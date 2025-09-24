@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Guide - Master the Ultimate 3D Roguelike Survival Game</title>
+    <meta name="description" content="Complete Megabonk survival guide with character builds, boss strategies, weapon combos & unlock tips. 94% Steam rating, 20 characters, 70+ items.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Megabonk - Ultimate 3D Roguelike Guide">
+    <meta property="og:description" content="Master Megabonk with complete character builds, boss strategies & weapon combinations.">
+    <meta property="og:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+    <meta property="og:url" content="https://megabonk.org/">
+    
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Variables */
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+        }
+        
+        /* Base */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            min-width: 180px;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: rgba(0, 0, 0, 0.15);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.25);
+        }
+        
+        .feature-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .feature-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        
+        /* Guides Section */
+        .guides-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 107, 53, 0.05) 100%);
+        }
+        
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .guide-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .guide-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--bg-darker));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .guide-content {
+            padding: 2rem;
+        }
+        
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .guide-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .guide-excerpt {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .guide-link {
+            color: var(--primary);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .tool-card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
+        
+        .tool-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .tool-description {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        /* Community Section */
+        .community-section {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(26, 26, 46, 0.8) 100%);
+        }
+        
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .community-link {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .community-link:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+        
+        .community-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .community-info h3 {
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .community-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            padding: 4rem 0 2rem;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+            border-radius: 20px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            margin: 2rem;
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal ul {
+            margin-left: 1.5rem;
+        }
+        
+        .modal li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(26, 26, 46, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--border);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .hero {
+                min-height: 70vh;
+                padding: 2rem 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .features-grid,
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .fab {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Focus styles for accessibility */
+        .nav-links a:focus,
+        .btn:focus,
+        .guide-card:focus,
+        .community-link:focus {
+            outline: 3px solid var(--primary);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">
+                <span>🎮</span>
+                <span>Megabonk.org</span>
+            </a>
+            
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#guides">Guides</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam Store</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Master Megabonk: The Ultimate <span class="highlight">3D Survival</span> Experience</h1>
+            <p class="hero-subtitle">🔥 Survive Endless Waves • 🎯 20 Unique Characters • ⚡ 70+ Epic Combinations</p>
+            <p class="hero-description">
+                Dive into the most <strong>chaotic 3D roguelike survival game of 2025</strong>. Master all 20 unique characters, 
+                discover 70+ weapon combinations, and survive increasingly difficult waves of enemies. 
+                <span class="highlight">Perfect for Steam Deck</span> with 94% positive reviews from 3,000+ players!
+            </p>
+            <div class="cta-buttons">
+                <a href="https://store.steampowered.com/app/3405340/Megabonk/" class="btn btn-primary" target="_blank">
+                    🎯 Buy on Steam - $8.49
+                </a>
+                <a href="#guides" class="btn btn-secondary">
+                    📚 Free Survival Guides
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats-section">
+        <div class="container">
+            <h2 class="section-title">Why 100K+ Players Choose Megabonk</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">⭐</span>
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">Positive Reviews</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">👥</span>
+                    <div class="stat-number">24K</div>
+                    <div class="stat-label">Daily Peak Players</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🎮</span>
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Copies Sold</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🦸</span>
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Unique Characters</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">What Makes Megabonk Special</h2>
+            <p class="section-subtitle">Experience the evolution of the bullet-heaven genre in stunning 3D</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🌟</span>
+                    <h3 class="feature-title">First 3D Vampire Survivors</h3>
+                    <p class="feature-description">
+                        The first fully 3D take on the viral bullet-heaven formula. Jump, glide, and bonk your way 
+                        through endless enemy hordes with unprecedented movement freedom.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">⚔️</span>
+                    <h3 class="feature-title">20 Unique Characters</h3>
+                    <p class="feature-description">
+                        From nimble foxes with fireball attacks to armored knights with massive swords. Each character 
+                        has distinct abilities, stats, and starting weapons.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🎮</span>
+                    <h3 class="feature-title">Steam Deck Verified</h3>
+                    <p class="feature-description">
+                        Perfectly optimized for handheld gaming. Runs flawlessly on Steam Deck with responsive controls, 
+                        60fps performance, and excellent battery life.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💎</span>
+                    <h3 class="feature-title">70+ Items & Synergies</h3>
+                    <p class="feature-description">
+                        Discover hundreds of item combinations and weapon synergies. Create game-breaking builds with 
+                        randomly generated upgrade paths and exponential power scaling.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🏆</span>
+                    <h3 class="feature-title">240 Epic Quests</h3>
+                    <p class="feature-description">
+                        Comprehensive progression system with hundreds of challenges. Unlock new characters, 
+                        weapons, abilities and secrets as you master the game.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3 class="feature-title">Addictive Fast Combat</h3>
+                    <p class="feature-description">
+                        Perfect balance of chaos and strategy. Auto-attacking weapons combined with 
+                        manual movement create skill-based gameplay.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guides Section -->
+    <section id="guides" class="section guides-section">
+        <div class="container">
+            <h2 class="section-title">Complete Megabonk Survival Guides</h2>
+            <p class="section-subtitle">Master every character, build, and strategy with our expert tutorials</p>
+            
+            <div class="guides-grid">
+                <div class="guide-card" onclick="showGuide('beginners')">
+                    <div class="guide-image">🚀</div>
+                    <div class="guide-content">
+                        <div class="guide-meta">
+                            <span>📅 Updated: Sept 2025</span>
+                            <span>⏱️ 5 min read</span>
+                        </div>
+                        <h3 class="guide-title">Beginner's Survival Guide</h3>
+                        <p class="guide-excerpt">
+                            Start your Megabonk journey right! Learn essential controls, best first characters, 
+                            and survival strategies to get your first 10+ minute runs consistently.
+                        </p>
+                        <span class="guide-link">Read Complete Guide →</span>
+                    </div>
+                </div>
+                
+                <div class="guide-card" onclick="showGuide('characters')">
+                    <div class="guide-image">👥</div>
+                    <div class="guide-content">
+                        <div class="guide-meta">
+                            <span>📅 Updated: Sept 2025</span>
+                            <span>⏱️ 8 min read</span>
+                        </div>
+                        <h3 class="guide-title">Character Tier List 2025</h3>
+                        <p class="guide-excerpt">
+                            Complete rankings of all 20 characters with stats, abilities, and unlock requirements. 
+                            Discover which heroes dominate the current meta.
+                        </p>
+                        <span class="guide-link">View Tier List →</span>
+                    </div>
+                </div>
+                
+                <div class="guide-card" onclick="showGuide('builds')">
+                    <div class="guide-image">🔧</div>
+                    <div class="guide-content">
+                        <div class="guide-meta">
+                            <span>📅 Updated: Sept 2025</span>
+                            <span>⏱️ 12 min read</span>
+                        </div>
+                        <h3 class="guide-title">OP Weapon Build Guide</h3>
+                        <p class="guide-excerpt">
+                            Discover the most powerful weapon combinations and item synergies. 
+                            Step-by-step instructions for creating game-breaking builds.
+                        </p>
+                        <span class="guide-link">Explore Builds →</span>
+                    </div>
+                </div>
+                
+                <div class="guide-card" onclick="showGuide('bosses')">
+                    <div class="guide-image">👹</div>
+                    <div class="guide-content">
+                        <div class="guide-meta">
+                            <span>📅 Updated: Sept 2025</span>
+                            <span>⏱️ 6 min read</span>
+                        </div>
+                        <h3 class="guide-title">Boss Battle Strategies</h3>
+                        <p class="guide-excerpt">
+                            Master every boss encounter with detailed attack patterns, positioning tips, 
+                            and recommended builds for consistent victories.
+                        </p>
+                        <span class="guide-link">Boss Strategies →</span>
+                    </div>
+                </div>
+                
+                <div class="guide-card" onclick="showGuide('achievements')">
+                    <div class="guide-image">🏅</div>
+                    <div class="guide-content">
+                        <div class="guide-meta">
+                            <span>📅 Updated: Sept 2025</span>
+                            <span>⏱️ 10 min read</span>
+                        </div>
+                        <h3 class="guide-title">Achievement Hunter</h3>
+                        <p class="guide-excerpt">
+                            Complete walkthrough for all Steam achievements. Detailed steps for 
+                            the trickiest unlocks and hidden objectives.
+                        </p>
+                        <span class="guide-link">Get All Achievements →</span>
+                    </div>
+                </div>
+                
+                <div class="guide-card" onclick="showGuide('advanced')">
+                    <div class="guide-image">💡</div>
+                    <div class="guide-content">
+                        <div class="guide-meta">
+                            <span>📅 Updated: Sept 2025</span>
+                            <span>⏱️ 15 min read</span>
+                        </div>
+                        <h3 class="guide-title">Pro Tips & Secrets</h3>
+                        <p class="guide-excerpt">
+                            Advanced strategies for experienced players. Animation canceling, 
+                            optimal movement patterns, and speedrun techniques.
+                        </p>
+                        <span class="guide-link">Master Pro Tips →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="section">
+        <div class="container">
+            <h2 class="section-title">Interactive Tools & Calculators</h2>
+            <p class="section-subtitle">Optimize your builds and strategy with our exclusive tools</p>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">🧮</span>
+                    <h3 class="tool-title">Build Planner</h3>
+                    <p class="tool-description">Plan your perfect weapon and item combinations before starting your run.</p>
+                    <button class="btn btn-secondary" onclick="launchTool('planner')">Launch Tool</button>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">📊</span>
+                    <h3 class="tool-title">DPS Calculator</h3>
+                    <p class="tool-description">Calculate theoretical damage output for different weapon setups and upgrades.</p>
+                    <button class="btn btn-secondary" onclick="launchTool('calculator')">Calculate DPS</button>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">⚖️</span>
+                    <h3 class="tool-title">Character Compare</h3>
+                    <p class="tool-description">Side-by-side comparison of character stats, abilities, and starting equipment.</p>
+                    <button class="btn btn-secondary" onclick="launchTool('compare')">Compare Now</button>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">🎯</span>
+                    <h3 class="tool-title">Random Challenge</h3>
+                    <p class="tool-description">Generate random build challenges to test your skills and discover new strategies.</p>
+                    <button class="btn btn-secondary" onclick="launchTool('challenge')">Generate Challenge</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section community-section">
+        <div class="container">
+            <h2 class="section-title">Join the Megabonk Community</h2>
+            <p class="section-subtitle">Connect with 100K+ players, share strategies, and stay updated</p>
+            
+            <div class="community-grid">
+                <a href="https://store.steampowered.com/app/3405340/Megabonk/" class="community-link" target="_blank">
+                    <span class="community-icon">🎮</span>
+                    <div class="community-info">
+                        <h3>Official Steam Store</h3>
+                        <p>Buy the game, read reviews, and join discussions</p>
+                    </div>
+                </a>
+                
+                <a href="https://steamcommunity.com/app/3405340" class="community-link" target="_blank">
+                    <span class="community-icon">👥</span>
+                    <div class="community-info">
+                        <h3>Steam Community</h3>
+                        <p>Guides, screenshots, and player discussions</p>
+                    </div>
+                </a>
+                
+                <a href="https://x.com/megabonkgame" class="community-link" target="_blank">
+                    <span class="community-icon">🐦</span>
+                    <div class="community-info">
+                        <h3>Official Twitter/X</h3>
+                        <p>Latest updates, dev insights, and announcements</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.youtube.com/results?search_query=megabonk+gameplay" class="community-link" target="_blank">
+                    <span class="community-icon">📺</span>
+                    <div class="community-info">
+                        <h3>YouTube Gameplay</h3>
+                        <p>Best gameplay videos, tutorials, and reviews</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.reddit.com/search/?q=Megabonk" class="community-link" target="_blank">
+                    <span class="community-icon">💬</span>
+                    <div class="community-info">
+                        <h3>Reddit Community</h3>
+                        <p>Tips, builds, memes, and community discussions</p>
+                    </div>
+                </a>
+                
+                <a href="https://steamcommunity.com/app/3405340/guides/" class="community-link" target="_blank">
+                    <span class="community-icon">📖</span>
+                    <div class="community-info">
+                        <h3>Steam Guides</h3>
+                        <p>Community-created guides and strategies</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>🎯 Survival Guides</h3>
+                    <ul>
+                        <li><a href="#guides" onclick="showGuide('beginners')">🚀 Beginner's Guide</a></li>
+                        <li><a href="#guides" onclick="showGuide('characters')">👥 Character Tier List</a></li>
+                        <li><a href="#guides" onclick="showGuide('builds')">🔧 Best Builds</a></li>
+                        <li><a href="#guides" onclick="showGuide('bosses')">👹 Boss Strategies</a></li>
+                        <li><a href="#guides" onclick="showGuide('achievements')">🏅 All Achievements</a></li>
+                        <li><a href="#guides" onclick="showGuide('advanced')">💡 Pro Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>🛠️ Tools & Database</h3>
+                    <ul>
+                        <li><a href="#tools" onclick="launchTool('planner')">🧮 Build Planner</a></li>
+                        <li><a href="#tools" onclick="launchTool('calculator')">📊 DPS Calculator</a></li>
+                        <li><a href="#tools" onclick="launchTool('compare')">⚖️ Character Compare</a></li>
+                        <li><a href="#tools" onclick="launchTool('challenge')">🎯 Random Challenge</a></li>
+                        <li><a href="#" onclick="showComingSoon()">📋 Character Database</a></li>
+                        <li><a href="#" onclick="showComingSoon()">⚔️ Weapons Database</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>🎮 Game Information</h3>
+                    <ul>
+                        <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">💰 Buy on Steam ($8.49)</a></li>
+                        <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">💻 System Requirements</a></li>
+                        <li><a href="https://steamcommunity.com/app/3405340/discussions/" target="_blank">📰 Latest Updates</a></li>
+                        <li><a href="https://x.com/megabonkgame" target="_blank">📢 Developer News</a></li>
+                        <li><a href="https://steamcommunity.com/app/3405340" target="_blank">📈 Player Stats</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>🌟 Community Links</h3>
+                    <ul>
+                        <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">🎮 Steam Store</a></li>
+                        <li><a href="https://steamcommunity.com/app/3405340" target="_blank">👥 Steam Community</a></li>
+                        <li><a href="https://x.com/megabonkgame" target="_blank">🐦 Twitter/X</a></li>
+                        <li><a href="https://www.reddit.com/search/?q=Megabonk" target="_blank">💬 Reddit</a></li>
+                        <li><a href="https://www.youtube.com/results?search_query=megabonk+gameplay" target="_blank">📺 YouTube</a></li>
+                        <li><a href="https://steamcommunity.com/app/3405340/guides/" target="_blank">📖 Steam Guides</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p><strong>Megabonk.org</strong> - The ultimate resource for Megabonk players worldwide</p>
+                <p>Unofficial fan site for <em>Megabonk</em> developed by <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" style="color: var(--primary);">vedinad</a>. 
+                   This site is optimized for accessibility, mobile devices, and Steam Deck browsing.</p>
+                <p>Game data accurate as of September 2025 • <a href="#" onclick="showInfo('privacy')" style="color: var(--primary);">Privacy Policy</a> • 
+                   <a href="#" onclick="showInfo('contact')" style="color: var(--primary);">Contact</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAB -->
+    <a href="https://store.steampowered.com/app/3405340/Megabonk/" class="fab" target="_blank" title="Buy Megabonk on Steam">
+        🛒
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // Guide content data
+        const guides = {
+            beginners: {
+                title: "🚀 Complete Beginner's Survival Guide",
+                content: `
+                    <h3>Getting Started</h3>
+                    <p><strong>Best Starting Characters:</strong></p>
+                    <ul>
+                        <li><strong>🦊 Fox (Kitsune):</strong> Fast movement + fireball attack - Perfect for beginners</li>
+                        <li><strong>⚔️ Knight:</strong> High health + sword spin - Great for learning positioning</li>
+                        <li><strong>🏹 Archer:</strong> Ranged attacks + decent speed - Safe playstyle</li>
+                    </ul>
+                    
+                    <h3>Essential Tips</h3>
+                    <ul>
+                        <li>🎯 <strong>Always keep moving:</strong> Standing still = death</li>
+                        <li>💎 <strong>Prioritize XP gems:</strong> They disappear after 30 seconds</li>
+                        <li>🔄 <strong>Create loops:</strong> Circle around enemies to group them</li>
+                        <li>⚡ <strong>Focus on 2-3 weapons max:</strong> Better to have strong weapons than many weak ones</li>
+                        <li>🛡️ <strong>Take defensive items early:</strong> Health and armor are crucial</li>
+                    </ul>
+                    
+                    <h3>First 10 Minutes Strategy</h3>
+                    <ol>
+                        <li>Choose Fox or Knight as starting character</li>
+                        <li>Upgrade your starting weapon first (levels 2-4)</li>
+                        <li>Take Health +20% when offered</li>
+                        <li>Add one complementary weapon (bow for Knight, sword for Fox)</li>
+                        <li>Focus on movement speed and pickup range</li>
+                        <li>At 10+ minutes, look for weapon evolutions</li>
+                    </ol>
+                `
+            },
+            characters: {
+                title: "👥 Character Tier List & Guide 2025",
+                content: `
+                    <h3>🏆 S-Tier (OP Characters)</h3>
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <p><strong>🦊 Kitsune (Fox):</strong> 95/100</p>
+                        <ul>
+                            <li>✅ Fastest movement speed (140%)</li>
+                            <li>✅ Fireball has great range and damage</li>
+                            <li>✅ Easy to unlock (default character)</li>
+                            <li>❌ Low health (80%)</li>
+                        </ul>
+                        
+                        <p><strong>🌟 Ninja:</strong> 92/100</p>
+                        <ul>
+                            <li>✅ Stealth ability every 15 seconds</li>
+                            <li>✅ High critical hit chance (25%)</li>
+                            <li>✅ Shuriken weapon pierces enemies</li>
+                            <li>❌ Requires 60 silver to unlock</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>🥇 A-Tier (Excellent)</h3>
+                    <ul>
+                        <li><strong>⚔️ Knight:</strong> Tanky with sword spin - Great for beginners</li>
+                        <li><strong>🏹 Archer:</strong> Long-range safety - Consistent damage</li>
+                        <li><strong>🔥 Pyromancer:</strong> Area damage king - Melts hordes</li>
+                        <li><strong>⚡ Lightning Mage:</strong> Chain lightning - Excellent crowd control</li>
+                    </ul>
+                    
+                    <h3>🥈 B-Tier (Good)</h3>
+                    <ul>
+                        <li><strong>🪓 Barbarian:</strong> High damage but slow</li>
+                        <li><strong>🏃 Runner:</strong> Fast but fragile</li>
+                        <li><strong>🧙 Wizard:</strong> Magic missile spam</li>
+                        <li><strong>🛡️ Paladin:</strong> Balanced stats</li>
+                    </ul>
+                `
+            },
+            builds: {
+                title: "🔧 OP Weapon Builds & Synergies",
+                content: `
+                    <h3>🔥 Top Meta Builds</h3>
+                    
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                        <h4>🌟 "Lightning Storm" Build</h4>
+                        <p><strong>Character:</strong> Lightning Mage or Kitsune</p>
+                        <p><strong>Core Weapons:</strong></p>
+                        <ul>
+                            <li>⚡ Lightning Bolt (max level) + Chain Lightning evolution</li>
+                            <li>🌀 Wind Blade (level 6+) for crowd control</li>
+                            <li>💎 Energy Ball for finishing enemies</li>
+                        </ul>
+                        <p><strong>Key Items:</strong> Mana Regeneration, Spell Power +50%, Lightning Damage +25%</p>
+                        <p><strong>Rating:</strong> ⭐⭐⭐⭐⭐ Best for late game scaling</p>
+                    </div>
+                    
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                        <h4>⚔️ "Melee Massacre" Build</h4>
+                        <p><strong>Character:</strong> Knight or Barbarian</p>
+                        <p><strong>Core Weapons:</strong></p>
+                        <ul>
+                            <li>⚔️ Spinning Sword (evolved) for 360° coverage</li>
+                            <li>🪓 Battle Axe for high single-target DPS</li>
+                            <li>🛡️ Shield Bash for crowd control</li>
+                        </ul>
+                        <p><strong>Key Items:</strong> Attack Speed +30%, Lifesteal 15%, Armor +40%</p>
+                        <p><strong>Rating:</strong> ⭐⭐⭐⭐ Great for beginners</p>
+                    </div>
+                    
+                    <h3>🎯 Weapon Evolution Guide</h3>
+                    <ul>
+                        <li><strong>Fireball + Fire Ring = Phoenix Burst:</strong> Massive AOE explosion</li>
+                        <li><strong>Lightning Bolt + Thunder Cloud = Storm Lord:</strong> Screen-wide lightning</li>
+                        <li><strong>Sword Spin + Whirlwind = Blade Tornado:</strong> Moving death spiral</li>
+                        <li><strong>Ice Shard + Freeze Aura = Absolute Zero:</strong> Freezes everything</li>
+                    </ul>
+                `
+            },
+            bosses: {
+                title: "👹 Boss Battle Strategies",
+                content: `
+                    <h3>🎯 General Boss Tips</h3>
+                    <ul>
+                        <li>🏃 <strong>Stay mobile:</strong> Never stop moving during boss fights</li>
+                        <li>🔄 <strong>Circle strafe:</strong> Move in large circles to avoid most attacks</li>
+                        <li>⚡ <strong>Burst damage:</strong> Use evolved weapons for maximum DPS</li>
+                        <li>💚 <strong>Health management:</strong> Don't fight bosses at low health</li>
+                    </ul>
+                    
+                    <h3>👹 Boss Guide</h3>
+                    
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                        <h4>🦴 Skeleton King (10 minutes)</h4>
+                        <p><strong>Health:</strong> 5,000 HP</p>
+                        <p><strong>Attacks:</strong></p>
+                        <ul>
+                            <li>Bone Throw: Projectiles in straight lines</li>
+                            <li>Summon Skeletons: Spawns 6-8 minions</li>
+                            <li>Ground Slam: AOE attack around boss</li>
+                        </ul>
+                        <p><strong>Strategy:</strong> Kill minions first, then focus boss. Stay at medium range.</p>
+                    </div>
+                    
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                        <h4>🔥 Flame Demon (20 minutes)</h4>
+                        <p><strong>Health:</strong> 12,000 HP</p>
+                        <p><strong>Attacks:</strong></p>
+                        <ul>
+                            <li>Fire Wave: Ring of fire expands outward</li>
+                            <li>Meteor Strike: Targets player location</li>
+                            <li>Flame Tornado: Moving fire tornado</li>
+                        </ul>
+                        <p><strong>Strategy:</strong> Use ice-based weapons if available. Keep moving to avoid meteors.</p>
+                        <p><strong>Weakness:</strong> Ice damage (+50% damage)</p>
+                    </div>
+                `
+            },
+            achievements: {
+                title: "🏅 Complete Achievement Guide",
+                content: `
+                    <h3>🎯 Easy Achievements (Do First)</h3>
+                    <ul>
+                        <li><strong>🚀 First Steps:</strong> Survive 5 minutes - Play any character</li>
+                        <li><strong>💀 Monster Slayer:</strong> Kill 1000 enemies - Happens naturally</li>
+                        <li><strong>💎 Gem Collector:</strong> Collect 500 gems - Focus on pickup range</li>
+                        <li><strong>⏰ Survivor:</strong> Reach 10 minutes - Use Fox with basic build</li>
+                    </ul>
+                    
+                    <h3>🏆 Medium Achievements</h3>
+                    <ul>
+                        <li><strong>⚔️ Weapon Master:</strong> Evolve 5 different weapons - Try various builds</li>
+                        <li><strong>👑 Boss Slayer:</strong> Defeat 10 bosses - Practice boss strategies</li>
+                        <li><strong>🔥 Pyrotechnic:</strong> Deal 100K fire damage - Use Pyromancer</li>
+                        <li><strong>💰 Rich:</strong> Collect 10,000 coins - Play survival mode</li>
+                    </ul>
+                    
+                    <h3>😤 Hard Achievements (Endgame)</h3>
+                    
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                        <h4>🗡️ Hero's Sword</h4>
+                        <p><strong>Requirement:</strong> Complete "Sticks and Stones" challenge (no items)</p>
+                        <p><strong>Strategy:</strong></p>
+                        <ol>
+                            <li>Use Fox for movement speed</li>
+                            <li>Level fireball to max (no items to pick up)</li>
+                            <li>Focus purely on weapon upgrades from XP</li>
+                            <li>Recommended weapon: Bone or Revolver (ricochet)</li>
+                        </ol>
+                    </div>
+                `
+            },
+            advanced: {
+                title: "💡 Advanced Pro Tips & Secrets",
+                content: `
+                    <h3>⚡ Advanced Movement Tech</h3>
+                    <ul>
+                        <li><strong>🔄 Perfect Kiting:</strong> Move in figure-8 patterns to group enemies optimally</li>
+                        <li><strong>📐 Corner Abuse:</strong> Use map edges to funnel enemies into kill zones</li>
+                        <li><strong>⚡ Animation Canceling:</strong> Jump to cancel attack animations for faster DPS</li>
+                        <li><strong>🎯 Positioning Priority:</strong> Always position for maximum XP gem collection</li>
+                    </ul>
+                    
+                    <h3>🧮 Hidden Mechanics</h3>
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                        <h4>🔢 Damage Scaling Formula</h4>
+                        <p><strong>Base Damage × (1 + Weapon Level × 0.2) × Character Multiplier</strong></p>
+                        <ul>
+                            <li>Each weapon level adds 20% damage</li>
+                            <li>Character multipliers range from 0.8x to 1.3x</li>
+                            <li>Critical hits are separate 2x multiplier</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>🏃 Speedrun Strategies</h3>
+                    <ul>
+                        <li><strong>Character:</strong> Fox (Kitsune) for maximum speed</li>
+                        <li><strong>Route:</strong> Figure-8 pattern in center of map</li>
+                        <li><strong>Build Priority:</strong> Movement Speed → Pickup Range → Single Weapon Focus</li>
+                        <li><strong>Time Saves:</strong> Skip defensive items in speedruns</li>
+                    </ul>
+                    
+                    <p><strong>🎯 Pro Tip:</strong> Master players focus 80% on positioning and movement, only 20% on build optimization!</p>
+                `
+            }
+        };
+
+        // Core functions
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function showGuide(type) {
+            const guide = guides[type];
+            if (!guide) return;
+            
+            showModal(guide.title, guide.content);
+        }
+
+        function launchTool(type) {
+            const toolNames = {
+                planner: 'Build Planner - Plan your perfect weapon combinations!',
+                calculator: 'DPS Calculator - Calculate your damage output!', 
+                compare: 'Character Compare - Compare character stats!',
+                challenge: 'Random Challenge - Test your skills!'
+            };
+            
+            const content = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>${toolNames[type] || 'Interactive Tool'}</h3>
+                    <p style="margin: 2rem 0;">This interactive tool is coming soon! We're building amazing calculators and planners for Megabonk players.</p>
+                    <p style="color: var(--text-muted);">Want to be notified when tools launch?</p>
+                </div>
+            `;
+            
+            showModal('🛠️ Interactive Tool', content);
+        }
+
+        function showComingSoon() {
+            showModal('🚧 Coming Soon', `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>Feature Under Development</h3>
+                    <p style="margin: 2rem 0;">We're working hard to bring you the most comprehensive Megabonk database and tools!</p>
+                    <p style="color: var(--text-muted);">Check back soon for updates.</p>
+                </div>
+            `);
+        }
+
+        function showInfo(type) {
+            const content = type === 'privacy' 
+                ? '<p>We use minimal analytics for site improvement. No personal data is collected. All external links open securely.</p>'
+                : '<p>This is an unofficial fan site. For game support, contact the developer via Steam.</p>';
+            
+            showModal(type === 'privacy' ? '🔒 Privacy Policy' : '📧 Contact Info', content);
+        }
+
+        function showModal(title, content) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
+                    <h2>${title}</h2>
+                    <div style="line-height: 1.8;">${content}</div>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="https://store.steampowered.com/app/3405340/Megabonk/" 
+                           target="_blank" 
+                           class="btn btn-primary">
+                            🎮 Play Megabonk Now - $8.49
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Close handlers
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
+            });
+            
+            document.addEventListener('keydown', function escHandler(e) {
+                if (e.key === 'Escape') {
+                    modal.remove();
+                    document.removeEventListener('keydown', escHandler);
+                }
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎮 Megabonk.org loaded successfully!');
+        });
+    </script>
+</body>
+</html>
