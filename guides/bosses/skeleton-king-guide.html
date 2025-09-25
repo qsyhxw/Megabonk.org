@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeleton King Boss Guide - Megabonk Complete Strategy</title>
+    <meta name="description" content="Complete Skeleton King boss guide for Megabonk. Learn attack patterns, positioning strategies, and recommended builds to defeat this 10-minute boss.">
+    <meta name="keywords" content="megabonk skeleton king, megabonk boss guide, skeleton king strategy, megabonk 10 minute boss">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+            --bone-white: #f5f5dc;
+            --danger-red: #dc2626;
+            --warning-yellow: #fbbf24;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(245, 245, 220, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 49%, rgba(245, 245, 220, 0.05) 50%, transparent 51%);
+            animation: boneGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes boneGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--bone-white) 0%, #d1d5db 50%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .boss-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .attack-pattern {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .attack-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .attack-icon {
+            font-size: 2.5rem;
+        }
+        
+        .attack-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .danger-level {
+            margin-left: auto;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .danger-high {
+            background: var(--danger-red);
+            color: white;
+        }
+        
+        .danger-medium {
+            background: var(--warning-yellow);
+            color: black;
+        }
+        
+        .danger-low {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .strategy-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .strategy-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .recommended-builds {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .build-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
+        }
+        
+        .build-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(245, 245, 220, 0.2);
+        }
+        
+        .build-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .build-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .build-rating {
+            color: var(--warning-yellow);
+            margin-bottom: 1rem;
+        }
+        
+        .phase-guide {
+            background: linear-gradient(135deg, rgba(245, 245, 220, 0.1) 0%, rgba(156, 163, 175, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .phase {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .phase:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .phase-number {
+            background: linear-gradient(45deg, var(--bone-white), #d1d5db);
+            color: var(--bg-dark);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+        
+        .phase-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--bone-white);
+        }
+        
+        .tips-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tip-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+        
+        .warning-box {
+            background: rgba(220, 38, 38, 0.1);
+            border: 2px solid var(--danger-red);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--danger-red);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-guides {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            margin: 0 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .boss-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .attack-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .btn {
+                margin: 0.5rem;
+                width: calc(100% - 1rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../index.html">Home</a> > 
+            <a href="../../bosses.html">Boss Guides</a> > 
+            Skeleton King
+        </nav>
+        
+        <section class="hero-section">
+            <h1 class="hero-title">🦴 Skeleton King</h1>
+            <p class="hero-subtitle">First Major Boss - Appears at 10 Minutes</p>
+        </section>
+        
+        <section class="boss-stats">
+            <div class="stat-card">
+                <div class="stat-icon">❤️</div>
+                <div class="stat-value">5,000</div>
+                <div class="stat-label">Health Points</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⚔️</div>
+                <div class="stat-value">Medium</div>
+                <div class="stat-label">Damage Level</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🏃</div>
+                <div class="stat-value">Slow</div>
+                <div class="stat-label">Movement Speed</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-value">10:00</div>
+                <div class="stat-label">Spawn Time</div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Attack Patterns</h2>
+            
+            <div class="attack-pattern">
+                <div class="attack-header">
+                    <div class="attack-icon">💀</div>
+                    <div class="attack-name">Bone Throw</div>
+                    <div class="danger-level danger-medium">MEDIUM THREAT</div>
+                </div>
+                <p><strong>Pattern:</strong> Throws 3-5 bone projectiles in straight lines toward player position</p>
+                <p><strong>Damage:</strong> 150-200 per bone</p>
+                <p><strong>Frequency:</strong> Every 3-4 seconds</p>
+                <p><strong>Counter:</strong> Side-step or move perpendicular to avoid projectiles. Bones travel slowly and are easy to dodge.</p>
+            </div>
+            
+            <div class="attack-pattern">
+                <div class="attack-header">
+                    <div class="attack-icon">💀</div>
+                    <div class="attack-name">Summon Skeletons</div>
+                    <div class="danger-level danger-high">HIGH THREAT</div>
+                </div>
+                <p><strong>Pattern:</strong> Spawns 6-8 skeleton minions around the battlefield</p>
+                <p><strong>Minion Health:</strong> 200 HP each</p>
+                <p><strong>Frequency:</strong> Every 12-15 seconds</p>
+                <p><strong>Counter:</strong> Clear minions immediately with AOE weapons. Don't let them accumulate!</p>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Priority Target Warning</h4>
+                    <p>Always kill skeleton minions first! They will overwhelm you if ignored. The Skeleton King is much easier to handle alone.</p>
+                </div>
+            </div>
+            
+            <div class="attack-pattern">
+                <div class="attack-header">
+                    <div class="attack-icon">💥</div>
+                    <div class="attack-name">Ground Slam</div>
+                    <div class="danger-level danger-high">HIGH THREAT</div>
+                </div>
+                <p><strong>Pattern:</strong> Large AOE attack around the boss (5-unit radius)</p>
+                <p><strong>Damage:</strong> 300-400 (can one-shot early builds)</p>
+                <p><strong>Frequency:</strong> When player gets too close (within 3 units)</p>
+                <p><strong>Counter:</strong> Maintain medium range. Never fight melee unless you have high armor.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Battle Strategy</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h3>🎯 Positioning Strategy</h3>
+                    <ul>
+                        <li>Stay at medium range (4-6 units away)</li>
+                        <li>Keep moving in wide circles</li>
+                        <li>Use terrain to break line of sight</li>
+                        <li>Never let boss corner you against walls</li>
+                        <li>Create space when minions spawn</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-card">
+                    <h3>🎭 Priority Targeting</h3>
+                    <ul>
+                        <li>Skeleton minions are priority #1</li>
+                        <li>Use AOE weapons to clear groups</li>
+                        <li>Focus boss only when alone</li>
+                        <li>Don't chase fleeing minions</li>
+                        <li>Position to hit multiple targets</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-card">
+                    <h3>⚔️ Damage Strategy</h3>
+                    <ul>
+                        <li>Consistent DPS beats burst damage</li>
+                        <li>Piercing weapons are excellent</li>
+                        <li>AOE effects handle minions</li>
+                        <li>Don't waste cooldowns on minions</li>
+                        <li>Save best attacks for boss phases</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Phase Guide</h2>
+            <div class="phase-guide">
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-number">1</div>
+                        <div class="phase-title">Opening Phase (100-75% HP)</div>
+                    </div>
+                    <p>Boss focuses on bone throw attacks. Stay mobile and learn the attack timing. Minion spawns are less frequent. Good time to establish positioning and rhythm.</p>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-number">2</div>
+                        <div class="phase-title">Minion Chaos (75-40% HP)</div>
+                    </div>
+                    <p>Frequent minion spawns with overlapping summon cycles. This is the most dangerous phase. Focus entirely on minion control. Boss becomes secondary target.</p>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-number">3</div>
+                        <div class="phase-title">Desperate Measures (40-0% HP)</div>
+                    </div>
+                    <p>Faster attack speed and more aggressive positioning. Ground slam range increases slightly. Maintain distance and stay patient - victory is close!</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Recommended Builds</h2>
+            <div class="recommended-builds">
+                <div class="build-card">
+                    <div class="build-icon">⚡</div>
+                    <div class="build-name">Lightning Storm</div>
+                    <div class="build-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Chain lightning clears minions instantly while dealing sustained damage to boss. Perfect for this encounter.</p>
+                </div>
+                
+                <div class="build-card">
+                    <div class="build-icon">🏹</div>
+                    <div class="build-name">Ranged Sniper</div>
+                    <div class="build-rating">⭐⭐⭐⭐☆</div>
+                    <p>Piercing shots handle both minions and boss. Safe distance play style reduces risk significantly.</p>
+                </div>
+                
+                <div class="build-card">
+                    <div class="build-name">🔥</div>
+                    <div class="build-name">Fire Mage</div>
+                    <div class="build-rating">⭐⭐⭐☆☆</div>
+                    <p>AOE fire spells good for minions, but mana management becomes critical during long fight phases.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips-section">
+            <h3>💡 Pro Tips & Advanced Strategies</h3>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🎯</span>
+                <div>
+                    <strong>Minion Positioning:</strong> Lure minions into tight groups before using AOE attacks for maximum efficiency.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⏰</span>
+                <div>
+                    <strong>Timing Windows:</strong> Attack boss immediately after clearing minions - you have 8-10 seconds before next spawn.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🛡️</span>
+                <div>
+                    <strong>Defensive Items:</strong> Consider +20% Health and armor items if you're struggling. Survivability beats raw damage here.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🔄</span>
+                <div>
+                    <strong>Movement Pattern:</strong> Large clockwise circles work best. Counterclockwise if you prefer, but stay consistent.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">💎</span>
+                <div>
+                    <strong>XP Management:</strong> Don't chase XP gems during active combat. Collect them between minion waves for safety.
+                </div>
+            </div>
+        </section>
+        
+        <div class="back-to-guides">
+            <a href="../../../index.html#guides" class="btn btn-secondary">← Back to Boss Guides</a>
+            <a href="flame-demon-strategy.html" class="btn">🔥 Next Boss: Flame Demon</a>
+            <a href="../../../index.html" class="btn">🏠 Home Page</a>
+        </div>
+    </div>
+</body>
+</html>
