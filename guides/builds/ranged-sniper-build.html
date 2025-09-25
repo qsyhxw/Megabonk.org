@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranged Sniper Build Guide - Megabonk's Ultimate Long-Range Build</title>
+    <meta name="description" content="Master the Ranged Sniper build in Megabonk. Complete guide with bow synergies, kiting strategies, and long-range combat for safe, high-damage runs.">
+    <meta name="keywords" content="megabonk ranged build, megabonk bow build, megabonk archer build, megabonk sniper build, megabonk long range">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+            --success: #4caf50;
+            --warning: #ff9800;
+            --info: #2196f3;
+            --ranged-accent: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segui UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--ranged-accent) 0%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid var(--ranged-accent);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .build-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .overview-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .overview-card h3 {
+            color: var(--ranged-accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .overview-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .overview-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .overview-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .subsection-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--ranged-accent);
+        }
+        
+        .weapon-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .weapon-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .weapon-icon {
+            font-size: 3rem;
+        }
+        
+        .weapon-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .weapon-priority {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .priority-core {
+            background: var(--ranged-accent);
+            color: white;
+        }
+        
+        .priority-important {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .priority-optional {
+            background: var(--info);
+            color: white;
+        }
+        
+        .step-by-step {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, var(--ranged-accent), #34d399);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--ranged-accent);
+        }
+        
+        .character-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .character-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .character-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .character-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .character-rating {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tip-icon {
+            color: var(--ranged-accent);
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+        
+        .back-to-guides {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--ranged-accent), #34d399);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            margin: 0 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--ranged-accent);
+        }
+        
+        .synergy-highlight {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--ranged-accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .kiting-guide {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--ranged-accent);
+            backdrop-filter: blur(15px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .build-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .weapon-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .btn {
+                margin: 0.5rem;
+                width: calc(100% - 1rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../index.html">Home</a> > 
+            <a href="../builds.html">Build Guides</a> > 
+            Ranged Sniper Build
+        </nav>
+        
+        <section class="hero-section">
+            <h1 class="hero-title">🏹 Ranged Sniper Build</h1>
+            <p class="hero-subtitle">Master the Art of Long-Range Precision and Safety</p>
+            <div class="rating-badge">
+                <span>⭐⭐⭐⭐☆</span>
+                <span>Safe & Consistent</span>
+            </div>
+        </section>
+        
+        <section class="build-overview">
+            <div class="overview-card">
+                <h3>🎯 Build Summary</h3>
+                <ul>
+                    <li><strong>Playstyle:</strong> Kiting, Long-Range</li>
+                    <li><strong>Difficulty:</strong> Intermediate</li>
+                    <li><strong>Best For:</strong> Consistent Wins, Safety</li>
+                    <li><strong>Power Spike:</strong> Level 12+</li>
+            </div>
+            
+            <div class="overview-card">
+                <h3>🏹 Core Weapons</h3>
+                <ul>
+                    <li>Precision Bow (Primary)</li>
+                    <li>Multi-Shot (Evolution)</li>
+                    <li>Wind Arrow (Support)</li>
+                    <li>Piercing Shot (Penetration)</li>
+                </ul>
+            </div>
+            
+            <div class="overview-card">
+                <h3>💨 Key Items</h3>
+                <ul>
+                    <li>Movement Speed (+40%)</li>
+                    <li>Range Extension (+50%)</li>
+                    <li>Projectile Speed (+30%)</li>
+                    <li>Critical Chance (+25%)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Best Characters for Ranged Sniper</h2>
+            <div class="character-recommendations">
+                <div class="character-card">
+                    <div class="character-icon">🏹</div>
+                    <h3 class="character-name">Archer</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Built for this playstyle! Natural bow mastery, +20% range, and excellent movement speed.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">🦊</div>
+                    <h3 class="character-name">Kitsune (Fox)</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Superior mobility for kiting. Fireball synergizes well with bow builds for mixed damage.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">🏃</div>
+                    <h3 class="character-name">Runner</h3>
+                    <div class="character-rating">⭐⭐⭐⭐☆</div>
+                    <p>Fastest character with natural speed bonuses. Perfect for hit-and-run tactics.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Core Weapons & Synergies</h2>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🏹</div>
+                    <div class="weapon-info">
+                        <h4>Precision Bow</h4>
+                        <span class="weapon-priority priority-core">CORE WEAPON</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Fires high-damage arrows that can critically strike. Increased accuracy and range.</p>
+                <p><strong>Max Level:</strong> 8 (Evolves at level 6 with Wind Arrow)</p>
+                <p><strong>Damage Scaling:</strong> 120% base damage + 15% per level</p>
+                
+                <div class="synergy-highlight">
+                    <strong>Critical Synergy:</strong> Each point of Critical Chance dramatically increases your DPS - prioritize crit items!
+                </div>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">💨</div>
+                    <div class="weapon-info">
+                        <h4>Wind Arrow</h4>
+                        <span class="weapon-priority priority-core">EVOLUTION REQUIREMENT</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Fires wind-enhanced arrows that travel faster and pierce one enemy.</p>
+                <p><strong>Evolution Trigger:</strong> Level 6 Precision Bow + Level 4 Wind Arrow = Storm Bow</p>
+                <p><strong>Strategy:</strong> Essential for evolution and provides early piercing capability.</p>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🌪️</div>
+                    <div class="weapon-info">
+                        <h4>Storm Bow (Evolution)</h4>
+                        <span class="weapon-priority priority-core">ULTIMATE FORM</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Fires multiple arrows in a spread pattern, each with piercing and wind effects.</p>
+                <p><strong>Power Level:</strong> 5 arrows per shot, each dealing 200% weapon damage with infinite pierce</p>
+                <p><strong>Game Impact:</strong> Transforms you from single-target to multi-target powerhouse.</p>
+                
+                <div class="synergy-highlight">
+                    <strong>Evolution Power:</strong> Once you get Storm Bow, you can safely engage entire enemy hordes from range!
+                </div>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🎯</div>
+                    <div class="weapon-info">
+                        <h4>Piercing Shot</h4>
+                        <span class="weapon-priority priority-important">CROWD CONTROL</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Fires arrows that pierce through multiple enemies in a line.</p>
+                <p><strong>Best Use:</strong> Excellent for clearing enemy lines and hitting multiple targets efficiently.</p>
+                <p><strong>Synergy:</strong> Combines with critical chance for devastating piercing criticals.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Master the Kiting Technique</h2>
+            <div class="kiting-guide">
+                <h4>🎯 What is Kiting?</h4>
+                <p>Kiting is the art of maintaining distance from enemies while continuously dealing damage. It's the core strategy for ranged builds.</p>
+                
+                <h4>📐 Optimal Kiting Pattern</h4>
+                <ul>
+                    <li><strong>Figure-8 Movement:</strong> Move in figure-8 patterns to maintain distance while grouping enemies</li>
+                    <li><strong>Corner Usage:</strong> Use map edges to funnel enemies into narrow lines for piercing shots</li>
+                    <li><strong>Spacing Control:</strong> Maintain 60-70% of your maximum range for optimal damage and safety</li>
+                    <li><strong>Retreat Routes:</strong> Always have an escape path planned when engaging enemy groups</li>
+                </ul>
+                
+                <div class="synergy-highlight">
+                    <strong>Pro Tip:</strong> Practice your kiting on easier difficulties first - good movement is more important than perfect aim!
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Step-by-Step Build Guide</h2>
+            <div class="step-by-step">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Foundation Phase (Levels 1-5)</h4>
+                        <p>Start with Precision Bow levels 1-3. Take Movement Speed items immediately - mobility is survival for ranged builds.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Range Extension (Levels 6-10)</h4>
+                        <p>Add Wind Arrow levels 1-2. Focus on Range Extension and Projectile Speed items. Start practicing kiting patterns.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Critical Development (Levels 11-15)</h4>
+                        <p>Prioritize Critical Chance items while continuing to level your core weapons. Add Piercing Shot for crowd control.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Evolution Setup (Levels 16-20)</h4>
+                        <p>Max Precision Bow to level 6 and Wind Arrow to level 4 to trigger Storm Bow evolution. Your power spike moment!</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Optimization Phase (Level 20+)</h4>
+                        <p>Focus on attack speed and critical damage multipliers. Add defensive items like Health Regen for sustainability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips-section">
+            <h3 class="subsection-title">🎯 Advanced Ranged Combat Tips</h3>
+            
+            <div class="tip-item">
+                <span class="tip-icon">💨</span>
+                <div>
+                    <strong>Movement is Life:</strong> Never stop moving. Even a split second of standing still can be deadly in later waves.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🎯</span>
+                <div>
+                    <strong>Lead Your Targets:</strong> Aim where enemies are going, not where they are. Projectile travel time matters at long range.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">📐</span>
+                <div>
+                    <strong>Use Map Geometry:</strong> Walls and obstacles are your friends. Use them to break line of sight and control enemy movement.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🔄</span>
+                <div>
+                    <strong>Rotation Priority:</strong> Take out dangerous enemies first (casters, fast enemies), then focus on the horde.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⚡</span>
+                <div>
+                    <strong>Stamina Management:</strong> Don't waste arrows on low-health enemies. Let DoT effects or other weapons finish them.
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h3 class="subsection-title">❌ Common Ranged Build Mistakes</h3>
+            <div class="weapon-card">
+                <ul>
+                    <li><strong>Standing too close:</strong> Ranged builds need distance - use your range advantage or you'll get overwhelmed</li>
+                    <li><strong>Ignoring movement speed:</strong> Without mobility, you can't kite effectively and will get cornered</li>
+                    <li><strong>Taking too many weapons early:</strong> Focus on your bow synergies first - spreading thin reduces your power</li>
+                    <li><strong>Poor positioning:</strong> Getting trapped in corners or against walls is the #1 cause of ranged build deaths</li>
+                    <li><strong>Neglecting critical chance:</strong> Ranged builds scale exponentially with crit - it's not optional</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="back-to-guides">
+            <a href="../builds.html" class="btn btn-secondary">← Back to Build Guides</a>
+            <a href="../characters/fox-kitsune-guide.html" class="btn">🦊 Fox Guide</a>
+            <a href="../../../index.html" class="btn">🏠 Home Page</a>
+        </div>
+    </div>
+</body>
+</html>
