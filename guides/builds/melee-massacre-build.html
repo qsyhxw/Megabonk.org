@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melee Massacre Build Guide - Megabonk's Ultimate Close Combat Build</title>
+    <meta name="description" content="Master the Melee Massacre build in Megabonk. Complete guide with sword synergies, tank strategies, and beginner-friendly melee combat for dominating runs.">
+    <meta name="keywords" content="megabonk melee build, megabonk sword build, megabonk tank build, megabonk knight build, megabonk close combat">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+            --success: #4caf50;
+            --warning: #ff9800;
+            --info: #2196f3;
+            --melee-accent: #dc2626;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--melee-accent) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid var(--melee-accent);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .build-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .overview-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .overview-card h3 {
+            color: var(--melee-accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .overview-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .overview-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .overview-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .subsection-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--melee-accent);
+        }
+        
+        .weapon-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .weapon-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .weapon-icon {
+            font-size: 3rem;
+        }
+        
+        .weapon-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .weapon-priority {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .priority-core {
+            background: var(--melee-accent);
+            color: white;
+        }
+        
+        .priority-important {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .priority-optional {
+            background: var(--info);
+            color: white;
+        }
+        
+        .step-by-step {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, var(--melee-accent), var(--primary));
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--melee-accent);
+        }
+        
+        .character-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .character-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .character-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .character-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .character-rating {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tip-icon {
+            color: var(--melee-accent);
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+        
+        .back-to-guides {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--melee-accent), var(--primary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            margin: 0 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--melee-accent);
+        }
+        
+        .synergy-highlight {
+            background: rgba(220, 38, 38, 0.1);
+            border-left: 4px solid var(--melee-accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .build-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .weapon-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .btn {
+                margin: 0.5rem;
+                width: calc(100% - 1rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../index.html">Home</a> > 
+            <a href="../builds.html">Build Guides</a> > 
+            Melee Massacre Build
+        </nav>
+        
+        <section class="hero-section">
+            <h1 class="hero-title">⚔️ Melee Massacre Build</h1>
+            <p class="hero-subtitle">The Ultimate Tank & Spank Build for Close Combat Dominance</p>
+            <div class="rating-badge">
+                <span>⭐⭐⭐⭐⭐</span>
+                <span>Beginner-Friendly</span>
+            </div>
+        </section>
+        
+        <section class="build-overview">
+            <div class="overview-card">
+                <h3>🎯 Build Summary</h3>
+                <ul>
+                    <li><strong>Playstyle:</strong> Tank, Close Combat</li>
+                    <li><strong>Difficulty:</strong> Beginner</li>
+                    <li><strong>Best For:</strong> New Players, Survivability</li>
+                    <li><strong>Power Spike:</strong> Level 10+</li>
+                </ul>
+            </div>
+            
+            <div class="overview-card">
+                <h3>⚔️ Core Weapons</h3>
+                <ul>
+                    <li>Spinning Sword (Primary)</li>
+                    <li>Battle Axe (High DPS)</li>
+                    <li>Shield Bash (Control)</li>
+                    <li>Whirlwind (Evolution)</li>
+                </ul>
+            </div>
+            
+            <div class="overview-card">
+                <h3>🛡️ Key Items</h3>
+                <ul>
+                    <li>Lifesteal (+15%)</li>
+                    <li>Armor (+40%)</li>
+                    <li>Attack Speed (+30%)</li>
+                    <li>Health Regen (+20/sec)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Best Characters for Melee Massacre</h2>
+            <div class="character-recommendations">
+                <div class="character-card">
+                    <div class="character-icon">⚔️</div>
+                    <h3 class="character-name">Knight</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Perfect starter! High health, built-in armor, and sword spin synergy. Ideal for learning the game.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">🪓</div>
+                    <h3 class="character-name">Barbarian</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Raw damage powerhouse! Higher attack but lower defense. Great for experienced players.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">🛡️</div>
+                    <h3 class="character-name">Paladin</h3>
+                    <div class="character-rating">⭐⭐⭐⭐☆</div>
+                    <p>Balanced option with built-in healing and decent damage. Good middle ground choice.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Core Weapons & Synergies</h2>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">⚔️</div>
+                    <div class="weapon-info">
+                        <h4>Spinning Sword</h4>
+                        <span class="weapon-priority priority-core">CORE WEAPON</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Creates a spinning sword around you that damages enemies in a 360° radius.</p>
+                <p><strong>Max Level:</strong> 8 (Evolves at level 6 with Whirlwind)</p>
+                <p><strong>Strategy:</strong> Your bread and butter! Provides consistent damage while you focus on positioning.</p>
+                
+                <div class="synergy-highlight">
+                    <strong>Synergy Tip:</strong> Pairs perfectly with Attack Speed - more spins = more damage and better crowd control!
+                </div>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🪓</div>
+                    <div class="weapon-info">
+                        <h4>Battle Axe</h4>
+                        <span class="weapon-priority priority-core">HIGH DPS</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Powerful single-target strikes that cleave through multiple enemies.</p>
+                <p><strong>Damage:</strong> 150% base damage with 3-enemy cleave at max level</p>
+                <p><strong>Best Use:</strong> Excellent against bosses and tough enemies that sword can't handle quickly.</p>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🌪️</div>
+                    <div class="weapon-info">
+                        <h4>Blade Tornado (Evolution)</h4>
+                        <span class="weapon-priority priority-core">ULTIMATE FORM</span>
+                    </div>
+                </div>
+                <p><strong>Evolution:</strong> Level 6 Spinning Sword + Level 4 Whirlwind = Blade Tornado</p>
+                <p><strong>Function:</strong> Massive spinning death spiral that moves with you and grows in size</p>
+                <p><strong>Power Level:</strong> Can clear entire screens and deals 400% weapon damage</p>
+                
+                <div class="synergy-highlight">
+                    <strong>Game Changer:</strong> Once evolved, you become nearly unstoppable in crowd situations!
+                </div>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🛡️</div>
+                    <div class="weapon-info">
+                        <h4>Shield Bash</h4>
+                        <span class="weapon-priority priority-important">CROWD CONTROL</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Stuns enemies in front of you while dealing moderate damage</p>
+                <p><strong>Utility:</strong> Essential for survivability - interrupts dangerous enemy attacks</p>
+                <p><strong>Synergy:</strong> Works great with lifesteal - stun enemies, then heal up with sword damage</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Step-by-Step Build Guide</h2>
+            <div class="step-by-step">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Early Game Foundation (Levels 1-5)</h4>
+                        <p>Start with Spinning Sword levels 1-3. Take any Health or Armor items you see. Focus on staying alive while you learn enemy patterns.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Damage Addition (Levels 6-10)</h4>
+                        <p>Add Battle Axe levels 1-3 for single-target damage. Look for Attack Speed items - they boost both weapons significantly.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Survival Focus (Levels 11-15)</h4>
+                        <p>Add Whirlwind levels 1-4 for evolution setup. Prioritize Lifesteal and Health Regen items - you'll be taking more damage as enemies get stronger.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Evolution Time (Levels 16-20)</h4>
+                        <p>Max Spinning Sword to level 6 to trigger Blade Tornado evolution. Add Shield Bash for crowd control and emergency escapes.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Optimization Phase (Level 20+)</h4>
+                        <p>Focus on items that enhance your evolved weapons. Look for Movement Speed to help with positioning and rare items that boost melee damage.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips-section">
+            <h3 class="subsection-title">💡 Pro Tips & Combat Strategies</h3>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⚔️</span>
+                <div>
+                    <strong>Positioning is Key:</strong> Stay at medium-close range. Too close and you'll take unnecessary damage, too far and your weapons won't hit.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🔄</span>
+                <div>
+                    <strong>Circle Strafe Technique:</strong> Move in circles around enemy groups. Your spinning weapons will hit everything while you avoid most attacks.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🛡️</span>
+                <div>
+                    <strong>Use Shield Bash Wisely:</strong> Save it for dangerous enemies or when you're overwhelmed. The stun can save your life.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">💚</span>
+                <div>
+                    <strong>Lifesteal Priority:</strong> Get lifesteal as early as possible. With multiple melee weapons, you'll heal constantly during fights.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⚡</span>
+                <div>
+                    <strong>Attack Speed Scaling:</strong> Attack speed affects ALL your melee weapons. One attack speed item boosts your entire build.
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h3 class="subsection-title">❌ Common Mistakes to Avoid</h3>
+            <div class="weapon-card">
+                <ul>
+                    <li><strong>Standing still:</strong> Even with high armor, you need to keep moving to avoid getting surrounded</li>
+                    <li><strong>Ignoring lifesteal:</strong> Without healing, you'll struggle in longer fights and against bosses</li>
+                    <li><strong>Taking ranged weapons:</strong> Stay focused on melee synergies - mixing weapon types dilutes your power</li>
+                    <li><strong>Rushing into crowds:</strong> Let enemies come to you, then circle around them for maximum weapon efficiency</li>
+                    <li><strong>Skipping Shield Bash:</strong> The crowd control is invaluable for survivability, even if damage is lower</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="back-to-guides">
+            <a href="../builds.html" class="btn btn-secondary">← Back to Build Guides</a>
+            <a href="../characters/knight-beginner-guide.html" class="btn">🗡️ Knight Guide</a>
+            <a href="../../../index.html" class="btn">🏠 Home Page</a>
+        </div>
+    </div>
+</body>
+</html>
