@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightning Storm Build Guide - Megabonk's Most OP Electric Build</title>
+    <meta name="description" content="Master the Lightning Storm build in Megabonk. Complete guide with weapon synergies, character recommendations, and step-by-step strategy for dominating runs.">
+    <meta name="keywords" content="megabonk lightning storm build, megabonk best build, megabonk electric build, megabonk weapon guide">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+            --success: #4caf50;
+            --warning: #ff9800;
+            --info: #2196f3;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid var(--primary);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .build-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .overview-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .overview-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .overview-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .overview-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .overview-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .subsection-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--primary);
+        }
+        
+        .weapon-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .weapon-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .weapon-icon {
+            font-size: 3rem;
+        }
+        
+        .weapon-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .weapon-priority {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .priority-core {
+            background: var(--success);
+            color: white;
+        }
+        
+        .priority-important {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .priority-optional {
+            background: var(--info);
+            color: white;
+        }
+        
+        .step-by-step {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .character-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .character-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .character-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .character-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .character-rating {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tip-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+        
+        .back-to-guides {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .build-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .weapon-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../index.html">Home</a> > 
+            <a href="../builds.html">Build Guides</a> > 
+            Lightning Storm Build
+        </nav>
+        
+        <section class="hero-section">
+            <h1 class="hero-title">⚡ Lightning Storm Build</h1>
+            <p class="hero-subtitle">The Ultimate Chain Lightning Build for Dominating Late Game</p>
+            <div class="rating-badge">
+                <span>⭐⭐⭐⭐⭐</span>
+                <span>S-Tier Meta Build</span>
+            </div>
+        </section>
+        
+        <section class="build-overview">
+            <div class="overview-card">
+                <h3>🎯 Build Summary</h3>
+                <ul>
+                    <li><strong>Playstyle:</strong> High DPS, Screen Clear</li>
+                    <li><strong>Difficulty:</strong> Intermediate</li>
+                    <li><strong>Best For:</strong> Late Game Scaling</li>
+                    <li><strong>Power Spike:</strong> Level 15+</li>
+                </ul>
+            </div>
+            
+            <div class="overview-card">
+                <h3>⚡ Core Weapons</h3>
+                <ul>
+                    <li>Lightning Bolt (Primary)</li>
+                    <li>Chain Lightning (Evolution)</li>
+                    <li>Thunder Cloud (Support)</li>
+                    <li>Static Field (Area Control)</li>
+                </ul>
+            </div>
+            
+            <div class="overview-card">
+                <h3>🔧 Key Items</h3>
+                <ul>
+                    <li>Mana Regeneration (+50%)</li>
+                    <li>Lightning Damage (+25%)</li>
+                    <li>Chain Range (+40%)</li>
+                    <li>Attack Speed (+30%)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Best Characters for Lightning Storm</h2>
+            <div class="character-recommendations">
+                <div class="character-card">
+                    <div class="character-icon">🦊</div>
+                    <h3 class="character-name">Kitsune (Fox)</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Perfect mobility for kiting while lightning chains. Natural mana synergy with starting fireball.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">⚡</div>
+                    <h3 class="character-name">Lightning Mage</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Built for this build! +25% lightning damage passive and faster mana regen.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">🧙</div>
+                    <h3 class="character-name">Wizard</h3>
+                    <div class="character-rating">⭐⭐⭐⭐☆</div>
+                    <p>Good alternative with magic missile synergy and spell power bonuses.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Core Weapons & Synergies</h2>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">⚡</div>
+                    <div class="weapon-info">
+                        <h4>Lightning Bolt</h4>
+                        <span class="weapon-priority priority-core">CORE WEAPON</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Fires lightning that chains between enemies. Each level increases damage and chain count.</p>
+                <p><strong>Max Level:</strong> 8 (Evolves at level 6 with Thunder Cloud)</p>
+                <p><strong>Priority:</strong> Max this first! It's your primary damage source.</p>
+                <p><strong>Synergy:</strong> Pairs perfectly with Chain Range and Lightning Damage items.</p>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">☁️</div>
+                    <div class="weapon-info">
+                        <h4>Thunder Cloud</h4>
+                        <span class="weapon-priority priority-core">EVOLUTION REQUIREMENT</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Creates lightning clouds that follow you and zap nearby enemies.</p>
+                <p><strong>Evolution Trigger:</strong> Level 6 Lightning Bolt + Level 4 Thunder Cloud = Storm Lord</p>
+                <p><strong>Strategy:</strong> Get to level 4, then focus on maxing Lightning Bolt first.</p>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🌩️</div>
+                    <div class="weapon-info">
+                        <h4>Storm Lord (Evolution)</h4>
+                        <span class="weapon-priority priority-core">ULTIMATE FORM</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Massive screen-wide lightning that chains infinitely and creates storm clouds.</p>
+                <p><strong>Damage:</strong> 300% base lightning damage with unlimited chain potential</p>
+                <p><strong>Game Changer:</strong> Once you get this, you can clear entire screens of enemies instantly.</p>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">⚡</div>
+                    <div class="weapon-info">
+                        <h4>Static Field</h4>
+                        <span class="weapon-priority priority-important">SUPPORT</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Creates an electric field around you that damages and slows enemies.</p>
+                <p><strong>Synergy:</strong> Proc Lightning Bolt chains when enemies enter the field.</p>
+                <p><strong>Defensive Value:</strong> Provides crowd control while you kite enemies.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Step-by-Step Build Guide</h2>
+            <div class="step-by-step">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Early Game (Levels 1-5)</h4>
+                        <p>Focus on Lightning Bolt levels 1-3. Take any Movement Speed or Mana Regen items. Avoid other weapons for now - you want to concentrate your upgrades.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Mid Game Setup (Levels 6-10)</h4>
+                        <p>Add Thunder Cloud levels 1-4. Start looking for Lightning Damage and Chain Range items. Continue leveling Lightning Bolt to 5-6.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Evolution Time (Levels 11-15)</h4>
+                        <p>Max Lightning Bolt to level 6, then max Thunder Cloud to level 4. This triggers the Storm Lord evolution - your power spike moment!</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Support Weapons (Levels 16-20)</h4>
+                        <p>Add Static Field for area control. Consider Wind Blade for mobility or Energy Ball for finishing enemies. Focus on items that boost your lightning damage.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Late Game Dominance (Level 20+)</h4>
+                        <p>You should be clearing entire screens. Focus on survival items like Health Regen and Movement Speed. Look for rare items that boost spell effects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips-section">
+            <h3 class="subsection-title">💡 Pro Tips & Advanced Strategies</h3>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⚡</span>
+                <div>
+                    <strong>Chain Positioning:</strong> Lightning chains to the closest enemy. Position yourself so chains jump through dense enemy groups for maximum damage.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🎯</span>
+                <div>
+                    <strong>Mana Management:</strong> Lightning Bolt consumes mana. Prioritize Mana Regen items early to maintain consistent damage output.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🔄</span>
+                <div>
+                    <strong>Kiting Technique:</strong> Move in large circles to group enemies, then let lightning chains clear entire groups at once.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⚠️</span>
+                <div>
+                    <strong>Boss Strategy:</strong> Lightning builds excel against groups but can struggle with single targets. Save Thunder Cloud procs for boss fights.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🎮</span>
+                <div>
+                    <strong>Controller Tip:</strong> This build works great with controllers - you can focus on movement while lightning auto-targets enemies.
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h3 class="subsection-title">❌ Common Mistakes to Avoid</h3>
+            <div class="weapon-card">
+                <ul>
+                    <li><strong>Spreading too thin:</strong> Don't take multiple weapon types early - focus on lightning synergies first</li>
+                    <li><strong>Ignoring mana:</strong> Without mana regen, your lightning bolt will stop firing in long fights</li>
+                    <li><strong>Poor positioning:</strong> Stay at medium range - too close and you'll take damage, too far and chains won't reach</li>
+                    <li><strong>Skipping support items:</strong> Health and movement speed become crucial once you have your core build</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="back-to-guides">
+            <a href="../builds.html" class="btn btn-secondary">← Back to Build Guides</a>
+            <a href="../../../index.html" class="btn">🏠 Home Page</a>
+        </div>
+    </div>
+</body>
+</html>
