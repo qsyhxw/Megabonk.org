@@ -9,7 +9,6 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    
     <!-- Open Graph -->
     <meta property="og:title" content="Megabonk - Ultimate 3D Roguelike Guide">
     <meta property="og:description" content="Master Megabonk with complete character builds, boss strategies & weapon combinations.">
@@ -232,6 +231,229 @@
             margin-bottom: 4rem;
         }
         
+        /* Character Showcase Styles */
+        .character-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .character-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+        
+        .character-card.featured::before {
+            content: "FEATURED";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(45deg, #ff6b35, #ff8c69);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .character-card.premium::before {
+            content: "PREMIUM";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(45deg, #9c27b0, #e91e63);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .character-image {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .character-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .character-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .character-stats {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+        
+        .character-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .character-features {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .character-card .guide-link {
+            color: var(--primary);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .character-card:hover .guide-link {
+            color: #ff8c69;
+        }
+        
+        /* Quick Navigation Section */
+        .quick-nav-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(255, 107, 53, 0.05) 100%);
+            padding: 4rem 0;
+        }
+        
+        .quick-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .nav-category {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .nav-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-category ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-category li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .nav-category a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-category a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-category .coming-soon {
+            opacity: 0.6;
+            position: relative;
+        }
+        
+        .nav-category .coming-soon::after {
+            content: "Coming Soon";
+            position: absolute;
+            right: 0;
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+        }
+        
+        /* Coming Soon Notice Styles */
+        .coming-soon-notice {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .notice-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .notice-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .notice-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .temp-build-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .temp-build-links .btn {
+            min-width: 160px;
+        }
+
         /* Stats Section */
         .stats-section {
             background: rgba(0, 0, 0, 0.15);
@@ -634,7 +856,8 @@
             }
             
             .features-grid,
-            .guides-grid {
+            .guides-grid,
+            .character-showcase {
                 grid-template-columns: 1fr;
             }
             
@@ -645,13 +868,19 @@
                 height: 50px;
                 font-size: 1.2rem;
             }
+            
+            .temp-build-links {
+                flex-direction: column;
+                align-items: center;
+            }
         }
         
         /* Focus styles for accessibility */
         .nav-links a:focus,
         .btn:focus,
         .guide-card:focus,
-        .community-link:focus {
+        .community-link:focus,
+        .character-card:focus {
             outline: 3px solid var(--primary);
             outline-offset: 3px;
         }
@@ -674,7 +903,9 @@
             </div>
             
             <ul class="nav-links" id="navLinks">
+                <li><a href="#characters">Characters</a></li>
                 <li><a href="#guides">Guides</a></li>
+                <li><a href="#builds">Builds</a></li>
                 <li><a href="#tools">Tools</a></li>
                 <li><a href="#community">Community</a></li>
                 <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam Store</a></li>
@@ -696,9 +927,140 @@
                 <a href="https://store.steampowered.com/app/3405340/Megabonk/" class="btn btn-primary" target="_blank">
                     🎯 Buy on Steam - $8.49
                 </a>
-                <a href="#guides" class="btn btn-secondary">
-                    📚 Free Survival Guides
+                <a href="#characters" class="btn btn-secondary">
+                    📚 Free Character Guides
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Character Showcase Section -->
+    <section id="characters" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Character Guides</h2>
+            <p class="section-subtitle">Master the most popular Megabonk characters with our detailed guides</p>
+            
+            <div class="character-showcase">
+                <div class="character-card featured" onclick="window.open('guides/characters/fox-kitsune-guide.html', '_blank')">
+                    <div class="character-image">🦊</div>
+                    <div class="character-content">
+                        <span class="character-badge">⭐ S-TIER</span>
+character-name">Kitsune (Fox)</h3>
+                        <p class="character-stats">Speed: ★★★★★ | Health: ★★★☆☆ | Beginner: ★★★★★</p>
+                        <p class="character-description">
+                            The ultimate beginner's choice! Master fireball builds, movement techniques, 
+                            and unlock strategies in our complete guide.
+                        </p>
+                        <div class="character-features">
+                            ✅ Complete build guide • ✅ Unlock requirements • ✅ Pro strategies
+                        </div>
+                        <span class="guide-link">Read Complete Guide →</span>
+                    </div>
+                </div>
+                
+                <div class="character-card" onclick="window.open('guides/characters/knight-beginner-guide.html', '_blank')">
+                    <div class="character-image">⚔️</div>
+                    <div class="character-content">
+                        <span class="character-badge">🛡️ BEGINNER</span>
+                        <h3 class="character-name">Knight</h3>
+                        <p class="character-stats">Speed: ★★☆☆☆ | Health: ★★★★★ | Beginner: ★★★★★</p>
+                        <p class="character-description">
+                            Perfect for new players! High survivability with powerful melee attacks. 
+                            Learn the fundamentals with this tanky hero.
+                        </p>
+                        <div class="character-features">
+                            ✅ Beginner strategies • ✅ Survival tips • ✅ Weapon combos
+                        </div>
+                        <span class="guide-link">Read Beginner Guide →</span>
+                    </div>
+                </div>
+                
+                <div class="character-card premium" onclick="window.open('guides/characters/ninja-unlock-guide.html', '_blank')">
+                    <div class="character-image">🥷</div>
+                    <div class="character-content">
+                        <span class="character-badge">💎 PREMIUM</span>
+                        <h3 class="character-name">Ninja</h3>
+                        <p class="character-stats">Speed: ★★★★☆ | Health: ★★★☆☆ | Advanced: ★★★★☆</p>
+                        <p class="character-description">
+                            High skill, high reward character. Master stealth mechanics, critical builds, 
+                            and advanced unlock strategies.
+                        </p>
+                        <div class="character-features">
+                            ✅ Unlock guide • ✅ Stealth tactics • ✅ Crit builds
+                        </div>
+                        <span class="guide-link">Read Unlock Guide →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Navigation Section -->
+    <section class="section quick-nav-section">
+        <div class="container">
+            <h2 class="section-title">Complete Site Navigation</h2>
+            <p class="section-subtitle">Everything you need to master Megabonk - guides, tools, and community</p>
+            
+            <div class="quick-nav-grid">
+                <div class="nav-category">
+                    <h3>🎯 Character Guides</h3>
+                    <ul>
+                        <li><a href="guides/characters/fox-kitsune-guide.html" target="_blank">🦊 Kitsune (Fox) Complete Guide</a></li>
+                        <li><a href="guides/characters/knight-beginner-guide.html" target="_blank">⚔️ Knight Beginner Guide</a></li>
+                        <li><a href="guides/characters/ninja-unlock-guide.html" target="_blank">🥷 Ninja Unlock Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-category">
+                    <h3>🔧 Build Guides</h3>
+                    <ul>
+                        <li><a href="#" class="coming-soon">🌟 Lightning Storm Build</a></li>
+                        <li><a href="#" class="coming-soon">⚔️ Melee Massacre Build</a></li>
+                        <li><a href="#" class="coming-soon">🏹 Ranged Sniper Build</a></li>
+                        <li><a href="#" class="coming-soon">🔥 Fire Mage Build</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-category">
+                    <h3>👹 Boss Strategies</h3>
+                    <ul>
+                        <li><a href="#" class="coming-soon">🦴 Skeleton King Guide</a></li>
+                        <li><a href="#" class="coming-soon">🔥 Flame Demon Strategy</a></li>
+                        <li><a href="#" class="coming-soon">⚡ Storm Lord Tactics</a></li>
+                        <li><a href="#" class="coming-soon">👑 Final Boss Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-category">
+                    <h3>🛠️ Game Tools</h3>
+                    <ul>
+                        <li><a href="#" class="coming-soon">🧮 Build Planner</a></li>
+                        <li><a href="#" class="coming-soon">📊 DPS Calculator</a></li>
+                        <li><a href="#" class="coming-soon">⚖️ Character Compare</a></li>
+                        <li><a href="#" class="coming-soon">🎯 Random Challenge</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Builds Section Placeholder -->
+    <section id="builds" class="section">
+        <div class="container">
+            <h2 class="section-title">Weapon Builds & Strategies</h2>
+            <p class="section-subtitle">Powerful build guides coming soon! Check out our character guides for build recommendations</p>
+            
+            <div class="coming-soon-notice">
+                <div class="notice-content">
+                    <span class="notice-icon">🔧</span>
+                    <h3>Build Guides in Development</h3>
+                    <p>We're creating comprehensive weapon build guides for all playstyles. Meanwhile, check out our character guides which include recommended builds and strategies.</p>
+                    <div class="temp-build-links">
+                        <a href="guides/characters/fox-kitsune-guide.html" class="btn btn-secondary" target="_blank">🦊 Fox Builds</a>
+                        <a href="guides/characters/knight-beginner-guide.html" class="btn btn-secondary" target="_blank">⚔️ Knight Builds</a>
+                        <a href="guides/characters/ninja-unlock-guide.html" class="btn btn-secondary" target="_blank">🥷 Ninja Builds</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1003,13 +1365,13 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h3>🎯 Survival Guides</h3>
+                    <h3>🎯 Character Guides</h3>
                     <ul>
-                        <li><a href="#guides" onclick="showGuide('beginners')">🚀 Beginner's Guide</a></li>
+                        <li><a href="guides/characters/fox-kitsune-guide.html" target="_blank">🦊 Kitsune (Fox) Guide</a></li>
+                        <li><a href="guides/characters/knight-beginner-guide.html" target="_blank">⚔️ Knight Beginner Guide</a></li>
+                        <li><a href="guides/characters/ninja-unlock-guide.html" target="_blank">🥷 Ninja Unlock Guide</a></li>
                         <li><a href="#guides" onclick="showGuide('characters')">👥 Character Tier List</a></li>
                         <li><a href="#guides" onclick="showGuide('builds')">🔧 Best Builds</a></li>
-                        <li><a href="#guides" onclick="showGuide('bosses')">👹 Boss Strategies</a></li>
-                        <li><a href="#guides" onclick="showGuide('achievements')">🏅 All Achievements</a></li>
                         <li><a href="#guides" onclick="showGuide('advanced')">💡 Pro Tips</a></li>
                     </ul>
                 </div>
@@ -1098,6 +1460,11 @@
                         <li>Focus on movement speed and pickup range</li>
                         <li>At 10+ minutes, look for weapon evolutions</li>
                     </ol>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <p><strong>Want detailed character guides?</strong></p>
+                        <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-primary">🦊 Fox Complete Guide</a>
+                    </div>
                 `
             },
             characters: {
@@ -1134,9 +1501,17 @@
                     <ul>
                         <li><strong>🪓 Barbarian:</strong> High damage but slow</li>
                         <li><strong>🏃 Runner:</strong> Fast but fragile</li>
-                        <li><strong>🧙 Wizard:</strong> Magic missile spam</li>
                         <li><strong>🛡️ Paladin:</strong> Balanced stats</li>
                     </ul>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <p><strong>Want detailed character guides?</strong></p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                            <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-secondary">🦊 Fox Guide</a>
+                            <a href="guides/characters/ninja-unlock-guide.html" target="_blank" class="btn btn-secondary">🥷 Ninja Guide</a>
+                            <a href="guides/characters/knight-beginner-guide.html" target="_blank" class="btn btn-secondary">⚔️ Knight Guide</a>
+                        </div>
+                    </div>
                 `
             },
             builds: {
@@ -1177,6 +1552,15 @@
                         <li><strong>Sword Spin + Whirlwind = Blade Tornado:</strong> Moving death spiral</li>
                         <li><strong>Ice Shard + Freeze Aura = Absolute Zero:</strong> Freezes everything</li>
                     </ul>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <p><strong>Character-specific builds:</strong></p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                            <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-secondary">🦊 Fox Builds</a>
+                            <a href="guides/characters/ninja-unlock-guide.html" target="_blank" class="btn btn-secondary">🥷 Ninja Builds</a>
+                            <a href="guides/characters/knight-beginner-guide.html" target="_blank" class="btn btn-secondary">⚔️ Knight Builds</a>
+                        </div>
+                    </div>
                 `
             },
             bosses: {
@@ -1283,6 +1667,11 @@
                     </ul>
                     
                     <p><strong>🎯 Pro Tip:</strong> Master players focus 80% on positioning and movement, only 20% on build optimization!</p>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <p><strong>Ready to apply these tips?</strong></p>
+                        <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-primary">🦊 Start with Fox Guide</a>
+                    </div>
                 `
             }
         };
@@ -1312,7 +1701,12 @@
                 <div style="text-align: center; padding: 2rem;">
                     <h3>${toolNames[type] || 'Interactive Tool'}</h3>
                     <p style="margin: 2rem 0;">This interactive tool is coming soon! We're building amazing calculators and planners for Megabonk players.</p>
-                    <p style="color: var(--text-muted);">Want to be notified when tools launch?</p>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Meanwhile, check out our detailed character guides:</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-secondary">🦊 Fox Guide</a>
+                        <a href="guides/characters/knight-beginner-guide.html" target="_blank" class="btn btn-secondary">⚔️ Knight Guide</a>
+                        <a href="guides/characters/ninja-unlock-guide.html" target="_blank" class="btn btn-secondary">🥷 Ninja Guide</a>
+                    </div>
                 </div>
             `;
             
@@ -1324,7 +1718,12 @@
                 <div style="text-align: center; padding: 2rem;">
                     <h3>Feature Under Development</h3>
                     <p style="margin: 2rem 0;">We're working hard to bring you the most comprehensive Megabonk database and tools!</p>
-                    <p style="color: var(--text-muted);">Check back soon for updates.</p>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">For now, check out our available guides:</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-secondary">🦊 Fox Guide</a>
+                        <a href="guides/characters/knight-beginner-guide.html" target="_blank" class="btn btn-secondary">⚔️ Knight Guide</a>
+                        <a href="guides/characters/ninja-unlock-guide.html" target="_blank" class="btn btn-secondary">🥷 Ninja Guide</a>
+                    </div>
                 </div>
             `);
         }
