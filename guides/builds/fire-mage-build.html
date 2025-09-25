@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Mage Build Guide - Megabonk's Ultimate Pyromancer Build</title>
+    <meta name="description" content="Master the Fire Mage build in Megabonk. Complete guide with fireball synergies, AOE strategies, and explosive magic combat for devastating area damage.">
+    <meta name="keywords" content="megabonk fire mage build, megabonk pyromancer build, megabonk fireball build, megabonk fire build, megabonk magic build">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+            --success: #4caf50;
+            --warning: #ff9800;
+            --info: #2196f3;
+            --fire-accent: #ef4444;
+            --fire-bright: #f97316;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 49%, rgba(249, 115, 22, 0.1) 50%, transparent 51%);
+            animation: flameFlicker 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes flameFlicker {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--fire-accent) 0%, var(--fire-bright) 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid var(--fire-accent);
+            font-size: 1.2rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .build-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .overview-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .overview-card h3 {
+            color: var(--fire-accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .overview-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .overview-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .overview-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .subsection-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--fire-accent);
+        }
+        
+        .weapon-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+        
+        .weapon-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .weapon-icon {
+            font-size: 3rem;
+        }
+        
+        .weapon-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .weapon-priority {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .priority-core {
+            background: var(--fire-accent);
+            color: white;
+        }
+        
+        .priority-important {
+            background: var(--fire-bright);
+            color: white;
+        }
+        
+        .priority-optional {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .step-by-step {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, var(--fire-accent), var(--fire-bright));
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        。step-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--fire-accent);
+        }
+        
+        。character-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px， 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        。character-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
+        }
+        
+        。character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+        }
+        
+        。character-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        。character-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        。character-rating {
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+        
+        。tips-section {
+            background: linear-gradient(135deg, rgba(239， 68, 68, 0.1) 0%, rgba(249, 115, 22, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        。tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        。tip-icon {
+            color: var(--fire-accent);
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+        
+        。back-to-guides {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        。btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--fire-accent)， var(--fire-bright));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            margin: 0 1rem;
+        }
+        
+        。btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(239， 68, 68, 0.4);
+        }
+        
+        。btn-secondary {
+            background: transparent;
+            border: 2px solid var(--fire-accent);
+        }
+        
+        。synergy-highlight {
+            background: rgba(239， 68， 68, 0.1);
+            border-left: 4px solid var(--fire-accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        。damage-warning {
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid var(--fire-bright);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        。damage-warning h4 {
+            color: var(--fire-bright);
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            。container {
+                padding: 1rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .build-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .weapon-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .btn {
+                margin: 0.5rem;
+                width: calc(100% - 1rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../index.html">Home</a> > 
+            <a href="../builds.html">Build Guides</a> > 
+            Fire Mage Build
+        </nav>
+        
+        <section class="hero-section">
+            <h1 class="hero-title">🔥 Fire Mage Build</h1>
+            <p class="hero-subtitle">Unleash Devastating Area Damage with Explosive Fire Magic</p>
+            <div class="rating-badge">
+                <span>⭐⭐⭐⭐⭐</span>
+                <span>AOE King</span>
+            </div>
+        </section>
+        
+        <section class="build-overview">
+            <div class="overview-card">
+                <h3>🎯 Build Summary</h3>
+                <ul>
+                    <li><strong>Playstyle:</strong> AOE, Spell Caster</li>
+                    <li><strong>Difficulty:</strong> Intermediate</li>
+                    <li><strong>Best For:</strong> Crowd Control, Horde Clear</li>
+                    <li><strong>Power Spike:</strong> Level 8+</li>
+                </ul>
+            </div>
+            
+            <div class="overview-card">
+                <h3>🔥 Core Weapons</h3>
+                <ul>
+                    <li>Fireball (Primary)</li>
+                    <li>Fire Ring (AOE Support)</li>
+                    <li>Phoenix Burst (Evolution)</li>
+                    <li>Flame Tornado (Ultimate)</li>
+                </ul>
+            </div>
+            
+            <div class="overview-card">
+                <h3>🧙 Key Items</h3>
+                <ul>
+                    <li>Spell Power (+50%)</li>
+                    <li>Fire Damage (+35%)</li>
+                    <li>Mana Regeneration (+40%)</li>
+                    <li>Area of Effect (+25%)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Best Characters for Fire Mage</h2>
+            <div class="character-recommendations">
+                <div class="character-card">
+                    <div class="character-icon">🔥</div>
+                    <h3 class="character-name">Pyromancer</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Built for fire magic! +30% fire damage, +25% spell power, and natural mana efficiency.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">🦊</div>
+                    <h3 class="character-name">Kitsune (Fox)</h3>
+                    <div class="character-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Starts with fireball and has excellent mobility for spell casting positioning.</p>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-icon">🧙</div>
+                    <h3 class="character-name">Wizard</h3>
+                    <div class="character-rating">⭐⭐⭐⭐☆</div>
+                    <p>General spell caster with magic missile synergy and good mana pool.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Core Weapons & Synergies</h2>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🌪️</div>
+                    <div class="weapon-info">
+                        <h4>Phoenix Burst (Evolution)</h4>
+                        <span class="weapon-priority priority-core">ULTIMATE FORM</span>
+                    </div>
+                </div>
+                <p><strong>Evolution:</strong> Level 6 Fireball + Level 4 Fire Ring = Phoenix Burst</p>
+                <p><strong>Function:</strong> Massive explosive burst that creates chain reactions across the battlefield</p>
+                <p><strong>Power Level:</strong> 500% weapon damage in huge radius with burning aftereffect</p>
+                
+                <div class="damage-warning">
+                    <h4>⚠️ Crowd Destroyer Warning</h4>
+                    <p>Phoenix Burst can clear entire screens of enemies instantly. Be prepared for sudden difficulty spikes after evolution!</p>
+                </div>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🌪️</div>
+                    <div class="weapon-info">
+                        <h4>Flame Tornado</h4>
+                        <span class="weapon-priority priority-important">AOE CONTROL</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Creates moving fire tornadoes that seek out and destroy enemy groups</p>
+                <p><strong>Best Use:</strong> Perfect for controlling large areas and herding enemies into kill zones</p>
+                <p><strong>Synergy:</strong> Combines with fire damage bonuses for devastating area control</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Step-by-Step Build Guide</h2>
+            <div class="step-by-step">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Fire Foundation (Levels 1-5)</h4>
+                        <p>Start with Fireball levels 1-3. Take any Mana Regeneration items immediately - you'll need sustained casting power.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>AOE Development (Levels 6-10)</h4>
+                        <p>Add Fire Ring levels 1-2. Focus on Spell Power and Fire Damage items. Start practicing positioning for maximum AOE coverage.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Power Scaling (Levels 11-15)</h4>
+                        <p>Continue leveling core weapons while prioritizing Area of Effect increases. Add Flame Tornado for additional crowd control.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Evolution Achievement (Levels 16-20)</h4>
+                        <p>Max Fireball to level 6 and Fire Ring to level 4 to trigger Phoenix Burst evolution. Prepare for explosive power increase!</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Master Pyromancer (Level 20+)</h4>
+                        <p>Focus on spell efficiency and cooldown reduction. Add survivability items since you'll be drawing lots of attention.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips-section">
+            <h3 class="subsection-title">🔥 Advanced Fire Magic Strategies</h3>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🎯</span>
+                <div>
+                    <strong>Positioning for AOE:</strong> Stay at medium range where your fireballs can hit multiple enemies but you're safe from retaliation.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">💙</span>
+                <div>
+                    <strong>Mana Management:</strong> Fire spells are mana-hungry. Always prioritize mana regeneration items early in your build.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🌪️</span>
+                <div>
+                    <strong>Chain Reactions:</strong> Use terrain to funnel enemies into tight groups, then unleash AOE spells for maximum damage efficiency.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🛡️</span>
+                <div>
+                    <strong>Defense Priority:</strong> Fire builds attract attention. Take health and armor items once your core damage is established.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⚡</span>
+                <div>
+                    <strong>Spell Rotation:</strong> Use Fire Ring for close enemies, Fireball for distant groups, and Flame Tornado for area denial.
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h3 class="subsection-title">🧙 Mana Efficiency Guide</h3>
+            <div class="weapon-card">
+                <h4>Managing Your Magical Resources</h4>
+                <ul>
+                    <li><strong>Early Game:</strong> Take every mana regeneration item you see - it's more important than damage initially</li>
+                    <li><strong>Casting Rhythm:</strong> Don't spam spells constantly. Let your mana pool recover between major engagements</li>
+                    <li><strong>Emergency Conservation:</strong> If mana gets low during boss fights, focus on positioning and let Fire Ring handle close enemies</li>
+                    <li><strong>Late Game Scaling:</strong> Once evolved, your spells become so powerful that efficiency matters less than raw output</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h3 class="subsection-title">❌ Common Fire Mage Mistakes</h3>
+            <div class="weapon-card">
+                <ul>
+                    <li><strong>Ignoring mana regen:</strong> Without sustainable casting, your damage output becomes inconsistent</li>
+                    <li><strong>Poor spell targeting:</strong> Fire spells have travel time - lead your targets and predict enemy movement</li>
+                    <li><strong>Standing too close:</strong> Fire mages are fragile - use your range advantage or get overwhelmed quickly</li>
+                    <li><strong>Neglecting survivability:</strong> High damage draws enemy attention - invest in health and armor mid-game</li>
+                    <li><strong>Spell spam inefficiency:</strong> Strategic casting with proper timing beats mindless button mashing every time</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="back-to-guides">
+            <a href="../builds.html" class="btn btn-secondary">← Back to Build Guides</a>
+            <a href="../characters/fox-kitsune-guide.html" class="btn">🦊 Fox Guide</a>
+            <a href="../../../index.html" class="btn">🏠 Home Page</a>
+        </div>
+    </div>
+</body>
+</html>">🔥</div>
+                    <div class="weapon-info">
+                        <h4>Fireball</h4>
+                        <span class="weapon-priority priority-core">CORE WEAPON</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Launches explosive fireballs that deal area damage on impact.</p>
+                <p><strong>Max Level:</strong> 8 (Evolves at level 6 with Fire Ring)</p>
+                <p><strong>Scaling:</strong> 110% base damage + 20% per level + explosion radius increases</p>
+                
+                <div class="synergy-highlight">
+                    <strong>AOE Synergy:</strong> Each Area of Effect increase dramatically boosts your crowd clearing potential!
+                </div>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon">🔥</div>
+                    <div class="weapon-info">
+                        <h4>Fire Ring</h4>
+                        <span class="weapon-priority priority-core">EVOLUTION REQUIREMENT</span>
+                    </div>
+                </div>
+                <p><strong>Function:</strong> Creates expanding rings of fire around you that damage all enemies.</p>
+                <p><strong>Evolution Trigger:</strong> Level 6 Fireball + Level 4 Fire Ring = Phoenix Burst</p>
+                <p><strong>Defensive Value:</strong> Excellent for crowd control when enemies get too close.</p>
+            </div>
+            
+            <div class="weapon-card">
+                <div class="weapon-header">
+                    <div class="weapon-icon
