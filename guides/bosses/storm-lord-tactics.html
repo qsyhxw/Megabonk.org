@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storm Lord Tactics - Megabonk Elite Boss Guide</title>
+    <meta name="description" content="Master the Storm Lord boss fight in Megabonk. Advanced tactics guide with lightning patterns, positioning strategies, and builds for the 30-minute elite boss.">
+    <meta name="keywords" content="megabonk storm lord, storm lord tactics, megabonk 30 minute boss, storm lord guide, lightning boss">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+            --lightning-blue: #3b82f6;
+            --lightning-purple: #8b5cf6;
+            --lightning-white: #f8fafc;
+            --storm-gray: #64748b;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 49%, rgba(139, 92, 246, 0.1) 50%, transparent 51%);
+            animation: lightningFlash 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes lightningFlash {
+            0%, 90%, 100% { opacity: 0.2; }
+            5%, 15% { opacity: 1; }
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--lightning-white) 0%, var(--lightning-blue) 50%, var(--lightning-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .boss-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--lightning-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .attack-pattern {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .attack-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .attack-icon {
+            font-size: 2.5rem;
+        }
+        
+        .attack-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .danger-level {
+            margin-left: auto;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .danger-instant {
+            background: #1e1b4b;
+            color: var(--lightning-white);
+        }
+        
+        .danger-extreme {
+            background: var(--lightning-purple);
+            color: white;
+        }
+        
+        .danger-high {
+            background: var(--lightning-blue);
+            color: white;
+        }
+        
+        .lightning-warning {
+            background: rgba(59, 130, 246, 0.15);
+            border: 2px solid var(--lightning-blue);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .lightning-warning h4 {
+            color: var(--lightning-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .strategy-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .strategy-card h3 {
+            color: var(--lightning-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .recommended-builds {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .build-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease;
+        }
+        
+        .build-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .build-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .build-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .build-rating {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+        
+        .phase-guide {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .phase {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .phase:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .phase-number {
+            background: linear-gradient(45deg, var(--lightning-blue), var(--lightning-purple));
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+        
+        .phase-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--lightning-blue);
+        }
+        
+        .tips-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tip-icon {
+            color: var(--lightning-blue);
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+        
+        .back-to-guides {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--lightning-blue), var(--lightning-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            margin: 0 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--lightning-blue);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .boss-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .attack-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .btn {
+                margin: 0.5rem;
+                width: calc(100% - 1rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../index.html">Home</a> > 
+            <a href="../../bosses.html">Boss Guides</a> > 
+            Storm Lord
+        </nav>
+        
+        <section class="hero-section">
+            <h1 class="hero-title">⚡ Storm Lord</h1>
+            <p class="hero-subtitle">Elite Lightning Boss - Appears at 30 Minutes</p>
+        </section>
+        
+        <section class="boss-stats">
+            <div class="stat-card">
+                <div class="stat-icon">❤️</div>
+                <div class="stat-value">18,000</div>
+                <div class="stat-label">Health Points</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⚔️</div>
+                <div class="stat-value">Extreme</div>
+                <div class="stat-label">Damage Level</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🏃</div>
+                <div class="stat-value">Fast</div>
+                <div class="stat-label">Movement Speed</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-value">30:00</div>
+                <div class="stat-label">Spawn Time</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-value">Screen-Wide</div>
+                <div class="stat-label">Attack Range</div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Attack Patterns</h2>
+            
+            <div class="attack-pattern">
+                <div class="attack-header">
+                    <div class="attack-icon">⚡</div>
+                    <div class="attack-name">Chain Lightning</div>
+                    <div class="danger-level danger-instant">INSTANT KILL</div>
+                </div>
+                <p><strong>Pattern:</strong> Lightning jumps between all enemies and the player in sequence</p>
+                <p><strong>Damage:</strong> 600-800 per hit (usually fatal)</p>
+                <p><strong>Range:</strong> Entire screen - nowhere is safe</p>
+                <p><strong>Frequency:</strong> Every 6-8 seconds</p>
+                <p><strong>Counter:</strong> This attack cannot be dodged by positioning. Only lightning resistance or immunity can save you.</p>
+                
+                <div class="lightning-warning">
+                    <h4>⚡ Lightning Resistance Required</h4>
+                    <p>Without significant lightning resistance (75%+), this boss is nearly impossible. Plan your build around electrical defense or accept that this fight will end quickly.</p>
+                </div>
+            </div>
+            
+            <div class="attack-pattern">
+                <div class="attack-header">
+                    <div class="attack-icon">🌩️</div>
+                    <div class="attack-name">Thunder Storm</div>
+                    <div class="danger-level danger-extreme">EXTREME THREAT</div>
+                </div>
+                <p><strong>Pattern:</strong> Multiple lightning strikes hit random locations across battlefield</p>
+                <p><strong>Damage:</strong> 400-500 per strike</p>
+                <p><strong>Count:</strong> 8-12 simultaneous strikes</p>
+                <p><strong>Frequency:</strong> Every 10-12 seconds</p>
+                <p><strong>Counter:</strong> Rapid movement and prayer. Some strikes can be avoided, but the coverage is massive.</p>
+            </div>
+            
+            <div class="attack-pattern">
+                <div class="attack-header">
+                    <div class="attack-icon">⚡</div>
+                    <div class="attack-name">Lightning Dash</div>
+                    <div class="danger-level danger-high">HIGH THREAT</div>
+                </div>
+                <p><strong>Pattern:</strong> Boss teleports instantly to player location with electrical explosion</p>
+                <p><strong>Damage:</strong> 500-600 in medium radius</p>
+                <p><strong>Speed:</strong> Instantaneous - no warning</p>
+                <p><strong>Frequency:</strong> Every 15-20 seconds</p>
+                <p><strong>Counter:</strong> Constant movement is your only defense. Never stay in one place for more than 2-3 seconds.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Battle Strategy</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h3>⚡ Lightning Defense Priority</h3>
+                    <ul>
+                        <li>Lightning resistance is absolutely mandatory</li>
+                        <li>Aim for 75%+ resistance minimum</li>
+                        <li>Electrical immunity items are ideal</li>
+                        <li>Grounding effects can help</li>
+                        <li>Consider this non-negotiable</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-card">
+                    <h3>🏃 Extreme Mobility</h3>
+                    <ul>
+                        <li>Never stop moving - ever</li>
+                        <li>Maximum movement speed is crucial</li>
+                        <li>Teleportation abilities are excellent</li>
+                        <li>Dash/sprint items are mandatory</li>
+                        <li>Practice unpredictable movement patterns</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-card">
+                    <h3>⚔️ Sustained DPS Focus</h3>
+                    <ul>
+                        <li>Consistent damage over burst</li>
+                        <li>Auto-attacking weapons preferred</li>
+                        <li>Avoid channeled or stationary abilities</li>
+                        <li>Piercing attacks work well</li>
+                        <li>DOT effects can be valuable</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Phase Guide</h2>
+            <div class="phase-guide">
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-number">1</div>
+                        <div class="phase-title">Storm Gathering (100-70% HP)</div>
+                    </div>
+                    <p>Focus on Chain Lightning and occasional Thunder Storms. This is your chance to establish rhythm and test your lightning resistance. If you can't survive this phase, you won't survive the fight.</p>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-number">2</div>
+                        <div class="phase-title">Electrical Chaos (70-30% HP)</div>
+                    </div>
+                    <p>Lightning Dash joins the rotation. All attacks become more frequent. Thunder Storms now have 12-15 strikes instead of 8-12. Maximum mobility and resistance are both essential.</p>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-number">3</div>
+                        <div class="phase-title">Tempest Fury (30-0% HP)</div>
+                    </div>
+                    <p>All attacks overlap. Chain Lightning every 4-5 seconds, constant Thunder Storms, frequent Lightning Dashes. Only perfectly optimized builds with maximum defenses can survive this phase.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Recommended Builds</h2>
+            <div class="recommended-builds">
+                <div class="build-card">
+                    <div class="build-icon">🛡️</div>
+                    <div class="build-name">Lightning Tank</div>
+                    <div class="build-rating">⭐⭐⭐⭐⭐</div>
+                    <p>Maximum lightning resistance build with sustained damage weapons. The only reliable way to defeat this boss.</p>
+                </div>
+                
+                <div class="build-card">
+                    <div class="build-icon">🏃</div>
+                    <div class="build-name">Speed Demon</div>
+                    <div class="build-rating">⭐⭐⭐⭐☆</div>
+                    <p>Maximum mobility with moderate lightning resistance. High skill ceiling but can work for expert players.</p>
+                </div>
+                
+                <div class="build-card">
+                    <div class="build-icon">🏹</div>
+                    <div class="build-name">Ranged Sniper</div>
+                    <div class="build-rating">⭐⭐⭐☆☆</div>
+                    <p>Good sustained damage but lacks the specialized defenses needed. Only works with perfect resistance items.</p>
+                </div>
+                
+                <div class="build-card">
+                    <div class="build-icon">⚡</div>
+                    <div class="build-name">Lightning Storm</div>
+                    <div class="build-rating">⭐⭐☆☆☆</div>
+                    <p>Lightning vs Lightning - the boss likely has high electrical resistance, making this matchup inefficient.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips-section">
+            <h3>⚡ Master-Level Storm Lord Tactics</h3>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🛡️</span>
+                <div>
+                    <strong>Resistance Math:</strong> 75% lightning resistance turns 800 damage into 200 damage - the difference between instant death and survival.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🔄</span>
+                <div>
+                    <strong>Movement Patterns:</strong> Use figure-8 patterns or random direction changes. Never move in straight lines or predictable circles.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">⚡</span>
+                <div>
+                    <strong>Chain Lightning Timing:</strong> Count the seconds between chain attacks. Use the brief windows to reposition more aggressively.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">💊</span>
+                <div>
+                    <strong>Healing Strategy:</strong> Instant healing items are crucial. DOT healing won't save you from burst electrical damage.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🎯</span>
+                <div>
+                    <strong>Damage Windows:</strong> Attack during Thunder Storm phases when the boss is stationary. Avoid attacking during Lightning Dash cooldowns.
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">🧠</span>
+                <div>
+                    <strong>Mental Preparation:</strong> This is the hardest boss before the final encounter. Expect multiple attempts and don't get frustrated.
+                </div>
+            </div>
+        </section>
+        
+        <div class="back-to-guides">
+            <a href="flame-demon-strategy.html" class="btn btn-secondary">← Previous: Flame Demon</a>
+            <a href="final-boss-guide.html" class="btn">👑 Final Boss Guide</a>
+            <a href="../../../index.html" class="btn">🏠 Home Page</a>
+        </div>
+    </div>
+</body>
+</html>
