@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Strategies Guide - Megabonk Complete Boss Tactics</title>
+    <meta name="description" content="Complete boss strategies for all Megabonk bosses. Master Skeleton King, Flame Demon, Storm Lord, and Final Boss with expert guides and tactics.">
+    <meta name="keywords" content="megabonk boss guide, boss strategies, skeleton king, flame demon, storm lord, final boss">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .progression-overview {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+        }
+        
+        .progression-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .progression-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .timeline-time {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            min-width: 60px;
+        }
+        
+        .timeline-content h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .boss-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .boss-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .boss-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+        
+        .boss-card.beginner {
+            border-left: 4px solid #4caf50;
+        }
+        
+        .boss-card.intermediate {
+            border-left: 4px solid #ff9800;
+        }
+        
+        .boss-card.advanced {
+            border-left: 4px solid #f44336;
+        }
+        
+        .boss-card.legendary {
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .boss-card.legendary::before {
+            content: 'LEGENDARY';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #9c27b0;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .boss-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .boss-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .boss-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .boss-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .boss-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .key-mechanics {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .key-mechanics h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .key-mechanics ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .key-mechanics li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+        }
+        
+        .key-mechanics li::before {
+            content: "• ";
+            color: var(--primary);
+        }
+        
+        .guide-link {
+            display: block;
+            text-align: center;
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+        
+        .guide-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .tips-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .tip-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .back-to-guides {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            margin: 0 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .boss-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .progression-timeline {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                margin: 0.5rem;
+                width: calc(100% - 1rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a> > 
+            Boss Strategies
+        </nav>
+        
+        <section class="hero-section">
+            <h1 class="hero-title">👹 Boss Strategies</h1>
+            <p class="hero-subtitle">Master Every Boss Encounter with Expert Tactics and Strategies</p>
+        </section>
+        
+        <section class="progression-overview">
+            <h2 class="progression-title">Boss Progression Timeline</h2>
+            <div class="progression-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">10:00</div>
+                    <div class="timeline-content">
+                        <h4>First Boss</h4>
+                        <p>Skeleton King - Learn basic boss mechanics</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">20:00</div>
+                    <div class="timeline-content">
+                        <h4>Fire Challenge</h4>
+                        <p>Flame Demon - Test your mobility and defenses</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">30:00</div>
+                    <div class="timeline-content">
+                        <h4>Lightning Trial</h4>
+                        <p>Storm Lord - Ultimate resistance test</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">45:00</div>
+                    <div class="timeline-content">
+                        <h4>Final Test</h4>
+                        <p>Ultimate Boss - Master everything</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="boss-grid">
+            <div class="boss-card beginner" onclick="window.open('skeleton-king-guide.html', '_blank')">
+                <div class="boss-icon">🦴</div>
+                <h3 class="boss-name">Skeleton King</h3>
+                <p class="boss-subtitle">First Major Boss • 10 Minutes</p>
+                
+                <div class="boss-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Health</span>
+                        <span class="stat-value">5,000</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Difficulty</span>
+                        <span class="stat-value">Beginner</span>
+                    </div>
+                </div>
+                
+                <p class="boss-description">
+                    Your first major boss encounter. Learn fundamental boss mechanics including positioning, 
+                    minion management, and attack pattern recognition. Perfect for practicing basic strategies.
+                </p>
+                
+                <div class="key-mechanics">
+                    <h4>Key Mechanics:</h4>
+                    <ul>
+                        <li>Bone Throw projectiles</li>
+                        <li>Skeleton minion spawns</li>
+                        <li>Ground slam AOE attack</li>
+                    </ul>
+                </div>
+                
+                <a href="skeleton-king-guide.html" class="guide-link">Complete Strategy Guide →</a>
+            </div>
+            
+            <div class="boss-card intermediate" onclick="window.open('flame-demon-strategy.html', '_blank')">
+                <div class="boss-icon">🔥</div>
+                <h3 class="boss-name">Flame Demon</h3>
+                <p class="boss-subtitle">Elite Fire Boss • 20 Minutes</p>
+                
+                <div class="boss-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Health</span>
+                        <span class="stat-value">12,000</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Difficulty</span>
+                        <span class="stat-value">High</span>
+                    </div>
+                </div>
+                
+                <p class="boss-description">
+                    A dangerous fire-based boss with deadly area attacks. Requires excellent mobility and 
+                    fire resistance. Ice weapons deal +50% bonus damage - exploit this weakness!
+                </p>
+                
+                <div class="key-mechanics">
+                    <h4>Key Mechanics:</h4>
+                    <ul>
+                        <li>Fire Wave (screen-wide)</li>
+                        <li>Meteor Strike targeting</li>
+                        <li>Flame Tornado tracking</li>
+                        <li>Weakness: Ice damage +50%</li>
+                    </ul>
+                </div>
+                
+                <a href="flame-demon-strategy.html" class="guide-link">Fire Combat Guide →</a>
+            </div>
+            
+            <div class="boss-card advanced" onclick="window.open('storm-lord-tactics.html', '_blank')">
+                <div class="boss-icon">⚡</div>
+                <h3 class="boss-name">Storm Lord</h3>
+                <p class="boss-subtitle">Elite Lightning Boss • 30 Minutes</p>
+                
+                <div class="boss-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Health</span>
+                        <span class="stat-value">18,000</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Difficulty</span>
+                        <span class="stat-value">Extreme</span>
+                    </div>
+                </div>
+                
+                <p class="boss-description">
+                    The most challenging regular boss. Requires 75%+ lightning resistance to survive. 
+                    Chain lightning attacks hit the entire screen - positioning won't save you here.
+                </p>
+                
+                <div class="key-mechanics">
+                    <h4>Key Mechanics:</h4>
+                    <ul>
+                        <li>Chain Lightning (undodgeable)</li>
+                        <li>Thunder Storm barrage</li>
+                        <li>Lightning Dash teleport</li>
+                        <li>Requirement: 75%+ Lightning Resist</li>
+                    </ul>
+                </div>
+                
+                <a href="storm-lord-tactics.html" class="guide-link">Lightning Tactics →</a>
+            </div>
+            
+            <div class="boss-card legendary" onclick="window.open('final-boss-guide.html', '_blank')">
+                <div class="boss-icon">👑</div>
+                <h3 class="boss-name">The Final Boss</h3>
+                <p class="boss-subtitle">Ultimate Challenge • 45 Minutes</p>
+                
+                <div class="boss-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Health</span>
+                        <span class="stat-value">30,000</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Difficulty</span>
+                        <span class="stat-value">Legendary</span>
+                    </div>
+                </div>
+                
+                <p class="boss-description">
+                    The ultimate test combining all previous boss mechanics with unique temporal and spatial distortions. 
+                    Only perfectly optimized builds and flawless execution can achieve victory.
+                </p>
+                
+                <div class="key-mechanics">
+                    <h4>Key Mechanics:</h4>
+                    <ul>
+                        <li>All elemental attacks</li>
+                        <li>Time dilation effects</li>
+                        <li>Spatial rifts & teleportation</li>
+                        <li>4-phase combat system</li>
+                    </ul>
+                </div>
+                
+                <a href="final-boss-guide.html" class="guide-link">Ultimate Challenge →</a>
+            </div>
+        </section>
+        
+        <section class="tips-section">
+            <h2 class="progression-title">General Boss Strategy Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🛡️ Defensive Priority</h4>
+                    <p>Always prioritize survivability over damage output. A dead character deals zero DPS. Build resistances appropriate for each boss type.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h4>🎯 Learn Attack Patterns</h4>
+                    <p>Every boss has predictable attack patterns and timing windows. Study these patterns and practice the timing until they become muscle memory.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h4>⚔️ Weapon Selection</h4>
+                    <p>Different bosses favor different weapon types. Ranged weapons for mobile bosses, AOE for minion-spawning bosses, sustained DPS for tanks.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h4>🏃 Positioning Mastery</h4>
+                    <p>Movement is your primary defense. Learn optimal positioning for each phase and always have an escape route planned before engaging.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h4>💊 Resource Management</h4>
+                    <p>Save your best healing items and abilities for later phases when bosses become more dangerous. Use weaker heals early to stay topped off.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h4>🧠 Mental Preparation</h4>
+                    <p>Boss fights are marathons, not sprints. Stay calm under pressure and stick to your strategy even when things look desperate.</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="back-to-guides">
+            <a href="../../index.html#guides" class="btn btn-secondary">← Back to All Guides</a>
+            <a href="../builds/" class="btn">🔧 Build Guides</a>
+            <a href="../../index.html" class="btn">🏠 Home Page</a>
+        </div>
+    </div>
+</body>
+</html>
