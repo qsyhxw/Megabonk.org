@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Combat Mastery - Advanced Achievement Guide</title>
+    <meta name="description" content="Master the most challenging combat achievements in Megabonk. Learn perfect execution, damage records, and advanced techniques for elite players.">
+    <meta name="keywords" content="megabonk combat achievements, megabonk perfect run, megabonk damage records, megabonk advanced techniques">
+    
+    <style>
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --bg-dark: #1A1A2E;
+            --bg-medium: #16213E;
+            --bg-light: #0F3460;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8BCC8;
+            --success-color: #00C851;
+            --warning-color: #FFB74D;
+            --danger-color: #FF5252;
+            --elite-color: #9C27B0;
+            --master-color: #E91E63;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 50%, var(--bg-light) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.15) 0%, rgba(233, 30, 99, 0.15) 100%);
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--elite-color), var(--master-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Difficulty Warning */
+        .difficulty-warning {
+            background: linear-gradient(135deg, rgba(255, 82, 82, 0.2) 0%, rgba(255, 107, 53, 0.2) 100%);
+            border: 2px solid var(--danger-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .difficulty-warning h2 {
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Achievement Categories */
+        .achievement-categories {
+            margin-bottom: 3rem;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-section {
+            background: rgba(22, 33, 62, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 5px solid var(--elite-color);
+        }
+        
+        .category-title {
+            color: var(--elite-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .achievement-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .achievement-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(156, 39, 176, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-item:hover {
+            background: rgba(156, 39, 176, 0.1);
+            border-color: var(--elite-color);
+            transform: translateX(5px);
+        }
+        
+        .achievement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievement-name {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .achievement-difficulty {
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .diff-extreme { background: var(--danger-color); color: white; }
+        .diff-master { background: var(--master-color); color: white; }
+        .diff-legendary { background: var(--elite-color); color: white; }
+        
+        .achievement-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .achievement-strategy {
+            background: rgba(0, 200, 81, 0.1);
+            padding: 0.8rem;
+            border-radius: 5px;
+            border-left: 3px solid var(--success-color);
+        }
+        
+        .strategy-title {
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .strategy-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        /* Master Techniques */
+        .master-techniques {
+            background: rgba(22, 33, 62, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 2px solid var(--master-color);
+        }
+        
+        .master-techniques h2 {
+            color: var(--master-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .technique-card {
+            background: rgba(233, 30, 99, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--master-color);
+            transition: all 0.3s ease;
+        }
+        
+        .technique-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.3);
+        }
+        
+        .technique-title {
+            color: var(--master-color);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Record Targets */
+        .record-targets {
+            background: linear-gradient(135deg, rgba(255, 230, 109, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .record-targets h2 {
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .records-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .record-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 230, 109, 0.3);
+        }
+        
+        .record-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .record-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .record-strategy {
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        /* Training Section */
+        .training-section {
+            background: rgba(22, 33, 62, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .training-section h2 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .training-card {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .training-title {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 2px solid var(--primary-color);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .categories-grid, .techniques-grid, .records-grid, .training-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../../index.html" class="logo">🎮 Megabonk.org</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../characters/">Characters</a></li>
+                        <li><a href="../builds/">Builds</a></li>
+                        <li><a href="../bosses/">Bosses</a></li>
+                        <li><a href="./">Achievements</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" style="padding: 1rem 0; color: var(--text-secondary);">
+            <a href="../../index.html" style="color: var(--secondary-color); text-decoration: none;">Home</a> > 
+            <a href="./" style="color: var(--secondary-color); text-decoration: none;">Achievements</a> > 
+            <strong>Combat Mastery</strong>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>⚔️ Combat Mastery Achievements</h1>
+            <p>The ultimate test of skill, precision, and dedication. These elite achievements separate casual players from true masters of Megabonk combat.</p>
+        </section>
+
+        <!-- Difficulty Warning -->
+        <section class="difficulty-warning">
+            <h2>⚠️ EXTREME DIFFICULTY WARNING</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">These achievements require <strong>perfect execution</strong>, extensive practice, and advanced game knowledge. Expect multiple failed attempts and significant time investment.</p>
+            <p style="color: var(--danger-color); font-weight: bold;">Recommended for players with 50+ hours of experience and mastery of all basic achievements.</p>
+        </section>
+
+        <!-- Achievement Categories -->
+        <section class="achievement-categories">
+            <div class="categories-grid">
+                <!-- Damage Records -->
+                <div class="category-section">
+                    <h2 class="category-title">💥 Damage Records</h2>
+                    <ul class="achievement-list">
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Lightning Master</span>
+                                <span class="achievement-difficulty diff-extreme">EXTREME</span>
+                            </div>
+                            <p class="achievement-description">Deal 1,000,000 lightning damage in a single run.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Use Fox + Lightning Storm build, focus on dense enemy clusters, maximize chain lightning evolution, maintain 30+ minute runs.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Critical Assassin</span>
+                                <span class="achievement-difficulty diff-master">MASTER</span>
+                            </div>
+                            <p class="achievement-description">Achieve 50 critical hits in 10 seconds.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Rogue + critical strike build, position near boss summon phases, time activation perfectly with enemy spawn waves.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Inferno Master</span>
+                                <span class="achievement-difficulty diff-legendary">LEGENDARY</span>
+                            </div>
+                            <p class="achievement-description">Deal 2,000,000 fire damage without taking damage.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Mage + Fire Mage build, perfect positioning required, utilize environmental flame walls, master all boss patterns.</div>
+                            </div>
+                        </li>
+
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">One Shot Wonder</span>
+                                <span class="achievement-difficulty diff-master">MASTER</span>
+                            </div>
+                            <p class="achievement-description">Deal 500,000+ damage in a single attack.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Stack all damage multipliers, use Ninja stealth critical, time with boss vulnerability phases.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Perfect Execution -->
+                <div class="category-section">
+                    <h2 class="category-title">💎 Perfect Execution</h2>
+                    <ul class="achievement-list">
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Untouchable</span>
+                                <span class="achievement-difficulty diff-legendary">LEGENDARY</span>
+                            </div>
+                            <p class="achievement-description">Complete a 45-minute run without taking any damage.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Archer + Ranged Sniper build, memorize all attack patterns, use safe positioning, practice extensively on shorter runs first.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Speedrun Master</span>
+                                <span class="achievement-difficulty diff-master">MASTER</span>
+                            </div>
+                            <p class="achievement-description">Defeat all three bosses in under 25 minutes.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Ninja + optimized DPS build, skip non-essential upgrades, use boss phase skipping techniques.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Flawless Victory</span>
+                                <span class="achievement-difficulty diff-extreme">EXTREME</span>
+                            </div>
+                            <p class="achievement-description">Defeat Final Boss without using any healing items.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Knight + defensive build, master all four boss phases, maintain full health through positioning.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Kill Records -->
+                <div class="category-section">
+                    <h2 class="category-title">💀 Kill Records</h2>
+                    <ul class="achievement-list">
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Genocidal</span>
+                                <span class="achievement-difficulty diff-extreme">EXTREME</span>
+                            </div>
+                            <p class="achievement-description">Kill 100,000 enemies in a single run.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Fox + AoE build, extend runs to 45+ minutes, prioritize enemy spawn rate upgrades.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Boss Hunter</span>
+                                <span class="achievement-difficulty diff-master">MASTER</span>
+                            </div>
+                            <p class="achievement-description">Defeat 5 bosses in a single run.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Extended survival runs, bosses respawn after intervals, maintain high DPS throughout.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Chain Killer</span>
+                                <span class="achievement-difficulty diff-master">MASTER</span>
+                            </div>
+                            <p class="achievement-description">Kill 1,000 enemies without stopping for 5 seconds.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Continuous movement, high-density areas, Lightning Storm or AoE builds essential.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Technique Mastery -->
+                <div class="category-section">
+                    <h2 class="category-title">🧠 Technique Mastery</h2>
+                    <ul class="achievement-list">
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Animation Cancel Master</span>
+                                <span class="achievement-difficulty diff-legendary">LEGENDARY</span>
+                            </div>
+                            <p class="achievement-description">Cancel 500 attack animations in a single run.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Frame-perfect inputs required, practice extensively, use high attack speed builds.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Perfect Positioning</span>
+                                <span class="achievement-difficulty diff-master">MASTER</span>
+                            </div>
+                            <p class="achievement-description">Never move more than 5 pixels from optimal position during boss fights.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Intimate knowledge of all boss patterns required, practice minimal movement techniques.</div>
+                            </div>
+                        </li>
+                        
+                        <li class="achievement-item">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Combo Master</span>
+                                <span class="achievement-difficulty diff-extreme">EXTREME</span>
+                            </div>
+                            <p class="achievement-description">Maintain a 500+ hit combo throughout entire boss fight.</p>
+                            <div class="achievement-strategy">
+                                <div class="strategy-title">🎯 Strategy:</div>
+                                <div class="strategy-text">Never stop attacking, continuous damage builds, hit both boss and minions simultaneously.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Master Techniques -->
+        <section class="master-techniques">
+            <h2>🎖️ Essential Master Techniques</h2>
+            <div class="techniques-grid">
+                <div class="technique-card">
+                    <h3 class="technique-title">🎯 Frame-Perfect Inputs</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Master 60fps precision for advanced techniques and optimization.</p>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>Practice input timing with metronome</li>
+                        <li>Use training mode extensively</li>
+                        <li>Study frame data for all abilities</li>
+                        <li>Maintain consistent input rhythm</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">📍 Pixel-Perfect Positioning</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Master exact positioning for maximum efficiency and safety.</p>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>Memorize optimal positions for each boss phase</li>
+                        <li>Use visual landmarks as reference points</li>
+                        <li>Practice micro-adjustments</li>
+                        <li>Develop muscle memory for key positions</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">⚡ Advanced Canceling</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Cancel animations for higher DPS and mobility.</p>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>Master movement canceling</li>
+                        <li>Perfect attack animation canceling</li>
+                        <li>Use spell canceling for repositioning</li>
+                        <li>Combine multiple cancel techniques</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">🧠 Pattern Recognition</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Predict and react to complex enemy patterns.</p>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>Study enemy spawn algorithms</li>
+                        <li>Memorize boss phase transitions</li>
+                        <li>Anticipate attack sequences</li>
+                        <li>Develop predictive positioning</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Record Targets -->
+        <section class="record-targets">
+            <h2>🏆 Record Targets & Benchmarks</h2>
+            <div class="records-grid">
+                <div class="record-card">
+                    <span class="record-number">1M+</span>
+                    <div class="record-label">Lightning Damage</div>
+                    <p class="record-strategy">Fox + Lightning Storm build, 30+ minute survival required</p>
+                </div>
+
+                <div class="record-card">
+                    <span class="record-number">100K+</span>
+                    <div class="record-label">Enemies Killed</div>
+                    <p class="record-strategy">AoE builds, extended 45+ minute runs</p>
+                </div>
+
+                <div class="record-card">
+                    <span class="record-number">500+</span>
+                    <div class="record-label">Hit Combo</div>
+                    <p class="record-strategy">Continuous damage builds, perfect positioning</p>
+                </div>
+
+                <div class="record-card">
+                    <span class="record-number">25m</span>
+                    <div class="record-label">Three Boss Speedrun</div>
+                    <p class="record-strategy">Ninja + optimized DPS, skip upgrades</p>
+                </div>
+
+                <div class="record-card">
+                    <span class="record-number">45m</span>
+                    <div class="record-label">No-Damage Run</div>
+                    <p class="record-strategy">Archer + Ranged Sniper, perfect execution</p>
+                </div>
+
+                <div class="record-card">
+                    <span class="record-number">2M+</span>
+                    <div class="record-label">Fire Damage (No Damage)</div>
+                    <p class="record-strategy">Mage + Fire build, legendary difficulty</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Program -->
+        <section class="training-section">
+            <h2>🎯 Combat Training Program</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="background: rgba(78, 205, 196, 0.1); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--secondary-color); transition: all 0.3s ease;">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        📚 Phase 1: Foundation (Week 1-2)
+                    </h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem; line-height: 1.6;">
+                        <li>Master all basic character movesets</li>
+                        <li>Learn boss attack patterns and timing</li>
+                        <li>Practice positioning without pressure</li>
+                        <li>Achieve consistent 20+ minute survivals</li>
+                        <li>Complete all story milestone achievements</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(78, 205, 196, 0.1); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--secondary-color); transition: all 0.3s ease;">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        ⚔️ Phase 2: Intermediate (Week 3-4)
+                    </h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem; line-height: 1.6;">
+                        <li>Practice animation canceling techniques</li>
+                        <li>Master damage optimization builds</li>
+                        <li>Achieve first no-damage boss kills</li>
+                        <li>Learn advanced movement techniques</li>
+                        <li>Complete medium difficulty combat achievements</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(78, 205, 196, 0.1); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--secondary-color); transition: all 0.3s ease;">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🏆 Phase 3: Advanced (Week 5-8)
+                    </h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem; line-height: 1.6;">
+                        <li>Perfect frame-precise input timing</li>
+                        <li>Master pixel-perfect positioning</li>
+                        <li>Achieve damage record benchmarks</li>
+                        <li>Practice speedrun techniques</li>
+                        <li>Attempt extreme difficulty achievements</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(78, 205, 196, 0.1); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--secondary-color); transition: all 0.3s ease;">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        💎 Phase 4: Mastery (Week 9+)
+                    </h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem; line-height: 1.6;">
+                        <li>Execute flawless 45-minute no-damage runs</li>
+                        <li>Achieve all legendary achievements</li>
+                        <li>Master combo maintenance techniques</li>
+                        <li>Perfect boss phase skip timing</li>
+                        <li>Complete all combat mastery challenges</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mental Preparation -->
+        <section style="background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(233, 30, 99, 0.1) 100%); border-radius: 15px; padding: 2rem; margin-bottom: 3rem; border: 2px solid var(--master-color);">
+            <h2 style="color: var(--master-color); text-align: center; margin-bottom: 2rem;">🧠 Mental Preparation & Focus</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 3px solid var(--master-color);">
+                    <h3 style="color: var(--master-color); margin-bottom: 1rem;">🎯 Pre-Session Preparation</h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>15-minute warmup with easier runs</li>
+                        <li>Review specific achievement requirements</li>
+                        <li>Practice key techniques in isolation</li>
+                        <li>Set clear session goals and expectations</li>
+                        <li>Ensure optimal physical comfort</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 3px solid var(--master-color);">
+                    <h3 style="color: var(--master-color); margin-bottom: 1rem;">⚡ During Challenging Attempts</h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>Maintain controlled breathing patterns</li>
+                        <li>Focus on execution, not outcome</li>
+                        <li>Accept mistakes and refocus quickly</li>
+                        <li>Use positive self-talk and affirmations</li>
+                        <li>Take breaks after failed attempts</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 3px solid var(--master-color);">
+                    <h3 style="color: var(--master-color); margin-bottom: 1rem;">📊 Progress Tracking</h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>Record personal best attempts</li>
+                        <li>Analyze failed runs for improvement</li>
+                        <li>Track consistency metrics over time</li>
+                        <li>Celebrate small improvements</li>
+                        <li>Maintain detailed practice logs</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 3px solid var(--master-color);">
+                    <h3 style="color: var(--master-color); margin-bottom: 1rem;">💪 Avoiding Burnout</h3>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
+                        <li>Limit extreme sessions to 2-3 hours</li>
+                        <li>Alternate between different achievement types</li>
+                        <li>Take 1-2 day breaks after major attempts</li>
+                        <li>Play other characters/builds for variety</li>
+                        <li>Remember - it's still a game!</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Motivation -->
+        <section style="background: linear-gradient(135deg, var(--elite-color) 0%, var(--master-color) 100%); border-radius: 15px; padding: 2rem; margin-bottom: 3rem; text-align: center;">
+            <h2 style="color: white; margin-bottom: 1rem; font-size: 2rem;">🏆 The Path to Mastery</h2>
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-bottom: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Combat mastery in Megabonk is not just about perfect execution - it's about dedication, patience, and continuous improvement. Every failed attempt teaches you something new. Every small improvement brings you closer to legendary status.
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.8); font-style: italic; font-size: 1rem;">
+                "The difference between a good player and a great player is not talent - it's the willingness to practice the same technique 10,000 times until it becomes second nature."
+            </p>
+            <div style="margin-top: 2rem; padding: 1rem; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: inline-block;">
+                <strong style="color: var(--accent-color); font-size: 1.2rem;">Remember:</strong>
+                <span style="color: white; margin-left: 0.5rem;">These achievements represent the pinnacle of skill. Take your time, stay focused, and never give up!</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Advanced Guides</h3>
+                    <a href="../builds/lightning-storm-build.html">⚡ Lightning Storm Build</a>
+                    <a href="../builds/ranged-sniper-build.html">🏹 Ranged Sniper Build</a>
+                    <a href="../builds/fire-mage-build.html">🔥 Fire Mage Build</a>
+                    <a href="../characters/ninja-unlock-guide.html">🥷 Ninja Advanced Guide</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Other Achievements</h3>
+                    <a href="story-milestones.html">📖 Story Milestones</a>
+                    <a href="character-unlocks.html">👥 Character Unlocks</a>
+                    <a href="collection-secrets.html">💎 Collections & Secrets</a>
+                    <a href="index.html">🏆 Achievement Hub</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Boss Strategies</h3>
+                    <a href="../bosses/skeleton-king-guide.html">🦴 Skeleton King</a>
+                    <a href="../bosses/flame-demon-strategy.html">🔥 Flame Demon</a>
+                    <a href="../bosses/storm-lord-tactics.html">⚡ Storm Lord</a>
+                    <a href="../bosses/final-boss-guide.html">👑 Final Boss</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Game Resources</h3>
+                    <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">🎮 Steam Store</a>
+                    <a href="https://steamcommunity.com/app/3405340" target="_blank">💬 Steam Community</a>
+                    <a href="../../index.html">🏠 Megabonk.org Home</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animate achievement items on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initially hide achievement items
+        document.querySelectorAll('.achievement-item, .technique-card, .record-card, .training-card').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+            item.style.transition = 'all 0.6s ease-out';
+            observer.observe(item);
+        });
+
+        // Add click handlers for achievement items
+        document.querySelectorAll('.achievement-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const strategy = this.querySelector('.achievement-strategy');
+                if (strategy.style.display === 'none' || strategy.style.display === '') {
+                    strategy.style.display = 'block';
+                    strategy.style.animation = 'fadeIn 0.3s ease-in';
+                } else {
+                    strategy.style.display = 'none';
+                }
+            });
+        });
+
+        // Add CSS animation for fadeIn
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
