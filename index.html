@@ -596,13 +596,13 @@
             cursor: pointer;
         }
         
-        .guide-card:hover {
+        。guide-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
             border-color: var(--primary);
         }
         
-        .guide-image {
+        。guide-image {
             width: 100%;
             height: 200px;
             background: linear-gradient(135deg, var(--primary), var(--bg-darker));
@@ -617,7 +617,7 @@
             padding: 2rem;
         }
         
-        .guide-meta {
+        。guide-meta {
             display: flex;
             justify-content: space-between;
             font-size: 0.9rem;
@@ -625,7 +625,7 @@
             margin-bottom: 1rem;
         }
         
-        .guide-title {
+        。guide-title {
             font-size: 1.4rem;
             margin-bottom: 1rem;
             font-weight: 700;
@@ -637,7 +637,7 @@
             line-height: 1.7;
         }
         
-        .guide-link {
+        。guide-link {
             color: var(--primary);
             font-weight: 700;
             display: inline-flex;
@@ -646,7 +646,7 @@
         }
         
         /* Tools Section */
-        .tools-grid {
+        。tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2.5rem;
@@ -730,6 +730,66 @@
             color: var(--text-muted);
             font-size: 0.95rem;
         }
+
+        /* Dropdown Menu Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: rgba(26, 26, 46, 0.98);
+    min-width: 250px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+    padding: 0.75rem 0;
+    list-style: none;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(255, 107, 53, 0.1);
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        display: block;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        padding-left: 1rem;
+    }
+    
+    .dropdown-menu a {
+        padding: 0.5rem 0;
+    }
+}
         
         /* Footer */
         footer {
@@ -784,7 +844,7 @@
             right: 30px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(45deg， var(--primary)， var(--primary-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -797,18 +857,18 @@
             transition: transform 0.3s ease;
         }
         
-        .fab:hover {
+        。fab:hover {
             transform: scale(1.1);
         }
         
         /* Modal */
-        .modal {
+        。modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0， 0， 0, 0.9);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -816,7 +876,7 @@
             backdrop-filter: blur(10px);
         }
         
-        .modal-content {
+        。modal-content {
             background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
             border-radius: 20px;
             max-width: 800px;
@@ -828,7 +888,7 @@
             position: relative;
         }
         
-        .modal-close {
+        。modal-close {
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -842,22 +902,22 @@
             cursor: pointer;
         }
         
-        .modal h2 {
+        。modal h2 {
             color: var(--primary);
             margin-bottom: 1.5rem;
         }
         
-        .modal ul {
+        。modal ul {
             margin-left: 1.5rem;
         }
         
-        .modal li {
+        。modal li {
             margin-bottom: 0.5rem;
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
+            。nav-links {
                 display: none;
                 position: absolute;
                 top: 100%;
@@ -939,7 +999,15 @@
             
             <ul class="nav-links" id="navLinks">
                 <li><a href="#guides">Guides</a></li>
-                <li><a href="#characters">Characters</a></li>
+                <li class="dropdown">
+    <a href="#characters">Characters ▼</a>
+    <ul class="dropdown-menu">
+        <li><a href="guides/characters/character-tier-list-2025.html">🏆 Tier List 2025</a></li>
+        <li><a href="guides/characters/fox-kitsune-guide.html">🦊 Fox Guide</a></li>
+        <li><a href="guides/characters/knight-beginner-guide.html">⚔️ Knight Guide</a></li>
+        <li><a href="guides/characters/ninja-unlock-guide.html">🥷 Ninja Guide</a></li>
+    </ul>
+</li>
                 <li><a href="#builds">Builds</a></li>
                 <li><a href="#bosses">Boss</a></li>
                 <li><a href="#achievements">Achievements</a></li>
@@ -974,7 +1042,19 @@
         <div class="container">
             <h2 class="section-title">Featured Character Guides</h2>
             <p class="section-subtitle">Master the most popular Megabonk characters with our detailed guides</p>
-            
+
+            <!-- 在角色展示区域开头添加 Tier List 突出显示 -->
+<div style="text-align: center; margin-bottom: 2rem;">
+    <a href="guides/characters/character-tier-list-2025.html" 
+       class="btn btn-primary"
+       style="background: linear-gradient(135deg, #ff6b35, #e55b00); display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; padding: 1rem 2rem;">
+        🏆 View Complete Character Tier List 2025
+    </a>
+    <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+        Rankings updated for September 2025 • All 20 characters analyzed
+    </p>
+</div>
+
             <div class="character-showcase">
                 <div class="character-card featured" onclick="window.open('guides/characters/fox-kitsune-guide.html', '_blank')">
                     <div class="character-image">🦊</div>
@@ -1037,14 +1117,15 @@
             <p class="section-subtitle">Everything you need to master Megabonk - guides, tools, and community</p>
             
             <div class="quick-nav-grid">
-                <div class="nav-category">
-                    <h3>🎯 Character Guides</h3>
-                    <ul>
-                        <li><a href="guides/characters/fox-kitsune-guide.html" target="_blank">🦊 Kitsune (Fox) Complete Guide</a></li>
-                        <li><a href="guides/characters/knight-beginner-guide.html" target="_blank">⚔️ Knight Beginner Guide</a></li>
-                        <li><a href="guides/characters/ninja-unlock-guide.html" target="_blank">🥷 Ninja Unlock Guide</a></li>
-                    </ul>
-                </div>
+               <div class="nav-category">
+    <h3>🎯 Character Guides</h3>
+    <ul>
+        <li><a href="guides/characters/character-tier-list-2025.html" target="_blank" style="color: var(--primary); font-weight: bold;">🏆 Complete Tier List 2025</a></li>
+        <li><a href="guides/characters/fox-kitsune-guide.html" target="_blank">🦊 Kitsune (Fox) Complete Guide</a></li>
+        <li><a href="guides/characters/knight-beginner-guide.html" target="_blank">⚔️ Knight Beginner Guide</a></li>
+        <li><a href="guides/characters/ninja-unlock-guide.html" target="_blank">🥷 Ninja Unlock Guide</a></li>
+    </ul>
+</div>
                 
                 <div class="nav-category">
                     <h3>🔧 Build Guides</h3>
@@ -1434,7 +1515,7 @@
     <section id="guides" class="section guides-section">
         <div class="container">
             <h2 class="section-title">Complete Megabonk Survival Guides</h2>
-            <p class="section-subtitle">Master every character, build, and strategy with our expert tutorials</p>
+            <p class="section-subtitle">Master every character, build, 和 strategy with our expert tutorials</p>
             
             <div class="guides-grid">
                 <div class="guide-card" onclick="showGuide('beginners')">
@@ -1462,7 +1543,7 @@
                         </div>
                         <h3 class="guide-title">Character Tier List 2025</h3>
                         <p class="guide-excerpt">
-                            Complete rankings of all 20 characters with stats, abilities, and unlock requirements. 
+                            Complete rankings of all 20 characters with stats, abilities, 和 unlock requirements. 
                             Discover which heroes dominate the current meta.
                         </p>
                         <span class="guide-link">View Tier List →</span>
@@ -1639,6 +1720,7 @@
                 <div class="footer-section">
                     <h3>🎯 Character & Build Guides</h3>
                     <ul>
+                        <li><a href="guides/characters/character-tier-list-2025.html" target="_blank">🏆 Character Tier List 2025</a></li>
                         <li><a href="guides/characters/fox-kitsune-guide.html" target="_blank">🦊 Kitsune (Fox) Guide</a></li>
                         <li><a href="guides/characters/knight-beginner-guide.html" target="_blank">⚔️ Knight Beginner Guide</a></li>
                         <li><a href="guides/characters/ninja-unlock-guide.html" target="_blank">🥷 Ninja Unlock Guide</a></li>
@@ -1780,6 +1862,7 @@
                     <div style="text-align: center; margin-top: 2rem;">
                         <p><strong>Want detailed character guides?</strong></p>
                         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                            <a href="guides/characters/character-tier-list-2025.html" target="_blank" class="btn btn-primary">🏆 Complete Tier List</a>
                             <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-secondary">🦊 Fox Guide</a>
                             <a href="guides/characters/ninja-unlock-guide.html" target="_blank" class="btn btn-secondary">🥷 Ninja Guide</a>
                             <a href="guides/characters/knight-beginner-guide.html" target="_blank" class="btn btn-secondary">⚔️ Knight Guide</a>
@@ -2022,13 +2105,13 @@
                 ? '<p>We use minimal analytics for site improvement. No personal data is collected. All external links open securely.</p>'
                 : '<p>This is an unofficial fan site. For game support, contact the developer via Steam.</p>';
             
-            showModal(type === 'privacy' ? '🔒 Privacy Policy' : '📧 Contact Info', content);
+            showModal(type === 'privacy' ? '🔒 Privacy Policy' : '📧 Contact Info'， content);
         }
 
-        function showModal(title, content) {
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.innerHTML = `
+        function showModal(title， content) {
+            const modal = document。createElement('div');
+            modal。className = 'modal';
+            modal。innerHTML = `
                 <div class="modal-content">
                     <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
                     <h2>${title}</h2>
@@ -2043,35 +2126,35 @@
                 </div>
             `;
             
-            document.body.appendChild(modal);
+            document。body。appendChild(modal);
             
             // Close handlers
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) modal.remove();
+            modal。addEventListener('click'， (e) => {
+                if (e。target === modal) modal.remove();
             });
             
             document.addEventListener('keydown', function escHandler(e) {
                 if (e.key === 'Escape') {
-                    modal.remove();
-                    document.removeEventListener('keydown', escHandler);
+                    modal。remove();
+                    document。removeEventListener('keydown'， escHandler);
                 }
             });
         }
 
         // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+        document。querySelectorAll('a[href^="#"]')。forEach(anchor => {
+            anchor。addEventListener('click'， function (e) {
+                e。preventDefault();
+                const target = document。querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target。scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎮 Megabonk.org loaded successfully!');
+        document。addEventListener('DOMContentLoaded'， function() {
+            console。log('🎮 Megabonk.org loaded successfully!');
         });
     </script>
 </body>
