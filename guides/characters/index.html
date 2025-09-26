@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Character Guides - Complete Rankings & Strategy Hub</title>
+    <meta name="description" content="Complete Megabonk character guide collection including tier list, Fox guide, Knight beginner tips, and Ninja unlock strategies. Master all 20 characters.">
+    <meta name="keywords" content="megabonk characters, megabonk tier list, megabonk fox guide, megabonk knight guide, megabonk ninja guide">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Megabonk Character Guides - Complete Collection">
+    <meta property="og:description" content="Master every Megabonk character with detailed guides, tier rankings, and unlock strategies.">
+    <meta property="og:url" content="https://megabonk.org/guides/characters/">
+    <meta property="og:type" content="website">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Megabonk Character Guides",
+        "description": "Complete collection of character guides for Megabonk game",
+        "url": "https://megabonk.org/guides/characters/",
+        "hasPart": [
+            {
+                "@type": "Article",
+                "name": "Character Tier List 2025",
+                "url": "https://megabonk.org/guides/characters/character-tier-list-2025.html"
+            },
+            {
+                "@type": "Article", 
+                "name": "Fox (Kitsune) Complete Guide",
+                "url": "https://megabonk.org/guides/characters/fox-kitsune-guide.html"
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #1a1a2e;
+            --accent-color: #ffd23f;
+            --text-color: #333;
+            --bg-color: #fff;
+            --border-color: #e0e0e0;
+            --card-bg: #fff;
+            --text-light: #ffffff;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-muted: #666;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.75rem 0;
+            color: #ccc;
+        }
+        
+        .breadcrumb nav {
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: #ff8c69;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #e55b00);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        /* Stats Overview */
+        .stats-overview {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            color: var(--text-light);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            color: var(--text-light);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Featured Tier List Section */
+        .featured-tier-list {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-tier-list::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .featured-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .featured-tier-list h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .featured-tier-list p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .tier-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .tier-stat {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tier-stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .tier-stat-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+        
+        /* Character Guides Grid */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .guide-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+        
+        .guide-card.featured {
+            border: 2px solid var(--primary-color);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+        }
+        
+        .guide-card.featured::before {
+            content: "FEATURED";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(45deg, #ff6b35, #ff8c69);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .guide-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .guide-category {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .guide-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .difficulty {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .difficulty.featured { background: linear-gradient(45deg, #ff6b35, #ff8c69); color: white; }
+        .difficulty.beginner { background: rgba(76, 175, 80, 0.2); color: #4caf50; }
+        .difficulty.intermediate { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
+        .difficulty.advanced { background: rgba(156, 39, 176, 0.2); color: #9c27b0; }
+        
+        .guide-description {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .guide-features {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .guide-features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .guide-features li {
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .guide-features li:before {
+            content: "✅ ";
+            margin-right: 0.5rem;
+        }
+        
+        .guide-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .guide-cta:hover {
+            color: #ff8c69;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), #e55b00);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Quick Access Section */
+        .quick-access {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(255, 107, 53, 0.05) 100%);
+            padding: 3rem 0;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .quick-link {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .quick-link:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .quick-link h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer Navigation */
+        .guide-footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 0;
+            border-radius: 15px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .footer-link {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .footer-link:hover {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-link h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            padding: 2rem 0;
+            text-align: center;
+            color: #ccc;
+            border-top: 2px solid var(--primary-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tier-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .guide-card {
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+        
+        .guide-card:nth-child(2) { animation-delay: 0.1s; }
+        .guide-card:nth-child(3) { animation-delay: 0.2s; }
+        .guide-card:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav>
+                <a href="/">Home</a> → 
+                <a href="/guides/">Guides</a> → 
+                <span>Character Guides</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Character Guide Collection</h1>
+                <p class="subtitle">Master all 20 Megabonk characters with detailed guides, tier rankings, and unlock strategies</p>
+                
+                <div class="stats-overview">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Complete Guides</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">20</span>
+                            <span class="stat-label">Characters Ranked</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Free Access</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2025</span>
+                            <span class="stat-label">Updated for</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- Featured Tier List Section -->
+            <section class="featured-tier-list">
+                <div class="featured-content">
+                    <h2>Complete Character Rankings</h2>
+                    <p>Discover which characters dominate the meta in our comprehensive tier list analysis with detailed stats, pros/cons, and usage recommendations for all 20 characters.</p>
+                    
+                    <div class="tier-stats">
+                        <div class="tier-stat">
+                            <span class="tier-stat-number">3</span>
+                            <span class="tier-stat-label">S-Tier</span>
+                        </div>
+                        <div class="tier-stat">
+                            <span class="tier-stat-number">4</span>
+                            <span class="tier-stat-label">A-Tier</span>
+                        </div>
+                        <div class="tier-stat">
+                            <span class="tier-stat-number">4</span>
+                            <span class="tier-stat-label">B-Tier</span>
+                        </div>
+                        <div class="tier-stat">
+                            <span class="tier-stat-number">9</span>
+                            <span class="tier-stat-label">C-D Tier</span>
+                        </div>
+                    </div>
+                    
+                    <a href="character-tier-list-2025.html" class="btn btn-primary">
+                        View Full Tier List 2025
+                    </a>
+                </div>
+            </section>
+
+            <!-- Character Guides Grid -->
+            <section>
+                <h2 class="section-title">Individual Character Guides</h2>
+                <p class="section-subtitle">Detailed strategies, builds, and unlock guides for the most popular Megabonk characters</p>
+                
+                <div class="guides-grid">
+                    <!-- Tier List Card -->
+                    <div class="guide-card featured" onclick="window.location.href='character-tier-list-2025.html'">
+                        <div class="guide-icon">🏆</div>
+                        <span class="guide-category">Complete Rankings</span>
+                        <h3 class="guide-title">Character Tier List 2025</h3>
+                        <div class="guide-meta">
+                            <span class="difficulty featured">All 20 Characters</span>
+                            <span>📅 Sept 2025</span>
+                        </div>
+                        <p class="guide-description">
+                            Comprehensive rankings of all Megabonk characters based on effectiveness, ease of use, and current meta viability. Includes detailed analysis and win rate statistics.
+                        </p>
+                        <div class="guide-features">
+                            <ul>
+                                <li>Complete S-D tier rankings</li>
+                                <li>Detailed pros and cons analysis</li>
+                                <li>Meta statistics and win rates</li>
+                                <li>Character selection guide</li>
+                                <li>Updated for latest patch</li>
+                            </ul>
+                        </div>
+                        <a href="character-tier-list-2025.html" class="guide-cta">View Complete Rankings →</a>
+                    </div>
+
+                    <!-- Fox Guide Card -->
+                    <div class="guide-card" onclick="window.location.href='fox-kitsune-guide.html'">
+                        <div class="guide-icon">🦊</div>
+                        <span class="guide-category">S-Tier Character</span>
+                        <h3 class="guide-title">Kitsune (Fox) Complete Guide</h3>
+                        <div class="guide-meta">
+                            <span class="difficulty beginner">Beginner Friendly</span>
+                            <span>⭐ S-Tier</span>
+                        </div>
+                        <p class="guide-description">
+                            Master the ultimate beginner's choice! Learn fireball builds, movement techniques, 
+                            and unlock strategies with the fastest character in the game.
+                        </p>
+                        <div class="guide-features">
+                            <ul>
+                                <li>3 complete build guides</li>
+                                <li>Movement and positioning tips</li>
+                                <li>Early to late game strategies</li>
+                                <li>Common mistakes to avoid</li>
+                                <li>Advanced techniques</li>
+                            </ul>
+                        </div>
+                        <a href="fox-kitsune-guide.html" class="guide-cta">Read Fox Guide →</a>
+                    </div>
+
+                    <!-- Knight Guide Card -->
+                    <div class="guide-card" onclick="window.location.href='knight-beginner-guide.html'">
+                        <div class="guide-icon">⚔️</div>
+                        <span class="guide-category">Beginner's Choice</span>
+                        <h3 class="guide-title">Knight Beginner Guide</h3>
+                        <div class="guide-meta">
+                            <span class="difficulty beginner">New Player</span>
+                            <span>🛡️ A-Tier</span>
+                        </div>
+                        <p class="guide-description">
+                            Perfect for new players! Learn tank strategies, defensive positioning, and powerful 
+                            melee builds with the most survivable character in Megabonk.
+                        </p>
+                        <div class="guide-features">
+                            <ul>
+                                <li>Beginner-friendly strategies</li>
+                                <li>Tank build progression</li>
+                                <li>Survival tips and tricks</li>
+                                <li>Weapon combo recommendations</li>
+                                <li>5-stage skill development</li>
+                            </ul>
+                        </div>
+                        <a href="knight-beginner-guide.html" class="guide-cta">Learn Knight Basics →</a>
+                    </div>
+
+                    <!-- Ninja Guide Card -->
+                    <div class="guide-card" onclick="window.location.href='ninja-unlock-guide.html'">
+                        <div class="guide-icon">🥷</div>
+                        <span class="guide-category">Premium Unlock</span>
+                        <h3 class="guide-title">Ninja Unlock Guide</h3>
+                        <div class="guide-meta">
+                            <span class="difficulty advanced">60 Silver Cost</span>
+                            <span>💎 SS-Tier</span>
+                        </div>
+                        <p class="guide-description">
+                            High skill, high reward character guide. Master stealth mechanics, critical builds, 
+                            and advanced silver farming strategies to unlock this premium assassin.
+                        </p>
+                        <div class="guide-features">
+                            <ul>
+                                <li>Efficient silver farming methods</li>
+                                <li>Stealth mechanic mastery</li>
+                                <li>Critical hit build optimization</li>
+                                <li>Advanced positioning tactics</li>
+                                <li>Unlock timeline planning</li>
+                            </ul>
+                        </div>
+                        <a href="ninja-unlock-guide.html" class="guide-cta">Master Ninja Unlock →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Access Section -->
+            <section class="quick-access">
+                <div class="container">
+                    <h2 class="section-title">Quick Character Selection</h2>
+                    <p class="section-subtitle">Not sure which character to start with? Use our quick selection guide</p>
+                    
+                    <div class="quick-links">
+                        <a href="character-tier-list-2025.html#new-players" class="quick-link">
+                            <h3>🔰 New Players</h3>
+                            <p>Best characters for beginners: Fox and Knight recommendations with easy builds</p>
+                        </a>
+                        
+                        <a href="fox-kitsune-guide.html" class="quick-link">
+                            <h3>⚡ Speed Players</h3>
+                            <p>Love fast gameplay? Fox offers 140% movement speed and high mobility builds</p>
+                        </a>
+                        
+                        <a href="ninja-unlock-guide.html" class="quick-link">
+                            <h3>💥 Damage Dealers</h3>
+                            <p>Want maximum damage? Ninja offers stealth, crits, and burst damage potential</p>
+                        </a>
+                        
+                        <a href="knight-beginner-guide.html" class="quick-link">
+                            <h3>🛡️ Safe Players</h3>
+                            <p>Prefer survivability? Knight has highest health and natural damage reduction</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related Guides Footer -->
+            <section class="guide-footer">
+                <div class="container">
+                    <h2 class="section-title">Explore More Megabonk Content</h2>
+                    <p class="section-subtitle">Complete your mastery with our full guide collection</p>
+                    
+                    <div class="footer-links">
+                        <a href="/guides/builds/" class="footer-link">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚔️</div>
+                            <h3>Weapon Builds</h3>
+                            <p>Master powerful weapon combinations and synergies</p>
+                        </a>
+                        
+                        <a href="/guides/bosses/" class="footer-link">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">👹</div>
+                            <h3>Boss Strategies</h3>
+                            <p>Defeat every boss from Skeleton King to Final Boss</p>
+                        </a>
+                        
+                        <a href="/guides/achievements/" class="footer-link">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
+                            <h3>Achievement Guide</h3>
+                            <p>Complete walkthrough for 100% Steam achievement completion</p>
+                        </a>
+                        
+                        <a href="/" class="footer-link">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏠</div>
+                            <h3>Homepage</h3>
+                            <p>Return to main guide hub and site navigation</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
