@@ -415,83 +415,48 @@
             font-size: 0.7rem;
         }
         
-        /* Achievement Section Styles */
-        .achievement-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .achievement-card {
+        /* Coming Soon Notice Styles */
+        .coming-soon-notice {
+            max-width: 800px;
+            margin: 3rem auto;
             background: var(--card-bg);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 3rem;
+            text-align: center;
             border: 1px solid var(--border);
             backdrop-filter: blur(15px);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
-        }
-
-        .achievement-icon {
-            font-size: 3.5rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .achievement-category {
-            display: inline-block;
-            background: rgba(255, 107, 53, 0.2);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .achievement-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: var(--text-light);
-        }
-
-        .achievement-meta {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            font-family: monospace;
-        }
-
-        .achievement-description {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .achievement-features {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            border-left: 3px solid var(--primary);
         }
         
+        .notice-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .notice-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .notice-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .temp-build-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .temp-build-links .btn {
+            min-width: 160px;
+        }
+
         /* Stats Section */
         .stats-section {
             background: rgba(0, 0, 0, 0.15);
@@ -680,7 +645,7 @@
             font-weight: 700;
         }
         
-        。tool-description {
+        .tool-description {
             color: var(--text-muted);
             margin-bottom: 2rem;
             line-height: 1.6;
@@ -707,26 +672,26 @@
             text-decoration: none;
             color: var(--text-light);
             border: 1px solid var(--border);
-            transition: 全部 0.3s ease;
+            transition: all 0.3s ease;
         }
         
-        。community-link:hover {
+        .community-link:hover {
             background: rgba(255, 255, 255, 0.12);
             transform: translateX(10px);
             border-color: var(--primary);
         }
         
-        。community-icon {
+        .community-icon {
             font-size: 2.5rem;
             color: var(--primary);
         }
         
-        。community-info h3 {
+        .community-info h3 {
             margin-bottom: 0.5rem;
             font-weight: 700;
         }
         
-        。community-info p {
+        .community-info p {
             color: var(--text-muted);
             font-size: 0.95rem;
         }
@@ -738,37 +703,37 @@
             border-top: 3px solid var(--primary);
         }
         
-        。footer-grid {
+        .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
         }
         
-        。footer-section h3 {
+        .footer-section h3 {
             color: var(--primary);
             margin-bottom: 1.5rem;
             font-weight: 700;
         }
         
-        。footer-section ul {
+        .footer-section ul {
             list-style: none;
         }
         
-        。footer-section li {
+        .footer-section li {
             margin-bottom: 0.8rem;
         }
         
-        。footer-section a {
+        .footer-section a {
             color: var(--text-muted);
             text-decoration: none;
             transition: color 0.3s ease;
         }
         
-        。footer-section a:hover {
+        .footer-section a:hover {
             color: var(--primary);
         }
         
-        。footer-bottom {
+        .footer-bottom {
             text-align: center;
             margin-top: 3rem;
             padding-top: 2rem;
@@ -895,8 +860,7 @@
             
             .features-grid,
             .guides-grid,
-            .character-showcase,
-            .achievement-showcase {
+            .character-showcase {
                 grid-template-columns: 1fr;
             }
             
@@ -907,6 +871,11 @@
                 height: 50px;
                 font-size: 1.2rem;
             }
+            
+            .temp-build-links {
+                flex-direction: column;
+                align-items: center;
+            }
         }
         
         /* Focus styles for accessibility */
@@ -914,8 +883,7 @@
         .btn:focus,
         .guide-card:focus,
         .community-link:focus,
-        .character-card:focus,
-        .achievement-card:focus {
+        .character-card:focus {
             outline: 3px solid var(--primary);
             outline-offset: 3px;
         }
@@ -941,7 +909,6 @@
                 <li><a href="#characters">Characters</a></li>
                 <li><a href="#guides">Guides</a></li>
                 <li><a href="#builds">Builds</a></li>
-                <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#tools">Tools</a></li>
                 <li><a href="#community">Community</a></li>
                 <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam Store</a></li>
@@ -956,7 +923,7 @@
             <p class="hero-subtitle">🔥 Survive Endless Waves • 🎯 20 Unique Characters • ⚡ 70+ Epic Combinations</p>
             <p class="hero-description">
                 Dive into the most <strong>chaotic 3D roguelike survival game of 2025</strong>. Master all 20 unique characters, 
-                discover 70+ weapon combinations, 和 survive increasingly difficult waves of enemies. 
+                discover 70+ weapon combinations, and survive increasingly difficult waves of enemies. 
                 <span class="highlight">Perfect for Steam Deck</span> with 94% positive reviews from 3,000+ players!
             </p>
             <div class="cta-buttons">
@@ -1060,24 +1027,13 @@
                 <div class="nav-category">
                     <h3>👹 Boss Strategies</h3>
                     <ul>
-                        <li><a href="guides/bosses/" target="_blank">📖 Complete Boss Guide Index</a></li>
-                        <li><a href="guides/bosses/skeleton-king-guide.html" target="_blank">🦴 Skeleton King Guide</a></li>
-                        <li><a href="guides/bosses/flame-demon-strategy.html" target="_blank">🔥 Flame Demon Strategy</a></li>
-                        <li><a href="guides/bosses/storm-lord-tactics.html" target="_blank">⚡ Storm Lord Tactics</a></li>
-                        <li><a href="guides/bosses/final-boss-guide.html" target="_blank">👑 Final Boss Guide</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav-category">
-                    <h3>🏆 Achievement Guides</h3>
-                    <ul>
-                        <li><a href="guides/achievements/" target="_blank">📋 Achievement Guide Index</a></li>
-                        <li><a href="guides/achievements/story-milestones.html" target="_blank">📖 Story Milestones</a></li>
-                        <li><a href="guides/achievements/character-unlocks.html" target="_blank">👥 Character Unlocks</a></li>
-                        <li><a href="guides/achievements/combat-mastery.html" target="_blank">⚔️ Combat Mastery</a></li>
-                        <li><a href="guides/achievements/collection-secrets.html" target="_blank">💎 Collections & Secrets</a></li>
-                    </ul>
-                </div>
+                    <li><a href="guides/bosses/" target="_blank">📖 Complete Boss Guide Index</a></li>
+                    <li><a href="guides/bosses/skeleton-king-guide.html" target="_blank">🦴 Skeleton King Guide</a></li>
+                    <li><a href="guides/bosses/flame-demon-strategy.html" target="_blank">🔥 Flame Demon Strategy</a></li>
+                    <li><a href="guides/bosses/storm-lord-tactics.html" target="_blank">⚡ Storm Lord Tactics</a></li>
+                    <li><a href="guides/bosses/final-boss-guide.html" target="_blank">👑 Final Boss Guide</a></li>
+                      </ul>
+                  </div>
                 
                 <div class="nav-category">
                     <h3>🛠️ Game Tools</h3>
@@ -1173,8 +1129,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Builds Section -->
     <section id="builds" class="section">
         <div class="container">
             <h2 class="section-title">Weapon Builds & Strategies</h2>
@@ -1252,93 +1206,7 @@
         </div>
     </section>
 
-    <!-- Achievement Guides Section -->
-    <section id="achievements" class="section">
-        <div class="container">
-            <h2 class="section-title">Achievement Guide System</h2>
-            <p class="section-subtitle">Complete every achievement and unlock all Steam rewards - 100% completion roadmap</p>
-            
-            <div class="achievement-showcase">
-                <div class="achievement-card" onclick="window.open('guides/achievements/story-milestones.html', '_blank')">
-                    <div class="achievement-icon">📖</div>
-                    <span class="achievement-category">STORY PROGRESSION</span>
-                    <h3 class="achievement-title">Story Milestones</h3>
-                    <div class="achievement-meta">
-                        <span>15 Achievements</span>
-                        <span>⏱️ Easy - 2 hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Complete guide to all time-based achievements. Survive 5, 10, 20, and 30+ minutes 
-                        with detailed strategies for each milestone.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Time-based progression • ✅ Survival strategies • ✅ Character recommendations
-                    </div>
-                    <span class="guide-link">Master Time Challenges →</span>
-                </div>
-
-                <div class="achievement-card" onclick="window.open('guides/achievements/character-unlocks.html', '_blank')">
-                    <div class="achievement-icon">👥</div>
-                    <span class="achievement-category">CHARACTER UNLOCKS</span>
-                    <h3 class="achievement-title">Character Unlocks</h3>
-                    <div class="achievement-meta">
-                        <span>20 Characters</span>
-                        <span>⏱️ Medium - 8 hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Unlock every character with efficient silver farming strategies. Includes secret 
-                        characters and optimal unlock order for maximum efficiency.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Silver farming guide • ✅ Secret character unlocks • ✅ Optimal order planning
-                    </div>
-                    <span class="guide-link">Unlock All Characters →</span>
-                </div>
-
-                <div class="achievement-card" onclick="window.open('guides/achievements/combat-mastery.html', '_blank')">
-                    <div class="achievement-icon">⚔️</div>
-                    <span class="achievement-category">COMBAT MASTERY</span>
-                    <h3 class="achievement-title">Combat Mastery</h3>
-                    <div class="achievement-meta">
-                        <span>10 Achievements</span>
-                        <span>⏱️ Hard - 20+ hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Master the most challenging combat achievements. Perfect runs, damage records, 
-                        and advanced techniques for dedicated players only.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Perfect execution training • ✅ Damage optimization • ✅ Advanced techniques
-                    </div>
-                    <span class="guide-link">Master Combat Skills →</span>
-                </div>
-
-                <div class="achievement-card premium" onclick="window.open('guides/achievements/collection-secrets.html', '_blank')">
-                    <div class="achievement-icon">💎</div>
-                    <span class="achievement-category">COLLECTION & SECRETS</span>
-                    <h3 class="achievement-title">Collections & Secrets</h3>
-                    <div class="achievement-meta">
-                        <span>73 Collectibles</span>
-                        <span>⏱️ Extreme - 30+ hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Find every hidden item, secret area, 和 easter egg. Complete collectible tracking 
-                        with exact locations and access methods.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Complete location maps • ✅ Secret area access • ✅ Easter egg discoveries
-                    </div>
-                    <span class="guide-link">Find All Secrets →</span>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="guides/achievements/" class="btn btn-secondary">🏆 Complete Achievement Index</a>
-            </div>
-        </div>
-    </section>
-
-<!-- Stats Section -->
+    <!-- Stats Section -->
     <section class="section stats-section">
         <div class="container">
             <h2 class="section-title">Why 100K+ Players Choose Megabonk</h2>
@@ -1463,7 +1331,7 @@
                         </div>
                         <h3 class="guide-title">Character Tier List 2025</h3>
                         <p class="guide-excerpt">
-                            Complete rankings of all 20 characters with stats, abilities, 和 unlock requirements. 
+                            Complete rankings of all 20 characters with stats, abilities, and unlock requirements. 
                             Discover which heroes dominate the current meta.
                         </p>
                         <span class="guide-link">View Tier List →</span>
@@ -1638,26 +1506,14 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h3>🎯 Character & Build Guides</h3>
+                    <h3>🎯 Character Guides</h3>
                     <ul>
                         <li><a href="guides/characters/fox-kitsune-guide.html" target="_blank">🦊 Kitsune (Fox) Guide</a></li>
                         <li><a href="guides/characters/knight-beginner-guide.html" target="_blank">⚔️ Knight Beginner Guide</a></li>
                         <li><a href="guides/characters/ninja-unlock-guide.html" target="_blank">🥷 Ninja Unlock Guide</a></li>
-                        <li><a href="guides/builds/lightning-storm-build.html" target="_blank">🌟 Lightning Storm Build</a></li>
-                        <li><a href="guides/builds/fire-mage-build.html" target="_blank">🔥 Fire Mage Build</a></li>
+                        <li><a href="guides/builds/lightning-storm-build.html" target="_blank">🌟 Lightning Storm</a></li>
+                        <li><a href="guides/builds/fire-mage-build.html" target="_blank">🔥 Fire Mage</a></li>
                         <li><a href="#guides" onclick="showGuide('advanced')">💡 Pro Tips</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>👹 Boss & Achievement Guides</h3>
-                    <ul>
-                        <li><a href="guides/bosses/" target="_blank">📖 Complete Boss Index</a></li>
-                        <li><a href="guides/bosses/skeleton-king-guide.html" target="_blank">🦴 Skeleton King Guide</a></li>
-                        <li><a href="guides/bosses/final-boss-guide.html" target="_blank">👑 Final Boss Guide</a></li>
-                        <li><a href="guides/achievements/" target="_blank">🏆 Achievement Index</a></li>
-                        <li><a href="guides/achievements/story-milestones.html" target="_blank">📖 Story Milestones</a></li>
-                        <li><a href="guides/achievements/combat-mastery.html" target="_blank">⚔️ Combat Mastery</a></li>
                     </ul>
                 </div>
                 
@@ -1681,7 +1537,18 @@
                         <li><a href="https://steamcommunity.com/app/3405340/discussions/" target="_blank">📰 Latest Updates</a></li>
                         <li><a href="https://x.com/megabonkgame" target="_blank">📢 Developer News</a></li>
                         <li><a href="https://steamcommunity.com/app/3405340" target="_blank">📈 Player Stats</a></li>
-                        <li><a href="https://steamcommunity.com/app/3405340/guides/" target="_blank">📖 Community Guides</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>🌟 Community Links</h3>
+                    <ul>
+                        <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">🎮 Steam Store</a></li>
+                        <li><a href="https://steamcommunity.com/app/3405340" target="_blank">👥 Steam Community</a></li>
+                        <li><a href="https://x.com/megabonkgame" target="_blank">🐦 Twitter/X</a></li>
+                        <li><a href="https://www.reddit.com/search/?q=Megabonk" target="_blank">💬 Reddit</a></li>
+                        <li><a href="https://www.youtube.com/results?search_query=megabonk+gameplay" target="_blank">📺 YouTube</a></li>
+                        <li><a href="https://steamcommunity.com/app/3405340/guides/" target="_blank">📖 Steam Guides</a></li>
                     </ul>
                 </div>
             </div>
@@ -1874,14 +1741,6 @@
                         <p><strong>Strategy:</strong> Use ice-based weapons if available. Keep moving to avoid meteors.</p>
                         <p><strong>Weakness:</strong> Ice damage (+50% damage)</p>
                     </div>
-                    
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <p><strong>Complete boss strategies:</strong></p>
-                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
-                            <a href="guides/bosses/skeleton-king-guide.html" target="_blank" class="btn btn-secondary">🦴 Skeleton King</a>
-                            <a href="guides/bosses/final-boss-guide.html" target="_blank" class="btn btn-secondary">👑 Final Boss</a>
-                        </div>
-                    </div>
                 `
             },
             achievements: {
@@ -1915,14 +1774,6 @@
                             <li>Focus purely on weapon upgrades from XP</li>
                             <li>Recommended weapon: Bone or Revolver (ricochet)</li>
                         </ol>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <p><strong>Complete achievement guides:</strong></p>
-                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
-                            <a href="guides/achievements/story-milestones.html" target="_blank" class="btn btn-secondary">📖 Story Milestones</a>
-                            <a href="guides/achievements/combat-mastery.html" target="_blank" class="btn btn-secondary">⚔️ Combat Mastery</a>
-                        </div>
                     </div>
                 `
             },
@@ -1991,11 +1842,11 @@
                 <div style="text-align: center; padding: 2rem;">
                     <h3>${toolNames[type] || 'Interactive Tool'}</h3>
                     <p style="margin: 2rem 0;">This interactive tool is coming soon! We're building amazing calculators and planners for Megabonk players.</p>
-                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Meanwhile, check out our detailed guides:</p>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Meanwhile, check out our detailed character guides:</p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                         <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-secondary">🦊 Fox Guide</a>
-                        <a href="guides/achievements/" target="_blank" class="btn btn-secondary">🏆 Achievements</a>
-                        <a href="guides/bosses/" target="_blank" class="btn btn-secondary">👹 Boss Guides</a>
+                        <a href="guides/characters/knight-beginner-guide.html" target="_blank" class="btn btn-secondary">⚔️ Knight Guide</a>
+                        <a href="guides/characters/ninja-unlock-guide.html" target="_blank" class="btn btn-secondary">🥷 Ninja Guide</a>
                     </div>
                 </div>
             `;
@@ -2011,8 +1862,8 @@
                     <p style="color: var(--text-muted); margin-bottom: 2rem;">For now, check out our available guides:</p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                         <a href="guides/characters/fox-kitsune-guide.html" target="_blank" class="btn btn-secondary">🦊 Fox Guide</a>
-                        <a href="guides/achievements/" target="_blank" class="btn btn-secondary">🏆 Achievements</a>
-                        <a href="guides/bosses/" target="_blank" class="btn btn-secondary">👹 Boss Guides</a>
+                        <a href="guides/characters/knight-beginner-guide.html" target="_blank" class="btn btn-secondary">⚔️ Knight Guide</a>
+                        <a href="guides/characters/ninja-unlock-guide.html" target="_blank" class="btn btn-secondary">🥷 Ninja Guide</a>
                     </div>
                 </div>
             `);
@@ -2023,13 +1874,13 @@
                 ? '<p>We use minimal analytics for site improvement. No personal data is collected. All external links open securely.</p>'
                 : '<p>This is an unofficial fan site. For game support, contact the developer via Steam.</p>';
             
-            showModal(输入 === 'privacy' ? '🔒 Privacy Policy' : '📧 Contact Info'， content);
+            showModal(type === 'privacy' ? '🔒 Privacy Policy' : '📧 Contact Info', content);
         }
 
-        function showModal(title， content) {
-            const modal = document。createElement('div');
-            modal。className = 'modal';
-            modal。innerHTML = `
+        function showModal(title, content) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
                 <div class="modal-content">
                     <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
                     <h2>${title}</h2>
@@ -2044,35 +1895,35 @@
                 </div>
             `;
             
-            document。body。appendChild(modal);
+            document.body.appendChild(modal);
             
             // Close handlers
-            modal。addEventListener('click'， (e) => {
-                if (e。target === modal) modal.remove();
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
             });
             
-            document。addEventListener('keydown'， function escHandler(e) {
-                if (e。key === 'Escape') {
-                    modal。remove();
-                    document。removeEventListener('keydown'， escHandler);
+            document.addEventListener('keydown', function escHandler(e) {
+                if (e.key === 'Escape') {
+                    modal.remove();
+                    document.removeEventListener('keydown', escHandler);
                 }
             });
         }
 
         // Smooth scrolling
-        document。querySelectorAll('a[href^="#"]')。forEach(anchor => {
-            anchor。addEventListener('click'， function (e) {
-                e。preventDefault();
-                const target = document。querySelector(this。getAttribute('href'));
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target。scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
 
         // Initialize
-        document。addEventListener('DOMContentLoaded'， function() {
-            console。log('🎮 Megabonk.org loaded successfully!');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎮 Megabonk.org loaded successfully!');
         });
     </script>
 </body>
