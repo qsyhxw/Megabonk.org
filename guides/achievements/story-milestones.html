@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Story Milestones - Complete Achievement Walkthrough</title>
+    <meta name="description" content="Complete guide to all 15 story milestone achievements in Megabonk. Learn optimal strategies for 10, 20, 30 minute survival and beyond with detailed tips.">
+    <meta name="keywords" content="megabonk story achievements, megabonk survival guide, megabonk milestone achievements, megabonk time achievements">
+    
+    <style>
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --bg-dark: #1A1A2E;
+            --bg-medium: #16213E;
+            --bg-light: #0F3460;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8BCC8;
+            --success-color: #00C851;
+            --warning-color: #FFB74D;
+            --danger-color: #FF5252;
+            --info-color: #64B5F6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 50%, var(--bg-light) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            color: var(--text-secondary);
+        }
+        
+        .breadcrumb a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(255, 230, 109, 0.15) 0%, rgba(255, 107, 53, 0.15) 100%);
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Achievement Timeline */
+        .achievement-timeline {
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-header h2 {
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-color), var(--primary-color));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border: 3px solid var(--bg-dark);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item.left {
+            left: 0;
+        }
+        
+        .timeline-item.right {
+            left: 50%;
+        }
+        
+        .timeline-item.left::after {
+            right: -16px;
+        }
+        
+        .timeline-item.right::after {
+            left: -16px;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background: rgba(22, 33, 62, 0.9);
+            position: relative;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover .timeline-content {
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(255, 230, 109, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .achievement-title {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievement-time {
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .achievement-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .achievement-difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .difficulty-easy {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .difficulty-medium {
+            background: var(--warning-color);
+            color: white;
+        }
+        
+        .difficulty-hard {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        /* Strategy Section */
+        .strategy-section {
+            margin-bottom: 3rem;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .strategy-card {
+            background: rgba(22, 33, 62, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 5px solid var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.3);
+        }
+        
+        .strategy-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .strategy-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .strategy-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .strategy-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+        }
+        
+        /* Build Recommendations */
+        .build-recommendations {
+            background: rgba(22, 33, 62, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .build-recommendations h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .builds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .build-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .build-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .build-title {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .build-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .build-rating {
+            display: flex;
+            gap: 0.2rem;
+        }
+        
+        .star {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .star.empty {
+            color: rgba(255, 230, 109, 0.3);
+        }
+        
+        /* Common Mistakes Section */
+        .common-mistakes {
+            background: rgba(255, 82, 82, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--danger-color);
+        }
+        
+        .common-mistakes h2 {
+            color: var(--danger-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .mistakes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .mistake-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 82, 82, 0.3);
+        }
+        
+        .mistake-title {
+            color: var(--danger-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .mistake-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 2px solid var(--primary-color);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item.right {
+                left: 0%;
+            }
+            
+            .timeline-item.left::after, 
+            .timeline-item.right::after {
+                left: 15px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .strategy-grid, .builds-grid, .mistakes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../../index.html" class="logo">🎮 Megabonk.org</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../characters/">Characters</a></li>
+                        <li><a href="../builds/">Builds</a></li>
+                        <li><a href="../bosses/">Bosses</a></li>
+                        <li><a href="./">Achievements</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a> > <a href="./">Achievements</a> > <strong>Story Milestones</strong>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>📖 Story Milestone Achievements</h1>
+            <p>Master all 15 story progression achievements by surviving increasingly difficult time intervals and reaching key gameplay milestones.</p>
+        </section>
+
+        <!-- Achievement Timeline -->
+        <section class="achievement-timeline">
+            <div class="timeline-header">
+                <h2>🏆 Achievement Timeline</h2>
+                <p style="color: var(--text-secondary);">Progress through these milestones in chronological order for optimal efficiency</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- 2 Minute Milestone -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">🎯</span>
+                        <h3 class="achievement-title">First Steps</h3>
+                        <div class="achievement-time">2:00 Minutes</div>
+                        <p class="achievement-description">Survive your first 2 minutes in Megabonk. This achievement introduces you to the basic survival mechanics.</p>
+                        <span class="achievement-difficulty difficulty-easy">EASY</span>
+                    </div>
+                </div>
+
+                <!-- 5 Minute Milestone -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">⚡</span>
+                        <h3 class="achievement-title">Getting Warmed Up</h3>
+                        <div class="achievement-time">5:00 Minutes</div>
+                        <p class="achievement-description">Reach the 5-minute mark and start experiencing weapon evolution mechanics.</p>
+                        <span class="achievement-difficulty difficulty-easy">EASY</span>
+                    </div>
+                </div>
+
+                <!-- 10 Minute Milestone -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">🔥</span>
+                        <h3 class="achievement-title">Skeleton Slayer</h3>
+                        <div class="achievement-time">10:00 Minutes</div>
+                        <p class="achievement-description">Defeat your first mini-boss, the Skeleton King, and prove your combat prowess.</p>
+                        <span class="achievement-difficulty difficulty-easy">EASY</span>
+                    </div>
+                </div>
+
+                <!-- 15 Minute Milestone -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">💪</span>
+                        <h3 class="achievement-title">Building Momentum</h3>
+                        <div class="achievement-time">15:00 Minutes</div>
+                        <p class="achievement-description">Maintain your run for 15 minutes while enemy intensity significantly increases.</p>
+                        <span class="achievement-difficulty difficulty-medium">MEDIUM</span>
+                    </div>
+                </div>
+
+                <!-- 20 Minute Milestone -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">🌪️</span>
+                        <h3 class="achievement-title">Flame Walker</h3>
+                        <div class="achievement-time">20:00 Minutes</div>
+                        <p class="achievement-description">Face and overcome the Flame Demon boss while managing intense enemy waves.</p>
+                        <span class="achievement-difficulty difficulty-medium">MEDIUM</span>
+                    </div>
+                </div>
+
+                <!-- 30 Minute Milestone -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">⚡</span>
+                        <h3 class="achievement-title">Storm Rider</h3>
+                        <div class="achievement-time">30:00 Minutes</div>
+                        <p class="achievement-description">Survive the Storm Lord encounter and prove your mastery of advanced combat mechanics.</p>
+                        <span class="achievement-difficulty difficulty-hard">HARD</span>
+                    </div>
+                </div>
+
+                <!-- 45 Minute Milestone -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">👑</span>
+                        <h3 class="achievement-title">Champion's Endurance</h3>
+                        <div class="achievement-time">45:00 Minutes</div>
+                        <p class="achievement-description">Reach the final boss encounter and demonstrate ultimate survival skills.</p>
+                        <span class="achievement-difficulty difficulty-hard">HARD</span>
+                    </div>
+                </div>
+
+                <!-- Perfect Run -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="achievement-icon">💎</span>
+                        <h3 class="achievement-title">Flawless Victory</h3>
+                        <div class="achievement-time">Any Duration</div>
+                        <p class="achievement-description">Complete a run without taking any damage. Requires perfect positioning and timing.</p>
+                        <span class="achievement-difficulty difficulty-hard">HARD</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section class="strategy-section">
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h3>🎯 Early Game Strategy (0-10 minutes)</h3>
+                    <ul class="strategy-list">
+                        <li>Choose Fox (Kitsune) for beginners - best survivability</li>
+                        <li>Prioritize movement speed upgrades first</li>
+                        <li>Focus on Lightning-based weapons for crowd control</li>
+                        <li>Stay mobile and avoid getting cornered</li>
+                        <li>Pick up every XP gem to accelerate progression</li>
+                        <li>Learn basic enemy patterns and timing</li>
+                    </ul>
+                </div>
+
+                <div class="strategy-card">
+                    <h3>⚔️ Mid Game Strategy (10-20 minutes)</h3>
+                    <ul class="strategy-list">
+                        <li>Evolve your primary weapon to maximum level</li>
+                        <li>Balance offensive and defensive upgrades</li>
+                        <li>Master the Skeleton King boss mechanics</li>
+                        <li>Start building weapon synergies</li>
+                        <li>Maintain optimal positioning against Flame Demon</li>
+                        <li>Utilize environmental advantages</li>
+                    </ul>
+                </div>
+
+                <div class="strategy-card">
+                    <h3>🏆 Late Game Strategy (20+ minutes)</h3>
+                    <ul class="strategy-list">
+                        <li>Perfect your build synergy combinations</li>
+                        <li>Master all boss attack patterns</li>
+                        <li>Optimize movement for maximum efficiency</li>
+                        <li>Plan your upgrade path strategically</li>
+                        <li>Maintain focus during intense sequences</li>
+                        <li>Practice perfect execution for flawless runs</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Build Recommendations -->
+        <section class="build-recommendations">
+            <h2>🔧 Recommended Builds for Story Milestones</h2>
+            <div class="builds-grid">
+                <div class="build-card">
+                    <div class="build-title">Lightning Storm Build</div>
+                    <p class="build-description">Perfect for beginners, excellent crowd control and consistent damage output throughout all milestone periods.</p>
+                    <div class="build-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-title">Melee Massacre Build</div>
+                    <p class="build-description">Tank-focused build ideal for learning boss mechanics while maintaining high survivability through healing.</p>
+                    <div class="build-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-title">Ranged Sniper Build</div>
+                    <p class="build-description">Safe positioning build that excels at boss fights and perfect runs by maintaining optimal distance.</p>
+                    <div class="build-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Mistakes -->
+        <section class="common-mistakes">
+            <h2>⚠️ Common Mistakes to Avoid</h2>
+            <div class="mistakes-grid">
+                <div class="mistake-item">
+                    <div class="mistake-title">❌ Greedy XP Collection</div>
+                    <p class="mistake-description">Don't risk your life for XP gems during intense moments. Survival is more important than faster progression.</p>
+                </div>
+
+                <div class="mistake-item">
+                    <div class="mistake-title">❌ Ignoring Boss Patterns</div>
+                    <p class="mistake-description">Each boss has telegraphed attacks. Learn the patterns instead of relying on luck or panic movement.</p>
+                </div>
+
+                <div class="mistake-item">
+                    <div class="mistake-title">❌ Poor Upgrade Planning</div>
+                    <p class="mistake-description">Don't randomly select upgrades. Plan your build synergy from the beginning for optimal performance.</p>
+                </div>
+
+                <div class="mistake-item">
+                    <div class="mistake-title">❌ Static Positioning</div>
+                    <p class="mistake-description">Stay mobile at all times. Static positioning leads to being overwhelmed by enemy swarms.</p>
+                </div>
+
+                <div class="mistake-item">
+                    <div class="mistake-title">❌ Panic During Bosses</div>
+                    <p class="mistake-description">Maintain calm and execute learned strategies. Panic leads to poor positioning and unnecessary damage.</p>
+                </div>
+
+                <div class="mistake-item">
+                    <div class="mistake-title">❌ Neglecting Defense</div>
+                    <p class="mistake-description">Balance offense with defense. Pure damage builds often fail at higher difficulty spikes.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Other Achievement Guides</h3>
+                    <a href="character-unlocks.html">👥 Character Unlocks</a>
+                    <a href="combat-mastery.html">⚔️ Combat Mastery</a>
+                    <a href="collection-secrets.html">💎 Collections & Secrets</a>
+                    <a href="index.html">🏆 Achievement Hub</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Build Guides</h3>
+                    <a href="../builds/lightning-storm-build.html">⚡ Lightning Storm</a>
+                    <a href="../builds/melee-massacre-build.html">⚔️ Melee Massacre</a>
+                    <a href="../builds/ranged-sniper-build.html">🏹 Ranged Sniper</a>
+                    <a href="../builds/">🔧 All Builds</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Character Guides</h3>
+                    <a href="../characters/fox-kitsune-guide.html">🦊 Fox (Kitsune)</a>
+                    <a href="../characters/knight-beginner-guide.html">⚔️ Knight</a>
+                    <a href="../characters/ninja-unlock-guide.html">🥷 Ninja</a>
+                    <a href="../characters/">👥 All Characters</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Game Resources</h3>
+                    <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">🎮 Steam Store</a>
+                    <a href="https://steamcommunity.com/app/3405340" target="_blank">💬 Steam Community</a>
+                    <a href="../../index.html">🏠 Megabonk.org Home</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate timeline items on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initially hide timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(50px)';
+            item.style.transition = 'all 0.6s ease-out';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
