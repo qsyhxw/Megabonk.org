@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Megabonk Guides - Characters, Builds, Boss & Achievement Guides</title>
+    <meta name="description" content="Comprehensive Megabonk guide collection. Master all characters, weapon builds, boss strategies, and achievements. Free expert guides for all skill levels.">
+    <meta name="keywords" content="megabonk guides, megabonk characters, megabonk builds, megabonk bosses, megabonk achievements, megabonk strategy">
+
+    <link rel="canonical" href="https://megabonk.org/guides/">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Complete Megabonk Guides - All Characters, Builds & Strategies">
+    <meta property="og:description" content="Master Megabonk with our comprehensive guide collection. Character guides, weapon builds, boss strategies, and achievement walkthroughs.">
+    <meta property="og:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+    <meta property="og:url" content="https://megabonk.org/guides/">
+    <meta property="og:type" content="website">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Complete Megabonk Guides",
+        "description": "Comprehensive collection of Megabonk guides covering characters, builds, bosses, and achievements",
+        "url": "https://megabonk.org/guides/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": 17,
+            "itemListElement": [
+                {
+                    "@type": "HowTo",
+                    "name": "Fox (Kitsune) Complete Guide",
+                    "url": "https://megabonk.org/guides/characters/fox-kitsune-guide.html"
+                },
+                {
+                    "@type": "HowTo", 
+                    "name": "Knight Beginner Guide",
+                    "url": "https://megabonk.org/guides/characters/knight-beginner-guide.html"
+                },
+                {
+                    "@type": "HowTo",
+                    "name": "Lightning Storm Build Guide",
+                    "url": "https://megabonk.org/guides/builds/lightning-storm-build.html"
+                }
+            ]
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://megabonk.org/"
+                },
+                {
+                    "@type": "ListItem", 
+                    "position": 2,
+                    "name": "Guides",
+                    "item": "https://megabonk.org/guides/"
+                }
+            ]
+        }
+    }
+    </script>
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Variables */
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 107, 53, 0.2);
+        }
+        
+        /* Base */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb nav {
+            padding: 0;
+        }
+
+        .breadcrumb ol {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb li {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb .current {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .breadcrumb .separator {
+            color: var(--text-muted);
+            margin: 0 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Guide Categories */
+        .guide-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .category-description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .category-count {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-features {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category-features li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .category-features li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .category-link {
+            color: var(--primary);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* All Guides Section */
+        .all-guides {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 107, 53, 0.05) 100%);
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .guide-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .guide-icon {
+            font-size: 3rem;
+            margin-right: 1rem;
+        }
+
+        .guide-badge {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .guide-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .guide-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .guide-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-link {
+            color: var(--primary);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            min-width: 180px;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            padding: 3rem 0 1rem;
+            border-top: 2px solid var(--primary);
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-content a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .guide-categories,
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Focus styles */
+        .category-card:focus,
+        .guide-card:focus,
+        .btn:focus {
+            outline: 3px solid var(--primary);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="../" class="logo">
+                <span>🎮</span>
+                <span>Megabonk.org</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <nav aria-label="Breadcrumb">
+                <ol>
+                    <li><a href="../">Home</a></li>
+                    <li><span class="separator">→</span></li>
+                    <li><span class="current">Guides</span></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Complete Megabonk Guide Collection</h1>
+            <p class="hero-subtitle">Master every aspect of the ultimate 3D roguelike survival game</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">17</span>
+                    <span class="stat-label">Expert Guides</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Guide Categories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Free Access</span>
+                </div>
+            </div>
+
+            <a href="https://store.steampowered.com/app/3405340/Megabonk/" class="btn btn-primary" target="_blank">
+                🎮 Get Megabonk - $8.49
+            </a>
+        </div>
+    </section>
+
+    <!-- Guide Categories -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Browse by Category</h2>
+            <p class="section-subtitle">Choose your learning path based on what you want to master</p>
+            
+            <div class="guide-categories">
+                <a href="characters/" class="category-card">
+                    <span class="category-icon">🎯</span>
+                    <h3 class="category-title">Character Guides</h3>
+                    <span class="category-count">3 Complete Guides</span>
+                    <p class="category-description">Master individual characters with detailed strategies, builds, and unlock methods.</p>
+                    <div class="category-features">
+                        <ul>
+                            <li>Complete character analysis</li>
+                            <li>Optimal build recommendations</li>
+                            <li>Unlock requirements & strategies</li>
+                            <li>Playstyle guides & tips</li>
+                        </ul>
+                    </div>
+                    <span class="category-link">View Character Guides →</span>
+                </a>
+
+                <a href="builds/" class="category-card">
+                    <span class="category-icon">🔧</span>
+                    <h3 class="category-title">Build Guides</h3>
+                    <span class="category-count">4 Weapon Builds</span>
+                    <p class="category-description">Discover the most powerful weapon combinations and synergies for dominating runs.</p>
+                    <div class="category-features">
+                        <ul>
+                            <li>Meta build strategies</li>
+                            <li>Weapon evolution paths</li>
+                            <li>Character compatibility</li>
+                            <li>Difficulty tier ratings</li>
+                        </ul>
+                    </div>
+                    <span class="category-link">Explore Build Guides →</span>
+                </a>
+
+                <a href="bosses/" class="category-card">
+                    <span class="category-icon">👹</span>
+                    <h3 class="category-title">Boss Strategies</h3>
+                    <span class="category-count">5 Boss Guides</span>
+                    <p class="category-description">Master every boss encounter from 10-minute fights to the ultimate endgame challenge.</p>
+                    <div class="category-features">
+                        <ul>
+                            <li>Attack pattern analysis</li>
+                            <li>Recommended builds & counters</li>
+                            <li>Phase-by-phase strategies</li>
+                            <li>Positioning & movement tips</li>
+                        </ul>
+                    </div>
+                    <span class="category-link">Master Boss Fights →</span>
+                </a>
+
+                <a href="achievements/" class="category-card">
+                    <span class="category-icon">🏆</span>
+                    <h3 class="category-title">Achievement Guides</h3>
+                    <span class="category-count">5 Achievement Categories</span>
+                    <p class="category-description">Complete every Steam achievement with detailed walkthroughs and optimization strategies.</p>
+                    <div class="category-features">
+                        <ul>
+                            <li>100% completion roadmap</li>
+                            <li>Hidden achievement unlocks</li>
+                            <li>Time-saving strategies</li>
+                            <li>Difficulty tier breakdown</li>
+                        </ul>
+                    </div>
+                    <span class="category-link">Get All Achievements →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Guides -->
+    <section class="section all-guides">
+        <div class="container">
+            <h2 class="section-title">All Guides</h2>
+            <p class="section-subtitle">Complete collection of expert Megabonk guides</p>
+            
+            <div class="guides-grid">
+                <!-- Character Guides -->
+                <a href="characters/fox-kitsune-guide.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">🦊</span>
+                        <span class="guide-badge">S-TIER</span>
+                    </div>
+                    <h3 class="guide-title">Fox (Kitsune) Complete Guide</h3>
+                    <div class="guide-meta">
+                        <span>📚 Character Guide</span>
+                        <span>⏱️ 8 min read</span>
+                        <span>🎯 Beginner Friendly</span>
+                    </div>
+                    <p class="guide-description">
+                        Master the fastest and most versatile character in Megabonk. Complete build guides, 
+                        movement techniques, and strategies for consistent 20+ minute runs.
+                    </p>
+                    <span class="guide-link">Read Complete Guide →</span>
+                </a>
+
+                <a href="characters/knight-beginner-guide.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">⚔️</span>
+                        <span class="guide-badge">BEGINNER</span>
+                    </div>
+                    <h3 class="guide-title">Knight Beginner Guide</h3>
+                    <div class="guide-meta">
+                        <span>📚 Character Guide</span>
+                        <span>⏱️ 6 min read</span>
+                        <span>🛡️ Tank Build</span>
+                    </div>
+                    <p class="guide-description">
+                        Perfect introduction to Megabonk with the most survivable character. 
+                        Learn fundamentals, positioning, and basic build strategies.
+                    </p>
+                    <span class="guide-link">Start Learning →</span>
+                </a>
+
+                <a href="characters/ninja-unlock-guide.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">🥷</span>
+                        <span class="guide-badge">PREMIUM</span>
+                    </div>
+                    <h3 class="guide-title">Ninja Unlock & Mastery Guide</h3>
+                    <div class="guide-meta">
+                        <span>📚 Character Guide</span>
+                        <span>⏱️ 7 min read</span>
+                        <span>💰 Unlock Strategy</span>
+                    </div>
+                    <p class="guide-description">
+                        Efficient silver farming strategies to unlock the powerful Ninja character, 
+                        plus advanced stealth mechanics and critical hit builds.
+                    </p>
+                    <span class="guide-link">Unlock Ninja →</span>
+                </a>
+
+                <!-- Build Guides -->
+                <a href="builds/lightning-storm-build.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">⚡</span>
+                        <span class="guide-badge">S-TIER</span>
+                    </div>
+                    <h3 class="guide-title">Lightning Storm Build</h3>
+                    <div class="guide-meta">
+                        <span>🔧 Build Guide</span>
+                        <span>⏱️ 10 min read</span>
+                        <span>⚡ Late Game</span>
+                    </div>
+                    <p class="guide-description">
+                        The most powerful late-game build featuring chain lightning and screen-clearing AOE. 
+                        Detailed evolution paths and character recommendations.
+                    </p>
+                    <span class="guide-link">Master Lightning →</span>
+                </a>
+
+                <a href="builds/melee-massacre-build.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">⚔️</span>
+                        <span class="guide-badge">BEGINNER</span>
+                    </div>
+                    <h3 class="guide-title">Melee Massacre Build</h3>
+                    <div class="guide-meta">
+                        <span>🔧 Build Guide</span>
+                        <span>⏱️ 8 min read</span>
+                        <span>🛡️ High Survivability</span>
+                    </div>
+                    <p class="guide-description">
+                        Beginner-friendly melee build with excellent survivability. Features lifesteal, 
+                        armor stacking, and consistent damage output.
+                    </p>
+                    <span class="guide-link">Build Melee Mastery →</span>
+                </a>
+
+                <a href="builds/ranged-sniper-build.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">🏹</span>
+                        <span class="guide-badge">PRECISION</span>
+                    </div>
+                    <h3 class="guide-title">Ranged Sniper Build</h3>
+                    <div class="guide-meta">
+                        <span>🔧 Build Guide</span>
+                        <span>⏱️ 9 min read</span>
+                        <span>🎯 Safety First</span>
+                    </div>
+                    <p class="guide-description">
+                        Master long-range combat with piercing shots and critical hits. 
+                        Perfect for players who prefer safe, precise gameplay.
+                    </p>
+                    <span class="guide-link">Perfect Your Aim →</span>
+                </a>
+
+                <a href="builds/fire-mage-build.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">🔥</span>
+                        <span class="guide-badge">EXPLOSIVE</span>
+                    </div>
+                    <h3 class="guide-title">Fire Mage Build</h3>
+                    <div class="guide-meta">
+                        <span>🔧 Build Guide</span>
+                        <span>⏱️ 9 min read</span>
+                        <span>💥 AOE Damage</span>
+                    </div>
+                    <p class="guide-description">
+                        Explosive fire-based build with chain reactions and area denial. 
+                        Watch enemies burn in devastating cascade effects.
+                    </p>
+                    <span class="guide-link">Ignite the Battlefield →</span>
+                </a>
+
+                <!-- Boss Guides -->
+                <a href="bosses/skeleton-king-guide.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">🦴</span>
+                        <span class="guide-badge">BEGINNER</span>
+                    </div>
+                    <h3 class="guide-title">Skeleton King Guide</h3>
+                    <div class="guide-meta">
+                        <span>👹 Boss Guide</span>
+                        <span>⏱️ 6 min read</span>
+                        <span>⏰ 10 Minutes</span>
+                    </div>
+                    <p class="guide-description">
+                        Your first major boss encounter. Learn minion management, attack patterns, 
+                        and positioning fundamentals for consistent victories.
+                    </p>
+                    <span class="guide-link">Defeat the King →</span>
+                </a>
+
+                <a href="bosses/final-boss-guide.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">👑</span>
+                        <span class="guide-badge">LEGENDARY</span>
+                    </div>
+                    <h3 class="guide-title">Final Boss Ultimate Guide</h3>
+                    <div class="guide-meta">
+                        <span>👹 Boss Guide</span>
+                        <span>⏱️ 15 min read</span>
+                        <span>⏰ 45 Minutes</span>
+                    </div>
+                    <p class="guide-description">
+                        The ultimate challenge with 4-phase combat and time distortion. 
+                        Only perfectly optimized builds can achieve victory.
+                    </p>
+                    <span class="guide-link">Face the Ultimate Challenge →</span>
+                </a>
+
+                <!-- Achievement Guides -->
+                <a href="achievements/story-milestones.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">📖</span>
+                        <span class="guide-badge">EASY</span>
+                    </div>
+                    <h3 class="guide-title">Story Milestones Achievement Guide</h3>
+                    <div class="guide-meta">
+                        <span>🏆 Achievement Guide</span>
+                        <span>⏱️ 5 min read</span>
+                        <span>⏰ 2 Hours</span>
+                    </div>
+                    <p class="guide-description">
+                        Complete guide to all time-based achievements. Survive 5, 10, 20, and 30+ minutes 
+                        with detailed strategies for each milestone.
+                    </p>
+                    <span class="guide-link">Master Time Challenges →</span>
+                </a>
+
+                <a href="achievements/combat-mastery.html" class="guide-card">
+                    <div class="guide-header">
+                        <span class="guide-icon">⚔️</span>
+                        <span class="guide-badge">EXTREME</span>
+                    </div>
+                    <h3 class="guide-title">Combat Mastery Achievement Guide</h3>
+                    <div class="guide-meta">
+                        <span>🏆 Achievement Guide</span>
+                        <span>⏱️ 12 min read</span>
+                        <span>⏰ 20+ Hours</span>
+                    </div>
+                    <p class="guide-description">
+                        Master the most challenging combat achievements. Perfect runs, damage records, 
+                        and advanced techniques for dedicated players only.
+                    </p>
+                    <span class="guide-link">Master Combat Skills →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div style="text-align: center; background: var(--card-bg); padding: 3rem; border-radius: 20px; border: 1px solid var(--border);">
+                <h2 style="margin-bottom: 1.5rem;">Ready to Master Megabonk?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">
+                    Join thousands of players who've improved their gameplay with our expert guides
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="characters/fox-kitsune-guide.html" class="btn btn-primary">
+                        🦊 Start with Fox Guide
+                    </a>
+                    <a href="https://store.steampowered.com/app/3405340/Megabonk/" class="btn" style="background: transparent; color: var(--text-light); border: 2px solid var(--primary);" target="_blank">
+                        🎮 Buy Megabonk - $8.49
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p><strong>Megabonk.org/guides</strong> - Your complete resource for mastering Megabonk</p>
+                <p>Unofficial fan site for <em>Megabonk</em> developed by <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">vedinad</a></p>
+                <p><a href="../">← Back to Homepage</a> • Updated September 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple analytics for guide views
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📖 Megabonk Guides Hub loaded successfully!');
+            
+            // Track guide card clicks
+            const guideCards = document.querySelectorAll('.guide-card, .category-card');
+            guideCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    console.log('Guide clicked:', this.querySelector('.guide-title, .category-title')?.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
