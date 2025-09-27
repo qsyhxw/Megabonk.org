@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Megabonk.org</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .error-message {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        .error-description {
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            opacity: 0.9;
+        }
+        .home-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1rem;
+        }
+        .home-button:hover {
+            background: #ee5a52;
+            transform: translateY(-2px);
+        }
+        .suggestions {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .suggestions ul {
+            list-style: none;
+            padding: 0;
+        }
+        .suggestions li {
+            margin: 0.5rem 0;
+        }
+        .suggestions a {
+            color: #ffd93d;
+            text-decoration: none;
+        }
+        .suggestions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-message">Page Not Found</h2>
+        <p class="error-description">
+            The page you're looking for doesn't exist on Megabonk.org. 
+            It might have been moved, deleted, or you entered the wrong URL.
+        </p>
+        
+        <a href="/" class="home-button">🏠 Return Home</a>
+        <a href="/guides/" class="home-button">📚 Browse Guides</a>
+        
+        <div class="suggestions">
+            <h3>Popular Pages:</h3>
+            <ul>
+                <li>🏆 <a href="/guides/characters/character-tier-list-2025.html">Character Tier List 2025</a></li>
+                <li>🦊 <a href="/guides/characters/fox-kitsune-guide.html">Fox Complete Guide</a></li>
+                <li>⚡ <a href="/guides/builds/lightning-storm-build.html">Lightning Storm Build</a></li>
+                <li>🦴 <a href="/guides/bosses/skeleton-king-guide.html">Skeleton King Guide</a></li>
+                <li>🏆 <a href="/guides/achievements/">Achievement Guides</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Google Analytics for 404 tracking
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: '404 Error',
+                page_location: window.location.href
+            });
+        }
+        
+        // 可选：自动重定向建议
+        const path = window.location.pathname;
+        if (path.includes('/tier-list')) {
+            setTimeout(() => {
+                window.location.href = '/guides/characters/character-tier-list-2025.html';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
