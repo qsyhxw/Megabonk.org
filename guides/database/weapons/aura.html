@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Weapon Guide - Best Builds & Unlock Strategy | Megabonk</title>
+    <meta name="description" content="Master the Aura weapon in Megabonk. Complete unlock guide, best builds, and strategies for the ultimate walking apocalypse S-tier weapon.">
+    <meta name="keywords" content="megabonk aura, aura weapon guide, megachad weapon, aura builds, aura unlock strategy">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Aura Weapon Guide - Walking Apocalypse | Megabonk">
+    <meta property="og:description" content="Master the S-tier Aura weapon with our complete guide. Unlock strategies, builds, and domination tactics.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/database/weapons/aura.html">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Aura Weapon Guide for Megabonk",
+        "description": "Complete guide to unlock and master the Aura weapon in Megabonk",
+        "totalTime": "PT30M",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Unlock Aura Weapon",
+                "text": "Don't take any damage for 2 consecutive minutes during a run"
+            },
+            {
+                "@type": "HowToStep", 
+                "name": "Master Aura Mechanics",
+                "text": "Learn size scaling and positioning for maximum AoE effectiveness"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Build Walking Apocalypse",
+                "text": "Stack size and damage items for the ultimate Aura build"
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --aura-primary: #ff6b35;
+            --aura-secondary: #f77f00;
+            --aura-accent: #fcbf49;
+            --aura-dark: #d62828;
+            --aura-light: #ffb3a1;
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #eee;
+            --text-secondary: #ccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .breadcrumb {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb nav {
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--aura-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--aura-primary);
+        }
+
+        .breadcrumb span {
+            color: var(--text-secondary);
+            margin: 0 8px;
+        }
+
+        /* Header */
+        .weapon-header {
+            text-align: center;
+            padding: 50px 0;
+            background: linear-gradient(135deg, var(--aura-primary), var(--aura-secondary));
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .weapon-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+        }
+
+        .weapon-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .weapon-subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .weapon-tier-badge {
+            display: inline-block;
+            background: var(--aura-accent);
+            color: var(--bg-primary);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--aura-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-title {
+            font-size: 1.1rem;
+            color: var(--aura-accent);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .guide-section {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--aura-primary);
+        }
+
+        .guide-section h2 {
+            color: var(--aura-primary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--aura-secondary);
+            padding-bottom: 10px;
+        }
+
+        .guide-section h3 {
+            color: var(--aura-accent);
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+
+        /* Unlock Strategy */
+        .unlock-strategy {
+            background: linear-gradient(135deg, var(--aura-dark), var(--aura-primary));
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .strategy-step {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        .step-number {
+            background: var(--aura-accent);
+            color: var(--bg-primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .step-description {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+        }
+
+        /* Build Cards */
+        .builds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .build-card {
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid var(--aura-primary);
+            transition: all 0.3s ease;
+        }
+
+        .build-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+        }
+
+        .build-title {
+            color: var(--aura-accent);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .build-rating {
+            display: inline-block;
+            background: var(--aura-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .item-list {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .item-list h4 {
+            color: var(--aura-primary);
+            margin-bottom: 10px;
+        }
+
+        .item-list ul {
+            margin-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .item-list li {
+            margin: 5px 0;
+        }
+
+        /* Pros and Cons */
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .pros {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
+        }
+
+        .cons {
+            background: rgba(255, 0, 0, 0.1);
+            border-left: 3px solid #ff0000;
+        }
+
+        .pros h4, .cons h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .pros h4 { color: #00ff88; }
+        .cons h4 { color: #ff6666; }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pros li, .cons li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .pros li::before {
+            content: "✓";
+            color: #00ff88;
+            position: absolute;
+            left: 0;
+        }
+
+        .cons li::before {
+            content: "✗";
+            color: #ff6666;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Tips Box */
+        .tip-box {
+            background: linear-gradient(135deg, var(--aura-primary), var(--aura-secondary));
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--aura-accent);
+        }
+
+        .tip-box h4 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .tip-box p {
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* Character Synergy */
+        .character-synergy {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid var(--aura-accent);
+        }
+
+        .synergy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .synergy-card {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--aura-primary);
+        }
+
+        .synergy-rating {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .synergy-character {
+            font-weight: bold;
+            color: var(--aura-accent);
+            margin-bottom: 5px;
+        }
+
+        .synergy-reason {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Navigation Footer */
+        .weapon-navigation {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: var(--aura-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--aura-accent);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .weapon-title {
+                font-size: 2.5rem;
+            }
+            
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .builds-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .synergy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .guide-section {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav>
+                <a href="../../../index.html">Home</a>
+                <span>></span>
+                <a href="../../index.html">Database</a>
+                <span>></span>
+                <a href="../index.html">Weapons</a>
+                <span>></span>
+                <span>Aura Guide</span>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Weapon Header -->
+        <div class="weapon-header">
+            <div class="weapon-title">🔮 AURA</div>
+            <div class="weapon-subtitle">The Walking Apocalypse Weapon</div>
+            <div class="weapon-tier-badge">S-TIER WEAPON</div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-title">⚔️ Weapon Type</div>
+                <div class="stat-value">Area Damage</div>
+                <div class="stat-description">Creates deadly circle around player</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">👤 Signature Character</div>
+                <div class="stat-value">Megachad</div>
+                <div class="stat-description">Perfect synergy with defensive abilities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">🔓 Unlock Difficulty</div>
+                <div class="stat-value">Medium</div>
+                <div class="stat-description">Requires 2 minutes without damage</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">🎯 Meta Rating</div>
+                <div class="stat-value">S-Tier</div>
+                <div class="stat-description">Top competitive weapon</div>
+            </div>
+        </div>
+
+        <!-- Unlock Strategy -->
+        <div class="guide-section">
+            <h2>🔓 How to Unlock Aura</h2>
+            <p>Aura requires one of the more challenging unlock conditions: surviving 2 consecutive minutes without taking any damage. Here's the proven strategy:</p>
+            
+            <div class="unlock-strategy">
+                <div class="strategy-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Choose the Right Character</div>
+                        <div class="step-description">Sir Oofie is ideal due to his armor blessing. Fox with luck can also work for better item RNG.</div>
+                    </div>
+                </div>
+                
+                <div class="strategy-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Start Conservative</div>
+                        <div class="step-description">Focus on movement speed and ranged weapons. Avoid risky positioning and enemy dense areas.</div>
+                    </div>
+                </div>
+                
+                <div class="strategy-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Use Safe Weapons</div>
+                        <div class="step-description">Lightning Staff, Bow, or Revolver work well. Avoid melee weapons that require close positioning.</div>
+                    </div>
+                </div>
+                
+                <div class="strategy-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Priority Items</div>
+                        <div class="step-description">Movement speed, armor, damage reduction, and health regeneration. Stay mobile and defensive.</div>
+                    </div>
+                </div>
+                
+                <div class="strategy-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Timer Management</div>
+                        <div class="step-description">The 2 minutes must be consecutive. If you take damage, the timer resets. Play extremely safe during the attempt.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Pro Unlock Strategy</h4>
+                <p>Use Forest Tier 1 for the unlock attempt. Enemy spawn rate is predictable, and there's plenty of room to kite. Avoid Desert maps due to unpredictable enemy spawns and environmental hazards.</p>
+            </div>
+        </div>
+
+        <!-- Weapon Mechanics -->
+        <div class="guide-section">
+            <h2>⚙️ Aura Weapon Mechanics</h2>
+            
+            <h3>🔴 Core Functionality</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary);">
+                <li><strong>AoE Circle:</strong> Creates a damage field around the player character</li>
+                <li><strong>Constant Damage:</strong> Continuously damages all enemies within range</li>
+                <li><strong>Size Scaling:</strong> Grows larger with Size tome and certain items</li>
+                <li><strong>Damage Scaling:</strong> Benefits from all damage multipliers and tomes</li>
+                <li><strong>Stun Effect:</strong> Can stun enemies with proper upgrades</li>
+            </ul>
+
+            <h3>📊 Scaling Properties</h3>
+            <div style="background: var(--bg-primary); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h4 style="color: var(--aura-accent); margin-bottom: 15px;">Damage Per Level</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div>
+                        <strong style="color: var(--aura-secondary);">Level 1-5:</strong><br>
+                        <span style="color: var(--text-secondary);">Base damage, small radius</span>
+                    </div>
+                    <div>
+                        <strong style="color: var(--aura-secondary);">Level 6-10:</strong><br>
+                        <span style="color: var(--text-secondary);">+50% damage, +25% size</span>
+                    </div>
+                    <div>
+                        <strong style="color: var(--aura-secondary);">Level 11-15:</strong><br>
+                        <span style="color: var(--text-secondary);">+100% damage, +50% size</span>
+                    </div>
+                    <div>
+                        <strong style="color: var(--aura-secondary);">Level 16+:</strong><br>
+                        <span style="color: var(--text-secondary);">Massive damage, screen coverage</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🎯 Best Stat Priorities</h3>
+            <ol style="margin-left: 20px; color: var(--text-secondary);">
+                <li><strong>Size:</strong> Increases AoE radius dramatically</li>
+                <li><strong>Damage:</strong> Direct damage multiplier</li>
+                <li><strong>Cooldown Reduction:</strong> More frequent pulses</li>
+                <li><strong>Quantity:</strong> Multiple aura instances</li>
+                <li><strong>Duration:</strong> Longer lasting effects</li>
+            </ol>
+        </div>
+
+        <!-- Build Strategies -->
+        <div class="guide-section">
+            <h2>🏗️ Aura Build Strategies</h2>
+            
+            <div class="builds-grid">
+                <div class="build-card">
+                    <div class="build-title">🌊 Walking Apocalypse</div>
+                    <div class="build-rating">S-TIER BUILD</div>
+                    <p><strong>Strategy:</strong> Maximum AoE coverage with size scaling. Just walk around and everything dies.</p>
+                    
+                    <div class="item-list">
+                        <h4>🎯 Core Items</h4>
+                        <ul>
+                            <li>Size Tome (maxed priority)</li>
+                            <li>Multiple Aura weapons</li>
+                            <li>Damage multipliers</li>
+                            <li>Cooldown reduction</li>
+                            <li>Movement speed</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✅ Pros</h4>
+                            <ul>
+                                <li>Effortless gameplay</li>
+                                <li>Incredible clear speed</li>
+                                <li>Safe positioning</li>
+                                <li>Scales infinitely</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>❌ Cons</h4>
+                            <ul>
+                                <li>Requires size tome</li>
+                                <li>Slow early game</li>
+                                <li>Passive playstyle</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-title">⚡ Speed Demon Aura</div>
+                    <div class="build-rating">A-TIER BUILD</div>
+                    <p><strong>Strategy:</strong> Combine Aura with high movement speed to become an untouchable death machine.</p>
+                    
+                    <div class="item-list">
+                        <h4>🎯 Core Items</h4>
+                        <ul>
+                            <li>Movement speed items</li>
+                            <li>Turbo Boots/Turbo Socks</li>
+                            <li>Size and damage balance</li>
+                            <li>Attack speed conversion</li>
+                            <li>Feathers and speed boosts</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✅ Pros</h4>
+                            <ul>
+                                <li>Incredible mobility</li>
+                                <li>Hard to hit</li>
+                                <li>Fast map clear</li>
+                                <li>Engaging gameplay</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>❌ Cons</h4>
+                            <ul>
+                                <li>Complex optimization</li>
+                                <li>Requires specific items</li>
+                                <li>Less raw damage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-title">🛡️ Tank Aura</div>
+                    <div class="build-rating">A-TIER BUILD</div>
+                    <p><strong>Strategy:</strong> Combine Aura with maximum survivability for AFK-style gameplay.</p>
+                    
+                    <div class="item-list">
+                        <h4>🎯 Core Items</h4>
+                        <ul>
+                            <li>Health and armor items</li>
+                            <li>Life steal effects</li>
+                            <li>Damage reduction</li>
+                            <li>Regeneration effects</li>
+                            <li>Chonkplate for overheal</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✅ Pros</h4>
+                            <ul>
+                                <li>Nearly unkillable</li>
+                                <li>AFK friendly</li>
+                                <li>Stress-free gameplay</li>
+                                <li>Great for challenges</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>❌ Cons</h4>
+                            <ul>
+                                <li>Slower kill times</li>
+                                <li>Boring for some</li>
+                                <li>Less damage scaling</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Character Synergies -->
+        <div class="guide-section">
+            <h2>👥 Character Synergies</h2>
+            
+            <div class="character-synergy">
+                <h3 style="color: var(--aura-accent); margin-bottom: 15px;">🤝 Best Character Combinations</h3>
+                
+                <div class="synergy-grid">
+                    <div class="synergy-card">
+                        <div class="synergy-rating">⭐⭐⭐⭐⭐</div>
+                        <div class="synergy-character">Megachad</div>
+                        <div class="synergy-reason">Perfect synergy - Aura is his signature weapon with built-in defensive abilities</div>
+                    </div>
+                    
+                    <div class="synergy-card">
+                        <div class="synergy-rating">⭐⭐⭐⭐</div>
+                        <div class="synergy-character">Sir Oofie</div>
+                        <div class="synergy-reason">Armor blessing complements Aura's defensive nature perfectly</div>
+                    </div>
+                    
+                    <div class="synergy-card">
+                        <div class="synergy-rating">⭐⭐⭐⭐</div>
+                        <div class="synergy-character">Athena</div>
+                        <div class="synergy-reason">Low HP damage bonus + thorns creates devastating combo</div>
+                    </div>
+                    
+                    <div class="synergy-card">
+                        <div class="synergy-rating">⭐⭐⭐</div>
+                        <div class="synergy-character">Fox</div>
+                        <div class="synergy-reason">Luck blessing helps find size and damage items faster</div>
+                    </div>
+                    
+                    <div class="synergy-card">
+                        <div class="synergy-rating">⭐⭐</div>
+                        <div class="synergy-character">Calcium</div>
+                        <div class="synergy-reason">Speed scaling can work but requires careful positioning</div>
+                    </div>
+                    
+                    <div class="synergy-card">
+                        <div class="synergy-rating">⭐⭐</div>
+                        <div class="synergy-character">Ninja</div>
+                        <div class="synergy-reason">Speed is good but doesn't synergize with Aura's passive nature</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Strategies -->
+        <div class="guide-section">
+            <h2>🎯 Advanced Aura Strategies</h2>
+            
+            <h3>🔄 Multi-Aura Stacking</h3>
+            <p>The most powerful Aura builds use multiple Aura weapons:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-top: 10px;">
+                <li><strong>2-3 Auras:</strong> Balanced approach with good coverage</li>
+                <li><strong>4-5 Auras:</strong> Maximum power, screen-wide destruction</li>
+                <li><strong>6+ Auras:</strong> Overkill territory, but incredibly satisfying</li>
+            </ul>
+
+            <h3>🎮 Positioning Mastery</h3>
+            <p>Even with Aura's passive nature, positioning matters:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-top: 10px;">
+                <li><strong>Center Control:</strong> Stay in areas with maximum enemy spawns</li>
+                <li><strong>Corner Avoidance:</strong> Don't get trapped against walls</li>
+                <li><strong>Boss Positioning:</strong> Keep moving during boss fights</li>
+                <li><strong>Swarm Management:</strong> Position for maximum AoE overlap</li>
+            </ul>
+
+            <h3>⚠️ Common Mistakes</h3>
+            <div style="background: rgba(255, 0, 0, 0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #ff6666;">
+                <ul style="color: var(--text-secondary);">
+                    <li><strong>Neglecting Size:</strong> Aura without size scaling is underwhelming</li>
+                    <li><strong>Standing Still:</strong> Even with Aura, you need to move and position</li>
+                    <li><strong>Ignoring Other Weapons:</strong> Aura alone isn't enough for high-level play</li>
+                    <li><strong>Poor Tome Priority:</strong> Size > Damage > Cooldown > Everything else</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <h4>🏆 Mastery Goal</h4>
+                <p>True Aura mastery is having screen-wide coverage while maintaining proper positioning and threat awareness. When enemies die before they can reach you, you've mastered the Walking Apocalypse!</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="weapon-navigation">
+            <h3 style="color: var(--aura-primary); margin-bottom: 20px;">🧭 Related Guides</h3>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">🔙 Weapons Database</a>
+                <a href="../../../guides/characters/megachad-guide.html" class="nav-link">👤 Megachad Guide</a>
+                <a href="aegis.html" class="nav-link">🛡️ Aegis Guide</a>
+                <a href="../../../guides/builds/" class="nav-link">🏗️ Build Guides</a>
+                <a href="../../../index.html" class="nav-link">🏠 Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
