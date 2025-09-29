@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frostwalker Complete Guide - Megabonk Weapons Database</title>
+    <meta name="description" content="Complete Megabonk Frostwalker guide: unlock requirements, Ice Cube farming, best builds, and crowd control strategies. Master the ultimate freeze weapon.">
+    <meta name="keywords" content="megabonk frostwalker, megabonk ice cube, megabonk freeze enemies, megabonk noelle weapon, megabonk crowd control">
+
+    <link rel="canonical" href="https://megabonk.org/database/weapons/frostwalker">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #5eb3d6;
+            --secondary-color: #3a8fb5;
+            --accent-color: #00d4ff;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --background: #0a1929;
+            --card-bg: #132f45;
+            --highlight: #00ffff;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --ice-glow: rgba(0, 212, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1929 0%, #1a2f45 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #5eb3d6 0%, #3a8fb5 100%);
+            padding: 2rem 5%;
+            box-shadow: 0 4px 20px var(--ice-glow);
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.7;
+        }
+
+        .weapon-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .weapon-icon {
+            font-size: 5rem;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .weapon-title-section h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--ice-glow);
+        }
+
+        .weapon-tier {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff, #0088ff);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px var(--ice-glow);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px var(--ice-glow);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-shadow: 0 0 10px var(--ice-glow);
+        }
+
+        h3 {
+            color: var(--highlight);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0f2535 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 15px var(--ice-glow);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--ice-glow);
+        }
+
+        .stat-label {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        /* Freeze Counter */
+        .freeze-counter {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0f2535 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 30px var(--ice-glow);
+        }
+
+        .freeze-progress {
+            margin: 1.5rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #00ffff);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 20px var(--ice-glow);
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .counter-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .counter-button {
+            background: var(--accent-color);
+            color: var(--text-dark);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px var(--ice-glow);
+        }
+
+        .counter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--ice-glow);
+        }
+
+        /* Unlock Guide */
+        .unlock-steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .unlock-steps li {
+            counter-increment: step-counter;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1a3a4a 0%, #0f2535 100%);
+            border-radius: 10px;
+            border-left: 4px solid var(--highlight);
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .unlock-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-color);
+            color: var(--text-dark);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--ice-glow);
+        }
+
+        /* Build Cards */
+        .builds-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .build-card {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0f2535 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .build-card:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px var(--ice-glow);
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .build-rating {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .star {
+            color: var(--warning);
+            font-size: 1.5rem;
+        }
+
+        .build-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tag {
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .pros {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        .cons {
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 4px solid #ff4444;
+        }
+
+        .pros h4, .cons h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .pros li::before {
+            content: "✓ ";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .cons li::before {
+            content: "✗ ";
+            color: #ff4444;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Character Synergy */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .character-card {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0f2535 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 25px var(--ice-glow);
+        }
+
+        .character-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .synergy-rating {
+            color: var(--warning);
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0f2535 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .tip-icon {
+            color: var(--warning);
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Ice Cube Special Section */
+        .ice-cube-section {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0f2535 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 30px var(--ice-glow);
+        }
+
+        .ice-cube-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 3rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 3rem;
+            box-shadow: 0 0 40px var(--ice-glow);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .weapon-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .weapon-title-section h1 {
+                font-size: 2rem;
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .counter-controls {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll Animations */
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="breadcrumb">
+            <a href="/">Home</a> > 
+            <a href="/database/">Database</a> > 
+            <a href="/database/weapons/">Weapons</a> > 
+            <span>Frostwalker</span>
+        </div>
+        <div class="weapon-header">
+            <div class="weapon-icon">❄️</div>
+            <div class="weapon-title-section">
+                <h1>Frostwalker</h1>
+                <span class="weapon-tier">A-TIER WEAPON</span>
+                <p style="margin-top: 1rem; opacity: 0.9;">The Ultimate Crowd Control - Freeze Your Path to Victory</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Weapon Overview -->
+        <section class="section">
+            <h2>❄️ Weapon Overview</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                The <strong>Frostwalker</strong> is Megabonk's premier <strong>crowd control weapon</strong>, leaving a trail of ice that freezes and damages enemies in your wake. Unlike most weapons that require aim, Frostwalker creates an automatic zone of control wherever you move, making it perfect for kiting strategies and managing large hordes. This weapon excels at creating safe paths through enemy swarms while dealing consistent damage over time.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Weapon Type</div>
+                    <div class="stat-value">Trail/Duration</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Tier Ranking</div>
+                    <div class="stat-value">A-Tier</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Unlock Cost</div>
+                    <div class="stat-value">2 Silver</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Max Level</div>
+                    <div class="stat-value">40</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Best Use Case</div>
+                    <div class="stat-value">Crowd Control</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Default Character</div>
+                    <div class="stat-value">❄️ Noelle</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ice Cube Requirement -->
+        <section class="section">
+            <h2>🧊 Ice Cube: The Key to Unlocking Frostwalker</h2>
+            
+            <div class="ice-cube-section">
+                <h3 style="text-align: center; margin-top: 0;">What is the Ice Cube?</h3>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
+                    The Ice Cube is a <strong>Legendary-tier item</strong> that's essential for unlocking Frostwalker. It's one of the rarest items in Megabonk, giving your attacks a <strong>20% chance to freeze enemies</strong>.
+                </p>
+
+                <div class="ice-cube-stats">
+                    <div class="stat-card">
+                        <div class="stat-label">Item Rarity</div>
+                        <div class="stat-value">Legendary</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Freeze Chance</div>
+                        <div class="stat-value">20%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Drop Rate</div>
+                        <div class="stat-value">Very Rare</div>
+                    </div>
+                </div>
+
+                <div class="tip-card" style="margin-top: 2rem;">
+                    <span class="tip-icon">💡</span>
+                    <strong>Important:</strong> Only freezes from the Ice Cube count toward unlocking Frostwalker. Other freeze effects don't contribute to your progress!
+                </div>
+            </div>
+        </section>
+
+        <!-- Unlock Guide -->
+        <section class="section">
+            <h2>🔓 How to Unlock Frostwalker</h2>
+            <p style="margin-bottom: 1.5rem;">
+                Unlocking Frostwalker is a unique challenge that requires dedication and luck. Follow this comprehensive guide to add this powerful crowd control weapon to your arsenal:
+            </p>
+
+            <ol class="unlock-steps">
+                <li>
+                    <strong>Find the Ice Cube Item</strong><br>
+                    The Ice Cube is a Legendary item, making it extremely rare. It can appear from:
+                    <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                        <li>Chest drops (higher tier chests have better chances)</li>
+                        <li>Shrine rewards</li>
+                        <li>Lucky random spawns during runs</li>
+                    </ul>
+                    Focus on opening every chest you find and using shrines frequently to increase your chances.
+                </li>
+                <li>
+                    <strong>Understand the Freeze Mechanic</strong><br>
+                    Once you have Ice Cube equipped, every projectile or attack has a <strong>20% chance</strong> to freeze enemies. That's roughly 1 in 5 hits. The freeze temporarily disables enemies and counts toward your unlock progress.
+                </li>
+                <li>
+                    <strong>Maximize Your Hit Rate</strong><br>
+                    To reach 1,000 freezes efficiently:
+                    <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                        <li>Use weapons with high projectile count (Lightning Staff, Firestaff)</li>
+                        <li>Focus on attack speed upgrades</li>
+                        <li>Survive to late game where enemy density is highest</li>
+                        <li>Target large swarms rather than single enemies</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Farm Freezes Across Multiple Runs</strong><br>
+                    You don't need to get all 1,000 freezes in one run. Progress is cumulative across all runs where you have Ice Cube equipped. Each successful run with 100-200 freezes brings you closer to the goal.
+                </li>
+                <li>
+                    <strong>Track Your Progress</strong><br>
+                    Use the interactive freeze counter below to manually track your progress. The game tracks this internally, but monitoring helps you estimate how many more runs you'll need.
+                </li>
+                <li>
+                    <strong>Complete the Unlock</strong><br>
+                    After reaching 1,000 total freezes with Ice Cube, return to the Main Menu, navigate to Unlocks > Weapons, and purchase Frostwalker for 2 Silver.
+                </li>
+            </ol>
+
+            <!-- Interactive Freeze Counter -->
+            <div class="freeze-counter">
+                <h3 style="margin-top: 0;">Freeze Progress Tracker</h3>
+                <p style="opacity: 0.9; margin-bottom: 1rem;">Track your journey to 1,000 freezes</p>
+                
+                <div class="freeze-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        <div class="progress-text" id="progressText">0 / 1,000 Freezes (0%)</div>
+                    </div>
+                </div>
+
+                <div class="counter-controls">
+                    <button class="counter-button" onclick="addFreezes(10)">+10 Freezes</button>
+                    <button class="counter-button" onclick="addFreezes(50)">+50 Freezes</button>
+                    <button class="counter-button" onclick="addFreezes(100)">+100 Freezes</button>
+                    <button class="counter-button" onclick="resetFreezes()">Reset Counter</button>
+                </div>
+
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
+                    <strong>Tip:</strong> A typical good run with Ice Cube can net you 100-200 freezes. That means 5-10 runs to complete the unlock!
+                </p>
+            </div>
+        </section>
+
+        <!-- Weapon Mechanics -->
+        <section class="section">
+            <h2>⚙️ Weapon Mechanics</h2>
+            
+            <h3>Core Mechanics</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Damage Type</div>
+                    <div class="stat-value">Freeze Trail</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Creates ice trail behind your movement</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Effect Duration</div>
+                    <div class="stat-value">Persistent</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Trail lasts several seconds</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Scaling Stats</div>
+                    <div class="stat-value">Duration + Size</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Attack speed affects tick rate</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Activation</div>
+                    <div class="stat-value">Automatic</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Always active while moving</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Key Upgrades to Prioritize</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px; margin-bottom: 0.5rem;">
+                    <strong>⏱️ Duration:</strong> Your top priority. Longer duration = ice trails last longer = more damage and control.
+                </li>
+                <li style="padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px; margin-bottom: 0.5rem;">
+                    <strong>📏 Size:</strong> Increases trail width, creating larger safe zones and affecting more enemies.
+                </li>
+                <li style="padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px; margin-bottom: 0.5rem;">
+                    <strong>🔥 Damage:</strong> Boosts the freeze damage tick rate, eliminating frozen enemies faster.
+                </li>
+                <li style="padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px; margin-bottom: 0.5rem;">
+                    <strong>⚡ Attack Speed:</strong> Affects how frequently the freeze effect ticks, indirectly increasing DPS.
+                </li>
+            </ul>
+
+            <div class="tip-card" style="margin-top: 2rem;">
+                <span class="tip-icon">⚠️</span>
+                <strong>Note:</strong> Unlike most weapons, Frostwalker does NOT benefit from Projectile Count upgrades. Focus on Duration and Size instead!
+            </div>
+        </section>
+
+        <!-- Recommended Builds -->
+        <section class="section">
+            <h2>🛠️ Recommended Builds</h2>
+            
+            <div class="builds-grid">
+                <!-- Build 1 -->
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 style="margin: 0;">❄️ Eternal Winter Build</h3>
+                        <div class="build-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    
+                    <div class="build-tags">
+                        <span class="tag">Maximum Control</span>
+                        <span class="tag">Survival</span>
+                        <span class="tag">Late Game</span>
+                    </div>
+
+                    <p>Maximize trail duration and coverage to create an impenetrable frozen fortress. This build turns the entire battlefield into your domain.</p>
+
+                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Core Items</h4>
+                    <ul style="list-style: none; padding-left: 1rem;">
+                        <li>⏱️ <strong>Duration Tome</strong> - Maximum trail persistence</li>
+                        <li>📏 <strong>Size-enhancing items</strong> - Wider freeze zones</li>
+                        <li>💨 <strong>Speed Boots</strong> - Cover more ground faster</li>
+                        <li>❄️ <strong>Ice-related items</strong> - Synergistic freeze effects</li>
+                    </ul>
+
+                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Upgrade Priority</h4>
+                    <ol style="padding-left: 1.5rem;">
+                        <li>Duration (max priority)</li>
+                        <li>Size</li>
+                        <li>Damage</li>
+                        <li>Movement Speed</li>
+                    </ol>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✓ Strengths</h4>
+                            <ul>
+                                <li>Nearly invincible with proper kiting</li>
+                                <li>Scales infinitely with map size</li>
+                                <li>No aim required</li>
+                                <li>Perfect for new players</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>✗ Weaknesses</h4>
+                            <ul>
+                                <li>Lower boss DPS</li>
+                                <li>Requires constant movement</li>
+                                <li>Less effective in tight spaces</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Build 2 -->
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 style="margin: 0;">🌪️ Speed Demon Freeze Build</h3>
+                        <div class="build-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="build-tags">
+                        <span class="tag">High Mobility</span>
+                        <span class="tag">Active Playstyle</span>
+                        <span class="tag">Fun</span>
+                    </div>
+
+                    <p>Combine extreme movement speed with Frostwalker to zip around the battlefield, leaving a maze of frozen death trails that confuse and eliminate enemies.</p>
+
+                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Core Items</h4>
+                    <ul style="list-style: none; padding-left: 1rem;">
+                        <li>💨 <strong>Speed Tome</strong> - Primary scaling stat</li>
+                        <li>⏱️ <strong>Duration items</strong> - Trail persistence</li>
+                        <li>🔥 <strong>Damage Tome</strong> - Eliminate frozen targets quickly</li>
+                        <li>⚡ <strong>Attack Speed items</strong> - Faster freeze ticks</li>
+                    </ul>
+
+                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Upgrade Priority</h4>
+                    <ol style="padding-left: 1.5rem;">
+                        <li>Movement Speed (max priority)</li>
+                        <li>Duration</li>
+                        <li>Damage</li>
+                        <li>Size</li>
+                    </ol>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✓ Strengths</h4>
+                            <ul>
+                                <li>Extremely satisfying gameplay</li>
+                                <li>Great for dodging abilities</li>
+                                <li>Confuses enemy AI</li>
+                                <li>High skill ceiling</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>✗ Weaknesses</h4>
+                            <ul>
+                                <li>Can be disorienting</li>
+                                <li>Requires good map knowledge</li>
+                                <li>Easy to make positioning mistakes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Build 3 -->
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 style="margin: 0;">🔥 Hybrid Burn & Freeze Build</h3>
+                        <div class="build-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="build-tags">
+                        <span class="tag">Balanced</span>
+                        <span class="tag">Boss Killer</span>
+                        <span class="tag">Versatile</span>
+                    </div>
+
+                    <p>Pair Frostwalker with Flamewalker for a dual-trail build that covers both crowd control (freeze) and damage (burn). The elemental combo is devastating.</p>
+
+                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Core Items</h4>
+                    <ul style="list-style: none; padding-left: 1rem;">
+                        <li>🔥 <strong>Flamewalker</strong> (secondary weapon) - Fire trail damage</li>
+                        <li>⏱️ <strong>Duration Tome</strong> - Affects both trails</li>
+                        <li>📏 <strong>Size items</strong> - Double trail coverage</li>
+                        <li>💥 <strong>Damage Tome</strong> - Boost both elements</li>
+                    </ul>
+
+                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Upgrade Priority</h4>
+                    <ol style="padding-left: 1.5rem;">
+                        <li>Duration (benefits both weapons)</li>
+                        <li>Damage (universal scaling)</li>
+                        <li>Size (double coverage)</li>
+                        <li>Movement Speed</li>
+                    </ol>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✓ Strengths</h4>
+                            <ul>
+                                <li>Best of both worlds</li>
+                                <li>Strong vs all content</li>
+                                <li>Visual spectacle</li>
+                                <li>Excellent DPS + control</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>✗ Weaknesses</h4>
+                            <ul>
+                                <li>Requires two weapon slots</li>
+                                <li>Stat spread is diluted</li>
+                                <li>Needs many upgrades to shine</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Character Synergy -->
+        <section class="section">
+            <h2>👥 Best Character Synergies</h2>
+            <p style="margin-bottom: 1.5rem;">
+                Frostwalker works exceptionally well with characters whose abilities complement its kiting-focused playstyle or enhance its crowd control capabilities.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <div class="character-icon">❄️</div>
+                    <h4>Noelle</h4>
+                    <div class="synergy-rating">⭐⭐⭐⭐⭐ Perfect</div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                        Default weapon. Noelle's ice-themed abilities perfectly synergize with Frostwalker's freeze mechanics.
+                    </p>
+                </div>
+
+                <div class="character-card" onclick="window.open('/guides/characters/calcium-guide', '_blank')">
+                    <div class="character-icon">💀</div>
+                    <h4>Calcium</h4>
+                    <div class="synergy-rating">⭐⭐⭐⭐⭐ Excellent</div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                        Speed scaling passive allows for incredible kiting potential, covering massive areas with ice trails while maintaining distance.
+                    </p>
+                </div>
+
+                <div class="character-card" onclick="window.open('/guides/characters/fox-kitsune-guide', '_blank')">
+                    <div class="character-icon">🦊</div>
+                    <h4>Fox</h4>
+                    <div class="synergy-rating">⭐⭐⭐⭐ Great</div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                        Luck scaling increases drop quality, helping you find Ice Cube faster and get better duration/size upgrades for Frostwalker.
+                    </p>
+                </div>
+
+                <div class="character-card" onclick="window.open('/guides/characters/sir-oofie-guide', '_blank')">
+                    <div class="character-icon">🛡️</div>
+                    <h4>Sir Oofie</h4>
+                    <div class="synergy-rating">⭐⭐⭐ Good</div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                        Armor scaling provides survivability while kiting. The freeze trail gives you time to recover from mistakes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Strategies -->
+        <section class="section">
+            <h2>🎓 Advanced Strategies</h2>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <span class="tip-icon">🎯</span>
+                    <strong>Circle Kiting Pattern:</strong> Move in large circles around the map edge. This creates a continuous frozen perimeter that enemies must pass through to reach you.
+                </div>
+
+                <div class="tip-card">
+                    <span class="tip-icon">🗺️</span>
+                    <strong>Terrain Exploitation:</strong> Use chokepoints and narrow corridors to your advantage. Your ice trail completely blocks these areas, forcing enemies into frozen death traps.
+                </div>
+
+                <div class="tip-card">
+                    <span class="tip-icon">💨</span>
+                    <strong>Never Stop Moving:</strong> The weapon only works while you're moving. Develop a habit of constant motion, even if just small adjustments. Standing still means no trail generation.
+                </div>
+
+                <div class="tip-card">
+                    <span class="tip-icon">🔄</span>
+                    <strong>Figure-8 Boss Strategy:</strong> Against bosses, move in figure-8 patterns. This keeps the boss frozen while you maintain safe distance and create overlapping damage zones.
+                </div>
+
+                <div class="tip-card">
+                    <span class="tip-icon">⚡</span>
+                    <strong>Speed Breakpoints:</strong> At ~200% movement speed, you can outrun any enemy, making Frostwalker essentially an invincibility tool when paired with proper kiting.
+                </div>
+
+                <div class="tip-card">
+                    <span class="tip-icon">💡</span>
+                    <strong>Duration Stacking:</strong> With max Duration upgrades, your trails can last 10+ seconds, effectively covering the entire visible area in frozen zones.
+                </div>
+
+                <div class="tip-card">
+                    <span class="tip-icon">🎲</span>
+                    <strong>Ice Cube Farming:</strong> Use Fox with Luck Tome maxed out for the best chance of finding Ice Cube. Open every chest and use every shrine you encounter.
+                </div>
+
+                <div class="tip-card">
+                    <span class="tip-icon">🔥</span>
+                    <strong>Elemental Synergy:</strong> Pair with Flamewalker or Dragon's Breath for maximum trail coverage. The dual-element approach handles both crowd control and damage efficiently.
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Mistakes -->
+        <section class="section">
+            <h2>⚠️ Common Mistakes to Avoid</h2>
+            
+            <div class="tips-grid">
+                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
+                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Prioritizing Projectile Count</h4>
+                    <p>Projectile Count does NOTHING for Frostwalker. It's a duration-based weapon, not a projectile weapon. Focus on Duration and Size instead.</p>
+                </div>
+
+                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
+                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Standing Still During Boss Fights</h4>
+                    <p>Your only defense is the frozen trail. If you stop moving, you lose your primary survival tool. Keep moving constantly, even in small circles.</p>
+                </div>
+
+                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
+                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Giving Up on Ice Cube Farming</h4>
+                    <p>Yes, it's rare, but finding Ice Cube is worth the effort. Many players give up too early. Keep farming chests - the payoff is huge.</p>
+                </div>
+
+                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
+                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Ignoring Movement Speed</h4>
+                    <p>Movement speed directly impacts how much area you cover and how effective your kiting is. It's a core stat for Frostwalker builds.</p>
+                </div>
+
+                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
+                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Using Frostwalker as Your Only Weapon</h4>
+                    <p>While strong for survival, Frostwalker alone lacks burst damage for bosses. Always carry a high-DPS secondary weapon like Sniper Rifle or Lightning Staff.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ice Cube Farming Tips -->
+        <section class="section">
+            <h2>🧊 Ice Cube Farming Strategy</h2>
+            
+            <h3>Maximizing Your Chances</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Best Character</div>
+                    <div class="stat-value">Fox</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">+1% Luck per level increases drop quality</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Best Tome</div>
+                    <div class="stat-value">Luck Tome</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Stacks with Fox's passive for maximum rarity</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Priority Targets</div>
+                    <div class="stat-value">Gold Chests</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Higher tier = better legendary drop chance</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Est. Runs Needed</div>
+                    <div class="stat-value">10-20</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">With optimal luck stacking strategy</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Step-by-Step Farming Guide</h3>
+            <ol style="padding-left: 1.5rem; line-height: 2;">
+                <li>Select <strong>Fox</strong> as your character for baseline Luck scaling</li>
+                <li>Prioritize finding and leveling <strong>Luck Tome</strong> in the first 5 minutes</li>
+                <li>Open <strong>every chest</strong> you encounter - never skip any</li>
+                <li>Use <strong>shrines frequently</strong>, especially Charge Shrines</li>
+                <li>Survive to <strong>late game</strong> (20+ minutes) for maximum chest spawns</li>
+                <li>Focus on <strong>gold-tier chests</strong> when you have a choice</li>
+                <li><strong>Don't give up!</strong> Legendary items are rare but the unlock is worth it</li>
+            </ol>
+
+            <div class="tip-card" style="margin-top: 2rem;">
+                <span class="tip-icon">🎲</span>
+                <strong>RNG Note:</strong> Some players find Ice Cube on their first run, others take 30+ runs. Stay persistent! Once you have it, the 1,000 freezes go faster than you think.
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 style="color: white; margin-bottom: 1rem;">Ready to Master Frostwalker?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
+                Explore more weapons and builds to create the ultimate Megabonk arsenal
+            </p>
+            <a href="/database/weapons/" class="cta-button">View All Weapons</a>
+            <a href="/guides/builds/" class="cta-button">Browse Build Guides</a>
+            <a href="/guides/characters/noelle-guide" class="cta-button">Noelle Character Guide</a>
+        </div>
+    </div>
+
+    <script>
+        // Freeze Counter Functionality
+        let freezeCount = parseInt(localStorage.getItem('freezeCount')) || 0;
+        const maxFreezes = 1000;
+
+        function updateProgressBar() {
+            const percentage = Math.min((freezeCount / maxFreezes) * 100, 100);
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = 
+                `${freezeCount} / ${maxFreezes} Freezes (${percentage.toFixed(1)}%)`;
+            
+            localStorage.setItem('freezeCount', freezeCount);
+
+            if (freezeCount >= maxFreezes) {
+                document.getElementById('progressText').textContent = '✓ Unlock Complete! Visit Unlocks Menu!';
+                document.getElementById('progressFill').style.background = 'linear-gradient(90deg, #00ff88, #00ffcc)';
+            }
+        }
+
+        function addFreezes(amount) {
+            freezeCount = Math.min(freezeCount + amount, maxFreezes);
+            updateProgressBar();
+        }
+
+        function resetFreezes() {
+            if (confirm('Reset freeze counter to 0?')) {
+                freezeCount = 0;
+                document.getElementById('progressFill').style.background = 'linear-gradient(90deg, #00d4ff, #00ffff)';
+                updateProgressBar();
+            }
+        }
+
+        // Initialize on page load
+        updateProgressBar();
+    </script>
+</body>
+</html>
