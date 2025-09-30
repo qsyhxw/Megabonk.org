@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walking Apocalypse Build Guide - Megabonk S-Tier AFK Build</title>
+    <meta name="description" content="Master the Walking Apocalypse S-tier AFK build in Megabonk. Complete guide for Megachad and Sir Oofie with Aura, Mirror, and Kevin combo for ultimate survival.">
+    <meta name="keywords" content="megabonk walking apocalypse, megabonk afk build, megabonk aura build, megachad build, megabonk s tier build">
+
+    <link rel="canonical" href="https://megabonk.org/guides/builds/walking-apocalypse">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Walking Apocalypse Build - Megabonk S-Tier AFK Guide">
+    <meta property="og:description" content="Ultimate AFK build guide for Megabonk featuring Aura, Mirror, and Kevin combo">
+    <meta property="og:type" content="article">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #667eea;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .build-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .build-tier {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-gradient);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Content Section */
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Item Cards */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .item-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .item-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .item-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .strategy-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .strategy-phase {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--primary-gradient);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .strategy-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .tip-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        /* Pros/Cons */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pros-card, .cons-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .pros-card {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .cons-card {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .pros-cons-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pros-cons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pros-cons-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .pros-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        .cons-icon {
+            color: var(--danger-color);
+            font-weight: 700;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .items-grid, .strategy-grid, .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎮 MEGABONK.ORG</div>
+            <ul class="nav-links">
+                <li><a href="../../">Home</a></li>
+                <li><a href="../">Builds</a></li>
+                <li><a href="../../guides/characters/">Characters</a></li>
+                <li><a href="../../database/weapons/">Weapons</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../../">Home</a> / <a href="../">Builds</a> / <span>Walking Apocalypse</span>
+    </div>
+
+    <section class="hero">
+        <div class="build-icon">💪🌪️</div>
+        <div class="build-tier">⭐ S-TIER BUILD</div>
+        <h1>Walking Apocalypse</h1>
+        <p class="hero-description">
+            The ultimate AFK build that turns you into an unstoppable force of destruction. Combine Aura, Mirror, 
+            and Kevin to create a walking death zone that eliminates enemies without lifting a finger.
+        </p>
+    </section>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">S+</div>
+            <div class="stat-label">Overall Rating</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐⭐</div>
+            <div class="stat-label">Damage Output</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐⭐</div>
+            <div class="stat-label">Survivability</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Easy</div>
+            <div class="stat-label">Difficulty</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">AFK</div>
+            <div class="stat-label">Playstyle</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <h2 class="section-title">🎯 Best Characters for This Build</h2>
+        <p class="section-subtitle">This build works with any character, but these excel:</p>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">💪</div>
+                    <div>
+                        <div class="item-title">Megachad</div>
+                        <div class="item-subtitle">Optimal Choice</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Perfect synergy with Aura (default weapon). His passive reduces cooldowns by 0.2s per level, 
+                    making Aura trigger more frequently. The ultimate AFK tank character.
+                </p>
+                <div class="item-stats">
+                    <div class="item-stat">
+                        <span>Aura Synergy</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+                        <span>100%</span>
+                    </div>
+                    <div class="item-stat">
+                        <span>Survivability</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 95%"></div></div>
+                        <span>95%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🛡️</div>
+                    <div>
+                        <div class="item-title">Sir Oofie</div>
+                        <div class="item-subtitle">Tank Alternative</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Default character with excellent tankiness. Gains 1% armor per level, making him nearly 
+                    invincible when combined with Mirror. Great for beginners.
+                </p>
+                <div class="item-stats">
+                    <div class="item-stat">
+                        <span>Defense</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+                        <span>100%</span>
+                    </div>
+                    <div class="item-stat">
+                        <span>AFK Viability</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 90%"></div></div>
+                        <span>90%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">⚔️ Core Weapons & Items</h2>
+        <p class="section-subtitle">The three pillars of the Walking Apocalypse build</p>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">💪</div>
+                    <div>
+                        <div class="item-title">Aura</div>
+                        <div class="item-subtitle">Primary Weapon</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Unlock:</strong> Survive 2 minutes without taking damage<br><br>
+                    Surrounds you with a damage-dealing aura that grows with your character size. The foundation 
+                    of this build. Scales incredibly well and hits all enemies around you automatically.
+                </p>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">✓</span>
+                        <span>Prioritize size-increasing items to maximize Aura range</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">✓</span>
+                        <span>Damage scales per level, making it stronger throughout the run</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🪞</div>
+                    <div>
+                        <div class="item-title">Mirror</div>
+                        <div class="item-subtitle">Force Multiplier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Unlock:</strong> Default unlock<br><br>
+                    Creates a duplicate of yourself that mirrors your movements and attacks. Essentially doubles 
+                    your Aura coverage and damage output. Game-changing item for AFK builds.
+                </p>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">✓</span>
+                        <span>Mirror clone inherits all your weapons and stats</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">✓</span>
+                        <span>Position strategically to cover more ground</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">👤</div>
+                    <div>
+                        <div class="item-title">Kevin</div>
+                        <div class="item-subtitle">Immortality Core</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Unlock:</strong> Found in game<br><br>
+                    THE most broken item in Megabonk. Grants near-immortality through insane regeneration. 
+                    Combined with Mirror, you become virtually unkillable. Absolutely essential for true AFK gameplay.
+                </p>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">✓</span>
+                        <span>Kevin + Mirror = Two sources of immortality</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">✓</span>
+                        <span>Allows you to stand in boss attacks without worry</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">📚 Recommended Tomes</h2>
+        <p class="section-subtitle">Maximize your power with these tome selections</p>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📖</div>
+                    <div>
+                        <div class="item-title">XP Tome</div>
+                        <div class="item-subtitle">Priority #1</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    The foundation of every meta build. Faster leveling means more stat bonuses, stronger weapons, 
+                    and quicker power spikes. Always take this first.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📕</div>
+                    <div>
+                        <div class="item-title">Curse Tome</div>
+                        <div class="item-subtitle">High Risk, High Reward</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Increases enemy spawn rate and difficulty but grants massive stat bonuses. With Mirror + Kevin 
+                    immortality, the downside is negligible while the benefits are huge.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📘</div>
+                    <div>
+                        <div class="item-title">Luck Tome</div>
+                        <div class="item-subtitle">Holy Trinity Completion</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Better item drops and increased crit chance. Combined with XP and Curse tomes, forms the 
+                    "Holy Trinity" that every meta build uses.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">🎮 Gameplay Strategy</h2>
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 1: Early Game (0-10 minutes)</div>
+                <h3 class="strategy-title">Foundation Building</h3>
+                <div class="strategy-content">
+                    <p><strong>Priority Goals:</strong></p>
+                    <ul>
+                        <li>Unlock Aura if you haven't already (2 min no damage)</li>
+                        <li>Pick up XP Tome as soon as possible</li>
+                        <li>Focus on survivability items and size increases</li>
+                        <li>Avoid risky plays - stay safe to build your foundation</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Move in circles to maximize Aura damage coverage</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Don't worry about damage yet - focus on not dying</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 2: Mid Game (10-20 minutes)</div>
+                <h3 class="strategy-title">Power Spike</h3>
+                <div class="strategy-content">
+                    <p><strong>Key Actions:</strong></p>
+                    <ul>
+                        <li>Obtain Mirror - this is your biggest power spike</li>
+                        <li>Add Curse Tome to increase spawn rate</li>
+                        <li>Get Kevin for immortality if available</li>
+                        <li>Level up Aura to maximum damage</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Once you have Mirror, you can handle 2x enemies easily</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Position mirror clone to cover a different area</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 3: Late Game (20+ minutes)</div>
+                <h3 class="strategy-title">True AFK Mode</h3>
+                <div class="strategy-content">
+                    <p><strong>Optimization:</strong></p>
+                    <ul>
+                        <li>You should have: Aura + Mirror + Kevin + 3 Tomes</li>
+                        <li>Add Luck Tome for the Holy Trinity</li>
+                        <li>Stack size and damage modifiers</li>
+                        <li>Literally AFK - the build plays itself</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>You can leave your keyboard at this point</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Stand near boss spawn points to kill them instantly</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">✅ Pros & Cons</h2>
+        <div class="pros-cons-grid">
+            <div class="pros-card">
+                <h3 class="pros-cons-title">
+                    <span>✓</span> Strengths
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>True AFK Build:</strong> Literally set it and forget it once setup is complete</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Extremely Tanky:</strong> Kevin + Mirror makes you nearly unkillable</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Scales Infinitely:</strong> Gets stronger the longer you survive</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Easy to Execute:</strong> Simple gameplay, minimal skill required</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Boss Killer:</strong> Melts bosses without trying</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Beginner Friendly:</strong> Perfect for new players</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cons-card">
+                <h3 class="pros-cons-title">
+                    <span>✗</span> Weaknesses
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Slow Start:</strong> Takes 10-15 minutes to really come online</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Item Dependent:</strong> Needs Mirror and Kevin to truly shine</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>RNG Factor:</strong> Item drops can make or break early game</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Boring for Some:</strong> Very passive playstyle, might not be exciting</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Vulnerable Early:</strong> Before getting Mirror, you're squishy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 style="margin-bottom: 1rem;">Ready to Dominate?</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Try this S-tier build and experience the ultimate AFK power fantasy in Megabonk.
+        </p>
+        <a href="../" class="btn">← Back to All Builds</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Megabonk.org - All Rights Reserved</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="../../" style="color: var(--accent-color);">Home</a> | 
+            <a href="../../guides/" style="color: var(--accent-color);">Guides</a> | 
+            <a href="../../database/" style="color: var(--accent-color);">Database</a>
+        </p>
+    </footer>
+</body>
+</html>
