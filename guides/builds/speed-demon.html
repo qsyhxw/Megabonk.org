@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Demon Build Guide - Megabonk S-Tier Speed Build</title>
+    <meta name="description" content="Master the Speed Demon S-tier build in Megabonk. Complete guide for Calcium with maximum speed stacking for insane damage and mobility.">
+    <meta name="keywords" content="megabonk speed demon, megabonk speed build, calcium build, megabonk fast build, megabonk s tier">
+
+    <link rel="canonical" href="https://megabonk.org/guides/builds/speed-demon">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Speed Demon Build - Megabonk S-Tier Speed Guide">
+    <meta property="og:description" content="Lightning-fast build guide for Calcium featuring maximum speed stacking and damage conversion">
+    <meta property="og:type" content="article">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --speed-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #f093fb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .build-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: speedPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes speedPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .build-tier {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--speed-gradient);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--speed-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Speed Lines Animation */
+        .speed-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .speed-line {
+            position: absolute;
+            height: 2px;
+            background: var(--speed-gradient);
+            animation: speedLine 2s linear infinite;
+        }
+
+        @keyframes speedLine {
+            from {
+                left: -100%;
+            }
+            to {
+                left: 100%;
+            }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--speed-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Content Section */
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--speed-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: rgba(245, 87, 108, 0.1);
+            border-left: 4px solid var(--danger-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            color: var(--danger-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Character Spotlight */
+        .character-spotlight {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .character-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+        }
+
+        .character-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .character-passive {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .passive-box {
+            background: rgba(240, 147, 251, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .passive-title {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .passive-mechanics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .mechanic-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mechanic-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Item Cards */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .item-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--speed-gradient);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Speed Calculator */
+        .speed-calculator {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .calculator-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--speed-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .speed-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .speed-tier {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .speed-tier:hover {
+            border-color: var(--accent-color);
+        }
+
+        .tier-label {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .tier-value {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-damage {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .strategy-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .strategy-phase {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--speed-gradient);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .strategy-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .tip-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        /* Pros/Cons */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pros-card, .cons-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .pros-card {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .cons-card {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .pros-cons-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pros-cons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pros-cons-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .pros-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        .cons-icon {
+            color: var(--danger-color);
+            font-weight: 700;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--speed-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .items-grid, .strategy-grid, .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .character-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎮 MEGABONK.ORG</div>
+            <ul class="nav-links">
+                <li><a href="../../">Home</a></li>
+                <li><a href="../">Builds</a></li>
+                <li><a href="../../guides/characters/">Characters</a></li>
+                <li><a href="../../database/weapons/">Weapons</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../../">Home</a> / <a href="../">Builds</a> / <span>Speed Demon</span>
+    </div>
+
+    <section class="hero">
+        <div class="speed-lines">
+            <div class="speed-line" style="top: 20%; width: 200px; animation-delay: 0s;"></div>
+            <div class="speed-line" style="top: 40%; width: 150px; animation-delay: 0.3s;"></div>
+            <div class="speed-line" style="top: 60%; width: 180px; animation-delay: 0.6s;"></div>
+            <div class="speed-line" style="top: 80%; width: 220px; animation-delay: 0.9s;"></div>
+        </div>
+        <div class="build-icon">💀⚡</div>
+        <div class="build-tier">⭐ S-TIER BUILD</div>
+        <h1>Speed Demon</h1>
+        <p class="hero-description">
+            The fastest build in Megabonk. Stack speed to insane levels with Calcium, converting velocity into 
+            raw damage. Dash around the map at lightning speed while decimating everything in your path.
+        </p>
+    </section>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">S</div>
+            <div class="stat-label">Overall Rating</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐⭐</div>
+            <div class="stat-label">Damage Output</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐☆☆</div>
+            <div class="stat-label">Survivability</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Hard</div>
+            <div class="stat-label">Difficulty</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Kiting</div>
+            <div class="stat-label">Playstyle</div>
+        </div>
+    </div>
+
+    <div class="alert-box">
+        <div class="alert-title">⚠️ High Skill Ceiling Build</div>
+        <p>This build requires excellent positioning and movement. You'll be moving extremely fast, which can be 
+        difficult to control. Not recommended for beginners. Master kiting mechanics before attempting this build.</p>
+    </div>
+
+    <section class="section">
+        <div class="character-spotlight">
+            <div class="character-icon">💀</div>
+            <h2 class="character-name">Calcium - The Speed Skeleton</h2>
+            <p class="character-passive">
+                <strong>Unlock:</strong> Kill 1,000 Skeletons<br>
+                <strong>Default Weapon:</strong> Bone
+            </p>
+            
+            <div class="passive-box">
+                <div class="passive-title">🔥 Unique Passive: Speed Demon</div>
+                <p style="margin-bottom: 1.5rem;">Speed builds up over time, but is halved when you take damage. 
+                Also gain damage based on speed.</p>
+                
+                <div class="passive-mechanics">
+                    <div class="mechanic-card">
+                        <div class="mechanic-icon">⚡</div>
+                        <strong>Speed Accumulation</strong>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            Continuously builds speed while moving. No upper limit - can reach insane velocities!
+                        </p>
+                    </div>
+                    <div class="mechanic-card">
+                        <div class="mechanic-icon">💥</div>
+                        <strong>Damage Conversion</strong>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            Every point of speed is converted to damage. The faster you go, the harder you hit!
+                        </p>
+                    </div>
+                    <div class="mechanic-card">
+                        <div class="mechanic-icon">⚠️</div>
+                        <strong>Risk/Reward</strong>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            Taking damage halves your speed. Must maintain perfect dodge gameplay for maximum power.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">⚔️ Core Items & Weapons</h2>
+        <p class="section-subtitle">Essential items to maximize your speed-to-damage conversion</p>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🦴</div>
+                    <div>
+                        <div class="item-title">Bone</div>
+                        <div class="item-subtitle">Default Weapon</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Calcium's signature weapon. Fast attack speed that scales with your movement speed. 
+                    The faster you move, the faster you attack. Perfect synergy with the speed build.
+                </p>
+                <div class="priority-badge">🔥 MANDATORY</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">👟</div>
+                    <div>
+                        <div class="item-title">Speed Boots</div>
+                        <div class="item-subtitle">Core Item #1</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +25% movement speed<br><br>
+                    Foundational item for the build. Stack multiple if possible. Each boot compounds with 
+                    Calcium's passive for exponential speed gains.
+                </p>
+                <div class="priority-badge">🔥 PRIORITY #1</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">⚡</div>
+                    <div>
+                        <div class="item-title">Lightning Staff</div>
+                        <div class="item-subtitle">Synergy Weapon</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> Chain lightning attacks<br><br>
+                    Complements your hit-and-run playstyle perfectly. Lightning chains to nearby enemies 
+                    while you zoom past them.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">💨</div>
+                    <div>
+                        <div class="item-title">Dash Ability</div>
+                        <div class="item-subtitle">Mobility Tool</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> Quick dash with i-frames<br><br>
+                    Essential for dodging attacks and maintaining your speed stacks. The invincibility frames 
+                    protect your speed multiplier.
+                </p>
+                <div class="priority-badge">🔥 PRIORITY #2</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🔴</div>
+                    <div>
+                        <div class="item-title">Health Pendant</div>
+                        <div class="item-subtitle">Safety Net</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +50% max HP<br><br>
+                    Your only survivability item. Gives you room for error since taking damage halves your 
+                    speed. One mistake is costly, but survivable.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🎲</div>
+                    <div>
+                        <div class="item-title">Haste Potion</div>
+                        <div class="item-subtitle">Temporary Boost</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +50% speed for 10 seconds<br><br>
+                    Emergency speed boost for tough situations or boss fights. Can stack with your existing 
+                    speed for ridiculous velocity.
+                </p>
+                <div class="priority-badge">⭐ SITUATIONAL</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="speed-calculator">
+            <h3 class="calculator-title">⚡ Speed-to-Damage Calculator</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                Understanding how your speed converts to damage output
+            </p>
+            <div class="speed-tiers">
+                <div class="speed-tier">
+                    <div class="tier-label">Early Game</div>
+                    <div class="tier-value">100% Speed</div>
+                    <div class="tier-damage">+50% Damage</div>
+                </div>
+                <div class="speed-tier">
+                    <div class="tier-label">Mid Game</div>
+                    <div class="tier-value">200% Speed</div>
+                    <div class="tier-damage">+150% Damage</div>
+                </div>
+                <div class="speed-tier">
+                    <div class="tier-label">Late Game</div>
+                    <div class="tier-value">300% Speed</div>
+                    <div class="tier-damage">+300% Damage</div>
+                </div>
+                <div class="speed-tier">
+                    <div class="tier-label">Max Power</div>
+                    <div class="tier-value">500%+ Speed</div>
+                    <div class="tier-damage">+600%+ Damage</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--warning-color); margin-top: 2rem; font-size: 0.9rem;">
+                ⚠️ Remember: Taking damage halves your speed, so perfect dodging is essential!
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">📚 Recommended Tomes</h2>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📖</div>
+                    <div>
+                        <div class="item-title">XP Tome</div>
+                        <div class="item-subtitle">Priority #1</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Faster leveling = faster speed stacking. More levels mean more passive speed 
+                    accumulation and stronger damage conversion.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📕</div>
+                    <div>
+                        <div class="item-title">Curse Tome</div>
+                        <div class="item-subtitle">High Risk Choice</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    More enemies = more risk of getting hit = speed loss. Only take if you're 
+                    confident in your dodging skills. Reward is worth it if you can stay clean.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📗</div>
+                    <div>
+                        <div class="item-title">Speed Tome</div>
+                        <div class="item-subtitle">Core Tome</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>ESSENTIAL.</strong> Directly increases your base movement speed. 
+                    Compounds with Speed Boots and Calcium's passive for maximum velocity.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">🎮 Gameplay Strategy</h2>
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 1: Early Game (0-10 minutes)</div>
+                <h3 class="strategy-title">Building Speed Foundation</h3>
+                <div class="strategy-content">
+                    <p><strong>Priority Goals:</strong></p>
+                    <ul>
+                        <li>Unlock Calcium if you haven't (kill 1,000 skeletons)</li>
+                        <li>Get Speed Boots ASAP - this is your #1 priority</li>
+                        <li>Pick up XP Tome for faster leveling</li>
+                        <li>Focus on NOT getting hit - preserve your speed stacks</li>
+                        <li>Practice kiting patterns in circles</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Keep moving constantly - your speed builds passively</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Early game is weak - play defensive until you get speed items</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 2: Mid Game (10-20 minutes)</div>
+                <h3 class="strategy-title">Speed Ramping</h3>
+                <div class="strategy-content">
+                    <p><strong>Key Actions:</strong></p>
+                    <ul>
+                        <li>Stack multiple Speed Boots if possible (2-3 is ideal)</li>
+                        <li>Add Lightning Staff for crowd clear while kiting</li>
+                        <li>Get Dash ability for safety and mobility</li>
+                        <li>Speed Tome is mandatory at this point</li>
+                        <li>Your damage should be ramping up significantly now</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>You should be noticeably faster than enemies now</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Master dash timing - it's your lifeline</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 3: Late Game (20+ minutes)</div>
+                <h3 class="strategy-title">Maximum Overdrive</h3>
+                <div class="strategy-content">
+                    <p><strong>Optimization:</strong></p>
+                    <ul>
+                        <li>Speed should be 300%+ at this point</li>
+                        <li>You're moving so fast enemies can barely touch you</li>
+                        <li>Damage output is insane due to speed conversion</li>
+                        <li>Circle strafe everything - bosses included</li>
+                        <li>Haste Potion for emergency situations only</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Control can be difficult - reduce mouse sensitivity if needed</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>One hit = 50% speed loss = massive damage drop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">💡 Advanced Tips & Tricks</h2>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🎯</div>
+                    <div>
+                        <div class="item-title">Perfect Kiting</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Move in wide circles around enemy groups. Your speed lets you outrun everything 
+                    while your weapons do the damage. Never stop moving!
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🛡️</div>
+                    <div>
+                        <div class="item-title">Dash Management</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Save dashes for unavoidable attacks or boss abilities. The i-frames are crucial 
+                    for maintaining your speed multiplier. Don't waste them!
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">⚡</div>
+                    <div>
+                        <div class="item-title">Speed Recovery</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    If you take damage, immediately retreat and kite enemies at maximum distance. 
+                    Your speed will rebuild over ~10 seconds of safe movement.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">✅ Pros & Cons</h2>
+        <div class="pros-cons-grid">
+            <div class="pros-card">
+                <h3 class="pros-cons-title">
+                    <span>✓</span> Strengths
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Insane Damage:</strong> Speed-to-damage conversion scales infinitely</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Superior Mobility:</strong> Fastest build in the game, excellent kiting</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Engaging Gameplay:</strong> Active, skill-based, never boring</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Boss Melter:</strong> Circle strafe bosses to death effortlessly</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Satisfying Mastery:</strong> Rewarding when you master it</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cons-card">
+                <h3 class="pros-cons-title">
+                    <span>✗</span> Weaknesses
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>High Skill Floor:</strong> Requires excellent mechanics and positioning</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Punishing Mistakes:</strong> One hit halves your damage output</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Weak Early Game:</strong> Takes 10-15 minutes to power up</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Control Difficulty:</strong> Hard to control at max speed</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Item Dependent:</strong> Needs Speed Boots to function</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Exhausting:</strong> Requires constant focus and movement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 style="margin-bottom: 1rem;">Master the Speed Demon Build</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            One of the most rewarding and powerful builds in Megabonk - if you can handle the speed.
+        </p>
+        <a href="../" class="btn">← Back to All Builds</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Megabonk.org - All Rights Reserved</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="../../" style="color: var(--accent-color);">Home</a> | 
+            <a href="../../guides/" style="color: var(--accent-color);">Guides</a> | 
+            <a href="../../database/" style="color: var(--accent-color);">Database</a>
+        </p>
+    </footer>
+</body>
+</html>
