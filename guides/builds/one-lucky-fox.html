@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Lucky Fox Build Guide - Megabonk RNG Meta Build</title>
+    <meta name="description" content="Master the One Lucky Fox RNG meta build in Megabonk. Complete guide for Fox with maximum luck stacking, better drops, and critical hit bonuses.">
+    <meta name="keywords" content="megabonk lucky fox, megabonk fox build, megabonk luck build, megabonk rng meta, fox guide megabonk">
+
+    <link rel="canonical" href="https://megabonk.org/guides/builds/one-lucky-fox">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="One Lucky Fox Build - Megabonk RNG Meta Guide">
+    <meta property="og:description" content="Ultimate luck-stacking build guide for Fox featuring RNG optimization and meta-defining power">
+    <meta property="og:type" content="article">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --luck-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            --green-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #f6d365;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .build-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: luckyBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes luckyBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        /* Lucky stars animation */
+        .lucky-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            animation: starTwinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+        }
+
+        .build-tier {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--luck-gradient);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--luck-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--luck-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Content Section */
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--luck-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Character Spotlight */
+        .character-spotlight {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .character-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+        }
+
+        .character-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .character-passive {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .passive-box {
+            background: rgba(246, 211, 101, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .passive-title {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Luck Calculator */
+        .luck-calculator {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .calculator-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--luck-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .luck-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .benefit-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Item Cards */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(246, 211, 101, 0.3);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .item-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--luck-gradient);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* RNG Showcase */
+        .rng-showcase {
+            background: linear-gradient(135deg, rgba(246, 211, 101, 0.1) 0%, rgba(253, 160, 133, 0.1) 100%);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .rng-title {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .rng-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .rng-example {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .rng-stat {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .rng-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .strategy-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .strategy-phase {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--luck-gradient);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .strategy-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .tip-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        /* Pros/Cons */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pros-card, .cons-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .pros-card {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .cons-card {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .pros-cons-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pros-cons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pros-cons-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .pros-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        .cons-icon {
+            color: var(--danger-color);
+            font-weight: 700;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--luck-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(246, 211, 101, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .items-grid, .strategy-grid, .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .character-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎮 MEGABONK.ORG</div>
+            <ul class="nav-links">
+                <li><a href="../../">Home</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+                <li><a href="../../guides/characters/">Characters</a></li>
+                <li><a href="../../database/weapons/">Weapons</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../../">Home</a> / <a href="/guides/builds/">Builds</a> / <span>One Lucky Fox</span>
+    </div>
+
+    <section class="hero">
+        <div class="lucky-stars">
+            <div class="star" style="top: 10%; left: 10%; animation-delay: 0s;">⭐</div>
+            <div class="star" style="top: 20%; left: 80%; animation-delay: 0.5s;">✨</div>
+            <div class="star" style="top: 60%; left: 15%; animation-delay: 1s;">⭐</div>
+            <div class="star" style="top: 70%; left: 85%; animation-delay: 1.5s;">✨</div>
+            <div class="star" style="top: 40%; left: 50%; animation-delay: 2s;">⭐</div>
+            <div class="star" style="top: 80%; left: 60%; animation-delay: 2.5s;">✨</div>
+        </div>
+        <div class="build-icon">🦊🍀</div>
+        <div class="build-tier">🌟 RNG META BUILD</div>
+        <h1>One Lucky Fox</h1>
+        <p class="hero-description">
+            The RNG meta-defining build. Stack luck to astronomical levels with Fox, getting better item drops, 
+            more critical hits, and game-breaking RNG outcomes. Let fortune decide your fate.
+        </p>
+    </section>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">S</div>
+            <div class="stat-label">Overall Rating</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐☆</div>
+            <div class="stat-label">Damage Output</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐☆</div>
+            <div class="stat-label">Survivability</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Easy</div>
+            <div class="stat-label">Difficulty</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">RNG</div>
+            <div class="stat-label">Playstyle</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="character-spotlight">
+            <div class="character-icon">🦊</div>
+            <h2 class="character-name">Fox - The Lucky Kitsune</h2>
+            <p class="character-passive">
+                <strong>Unlock:</strong> Default Character (Available from start)<br>
+                <strong>Default Weapon:</strong> Firestaff
+            </p>
+            
+            <div class="passive-box">
+                <div class="passive-title">🍀 Unique Passive: Fortune's Favor</div>
+                <p style="margin-bottom: 1.5rem;">Gain 1% Luck per level. At max level (100), you'll have 
+                +100% luck - the highest base luck in the game!</p>
+                
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    This makes Fox the ultimate RNG character. Combined with Luck Tome and Lucky Charm, 
+                    you can reach luck values that break the normal probability system.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="luck-calculator">
+            <h3 class="calculator-title">🍀 What Does Luck Actually Do?</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                Luck affects multiple systems in Megabonk
+            </p>
+            <div class="luck-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💎</div>
+                    <div class="benefit-title">Better Drops</div>
+                    <div class="benefit-description">
+                        Higher chance for rare items, tomes, and weapons to appear
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-title">Crit Chance</div>
+                    <div class="benefit-description">
+                        Increased critical hit probability on all attacks
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎁</div>
+                    <div class="benefit-title">Chest Quality</div>
+                    <div class="benefit-description">
+                        Better rewards from chests and boss drops
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎲</div>
+                    <div class="benefit-title">RNG Events</div>
+                    <div class="benefit-description">
+                        More favorable outcomes in random events
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌟</div>
+                    <div class="benefit-title">Proc Rates</div>
+                    <div class="benefit-description">
+                        On-hit effects trigger more frequently
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="rng-showcase">
+            <h3 class="rng-title">📊 Luck Stacking Breakdown</h3>
+            <div class="rng-examples">
+                <div class="rng-example">
+                    <div class="rng-stat">100%</div>
+                    <div class="rng-label">Fox Passive (Lv100)</div>
+                </div>
+                <div class="rng-example">
+                    <div class="rng-stat">+50%</div>
+                    <div class="rng-label">Luck Tome</div>
+                </div>
+                <div class="rng-example">
+                    <div class="rng-stat">+25%</div>
+                    <div class="rng-label">Lucky Charm</div>
+                </div>
+                <div class="rng-example">
+                    <div class="rng-stat">+15%</div>
+                    <div class="rng-label">Clover Leaf</div>
+                </div>
+                <div class="rng-example">
+                    <div class="rng-stat">190%</div>
+                    <div class="rng-label">TOTAL LUCK!</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--success-color); margin-top: 1.5rem; font-size: 0.9rem;">
+                🎯 With 190% luck, you're essentially playing a different game with vastly better RNG!
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">⚔️ Core Items & Strategy</h2>
+        <p class="section-subtitle">Essential items to maximize your luck potential</p>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🔥</div>
+                    <div>
+                        <div class="item-title">Firestaff</div>
+                        <div class="item-subtitle">Default Weapon</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Fox's signature weapon. Fast fire rate with good base damage. Benefits from your 
+                    increased crit chance through luck stacking. Simple but effective.
+                </p>
+                <div class="priority-badge">✅ DEFAULT</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🎲</div>
+                    <div>
+                        <div class="item-title">Lucky Charm</div>
+                        <div class="item-subtitle">Core Item #1</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +25% Luck<br><br>
+                    Stacks multiplicatively with Fox's passive. This is THE item for this build. 
+                    Get it as soon as possible to maximize your RNG benefits.
+                </p>
+                <div class="priority-badge">🔥 MANDATORY</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🍀</div>
+                    <div>
+                        <div class="item-title">Clover Leaf</div>
+                        <div class="item-subtitle">Luck Amplifier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +15% Luck + Better drops<br><br>
+                    Additional luck stacking plus improved drop rates. Makes rare items appear 
+                    much more frequently. Essential for the full RNG experience.
+                </p>
+                <div class="priority-badge">🔥 PRIORITY #2</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">💎</div>
+                    <div>
+                        <div class="item-title">Crit Damage Gem</div>
+                        <div class="item-subtitle">Damage Multiplier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +50% Crit Damage<br><br>
+                    Your high luck gives you more crits. Make those crits hit harder! 
+                    Dramatically increases your damage output.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">⚡</div>
+                    <div>
+                        <div class="item-title">Lightning Staff</div>
+                        <div class="item-subtitle">Secondary Weapon</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> Chain lightning attacks<br><br>
+                    Adds crowd control and another damage source that benefits from your crit chance. 
+                    Each lightning chain can crit independently.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🪞</div>
+                    <div>
+                        <div class="item-title">Mirror</div>
+                        <div class="item-subtitle">Force Multiplier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> Duplicate yourself<br><br>
+                    Your clone inherits your luck stat! Essentially doubles your RNG benefits 
+                    and damage output. Game-changing item.
+                </p>
+                <div class="priority-badge">🔥 CORE ITEM</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">📚 Recommended Tomes</h2>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📘</div>
+                    <div>
+                        <div class="item-title">Luck Tome</div>
+                        <div class="item-subtitle">Priority #1</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>NON-NEGOTIABLE.</strong> +50% luck boost. This is the cornerstone of the entire 
+                    build. Take this before anything else.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📖</div>
+                    <div>
+                        <div class="item-title">XP Tome</div>
+                        <div class="item-subtitle">Level Faster</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Level faster = more luck from Fox's passive faster. Part of the Holy Trinity. 
+                    Always take for any meta build.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📕</div>
+                    <div>
+                        <div class="item-title">Curse Tome</div>
+                        <div class="item-subtitle">High Risk/Reward</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    More enemies = more chances for lucky drops. Completes the Holy Trinity. 
+                    Your luck will help with the increased difficulty.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">🎮 Gameplay Strategy</h2>
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 1: Early Game (0-10 minutes)</div>
+                <h3 class="strategy-title">Foundation Building</h3>
+                <div class="strategy-content">
+                    <p><strong>Priority Goals:</strong></p>
+                    <ul>
+                        <li>Fox is available from the start - instant access!</li>
+                        <li>Get Luck Tome ASAP - this is your foundation</li>
+                        <li>Pick up XP Tome second for faster leveling</li>
+                        <li>Look for Lucky Charm in item drops</li>
+                        <li>Your Firestaff is solid - focus on item collection</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Your luck is already working - you'll notice better drops</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Be aggressive with chest pickups - luck affects their quality</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 2: Mid Game (10-20 minutes)</div>
+                <h3 class="strategy-title">Luck Stacking</h3>
+                <div class="strategy-content">
+                    <p><strong>Key Actions:</strong></p>
+                    <ul>
+                        <li>You should have: Luck Tome + XP Tome + Lucky Charm</li>
+                        <li>Add Clover Leaf for more luck stacking</li>
+                        <li>Get Mirror to double your luck benefits</li>
+                        <li>Your crit rate should be noticeably high now</li>
+                        <li>Add Lightning Staff or other weapons as they appear</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>100%+ luck at this point - RNG is heavily in your favor</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Rare items drop frequently - be selective with picks</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 3: Late Game (20+ minutes)</div>
+                <h3 class="strategy-title">RNG God Mode</h3>
+                <div class="strategy-content">
+                    <p><strong>Optimization:</strong></p>
+                    <ul>
+                        <li>190%+ luck achieved - you're an RNG god now</li>
+                        <li>Critical hits happen constantly</li>
+                        <li>Best items appear regularly in drops</li>
+                        <li>Curse Tome's downside is mitigated by luck</li>
+                        <li>Every chest feels like a jackpot</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>You're experiencing the game at peak RNG optimization</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Share your insane drop screenshots with the community!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">💡 Advanced Tips</h2>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🎯</div>
+                    <div>
+                        <div class="item-title">Luck Breakpoints</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>50% Luck:</strong> Noticeable crit increase<br>
+                    <strong>100% Luck:</strong> Significant better drops<br>
+                    <strong>150% Luck:</strong> Rare items become common<br>
+                    <strong>190%+ Luck:</strong> Game-breaking RNG
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">⚡</div>
+                    <div>
+                        <div class="item-title">Item Priority Order</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    1. Luck Tome (immediate)<br>
+                    2. Lucky Charm (early game)<br>
+                    3. XP Tome (early game)<br>
+                    4. Mirror (mid game)<br>
+                    5. Clover Leaf (mid game)<br>
+                    6. Curse Tome (late game)
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🎲</div>
+                    <div>
+                        <div class="item-title">RNG Optimization</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Open as many chests as possible - your luck makes them worthwhile. 
+                    Clear boss encounters for their enhanced drops. Take risks for rare event outcomes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">✅ Pros & Cons</h2>
+        <div class="pros-cons-grid">
+            <div class="pros-card">
+                <h3 class="pros-cons-title">
+                    <span>✓</span> Strengths
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Best Drops:</strong> You get better items than any other build</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>High Crit Rate:</strong> Constant critical hits for massive damage</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Easy Access:</strong> Fox is available from the start</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Meta Defining:</strong> Luck Tome makes this universally strong</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Fun Factor:</strong> Every run feels like you're winning the lottery</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Beginner Friendly:</strong> Simple to understand and execute</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cons-card">
+                <h3 class="pros-cons-title">
+                    <span>✗</span> Weaknesses
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>RNG Dependent:</strong> Still subject to bad luck occasionally</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>No Defensive Bonuses:</strong> Luck doesn't help survivability directly</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Item Reliant:</strong> Needs specific luck items to shine</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Less Specialized:</strong> Other builds have higher damage ceilings</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Luck Tome Essential:</strong> Build doesn't work without it</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 style="margin-bottom: 1rem;">Embrace the RNG</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Let fortune be your guide. Stack luck to astronomical levels and enjoy the best RNG Megabonk has to offer.
+        </p>
+        <a href="/guides/builds/" class="btn">← Back to All Builds</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Megabonk.org - All Rights Reserved</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="../../" style="color: var(--accent-color);">Home</a> | 
+            <a href="../../guides/" style="color: var(--accent-color);">Guides</a> | 
+            <a href="../../database/" style="color: var(--accent-color);">Database</a>
+        </p>
+    </footer>
+</body>
+</html>
