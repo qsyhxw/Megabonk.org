@@ -3,544 +3,1369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Build Guides - Best Weapon Builds & Strategies 2025</title>
-    <meta name="description" content="Master Megabonk with the best weapon builds and strategies. Complete guides for Lightning Storm, Melee Massacre, Ranged Sniper, and Fire Mage builds.">
-    <meta name="keywords" content="megabonk best builds, megabonk weapon builds, megabonk build guide, megabonk strategies, megabonk meta builds">
+    <title>Megabonk Best Builds Guide 2025 - Top Meta Builds & Strategies</title>
+    <meta name="description" content="Master Megabonk with the best character builds, weapon combos, and meta strategies. Complete guide to Walking Apocalypse, Speed Demon, Bullet Hell, and more top-tier builds.">
+    <meta name="keywords" content="megabonk builds, megabonk best build, megabonk character builds, megabonk meta builds, megabonk weapon combos, megabonk strategies">
+
+    <link rel="canonical" href="https://megabonk.org/guides/builds/">
     
+    <!-- Open Graph -->
+    <meta property="og:title" content="Megabonk Best Builds Guide 2025">
+    <meta property="og:description" content="Complete guide to the most powerful builds in Megabonk. Master meta strategies and dominate the leaderboards!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://megabonk.org/guides/builds/">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Megabonk Best Builds Guide",
+      "description": "Complete collection of the best character builds and strategies for Megabonk",
+      "url": "https://megabonk.org/guides/builds/"
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         :root {
-            --primary: #ff6b35;
-            --primary-dark: #e55a2b;
-            --bg-dark: #1a1a2e;
-            --bg-darker: #16213e;
-            --text-light: #ffffff;
-            --text-muted: #cccccc;
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --border: rgba(255, 107, 53, 0.2);
-            --lightning: #3b82f6;
-            --melee: #dc2626;
-            --ranged: #10b981;
-            --fire: #ef4444;
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-pink: #ff006e;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: var(--text-light);
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
-            min-height: 100vh;
+            background: var(--primary-bg);
+            overflow-x: hidden;
         }
-        
-        .container {
-            max-width: 1200px;
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .breadcrumb {
-            margin-bottom: 2rem;
-            color: var(--text-muted);
-        }
-        
-        .breadcrumb a {
-            color: var(--primary);
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
         }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
-        
-        .hero-section {
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(58, 134, 255, 0.2));
+            padding: 6rem 2rem 4rem;
             text-align: center;
-            margin-bottom: 4rem;
-            padding: 4rem 2rem;
-            background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .hero-title {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, #ffd700 100%);
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(157,78,221,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue), var(--accent-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--text-muted);
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
             margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
-        
-        .meta-info {
+
+        .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 4rem;
+            margin-top: 3rem;
             flex-wrap: wrap;
         }
-        
-        .meta-badge {
-            background: var(--card-bg);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(15px);
+
+        .stat-item {
+            text-align: center;
         }
-        
-        .builds-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Styles */
+        .section {
             margin-bottom: 4rem;
         }
-        
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Meta Strategy Section */
+        .meta-card {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(58, 134, 255, 0.1));
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .trinity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .trinity-card {
+            background: rgba(15, 52, 96, 0.5);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .trinity-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .trinity-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .trinity-card h3 {
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+
+        .alert-box {
+            background: rgba(255, 190, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .alert-box strong {
+            color: var(--warning);
+        }
+
+        /* Build Cards */
+        .builds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
         .build-card {
             background: var(--card-bg);
             border-radius: 20px;
-            padding: 0;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(15px);
-            transition: all 0.4s ease;
-            cursor: pointer;
             overflow: hidden;
-            text-decoration: none;
-            color: inherit;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(157, 78, 221, 0.2);
         }
-        
+
         .build-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 20px 40px rgba(157, 78, 221, 0.4);
+            border-color: var(--accent-purple);
         }
-        
+
         .build-header {
             padding: 2rem;
-            text-align: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        .build-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+        }
+
+        .s-tier { 
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(255, 0, 110, 0.3));
         }
         
-        .build-icon {
-            font-size: 4rem;
+        .a-tier { 
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.3), rgba(6, 255, 165, 0.3));
+        }
+        
+        .meta { 
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.3), rgba(255, 0, 110, 0.3));
+        }
+
+        .build-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
             margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .build-title {
             font-size: 1.8rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
         }
-        
-        .build-subtitle {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
+
+        .build-character {
+            color: var(--text-gray);
+            font-size: 1rem;
         }
-        
-        .build-rating {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .difficulty-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        .difficulty-beginner { background: #10b981; }
-        .difficulty-intermediate { background: #f59e0b; }
-        .difficulty-advanced { background: #ef4444; }
-        
+
         .build-content {
-            padding: 0 2rem 2rem;
+            padding: 2rem;
         }
-        
-        .build-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+
+        .build-description {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .build-section {
             margin-bottom: 1.5rem;
         }
-        
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 0.3rem;
-        }
-        
-        .stat-value {
-            font-weight: 700;
+
+        .build-section h4 {
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
             font-size: 1.1rem;
+            font-weight: 700;
         }
-        
-        .build-features {
+
+        .weapon-list, .tome-list, .item-list {
             list-style: none;
-            margin-bottom: 2rem;
+            padding: 0;
         }
-        
-        .build-features li {
-            padding: 0.5rem 0;
+
+        .weapon-list li, .tome-list li, .item-list li {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border-left: 3px solid rgba(157, 78, 221, 0.5);
+        }
+
+        .priority-1 { color: var(--danger); font-weight: 700; }
+        .priority-2 { color: var(--warning); font-weight: 600; }
+        .priority-3 { color: var(--accent-blue); font-weight: 500; }
+
+        .info-box {
+            background: rgba(58, 134, 255, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .warning-box {
+            background: rgba(255, 190, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .success-box {
+            background: rgba(6, 255, 165, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .build-footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .difficulty {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
         }
-        
-        .feature-check {
-            color: #10b981;
-            font-weight: bold;
+
+        .difficulty-bar {
+            width: 120px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
         }
-        
-        .view-guide-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+
+        .difficulty-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+            transition: width 0.3s;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
             color: white;
+            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 10px;
-            font-weight: 700;
+            border-radius: 25px;
             cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.4);
+        }
+
+        /* Tier List Section */
+        .tier-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tier-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .tier-label {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .tier-s { 
+            background: linear-gradient(135deg, #9d4edd, #ff006e);
         }
         
-        .view-guide-btn:hover {
-            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+        .tier-a { 
+            background: linear-gradient(135deg, #3a86ff, #06ffa5);
         }
         
-        /* Individual build theme colors */
-        .build-lightning { border-color: var(--lightning); }
-        .build-lightning:hover { box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3); }
-        .build-lightning .view-guide-btn { background: linear-gradient(45deg, var(--lightning), #1d4ed8); }
-        
-        .build-melee { border-color: var(--melee); }
-        .build-melee:hover { box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3); }
-        .build-melee .view-guide-btn { background: linear-gradient(45deg, var(--melee), #b91c1c); }
-        
-        .build-ranged { border-color: var(--ranged); }
-        .build-ranged:hover { box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3); }
-        .build-ranged .view-guide-btn { background: linear-gradient(45deg, var(--ranged), #047857); }
-        
-        .build-fire { border-color: var(--fire); }
-        .build-fire:hover { box-shadow: 0 20px 40px rgba(239, 68, 68, 0.3); }
-        .build-fire .view-guide-btn { background: linear-gradient(45deg, var(--fire), #dc2626); }
-        
-        .tips-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 4rem;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(15px);
+        .tier-b { 
+            background: linear-gradient(135deg, #ffbe0b, #06ffa5);
         }
-        
+
+        .tier-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tier-item {
+            background: rgba(15, 52, 96, 0.5);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            padding: 0.75rem 1.25rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tier-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-purple);
+            background: rgba(157, 78, 221, 0.2);
+        }
+
+        /* Tips Section */
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
-        
+
         .tip-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(15, 52, 96, 0.5);
+            border: 1px solid rgba(157, 78, 221, 0.3);
             border-radius: 15px;
             padding: 2rem;
+            transition: all 0.3s ease;
         }
-        
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+        }
+
         .tip-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            display: block;
         }
-        
-        .tip-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+
+        .tip-card h4 {
+            color: var(--accent-purple);
             margin-bottom: 1rem;
-            color: var(--primary);
+            font-size: 1.2rem;
         }
-        
-        .back-home {
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(58, 134, 255, 0.1));
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 20px;
+            padding: 4rem 2rem;
             text-align: center;
             margin-top: 4rem;
         }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-            color: white;
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--success));
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), var(--accent-blue));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(157, 78, 221, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--accent-purple);
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: transform 0.3s ease;
-            margin: 0 1rem;
+            transition: color 0.3s;
         }
-        
-        .btn:hover {
-            transform: translateY(-3px);
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
         }
-        
-        。btn-secondary {
-            background: transparent;
-            border: 2px solid var(--primary);
-        }
-        
+
+        /* Responsive */
         @media (max-width: 768px) {
-            。container {
-                padding: 1rem;
+            .hero h1 {
+                font-size: 2.5rem;
             }
-            
-            。builds-grid {
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .builds-grid {
                 grid-template-columns: 1fr;
             }
-            
-            。meta-info {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            。build-stats {
+
+            .tier-row {
                 grid-template-columns: 1fr;
             }
+
+            .tier-label {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .build-card, .trinity-card, .tip-card {
+            animation: fadeInUp 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="breadcrumb">
-            <a href="../../index.html">Home</a> > Build Guides
+    <header>
+        <nav>
+            <a href="../../" class="logo">Megabonk.org</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../">Home</a></li>
+                <li><a href="../characters/">Characters</a></li>
+                <li><a href="./">Builds</a></li>
+                <li><a href="../bosses/">Bosses</a></li>
+                <li><a href="../achievements/">Achievements</a></li>
+                <li><a href="../../database/weapons/">Weapons</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenu">☰</button>
         </nav>
-        
-        <section class="hero-section">
-            <h1 class="hero-title">🔧 Megabonk Build Guides</h1>
-            <p class="hero-subtitle">Master the meta with our comprehensive weapon build guides. From beginner-friendly setups to advanced strategies, dominate every run with the perfect build for your playstyle.</p>
-            
-            <div class="meta-info">
-                <div class="meta-badge">
-                    <strong>4 Complete Builds</strong>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>🏆 Best Megabonk Builds 2025</h1>
+            <p>Master the most powerful character builds and dominate the leaderboards</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Meta Builds</div>
                 </div>
-                <div class="meta-badge">
-                    <strong>Updated September 2025</strong>
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Weapon Combos</div>
                 </div>
-                <div class="meta-badge">
-                    <strong>All Difficulties</strong>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Win Rate Possible</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- The Holy Trinity Meta Strategy -->
+        <section class="section">
+            <div class="meta-card">
+                <h2 class="section-title">🔥 The Holy Trinity - Universal Meta Strategy</h2>
+                <p class="section-subtitle">
+                    The foundation of every god-tier run in Megabonk. This strategy creates an exponential growth engine 
+                    that outscales the game's difficulty curve. Master this, and you'll dominate any character build.
+                </p>
+                
+                <div class="trinity-grid">
+                    <div class="trinity-card">
+                        <div class="trinity-icon">📚</div>
+                        <h3>XP Tome</h3>
+                        <p>More XP = faster leveling = more upgrade choices. The acceleration engine of your build.</p>
+                        <strong style="color: var(--danger);">Priority: HIGHEST</strong>
+                    </div>
+                    <div class="trinity-card">
+                        <div class="trinity-icon">😈</div>
+                        <h3>Curse Tome</h3>
+                        <p>Makes game harder BUT dramatically increases drop quality. Risk-reward perfection.</p>
+                        <strong style="color: var(--warning);">Priority: HIGH</strong>
+                    </div>
+                    <div class="trinity-card">
+                        <div class="trinity-icon">🍀</div>
+                        <h3>Luck Tome</h3>
+                        <p>Ensures every level-up gives legendary/epic upgrades. Multiplies the power of XP Tome.</p>
+                        <strong style="color: var(--warning);">Priority: HIGH</strong>
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <strong>💡 Pro Tip:</strong> Always prioritize these three tomes first in ANY build. They create a feedback loop 
+                    where leveling up → better upgrades → faster clearing → more XP → more levels → even better upgrades. 
+                    This is the secret to 100K+ kill runs.
                 </div>
             </div>
         </section>
-        
-        <section class="builds-grid">
-            <a href="/guides/builds/lightning-storm-build.html" class="build-card build-lightning">
-                <div class="build-header">
-                    <div class="build-icon">⚡</div>
-                    <h2 class="build-title">Lightning Storm Build</h2>
-                    <p class="build-subtitle">Chain Lightning Dominance</p>
-                    <div class="build-rating">
-                        <span>⭐⭐⭐⭐⭐</span>
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+
+        <!-- Build Cards -->
+        <section class="section">
+            <h2 class="section-title">🎯 Top Meta Builds</h2>
+
+            <div class="builds-grid">
+                <!-- Build 1: Walking Apocalypse -->
+                <div class="build-card">
+                    <div class="build-header s-tier">
+                        <span class="build-badge">⭐ S-TIER</span>
+                        <h3 class="build-title">💪 Walking Apocalypse</h3>
+                        <p class="build-character">Best Character: Megachad / Sir Oofie</p>
                     </div>
-                </div>
-                <div class="build-content">
-                    <div class="build-stats">
-                        <div class="stat-item">
-                            <div class="stat-label">Crowd Clear</div>
-                            <div class="stat-value">S-Tier</div>
+                    <div class="build-content">
+                        <p class="build-description">
+                            The ultimate AFK build. Create a massive death zone around you that instantly melts anything nearby. 
+                            Stand still and watch everything die. Perfect for clearing challenges and high curse runs.
+                        </p>
+
+                        <div class="build-section">
+                            <h4>⚔️ Weapons (Priority Order)</h4>
+                            <ul class="weapon-list">
+                                <li><span class="priority-1">1️⃣ Aura</span> - Core weapon, scales with size</li>
+                                <li><span class="priority-2">2️⃣ Sword</span> - 360° coverage</li>
+                                <li><span class="priority-3">3️⃣ Axe</span> - High damage AOE</li>
+                                <li><span class="priority-3">4️⃣ Lightning Staff</span> - Chain damage</li>
+                            </ul>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Boss Damage</div>
-                            <div class="stat-value">A-Tier</div>
+
+                        <div class="build-section">
+                            <h4>📚 Tomes</h4>
+                            <ul class="tome-list">
+                                <li><span class="priority-1">Quantity Tome</span> - More projectiles</li>
+                                <li><span class="priority-2">Size/Cooldown Tome</span> - Bigger AOE or faster attacks</li>
+                                <li><span class="priority-3">Holy Trinity</span> - XP + Curse + Luck</li>
+                            </ul>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Survivability</div>
-                            <div class="stat-value">B-Tier</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Power Spike</div>
-                            <div class="stat-value">Level 15+</div>
-                        </div>
-                    </div>
-                    <ul class="build-features">
-                        <li><span class="feature-check">✅</span> Screen-wide lightning chains</li>
-                        <li><span class="feature-check">✅</span> Excellent late-game scaling</li>
-                        <li><span class="feature-check">✅</span> Perfect for Fox & Lightning Mage</li>
-                        <li><span class="feature-check">✅</span> Storm Lord evolution guide</li>
-                    </ul>
-                    <button class="view-guide-btn">View Complete Guide →</button>
-                </div>
-            </a>
-            
-            <a href="/guides/builds/melee-massacre-build.html" class="build-card build-melee">
-                <div class="build-header">
-                    <div class="build-icon">⚔️</div>
-                    <h2 class="build-title">Melee Massacre Build</h2>
-                    <p class="build-subtitle">Tank & Spank Mastery</p>
-                    <div class="build-rating">
-                        <span>⭐⭐⭐⭐⭐</span>
-                        <span class="difficulty-badge difficulty-beginner">Beginner</span>
-                    </div>
-                </div>
-                <div class="build-content">
-                    <div class="build-stats">
-                        <div class="stat-item">
-                            <div class="stat-label">Survivability</div>
-                            <div class="stat-value">S-Tier</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Boss Damage</div>
-                            <div class="stat-value">A-Tier</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Beginner Friendly</div>
-                            <div class="stat-value">S-Tier</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Power Spike</div>
-                            <div class="stat-value">Level 10+</div>
+
+                        <div class="build-section">
+                            <h4>🎁 Key Items</h4>
+                            <ul class="item-list">
+                                <li>Idle Juice - 2x damage while standing still</li>
+                                <li>Demonic Soul - Massive damage boost</li>
+                                <li>Mirror - Invulnerability on damage</li>
+                                <li>Power Gloves - Attack speed</li>
+                            </ul>
                         </div>
                     </div>
-                    <ul class="build-features">
-                        <li><span class="feature-check">✅</span> High survivability & lifesteal</li>
-                        <li><span class="feature-check">✅</span> Perfect for new players</li>
-                        <li><span class="feature-check">✅</span> Blade Tornado evolution</li>
-                        <li><span class="feature-check">✅</span> Knight & Barbarian builds</li>
-                    </ul>
-                    <button class="view-guide-btn">View Complete Guide →</button>
-                </div>
-            </a>
-            
-            <a href="/guides/builds/ranged-sniper-build.html" class="build-card build-ranged">
-                <div class="build-header">
-                    <div class="build-icon">🏹</div>
-                    <h2 class="build-title">Ranged Sniper Build</h2>
-                    <p class="build-subtitle">Long-Range Precision</p>
-                    <div class="build-rating">
-                        <span>⭐⭐⭐⭐☆</span>
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                    <div class="build-footer">
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-bar">
+                                <div class="difficulty-fill" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Full Guide →</a>
                     </div>
                 </div>
-                <div class="build-content">
-                    <div class="build-stats">
-                        <div class="stat-item">
-                            <div class="stat-label">Safety</div>
-                            <div class="stat-value">S-Tier</div>
+
+                <!-- Build 2: Speed Demon -->
+                <div class="build-card">
+                    <div class="build-header s-tier">
+                        <span class="build-badge">⭐ S-TIER</span>
+                        <h3 class="build-title">⚡ Speed Demon</h3>
+                        <p class="build-character">Best Character: Calcium</p>
+                    </div>
+                    <div class="build-content">
+                        <p class="build-description">
+                            Zoom across the map at impossible speeds. Calcium's damage scales with movement speed, 
+                            making you functionally invulnerable while dealing insane damage. Most fun build in the game!
+                        </p>
+
+                        <div class="build-section">
+                            <h4>⚔️ Weapons</h4>
+                            <ul class="weapon-list">
+                                <li><span class="priority-1">1️⃣ Bone</span> - Calcium's starter weapon</li>
+                                <li><span class="priority-2">2️⃣ Bananarang</span> - Boomerang mechanics</li>
+                                <li><span class="priority-3">3️⃣ Flamewalker</span> - Leaves fire trail</li>
+                            </ul>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Consistency</div>
-                            <div class="stat-value">A-Tier</div>
+
+                        <div class="build-section">
+                            <h4>📚 Tomes</h4>
+                            <ul class="tome-list">
+                                <li><span class="priority-1">Agility Tome</span> - MANDATORY! More speed</li>
+                                <li><span class="priority-2">Quantity Tome</span> - More projectiles</li>
+                                <li><span class="priority-3">Projectile Speed</span> - Synergizes with build</li>
+                            </ul>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Crowd Clear</div>
-                            <div class="stat-value">B-Tier</div>
+
+                        <div class="build-section">
+                            <h4>🎁 Key Items (ALL MANDATORY)</h4>
+                            <ul class="item-list">
+                                <li>Coward's Cloak - Evasion + speed</li>
+                                <li>Turbo Socks - Movement speed</li>
+                                <li>Phantom Shroud - Evasion</li>
+                                <li>Slippery Ring - More evasion</li>
+                            </ul>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Power Spike</div>
-                            <div class="stat-value">Level 12+</div>
+
+                        <div class="warning-box">
+                            <strong>⚠️ Critical:</strong> Don't take damage! Your speed (and damage) gets cut in half if hit. 
+                            Stack evasion items to stay at maximum velocity.
                         </div>
                     </div>
-                    <ul class="build-features">
-                        <li><span class="feature-check">✅</span> Safe kiting gameplay</li>
-                        <li><span class="feature-check">✅</span> Consistent run success</li>
-                        <li><span class="feature-check">✅</span> Storm Bow evolution</li>
-                        <li><span class="feature-check">✅</span> Master kiting techniques</li>
-                    </ul>
-                    <button class="view-guide-btn">View Complete Guide →</button>
-                </div>
-            </a>
-            
-            <a href="/guides/builds/fire-mage-build.html" class="build-card build-fire">
-                <div class="build-header">
-                    <div class="build-icon">🔥</div>
-                    <h2 class="build-title">Fire Mage Build</h2>
-                    <p class="build-subtitle">Explosive AOE Magic</p>
-                    <div class="build-rating">
-                        <span>⭐⭐⭐⭐⭐</span>
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                    <div class="build-footer">
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-bar">
+                                <div class="difficulty-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Full Guide →</a>
                     </div>
                 </div>
-                <div class="build-content">
-                    <div class="build-stats">
-                        <div class="stat-item">
-                            <div class="stat-label">AOE Damage</div>
-                            <div class="stat-value">S-Tier</div>
+
+                <!-- Build 3: Bullet Hell -->
+                <div class="build-card">
+                    <div class="build-header a-tier">
+                        <span class="build-badge">⭐ A-TIER</span>
+                        <h3 class="build-title">🔫 Bullet Hell</h3>
+                        <p class="build-character">Best Character: CL4NK</p>
+                    </div>
+                    <div class="build-content">
+                        <p class="build-description">
+                            Turn the screen into pure chaos with projectiles everywhere. CL4NK's crit passive makes 
+                            every bullet potentially deadly. Weak against single targets but destroys swarms instantly.
+                        </p>
+
+                        <div class="build-section">
+                            <h4>⚔️ Weapons</h4>
+                            <ul class="weapon-list">
+                                <li><span class="priority-1">1️⃣ Revolver</span> - CL4NK's starter, scales with crit</li>
+                                <li><span class="priority-2">2️⃣ Bow</span> - Piercing projectiles</li>
+                                <li><span class="priority-3">3️⃣ Bone</span> - Boomerang effect</li>
+                                <li><span class="priority-3">4️⃣ Bananarang</span> - Multi-hit potential</li>
+                            </ul>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Crowd Clear</div>
-                            <div class="stat-value">S-Tier</div>
+
+                        <div class="build-section">
+                            <h4>📚 Tomes</h4>
+                            <ul class="tome-list">
+                                <li><span class="priority-1">Quantity Tome</span> - More bullets = more chaos</li>
+                                <li><span class="priority-2">Projectile Speed</span> - Faster coverage</li>
+                                <li><span class="priority-3">Precision Tome</span> - Crit damage boost</li>
+                            </ul>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Mana Efficiency</div>
-                            <div class="stat-value">B-Tier</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Power Spike</div>
-                            <div class="stat-value">Level 8+</div>
+
+                        <div class="build-section">
+                            <h4>🎁 Key Items</h4>
+                            <ul class="item-list">
+                                <li>Battery - Attack speed boost</li>
+                                <li>Gym Sauce - Damage increase</li>
+                                <li>Demonic Soul - Massive damage</li>
+                                <li>Tactical Glasses - Crit chance</li>
+                                <li>Boss Buster - Single target help</li>
+                            </ul>
                         </div>
                     </div>
-                    <ul class="build-features">
-                        <li><span class="feature-check">✅</span> Massive area explosions</li>
-                        <li><span class="feature-check">✅</span> Phoenix Burst evolution</li>
-                        <li><span class="feature-check">✅</span> Perfect for Pyromancer</li>
-                        <li><span class="feature-check">✅</span> Mana management guide</li>
-                    </ul>
-                    <button class="view-guide-btn">View Complete Guide →</button>
+                    <div class="build-footer">
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-bar">
+                                <div class="difficulty-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Full Guide →</a>
+                    </div>
                 </div>
-            </a>
+
+                <!-- Build 4: One Lucky Fox -->
+                <div class="build-card">
+                    <div class="build-header meta">
+                        <span class="build-badge">🎲 RNG META</span>
+                        <h3 class="build-title">🦊 One Lucky Fox</h3>
+                        <p class="build-character">Best Character: Fox</p>
+                    </div>
+                    <div class="build-content">
+                        <p class="build-description">
+                            Unconventional but insanely powerful. Stack Luck to absurd levels and watch legendary items 
+                            rain from the sky. Fox gains 1% Luck per level, creating the best RNG manipulation in the game.
+                        </p>
+
+                        <div class="build-section">
+                            <h4>⚔️ Weapons (Keep it Simple)</h4>
+                            <ul class="weapon-list">
+                                <li><span class="priority-1">1️⃣ Firestaff</span> - Fox's starter</li>
+                                <li><span class="priority-2">2️⃣ Lightning Staff</span> - Chain damage</li>
+                                <li><span class="priority-3">3️⃣ Any weapon</span> - Focus on items instead</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>📚 Tomes</h4>
+                            <ul class="tome-list">
+                                <li><span class="priority-1">Luck Tome</span> - Stack this as high as possible!</li>
+                                <li><span class="priority-2">XP Tome</span> - Level faster = more Luck</li>
+                                <li><span class="priority-3">Curse Tome</span> - Better item drops</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>🎁 Key Items (RNG-Dependent)</h4>
+                            <ul class="item-list">
+                                <li>Clover - Luck boost (priority #1)</li>
+                                <li>Giant Fork - Crit can Megacrit (x20 damage!)</li>
+                                <li>Overpowered Lamp - On-hit effects proc 2x</li>
+                                <li>Big Bonk - 20x damage multiplier chance</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box">
+                            <strong>🎰 Strategy:</strong> Focus purely on leveling and Luck early game. Don't worry about 
+                            damage - once your Luck is high enough, you'll get game-breaking items that make you unstoppable. 
+                            Visit every shrine and vendor!
+                        </div>
+                    </div>
+                    <div class="build-footer">
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-bar">
+                                <div class="difficulty-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Full Guide →</a>
+                    </div>
+                </div>
+
+                <!-- Build 5: Sword Master -->
+                <div class="build-card">
+                    <div class="build-header a-tier">
+                        <span class="build-badge">⭐ A-TIER</span>
+                        <h3 class="build-title">⚔️ Sword Master</h3>
+                        <p class="build-character">Best Character: Sir Oofie</p>
+                    </div>
+                    <div class="build-content">
+                        <p class="build-description">
+                            The simplest yet most reliable build. Stack sword swipes until they cover the entire screen. 
+                            Combined with knockback and defensive items, you become an immortal spinning death machine.
+                        </p>
+
+                        <div class="build-section">
+                            <h4>⚔️ Weapons</h4>
+                            <ul class="weapon-list">
+                                <li><span class="priority-1">1️⃣ Sword</span> - Core weapon, start leveling immediately</li>
+                                <li><span class="priority-2">2️⃣ Aegis</span> - Block + shockwave counter</li>
+                                <li><span class="priority-3">3️⃣ Chunkers</span> - Additional defense</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>📚 Tomes</h4>
+                            <ul class="tome-list">
+                                <li><span class="priority-1">Size Tome</span> - Bigger sword swipes</li>
+                                <li><span class="priority-2">Quantity Tome</span> - More projectiles</li>
+                                <li><span class="priority-3">Shield Tome</span> - Extra defense (optional)</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>🎁 Key Items</h4>
+                            <ul class="item-list">
+                                <li>Idle Juice - 2x damage standing still</li>
+                                <li>Demonic Soul - Damage boost</li>
+                                <li>Mirror - Invulnerability on hit</li>
+                                <li>Power Gloves - Attack speed</li>
+                            </ul>
+                        </div>
+
+                        <div class="success-box">
+                            <strong>💚 Beginner Friendly:</strong> This is the easiest build to execute. Just stand in one 
+                            spot and watch sword swipes delete everything. Perfect for learning game mechanics.
+                        </div>
+                    </div>
+                    <div class="build-footer">
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-bar">
+                                <div class="difficulty-fill" style="width: 15%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Full Guide →</a>
+                    </div>
+                </div>
+
+                <!-- Build 6: Poison Lifesteal -->
+                <div class="build-card">
+                    <div class="build-header a-tier">
+                        <span class="build-badge">⭐ A-TIER</span>
+                        <h3 class="build-title">☠️ Poison Lifesteal</h3>
+                        <p class="build-character">Best Character: Amog</p>
+                    </div>
+                    <div class="build-content">
+                        <p class="build-description">
+                            Risk-free sustain build that heals you constantly. Poison damage ticks count as hits for lifesteal, 
+                            giving you insane health regeneration. Perfect for surviving tough situations and boss fights.
+                        </p>
+
+                        <div class="build-section">
+                            <h4>⚔️ Weapons</h4>
+                            <ul class="weapon-list">
+                                <li><span class="priority-1">1️⃣ Poison Flask</span> - Amog's starter, DOT damage</li>
+                                <li><span class="priority-2">2️⃣ Any AOE weapons</span> - More poison coverage</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>📚 Tomes</h4>
+                            <ul class="tome-list">
+                                <li><span class="priority-1">Lifesteal Tome</span> - Rush to 100% lifesteal!</li>
+                                <li><span class="priority-2">Damage Tome</span> - More damage = more healing</li>
+                                <li><span class="priority-3">Bloody Tome</span> - Extra poison damage</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>🎁 Key Items</h4>
+                            <ul class="item-list">
+                                <li>Moldy Cheese - Extra poison stacks</li>
+                                <li>Any lifesteal items - Stack to 100%</li>
+                                <li>Attack speed items - Faster poison application</li>
+                            </ul>
+                        </div>
+
+                        <div class="warning-box">
+                            <strong>⚠️ Key Mechanic:</strong> Prioritize getting 100% lifesteal ASAP. At 100%, you heal 1 HP 
+                            per hit, and poison DOT counts as continuous hits. You'll be immortal!
+                        </div>
+                    </div>
+                    <div class="build-footer">
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-bar">
+                                <div class="difficulty-fill" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Full Guide →</a>
+                    </div>
+                </div>
+
+                <!-- Build 7: Kevin + Mirror Immortality -->
+                <div class="build-card">
+                    <div class="build-header meta">
+                        <span class="build-badge">🔥 BROKEN META</span>
+                        <h3 class="build-title">🛡️ Kevin + Mirror Immortality</h3>
+                        <p class="build-character">Best Character: Any (Universal)</p>
+                    </div>
+                    <div class="build-content">
+                        <p class="build-description">
+                            The most broken combo in Megabonk right now. Kevin damages you (can't kill), Mirror gives 
+                            invulnerability when damaged. With enough attack speed, you become literally immortal. 
+                            This is how leaderboard runs are done.
+                        </p>
+
+                        <div class="build-section">
+                            <h4>⚔️ Weapons (High DPS Required)</h4>
+                            <ul class="weapon-list">
+                                <li>Aura - Constant damage</li>
+                                <li>Lightning Staff - Chain damage</li>
+                                <li>Revolver - Fast hits</li>
+                                <li>Any high-DPS weapon</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>📚 Tomes</h4>
+                            <ul class="tome-list">
+                                <li><span class="priority-1">Cooldown Tome</span> - MANDATORY! More attack speed</li>
+                                <li><span class="priority-2">Damage Tome</span> - Kill faster</li>
+                                <li><span class="priority-3">Holy Trinity</span> - XP + Curse + Luck</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-section">
+                            <h4>🎁 Key Items (BOTH REQUIRED)</h4>
+                            <ul class="item-list">
+                                <li>Kevin - Damages you (can't kill you)</li>
+                                <li>Mirror - Invulnerability on damage</li>
+                                <li>Battery - More attack speed</li>
+                                <li>Any attack speed items - Stack as much as possible</li>
+                            </ul>
+                        </div>
+
+                        <div class="warning-box">
+                            <strong>🔥 How It Works:</strong> Kevin damages you constantly (scaled by attack speed). 
+                            Mirror triggers on each damage tick, giving you brief invulnerability. With high enough attack 
+                            speed, the invulnerability windows overlap, making you completely immortal. You literally 
+                            cannot die while this combo is active!
+                        </div>
+                    </div>
+                    <div class="build-footer">
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-bar">
+                                <div class="difficulty-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn">Full Guide →</a>
+                    </div>
+                </div>
+            </div>
         </section>
-        
-        <section class="tips-section">
-            <h2>🎯 Build Selection Guide</h2>
+
+        <!-- Weapon Tier List -->
+        <section class="section">
+            <div class="meta-card">
+                <h2 class="section-title">⚔️ Weapon Tier List</h2>
+                <p class="section-subtitle">
+                    Ranked by overall strength and versatility across all builds and characters.
+                </p>
+
+                <div class="tier-grid">
+                    <div class="tier-row">
+                        <div class="tier-label tier-s">S</div>
+                        <div class="tier-items">
+                            <span class="tier-item">💪 Aura</span>
+                            <span class="tier-item">🛡️ Aegis</span>
+                            <span class="tier-item">🔥 Flamewalker</span>
+                            <span class="tier-item">🎲 Dice</span>
+                            <span class="tier-item">⚔️ Katana</span>
+                            <span class="tier-item">🗡️ Dexecutioner</span>
+                            <span class="tier-item">🩸 Blood Magic</span>
+                            <span class="tier-item">🍌 Bananarang</span>
+                            <span class="tier-item">🏹 Bow</span>
+                            <span class="tier-item">⚡ Lightning Staff</span>
+                        </div>
+                    </div>
+
+                    <div class="tier-row">
+                        <div class="tier-label tier-a">A</div>
+                        <div class="tier-items">
+                            <span class="tier-item">🔫 Revolver</span>
+                            <span class="tier-item">⚔️ Sword</span>
+                            <span class="tier-item">💀 Bone</span>
+                            <span class="tier-item">🔪 Hero's Sword</span>
+                            <span class="tier-item">🪓 Axe</span>
+                            <span class="tier-item">🌪️ Tornado</span>
+                            <span class="tier-item">⚫ Black Hole</span>
+                        </div>
+                    </div>
+
+                    <div class="tier-row">
+                        <div class="tier-label tier-b">B</div>
+                        <div class="tier-items">
+                            <span class="tier-item">🔥 Fire Staff</span>
+                            <span class="tier-item">❄️ Ice Crystal</span>
+                            <span class="tier-item">🔫 Shotgun</span>
+                            <span class="tier-item">☠️ Poison Flask</span>
+                            <span class="tier-item">📱 Wireless Dagger</span>
+                            <span class="tier-item">🎯 Sniper Rifle</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tome Tier List -->
+        <section class="section">
+            <div class="meta-card">
+                <h2 class="section-title">📚 Tome Tier List</h2>
+                <p class="section-subtitle">
+                    Best tomes for most builds. S-tier should be in every run targeting leaderboards.
+                </p>
+
+                <div class="tier-grid">
+                    <div class="tier-row">
+                        <div class="tier-label tier-s">S</div>
+                        <div class="tier-items">
+                            <span class="tier-item">📚 XP Tome</span>
+                            <span class="tier-item">😈 Cursed Tome</span>
+                            <span class="tier-item">🍀 Luck Tome</span>
+                            <span class="tier-item">💥 Damage Tome</span>
+                            <span class="tier-item">⏱️ Cooldown Tome</span>
+                        </div>
+                    </div>
+
+                    <div class="tier-row">
+                        <div class="tier-label tier-a">A</div>
+                        <div class="tier-items">
+                            <span class="tier-item">🎯 Precision Tome</span>
+                            <span class="tier-item">🩸 Bloody Tome</span>
+                            <span class="tier-item">📏 Size Tome</span>
+                            <span class="tier-item">🔢 Quantity Tome</span>
+                            <span class="tier-item">⚡ Agility Tome</span>
+                        </div>
+                    </div>
+
+                    <div class="tier-row">
+                        <div class="tier-label tier-b">B</div>
+                        <div class="tier-items">
+                            <span class="tier-item">🛡️ Shield Tome</span>
+                            <span class="tier-item">❤️ Lifesteal Tome</span>
+                            <span class="tier-item">🎯 Projectile Speed</span>
+                            <span class="tier-item">Others (situational)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Tips -->
+        <section class="section">
+            <h2 class="section-title">💡 Pro Tips & Advanced Strategies</h2>
+            
             <div class="tips-grid">
                 <div class="tip-card">
-                    <span class="tip-icon">🆕</span>
-                    <h3 class="tip-title">New to Megabonk?</h3>
-                    <p>Start with the <strong>Melee Massacre Build</strong>. It's forgiving, has great survivability, and teaches you the fundamentals while being powerful enough to carry you to victory.</p>
+                    <div class="tip-icon">🎯</div>
+                    <h4>Stat Priority</h4>
+                    <p>
+                        Always prioritize: Luck → Movement Speed → Attack Speed → Damage. 
+                        Luck affects all future upgrades, making it the highest-value long-term investment.
+                    </p>
                 </div>
-                
+
                 <div class="tip-card">
-                    <span class="tip-icon">⚡</span>
-                    <h3 class="tip-title">Want Maximum Damage?</h3>
-                    <p>Try the <strong>Lightning Storm Build</strong> for incredible screen-clearing potential, or the <strong>Fire Mage Build</strong> for explosive AOE devastation.</p>
+                    <div class="tip-icon">⏰</div>
+                    <h4>Early vs Late Game</h4>
+                    <p>
+                        First 5 minutes: Focus on XP and leveling. Minutes 5-15: Build your weapon loadout. 
+                        15+ minutes: Stack damage and survive. Plan your build timeline!
+                    </p>
                 </div>
-                
+
                 <div class="tip-card">
-                    <span class="tip-icon">🛡️</span>
-                    <h3 class="tip-title">Prefer Safe Gameplay?</h3>
-                    <p>The <strong>Ranged Sniper Build</strong> offers the safest playstyle with excellent kiting potential and consistent run success rates.</p>
+                    <div class="tip-icon">🎲</div>
+                    <h4>Embrace the Curse</h4>
+                    <p>
+                        Don't fear Curse Tome! Making the game harder dramatically increases drop quality. 
+                        The Holy Trinity (XP + Curse + Luck) is meta for a reason.
+                    </p>
                 </div>
-                
+
                 <div class="tip-card">
-                    <span class="tip-icon">🎮</span>
-                    <h3 class="tip-title">Pro Tips</h3>
-                    <p>Each build works with multiple characters. Check individual guides for character recommendations and specific synergies to maximize your effectiveness.</p>
+                    <div class="tip-icon">🔄</div>
+                    <h4>Reroll Strategy</h4>
+                    <p>
+                        Visit shrines and vendors often. With high Luck, rerolls can give you game-breaking 
+                        legendary items. Don't hoard currency - spend it on rerolls!
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">⚡</div>
+                    <h4>Attack Speed Scaling</h4>
+                    <p>
+                        Most builds become exponentially better with attack speed. It affects Kevin+Mirror combo, 
+                        lifesteal healing, and on-hit effect procs. Never skip attack speed!
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🏆</div>
+                    <h4>Leaderboard Strategy</h4>
+                    <p>
+                        For top scores: Always use Holy Trinity, focus on XP early, don't die before minute 20, 
+                        and abuse Kevin+Mirror if you find them. Kill count matters more than time survived!
+                    </p>
                 </div>
             </div>
         </section>
-        
-        <div class="back-home">
-            <a href="../../index.html" class="btn">🏠 Back to Home</a>
-            <a href="../characters/" class="btn btn-secondary">👥 Character Guides</a>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="section-title">Ready to Dominate Megabonk?</h2>
+            <p class="section-subtitle">
+                These builds are proven by top players and backed by real game data. Pick your favorite, 
+                adapt to your playstyle, and start climbing those leaderboards!
+            </p>
+            <div class="cta-buttons">
+                <a href="../characters/" class="btn">View Character Guides</a>
+                <a href="../../database/weapons/" class="btn btn-secondary">Browse Weapon Database</a>
+                <a href="../bosses/" class="btn btn-success">Master Boss Fights</a>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide</p>
+            <div class="footer-links">
+                <a href="../../">Home</a>
+                <a href="../characters/">Characters</a>
+                <a href="./">Builds</a>
+                <a href="../bosses/">Bosses</a>
+                <a href="../achievements/">Achievements</a>
+                <a href="../../database/weapons/">Weapons</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.build-card, .trinity-card, .tip-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
