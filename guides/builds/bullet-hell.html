@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bullet Hell Build Guide - Megabonk A-Tier Gunslinger Build</title>
+    <meta name="description" content="Master the Bullet Hell A-tier build in Megabonk. Complete guide for CL4NK with Revolver, maximum crit rate, and overwhelming projectile coverage.">
+    <meta name="keywords" content="megabonk bullet hell, megabonk cl4nk build, megabonk revolver build, megabonk crit build, megabonk a tier">
+
+    <link rel="canonical" href="https://megabonk.org/guides/builds/bullet-hell">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bullet Hell Build - Megabonk A-Tier Gunslinger Guide">
+    <meta property="og:description" content="Ultimate ranged build guide for CL4NK featuring maximum projectile coverage and crit stacking">
+    <meta property="og:type" content="article">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bullet-gradient: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #ffd89b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .build-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bulletFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes bulletFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Bullet particles */
+        .bullet-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .bullet {
+            position: absolute;
+            width: 4px;
+            height: 12px;
+            background: var(--bullet-gradient);
+            border-radius: 10px;
+            animation: bulletFly 3s linear infinite;
+        }
+
+        @keyframes bulletFly {
+            from {
+                transform: translateX(-100px) translateY(0) rotate(45deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            to {
+                transform: translateX(1200px) translateY(-300px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .build-tier {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--bullet-gradient);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--bullet-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--bullet-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Content Section */
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--bullet-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Character Spotlight */
+        .character-spotlight {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .character-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+        }
+
+        .character-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .character-passive {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .passive-box {
+            background: rgba(255, 216, 155, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .passive-title {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Crit Calculator */
+        .crit-calculator {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .calculator-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--bullet-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .crit-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .crit-level {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .crit-level:hover {
+            border-color: var(--accent-color);
+        }
+
+        .level-label {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .crit-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .damage-multiplier {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Item Cards */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(255, 216, 155, 0.3);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .item-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--bullet-gradient);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Weapon Synergy */
+        .weapon-synergy {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .synergy-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+        }
+
+        .synergy-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .synergy-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .synergy-rating {
+            padding: 0.2rem 0.8rem;
+            background: var(--success-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .strategy-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .strategy-phase {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--bullet-gradient);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .strategy-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .tip-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        /* Pros/Cons */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pros-card, .cons-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .pros-card {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .cons-card {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .pros-cons-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pros-cons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pros-cons-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .pros-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        .cons-icon {
+            color: var(--danger-color);
+            font-weight: 700;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--bullet-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 216, 155, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .items-grid, .strategy-grid, .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .character-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎮 MEGABONK.ORG</div>
+            <ul class="nav-links">
+                <li><a href="../../">Home</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+                <li><a href="../../guides/characters/">Characters</a></li>
+                <li><a href="../../database/weapons/">Weapons</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../../">Home</a> / <a href="/guides/builds/">Builds</a> / <span>Bullet Hell</span>
+    </div>
+
+    <section class="hero">
+        <div class="bullet-particles">
+            <div class="bullet" style="top: 10%; animation-delay: 0s;"></div>
+            <div class="bullet" style="top: 30%; animation-delay: 0.5s;"></div>
+            <div class="bullet" style="top: 50%; animation-delay: 1s;"></div>
+            <div class="bullet" style="top: 70%; animation-delay: 1.5s;"></div>
+            <div class="bullet" style="top: 20%; animation-delay: 2s;"></div>
+            <div class="bullet" style="top: 60%; animation-delay: 2.5s;"></div>
+        </div>
+        <div class="build-icon">🔫💥</div>
+        <div class="build-tier">⭐ A-TIER BUILD</div>
+        <h1>Bullet Hell</h1>
+        <p class="hero-description">
+            Unleash an overwhelming barrage of projectiles with CL4NK. Stack crit rate to maximum levels 
+            and create a screen-filling bullet storm that melts everything. The ultimate ranged DPS build.
+        </p>
+    </section>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">A+</div>
+            <div class="stat-label">Overall Rating</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐⭐</div>
+            <div class="stat-label">Damage Output</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐☆</div>
+            <div class="stat-label">Survivability</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Medium</div>
+            <div class="stat-label">Difficulty</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Ranged</div>
+            <div class="stat-label">Playstyle</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="character-spotlight">
+            <div class="character-icon">🤖</div>
+            <h2 class="character-name">CL4NK - The Robot Gunslinger</h2>
+            <p class="character-passive">
+                <strong>Unlock:</strong> Complete Forest Tier 1 + Purchase Revolver<br>
+                <strong>Default Weapon:</strong> Revolver
+            </p>
+            
+            <div class="passive-box">
+                <div class="passive-title">🎯 Unique Passive: Precision Protocol</div>
+                <p style="margin-bottom: 1.5rem;">Gain 1% Crit Chance per level. At max level (100), you'll have 
+                100% base crit chance before any items!</p>
+                
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    This makes CL4NK the most consistent critical hit character in the game. Every shot becomes 
+                    a guaranteed crit with proper leveling, making him perfect for projectile-heavy builds.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="crit-calculator">
+            <h3 class="calculator-title">🎯 Crit Chance by Level</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                CL4NK's passive guarantees scaling critical hit chance
+            </p>
+            <div class="crit-levels">
+                <div class="crit-level">
+                    <div class="level-label">Level 10</div>
+                    <div class="crit-value">10%</div>
+                    <div class="damage-multiplier">Early Power</div>
+                </div>
+                <div class="crit-level">
+                    <div class="level-label">Level 25</div>
+                    <div class="crit-value">25%</div>
+                    <div class="damage-multiplier">Good Crits</div>
+                </div>
+                <div class="crit-level">
+                    <div class="level-label">Level 50</div>
+                    <div class="crit-value">50%</div>
+                    <div class="damage-multiplier">Half Crits</div>
+                </div>
+                <div class="crit-level">
+                    <div class="level-label">Level 75</div>
+                    <div class="crit-value">75%</div>
+                    <div class="damage-multiplier">Most Crits</div>
+                </div>
+                <div class="crit-level">
+                    <div class="level-label">Level 100</div>
+                    <div class="crit-value">100%</div>
+                    <div class="damage-multiplier">ALL CRITS!</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--success-color); margin-top: 2rem; font-size: 0.9rem;">
+                ✓ This is WITHOUT any crit items! Add Lucky Charm and other crit items to reach 100% much earlier.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">⚔️ Core Weapons & Items</h2>
+        <p class="section-subtitle">Build your ultimate bullet storm</p>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🔫</div>
+                    <div>
+                        <div class="item-title">Revolver</div>
+                        <div class="item-subtitle">Primary Weapon</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Unlock:</strong> Forest Tier 1 + Purchase<br><br>
+                    CL4NK's signature weapon. Rapid-fire bullets with pierce damage. Perfect synergy with crit 
+                    stacking. Each bullet can crit independently, creating a devastating damage output.
+                </p>
+                <div class="priority-badge">🔥 MANDATORY</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">⚡</div>
+                    <div>
+                        <div class="item-title">Lightning Staff</div>
+                        <div class="item-subtitle">Projectile Multiplier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> Chain lightning attacks<br><br>
+                    Adds another projectile layer to your bullet hell. Lightning chains between enemies, 
+                    and each chain can also crit. Massively increases screen coverage.
+                </p>
+                <div class="priority-badge">🔥 CORE ITEM</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🔥</div>
+                    <div>
+                        <div class="item-title">Fireball</div>
+                        <div class="item-subtitle">AOE Addition</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> Explosive projectiles<br><br>
+                    Another projectile weapon that benefits from your crit rate. Explosions on impact clear 
+                    crowds effectively. Essential for the full bullet hell experience.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🎲</div>
+                    <div>
+                        <div class="item-title">Lucky Charm</div>
+                        <div class="item-subtitle">Crit Amplifier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +15% Crit Chance<br><br>
+                    Stacks with CL4NK's passive. Reach 100% crit chance 15 levels earlier. Absolutely essential 
+                    for maximizing damage output early.
+                </p>
+                <div class="priority-badge">🔥 PRIORITY #1</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">💎</div>
+                    <div>
+                        <div class="item-title">Crit Damage Gem</div>
+                        <div class="item-subtitle">Damage Multiplier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +50% Crit Damage<br><br>
+                    Once you have high crit chance, increase the damage of those crits. Turns your guaranteed 
+                    crits into screen-clearing nukes.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">⚙️</div>
+                    <div>
+                        <div class="item-title">Attack Speed Gear</div>
+                        <div class="item-subtitle">Fire Rate Boost</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    <strong>Effect:</strong> +30% Attack Speed<br><br>
+                    More bullets per second = more crits per second. Dramatically increases your DPS and 
+                    makes the bullet hell even more intense.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">🔄 Weapon Synergies</h2>
+        <p class="section-subtitle">Best weapon combinations for maximum bullet coverage</p>
+        <div class="weapon-synergy">
+            <div class="synergy-card">
+                <div class="synergy-header">
+                    <div class="synergy-name">🔫 Revolver + Lightning</div>
+                    <div class="synergy-rating">S-Tier</div>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    Core combo. Revolver provides consistent DPS while Lightning chains handle crowd control. 
+                    Both benefit from crit stacking.
+                </p>
+            </div>
+
+            <div class="synergy-card">
+                <div class="synergy-header">
+                    <div class="synergy-name">🔥 Triple Projectile</div>
+                    <div class="synergy-rating">S-Tier</div>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    Revolver + Lightning + Fireball. Maximum screen coverage. Every weapon can crit, creating 
+                    insane damage output.
+                </p>
+            </div>
+
+            <div class="synergy-card">
+                <div class="synergy-header">
+                    <div class="synergy-name">💥 Explosive Focus</div>
+                    <div class="synergy-rating">A-Tier</div>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    Fireball + Grenade Launcher. Focus on AOE crits. Great for dense enemy waves and boss adds.
+                </p>
+            </div>
+
+            <div class="synergy-card">
+                <div class="synergy-header">
+                    <div class="synergy-name">⚡ Pierce Chain</div>
+                    <div class="synergy-rating">A-Tier</div>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    Revolver + Lightning + Pierce items. Bullets that pierce and chain = maximum efficiency.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">📚 Recommended Tomes</h2>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📖</div>
+                    <div>
+                        <div class="item-title">XP Tome</div>
+                        <div class="item-subtitle">Priority #1</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Level faster = reach 100% crit chance faster. Non-negotiable for this build. 
+                    The faster you level, the stronger your crit rate becomes.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📘</div>
+                    <div>
+                        <div class="item-title">Luck Tome</div>
+                        <div class="item-subtitle">Crit Synergy</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Increases crit chance and item drop rates. Perfect synergy with CL4NK's passive. 
+                    Part of the Holy Trinity for a reason.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📕</div>
+                    <div>
+                        <div class="item-title">Curse Tome</div>
+                        <div class="item-subtitle">Risk/Reward</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    More enemies = more targets for your bullets. Ranged build can handle increased 
+                    spawn rates safely. Take for maximum stat bonuses.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">🎮 Gameplay Strategy</h2>
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 1: Early Game (0-10 minutes)</div>
+                <h3 class="strategy-title">Building Your Arsenal</h3>
+                <div class="strategy-content">
+                    <p><strong>Priority Goals:</strong></p>
+                    <ul>
+                        <li>Unlock CL4NK (Forest Tier 1 + buy Revolver)</li>
+                        <li>Get XP Tome first - you need levels for crit chance</li>
+                        <li>Pick up Lucky Charm as soon as possible</li>
+                        <li>Add Lightning Staff for your second weapon</li>
+                        <li>Maintain distance from enemies - you're squishy</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Your crit rate is still low - focus on survivability</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Kite enemies in circles while shooting</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 2: Mid Game (10-20 minutes)</div>
+                <h3 class="strategy-title">Crit Stacking Phase</h3>
+                <div class="strategy-content">
+                    <p><strong>Key Actions:</strong></p>
+                    <ul>
+                        <li>You should be level 25-50 now (25-50% crit rate)</li>
+                        <li>Add Fireball for the third projectile weapon</li>
+                        <li>Get Crit Damage Gem to amplify your crits</li>
+                        <li>Add Attack Speed Gear for more bullets</li>
+                        <li>Start taking Luck Tome and Curse Tome</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>50% crit rate = every other shot crits = good damage</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Keep maximum distance - let your projectiles do the work</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 3: Late Game (20+ minutes)</div>
+                <h3 class="strategy-title">True Bullet Hell</h3>
+                <div class="strategy-content">
+                    <p><strong>Optimization:</strong></p>
+                    <ul>
+                        <li>You should be approaching or at 100% crit chance</li>
+                        <li>Every shot is now a critical hit</li>
+                        <li>Screen is filled with projectiles and explosions</li>
+                        <li>Enemies die before they can reach you</li>
+                        <li>Bosses melt in seconds under your sustained DPS</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>You're now at peak power - play aggressively</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Position to hit multiple enemies with pierce/chain effects</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">✅ Pros & Cons</h2>
+        <div class="pros-cons-grid">
+            <div class="pros-card">
+                <h3 class="pros-cons-title">
+                    <span>✓</span> Strengths
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Guaranteed Crits:</strong> 100% crit chance at max level is insane</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Screen Coverage:</strong> Projectiles fill the entire screen</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Safe Playstyle:</strong> Kill enemies before they reach you</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Boss Shredder:</strong> Sustained DPS melts bosses quickly</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Consistent Power:</strong> Reliable damage scaling through levels</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Fun Factor:</strong> Visually satisfying bullet storm gameplay</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cons-card">
+                <h3 class="pros-cons-title">
+                    <span>✗</span> Weaknesses
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Slow Start:</strong> Weak early game until crit rate builds up</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Level Dependent:</strong> Power scales directly with character level</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Squishy:</strong> Low survivability if enemies get close</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Positioning Critical:</strong> Must maintain distance at all times</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Item Dependent:</strong> Needs Lucky Charm and weapon items</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 style="margin-bottom: 1rem;">Unleash the Bullet Storm</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Create the ultimate ranged DPS machine with guaranteed critical hits and overwhelming projectile coverage.
+        </p>
+        <a href="/guides/builds/" class="btn">← Back to All Builds</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Megabonk.org - All Rights Reserved</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="../../" style="color: var(--accent-color);">Home</a> | 
+            <a href="../../guides/" style="color: var(--accent-color);">Guides</a> | 
+            <a href="../../database/" style="color: var(--accent-color);">Database</a>
+        </p>
+    </footer>
+</body>
+</html>
