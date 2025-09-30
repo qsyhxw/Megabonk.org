@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin + Mirror Immortality Build - Megabonk Meta-Breaking Guide</title>
+    <meta name="description" content="Master the Kevin + Mirror Immortality meta-breaking build in Megabonk. The most overpowered item combination that makes you virtually unkillable.">
+    <meta name="keywords" content="megabonk kevin, megabonk mirror, megabonk immortality build, megabonk broken build, megabonk meta">
+
+    <link rel="canonical" href="https://megabonk.org/guides/builds/kevin-mirror-immortality">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kevin + Mirror Immortality - Megabonk Meta-Breaking Build">
+    <meta property="og:description" content="The most broken item combination in Megabonk - achieve near-immortality with Kevin and Mirror">
+    <meta property="og:type" content="article">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --immortal-gradient: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);
+            --gold-gradient: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #fc466b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .build-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: immortalGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes immortalGlow {
+            0%, 100% { 
+                transform: scale(1); 
+                filter: drop-shadow(0 0 20px #fc466b) drop-shadow(0 0 40px #3f5efb);
+            }
+            50% { 
+                transform: scale(1.15); 
+                filter: drop-shadow(0 0 30px #fc466b) drop-shadow(0 0 60px #3f5efb);
+            }
+        }
+
+        /* Energy particles */
+        .energy-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .energy-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #fc466b, #3f5efb);
+            border-radius: 50%;
+            animation: energyFloat 4s ease-in-out infinite;
+            box-shadow: 0 0 10px #fc466b;
+        }
+
+        @keyframes energyFloat {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .build-tier {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--immortal-gradient);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 20px rgba(252, 70, 107, 0.5);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--immortal-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .warning-banner {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--danger-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .warning-title {
+            color: var(--danger-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--immortal-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Content Section */
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--immortal-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Core Items Showcase */
+        .core-items-showcase {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .showcase-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--immortal-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .items-duo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .duo-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .duo-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .duo-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .duo-effect {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .synergy-explosion {
+            background: linear-gradient(135deg, rgba(252, 70, 107, 0.2) 0%, rgba(63, 94, 251, 0.2) 100%);
+            border: 3px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .synergy-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .synergy-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Character Compatibility */
+        .character-compat {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .compat-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--immortal-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .compat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .compat-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .compat-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .compat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .compat-name {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .compat-rating {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background: var(--success-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .compat-note {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Item Cards */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(252, 70, 107, 0.3);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .item-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--immortal-gradient);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .strategy-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .strategy-phase {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--immortal-gradient);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .strategy-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .tip-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        /* Pros/Cons */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pros-card, .cons-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .pros-card {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .cons-card {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .pros-cons-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pros-cons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pros-cons-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .pros-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        .cons-icon {
+            color: var(--danger-color);
+            font-weight: 700;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--immortal-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(252, 70, 107, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .items-grid, .strategy-grid, .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎮 MEGABONK.ORG</div>
+            <ul class="nav-links">
+                <li><a href="../../">Home</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+                <li><a href="../../guides/characters/">Characters</a></li>
+                <li><a href="../../database/weapons/">Weapons</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../../">Home</a> / <a href="/guides/builds/">Builds</a> / <span>Kevin + Mirror Immortality</span>
+    </div>
+
+    <section class="hero">
+        <div class="energy-particles">
+            <div class="energy-particle" style="left: 10%; bottom: 0; animation-delay: 0s;"></div>
+            <div class="energy-particle" style="left: 25%; bottom: 0; animation-delay: 0.5s;"></div>
+            <div class="energy-particle" style="left: 40%; bottom: 0; animation-delay: 1s;"></div>
+            <div class="energy-particle" style="left: 55%; bottom: 0; animation-delay: 1.5s;"></div>
+            <div class="energy-particle" style="left: 70%; bottom: 0; animation-delay: 2s;"></div>
+            <div class="energy-particle" style="left: 85%; bottom: 0; animation-delay: 2.5s;"></div>
+        </div>
+        <div class="build-icon">👤🪞</div>
+        <div class="build-tier">💎 META-BREAKING BUILD</div>
+        <h1>Kevin + Mirror Immortality</h1>
+        <p class="hero-description">
+            The most broken item combination in Megabonk. Kevin grants near-immortality through insane regeneration, 
+            and Mirror duplicates it. Two unkillable entities = you literally cannot die.
+        </p>
+        <div class="warning-banner">
+            <div class="warning-title">⚠️ GAME-BREAKING COMBINATION</div>
+            <p>This build trivializes the entire game. You become virtually invincible. Use responsibly if you 
+            want to maintain any challenge. Works with ANY character.</p>
+        </div>
+    </section>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">SS+</div>
+            <div class="stat-label">Overall Rating</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐☆</div>
+            <div class="stat-label">Damage Output</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">⭐⭐⭐⭐⭐</div>
+            <div class="stat-label">Survivability</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Trivial</div>
+            <div class="stat-label">Difficulty</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Immortal</div>
+            <div class="stat-label">Playstyle</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="core-items-showcase">
+            <h2 class="showcase-title">🔥 The Immortality Duo</h2>
+            <div class="items-duo">
+                <div class="duo-item">
+                    <div class="duo-icon">👤</div>
+                    <div class="duo-name">Kevin</div>
+                    <div class="duo-effect">
+                        <strong>Effect:</strong> Massive health regeneration<br>
+                        <strong>Unlock:</strong> Found in game
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">
+                        THE most broken item in Megabonk. Grants regeneration so powerful that you 
+                        heal faster than almost anything can damage you. Alone, it's S-tier. With Mirror? 
+                        It's game-breaking.
+                    </p>
+                </div>
+
+                <div class="duo-item">
+                    <div class="duo-icon">🪞</div>
+                    <div class="duo-name">Mirror</div>
+                    <div class="duo-effect">
+                        <strong>Effect:</strong> Creates your duplicate<br>
+                        <strong>Unlock:</strong> Default unlock
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">
+                        Creates a clone that mirrors your movements and inherits ALL your items. 
+                        This means your clone ALSO gets Kevin's regeneration. Two sources of immortality 
+                        = literally unkillable.
+                    </p>
+                </div>
+            </div>
+
+            <div class="synergy-explosion">
+                <div class="synergy-title">💥 THE SYNERGY THAT BREAKS EVERYTHING</div>
+                <div class="synergy-desc">
+                    <p><strong>Kevin alone:</strong> Near-immortality through insane regeneration.</p>
+                    <p style="margin: 1rem 0;"><strong>Mirror alone:</strong> Doubles your damage output and coverage.</p>
+                    <p><strong>Kevin + Mirror together:</strong> TWO entities with Kevin's regeneration. You have double 
+                    the effective HP pool with double the healing. If one takes damage, the other is still at full HP. 
+                    You would need to take lethal damage to BOTH simultaneously to die - which is nearly impossible.</p>
+                    <p style="margin-top: 1rem; color: var(--accent-color); font-weight: 700;">
+                        Result: You can AFK in boss fights. Stand in the middle of enemy hordes. Face-tank everything. 
+                        The game cannot kill you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="character-compat">
+            <h3 class="compat-title">🎭 Works With EVERY Character</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                This combo doesn't rely on character passives - it's pure item power. Some examples:
+            </p>
+            <div class="compat-grid">
+                <div class="compat-card">
+                    <div class="compat-icon">💪</div>
+                    <div class="compat-name">Megachad</div>
+                    <div class="compat-rating">PERFECT</div>
+                    <div class="compat-note">Aura + Immortality = Walking Apocalypse</div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-icon">🛡️</div>
+                    <div class="compat-name">Sir Oofie</div>
+                    <div class="compat-rating">PERFECT</div>
+                    <div class="compat-note">Armor + Immortality = Literal God Mode</div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-icon">🦊</div>
+                    <div class="compat-name">Fox</div>
+                    <div class="compat-rating">EXCELLENT</div>
+                    <div class="compat-note">High luck + No death = Infinite value</div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-icon">🤖</div>
+                    <div class="compat-name">CL4NK</div>
+                    <div class="compat-rating">EXCELLENT</div>
+                    <div class="compat-note">100% crit + Immortal = Unstoppable</div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-icon">💀</div>
+                    <div class="compat-name">Calcium</div>
+                    <div class="compat-rating">EXCELLENT</div>
+                    <div class="compat-note">Speed + No fear of damage = Maximum DPS</div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-icon">🥷</div>
+                    <div class="compat-name">Ninja</div>
+                    <div class="compat-rating">EXCELLENT</div>
+                    <div class="compat-note">Executes + Immortality = Effortless wins</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">⚔️ Recommended Supporting Items</h2>
+        <p class="section-subtitle">Items that complement the immortality combo</p>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">💪</div>
+                    <div>
+                        <div class="item-title">Aura</div>
+                        <div class="item-subtitle">Damage Amplifier</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    You're immortal - now add passive damage. Aura lets you deal damage while literally 
+                    AFK. Perfect synergy with Kevin + Mirror.
+                </p>
+                <div class="priority-badge">🔥 HIGHLY RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📕</div>
+                    <div>
+                        <div class="item-title">Curse Tome</div>
+                        <div class="item-subtitle">Zero Risk</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    More enemies? No problem - you can't die anyway. Take Curse Tome for the massive 
+                    stat bonuses with zero downside.
+                </p>
+                <div class="priority-badge">🔥 NO RISK</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🔴</div>
+                    <div>
+                        <div class="item-title">Health Pendant</div>
+                        <div class="item-subtitle">Safety Buffer</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    More HP = bigger cushion for Kevin's regen to work with. Not necessary but adds 
+                    an extra layer of safety.
+                </p>
+                <div class="priority-badge">⭐ OPTIONAL</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">⚡</div>
+                    <div>
+                        <div class="item-title">Any Weapon</div>
+                        <div class="item-subtitle">Personal Choice</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    You're already immortal - pick whatever weapons you enjoy. The build doesn't rely 
+                    on specific weapons. Have fun!
+                </p>
+                <div class="priority-badge">⭐ FLEXIBLE</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">📖</div>
+                    <div>
+                        <div class="item-title">XP Tome</div>
+                        <div class="item-subtitle">Standard Pick</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Level faster for stat scaling. Standard for all builds. Not critical but helpful 
+                    for reaching max power faster.
+                </p>
+                <div class="priority-badge">⭐ RECOMMENDED</div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🎲</div>
+                    <div>
+                        <div class="item-title">Lucky Charm</div>
+                        <div class="item-subtitle">Bonus Pick</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Better drops and more crits. Since you never die, you have infinite time to farm 
+                    items. Luck accelerates your power.
+                </p>
+                <div class="priority-badge">⭐ BONUS</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">🎮 How To Execute This Build</h2>
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 1: Finding The Items (0-15 minutes)</div>
+                <h3 class="strategy-title">The Hunt</h3>
+                <div class="strategy-content">
+                    <p><strong>Priority Goals:</strong></p>
+                    <ul>
+                        <li><strong>Find Kevin</strong> - This is your #1 priority. Kevin spawns randomly in chests/drops</li>
+                        <li><strong>Get Mirror</strong> - Usually available in mid-game. Look for it actively</li>
+                        <li>Play any character - this build works with everyone</li>
+                        <li>Until you get Kevin, play normally and focus on survivability</li>
+                        <li>Don't take unnecessary risks until you have the combo</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Kevin is RNG - may take 5-15 minutes to find</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Mirror is more common - usually appears around 10 minutes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 2: Activating God Mode (15-20 minutes)</div>
+                <h3 class="strategy-title">The Transformation</h3>
+                <div class="strategy-content">
+                    <p><strong>The Moment You Get Both Items:</strong></p>
+                    <ul>
+                        <li>Once you have Kevin + Mirror, you are now virtually unkillable</li>
+                        <li>Test it - stand in a group of enemies. Watch your HP barely move</li>
+                        <li>Add Curse Tome now - you can handle the increased spawns</li>
+                        <li>Take XP Tome to accelerate your power growth</li>
+                        <li>Add Aura or other passive damage weapons</li>
+                        <li>You can now play completely recklessly</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Your clone has Kevin too - two immortal entities</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>Boss attacks that would one-shot others barely scratch you</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-phase">Phase 3: Domination (20+ minutes)</div>
+                <h3 class="strategy-title">True Immortality</h3>
+                <div class="strategy-content">
+                    <p><strong>"Gameplay":</strong></p>
+                    <ul>
+                        <li>You can literally AFK and the game plays itself</li>
+                        <li>Stand in the middle of boss fights without moving</li>
+                        <li>Curse Tome's downside is completely irrelevant</li>
+                        <li>Take every risky item - you can't die anyway</li>
+                        <li>Focus on maximizing damage since survival is guaranteed</li>
+                        <li>Enjoy the most broken build in Megabonk</li>
+                    </ul>
+                </div>
+                <div class="strategy-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>You can clear 45+ minute runs without trying</span>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <span>The Final Boss cannot kill you - just stand there and win</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">💡 Why This Works</h2>
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">👤</div>
+                    <div>
+                        <div class="item-title">Kevin's Power</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Kevin provides regeneration that heals you for approximately 5-10% of your max HP per second. 
+                    This means you recover from near-death to full HP in seconds. Most attacks can't outdamage it.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">🪞</div>
+                    <div>
+                        <div class="item-title">Mirror's Duplication</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    Mirror creates a clone with ALL your items. Your clone has Kevin too. Now you have two separate 
+                    health pools, both regenerating massively. Enemies must kill BOTH nearly simultaneously.
+                </p>
+            </div>
+
+            <div class="item-card">
+                <div class="item-header">
+                    <div class="item-icon">💥</div>
+                    <div>
+                        <div class="item-title">The Math</div>
+                    </div>
+                </div>
+                <p class="item-description">
+                    To kill you, enemies must deal 100% of your HP in damage faster than Kevin heals you (5-10%/sec), 
+                    AND also kill your clone. In practice, this is impossible after mid-game.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">✅ Pros & Cons</h2>
+        <div class="pros-cons-grid">
+            <div class="pros-card">
+                <h3 class="pros-cons-title">
+                    <span>✓</span> Strengths
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Literal Immortality:</strong> You cannot die with this combo</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Universal:</strong> Works with every character in the game</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>No Skill Required:</strong> Removes all difficulty from the game</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Curse Tome Safe:</strong> Take all high-risk, high-reward items</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>AFK Viable:</strong> Literally set it and forget it</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="pros-icon">✓</span>
+                        <span><strong>Beginner Friendly:</strong> Guaranteed success once you get the items</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cons-card">
+                <h3 class="pros-cons-title">
+                    <span>✗</span> Weaknesses
+                </h3>
+                <div class="pros-cons-list">
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>RNG Dependent:</strong> Kevin is a random drop - might take time to find</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Removes Challenge:</strong> Makes the game trivially easy - not fun for everyone</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Weak Before Combo:</strong> Normal difficulty until you get both items</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Boring for Some:</strong> No tension or risk = less exciting gameplay</span>
+                    </div>
+                    <div class="pros-cons-item">
+                        <span class="cons-icon">✗</span>
+                        <span><strong>Feels Like Cheating:</strong> You're basically exploiting game mechanics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 style="margin-bottom: 1rem;">Break the Game</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Experience true immortality with the most overpowered item combination in Megabonk. Use responsibly.
+        </p>
+        <a href="/guides/builds/" class="btn">← Back to All Builds</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Megabonk.org - All Rights Reserved</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="../../" style="color: var(--accent-color);">Home</a> | 
+            <a href="../../guides/" style="color: var(--accent-color);">Guides</a> | 
+            <a href="../../database/" style="color: var(--accent-color);">Database</a>
+        </p>
+    </footer>
+</body>
+</html>
