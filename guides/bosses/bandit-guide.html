@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandit Hidden Boss Guide - Desert Outlaw | Megabonk.org</title>
+    <meta name="description" content="Complete guide to finding and defeating Bandit, the hidden boss in Megabonk's Desert. Unlock the Bandit character and Dexecutioner weapon with our expert strategies.">
+    <meta name="keywords" content="megabonk bandit, bandit boss guide, desert hidden boss, dexecutioner unlock, megabonk hidden characters">
+
+    <link rel="canonical" href="https://megabonk.org/guides/bosses/bandit-guide">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bandit Hidden Boss Guide - Megabonk">
+    <meta property="og:description" content="Find and defeat the Bandit hidden boss in Desert to unlock the powerful Dexecutioner weapon">
+    <meta property="og:type" content="article">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff8800;
+            --secondary-color: #cc6600;
+            --background: #1a1a2e;
+            --surface: #16213e;
+            --text: #e4e4e4;
+            --accent: #ffd700;
+            --danger: #ff4444;
+            --warning: #ffaa00;
+            --success: #00ff88;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Desert Theme Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 136, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(204, 102, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(22, 33, 62, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header */
+        .boss-header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .boss-icon {
+            font-size: 8rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 136, 0, 0.6));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .boss-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge-hidden {
+            background: linear-gradient(135deg, #8b00ff, #ff00ff);
+            box-shadow: 0 4px 15px rgba(139, 0, 255, 0.4);
+        }
+
+        .badge-desert {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 15px rgba(255, 136, 0, 0.4);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #aaa;
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(22, 33, 62, 0.6);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 136, 0, 0.3);
+            border-color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Difficulty Stars */
+        .difficulty-stars {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .star {
+            color: var(--accent);
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+        }
+
+        .star.empty {
+            color: #444;
+        }
+
+        /* Content Sections */
+        .section {
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 136, 0, 0.2);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        /* Location Steps */
+        .location-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step {
+            background: rgba(255, 136, 0, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            background: rgba(255, 136, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--background);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        /* Attack Patterns */
+        .attacks-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .attack-card {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid var(--danger);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .attack-card:hover {
+            background: rgba(255, 68, 68, 0.2);
+            transform: scale(1.02);
+        }
+
+        .attack-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .attack-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--danger);
+        }
+
+        .threat-level {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .threat-high {
+            background: var(--danger);
+            color: white;
+        }
+
+        .threat-medium {
+            background: var(--warning);
+            color: var(--background);
+        }
+
+        /* Character Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .character-card {
+            background: rgba(255, 136, 0, 0.1);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 136, 0, 0.3);
+        }
+
+        .character-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .rating {
+            display: flex;
+            gap: 0.3rem;
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        /* Tips List */
+        .tips-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .tip {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+        }
+
+        .tip strong {
+            color: var(--success);
+        }
+
+        /* Rewards Section */
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .reward-card {
+            background: linear-gradient(135deg, rgba(255, 136, 0, 0.2), rgba(255, 215, 0, 0.1));
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .reward-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .reward-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .reward-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(255, 170, 0, 0.1);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .warning-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 136, 0, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .boss-icon {
+                font-size: 5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span>🎮</span> Megabonk.org
+            </a>
+            <ul class="nav-links">
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/guides/characters/">Characters</a></li>
+                <li><a href="/guides/bosses/">Bosses</a></li>
+                <li><a href="/database/weapons/">Weapons</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/guides/bosses/">Boss Strategies</a> / Bandit
+        </div>
+
+        <div class="boss-header fade-in">
+            <div class="boss-icon">🤠</div>
+            <div class="boss-badges">
+                <span class="badge badge-hidden">Hidden Boss</span>
+                <span class="badge badge-desert">Desert Region</span>
+            </div>
+            <h1>Bandit</h1>
+            <p class="subtitle">Desert Outlaw - Dexecutioner Unlock</p>
+        </div>
+
+        <div class="stats-grid fade-in">
+            <div class="stat-card">
+                <div class="stat-label">Health Pool</div>
+                <div class="stat-value">High</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Difficulty</div>
+                <div class="difficulty-stars">
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star empty">⭐</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Location</div>
+                <div class="stat-value">🏜️ Desert</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Reward</div>
+                <div class="stat-value">🎭 Character</div>
+            </div>
+        </div>
+
+        <section class="section fade-in">
+            <h2>🗺️ How to Find Bandit</h2>
+            <p>Bandit is a hidden boss that roams the Desert region. Unlike regular bosses that appear at set time intervals, you must actively search for him.</p>
+            
+            <div class="location-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div>
+                        <h3>Reach the Desert</h3>
+                        <p>Complete the Forest region and unlock access to the Desert biome. Bandit will NOT appear until you've entered the Desert area.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div>
+                        <h3>Explore Thoroughly</h3>
+                        <p>Bandit spawns at a random location in the Desert. Move through different areas of the map to trigger his appearance. Look for visual cues like dust clouds or tumbleweeds moving unusually.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div>
+                        <h3>Listen for Audio Cues</h3>
+                        <p>When Bandit is nearby, you'll hear distinctive gunshot sounds and a western-style whistle. Turn your audio up to catch these hints!</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <div>
+                        <h3>Prepare Before Engaging</h3>
+                        <p>Once you spot Bandit, don't rush in! Make sure you have good weapons upgraded, health at maximum, and ideally some defensive items like Mirror or Kevin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-icon">⚠️</div>
+                <div>
+                    <strong>Pro Tip:</strong> Bandit is more likely to spawn in the outer edges of the Desert map rather than the center. Try exploring the perimeter areas first. If you die during the fight, you'll need to find him again in your next run!
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>💀 Combat Mechanics & Attack Patterns</h2>
+            
+            <div class="attacks-grid">
+                <div class="attack-card">
+                    <div class="attack-header">
+                        <span class="attack-name">🔫 Quickdraw Shots</span>
+                        <span class="threat-level threat-high">HIGH THREAT</span>
+                    </div>
+                    <p><strong>Behavior:</strong> Bandit fires rapid-fire revolver shots in your direction with pinpoint accuracy.</p>
+                    <p><strong>Damage:</strong> Medium per shot, but fires 6 shots in quick succession.</p>
+                    <p><strong>Counter:</strong> Use zig-zag movement patterns. Don't run in straight lines! His shots travel in straight paths, so erratic movement throws off his aim.</p>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-header">
+                        <span class="attack-name">💨 Desert Dash</span>
+                        <span class="threat-level threat-high">HIGH THREAT</span>
+                    </div>
+                    <p><strong>Behavior:</strong> Bandit teleports behind you in a cloud of dust and attempts a melee dagger strike.</p>
+                    <p><strong>Damage:</strong> Very high (can one-shot low HP characters).</p>
+                    <p><strong>Counter:</strong> Watch for the dust cloud animation that appears before he teleports. Immediately dash away when you see it. Aegis shield can block this attack.</p>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-header">
+                        <span class="attack-name">🪃 Dexecutioner Throw</span>
+                        <span class="threat-level threat-medium">MEDIUM THREAT</span>
+                    </div>
+                    <p><strong>Behavior:</strong> Throws his signature dual-blade weapon that boomerangs back to him, hitting you twice.</p>
+                    <p><strong>Damage:</strong> High on each pass (outbound and return).</p>
+                    <p><strong>Counter:</strong> The Dexecutioner follows a predictable arc. Move perpendicular to its path rather than away from it. Stay mobile after the first pass to avoid the return trajectory.</p>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-header">
+                        <span class="attack-name">🌪️ Sandstorm Summon</span>
+                        <span class="threat-level threat-medium">MEDIUM THREAT</span>
+                    </div>
+                    <p><strong>Behavior:</strong> Creates a large sandstorm that obscures vision and spawns cactus enemies.</p>
+                    <p><strong>Damage:</strong> Low damage over time, but reduces visibility significantly.</p>
+                    <p><strong>Counter:</strong> Don't panic! The sandstorm has a fixed duration. Focus on dodging Bandit's other attacks rather than fighting the cactus minions. AOE weapons like Aura automatically clear the cacti.</p>
+                </div>
+            </div>
+
+            <h3>🎭 Boss Phases</h3>
+            <div class="location-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div>
+                        <h3>Phase 1: The Shootout (100-60% HP)</h3>
+                        <p>Bandit relies primarily on Quickdraw Shots and occasional Dexecutioner Throws. He moves slowly and predictably. Focus on learning his shot patterns and positioning yourself to minimize hits.</p>
+                        <p><strong>Strategy:</strong> Maintain medium distance. Too close and he'll use Desert Dash; too far and his shots become harder to dodge.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div>
+                        <h3>Phase 2: Desperate Measures (60-30% HP)</h3>
+                        <p>Bandit becomes more aggressive, using Desert Dash frequently and summoning Sandstorms. His movement speed increases significantly.</p>
+                        <p><strong>Strategy:</strong> This is the most dangerous phase. Keep moving constantly and use AOE weapons to clear sandstorm minions automatically. Save your dash/evasion ability for Desert Dash teleports.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div>
+                        <h3>Phase 3: Last Stand (30-0% HP)</h3>
+                        <p>Bandit enters "Last Stand" mode with a golden aura. All his attacks become faster and he chains attacks together more rapidly. He also gains brief invincibility frames between attack chains.</p>
+                        <p><strong>Strategy:</strong> Patience is key! Don't over-commit to attacking during his invincibility frames. Wait for openings between his attack chains and burst him down with high-damage abilities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>👥 Best Characters for Bandit Fight</h2>
+            
+            <div class="character-grid">
+                <div class="character-card">
+                    <div class="character-name">🦊 Fox</div>
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐ (Perfect)
+                    </div>
+                    <p><strong>Why:</strong> High mobility with Firestaff's range allows you to kite Bandit effectively. Luck blessing helps with critical dodges.</p>
+                    <p><strong>Strategy:</strong> Keep your distance and use hit-and-run tactics. Your speed advantage makes dodging Desert Dash much easier.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🛡️ Sir Oofie</div>
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐ (Perfect)
+                    </div>
+                    <p><strong>Why:</strong> High armor makes you tanky enough to survive Bandit's burst damage. Sword provides good melee range.</p>
+                    <p><strong>Strategy:</strong> Face-tank his Quickdraw Shots and counter-attack. Use Aegis shield if you have it to block Desert Dash.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🥷 Ninja</div>
+                    <div class="rating">
+                        ⭐⭐⭐⭐ (Excellent)
+                    </div>
+                    <p><strong>Why:</strong> Evasion passive can trigger on Bandit's attacks, and the execution mechanic works on his Desert Dash if you evade it.</p>
+                    <p><strong>Strategy:</strong> Play aggressively and rely on your evasion. Time your dodges to trigger executions for massive damage.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🤖 CL4NK</div>
+                    <div class="rating">
+                        ⭐⭐⭐⭐ (Excellent)
+                    </div>
+                    <p><strong>Why:</strong> Revolver has long range and high crit rate, perfect for a shootout. Crits can interrupt Bandit's attacks.</p>
+                    <p><strong>Strategy:</strong> Keep maximum distance and focus on landing critical hits. Your Revolver outranges his pistol.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">⚡ Calcium</div>
+                    <div class="rating">
+                        ⭐⭐⭐ (Good)
+                    </div>
+                    <p><strong>Why:</strong> Speed demon build allows you to outrun all of Bandit's attacks if you maintain high velocity.</p>
+                    <p><strong>Strategy:</strong> Build speed early and never stop moving. Your damage scales with speed, so constant motion helps both offense and defense.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">💪 Megachad</div>
+                    <div class="rating">
+                        ⭐⭐ (Challenging)
+                    </div>
+                    <p><strong>Why:</strong> Aura can damage Bandit passively, but limited mobility makes you vulnerable to Desert Dash.</p>
+                    <p><strong>Strategy:</strong> Only recommended if you have Kevin + Mirror combo for immortality. Otherwise, you'll struggle with his mobility.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>⚔️ Recommended Weapons & Build</h2>
+            
+            <h3>🔥 Best Weapons</h3>
+            <div class="character-grid">
+                <div class="character-card">
+                    <div class="character-name">🔫 Revolver</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>Perfect for a ranged shootout. High fire rate and crit chance means you can out-DPS Bandit at distance.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">⚔️ Katana</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>Ultra-fast attack speed lets you burst him down quickly. Execute mechanic synergizes with evasion-based playstyle.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🛡️ Aegis</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>Can block Desert Dash completely, nullifying his most dangerous attack. Shockwave counter-damage is bonus DPS.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🔥 Firestaff</div>
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <p>Long range and projectile speed make it easy to hit Bandit while kiting. Fire DoT helps during sandstorm phase.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">💪 Aura</div>
+                    <div class="rating">⭐⭐⭐</div>
+                    <p>Passive damage is helpful but requires you to get close. Good for Sir Oofie tank builds only.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🍌 Bananarang</div>
+                    <div class="rating">⭐⭐⭐</div>
+                    <p>Boomerang mechanic can hit Bandit multiple times per throw, but requires precise positioning during his mobile phases.</p>
+                </div>
+            </div>
+
+            <h3>📖 Essential Tomes</h3>
+            <div class="tips-list">
+                <div class="tip">
+                    <strong>XP Tome:</strong> Get this to max level first. The faster you level up, the more stats and items you'll have before finding Bandit.
+                </div>
+                <div class="tip">
+                    <strong>Damage Tome:</strong> Essential for all builds. Bandit has high HP, so maximizing your damage output is critical.
+                </div>
+                <div class="tip">
+                    <strong>Health Tome:</strong> Survivability is key. Extra HP gives you margin for error when dodging his attacks.
+                </div>
+                <div class="tip">
+                    <strong>Speed Tome:</strong> Recommended for all builds. Movement speed helps you dodge Desert Dash and reposition during Sandstorms.
+                </div>
+            </div>
+
+            <h3>🛡️ Must-Have Items</h3>
+            <div class="tips-list">
+                <div class="tip">
+                    <strong>Mirror:</strong> Provides a second life. Absolutely clutch if Bandit lands a Desert Dash on you.
+                </div>
+                <div class="tip">
+                    <strong>Kevin:</strong> Pairs with Mirror for near-immortality. Highly recommended for first-time attempts.
+                </div>
+                <div class="tip">
+                    <strong>Health Pendant:</strong> Constant HP regeneration helps offset chip damage from Quickdraw Shots.
+                </div>
+                <div class="tip">
+                    <strong>Speed Boots:</strong> Extra movement speed is always valuable. Makes all dodging easier.
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>💡 Pro Tips & Advanced Strategies</h2>
+            
+            <div class="tips-list">
+                <div class="tip">
+                    <strong>Map Edge Strategy:</strong> Try to fight Bandit near the edges of the Desert map. This limits his mobility options and makes his teleports more predictable since he can't go beyond the map boundary.
+                </div>
+                
+                <div class="tip">
+                    <strong>Sandstorm AOE:</strong> Don't waste time fighting cactus enemies during sandstorms. Use AOE weapons (Aura, Firestaff) to clear them passively while you focus on dodging Bandit.
+                </div>
+                
+                <div class="tip">
+                    <strong>Desert Dash Tell:</strong> The dust cloud animation always appears 0.5 seconds before Bandit teleports. Train yourself to recognize this visual cue and dash preemptively.
+                </div>
+                
+                <div class="tip">
+                    <strong>Invincibility Frame Timing:</strong> In Phase 3, Bandit has invincibility frames between attack chains. Watch his golden aura—when it flickers, that's your window to attack. Don't waste abilities while he's invincible.
+                </div>
+                
+                <div class="tip">
+                    <strong>Weapon Evolution Timing:</strong> Try to evolve your main weapon BEFORE finding Bandit. The power spike from evolution can make the fight significantly easier. Don't delay finding Bandit too long though, as enemy scaling increases over time.
+                </div>
+                
+                <div class="tip">
+                    <strong>Audio Advantage:</strong> Turn up game audio and use headphones if possible. The directional audio cues for Desert Dash can tell you which side Bandit will teleport to.
+                </div>
+                
+                <div class="tip">
+                    <strong>Kite Circle Pattern:</strong> The most reliable dodge pattern is running in a wide circle around Bandit. This makes his Quickdraw Shots easier to avoid and keeps you mobile enough to react to Desert Dash.
+                </div>
+                
+                <div class="tip">
+                    <strong>HP Threshold Management:</strong> Try to burst Bandit down from 35% to 25% HP quickly. This skips the most dangerous part of Phase 2 where he's extremely aggressive but hasn't entered Last Stand yet.
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>🏆 Rewards & Unlocks</h2>
+            
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-icon">🎭</div>
+                    <div class="reward-title">Bandit Character</div>
+                    <p>Unlocks Bandit as a playable character for future runs. Bandit has unique abilities related to stealth and critical hits.</p>
+                </div>
+                
+                <div class="reward-card">
+                    <div class="reward-icon">🪃</div>
+                    <div class="reward-title">Dexecutioner Weapon</div>
+                    <p>Unlocks the legendary dual-blade boomerang weapon. S-tier weapon that can be purchased in the shop for future runs. Deals massive damage with unique boomerang mechanics.</p>
+                </div>
+                
+                <div class="reward-card">
+                    <div class="reward-icon">🏅</div>
+                    <div class="reward-title">Desert Conqueror Achievement</div>
+                    <p>Steam achievement for defeating Bandit. Rare achievement that shows you've mastered the Desert hidden boss.</p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-icon">🎉</div>
+                <div>
+                    <strong>Special Note:</strong> Defeating Bandit also unlocks special dialogue options with the mysterious Merchant NPC. These can lead to discovering other hidden secrets in Megabonk!
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2>❌ Common Mistakes to Avoid</h2>
+            
+            <div class="tips-list">
+                <div class="tip" style="border-left-color: var(--danger);">
+                    <strong>Mistake:</strong> Fighting Bandit too early in your run. <br>
+                    <strong>Solution:</strong> Wait until you have at least 3 evolved weapons and the Holy Trinity tomes (XP, Damage, Luck) before seeking him out.
+                </div>
+                
+                <div class="tip" style="border-left-color: var(--danger);">
+                    <strong>Mistake:</strong> Standing still during Sandstorm phase. <br>
+                    <strong>Solution:</strong> Keep moving constantly! Standing still makes you an easy target for both cacti and Bandit's follow-up attacks.
+                </div>
+                
+                <div class="tip" style="border-left-color: var(--danger);">
+                    <strong>Mistake:</strong> Chasing Bandit during Desert Dash. <br>
+                    <strong>Solution:</strong> Never chase him after he teleports. Create distance instead and wait for his next attack pattern.
+                </div>
+                
+                <div class="tip" style="border-left-color: var(--danger);">
+                    <strong>Mistake:</strong> Ignoring the Dexecutioner return path. <br>
+                    <strong>Solution:</strong> After dodging the initial throw, immediately move perpendicular to avoid the return trajectory. Many players forget it comes back!
+                </div>
+                
+                <div class="tip" style="border-left-color: var(--danger);">
+                    <strong>Mistake:</strong> Using slow, heavy-hitting weapons. <br>
+                    <strong>Solution:</strong> Bandit's high mobility makes it hard to land slow attacks. Stick to fast weapons like Katana, Revolver, or Firestaff.
+                </div>
+            </div>
+        </section>
+
+        <div class="nav-buttons fade-in">
+            <a href="/guides/bosses/" class="btn btn-primary">
+                ← Back to All Bosses
+            </a>
+            <a href="/guides/characters/bandit-guide.html" class="btn btn-secondary">
+                View Bandit Character Guide →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
