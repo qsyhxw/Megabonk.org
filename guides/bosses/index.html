@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Boss Guide - Complete Strategies for All Bosses</title>
-    <meta name="description" content="Master every boss in Megabonk with detailed strategies. Learn how to defeat Lil Bark, Bark Vader, and all tier bosses with expert tactics and builds.">
-    <meta name="keywords" content="megabonk boss guide, lil bark strategy, bark vader guide, megabonk bosses, megabonk tier 3 boss">
+    <title>Megabonk Boss Guide - Complete Strategies for All Bosses | Megabonk.org</title>
+    <meta name="description" content="Master all Megabonk bosses with complete strategies. Defeat Lil Bark, Chadbark, Bark Vader, and Anubis with expert tactics, builds, and attack pattern guides.">
+    <meta name="keywords" content="megabonk boss guide, lil bark boss, bark vader guide, megabonk boss strategies, forest boss, desert boss, anubis boss">
 
     <link rel="canonical" href="https://megabonk.org/guides/bosses/">
-
-
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="Megabonk Boss Guide - Complete Strategies">
-    <meta property="og:description" content="Master every boss encounter in Megabonk with detailed attack patterns and winning strategies">
+    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://megabonk.org/guides/bosses/">
+    <meta property="og:title" content="Megabonk Boss Guide - Complete Boss Strategies">
+    <meta property="og:description" content="Master all Megabonk bosses with expert strategies and tactics.">
     
     <style>
         * {
@@ -24,39 +22,78 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e8e8e8;
-            line-height: 1.6;
-            min-height: 100vh;
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --card-bg: rgba(30, 30, 46, 0.6);
+            --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-blue: linear-gradient(135deg, #667eea 0%, #3a86ff 100%);
         }
 
-        /* Navigation */
-        nav {
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Header */
+        header {
             background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 2px solid rgba(138, 43, 226, 0.3);
+            border-bottom: 2px solid rgba(157, 78, 221, 0.3);
         }
 
-        .nav-container {
-            max-width: 1400px;
+        nav {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
         }
 
@@ -67,42 +104,106 @@
         }
 
         .nav-links a {
-            color: #e8e8e8;
+            color: var(--text-primary);
             text-decoration: none;
             transition: color 0.3s;
+            font-weight: 500;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: var(--accent-purple);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(157, 78, 221, 0.2);
         }
 
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero p {
+        .hero-subtitle {
             font-size: 1.2rem;
-            color: #b8b8b8;
-            max-width: 800px;
-            margin: 0 auto;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
         }
 
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
 
         /* Section Title */
@@ -110,81 +211,33 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-subtitle {
             text-align: center;
-            color: #b8b8b8;
-            margin-bottom: 3rem;
+            color: var(--text-secondary);
             font-size: 1.1rem;
+            margin-bottom: 3rem;
         }
 
-        /* Boss Categories */
-        .boss-categories {
+        /* Boss Cards Grid */
+        .boss-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
         }
 
-        .category-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(138, 43, 226, 0.5);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .category-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #667eea;
-        }
-
-        .category-card p {
-            color: #b8b8b8;
-            margin-bottom: 1rem;
-        }
-
-        .boss-count {
-            display: inline-block;
-            background: rgba(102, 126, 234, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #667eea;
-        }
-
-        /* Boss Grid */
-        .boss-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
         .boss-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 2rem;
-            border: 2px solid rgba(138, 43, 226, 0.2);
+            border: 2px solid rgba(157, 78, 221, 0.2);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -196,256 +249,301 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .boss-card:hover::before {
-            transform: scaleX(1);
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-purple);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .boss-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(138, 43, 226, 0.5);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            transform: translateY(-10px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 40px rgba(157, 78, 221, 0.3);
         }
 
-        .boss-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
+        .boss-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .boss-card-content {
+            position: relative;
+            z-index: 1;
         }
 
         .boss-icon {
-            font-size: 3rem;
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px currentColor);
         }
 
-        .boss-difficulty {
-            padding: 0.4rem 1rem;
+        .boss-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .boss-badge {
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
             text-transform: uppercase;
         }
 
-        .difficulty-easy { background: rgba(76, 175, 80, 0.2); color: #4caf50; }
-        .difficulty-medium { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
-        .difficulty-hard { background: rgba(244, 67, 54, 0.2); color: #f44336; }
-        .difficulty-extreme { background: rgba(156, 39, 176, 0.2); color: #9c27b0; }
+        .badge-tier1 { background: linear-gradient(135deg, #00c853 0%, #64dd17 100%); }
+        .badge-tier2 { background: linear-gradient(135deg, #ffd600 0%, #ffab00 100%); color: #000; }
+        .badge-tier3 { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); }
+        .badge-hidden { background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%); }
+        .badge-desert { background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%); }
 
-        .boss-card h3 {
+        .boss-name {
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
-            color: #fff;
+            text-align: center;
         }
 
-        .boss-tier {
-            color: #667eea;
-            font-size: 0.9rem;
+        .boss-subtitle {
+            color: var(--text-secondary);
+            text-align: center;
             margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
         .boss-stats {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin: 1.5rem 0;
         }
 
-        .stat-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.8rem;
-            border-radius: 8px;
-            border-left: 3px solid #667eea;
+        .boss-stat {
+            background: rgba(157, 78, 221, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
         }
 
-        .stat-label {
-            font-size: 0.85rem;
-            color: #888;
-            text-transform: uppercase;
+        .boss-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
         }
 
-        .stat-value {
-            font-size: 1.1rem;
+        .boss-stat-value {
             font-weight: bold;
-            color: #fff;
-            margin-top: 0.3rem;
-        }
-
-        .boss-features {
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-tag {
-            display: inline-block;
-            background: rgba(102, 126, 234, 0.15);
-            padding: 0.4rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            margin: 0.3rem 0.3rem 0.3rem 0;
-            color: #a8b8ff;
+            font-size: 1.1rem;
+            color: var(--accent-purple);
         }
 
         .boss-mechanics {
-            background: rgba(244, 67, 54, 0.1);
-            border-left: 3px solid #f44336;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin: 1.5rem 0;
         }
 
-        .boss-mechanics h4 {
-            color: #f44336;
+        .boss-mechanics-title {
+            font-size: 0.9rem;
+            color: var(--accent-purple);
             margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .boss-mechanics ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .boss-mechanics li {
-            padding-left: 1.5rem;
-            position: relative;
-            margin-bottom: 0.5rem;
-            color: #d8d8d8;
-        }
-
-        .boss-mechanics li::before {
-            content: "⚠️";
-            position: absolute;
-            left: 0;
-        }
-
-        .view-guide-btn {
-            display: block;
-            width: 100%;
-            padding: 0.8rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
         }
 
-        .view-guide-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+        .boss-mechanics-list {
+            list-style: none;
+            padding: 0;
         }
 
-        /* Pro Tips */
-        .pro-tips {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            margin-bottom: 3rem;
-        }
-
-        .pro-tips h3 {
-            color: #667eea;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .tip-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .tip-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .tip-item h4 {
-            color: #667eea;
-            margin-bottom: 0.8rem;
+        .boss-mechanics-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
             display: flex;
-            align-items: center;
+            align-items: start;
             gap: 0.5rem;
         }
 
-        .tip-item p {
-            color: #c8c8c8;
-            line-height: 1.6;
+        .boss-mechanics-list li::before {
+            content: '⚡';
+            flex-shrink: 0;
         }
 
-        /* Boss Timeline */
-        .boss-timeline {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            margin-bottom: 3rem;
+        .boss-tips {
+            background: rgba(58, 134, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-blue);
+            margin-top: 1rem;
         }
 
-        .boss-timeline h3 {
-            color: #667eea;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-left: 3rem;
-        }
-
-        .timeline-time {
-            position: absolute;
-            left: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        .boss-tips-title {
             font-weight: bold;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
             font-size: 0.9rem;
         }
 
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            flex: 1;
-            margin-left: 1rem;
+        .boss-tips-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* General Strategies Section */
+        .strategies-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .strategy-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(157, 78, 221, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .strategy-item:hover {
+            background: rgba(157, 78, 221, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .strategy-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .strategy-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-purple);
+        }
+
+        .strategy-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Boss Curse Section */
+        .curse-section {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1) 0%, rgba(88, 28, 135, 0.1) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            text-align: center;
+        }
+
+        .curse-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .curse-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-purple);
+        }
+
+        .curse-desc {
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .curse-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .curse-feature {
+            background: rgba(157, 78, 221, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+
+        .curse-feature-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--accent-purple);
+        }
+
+        /* CTA Buttons */
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(157, 78, 221, 0.1);
+            color: var(--text-primary);
+            border: 2px solid var(--accent-purple);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(157, 78, 221, 0.2);
+            transform: translateY(-3px);
         }
 
         /* Footer */
         footer {
-            background: rgba(26, 26, 46, 0.95);
-            padding: 3rem 2rem;
+            background: rgba(22, 33, 62, 0.95);
+            padding: 3rem 2rem 1rem;
             margin-top: 4rem;
-            border-top: 2px solid rgba(138, 43, 226, 0.3);
+            border-top: 2px solid rgba(157, 78, 221, 0.3);
         }
 
         .footer-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            margin-bottom: 2rem;
         }
 
         .footer-section h3 {
-            color: #667eea;
+            color: var(--accent-purple);
             margin-bottom: 1rem;
         }
 
@@ -453,50 +551,71 @@
             list-style: none;
         }
 
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
         .footer-section a {
-            color: #b8b8b8;
+            color: var(--text-secondary);
             text-decoration: none;
-            display: block;
-            padding: 0.3rem 0;
             transition: color 0.3s;
         }
 
         .footer-section a:hover {
-            color: #667eea;
+            color: var(--accent-purple);
         }
 
-        /* Responsive */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(157, 78, 221, 0.2);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(26, 26, 46, 0.98);
+                width: 100%;
+                padding: 2rem;
+                transition: 0.3s;
+                border-top: 2px solid rgba(157, 78, 221, 0.3);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
             .hero h1 {
                 font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
             }
 
             .boss-grid {
                 grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
+            .hero-stats {
+                gap: 1.5rem;
             }
 
-            .timeline-item {
-                flex-direction: column;
-                align-items: flex-start;
-                padding-left: 0;
-            }
-
-            .timeline-time {
-                position: relative;
-                margin-bottom: 0.5rem;
-            }
-
-            .timeline-content {
-                margin-left: 0;
+            .strategy-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Animation */
+        /* Scroll Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -514,391 +633,438 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="/" class="logo">Megabonk.org</a>
-            <ul class="nav-links">
+    <div class="animated-bg"></div>
+
+    <header>
+        <nav>
+            <a href="/" class="logo">🎮 Megabonk.org</a>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="/">Home</a></li>
                 <li><a href="/guides/">Guides</a></li>
                 <li><a href="/guides/characters/">Characters</a></li>
                 <li><a href="/guides/builds/">Builds</a></li>
                 <li><a href="/guides/bosses/">Bosses</a></li>
+                <li><a href="/database/weapons/">Weapons</a></li>
             </ul>
-        </div>
-    </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>🎮 Megabonk Boss Guide</h1>
-        <p>Master every boss encounter with detailed strategies, attack patterns, and winning tactics</p>
+    <div class="breadcrumb">
+        <a href="/">Home</a> > <a href="/guides/">Guides</a> > <span>Boss Strategies</span>
     </div>
 
-    <!-- Main Content -->
     <div class="container">
-        <!-- Boss Categories -->
-        <h2 class="section-title">Boss Categories</h2>
-        <p class="section-subtitle">Navigate through different boss types and difficulty tiers</p>
-        
-        <div class="boss-categories">
-            <div class="category-card">
-                <div class="category-icon">🌲</div>
-                <h3>Forest Bosses</h3>
-                <p>Tree-themed bosses from Lil Bark to the legendary Bark Vader</p>
-                <span class="boss-count">3 Bosses</span>
+        <!-- Hero Section -->
+        <section class="hero fade-in">
+            <h1>⚔️ Boss Strategy Guide</h1>
+            <p class="hero-subtitle">Master every boss encounter with expert strategies, attack patterns, and recommended builds</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">6</div>
+                    <div class="hero-stat-label">Total Bosses</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">3</div>
+                    <div class="hero-stat-label">Difficulty Tiers</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">2</div>
+                    <div class="hero-stat-label">Hidden Bosses</div>
+                </div>
             </div>
-
-            <div class="category-card">
-                <div class="category-icon">🏜️</div>
-                <h3>Desert Bosses</h3>
-                <p>Challenging desert encounters across all three tiers</p>
-                <span class="boss-count">3 Bosses</span>
-            </div>
-
-            <div class="category-card">
-                <div class="category-icon">👹</div>
-                <h3>Mini Bosses</h3>
-                <p>Chunkham, Stone Golem, and timed encounters</p>
-                <span class="boss-count">Multiple</span>
-            </div>
-
-            <div class="category-card">
-                <div class="category-icon">🎭</div>
-                <h3>Optional Bosses</h3>
-                <p>Hidden bosses like Sus Bush and Suspicious Bandit</p>
-                <span class="boss-count">2+ Bosses</span>
-            </div>
-        </div>
+        </section>
 
         <!-- Forest Bosses -->
-        <h2 class="section-title">🌲 Forest Boss Encounters</h2>
-        <p class="section-subtitle">Progressive difficulty across three tiers</p>
-        
+        <h2 class="section-title">🌲 Forest Region Bosses</h2>
+        <p class="section-subtitle">Master the three tiers of forest challenges</p>
+
         <div class="boss-grid">
             <!-- Lil Bark -->
-            <div class="boss-card">
-                <div class="boss-header">
+            <div class="boss-card" onclick="window.open('/guides/bosses/lil-bark-guide.html', '_blank')">
+                <div class="boss-card-content">
                     <div class="boss-icon">🌳</div>
-                    <span class="boss-difficulty difficulty-easy">EASY</span>
-                </div>
-                <h3>Lil Bark</h3>
-                <p class="boss-tier">Forest Tier 1 Final Boss</p>
-                
-                <div class="boss-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Health</div>
-                        <div class="stat-value">12,000 HP</div>
+                    <div class="boss-badges">
+                        <span class="boss-badge badge-tier1">Tier 1</span>
+                        <span class="boss-badge badge-tier1">Beginner</span>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Speed</div>
-                        <div class="stat-value">Slow</div>
+                    <h3 class="boss-name">Lil Bark</h3>
+                    <p class="boss-subtitle">First Forest Boss - Tutorial Fight</p>
+                    
+                    <div class="boss-stats">
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">HP</div>
+                            <div class="boss-stat-value">~100K</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Difficulty</div>
+                            <div class="boss-stat-value">⭐⭐☆☆☆</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Spawn Time</div>
+                            <div class="boss-stat-value">Any Time</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Location</div>
+                            <div class="boss-stat-value">Forest</div>
+                        </div>
+                    </div>
+
+                    <div class="boss-mechanics">
+                        <div class="boss-mechanics-title">Core Mechanics:</div>
+                        <ul class="boss-mechanics-list">
+                            <li>Red sphere projectiles</li>
+                            <li>Predictable movement patterns</li>
+                            <li>Circle-kiting strategy</li>
+                            <li>Red aura portal tracking</li>
+                        </ul>
+                    </div>
+
+                    <div class="boss-tips">
+                        <div class="boss-tips-title">💡 Pro Tip</div>
+                        <div class="boss-tips-text">Defeat in under 6 minutes with CL4NK to unlock Speedrunner achievement and character skin!</div>
                     </div>
                 </div>
-
-                <div class="boss-features">
-                    <span class="feature-tag">Summons Tree Lines</span>
-                    <span class="feature-tag">Red Warning Spheres</span>
-                    <span class="feature-tag">Tanky Boss</span>
-                </div>
-
-                <div class="boss-mechanics">
-                    <h4>⚠️ Core Mechanics</h4>
-                    <ul>
-                        <li>Summons pointy tree lines in front</li>
-                        <li>Red spheres mark danger zones</li>
-                        <li>Slow movement, easy to dodge</li>
-                        <li>Stay close for maximum DPS</li>
-                    </ul>
-                </div>
-
-                <a href="lil-bark-guide.html" class="view-guide-btn">View Complete Guide →</a>
             </div>
 
             <!-- Chadbark -->
-            <div class="boss-card">
-                <div class="boss-header">
+            <div class="boss-card" onclick="window.open('/guides/bosses/chadbark-guide.html', '_blank')">
+                <div class="boss-card-content">
                     <div class="boss-icon">🌲</div>
-                    <span class="boss-difficulty difficulty-medium">MEDIUM</span>
-                </div>
-                <h3>Chadbark</h3>
-                <p class="boss-tier">Forest Tier 2 Final Boss</p>
-                
-                <div class="boss-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Health</div>
-                        <div class="stat-value">~500K HP</div>
+                    <div class="boss-badges">
+                        <span class="boss-badge badge-tier2">Tier 2</span>
+                        <span class="boss-badge badge-tier2">Intermediate</span>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Speed</div>
-                        <div class="stat-value">Medium</div>
+                    <h3 class="boss-name">Chadbark</h3>
+                    <p class="boss-subtitle">Enhanced Forest Boss</p>
+                    
+                    <div class="boss-stats">
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">HP</div>
+                            <div class="boss-stat-value">~500K</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Difficulty</div>
+                            <div class="boss-stat-value">⭐⭐⭐☆☆</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">New Mechanics</div>
+                            <div class="boss-stat-value">Yes</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Tier</div>
+                            <div class="boss-stat-value">Forest 2</div>
+                        </div>
+                    </div>
+
+                    <div class="boss-mechanics">
+                        <div class="boss-mechanics-title">Core Mechanics:</div>
+                        <ul class="boss-mechanics-list">
+                            <li>Increased damage output</li>
+                            <li>Faster projectile speed</li>
+                            <li>Additional attack patterns</li>
+                            <li>Higher HP pool</li>
+                        </ul>
+                    </div>
+
+                    <div class="boss-tips">
+                        <div class="boss-tips-title">💡 Strategy</div>
+                        <div class="boss-tips-text">Build up projectile count and attack speed before engaging. Movement speed is crucial!</div>
                     </div>
                 </div>
-
-                <div class="boss-features">
-                    <span class="feature-tag">Enhanced Attacks</span>
-                    <span class="feature-tag">More Aggressive</span>
-                    <span class="feature-tag">Tier 2 Challenge</span>
-                </div>
-
-                <div class="boss-mechanics">
-                    <h4>⚠️ Core Mechanics</h4>
-                    <ul>
-                        <li>Stronger version of Lil Bark</li>
-                        <li>Faster attack patterns</li>
-                        <li>Higher HP pool</li>
-                        <li>Requires better builds</li>
-                    </ul>
-                </div>
-
-                <a href="chadbark-guide.html" class="view-guide-btn">View Complete Guide →</a>
             </div>
 
             <!-- Bark Vader -->
-            <div class="boss-card">
-                <div class="boss-header">
-                    <div class="boss-icon">👑</div>
-                    <span class="boss-difficulty difficulty-extreme">EXTREME</span>
-                </div>
-                <h3>Bark Vader</h3>
-                <p class="boss-tier">Forest Tier 3 Final Boss</p>
-                
-                <div class="boss-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Health</div>
-                        <div class="stat-value">18M HP</div>
+            <div class="boss-card" onclick="window.open('/guides/bosses/bark-vader-guide.html', '_blank')">
+                <div class="boss-card-content">
+                    <div class="boss-icon">🎄</div>
+                    <div class="boss-badges">
+                        <span class="boss-badge badge-tier3">Tier 3</span>
+                        <span class="boss-badge badge-tier3">Extreme</span>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Special</div>
-                        <div class="stat-value">Weapon Lock</div>
+                    <h3 class="boss-name">Bark Vader</h3>
+                    <p class="boss-subtitle">Ultimate Forest Boss - Weapon Deletion!</p>
+                    
+                    <div class="boss-stats">
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">HP</div>
+                            <div class="boss-stat-value">18M</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Difficulty</div>
+                            <div class="boss-stat-value">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Gimmick</div>
+                            <div class="boss-stat-value">Weapon Lock</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Phases</div>
+                            <div class="boss-stat-value">Multiple</div>
+                        </div>
+                    </div>
+
+                    <div class="boss-mechanics">
+                        <div class="boss-mechanics-title">⚠️ WARNING Mechanics:</div>
+                        <ul class="boss-mechanics-list">
+                            <li><strong>Deletes all weapons except starting weapon</strong></li>
+                            <li>Shield pylons + healing phases</li>
+                            <li>Ground tracking attacks</li>
+                            <li>Aerial frost bolt barrages</li>
+                        </ul>
+                    </div>
+
+                    <div class="boss-tips">
+                        <div class="boss-tips-title">🔥 Critical Tip</div>
+                        <div class="boss-tips-text">ONLY invest in your starting weapon! Focus ALL upgrades there. Prioritize movement speed to destroy pylons quickly!</div>
                     </div>
                 </div>
-
-                <div class="boss-features">
-                    <span class="feature-tag">🔒 Disables Secondary Weapons</span>
-                    <span class="feature-tag">Shield Pylons</span>
-                    <span class="feature-tag">Self-Healing</span>
-                </div>
-
-                <div class="boss-mechanics">
-                    <h4>⚠️ CRITICAL Mechanics</h4>
-                    <ul>
-                        <li>Disables ALL secondary weapons!</li>
-                        <li>Shields himself with pylons</li>
-                        <li>Heals when pylons active</li>
-                        <li>Must destroy pylons quickly</li>
-                        <li>Only starting weapon usable</li>
-                    </ul>
-                </div>
-
-                <a href="bark-vader-guide.html" class="view-guide-btn">View Complete Guide →</a>
             </div>
         </div>
 
         <!-- Desert Bosses -->
-        <h2 class="section-title">🏜️ Desert Boss Encounters</h2>
-        <p class="section-subtitle">Unlock by reaching Forest Tier 2 Stage 2 with CL4NK</p>
-        
+        <h2 class="section-title">🏜️ Desert Region Bosses</h2>
+        <p class="section-subtitle">Face the scorching challenges of the desert</p>
+
         <div class="boss-grid">
-            <div class="boss-card">
-                <div class="boss-header">
-                    <div class="boss-icon">🦂</div>
-                    <span class="boss-difficulty difficulty-easy">TIER 1</span>
+            <!-- Anubis -->
+            <div class="boss-card" onclick="window.open('/guides/bosses/anubis-guide.html', '_blank')">
+                <div class="boss-card-content">
+                    <div class="boss-icon">⚱️</div>
+                    <div class="boss-badges">
+                        <span class="boss-badge badge-desert">Desert</span>
+                        <span class="boss-badge badge-tier3">Advanced</span>
+                    </div>
+                    <h3 class="boss-name">Anubis</h3>
+                    <p class="boss-subtitle">Judge of the Desert - Multi-Phase Battle</p>
+                    
+                    <div class="boss-stats">
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">HP</div>
+                            <div class="boss-stat-value">Varies</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Difficulty</div>
+                            <div class="boss-stat-value">⭐⭐⭐⭐☆</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Unlock</div>
+                            <div class="boss-stat-value">CL4NK Run</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Region</div>
+                            <div class="boss-stat-value">Desert</div>
+                        </div>
+                    </div>
+
+                    <div class="boss-mechanics">
+                        <div class="boss-mechanics-title">Core Mechanics:</div>
+                        <ul class="boss-mechanics-list">
+                            <li>AOE laser attacks</li>
+                            <li>Swarm pattern summons</li>
+                            <li>High mobility requirement</li>
+                            <li>Open arena combat</li>
+                        </ul>
+                    </div>
+
+                    <div class="boss-tips">
+                        <div class="boss-tips-title">💡 Strategy</div>
+                        <div class="boss-tips-text">Unlock Desert by completing Forest Tier 2 with CL4NK. Requires excellent positioning!</div>
+                    </div>
                 </div>
-                <h3>Desert Tier 1 Boss</h3>
-                <p class="boss-tier">Desert Tier 1 Final Boss</p>
-                
-                <div class="boss-features">
-                    <span class="feature-tag">Desert Themed</span>
-                    <span class="feature-tag">Open Space Combat</span>
-                    <span class="feature-tag">Entry Level</span>
-                </div>
-
-                <p style="color: #b8b8b8; margin: 1rem 0;">First desert boss encounter. More open combat space compared to forest.</p>
-
-                <a href="desert-tier1-guide.html" class="view-guide-btn">View Guide →</a>
-            </div>
-
-            <div class="boss-card">
-                <div class="boss-header">
-                    <div class="boss-icon">🐍</div>
-                    <span class="boss-difficulty difficulty-medium">TIER 2</span>
-                </div>
-                <h3>Desert Tier 2 Boss</h3>
-                <p class="boss-tier">Desert Tier 2 Final Boss</p>
-                
-                <div class="boss-features">
-                    <span class="feature-tag">Increased Difficulty</span>
-                    <span class="feature-tag">Complex Patterns</span>
-                </div>
-
-                <p style="color: #b8b8b8; margin: 1rem 0;">Mid-tier desert challenge with enhanced mechanics.</p>
-
-                <a href="desert-tier2-guide.html" class="view-guide-btn">View Guide →</a>
-            </div>
-
-            <div class="boss-card">
-                <div class="boss-header">
-                    <div class="boss-icon">👹</div>
-                    <span class="boss-difficulty difficulty-extreme">TIER 3</span>
-                </div>
-                <h3>Desert Tier 3 Boss</h3>
-                <p class="boss-tier">Desert Tier 3 Final Boss</p>
-                
-                <div class="boss-features">
-                    <span class="feature-tag">🔒 Weapon Restrictions</span>
-                    <span class="feature-tag">Ultimate Challenge</span>
-                </div>
-
-                <div class="boss-mechanics">
-                    <h4>⚠️ Expected Mechanics</h4>
-                    <ul>
-                        <li>Similar weapon lock to Bark Vader</li>
-                        <li>Desert-themed attacks</li>
-                        <li>Extreme difficulty</li>
-                    </ul>
-                </div>
-
-                <a href="desert-tier3-guide.html" class="view-guide-btn">View Guide →</a>
             </div>
         </div>
 
-        <!-- Optional Bosses -->
-        <h2 class="section-title">🎭 Optional & Hidden Bosses</h2>
-        <p class="section-subtitle">Special encounters that unlock unique characters</p>
-        
+        <!-- Hidden Bosses -->
+        <h2 class="section-title">🎭 Hidden Boss Encounters</h2>
+        <p class="section-subtitle">Secret bosses that unlock unique characters</p>
+
         <div class="boss-grid">
-            <!-- Sus Bush -->
-            <div class="boss-card">
-                <div class="boss-header">
+            <!-- Bush -->
+            <div class="boss-card" onclick="window.open('/guides/bosses/bush-guide.html', '_blank')">
+                <div class="boss-card-content">
                     <div class="boss-icon">🌿</div>
-                    <span class="boss-difficulty difficulty-hard">HIDDEN</span>
-                </div>
-                <h3>Sus Bush</h3>
-                <p class="boss-tier">Forest Hidden Boss</p>
-                
-                <div class="boss-features">
-                    <span class="feature-tag">Character Unlock</span>
-                    <span class="feature-tag">Optional Fight</span>
-                    <span class="feature-tag">High Risk</span>
-                </div>
+                    <div class="boss-badges">
+                        <span class="boss-badge badge-hidden">Hidden</span>
+                        <span class="boss-badge badge-tier3">Extreme</span>
+                    </div>
+                    <h3 class="boss-name">Bush (Suspicious Bush)</h3>
+                    <p class="boss-subtitle">Hidden Forest Boss - Character Unlock</p>
+                    
+                    <div class="boss-stats">
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">HP</div>
+                            <div class="boss-stat-value">Very High</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Difficulty</div>
+                            <div class="boss-stat-value">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Trigger</div>
+                            <div class="boss-stat-value">Sus Bush</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Reward</div>
+                            <div class="boss-stat-value">Bush Char</div>
+                        </div>
+                    </div>
 
-                <div class="boss-mechanics">
-                    <h4>⚠️ Unlock Requirements</h4>
-                    <ul>
-                        <li>Find and interact with Sus Bush</li>
-                        <li>Defeat to unlock Bush character</li>
-                        <li>Requires Sniper Rifle weapon</li>
-                        <li>Drops free chest on death</li>
-                    </ul>
-                </div>
+                    <div class="boss-mechanics">
+                        <div class="boss-mechanics-title">⚠️ Warning:</div>
+                        <ul class="boss-mechanics-list">
+                            <li><strong>Extremely high damage!</strong></li>
+                            <li>Requires late-game build</li>
+                            <li>Needs Sniper unlocked</li>
+                            <li>Drops free chest on death</li>
+                        </ul>
+                    </div>
 
-                <a href="sus-bush-guide.html" class="view-guide-btn">View Guide →</a>
+                    <div class="boss-tips">
+                        <div class="boss-tips-title">🎯 Unlock Tip</div>
+                        <div class="boss-tips-text">AVOID early game! Only fight when fully powered up. Unlocks Bush character (requires Sniper weapon).</div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Suspicious Bandit -->
-            <div class="boss-card">
-                <div class="boss-header">
-                    <div class="boss-icon">🎭</div>
-                    <span class="boss-difficulty difficulty-hard">HIDDEN</span>
-                </div>
-                <h3>Suspicious Bandit</h3>
-                <p class="boss-tier">Desert Hidden Boss</p>
-                
-                <div class="boss-features">
-                    <span class="feature-tag">Character Unlock</span>
-                    <span class="feature-tag">Dexecutioner Required</span>
-                    <span class="feature-tag">Free Chest</span>
-                </div>
+            <!-- Bandit -->
+            <div class="boss-card" onclick="window.open('/guides/bosses/bandit-guide.html', '_blank')">
+                <div class="boss-card-content">
+                    <div class="boss-icon">🤠</div>
+                    <div class="boss-badges">
+                        <span class="boss-badge badge-hidden">Hidden</span>
+                        <span class="boss-badge badge-desert">Desert</span>
+                    </div>
+                    <h3 class="boss-name">Bandit</h3>
+                    <p class="boss-subtitle">Desert Hidden Boss - Dexecutioner Unlock</p>
+                    
+                    <div class="boss-stats">
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">HP</div>
+                            <div class="boss-stat-value">High</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Difficulty</div>
+                            <div class="boss-stat-value">⭐⭐⭐⭐☆</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Location</div>
+                            <div class="boss-stat-value">Desert</div>
+                        </div>
+                        <div class="boss-stat">
+                            <div class="boss-stat-label">Reward</div>
+                            <div class="boss-stat-value">Character</div>
+                        </div>
+                    </div>
 
-                <div class="boss-mechanics">
-                    <h4>⚠️ Unlock Requirements</h4>
-                    <ul>
-                        <li>Find Suspicious Bandit in Desert</li>
-                        <li>Defeat to unlock Bandit character</li>
-                        <li>Must have Dexecutioner weapon</li>
-                        <li>Drops free chest on death</li>
-                    </ul>
-                </div>
+                    <div class="boss-mechanics">
+                        <div class="boss-mechanics-title">Core Mechanics:</div>
+                        <ul class="boss-mechanics-list">
+                            <li>Fast-paced combat</li>
+                            <li>Desert environment</li>
+                            <li>Special spawn trigger</li>
+                            <li>Character unlock reward</li>
+                        </ul>
+                    </div>
 
-                <a href="suspicious-bandit-guide.html" class="view-guide-btn">View Guide →</a>
+                    <div class="boss-tips">
+                        <div class="boss-tips-title">💡 Unlock</div>
+                        <div class="boss-tips-text">Find and defeat in Desert. Requires Dexecutioner weapon to unlock as playable character.</div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Boss Timeline -->
-        <div class="boss-timeline">
-            <h3>⏰ Boss Spawn Timeline</h3>
+        <!-- Boss Curse System -->
+        <section class="curse-section">
+            <div class="curse-icon">👹</div>
+            <h2 class="curse-title">Boss Curse System</h2>
+            <p class="curse-desc">
+                Activate Boss Curse shrines to spawn additional bosses during the final fight. High risk, high reward!
+                Each curse adds another boss and slightly increases their HP, but rewards you with extra loot chests.
+            </p>
             
-            <div class="timeline-item">
-                <div class="timeline-time">7:00</div>
-                <div class="timeline-content">
-                    <strong>First Mini Boss</strong> - Tier 1 & 2 (6:30 for Tier 3)
-                    <p style="color: #888; margin-top: 0.5rem;">Chunkham or Stone Golem appears</p>
+            <div class="curse-features">
+                <div class="curse-feature">
+                    <div class="curse-feature-title">⚔️ Multiple Bosses</div>
+                    <p class="boss-tips-text">Fight 2+ bosses simultaneously</p>
+                </div>
+                <div class="curse-feature">
+                    <div class="curse-feature-title">💰 Extra Rewards</div>
+                    <p class="boss-tips-text">Bonus chest per curse</p>
+                </div>
+                <div class="curse-feature">
+                    <div class="curse-feature-title">🏆 Achievements</div>
+                    <p class="boss-tips-text">Required for "Speedboi"</p>
+                </div>
+                <div class="curse-feature">
+                    <div class="curse-feature-title">⚡ Higher Difficulty</div>
+                    <p class="boss-tips-text">Increased boss HP</p>
                 </div>
             </div>
+        </section>
 
-            <div class="timeline-item">
-                <div class="timeline-time">6:00</div>
-                <div class="timeline-content">
-                    <strong>First Swarm</strong> - Tier 1 & 2 (5:30 for Tier 3)
-                    <p style="color: #888; margin-top: 0.5rem;">Enemy density increases significantly</p>
+        <!-- General Strategies -->
+        <section class="strategies-section">
+            <h2 class="section-title">🎯 Universal Boss Strategies</h2>
+            <p class="section-subtitle">Core principles that work against all bosses</p>
+            
+            <div class="strategy-grid">
+                <div class="strategy-item">
+                    <div class="strategy-icon">📖</div>
+                    <h3 class="strategy-title">Study Patterns</h3>
+                    <p class="strategy-desc">Every boss has predictable attack patterns. Learn the timing windows and practice until they become muscle memory.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">⚔️</div>
+                    <h3 class="strategy-title">Weapon Choice</h3>
+                    <p class="strategy-desc">Different bosses favor different weapons. Ranged for mobile bosses, AOE for minion spawners, sustained DPS for tanks.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">🏃</div>
+                    <h3 class="strategy-title">Movement First</h3>
+                    <p class="strategy-desc">Movement is your primary defense. Learn optimal positioning and always have an escape route planned.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">💊</div>
+                    <h3 class="strategy-title">Resource Management</h3>
+                    <p class="strategy-desc">Save your best healing items for later phases when bosses become more dangerous. Use weaker heals early.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">🧘</div>
+                    <h3 class="strategy-title">Stay Calm</h3>
+                    <p class="strategy-desc">Boss fights are marathons, not sprints. Stay calm under pressure and stick to your strategy.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">🔄</div>
+                    <h3 class="strategy-title">Adapt & Learn</h3>
+                    <p class="strategy-desc">Each defeat teaches you something. Analyze what went wrong and adjust your build accordingly.</p>
                 </div>
             </div>
+        </section>
 
-            <div class="timeline-item">
-                <div class="timeline-time">3:00/2:00</div>
-                <div class="timeline-content">
-                    <strong>Second Mini Boss</strong> - 3:00 for Tier 3, 2:00 for Tier 1 & 2
-                    <p style="color: #888; margin-top: 0.5rem;">Another mini boss spawns</p>
-                </div>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="section-title">Ready to Master Every Boss?</h2>
+            <p class="section-subtitle">Explore our comprehensive guides and dominate Megabonk</p>
+            <div>
+                <a href="/guides/builds/" class="btn btn-primary">🔥 Best Builds for Bosses</a>
+                <a href="/guides/characters/" class="btn btn-secondary">👥 Character Guides</a>
+                <a href="/database/weapons/" class="btn btn-secondary">⚔️ Weapon Database</a>
             </div>
-
-            <div class="timeline-item">
-                <div class="timeline-time">0:00</div>
-                <div class="timeline-content">
-                    <strong>Final Swarm</strong> - Time runs out
-                    <p style="color: #888; margin-top: 0.5rem;">Endless waves begin if boss not defeated</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pro Tips -->
-        <div class="pro-tips">
-            <h3>💡 Universal Boss Strategies</h3>
-            <div class="tip-grid">
-                <div class="tip-item">
-                    <h4>🎯 Build for Your Starting Weapon</h4>
-                    <p>Tier 3 bosses disable secondary weapons. Focus all upgrades on your starting weapon for late-game viability.</p>
-                </div>
-
-                <div class="tip-item">
-                    <h4>🛡️ Survivability > Damage</h4>
-                    <p>Use Defense Tome, Shield Tome, or Health/Armor Tomes. You can't DPS if you're dead.</p>
-                </div>
-
-                <div class="tip-item">
-                    <h4>⚡ The Holy Trinity</h4>
-                    <p>XP Tome + Curse Tome + Luck Tome is the meta combo for all boss fights. Increases power scaling exponentially.</p>
-                </div>
-
-                <div class="tip-item">
-                    <h4>🎲 Boss Curse Shrines</h4>
-                    <p>Spawns extra bosses but gives extra reward chests. Use strategically for achievements like "Speedboi".</p>
-                </div>
-
-                <div class="tip-item">
-                    <h4>💨 Speed is Life</h4>
-                    <p>Movement Speed helps you dodge attacks, destroy pylons (Bark Vader), and collect XP faster.</p>
-                </div>
-
-                <div class="tip-item">
-                    <h4>🔄 Don't Go Wide</h4>
-                    <p>Don't level multiple weapons equally. Deep investment in one weapon beats spreading upgrades thin.</p>
-                </div>
-            </div>
-        </div>
+        </section>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -906,53 +1072,51 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/guides/">All Guides</a></li>
-                    <li><a href="/guides/characters/">Character Guides</a></li>
-                    <li><a href="/guides/builds/">Build Guides</a></li>
+                    <li><a href="/guides/characters/">Characters</a></li>
+                    <li><a href="/guides/builds/">Builds</a></li>
                 </ul>
             </div>
-
             <div class="footer-section">
                 <h3>Boss Guides</h3>
                 <ul>
-                    <li><a href="lil-bark-guide.html">Lil Bark Guide</a></li>
-                    <li><a href="chadbark-guide.html">Chadbark Guide</a></li>
-                    <li><a href="bark-vader-guide.html">Bark Vader Guide</a></li>
-                    <li><a href="sus-bush-guide.html">Sus Bush Guide</a></li>
+                    <li><a href="/guides/bosses/lil-bark-guide.html">Lil Bark Guide</a></li>
+                    <li><a href="/guides/bosses/bark-vader-guide.html">Bark Vader Guide</a></li>
+                    <li><a href="/guides/bosses/anubis-guide.html">Anubis Guide</a></li>
+                    <li><a href="/guides/bosses/bush-guide.html">Bush Guide</a></li>
                 </ul>
             </div>
-
-            <div class="footer-section">
-                <h3>Community</h3>
-                <ul>
-                    <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam Store</a></li>
-                    <li><a href="https://steamcommunity.com/app/3405340/" target="_blank">Steam Community</a></li>
-                    <li><a href="https://www.reddit.com/search/?q=Megabonk" target="_blank">Reddit</a></li>
-                </ul>
-            </div>
-
             <div class="footer-section">
                 <h3>Resources</h3>
                 <ul>
                     <li><a href="/database/weapons/">Weapon Database</a></li>
                     <li><a href="/guides/achievements/">Achievements</a></li>
-                    <li><a href="/guides/builds/">Best Builds</a></li>
+                    <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam Page</a></li>
                 </ul>
             </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="https://twitter.com/megabonkgame" target="_blank">Twitter</a></li>
+                    <li><a href="https://www.reddit.com/search/?q=Megabonk" target="_blank">Reddit</a></li>
+                    <li><a href="https://steamcommunity.com/app/3405340" target="_blank">Steam Community</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Megabonk.org - Unofficial Fan Guide | Not affiliated with the official game</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scroll animation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
-        // Fade in animation on scroll
+        // Scroll Animation Observer
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -961,13 +1125,25 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.boss-card, .category-card, .tip-item').forEach(el => {
+        // Observe all boss cards
+        document.querySelectorAll('.boss-card, .strategy-item, .curse-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
             observer.observe(el);
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
     </script>
 </body>
