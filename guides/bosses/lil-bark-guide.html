@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lil Bark Boss Guide - Megabonk Forest Tier 1 Strategy | Megabonk.org</title>
+    <meta name="description" content="Complete Lil Bark boss guide for Megabonk. Master attack patterns, unlock Speedrunner achievement, and defeat the Forest Tier 1 boss with expert strategies.">
+    <meta name="keywords" content="megabonk lil bark, lil bark boss guide, forest tier 1 boss, megabonk speedrunner, megabonk first boss">
+
+    <link rel="canonical" href="https://megabonk.org/guides/bosses/lil-bark-guide">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-green: #00c853;
+            --accent-green-light: #64dd17;
+            --accent-blue: #3a86ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --card-bg: rgba(30, 30, 46, 0.6);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0d3d0d 50%, #0a2e0a 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 200, 83, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Floating Leaves Animation */
+        .leaf {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            opacity: 0.3;
+            animation: fall 15s linear infinite;
+            z-index: -1;
+        }
+
+        .leaf:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .leaf:nth-child(2) { left: 30%; animation-delay: 2s; }
+        .leaf:nth-child(3) { left: 50%; animation-delay: 4s; }
+        .leaf:nth-child(4) { left: 70%; animation-delay: 6s; }
+        .leaf:nth-child(5) { left: 90%; animation-delay: 8s; }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                transform: rotate(0deg);
+            }
+            100% {
+                top: 110%;
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(0, 200, 83, 0.3);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-green);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .boss-hero {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.2) 0%, rgba(10, 46, 10, 0.4) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 2px solid rgba(0, 200, 83, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .boss-hero::before {
+            content: '🌳';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.05;
+            right: -5rem;
+            top: -5rem;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.05; }
+            50% { transform: scale(1.1); opacity: 0.08; }
+        }
+
+        .boss-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .boss-title-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .boss-icon-large {
+            font-size: 6rem;
+            filter: drop-shadow(0 0 20px rgba(0, 200, 83, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .boss-name-large {
+            font-size: 3.5rem;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .boss-subtitle-large {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+        }
+
+        .boss-badges-large {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-large {
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .badge-tier1 {
+            background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
+        }
+
+        .badge-beginner {
+            background: linear-gradient(135deg, #3a86ff 0%, #4facfe 100%);
+        }
+
+        .badge-speedrun {
+            background: linear-gradient(135deg, #ffd600 0%, #ffab00 100%);
+            color: #000;
+        }
+
+        /* Stats Grid */
+        .boss-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 200, 83, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 200, 83, 0.3);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        /* Section Styles */
+        .section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 200, 83, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title-icon {
+            font-size: 2rem;
+        }
+
+        /* How to Find Section */
+        .step-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: rgba(0, 200, 83, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-green);
+            display: flex;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-green);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Attack Patterns */
+        .attack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .attack-card {
+            background: rgba(0, 200, 83, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            transition: all 0.3s;
+        }
+
+        .attack-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
+            box-shadow: 0 10px 30px rgba(0, 200, 83, 0.2);
+        }
+
+        .attack-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .attack-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--accent-green);
+            text-align: center;
+        }
+
+        .attack-threat {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .threat-badge {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .threat-low { background: rgba(0, 200, 83, 0.3); }
+        .threat-medium { background: rgba(255, 193, 7, 0.3); color: #ffc107; }
+        .threat-high { background: rgba(255, 82, 82, 0.3); color: #ff5252; }
+
+        .attack-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .counter-strategy {
+            background: rgba(0, 200, 83, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .counter-title {
+            font-weight: bold;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Recommended Builds */
+        .build-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .build-card {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.1) 0%, rgba(10, 46, 10, 0.2) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 200, 83, 0.3);
+            transition: all 0.3s;
+        }
+
+        .build-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 200, 83, 0.3);
+        }
+
+        .build-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .build-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .build-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .build-rating {
+            display: flex;
+            justify-content: center;
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .build-difficulty {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .build-weapons {
+            margin-bottom: 1rem;
+        }
+
+        .build-weapons-title {
+            font-weight: bold;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .weapon-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .weapon-tag {
+            background: rgba(0, 200, 83, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .build-stats {
+            background: rgba(0, 200, 83, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .build-stats-title {
+            font-weight: bold;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .build-stats-list {
+            list-style: none;
+        }
+
+        .build-stats-list li {
+            padding: 0.3rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .build-stats-list li::before {
+            content: '▸';
+            color: var(--accent-green);
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border: 2px solid rgba(255, 193, 7, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .warning-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ffc107;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .warning-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Success Box */
+        .success-box {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.1) 0%, rgba(100, 221, 23, 0.1) 100%);
+            border: 2px solid rgba(0, 200, 83, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .success-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Pro Tips */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tip-card {
+            background: rgba(0, 200, 83, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-content {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 200, 83, 0.1);
+            color: var(--text-primary);
+            border: 2px solid var(--accent-green);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 200, 83, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(22, 33, 62, 0.95);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+            border-top: 2px solid rgba(0, 200, 83, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 200, 83, 0.2);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(26, 26, 46, 0.98);
+                width: 100%;
+                padding: 2rem;
+                transition: 0.3s;
+                border-top: 2px solid rgba(0, 200, 83, 0.3);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .boss-name-large {
+                font-size: 2.5rem;
+            }
+
+            .boss-stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .attack-grid, .build-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .boss-hero {
+                padding: 2rem 1.5rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="leaf">🍃</div>
+    <div class="leaf">🍂</div>
+    <div class="leaf">🍃</div>
+    <div class="leaf">🍂</div>
+    <div class="leaf">🍃</div>
+
+    <header>
+        <nav>
+            <a href="/" class="logo">🎮 Megabonk.org</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/guides/characters/">Characters</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+                <li><a href="/guides/bosses/">Bosses</a></li>
+                <li><a href="/database/weapons/">Weapons</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> > <a href="/guides/">Guides</a> > <a href="/guides/bosses/">Boss Strategies</a> > <span>Lil Bark</span>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="boss-hero">
+            <div class="boss-hero-content">
+                <div class="boss-title-section">
+                    <div class="boss-icon-large">🌳</div>
+                    <h1 class="boss-name-large">Lil Bark</h1>
+                    <p class="boss-subtitle-large">Forest Tier 1 Final Boss - Your First Real Challenge</p>
+                    <div class="boss-badges-large">
+                        <span class="badge-large badge-tier1">Tier 1</span>
+                        <span class="badge-large badge-beginner">Beginner Friendly</span>
+                        <span class="badge-large badge-speedrun">Speedrun Target</span>
+                    </div>
+                </div>
+
+                <div class="boss-stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Health Pool</div>
+                        <div class="stat-value">~100K</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Difficulty</div>
+                        <div class="stat-value">⭐⭐☆☆☆</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Location</div>
+                        <div class="stat-value">Forest</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Spawn Method</div>
+                        <div class="stat-value">Boss Portal</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Speedrun Time</div>
+                        <div class="stat-value">< 6 Minutes</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Best Character</div>
+                        <div class="stat-value">CL4NK</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">📖</span>
+                Boss Overview
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                Lil Bark is the first major boss encounter in Megabonk's Forest region. Congratulations - you've officially graduated from swatting goblins to facing down a walking tree! This boss serves as an introduction to Megabonk's boss mechanics, teaching you the fundamentals of positioning, pattern recognition, and resource management. While labeled "beginner friendly," don't underestimate Lil Bark - he can still end your run if you're unprepared.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.8;">
+                The fight emphasizes constant movement, projectile dodging, and sustained DPS. It's the perfect training ground for the more challenging bosses you'll face later. Master Lil Bark, and you'll have the foundation needed to tackle Chadbark and eventually the infamous Bark Vader.
+            </p>
+        </section>
+
+        <!-- How to Find -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">🗺️</span>
+                How to Find Lil Bark
+            </h2>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Look for Red Aura Strings</h3>
+                        <p>The easiest way to locate Lil Bark is by following the red aura strings that float across your map. These glowing red trails are your breadcrumbs - they always lead toward the Boss Portal. Pay attention to where they're flowing from and follow them closely.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Find the Boss Portal</h3>
+                        <p>Once you follow the red aura strings, you'll discover the Boss Portal - a distinctive stone platform with a circular entrance. This is your gateway to the Lil Bark encounter. The portal has a unique visual appearance that makes it stand out from regular forest terrain.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Prepare Your Build</h3>
+                        <p>Before activating the portal, make sure you're ready! Check your weapon upgrades, tome levels, and HP. Ideally, you want to be at least level 15+ with solid DPS and some survivability stats. Don't rush - clear some more enemies if you need more upgrades.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Press E to Summon</h3>
+                        <p>When you're ready, approach the Boss Portal and press E to summon Lil Bark. The fight begins immediately, so make sure you're positioned well and mentally prepared. There's no going back once you start!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">
+                    <span>⚠️</span> Timing Recommendation
+                </div>
+                <div class="warning-content">
+                    For your first clear, aim to find and summon Lil Bark around the 5-7 minute mark. This gives you enough time to build up your character while leaving a comfortable buffer before the Final Swarm (which starts at 0:00). For Speedrunner achievement attempts, you'll need to locate the portal within the first 1-2 minutes and defeat Lil Bark in under 6 minutes total.
+                </div>
+            </div>
+        </section>
+
+        <!-- Attack Patterns -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">⚔️</span>
+                Attack Patterns & Mechanics
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Lil Bark has relatively simple and predictable attack patterns, making him an ideal first boss. Learn these mechanics well, as they form the foundation for more complex boss fights later.
+            </p>
+
+            <div class="attack-grid">
+                <div class="attack-card">
+                    <div class="attack-icon">🔴</div>
+                    <h3 class="attack-name">Red Sphere Projectiles</h3>
+                    <div class="attack-threat">
+                        <span class="threat-badge threat-medium">Medium Threat</span>
+                    </div>
+                    <p class="attack-desc">
+                        Lil Bark's primary attack. He continuously fires red spheres in your direction. These projectiles move at a moderate speed and deal decent damage on hit. The spheres have a slight homing property but can be easily dodged with proper movement.
+                    </p>
+                    <div class="counter-strategy">
+                        <div class="counter-title">Counter Strategy:</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Keep circling around Lil Bark in a wide orbit. The red spheres are most dangerous when you're standing still or moving in straight lines. Maintain constant circular movement to weave between the projectiles naturally.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-icon">🌀</div>
+                    <h3 class="attack-name">Projectile Barrage</h3>
+                    <div class="attack-threat">
+                        <span class="threat-badge threat-medium">Medium Threat</span>
+                    </div>
+                    <p class="attack-desc">
+                        Occasionally, Lil Bark increases the rate of red sphere spawns, creating a temporary bullet-hell situation. This happens when he reaches certain HP thresholds or after a set time interval during the fight.
+                    </p>
+                    <div class="counter-strategy">
+                        <div class="counter-title">Counter Strategy:</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Don't panic! Continue your circular movement pattern but widen your orbit slightly. Use obstacles in the arena to your advantage. If you have movement speed upgrades, this is when they shine.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-icon">🌲</div>
+                    <h3 class="attack-name">Rooted Position</h3>
+                    <div class="attack-threat">
+                        <span class="threat-badge threat-low">Low Threat</span>
+                    </div>
+                    <p class="attack-desc">
+                        Unlike many bosses, Lil Bark doesn't chase you around the arena. He stays relatively stationary in the center, making this a "turret boss" fight. This predictable positioning is actually your advantage.
+                    </p>
+                    <div class="counter-strategy">
+                        <div class="counter-title">Counter Strategy:</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Use his stationary nature to your advantage. Maintain a medium distance - close enough that all your attacks hit, but far enough to have reaction time for dodging. Stay within your weapon's optimal range.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Builds -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">🛠️</span>
+                Recommended Builds & Characters
+            </h2>
+
+            <div class="build-grid">
+                <div class="build-card">
+                    <div class="build-header">
+                        <div class="build-icon">🔫</div>
+                        <h3 class="build-name">CL4NK Crit Machine</h3>
+                        <div class="build-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="build-difficulty">Difficulty: Easy | Best for Speedrun</p>
+                    </div>
+
+                    <div class="build-weapons">
+                        <div class="build-weapons-title">Recommended Weapons:</div>
+                        <div class="weapon-list">
+                            <span class="weapon-tag">Revolver (Primary)</span>
+                            <span class="weapon-tag">Bone</span>
+                            <span class="weapon-tag">Bananarang</span>
+                        </div>
+                    </div>
+
+                    <div class="build-stats">
+                        <div class="build-stats-title">Priority Stats:</div>
+                        <ul class="build-stats-list">
+                            <li>Critical Damage (CL4NK's passive)</li>
+                            <li>Attack Speed</li>
+                            <li>Projectile Count</li>
+                            <li>Movement Speed</li>
+                        </ul>
+                    </div>
+
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                        CL4NK's innate crit rate bonus makes him the ideal character for this fight. The Revolver's rapid fire combined with his crit passive melts Lil Bark quickly. Perfect for Speedrunner achievement!
+                    </p>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <div class="build-icon">🦊</div>
+                        <h3 class="build-name">Fox Kite Master</h3>
+                        <div class="build-rating">⭐⭐⭐⭐☆</div>
+                        <p class="build-difficulty">Difficulty: Easy | Beginner Recommended</p>
+                    </div>
+
+                    <div class="build-weapons">
+                        <div class="build-weapons-title">Recommended Weapons:</div>
+                        <div class="weapon-list">
+                            <span class="weapon-tag">Firestaff (Primary)</span>
+                            <span class="weapon-tag">Aura</span>
+                            <span class="weapon-tag">Revolver</span>
+                        </div>
+                    </div>
+
+                    <div class="build-stats">
+                        <div class="build-stats-title">Priority Stats:</div>
+                        <ul class="build-stats-list">
+                            <li>Luck (Fox's passive)</li>
+                            <li>Projectile Count</li>
+                            <li>Attack Speed</li>
+                            <li>HP/Lifesteal</li>
+                        </ul>
+                    </div>
+
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                        Fox's luck passive gives you better upgrade options throughout your run. The Firestaff provides good ranged damage while Aura offers passive protection. Great for first-time boss attempts.
+                    </p>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <div class="build-icon">🛡️</div>
+                        <h3 class="build-name">Sir Oofie Tank</h3>
+                        <div class="build-rating">⭐⭐⭐☆☆</div>
+                        <p class="build-difficulty">Difficulty: Medium | Safe & Steady</p>
+                    </div>
+
+                    <div class="build-weapons">
+                        <div class="build-weapons-title">Recommended Weapons:</div>
+                        <div class="weapon-list">
+                            <span class="weapon-tag">Sword (Primary)</span>
+                            <span class="weapon-tag">Aegis</span>
+                            <span class="weapon-tag">Aura</span>
+                        </div>
+                    </div>
+
+                    <div class="build-stats">
+                        <div class="build-stats-title">Priority Stats:</div>
+                        <ul class="build-stats-list">
+                            <li>Armor (Sir Oofie's passive)</li>
+                            <li>HP</li>
+                            <li>Lifesteal</li>
+                            <li>Attack Size</li>
+                        </ul>
+                    </div>
+
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                        Sir Oofie's armor passive makes him incredibly tanky. While slower than other characters, his survivability lets you learn the fight without worrying too much about mistakes. Great for practice runs.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Battle Strategy -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">🎯</span>
+                Winning Battle Strategy
+            </h2>
+
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Pre-Fight Preparation</h3>
+                        <p>Before summoning Lil Bark, ensure you have:</p>
+                        <ul style="margin-top: 0.5rem; color: var(--text-secondary);">
+                            <li style="margin: 0.5rem 0;">• Level 15+ recommended</li>
+                            <li style="margin: 0.5rem 0;">• Primary weapon fully upgraded</li>
+                            <li style="margin: 0.5rem 0;">• At least one survivability stat (HP/Lifesteal/Armor)</li>
+                            <li style="margin: 0.5rem 0;">• Movement speed upgrades if possible</li>
+                            <li style="margin: 0.5rem 0;">• Attack speed or projectile count boosted</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Opening Phase (100%-70% HP)</h3>
+                        <p>Start circling Lil Bark clockwise or counterclockwise - pick a direction and stick with it. Maintain a medium distance (not too close, not too far). Focus on establishing your rhythm. The red spheres come at a steady pace during this phase, so use it to warm up and get comfortable with the dodge pattern.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Mid Phase (70%-30% HP)</h3>
+                        <p>Projectile frequency increases. Continue your circular movement but widen your orbit slightly. Don't get greedy with damage - staying alive is more important than DPS. If you're using ranged weapons, this is where they shine. Stay mobile, keep attacking, and maintain your discipline.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Final Push (30%-0% HP)</h3>
+                        <p>Lil Bark enters "desperation mode" with maximum projectile spam. This is the most dangerous phase. If you have any healing shrines or invincibility pickups saved, now's the time to use them. Stay calm, maintain your movement pattern, and don't panic. The fight is almost over - consistency wins!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <div class="success-title">
+                    <span>💡</span> Pro Movement Tip
+                </div>
+                <div class="warning-content">
+                    <strong>The Golden Rule:</strong> Stay close to Lil Bark but keep moving. Staying close ensures every attack you unleash lands (maximizing DPS), while constant circular movement naturally weaves you between the red spheres. Think of it like orbiting a planet - maintain that steady circular path and you'll dodge most attacks automatically. This technique works on all "turret" style bosses!
+                </div>
+            </div>
+        </section>
+
+        <!-- Speedrunner Achievement -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">🏆</span>
+                Speedrunner Achievement Guide
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Want to unlock the prestigious Speedrunner achievement and earn a special character skin? Defeat Lil Bark in under 6 minutes! Here's your complete guide:
+            </p>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">⚡</div>
+                    <h3 class="tip-title">Speed is Everything</h3>
+                    <p class="tip-content">
+                        Prioritize movement speed upgrades early. You need to locate the Boss Portal within the first 1-2 minutes. Follow those red aura strings immediately - don't waste time farming regular enemies.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h3 class="tip-title">Use CL4NK</h3>
+                    <p class="tip-content">
+                        CL4NK is strongly recommended due to his crit damage buffs. His Revolver + crit passive combination provides the burst damage needed to kill Lil Bark quickly. Other characters can work but require near-perfect builds.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🔥</div>
+                    <h3 class="tip-title">Prioritize Damage</h3>
+                    <p class="tip-content">
+                        For speedruns, offense > defense. Focus on: Projectile Count, Attack Speed, Critical Damage, and Raw Damage upgrades. Skip defensive stats - you won't need them if you kill fast enough.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">📊</div>
+                    <h3 class="tip-title">Tome Choices</h3>
+                    <p class="tip-content">
+                        Take Damage Tome and Attack Speed Tome if offered. The Holy Trinity (XP, Curse, Luck) is great for long runs but not necessary for speedruns. Focus on immediate power spikes.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h3 class="tip-title">Aggressive Play</h3>
+                    <p class="tip-content">
+                        Stay as close to Lil Bark as safely possible. Every second counts, and maximum DPS uptime is crucial. Practice the fight a few times first to learn the patterns, then go for speed.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">⏱️</div>
+                    <h3 class="tip-title">Time Management</h3>
+                    <p class="tip-content">
+                        Ideal split: Find portal by 2:00, be level 10+ by 3:00, start fight by 3:30, finish by 6:00. If you're behind schedule, restart early rather than wasting a full run attempt.
+                    </p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">
+                    <span>🏅</span> Reward Details
+                </div>
+                <div class="warning-content">
+                    Successfully defeating Lil Bark in under 6 minutes unlocks the <strong>Speedrunner</strong> achievement AND rewards you with a special character skin for whichever character you used during the attempt. This skin is permanent and can be equipped from the character selection screen. The achievement is account-wide, but the skin is character-specific, so you can collect multiple skins by speedrunning with different characters!
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Mistakes -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">❌</span>
+                Common Mistakes to Avoid
+            </h2>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🐌</div>
+                    <h3 class="tip-title">Standing Still</h3>
+                    <p class="tip-content">
+                        The #1 killer of first-time attempts. Lil Bark's red spheres will swarm anyone who stops moving. Even while attacking, keep your character moving in circles. Movement is life!
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h3 class="tip-title">Fighting Underleveled</h3>
+                    <p class="tip-content">
+                        Summoning Lil Bark too early is a recipe for disaster. Take the time to reach level 15+ and get solid upgrades. A few extra minutes of farming makes the fight 10x easier.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">⚔️</div>
+                    <h3 class="tip-title">Weapon Spread</h3>
+                    <p class="tip-content">
+                        Don't spread your upgrades across too many weapons. Focus on maxing out 1-2 primary weapons. A level 7 Revolver beats three level 3 weapons every time.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🏃</div>
+                    <h3 class="tip-title">Panicking</h3>
+                    <p class="tip-content">
+                        When the screen fills with projectiles, new players tend to panic and lose their movement rhythm. Stay calm, maintain your circular pattern, and trust the strategy. Consistency beats panic.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">❤️</div>
+                    <h3 class="tip-title">Ignoring HP</h3>
+                    <p class="tip-content">
+                        Pure glass cannon builds can work, but not for your first clear. Invest in at least some HP or Lifesteal. You need survivability to learn the patterns and recover from mistakes.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">📍</div>
+                    <h3 class="tip-title">Distance Management</h3>
+                    <p class="tip-content">
+                        Being too far reduces your DPS. Being too close leaves no dodge reaction time. Find the sweet spot for your weapon type - usually medium range works best.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2 class="section-title">Master More Bosses</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Now that you've mastered Lil Bark, are you ready for the next challenge?
+            </p>
+            <div>
+                <a href="/guides/bosses/" class="btn btn-primary">🌲 All Boss Guides</a>
+                <a href="/guides/bosses/chadbark-guide.html" class="btn btn-secondary">Next: Chadbark →</a>
+                <a href="/guides/builds/" class="btn btn-secondary">🔥 Best Builds</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boss Guides</h3>
+                <ul>
+                    <li><a href="/guides/bosses/">All Bosses</a></li>
+                    <li><a href="/guides/bosses/lil-bark-guide.html">Lil Bark (Tier 1)</a></li>
+                    <li><a href="/guides/bosses/chadbark-guide.html">Chadbark (Tier 2)</a></li>
+                    <li><a href="/guides/bosses/bark-vader-guide.html">Bark Vader (Tier 3)</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Character Guides</h3>
+                <ul>
+                    <li><a href="/guides/characters/fox-kitsune-guide">Fox Guide</a></li>
+                    <li><a href="/guides/characters/cl4nk-guide">CL4NK Guide</a></li>
+                    <li><a href="/guides/characters/sir-oofie-guide">Sir Oofie Guide</a></li>
+                    <li><a href="/guides/characters/">All Characters</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Builds & Strategy</h3>
+                <ul>
+                    <li><a href="/guides/builds/">Build Guides</a></li>
+                    <li><a href="/database/weapons/">Weapon Database</a></li>
+                    <li><a href="/guides/achievements/">Achievements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam Page</a></li>
+                    <li><a href="https://twitter.com/megabonkgame" target="_blank">Twitter</a></li>
+                    <li><a href="https://www.reddit.com/search/?q=Megabonk" target="_blank">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Megabonk.org - Unofficial Fan Guide | Not affiliated with the official game</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('.section, .attack-card, .build-card, .tip-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
