@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bush (Suspicious Bush) Boss Guide - Forest Hidden Boss | Megabonk</title>
+    <meta name="description" content="Complete guide to finding and defeating Bush, the Suspicious Bush hidden boss in Megabonk Forest. Unlock Bush character and Sniper Rifle strategies.">
+    <meta name="keywords" content="megabonk bush boss, suspicious bush guide, bush character unlock, megabonk hidden boss, forest secret boss, sniper rifle">
+
+    <link rel="canonical" href="https://megabonk.org/guides/bosses/bush-guide">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a4d1a 0%, #0d260d 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Leaf particles animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(ellipse, rgba(34, 139, 34, 0.7) 0%, transparent 70%);
+            border-radius: 50% 0 50% 0;
+            animation: leafFloat 25s infinite;
+        }
+
+        @keyframes leafFloat {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.4; }
+            25% { transform: translateY(-120px) translateX(60px) rotate(90deg); opacity: 0.7; }
+            50% { transform: translateY(-240px) translateX(-40px) rotate(180deg); opacity: 0.9; }
+            75% { transform: translateY(-180px) translateX(80px) rotate(270deg); opacity: 0.6; }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 77, 26, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(34, 139, 34, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #32cd32;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #32cd32;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.3) 0%, rgba(26, 77, 26, 0.5) 100%);
+            border: 2px solid rgba(34, 139, 34, 0.5);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            animation: greenPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes greenPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(34, 139, 34, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(50, 205, 50, 0.6); }
+        }
+
+        .boss-icon {
+            font-size: 5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(34, 139, 34, 0.8);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(34, 139, 34, 0.8); filter: brightness(1); }
+            50% { text-shadow: 0 0 40px rgba(50, 205, 50, 1); filter: brightness(1.3); }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .boss-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #32cd32;
+            margin-bottom: 2rem;
+        }
+
+        /* Info banner */
+        .info-banner {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.4) 0%, rgba(50, 205, 50, 0.2) 100%);
+            border: 2px solid #32cd32;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+        }
+
+        .info-content h3 {
+            color: #32cd32;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(26, 77, 26, 0.6);
+            border: 2px solid rgba(34, 139, 34, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #32cd32;
+            box-shadow: 0 10px 30px rgba(34, 139, 34, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #32cd32;
+        }
+
+        /* Section styling */
+        .section {
+            background: rgba(26, 77, 26, 0.6);
+            border: 2px solid rgba(34, 139, 34, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #32cd32;
+            border-bottom: 2px solid rgba(34, 139, 34, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: #50fa7b;
+        }
+
+        /* Step cards */
+        .step-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.2) 0%, rgba(26, 77, 26, 0.4) 100%);
+            border: 2px solid rgba(34, 139, 34, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: all 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateX(10px);
+            border-color: #32cd32;
+            box-shadow: 0 10px 30px rgba(34, 139, 34, 0.3);
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: #32cd32;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d260d;
+        }
+
+        .step-content h3 {
+            color: #32cd32;
+            margin: 0 0 0.5rem 0;
+        }
+
+        /* Attack patterns */
+        .attack-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .attack-item {
+            background: rgba(34, 139, 34, 0.2);
+            border-left: 4px solid #32cd32;
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s;
+        }
+
+        .attack-item:hover {
+            background: rgba(34, 139, 34, 0.3);
+            transform: translateX(5px);
+        }
+
+        .attack-name {
+            font-weight: bold;
+            color: #32cd32;
+            margin-bottom: 0.5rem;
+        }
+
+        .threat-level {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        .threat-medium {
+            background: #ff8c00;
+            color: white;
+        }
+
+        .threat-high {
+            background: #ff6b00;
+            color: white;
+        }
+
+        /* Character card */
+        .character-card {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.2) 0%, rgba(26, 77, 26, 0.4) 100%);
+            border: 2px solid rgba(34, 139, 34, 0.4);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .character-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .character-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #32cd32;
+        }
+
+        .tier-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .tier-a {
+            background: linear-gradient(135deg, #c0c0c0 0%, #666 100%);
+            color: white;
+        }
+
+        .character-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .rating-stars {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Tips and warnings */
+        .tip-box {
+            background: rgba(0, 139, 0, 0.2);
+            border-left: 4px solid #00ff00;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning-box {
+            background: rgba(255, 140, 0, 0.2);
+            border-left: 4px solid #ff8c00;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(34, 139, 34, 0.5);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .step-card {
+                flex-direction: column;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0d260d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #32cd32;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">MEGABONK</div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../">Guides</a></li>
+                <li><a href="../bosses/">Bosses</a></li>
+                <li><a href="../characters/">Characters</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a> &gt; 
+            <a href="../">Guides</a> &gt; 
+            <a href="../bosses/">Bosses</a> &gt; 
+            Bush (Suspicious Bush) Guide
+        </div>
+
+        <!-- Hero section -->
+        <div class="hero">
+            <div class="boss-icon">🌿🤫</div>
+            <h1>Bush (Suspicious Bush)</h1>
+            <p class="boss-subtitle">Hidden Forest Boss - Character Unlock Challenge</p>
+
+            <div class="info-banner">
+                <div class="info-icon">ℹ️</div>
+                <div class="info-content">
+                    <h3>SECRET BOSS ENCOUNTER</h3>
+                    <p>This is a hidden boss fight that unlocks the Bush character. Look for the "Sus Bush" in the Forest biome and prepare for combat. Requires Sniper Rifle weapon to be unlocked first!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boss Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💪</div>
+                <div class="stat-label">Health Pool</div>
+                <div class="stat-value">12,500 HP</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📍</div>
+                <div class="stat-label">Location</div>
+                <div class="stat-value">Forest (Any Tier)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-label">Difficulty Rating</div>
+                <div class="stat-value">7/10 ⭐</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎁</div>
+                <div class="stat-label">Reward</div>
+                <div class="stat-value">Bush Character</div>
+            </div>
+        </div>
+
+        <!-- How to Find -->
+        <section class="section">
+            <h2>🔍 How to Find the Suspicious Bush</h2>
+            
+            <p>Bush is a unique hidden boss that doesn't appear naturally. You must find and interact with a special object to trigger the encounter.</p>
+
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Explore the Forest</h3>
+                        <p>Bush can appear in any Forest tier (1, 2, or 3). Thoroughly explore dense forest areas and hidden clearings while progressing through your run.</p>
+                        <div class="tip-box">
+                            <strong>Search Tips:</strong> Check areas with thick tree coverage, corners of the map, and spots near boss arenas. The Sus Bush blends in with regular bushes but has a special indicator.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Look for "Sus Bush" Prompt</h3>
+                        <p>When you get close to the hidden boss location, you'll see an interaction prompt that says "Sus Bush" instead of the normal bush indicator.</p>
+                        <div class="warning-box">
+                            <strong>Warning:</strong> Don't interact unless you're prepared! Once you shake the Sus Bush, the boss fight begins immediately with no way to back out.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Prepare Your Build</h3>
+                        <p>Before interacting, ensure you have:</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Full or near-full health bar</li>
+                            <li>Strong weapons upgraded to high levels</li>
+                            <li>Good defensive items (HP, Armor, Lifesteal)</li>
+                            <li>Movement speed for dodging</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Shake the Bush!</h3>
+                        <p>Press the interact key (E) to shake the Sus Bush. Bush will emerge and the boss fight begins in the surrounding area. Get ready for explosive combat!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements -->
+        <section class="section">
+            <h2>🔓 Unlock Requirements</h2>
+            
+            <h3>Before Fighting Bush:</h3>
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-number">✓</div>
+                    <div class="step-content">
+                        <h3>Unlock Sniper Rifle Weapon</h3>
+                        <p><strong>Requirement:</strong> Get Precision Tome to Level 10</p>
+                        <p>You MUST have the Sniper Rifle weapon unlocked before you can unlock Bush as a character. This is Bush's starting weapon.</p>
+                        <div class="tip-box" style="margin-top: 1rem;">
+                            <strong>How to Get Precision Tome Level 10:</strong> Pick up Precision Tome during runs and prioritize upgrading it. Takes several runs to reach level 10 if you're starting from scratch.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">✓</div>
+                    <div class="step-content">
+                        <h3>Purchase Sniper Rifle in Shop</h3>
+                        <p>After unlocking the Sniper Rifle through Precision Tome, go to Main Menu → Unlocks and purchase it with Silver coins.</p>
+                        <div class="warning-box" style="margin-top: 1rem;">
+                            <strong>Important:</strong> You cannot unlock Bush character without first owning the Sniper Rifle weapon in your collection!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>After Defeating Bush:</h3>
+            <div class="tip-box">
+                <strong>Character Unlock Process:</strong>
+                <ol style="margin: 1rem 0 0 2rem;">
+                    <li>Defeat Bush in combat (12,500 HP)</li>
+                    <li>Collect the free chest that drops</li>
+                    <li>After run ends, go to Main Menu → Unlocks</li>
+                    <li>Purchase Bush character with Silver coins</li>
+                    <li>Bush is now playable with Sniper Rifle as starting weapon!</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Boss Fight Strategy -->
+        <section class="section">
+            <h2>⚔️ Boss Fight Strategy</h2>
+            
+            <h3>Bush's Attack Patterns</h3>
+            <div class="attack-list">
+                <div class="attack-item">
+                    <div class="attack-name">
+                        Sniper Shots 
+                        <span class="threat-level threat-high">HIGH THREAT</span>
+                    </div>
+                    <p><strong>Pattern:</strong> Long-range precision shots that deal heavy damage. Bush positions himself at distance and fires accurately.</p>
+                    <p><strong>Counter:</strong> Constant lateral movement. Don't move in straight lines toward or away from Bush. Zigzag pattern works best.</p>
+                </div>
+
+                <div class="attack-item">
+                    <div class="attack-name">
+                        Explosive Shots 
+                        <span class="threat-level threat-high">HIGH THREAT</span>
+                    </div>
+                    <p><strong>Pattern:</strong> Bush's passive ability triggers explosive blasts that can delete entire groups of nearby enemies and damage you.</p>
+                    <p><strong>Counter:</strong> Keep medium distance - close enough to deal damage, far enough to avoid explosion radius. Watch for visual cues before explosions.</p>
+                </div>
+
+                <div class="attack-item">
+                    <div class="attack-name">
+                        Repositioning 
+                        <span class="threat-level threat-medium">MEDIUM THREAT</span>
+                    </div>
+                    <p><strong>Pattern:</strong> Bush moves to maintain optimal sniping distance and find better positioning throughout the fight.</p>
+                    <p><strong>Counter:</strong> Use this window to close distance or heal. Bush is vulnerable during repositioning.</p>
+                </div>
+            </div>
+
+            <h3>Winning Strategy</h3>
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-number">💡</div>
+                    <div class="step-content">
+                        <h3>Maintain Medium Range</h3>
+                        <p>Too close = explosive damage. Too far = hard to hit Bush. Find the sweet spot at medium range where you can attack while dodging sniper shots.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">💡</div>
+                    <div class="step-content">
+                        <h3>Prioritize Survival</h3>
+                        <p>With 12,500 HP, Bush takes time to defeat. Focus on not dying rather than rushing damage. Lifesteal and HP regeneration are very valuable.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">💡</div>
+                    <div class="step-content">
+                        <h3>Use Ranged Weapons</h3>
+                        <p>Ranged weapons (Firestaff, Katana, Revolver) are safer than melee. You can maintain the optimal distance while dealing consistent damage.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">💡</div>
+                    <div class="step-content">
+                        <h3>Watch for Explosions</h3>
+                        <p>Bush's explosive passive can hurt you badly. If you see a group of enemies near Bush about to explode, back off immediately.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bush Character Info -->
+        <section class="section">
+            <h2>🎮 Bush Character Profile</h2>
+            
+            <div class="character-card">
+                <div class="character-header">
+                    <div class="character-name">🌿 Bush</div>
+                    <span class="tier-badge tier-a">A-TIER</span>
+                </div>
+
+                <div class="character-icon">🌿</div>
+                <div class="rating-stars">★★★★☆</div>
+
+                <h3>Starting Weapon</h3>
+                <p><strong>🎯 Sniper Rifle</strong> - Long-range precision weapon with high damage per shot.</p>
+
+                <h3>Passive Ability</h3>
+                <p><strong>💥 Explosive Mastery</strong> - Bush's attacks trigger huge explosions that can delete entire packs of enemies. Requires excellent manual aim to be effective but devastating when used properly.</p>
+
+                <h3>Playstyle</h3>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>Long-Range Sniper</strong>: Maintain distance and pick off enemies</li>
+                    <li><strong>Positioning Focus</strong>: Requires good positioning and aim</li>
+                    <li><strong>Explosive Crowd Control</strong>: Passive explosions clear large groups</li>
+                    <li><strong>High Skill Ceiling</strong>: Rewards precision and game sense</li>
+                </ul>
+
+                <h3>Best Builds for Bush</h3>
+                <div class="tip-box" style="margin-top: 1rem;">
+                    <strong>Recommended Build Path:</strong>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Max Sniper Rifle upgrades (damage, crit chance)</li>
+                        <li>Precision Tome (accuracy and crit damage)</li>
+                        <li>Critical Damage items (Bush benefits from high crit)</li>
+                        <li>Movement Speed (maintain optimal range)</li>
+                        <li>Attack Speed secondary (more shots = more explosions)</li>
+                    </ul>
+                </div>
+
+                <h3>Recent Buffs</h3>
+                <div class="info-banner" style="margin-top: 1rem;">
+                    <div class="info-icon">📈</div>
+                    <div class="info-content">
+                        <p>Bush received buffs in patch v1.0.7! His passive now correctly gives crit damage instead of crit chance (bug fix), making him significantly stronger. The explosion mechanics were also improved for better consistency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Tips -->
+        <section class="section">
+            <h2>💡 Pro Tips & Strategy</h2>
+            
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-number">📝</div>
+                    <div class="step-content">
+                        <h3>Best Time to Fight Bush</h3>
+                        <p>Wait until you've collected good items and upgraded weapons before searching for Sus Bush. Don't attempt this fight in the first 5 minutes of a run.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">📝</div>
+                    <div class="step-content">
+                        <h3>Recommended Characters</h3>
+                        <p><strong>Best choices:</strong> Fox (ranged Firestaff), Ninja (high damage + evasion), CL4NK (ranged Revolver). Avoid melee-focused characters as they struggle with Bush's kiting.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">📝</div>
+                    <div class="step-content">
+                        <h3>Essential Items</h3>
+                        <p>Before fighting, try to have: HP regeneration, Lifesteal, Movement Speed, and Armor. Defensive stats help survive the 12.5K HP grind.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">📝</div>
+                    <div class="step-content">
+                        <h3>Don't Rush</h3>
+                        <p>Bush has a lot of HP but isn't overly aggressive. Take your time, focus on dodging, and chip away at his health. Patience wins this fight.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box" style="margin-top: 2rem;">
+                <h3>Common Mistakes:</h3>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li>❌ Fighting Bush too early in the run without proper upgrades</li>
+                    <li>❌ Using melee weapons and getting caught in explosion radius</li>
+                    <li>❌ Forgetting to unlock Sniper Rifle before defeating Bush</li>
+                    <li>❌ Standing still and taking full sniper shot damage</li>
+                    <li>❌ Not having Sniper Rifle purchased in shop (blocks character unlock)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Final Tips -->
+        <section class="section">
+            <h2>🏆 Summary & Final Thoughts</h2>
+            
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                Bush is a fun hidden boss that rewards exploration and preparation. <strong>With proper build and strategy, the 12,500 HP boss is very manageable.</strong> The key is finding the Sus Bush location, having Sniper Rifle unlocked beforehand, and maintaining good positioning throughout the fight.
+            </p>
+
+            <div class="tip-box" style="margin: 2rem 0;">
+                <h3 style="color: #32cd32; margin-bottom: 1rem;">🎯 Quick Checklist:</h3>
+                <p style="font-size: 1.1rem;"><strong>Before Boss Fight:</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>✅ Precision Tome Level 10 (unlocks Sniper Rifle)</li>
+                    <li>✅ Purchase Sniper Rifle from shop</li>
+                    <li>✅ Strong build with upgraded weapons</li>
+                    <li>✅ Full health and defensive items</li>
+                    <li>✅ Find Sus Bush in Forest</li>
+                </ul>
+                <p style="font-size: 1.1rem; margin-top: 1rem;"><strong>During Fight:</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>✅ Maintain medium range</li>
+                    <li>✅ Constant lateral movement</li>
+                    <li>✅ Watch for explosions</li>
+                    <li>✅ Prioritize survival over damage</li>
+                </ul>
+                <p style="font-size: 1.1rem; margin-top: 1rem;"><strong>After Victory:</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>✅ Collect free chest reward</li>
+                    <li>✅ Go to Main Menu → Unlocks after run</li>
+                    <li>✅ Purchase Bush character with Silver</li>
+                    <li>✅ Enjoy explosive sniper gameplay!</li>
+                </ul>
+            </div>
+
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 2rem;">
+                Bush is an <strong>A-tier character with high skill ceiling.</strong> The Sniper Rifle starting weapon and explosive passive make for unique gameplay. With recent buffs improving his crit damage mechanics, Bush is now a strong choice for players who enjoy precision aiming and long-range combat. Good luck with your hidden boss hunt!
+            </p>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="../bosses/" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, #32cd32 0%, #228b22 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; transition: all 0.3s;">
+                    ← Back to All Boss Guides
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script>
+        // Create leaf particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = `${Math.random() * 30 + 15}px`;
+            particle.style.height = particle.style.width;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 25}s`;
+            particle.style.animationDuration = `${Math.random() * 15 + 20}s`;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .stat-card, .step-card, .attack-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
