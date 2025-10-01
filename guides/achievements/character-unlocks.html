@@ -3,923 +3,1500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Character Unlocks - Complete Achievement Guide</title>
-    <meta name="description" content="Unlock all 20 characters in Megabonk with our detailed guide. Learn efficient currency farming, secret character requirements, and optimal unlock strategies.">
-    <meta name="keywords" content="megabonk character unlock, megabonk all characters, megabonk ninja unlock, megabonk secret characters, megabonk silver coins">
+    <title>Character Unlock Achievements - Megabonk Achievement Guide</title>
+    <meta name="description" content="Complete guide to unlock all 20 characters in Megabonk. Includes silver farming strategies, hidden character locations, and tier completion tips.">
+    <meta name="keywords" content="megabonk character unlocks, megabonk all characters, megabonk ninja unlock, megabonk monke unlock, megabonk silver farming">
+
+    <link rel="canonical" href="https://megabonk.org/guides/achievements/character-unlocks">
     
     <style>
-        :root {
-            --primary-color: #FF6B35;
-            --secondary-color: #4ECDC4;
-            --accent-color: #FFE66D;
-            --bg-dark: #1A1A2E;
-            --bg-medium: #16213E;
-            --bg-light: #0F3460;
-            --text-primary: #FFFFFF;
-            --text-secondary: #B8BCC8;
-            --success-color: #00C851;
-            --warning-color: #FFB74D;
-            --danger-color: #FF5252;
-            --info-color: #64B5F6;
-            --ninja-color: #8E24AA;
-            --archer-color: #2E7D32;
-            --mage-color: #1565C0;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --text: #e4e4e4;
+            --text-dim: #a0a0a0;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #ff7675;
+            --character: #3498db;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 50%, var(--bg-light) 100%);
-            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--dark);
+            color: var(--text);
             line-height: 1.6;
-            min-height: 100vh;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
+
         /* Header */
         .header {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--primary-color);
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             padding: 1rem 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.1);
         }
-        
-        .header-content {
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
         }
-        
+
         .nav-links {
             display: flex;
-            gap: 1.5rem;
             list-style: none;
+            gap: 2rem;
         }
-        
+
         .nav-links a {
-            color: var(--text-secondary);
+            color: var(--text);
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        
+
         .nav-links a:hover {
-            color: var(--primary-color);
-            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary);
         }
-        
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
         /* Hero Section */
         .hero {
+            background: linear-gradient(135deg, var(--darker) 0%, #2980b9 100%);
+            padding: 4rem 2rem;
             text-align: center;
-            padding: 3rem 0;
-            background: linear-gradient(135deg, rgba(142, 36, 170, 0.15) 0%, rgba(255, 107, 53, 0.15) 100%);
-            border-radius: 15px;
-            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .hero::before {
+            content: '👥';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.03;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--ninja-color), var(--primary-color));
+            background: linear-gradient(135deg, var(--character), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        /* Currency Guide */
-        .currency-guide {
-            background: rgba(22, 33, 62, 0.9);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            border: 2px solid var(--accent-color);
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--character);
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
         }
-        
-        .currency-guide h2 {
-            color: var(--accent-color);
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-        }
-        
-        .currency-methods {
+
+        /* Stats */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .method-card {
-            background: rgba(255, 230, 109, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid var(--accent-color);
-            transition: all 0.3s ease;
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(52, 152, 219, 0.2);
         }
-        
-        .method-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 230, 109, 0.3);
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--character);
+            display: block;
         }
-        
-        .method-title {
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 1rem;
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        /* Progress Tracker */
+        .progress-tracker {
+            background: rgba(52, 152, 219, 0.05);
+            border: 2px solid rgba(52, 152, 219, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tracker-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .tracker-stats {
+            color: var(--character);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--character), var(--success));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .efficiency-rating {
-            margin-left: auto;
-            font-size: 0.8rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            background: var(--success-color);
+            justify-content: flex-end;
+            padding-right: 1rem;
             color: white;
+            font-weight: 600;
         }
-        
-        /* Character Grid */
-        .characters-section {
+
+        /* Character Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
             margin-bottom: 3rem;
         }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .section-header h2 {
-            color: var(--secondary-color);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .characters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        
+
         .character-card {
-            background: rgba(22, 33, 62, 0.9);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            padding: 1.5rem;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
+            padding: 2rem;
+            border-left: 4px solid var(--character);
+            transition: all 0.3s;
+            cursor: pointer;
             position: relative;
-            overflow: hidden;
         }
-        
-        .character-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .character-card:hover::before {
-            left: 100%;
-        }
-        
+
         .character-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--secondary-color);
-            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
         }
-        
+
+        .character-card.default {
+            border-left-color: var(--success);
+            background: rgba(0, 184, 148, 0.05);
+        }
+
+        .character-card.hidden {
+            border-left-color: var(--accent);
+            background: rgba(253, 121, 168, 0.05);
+        }
+
+        .character-card.hard {
+            border-left-color: var(--danger);
+        }
+
         .character-header {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .character-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
         }
-        
-        .character-info h3 {
-            color: var(--secondary-color);
-            font-size: 1.3rem;
-            margin-bottom: 0.2rem;
+
+        .character-info {
+            flex: 1;
         }
-        
-        .character-tier {
-            font-size: 0.8rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            font-weight: bold;
+
+        .character-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.3rem;
         }
-        
-        .tier-s { background: #FF6B35; color: white; }
-        .tier-a { background: #FFB74D; color: white; }
-        .tier-b { background: #81C784; color: white; }
-        .tier-c { background: #90A4AE; color: white; }
-        
-        .unlock-requirement {
-            background: rgba(255, 255, 255, 0.1);
+
+        .character-type {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--character);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .character-type.default {
+            background: rgba(0, 184, 148, 0.2);
+            color: var(--success);
+        }
+
+        .character-type.hidden {
+            background: rgba(253, 121, 168, 0.2);
+            color: var(--accent);
+        }
+
+        .unlock-requirements {
+            background: rgba(255, 255, 255, 0.03);
             padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 3px solid var(--accent-color);
-        }
-        
-        .requirement-title {
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .requirement-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        .unlock-strategy {
+            border-radius: 10px;
             margin-top: 1rem;
         }
-        
-        .strategy-title {
-            color: var(--info-color);
-            font-weight: bold;
+
+        .requirement-title {
+            font-weight: 600;
+            color: var(--character);
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
         }
-        
-        .strategy-steps {
+
+        .requirement-list {
             list-style: none;
             padding: 0;
         }
-        
-        .strategy-steps li {
-            margin-bottom: 0.3rem;
-            padding-left: 1rem;
+
+        .requirement-list li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
             position: relative;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+            color: var(--text-dim);
         }
-        
-        .strategy-steps li::before {
-            content: '▶';
+
+        .requirement-list li::before {
+            content: '✓';
             position: absolute;
             left: 0;
-            color: var(--info-color);
-            font-size: 0.7rem;
+            color: var(--character);
+            font-weight: bold;
         }
-        
-        /* Secret Characters Section */
-        .secret-characters {
-            background: linear-gradient(135deg, rgba(142, 36, 170, 0.2) 0%, rgba(255, 82, 82, 0.2) 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            border: 2px solid var(--ninja-color);
-        }
-        
-        .secret-characters h2 {
-            color: var(--ninja-color);
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-        }
-        
-        .secret-grid {
+
+        .character-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .secret-card {
-            background: rgba(142, 36, 170, 0.1);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--ninja-color);
-        }
-        
-        .secret-card h3 {
-            color: var(--ninja-color);
-            margin-bottom: 1rem;
+
+        .stat-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-        
-        .secret-hint {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border-left: 3px solid var(--danger-color);
-        }
-        
-        .secret-hint h4 {
-            color: var(--danger-color);
             font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            color: var(--text-dim);
         }
-        
-        /* Progress Tracker */
-        .progress-tracker {
-            background: rgba(22, 33, 62, 0.8);
-            border-radius: 15px;
+
+        .stat-icon {
+            font-size: 1rem;
+        }
+
+        /* Silver Farming Section */
+        .farming-section {
+            background: rgba(253, 203, 110, 0.05);
+            border: 2px solid rgba(253, 203, 110, 0.2);
+            border-radius: 20px;
             padding: 2rem;
-            margin-bottom: 3rem;
-            border: 2px solid var(--success-color);
+            margin: 3rem 0;
         }
-        
-        .progress-tracker h2 {
-            color: var(--success-color);
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .progress-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .progress-stat {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-        
-        .progress-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--success-color);
-            display: block;
-        }
-        
-        .progress-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-        
-        .unlock-checklist {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+        .farming-title {
+            font-size: 1.8rem;
+            color: var(--warning);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
             gap: 1rem;
         }
-        
-        .checklist-item {
+
+        .farming-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .farming-method {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .method-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 0.8rem;
+        }
+
+        .method-efficiency {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
+            margin-bottom: 1rem;
+            color: var(--text-dim);
             font-size: 0.9rem;
         }
-        
-        .checklist-checkbox {
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--success-color);
-            border-radius: 3px;
+
+        .method-content {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .method-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .method-content li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .method-content li::before {
+            content: '💰';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Silver Calculator */
+        .silver-calculator {
+            background: linear-gradient(135deg, rgba(253, 203, 110, 0.1), rgba(253, 121, 168, 0.1));
+            border: 2px solid var(--warning);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .calculator-header {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-input {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .calculator-input label {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .calculator-input input {
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(253, 203, 110, 0.3);
+            border-radius: 5px;
+            color: var(--text);
+            width: 120px;
+        }
+
+        .calculator-result {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--text-dim);
+        }
+
+        .result-value {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--character);
+        }
+
+        .tip-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--character);
+            margin-bottom: 0.8rem;
+        }
+
+        .tip-content {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* Unlock Priority */
+        .priority-section {
+            background: rgba(108, 92, 231, 0.05);
+            border: 2px solid rgba(108, 92, 231, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .priority-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .priority-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .priority-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .priority-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
-        
-        .checklist-checkbox.checked {
-            background: var(--success-color);
+
+        .priority-content {
+            flex: 1;
         }
-        
-        .checklist-checkbox.checked::after {
-            content: '✓';
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
+
+        .priority-character {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
         }
-        
+
+        .priority-reason {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
         /* Footer */
         .footer {
-            background: rgba(26, 26, 46, 0.95);
-            padding: 2rem 0;
-            margin-top: 3rem;
-            border-top: 2px solid var(--primary-color);
+            background: var(--darker);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid rgba(108, 92, 231, 0.2);
         }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        
-        .footer-section a {
-            color: var(--text-secondary);
+
+        .footer a {
+            color: var(--primary);
             text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
+            margin: 0 1rem;
         }
-        
-        .footer-section a:hover {
-            color: var(--secondary-color);
-        }
-        
-        /* Responsive Design */
+
+        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
-            .currency-methods, .characters-grid, .secret-grid {
+
+            .character-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .progress-stats {
-                grid-template-columns: repeat(2, 1fr);
+
+            .farming-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="../../index.html" class="logo">🎮 Megabonk.org</a>
-                <nav>
-                    <ul class="nav-links">
-                        <li><a href="../../index.html">Home</a></li>
-                        <li><a href="../characters/">Characters</a></li>
-                        <li><a href="../builds/">Builds</a></li>
-                        <li><a href="../bosses/">Bosses</a></li>
-                        <li><a href="./">Achievements</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        <nav class="nav-container">
+            <a href="/" class="logo">Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/guides/achievements/">Achievements</a></li>
+                <li><a href="/guides/characters/">Characters</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main class="container">
-        <!-- Breadcrumb -->
-        <nav class="breadcrumb" style="padding: 1rem 0; color: var(--text-secondary);">
-            <a href="../../index.html" style="color: var(--secondary-color); text-decoration: none;">Home</a> > 
-            <a href="./" style="color: var(--secondary-color); text-decoration: none;">Achievements</a> > 
-            <strong>Character Unlocks</strong>
-        </nav>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/guides/">Guides</a>
+        <span>›</span>
+        <a href="/guides/achievements/">Achievements</a>
+        <span>›</span>
+        <span>Character Unlocks</span>
+    </div>
 
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>👥 Character Unlock Guide</h1>
-            <p>Master the art of unlocking all 20 unique characters in Megabonk. From easy starter unlocks to challenging secret characters, we'll guide you through every requirement and optimal strategy.</p>
-        </section>
-
-        <!-- Currency Farming Guide -->
-        <section class="currency-guide">
-            <h2>💰 Efficient Currency Farming Methods</h2>
-            <div class="currency-methods">
-                <div class="method-card">
-                    <div class="method-title">
-                        🏃‍♂️ Speed Farming (5-10 min runs)
-                        <span class="efficiency-rating">BEST</span>
-                    </div>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Focus on quick, consistent runs to maximize coins per hour.</p>
-                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
-                        <li>Use Fox for reliable 10-minute runs</li>
-                        <li>Prioritize movement speed upgrades</li>
-                        <li>Average: 8-12 coins per run</li>
-                        <li>Time investment: ~50 hours for all characters</li>
-                    </ul>
-                </div>
-
-                <div class="method-card">
-                    <div class="method-title">
-                        ⚡ Lightning Farm Strategy
-                        <span class="efficiency-rating" style="background: var(--info-color);">FAST</span>
-                    </div>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Optimize for maximum enemy kills using Lightning Storm build.</p>
-                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
-                        <li>Lightning Storm + Chain Lightning combo</li>
-                        <li>Focus on dense enemy areas</li>
-                        <li>Average: 10-15 coins per run</li>
-                        <li>Requires advanced positioning skills</li>
-                    </ul>
-                </div>
-
-                <div class="method-card">
-                    <div class="method-title">
-                        🛡️ Safe Marathon Strategy
-                        <span class="efficiency-rating" style="background: var(--warning-color);">SAFE</span>
-                    </div>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Longer, safer runs for guaranteed progress.</p>
-                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
-                        <li>Knight + Melee Massacre build</li>
-                        <li>20-30 minute runs for maximum coins</li>
-                        <li>Average: 15-25 coins per run</li>
-                        <li>Perfect for beginners</li>
-                    </ul>
-                </div>
-
-                <div class="method-card">
-                    <div class="method-title">
-                        🎯 Achievement Combo Farming
-                        <span class="efficiency-rating" style="background: var(--ninja-color); color: white;">SMART</span>
-                    </div>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Combine character unlocks with other achievements.</p>
-                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-left: 1rem;">
-                        <li>Target multiple achievements per run</li>
-                        <li>Plan unlock order strategically</li>
-                        <li>Maximize time efficiency</li>
-                        <li>Complete story milestones simultaneously</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Character Unlocks -->
-        <section class="characters-section">
-            <div class="section-header">
-                <h2>🔓 Character Unlock Requirements</h2>
-                <p style="color: var(--text-secondary);">All character unlock costs and strategies (Ordered by unlock difficulty)</p>
-            </div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Character Unlock Achievements</h1>
+            <p style="font-size: 1.2rem; color: var(--text-dim);">
+                Complete guide to unlock all 20 playable characters in Megabonk
+            </p>
+            <span class="category-badge">Medium - Hard Difficulty</span>
             
-            <div class="characters-grid">
-                <!-- Knight -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <span class="character-icon">⚔️</span>
-                        <div class="character-info">
-                            <h3>Knight</h3>
-                            <span class="character-tier tier-a">A-TIER TANK</span>
-                        </div>
-                    </div>
-                    <div class="unlock-requirement">
-                        <div class="requirement-title">
-                            🆓 FREE STARTER
-                        </div>
-                        <p class="requirement-description">Available from the beginning. Perfect for learning the game mechanics and currency farming.</p>
-                    </div>
-                    <div class="unlock-strategy">
-                        <div class="strategy-title">💡 Best Used For:</div>
-                        <ul class="strategy-steps">
-                            <li>Learning boss patterns safely</li>
-                            <li>Currency farming with Melee Massacre build</li>
-                            <li>Story milestone achievements</li>
-                        </ul>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">20</span>
+                    <span class="stat-label">Total Characters</span>
                 </div>
-
-                <!-- Fox -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <span class="character-icon">🦊</span>
-                        <div class="character-info">
-                            <h3>Fox (Kitsune)</h3>
-                            <span class="character-tier tier-s">S-TIER</span>
-                        </div>
-                    </div>
-                    <div class="unlock-requirement">
-                        <div class="requirement-title">
-                            🆓 FREE STARTER
-                        </div>
-                        <p class="requirement-description">Available from the beginning. The most balanced and beginner-friendly character in the game.</p>
-                    </div>
-                    <div class="unlock-strategy">
-                        <div class="strategy-title">💡 Best Used For:</div>
-                        <ul class="strategy-steps">
-                            <li>Lightning Storm builds for maximum efficiency</li>
-                            <li>Perfect for first-time players</li>
-                            <li>Reliable 10-20 minute survival runs</li>
-                        </ul>
-                    </div>
+                <div class="stat-card">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Default Unlocked</span>
                 </div>
-
-                <!-- Archer -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <span class="character-icon">🏹</span>
-                        <div class="character-info">
-                            <h3>Archer</h3>
-                            <span class="character-tier tier-a">A-TIER RANGED</span>
-                        </div>
-                    </div>
-                    <div class="unlock-requirement">
-                        <div class="requirement-title">
-                            🪙 10 SILVER COINS
-                        </div>
-                        <p class="requirement-description">First unlock available. Specializes in ranged combat with precision and safety.</p>
-                    </div>
-                    <div class="unlock-strategy">
-                        <div class="strategy-title">💡 Unlock Strategy:</div>
-                        <ul class="strategy-steps">
-                            <li>Complete 1-2 successful runs with Fox</li>
-                            <li>Farm using Lightning Storm build</li>
-                            <li>Estimated time: 2-3 hours</li>
-                        </ul>
-                    </div>
+                <div class="stat-card">
+                    <span class="stat-number">18</span>
+                    <span class="stat-label">Need to Unlock</span>
                 </div>
-
-                <!-- Mage -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <span class="character-icon">🔮</span>
-                        <div class="character-info">
-                            <h3>Mage</h3>
-                            <span class="character-tier tier-s">S-TIER MAGIC</span>
-                        </div>
-                    </div>
-                    <div class="unlock-requirement">
-                        <div class="requirement-title">
-                            🪙 25 SILVER COINS
-                        </div>
-                        <p class="requirement-description">Powerful magic user with exceptional area-of-effect capabilities and elemental mastery.</p>
-                    </div>
-                    <div class="unlock-strategy">
-                        <div class="strategy-title">💡 Unlock Strategy:</div>
-                        <ul class="strategy-steps">
-                            <li>Use Archer for efficient farming</li>
-                            <li>Focus on 15-20 minute runs</li>
-                            <li>Estimated time: 5-7 hours</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Rogue -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <span class="character-icon">🗡️</span>
-                        <div class="character-info">
-                            <h3>Rogue</h3>
-                            <span class="character-tier tier-a">A-TIER SPEED</span>
-                        </div>
-                    </div>
-                    <div class="unlock-requirement">
-                        <div class="requirement-title">
-                            🪙 35 SILVER COINS
-                        </div>
-                        <p class="requirement-description">High-speed assassin with critical strike focus and mobility-based combat.</p>
-                    </div>
-                    <div class="unlock-strategy">
-                        <div class="strategy-title">💡 Unlock Strategy:</div>
-                        <ul class="strategy-steps">
-                            <li>Combine with story milestone farming</li>
-                            <li>Use Mage for high-coin runs</li>
-                            <li>Estimated time: 8-10 hours</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Ninja -->
-                <div class="character-card" style="border-color: var(--ninja-color);">
-                    <div class="character-header">
-                        <span class="character-icon">🥷</span>
-                        <div class="character-info">
-                            <h3>Ninja</h3>
-                            <span class="character-tier tier-s" style="background: var(--ninja-color);">SS-TIER ELITE</span>
-                        </div>
-                    </div>
-                    <div class="unlock-requirement">
-                        <div class="requirement-title">
-                            🪙 60 SILVER COINS
-                        </div>
-                        <p class="requirement-description">The most expensive regular unlock. Master of stealth with unparalleled damage potential and unique abilities.</p>
-                    </div>
-                    <div class="unlock-strategy">
-                        <div class="strategy-title">💡 Unlock Strategy:</div>
-                        <ul class="strategy-steps">
-                            <li>Save this for last among regular characters</li>
-                            <li>Use accumulated characters for variety</li>
-                            <li>Estimated total time: 25-30 hours</li>
-                            <li>Worth the investment for endgame content</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Secret Characters -->
-        <section class="secret-characters">
-            <h2>🔒 Secret Character Unlocks</h2>
-            <div class="secret-grid">
-                <div class="secret-card">
-                    <h3>💀 Death Knight</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Unlocked through a challenging hidden requirement involving boss encounters.</p>
-                    <div class="secret-hint">
-                        <h4>🔍 DISCOVERY HINT</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Defeat all three main bosses in a single run without taking damage from any of them. Requires perfect execution and advanced builds.</p>
-                    </div>
-                    <ul class="strategy-steps">
-                        <li>Master all boss attack patterns first</li>
-                        <li>Use Ranged Sniper build for safety</li>
-                        <li>Practice perfect runs extensively</li>
-                        <li>Expect multiple attempts</li>
-                    </ul>
-                </div>
-
-                <div class="secret-card">
-                    <h3>⚡ Storm Warrior</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Hidden character related to lightning-based achievements and mastery.</p>
-                    <div class="secret-hint">
-                        <h4>🔍 DISCOVERY HINT</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Deal 1,000,000 total lightning damage across all your runs. Progress is cumulative and tracked globally.</p>
-                    </div>
-                    <ul class="strategy-steps">
-                        <li>Use Lightning Storm build consistently</li>
-                        <li>Focus on high enemy density areas</li>
-                        <li>Progress tracks across all characters</li>
-                        <li>Estimated time: 20-25 hours of lightning builds</li>
-                    </ul>
-                </div>
-
-                <div class="secret-card">
-                    <h3>🌟 Cosmic Guardian</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">The ultimate secret character requiring mastery of all game systems.</p>
-                    <div class="secret-hint">
-                        <h4>🔍 DISCOVERY HINT</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Unlock all other 19 characters and complete every achievement category. Only appears after 100% completion.</p>
-                    </div>
-                    <ul class="strategy-steps">
-                        <li>Complete all story milestones</li>
-                        <li>Unlock all regular and secret characters</li>
-                        <li>Master all combat achievements</li>
-                        <li>Find all collection secrets</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Progress Tracker -->
-        <section class="progress-tracker">
-            <h2>📊 Unlock Progress Tracker</h2>
-            <div class="progress-stats">
-                <div class="progress-stat">
-                    <span class="progress-number" id="unlockedCount">2</span>
-                    <div class="progress-label">Characters Unlocked</div>
-                </div>
-                <div class="progress-stat">
-                    <span class="progress-number" id="coinsSpent">0</span>
-                    <div class="progress-label">Silver Coins Spent</div>
-                </div>
-                <div class="progress-stat">
-                    <span class="progress-number" id="completionPercent">10%</span>
-                    <div class="progress-label">Collection Complete</div>
-                </div>
-                <div class="progress-stat">
-                    <span class="progress-number" id="secretsFound">0</span>
-                    <div class="progress-label">Secret Characters</div>
-                </div>
-            </div>
-            
-            <h3 style="color: var(--success-color); margin-bottom: 1rem; text-align: center;">Character Unlock Checklist</h3>
-            <div class="unlock-checklist">
-                <div class="checklist-item">
-                    <div class="checklist-checkbox checked"></div>
-                    <span>⚔️ Knight (Free Starter)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox checked"></div>
-                    <span>🦊 Fox/Kitsune (Free Starter)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox" data-cost="10"></div>
-                    <span>🏹 Archer (10 coins)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox" data-cost="25"></div>
-                    <span>🔮 Mage (25 coins)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox" data-cost="35"></div>
-                    <span>🗡️ Rogue (35 coins)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox" data-cost="60"></div>
-                    <span>🥷 Ninja (60 coins)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox secret" data-secret="death-knight"></div>
-                    <span>💀 Death Knight (Secret)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox secret" data-secret="storm-warrior"></div>
-                    <span>⚡ Storm Warrior (Secret)</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checklist-checkbox secret" data-secret="cosmic-guardian"></div>
-                    <span>🌟 Cosmic Guardian (Secret)</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Character Guides</h3>
-                    <a href="../characters/fox-kitsune-guide.html">🦊 Fox Complete Guide</a>
-                    <a href="../characters/knight-beginner-guide.html">⚔️ Knight Beginner Guide</a>
-                    <a href="../characters/ninja-unlock-guide.html">🥷 Ninja Advanced Guide</a>
-                    <a href="../characters/">👥 All Character Guides</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Other Achievements</h3>
-                    <a href="story-milestones.html">📖 Story Milestones</a>
-                    <a href="combat-mastery.html">⚔️ Combat Mastery</a>
-                    <a href="collection-secrets.html">💎 Collections & Secrets</a>
-                    <a href="index.html">🏆 Achievement Hub</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Build Guides</h3>
-                    <a href="../builds/lightning-storm-build.html">⚡ Lightning Storm</a>
-                    <a href="../builds/melee-massacre-build.html">⚔️ Melee Massacre</a>
-                    <a href="../builds/ranged-sniper-build.html">🏹 Ranged Sniper</a>
-                    <a href="../builds/">🔧 All Build Guides</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Game Resources</h3>
-                    <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">🎮 Steam Store</a>
-                    <a href="https://steamcommunity.com/app/3405340" target="_blank">💬 Steam Community</a>
-                    <a href="../../index.html">🏠 Megabonk.org Home</a>
+                <div class="stat-card">
+                    <span class="stat-number">~20h</span>
+                    <span class="stat-label">Full Unlock Time</span>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div class="tracker-header">
+                <div class="tracker-title">👥 Character Collection Progress</div>
+                <div class="tracker-stats">2 / 20 (10%)</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 10%;">10%</div>
+            </div>
+            <p style="color: var(--text-dim); margin-top: 1rem; font-size: 0.9rem;">
+                Click on character cards to mark them as unlocked
+            </p>
+        </div>
+
+        <!-- Default Characters -->
+        <h2 class="section-title">✅ Default Characters (Available Immediately)</h2>
+        <div class="character-grid">
+            <!-- Fox -->
+            <div class="character-card default" data-character="fox" data-unlocked="true">
+                <div class="character-header">
+                    <span class="character-icon">🦊</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Fox</h3>
+                        <span class="character-type default">DEFAULT - UNLOCKED</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirement</div>
+                    <p style="color: var(--success); font-weight: 600;">Available from the start - No unlock needed!</p>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⚔️</span>
+                        <span>Default Weapon: Firestaff</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🍀</span>
+                        <span>RNG Blessing: +1% Luck/level</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: S-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">👤</span>
+                        <span>Best For: Beginners</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sir Oofie -->
+            <div class="character-card default" data-character="sir-oofie" data-unlocked="true">
+                <div class="character-header">
+                    <span class="character-icon">🛡️</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Sir Oofie</h3>
+                        <span class="character-type default">DEFAULT - UNLOCKED</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirement</div>
+                    <p style="color: var(--success); font-weight: 600;">Available from the start - No unlock needed!</p>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⚔️</span>
+                        <span>Default Weapon: Sword</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🛡️</span>
+                        <span>RNG Blessing: +1% Armor/level</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: S-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">👤</span>
+                        <span>Best For: Tank Builds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier-Based Unlocks -->
+        <h2 class="section-title">🗺️ Tier Completion Unlocks</h2>
+        <div class="character-grid">
+            <!-- CL4NK -->
+            <div class="character-card" data-character="cl4nk">
+                <div class="character-header">
+                    <span class="character-icon">🤖</span>
+                    <div class="character-info">
+                        <h3 class="character-name">CL4NK</h3>
+                        <span class="character-type">TIER UNLOCK</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Complete Forest Tier 1 (beat all 3 Forest stages)</li>
+                        <li>Purchase weapon: Revolver (unlock by killing 7,500 enemies)</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🔫</span>
+                        <span>Weapon: Revolver</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">💥</span>
+                        <span>Blessing: +1% Crit/level</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: A-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>Unlock Time: ~3-5 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ninja -->
+            <div class="character-card" data-character="ninja">
+                <div class="character-header">
+                    <span class="character-icon">🥷</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Ninja</h3>
+                        <span class="character-type">TIER UNLOCK</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Complete Desert Tier 1 (beat all 3 Desert stages)</li>
+                        <li>Purchase weapon: Katana (unlock via specific quest)</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⚔️</span>
+                        <span>Weapon: Katana</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">👻</span>
+                        <span>Blessing: Execute on evade</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: S-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>Unlock Time: ~5-8 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Robinette -->
+            <div class="character-card" data-character="robinette">
+                <div class="character-header">
+                    <span class="character-icon">🏹</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Robinette</h3>
+                        <span class="character-type">TIER UNLOCK</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Complete Forest Tier 2 (beat Tier 2 stages)</li>
+                        <li>Details: TBD (character under development)</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🏹</span>
+                        <span>Weapon: Bow</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">❓</span>
+                        <span>Blessing: TBD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: TBD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>Unlock Time: ~8-12 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kill-Based Unlocks -->
+        <h2 class="section-title">💀 Enemy Kill Unlocks</h2>
+        <div class="character-grid">
+            <!-- Calcium -->
+            <div class="character-card" data-character="calcium">
+                <div class="character-header">
+                    <span class="character-icon">💀</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Calcium</h3>
+                        <span class="character-type">KILL UNLOCK</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirement</div>
+                    <ul class="requirement-list">
+                        <li>Kill 1,000 Skeleton enemies (Forest stages)</li>
+                        <li>Cumulative across all runs</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🦴</span>
+                        <span>Weapon: Bone</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⚡</span>
+                        <span>Blessing: Speed → Damage</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: A-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>Unlock Time: ~4-6 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ogre -->
+            <div class="character-card hard" data-character="ogre">
+                <div class="character-header">
+                    <span class="character-icon">👹</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Ogre</h3>
+                        <span class="character-type">HARD GRIND</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Kill 15,000 Goblin enemies (Forest stages)</li>
+                        <li>Purchase weapon: Axe (unlock by killing 2,000 with Sword)</li>
+                        <li>Estimated: 10-20 dedicated farming runs</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🪓</span>
+                        <span>Weapon: Axe</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">💥</span>
+                        <span>Blessing: +1% Damage/level</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: S-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>Unlock Time: ~12-20 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tome-Based Unlocks -->
+        <h2 class="section-title">📚 Tome Level Unlocks</h2>
+        <div class="character-grid">
+            <!-- Megachad -->
+            <div class="character-card" data-character="megachad">
+                <div class="character-header">
+                    <span class="character-icon">💪</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Megachad</h3>
+                        <span class="character-type">TOME UNLOCK</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Get Damage Tome to Level 7</li>
+                        <li>Purchase weapon: Aura (unlock by taking no damage for 2 min)</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">💪</span>
+                        <span>Weapon: Aura</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🛡️</span>
+                        <span>Blessing: Stun & Block</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: S-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>Unlock Time: ~5-8 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Athena -->
+            <div class="character-card" data-character="athena">
+                <div class="character-header">
+                    <span class="character-icon">⚡</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Athena</h3>
+                        <span class="character-type">TOME UNLOCK</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Get Thorns Tome to Level 9</li>
+                        <li>Purchase weapon: Aegis (block 500 damage as Sir Oofie)</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🛡️</span>
+                        <span>Weapon: Aegis</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🌵</span>
+                        <span>Blessing: +1 Thorns/level</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: A-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>Unlock Time: ~8-12 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden/Secret Characters -->
+        <h2 class="section-title">🔍 Hidden & Secret Characters</h2>
+        <div class="character-grid">
+            <!-- Monke -->
+            <div class="character-card hidden" data-character="monke">
+                <div class="character-header">
+                    <span class="character-icon">🐵</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Monke</h3>
+                        <span class="character-type hidden">SECRET CHARACTER</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Find Monke trapped in a cage in the Forest</li>
+                        <li>Find the Bananarang weapon in the Forest</li>
+                        <li>Find the Gold Key to open the cage</li>
+                        <li>Interact with cage to free Monke</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🍌</span>
+                        <span>Weapon: Bananarang</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🧗</span>
+                        <span>Blessing: Wall Climb + HP</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: A-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🗺️</span>
+                        <span>Location: Forest hidden area</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bush -->
+            <div class="character-card hidden" data-character="bush">
+                <div class="character-header">
+                    <span class="character-icon">🌳</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Bush</h3>
+                        <span class="character-type hidden">HIDDEN BOSS</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Find and defeat the Suspicious Bush boss in Forest</li>
+                        <li>Bush spawns when you interact with special bush object</li>
+                        <li>Purchase weapon: Sniper Rifle (Precision Tome Level 10)</li>
+                        <li>Drops free chest on defeat</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🔫</span>
+                        <span>Weapon: Sniper Rifle</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">❓</span>
+                        <span>Blessing: TBD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: A-Tier</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🗺️</span>
+                        <span>Location: Forest special spawn</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bandit -->
+            <div class="character-card hidden" data-character="bandit">
+                <div class="character-header">
+                    <span class="character-icon">🤠</span>
+                    <div class="character-info">
+                        <h3 class="character-name">Bandit</h3>
+                        <span class="character-type hidden">HIDDEN BOSS</span>
+                    </div>
+                </div>
+                <div class="unlock-requirements">
+                    <div class="requirement-title">🔓 Unlock Requirements</div>
+                    <ul class="requirement-list">
+                        <li>Find and defeat Bandit boss in Desert</li>
+                        <li>Purchase weapon: Dexecutioner (unlock requirement TBD)</li>
+                        <li>Drops free chest on defeat</li>
+                    </ul>
+                </div>
+                <div class="character-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⚔️</span>
+                        <span>Weapon: Dexecutioner</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">❓</span>
+                        <span>Blessing: TBD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span>Tier: TBD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🗺️</span>
+                        <span>Location: Desert hidden spawn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Silver Farming Section -->
+        <div class="farming-section">
+            <h2 class="farming-title">💰 Silver Farming Strategies</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">
+                Most characters require purchasing weapons, which costs silver. Here are the most efficient farming methods:
+            </p>
+            
+            <div class="farming-grid">
+                <div class="farming-method">
+                    <div class="method-title">🏃 Speed Farming (Best Overall)</div>
+                    <div class="method-efficiency">
+                        <span>⚡</span>
+                        <span>Efficiency: ★★★★★ | 800-1200 silver/run</span>
+                    </div>
+                    <div class="method-content">
+                        <ul>
+                            <li>Focus on killing enemies fast with AOE builds</li>
+                            <li>Use Aura or Flamewalker for auto-damage</li>
+                            <li>Stack Luck Tome for better silver drops</li>
+                            <li>Forest Tier 1 has best enemy density</li>
+                            <li>Complete run in 10-15 minutes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="farming-method">
+                    <div class="method-title">⏱️ Final Swarm Farming</div>
+                    <div class="method-efficiency">
+                        <span>💀</span>
+                        <span>Efficiency: ★★★★☆ | 1000-1500 silver/run</span>
+                    </div>
+                    <div class="method-content">
+                        <ul>
+                            <li>Build for survival and extend Final Swarm time</li>
+                            <li>Use Walking Apocalypse build (Aura + Mirror + Kevin)</li>
+                            <li>Silver bonus increases the longer you survive</li>
+                            <li>Requires good defensive build</li>
+                            <li>Higher risk but higher reward</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="farming-method">
+                    <div class="method-title">🎲 Luck Build Farming</div>
+                    <div class="method-efficiency">
+                        <span>🍀</span>
+                        <span>Efficiency: ★★★★☆ | 900-1400 silver/run</span>
+                    </div>
+                    <div class="method-content">
+                        <ul>
+                            <li>Use Fox character (+1% Luck per level)</li>
+                            <li>Stack Luck Tome, Lucky Charm, and luck items</li>
+                            <li>Better quality drops = more silver per enemy</li>
+                            <li>Combine with One Lucky Fox build</li>
+                            <li>Consistent and reliable method</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="farming-method">
+                    <div class="method-title">🏆 Boss Rush Strategy</div>
+                    <div class="method-efficiency">
+                        <span>👑</span>
+                        <span>Efficiency: ★★★☆☆ | 600-900 silver/run</span>
+                    </div>
+                    <div class="method-content">
+                        <ul>
+                            <li>Rush to boss as fast as possible</li>
+                            <li>Boss kills give large silver bonuses</li>
+                            <li>Complete multiple tiers if possible</li>
+                            <li>Use high DPS builds for speed</li>
+                            <li>Less consistent but faster runs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Silver Calculator -->
+            <div class="silver-calculator">
+                <div class="calculator-header">💰 Silver Unlock Calculator</div>
+                <div class="calculator-input">
+                    <label for="silver-per-run">Average Silver per Run:</label>
+                    <input type="number" id="silver-per-run" value="1000" min="0">
+                </div>
+                <div class="calculator-input">
+                    <label for="target-silver">Silver Needed:</label>
+                    <input type="number" id="target-silver" value="5000" min="0">
+                </div>
+                <div class="calculator-result" id="calculator-result">
+                    <div class="result-item">
+                        <span class="result-label">Runs Required:</span>
+                        <span class="result-value">5 runs</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Estimated Time (15 min/run):</span>
+                        <span class="result-value">1h 15min</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">With Luck Build (+20%):</span>
+                        <span class="result-value">4 runs (1h)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unlock Priority Guide -->
+        <div class="priority-section">
+            <h2 class="priority-title">🎯 Recommended Unlock Order</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">
+                Follow this order for optimal progression and to unlock the most powerful characters first:
+            </p>
+            
+            <div class="priority-list">
+                <div class="priority-item">
+                    <div class="priority-number">1</div>
+                    <div class="priority-content">
+                        <div class="priority-character">🤖 CL4NK (Forest Tier 1)</div>
+                        <div class="priority-reason">
+                            First major unlock. Crit-focused playstyle opens new strategies. Revolver is easy to unlock (7,500 kills). Essential for crit-based achievements.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-number">2</div>
+                    <div class="priority-content">
+                        <div class="priority-character">💪 Megachad (Damage Tome 7 + Aura)</div>
+                        <div class="priority-reason">
+                            Best for AFK/tank builds. Aura weapon is S-tier. Makes Final Swarm survival easy. Required for Walking Apocalypse meta build.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-number">3</div>
+                    <div class="priority-content">
+                        <div class="priority-character">💀 Calcium (1,000 Skeleton Kills)</div>
+                        <div class="priority-reason">
+                            Unlocks naturally while playing Forest. Speed-based gameplay is fun. Good for farming achievements. Bone weapon has unique mechanics.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-number">4</div>
+                    <div class="priority-content">
+                        <div class="priority-character">🥷 Ninja (Desert Tier 1 + Katana)</div>
+                        <div class="priority-reason">
+                            S-tier character with execution mechanic. Katana is one of the best weapons. Opens Desert progression. High skill ceiling, high reward.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-number">5</div>
+                    <div class="priority-content">
+                        <div class="priority-character">🐵 Monke (Find in Forest)</div>
+                        <div class="priority-reason">
+                            Fun secret character with wall climbing. Bananarang is unique weapon. Easy to unlock if you explore. Good for mobility-focused builds.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-number">6</div>
+                    <div class="priority-content">
+                        <div class="priority-character">⚡ Athena (Thorns Tome 9 + Aegis)</div>
+                        <div class="priority-reason">
+                            Required for Cactus achievement (rarest in game). Aegis is A-tier defensive weapon. Thorns mechanic enables unique builds. Tanky playstyle.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-number">7</div>
+                    <div class="priority-content">
+                        <div class="priority-character">👹 Ogre (15,000 Goblin Kills)</div>
+                        <div class="priority-reason">
+                            Long grind but S-tier character. +1% damage per level scales infinitely. Axe weapon is powerful AOE. Save for late game when farming other achievements.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-number">8+</div>
+                    <div class="priority-content">
+                        <div class="priority-character">🌟 Remaining Characters</div>
+                        <div class="priority-reason">
+                            Unlock as you complete challenges, tiers, and find hidden bosses. Bush, Bandit, and other tier-based unlocks will come naturally during progression.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <h2 class="section-title">💡 Character Unlock Pro Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-title">🎯 Combine Objectives</div>
+                    <div class="tip-content">
+                        Work on multiple unlock requirements simultaneously. For example, farm goblins for Ogre while also working on weapon kill achievements.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">💰 Farm Silver Early</div>
+                    <div class="tip-content">
+                        Most characters require purchasing weapons. Build up a silver reserve early so you can unlock characters immediately when you meet requirements.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">📚 Prioritize Tomes</div>
+                    <div class="tip-content">
+                        Upgrading tomes unlocks characters AND improves your builds. Focus on XP Tome, Damage Tome, and Thorns Tome for character unlocks.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">🗺️ Explore Thoroughly</div>
+                    <div class="tip-content">
+                        Hidden characters like Monke and Bush require exploration. Take time to check unusual areas, suspicious objects, and hidden paths.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">⏰ Don't Rush Tier 3</div>
+                    <div class="tip-content">
+                        Some characters unlock from Tier 2 and Tier 3 completion. Focus on unlocking easier characters first before attempting harder tiers.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">🎮 Try Each Character</div>
+                    <div class="tip-content">
+                        Each character has unique playstyle. Test them after unlocking to find your favorite. Some achievements require specific characters.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div style="display: flex; justify-content: space-between; margin-top: 4rem; flex-wrap: wrap; gap: 1rem;">
+            <a href="combat-mastery.html" class="btn" style="padding: 1rem 2rem; background: var(--darker); color: var(--text); text-decoration: none; border-radius: 10px; border: 2px solid var(--primary);">
+                ← Combat Mastery Achievements
+            </a>
+            <a href="collection-secrets.html" class="btn" style="padding: 1rem 2rem; background: linear-gradient(135deg, var(--character), var(--accent)); color: white; text-decoration: none; border-radius: 10px;">
+                Collections & Secrets →
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p style="color: var(--text-dim);">
+            <a href="/">Home</a>
+            <a href="/guides/">Guides</a>
+            <a href="/guides/achievements/">Achievements</a>
+            <a href="/guides/characters/">Characters</a>
+            <a href="/guides/builds/">Builds</a>
+        </p>
+        <p style="color: var(--text-dim); margin-top: 1rem; font-size: 0.9rem;">
+            © 2025 Megabonk.org - Unofficial Fan Guide
+        </p>
     </footer>
 
     <script>
-        // Interactive progress tracker
-        let unlockedCount = 2; // Starting with Knight and Fox
-        let coinsSpent = 0;
-        let secretsFound = 0;
+        // Silver Calculator
+        function updateCalculator() {
+            const silverPerRun = parseInt(document.getElementById('silver-per-run').value) || 0;
+            const targetSilver = parseInt(document.getElementById('target-silver').value) || 0;
+            
+            const runsRequired = Math.ceil(targetSilver / silverPerRun);
+            const timeRequired = runsRequired * 15; // 15 min per run
+            const hours = Math.floor(timeRequired / 60);
+            const minutes = timeRequired % 60;
+            
+            const luckSilver = Math.floor(silverPerRun * 1.2);
+            const luckRuns = Math.ceil(targetSilver / luckSilver);
+            const luckTime = luckRuns * 15;
+            const luckHours = Math.floor(luckTime / 60);
+            const luckMinutes = luckTime % 60;
+            
+            const resultHTML = `
+                <div class="result-item">
+                    <span class="result-label">Runs Required:</span>
+                    <span class="result-value">${runsRequired} runs</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Estimated Time (15 min/run):</span>
+                    <span class="result-value">${hours}h ${minutes}min</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">With Luck Build (+20%):</span>
+                    <span class="result-value">${luckRuns} runs (${luckHours}h ${luckMinutes}min)</span>
+                </div>
+            `;
+            
+            document.getElementById('calculator-result').innerHTML = resultHTML;
+        }
 
-        const checkboxes = document.querySelectorAll('.checklist-checkbox');
-        const unlockedCountElement = document.getElementById('unlockedCount');
-        const coinsSpentElement = document.getElementById('coinsSpent');
-        const completionPercentElement = document.getElementById('completionPercent');
-        const secretsFoundElement = document.getElementById('secretsFound');
+        document.getElementById('silver-per-run').addEventListener('input', updateCalculator);
+        document.getElementById('target-silver').addEventListener('input', updateCalculator);
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('click', function() {
-                if (this.classList.contains('checked')) {
-                    // Uncheck
-                    this.classList.remove('checked');
+        // Character progress tracker
+        const characters = document.querySelectorAll('.character-card');
+        const progressFill = document.getElementById('progressFill');
+        const totalCharacters = characters.length;
+        let unlockedCount = 2; // Fox and Sir Oofie default unlocked
+
+        // Load saved progress
+        characters.forEach(character => {
+            const id = character.dataset.character;
+            const isDefault = character.dataset.unlocked === 'true';
+            
+            if (isDefault) {
+                character.style.opacity = '0.6';
+                character.style.border = '2px solid var(--success)';
+            } else if (localStorage.getItem(`character_${id}`) === 'unlocked') {
+                character.style.opacity = '0.6';
+                character.style.border = '2px solid var(--character)';
+                unlockedCount++;
+            }
+
+            // Click to toggle unlock
+            character.addEventListener('click', function() {
+                if (isDefault) return; // Can't toggle default characters
+                
+                const id = this.dataset.character;
+                const isUnlocked = localStorage.getItem(`character_${id}`) === 'unlocked';
+                
+                if (isUnlocked) {
+                    localStorage.removeItem(`character_${id}`);
+                    this.style.opacity = '1';
+                    this.style.border = '';
                     unlockedCount--;
-                    
-                    const cost = parseInt(this.dataset.cost) || 0;
-                    coinsSpent -= cost;
-                    
-                    if (this.classList.contains('secret')) {
-                        secretsFound--;
-                    }
                 } else {
-                    // Check
-                    this.classList.add('checked');
+                    localStorage.setItem(`character_${id}`, 'unlocked');
+                    this.style.opacity = '0.6';
+                    this.style.border = '2px solid var(--character)';
                     unlockedCount++;
-                    
-                    const cost = parseInt(this.dataset.cost) || 0;
-                    coinsSpent += cost;
-                    
-                    if (this.classList.contains('secret')) {
-                        secretsFound++;
-                    }
                 }
                 
                 updateProgress();
@@ -927,27 +1504,17 @@
         });
 
         function updateProgress() {
-            unlockedCountElement.textContent = unlockedCount;
-            coinsSpentElement.textContent = coinsSpent;
-            secretsFoundElement.textContent = secretsFound;
-            
-            const completionPercent = Math.round((unlockedCount / 20) * 100);
-            completionPercentElement.textContent = completionPercent + '%';
-            
-            // Update progress bar colors based on completion
-            if (completionPercent >= 100) {
-                document.querySelector('.progress-tracker').style.borderColor = 'var(--ninja-color)';
-            } else if (completionPercent >= 75) {
-                document.querySelector('.progress-tracker').style.borderColor = 'var(--accent-color)';
-            }
+            const percentage = Math.round((unlockedCount / totalCharacters) * 100);
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+            document.querySelector('.tracker-stats').textContent = 
+                `${unlockedCount} / ${totalCharacters} (${percentage}%)`;
         }
 
-        // Animate cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        updateProgress();
+        updateCalculator();
 
+        // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -955,29 +1522,17 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        // Initially hide character cards
-        document.querySelectorAll('.character-card, .secret-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease-out';
-            observer.observe(card);
-        });
-
-        // Add smooth scrolling for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        document.querySelectorAll('.character-card').forEach(card => {
+            if (!card.dataset.unlocked) {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            }
         });
     </script>
 </body>
 </html>
+
