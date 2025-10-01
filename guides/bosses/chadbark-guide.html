@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chadbark Boss Guide - Megabonk Forest Tier 2 Strategy | Megabonk.org</title>
+    <meta name="description" content="Complete Chadbark boss guide for Megabonk Tier 2. Master enhanced mechanics, 500K HP fight, and unlock Desert access with expert tier 2 strategies.">
+    <meta name="keywords" content="megabonk chadbark, chadbark boss guide, forest tier 2 boss, megabonk tier 2, desert unlock">
+
+    <link rel="canonical" href="https://megabonk.org/guides/bosses/chadbark-guide">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-yellow: #ffd600;
+            --accent-orange: #ffab00;
+            --accent-blue: #3a86ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --card-bg: rgba(30, 30, 46, 0.6);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #3d2a0d 50%, #2e1a0a 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 214, 0, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 171, 0, 0.4);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s linear infinite;
+            z-index: -1;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 30%; animation-delay: 3s; }
+        .particle:nth-child(3) { left: 50%; animation-delay: 6s; }
+        .particle:nth-child(4) { left: 70%; animation-delay: 9s; }
+        .particle:nth-child(5) { left: 90%; animation-delay: 12s; }
+
+        @keyframes float {
+            0% {
+                top: -10%;
+                transform: translateX(0) scale(1);
+            }
+            50% {
+                transform: translateX(50px) scale(1.2);
+            }
+            100% {
+                top: 110%;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 214, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffd600 0%, #ffab00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-yellow);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .boss-hero {
+            background: linear-gradient(135deg, rgba(255, 214, 0, 0.2) 0%, rgba(61, 42, 13, 0.4) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 2px solid rgba(255, 214, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .boss-hero::before {
+            content: '🌲';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.05;
+            right: -5rem;
+            top: -5rem;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.05; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.08; }
+        }
+
+        .boss-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .boss-title-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .boss-icon-large {
+            font-size: 6rem;
+            filter: drop-shadow(0 0 20px rgba(255, 214, 0, 0.5));
+            animation: float-boss 3s ease-in-out infinite;
+        }
+
+        @keyframes float-boss {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .boss-name-large {
+            font-size: 3.5rem;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, #ffd600 0%, #ffab00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .boss-subtitle-large {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+        }
+
+        .boss-badges-large {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-large {
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .badge-tier2 {
+            background: linear-gradient(135deg, #ffd600 0%, #ffab00 100%);
+            color: #000;
+        }
+
+        .badge-intermediate {
+            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+        }
+
+        .badge-teleport {
+            background: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%);
+        }
+
+        /* Stats Grid */
+        .boss-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(255, 214, 0, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 214, 0, 0.3);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        /* Section Styles */
+        .section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 214, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title-icon {
+            font-size: 2rem;
+        }
+
+        /* Comparison Box */
+        .comparison-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-item {
+            background: rgba(255, 214, 0, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 214, 0, 0.2);
+        }
+
+        .comparison-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+            text-align: center;
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: start;
+            gap: 0.5rem;
+        }
+
+        .comparison-list li::before {
+            content: '▸';
+            color: var(--accent-yellow);
+            flex-shrink: 0;
+        }
+
+        /* Attack Patterns */
+        .attack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .attack-card {
+            background: rgba(255, 214, 0, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .attack-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-yellow);
+            box-shadow: 0 10px 30px rgba(255, 214, 0, 0.2);
+        }
+
+        .attack-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .attack-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--accent-yellow);
+            text-align: center;
+        }
+
+        .attack-threat {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .threat-badge {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .threat-medium { background: rgba(255, 193, 7, 0.3); color: #ffc107; }
+        .threat-high { background: rgba(255, 82, 82, 0.3); color: #ff5252; }
+        .threat-extreme { background: rgba(138, 43, 226, 0.3); color: #ba68c8; }
+
+        .attack-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .counter-strategy {
+            background: rgba(255, 214, 0, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-yellow);
+        }
+
+        .counter-title {
+            font-weight: bold;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Build Grid */
+        .build-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .build-card {
+            background: linear-gradient(135deg, rgba(255, 214, 0, 0.1) 0%, rgba(61, 42, 13, 0.2) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 214, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .build-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 214, 0, 0.3);
+        }
+
+        .build-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .build-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .build-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .build-rating {
+            display: flex;
+            justify-content: center;
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .build-difficulty {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .build-weapons {
+            margin-bottom: 1rem;
+        }
+
+        .build-weapons-title {
+            font-weight: bold;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .weapon-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .weapon-tag {
+            background: rgba(255, 214, 0, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .build-stats {
+            background: rgba(255, 214, 0, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .build-stats-title {
+            font-weight: bold;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .build-stats-list {
+            list-style: none;
+        }
+
+        .build-stats-list li {
+            padding: 0.3rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .build-stats-list li::before {
+            content: '▸';
+            color: var(--accent-yellow);
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 82, 82, 0.1) 0%, rgba(239, 83, 80, 0.1) 100%);
+            border: 2px solid rgba(255, 82, 82, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .warning-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ff5252;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .warning-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Success Box */
+        .success-box {
+            background: linear-gradient(135deg, rgba(255, 214, 0, 0.1) 0%, rgba(255, 171, 0, 0.1) 100%);
+            border: 2px solid rgba(255, 214, 0, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .success-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-yellow);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Step List */
+        .step-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: rgba(255, 214, 0, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-yellow);
+            display: flex;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #ffd600 0%, #ffab00 100%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            color: #000;
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-yellow);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Tips Grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tip-card {
+            background: rgba(255, 214, 0, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-yellow);
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-content {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd600 0%, #ffab00 100%);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 214, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 214, 0, 0.1);
+            color: var(--text-primary);
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 214, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(22, 33, 62, 0.95);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+            border-top: 2px solid rgba(255, 214, 0, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 214, 0, 0.2);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(26, 26, 46, 0.98);
+                width: 100%;
+                padding: 2rem;
+                transition: 0.3s;
+                border-top: 2px solid rgba(255, 214, 0, 0.3);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .boss-name-large {
+                font-size: 2.5rem;
+            }
+
+            .boss-stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .attack-grid, .build-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .boss-hero {
+                padding: 2rem 1.5rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <header>
+        <nav>
+            <a href="/" class="logo">🎮 Megabonk.org</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/guides/characters/">Characters</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+                <li><a href="/guides/bosses/">Bosses</a></li>
+                <li><a href="/database/weapons/">Weapons</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> > <a href="/guides/">Guides</a> > <a href="/guides/bosses/">Boss Strategies</a> > <span>Chadbark</span>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="boss-hero">
+            <div class="boss-hero-content">
+                <div class="boss-title-section">
+                    <div class="boss-icon-large">🌲</div>
+                    <h1 class="boss-name-large">Chadbark</h1>
+                    <p class="boss-subtitle-large">Forest Tier 2 Enhanced Boss - The Real Challenge Begins</p>
+                    <div class="boss-badges-large">
+                        <span class="badge-large badge-tier2">Tier 2</span>
+                        <span class="badge-large badge-intermediate">Intermediate</span>
+                        <span class="badge-large badge-teleport">Unlock Teleport</span>
+                    </div>
+                </div>
+
+                <div class="boss-stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Health Pool</div>
+                        <div class="stat-value">~500K</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Difficulty</div>
+                        <div class="stat-value">⭐⭐⭐☆☆</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Location</div>
+                        <div class="stat-value">Forest T2</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">HP Multiplier</div>
+                        <div class="stat-value">25x vs T1</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Unlock Requirement</div>
+                        <div class="stat-value">Clear T1</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Reward</div>
+                        <div class="stat-value">Teleport</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">📖</span>
+                Boss Overview
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                Welcome to Tier 2 - where Megabonk stops being friendly. Chadbark is Lil Bark's bigger, badder brother, and he doesn't mess around. This is where the game shifts from "lighthearted bonking to a true survival challenge." The boss health pool jumps from a manageable ~100K in Tier 1 to a staggering ~500K in Tier 2 - that's a 25x increase!
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.8;">
+                Chadbark serves as the real DPS check in Megabonk. If your build isn't optimized, you'll struggle to kill him before the Final Swarm overwhelms you. This fight teaches you the importance of focused weapon investment, smart tome choices (hello, Holy Trinity!), and proper timing. Master Chadbark, and you'll unlock the ability to teleport to Stage 2, opening up new progression paths and eventually access to the Desert biome.
+            </p>
+        </section>
+
+        <!-- Tier 1 vs Tier 2 Comparison -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">⚖️</span>
+                Tier 1 vs Tier 2: What Changed?
+            </h2>
+
+            <div class="comparison-box">
+                <div class="comparison-item">
+                    <div class="comparison-title">🌱 Tier 1 (Lil Bark)</div>
+                    <ul class="comparison-list">
+                        <li>Boss HP: ~20K-100K</li>
+                        <li>Forgiving damage output</li>
+                        <li>Simple projectile patterns</li>
+                        <li>No teleportation available</li>
+                        <li>Beginner-friendly pacing</li>
+                        <li>Can win with basic builds</li>
+                        <li>Mini Boss: 7:00, 2:00</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-item">
+                    <div class="comparison-title">🔥 Tier 2 (Chadbark)</div>
+                    <ul class="comparison-list">
+                        <li>Boss HP: ~500K (25x increase!)</li>
+                        <li>Punishing, faster attacks</li>
+                        <li>Enhanced projectile density</li>
+                        <li>Unlocks 1 teleport ability</li>
+                        <li>Intense Final Swarm</li>
+                        <li>Requires optimized builds</li>
+                        <li>Mini Boss: 7:00, 2:00 (same)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">
+                    <span>⚠️</span> The Difficulty Spike
+                </div>
+                <div class="warning-content">
+                    <p>Many players report that Tier 2 feels like hitting a brick wall. The jump from 20K to 500K HP isn't just about numbers - it's a fundamental shift in how you need to approach the game. You can't rely on luck anymore. <strong>Focused builds, proper tome selection, and smart stat priorities become mandatory.</strong></p>
+                    <p style="margin-top: 1rem;">Players frequently struggle here because they spread upgrades across too many weapons. For Chadbark, you need to go "deep not wide" - max out 1-2 weapons rather than having 3-4 mediocre ones.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Unlock & Access -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">🗺️</span>
+                How to Unlock Tier 2
+            </h2>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Clear Both Tier 1 Stages</h3>
+                        <p>To unlock Tier 2, you must clear both levels of Tier 1 in the Forest (or Desert). This means defeating Lil Bark, using the teleporter to reach Stage 2, and completing that stage as well. Both stages must be cleared in a single run.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Select Tier 2 Before Starting</h3>
+                        <p>Once you've unlocked Tier 2, you can select it from the difficulty menu before starting your next run. Tier 2 becomes permanently available for that biome (Forest or Desert) once unlocked.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Build for DPS, Not Just Survival</h3>
+                        <p>Before attempting Chadbark, make sure your build has strong DPS potential. Prioritize: Attack Speed Tome, Damage Tome, or the Holy Trinity (Curse + XP + Luck). Don't enter Tier 2 with a pure tank build - you need to kill fast.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Timing is Everything</h3>
+                        <p>Summon Chadbark with about 1 minute left on the clock. This gives you enough time to kill him before the Final Swarm becomes unmanageable. Black Ghosts spawn at -1:00, so you want the boss dead before then!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <div class="success-title">
+                    <span>🚀</span> Teleport System Unlocked!
+                </div>
+                <div class="warning-content">
+                    Once you defeat Chadbark in Tier 2, you unlock the <strong>Teleport System</strong>! This allows you to teleport to the next area after beating Stage 1's boss. In Tier 2, you get 1 teleport (Stage 1 → Stage 2). In Tier 3, you get 2 teleports. This dramatically speeds up progression and lets you access more challenging content and better loot drops.
+                </div>
+            </div>
+        </section>
+
+        <!-- Attack Patterns -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">⚔️</span>
+                Enhanced Attack Patterns
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Chadbark uses similar attacks to Lil Bark, but everything is faster, stronger, and more numerous. Here's what to expect:
+            </p>
+
+            <div class="attack-grid">
+                <div class="attack-card">
+                    <div class="attack-icon">🔴</div>
+                    <h3 class="attack-name">Enhanced Red Spheres</h3>
+                    <div class="attack-threat">
+                        <span class="threat-badge threat-high">High Threat</span>
+                    </div>
+                    <p class="attack-desc">
+                        The familiar red projectiles return, but now they fire 2-3x faster and with greater tracking. The projectile density is significantly higher, creating a true bullet-hell environment. Each sphere also deals more damage than in Tier 1.
+                    </p>
+                    <div class="counter-strategy">
+                        <div class="counter-title">Counter Strategy:</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Maintain aggressive circular movement - wider orbits than Tier 1. Movement speed upgrades are now mandatory, not optional. Consider taking the Speed Boots item if offered. Don't try to face-tank anything.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-icon">🌀</div>
+                    <h3 class="attack-name">Projectile Storm</h3>
+                    <div class="attack-threat">
+                        <span class="threat-badge threat-extreme">Extreme Threat</span>
+                    </div>
+                    <p class="attack-desc">
+                        At 50% and 25% HP thresholds, Chadbark triggers a devastating projectile storm - filling the entire screen with red spheres. This phase lasts 5-10 seconds and is designed to punish players with poor mobility or insufficient survivability stats.
+                    </p>
+                    <div class="counter-strategy">
+                        <div class="counter-title">Counter Strategy:</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            When you see HP threshold warnings, prepare for the storm. Use invincibility shrines if available. If you have lifesteal or shields, this is when they matter most. Don't panic - keep moving, don't stop attacking.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-icon">💥</div>
+                    <h3 class="attack-name">Area Denial Zones</h3>
+                    <div class="attack-threat">
+                        <span class="threat-badge threat-high">High Threat</span>
+                    </div>
+                    <p class="attack-desc">
+                        Chadbark occasionally creates hazard zones on the ground that deal continuous damage. These zones last longer in Tier 2 and can overlap, restricting your movement options significantly.
+                    </p>
+                    <div class="counter-strategy">
+                        <div class="counter-title">Counter Strategy:</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Stay aware of the arena. Don't let hazard zones box you into corners. If you get surrounded, use your best movement ability to escape rather than trying to tank through the damage.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="attack-card">
+                    <div class="attack-icon">⏰</div>
+                    <h3 class="attack-name">DPS Check Mechanic</h3>
+                    <div class="attack-threat">
+                        <span class="threat-badge threat-extreme">Extreme Threat</span>
+                    </div>
+                    <p class="attack-desc">
+                        The biggest challenge isn't Chadbark's attacks - it's killing him fast enough. With 500K HP and the Final Swarm at 0:00, you're racing against time. If you don't have sufficient DPS, you'll die to the swarm, not the boss.
+                    </p>
+                    <div class="counter-strategy">
+                        <div class="counter-title">Counter Strategy:</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            This is why build optimization matters. Focus 100% of your upgrades into 1-2 weapons max. Take damage-boosting tomes. Use the Magnet shrine before engaging to quickly level up. Every second of uptime matters - stay close and keep attacking!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Builds -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">🛠️</span>
+                Tier 2 Optimized Builds
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                These builds are specifically designed to handle the DPS requirements of Tier 2 bosses:
+            </p>
+
+            <div class="build-grid">
+                <div class="build-card">
+                    <div class="build-header">
+                        <div class="build-icon">🎲</div>
+                        <h3 class="build-name">Holy Trinity Power Spike</h3>
+                        <div class="build-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="build-difficulty">Difficulty: Medium | Meta Build</p>
+                    </div>
+
+                    <div class="build-weapons">
+                        <div class="build-weapons-title">Core Tomes (The Holy Trinity):</div>
+                        <div class="weapon-list">
+                            <span class="weapon-tag">Curse Tome</span>
+                            <span class="weapon-tag">XP Gain Tome</span>
+                            <span class="weapon-tag">Luck Tome</span>
+                        </div>
+                    </div>
+
+                    <div class="build-stats">
+                        <div class="build-stats-title">Why It Works:</div>
+                        <ul class="build-stats-list">
+                            <li>Curse spawns more enemies</li>
+                            <li>XP Tome makes you level faster</li>
+                            <li>Luck ensures god-tier upgrades</li>
+                            <li>Creates exponential scaling</li>
+                        </ul>
+                    </div>
+
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                        This is THE meta build for Tier 2. The Holy Trinity creates a feedback loop that lets you rapidly outscale the difficulty. Take Greed Shrines too - the increased difficulty actually HELPS you with this combo!
+                    </p>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <div class="build-icon">🔫</div>
+                        <h3 class="build-name">CL4NK Crit Shredder</h3>
+                        <div class="build-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="build-difficulty">Difficulty: Easy | DPS Focus</p>
+                    </div>
+
+                    <div class="build-weapons">
+                        <div class="build-weapons-title">Weapon Priority:</div>
+                        <div class="weapon-list">
+                            <span class="weapon-tag">Revolver (Focus 100%)</span>
+                            <span class="weapon-tag">Katana (Secondary)</span>
+                            <span class="weapon-tag">Avoid 3+ weapons</span>
+                        </div>
+                    </div>
+
+                    <div class="build-stats">
+                        <div class="build-stats-title">Priority Stats:</div>
+                        <ul class="build-stats-list">
+                            <li>Critical Damage (CL4NK passive)</li>
+                            <li>Attack Speed (Must-have)</li>
+                            <li>Projectile Count</li>
+                            <li>Raw Damage</li>
+                        </ul>
+                    </div>
+
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                        CL4NK's crit passive makes him arguably the best character for Tier 2 DPS checks. Max out your Revolver first, then add Katana only if you get it early. Attack Speed Tome is mandatory.
+                    </p>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <div class="build-icon">💪</div>
+                        <h3 class="build-name">Aura Apocalypse</h3>
+                        <div class="build-rating">⭐⭐⭐⭐☆</div>
+                        <p class="build-difficulty">Difficulty: Easy | Walking Death</p>
+                    </div>
+
+                    <div class="build-weapons">
+                        <div class="build-weapons-title">Core Strategy:</div>
+                        <div class="weapon-list">
+                            <span class="weapon-tag">Aura (Primary)</span>
+                            <span class="weapon-tag">Mirror Item</span>
+                            <span class="weapon-tag">Kevin Item</span>
+                            <span class="weapon-tag">Size Upgrades</span>
+                        </div>
+                    </div>
+
+                    <div class="build-stats">
+                        <div class="build-stats-title">Priority Stats:</div>
+                        <ul class="build-stats-list">
+                            <li>Attack Size (Aura scales)</li>
+                            <li>Attack Speed/Cooldown</li>
+                            <li>Damage multipliers</li>
+                            <li>HP/Lifesteal for survivability</li>
+                        </ul>
+                    </div>
+
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                        The "Walking Apocalypse" build works well in Tier 2 with Megachad or Sir Oofie. Stack Aura size and just walk in circles near Chadbark. Your aura does the work. Less mechanical skill required but needs specific items.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Battle Strategy -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">🎯</span>
+                Winning Battle Strategy
+            </h2>
+
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Pre-Fight Optimization (0:00-5:00)</h3>
+                        <p>Use the first 5 minutes to maximize your power:</p>
+                        <ul style="margin-top: 0.5rem; color: var(--text-secondary);">
+                            <li style="margin: 0.5rem 0;">• Take Greed Shrines early (synergizes with Curse Tome)</li>
+                            <li style="margin: 0.5rem 0;">• Activate Challenge Shrines for better loot</li>
+                            <li style="margin: 0.5rem 0;">• Focus ALL upgrades into 1-2 weapons</li>
+                            <li style="margin: 0.5rem 0;">• Prioritize Attack Speed and Damage over everything</li>
+                            <li style="margin: 0.5rem 0;">• Use Magnet shrine at ~6:00 mark for quick level ups</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Boss Summon Timing (1:00 remaining)</h3>
+                        <p>The sweet spot for summoning Chadbark is around 1:00 remaining on the clock. This gives you enough time to kill him (usually takes 30-45 seconds with a good build) while leaving a small buffer before the Final Swarm at 0:00. If you summon earlier, you might get overwhelmed by regular enemies. If you wait too long, you'll die to Black Ghosts.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Phase 1: Establish Rhythm (100%-50% HP)</h3>
+                        <p>Start with your circular kiting pattern - just like Tier 1, but wider orbits and faster movement. Chadbark's projectiles are faster, so you need to stay ahead of them. Keep constant DPS pressure. Don't get greedy trying to maximize damage at the cost of taking hits. Every hit matters in Tier 2.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Phase 2: Projectile Storm (50% HP)</h3>
+                        <p>When Chadbark hits 50% HP, expect the projectile storm. The screen fills with red spheres. This is the panic check. Stay calm, widen your orbit even more, and DON'T STOP MOVING. If you have any defensive cooldowns or invincibility pickups, use them here. Continue attacking - you need to push through this phase quickly.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Phase 3: Final Push (25%-0% HP)</h3>
+                        <p>Another projectile storm triggers at 25%. This is the victory stretch. Chadbark is almost dead, but so are you if you make mistakes. Keep your movement rhythm, stay patient, and trust your build. If you've made it this far, you have the damage to win. The Final Swarm should be approaching, so finish strong!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">
+                    <span>⏰</span> Time Management is Critical
+                </div>
+                <div class="warning-content">
+                    <strong>Rule of thumb for Tier 2:</strong>
+                    <ul style="margin-top: 1rem; color: var(--text-secondary);">
+                        <li style="margin: 0.5rem 0;">• 0:00-5:00: Power farming and optimization</li>
+                        <li style="margin: 0.5rem 0;">• 3:00: Mini Boss spawn - kill quickly</li>
+                        <li style="margin: 0.5rem 0;">• 2:00: Second Mini Boss - prioritize over regular enemies</li>
+                        <li style="margin: 0.5rem 0;">• 1:00: Summon Chadbark</li>
+                        <li style="margin: 0.5rem 0;">• 0:30-0:00: Chadbark should be dead or nearly dead</li>
+                        <li style="margin: 0.5rem 0;">• 0:00: Final Swarm starts - finish boss ASAP!</li>
+                        <li style="margin: 0.5rem 0;">• -1:00: Black Ghosts spawn - you MUST be done by now</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">If Chadbark isn't dead by -1:00, the Black Ghosts will push you around and kill you. Time management is as important as your DPS!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Tips -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-title-icon">💡</span>
+                Advanced Tips & Common Mistakes
+            </h2>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">⚔️</div>
+                    <h3 class="tip-title">Single Weapon Focus</h3>
+                    <p class="tip-content">
+                        THE #1 mistake in Tier 2: spreading upgrades across 3-4 weapons. You don't have the DPS. Pick ONE primary weapon (Revolver, Katana, Aura) and max it to level 7+ before even considering a second weapon.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🎲</div>
+                    <h3 class="tip-title">Embrace The Holy Trinity</h3>
+                    <p class="tip-content">
+                        Curse Tome + XP Tome + Luck Tome is not optional in Tier 2. This combo is the difference between struggling and dominating. The synergy creates exponential scaling that lets you outpace the difficulty curve.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">💰</div>
+                    <h3 class="tip-title">Take Greed Shrines</h3>
+                    <p class="tip-content">
+                        Greed Shrines increase difficulty by 5% but give gold. If you're running Curse Tome, this "downside" is actually an upside - more enemies means more XP. Always take them early game.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🏃</div>
+                    <h3 class="tip-title">Movement Speed Priority</h3>
+                    <p class="tip-content">
+                        Movement speed is no longer optional. Take the Speed Boots item if offered. You can't kill what you can't catch, and you can't dodge what you can't outrun. Speed is life in Tier 2.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🧲</div>
+                    <h3 class="tip-title">Magnet Shrine Timing</h3>
+                    <p class="tip-content">
+                        Save the Magnet (Shrine of Succ) for right before the boss fight. Activate it around 1:30-2:00 remaining to collect all the XP you've left behind, giving you 2-3 quick level ups before engaging.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">💀</div>
+                    <h3 class="tip-title">Mini Boss Priority</h3>
+                    <p class="tip-content">
+                        Don't ignore the Mini Bosses at 7:00 and 2:00. They drop guaranteed items and significant XP. Kill them quickly, then return to farming. They're speed bumps, not walls.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🛡️</div>
+                    <h3 class="tip-title">Don't Neglect Survivability</h3>
+                    <p class="tip-content">
+                        While DPS is priority #1, you need SOME survivability. Invest in at least one of: HP, Lifesteal, Armor, or Shields. A dead character deals zero DPS. Find the balance.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">⚡</div>
+                    <h3 class="tip-title">Attack Speed > Raw Damage</h3>
+                    <p class="tip-content">
+                        Counterintuitively, Attack Speed is often better than raw Damage in Tier 2. More attacks means more lifesteal procs, more consistent DPS, and better overall damage output. Prioritize it.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2 class="section-title">Ready for the Ultimate Challenge?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                You've conquered Chadbark and unlocked Tier 2. Now prepare for the hardest fight in the game...
+            </p>
+            <div>
+                <a href="/guides/bosses/bark-vader-guide.html" class="btn btn-primary">Next: Bark Vader (Tier 3) →</a>
+                <a href="/guides/bosses/" class="btn btn-secondary">🌲 All Boss Guides</a>
+                <a href="/guides/builds/" class="btn btn-secondary">🔥 Best Builds</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boss Guides</h3>
+                <ul>
+                    <li><a href="/guides/bosses/">All Bosses</a></li>
+                    <li><a href="/guides/bosses/lil-bark-guide.html">Lil Bark (Tier 1)</a></li>
+                    <li><a href="/guides/bosses/chadbark-guide.html">Chadbark (Tier 2)</a></li>
+                    <li><a href="/guides/bosses/bark-vader-guide.html">Bark Vader (Tier 3)</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Character Guides</h3>
+                <ul>
+                    <li><a href="/guides/characters/cl4nk-guide">CL4NK Guide</a></li>
+                    <li><a href="/guides/characters/megachad-guide">Megachad Guide</a></li>
+                    <li><a href="/guides/characters/">All Characters</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Meta Strategy</h3>
+                <ul>
+                    <li><a href="/guides/builds/">Build Guides</a></li>
+                    <li><a href="/guides/builds/walking-apocalypse">Walking Apocalypse</a></li>
+                    <li><a href="/database/weapons/">Weapon Database</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam Page</a></li>
+                    <li><a href="https://twitter.com/megabonkgame" target="_blank">Twitter</a></li>
+                    <li><a href="https://www.reddit.com/search/?q=Megabonk" target="_blank">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Megabonk.org - Unofficial Fan Guide | Not affiliated with the official game</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('.section, .attack-card, .build-card, .tip-card, .comparison-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
