@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extreme Challenge Achievements - Megabonk Achievement Guide</title>
+    <meta name="description" content="Master the hardest achievements in Megabonk. Includes no-hit runs, speedruns, challenge modes, and extreme difficulty achievements for expert players.">
+    <meta name="keywords" content="megabonk extreme challenges, megabonk no damage, megabonk speedrun, megabonk hardest achievements">
+
+    <link rel="canonical" href="https://megabonk.org/guides/achievements/extreme-challenges">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --text: #e4e4e4;
+            --text-dim: #a0a0a0;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #ff7675;
+            --extreme: #8e44ad;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--darker) 0%, #6c3483 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '👑';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.03;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--extreme), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleShine 3s ease-in-out infinite;
+        }
+
+        @keyframes titleShine {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(142, 68, 173, 0.2);
+            color: var(--extreme);
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(142, 68, 173, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(142, 68, 173, 0.6); }
+        }
+
+        /* Warning Banner */
+        .extreme-warning {
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.2), rgba(231, 76, 60, 0.2));
+            border: 3px solid var(--extreme);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 1400px;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(142, 68, 173, 0.3);
+        }
+
+        .warning-icon {
+            font-size: 4rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .warning-content h2 {
+            color: var(--extreme);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .warning-content p {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(142, 68, 173, 0.3);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--extreme);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        /* Progress Tracker */
+        .progress-tracker {
+            background: rgba(142, 68, 173, 0.05);
+            border: 2px solid rgba(142, 68, 173, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tracker-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .tracker-stats {
+            color: var(--extreme);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--extreme), var(--accent));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Achievement List */
+        .achievement-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .achievement-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid var(--extreme);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(142, 68, 173, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .achievement-card:hover::before {
+            left: 100%;
+        }
+
+        .achievement-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(142, 68, 173, 0.2);
+        }
+
+        .achievement-card.legendary {
+            border-left-color: var(--warning);
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.05), rgba(253, 203, 110, 0.05));
+        }
+
+        .achievement-card.impossible {
+            border-left-color: var(--danger);
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.05), rgba(255, 118, 117, 0.05));
+            animation: dangerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes dangerGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 118, 117, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(255, 118, 117, 0.4); }
+        }
+
+        .achievement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+        }
+
+        .achievement-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .achievement-rarity {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(142, 68, 173, 0.3);
+            color: var(--extreme);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .achievement-rarity.legendary {
+            background: rgba(253, 203, 110, 0.3);
+            color: var(--warning);
+        }
+
+        .achievement-rarity.impossible {
+            background: rgba(255, 118, 117, 0.3);
+            color: var(--danger);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .achievement-description {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .achievement-details {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .detail-section {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .detail-title {
+            font-weight: 600;
+            color: var(--extreme);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-content {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .detail-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .detail-content li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .detail-content li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Difficulty Rating */
+        .difficulty-rating {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            align-items: center;
+        }
+
+        .difficulty-label {
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .difficulty-stars {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .star {
+            color: var(--extreme);
+            font-size: 1.2rem;
+        }
+
+        .star.empty {
+            color: rgba(142, 68, 173, 0.2);
+        }
+
+        /* Challenge Mode Section */
+        .challenge-section {
+            background: rgba(142, 68, 173, 0.05);
+            border: 2px solid rgba(142, 68, 173, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .challenge-title {
+            font-size: 1.8rem;
+            color: var(--extreme);
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--extreme);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .challenge-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .challenge-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--extreme);
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-description {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-reward {
+            color: var(--warning);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background: rgba(142, 68, 173, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--extreme);
+        }
+
+        .tip-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--extreme);
+            margin-bottom: 0.8rem;
+        }
+
+        .tip-content {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .extreme-warning {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .achievement-header {
+                flex-direction: column;
+            }
+
+            .achievement-rarity {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/guides/achievements/">Achievements</a></li>
+                <li><a href="/guides/characters/">Characters</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/guides/">Guides</a>
+        <span>›</span>
+        <a href="/guides/achievements/">Achievements</a>
+        <span>›</span>
+        <span>Extreme Challenges</span>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Extreme Challenge Achievements</h1>
+            <p style="font-size: 1.2rem; color: var(--text-dim);">
+                The hardest achievements in Megabonk - for expert players only
+            </p>
+            <span class="category-badge">🔥 EXTREME DIFFICULTY 🔥</span>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Extreme Achievements</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">&lt;5%</span>
+                    <span class="stat-label">Average Unlock Rate</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100h+</span>
+                    <span class="stat-label">Mastery Time</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">0.56%</span>
+                    <span class="stat-label">Rarest Achievement</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Banner -->
+    <div class="container">
+        <div class="extreme-warning">
+            <div class="warning-icon">⚠️</div>
+            <div class="warning-content">
+                <h2>EXTREME DIFFICULTY WARNING</h2>
+                <p>
+                    These achievements represent the absolute peak of Megabonk mastery. Most require perfect execution, 
+                    extensive game knowledge, specific builds, and significant time investment. Average completion rate 
+                    is under 5%. Only attempt these if you've mastered all other achievement categories. <strong>Failure 
+                    and frustration are guaranteed</strong> - but the satisfaction of completion is unmatched.
+                </p>
+            </div>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div class="tracker-header">
+                <div class="tracker-title">👑 Elite Mastery Progress</div>
+                <div class="tracker-stats">0 / 20 (0%)</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+            </div>
+            <p style="color: var(--text-dim); margin-top: 1rem; font-size: 0.9rem;">
+                Click on achievements to mark them as completed (if you dare)
+            </p>
+        </div>
+
+        <!-- No-Hit Challenges -->
+        <h2 class="section-title">🛡️ No-Hit & Perfect Execution</h2>
+        <div class="achievement-list">
+            <!-- Untouchable -->
+            <div class="achievement-card legendary" data-achievement="untouchable">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">👻</span>
+                            <h3 class="achievement-name">Untouchable</h3>
+                        </div>
+                        <p class="achievement-description">Complete 45-minute run without taking damage</p>
+                    </div>
+                    <span class="achievement-rarity legendary">~2% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">⚠️ Extreme Difficulty</div>
+                        <div class="detail-content">
+                            One of the hardest achievements in the game. Requires 45 minutes of PERFECT play with ZERO mistakes. Single hit = run over. Demands mastery of movement, enemy patterns, and build optimization.
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">🎯 Required Build</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li><strong>Aura</strong> - 360° automatic damage, no aiming needed</li>
+                                <li><strong>Max Size Tome</strong> - Huge Aura radius to kill enemies before they reach you</li>
+                                <li><strong>Max Agility Tome</strong> - Essential for dodging</li>
+                                <li><strong>Lucky Charm</strong> - Better item quality</li>
+                                <li><strong>Evasion Boots</strong> - Additional dodge chance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Expert Strategy</div>
+                        <div class="detail-content">
+                            Use <strong>Megachad or Sir Oofie</strong> for best survivability. Keep moving in large circles around the map edges. NEVER stand still. Learn enemy spawn patterns. Practice movement without attacking for 20+ hours before attempting. Exit and restart if you take damage in first 5 minutes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flawless Victory -->
+            <div class="achievement-card legendary" data-achievement="flawless-victory">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">💎</span>
+                            <h3 class="achievement-name">Flawless Victory</h3>
+                        </div>
+                        <p class="achievement-description">Defeat Final Boss without using healing items</p>
+                    </div>
+                    <span class="achievement-rarity legendary">~3% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">🎯 Strategy</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li>Requires understanding all 4 Final Boss phases</li>
+                                <li>Use lifesteal build to regain HP from enemy kills</li>
+                                <li>Stack max HP items before boss fight</li>
+                                <li>Position perfectly to avoid all telegraphed attacks</li>
+                                <li>Practice boss patterns in regular runs first</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Recommended Build</div>
+                        <div class="detail-content">
+                            Poison Lifesteal build works best. Stack Poison damage + Lifesteal items. Let DoT kill boss while you focus on dodging. Health Pendant + Vampire Ring + Poison Flask combination is essential.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Speed & Time Challenges -->
+        <h2 class="section-title">⚡ Speed & Time Attack</h2>
+        <div class="achievement-list">
+            <!-- Speedrun Master -->
+            <div class="achievement-card legendary" data-achievement="speedrun-master">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">🏃</span>
+                            <h3 class="achievement-name">Speedrun Master</h3>
+                        </div>
+                        <p class="achievement-description">Defeat 3 Bosses in under 25 minutes</p>
+                    </div>
+                    <span class="achievement-rarity legendary">~4% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">⚡ Speed Build Required</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li>Max Agility Tome for movement speed</li>
+                                <li>High DPS weapon (Katana, Dice, or Revolver)</li>
+                                <li>Skip all non-essential items and chests</li>
+                                <li>Memorize optimal path to each boss</li>
+                                <li>Average 8 minutes per boss maximum</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Routing Tips</div>
+                        <div class="detail-content">
+                            Practice the route 20+ times. Know where every boss spawns. Don't fight unnecessary enemies. Use Calcium (speed character) or Ninja (speed weapon) for fastest movement. Rush XP items early to level quickly.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marathon Runner -->
+            <div class="achievement-card legendary" data-achievement="marathon-runner">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">⏱️</span>
+                            <h3 class="achievement-name">Marathon Runner</h3>
+                        </div>
+                        <p class="achievement-description">Survive Final Swarm for 10 minutes</p>
+                    </div>
+                    <span class="achievement-rarity legendary">~1% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">🛡️ Immortality Build REQUIRED</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li><strong>Kevin + Mirror</strong> - Double immortality combo (ESSENTIAL)</li>
+                                <li><strong>Aura</strong> - Continuous damage while moving</li>
+                                <li><strong>Max HP items</strong> - Stack every health item you can find</li>
+                                <li><strong>Max Armor</strong> - Use Sir Oofie or Megachad</li>
+                                <li><strong>Evasion items</strong> - Dodge chance crucial</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Survival Strategy</div>
+                        <div class="detail-content">
+                            Circle the outer edge of the map CONSTANTLY. Never stop moving. Let Aura kill enemies passively. The Kevin+Mirror combo will save you twice when you would die. After 5 minutes, enemy density becomes EXTREME - positioning is everything.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Mode Achievements -->
+        <h2 class="section-title">🎯 Challenge Mode Mastery</h2>
+        <div class="achievement-list">
+            <!-- Challenge Conqueror -->
+            <div class="achievement-card legendary" data-achievement="challenge-conqueror">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">🏆</span>
+                            <h3 class="achievement-name">Challenge Conqueror</h3>
+                        </div>
+                        <p class="achievement-description">Complete all 12 Challenge Modes</p>
+                    </div>
+                    <span class="achievement-rarity legendary">~3% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">🎮 Challenge Categories</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li><strong>Restriction Challenges</strong> - No healing, no rerolls, specific weapon only</li>
+                                <li><strong>Speed Challenges</strong> - Time limits on boss kills and level completion</li>
+                                <li><strong>Survival Challenges</strong> - Extended Final Swarm, double enemy spawns</li>
+                                <li><strong>Perfect Execution</strong> - No damage, no deaths, flawless runs</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Challenge Tips</div>
+                        <div class="detail-content">
+                            Start with easier challenges (speed-based). Save restriction challenges for when you have meta builds mastered. Practice each challenge type separately before attempting all 12. Some challenges require specific character unlocks.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pacifist Run -->
+            <div class="achievement-card impossible" data-achievement="pacifist">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">🕊️</span>
+                            <h3 class="achievement-name">Pacifist</h3>
+                        </div>
+                        <p class="achievement-description">Complete a run using only passive damage (no direct attacks)</p>
+                    </div>
+                    <span class="achievement-rarity impossible">~0.8% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">🎯 Passive-Only Build</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li><strong>Aura</strong> - Primary damage source (automatic)</li>
+                                <li><strong>Thorns items</strong> - Reflect damage when hit</li>
+                                <li><strong>Poison trails</strong> - DoT from movement</li>
+                                <li><strong>Explosion items</strong> - Trigger on kill/hit</li>
+                                <li><strong>NO direct weapon usage allowed!</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Strategy</div>
+                        <div class="detail-content">
+                            Extremely difficult. Aura is mandatory. Stack every passive damage source. Never use your weapon (some players unbind attack keys to avoid mistakes). Requires perfect positioning to let Aura kill everything. Boss fights take 2-3x longer than normal.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Extreme Damage & Kill Records -->
+        <h2 class="section-title">💥 Extreme Damage & Kill Records</h2>
+        <div class="achievement-list">
+            <!-- One Million Damage -->
+            <div class="achievement-card legendary" data-achievement="million-damage">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">💥</span>
+                            <h3 class="achievement-name">Apocalypse</h3>
+                        </div>
+                        <p class="achievement-description">Deal 50,000,000 total damage in a single run</p>
+                    </div>
+                    <span class="achievement-rarity legendary">~2% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">💥 Max Damage Build</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li>Use <strong>Ogre</strong> (+1% damage per level, infinite scaling)</li>
+                                <li>Max Damage Tome (highest priority)</li>
+                                <li>Stack Attack Speed for more hits</li>
+                                <li>Use Dice weapon (RNG burst damage)</li>
+                                <li>Survive 45+ minutes for maximum level scaling</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Strategy</div>
+                        <div class="detail-content">
+                            Requires extended run with max damage optimization. Ogre is essential because his passive scales infinitely. Farm Final Swarm for 10+ minutes to accumulate damage. Every level = +1% more damage permanently. Reach level 80+ for best results.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kill Chain Master -->
+            <div class="achievement-card legendary" data-achievement="kill-chain">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">⚡</span>
+                            <h3 class="achievement-name">Chain Reaction</h3>
+                        </div>
+                        <p class="achievement-description">Kill 5,000 enemies in 1 minute</p>
+                    </div>
+                    <span class="achievement-rarity legendary">~1.5% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">⚡ Chain Kill Build</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li>Requires Final Swarm for enemy density</li>
+                                <li>Max Size + Max Cooldown Tomes</li>
+                                <li>Aura or AOE explosion weapons</li>
+                                <li>On-kill explosion items (chain reactions)</li>
+                                <li>Need 83 kills per SECOND for 60 seconds</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Execution</div>
+                        <div class="detail-content">
+                            Only achievable deep into Final Swarm (8+ minutes) when enemy density is MAXIMUM. Stand in center of enemy horde. One kill triggers explosion → chain reaction → massive simultaneous kills. Requires perfect build and timing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impossible Achievements -->
+        <h2 class="section-title">🔥 Near-Impossible Achievements</h2>
+        <div class="achievement-list">
+            <!-- Cactus (Already covered in combat but worth repeating) -->
+            <div class="achievement-card impossible" data-achievement="cactus-extreme">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">🌵</span>
+                            <h3 class="achievement-name">Cactus Master</h3>
+                        </div>
+                        <p class="achievement-description">Kill 100 cactus enemies with Thorns damage only</p>
+                    </div>
+                    <span class="achievement-rarity impossible">0.56% Unlocked - RAREST</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">⚠️ THE RAREST ACHIEVEMENT</div>
+                        <div class="detail-content">
+                            This is the single rarest achievement in Megabonk. Only 0.56% of players have unlocked it. Requires Athena (Thorns Tome 9), Aegis weapon, Desert stages, and extreme patience. See Combat Mastery guide for full strategy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- True Perfectionist -->
+            <div class="achievement-card impossible" data-achievement="perfectionist">
+                <div class="achievement-header">
+                    <div class="achievement-info">
+                        <div class="achievement-title">
+                            <span class="achievement-icon">🌟</span>
+                            <h3 class="achievement-name">True Perfectionist</h3>
+                        </div>
+                        <p class="achievement-description">Unlock all other achievements (100% completion)</p>
+                    </div>
+                    <span class="achievement-rarity impossible">~0.3% Unlocked</span>
+                </div>
+                <div class="difficulty-rating">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="achievement-details">
+                    <div class="detail-section">
+                        <div class="detail-title">🏆 Ultimate Achievement</div>
+                        <div class="detail-content">
+                            <ul>
+                                <li>Requires completing EVERY other achievement in the game</li>
+                                <li>Estimated 150-300 hours of gameplay</li>
+                                <li>Demands mastery of all characters, builds, and strategies</li>
+                                <li>Includes all combat, collection, and extreme challenges</li>
+                                <li>Only for the most dedicated players</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 The Journey</div>
+                        <div class="detail-content">
+                            This isn't just an achievement - it's a testament to complete mastery of Megabonk. You'll need perfect execution for combat challenges, extensive farming for collections, character unlocks, and extreme patience for the rarest achievements. Less than 0.3% of players reach this level.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Mode Overview -->
+        <div class="challenge-section">
+            <h2 class="challenge-title">🎯 Challenge Mode Overview</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">
+                Challenge Modes unlock after completing basic progression. Each adds unique restrictions or objectives:
+            </p>
+            
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <div class="challenge-name">⚡ Speed Run</div>
+                    <div class="challenge-description">
+                        Defeat boss in under 10 minutes. Requires routing knowledge and DPS optimization.
+                    </div>
+                    <div class="challenge-reward">Reward: Speed Boots (permanent item unlock)</div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-name">🛡️ No Damage</div>
+                    <div class="challenge-description">
+                        Complete tier without taking damage. Demands perfect positioning and enemy pattern knowledge.
+                    </div>
+                    <div class="challenge-reward">Reward: Evasion Charm (permanent item unlock)</div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-name">💀 Double Trouble</div>
+                    <div class="challenge-description">
+                        Enemy spawn rate doubled. Test your AOE damage and crowd control abilities.
+                    </div>
+                    <div class="challenge-reward">Reward: XP Multiplier Tome upgrade</div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-name">🎲 RNG Hell</div>
+                    <div class="challenge-description">
+                        All item drops randomized with extreme variance. Adapt to any build on the fly.
+                    </div>
+                    <div class="challenge-reward">Reward: Lucky Dice (reroll enhancement)</div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-name">⚔️ One Weapon</div>
+                    <div class="challenge-description">
+                        Complete run with only your starting weapon. No weapon pickups allowed.
+                    </div>
+                    <div class="challenge-reward">Reward: Weapon Mastery bonus (permanent)</div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-name">🔥 Final Swarm+</div>
+                    <div class="challenge-description">
+                        Final Swarm starts at 30 minutes. Survive 5 minutes of maximum intensity.
+                    </div>
+                    <div class="challenge-reward">Reward: Immortality Ring (rare item)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expert Tips -->
+        <div class="tips-section">
+            <h2 class="section-title">💡 Elite Mastery Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-title">🎯 Master One Challenge Type</div>
+                    <div class="tip-content">
+                        Don't attempt all extreme challenges at once. Focus on one category (no-hit, speed, etc.) and master it completely before moving to the next. Specialization beats generalization.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">📊 Practice Makes Perfect</div>
+                    <div class="tip-content">
+                        Extreme challenges require 50-100+ practice attempts each. Track your progress, learn from failures, and incrementally improve. Every failed run teaches valuable lessons.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">🧠 Mental Preparation</div>
+                    <div class="tip-content">
+                        These challenges are as much mental as mechanical. Take breaks between attempts. Don't tilt after failures. Stay calm during crucial moments. Peak performance requires peak mental state.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">📚 Study the Meta</div>
+                    <div class="tip-content">
+                        Watch top players' successful runs. Study their builds, routing, and decision-making. Community Discord often shares strategies. Learn from those who've succeeded before you.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">⚙️ Build Optimization</div>
+                    <div class="tip-content">
+                        Extreme challenges demand PERFECT builds. Every item matters. Use Banish and Toggler to control your item pool. Meta builds aren't optional - they're mandatory for success.
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-title">🎮 Save the Hardest for Last</div>
+                    <div class="tip-content">
+                        Cactus (0.56%), Untouchable, and Marathon Runner are the holy trinity of difficulty. Attempt these only after mastering everything else. They represent the absolute peak of Megabonk skill.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div style="display: flex; justify-content: space-between; margin-top: 4rem; flex-wrap: wrap; gap: 1rem;">
+            <a href="collection-secrets.html" class="btn" style="padding: 1rem 2rem; background: var(--darker); color: var(--text); text-decoration: none; border-radius: 10px; border: 2px solid var(--primary);">
+                ← Collections & Secrets
+            </a>
+            <a href="/guides/achievements/" class="btn" style="padding: 1rem 2rem; background: linear-gradient(135deg, var(--extreme), var(--accent)); color: white; text-decoration: none; border-radius: 10px;">
+                Back to Achievement Hub
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p style="color: var(--text-dim);">
+            <a href="/">Home</a>
+            <a href="/guides/">Guides</a>
+            <a href="/guides/achievements/">Achievements</a>
+            <a href="/guides/characters/">Characters</a>
+            <a href="/guides/builds/">Builds</a>
+        </p>
+        <p style="color: var(--text-dim); margin-top: 1rem; font-size: 0.9rem;">
+            © 2025 Megabonk.org - Unofficial Fan Guide
+        </p>
+    </footer>
+
+    <script>
+        // Achievement progress tracker
+        const achievements = document.querySelectorAll('.achievement-card');
+        const progressFill = document.getElementById('progressFill');
+        const totalAchievements = achievements.length;
+        let completedCount = 0;
+
+        achievements.forEach(achievement => {
+            const id = achievement.dataset.achievement;
+            if (localStorage.getItem(`achievement_${id}`) === 'completed') {
+                achievement.style.opacity = '0.5';
+                achievement.style.border = '2px solid var(--extreme)';
+                completedCount++;
+            }
+
+            achievement.addEventListener('click', function() {
+                const id = this.dataset.achievement;
+                const isCompleted = localStorage.getItem(`achievement_${id}`) === 'completed';
+                
+                if (isCompleted) {
+                    localStorage.removeItem(`achievement_${id}`);
+                    this.style.opacity = '1';
+                    this.style.border = '';
+                    completedCount--;
+                } else {
+                    localStorage.setItem(`achievement_${id}`, 'completed');
+                    this.style.opacity = '0.5';
+                    this.style.border = '2px solid var(--extreme)';
+                    completedCount++;
+                }
+                
+                updateProgress();
+            });
+        });
+
+        function updateProgress() {
+            const percentage = Math.round((completedCount / totalAchievements) * 100);
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+            document.querySelector('.tracker-stats').textContent = 
+                `${completedCount} / ${totalAchievements} (${percentage}%)`;
+        }
+
+        updateProgress();
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.achievement-card, .challenge-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
