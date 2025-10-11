@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Tier Lists 2025 - Complete Character, Weapon, Item & Tome Rankings</title>
+    <meta name="description" content="Complete Megabonk tier lists for 2025. S-tier characters, weapons, items and tomes rankings based on competitive meta. Updated for version 1.0.12 with expert analysis.">
+    <meta name="keywords" content="megabonk tier list, megabonk character tier list, megabonk weapon tier list, megabonk best characters, megabonk rankings 2025">
+    <link rel="canonical" href="https://megabonk.org/tier-lists/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8b5cf6;
+            --secondary-color: #3b82f6;
+            --bg-dark: #0f0f23;
+            --bg-darker: #1a1a2e;
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
+            --s-tier: #ff6b6b;
+            --a-tier: #ffa500;
+            --b-tier: #ffd93d;
+            --c-tier: #6bcf7f;
+            --d-tier: #a0aec0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .version-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Tier List Categories */
+        .tier-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .category-description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .view-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .view-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Tier Legend */
+        .tier-legend {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .tier-legend h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tier-item {
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid;
+        }
+
+        .tier-item.s-tier {
+            background: rgba(255, 107, 107, 0.1);
+            border-color: var(--s-tier);
+        }
+
+        .tier-item.a-tier {
+            background: rgba(255, 165, 0, 0.1);
+            border-color: var(--a-tier);
+        }
+
+        .tier-item.b-tier {
+            background: rgba(255, 217, 61, 0.1);
+            border-color: var(--b-tier);
+        }
+
+        .tier-item.c-tier {
+            background: rgba(107, 207, 127, 0.1);
+            border-color: var(--c-tier);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .s-tier .tier-badge { background: var(--s-tier); }
+        .a-tier .tier-badge { background: var(--a-tier); }
+        .b-tier .tier-badge { background: var(--b-tier); }
+        .c-tier .tier-badge { background: var(--c-tier); }
+
+        /* Meta Updates */
+        .meta-updates {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .meta-updates h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .update-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .update-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            margin-bottom: 4rem;
+        }
+
+        .featured-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .featured-card {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .featured-card:hover {
+            transform: scale(1.05);
+        }
+
+        .featured-card.s-tier { border-color: var(--s-tier); }
+        .featured-card.a-tier { border-color: var(--a-tier); }
+
+        .featured-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-tier {
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .cta-btn.primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .cta-btn.secondary {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .tier-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎮 Megabonk.org</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/guides/meta-strategy/">Meta</a></li>
+                <li><a href="/database/">Database</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>🏆 Complete Megabonk Tier Lists 2025</h1>
+            <p class="hero-subtitle">Comprehensive Rankings for Characters, Weapons, Items & Tomes</p>
+            <span class="version-badge">📊 Updated for Version 1.0.12 | October 2025</span>
+        </section>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-number">20</div>
+                <div class="stat-label">Characters Ranked</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">29</div>
+                <div class="stat-label">Weapons Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">40+</div>
+                <div class="stat-label">Items Evaluated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Tomes Tested</div>
+            </div>
+        </div>
+
+        <!-- Tier List Categories -->
+        <section class="tier-categories">
+            <!-- Characters -->
+            <div class="category-card" onclick="window.location.href='/guides/characters/character-tier-list-2025'">
+                <div class="category-icon">👥</div>
+                <h3 class="category-title">Character Tier List</h3>
+                <p class="category-description">Complete rankings of all 20 playable characters based on competitive viability and meta strength.</p>
+                <div class="category-stats">
+                    <span>🌟 S-Tier: 4</span>
+                    <span>⭐ A-Tier: 4</span>
+                </div>
+                <div class="category-stats">
+                    <span>📊 B-Tier: 6</span>
+                    <span>📉 C-Tier: 6</span>
+                </div>
+                <button class="view-btn">View Character Rankings →</button>
+            </div>
+
+            <!-- Weapons -->
+            <div class="category-card" onclick="window.location.href='/database/weapons/'">
+                <div class="category-icon">⚔️</div>
+                <h3 class="category-title">Weapon Tier List</h3>
+                <p class="category-description">Rankings of all 29 weapons from default unlocks to endgame powerhouses.</p>
+                <div class="category-stats">
+                    <span>🌟 S-Tier: 5</span>
+                    <span>⭐ A-Tier: 8</span>
+                </div>
+                <div class="category-stats">
+                    <span>📊 B-Tier: 10</span>
+                    <span>📉 C-Tier: 6</span>
+                </div>
+                <button class="view-btn">View Weapon Rankings →</button>
+            </div>
+
+            <!-- Items -->
+            <div class="category-card">
+                <div class="category-icon">💎</div>
+                <h3 class="category-title">Item Tier List</h3>
+                <p class="category-description">Essential items, game-breaking combos, and must-have pickups for competitive runs.</p>
+                <div class="category-stats">
+                    <span>🌟 S-Tier: 6</span>
+                    <span>⭐ A-Tier: 12</span>
+                </div>
+                <div class="category-stats">
+                    <span>📊 B-Tier: 15</span>
+                    <span>📉 C-Tier: 7+</span>
+                </div>
+                <button class="view-btn">View Item Rankings →</button>
+            </div>
+
+            <!-- Tomes -->
+            <div class="category-card">
+                <div class="category-icon">📚</div>
+                <h3 class="category-title">Tome Tier List</h3>
+                <p class="category-description">Power rankings of all 12 tomes including the Holy Trinity combination.</p>
+                <div class="category-stats">
+                    <span>🌟 S-Tier: 3</span>
+                    <span>⭐ A-Tier: 4</span>
+                </div>
+                <div class="category-stats">
+                    <span>📊 B-Tier: 3</span>
+                    <span>📉 C-Tier: 2</span>
+                </div>
+                <button class="view-btn">View Tome Rankings →</button>
+            </div>
+        </section>
+
+        <!-- Tier Legend -->
+        <section class="tier-legend">
+            <h2>📊 Understanding Our Tier System</h2>
+            <div class="tier-grid">
+                <div class="tier-item s-tier">
+                    <span class="tier-badge">S-TIER</span>
+                    <h4>Meta Dominant</h4>
+                    <p>Best-in-class performance. Consistently dominates competitive play and leaderboards. Must-pick for serious runs.</p>
+                </div>
+                <div class="tier-item a-tier">
+                    <span class="tier-badge">A-TIER</span>
+                    <h4>Highly Competitive</h4>
+                    <p>Excellent choices with strong viability. Capable of top-tier performance with proper builds and execution.</p>
+                </div>
+                <div class="tier-item b-tier">
+                    <span class="tier-badge">B-TIER</span>
+                    <h4>Solid & Viable</h4>
+                    <p>Good choices for most situations. Reliable performance but may lack the power spike of higher tiers.</p>
+                </div>
+                <div class="tier-item c-tier">
+                    <span class="tier-badge">C-TIER</span>
+                    <h4>Situational</h4>
+                    <p>Workable in specific builds or playstyles. Generally outperformed by higher tiers but can succeed with dedication.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Top Picks -->
+        <section class="featured-section">
+            <h2>🌟 Current Meta: Top Picks</h2>
+            <div class="featured-grid">
+                <!-- Characters -->
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">🎲</div>
+                    <div class="featured-name">Dicehead</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Unlimited crit scaling</p>
+                </div>
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">🤖</div>
+                    <div class="featured-name">CL4NK</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Glass cannon crit master</p>
+                </div>
+                <!-- Weapons -->
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">💪</div>
+                    <div class="featured-name">Aura</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">360° area damage</p>
+                </div>
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">🎲</div>
+                    <div class="featured-name">Dice</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">RNG game-breaker</p>
+                </div>
+                <!-- Items -->
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">🪞</div>
+                    <div class="featured-name">Mirror</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Damage reflection</p>
+                </div>
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">🥊</div>
+                    <div class="featured-name">Kevin</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Self-damage engine</p>
+                </div>
+                <!-- Tomes -->
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">📖</div>
+                    <div class="featured-name">XP Tome</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Holy Trinity core</p>
+                </div>
+                <div class="featured-card s-tier">
+                    <div class="featured-emoji">🍀</div>
+                    <div class="featured-name">Luck Tome</div>
+                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Drop quality boost</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meta Updates -->
+        <section class="meta-updates">
+            <h2>📰 Recent Meta Changes</h2>
+            <div class="update-item">
+                <div class="update-date">🗓️ Version 1.0.12 | October 8, 2025</div>
+                <strong>Major Balance Overhaul:</strong> Final Swarm introduced, Joe's Dagger capped at 2,000% damage, XP Tome nerfed from 9% to 7% per level. Duration bug fixed enabling Dexecutioner/Axe/Sword builds.
+            </div>
+            <div class="update-item">
+                <div class="update-date">🗓️ Version 1.0.7 | September 29, 2025</div>
+                <strong>Kevin + Mirror Nerf:</strong> Immortality exploit removed, leaderboards reset. Athena buffed +150% attack speed when unshielded. Character diversity dramatically increased.
+            </div>
+            <div class="update-item">
+                <div class="update-date">🗓️ Current Meta Focus</div>
+                <strong>Skill-Based Era:</strong> Meta has shifted from exploit-based to skill-focused gameplay. Holy Trinity (XP + Curse + Luck) remains essential for competitive runs.
+            </div>
+        </section>
+
+        <!-- Ranking Methodology -->
+        <section class="meta-updates">
+            <h2>🎯 Our Ranking Methodology</h2>
+            <div class="update-item">
+                <strong>🏆 Competitive Performance (40%):</strong> Leaderboard presence, top player usage, tournament results
+            </div>
+            <div class="update-item">
+                <strong>⚖️ Consistency (25%):</strong> Performance across different situations, reliability, skill floor vs ceiling
+            </div>
+            <div class="update-item">
+                <strong>🔄 Versatility (20%):</strong> Build options, synergy potential, map adaptability
+            </div>
+            <div class="update-item">
+                <strong>📊 Meta Impact (15%):</strong> Influence on competitive scene, forcing bans/restrictions, defining strategies
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>🚀 Master the Meta</h2>
+            <p style="margin-bottom: 2rem;">Deep dive into our comprehensive guides to dominate every aspect of Megabonk</p>
+            <div class="cta-buttons">
+                <a href="/guides/meta-strategy/" class="cta-btn primary">📖 Read Meta Strategy Guide</a>
+                <a href="/guides/tips-tricks/" class="cta-btn secondary">💡 View Tips & Tricks</a>
+                <a href="/guides/builds/" class="cta-btn secondary">🔧 Explore Builds</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="color: var(--text-muted);">© 2025 Megabonk.org | All tier lists updated for version 1.0.12 | <a href="/privacy-policy" style="color: var(--primary-color);">Privacy Policy</a></p>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Rankings based on competitive data, community feedback, and developer balance changes</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.category-card, .featured-card, .update-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
