@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robinette Guide - Economy Master | MegaBonk Character Guides</title>
+    <meta name="description" content="Complete Robinette guide for MegaBonk. Master the economy flow with gold generation, shop optimization, and wealth-scaling builds. Best items, strategies, and tips.">
+    <meta name="keywords" content="megabonk robinette, robinette guide, robinette build, economy build, gold generation, megabonk economy, robinette tips">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Floating Coins Animation */
+        .coin-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .coin {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.15;
+            animation: float-coin 15s infinite ease-in-out;
+        }
+
+        @keyframes float-coin {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .coin:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .coin:nth-child(2) { left: 25%; animation-delay: 2s; }
+        .coin:nth-child(3) { left: 40%; animation-delay: 4s; }
+        .coin:nth-child(4) { left: 55%; animation-delay: 1s; }
+        .coin:nth-child(5) { left: 70%; animation-delay: 3s; }
+        .coin:nth-child(6) { left: 85%; animation-delay: 5s; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(218, 165, 32, 0.3);
+            border: 2px solid #FFD700;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            color: #FFD700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #FFF8DC;
+            margin-bottom: 20px;
+        }
+
+        /* Tier Badge */
+        .tier-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 5px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .tier-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(30, 30, 45, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFA500;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(30, 30, 45, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #DAA520;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3);
+        }
+
+        .stat-card h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        /* Section Styling */
+        .section {
+            background: rgba(30, 30, 45, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+        }
+
+        h2 {
+            color: #FFD700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #DAA520;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #FFA500;
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        /* Build Cards */
+        .build-card {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 2px solid #DAA520;
+        }
+
+        .build-card h3 {
+            color: #FFD700;
+            font-size: 1.6em;
+            margin-top: 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #DAA520 0%, #B8860B 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '💰';
+            position: absolute;
+            left: -28px;
+            top: 0;
+            font-size: 24px;
+            background: rgba(30, 30, 45, 0.9);
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .timeline-item h4 {
+            color: #FFD700;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        /* Tips Box */
+        .tip-box {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(46, 125, 50, 0.2) 100%);
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.2) 0%, rgba(230, 81, 0, 0.2) 100%);
+            border-left: 4px solid #FF9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        /* Highlight */
+        .highlight {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        strong {
+            color: #FFA500;
+        }
+
+        /* Pros/Cons */
+        .pros-cons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros, .cons {
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .pros {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(46, 125, 50, 0.2) 100%);
+            border: 2px solid #4CAF50;
+        }
+
+        .cons {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(183, 28, 28, 0.2) 100%);
+            border: 2px solid #F44336;
+        }
+
+        .pros h3 {
+            color: #4CAF50;
+        }
+
+        .cons h3 {
+            color: #F44336;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: #888;
+            border-top: 2px solid rgba(218, 165, 32, 0.3);
+        }
+
+        footer a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #FFA500;
+        }
+    </style>
+</head>
+<body>
+    <div class="coin-bg">
+        <div class="coin">💰</div>
+        <div class="coin">💵</div>
+        <div class="coin">💰</div>
+        <div class="coin">💎</div>
+        <div class="coin">💰</div>
+        <div class="coin">💵</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>💰 ROBINETTE 💰</h1>
+            <p class="subtitle">The Economy Master - Wealth Through Strategy</p>
+            <div class="tier-container">
+                <span class="tier-badge">A-TIER Overall</span>
+                <span class="tier-badge">S-TIER Economy Flow</span>
+            </div>
+        </header>
+
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#builds">Builds</a>
+            <a href="#strategy">Strategy</a>
+            <a href="#tips">Pro Tips</a>
+            <a href="#unlock">Unlock Guide</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <h2>📊 Character Overview</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>💰 Unlock Method</h3>
+                    <p>Complete <strong>Forest Tier 2</strong></p>
+                </div>
+                <div class="stat-card">
+                    <h3>🎯 Playstyle</h3>
+                    <p><strong>Economy/Shop Optimization</strong></p>
+                </div>
+                <div class="stat-card">
+                    <h3>⚔️ Default Weapon</h3>
+                    <p><strong>Starting loadout ready</strong></p>
+                </div>
+                <div class="stat-card">
+                    <h3>📈 Difficulty</h3>
+                    <p><strong>Medium</strong> - Strategic planning</p>
+                </div>
+            </div>
+
+            <h3>💎 Passive Ability: Golden Touch</h3>
+            <p>Robinette's economy-focused passive provides significant advantages in gold generation and shop value:</p>
+            <ul>
+                <li><strong>Increased Gold Drops:</strong> Enemies drop more gold when killed</li>
+                <li><strong>Shop Discount:</strong> Items in the shop cost less, enabling faster power scaling</li>
+                <li><strong>Economy Snowball:</strong> More gold = more items = faster progression</li>
+                <li><strong>Perfect for Long Runs:</strong> Wealth advantage compounds over time</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>💡 Core Identity:</strong> Robinette transforms the shop into your primary power source. While other characters rely on RNG drops, you buy your way to victory with strategic gold management and smart purchasing decisions.
+            </div>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3>✅ Strengths</h3>
+                    <ul>
+                        <li>Excellent shop value and item access</li>
+                        <li>Consistent power scaling through purchases</li>
+                        <li>Strong late-game economy dominance</li>
+                        <li>Less RNG-dependent than other characters</li>
+                        <li>Great for completing item collection</li>
+                        <li>Synergizes with economic items</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h3>❌ Weaknesses</h3>
+                    <ul>
+                        <li>Slower early game without shop access</li>
+                        <li>Requires strategic gold management</li>
+                        <li>Less combat-focused passive</li>
+                        <li>Weaker if shops are unlucky</li>
+                        <li>Needs to reach shops to benefit</li>
+                        <li>Gold items are mandatory picks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Builds Section -->
+        <section id="builds" class="section">
+            <h2>🎯 Recommended Builds</h2>
+
+            <div class="build-card">
+                <h3>1. 💎 Maximum Wealth Scaling</h3>
+                <p><strong>Goal:</strong> Maximize gold generation to dominate shop purchases</p>
+                
+                <h4>Core Items (Priority Order):</h4>
+                <ol>
+                    <li><strong>Piggy Bank</strong> - Core gold generation item</li>
+                    <li><strong>Greed</strong> - Increases gold from all sources</li>
+                    <li><strong>Lucky Coin</strong> - Chance for bonus gold drops</li>
+                    <li><strong>Crown</strong> - Scaling gold per wave</li>
+                    <li><strong>Metal Detector</strong> - Find more gold naturally</li>
+                </ol>
+
+                <h4>Supporting Stats:</h4>
+                <ul>
+                    <li><span class="highlight">Pickup Range</span> - Collect gold efficiently</li>
+                    <li><span class="highlight">Luck</span> - Better drops and shop rolls</li>
+                    <li><span class="highlight">Max HP</span> - Survive to spend your wealth</li>
+                </ul>
+
+                <h4>Gameplan:</h4>
+                <p>Focus entirely on gold generation in the early game. Every gold item you find should be purchased or picked up. Your goal is to reach a critical mass where you can buy every good item in every shop, creating an unstoppable power curve.</p>
+            </div>
+
+            <div class="build-card">
+                <h3>2. ⚡ Balanced Economy Fighter</h3>
+                <p><strong>Goal:</strong> Mix economy with combat power for consistent runs</p>
+                
+                <h4>Core Items (Priority Order):</h4>
+                <ol>
+                    <li><strong>Piggy Bank / Greed</strong> - Pick one economy foundation</li>
+                    <li><strong>Damage Weapon</strong> - Kevin, Dexecutioner, or similar</li>
+                    <li><strong>Attack Speed Items</strong> - Scale your damage</li>
+                    <li><strong>Lucky Coin</strong> - Passive gold generation</li>
+                    <li><strong>Lifesteal / Regen</strong> - Sustainability</li>
+                </ol>
+
+                <h4>Supporting Stats:</h4>
+                <ul>
+                    <li><span class="highlight">Damage</span> - Clear waves faster</li>
+                    <li><span class="highlight">Attack Speed</span> - DPS scaling</li>
+                    <li><span class="highlight">Luck</span> - Better shop options</li>
+                </ul>
+
+                <h4>Gameplan:</h4>
+                <p>Don't neglect combat entirely. Pick 1-2 gold items early, then focus on damage scaling. Use your economic advantage to buy weapons and combat items that normally would be too expensive. This build is more forgiving and consistent.</p>
+            </div>
+
+            <div class="build-card">
+                <h3>3. 🛍️ Shop Reroll Master</h3>
+                <p><strong>Goal:</strong> Abuse shop rerolls to find perfect items</p>
+                
+                <h4>Core Items (Priority Order):</h4>
+                <ol>
+                    <li><strong>Greed + Crown</strong> - Maximum gold income</li>
+                    <li><strong>Luck Items</strong> - Better shop quality</li>
+                    <li><strong>Any Gold Generation</strong> - Fund rerolls</li>
+                    <li><strong>Microwave (if possible)</strong> - Duplicate purchases</li>
+                    <li><strong>Meta Items</strong> - Kevin, Mirror, Timewarp</li>
+                </ol>
+
+                <h4>Supporting Stats:</h4>
+                <ul>
+                    <li><span class="highlight">Luck</span> - Best shop items</li>
+                    <li><span class="highlight">Gold Generation</span> - Reroll funding</li>
+                    <li><span class="highlight">XP Gain</span> - More shops per run</li>
+                </ul>
+
+                <h4>Gameplan:</h4>
+                <p>Save gold specifically for shop rerolls. Don't buy mediocre items - reroll until you see S-tier items. With Robinette's discounts, you can afford multiple rerolls per shop. This strategy finds the best possible items but requires patience and gold management.</p>
+            </div>
+        </section>
+
+        <!-- Strategy Timeline -->
+        <section id="strategy" class="section">
+            <h2>⏱️ Strategy Timeline</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>0-5 Minutes: Foundation Phase</h4>
+                    <p><strong>Goal:</strong> Survive early waves and prepare for first shop</p>
+                    <ul>
+                        <li>Focus on basic survival - don't be greedy</li>
+                        <li>Pick up ALL gold drops (Pickup Range helps)</li>
+                        <li>Take any weapon that helps you clear safely</li>
+                        <li>Look for your first gold generation item</li>
+                        <li>Prioritize reaching shops over risky plays</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>💡 Early Game Tip:</strong> Robinette's passive doesn't help much before shops. Play conservatively and survive to capitalize on your economy advantage later.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>5-15 Minutes: Economy Establishment</h4>
+                    <p><strong>Goal:</strong> Build your gold engine and start purchasing power</p>
+                    <ul>
+                        <li>Buy <strong>Piggy Bank or Greed</strong> in first shop if possible</li>
+                        <li>Start stacking gold generation items</li>
+                        <li>Use shop discounts to buy multiple items per visit</li>
+                        <li>Balance economy items with survival needs</li>
+                        <li>Reroll shops if no good options appear</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>💰 Gold Management:</strong> In shops, buy economy items FIRST, then spend remaining gold on combat items. Your gold generation compounds, so investments pay off quickly.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>15-30 Minutes: Power Spike</h4>
+                    <p><strong>Goal:</strong> Leverage your wealth advantage into combat dominance</p>
+                    <ul>
+                        <li>You should have 2-3+ gold generation items by now</li>
+                        <li>Start buying S-tier combat items (Kevin, Mirror, Timewarp)</li>
+                        <li>Buy every good item in shops - you can afford it</li>
+                        <li>Focus on completing synergistic combos</li>
+                        <li>Maintain your economic lead with occasional gold picks</li>
+                    </ul>
+                    <div class="warning-box">
+                        <strong>⚠️ Don't Over-Invest:</strong> Once you have 3-4 gold items, shift focus to combat. More gold doesn't help if you're dying. Balance is key.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>30+ Minutes: Economic Domination</h4>
+                    <p><strong>Goal:</strong> Buy everything and achieve perfect builds</p>
+                    <ul>
+                        <li>Purchase every single good item in shops</li>
+                        <li>Reroll aggressively for missing combo pieces</li>
+                        <li>Gold is infinite - focus on optimization</li>
+                        <li>Complete item collections and achievements</li>
+                        <li>Experiment with different build paths</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>🏆 Late Game Power:</strong> With 4-5 gold items, you generate so much wealth that money becomes meaningless. Buy everything, reroll constantly, and build the perfect endgame setup.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Tips -->
+        <section id="tips" class="section">
+            <h2>💡 Pro Tips & Common Mistakes</h2>
+
+            <h3>✅ Advanced Techniques</h3>
+            <ul>
+                <li><strong>Shop Timing:</strong> Plan routes to hit shops immediately after big gold waves for maximum purchasing power</li>
+                <li><strong>Reroll Strategy:</strong> Don't reroll until you see the full shop first - might already have what you need</li>
+                <li><strong>Item Valuation:</strong> Calculate if rerolling (costs gold) is worth it vs buying mediocre items</li>
+                <li><strong>Pickup Range Synergy:</strong> More range = faster gold collection = faster shop purchasing</li>
+                <li><strong>Luck Investment:</strong> Luck improves shop quality - worth investing in for Robinette</li>
+                <li><strong>Gold Floor Strategy:</strong> Always maintain 50+ gold for emergency shop rerolls</li>
+                <li><strong>Combo Completion:</strong> Use wealth to complete combos other characters can't afford</li>
+                <li><strong>Microwave Abuse:</strong> If you find Microwave, duplicate expensive shop purchases for massive value</li>
+                <li><strong>Crown Scaling:</strong> Crown gets better every wave - excellent late game investment</li>
+                <li><strong>Shop Skip Decision:</strong> Sometimes worth skipping shops if items are bad - save gold for rerolls later</li>
+            </ul>
+
+            <h3>❌ Common Mistakes to Avoid</h3>
+            <ul>
+                <li><strong>Over-investing in Economy:</strong> 5+ gold items is overkill - you'll be rich but weak</li>
+                <li><strong>Ignoring Survival:</strong> Gold means nothing if you're dead. Buy HP/Regen when needed</li>
+                <li><strong>Not Using Discounts:</strong> Robinette's shop prices are lower - BUY MORE ITEMS per visit</li>
+                <li><strong>Skipping Pickup Range:</strong> Slow gold collection wastes your economic advantage</li>
+                <li><strong>Random Rerolling:</strong> Reroll with PURPOSE when looking for specific items, not randomly</li>
+                <li><strong>Buying Every Shop Item:</strong> Early game, you can't afford everything. Be selective</li>
+                <li><strong>Neglecting Weapons:</strong> Economy items don't kill enemies. Buy weapons too</li>
+                <li><strong>Poor Gold Management:</strong> Spending all gold immediately leaves you unable to reroll</li>
+                <li><strong>Ignoring Luck Stat:</strong> Luck directly improves your shop quality - very valuable</li>
+                <li><strong>Fighting Without Items:</strong> Use your wealth - buy combat power, don't hoard gold</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ Critical Mistake:</strong> The biggest error is building full economy with zero combat items. Robinette is about USING wealth to buy power, not just accumulating gold. If you have 500+ gold but weak damage, you're playing wrong.
+            </div>
+        </section>
+
+        <!-- Item Synergies -->
+        <section id="synergies" class="section">
+            <h2>🔗 Best Item Synergies</h2>
+
+            <h3>💰 Core Economy Combos</h3>
+            <ul>
+                <li><strong>Piggy Bank + Greed:</strong> Multiplicative gold generation - the foundation of wealth builds</li>
+                <li><strong>Crown + Time Played:</strong> Crown scales with waves, giving exponential gold in long runs</li>
+                <li><strong>Lucky Coin + Luck Stat:</strong> More luck = more bonus gold procs = more wealth</li>
+                <li><strong>Metal Detector + Pickup Range:</strong> Find and collect gold faster across the map</li>
+                <li><strong>All Gold Items + Shop Visits:</strong> The more you have, the more you can buy, creating a snowball</li>
+            </ul>
+
+            <h3>💎 Wealth-to-Power Conversions</h3>
+            <ul>
+                <li><strong>Economic Base + Kevin:</strong> Buy the best weapon with your wealth advantage</li>
+                <li><strong>Gold Items + Mirror:</strong> Use wealth to buy Mirror early, then abuse it</li>
+                <li><strong>Shop Discounts + S-Tier Items:</strong> Afford expensive meta items other characters can't</li>
+                <li><strong>Wealth + Microwave:</strong> Duplicate expensive purchases for insane value</li>
+                <li><strong>Gold Generation + Reroll Spam:</strong> Reroll until you find perfect items</li>
+            </ul>
+
+            <h3>📊 Stat Priority with Robinette</h3>
+            <ol>
+                <li><strong>Gold Generation</strong> - Core identity, stack 2-4 items</li>
+                <li><strong>Luck</strong> - Improves shop quality significantly</li>
+                <li><strong>Pickup Range</strong> - Essential for efficient gold collection</li>
+                <li><strong>Damage/Attack Speed</strong> - Convert wealth into combat power</li>
+                <li><strong>Max HP/Regen</strong> - Survival to use your wealth</li>
+                <li><strong>XP Gain</strong> - More levels = more shops</li>
+            </ol>
+        </section>
+
+        <!-- Unlock Guide -->
+        <section id="unlock" class="section">
+            <h2>🔓 How to Unlock Robinette</h2>
+
+            <h3>Unlock Requirement: Complete Forest Tier 2</h3>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Step 1: Reach Forest Biome</h4>
+                    <p>Select the Forest biome from the game menu. This is one of the starting biomes available to all players.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Step 2: Complete Tier 1</h4>
+                    <p>Successfully complete Forest Tier 1 difficulty. This unlocks Tier 2 access. Recommended for beginners to practice before attempting Tier 2.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Step 3: Attempt Forest Tier 2</h4>
+                    <p>Select Forest Tier 2 from the difficulty options. This tier has significantly stronger enemies and requires better builds.</p>
+                    <ul>
+                        <li>Use a strong character like Fox or MegaChad</li>
+                        <li>Focus on damage scaling and survival</li>
+                        <li>Prioritize S-tier items from shops</li>
+                        <li>Learn enemy patterns to avoid damage</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Step 4: Complete the Run</h4>
+                    <p>Survive all waves and defeat the final boss. Upon completion, Robinette will be permanently unlocked for all future runs!</p>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Unlock Tips:</strong> Forest Tier 2 is moderately difficult. If struggling, practice with stronger characters first, learn optimal builds, and focus on damage + survival balance. Robinette is worth the effort!
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section">
+            <h2>❓ Frequently Asked Questions</h2>
+
+            <h3>Is Robinette good for beginners?</h3>
+            <p>Moderate difficulty. Robinette requires strategic thinking about economy management and when to invest vs when to spend. If you understand shop mechanics and item priorities, Robinette is very rewarding. If you prefer simpler "fight and win" characters, try Fox or MegaChad first.</p>
+
+            <h3>How many gold items should I stack?</h3>
+            <p>Optimal is 2-4 gold generation items. 2 is minimum for economy advantage, 3-4 is the sweet spot for wealth without sacrificing combat. 5+ is overkill and leaves you weak in fights. Balance is crucial.</p>
+
+            <h3>Should I always reroll shops?</h3>
+            <p>No. Reroll only when: (1) Shop has zero good items, (2) You're looking for specific combo pieces, or (3) You have excess gold late game. Early game, rerolling costs valuable gold needed for purchases.</p>
+
+            <h3>What's the best first shop purchase?</h3>
+            <p>Priority order: Piggy Bank > Greed > Any Gold Generation > Strong Weapon > Survival Items. Get your economy engine started first, then buy combat power with your growing wealth.</p>
+
+            <h3>Does Robinette work on all biomes?</h3>
+            <p>Yes! Economy builds work everywhere. Desert and Factory have more shops, making them slightly better for Robinette, but Forest is also good. Avoid biomes without shops if possible.</p>
+
+            <h3>Can I complete challenges with Robinette?</h3>
+            <p>Yes, though some challenges are harder. Robinette excels at "No Damage Taken" challenges (buy defensive items) and "Collect X Items" challenges (buy everything). Speed challenges are tougher since economy builds scale slowly.</p>
+
+            <h3>Best late game strategy?</h3>
+            <p>Once you have 4-5 gold items and generate 100+ gold per wave, buy EVERYTHING in shops. Reroll aggressively until you complete perfect combos. Use Microwave on expensive items if you find it. At this point, gold is infinite - focus on optimization.</p>
+
+            <h3>Does Robinette's passive stack with gold items?</h3>
+            <p>Yes! Robinette's increased gold generation and shop discounts work multiplicatively with items like Piggy Bank and Greed. This creates massive compound scaling - the core reason Robinette is S-tier for economy.</p>
+
+            <h3>Why is Robinette A-tier instead of S-tier?</h3>
+            <p>While Robinette dominates economy, the character lacks combat-focused passives. Characters like Dicehead (infinite crit scaling) or Bandit (attack speed scaling) have passives that directly improve fighting. Robinette's advantage is indirect - you must convert wealth into power through smart purchases.</p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>Related Guides:</strong></p>
+            <p>
+                <a href="/guides/characters/character-tier-list-2025">Character Tier List</a> | 
+                <a href="/guides/items/gold-items-guide">Gold Items Guide</a> | 
+                <a href="/guides/mechanics/shop-guide">Shop Mechanics</a> | 
+                <a href="/guides/builds/economy-builds">Economy Meta</a>
+            </p>
+            <p style="margin-top: 20px;">
+                <a href="/guides/characters/">← Back to Character Guides</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                Last Updated: October 2025 | MegaBonk Economy Master Guide
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
