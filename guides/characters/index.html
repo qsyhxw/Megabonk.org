@@ -5,39 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megabonk Character Guides - Complete Rankings & Strategy Hub</title>
     <meta name="description" content="Complete Megabonk character guide collection including tier list, Fox guide, Knight beginner tips, and Ninja unlock strategies. Master all 20 characters.">
-    <meta name="keywords" content="megabonk characters, megabonk tier list, megabonk fox guide, megabonk knight guide, megabonk ninja guide">
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
-     crossorigin="anonymous"></script>
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Megabonk Character Guides - Complete Collection">
-    <meta property="og:description" content="Master every Megabonk character with detailed guides, tier rankings, and unlock strategies.">
-    <meta property="og:url" content="https://megabonk.org/guides/characters/">
-    <meta property="og:type" content="website">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "Megabonk Character Guides",
-        "description": "Complete collection of character guides for Megabonk game",
-        "url": "https://megabonk.org/guides/characters/",
-        "hasPart": [
-            {
-                "@type": "Article",
-                "name": "Character Tier List 2025",
-                "url": "https://megabonk.org/guides/characters/character-tier-list-2025.html"
-            },
-            {
-                "@type": "Article", 
-                "name": "Fox (Kitsune) Complete Guide",
-                "url": "https://megabonk.org/guides/characters/fox-kitsune-guide.html"
-            }
-        ]
-    }
-    </script>
     
     <style>
         * {
@@ -50,20 +17,17 @@
             --primary-color: #ff6b35;
             --secondary-color: #1a1a2e;
             --accent-color: #ffd23f;
-            --text-color: #333;
-            --bg-color: #fff;
-            --border-color: #e0e0e0;
-            --card-bg: #fff;
-            --text-light: #ffffff;
             --bg-dark: #1a1a2e;
             --bg-darker: #16213e;
-            --text-muted: #666;
+            --card-bg: #2d3561;
+            --text-light: #ffffff;
+            --text-muted: #a8b2d1;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
+            color: var(--text-light);
             background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
             min-height: 100vh;
         }
@@ -74,7 +38,6 @@
             padding: 0 1rem;
         }
         
-        /* Breadcrumb */
         .breadcrumb {
             background: rgba(0, 0, 0, 0.3);
             padding: 0.75rem 0;
@@ -95,238 +58,329 @@
             color: #ff8c69;
         }
         
-        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary-color), #e55b00);
-            color: white;
-            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #e63946 100%);
+            padding: 3rem 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         
         h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            font-weight: 900;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: 600;
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
-        /* Stats Overview */
-        .stats-overview {
-            background: rgba(255,255,255,0.1);
+        .tier-overview {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.15));
             padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        
-        .stat-item {
-            color: white;
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        /* Main Content */
-        .main-content {
-            padding: 4rem 0;
-            color: var(--text-light);
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1rem;
-            font-weight: 800;
-            color: var(--text-light);
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #ccc;
+            border-radius: 12px;
             margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            border-left: 4px solid var(--accent-color);
         }
         
-        /* Featured Tier List Section */
-        .featured-tier-list {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            margin: 3rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .featured-tier-list::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        
-        .featured-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .featured-tier-list h2 {
-            font-size: 2.5rem;
+        .tier-overview h2 {
+            color: var(--accent-color);
             margin-bottom: 1rem;
-            font-weight: 800;
-        }
-        
-        .featured-tier-list p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
         }
         
         .tier-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 1rem;
-            margin: 2rem 0;
-            text-align: center;
+            margin: 1.5rem 0;
         }
         
         .tier-stat {
-            background: rgba(255,255,255,0.15);
+            text-align: center;
             padding: 1rem;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
         }
         
         .tier-stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
             display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
         }
         
         .tier-stat-label {
-            font-size: 0.8rem;
-            opacity: 0.9;
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
             margin-top: 0.25rem;
         }
         
-        /* Character Guides Grid */
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--bg-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 210, 63, 0.4);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+        
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .filter-controls {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-label {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+            background: rgba(255, 107, 53, 0.2);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), #e63946);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .reset-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(220, 20, 60, 0.2);
+            border: 2px solid rgba(220, 20, 60, 0.4);
+            border-radius: 20px;
+            color: #dc143c;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            background: rgba(220, 20, 60, 0.3);
+            border-color: #dc143c;
+        }
+        
+        .filter-stats {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .guide-card.hidden {
+            display: none;
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        
+        .no-results h3 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
         .guides-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin-bottom: 3rem;
         }
         
         .guide-card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
             padding: 2rem;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            backdrop-filter: blur(15px);
-            transition: all 0.4s ease;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .guide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .guide-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
             border-color: var(--primary-color);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+        
+        .guide-card:hover::before {
+            opacity: 1;
         }
         
         .guide-card.featured {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(230, 57, 70, 0.2));
             border: 2px solid var(--primary-color);
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
         }
         
-        .guide-card.featured::before {
-            content: "FEATURED";
+        .guide-card.featured .featured-badge {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: linear-gradient(45deg, #ff6b35, #ff8c69);
+            background: var(--primary-color);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
         }
         
         .guide-icon {
-            font-size: 4rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            display: block;
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
         
         .guide-category {
             display: inline-block;
             background: rgba(255, 107, 53, 0.2);
             color: var(--primary-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
             margin-bottom: 1rem;
             text-transform: uppercase;
         }
         
+        .guide-category.s-tier {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .guide-category.a-tier {
+            background: rgba(50, 205, 50, 0.2);
+            color: #32cd32;
+        }
+        
+        .guide-category.b-tier {
+            background: rgba(100, 149, 237, 0.2);
+            color: #6495ed;
+        }
+        
+        .guide-category.beginner {
+            background: rgba(144, 238, 144, 0.2);
+            color: #90ee90;
+        }
+        
+        .guide-category.unlock {
+            background: rgba(147, 112, 219, 0.2);
+            color: #9370db;
+        }
+        
         .guide-title {
             font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: var(--text-light);
         }
         
@@ -335,209 +389,416 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #ccc;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
         
         .difficulty {
             padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
         
-        .difficulty.featured { background: linear-gradient(45deg, #ff6b35, #ff8c69); color: white; }
-        .difficulty.beginner { background: rgba(76, 175, 80, 0.2); color: #4caf50; }
-        .difficulty.intermediate { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
-        .difficulty.advanced { background: rgba(156, 39, 176, 0.2); color: #9c27b0; }
+        .difficulty.featured {
+            background: var(--accent-color);
+            color: var(--bg-dark);
+        }
+        
+        .difficulty.beginner {
+            background: rgba(144, 238, 144, 0.3);
+            color: #90ee90;
+        }
+        
+        .difficulty.intermediate {
+            background: rgba(255, 165, 0, 0.3);
+            color: #ffa500;
+        }
+        
+        .difficulty.advanced {
+            background: rgba(220, 20, 60, 0.3);
+            color: #dc143c;
+        }
         
         .guide-description {
-            color: #ccc;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
         
         .guide-features {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border-left: 3px solid var(--primary-color);
+            list-style: none;
+            margin-top: 1rem;
+            flex-grow: 1;
         }
         
-        .guide-features ul {
+        .guide-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .guide-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #32cd32;
+            font-weight: bold;
+        }
+        
+        .radar-chart {
+            width: 180px;
+            height: 180px;
+            margin: 1rem auto;
+            position: relative;
+        }
+        
+        .radar-chart canvas {
+            display: block;
+        }
+        
+        .guide-cta {
+            display: block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, var(--primary-color), #e63946);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .guide-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.5);
+        }
+        
+        .guide-cta::after {
+            content: ' →';
+            margin-left: 0.5rem;
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .tier-badge.s {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+        }
+        
+        .tier-badge.a {
+            background: linear-gradient(135deg, #32cd32, #98fb98);
+            color: #000;
+        }
+        
+        .tier-badge.b {
+            background: linear-gradient(135deg, #6495ed, #87ceeb);
+            color: #fff;
+        }
+        
+        .tier-badge.c {
+            background: linear-gradient(135deg, #ffa500, #ffb347);
+            color: #000;
+        }
+        
+        /* Compare Button */
+        .compare-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 107, 53, 0.5);
+            color: var(--text-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .compare-btn:hover {
+            background: rgba(255, 107, 53, 0.8);
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .compare-btn.selected {
+            background: linear-gradient(135deg, var(--primary-color), #e63946);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.6);
+        }
+        
+        /* Compare Panel */
+        .compare-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--card-bg), var(--bg-darker));
+            border-top: 3px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+        
+        .compare-panel.active {
+            transform: translateY(0);
+        }
+        
+        .compare-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .compare-title {
+            font-size: 1.3rem;
+            color: var(--text-light);
+        }
+        
+        .compare-close {
+            background: rgba(220, 20, 60, 0.3);
+            border: 2px solid #dc143c;
+            color: #dc143c;
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .compare-close:hover {
+            background: rgba(220, 20, 60, 0.5);
+        }
+        
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        
+        .compare-character {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .compare-character-header {
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .compare-character-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .compare-character-name {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .compare-stats-table {
+            margin: 0.75rem 0;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        
+        .compare-stats-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .compare-stats-table td {
+            padding: 0.4rem;
+            color: var(--text-muted);
+        }
+        
+        .compare-stats-table td:first-child {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .compare-stats-table td:last-child {
+            text-align: right;
+        }
+        
+        .compare-section {
+            margin: 0.75rem 0;
+        }
+        
+        .compare-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+        
+        .compare-section ul {
             list-style: none;
             padding: 0;
         }
         
-        .guide-features li {
-            margin-bottom: 0.5rem;
-            color: #ccc;
-            font-size: 0.9rem;
+        .compare-section li {
+            padding: 0.2rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
         
-        .guide-features li:before {
-            content: "✅ ";
-            margin-right: 0.5rem;
-        }
-        
-        .guide-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+        .compare-section li::before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
             color: var(--primary-color);
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.3s ease;
         }
         
-        .guide-cta:hover {
-            color: #ff8c69;
+        .compare-radar-container {
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: center;
         }
         
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        .compare-radar-container canvas {
+            width: 150px !important;
+            height: 150px !important;
         }
         
-        .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color), #e55b00);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
-        }
-        
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-light);
-            border: 2px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 107, 53, 0.1);
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        /* Quick Access Section */
-        .quick-access {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(255, 107, 53, 0.05) 100%);
-            padding: 3rem 0;
-            border-radius: 20px;
-            margin: 3rem 0;
-        }
-        
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .quick-link {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-            display: block;
-        }
-        
-        .quick-link:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-        
-        .quick-link h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Footer Navigation */
-        .guide-footer {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 3rem 0;
-            border-radius: 15px;
-            margin: 3rem 0;
+        .compare-instructions {
             text-align: center;
-        }
-        
-        .footer-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .footer-link {
-            background: rgba(255, 255, 255, 0.08);
             padding: 1.5rem;
-            border-radius: 12px;
-            text-decoration: none;
+            color: var(--text-muted);
+        }
+        
+        .compare-instructions h3 {
             color: var(--text-light);
-            transition: all 0.3s ease;
-            display: block;
-        }
-        
-        .footer-link:hover {
-            background: rgba(255, 107, 53, 0.1);
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        .footer-link h3 {
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         /* Footer */
         footer {
-            background: var(--bg-dark);
-            padding: 2rem 0;
-            text-align: center;
-            color: #ccc;
-            border-top: 2px solid var(--primary-color);
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            border-top: 3px solid var(--primary-color);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
         }
         
-        /* Responsive Design */
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-section ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        
+        .footer-section p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+        
         @media (max-width: 768px) {
-            .guides-grid {
-                grid-template-columns: 1fr;
+            h1 {
+                font-size: 2rem;
             }
             
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .guides-grid {
+                grid-template-columns: 1fr;
             }
             
             .tier-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            h1 {
-                font-size: 2.5rem;
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
             }
         }
         
-        /* Animation */
-        @keyframes slideInUp {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -549,265 +810,534 @@
         }
         
         .guide-card {
-            animation: slideInUp 0.6s ease-out forwards;
+            animation: fadeInUp 0.6s ease-out forwards;
         }
-        
-        .guide-card:nth-child(2) { animation-delay: 0.1s; }
-        .guide-card:nth-child(3) { animation-delay: 0.2s; }
-        .guide-card:nth-child(4) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <!-- Breadcrumb -->
     <div class="breadcrumb">
         <div class="container">
             <nav>
                 <a href="/">Home</a> → 
                 <a href="/guides/">Guides</a> → 
-                <span>Character Guides</span>
+                <span>Characters</span>
             </nav>
         </div>
     </div>
 
-    <!-- Header -->
     <header>
         <div class="container">
-            <div class="header-content">
-                <h1>Character Guide Collection</h1>
-                <p class="subtitle">Master all 20 Megabonk characters with detailed guides, tier rankings, and unlock strategies</p>
-                
-                <div class="stats-overview">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">4</span>
-                            <span class="stat-label">Complete Guides</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">20</span>
-                            <span class="stat-label">Characters Ranked</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Free Access</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">2025</span>
-                            <span class="stat-label">Updated for</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h1>🎮 Megabonk Character Guides</h1>
+            <p class="subtitle">Complete strategy collection for all 20 characters - tier rankings, unlock guides, and expert builds</p>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
+    <main class="container">
+        <section class="tier-overview">
+            <h2>📊 Complete Character Tier List 2025</h2>
+            <p>Discover which characters dominate the meta in our comprehensive tier list analysis with detailed stats, pros/cons, and usage recommendations for all 20 characters.</p>
             
-            <!-- Featured Tier List Section -->
-            <section class="featured-tier-list">
-                <div class="featured-content">
-                    <h2>Complete Character Rankings</h2>
-                    <p>Discover which characters dominate the meta in our comprehensive tier list analysis with detailed stats, pros/cons, and usage recommendations for all 20 characters.</p>
-                    
-                    <div class="tier-stats">
-                        <div class="tier-stat">
-                            <span class="tier-stat-number">3</span>
-                            <span class="tier-stat-label">S-Tier</span>
-                        </div>
-                        <div class="tier-stat">
-                            <span class="tier-stat-number">4</span>
-                            <span class="tier-stat-label">A-Tier</span>
-                        </div>
-                        <div class="tier-stat">
-                            <span class="tier-stat-number">4</span>
-                            <span class="tier-stat-label">B-Tier</span>
-                        </div>
-                        <div class="tier-stat">
-                            <span class="tier-stat-number">9</span>
-                            <span class="tier-stat-label">C-D Tier</span>
-                        </div>
+            <div class="tier-stats">
+                <div class="tier-stat">
+                    <span class="tier-stat-number">3</span>
+                    <span class="tier-stat-label">S-Tier</span>
+                </div>
+                <div class="tier-stat">
+                    <span class="tier-stat-number">4</span>
+                    <span class="tier-stat-label">A-Tier</span>
+                </div>
+                <div class="tier-stat">
+                    <span class="tier-stat-number">4</span>
+                    <span class="tier-stat-label">B-Tier</span>
+                </div>
+                <div class="tier-stat">
+                    <span class="tier-stat-number">9</span>
+                    <span class="tier-stat-label">C-D Tier</span>
+                </div>
+            </div>
+            
+            <a href="character-tier-list-2025.html" class="btn-primary">
+                View Full Tier List 2025 →
+            </a>
+        </section>
+
+        <section>
+            <h2 class="section-title">Individual Character Guides</h2>
+            <p class="section-subtitle">Detailed strategies, builds, and unlock guides for all Megabonk characters</p>
+            
+            <div class="filter-controls">
+                <div class="filter-row">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="Search characters..." />
                     </div>
                     
-                    <a href="character-tier-list-2025.html" class="btn btn-primary">
-                        View Full Tier List 2025
-                    </a>
+                    <div class="filter-group">
+                        <span class="filter-label">Tier:</span>
+                        <button class="filter-btn active" data-filter="tier" data-value="all">All</button>
+                        <button class="filter-btn" data-filter="tier" data-value="s">S-Tier</button>
+                        <button class="filter-btn" data-filter="tier" data-value="a">A-Tier</button>
+                        <button class="filter-btn" data-filter="tier" data-value="b">B-Tier</button>
+                        <button class="filter-btn" data-filter="tier" data-value="c">C-D</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <span class="filter-label">Difficulty:</span>
+                        <button class="filter-btn active" data-filter="difficulty" data-value="all">All</button>
+                        <button class="filter-btn" data-filter="difficulty" data-value="beginner">Beginner</button>
+                        <button class="filter-btn" data-filter="difficulty" data-value="intermediate">Intermediate</button>
+                        <button class="filter-btn" data-filter="difficulty" data-value="advanced">Advanced</button>
+                    </div>
+                    
+                    <button class="reset-btn" id="resetFilters">Reset All</button>
                 </div>
-            </section>
-
-            <!-- Character Guides Grid -->
-            <section>
-                <h2 class="section-title">Individual Character Guides</h2>
-                <p class="section-subtitle">Detailed strategies, builds, and unlock guides for the most popular Megabonk characters</p>
                 
-                <div class="guides-grid">
-                    <!-- Tier List Card -->
-                    <div class="guide-card featured" onclick="window.location.href='character-tier-list-2025.html'">
-                        <div class="guide-icon">🏆</div>
-                        <span class="guide-category">Complete Rankings</span>
-                        <h3 class="guide-title">Character Tier List 2025</h3>
-                        <div class="guide-meta">
-                            <span class="difficulty featured">All 20 Characters</span>
-                            <span>📅 Sept 2025</span>
-                        </div>
-                        <p class="guide-description">
-                            Comprehensive rankings of all Megabonk characters based on effectiveness, ease of use, 和 current meta viability. Includes detailed analysis and win rate statistics.
-                        </p>
-                        <div class="guide-features">
-                            <ul>
-                                <li>Complete S-D tier rankings</li>
-                                <li>Detailed pros and cons analysis</li>
-                                <li>Meta statistics and win rates</li>
-                                <li>Character selection guide</li>
-                                <li>Updated for latest patch</li>
-                            </ul>
-                        </div>
-                        <a href="character-tier-list-2025.html" class="guide-cta">View Complete Rankings →</a>
-                    </div>
-
-                    <!-- Fox Guide Card -->
-                    <div class="guide-card" onclick="window.location.href='fox-kitsune-guide.html'">
-                        <div class="guide-icon">🦊</div>
-                        <span class="guide-category">S-Tier Character</span>
-                        <h3 class="guide-title">Fox Complete Guide</h3>
-                        <div class="guide-meta">
-                            <span class="difficulty beginner">Beginner Friendly</span>
-                            <span>⭐ S-Tier</span>
-                        </div>
-                        <p class="guide-description">
-                            Master the ultimate beginner's choice! Learn fireball builds, movement techniques, 
-                            and unlock strategies with the fastest character in the game.
-                        </p>
-                        <div class="guide-features">
-                            <ul>
-                                <li>3 complete build guides</li>
-                                <li>Movement and positioning tips</li>
-                                <li>Early to late game strategies</li>
-                                <li>Common mistakes to avoid</li>
-                                <li>Advanced techniques</li>
-                            </ul>
-                        </div>
-                        <a href="fox-kitsune-guide.html" class="guide-cta">Read Fox Guide →</a>
-                    </div>
-
-                    <!-- Knight Guide Card -->
-                    <div class="guide-card" onclick="window.location.href='knight-beginner-guide.html'">
-                        <div class="guide-icon">⚔️</div>
-                        <span class="guide-category">Beginner's Choice</span>
-                        <h3 class="guide-title">Sir Oofie Beginner Guide</h3>
-                        <div class="guide-meta">
-                            <span class="difficulty beginner">New Player</span>
-                            <span>🛡️ A-Tier</span>
-                        </div>
-                        <p class="guide-description">
-                            Perfect for new players! Learn tank strategies, defensive positioning, and powerful 
-                            melee builds with the most survivable character in Megabonk.
-                        </p>
-                        <div class="guide-features">
-                            <ul>
-                                <li>Beginner-friendly strategies</li>
-                                <li>Tank build progression</li>
-                                <li>Survival tips and tricks</li>
-                                <li>Weapon combo recommendations</li>
-                                <li>5-stage skill development</li>
-                            </ul>
-                        </div>
-                        <a href="knight-beginner-guide.html" class="guide-cta">Learn Knight Basics →</a>
-                    </div>
-
-                    <!-- Ninja Guide Card -->
-                    <div class="guide-card" onclick="window.location.href='ninja-unlock-guide.html'">
-                        <div class="guide-icon">🥷</div>
-                        <span class="guide-category">Premium Unlock</span>
-                        <h3 class="guide-title">Ninja Unlock Guide</h3>
-                        <div class="guide-meta">
-                            <span class="difficulty advanced">60 Silver Cost</span>
-                            <span>💎 SS-Tier</span>
-                        </div>
-                        <p class="guide-description">
-                            High skill, high reward character guide. Master stealth mechanics, critical builds, 
-                            and advanced silver farming strategies to unlock this premium assassin.
-                        </p>
-                        <div class="guide-features">
-                            <ul>
-                                <li>Efficient silver farming methods</li>
-                                <li>Stealth mechanic mastery</li>
-                                <li>Critical hit build optimization</li>
-                                <li>Advanced positioning tactics</li>
-                                <li>Unlock timeline planning</li>
-                            </ul>
-                        </div>
-                        <a href="ninja-unlock-guide.html" class="guide-cta">Master Ninja Unlock →</a>
-                    </div>
+                <div class="filter-stats">
+                    Showing <strong id="visibleCount">21</strong> of <strong>21</strong> characters
                 </div>
-            </section>
-
-            <!-- Quick Access Section -->
-            <section class="quick-access">
-                <div class="container">
-                    <h2 class="section-title">Quick Character Selection</h2>
-                    <p class="section-subtitle">Not sure which character to start with? Use our quick selection guide</p>
-                    
-                    <div class="quick-links">
-                        <a href="character-tier-list-2025.html#new-players" class="quick-link">
-                            <h3>🔰 New Players</h3>
-                            <p>Best characters for beginners: Fox and Knight recommendations with easy builds</p>
-                        </a>
-                        
-                        <a href="fox-kitsune-guide.html" class="quick-link">
-                            <h3>⚡ Speed Players</h3>
-                            <p>Love fast gameplay? Fox offers 140% movement speed and high mobility builds</p>
-                        </a>
-                        
-                        <a href="ninja-unlock-guide.html" class="quick-link">
-                            <h3>💥 Damage Dealers</h3>
-                            <p>Want maximum damage? Ninja offers stealth, crits, and burst damage potential</p>
-                        </a>
-                        
-                        <a href="knight-beginner-guide.html" class="quick-link">
-                            <h3>🛡️ Safe Players</h3>
-                            <p>Prefer survivability? Knight has highest health and natural damage reduction</p>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Related Guides Footer -->
-            <section class="guide-footer">
-                <div class="container">
-                    <h2 class="section-title">Explore More Megabonk Content</h2>
-                    <p class="section-subtitle">Complete your mastery with our full guide collection</p>
-                    
-                    <div class="footer-links">
-                        <a href="/guides/builds/" class="footer-link">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚔️</div>
-                            <h3>Weapon Builds</h3>
-                            <p>Master powerful weapon combinations and synergies</p>
-                        </a>
-                        
-                        <a href="/guides/bosses/" class="footer-link">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">👹</div>
-                            <h3>Boss Strategies</h3>
-                            <p>Defeat every boss from Skeleton King to Final Boss</p>
-                        </a>
-                        
-                        <a href="/guides/achievements/" class="footer-link">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
-                            <h3>Achievement Guide</h3>
-                            <p>Complete walkthrough for 100% Steam achievement completion</p>
-                        </a>
-                        
-                        <a href="/" class="footer-link">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏠</div>
-                            <h3>Homepage</h3>
-                            <p>Return to main guide hub and site navigation</p>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </div>
+            </div>
+            
+            <div class="guides-grid" id="guidesGrid">
+                <!-- Character cards will be inserted here by JavaScript -->
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>🎮 About Megabonk</h3>
+                    <p>
+                        Your ultimate guide to mastering Megabonk! Comprehensive character guides, tier lists, build strategies, and meta analysis to help you dominate the game.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>🔗 Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/guides/">All Guides</a></li>
+                        <li><a href="/guides/characters/">Characters</a></li>
+                        <li><a href="/guides/characters/character-tier-list-2025.html">Tier List 2025</a></li>
+                        <li><a href="/guides/meta-strategy/">Meta Strategy</a></li>
+                        <li><a href="/database/">Database</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Popular Guides -->
+                <div class="footer-section">
+                    <h3>⭐ Popular Guides</h3>
+                    <ul>
+                        <li><a href="/guides/characters/fox-kitsune-guide.html">🦊 Fox Complete Guide</a></li>
+                        <li><a href="/guides/characters/dicehead-guide.html">🎲 Dicehead Mastery</a></li>
+                        <li><a href="/guides/characters/sir-oofie-guide.html">🛡️ Sir Oofie Beginner</a></li>
+                        <li><a href="/guides/characters/ninja-unlock-guide.html">🥷 Ninja Unlock</a></li>
+                        <li><a href="/guides/builds/">Build Guides</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div class="footer-section">
+                    <h3>📚 Resources</h3>
+                    <ul>
+                        <li><a href="/database/weapons/">Weapons Database</a></li>
+                        <li><a href="/database/items/">Items Database</a></li>
+                        <li><a href="/tier-lists/">Tier Lists</a></li>
+                        <li><a href="/guides/tips-tricks/">Tips & Tricks</a></li>
+                        <li><a href="/guides/challenges/">Challenges</a></li>
+                        <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Get Megabonk on Steam</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 <a href="/">Megabonk.org</a> - Unofficial fan guide and strategy resource</p>
+                <p>Not affiliated with the official Megabonk developers | All game content &copy; their respective owners</p>
+                <p style="margin-top: 0.5rem;">Last Updated: October 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Compare Panel -->
+    <div class="compare-panel" id="comparePanel">
+        <div class="container">
+            <div class="compare-header">
+                <h2 class="compare-title">⚖️ Character Comparison</h2>
+                <button class="compare-close" id="compareClose">Close Comparison</button>
+            </div>
+            <div id="compareContent">
+                <div class="compare-instructions">
+                    <h3>Select 2-3 characters to compare</h3>
+                    <p>Click the ⚖️ button on character cards to add them to comparison</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Character data with stats for radar charts
+        const characters = [
+            { id: 'tierlist', name: 'Character Tier List 2025', tier: 'featured', difficulty: 'all', icon: '🏆', category: 'Complete Rankings', difficultyLabel: 'All 20 Characters', description: 'Comprehensive rankings of all Megabonk characters based on effectiveness, ease of use, and current meta viability.', features: ['Complete S-D tier rankings', 'Detailed pros and cons analysis', 'Meta statistics and win rates'], link: 'character-tier-list-2025.html', cta: 'View Complete Rankings', stats: [5, 5, 5, 5, 5], featured: true, canCompare: false },
+            { id: 'fox', name: 'Fox', tier: 's', difficulty: 'beginner', icon: '🦊', category: 's-tier', categoryClass: 's-tier', difficultyLabel: 'Beginner Friendly', description: 'Master the ultimate beginner\'s choice! Learn fireball builds, movement techniques with the fastest character.', features: ['3 complete build guides', 'Movement and positioning tips', 'Advanced techniques'], link: 'fox-kitsune-guide.html', cta: 'Read Fox Guide', stats: [4, 3, 5, 4, 5], canCompare: true, passive: '+1% Luck per level', weapon: 'Firestaff', pros: ['Beginner friendly', 'High mobility', 'Strong scaling'], cons: ['Squishy defense', 'Requires positioning'] },
+            { id: 'dicehead', name: 'Dicehead', tier: 's', difficulty: 'advanced', icon: '🎲', category: 's-tier', categoryClass: 's-tier', difficultyLabel: 'Advanced', description: 'Master the RNG king with unlimited crit scaling. Dominate leaderboards with exponential damage builds.', features: ['Unlimited crit scaling guide', 'XP farming strategies', 'Late game domination'], link: 'dicehead-guide.html', cta: 'Master Dicehead', stats: [5, 2, 3, 3, 5], canCompare: true, passive: 'Roll dice on level-up, 6 = +Crit', weapon: 'Dice', pros: ['Unlimited scaling', 'Leaderboard dominant', 'Exponential power'], cons: ['Slow early game', 'RNG dependent', 'High skill floor'] },
+            { id: 'cl4nk', name: 'CL4NK', tier: 's', difficulty: 'advanced', icon: '🤖', category: 's-tier', categoryClass: 's-tier', difficultyLabel: 'Advanced', description: 'Glass cannon specialist with +1% crit per level. Master high-risk, high-reward gameplay.', features: ['Crit scaling optimization', 'Shield management tactics', 'Glass cannon strategies'], link: 'cl4nk-guide.html', cta: 'Learn CL4NK', stats: [5, 2, 4, 3, 5], canCompare: true, passive: '+1% Crit Chance per level', weapon: 'Revolver', pros: ['Consistent crit scaling', 'High DPS', 'Shield mechanics'], cons: ['Very fragile', 'Slow early game', 'Shield dependent'] },
+            { id: 'sir-oofie', name: 'Sir Oofie', tier: 'a', difficulty: 'beginner', icon: '🛡️', category: 'beginner', categoryClass: 'beginner', difficultyLabel: 'New Player', description: 'Perfect for new players! Learn tank strategies and defensive positioning with the most survivable character.', features: ['Beginner-friendly strategies', 'Tank build progression', 'Survival tips and tricks'], link: 'sir-oofie-guide.html', cta: 'Learn Knight Basics', stats: [3, 5, 2, 5, 3], canCompare: true, passive: '+1% Armor per level', weapon: 'Sword', pros: ['Most survivable', 'Beginner friendly', 'Strong melee'], cons: ['Slow movement', 'Low range', 'Scaling limited'] },
+            { id: 'bandit', name: 'Bandit', tier: 'a', difficulty: 'intermediate', icon: '🗡️', category: 'a-tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Attack speed specialist with Kevin synergy. Master rapid-fire builds and on-hit effects.', features: ['Attack speed optimization', 'Kevin mirror strategies', 'On-hit effect stacking'], link: 'bandit-guide.html', cta: 'Master Bandit', stats: [5, 3, 4, 3, 4], canCompare: true, passive: 'Scaling attack speed', weapon: 'Daggers', pros: ['Attack speed king', 'Kevin synergy', 'Strong DPS'], cons: ['Build dependent', 'Moderate defense'] },
+            { id: 'sir-chadwell', name: 'Sir Chadwell', tier: 'a', difficulty: 'advanced', icon: '⚔️', category: 'a-tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced Unlock', description: 'Elite warrior unlocked via Forest Tier 3. Master corrupted sword builds and elite prowess mechanics.', features: ['Forest Tier 3 strategy', 'Corrupted sword mastery', 'Critical corruption builds'], link: 'sir-chadwell-guide.html', cta: 'Unlock Sir Chadwell', stats: [4, 4, 3, 2, 4], canCompare: true, passive: '+30% weapon dmg, +15% all dmg', weapon: 'Corrupted Sword', pros: ['High damage', 'Elite prowess', 'Balanced stats'], cons: ['Hard unlock', 'Weapon dependent'] },
+            { id: 'amog', name: 'Amog', tier: 'a', difficulty: 'intermediate', icon: '☠️', category: 'a-tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Ultimate poison specialist with chain explosion mechanics. Master DOT builds and lifesteal synergies.', features: ['Poison explosion chains', 'Lifesteal sustainability', 'Duration scaling guide'], link: 'amog-guide.html', cta: 'Master Poison', stats: [4, 3, 3, 4, 4], canCompare: true, passive: 'Poison explosions chain', weapon: 'Poison Darts', pros: ['DoT specialist', 'Lifesteal synergy', 'Chain reactions'], cons: ['Requires setup', 'Indirect damage'] },
+            { id: 'calcium', name: 'Calcium', tier: 'b', difficulty: 'intermediate', icon: '🦴', category: 'b-tier', categoryClass: 'b-tier', difficultyLabel: 'Intermediate', description: 'Speed scaling specialist with bone throw. Master movement-based builds and attack speed synergies.', features: ['Speed scaling mechanics', 'Bone weapon mastery', 'Movement optimization'], link: 'calcium-guide.html', cta: 'Learn Calcium', stats: [4, 2, 5, 3, 4], canCompare: true, passive: 'Speed builds over time', weapon: 'Bone', pros: ['Speed demon', 'High damage potential', 'Great mobility'], cons: ['Very fragile', 'Speed resets on hit', 'High skill cap'] },
+            { id: 'megachad', name: 'Megachad', tier: 'b', difficulty: 'beginner', icon: '💪', category: 'beginner', categoryClass: 'beginner', difficultyLabel: 'Beginner Friendly', description: 'Natural tank with high HP scaling. Perfect for players learning game mechanics while maintaining survivability.', features: ['HP scaling mechanics', 'Tank build strategies', 'Defensive positioning'], link: 'megachad-guide.html', cta: 'Master Megachad', stats: [3, 5, 2, 5, 3], canCompare: true, passive: 'Flex - Damage immunity windows', weapon: 'Aura', pros: ['Tankiest character', 'Damage immunity', 'Beginner friendly'], cons: ['Low mobility', 'Close range', 'Worst luck stats'] },
+            { id: 'monke', name: 'Monke', tier: 'b', difficulty: 'intermediate', icon: '🦍', category: 'b-tier', categoryClass: 'b-tier', difficultyLabel: 'Intermediate', description: 'Wall climbing specialist with health scaling. Unique mobility options and terrain advantages.', features: ['Wall climbing mechanics', 'Health scaling builds', 'Mobility strategies'], link: 'monke-guide.html', cta: 'Go Monke Mode', stats: [3, 4, 4, 3, 3], canCompare: true, passive: 'Wall climbing, +50 HP', weapon: 'Fists', pros: ['Unique mobility', 'HP scaling', 'Fun playstyle'], cons: ['Contested ranking', 'Niche utility'] },
+            { id: 'tony', name: 'Tony McZoom', tier: 'b', difficulty: 'intermediate', icon: '🏃', category: 'b-tier', categoryClass: 'b-tier', difficultyLabel: 'Intermediate', description: 'Movement speed specialist with wireless dagger. Master kiting and hit-and-run tactics.', features: ['Speed scaling optimization', 'Kiting and positioning', 'Momentum damage builds'], link: 'tony-mczoom-guide.html', cta: 'Zoom Into Action', stats: [4, 2, 5, 3, 3], canCompare: true, passive: '+15% base speed, +25% speed effectiveness', weapon: 'Wireless Dagger', pros: ['Speed master', 'Hit-and-run', 'Momentum damage'], cons: ['Skill dependent', 'Must keep moving'] },
+            { id: 'bush', name: 'Bush', tier: 'b', difficulty: 'advanced', icon: '🌿', category: 'b-tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'Sniper precision specialist. Master long-range combat and accuracy-based builds.', features: ['Precision mechanics', 'Sniper positioning guide', 'Accuracy optimization'], link: 'bush-guide.html', cta: 'Master Precision', stats: [5, 2, 2, 2, 4], canCompare: true, passive: '+0.5% Crit Damage per level', weapon: 'Sniper Rifle', pros: ['Long range', 'Precision damage', 'Boss killer'], cons: ['Requires aim', 'Low mobility', 'High skill cap'] },
+            { id: 'ogre', name: 'Ogre', tier: 'b', difficulty: 'beginner', icon: '👹', category: 'b-tier', categoryClass: 'b-tier', difficultyLabel: 'Beginner Friendly', description: 'Slow but steady damage dealer. Master tanky builds with consistent damage output.', features: ['Steady damage strategies', 'Tank build optimization', 'Survivability focus'], link: 'ogre-guide.html', cta: 'Play Ogre', stats: [4, 4, 2, 5, 4], canCompare: true, passive: '+1% Damage per level', weapon: 'Club', pros: ['Consistent damage', 'Tanky', 'Beginner friendly'], cons: ['Slow movement', 'Late game focus'] },
+            { id: 'robinette', name: 'Robinette', tier: 'b', difficulty: 'intermediate', icon: '💰', category: 'b-tier', categoryClass: 'b-tier', difficultyLabel: 'Intermediate', description: 'Gold scaling specialist. Master economic strategies and wealth-based power scaling.', features: ['Gold scaling mechanics', 'Economic strategies', 'Shop optimization'], link: 'robinette-guide.html', cta: 'Master Gold Scaling', stats: [4, 3, 3, 4, 5], canCompare: true, passive: '+1% Gold Gain per level', weapon: 'Bow', pros: ['Gold scaling', 'Snowballing power', 'Shop advantage'], cons: ['Slow start', 'Gold dependent'] },
+            { id: 'ninja', name: 'Ninja', tier: 'c', difficulty: 'advanced', icon: '🥷', category: 'unlock', categoryClass: 'unlock', difficultyLabel: 'Unlock Guide', description: 'Complete guide to unlocking the elusive ninja assassin. Learn evasion mechanics and stealth.', features: ['Complete unlock walkthrough', 'Evasion mechanics guide', 'Stealth strategies'], link: 'ninja-unlock-guide.html', cta: 'Unlock Ninja', stats: [5, 3, 5, 2, 4], canCompare: true, passive: '+0.5% Evasion per level', weapon: 'Katana', pros: ['High evasion', 'Execute mechanic', 'Fast mobility'], cons: ['Bosses ignore evasion', 'High risk melee'] },
+            { id: 'athena', name: 'Athena', tier: 'c', difficulty: 'intermediate', icon: '⚡', category: '', categoryClass: '', difficultyLabel: 'Intermediate', description: 'Thorns and lightning specialist. Master defensive counter-damage builds and elemental synergies.', features: ['Thorns scaling mechanics', 'Lightning build guides', 'Counter-damage tactics'], link: 'athena-guide.html', cta: 'Master Athena', stats: [3, 4, 3, 4, 3], canCompare: true, passive: '+2 Thorns per level', weapon: 'Lightning Staff', pros: ['Thorns specialist', 'Counter damage', 'Defensive'], cons: ['Passive playstyle', 'Niche builds'] },
+            { id: 'spaceman', name: 'Spaceman', tier: 'c', difficulty: 'advanced', icon: '🚀', category: '', categoryClass: '', difficultyLabel: 'Master Unlock', description: 'Ultimate challenge reward character with Black Hole weapon. Guide to the hardest unlock.', features: ['6 challenge completion', 'Black Hole mechanics', 'Unlock strategies'], link: 'spaceman-guide.html', cta: 'Reach for the Stars', stats: [4, 3, 3, 2, 4], canCompare: true, passive: 'Space-themed abilities', weapon: 'Black Hole', pros: ['Ultimate unlock', 'Black Hole weapon', 'Unique mechanics'], cons: ['Hardest unlock', 'Limited info'] },
+            { id: 'vlad', name: 'Vlad', tier: 'c', difficulty: 'advanced', icon: '🧛', category: '', categoryClass: '', difficultyLabel: 'Advanced', description: 'Blood magic specialist from Desert Tier 2. Master lifesteal builds and HP-based mechanics.', features: ['Blood magic mechanics', 'Lifesteal optimization', 'Vampiric strategies'], link: 'vlad-guide.html', cta: 'Embrace Darkness', stats: [4, 3, 3, 3, 4], canCompare: true, passive: 'Blood magic lifesteal', weapon: 'Blood Magic', pros: ['Lifesteal specialist', 'Low HP bonus', 'Sustain'], cons: ['Risky playstyle', 'HP management'] },
+            { id: 'noelle', name: 'Noelle', tier: 'c', difficulty: 'intermediate', icon: '🎄', category: '', categoryClass: '', difficultyLabel: 'Intermediate', description: 'Seasonal character with unique mechanics. Learn special abilities and holiday-themed builds.', features: ['Seasonal mechanics', 'Special abilities guide', 'Unique playstyle'], link: 'noelle-guide.html', cta: 'Celebrate with Noelle', stats: [3, 3, 3, 4, 3], canCompare: true, passive: 'Seasonal abilities', weapon: 'Candy Cane', pros: ['Seasonal fun', 'Unique abilities', 'Holiday themed'], cons: ['Limited availability', 'Niche character'] },
+            { id: 'birdo', name: 'Birdo', tier: 'c', difficulty: 'advanced', icon: '🦅', category: '', categoryClass: '', difficultyLabel: 'Challenge Unlock', description: 'Tornado specialist requiring 100 tornado kills while carried. Complete unlock guide.', features: ['100 tornado kill guide', 'Carried mode strategy', 'Tornado mechanics'], link: 'birdo-guide.html', cta: 'Unlock Birdo', stats: [3, 3, 4, 2, 3], canCompare: true, passive: 'Tornado focus', weapon: 'Tornado', pros: ['Tornado specialist', 'Unique unlock', 'AOE damage'], cons: ['Complex unlock', 'Carried mode required'] }
+        ];
+
+        // Comparison state
+        let selectedCharacters = [];
+        const MAX_COMPARE = 3;
+
+        // Draw radar chart
+        function drawRadarChart(canvas, stats) {
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 30;
+            const labels = ['Attack', 'Defense', 'Speed', 'Easy', 'Scaling'];
+            const numPoints = labels.length;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw background grid
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            for (let i = 1; i <= 5; i++) {
+                ctx.beginPath();
+                for (let j = 0; j <= numPoints; j++) {
+                    const angle = (j * 2 * Math.PI) / numPoints - Math.PI / 2;
+                    const x = centerX + Math.cos(angle) * (radius * i / 5);
+                    const y = centerY + Math.sin(angle) * (radius * i / 5);
+                    if (j === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+            }
+            
+            // Draw axes
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            for (let i = 0; i < numPoints; i++) {
+                const angle = (i * 2 * Math.PI) / numPoints - Math.PI / 2;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(
+                    centerX + Math.cos(angle) * radius,
+                    centerY + Math.sin(angle) * radius
+                );
+                ctx.stroke();
+            }
+            
+            // Draw data
+            ctx.beginPath();
+            ctx.strokeStyle = '#ff6b35';
+            ctx.fillStyle = 'rgba(255, 107, 53, 0.3)';
+            ctx.lineWidth = 2;
+            
+            for (let i = 0; i <= numPoints; i++) {
+                const angle = (i * 2 * Math.PI) / numPoints - Math.PI / 2;
+                const value = stats[i % numPoints];
+                const x = centerX + Math.cos(angle) * (radius * value / 5);
+                const y = centerY + Math.sin(angle) * (radius * value / 5);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            
+            // Draw labels
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            for (let i = 0; i < numPoints; i++) {
+                const angle = (i * 2 * Math.PI) / numPoints - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * (radius + 20);
+                const y = centerY + Math.sin(angle) * (radius + 20);
+                ctx.fillText(labels[i], x, y);
+            }
+        }
+
+        // Toggle character comparison
+        function toggleCompare(charId) {
+            const char = characters.find(c => c.id === charId);
+            if (!char || !char.canCompare) return;
+
+            const index = selectedCharacters.findIndex(c => c.id === charId);
+            
+            if (index > -1) {
+                // Remove from comparison
+                selectedCharacters.splice(index, 1);
+            } else {
+                // Add to comparison (max 3)
+                if (selectedCharacters.length < MAX_COMPARE) {
+                    selectedCharacters.push(char);
+                } else {
+                    alert(`You can only compare up to ${MAX_COMPARE} characters at once`);
+                    return;
+                }
+            }
+
+            // Update UI
+            updateCompareButtons();
+            updateComparePanel();
+        }
+
+        // Update compare button states
+        function updateCompareButtons() {
+            document.querySelectorAll('.compare-btn').forEach(btn => {
+                const charId = btn.dataset.charId;
+                const isSelected = selectedCharacters.some(c => c.id === charId);
+                btn.classList.toggle('selected', isSelected);
+            });
+        }
+
+        // Update compare panel
+        function updateComparePanel() {
+            const panel = document.getElementById('comparePanel');
+            const content = document.getElementById('compareContent');
+
+            if (selectedCharacters.length === 0) {
+                panel.classList.remove('active');
+                content.innerHTML = `
+                    <div class="compare-instructions">
+                        <h3>Select 2-3 characters to compare</h3>
+                        <p>Click the ⚖️ button on character cards to add them to comparison</p>
+                    </div>
+                `;
+                return;
+            }
+
+            panel.classList.add('active');
+
+            const compareHTML = `
+                <div class="compare-grid">
+                    ${selectedCharacters.map(char => `
+                        <div class="compare-character">
+                            <div class="compare-character-header">
+                                <div class="compare-character-icon">${char.icon}</div>
+                                <h3 class="compare-character-name">${char.name}</h3>
+                                <span class="difficulty ${char.difficulty}">${char.difficultyLabel}</span>
+                            </div>
+                            
+                            <div class="compare-radar-container">
+                                <canvas id="compare-radar-${char.id}" width="150" height="150"></canvas>
+                            </div>
+                            
+                            <table class="compare-stats-table">
+                                <tr>
+                                    <td>Tier</td>
+                                    <td>${char.tier.toUpperCase()}-Tier</td>
+                                </tr>
+                                <tr>
+                                    <td>Weapon</td>
+                                    <td>${char.weapon || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td>Passive</td>
+                                    <td style="font-size: 0.85rem">${char.passive || 'N/A'}</td>
+                                </tr>
+                            </table>
+                            
+                            <div class="compare-section">
+                                <h4>✓ Strengths</h4>
+                                <ul>
+                                    ${(char.pros || []).map(pro => `<li>${pro}</li>`).join('')}
+                                </ul>
+                            </div>
+                            
+                            <div class="compare-section">
+                                <h4>✗ Weaknesses</h4>
+                                <ul>
+                                    ${(char.cons || []).map(con => `<li>${con}</li>`).join('')}
+                                </ul>
+                            </div>
+                            
+                            <a href="${char.link}" class="guide-cta" style="margin-top: 0.75rem; padding: 0.6rem 0.8rem; font-size: 0.9rem;">${char.cta}</a>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            content.innerHTML = compareHTML;
+
+            // Draw radar charts
+            setTimeout(() => {
+                selectedCharacters.forEach(char => {
+                    const canvas = document.getElementById(`compare-radar-${char.id}`);
+                    if (canvas) drawRadarChart(canvas, char.stats);
+                });
+            }, 0);
+        }
+
+        // Create character cards
+        function createCharacterCards() {
+            const grid = document.getElementById('guidesGrid');
+            
+            characters.forEach(char => {
+                const card = document.createElement('div');
+                card.className = `guide-card${char.featured ? ' featured' : ''}`;
+                card.setAttribute('data-tier', char.tier);
+                card.setAttribute('data-difficulty', char.difficulty);
+                card.setAttribute('data-name', char.name);
+                
+                let tierBadge = '';
+                if (char.tier === 's') tierBadge = '<span class="tier-badge s">S-Tier</span>';
+                else if (char.tier === 'a') tierBadge = '<span class="tier-badge a">A-Tier</span>';
+                else if (char.tier === 'b') tierBadge = '<span class="tier-badge b">B-Tier</span>';
+                else if (char.tier === 'c') tierBadge = '<span class="tier-badge c">C-Tier</span>';
+                
+                const compareBtn = char.canCompare ? 
+                    `<button class="compare-btn" data-char-id="${char.id}" title="Add to comparison">⚖️</button>` : '';
+                
+                card.innerHTML = `
+                    ${compareBtn}
+                    ${char.featured ? '<span class="featured-badge">FEATURED</span>' : tierBadge}
+                    <div class="guide-icon">${char.icon}</div>
+                    <span class="guide-category ${char.categoryClass}">${char.category || 'Character Guide'}</span>
+                    <h3 class="guide-title">${char.name}</h3>
+                    <div class="guide-meta">
+                        <span class="difficulty ${char.difficulty}">${char.difficultyLabel}</span>
+                    </div>
+                    <p class="guide-description">${char.description}</p>
+                    <ul class="guide-features">
+                        ${char.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                    <div class="radar-chart">
+                        <canvas id="radar-${char.id}" width="180" height="180"></canvas>
+                    </div>
+                    <a href="${char.link}" class="guide-cta">${char.cta}</a>
+                `;
+                
+                grid.appendChild(card);
+                
+                // Add compare button listener
+                if (char.canCompare) {
+                    const btn = card.querySelector('.compare-btn');
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        toggleCompare(char.id);
+                    });
+                }
+                
+                // Draw radar chart
+                setTimeout(() => {
+                    const canvas = document.getElementById(`radar-${char.id}`);
+                    if (canvas) drawRadarChart(canvas, char.stats);
+                }, 0);
+            });
+        }
+
+        // Filter functionality
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const resetButton = document.getElementById('resetFilters');
+        const visibleCountEl = document.getElementById('visibleCount');
+        
+        let currentFilters = {
+            tier: 'all',
+            difficulty: 'all',
+            search: ''
+        };
+
+        searchInput.addEventListener('input', (e) => {
+            currentFilters.search = e.target.value.toLowerCase();
+            applyFilters();
+        });
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filterType = button.dataset.filter;
+                const filterValue = button.dataset.value;
+                
+                const sameGroupButtons = document.querySelectorAll(`[data-filter="${filterType}"]`);
+                sameGroupButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                currentFilters[filterType] = filterValue;
+                applyFilters();
+            });
+        });
+
+        resetButton.addEventListener('click', () => {
+            currentFilters = { tier: 'all', difficulty: 'all', search: '' };
+            searchInput.value = '';
+            filterButtons.forEach(btn => {
+                if (btn.dataset.value === 'all') btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            applyFilters();
+        });
+
+        function applyFilters() {
+            const guideCards = document.querySelectorAll('.guide-card');
+            let visibleCount = 0;
+            
+            guideCards.forEach(card => {
+                const cardTier = card.dataset.tier;
+                const cardDifficulty = card.dataset.difficulty;
+                const cardName = card.dataset.name.toLowerCase();
+                
+                const searchMatch = currentFilters.search === '' || cardName.includes(currentFilters.search);
+                const tierMatch = currentFilters.tier === 'all' || cardTier === currentFilters.tier || cardTier === 'featured';
+                const difficultyMatch = currentFilters.difficulty === 'all' || cardDifficulty === currentFilters.difficulty || cardDifficulty === 'all';
+                
+                if (searchMatch && tierMatch && difficultyMatch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            visibleCountEl.textContent = visibleCount;
+            showNoResultsMessage(visibleCount);
+        }
+
+        function showNoResultsMessage(count) {
+            const existingMessage = document.querySelector('.no-results');
+            
+            if (count === 0 && !existingMessage) {
+                const message = document.createElement('div');
+                message.className = 'no-results';
+                message.innerHTML = '<h3>😔 No characters found</h3><p>Try adjusting your filters or search query</p>';
+                document.getElementById('guidesGrid').appendChild(message);
+            } else if (count > 0 && existingMessage) {
+                existingMessage.remove();
+            }
+        }
+
+        // Close compare panel
+        document.getElementById('compareClose').addEventListener('click', () => {
+            selectedCharacters = [];
+            updateCompareButtons();
+            updateComparePanel();
+        });
+
+        // Initialize
+        createCharacterCards();
+    </script>
+</body>
+</html>
