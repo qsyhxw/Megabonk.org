@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poison Flask Guide - High-Risk Lifesteal Weapon | Megabonk Database</title>
+    <meta name="description" content="Complete Poison Flask guide: unlock methods, Amog synergy, lifesteal builds, poison stacking mechanics & advanced strategies. Master Megabonk's DoT weapon.">
+    <meta name="keywords" content="megabonk poison flask, poison flask guide, amog weapon, poison build, lifesteal build, megabonk weapons">
+
+    <link rel="canonical" href="https://megabonk.org/database/weapons/poison-flask">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+  
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Poison Flask Complete Guide - Megabonk Weapon Database">
+    <meta property="og:description" content="Master the Poison Flask: unlock requirements, Amog synergy, lifesteal builds & advanced poison stacking strategies">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/database/weapons/poison-flask">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Poison Flask Complete Guide",
+      "description": "Complete guide to mastering Poison Flask in Megabonk",
+      "image": "https://megabonk.org/images/poison-flask.jpg",
+      "totalTime": "PT30M"
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --poison-green: #00ff41;
+            --dark-green: #004d1a;
+            --toxic-yellow: #ccff00;
+            --danger-red: #ff3333;
+            --bg-dark: #0a0f0a;
+            --bg-card: #1a2e1a;
+            --text-light: #e0ffe0;
+            --border-glow: rgba(0, 255, 65, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0f0a 0%, #1a2e1a 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Animated background poison particles */
+        @keyframes float-poison {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.6; }
+        }
+
+        body::before {
+            content: '☠️💀🧪☣️';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 3rem;
+            opacity: 0.03;
+            pointer-events: none;
+            word-spacing: 100px;
+            line-height: 150px;
+            animation: float-poison 10s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-green), var(--bg-card));
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid var(--poison-green);
+            box-shadow: 0 0 30px var(--border-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                transparent,
+                var(--poison-green),
+                var(--toxic-yellow),
+                var(--poison-green),
+                transparent
+            );
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .breadcrumb {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--poison-green);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .weapon-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .weapon-icon {
+            font-size: 4rem;
+            filter: drop-shadow(0 0 20px var(--poison-green));
+        }
+
+        .weapon-title h1 {
+            font-size: 2.5rem;
+            color: var(--poison-green);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .weapon-subtitle {
+            color: var(--toxic-yellow);
+            font-size: 1.1rem;
+        }
+
+        .tier-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tier-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tier-badge.c-tier {
+            background: linear-gradient(135deg, #666, #888);
+            border: 2px solid #999;
+        }
+
+        .tier-badge.situational {
+            background: linear-gradient(135deg, var(--toxic-yellow), #99cc00);
+            color: #000;
+            border: 2px solid #ccff00;
+        }
+
+        .tier-badge.amog {
+            background: linear-gradient(135deg, var(--poison-green), #00cc33);
+            border: 2px solid var(--poison-green);
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--poison-green);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px var(--border-glow);
+        }
+
+        .stat-label {
+            color: var(--toxic-yellow);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--poison-green);
+        }
+
+        /* Sections */
+        .section {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .section h2 {
+            color: var(--poison-green);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid var(--poison-green);
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: var(--toxic-yellow);
+            margin: 20px 0 10px 0;
+            font-size: 1.3rem;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.success {
+            background: rgba(0, 255, 65, 0.1);
+            border-color: var(--poison-green);
+        }
+
+        .info-box.warning {
+            background: rgba(204, 255, 0, 0.1);
+            border-color: var(--toxic-yellow);
+        }
+
+        .info-box.danger {
+            background: rgba(255, 51, 51, 0.1);
+            border-color: var(--danger-red);
+        }
+
+        .info-box.info {
+            background: rgba(0, 204, 255, 0.1);
+            border-color: #00ccff;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        /* Unlock Steps */
+        .unlock-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .unlock-step {
+            background: rgba(0, 255, 65, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--poison-green);
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: var(--poison-green);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Build Cards */
+        .build-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .build-card {
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.05), rgba(204, 255, 0, 0.05));
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid var(--poison-green);
+            transition: all 0.3s ease;
+        }
+
+        .build-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--border-glow);
+            border-color: var(--toxic-yellow);
+        }
+
+        .build-card h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .build-rating {
+            display: inline-block;
+            background: var(--poison-green);
+            color: #000;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Pros/Cons Lists */
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros, .cons {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .pros {
+            border: 2px solid var(--poison-green);
+        }
+
+        .cons {
+            border: 2px solid var(--danger-red);
+        }
+
+        .pros h4 {
+            color: var(--poison-green);
+        }
+
+        .cons h4 {
+            color: var(--danger-red);
+        }
+
+        .pros li::marker {
+            content: "✅ ";
+        }
+
+        .cons li::marker {
+            content: "❌ ";
+        }
+
+        /* Version Cards */
+        .version-card {
+            background: rgba(0, 255, 65, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid var(--poison-green);
+            margin-bottom: 20px;
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .version-badge {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .version-badge.current {
+            background: var(--poison-green);
+            color: #000;
+        }
+
+        .version-badge.old {
+            background: #666;
+            color: #fff;
+        }
+
+        .version-changes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .change-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .change-item.positive {
+            border-left: 4px solid var(--poison-green);
+        }
+
+        .change-item.negative {
+            border-left: 4px solid var(--danger-red);
+        }
+
+        .change-item.neutral {
+            border-left: 4px solid var(--toxic-yellow);
+        }
+
+        .change-icon {
+            font-size: 1.5rem;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: rgba(0, 255, 65, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid rgba(0, 255, 65, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--poison-green);
+            box-shadow: 0 5px 15px var(--border-glow);
+        }
+
+        .faq-question {
+            color: var(--toxic-yellow);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(135deg, var(--poison-green), #00cc33);
+            color: #000;
+            border: 2px solid var(--poison-green);
+        }
+
+        .cta-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px var(--border-glow);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--poison-green);
+            border: 2px solid var(--poison-green);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 50px;
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .weapon-title h1 {
+                font-size: 2rem;
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+
+            .build-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .weapon-header {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--poison-green);
+            color: #000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 20px var(--border-glow);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <nav class="breadcrumb">
+                <a href="/">Home</a> → 
+                <a href="/database/">Database</a> → 
+                <a href="/database/weapons/">Weapons</a> → 
+                <span>Poison Flask</span>
+            </nav>
+
+            <div class="weapon-header">
+                <div class="weapon-icon">🧪</div>
+                <div class="weapon-title">
+                    <h1>Poison Flask</h1>
+                    <p class="weapon-subtitle">High-Risk Lifesteal Weapon | Amog's Signature</p>
+                    <div class="tier-badges">
+                        <span class="tier-badge c-tier">⭐ C-Tier Overall</span>
+                        <span class="tier-badge situational">⚡ A-Tier with Build</span>
+                        <span class="tier-badge amog">☠️ S-Tier on Amog</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-label">Base Damage</div>
+                <div class="stat-value">1</div>
+                <small style="color: var(--danger-red);">Lowest in Game</small>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Attack Range</div>
+                <div class="stat-value">Short</div>
+                <small style="color: var(--toxic-yellow);">Close Combat</small>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Unlock Difficulty</div>
+                <div class="stat-value">Medium</div>
+                <small>Kill Scorpionussy 3x</small>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Skill Ceiling</div>
+                <div class="stat-value">High</div>
+                <small style="color: var(--poison-green);">Mastery Rewarding</small>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <section class="section" id="overview">
+            <h2>🧪 Weapon Overview</h2>
+            <p><strong>Poison Flask deals the lowest base damage in Megabonk (1 damage) but transforms into a powerful sustain weapon through poison stacking and lifesteal synergies.</strong> This short-range projectile weapon throws bottles that shatter on impact, creating poison clouds that deal escalating damage over time.</p>
+
+            <div class="info-box warning">
+                <strong>⚠️ Critical Understanding:</strong> Poison Flask is NOT a damage weapon—it's a setup and sustain tool that enables lifesteal builds. Expect weak early game and plan accordingly.
+            </div>
+
+            <p>While currently ranked <strong>C-tier by most community tier lists</strong>, Poison Flask becomes remarkably effective with proper investment, enabling near-immortal lifesteal builds that convert poison damage into continuous healing. The weapon requires close-range aggressive positioning and significant item investment to overcome its fundamental weaknesses.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Strengths</h4>
+                    <ul>
+                        <li>Poison DoT stacks exponentially with investment</li>
+                        <li>Enables near-immortal lifesteal builds (100% lifesteal)</li>
+                        <li>Amog's Plague passive creates devastating chain reactions</li>
+                        <li>Excellent against high-HP bosses (sustained damage)</li>
+                        <li>Unique and satisfying DoT playstyle</li>
+                        <li>Continues damaging after you move away</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Weaknesses</h4>
+                    <ul>
+                        <li>Lowest base damage (1) in entire game</li>
+                        <li>Extremely short range (shorter than some melee weapons)</li>
+                        <li>Slow projectile speed</li>
+                        <li>No crit scaling in crit-focused meta</li>
+                        <li>Requires specific items to function (not flexible)</li>
+                        <li>Delayed kill times cause loot collection issues</li>
+                        <li>Brutal early game weakness</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unlock Section -->
+        <section class="section" id="unlock">
+            <h2>🔓 How to Unlock Poison Flask</h2>
+            
+            <div class="info-box info">
+                <strong>📋 Requirements:</strong> Kill Scorpionussy Miniboss on Desert map 3 times (cumulative across runs), then purchase with 2 Silver from Main Menu → Unlocks → Weapons
+            </div>
+
+            <div class="unlock-steps">
+                <div class="unlock-step">
+                    <div class="step-number">1</div>
+                    <h3>Reach Desert Map</h3>
+                    <p>Complete Forest Tier 1 or select Desert as starting map. Scorpionussy is a Desert-exclusive miniboss that spawns mid-run.</p>
+                </div>
+
+                <div class="unlock-step">
+                    <div class="step-number">2</div>
+                    <h3>Survive Until Miniboss Spawn</h3>
+                    <p>Scorpionussy typically appears around 10-15 minutes into Desert runs. Build enough damage to defeat it—easier than stage bosses but requires decent DPS. Use any character with strong early-game weapons (Aura, Lightning Staff).</p>
+                </div>
+
+                <div class="unlock-step">
+                    <div class="step-number">3</div>
+                    <h3>Repeat 3 Times (Cumulative)</h3>
+                    <p>Defeats count across all runs—you don't need to kill it 3 times in a single run. Track progress in your unlocks menu. Estimated time: 1-3 hours depending on skill level.</p>
+                </div>
+
+                <div class="unlock-step">
+                    <div class="step-number">4</div>
+                    <h3>Purchase with Silver</h3>
+                    <p>After the 3rd kill, return to Main Menu → Unlocks → Weapons → Poison Flask (costs 2 Silver). This is a trivial cost accumulated through normal play.</p>
+                </div>
+            </div>
+
+            <div class="info-box warning">
+                <strong>⚠️ Common Confusion:</strong> Poisoning 50,000 enemies with Moldy Cheese unlocks <strong>Amog character</strong>, NOT Poison Flask weapon. Since Amog starts with Poison Flask, many players mistakenly believe this unlocks the weapon itself.
+            </div>
+        </section>
+
+        <!-- Mechanics Section -->
+        <section class="section" id="mechanics">
+            <h2>⚙️ Core Mechanics</h2>
+
+            <h3>🎯 Attack Pattern</h3>
+            <p>Poison Flask throws bottles in a <strong>short arc</strong> that explode on contact, creating <strong>area-of-effect poison clouds</strong>. Each hit applies <strong>poison stacks</strong> to enemies, with damage increasing the longer enemies remain exposed—this stacking mechanic is the weapon's primary strength.</p>
+
+            <div class="info-box success">
+                <strong>💡 Poison DoT Interaction:</strong> The poison DoT itself counts as <strong>continuous hits for lifesteal calculations</strong>, meaning 100% lifesteal heals 1 HP per damage tick. This is the foundation of the weapon's strongest build strategy!
+            </div>
+
+            <h3>📊 Damage Calculation</h3>
+            <p><code>Effective Damage = Weapon Damage × Character Damage</code></p>
+            <p><code>Character Damage = Initial Damage × Tome Damage × (1 + Shrine Damage)</code></p>
+            <p>With base damage of 1, a Damage Tome providing 1.16x multiplier results in ~1.16 damage per hit before poison DoT amplification.</p>
+
+            <h3>🔧 Upgrade Paths (5 Available)</h3>
+            <ul>
+                <li><strong>Damage</strong> ⭐⭐⭐⭐⭐ - Increases base hit and poison DoT values (S-tier priority)</li>
+                <li><strong>Duration</strong> ⭐⭐⭐⭐ - Extends poison cloud persistence and effect length (A-tier)</li>
+                <li><strong>Projectile Count</strong> ⭐⭐⭐⭐⭐ - Adds successive bottles per attack cycle (S-tier for coverage)</li>
+                <li><strong>Projectile Speed</strong> ⭐⭐⭐ - Increases travel velocity (B-tier but necessary given slow base speed)</li>
+                <li><strong>Size</strong> ⭐⭐⭐⭐ - Expands explosion radius and cloud area (A-tier for AoE)</li>
+            </ul>
+
+            <div class="info-box danger">
+                <strong>❌ Notably Absent:</strong> Crit Chance, Crit Damage, Attack Speed/Cooldown, Projectile Bounces, Knockback. This lack of crit scaling is a major weakness in the current crit-focused meta.
+            </div>
+        </section>
+
+        <!-- Amog Synergy Section -->
+        <section class="section" id="amog">
+            <h2>☠️ Amog Synergy: The Plague Spreader</h2>
+
+            <div class="info-box success">
+                <strong>🎯 Best Character:</strong> Amog is Poison Flask's optimal user, possessing unique mechanics that transform the weapon from mediocre to viable. He's the ONLY character that makes this weapon truly competitive.
+            </div>
+
+            <h3>🧬 Amog's Plague Passive</h3>
+            <ul>
+                <li><strong>Explosion Chain Reaction</strong>: Poisoned enemies explode on death, spreading poison to nearby foes</li>
+                <li><strong>Built-in Lifesteal</strong>: Amog heals for the same amount as poison damage dealt (natural sustain loop)</li>
+                <li><strong>Higher Base Size & Duration</strong>: Enlarges poison clouds and extends their persistence</li>
+                <li><strong>Hit-and-Run Playstyle</strong>: Apply poison → kite backward → enemies die and spread poison → heal constantly</li>
+            </ul>
+
+            <div class="build-card">
+                <h3>☠️ Amog Unlock Method</h3>
+                <p><strong>Requirement:</strong> Poison 50,000 enemies across any number of runs using the Moldy Cheese item.</p>
+                <p><strong>Benefit:</strong> Once unlocked, Amog starts every run with Poison Flask equipped, letting you immediately begin building around poison synergies.</p>
+            </div>
+
+            <div class="info-box warning">
+                <strong>⚠️ Other Characters:</strong> While technically usable on anyone, Poison Flask is SIGNIFICANTLY WEAKER on other characters. They lack Amog's critical synergies and gain no special benefit, making the weapon a liability rather than an asset.
+            </div>
+        </section>
+
+        <!-- Essential Items Section -->
+        <section class="section" id="items">
+            <h2>🎒 Essential Items & Synergies</h2>
+
+            <h3>⭐ Mandatory Core Items (Must-Have)</h3>
+            <div class="build-grid">
+                <div class="build-card">
+                    <h3>🧀 Moldy Cheese</h3>
+                    <span class="build-rating">MANDATORY</span>
+                    <p><strong>Effect:</strong> 20% chance to poison enemies on hit + scales poison damage</p>
+                    <p><strong>Why Essential:</strong> Creates additional poison sources beyond Poison Flask itself. With Overpowered Lamp, this becomes near-guaranteed poison application across your entire weapon arsenal.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>😷 Gas Mask</h3>
+                    <span class="build-rating">MANDATORY</span>
+                    <p><strong>Effect:</strong> Grants Armor AND Lifesteal for every poisoned enemy on screen</p>
+                    <p><strong>Why Essential:</strong> In dense crowds with poison spreading everywhere, Gas Mask alone can provide enough defensive stats to face-tank incoming damage.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>💡 Overpowered Lamp</h3>
+                    <span class="build-rating">MANDATORY</span>
+                    <p><strong>Effect:</strong> Increases proc rates for all on-hit effects</p>
+                    <p><strong>Why Essential:</strong> Makes Moldy Cheese's 20% poison proc nearly guaranteed. Stacks with itself for even higher proc chances.</p>
+                </div>
+            </div>
+
+            <h3>💉 Lifesteal Build Core (Primary Strategy)</h3>
+            <ul>
+                <li><strong>Lifesteal Tome (100%)</strong> 🔴 CRITICAL BREAKPOINT - Every point of damage heals 1 HP, poison DoT ticks heal constantly</li>
+                <li><strong>Chonkplate</strong> - Massive lifesteal + overheal (converts excess healing to shields)</li>
+                <li><strong>Vampiric Ring</strong> - Additional lifesteal scaling</li>
+                <li><strong>Holy Book</strong> - +100 Max HP, +50 HP Regen, healing converts to damage</li>
+                <li><strong>Bloody Cleaver</strong> - Further lifesteal amplification</li>
+                <li><strong>Leeching Crystal</strong> - Trades HP Regen for Max HP (acceptable in pure lifesteal builds)</li>
+            </ul>
+
+            <h3>💊 Poison Ecosystem Items</h3>
+            <ul>
+                <li><strong>Toxic Barrel</strong> - Spreads poison when YOU take damage (defensive mechanic, pairs with Kevin combo)</li>
+                <li><strong>Multiple Moldy Cheese Stacks</strong> - Use Microwave to duplicate for exponential poison scaling</li>
+            </ul>
+
+            <h3>⚡ Movement & Damage Scaling</h3>
+            <ul>
+                <li><strong>Turbo Socks + Turbo Skates</strong> 🔴 NON-NEGOTIABLE - High movement speed essential for aggressive kiting at close range</li>
+                <li><strong>Big Bonk, Spicy Meatball, Joe's Dagger</strong> - Damage multipliers (scales both damage and healing rate)</li>
+                <li><strong>Gym Sauce, Forbidden Juice</strong> - Universal damage boosts</li>
+            </ul>
+
+            <h3>🛡️ Tank Scaling Alternative</h3>
+            <ul>
+                <li><strong>Beefy Ring</strong> - +20% damage per 100 HP (converts survivability into offense)</li>
+                <li><strong>Chonkplate</strong> - Overheal capability prevents one-shots</li>
+                <li><strong>Demonic Blood, Demon Blood</strong> - HP stacking</li>
+            </ul>
+        </section>
+
+        <!-- Builds Section -->
+        <section class="section" id="builds">
+            <h2>🏗️ Optimal Build Progressions</h2>
+
+            <h3>🌱 Early Game (0-5 Minutes): Survival & Setup</h3>
+            <div class="info-box danger">
+                <strong>⚠️ Brutal Phase:</strong> This is when Poison Flask is at its WEAKEST. Your goal is pure survival until items come online.
+            </div>
+            <ul>
+                <li>Upgrade Poison Flask first (it's your guaranteed starter on Amog)</li>
+                <li>Prioritize <strong>XP Tome</strong> to level quickly and generate more upgrade opportunities</li>
+                <li>Take defensive stats (Regen, Armor, Shield) until poison items appear</li>
+                <li><strong>Add ONE ranged weapon immediately</strong> - Lightning Staff or Aura optimal</li>
+                <li>Stay mobile, avoid getting surrounded - damage too low for aggression</li>
+                <li><strong>Tome Priority:</strong> XP > Luck > Movement Speed > Damage</li>
+            </ul>
+
+            <h3>⚔️ Mid Game (5-15 Minutes): Build Comes Online</h3>
+            <div class="info-box success">
+                <strong>💡 Power Spike:</strong> Once you hit <strong>100% Lifesteal Tome + Moldy Cheese + Gas Mask</strong>, you become nearly unkillable.
+            </div>
+            <ul>
+                <li><strong>RUSH Lifesteal Tome to 100%</strong> - Single most impactful power spike</li>
+                <li>Stack Damage Tome simultaneously (scales both damage AND healing rate)</li>
+                <li>Collect Moldy Cheese, Gas Mask, Toxic Barrel as they appear</li>
+                <li>Add Projectile Speed and Quantity tomes to compensate for slow flasks</li>
+                <li>Complete weapon loadout: Lightning Staff (range), Aura (AoE), Bone/Aegis (coverage)</li>
+                <li><strong>The Moment:</strong> When you acquire Moldy Cheese + Gas Mask together, switch from defensive to aggressive play</li>
+            </ul>
+
+            <h3>🔥 Late Game (15+ Minutes / Tier 2-3): Damage Multiplication</h3>
+            <ul>
+                <li>Stack damage multipliers from multiple sources</li>
+                <li>Maximize poison proc chances (Overpowered Lamp + multiple Moldy Cheese)</li>
+                <li>Add HP items (Chonkplate, Beefy Ring, Demonic Blood) for burst damage survivability</li>
+                <li>Optimize tome levels: Damage, Quantity, Duration, Size all scale exponentially when combined</li>
+                <li><strong>Tier 3 Strategy:</strong> Stand in the middle of waves with Gas Mask providing defensive stats while poison does the work</li>
+            </ul>
+
+            <h3>👑 Advanced Build: Mirror + Kevin Immortality</h3>
+            <div class="build-card">
+                <h3>💫 The Immortality Combo</h3>
+                <span class="build-rating">EXPERT</span>
+                <p><strong>Core Mechanic:</strong> Kevin damages you constantly but can't kill you. Mirror grants invulnerability when you take damage. With high attack speed, invulnerability windows overlap = permanent immunity.</p>
+                <p><strong>Synergy Stack:</strong></p>
+                <ul>
+                    <li><strong>Toxic Barrel</strong> - Spreads poison when Kevin damages you</li>
+                    <li><strong>Gas Mask</strong> - Grants armor/lifesteal from all the poison</li>
+                    <li><strong>HP Items</strong> - Chonkplate, Beefy Ring, Demonic Blood (survive setup period)</li>
+                    <li><strong>Attack Speed</strong> - Battery, Attack Speed Tome (overlap invulnerability windows)</li>
+                </ul>
+                <p><strong>⚠️ Note:</strong> Kevin was nerfed in v1.0.7 to remove automatic invincibility. Requires significant attack speed investment to function post-nerf.</p>
+            </div>
+
+            <h3>📋 Tome Priority Rankings</h3>
+            <ul>
+                <li><strong>S-Tier:</strong> Damage (universal), Quantity (more stacks), Cooldown (faster application)</li>
+                <li><strong>A-Tier:</strong> Duration (extends poison), Size (better coverage)</li>
+                <li><strong>B-Tier:</strong> Projectile Speed (compensates slow base speed)</li>
+                <li><strong>Early Investment:</strong> Luck Tome (improves all future upgrade quality)</li>
+            </ul>
+        </section>
+
+        <!-- Combat Strategy Section -->
+        <section class="section" id="strategy">
+            <h2>⚔️ Combat Strategy & Tactics</h2>
+
+            <h3>🎯 Fundamental Rule: Never Stop Moving</h3>
+            <div class="info-box danger">
+                <strong>❌ FATAL ERROR:</strong> Poison Flask's short range makes static positioning a death sentence. Constant movement is mandatory for survival.
+            </div>
+
+            <h3>🌀 Aggressive Kiting Pattern</h3>
+            <ol>
+                <li>Circle around enemy groups while applying poison stacks</li>
+                <li>Use walls and obstacles to funnel enemies into poison clouds</li>
+                <li>Apply poison to multiple targets, then retreat while DoT ticks</li>
+                <li>Let Amog's Plague passive cause dying enemies to explode and spread poison</li>
+                <li>Repeat hit-and-run pattern - let poison do the killing while you focus on survival</li>
+            </ol>
+
+            <h3>👹 Boss Fight Strategy</h3>
+            <ul>
+                <li><strong>Hyper-Aggressive Approach:</strong> Keep poison ticking constantly on boss while circle-kiting to avoid burst damage</li>
+                <li><strong>Poison Advantage:</strong> Excels against high-HP targets because damage accumulates continuously</li>
+                <li><strong>More effective against 500,000+ HP Tier 2-3 bosses</strong> than many burst weapons</li>
+                <li><strong>With Lifesteal Build:</strong> You barely lose health during boss encounters (constant healing from poison ticks)</li>
+            </ul>
+
+            <h3>👥 Crowd Control</h3>
+            <ul>
+                <li>Use Poison Flask against <strong>tanky enemies</strong> (applying maximum stacks)</li>
+                <li>Secondary weapons (Aura, Lightning Staff) handle immediate threats and fodder</li>
+                <li>Let Amog's Plague passive create chain reactions: poisoned enemies → die → explode → poison nearby enemies → repeat</li>
+                <li><strong>Toxic Barrel Synergy:</strong> In dense swarms, taking damage spreads more poison (defensive pressure becomes offensive opportunity)</li>
+            </ul>
+
+            <h3>❌ Common Fatal Mistakes</h3>
+            <ul>
+                <li><strong>Playing Solo Poison Flask</strong> - Must have companion weapons to cover range deficit</li>
+                <li><strong>Standing Still</strong> - Instant death at close range</li>
+                <li><strong>Not Investing in Sustain Early</strong> - Missing the lifesteal loop power spike</li>
+                <li><strong>Neglecting Moldy Cheese</strong> - This is mandatory, not optional</li>
+                <li><strong>Giving Up During Weak Early Game</strong> - Build hasn't scaled yet, patience required</li>
+                <li><strong>Ignoring Projectile Speed</strong> - Compounds the range problem significantly</li>
+                <li><strong>Over-investing in Duration on Tier 1</strong> - Base damage too low, focus damage first</li>
+            </ul>
+        </section>
+
+        <!-- Weapon Combinations Section -->
+        <section class="section" id="combos">
+            <h2>🔗 Weapon Combinations</h2>
+
+            <h3>✅ Optimal Pairings</h3>
+            <div class="build-grid">
+                <div class="build-card">
+                    <h3>⚡ Lightning Staff</h3>
+                    <span class="build-rating">BEST</span>
+                    <p>Covers long-range weakness, freezes enemies in place, provides chain damage for crowd control. The single best companion weapon.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>🌀 Aura</h3>
+                    <span class="build-rating">EXCELLENT</span>
+                    <p>Constant passive AoE damage at all ranges, clearing enemies before they close distance. Defensive tool + offense.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>🦴 Bone</h3>
+                    <span class="build-rating">GOOD</span>
+                    <p>Bouncing projectiles for additional range coverage. Helps with stragglers and spread-out enemies.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>🛡️ Aegis</h3>
+                    <span class="build-rating">DEFENSIVE</span>
+                    <p>Shockwave damage and survivability when overwhelmed. Best choice for tank scaling builds.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>🩸 Blood Magic</h3>
+                    <span class="build-rating">SUSTAIN</span>
+                    <p>Additional sustain and damage. Pairs well with lifesteal focus.</p>
+                </div>
+            </div>
+
+            <h3>❌ Avoid These Combinations</h3>
+            <ul>
+                <li><strong>Doubling Down on Short-Range</strong> - Stacking weaknesses leaves you vulnerable to being swarmed</li>
+                <li><strong>Weapons Requiring Standing Still</strong> - Contradicts constant kiting strategy poison builds demand</li>
+                <li><strong>Pure Single-Target Weapons</strong> - Poison Flask already handles single targets effectively through stacking</li>
+            </ul>
+        </section>
+
+        <!-- Version History Section -->
+        <section id="version-history" class="section">
+            <h2>📜 Version History & Meta Evolution</h2>
+            
+            <div class="version-card">
+                <div class="version-header">
+                    <h3>🔄 Patch v1.0.12 (October 8, 2025)</h3>
+                    <span class="version-badge current">Current</span>
+                </div>
+                <div class="version-changes">
+                    <div class="change-item positive">
+                        <span class="change-icon">✅</span>
+                        <div>
+                            <strong>FPS Optimizations</strong>
+                            <p>Fixed late-game frame drops when excessive poison effects filled the screen. Poison Flask now runs smoothly even in dense swarms with multiple poison sources active.</p>
+                        </div>
+                    </div>
+                    <div class="change-item neutral">
+                        <span class="change-icon">⚙️</span>
+                        <div>
+                            <strong>Duration Cap Implementation</strong>
+                            <p>Prevents projectiles from staying active indefinitely with high duration stats. Ensures consistent performance and prevents exploit scenarios.</p>
+                        </div>
+                    </div>
+                    <div class="change-item negative">
+                        <span class="change-icon">⚠️</span>
+                        <div>
+                            <strong>Final Swarm Difficulty Increase</strong>
+                            <p>Endgame content became significantly harder, affecting all builds including poison. DoT strategies face more pressure in the 60+ minute ghost phase.</p>
+                        </div>
+                    </div>
+                    <div class="change-item neutral">
+                        <span class="change-icon">📊</span>
+                        <div>
+                            <strong>No Direct Balance Changes</strong>
+                            <p>Poison Flask received no adjustments to damage, range, or core mechanics. Fundamental weaknesses remain unaddressed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="version-card">
+                <div class="version-header">
+                    <h3>🔄 Patch v1.0.7 (September 29, 2025)</h3>
+                    <span class="version-badge old">Previous</span>
+                </div>
+                <div class="version-changes">
+                    <div class="change-item negative">
+                        <span class="change-icon">🔻</span>
+                        <div>
+                            <strong>Kevin Item Nerfed</strong>
+                            <p>Removed automatic invincibility, affecting the Mirror + Kevin immortality combo that many poison builds relied on. Combo still functions but requires much higher attack speed investment.</p>
+                        </div>
+                    </div>
+                    <div class="change-item neutral">
+                        <span class="change-icon">🐛</span>
+                        <div>
+                            <strong>FPS Issues Acknowledged</strong>
+                            <p>Developers noted FPS problems with Poison Flask causing performance drops. This was later fixed in v1.0.12.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>📊 Current Meta Position</h3>
+            <p><strong>Pre-v1.0.12:</strong> Poison Flask was already considered weak and situational.</p>
+            <p><strong>Post-v1.0.12:</strong> Performance improvements help late-game viability, but fundamental weaknesses remain unaddressed:</p>
+            <ul>
+                <li>Extremely short range</li>
+                <li>Low base damage</li>
+                <li>Lack of crit scaling</li>
+                <li>DoT-dependent playstyle</li>
+            </ul>
+
+            <div class="info-box warning">
+                <strong>⚠️ Meta Reality:</strong> Current meta heavily favors weapons with built-in crit scaling (Dice, Revolver, Dexecutioner), which deal 5-10x more damage than weapons without native crit upgrades. Poison Flask's DoT playstyle means delayed kills, causing loot collection issues.
+            </div>
+        </section>
+
+        <!-- Community Consensus Section -->
+        <section class="section" id="community">
+            <h2>👥 Community Consensus</h2>
+
+            <h3>📊 Tier List Placements</h3>
+            <div class="build-grid">
+                <div class="build-card">
+                    <h3>🎮 Destructoid</h3>
+                    <span class="build-rating">C-Tier</span>
+                    <p>"The damage over time caused by the Poison attacks feels underpowered in the current build."</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>🎯 Twinfinite</h3>
+                    <span class="build-rating">A-Tier*</span>
+                    <p>Ranked second tier BUT notes it's "seldom seen in high-scoring runs" (*with caveats)</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>🎪 Amiibo Doctor</h3>
+                    <span class="build-rating">B-Tier</span>
+                    <p>"Good for poison-focused builds (especially Amog)" but "very low base damage means it needs significant investment"</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>🌐 Megabonk.net</h3>
+                    <span class="build-rating">A-Tier</span>
+                    <p>Lists it as "decent weapon" without significant caveats</p>
+                </div>
+            </div>
+
+            <div class="info-box info">
+                <strong>📊 Overall Consensus:</strong> B-tier to C-tier, with most leaning toward C-tier placement. Needs specific builds and character (Amog) to function at competitive level.
+            </div>
+
+            <h3>💬 Community Sentiment</h3>
+            
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Positive Takes</h4>
+                    <ul>
+                        <li>"Poison flask and lightning staff are great! some of my favorites"</li>
+                        <li>With proper build can deal "extreme amounts of poison damage"</li>
+                        <li>Unique and satisfying DoT playstyle</li>
+                        <li>Near-immortal lifesteal builds possible</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Negative Takes (Dominant)</h4>
+                    <ul>
+                        <li>"It does 1 damage by default" - struggles against Tier 2 enemies with 500,000 HP</li>
+                        <li>"The PF draaaaags" - slow scaling frustration</li>
+                        <li>Amog's Plague passive "looks good on paper, but it just kind of underperforms"</li>
+                        <li>"Poison Flask/Amog could use some love" - recurring community sentiment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>💡 Popular Community Buff Suggestions</h3>
+            <ul>
+                <li>Leave poison zones on the ground similar to Dragon's Breath weapon</li>
+                <li>Double the throwing range to make close positioning less punishing</li>
+                <li>Change Amog's passive from spreading poison to detonating enemies for their remaining poison damage</li>
+                <li>Add native crit scaling to compete with meta weapons</li>
+            </ul>
+
+            <h3>👤 Amog Character Ranking</h3>
+            <ul>
+                <li><strong>Destructoid:</strong> C-tier ("slightly tricky to master")</li>
+                <li><strong>Twinfinite:</strong> B-tier ("far from being the meta")</li>
+                <li><strong>Pro Game Guides:</strong> Not included in top tiers</li>
+            </ul>
+            <p>Considered one of the most misunderstood characters, with a kit that sounds powerful but underdelivers in practice.</p>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section" id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: Is Poison Flask viable for leaderboard runs?</div>
+                <p><strong>A:</strong> No. While it can complete all content with proper investment, it won't reach leaderboards. The delayed kill times, lack of crit scaling, and requirement for specific items prevent competitive viability. Most high-tier runs feature crit-scaling weapons like Dice or Dexecutioner.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: Can I use Poison Flask on characters other than Amog?</div>
+                <p><strong>A:</strong> Technically yes, but it's significantly weaker. Amog's Plague passive (poison spreading on death) and built-in lifesteal are essential for making the weapon functional. Other characters lack these synergies and gain no special benefit.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: What's the minimum investment to make Poison Flask work?</div>
+                <p><strong>A:</strong> You MUST acquire:
+                <ul>
+                    <li>Moldy Cheese (mandatory poison scaling)</li>
+                    <li>100% Lifesteal Tome (critical power spike)</li>
+                    <li>Gas Mask (survivability from poisoned enemies)</li>
+                    <li>One ranged weapon (Lightning Staff/Aura)</li>
+                    <li>Movement speed items (Turbo Socks/Skates)</li>
+                </ul>
+                Without these core items, the weapon remains weak regardless of skill level.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: Does Poison Flask get better late game?</div>
+                <p><strong>A:</strong> Yes, but only with proper scaling. The poison DoT damage increases exponentially with Damage, Duration, and Quantity tome investment. However, it never catches up to crit-scaling weapons in raw DPS potential.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: Is the Mirror + Kevin immortality combo still viable after nerfs?</div>
+                <p><strong>A:</strong> Partially. Kevin was nerfed in v1.0.7 to remove automatic invincibility. The combo still functions but requires SIGNIFICANTLY higher attack speed investment (Battery, Attack Speed Tome) to overlap invulnerability windows. It's no longer automatic immortality but still provides elite survivability with proper build.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: How do I survive the brutal early game with Poison Flask?</div>
+                <p><strong>A:</strong> 
+                <ol>
+                    <li>Never stop moving (static positioning = death)</li>
+                    <li>Add ONE ranged weapon immediately (Lightning Staff optimal)</li>
+                    <li>Prioritize XP Tome for faster leveling</li>
+                    <li>Take defensive stats (Regen, Armor, Shield) until poison items appear</li>
+                    <li>Play extremely safe until you acquire Moldy Cheese + 100% Lifesteal Tome</li>
+                </ol>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: What's better: Poison Flask or just using Moldy Cheese on other weapons?</div>
+                <p><strong>A:</strong> For early game, Moldy Cheese on fast-hitting weapons (Katana, Revolver) is often more effective. However, Poison Flask becomes superior long-term because "you can upgrade the poison damage itself" rather than relying on Moldy Cheese's fixed scaling. By late game, a properly built Poison Flask outdamages Moldy Cheese alone.</p>
+            </div>
+        </section>
+
+        <!-- Final Verdict Section -->
+        <section class="section" id="verdict">
+            <h2>⚖️ Final Verdict</h2>
+
+            <div class="info-box success">
+                <h3>✅ Choose Poison Flask If You:</h3>
+                <ul>
+                    <li>Enjoy mastery-based playstyles that reward patience and skill</li>
+                    <li>Want a unique lifesteal sustain build</li>
+                    <li>Love DoT mechanics and aggressive kiting gameplay</li>
+                    <li>Play Amog (the ONLY character where this weapon is truly competitive)</li>
+                    <li>Want to complete Tier 1-2 content with a satisfying playstyle</li>
+                    <li>Enjoy thematically appropriate poison-focused builds</li>
+                </ul>
+            </div>
+
+            <div class="info-box danger">
+                <h3>❌ Avoid Poison Flask If You:</h3>
+                <ul>
+                    <li>Push for high-score leaderboard runs</li>
+                    <li>Dislike close-range combat and constant kiting</li>
+                    <li>Want immediate power without extensive build investment</li>
+                    <li>Prefer burst damage over sustained DoT playstyle</li>
+                    <li>Lack patience for weak early game phases</li>
+                    <li>Play characters other than Amog</li>
+                </ul>
+            </div>
+
+            <h3>📊 Overall Rating</h3>
+            <div class="build-grid">
+                <div class="build-card">
+                    <h3>Overall Tier</h3>
+                    <span class="build-rating">C-Tier</span>
+                    <p>C-tier overall, but A-tier with proper build investment and Amog character synergy.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>Skill Ceiling</h3>
+                    <span class="build-rating">VERY HIGH</span>
+                    <p>Demands perfect item acquisition, strong positioning skills, and aggressive kiting mastery.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>Investment Required</h3>
+                    <span class="build-rating">HIGH</span>
+                    <p>Requires specific mandatory items (Moldy Cheese, 100% Lifesteal, Gas Mask) and extensive tome scaling to merely match baseline performance of meta weapons.</p>
+                </div>
+
+                <div class="build-card">
+                    <h3>Fun Factor</h3>
+                    <span class="build-rating">POLARIZING</span>
+                    <p>Extremely satisfying for DoT enthusiasts, frustrating for everyone else. Near-immortal lifesteal builds create unique power fantasy once online.</p>
+                </div>
+            </div>
+
+            <h3>🎯 Final Recommendation</h3>
+            <p><strong>Poison Flask is a high-skill, high-investment weapon that can complete all content but won't reach leaderboards.</strong> The lifesteal loop build (100% lifesteal + poison damage scaling) creates near-immortal survivability with proper execution, making it viable for casual Tier 1-2 content. Boss fights showcase the weapon's strength—sustained poison stacks shred high-HP targets more effectively than many alternatives.</p>
+
+            <p>However, fundamental weaknesses prevent competitive viability: extremely short range (shortest in game), lowest base damage (1), slow projectile speed, lack of crit scaling in a crit-focused meta, and delayed kill times causing loot collection issues.</p>
+
+            <div class="info-box warning">
+                <strong>⚖️ The Verdict:</strong> Poison Flask needs buffs to compete with top-tier options, but with proper execution, it remains a satisfying and viable choice for non-competitive gameplay. If you're willing to invest the time and items, the near-immortal lifesteal playstyle is genuinely fun and unique. Just don't expect leaderboard results.
+            </div>
+        </section>
+
+        <!-- Related Links -->
+        <div class="cta-buttons">
+            <a href="/guides/characters/amog-guide" class="cta-button primary">☠️ Read Amog Character Guide</a>
+            <a href="/tier-lists/items/" class="cta-button secondary">📋 View Item Tier List</a>
+            <a href="/guides/builds/" class="cta-button secondary">🏗️ Explore Build Guides</a>
+            <a href="/database/weapons/" class="cta-button secondary">⚔️ All Weapons Database</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>Last Updated:</strong> October 13, 2025 (Version 1.0.12)</p>
+            <p>📧 Have corrections or suggestions? <a href="/contact/">Contact us</a></p>
+            <p>
+                <a href="/">Home</a> | 
+                <a href="/guides/">Guides</a> | 
+                <a href="/tier-lists/">Tier Lists</a> | 
+                <a href="/database/">Database</a>
+            </p>
+            <p style="margin-top: 20px; color: #666;">
+                © 2025 Megabonk.org - Unofficial fan-made guide website. Not affiliated with game developers.
+            </p>
+        </footer>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script>
+        // Scroll to top functionality
+        const scrollTop = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .build-card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
