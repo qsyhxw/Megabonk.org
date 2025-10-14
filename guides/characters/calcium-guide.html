@@ -11,6 +11,16 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
      crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
     
     <script type="application/ld+json">
     {
@@ -135,9 +145,13 @@
         }
         
         .character-icon {
-            font-size: 6rem;
-            margin-bottom: 1.5rem;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
             display: block;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(245, 245, 220, 0.3);
+            border: 3px solid var(--primary);
         }
         
         .character-title {
@@ -173,7 +187,16 @@
             border-radius: 15px;
             border: 1px solid var(--border);
             margin: 2rem auto;
-            max-width: 600px;
+            max-width: 700px;
+        }
+        
+        .unlock-info h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .unlock-info p {
+            margin-bottom: 0.5rem;
         }
         
         .quick-stats {
@@ -272,12 +295,38 @@
             margin: 2rem 0;
         }
         
+        .speed-info h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .speed-info ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .speed-info li {
+            margin-bottom: 0.8rem;
+        }
+        
         .danger-warning {
             background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
             padding: 2rem;
             border-radius: 15px;
             border: 2px solid var(--danger);
             margin: 2rem 0;
+        }
+        
+        .danger-warning h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .danger-warning ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .danger-warning li {
+            margin-bottom: 0.8rem;
         }
         
         .pros-cons {
@@ -310,6 +359,14 @@
         .cons h4 {
             color: var(--danger);
             margin-bottom: 1rem;
+        }
+        
+        .pros ul, .cons ul {
+            margin-left: 1.5rem;
+        }
+        
+        .pros li, .cons li {
+            margin-bottom: 0.8rem;
         }
         
         .progression-timeline {
@@ -345,12 +402,40 @@
             border: 1px solid var(--border);
         }
         
+        .timeline-content h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .timeline-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .timeline-content li {
+            margin-bottom: 0.5rem;
+        }
+        
         .unlock-progress {
             background: var(--card-bg);
             border-radius: 10px;
             padding: 1.5rem;
             margin: 1rem 0;
             border-left: 4px solid var(--bone);
+        }
+        
+        .unlock-progress h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .unlock-progress ol {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .unlock-progress li {
+            margin-bottom: 0.8rem;
         }
         
         .cta-section {
@@ -431,7 +516,7 @@
 
     <section class="hero">
         <div class="container">
-            <span class="character-icon">💀</span>
+            <img src="https://megabonk.org/images/guides/characters/Calcium.png" alt="Calcium Character" class="character-icon">
             <h1 class="character-title">Calcium Complete Guide</h1>
             <p class="character-subtitle">The Lightning-Fast Skeleton Speedster</p>
             <div class="rating-badge">A-TIER SPEED • Score: 87/100</div>
@@ -440,7 +525,15 @@
                 <h3>📋 Character Information</h3>
                 <p><strong>How to Unlock:</strong> Kill 1,000 Skeletons</p>
                 <p><strong>Default Weapon:</strong> Bone</p>
-                <p><strong>RNG Blessing:</strong> Speed builds up over time, but is halved when you take damage. Also gain damage based on speed</p>
+                <p><strong>Passive Ability:</strong> Speed Demon - Speed builds up over time, but resets when you take damage (except fall damage). Damage increases based on current speed</p>
+            </div>
+
+            <div class="unlock-info">
+                <h3>📊 Base Stats</h3>
+                <p><strong>HP:</strong> 100</p>
+                <p><strong>Armor:</strong> 0</p>
+                <p><strong>Shield:</strong> 0</p>
+                <p><strong>Move Speed:</strong> 1.18 (increases by +0.18 over time)</p>
             </div>
             
             <div class="quick-stats">
@@ -470,22 +563,24 @@
             <p class="section-subtitle">Master the art of speed-based combat with Calcium's unique mechanics</p>
             
             <div class="speed-info">
-                <h3>⚡ RNG Blessing: Speed Demon</h3>
+                <h3>⚡ Passive Ability: Speed Demon</h3>
                 <p><strong>Calcium's speed-based power system works as follows:</strong></p>
                 <ul>
                     <li><strong>Speed Buildup:</strong> Movement speed increases over time during combat</li>
                     <li><strong>Damage Scaling:</strong> Higher speed = higher damage output</li>
-                    <li><strong>Damage Penalty:</strong> Speed is halved when you take ANY damage</li>
+                    <li><strong>Damage Penalty:</strong> Speed resets when you take damage (except fall damage)</li>
+                    <li><strong>Fall Damage Safe:</strong> Taking fall damage does NOT reset speed</li>
                     <li><strong>Risk/Reward:</strong> High damage potential but requires perfect damage avoidance</li>
                 </ul>
                 <p><em>This makes Calcium a high-skill, high-reward character perfect for experienced players.</em></p>
             </div>
 
             <div class="danger-warning">
-                <h3>⚠️ Critical Warning: Damage = Speed Loss</h3>
-                <p><strong>Taking damage halves your speed (and damage) - avoid it at all costs!</strong></p>
+                <h3>⚠️ Critical Warning: Damage = Speed Reset</h3>
+                <p><strong>Taking enemy damage resets your speed back to base - avoid it at all costs!</strong></p>
                 <ul>
-                    <li>One hit can ruin minutes of speed buildup</li>
+                    <li>One hit resets all your accumulated speed</li>
+                    <li><strong>Important Exception:</strong> Fall damage does NOT reset speed</li>
                     <li>Perfect positioning and timing are essential</li>
                     <li>Consider health items only as emergency backup</li>
                     <li>Focus on mobility and avoidance over tanking</li>
@@ -501,16 +596,18 @@
                         <li><strong>Bone Weapon:</strong> Unique projectile with good range</li>
                         <li><strong>Mobility Master:</strong> Outrun any enemy or projectile</li>
                         <li><strong>Exciting Gameplay:</strong> Fast-paced, skill-based combat</li>
+                        <li><strong>Fall Damage Safe:</strong> Can use terrain without speed penalty</li>
                     </ul>
                 </div>
                 <div class="cons">
                     <h4>❌ Weaknesses</h4>
                     <ul>
-                        <li><strong>Damage Vulnerability:</strong> One hit ruins speed buildup</li>
+                        <li><strong>Damage Vulnerability:</strong> One hit resets all speed buildup</li>
                         <li><strong>High Skill Floor:</strong> Requires excellent positioning</li>
                         <li><strong>Unlock Requirements:</strong> Need to kill 1,000 skeletons first</li>
                         <li><strong>Inconsistent Power:</strong> Performance varies based on damage taken</li>
                         <li><strong>Stress Inducing:</strong> Constant pressure to avoid damage</li>
+                        <li><strong>Low Base Stats:</strong> No armor or shield protection</li>
                     </ul>
                 </div>
             </div>
@@ -556,7 +653,7 @@
                     <li>🚫 <strong>No melee weapons:</strong> Avoid anything that requires getting close</li>
                 </ul>
                 <p><strong>Key Items:</strong> Movement Speed +50%, Pickup Range +100%, NO health/armor items</p>
-                <p><strong>Strategy:</strong> Focus entirely on speed buildup and perfect damage avoidance</p>
+                <p><strong>Strategy:</strong> Focus entirely on speed buildup and perfect damage avoidance. Use fall damage strategically since it doesn't reset speed</p>
             </div>
 
             <div class="build-card">
@@ -608,7 +705,8 @@
                         <p><strong>Priority:</strong> Learn how speed buildup and damage penalties work</p>
                         <ul>
                             <li>Observe how your speed increases over time</li>
-                            <li>Notice the dramatic speed loss when taking damage</li>
+                            <li>Notice the complete speed reset when taking enemy damage</li>
+                            <li>Test fall damage - it won't reset your speed!</li>
                             <li>Practice basic positioning and enemy avoidance</li>
                             <li>Get comfortable with Bone weapon mechanics</li>
                             <li>Start developing damage avoidance instincts</li>
@@ -626,7 +724,8 @@
                             <li>Learn enemy attack patterns and timing</li>
                             <li>Practice maintaining speed during intense combat</li>
                             <li>Develop map awareness and escape route planning</li>
-                            <li>Begin achieving 5+ minute runs without taking damage</li>
+                            <li>Begin achieving 5+ minute runs without taking enemy damage</li>
+                            <li>Use terrain and fall damage strategically</li>
                         </ul>
                     </div>
                 </div>
@@ -642,6 +741,7 @@
                             <li>Optimize build choices for maximum speed scaling</li>
                             <li>Learn boss fight positioning while maintaining speed</li>
                             <li>Begin understanding true potential of speed-damage scaling</li>
+                            <li>Master diagonal movement for optimal speed</li>
                         </ul>
                     </div>
                 </div>
@@ -653,10 +753,11 @@
                         <p><strong>Priority:</strong> Perfect execution and maximum power potential</p>
                         <ul>
                             <li>Achieve perfect damage avoidance for entire runs</li>
-                            <li>Master all advanced techniques and positioning</li>
+                            <li>Master all advanced techniques including B-hopping</li>
                             <li>Optimize builds for maximum damage output scaling</li>
                             <li>Help other players learn speed-based gameplay</li>
                             <li>Compete for speed run records and achievement unlocks</li>
+                            <li>Enable Debug Speed display to monitor performance</li>
                         </ul>
                     </div>
                 </div>
@@ -685,7 +786,8 @@
                     <ul>
                         <li><strong>Constant Movement:</strong> Never stop moving to build speed</li>
                         <li><strong>Damage Avoidance:</strong> Prioritize positioning over aggressive plays</li>
-                        <li><strong>Recovery Planning:</strong> Know how to rebuild speed after damage</li>
+                        <li><strong>Fall Damage Strategy:</strong> Use terrain to your advantage - it won't reset speed</li>
+                        <li><strong>Recovery Planning:</strong> Know how to rebuild speed after enemy damage</li>
                         <li><strong>Route Optimization:</strong> Plan movement paths for efficiency</li>
                         <li><strong>Emergency Escapes:</strong> Always have an exit strategy</li>
                     </ul>
@@ -700,6 +802,7 @@
                         <li><strong>Melee Weapons:</strong> Avoid weapons that require close combat</li>
                         <li><strong>Panic Decisions:</strong> Stay calm when surrounded</li>
                         <li><strong>Speed Overconfidence:</strong> High speed can make you overextend</li>
+                        <li><strong>Forgetting Fall Damage Exception:</strong> You can use terrain jumps safely</li>
                     </ul>
                 </div>
 
@@ -708,9 +811,11 @@
                     <p><strong>Expert-level strategies for Calcium mastery:</strong></p>
                     <ul>
                         <li><strong>Perfect Kiting:</strong> Maintain distance while maximizing DPS</li>
-                        <li><strong>Speed Conservation:</strong> Minimize speed loss during unavoidable damage</li>
+                        <li><strong>B-Hopping (Bunny Hop):</strong> Advanced movement technique for speed boost</li>
+                        <li><strong>Diagonal Movement:</strong> Move diagonally - it's faster than straight lines</li>
+                        <li><strong>Slide Mechanics:</strong> Use CTRL on downhill slopes for extra speed</li>
+                        <li><strong>Debug Speed Monitor:</strong> Enable in Settings > Game > Other > Debug Speed</li>
                         <li><strong>Pattern Recognition:</strong> Predict enemy movements for positioning</li>
-                        <li><strong>Momentum Management:</strong> Use speed buildup strategically</li>
                         <li><strong>Mental Game:</strong> Stay focused under pressure</li>
                     </ul>
                 </div>
