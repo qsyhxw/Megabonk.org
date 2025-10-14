@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shotgun Weapon Guide - Megabonk Complete Strategy</title>
+    <meta name="description" content="Master the Shotgun in Megabonk with our complete guide covering unlock methods, stats, builds, and strategies. Learn the RNG farming techniques and close-range burst builds.">
+    <meta name="keywords" content="megabonk shotgun, shotgun unlock, megabonk tumbleweed, desert stage 2, shotgun build, spread weapon, burst damage">
+
+    <link rel="canonical" href="https://megabonk.org/database/weapons/shotgun">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+    
+    <!-- Schema.org markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Shotgun Weapon Guide - Megabonk Complete Strategy",
+      "description": "Master the Shotgun with unlock guides, builds, and advanced strategies",
+      "author": {
+        "@type": "Organization",
+        "name": "Megabonk.org"
+      }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #eee;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Pellet Background */
+        .pellet-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .pellet {
+            position: absolute;
+            width: 4px;
+            height: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #ffaa00);
+            border-radius: 2px;
+            opacity: 0.3;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) rotate(45deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(100vh) rotate(135deg);
+                opacity: 0;
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #d62828 0%, #f77f00 100%);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 20px rgba(214, 40, 40, 0.3);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.8),
+                         0 0 40px rgba(255, 107, 107, 0.5);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .weapon-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 170, 0, 0.2);
+            border: 2px solid #ffaa00;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin: 0.25rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            padding: 1rem 0;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #ffaa00;
+        }
+
+        .weapon-overview {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(214, 40, 40, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b6b;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.2);
+        }
+
+        .stat-card h3 {
+            color: #ffaa00;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-card .icon {
+            font-size: 1.5rem;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .content-section h2 {
+            color: #ff6b6b;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .content-section h3 {
+            color: #ffaa00;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .unlock-steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .unlock-steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin: 1.5rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .unlock-steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #d62828, #f77f00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pros-box, .cons-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .pros-box {
+            border: 2px solid #4ade80;
+        }
+
+        .cons-box {
+            border: 2px solid #f87171;
+        }
+
+        .pros-box h3 {
+            color: #4ade80;
+        }
+
+        .cons-box h3 {
+            color: #f87171;
+        }
+
+        .pros-box ul, .cons-box ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .pros-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pros-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .cons-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .cons-box li:before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #f87171;
+            font-weight: bold;
+        }
+
+        .build-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            transition: all 0.3s;
+        }
+
+        .build-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b6b;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .build-card h3 {
+            color: #ffaa00;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .build-card .difficulty {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 170, 0, 0.2);
+            border: 1px solid #ffaa00;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box h4 {
+            color: #ffc107;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box h4 {
+            color: #3b82f6;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .success-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .success-box h4 {
+            color: #10b981;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .strategy-list {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .strategy-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .strategy-list li:last-child {
+            border-bottom: none;
+        }
+
+        .related-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .related-link {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: #eee;
+            transition: all 0.3s;
+        }
+
+        .related-link:hover {
+            background: rgba(255, 107, 107, 0.1);
+            border-color: #ff6b6b;
+            transform: translateY(-5px);
+        }
+
+        .related-link .emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #d62828, #f77f00);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(214, 40, 40, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(214, 40, 40, 0.5);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 2px solid rgba(214, 40, 40, 0.3);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #ffaa00;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Pellet Background -->
+    <div class="pellet-background" id="pelletBg"></div>
+
+    <div class="header">
+        <h1>🔫 Shotgun</h1>
+        <p class="subtitle">High-Risk Spread Weapon - Close-Range Burst Master</p>
+        <div>
+            <span class="weapon-badge">🎯 Manual Aim Required</span>
+            <span class="weapon-badge">💥 Burst Damage</span>
+            <span class="weapon-badge">🎲 RNG Unlock</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">🏠 Home</a> &gt; 
+            <a href="/database/">📚 Database</a> &gt; 
+            <a href="/database/weapons/">⚔️ Weapons</a> &gt; 
+            <span>Shotgun</span>
+        </div>
+
+        <!-- Weapon Overview -->
+        <div class="weapon-overview">
+            <h2>🔍 Weapon Overview</h2>
+            <p><strong>The Shotgun is a directional spread weapon that fires multiple pellets in a cone pattern, requiring manual aim but delivering devastating close-range burst damage.</strong> Unlike auto-targeting weapons like Katana or Aura, players must position and aim carefully with their cursor. When all pellets connect at close range, the Shotgun can instantly wipe out swarms, making it one of the most powerful burst damage weapons in Megabonk—if you can handle the aim requirement and unlock RNG.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3><span class="icon">📊</span> Tier Rating</h3>
+                    <p><strong>B-tier</strong> - Strong with proper aim and build investment, but RNG unlock and manual aim requirement prevent universal adoption</p>
+                </div>
+                <div class="stat-card">
+                    <h3><span class="icon">🔓</span> Unlock Method</h3>
+                    <p><strong>5% drop chance</strong> from breaking Tumbleweeds on <strong>Desert Stage 2</strong></p>
+                </div>
+                <div class="stat-card">
+                    <h3><span class="icon">💰</span> Purchase Cost</h3>
+                    <p><strong>2 Silver</strong> from Main Menu → Unlocks tab after meeting unlock condition</p>
+                </div>
+                <div class="stat-card">
+                    <h3><span class="icon">🎯</span> Targeting Type</h3>
+                    <p><strong>Manual Aim</strong> - Direction controlled by mouse cursor</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Mechanics -->
+        <div class="content-section">
+            <h2>⚙️ Core Mechanics</h2>
+            
+            <h3>💥 Spread Pattern & Pellet System</h3>
+            <p>The Shotgun fires <strong>multiple pellets in a cone-shaped spread</strong> centered on your cursor direction. Each pellet is an independent projectile that can damage enemies. Unlike weapons that fire single projectiles, the Shotgun's strength comes from multiple pellets hitting the same target simultaneously, creating extreme burst damage potential at close range.</p>
+            
+            <p><strong>Key mechanic:</strong> The closer you are to enemies, the more pellets will connect with a single target. At point-blank range, 100% of pellets can hit a single enemy for maximum damage. At mid-range, pellets spread and only some hit. At long range, the spread becomes too wide for reliable damage.</p>
+
+            <h3>🎯 Manual Aim Requirement</h3>
+            <p>Unlike smart-targeting weapons (Katana, Wireless Dagger, Aura), <strong>you must manually aim the Shotgun with your mouse cursor</strong>. This adds a skill requirement but provides precise control over positioning. Players comfortable with manual aim will find the Shotgun highly rewarding, while those who prefer fire-and-forget weapons should avoid it.</p>
+
+            <h3>📈 Upgrade Paths</h3>
+            <ul class="strategy-list">
+                <li><strong>🎯 Projectile Count</strong> - HIGHEST PRIORITY. Increases the number of pellets fired per shot, dramatically improving damage potential and spread coverage. Stack this early and often.</li>
+                <li><strong>⏱️ Cooldown</strong> - HIGH PRIORITY. Reduces time between shots, allowing rapid-fire shotgun blasts. Essential for maintaining pressure in swarms.</li>
+                <li><strong>💪 Damage</strong> - Standard damage scaling that affects all pellets. Good universal upgrade.</li>
+                <li><strong>🔄 Projectile Speed</strong> - Increases pellet travel velocity. Generally low priority since Shotgun excels at close range where speed matters less.</li>
+                <li><strong>📏 Size</strong> - May increase pellet hitbox size. Useful for consistency but lower priority than Count/Cooldown.</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>⚠️ Critical Upgrade Priority</h4>
+                <p><strong>Always prioritize Projectile Count and Cooldown upgrades.</strong> These two stats multiplicatively increase the Shotgun's effectiveness more than any other stats. Without high projectile count, the weapon's spread becomes too inconsistent. Without cooldown reduction, you can't maintain pressure during swarm phases.</p>
+            </div>
+        </div>
+
+        <!-- Unlock Guide -->
+        <div class="content-section">
+            <h2>🔓 How to Unlock the Shotgun</h2>
+            
+            <p>The Shotgun has one of the most <strong>RNG-dependent unlock methods in Megabonk</strong>. Unlike quest-based or achievement-based unlocks, you're at the mercy of random chance—specifically a 5% drop rate from Tumbleweeds on Desert Stage 2.</p>
+
+            <h3>📝 Step-by-Step Unlock Guide</h3>
+            <ol class="unlock-steps">
+                <li>
+                    <strong>Reach Desert Stage 2</strong>
+                    <p>Progress through the Desert map to Stage 2. This typically requires defeating the Desert Stage 1 boss first.</p>
+                </li>
+                <li>
+                    <strong>Find and Break Tumbleweeds</strong>
+                    <p>Tumbleweeds are rolling environmental objects that appear on the Desert map. They look like rolling bushes and can be destroyed by attacking them. <strong>You must chase and break Tumbleweeds specifically on Stage 2</strong>—Stage 1 Tumbleweeds drop the Katana instead.</p>
+                </li>
+                <li>
+                    <strong>Hope for 5% Drop Chance</strong>
+                    <p>Each Tumbleweed you break on Desert Stage 2 has a <strong>5% chance to unlock the Shotgun</strong>. This means on average, you'll need to break 20 Tumbleweeds to get the unlock. Some players get it on their first try; others spend hours farming.</p>
+                </li>
+                <li>
+                    <strong>No Weapon Slot Required</strong>
+                    <p>Unlike some unlocks, you <strong>do NOT need an empty weapon slot</strong> for the Shotgun to unlock. The unlock happens in the background and you'll see a notification. You can even die after getting the unlock—it's permanent.</p>
+                </li>
+                <li>
+                    <strong>Purchase from Main Menu</strong>
+                    <p>After unlocking, return to the Main Menu and go to <strong>Unlocks tab → Weapons</strong>. Purchase the Shotgun for <strong>2 Silver</strong>. It will then be available in future runs.</p>
+                </li>
+            </ol>
+
+            <div class="info-box">
+                <h4>💡 Unlock Optimization Tips</h4>
+                <ul>
+                    <li><strong>Use a fast character</strong> (Calcium, Tony McZoom) to chase Tumbleweeds more easily</li>
+                    <li><strong>Take movement speed upgrades</strong> from shrines and items (Turbo Socks)</li>
+                    <li><strong>Don't rush the stage</strong>—take your time to explore every corner for Tumbleweeds</li>
+                    <li><strong>Multiple runs expected</strong>—Most players report 3-10 runs before the drop</li>
+                    <li><strong>Can be done on any difficulty</strong>—Lower difficulty = easier survival while farming</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Common Frustrations</h4>
+                <p><strong>"I've broken 50 Tumbleweeds and still nothing!"</strong> - This is RNG. At 5%, you could theoretically never get the drop (though extremely unlikely after 50). Most players get it within 20 breaks. <strong>Make sure you're on Desert Stage 2, not Stage 1</strong>—Stage 1 drops Katana instead.</p>
+            </div>
+        </div>
+
+        <!-- Character Synergies -->
+        <div class="content-section">
+            <h2>👥 Character Synergies</h2>
+            
+            <h3>🔥 Best Characters for Shotgun</h3>
+            
+            <div class="build-card">
+                <h3>🗡️ Bandit <span class="difficulty">★★★★★ S-Tier Synergy</span></h3>
+                <p><strong>Why Bandit:</strong> Bandit's passive grants <strong>+1% Attack Speed per level</strong>, which directly translates to faster Shotgun shots. By level 50, Bandit fires Shotguns 50% faster than other characters. Combined with Cooldown Tome, Bandit can create a rapid-fire shotgun build that deletes bosses in seconds.</p>
+                <p><strong>Recommended Build:</strong> Shotgun + Revolver + Bow + Bananarang | Cooldown Tome + Quantity Tome + Damage Tome + XP Tome</p>
+                <p><strong>Key Items:</strong> Time Bracelet (attack speed), Battery (cooldown), Gym Sauce (damage), Boss Buster (boss damage)</p>
+            </div>
+
+            <div class="build-card">
+                <h3>🎯 CL4NK <span class="difficulty">★★★★ A-Tier Synergy</span></h3>
+                <p><strong>Why CL4NK:</strong> CL4NK gains <strong>+1% Crit Chance per level</strong>, and each Shotgun pellet can crit independently. High projectile count means dozens of pellets, each with crit chance, creating massive burst damage potential. CL4NK's starter weapon Revolver also synergizes with crit builds.</p>
+                <p><strong>Recommended Build:</strong> Shotgun + Revolver + Dice + Aegis | Precision Tome + Quantity Tome + Damage Tome + XP Tome</p>
+                <p><strong>Key Items:</strong> Giant Fork (Megacrits), Forbidden Juice (crit chance), Gym Sauce (damage), Demonic Blade (lifesteal on crit)</p>
+            </div>
+
+            <div class="build-card">
+                <h3>🛡️ Sir Oofie <span class="difficulty">★★★ B-Tier Synergy</span></h3>
+                <p><strong>Why Sir Oofie:</strong> Sir Oofie's <strong>+1% Armor per level</strong> passive allows aggressive close-range positioning required for the Shotgun. Beginners benefit from the tankiness, letting them get close enough for all pellets to connect without dying instantly.</p>
+                <p><strong>Recommended Build:</strong> Shotgun + Aegis + Aura + Lightning Staff | Quantity Tome + Cooldown Tome + Armor Tome + HP Tome</p>
+                <p><strong>Key Items:</strong> Chonkplate (overheal), Beefy Ring (damage from HP), Medkit (regen), Oats (HP)</p>
+            </div>
+
+            <h3>⚠️ Characters to Avoid</h3>
+            <ul class="strategy-list">
+                <li><strong>Spaceman</strong> - No damage or defense scaling, struggles with close-range aggression</li>
+                <li><strong>Amog</strong> - Poison-focused kit doesn't synergize with burst damage playstyle</li>
+                <li><strong>Ninja</strong> - Evasion-based character conflicts with needing to be in melee range</li>
+            </ul>
+        </div>
+
+        <!-- Optimal Builds -->
+        <div class="content-section">
+            <h2>🏗️ Optimal Shotgun Builds</h2>
+            
+            <div class="build-card">
+                <h3>💀 Close-Range Burst Build (Bandit) <span class="difficulty">Difficulty: Medium</span></h3>
+                <p><strong>The most powerful Shotgun build</strong> that maximizes burst damage through attack speed and projectile count stacking.</p>
+                
+                <h4>🔫 Weapons (4/4)</h4>
+                <ul>
+                    <li><strong>Shotgun</strong> (Primary) - Stack Projectile Count and Cooldown upgrades</li>
+                    <li><strong>Dexecutioner</strong> - Execute mechanic for finishing enemies</li>
+                    <li><strong>Bow</strong> - Long-range backup for enemies outside Shotgun range</li>
+                    <li><strong>Aura</strong> - Passive AoE coverage for safety</li>
+                </ul>
+
+                <h4>📚 Tomes (4/4)</h4>
+                <ul>
+                    <li><strong>Quantity Tome</strong> (Priority 1) - More projectiles = more pellets</li>
+                    <li><strong>Cooldown Tome</strong> (Priority 2) - Attack speed multiplicative with Bandit passive</li>
+                    <li><strong>Damage Tome</strong> (Priority 3) - Universal damage scaling</li>
+                    <li><strong>XP Tome</strong> (Priority 4) - Faster leveling for more upgrades</li>
+                </ul>
+
+                <h4>🎁 Essential Items</h4>
+                <ul>
+                    <li><strong>Time Bracelet</strong> - Critical attack speed boost</li>
+                    <li><strong>Battery</strong> - Additional cooldown reduction</li>
+                    <li><strong>Gym Sauce</strong> - +10% damage (no downside)</li>
+                    <li><strong>Boss Buster</strong> - +15% damage vs Elites/Bosses</li>
+                    <li><strong>Joe's Dagger</strong> - 1% execute chance, damage per execute</li>
+                    <li><strong>Overpowered Lamp</strong> - +1 proc chance for on-hit effects</li>
+                    <li><strong>Turbo Socks</strong> - Movement speed for positioning</li>
+                </ul>
+
+                <h4>🎯 Strategy</h4>
+                <ol>
+                    <li><strong>Early Game (0-5 min):</strong> Focus survival. Use Bow and Aura for safe clearing until Shotgun scales.</li>
+                    <li><strong>Mid Game (5-15 min):</strong> Prioritize Quantity and Cooldown upgrades. Start aggressive Shotgun positioning.</li>
+                    <li><strong>Late Game (15+ min):</strong> With Bandit's attack speed + Cooldown Tome, Shotgun becomes rapid-fire. Face-tank swarms while blasting.</li>
+                    <li><strong>Boss Strategy:</strong> Circle strafe at close range, unloading Shotgun blasts point-blank. Execute with Dexecutioner.</li>
+                </ol>
+            </div>
+
+            <div class="build-card">
+                <h3>💎 Crit Shotgun Build (CL4NK) <span class="difficulty">Difficulty: High</span></h3>
+                <p><strong>Transforms every pellet into a potential Megacrit</strong> through CL4NK's passive and crit stacking.</p>
+                
+                <h4>🔫 Weapons (4/4)</h4>
+                <ul>
+                    <li><strong>Shotgun</strong> (Primary) - Each pellet can crit</li>
+                    <li><strong>Revolver</strong> - Native crit stats, CL4NK starter</li>
+                    <li><strong>Dice</strong> - Permanent crit stacking from level-ups</li>
+                    <li><strong>Aegis</strong> - Defensive shockwave for survival</li>
+                </ul>
+
+                <h4>📚 Tomes (4/4)</h4>
+                <ul>
+                    <li><strong>Precision Tome</strong> (Priority 1) - Crit damage multiplier</li>
+                    <li><strong>Quantity Tome</strong> (Priority 2) - More pellets = more crit opportunities</li>
+                    <li><strong>Damage Tome</strong> (Priority 3) - Base damage for crits</li>
+                    <li><strong>XP Tome</strong> (Priority 4) - Faster CL4NK passive scaling</li>
+                </ul>
+
+                <h4>🎁 Essential Items</h4>
+                <ul>
+                    <li><strong>Giant Fork</strong> (Build-Defining) - Megacrits at x20 damage</li>
+                    <li><strong>Forbidden Juice</strong> - +10% crit chance</li>
+                    <li><strong>Gym Sauce</strong> - Flat damage boost</li>
+                    <li><strong>Demonic Blade</strong> - +25 lifesteal on crit (sustain)</li>
+                    <li><strong>Big Bonk</strong> - 2% chance for x20 damage multiplier</li>
+                    <li><strong>Clover</strong> - Luck scaling improves all drops</li>
+                </ul>
+
+                <h4>🎯 Strategy</h4>
+                <p><strong>This build has the highest damage ceiling in the game when fully online.</strong> Focus on leveling CL4NK to 50+ for maximum crit chance passive. Every Shotgun blast fires dozens of pellets, each with 50%+ crit chance and potential for Megacrits. A single point-blank Shotgun shot can one-shot bosses if multiple Megacrits proc simultaneously.</p>
+                <p><strong>Warning:</strong> This build is glass cannon. Use Aegis defensively and avoid getting surrounded. The burst damage is insane but you're extremely fragile.</p>
+            </div>
+
+            <div class="build-card">
+                <h3>🛡️ Tank Shotgun Build (Sir Oofie) <span class="difficulty">Difficulty: Easy</span></h3>
+                <p><strong>Beginner-friendly build</strong> that uses tankiness to allow safe close-range positioning.</p>
+                
+                <h4>🔫 Weapons (4/4)</h4>
+                <ul>
+                    <li><strong>Shotgun</strong> (Primary) - Close-range damage</li>
+                    <li><strong>Aegis</strong> - Shield + shockwave defense</li>
+                    <li><strong>Aura</strong> - Passive 360° AoE</li>
+                    <li><strong>Lightning Staff</strong> - Crowd control and stun</li>
+                </ul>
+
+                <h4>📚 Tomes (4/4)</h4>
+                <ul>
+                    <li><strong>Armor Tome</strong> (Priority 1) - Synergy with Sir Oofie passive</li>
+                    <li><strong>HP Tome</strong> (Priority 2) - More survivability</li>
+                    <li><strong>Quantity Tome</strong> (Priority 3) - Shotgun pellets</li>
+                    <li><strong>Lifesteal Tome</strong> (Priority 4) - Sustain at close range</li>
+                </ul>
+
+                <h4>🎁 Essential Items</h4>
+                <ul>
+                    <li><strong>Chonkplate</strong> - Lifesteal + overheal (immortality)</li>
+                    <li><strong>Beefy Ring</strong> - +20% damage per 100 HP</li>
+                    <li><strong>Medkit</strong> - +45 HP regen</li>
+                    <li><strong>Oats</strong> - +25 Max HP (stacks)</li>
+                    <li><strong>Mirror</strong> - Invulnerability on damage taken</li>
+                </ul>
+
+                <h4>🎯 Strategy</h4>
+                <p>Stand in the middle of swarms and blast away. Sir Oofie's armor + HP stacking + Lifesteal makes you nearly unkillable. Use Aura and Aegis for passive defense while Shotgun provides active offense. <strong>Perfect for learning Shotgun mechanics without dying constantly.</strong></p>
+            </div>
+        </div>
+
+        <!-- Combat Strategy -->
+        <div class="content-section">
+            <h2>⚔️ Combat Strategy & Positioning</h2>
+            
+            <h3>🎯 Optimal Range Management</h3>
+            <div class="strategy-list">
+                <li><strong>Point-Blank Range (0-3 meters):</strong> Maximum damage potential. All pellets hit single target. High risk but highest reward. Use against bosses and elite enemies.</li>
+                <li><strong>Close Range (3-6 meters):</strong> Good damage with partial pellet spread. Balances risk and reward. Ideal for swarms.</li>
+                <li><strong>Mid Range (6-10 meters):</strong> Moderate damage. Pellets spread significantly. Backup range when overwhelmed.</li>
+                <li><strong>Long Range (10+ meters):</strong> Ineffective. Pellets too spread out. Switch to backup weapons.</li>
+            </div>
+
+            <h3>🏃 Movement Patterns</h3>
+            <div class="success-box">
+                <h4>✅ The Shotgun Circle Strafe</h4>
+                <p><strong>The optimal movement pattern for Shotgun users</strong> involves circular strafing around enemy groups. Move in a tight circle at close range while firing into the center of the swarm. This keeps enemies grouped, ensures all pellets connect, and makes dodging predictable.</p>
+            </div>
+
+            <h3>🧩 Terrain Usage</h3>
+            <ul class="strategy-list">
+                <li><strong>Funnel Enemies:</strong> Use walls and obstacles to create choke points where enemies must approach from one direction. Blast the funnel with Shotgun.</li>
+                <li><strong>Corner Control:</strong> Position yourself in corners to limit enemy approach angles. Forces enemies into tight groups perfect for Shotgun spread.</li>
+                <li><strong>Kiting Loops:</strong> Create circular kiting paths that bring you past enemy groups repeatedly, allowing drive-by Shotgun blasts.</li>
+            </ul>
+
+            <h3>👹 Boss Fight Strategy</h3>
+            <div class="info-box">
+                <h4>💡 Boss-Specific Tactics</h4>
+                <ul>
+                    <li><strong>Phase 1 (High HP):</strong> Aggressive circle strafe at close range. Unload Shotgun point-blank. Dodge boss special attacks but maintain proximity.</li>
+                    <li><strong>Phase 2 (Low HP):</strong> Boss becomes more aggressive. Use backup weapons (Bow, Aura) at mid-range. Shotgun for burst windows when safe.</li>
+                    <li><strong>Boss Minions:</strong> Shotgun excels at clearing boss-spawned adds. One shot can clear multiple minions.</li>
+                </ul>
+            </div>
+
+            <h3>🌊 Swarm Management</h3>
+            <p><strong>Shotgun is a swarm-clearing weapon.</strong> Against dense crowds, position yourself in the middle (with proper defenses) and fire in different directions. Each Shotgun blast can damage 5-15+ enemies simultaneously depending on projectile count and spread.</p>
+        </div>
+
+        <!-- Pros & Cons -->
+        <div class="content-section">
+            <h2>⚖️ Strengths & Weaknesses</h2>
+            <div class="pros-cons">
+                <div class="pros-box">
+                    <h3>✅ Strengths</h3>
+                    <ul>
+                        <li>Highest burst damage potential at close range when all pellets connect</li>
+                        <li>Exceptional swarm clearing with proper Projectile Count scaling</li>
+                        <li>Manual aim provides precise control over damage direction</li>
+                        <li>Scales exponentially with Projectile Count and Cooldown upgrades</li>
+                        <li>Strong synergy with attack speed characters (Bandit) and crit builds (CL4NK)</li>
+                        <li>Can one-shot elite enemies and severely damage bosses with optimized builds</li>
+                        <li>Works well with on-hit effect items (Moldy Cheese, Ice Crystal) due to multiple pellets</li>
+                        <li>Satisfying visual and gameplay feel when fully upgraded</li>
+                    </ul>
+                </div>
+                <div class="cons-box">
+                    <h3>❌ Weaknesses</h3>
+                    <ul>
+                        <li>RNG-dependent unlock (5% Tumbleweed drop) can take hours of farming</li>
+                        <li>Requires manual aim skill—not beginner-friendly like auto-targeting weapons</li>
+                        <li>Forces close-range aggressive positioning, increasing risk of death</li>
+                        <li>Ineffective at long range due to pellet spread</li>
+                        <li>Heavily build-dependent—weak without Projectile Count and Cooldown investment</li>
+                        <li>Requires backup weapons for range coverage (Bow, Lightning Staff)</li>
+                        <li>Not competitive for world record runs compared to meta weapons (Dexecutioner, Katana)</li>
+                        <li>Struggles in early game before upgrade scaling kicks in</li>
+                        <li>Poor single-target damage at distance—designed for close-range swarms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Version History -->
+        <div class="content-section">
+            <h2>📝 Version History & Balance Changes</h2>
+            
+            <h3>🔄 Patch 1.0.12 (October 8, 2025)</h3>
+            <p><strong>No direct Shotgun changes.</strong> The weapon has remained mechanically consistent since implementation. However, general balance changes affected all weapons:</p>
+            <ul class="strategy-list">
+                <li><strong>XP Tome nerfed</strong> from 9% to 7% bonus XP gain—indirect nerf affecting all builds</li>
+                <li><strong>Duration stat rework</strong> affecting duration-scaling weapons (not Shotgun)</li>
+                <li><strong>Performance optimizations</strong> improved FPS in late-game with many projectiles (benefits Shotgun)</li>
+            </ul>
+
+            <h3>🔄 Patch 1.0.7 (September 25, 2025)</h3>
+            <p><strong>No Shotgun-specific changes.</strong> General weapon slot unlock adjustments but Shotgun mechanics untouched.</p>
+
+            <h3>📊 Current Meta Position</h3>
+            <p><strong>The Shotgun has maintained a stable B-tier position since launch.</strong> While not meta for competitive leaderboard runs, it remains a popular choice for players who enjoy manual aim mechanics and close-range burst gameplay. The lack of balance changes suggests developers view it as appropriately positioned—powerful when built correctly but not overpowered.</p>
+
+            <div class="info-box">
+                <h4>💡 Meta Outlook</h4>
+                <p>The Shotgun is unlikely to receive significant buffs as it already delivers extreme burst damage when optimized. However, the RNG unlock method frustrates many players, and future quality-of-life changes might include increased Tumbleweed spawn rates or improved drop chance to reduce farming time.</p>
+            </div>
+        </div>
+
+        <!-- Community Perspectives -->
+        <div class="content-section">
+            <h2>👥 Community Perspectives</h2>
+            
+            <h3>💬 Player Sentiment</h3>
+            <p><strong>Community opinion on the Shotgun is mixed-positive,</strong> with most players appreciating its power when properly built while acknowledging the unlock frustration and skill requirement.</p>
+
+            <div class="success-box">
+                <h4>✅ Positive Feedback</h4>
+                <ul>
+                    <li>"Once you get used to aiming, Shotgun absolutely shreds swarms. Best burst damage in the game." - Steam Community</li>
+                    <li>"Bandit + Shotgun + Cooldown Tome = rapid-fire monster. Melts Tier 2 bosses." - Reddit r/Megabonk</li>
+                    <li>"The satisfaction of landing a perfect point-blank shot and watching 20 enemies explode is unmatched." - Discord</li>
+                    <li>"Finally got the Shotgun drop after 8 runs. Worth the grind—completely changed my Desert runs." - Pro Game Guides Comments</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Common Criticisms</h4>
+                <ul>
+                    <li>"Spent 3 hours farming Tumbleweeds. RNG unlock is awful design." - Steam Reviews</li>
+                    <li>"Why does a Shotgun require better aim than most games? Just make it auto-target." - Reddit</li>
+                    <li>"Too risky for Tier 3 content. I die before getting close enough to use it effectively." - Discord</li>
+                    <li>"It's good, but Dexecutioner and Katana are just better and easier to use." - YouTube Comments</li>
+                </ul>
+            </div>
+
+            <h3>🏆 Competitive Usage</h3>
+            <p><strong>Shotgun rarely appears in top 100 leaderboard runs.</strong> While it can clear Tier 1-2 content easily with proper builds, competitive players prefer weapons with better range and consistency (Sniper Rifle, Dexecutioner, Bow, Katana, Revolver). The close-range requirement creates too much risk in Tier 3 endless waves where survival matters more than burst damage.</p>
+
+            <h3>💡 Common Questions</h3>
+            <div class="info-box">
+                <h4>❓ FAQ</h4>
+                <ul>
+                    <li><strong>Q: Do I need to kill enemies with Tumbleweeds to unlock?</strong><br>
+                    A: No. You just need to break Tumbleweeds on Desert Stage 2. The 5% chance triggers on breaking them, not killing with them.</li>
+                    
+                    <li><strong>Q: Can I unlock Shotgun on Desert Stage 1?</strong><br>
+                    A: No. Desert Stage 1 Tumbleweeds drop Katana. Shotgun only drops from Desert Stage 2 Tumbleweeds.</li>
+                    
+                    <li><strong>Q: Is Shotgun better than Revolver?</strong><br>
+                    A: Different use cases. Revolver has better range and crit scaling but lower burst. Shotgun has highest burst at close range but weak at distance.</li>
+                    
+                    <li><strong>Q: Does Projectile Speed matter for Shotgun?</strong><br>
+                    A: Not really. Shotgun excels at close range where pellet travel time is minimal. Focus on Projectile Count and Cooldown instead.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="content-section">
+            <h2>⚔️ Weapon Comparisons</h2>
+            
+            <h3>🔫 Shotgun vs. Revolver</h3>
+            <p><strong>Both are projectile-based manual aim weapons but serve different roles:</strong></p>
+            <ul class="strategy-list">
+                <li><strong>Range:</strong> Revolver wins. Works well at all ranges. Shotgun is close-range only.</li>
+                <li><strong>Burst Damage:</strong> Shotgun wins at close range. Revolver more consistent.</li>
+                <li><strong>Crit Scaling:</strong> Revolver has native crit stats. Shotgun must rely on character/items.</li>
+                <li><strong>Ease of Use:</strong> Tie—both require manual aim.</li>
+                <li><strong>Meta Viability:</strong> Revolver S/A-tier, Shotgun B-tier.</li>
+            </ul>
+            <p><strong>Verdict:</strong> Use both together in builds for close/mid-range coverage.</p>
+
+            <h3>🗡️ Shotgun vs. Dexecutioner</h3>
+            <p><strong>Two high-damage burst weapons with different mechanics:</strong></p>
+            <ul class="strategy-list">
+                <li><strong>Damage Type:</strong> Dexecutioner has execute mechanic (instant kill <20% HP). Shotgun is pure burst.</li>
+                <li><strong>Range:</strong> Dexecutioner works at all ranges. Shotgun close-range only.</li>
+                <li><strong>Consistency:</strong> Dexecutioner more reliable. Shotgun requires aim.</li>
+                <li><strong>Swarm Clearing:</strong> Shotgun better for dense swarms. Dexecutioner better for elites.</li>
+            </ul>
+            <p><strong>Verdict:</strong> Dexecutioner is objectively better for competitive play but Shotgun more satisfying when it works.</p>
+
+            <h3>🏹 Shotgun vs. Bow</h3>
+            <ul class="strategy-list">
+                <li><strong>Range:</strong> Bow pierces through multiple enemies at any range. Shotgun close-range only.</li>
+                <li><strong>Damage Pattern:</strong> Bow is single line pierce. Shotgun is cone spread.</li>
+                <li><strong>Ease of Use:</strong> Bow easier—less precision needed.</li>
+                <li><strong>Build Dependency:</strong> Bow works with minimal upgrades. Shotgun needs heavy investment.</li>
+            </ul>
+            <p><strong>Verdict:</strong> Bow is more versatile and beginner-friendly. Shotgun has higher ceiling with proper build.</p>
+        </div>
+
+        <!-- Related Links -->
+        <div class="content-section">
+            <h2>🔗 Related Guides</h2>
+            <div class="related-links">
+                <a href="/database/weapons/" class="related-link">
+                    <span class="emoji">⚔️</span>
+                    <strong>All Weapons Database</strong>
+                </a>
+                <a href="/database/weapons/revolver" class="related-link">
+                    <span class="emoji">🔫</span>
+                    <strong>Revolver Guide</strong>
+                </a>
+                <a href="/database/weapons/dexecutioner" class="related-link">
+                    <span class="emoji">⚡</span>
+                    <strong>Dexecutioner Guide</strong>
+                </a>
+                <a href="/guides/characters/bandit-guide" class="related-link">
+                    <span class="emoji">🗡️</span>
+                    <strong>Bandit Character Guide</strong>
+                </a>
+                <a href="/guides/characters/cl4nk-guide" class="related-link">
+                    <span class="emoji">🤖</span>
+                    <strong>CL4NK Character Guide</strong>
+                </a>
+                <a href="/guides/builds/" class="related-link">
+                    <span class="emoji">🏗️</span>
+                    <strong>All Build Guides</strong>
+                </a>
+                <a href="/tier-lists/items/" class="related-link">
+                    <span class="emoji">💎</span>
+                    <strong>Items Tier List</strong>
+                </a>
+                <a href="/guides/tips-tricks/" class="related-link">
+                    <span class="emoji">💡</span>
+                    <strong>Tips & Tricks</strong>
+                </a>
+            </div>
+        </div>
+
+        <!-- Final Verdict -->
+        <div class="content-section">
+            <h2>🎯 Final Verdict</h2>
+            
+            <div class="success-box">
+                <h4>✅ When to Use Shotgun</h4>
+                <ul>
+                    <li>You enjoy manual aim mechanics and skill-based gameplay</li>
+                    <li>You're playing Bandit or CL4NK for optimal synergy</li>
+                    <li>You want the highest burst damage in the game at close range</li>
+                    <li>You're willing to invest in Projectile Count and Cooldown upgrades</li>
+                    <li>You have AoE backup weapons (Aura, Lightning Staff) for coverage</li>
+                    <li>You're farming Tier 1-2 content where close-range aggression is safe</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ When to Avoid Shotgun</h4>
+                <ul>
+                    <li>You prefer fire-and-forget auto-targeting weapons</li>
+                    <li>You're attempting world record leaderboard runs (use meta weapons instead)</li>
+                    <li>You're still learning the game and die frequently (use safer ranged options)</li>
+                    <li>You don't want to spend hours farming RNG Tumbleweed drops</li>
+                    <li>You're on Tier 3 endless content where close-range is too risky</li>
+                    <li>You prefer consistent DPS over burst damage spikes</li>
+                </ul>
+            </div>
+
+            <h3>📊 Overall Rating: B-Tier</h3>
+            <p><strong>The Shotgun is a powerful, satisfying weapon that rewards skill and proper investment but cannot compete with top-tier meta options for competitive play.</strong> It delivers the highest burst damage in the game when all pellets connect at point-blank range, and with Bandit's attack speed scaling or CL4NK's crit synergy, it can create devastating builds that trivialize mid-tier content.</p>
+
+            <p>However, the weapon's close-range requirement, manual aim demand, and RNG unlock frustration prevent it from achieving universal popularity. Players comfortable with aggressive positioning and precise aim will find the Shotgun incredibly rewarding, while those seeking safer, more consistent weapons should look elsewhere.</p>
+
+            <p><strong>Unlock it if you enjoy high-risk, high-reward gameplay.</strong> The satisfaction of landing a perfect point-blank Shotgun blast that instantly clears a screen of enemies is unmatched in Megabonk. Just don't expect it to carry you to the top of the leaderboards—that's what Dexecutioner and Katana are for.</p>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        ↑
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Megabonk.org - Complete Strategy Guides</p>
+        <p>
+            <a href="/">Home</a> | 
+            <a href="/guides/">Guides</a> | 
+            <a href="/database/">Database</a> | 
+            <a href="/tier-lists/">Tier Lists</a>
+        </p>
+        <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.7;">
+            Last Updated: October 13, 2025 | Version 1.0.12
+        </p>
+    </div>
+
+    <script>
+        // Generate animated pellets
+        function createPellets() {
+            const bg = document.getElementById('pelletBg');
+            const pelletCount = 30;
+            
+            for (let i = 0; i < pelletCount; i++) {
+                const pellet = document.createElement('div');
+                pellet.className = 'pellet';
+                pellet.style.left = Math.random() * 100 + '%';
+                pellet.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                pellet.style.animationDelay = Math.random() * 2 + 's';
+                bg.appendChild(pellet);
+            }
+        }
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize
+        createPellets();
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe content sections
+        document.querySelectorAll('.content-section, .build-card').forEach((el) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
