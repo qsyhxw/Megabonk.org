@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,10 +189,21 @@
         }
         
         .character-icon {
-            font-size: 8rem;
-            margin-bottom: 1rem;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 1.5rem;
             display: block;
+            object-fit: contain;
+            border-radius: 20px;
+            background: rgba(107, 70, 193, 0.1);
+            padding: 1rem;
+            box-shadow: 0 15px 40px rgba(107, 70, 193, 0.4);
+            transition: transform 0.3s ease;
         }
+
+        .character-icon:hover {
+            transform: scale(1.05);
+}
         
         .character-name {
             font-size: 3rem;
@@ -707,7 +720,7 @@
     <main class="main">
         <article class="content">
             <header class="character-header">
-                <span class="character-icon">🥷</span>
+                <img src="https://megabonk.org/images/guides/characters/Ninja.png" alt="Ninja Character" class="character-icon">
                 <h1 class="character-name">Ninja</h1>
                 <p class="character-subtitle">Master of Execute & Evasion</p>
                 <span class="character-rating">91/100 Rating - A-Tier</span>
@@ -1223,5 +1236,44 @@
 
         console。log('🥷 Ninja Unlock Guide with Execute & Evasion mechanics loaded successfully!');
     </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 </html>
