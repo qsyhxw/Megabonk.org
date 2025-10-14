@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Megabonk Wireless Dagger Guide: A-Tier Auto-Targeting Weapon</title>
+    <meta name="description" content="Complete Wireless Dagger guide for Megabonk. Learn unlock methods, Tony McZoom synergy, auto-targeting mechanics & why this A/B-tier weapon excels in casual play.">
+    <meta name="keywords" content="megabonk wireless dagger, wireless dagger guide, tony mczoom weapon, auto targeting weapon, megabonk weapons">
+
+    <link rel="canonical" href="https://megabonk.org/database/weapons/wireless-dagger">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Megabonk Wireless Dagger Guide: A-Tier Auto-Targeting Weapon">
+    <meta property="og:description" content="Complete guide to the Wireless Dagger - auto-targeting smart weapon with 9 base damage, perfect for Tony McZoom builds and high-speed gameplay.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/database/weapons/wireless-dagger">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Megabonk Wireless Dagger Complete Guide",
+      "description": "Comprehensive guide to the Wireless Dagger weapon in Megabonk, including unlock methods, builds, and strategies.",
+      "author": {
+        "@type": "Organization",
+        "name": "Megabonk.org"
+      },
+      "datePublished": "2025-10-14",
+      "dateModified": "2025-10-14"
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        /* Electric/Speed Theme Animations */
+        @keyframes electricPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        @keyframes speedLine {
+            0% { transform: translateX(-100%) scaleX(0.3); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateX(200%) scaleX(1); opacity: 0; }
+        }
+
+        @keyframes electricSpark {
+            0% { transform: translate(0, 0) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+        }
+
+        .electric-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .electric-pulse {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, transparent 70%);
+            animation: electricPulse 3s ease-in-out infinite;
+        }
+
+        .electric-pulse:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+        .electric-pulse:nth-child(2) { top: 60%; right: 15%; animation-delay: 1s; }
+        .electric-pulse:nth-child(3) { bottom: 15%; left: 30%; animation-delay: 2s; }
+
+        .speed-line {
+            position: absolute;
+            height: 2px;
+            width: 200px;
+            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.6), transparent);
+            animation: speedLine 2s linear infinite;
+        }
+
+        .speed-line:nth-child(4) { top: 20%; animation-delay: 0s; }
+        .speed-line:nth-child(5) { top: 40%; animation-delay: 0.5s; }
+        .speed-line:nth-child(6) { top: 60%; animation-delay: 1s; }
+        .speed-line:nth-child(7) { top: 80%; animation-delay: 1.5s; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.1) 0%, rgba(30, 144, 255, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(0, 191, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 191, 255, 0.2);
+        }
+
+        .weapon-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .weapon-icon {
+            font-size: 3rem;
+            animation: electricPulse 2s ease-in-out infinite;
+        }
+
+        h1 {
+            color: #00bfff;
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+
+        .weapon-subtitle {
+            color: #87ceeb;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .tier-badges {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tier-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .tier-a {
+            background: linear-gradient(135deg, #4169e1, #1e90ff);
+            border: 2px solid #00bfff;
+        }
+
+        .tier-b {
+            background: linear-gradient(135deg, #20b2aa, #48d1cc);
+            border: 2px solid #40e0d0;
+        }
+
+        .tier-disputed {
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            border: 2px solid #ffb84d;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 191, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 191, 255, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 191, 255, 0.6);
+            box-shadow: 0 8px 24px rgba(0, 191, 255, 0.3);
+        }
+
+        .stat-label {
+            color: #87ceeb;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            color: #00bfff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(30, 30, 46, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-section h2 {
+            color: #00bfff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 191, 255, 0.3);
+            font-size: 1.8rem;
+        }
+
+        .content-section h3 {
+            color: #87ceeb;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.tip {
+            background: rgba(0, 255, 127, 0.1);
+            border-color: #00ff7f;
+        }
+
+        .info-box.warning {
+            background: rgba(255, 165, 0, 0.1);
+            border-color: #ffa500;
+        }
+
+        .info-box.important {
+            background: rgba(0, 191, 255, 0.1);
+            border-color: #00bfff;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: rgba(30, 30, 46, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: rgba(0, 191, 255, 0.2);
+            color: #00bfff;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+        }
+
+        tr:hover {
+            background: rgba(0, 191, 255, 0.05);
+        }
+
+        /* Character Synergy Grid */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .character-card {
+            background: rgba(0, 191, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 191, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 191, 255, 0.6);
+            box-shadow: 0 8px 24px rgba(0, 191, 255, 0.3);
+        }
+
+        .character-name {
+            color: #00bfff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .synergy-rating {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation */
+        .breadcrumb {
+            margin-bottom: 1rem;
+            color: #87ceeb;
+        }
+
+        .breadcrumb a {
+            color: #00bfff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #87ceeb;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00bfff, #1e90ff);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .weapon-title {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Scroll Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .content-section:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+        /* Strengths/Weaknesses */
+        .pros-cons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .pros, .cons {
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid;
+        }
+
+        .pros {
+            background: rgba(0, 255, 127, 0.1);
+            border-color: #00ff7f;
+        }
+
+        .cons {
+            background: rgba(255, 69, 0, 0.1);
+            border-color: #ff4500;
+        }
+
+        .pros h3 {
+            color: #00ff7f;
+        }
+
+        .cons h3 {
+            color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <!-- Electric Background Effects -->
+    <div class="electric-bg">
+        <div class="electric-pulse"></div>
+        <div class="electric-pulse"></div>
+        <div class="electric-pulse"></div>
+        <div class="speed-line"></div>
+        <div class="speed-line"></div>
+        <div class="speed-line"></div>
+        <div class="speed-line"></div>
+    </div>
+
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <a href="/">Home</a> » 
+            <a href="/database/">Database</a> » 
+            <a href="/database/weapons/">Weapons</a> » 
+            Wireless Dagger
+        </nav>
+
+        <!-- Header -->
+        <header>
+            <div class="weapon-title">
+                <div class="weapon-icon">🗡️⚡</div>
+                <div>
+                    <h1>Wireless Dagger</h1>
+                    <p class="weapon-subtitle">Smart Auto-Targeting High-Speed Weapon</p>
+                </div>
+            </div>
+
+            <div class="tier-badges">
+                <span class="tier-badge tier-a">A-Tier (Destructoid, Amiibo Doctor)</span>
+                <span class="tier-badge tier-b">B-Tier (Pro Game Guides, Dexerto)</span>
+                <span class="tier-badge tier-disputed">⚠️ Tier Disputed</span>
+            </div>
+        </header>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-label">Base Damage</div>
+                <div class="stat-value">9</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Attack Speed</div>
+                <div class="stat-value">Very Fast</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Unlock Cost</div>
+                <div class="stat-value">2 Silver</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Signature Character</div>
+                <div class="stat-value">Tony McZoom</div>
+            </div>
+        </div>
+
+        <!-- Introduction -->
+        <section class="content-section">
+            <h2>🎯 Weapon Overview</h2>
+            <p>The Wireless Dagger is a <strong>mid-tier smart weapon</strong> that auto-targets enemies with homing projectiles. With <strong>9 base damage</strong> and extremely rapid attack speed, it excels in casual play through convenient fire-and-forget mechanics, but falls short in competitive world record runs due to short range and crowd control limitations.</p>
+            
+            <div class="info-box important">
+                <strong>Key Identity:</strong> A fire-and-forget auto-targeting weapon that frees players to focus entirely on movement and positioning while projectiles independently chase targets. "Wireless tech goes crazy these days."
+            </div>
+
+            <p>The weapon unlocks by <strong>leveling Lightning Staff to 15</strong>, costs <strong>2 Silver to purchase</strong>, and serves as the signature starter weapon for character <strong>Tony McZoom</strong>. While accessible to unlock and fun to play, it occupies a "decent but not optimal" space in the meta, serving effectively as a third or fourth weapon slot rather than a primary carry option.</p>
+        </section>
+
+        <!-- Unlock Guide -->
+        <section class="content-section">
+            <h2>🔓 How to Unlock the Wireless Dagger</h2>
+            
+            <h3>Unlock Requirements</h3>
+            <ol>
+                <li>Select <strong>Lightning Staff</strong> during any run</li>
+                <li>Upgrade Lightning Staff to <strong>Level 15 within a single run</strong></li>
+                <li>After reaching Level 15, the Wireless Dagger becomes available for purchase</li>
+                <li>Go to <strong>Main Menu → Unlocks Tab</strong></li>
+                <li>Purchase for <strong>2 Silver</strong></li>
+            </ol>
+
+            <div class="info-box tip">
+                <strong>💡 Pro Tip:</strong> You don't need to complete the run—just reach Level 15 with Lightning Staff to unlock purchase access. The unlock progress is permanent once achieved.
+            </div>
+
+            <h3>Optimal Unlock Strategy</h3>
+            <ul>
+                <li><strong>Character:</strong> Use Fox for better XP gain</li>
+                <li><strong>Map:</strong> Select Tier 2 or higher for sufficient enemy density</li>
+                <li><strong>Build Focus:</strong> Start with Lightning Staff as primary weapon</li>
+                <li><strong>Tomes:</strong> Use XP Tome to level faster</li>
+                <li><strong>Weapon Limit:</strong> Keep build to maximum 2 weapons and 2 tomes to increase Lightning Staff upgrade frequency</li>
+                <li><strong>Priority:</strong> Always choose Lightning Staff upgrades above other weapons</li>
+            </ul>
+
+            <div class="info-box important">
+                <strong>Progression Note:</strong> The Wireless Dagger unlock is a <strong>prerequisite for unlocking character Tony McZoom</strong>. After purchasing the Wireless Dagger and completing any two Challenges in the game, you can then purchase Tony McZoom from the shop.
+            </div>
+        </section>
+
+        <!-- Core Mechanics -->
+        <section class="content-section">
+            <h2>⚙️ Core Mechanics & How It Actually Works</h2>
+            
+            <h3>Smart Auto-Targeting System</h3>
+            <p>The Wireless Dagger operates on a unique <strong>smart auto-targeting system</strong> where thrown daggers automatically seek and track nearby enemies without manual aiming required. This "fire-and-forget" weapon frees players to focus entirely on movement, positioning, and dodging while projectiles independently chase targets.</p>
+
+            <div class="info-box tip">
+                <strong>Game Flavor Text:</strong> "Wireless tech goes crazy these days" - reflecting the weapon's autonomous tracking capability.
+            </div>
+
+            <h3>Damage & Attack Speed</h3>
+            <ul>
+                <li><strong>Base Damage:</strong> 9 (mid-tier, matching Bow but below Sniper Rifle's 22)</li>
+                <li><strong>Attack Speed:</strong> One of the <strong>fastest-hitting weapons in Megabonk</strong></li>
+                <li><strong>Scaling:</strong> Attack speed scales through character abilities, Cooldown Tome, Battery items, Charge Shrines, and passive bonuses</li>
+                <li><strong>DPS Focus:</strong> Compensates for moderate base damage through extremely high attack speed</li>
+            </ul>
+
+            <h3>Five Upgrade Paths</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Upgrade Type</th>
+                        <th>Effect</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Projectile Count</strong></td>
+                        <td>Increases daggers thrown per attack</td>
+                        <td>⭐⭐⭐⭐⭐ Highest</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Projectile Bounces</strong></td>
+                        <td>Daggers chain between enemies</td>
+                        <td>⭐⭐⭐⭐⭐ Highest</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Damage</strong></td>
+                        <td>Increases base damage per projectile</td>
+                        <td>⭐⭐⭐⭐ High</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duration</strong></td>
+                        <td>Extends active time in air</td>
+                        <td>⭐⭐⭐ Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Projectile Speed</strong></td>
+                        <td>Increases dagger velocity</td>
+                        <td>⭐⭐ Low</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box warning">
+                <strong>⚠️ Important:</strong> Maximizing <strong>Projectile Bounces</strong> is considered the <strong>most important upgrade stat</strong> by community consensus, as it creates screen-clearing chain reactions. Always prioritize Projectile Count and Bounces above other stats.
+            </div>
+
+            <h3>Key Strengths</h3>
+            <ul>
+                <li><strong>Smart Targeting:</strong> Excels in chaotic fights with many fast-moving enemies</li>
+                <li><strong>On-Hit Effects:</strong> Works excellently with Moldy Cheese (poison) and Ice Crystal (freeze)</li>
+                <li><strong>Rapid Procs:</strong> High attack rate multiplies on-hit effect opportunities</li>
+                <li><strong>Bounce Chains:</strong> Creates satisfying cascading damage through enemy groups</li>
+                <li><strong>Mental Bandwidth:</strong> Eliminates aiming requirements for pure movement focus</li>
+            </ul>
+        </section>
+
+        <!-- Character Synergies -->
+        <section class="content-section">
+            <h2>👥 Character Synergies & Who Benefits Most</h2>
+            
+            <div class="character-grid">
+                <div class="character-card">
+                    <div class="character-name">🏃 Tony McZoom</div>
+                    <div class="synergy-rating">⭐⭐⭐⭐⭐ PERFECT SYNERGY</div>
+                    <p><strong>Passive:</strong> +2% Pickup Range per level, Zap electric attacks</p>
+                    <p><strong>Why It Works:</strong></p>
+                    <ul>
+                        <li>Signature starter weapon</li>
+                        <li>Hoverboard high-mobility perfectly matches fire-and-forget nature</li>
+                        <li>Movement charges electric area attacks</li>
+                        <li>Pickup range enables aggressive kiting patterns</li>
+                    </ul>
+                    <div class="info-box warning">
+                        <strong>⚠️ Learning Curve:</strong> "Tony McZoom isn't the easiest of characters to master" - requires constant strafing movements similar to Counter-Strike surfing.
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🗡️ Bandit</div>
+                    <div class="synergy-rating">⭐⭐⭐⭐⭐ EXCELLENT</div>
+                    <p><strong>Passive:</strong> +1% Attack Speed per level</p>
+                    <p><strong>Why It Works:</strong></p>
+                    <ul>
+                        <li>Attack speed scaling synergizes with rapid-hit design</li>
+                        <li>Dexecutioner execute mechanic procs frequently</li>
+                        <li>"Incredible crowd-clearing potential" when paired with Revolver, Bow, Bananarang</li>
+                        <li>Build: Cooldown Tome + Overpowered Lamp + Joe's Dagger = devastating execute chains</li>
+                    </ul>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🤖 CL4NK</div>
+                    <div class="synergy-rating">⭐⭐⭐⭐ STRONG (Crit-Focused)</div>
+                    <p><strong>Passive:</strong> Increases Crit Chance every level</p>
+                    <p><strong>Why It Works:</strong></p>
+                    <ul>
+                        <li>Innate crit stats combine with high attack rate</li>
+                        <li>Mega Crit builds: Wireless Dagger + Revolver + Katana + Aegis</li>
+                        <li>Requires <strong>4+ projectile bounces</strong> for both weapons</li>
+                        <li>Priority: XP Tome + Precision Tome + Clover stacking</li>
+                    </ul>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">🥷 Ninja</div>
+                    <div class="synergy-rating">⭐⭐⭐ GOOD (Situational)</div>
+                    <p><strong>Passive:</strong> +0.5% evasion per level, execute on dodge</p>
+                    <p><strong>Why It Works:</strong></p>
+                    <ul>
+                        <li>Crit builds: Katana + Dexecutioner + Wireless Dagger</li>
+                        <li>Evasion allows risky close-range positioning</li>
+                        <li>Rapid hits benefit from crit scaling</li>
+                        <li>Execute passive procs create satisfying chains</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box important">
+                <strong>Universal Availability:</strong> The weapon is <strong>not character-exclusive to Tony McZoom</strong>—any character can use it once unlocked. However, Tony provides such strong synergy that it performs noticeably better with him than most alternatives.
+            </div>
+        </section>
+
+        <!-- Tier Rankings -->
+        <section class="content-section">
+            <h2>🏆 Competitive Tier Placement & Meta Viability</h2>
+            
+            <h3>Tier Ranking Variance Across Sources</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Tier</th>
+                        <th>Date</th>
+                        <th>Analysis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Destructoid</strong></td>
+                        <td>A-Tier</td>
+                        <td>Sept 26, 2025</td>
+                        <td>"Like the katana, this dagger can bring down enemies swiftly at high speed"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amiibo Doctor</strong></td>
+                        <td>A-Tier</td>
+                        <td>Oct 7, 2025 (v1.0.7)</td>
+                        <td>"9 base damage, smart targeting with bounces, unusual duration scaling allows persistent damage"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pro Game Guides</strong></td>
+                        <td>B-Tier</td>
+                        <td>Oct 6, 2025</td>
+                        <td>"Solid third or fourth weapon... requires hefty investment early on, which can lock out other weapons"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dexerto</strong></td>
+                        <td>B-Tier</td>
+                        <td>Sept 27, 2025</td>
+                        <td><strong>"Great life-steal option for casual play, but too slow for serious records"</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Twinfinite</strong></td>
+                        <td>B-Tier</td>
+                        <td>Sept 27, 2025</td>
+                        <td>"Potentially useful... depending on build... in 99% cases, will not" top-tier</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Competitive & Leaderboard Viability</h3>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3>✅ Strengths</h3>
+                    <ul>
+                        <li><strong>Smart targeting</strong> eliminates aiming requirements</li>
+                        <li><strong>Excellent high-mobility</strong> playstyles</li>
+                        <li><strong>Strong crowd-clearing</strong> with bounce chains</li>
+                        <li><strong>Accessible unlock</strong> requirements</li>
+                        <li><strong>Fun gameplay loop</strong> with satisfying mechanics</li>
+                        <li><strong>Works well Tier 1-2</strong> progression</li>
+                    </ul>
+                </div>
+
+                <div class="cons">
+                    <h3>❌ Weaknesses</h3>
+                    <ul>
+                        <li><strong>Mid-tier base damage</strong> (9)</li>
+                        <li><strong>Requires specific upgrades</strong> to reach potential</li>
+                        <li><strong>Needs AoE support weapons</strong></li>
+                        <li><strong>Suboptimal single-target</strong> damage vs alternatives</li>
+                        <li><strong>Build-dependent</strong> performance</li>
+                        <li><strong>"Too slow for serious records"</strong> - not meta for leaderboards</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box warning">
+                <strong>⚠️ Competitive Reality:</strong> Community consensus is clear—the Wireless Dagger is <strong>not meta for world record attempts</strong>. It's not seen in high-scoring leaderboard runs. The weapon performs well in Tier 1-2 progression and casual/fun runs but cannot compete with S-tier meta weapons like Sniper Rifle, Dexecutioner, Katana, Bow, Revolver, Aura, and Aegis.
+            </div>
+
+            <h3>Context-Dependent Tier Assessment</h3>
+            <p>The tier variance reflects its context-dependent nature:</p>
+            <ul>
+                <li><strong>A-Tier</strong> from technical analysts (strong when properly built in casual-to-mid-tier content)</li>
+                <li><strong>B-Tier</strong> from competitive evaluators (inadequate for leaderboard attempts against meta alternatives)</li>
+            </ul>
+
+            <p><strong>Consensus:</strong> "Decent but not optimal" - works effectively as a <strong>third or fourth weapon slot</strong> in balanced builds but cannot solo carry against challenging content.</p>
+        </section>
+
+        <!-- Optimal Builds -->
+        <section class="content-section">
+            <h2>🎮 Optimal Builds & Loadout Recommendations</h2>
+            
+            <h3>1. Zooming Tony Build (Strongest Meta Approach)</h3>
+            <p><strong>Best Character:</strong> Tony McZoom</p>
+            
+            <h4>Weapons:</h4>
+            <ul>
+                <li><strong>Wireless Dagger</strong> (Primary)</li>
+                <li>Tornado / Slutty Rocket</li>
+                <li>Lightning Staff / Firestaff</li>
+                <li>Aegis (Defensive coverage)</li>
+            </ul>
+
+            <h4>The "Devastating Trio" Tomes:</h4>
+            <ol>
+                <li><strong>Quantity Tome</strong> ⭐⭐⭐⭐⭐</li>
+                <li><strong>Cooldown Tome</strong> ⭐⭐⭐⭐⭐</li>
+                <li><strong>Damage Tome</strong> ⭐⭐⭐⭐⭐</li>
+                <li>Luck Tome (4th selection)</li>
+            </ol>
+
+            <h4>Essential Items:</h4>
+            <ul>
+                <li><strong>Turbo Socks</strong> (Mandatory - movement speed)</li>
+                <li><strong>Turbo Skates</strong> (Mandatory - speed to damage conversion)</li>
+                <li>Wrench, Time Bracelet, Beefy Ring</li>
+                <li>Moldy Cheese, Gym Sauce, Oats, Medkit</li>
+                <li>Big Bonk, Boss Buster, Spicy Meatball, Anvil</li>
+            </ul>
+
+            <h4>Strategy:</h4>
+            <p>Constant high-speed movement while Aegis provides defensive safety layer. Orbit back occasionally for XP pickup. Convert movement speed into damage through Turbo Skates while Wireless Dagger handles auto-targeting.</p>
+
+            <hr>
+
+            <h3>2. Tony Crit Build (Projectile Multiplication)</h3>
+            <p><strong>Best Character:</strong> Tony McZoom</p>
+            
+            <h4>Weapons:</h4>
+            <ul>
+                <li><strong>Wireless Dagger</strong></li>
+                <li>Revolver</li>
+                <li>Dice</li>
+                <li>Aegis</li>
+            </ul>
+
+            <h4>Core Tomes:</h4>
+            <ul>
+                <li><strong>Precision Tome</strong> ⭐⭐⭐⭐⭐ (Must get early or pivot)</li>
+                <li><strong>Quantity Tome</strong> ⭐⭐⭐⭐⭐</li>
+                <li>Damage Tome</li>
+                <li>XP Tome</li>
+            </ul>
+
+            <div class="info-box important">
+                <strong>Critical Insight:</strong> "Increased projectiles = higher crit chance" - projectile multiplication creates more crit opportunities.
+            </div>
+
+            <h4>Key Items:</h4>
+            <ul>
+                <li><strong>Turbo Skates</strong> (Multiple stacks if possible)</li>
+                <li><strong>Forbidden Juice</strong> (Must get early)</li>
+                <li>Giant Fork, Grandma's Secret Tonic, Demonic Soul</li>
+                <li>Backpack, Demonic Blade, Wrench, Time Bracelet, Clover</li>
+                <li>Gym Sauce</li>
+            </ul>
+
+            <h4>Requirements:</h4>
+            <ul>
+                <li>Get Precision Tome, Quantity Tome, and Forbidden Juice early or pivot to Zooming build</li>
+                <li>Cannot miss Crit Chance upgrades for Dice and Revolver</li>
+            </ul>
+
+            <hr>
+
+            <h3>3. Tank DPS Hybrid Build</h3>
+            <p><strong>Best Character:</strong> Tony McZoom (survivability focus)</p>
+            
+            <h4>Weapons:</h4>
+            <ul>
+                <li><strong>Wireless Dagger</strong></li>
+                <li>Dice</li>
+                <li>Blood Magic</li>
+                <li>Aegis</li>
+            </ul>
+
+            <h4>Sustainability Tomes:</h4>
+            <ul>
+                <li>Quantity Tome</li>
+                <li><strong>Regen Tome</strong></li>
+                <li><strong>HP Tome</strong></li>
+                <li>Cooldown Tome</li>
+            </ul>
+
+            <h4>Essential Items:</h4>
+            <ul>
+                <li><strong>Chonkplate</strong> (Build-defining - enables overhealing)</li>
+                <li>Gas Mask, Moldy Cheese, Demonic Blade</li>
+                <li>Beacon, Medkit, Wrench, Time Bracelet</li>
+                <li>Slutty Cannon, Demonic Soul, Oats, Beefy Ring, Gym Sauce</li>
+            </ul>
+
+            <h4>Synergy:</h4>
+            <p>Chonkplate's overhealing mechanics synergize with HP/Regen tomes, creating a tanky Tony McZoom that can sustain aggressive close-range play.</p>
+
+            <hr>
+
+            <h3>4. Bandit Execute Chain Build</h3>
+            <p><strong>Best Character:</strong> Bandit</p>
+            
+            <h4>Weapons:</h4>
+            <ul>
+                <li><strong>Wireless Dagger</strong></li>
+                <li>Revolver</li>
+                <li>Bow</li>
+                <li>Bananarang</li>
+            </ul>
+
+            <h4>Best Tomes:</h4>
+            <ul>
+                <li><strong>Cooldown Tome</strong> (Highest priority - on-hit proc frequency)</li>
+                <li>XP Tome</li>
+                <li>Luck Tome</li>
+                <li>Cursed Tome (increased difficulty = better drops)</li>
+            </ul>
+
+            <h4>Essential Items:</h4>
+            <ul>
+                <li><strong>Overpowered Lamp</strong> (Critical - +1 proc chance on-hit effects)</li>
+                <li><strong>Joe's Dagger</strong> (Execute passive + damage scaling)</li>
+                <li>Blood Mark, Lightning Orb, Power Gloves, Backpack</li>
+            </ul>
+
+            <h4>Why It Works:</h4>
+            <p>"Incredible crowd-clearing potential, damage output, and simple synergies." Bandit's attack speed scaling creates constant executes, while Overpowered Lamp doubles all on-hit effects for devastating chains.</p>
+
+            <hr>
+
+            <h3>5. CL4NK Mega Crit Build</h3>
+            <p><strong>Best Character:</strong> CL4NK</p>
+            
+            <h4>Weapons:</h4>
+            <ul>
+                <li><strong>Wireless Dagger</strong></li>
+                <li>Revolver</li>
+                <li>Katana</li>
+                <li>Aegis</li>
+            </ul>
+
+            <div class="info-box warning">
+                <strong>⚠️ Critical Requirement:</strong> Get <strong>projectile bounces to at least 4</strong> for both Wireless Dagger and Revolver. This is mandatory for the build to function.
+            </div>
+
+            <h4>Power Leveling Tomes:</h4>
+            <ul>
+                <li><strong>XP Tome</strong></li>
+                <li><strong>Precision Tome</strong></li>
+                <li>Crit Damage Tome</li>
+                <li>Damage Tome</li>
+            </ul>
+
+            <h4>Luck Stacking:</h4>
+            <ul>
+                <li>Clover</li>
+                <li>Luck upgrades from shrines</li>
+                <li>Credit Cards (if available)</li>
+            </ul>
+
+            <hr>
+
+            <h3>Universal Tome Priority (All Builds)</h3>
+            <ol>
+                <li><strong>Attack Speed/Cooldown Tome</strong> ⭐⭐⭐⭐⭐ (Highest priority)</li>
+                <li><strong>Quantity Tome</strong> ⭐⭐⭐⭐⭐ (Projectile multiplication)</li>
+                <li>Damage Tome ⭐⭐⭐⭐ (Scaling)</li>
+                <li>Crit Damage/Precision Tome ⭐⭐⭐⭐ (Rapid-hit synergy)</li>
+                <li>Agility Tome ⭐⭐⭐ (Mobility for short range offset)</li>
+            </ol>
+
+            <div class="info-box important">
+                <strong>Meta Tomes:</strong> XP Tome and Luck Tome are practically required for Tier 3 content, with Cursed Tome as a high-risk, high-reward option increasing difficulty while dramatically improving drop quality.
+            </div>
+
+            <h3>Essential Item Categories</h3>
+            
+            <h4>Mobility Items (Short-Range Offset):</h4>
+            <ul>
+                <li>Turbo Socks, Turbo Skates, Golden Boots</li>
+            </ul>
+
+            <h4>Damage Items (Flat Multiplication):</h4>
+            <ul>
+                <li>Gym Sauce, Beefy Ring, Boss Buster, Spicy Meatball, Wrench</li>
+            </ul>
+
+            <h4>On-Hit Effect Items (Rapid Attack Synergy):</h4>
+            <ul>
+                <li>Moldy Cheese (+40% poison), Ice Crystal (+7.5% freeze), Unstable Transfusion (+27% Bloodmark)</li>
+            </ul>
+
+            <h4>Legendary Items (Build-Defining):</h4>
+            <ul>
+                <li>Overpowered Lamp, Forbidden Juice, Chonkplate, Joe's Dagger, Big Bonk, Anvil</li>
+            </ul>
+        </section>
+
+        <!-- Version History -->
+        <section class="content-section">
+            <h2>📜 Version History & Balance Changes</h2>
+            
+            <h3>Direct Weapon Changes</h3>
+            <p>Research into patch notes reveals <strong>no specific direct nerfs or buffs to the Wireless Dagger itself</strong>. The weapon has remained mechanically consistent since its implementation in the September 2025 Megabonk release.</p>
+
+            <h3>Patch v1.0.12 (October 8, 2025) - Duration System Rework</h3>
+            <div class="info-box important">
+                <strong>Major Change:</strong> Duration stat system affecting all duration-scaling weapons received a significant rework. The update added limits to duration scaling to "prevent projectiles staying out indefinitely."
+            </div>
+
+            <p><strong>Affected Weapons:</strong></p>
+            <ul>
+                <li>Wireless Dagger</li>
+                <li>Axes</li>
+                <li>Flamewalker</li>
+                <li>Black Hole</li>
+            </ul>
+
+            <p><strong>Impact:</strong> Makes duration upgrades more balanced for weapons where excessive duration could create permanent projectile coverage. Previously, unlimited duration stacking could create exploit-level scenarios.</p>
+
+            <h3>Patch v1.0.12 - Indirect Nerfs</h3>
+            <ul>
+                <li><strong>Joe's Dagger nerf</strong> - Major nerf affecting execute-focused builds</li>
+                <li><strong>XP Tome nerf</strong> - Reduced from 9% to 7% bonus XP gain (affects all builds since practically required for Tier 3)</li>
+                <li><strong>Black Hole adjustments</strong> - Didn't directly impact Wireless Dagger</li>
+            </ul>
+
+            <h3>Patch v1.0.7 (September 25, 2025)</h3>
+            <p>Character buffs and weapon slot unlock adjustments but didn't specifically target the Wireless Dagger.</p>
+
+            <h3>Balance History Assessment</h3>
+            <p>The absence of direct balance changes suggests the Wireless Dagger has occupied a <strong>stable mid-tier position since launch</strong>. While meta weapons like Sniper Rifle, Dexecutioner, and Bow receive more attention in patch discussions, the Wireless Dagger's A/B-tier status and "decent but not optimal" community assessment has remained consistent across the game's first month since its September 2025 release.</p>
+
+            <p>The duration rework represents the only mechanical change affecting the weapon, primarily preventing exploit-level duration stacking rather than fundamentally altering intended gameplay.</p>
+        </section>
+
+        <!-- Community Perspectives -->
+        <section class="content-section">
+            <h2>💬 Community Perspectives, Strengths & Weaknesses</h2>
+            
+            <h3>Player Sentiment Overview</h3>
+            <p>Player sentiment toward the Wireless Dagger runs <strong>mixed-positive</strong>, with community members viewing it as a solid mid-tier option with specific use cases rather than a universally strong weapon.</p>
+
+            <div class="info-box tip">
+                <strong>Representative Quotes:</strong>
+                <ul>
+                    <li>"Wireless Dagger can be decent too"</li>
+                    <li>"I've also liked the wireless dagger a lot, but i think i need to play Tony more to appreciate it fully"</li>
+                    <li>"Great life-steal option for casual play, but too slow for serious records"</li>
+                </ul>
+            </div>
+
+            <h3>Casual vs Competitive Viability</h3>
+            <p>The community clearly distinguishes between <strong>casual versus competitive viability</strong>:</p>
+            <ul>
+                <li><strong>Casual/Progression:</strong> Solid for Tiers 1-2, fun and accessible gameplay</li>
+                <li><strong>Competitive:</strong> Not discussed in serious meta conversations for world records or top leaderboards</li>
+            </ul>
+
+            <h3>Common Strategies from Players</h3>
+            <ul>
+                <li><strong>Aggressive positioning:</strong> "Stick close to enemies and let your high attack speed shred through them"</li>
+                <li><strong>Build balance:</strong> "Focus on stacking crit and flat damage multipliers so every stab pays off"</li>
+                <li><strong>AoE coverage:</strong> "Balance your build with AoE coverage to avoid being swarmed"</li>
+                <li><strong>Movement focus:</strong> Fire-and-forget targeting eliminates aiming for pure dodging focus</li>
+            </ul>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3>✅ Key Strengths Identified</h3>
+                    <ul>
+                        <li><strong>Smart targeting</strong> frees mental bandwidth</li>
+                        <li><strong>Extremely high attack speed</strong> for rapid DPS stacking</li>
+                        <li><strong>Excellent single-target burst</strong> - "single-target melt potential that few weapons can match" when fully online</li>
+                        <li><strong>Strong crit/attack speed scaling</strong></li>
+                        <li><strong>Bounce mechanics</strong> - "can clear entire screens" with chain reactions</li>
+                        <li><strong>Accessible unlock</strong> through Lightning Staff Level 15</li>
+                        <li><strong>Fun gameplay loop</strong> - satisfying visual and mechanical appeal</li>
+                    </ul>
+                </div>
+
+                <div class="cons">
+                    <h3>❌ Primary Weaknesses Highlighted</h3>
+                    <ul>
+                        <li><strong>Short range/lack of reach</strong> - major limitation requiring constant mobility</li>
+                        <li><strong>Cannot solo carry</strong> - "not strong enough to solo carry you against more challenging enemies"</li>
+                        <li><strong>Requires AoE support</strong> - "dagger alone won't handle large crowds well"</li>
+                        <li><strong>Heavy investment needs</strong> - can "lock out other weapons" early in runs</li>
+                        <li><strong>"Too slow for serious records"</strong> in competitive contexts</li>
+                        <li><strong>Build-dependency</strong> - only "fully shines" with specific tome/item combinations</li>
+                        <li><strong>High-risk weapon</strong> - demands aggressive close-range play</li>
+                        <li><strong>Tony McZoom learning curve</strong> - "movement patterns that are slightly haphazard in nature"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Common Player Questions & Solutions</h3>
+            
+            <h4>Q: "How do I unlock the Wireless Dagger?"</h4>
+            <p><strong>A:</strong> Level Lightning Staff to 15 (not Desert Tier 2 as initially confused). Use Fox with XP Tome on Tier 2+ maps, limit build to 2 weapons and 2 tomes maximum to increase Lightning Staff upgrade frequency.</p>
+
+            <h4>Q: "Is it good for competitive/leaderboard runs?"</h4>
+            <p><strong>A:</strong> No. Community consensus: works best Tier 1-2 progression and casual/fun runs, but cannot compete with S-tier meta weapons (Sniper Rifle, Dexecutioner, Katana, Bow, Revolver, Aura, Aegis) for world records.</p>
+
+            <h4>Q: "Which characters work best with it?"</h4>
+            <p><strong>A:</strong> Best with high-speed weapon characters: Tony McZoom (perfect synergy), Bandit (attack speed scaling), CL4NK (crit builds), Ninja (crit/evasion). Less recommended for tank characters or Tier 3 competitive runs.</p>
+
+            <h4>Q: "What builds should I use?"</h4>
+            <p><strong>A:</strong> See the "Optimal Builds" section above. Priority tomes: Cooldown/Attack Speed → Quantity → Damage → Precision/Crit. Essential items: Turbo Socks, Turbo Skates, Overpowered Lamp (if Bandit), Moldy Cheese, Gym Sauce.</p>
+        </section>
+
+        <!-- Weapon Comparisons -->
+        <section class="content-section">
+            <h2>⚖️ Comparison to Similar Dagger & Projectile Weapons</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Weapon</th>
+                        <th>Tier</th>
+                        <th>Base Damage</th>
+                        <th>Key Advantage vs Wireless Dagger</th>
+                        <th>Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Katana</strong></td>
+                        <td>A/S-Tier</td>
+                        <td>Higher</td>
+                        <td>Superior crit scaling, meta builds, better competitive performance</td>
+                        <td><span style="color: #ff6347;">❌ Clearly Superior</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revolver</strong></td>
+                        <td>A/S-Tier</td>
+                        <td>~9</td>
+                        <td>Innate crit stats, better late game scaling, more frequent in competitive builds</td>
+                        <td><span style="color: #ff6347;">❌ Better for Endgame</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bow</strong></td>
+                        <td>A/S-Tier</td>
+                        <td>9</td>
+                        <td>Piercing mechanics, better crit scaling, meta weapon status</td>
+                        <td><span style="color: #ff6347;">❌ Meta Choice</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bone</strong></td>
+                        <td>B-Tier</td>
+                        <td>Lower</td>
+                        <td>Better AoE coverage, knockback utility, reliable bouncing damage</td>
+                        <td><span style="color: #ffd700;">⚖️ Similar Tier (Different Focus)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lightning Staff</strong></td>
+                        <td>S/A-Tier</td>
+                        <td>Higher</td>
+                        <td>Starter weapon, powerful bounce mechanics, excellent AoE, meta status</td>
+                        <td><span style="color: #ff6347;">❌ Unlock Requirement Yet Superior</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Detailed Comparisons</h3>
+
+            <h4>Wireless Dagger vs Katana</h4>
+            <p><strong>Similarities:</strong> Both emphasize high-speed gameplay and rapid attacks</p>
+            <p><strong>Katana Advantages:</strong></p>
+            <ul>
+                <li>Superior crit scaling</li>
+                <li>Regular use in meta builds</li>
+                <li>Better competitive performance</li>
+                <li>Melee nature provides different positioning advantages</li>
+            </ul>
+            <p><strong>Verdict:</strong> Destructoid's tier list notes the similarity ("Like the katana, this dagger can bring down enemies swiftly at high speed") but ultimately ranks Katana higher for endgame.</p>
+
+            <h4>Wireless Dagger vs Revolver</h4>
+            <p><strong>Similarities:</strong> Both are projectile weapons with bounce mechanics</p>
+            <p><strong>Revolver Advantages:</strong></p>
+            <ul>
+                <li>Innate crit stats</li>
+                <li>Better late game scaling</li>
+                <li>More frequent in competitive builds</li>
+                <li>Superior base stats</li>
+            </ul>
+            <p><strong>Synergy:</strong> Build guides often pair them together (CL4NK Mega Crit build), leveraging synergistic bounce mechanics while Revolver handles primary damage output.</p>
+
+            <h4>Wireless Dagger vs Bow</h4>
+            <p><strong>Similarities:</strong> Both are projectile weapons with 9 base damage</p>
+            <p><strong>Bow Advantages:</strong></p>
+            <ul>
+                <li>Piercing mechanics hit multiple enemies in a line without requiring bounce upgrades</li>
+                <li>More consistent crowd damage</li>
+                <li>Better crit scaling</li>
+                <li>Meta weapon status across multiple tier lists</li>
+            </ul>
+            <p><strong>Smart Targeting Note:</strong> Wireless Dagger's advantage (projectiles chase evasive enemies) doesn't compensate for Bow's superior overall power and versatility.</p>
+
+            <h4>Wireless Dagger vs Bone</h4>
+            <p><strong>Similar Tier Placement (Both B-Tier):</strong></p>
+            <ul>
+                <li><strong>Bone Focus:</strong> AoE coverage and knockback for enemy control</li>
+                <li><strong>Wireless Dagger Focus:</strong> Faster hit rate and smart targeting</li>
+                <li><strong>Build Synergy:</strong> Often recommended together - Bone handles crowds while Wireless Dagger focuses single targets</li>
+            </ul>
+            <p><strong>Quote:</strong> "Dagger alone won't handle large crowds well" + "Bone adds reliable bouncing damage" = complementary pairing</p>
+
+            <h4>Wireless Dagger vs Lightning Staff</h4>
+            <div class="info-box important">
+                <strong>The Irony:</strong> Lightning Staff is both the unlock requirement for Wireless Dagger AND a significantly superior weapon (S/A-tier).
+            </div>
+
+            <p><strong>Lightning Staff Advantages:</strong></p>
+            <ul>
+                <li>Starter weapon with immediate availability</li>
+                <li>Powerful bounce mechanics</li>
+                <li>Excellent AoE coverage</li>
+                <li>Meta status in competitive play</li>
+            </ul>
+
+            <p><strong>Build Synergy Despite Tier Difference:</strong> Guides frequently recommend pairing them together - Lightning Staff provides AoE coverage while Wireless Dagger handles focused single-target damage. Players invested in leveling Lightning Staff for the unlock can continue using it alongside the newly unlocked Wireless Dagger.</p>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="content-section">
+            <h2>🎯 Conclusion: A Capable Mid-Tier Option with Clear Boundaries</h2>
+            
+            <p>The Wireless Dagger establishes itself as an <strong>accessible, enjoyable weapon</strong> that rewards specific builds and playstyles while falling short of competitive optimization. Its smart auto-targeting system and rapid attack speed create a satisfying gameplay loop—particularly with Tony McZoom's high-mobility hoverboard mechanics—but the weapon cannot escape its fundamental limitations of short range, AoE weakness, and heavy investment requirements.</p>
+
+            <h3>Final Assessment</h3>
+            
+            <div class="info-box important">
+                <strong>Tier Variance Explained:</strong> The placement variance across sources (A-tier from technical analysts, B-tier from competitive evaluators) reflects its <strong>context-dependent nature</strong>: strong when properly built in casual-to-mid-tier content, inadequate for leaderboard attempts against meta alternatives.
+            </div>
+
+            <h3>Who Should Use This Weapon?</h3>
+            
+            <h4>✅ Perfect For:</h4>
+            <ul>
+                <li>Players seeking convenient <strong>fire-and-forget mechanics</strong></li>
+                <li>Tony McZoom enthusiasts who want his signature weapon</li>
+                <li>Casual players prioritizing <strong>fun over optimization</strong></li>
+                <li><strong>Tier 1-2 progression</strong> and learning the game</li>
+                <li>Players who enjoy <strong>visible bounce chain reactions</strong></li>
+                <li>High-mobility playstyle preference</li>
+            </ul>
+
+            <h4>❌ Not Recommended For:</h4>
+            <ul>
+                <li><strong>World record attempts</strong> or top leaderboard positions</li>
+                <li>Players seeking <strong>primary carry weapons</strong></li>
+                <li>Tier 3 competitive optimization</li>
+                <li>Solo carry against challenging content</li>
+                <li>Players who prefer tank/stationary builds</li>
+            </ul>
+
+            <h3>The Weapon's Greatest Achievement</h3>
+            <p>The Wireless Dagger's greatest achievement may be serving as <strong>Tony McZoom's signature starter weapon</strong>, where the character's design specifically complements the dagger's mechanics. This creates a coherent gameplay identity—high-speed kiting with auto-targeting projectiles—that feels intentional and satisfying even when not mathematically optimal.</p>
+
+            <h3>Bottom Line</h3>
+            <div class="info-box tip">
+                <strong>Summary:</strong> For players prioritizing enjoyment over optimization, the Wireless Dagger delivers exactly what its name promises: a wireless, hassle-free weapon that handles targeting while you focus on movement. Just don't expect it to carry you to the top of the leaderboards.
+            </div>
+
+            <p><strong>Use Case:</strong> Solid mid-tier option for progression and enjoyment, inadequate for optimization. Works effectively as a <strong>third or fourth weapon slot</strong> rather than a primary carry option.</p>
+
+            <h3>Related Guides</h3>
+            <ul>
+                <li><a href="/guides/characters/tony-mczoom-guide">Tony McZoom Complete Character Guide</a></li>
+                <li><a href="/guides/characters/bandit-guide">Bandit Attack Speed Build Guide</a></li>
+                <li><a href="/guides/characters/cl4nk-guide">CL4NK Mega Crit Build Guide</a></li>
+                <li><a href="/database/weapons/lightning-staff">Lightning Staff Weapon Guide</a></li>
+                <li><a href="/guides/builds/">Complete Build Guides</a></li>
+                <li><a href="/guides/meta-strategy/">Meta Strategy Hub</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Show/hide back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
