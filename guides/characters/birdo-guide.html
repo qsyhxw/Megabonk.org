@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birdo Guide - Tornado Master | MegaBonk Character Guides</title>
-    <meta name="description" content="Complete Birdo guide for MegaBonk. Master tornado mechanics, aerial combat, and wind control. Best builds, strategies, and special unlock guide.">
-    <meta name="keywords" content="megabonk birdo, birdo guide, birdo build, tornado build, wind control, birdo unlock, tornado master">
+    <title>Megabonk Birdo Guide: Unlock, Builds & Float Tips</title>
+    <meta name="description" content="Master Birdo in Megabonk: unlock requirements, Float mechanics, best builds & strategies. Transform fragility into aerial dominance with expert tips.">
 
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
-     crossorigin="anonymous"></script>
-  
     <link rel="canonical" href="https://megabonk.org/guides/characters/birdo-guide">
 
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
   
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    
     <style>
         * {
             margin: 0;
@@ -30,7 +38,7 @@
             position: relative;
         }
 
-        /* Wind Stream Animation */
+        /* Wind Animation */
         .wind-bg {
             position: fixed;
             top: 0;
@@ -61,27 +69,6 @@
         .wind-stream:nth-child(3) { top: 55%; animation-delay: 2s; }
         .wind-stream:nth-child(4) { top: 75%; animation-delay: 1.5s; }
 
-        /* Tornado Vortex Effect */
-        .tornado-vortex {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 400px;
-            height: 400px;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, transparent 40%, rgba(135, 206, 235, 0.1) 70%, transparent 100%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
-            animation: spin-vortex 20s linear infinite;
-        }
-
-        @keyframes spin-vortex {
-            0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.2; }
-            50% { opacity: 0.3; }
-            100% { transform: translate(-50%, -50%) rotate(360deg); opacity: 0.2; }
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -90,7 +77,40 @@
             z-index: 1;
         }
 
-        /* Header */
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            background: rgba(30, 30, 45, 0.8);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: #48cae4;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb a:hover {
+            color: #caf0f8;
+        }
+
+        .breadcrumb-separator {
+            color: #888;
+            margin: 0 10px;
+        }
+
+        .breadcrumb-current {
+            color: #caf0f8;
+        }
+
+        /* Header with Character Image */
         header {
             background: linear-gradient(135deg, #00b4d8 0%, #0096c7 50%, #0077b6 100%);
             padding: 30px;
@@ -102,59 +122,56 @@
             overflow: hidden;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(144, 224, 239, 0.2) 0%, transparent 70%);
-            animation: pulse-header 3s infinite ease-in-out;
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes pulse-header {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
+        .character-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            border: 3px solid #caf0f8;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 300px;
         }
 
         h1 {
             font-size: 3em;
-            text-align: center;
             color: #caf0f8;
             text-shadow: 0 0 20px rgba(144, 224, 239, 0.8), 3px 3px 6px rgba(0,0,0,0.5);
             margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
         }
 
         .subtitle {
-            text-align: center;
             font-size: 1.3em;
             color: #ade8f4;
             margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
         }
 
-        /* Tier Badge */
         .tier-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
             color: white;
             padding: 8px 20px;
             border-radius: 25px;
             font-weight: bold;
             font-size: 1.1em;
             margin: 5px;
-            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
         }
 
         .tier-container {
-            text-align: center;
             margin-top: 15px;
-            position: relative;
-            z-index: 1;
         }
 
         /* Navigation */
@@ -231,7 +248,6 @@
             margin-bottom: 15px;
         }
 
-        /* Lists */
         ul, ol {
             margin-left: 25px;
             margin-bottom: 15px;
@@ -257,46 +273,6 @@
             margin-top: 0;
         }
 
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-            margin-top: 20px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #00b4d8 0%, #0077b6 100%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-            padding-left: 30px;
-        }
-
-        .timeline-item::before {
-            content: '🌪️';
-            position: absolute;
-            left: -28px;
-            top: 0;
-            font-size: 24px;
-            background: rgba(30, 30, 45, 0.9);
-            padding: 5px;
-            border-radius: 50%;
-        }
-
-        .timeline-item h4 {
-            color: #48cae4;
-            font-size: 1.3em;
-            margin-bottom: 10px;
-        }
-
         /* Tips Box */
         .tip-box {
             background: linear-gradient(135deg, rgba(0, 180, 216, 0.2) 0%, rgba(0, 119, 182, 0.2) 100%);
@@ -314,7 +290,6 @@
             border-radius: 5px;
         }
 
-        /* Highlight */
         .highlight {
             color: #caf0f8;
             font-weight: bold;
@@ -355,21 +330,6 @@
             color: #FF9800;
         }
 
-        /* Unlock Challenge Card */
-        .unlock-challenge {
-            background: linear-gradient(135deg, rgba(255, 152, 0, 0.15) 0%, rgba(230, 81, 0, 0.15) 100%);
-            padding: 25px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 2px solid #FF9800;
-        }
-
-        .unlock-challenge h4 {
-            color: #FF9800;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
@@ -383,6 +343,11 @@
             nav a {
                 display: block;
                 margin: 10px 0;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
@@ -412,15 +377,30 @@
         <div class="wind-stream"></div>
         <div class="wind-stream"></div>
     </div>
-    <div class="tornado-vortex"></div>
 
     <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <a href="https://megabonk.org/">🏠 Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="https://megabonk.org/guides/">Guides</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="https://megabonk.org/guides/characters/">Characters</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Birdo Guide</span>
+        </nav>
+
         <header>
-            <h1>🌪️ BIRDO 🦅</h1>
-            <p class="subtitle">The Tornado Master - Wind and Fury</p>
-            <div class="tier-container">
-                <span class="tier-badge">A-TIER Overall</span>
-                <span class="tier-badge">S-TIER Tornado Specialist</span>
+            <div class="header-content">
+                <img src="https://megabonk.org/images/guides/characters/Birdo.png" alt="Birdo Character" class="character-image">
+                <div class="header-text">
+                    <h1>🌪️ BIRDO 🦅</h1>
+                    <p class="subtitle">The Mobile Specialist - Float and Crowd Control</p>
+                    <div class="tier-container">
+                        <span class="tier-badge">B-TIER Overall</span>
+                        <span class="tier-badge">High Skill Ceiling</span>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -444,54 +424,58 @@
                 </div>
                 <div class="stat-card">
                     <h3>🎯 Playstyle</h3>
-                    <p><strong>Aerial Control / Wind Manipulation</strong></p>
+                    <p><strong>Mobile / Crowd Control</strong></p>
                 </div>
                 <div class="stat-card">
-                    <h3>⚔️ Default Weapon</h3>
-                    <p><strong>Tornado</strong> (must purchase)</p>
+                    <h3>⚔️ Starting Weapon</h3>
+                    <p><strong>Tornado</strong> (crowd control specialist)</p>
                 </div>
                 <div class="stat-card">
                     <h3>📈 Difficulty</h3>
-                    <p><strong>Hard</strong> - Challenging unlock + technical play</p>
+                    <p><strong>Hard</strong> - Challenging unlock + fragile survivability</p>
                 </div>
             </div>
 
-            <h3>🌪️ Passive Ability: Eye of the Storm</h3>
-            <p>Birdo's mastery over wind grants unique aerial advantages:</p>
+            <h3>💨 Passive Ability: Float</h3>
+            <p>Birdo's unique mobility passive:</p>
             <ul>
-                <li><strong>Tornado Synergy:</strong> Tornado weapon deals increased damage and has enhanced pickup range</li>
-                <li><strong>Wind Rider:</strong> Movement speed increased when near active Tornado effects</li>
-                <li><strong>Aerial Superiority:</strong> When carried by Tornado, gain damage boost and temporary invulnerability</li>
-                <li><strong>Vortex Amplification:</strong> Tornado duration and size increased, pulling in more enemies</li>
+                <li><strong>Float Mechanic:</strong> Hold Jump button to float in the air</li>
+                <li><strong>Aerial Mobility:</strong> Stay airborne to avoid ground-based enemies</li>
+                <li><strong>Positioning Advantage:</strong> Attack from above while floating</li>
+                <li><strong>Scarf Synergy:</strong> Gain bonus damage while airborne with Scarf item</li>
             </ul>
 
             <div class="tip-box">
-                <strong>💡 Core Identity:</strong> Birdo is THE Tornado specialist. While carried by your own Tornado, you become an aerial death machine - invulnerable, high damage, and able to reposition freely. Master the art of riding your tornadoes to dominate the battlefield from above.
+                <strong>💡 Core Identity:</strong> Birdo is the most mobile character in MegaBonk with the Float passive allowing aerial positioning. However, this comes at a cost - Birdo is also the most fragile character with very low health. Master floating to avoid damage while positioning for crowd control with Tornado.
             </div>
 
             <div class="pros-cons">
                 <div class="pros">
                     <h3>✅ Strengths</h3>
                     <ul>
-                        <li>Incredible mobility when riding Tornadoes</li>
-                        <li>Temporary invulnerability during aerial phase</li>
-                        <li>Massive AOE damage with enhanced Tornado</li>
-                        <li>Safe positioning through aerial control</li>
-                        <li>Unique and fun playstyle</li>
-                        <li>Excellent against dense enemy waves</li>
+                        <li>Highest mobility in the game via Float</li>
+                        <li>Can avoid ground enemies by staying airborne</li>
+                        <li>Excellent crowd control with Tornado knockback</li>
+                        <li>Synergizes well with Scarf item</li>
+                        <li>Unique and fun floating mechanic</li>
+                        <li>Good for kiting and repositioning</li>
                     </ul>
                 </div>
                 <div class="cons">
                     <h3>❌ Weaknesses</h3>
                     <ul>
-                        <li>Extremely challenging unlock requirement</li>
-                        <li>Requires Tornado weapon to function</li>
-                        <li>High skill ceiling - aerial timing critical</li>
-                        <li>Weaker when not riding Tornado</li>
-                        <li>Desert-specific unlock location</li>
-                        <li>Learning curve for optimal play</li>
+                        <li>Most fragile character - extremely low health</li>
+                        <li>Tornado has low base damage</li>
+                        <li>Weak early game without upgrades</li>
+                        <li>High skill ceiling - difficult to master</li>
+                        <li>Very challenging unlock requirement</li>
+                        <li>Float mechanic requires practice</li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important Note:</strong> Birdo is ranked B-tier to C-tier by the community due to low survivability. The Tornado weapon is considered one of the weakest starting weapons. This character requires significant skill and is not recommended for beginners.
             </div>
         </section>
 
@@ -500,144 +484,114 @@
             <h2>🎯 Recommended Builds</h2>
 
             <div class="build-card">
-                <h3>1. 🌪️ Eternal Vortex</h3>
-                <p><strong>Goal:</strong> Maximize Tornado uptime for constant aerial dominance</p>
+                <h3>1. 🌀 Crowd Control Specialist</h3>
+                <p><strong>Goal:</strong> Maximize Tornado's knockback for defensive play</p>
                 
                 <h4>Core Items (Priority Order):</h4>
                 <ol>
-                    <li><strong>Tornado</strong> - Essential signature weapon</li>
-                    <li><strong>Cooldown Reduction</strong> - Spam Tornadoes constantly</li>
-                    <li><strong>Duration</strong> - Longer Tornado ride time</li>
-                    <li><strong>Area of Effect</strong> - Larger Tornado radius</li>
-                    <li><strong>Damage % Scaling</strong> - Amplify aerial burst</li>
+                    <li><strong>Tornado</strong> - Starting weapon, focus on upgrades</li>
+                    <li><strong>Knockback Stats</strong> - Push enemies further away</li>
+                    <li><strong>Projectile Count</strong> - More tornadoes = better coverage</li>
+                    <li><strong>Area Size</strong> - Larger tornado coverage</li>
+                    <li><strong>Max HP / Armor</strong> - Essential for Birdo's low health</li>
                 </ol>
 
                 <h4>Supporting Stats:</h4>
                 <ul>
-                    <li><span class="highlight">Cooldown Reduction</span> - Near-permanent Tornado uptime (50-60%)</li>
-                    <li><span class="highlight">Duration</span> - Longer aerial phases (100%+)</li>
-                    <li><span class="highlight">Area Size</span> - Pull more enemies into vortex</li>
-                    <li><span class="highlight">Damage</span> - Maximize DPS while airborne</li>
+                    <li><span class="highlight">Max HP</span> - Critical for survival (Birdo is very fragile)</li>
+                    <li><span class="highlight">Knockback</span> - Keep enemies at distance</li>
+                    <li><span class="highlight">Projectile Count</span> - More crowd control coverage</li>
+                    <li><span class="highlight">Size</span> - Larger tornado area</li>
                 </ul>
 
                 <h4>Gameplan:</h4>
-                <p>Cast Tornado, let it carry you into the air, deal massive damage while invulnerable, land safely. With maxed Cooldown and Duration, you can chain Tornadoes to stay airborne 80-90% of the time, making you nearly untouchable while dealing constant AOE damage.</p>
+                <p>Use Tornado's knockback to create space. Float above enemies to avoid damage while your tornadoes push hordes away. This is a defensive build focused on survival through crowd control rather than raw damage.</p>
             </div>
 
             <div class="build-card">
-                <h3>2. ⚡ Sky Striker</h3>
-                <p><strong>Goal:</strong> Combine Tornado with burst damage for aerial assassinations</p>
+                <h3>2. ✈️ Aerial Scarf Build</h3>
+                <p><strong>Goal:</strong> Maximize airborne damage with Scarf synergy</p>
                 
                 <h4>Core Items (Priority Order):</h4>
                 <ol>
-                    <li><strong>Tornado</strong> - Core mobility tool</li>
-                    <li><strong>High Damage Weapons</strong> - Kevin, Dexecutioner, Rocket</li>
-                    <li><strong>Crit Chance/Damage</strong> - Aerial burst potential</li>
-                    <li><strong>Cooldown Reduction</strong> - Frequent aerial phases</li>
-                    <li><strong>Attack Speed</strong> - More hits during aerial time</li>
+                    <li><strong>Scarf</strong> - Essential item for bonus damage while airborne</li>
+                    <li><strong>High DPS Weapons</strong> - Supplement weak Tornado damage</li>
+                    <li><strong>Max HP</strong> - Compensate for low base health</li>
+                    <li><strong>Damage % Scaling</strong> - Amplify Scarf bonus</li>
+                    <li><strong>Attack Speed</strong> - More hits while floating</li>
                 </ol>
 
                 <h4>Supporting Stats:</h4>
                 <ul>
-                    <li><span class="highlight">Crit Chance/Damage</span> - Massive aerial bursts</li>
-                    <li><span class="highlight">Damage</span> - Capitalize on aerial bonus</li>
-                    <li><span class="highlight">Cooldown Reduction</span> - Access aerial state often</li>
+                    <li><span class="highlight">Damage %</span> - Multiply Scarf's airborne bonus</li>
+                    <li><span class="highlight">Attack Speed</span> - More attacks while floating</li>
+                    <li><span class="highlight">Max HP</span> - Survival necessity</li>
+                    <li><span class="highlight">Movement Speed</span> - Better aerial positioning</li>
                 </ul>
 
                 <h4>Gameplan:</h4>
-                <p>Use Tornado as an offensive tool. Ride it to position above enemy clusters, unleash burst damage during invulnerability window, land and reposition. This build emphasizes burst over sustained damage, turning you into an aerial strike force.</p>
+                <p>Stay airborne as much as possible to maintain Scarf's damage bonus. Float constantly while attacking. Supplement Tornado with higher DPS weapons since Tornado's base damage is weak. Focus on survival stats to offset Birdo's fragility.</p>
             </div>
 
             <div class="build-card">
-                <h3>3. 🌀 Wind Wall Defense</h3>
-                <p><strong>Goal:</strong> Use Tornado defensively for safe farming and survival</p>
+                <h3>3. 🛡️ Survival Focus</h3>
+                <p><strong>Goal:</strong> Maximize survivability for the most fragile character</p>
                 
                 <h4>Core Items (Priority Order):</h4>
                 <ol>
-                    <li><strong>Tornado</strong> - Defensive escape tool</li>
-                    <li><strong>Duration</strong> - Extended safety windows</li>
-                    <li><strong>Movement Speed</strong> - Superior positioning</li>
-                    <li><strong>Max HP / Regen</strong> - Survive between aerials</li>
-                    <li><strong>Cooldown Reduction</strong> - Frequent escapes</li>
+                    <li><strong>Max HP Items</strong> - Stack health aggressively</li>
+                    <li><strong>Armor / Defense</strong> - Reduce incoming damage</li>
+                    <li><strong>Regeneration</strong> - Passive healing</li>
+                    <li><strong>Movement Speed</strong> - Escape dangerous situations</li>
+                    <li><strong>Lifesteal Weapons</strong> - Active healing</li>
                 </ol>
 
                 <h4>Supporting Stats:</h4>
                 <ul>
-                    <li><span class="highlight">Duration</span> - Longer invulnerability</li>
-                    <li><span class="highlight">Movement Speed</span> - Mobility for kiting</li>
-                    <li><span class="highlight">Max HP/Regen</span> - Survivability</li>
+                    <li><span class="highlight">Max HP</span> - Primary survival stat</li>
+                    <li><span class="highlight">Armor</span> - Damage reduction</li>
+                    <li><span class="highlight">Regen</span> - Constant healing</li>
+                    <li><span class="highlight">Movement Speed</span> - Kiting ability</li>
                 </ul>
 
                 <h4>Gameplan:</h4>
-                <p>Treat Tornado as a panic button. When overwhelmed, cast Tornado to become invulnerable and reposition to safety. This is the safest Birdo build, perfect for learning the character or tackling difficult content. Less offensive but extremely forgiving.</p>
+                <p>Accept that Birdo is extremely fragile and invest heavily in defensive stats. Use Float to avoid damage, Tornado to create space, and stack HP/Armor to survive. This is the safest build for learning Birdo but sacrifices damage output.</p>
             </div>
         </section>
 
-        <!-- Strategy Timeline -->
+        <!-- Strategy Section -->
         <section id="strategy" class="section">
-            <h2>⏱️ Strategy Timeline</h2>
+            <h2>⏱️ Strategy Guide</h2>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4>0-5 Minutes: Pre-Tornado Phase</h4>
-                    <p><strong>Goal:</strong> Survive until you can purchase Tornado</p>
-                    <ul>
-                        <li>Birdo is significantly weaker without Tornado</li>
-                        <li>Play defensively with any starting weapon</li>
-                        <li>Focus on collecting gold for first shop</li>
-                        <li>Passive provides minor benefits but not impactful yet</li>
-                        <li>Avoid risky plays - your power spike comes after Tornado</li>
-                    </ul>
-                    <div class="warning-box">
-                        <strong>⚠️ Early Game:</strong> Without Tornado, you're playing a below-average character. Just survive and reach the shop. Don't expect to dominate early.
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <h4>5-15 Minutes: Learning Aerials</h4>
-                    <p><strong>Goal:</strong> Acquire Tornado and master aerial mechanics</p>
-                    <ul>
-                        <li><strong>First shop: BUY TORNADO (mandatory)</strong></li>
-                        <li>Practice timing - when to cast, when to ride</li>
-                        <li>Learn invulnerability window duration</li>
-                        <li>Experiment with positioning during aerial phase</li>
-                        <li>Start stacking Cooldown Reduction</li>
-                    </ul>
-                    <div class="tip-box">
-                        <strong>💡 Aerial Basics:</strong> Cast Tornado directly on yourself or nearby. You'll be lifted into the air, becoming invulnerable. Use this time to attack safely or reposition. Practice the timing!
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <h4>15-30 Minutes: Aerial Dominance</h4>
-                    <p><strong>Goal:</strong> Achieve consistent aerial uptime and control</p>
-                    <ul>
-                        <li>Stack Cooldown to 40-60% for frequent Tornadoes</li>
-                        <li>Add Duration for longer aerial phases</li>
-                        <li>Master offensive aerial attacks</li>
-                        <li>Use aerial invulnerability to dodge dangerous attacks</li>
-                        <li>Chain Tornadoes for near-constant aerial state</li>
-                    </ul>
-                    <div class="tip-box">
-                        <strong>🌪️ Tornado Chaining:</strong> With 50%+ Cooldown and 100% Duration, you can cast a second Tornado before the first expires. This keeps you airborne almost permanently!
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <h4>30+ Minutes: Sky Lord</h4>
-                    <p><strong>Goal:</strong> Perfect aerial combat and battlefield control</p>
-                    <ul>
-                        <li>Near-permanent aerial state with optimized CDR/Duration</li>
-                        <li>Enemies cannot touch you - you're always airborne</li>
-                        <li>Massive AOE damage to everything below</li>
-                        <li>Use aerial positioning to avoid all ground hazards</li>
-                        <li>Master advanced aerial movement techniques</li>
-                    </ul>
-                    <div class="tip-box">
-                        <strong>🏆 Late Game Mastery:</strong> You're essentially flying permanently, raining damage from above while invulnerable. Ground-based enemies are helpless. You've mastered the sky.
-                    </div>
-                </div>
+            <h3>Early Game (0-10 Minutes)</h3>
+            <div class="warning-box">
+                <strong>⚠️ Critical Phase:</strong> Birdo has a very weak early game. You're the most fragile character with one of the weakest starting weapons. Survival is the only goal.
             </div>
+            <ul>
+                <li>Play extremely defensively - avoid taking any unnecessary damage</li>
+                <li>Use Float to stay away from enemy clusters</li>
+                <li>Tornado knockback is your main survival tool - use it to create space</li>
+                <li>Prioritize HP and survivability upgrades in first shops</li>
+                <li>Focus on collecting gold safely rather than aggressive killing</li>
+            </ul>
+
+            <h3>Mid Game (10-20 Minutes)</h3>
+            <ul>
+                <li>Start stacking Tornado upgrades (Projectile Count, Size, Knockback)</li>
+                <li>Look for Scarf item if available - provides airborne damage bonus</li>
+                <li>Consider adding a second weapon with higher damage</li>
+                <li>Continue prioritizing survivability alongside offense</li>
+                <li>Master Float timing to dodge attacks while maintaining damage</li>
+            </ul>
+
+            <h3>Late Game (20+ Minutes)</h3>
+            <ul>
+                <li>With proper upgrades, Tornado becomes effective crowd control</li>
+                <li>Use Float + Tornado to create a defensive perimeter</li>
+                <li>Focus on positioning - stay airborne and use knockback</li>
+                <li>Avoid boss melee attacks by floating above them</li>
+                <li>Survival remains critical - Birdo never becomes tanky</li>
+            </ul>
         </section>
 
         <!-- Pro Tips -->
@@ -646,76 +600,31 @@
 
             <h3>✅ Advanced Techniques</h3>
             <ul>
-                <li><strong>Aerial Positioning:</strong> While airborne, you can still move - use this to position for landing</li>
-                <li><strong>Invulnerability Timing:</strong> Learn exact duration of aerial invulnerability to maximize safety</li>
-                <li><strong>Offensive Aerials:</strong> Cast Tornado over enemy clusters to damage them while you're airborne</li>
-                <li><strong>Escape Mechanics:</strong> Use Tornado as panic button when surrounded or overwhelmed</li>
-                <li><strong>Duration Stacking:</strong> 100% Duration doubles your aerial time - critical threshold</li>
-                <li><strong>Cooldown Breakpoints:</strong> 50% CDR lets you chain Tornadoes with minimal downtime</li>
-                <li><strong>Landing Strategy:</strong> Always land in safe positions away from enemy clusters</li>
-                <li><strong>Attack During Flight:</strong> You can attack while airborne - don't waste the DPS window</li>
-                <li><strong>Tornado Placement:</strong> Cast Tornado slightly ahead of your position for better timing</li>
-                <li><strong>Boss Strategy:</strong> Use aerial invulnerability to dodge boss special attacks</li>
+                <li><strong>Float Timing:</strong> Tap Jump repeatedly instead of holding for better control</li>
+                <li><strong>Knockback Positioning:</strong> Position tornadoes to push enemies away from you</li>
+                <li><strong>Scarf Timing:</strong> Stay airborne constantly when you have Scarf equipped</li>
+                <li><strong>Emergency Float:</strong> Use Float as panic button when surrounded</li>
+                <li><strong>Natural Tornadoes:</strong> On Desert, use environmental tornadoes for lift</li>
+                <li><strong>HP Priority:</strong> Always prioritize health upgrades - you're very fragile</li>
+                <li><strong>Weapon Supplement:</strong> Add stronger weapons to compensate for Tornado's low damage</li>
+                <li><strong>Kiting Mastery:</strong> Use Float + Movement to kite while attacking</li>
             </ul>
 
             <h3>❌ Common Mistakes to Avoid</h3>
             <ul>
-                <li><strong>Playing Without Tornado:</strong> Your entire identity requires Tornado - buy it first shop always</li>
-                <li><strong>Ignoring Cooldown:</strong> Without CDR, Tornado has too much downtime - stack it heavily</li>
-                <li><strong>Poor Landing Spots:</strong> Landing in enemy clusters wastes your invulnerability advantage</li>
-                <li><strong>Not Attacking Airborne:</strong> You can attack while flying - don't waste the opportunity</li>
-                <li><strong>Neglecting Duration:</strong> Short aerial phases aren't useful - Duration is critical</li>
-                <li><strong>Static Gameplay:</strong> Even with aerial advantage, you need to move and position well</li>
-                <li><strong>Wrong Weapon Choices:</strong> Tornado is superior for Birdo - other weapons waste passive</li>
-                <li><strong>Wasting Invulnerability:</strong> Use aerial phase strategically, not randomly</li>
-                <li><strong>Over-Confidence:</strong> You're only invulnerable while airborne - respect ground time</li>
-                <li><strong>Ignoring Area Size:</strong> Larger Tornado pulls more enemies - very valuable stat</li>
+                <li><strong>Playing Aggressively:</strong> Birdo is not a damage character - play defensively</li>
+                <li><strong>Ignoring HP:</strong> Without HP stacking, you'll die constantly</li>
+                <li><strong>Static Floating:</strong> Don't just float in place - keep moving</li>
+                <li><strong>Relying Only on Tornado:</strong> Tornado damage is weak - add other weapons</li>
+                <li><strong>Poor Knockback Use:</strong> Position tornadoes to push enemies away, not toward you</li>
+                <li><strong>Fighting in Melee:</strong> Never let enemies get close - you're extremely fragile</li>
+                <li><strong>Neglecting Scarf:</strong> If you find Scarf, it's mandatory for Birdo</li>
+                <li><strong>Overconfidence:</strong> Even with upgrades, Birdo remains fragile</li>
             </ul>
 
             <div class="warning-box">
-                <strong>⚠️ Critical Mistake:</strong> The biggest error is not maximizing Tornado uptime through Cooldown and Duration. Without these stats, you spend too much time vulnerable on the ground. Your power is in the air - invest heavily in aerial uptime.
+                <strong>⚠️ Reality Check:</strong> Birdo is considered one of the weakest characters by the community. The Tornado weapon has low damage and Birdo's health is the lowest in the game. Success requires excellent positioning and defensive play. Not recommended for beginners.
             </div>
-        </section>
-
-        <!-- Item Synergies -->
-        <section id="synergies" class="section">
-            <h2>🔗 Best Item Synergies</h2>
-
-            <h3>🌪️ Core Tornado Combos</h3>
-            <ul>
-                <li><strong>Tornado + Cooldown Reduction:</strong> The foundation - more frequent aerial phases</li>
-                <li><strong>Tornado + Duration:</strong> Longer invulnerability windows and aerial time</li>
-                <li><strong>Tornado + Area Size:</strong> Larger vortex pulls in more enemies for more damage</li>
-                <li><strong>Tornado + Damage Scaling:</strong> Amplify your aerial damage bonus</li>
-                <li><strong>Tornado + Movement Speed:</strong> Better positioning during and between aerials</li>
-            </ul>
-
-            <h3>⚡ Aerial Damage Multipliers</h3>
-            <ul>
-                <li><strong>Aerial Bonus + Crit Build:</strong> Crits during invulnerability = massive safe damage</li>
-                <li><strong>Aerial + Attack Speed:</strong> More attacks during limited aerial time</li>
-                <li><strong>Tornado AOE + Explosive Weapons:</strong> Rain explosions from above</li>
-                <li><strong>Aerial + On-Hit Effects:</strong> Kevin, Poison proc while invulnerable</li>
-                <li><strong>Damage Bonus + Burst Weapons:</strong> Rocket, Grenade for aerial strikes</li>
-            </ul>
-
-            <h3>🛡️ Survival Synergies</h3>
-            <ul>
-                <li><strong>Invulnerability + Regen:</strong> Heal during aerial phase safely</li>
-                <li><strong>Tornado + Max HP:</strong> Survive ground time between aerials</li>
-                <li><strong>Duration + Lifesteal:</strong> Attack during long aerials to heal</li>
-                <li><strong>Movement Speed + Tornado:</strong> Escape then go airborne for safety</li>
-            </ul>
-
-            <h3>📊 Stat Priority with Birdo</h3>
-            <ol>
-                <li><strong>Cooldown Reduction</strong> - Essential for aerial uptime (aim for 50-60%)</li>
-                <li><strong>Duration</strong> - Longer aerials = more safety (aim for 100%+)</li>
-                <li><strong>Damage</strong> - Maximize aerial damage bonus output</li>
-                <li><strong>Area Size</strong> - Larger Tornado coverage</li>
-                <li><strong>Attack Speed</strong> - More hits during aerial windows</li>
-                <li><strong>Crit Chance/Damage</strong> - Amplify burst potential</li>
-            </ol>
         </section>
 
         <!-- Unlock Guide -->
@@ -724,82 +633,62 @@
 
             <h3>Unlock Requirement: Kill 100 Enemies Using Tornado While Carried by Tornado on Desert</h3>
 
-            <p>This is one of the most challenging character unlocks in the game. You must satisfy THREE conditions simultaneously:</p>
+            <p>This is one of the most challenging character unlocks in MegaBonk. You must satisfy THREE conditions simultaneously:</p>
 
-            <div class="unlock-challenge">
-                <h4>⚠️ Challenge Breakdown</h4>
+            <div class="warning-box">
+                <h4>⚠️ Unlock Requirements</h4>
                 <ol>
                     <li><strong>Location:</strong> Must be on Desert biome</li>
-                    <li><strong>Weapon:</strong> Must use Tornado weapon</li>
-                    <li><strong>State:</strong> Must be carried by Tornado (airborne) when enemies die</li>
-                    <li><strong>Kill Count:</strong> 100 enemies must die meeting all above conditions</li>
+                    <li><strong>Weapon:</strong> Must use Tornado weapon for the kills</li>
+                    <li><strong>State:</strong> Must be carried/lifted by a Tornado when enemies die</li>
+                    <li><strong>Kill Count:</strong> 100 enemies meeting all conditions</li>
                 </ol>
             </div>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4>Step 1: Choose Desert Biome</h4>
-                    <p>Select Desert from the biome menu. This unlock ONLY works in Desert - no other biomes count.</p>
-                </div>
+            <h3>Step-by-Step Unlock Process</h3>
 
-                <div class="timeline-item">
-                    <h4>Step 2: Acquire Tornado Weapon</h4>
-                    <p>You MUST purchase Tornado weapon in a shop. Tips:</p>
-                    <ul>
-                        <li>Tornado must be purchased - doesn't come as default weapon</li>
-                        <li>Save gold specifically for Tornado purchase</li>
-                        <li>Use characters with shop advantages (Robinette helps)</li>
-                        <li>Reroll shops if Tornado doesn't appear</li>
-                        <li>Tornado is somewhat rare - be patient</li>
-                    </ul>
-                </div>
+            <h4>Step 1: Get Tornado Weapon</h4>
+            <p>Tornado is unlocked by: <strong>Charge 5 Charge Shrines during sandstorms on Desert map</strong></p>
+            <ul>
+                <li>Play on Desert biome</li>
+                <li>Wait for sandstorms (weather event)</li>
+                <li>Find Charge Shrines (glowing pillars)</li>
+                <li>Charge 5 shrines total during sandstorms</li>
+                <li>Tornado weapon permanently unlocked</li>
+            </ul>
 
-                <div class="timeline-item">
-                    <h4>Step 3: Execute the Unlock Strategy</h4>
-                    <p>Once you have Tornado in Desert, follow this strategy:</p>
-                    <ul>
-                        <li><strong>Cast Tornado on yourself</strong> to be lifted into the air</li>
-                        <li><strong>While airborne</strong>, attack enemies with Tornado weapon</li>
-                        <li><strong>Kill 100 enemies</strong> while you're being carried by Tornado</li>
-                        <li>Enemies must die while you're in the aerial state</li>
-                        <li>Kills on the ground don't count - only aerial kills</li>
-                    </ul>
-                    <div class="tip-box">
-                        <strong>💡 Key Insight:</strong> The kills must happen while you're AIRBORNE. Cast Tornado, ride it up, and kill enemies with Tornado damage while you're flying. Ground kills don't count toward the 100.
-                    </div>
-                </div>
+            <h4>Step 2: Play Desert with Tornado</h4>
+            <p>Once Tornado is unlocked:</p>
+            <ul>
+                <li>Select any character (Fox recommended for survivability)</li>
+                <li>Choose Desert biome</li>
+                <li>Purchase/equip Tornado weapon in shops or as starting weapon</li>
+            </ul>
 
-                <div class="timeline-item">
-                    <h4>Step 4: Optimize for Success</h4>
-                    <p>To complete this efficiently:</p>
-                    <ul>
-                        <li><strong>Stack Duration:</strong> Longer aerials = more time to get kills</li>
-                        <li><strong>Stack Cooldown:</strong> More Tornadoes = more aerial time</li>
-                        <li><strong>Stack Area Size:</strong> Larger Tornado hits more enemies</li>
-                        <li><strong>Stack Damage:</strong> Kills enemies faster during aerial</li>
-                        <li><strong>Target dense waves:</strong> More enemies = faster progress</li>
-                    </ul>
-                </div>
-
-                <div class="timeline-item">
-                    <h4>Step 5: Track Progress</h4>
-                    <p>The game tracks your aerial Tornado kills. You'll receive a notification when you hit 100 kills and unlock Birdo permanently!</p>
-                    <div class="warning-box">
-                        <strong>⚠️ Important:</strong> Progress may persist across runs, but it's safest to try completing all 100 in a single run. Focus on a long Desert run with optimized Tornado build.
-                    </div>
-                </div>
-            </div>
-
+            <h4>Step 3: Execute the Unlock</h4>
             <div class="tip-box">
-                <strong>💡 Unlock Optimization Tips:</strong>
-                <ul>
-                    <li>Use Fox or MegaChad for easier Desert survival</li>
-                    <li>Prioritize Duration + Cooldown after getting Tornado</li>
-                    <li>Fight in areas with dense enemy spawns</li>
-                    <li>Cast Tornado frequently to maximize aerial time</li>
-                    <li>Be patient - this unlock requires 1-2 hours typically</li>
-                    <li>Consider making a dedicated "unlock Birdo" run</li>
-                </ul>
+                <strong>💡 Key Strategy:</strong> Natural tornadoes spawn on Desert biome. These environmental tornadoes will lift you into the air. While being carried by a tornado, use your Tornado weapon to kill enemies. Only kills while airborne in a tornado count!
+            </div>
+            <ul>
+                <li>Wait for natural tornadoes to spawn on Desert</li>
+                <li>Let the tornado pick you up (you'll be lifted into air)</li>
+                <li>While airborne, attack enemies with Tornado weapon</li>
+                <li>Kills must occur while you're being carried</li>
+                <li>Repeat until 100 kills achieved</li>
+            </ul>
+
+            <h4>Tips for Efficient Unlocking:</h4>
+            <ul>
+                <li><strong>Use Fox:</strong> High survivability makes long runs easier</li>
+                <li><strong>Upgrade Tornado:</strong> Get Projectile Count, Size, Damage upgrades</li>
+                <li><strong>Wait for Tornadoes:</strong> Be patient - fight near tornado spawn areas</li>
+                <li><strong>Dense Waves:</strong> Target high enemy density areas</li>
+                <li><strong>Long Run:</strong> Plan for 30-60+ minute run to get 100 kills</li>
+                <li><strong>Survivability:</strong> Stack HP/defense to survive long enough</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ Unlock Difficulty:</strong> This is one of the hardest unlocks in the game. The requirement is very specific and takes patience. Most players report 1-2 hours minimum for completion. Progress may or may not persist across runs - attempt to complete in one run to be safe.
             </div>
         </section>
 
@@ -808,34 +697,28 @@
             <h2>❓ Frequently Asked Questions</h2>
 
             <h3>Is Birdo good for beginners?</h3>
-            <p>Absolutely not. Birdo has one of the hardest unlocks in the game (requires specific Desert run with Tornado weapon and 100 aerial kills). Additionally, the playstyle is highly technical, requiring mastery of aerial timing, invulnerability windows, and positioning. Only attempt after completing 20+ runs. Start with Fox or MegaChad.</p>
+            <p>No. Birdo is one of the hardest characters to unlock and play. The character is extremely fragile (lowest HP in game), has a weak starting weapon, and requires mastery of Float mechanics. Start with Fox or other easier characters first.</p>
 
-            <h3>How long does it take to unlock Birdo?</h3>
-            <p>Typically 1-3 hours. You need: (1) A Desert run, (2) Find and purchase Tornado, (3) Get 100 kills while airborne. RNG affects Tornado availability, but once you have it, the 100 kills take 30-60 minutes of focused gameplay.</p>
+            <h3>What tier is Birdo?</h3>
+            <p>Community tier lists rank Birdo as B-tier to C-tier. The character is considered below average due to extreme fragility and weak Tornado weapon. High mobility from Float is the only strong point, but it doesn't compensate for the weaknesses.</p>
 
-            <h3>Do ground kills count toward the unlock?</h3>
-            <p>No! Only kills while you're CARRIED BY TORNADO (airborne/flying) count. Ground kills, even with Tornado weapon, don't count. You must be in the aerial invulnerability state when enemies die.</p>
+            <h3>How long does unlocking Birdo take?</h3>
+            <p>Typically 1-2 hours minimum. You must first unlock Tornado weapon (charge 5 shrines during sandstorms), then get 100 kills while being carried by tornadoes on Desert. The requirement is very specific and time-consuming.</p>
 
-            <h3>Can I unlock Birdo in other biomes?</h3>
-            <p>No. The unlock explicitly requires Desert biome. Forest, Factory, or other biomes won't work. You must be in Desert for the kills to count.</p>
+            <h3>What is Birdo's passive ability?</h3>
+            <p>Float - Hold Jump button to float in the air. This provides aerial mobility and allows you to avoid ground-based enemies. Synergizes with the Scarf item for bonus damage while airborne.</p>
 
-            <h3>What if I can't find Tornado in shops?</h3>
-            <p>Keep trying. Tornado is somewhat rare but not extremely rare. Use Robinette for better shop access, reroll when you have gold, and be patient. You may need to start multiple Desert runs before finding Tornado.</p>
+            <h3>Is Tornado a good weapon?</h3>
+            <p>No. Tornado is considered one of the weakest weapons in MegaBonk. It has very low base damage but provides good crowd control through knockback. You'll need to supplement it with stronger weapons for damage.</p>
 
-            <h3>How do I know if I'm "carried by Tornado"?</h3>
-            <p>You'll be visibly lifted into the air, and you'll have invulnerability (can't take damage). Your character will be spinning/rotating in the Tornado vortex. This is the aerial state where kills count.</p>
+            <h3>What items synergize with Birdo?</h3>
+            <p>Scarf is the best item - it provides bonus damage while airborne, which synergizes perfectly with Float. Also prioritize Max HP items (Birdo is extremely fragile), Movement Speed for positioning, and any high-DPS weapons to supplement weak Tornado damage.</p>
 
-            <h3>Best stats for Birdo?</h3>
-            <p>Priority: (1) Cooldown Reduction 50-60%, (2) Duration 100%+, (3) Damage, (4) Area Size, (5) Attack Speed. Cooldown and Duration are non-negotiable - they determine your aerial uptime, which is your entire power source.</p>
+            <h3>How fragile is Birdo really?</h3>
+            <p>Birdo is described as "the most fragile character" in the game with the lowest base health. You will die very easily without heavy HP stacking. Plan to invest significantly in survivability items and play very defensively.</p>
 
-            <h3>Can I play Birdo without Tornado weapon?</h3>
-            <p>No. Your entire passive and playstyle revolve around Tornado. Without it, you're playing a significantly weaker character with minimal passive benefits. ALWAYS buy Tornado first shop.</p>
-
-            <h3>Does progress save if I die?</h3>
-            <p>This is unclear. To be safe, try to get all 100 aerial kills in a single successful run. Don't rely on cross-run progress - complete the unlock in one dedicated Desert run with Tornado.</p>
-
-            <h3>Late game strategy?</h3>
-            <p>With maxed Cooldown (50-60%) and Duration (100%+), you can maintain near-permanent aerial state. Chain Tornadoes to stay airborne 80-90% of the time. You're invulnerable, mobile, and dealing constant AOE damage. Ground enemies cannot touch you - you've mastered the sky.</p>
+            <h3>Best strategy for Birdo?</h3>
+            <p>Defensive positioning. Use Float to stay airborne and away from enemies. Use Tornado's knockback to create space. Stack HP and survivability items aggressively. Add stronger weapons to supplement Tornado's low damage. Master kiting and never fight in melee range.</p>
         </section>
 
         <!-- Footer -->
@@ -843,15 +726,14 @@
             <p><strong>Related Guides:</strong></p>
             <p>
                 <a href="/guides/characters/character-tier-list-2025">Character Tier List</a> | 
-                <a href="/guides/items/tornado-guide">Tornado Mechanics</a> | 
-                <a href="/guides/biomes/desert-guide">Desert Biome Guide</a> | 
-                <a href="/guides/builds/aerial-builds">Aerial Combat Meta</a>
+                 <a href="/guides/builds/">Builds</a> | 
+                <a href="/database/">Database</a>
             </p>
             <p style="margin-top: 20px;">
-                <a href="/guides/characters/">← Back to Character Guides</a>
+                <a href="https://megabonk.org/guides/characters/">← Back to Character Guides</a>
             </p>
             <p style="margin-top: 20px; font-size: 0.9em;">
-                Last Updated: October 2025 | MegaBonk Tornado Master Guide
+                Last Updated: October 2025 | MegaBonk Character Guide - Accurate Information
             </p>
         </footer>
     </div>
