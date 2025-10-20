@@ -1,1130 +1,477 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sword Complete Guide - Megabonk Weapons Database</title>
-    <meta name="description" content="Complete Megabonk Sword guide: Sir Oofie's default weapon, melee combat mechanics, weapon unlock farming, and transition strategies. Master the knight's blade.">
-    <meta name="keywords" content="megabonk sword, megabonk sir oofie weapon, megabonk melee weapon, megabonk axe unlock, megabonk dexecutioner unlock">
-  
-    <link rel="canonical" href="https://megabonk.org/database/weapons/sword">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Megabonk Sword Guide: Unlocks, Builds & Tips</title>
+    <meta name="description" content=" Sir Oofie's starting Sword explained: real unlocks (Axe 2,000 kills; Dexecutioner 12,500), Brass Knuckles item effect, plus safe early-game builds. "/>
+    <meta name="keywords" content="megabonk sword, sir oofie sword, sword unlocks, axe 2000 sword kills, dexecutioner 12500 sword kills, brass knuckles item"/>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
-     crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://megabonk.org/database/weapons/sword"/>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #708090;
-            --secondary-color: #556677;
-            --accent-color: #a0b0c0;
-            --text-light: #ffffff;
-            --text-dark: #333333;
-            --background: #0a0a0f;
-            --card-bg: #1a1a25;
-            --highlight: #c0d0e0;
-            --success: #00ff88;
-            --warning: #ffaa00;
-            --metal-glow: rgba(192, 208, 224, 0.3);
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a25 100%);
-            color: var(--text-light);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #708090 0%, #556677 100%);
-            padding: 2rem 5%;
-            box-shadow: 0 4px 20px var(--metal-glow);
-        }
-
-        .breadcrumb {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .breadcrumb a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .breadcrumb a:hover {
-            opacity: 0.7;
-        }
-
-        .weapon-header {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .weapon-icon {
-            font-size: 5rem;
-            filter: drop-shadow(0 0 20px rgba(192, 208, 224, 0.5));
-            animation: shine 3s ease-in-out infinite;
-        }
-
-        @keyframes shine {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(192, 208, 224, 0.5)); }
-            50% { filter: drop-shadow(0 0 30px rgba(192, 208, 224, 0.8)); }
-        }
-
-        .weapon-title-section h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--metal-glow);
-        }
-
-        .weapon-tier {
-            display: inline-block;
-            background: linear-gradient(135deg, #c0c0c0, #888888);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            box-shadow: 0 0 15px var(--metal-glow);
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 5%;
-        }
-
-        .section {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px var(--metal-glow);
-            border: 1px solid rgba(192, 208, 224, 0.2);
-        }
-
-        h2 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-shadow: 0 0 10px var(--metal-glow);
-        }
-
-        h3 {
-            color: var(--highlight);
-            margin: 1.5rem 0 1rem;
-            font-size: 1.5rem;
-        }
-
-        /* Default Weapon Banner */
-        .default-banner {
-            background: linear-gradient(135deg, #2a5a2a 0%, #1a3a1a 100%);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
-        }
-
-        .default-banner h3 {
-            color: #00ff88;
-            margin: 0 0 0.5rem 0;
-            font-size: 1.5rem;
-        }
-
-        /* Warning Banner */
-        .warning-banner {
-            background: linear-gradient(135deg, #5a2a2a 0%, #3a1a1a 100%);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-            border: 2px solid #ff4444;
-            box-shadow: 0 0 25px rgba(255, 68, 68, 0.3);
-        }
-
-        .warning-banner h3 {
-            color: #ff4444;
-            margin: 0 0 0.5rem 0;
-            font-size: 1.5rem;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #2a2a35 0%, #1a1a25 100%);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 15px var(--metal-glow);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px var(--metal-glow);
-        }
-
-        .stat-label {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--text-light);
-        }
-
-        /* Unlock Progress Tracker */
-        .unlock-tracker {
-            background: linear-gradient(135deg, #2a2a35 0%, #1a1a25 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 0 30px var(--metal-glow);
-        }
-
-        .unlock-item {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border-left: 4px solid var(--warning);
-        }
-
-        .unlock-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .unlock-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .unlock-cost {
-            background: var(--accent-color);
-            color: var(--text-dark);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 25px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-color), var(--highlight));
-            transition: width 0.5s ease;
-            box-shadow: 0 0 15px var(--metal-glow);
-        }
-
-        .progress-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            font-size: 0.9rem;
-        }
-
-        .counter-controls {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .counter-button {
-            background: var(--accent-color);
-            color: var(--text-dark);
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px var(--metal-glow);
-            font-size: 0.85rem;
-        }
-
-        .counter-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--metal-glow);
-        }
-
-        /* Build Cards */
-        .builds-grid {
-            display: grid;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .build-card {
-            background: linear-gradient(135deg, #2a2a35 0%, #1a1a25 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .build-card:hover {
-            border-color: var(--accent-color);
-            transform: scale(1.02);
-            box-shadow: 0 12px 40px var(--metal-glow);
-        }
-
-        .build-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .build-rating {
-            display: flex;
-            gap: 0.3rem;
-        }
-
-        .star {
-            color: var(--warning);
-            font-size: 1.5rem;
-        }
-
-        .build-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .tag {
-            background: var(--accent-color);
-            color: var(--text-dark);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .pros-cons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .pros, .cons {
-            padding: 1rem;
-            border-radius: 10px;
-        }
-
-        .pros {
-            background: rgba(0, 255, 136, 0.1);
-            border-left: 4px solid var(--success);
-        }
-
-        .cons {
-            background: rgba(255, 68, 68, 0.1);
-            border-left: 4px solid #ff4444;
-        }
-
-        .pros h4, .cons h4 {
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .pros ul, .cons ul {
-            list-style: none;
-            padding-left: 1rem;
-        }
-
-        .pros li::before {
-            content: "✓ ";
-            color: var(--success);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .cons li::before {
-            content: "✗ ";
-            color: #ff4444;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* Character Synergy */
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .character-card {
-            background: linear-gradient(135deg, #2a2a35 0%, #1a1a25 100%);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .character-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-            box-shadow: 0 8px 30px var(--metal-glow);
-        }
-
-        .character-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .synergy-rating {
-            color: var(--warning);
-            font-weight: bold;
-            margin-top: 0.5rem;
-        }
-
-        /* Tips Section */
-        .tips-grid {
-            display: grid;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .tip-card {
-            background: linear-gradient(135deg, #2a2a35 0%, #1a1a25 100%);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--warning);
-        }
-
-        .tip-icon {
-            color: var(--warning);
-            margin-right: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            padding: 3rem;
-            text-align: center;
-            border-radius: 15px;
-            margin-top: 3rem;
-            box-shadow: 0 0 50px var(--metal-glow);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: var(--primary-color);
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 0.5rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .weapon-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .weapon-title-section h1 {
-                font-size: 2rem;
-            }
-
-            .pros-cons {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .unlock-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .counter-controls {
-                flex-direction: column;
-            }
-        }
-
-        /* Scroll Animations */
-        .section {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .section:nth-child(1) { animation-delay: 0.1s; }
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.3s; }
-        .section:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        * { margin:0; padding:0; box-sizing: border-box; }
+        :root{
+            --primary-color:#708090; --secondary-color:#556677; --accent-color:#a0b0c0;
+            --text-light:#ffffff; --text-dark:#333333; --background:#0a0a0f; --card-bg:#1a1a25;
+            --highlight:#c0d0e0; --success:#00ff88; --warning:#ffaa00; --metal-glow: rgba(192,208,224,0.3);
+        }
+        body{ font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:linear-gradient(135deg,#0a0a0f 0%,#1a1a25 100%); color:var(--text-light); line-height:1.6; min-height:100vh;}
+        header{ background:linear-gradient(135deg,#708090 0%,#556677 100%); padding:2rem 5%; box-shadow:0 4px 20px var(--metal-glow); }
+        .breadcrumb{ font-size:0.9rem; margin-bottom:1rem; opacity:0.9; }
+        .breadcrumb a{ color:var(--text-light); text-decoration:none; transition:opacity .3s; } .breadcrumb a:hover{ opacity:.7; }
+
+        .weapon-header{ display:flex; align-items:center; gap:2rem; flex-wrap:wrap; }
+        .weapon-icon{ font-size:5rem; filter: drop-shadow(0 0 20px rgba(192,208,224,.5)); animation:shine 3s ease-in-out infinite; }
+        @keyframes shine{ 0%,100%{filter:drop-shadow(0 0 20px rgba(192,208,224,.5));} 50%{filter:drop-shadow(0 0 30px rgba(192,208,224,.8));} }
+        .weapon-title-section h1{ font-size:3rem; margin-bottom:.5rem; text-shadow:2px 2px 4px rgba(0,0,0,.5), 0 0 20px var(--metal-glow); }
+        .weapon-tier{ display:inline-block; background:linear-gradient(135deg,#c0c0c0,#888); padding:.3rem 1rem; border-radius:20px; font-weight:bold; font-size:.9rem; letter-spacing:1px; box-shadow:0 0 15px var(--metal-glow); }
+
+        /* image */
+        .weapon-art{ width:120px; height:auto; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.35), 0 0 20px var(--metal-glow); border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); }
+
+        .container{ max-width:1200px; margin:0 auto; padding:3rem 5%; }
+        .section{ background:var(--card-bg); border-radius:15px; padding:2rem; margin-bottom:2rem; box-shadow:0 8px 32px rgba(0,0,0,.3), 0 0 20px var(--metal-glow); border:1px solid rgba(192,208,224,.2); opacity:0; transform:translateY(30px); animation:fadeInUp .8s ease forwards;}
+        .section:nth-child(1){animation-delay:.1s;} .section:nth-child(2){animation-delay:.2s;} .section:nth-child(3){animation-delay:.3s;} .section:nth-child(4){animation-delay:.4s;}
+        @keyframes fadeInUp{ to{ opacity:1; transform:translateY(0);} }
+
+        h2{ color:var(--accent-color); margin-bottom:1.5rem; font-size:2rem; display:flex; align-items:center; gap:.5rem; text-shadow:0 0 10px var(--metal-glow); }
+        h3{ color:var(--highlight); margin:1.5rem 0 1rem; font-size:1.5rem; }
+
+        .default-banner{ background:linear-gradient(135deg,#2a5a2a 0%,#1a3a1a 100%); border-radius:15px; padding:1.5rem; margin:2rem 0; text-align:center; border:2px solid #00ff88; box-shadow:0 0 25px rgba(0,255,136,.3); }
+        .default-banner h3{ color:#00ff88; margin:0 0 .5rem 0; font-size:1.5rem; }
+
+        .warning-banner{ background:linear-gradient(135deg,#5a2a2a 0%,#3a1a1a 100%); border-radius:15px; padding:1.5rem; margin:2rem 0; text-align:center; border:2px solid #ff4444; box-shadow:0 0 25px rgba(255,68,68,.3); }
+        .warning-banner h3{ color:#ff4444; margin:0 0 .5rem 0; font-size:1.5rem; }
+
+        .stats-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:2rem 0; }
+        .stat-card{ background:linear-gradient(135deg,#2a2a35 0%,#1a1a25 100%); padding:1.5rem; border-radius:10px; border-left:4px solid var(--accent-color); transition:.3s; box-shadow:0 0 15px var(--metal-glow); }
+        .stat-card:hover{ transform:translateY(-5px); box-shadow:0 8px 30px var(--metal-glow); }
+        .stat-label{ color:var(--accent-color); font-size:.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:.5rem; }
+        .stat-value{ font-size:1.8rem; font-weight:bold; color:var(--text-light); }
+
+        .unlock-tracker{ background:linear-gradient(135deg,#2a2a35 0%,#1a1a25 100%); border-radius:15px; padding:2rem; margin:2rem 0; border:2px solid var(--accent-color); box-shadow:0 0 30px var(--metal-glow); }
+        .unlock-item{ margin-bottom:2rem; padding:1.5rem; background:rgba(255,255,255,.05); border-radius:10px; border-left:4px solid var(--warning); }
+        .unlock-item:last-child{ margin-bottom:0; }
+        .unlock-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:1rem; }
+        .unlock-note{ background:var(--accent-color); color:var(--text-dark); padding:.3rem .8rem; border-radius:15px; font-weight:bold; font-size:.9rem; }
+
+        .progress-bar{ width:100%; height:25px; background:rgba(0,0,0,.3); border-radius:15px; overflow:hidden; position:relative; margin:1rem 0; }
+        .progress-fill{ height:100%; background:linear-gradient(90deg,var(--accent-color),var(--highlight)); transition:width .5s ease; box-shadow:0 0 15px var(--metal-glow); }
+        .progress-text{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-weight:bold; text-shadow:2px 2px 4px rgba(0,0,0,.8); font-size:.9rem; }
+        .counter-controls{ display:flex; justify-content:center; gap:.5rem; margin-top:1rem; flex-wrap:wrap; }
+        .counter-button{ background:var(--accent-color); color:var(--text-dark); border:none; padding:.6rem 1.2rem; border-radius:20px; cursor:pointer; font-weight:bold; transition:all .3s; box-shadow:0 4px 15px var(--metal-glow); font-size:.85rem; }
+        .counter-button:hover{ transform:translateY(-2px); box-shadow:0 6px 20px var(--metal-glow); }
+
+        .builds-grid{ display:grid; gap:2rem; margin-top:2rem; }
+        .build-card{ background:linear-gradient(135deg,#2a2a35 0%,#1a1a25 100%); border-radius:15px; padding:2rem; border:2px solid transparent; transition:.3s; }
+        .build-card:hover{ border-color:var(--accent-color); transform:scale(1.02); box-shadow:0 12px 40px var(--metal-glow); }
+        .build-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+        .build-rating{ display:flex; gap:.3rem; }
+        .star{ color:var(--warning); font-size:1.5rem; }
+        .build-tags{ display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }
+        .tag{ background:var(--accent-color); color:var(--text-dark); padding:.3rem .8rem; border-radius:15px; font-size:.85rem; font-weight:500; }
+
+        .pros-cons{ display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem; }
+        .pros,.cons{ padding:1rem; border-radius:10px; }
+        .pros{ background:rgba(0,255,136,.1); border-left:4px solid var(--success); }
+        .cons{ background:rgba(255,68,68,.1); border-left:4px solid #ff4444; }
+        .pros h4,.cons h4{ margin-bottom:.5rem; font-size:1.1rem; }
+        .pros ul,.cons ul{ list-style:none; padding-left:1rem; }
+        .pros li::before{ content:"✓ "; color:var(--success); font-weight:bold; margin-right:.5rem; }
+        .cons li::before{ content:"✗ "; color:#ff4444; font-weight:bold; margin-right:.5rem; }
+
+        .character-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1.5rem; margin-top:1.5rem; }
+        .character-card{ background:linear-gradient(135deg,#2a2a35 0%,#1a1a25 100%); padding:1.5rem; border-radius:10px; text-align:center; transition:.3s; cursor:pointer; border:2px solid transparent; }
+        .character-card:hover{ transform:translateY(-5px); border-color:var(--accent-color); box-shadow:0 8px 30px var(--metal-glow); }
+        .character-icon{ font-size:3rem; margin-bottom:.5rem; }
+        .synergy-rating{ color:var(--warning); font-weight:bold; margin-top:.5rem; }
+
+        .tips-grid{ display:grid; gap:1rem; margin-top:1.5rem; }
+        .tip-card{ background:linear-gradient(135deg,#2a2a35 0%,#1a1a25 100%); padding:1.5rem; border-radius:10px; border-left:4px solid var(--warning); }
+        .tip-icon{ color:var(--warning); margin-right:.5rem; font-size:1.2rem; }
+
+        .cta-section{ background:linear-gradient(135deg,var(--primary-color) 0%,var(--secondary-color) 100%); padding:3rem; text-align:center; border-radius:15px; margin-top:3rem; box-shadow:0 0 50px var(--metal-glow); }
+        .cta-button{ display:inline-block; background:white; color:var(--primary-color); padding:1rem 2rem; border-radius:30px; text-decoration:none; font-weight:bold; margin:.5rem; transition:all .3s; box-shadow:0 4px 15px rgba(0,0,0,.2); }
+        .cta-button:hover{ transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,0,0,.3); }
+
+        @media (max-width:768px){
+            .weapon-header{ flex-direction:column; text-align:center; }
+            .weapon-title-section h1{ font-size:2rem; }
+            .pros-cons{ grid-template-columns:1fr; }
+            .stats-grid{ grid-template-columns:1fr; }
+            .unlock-header{ flex-direction:column; align-items:flex-start; }
+            .counter-controls{ flex-direction:column; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="breadcrumb">
-            <a href="/">Home</a> > 
-            <a href="/database/">Database</a> > 
-            <a href="/database/weapons/">Weapons</a> > 
-            <span>Sword</span>
-        </div>
-        <div class="weapon-header">
-            <div class="weapon-icon">⚔️</div>
-            <div class="weapon-title-section">
-                <h1>Sword</h1>
-                <span class="weapon-tier">C-TIER WEAPON</span>
-                <p style="margin-top: 1rem; opacity: 0.9;">Sir Oofie's Default Weapon - The Basic Melee Blade</p>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
-        <!-- Default Weapon Banner -->
-        <div class="default-banner">
-            <h3>✓ DEFAULT WEAPON - NO UNLOCK REQUIRED</h3>
-            <p style="font-size: 1.1rem; opacity: 0.9;">
-                Available from the start! One of 7 default weapons that require no unlock.
-            </p>
-        </div>
-
-        <!-- Warning Banner -->
-        <div class="warning-banner">
-            <h3>⚠️ EARLY GAME WEAPON - REPLACE AS SOON AS POSSIBLE</h3>
-            <p style="font-size: 1.1rem; opacity: 0.9;">
-                Community consensus: Sword is the weakest default weapon. Use it to unlock better weapons, then transition immediately.
-            </p>
-        </div>
-
-        <!-- Weapon Overview -->
-        <section class="section">
-            <h2>⚔️ Weapon Overview</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
-                The <strong>Sword</strong> is <strong>Sir Oofie's default weapon</strong> and represents the most basic melee option in Megabonk. It delivers straightforward <strong>melee slashes</strong> that can hit multiple enemies in front of you. While the Sword's simplicity makes it easy to understand for new players, it suffers from fundamental limitations: slow attack speed, melee-only range, forward-facing attacks only, and weak scaling. The Sword's primary value lies in its role as a <strong>weapon unlock farming tool</strong> – kill enemies with it to unlock Axe, Brass Knuckles, and the powerful Dexecutioner.
-            </p>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">Weapon Type</div>
-                    <div class="stat-value">Melee Slash</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Tier Ranking</div>
-                    <div class="stat-value">C-Tier</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Unlock Status</div>
-                    <div class="stat-value">Default</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Max Level</div>
-                    <div class="stat-value">40</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Best Use Case</div>
-                    <div class="stat-value">Weapon Farming</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Default Character</div>
-                    <div class="stat-value">🛡️ Sir Oofie</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Weapon Unlocks Tracker -->
-        <section class="section">
-            <h2>🔓 Unlock Other Weapons with Sword Kills</h2>
-            <p style="margin-bottom: 1.5rem;">
-                The Sword's main purpose is to unlock <strong>three powerful weapons</strong> through kill milestones. This is why many players intentionally use Sword in early runs despite its weaknesses. Track your progress below:
-            </p>
-
-            <div class="unlock-tracker">
-                <!-- Axe Unlock -->
-                <div class="unlock-item">
-                    <div class="unlock-header">
-                        <h3 style="margin: 0; color: var(--highlight);">🪓 Axe</h3>
-                        <span class="unlock-cost">1 Silver</span>
-                    </div>
-                    <p style="margin-bottom: 1rem;">Kill <strong>2,000 enemies</strong> using the Sword to unlock this spinning AoE weapon. Axe is significantly better than Sword for crowd control.</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="axeProgress" style="width: 0%"></div>
-                        <div class="progress-text" id="axeText">0 / 2,000 Kills (0%)</div>
-                    </div>
-                    <div class="counter-controls">
-                        <button class="counter-button" onclick="addKills('axe', 50)">+50</button>
-                        <button class="counter-button" onclick="addKills('axe', 100)">+100</button>
-                        <button class="counter-button" onclick="addKills('axe', 500)">+500</button>
-                        <button class="counter-button" onclick="resetKills('axe')">Reset</button>
-                    </div>
-                </div>
-
-                <!-- Brass Knuckles Unlock -->
-                <div class="unlock-item">
-                    <div class="unlock-header">
-                        <h3 style="margin: 0; color: var(--highlight);">👊 Brass Knuckles</h3>
-                        <span class="unlock-cost">2 Silver</span>
-                    </div>
-                    <p style="margin-bottom: 1rem;">Kill <strong>5,000 enemies</strong> using the Sword. This fast-hitting melee weapon offers higher DPS than Sword with rapid strikes.</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="knucklesProgress" style="width: 0%"></div>
-                        <div class="progress-text" id="knucklesText">0 / 5,000 Kills (0%)</div>
-                    </div>
-                    <div class="counter-controls">
-                        <button class="counter-button" onclick="addKills('knuckles', 100)">+100</button>
-                        <button class="counter-button" onclick="addKills('knuckles', 250)">+250</button>
-                        <button class="counter-button" onclick="addKills('knuckles', 500)">+500</button>
-                        <button class="counter-button" onclick="resetKills('knuckles')">Reset</button>
-                    </div>
-                </div>
-
-                <!-- Dexecutioner Unlock -->
-                <div class="unlock-item">
-                    <div class="unlock-header">
-                        <h3 style="margin: 0; color: var(--highlight);">⚔️ Dexecutioner</h3>
-                        <span class="unlock-cost">3 Silver</span>
-                    </div>
-                    <p style="margin-bottom: 1rem;">Kill <strong>12,500 enemies</strong> using the Sword to unlock this S-tier piercing blade with instant execution mechanics. Worth the grind!</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="dexProgress" style="width: 0%"></div>
-                        <div class="progress-text" id="dexText">0 / 12,500 Kills (0%)</div>
-                    </div>
-                    <div class="counter-controls">
-                        <button class="counter-button" onclick="addKills('dex', 250)">+250</button>
-                        <button class="counter-button" onclick="addKills('dex', 500)">+500</button>
-                        <button class="counter-button" onclick="addKills('dex', 1000)">+1000</button>
-                        <button class="counter-button" onclick="resetKills('dex')">Reset</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card" style="margin-top: 2rem;">
-                <span class="tip-icon">💡</span>
-                <strong>Farming Strategy:</strong> You don't need to get all kills in one run. Progress is cumulative across all runs. Focus on survival and max kill count per run. A typical 20-minute run can net 1,000-2,000 kills with proper builds.
-            </div>
-        </section>
-
-        <!-- Weapon Mechanics -->
-        <section class="section">
-            <h2>⚙️ Weapon Mechanics</h2>
-            
-            <h3>Core Mechanics</h3>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">Damage Type</div>
-                    <div class="stat-value">Melee Slash</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Close-range slashing attacks</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Attack Pattern</div>
-                    <div class="stat-value">Forward Arc</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Only hits enemies in front</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Attack Speed</div>
-                    <div class="stat-value">Slow</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Noticeable swing delay</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Range</div>
-                    <div class="stat-value">Melee Only</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Must be in close range</p>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 2rem;">Fundamental Weaknesses</h3>
-            <div class="tips-grid">
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">🐌 Slow Attack Speed</h4>
-                    <p>Base swing speed is noticeably slow. You'll need significant Attack Speed upgrades to make Sword feel responsive, which competes with other stat priorities.</p>
-                </div>
-
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">👊 Melee Range Danger</h4>
-                    <p>Being forced into melee range means taking more damage. Sir Oofie's armor helps, but you're still vulnerable to swarms and explosive enemies.</p>
-                </div>
-
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">➡️ Forward-Only Attacks</h4>
-                    <p>Sword can't hit behind you. Exploding enemies and fast flankers are nightmares. You need Size upgrades to increase the attack arc width.</p>
-                </div>
-
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">📉 Poor Late-Game Scaling</h4>
-                    <p>Even with perfect upgrades, Sword can't compete with S-tier weapons in late game. Boss DPS and swarm clear speed are both suboptimal.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Builds for Sword Farming -->
-        <section class="section">
-            <h2>🛠️ Builds for Sword Kill Farming</h2>
-            <p style="margin-bottom: 1.5rem;">
-                Since Sword's primary purpose is unlocking other weapons, these builds focus on <strong>maximizing kill count and survival</strong> rather than competitive viability:
-            </p>
-            
-            <div class="builds-grid">
-                <!-- Build 1 -->
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 style="margin: 0;">🛡️ Tank & Slash Build</h3>
-                        <div class="build-rating">
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">☆</span>
-                        </div>
-                    </div>
-                    
-                    <div class="build-tags">
-                        <span class="tag">Sir Oofie</span>
-                        <span class="tag">Survivability</span>
-                        <span class="tag">Kill Farming</span>
-                    </div>
-
-                    <p>Leverage Sir Oofie's armor scaling to facetank enemies while grinding sword kills. Add lifesteal and armor items for maximum sustainability.</p>
-
-                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Core Strategy</h4>
-                    <ul style="list-style: none; padding-left: 1rem;">
-                        <li>🛡️ <strong>Armor Tome</strong> - Stacks with Sir Oofie's passive</li>
-                        <li>❤️ <strong>Lifesteal Tome</strong> - Sustain through melee combat</li>
-                        <li>⚡ <strong>Attack Speed Tome</strong> - Fix slow sword swings</li>
-                        <li>🔥 <strong>Damage Tome</strong> - Faster kill speed</li>
-                    </ul>
-
-                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Essential Items</h4>
-                    <ul style="list-style: none; padding-left: 1rem;">
-                        <li>🏋️ <strong>Chonkplate</strong> - 75% HP boost + 20% lifesteal</li>
-                        <li>🍖 <strong>Beefy Ring</strong> - Convert HP to damage</li>
-                        <li>⚡ <strong>Turbo Boots</strong> - Movement speed (survival)</li>
-                        <li>🔰 <strong>Spikey Shield</strong> - Thorns damage synergy</li>
-                    </ul>
-
-                    <div class="pros-cons">
-                        <div class="pros">
-                            <h4>✓ Strengths</h4>
-                            <ul>
-                                <li>Very high survivability</li>
-                                <li>Can reach 30+ minute runs</li>
-                                <li>Excellent kill accumulation</li>
-                                <li>Beginner friendly</li>
-                            </ul>
-                        </div>
-                        <div class="cons">
-                            <h4>✗ Weaknesses</h4>
-                            <ul>
-                                <li>Still slow kill speed</li>
-                                <li>Vulnerable to explosions</li>
-                                <li>Weak vs bosses</li>
-                                <li>Boring gameplay</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Build 2 -->
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 style="margin: 0;">⚡ Speed Slash Hybrid Build</h3>
-                        <div class="build-rating">
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">☆</span>
-                        </div>
-                    </div>
-                    
-                    <div class="build-tags">
-                        <span class="tag">Attack Speed Focus</span>
-                        <span class="tag">Size Scaling</span>
-                        <span class="tag">Kill Efficiency</span>
-                    </div>
-
-                    <p>Fix Sword's fundamental flaws by stacking Attack Speed and Size. Add secondary ranged weapons for safety and efficiency.</p>
-
-                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Core Strategy</h4>
-                    <ul style="list-style: none; padding-left: 1rem;">
-                        <li>⚡ <strong>Attack Speed Tome</strong> - Priority #1</li>
-                        <li>📏 <strong>Size Tome</strong> - Wider attack arc</li>
-                        <li>🔥 <strong>Damage Tome</strong> - Kill speed boost</li>
-                        <li>⚡ <strong>Lightning Staff</strong> (secondary) - Safe AoE damage</li>
-                    </ul>
-
-                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Upgrade Priority</h4>
-                    <ol style="padding-left: 1.5rem;">
-                        <li>Attack Speed (max priority)</li>
-                        <li>Size (attack arc width)</li>
-                        <li>Damage</li>
-                        <li>Movement Speed</li>
-                    </ol>
-
-                    <div class="pros-cons">
-                        <div class="pros">
-                            <h4>✓ Strengths</h4>
-                            <ul>
-                                <li>Faster kill accumulation</li>
-                                <li>Less clunky gameplay</li>
-                                <li>Safer with ranged backup</li>
-                                <li>Better clear efficiency</li>
-                            </ul>
-                        </div>
-                        <div class="cons">
-                            <h4>✗ Weaknesses</h4>
-                            <ul>
-                                <li>Stat-hungry build</li>
-                                <li>Takes time to ramp up</li>
-                                <li>Still weak early game</li>
-                                <li>Diluted weapon focus</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Build 3 -->
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 style="margin: 0;">🎯 Efficient Farming Build</h3>
-                        <div class="build-rating">
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                        </div>
-                    </div>
-                    
-                    <div class="build-tags">
-                        <span class="tag">Recommended</span>
-                        <span class="tag">Optimized</span>
-                        <span class="tag">Kill Farming</span>
-                    </div>
-
-                    <p>The smartest approach: Use Sword just enough to unlock weapons, then immediately transition to better options. Don't waste time trying to make Sword "work".</p>
-
-                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Strategy Phase 1 (Axe - 2K Kills)</h4>
-                    <ul style="list-style: none; padding-left: 1rem;">
-                        <li>🎯 <strong>Focus:</strong> Pure survival with minimal Sword investment</li>
-                        <li>⏱️ <strong>Duration:</strong> 2-4 runs of 15-20 minutes each</li>
-                        <li>⚡ <strong>Tomes:</strong> XP Tome + Luck Tome for faster leveling</li>
-                        <li>🔄 <strong>Transition:</strong> Switch to Axe immediately after unlock</li>
-                    </ul>
-
-                    <h4 style="margin-top: 1.5rem; color: var(--warning);">Strategy Phase 2 (Dexecutioner - 12.5K Total)</h4>
-                    <ul style="list-style: none; padding-left: 1rem;">
-                        <li>🪓 <strong>Use Axe</strong> to accumulate remaining ~10K sword kills</li>
-                        <li>⚔️ <strong>Keep Sword</strong> as secondary weapon slot</li>
-                        <li>📈 <strong>Let passive kills</strong> from Sword count toward Dexecutioner</li>
-                        <li>🏆 <strong>Final Reward:</strong> S-tier Dexecutioner weapon</li>
-                    </ul>
-
-                    <div class="pros-cons">
-                        <div class="pros">
-                            <h4>✓ Strengths</h4>
-                            <ul>
-                                <li>Most time-efficient</li>
-                                <li>Minimizes Sword suffering</li>
-                                <li>Gets you to S-tier weapons faster</li>
-                                <li>Smart resource allocation</li>
-                            </ul>
-                        </div>
-                        <div class="cons">
-                            <h4>✗ Weaknesses</h4>
-                            <ul>
-                                <li>Requires game knowledge</li>
-                                <li>Less straightforward</li>
-                                <li>Need to manage weapon slots</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Character Synergy -->
-        <section class="section">
-            <h2>👥 Character Compatibility</h2>
-            <p style="margin-bottom: 1.5rem;">
-                Sword works best with tanky characters who can survive melee range combat. Sir Oofie is the obvious choice, but others can work:
-            </p>
-
-            <div class="character-grid">
-                <div class="character-card" onclick="window.open('/guides/characters/sir-oofie-guide', '_blank')">
-                    <div class="character-icon">🛡️</div>
-                    <h4>Sir Oofie</h4>
-                    <div class="synergy-rating">⭐⭐⭐⭐⭐ Perfect</div>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
-                        Default weapon. Armor scaling (+1% per level) is designed specifically to compensate for Sword's melee range weakness.
-                    </p>
-                </div>
-
-                <div class="character-card" onclick="window.open('/guides/characters/megachad-guide', '_blank')">
-                    <div class="character-icon">💪</div>
-                    <h4>Megachad</h4>
-                    <div class="synergy-rating">⭐⭐⭐ Viable</div>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
-                        Defensive stats and Aura synergy help survive melee combat. Not optimal, but his tankiness makes Sword farming bearable.
-                    </p>
-                </div>
-
-                <div class="character-card">
-                    <div class="character-icon">⚔️</div>
-                    <h4>Melee Characters</h4>
-                    <div class="synergy-rating">⭐⭐ Acceptable</div>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
-                        Any character with armor/defense passives can use Sword for farming purposes, but it's never their optimal weapon choice.
-                    </p>
-                </div>
-
-                <div class="character-card">
-                    <div class="character-icon">🦊</div>
-                    <h4>Fox / Calcium</h4>
-                    <div class="synergy-rating">⭐ Poor</div>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
-                        Squishy characters with no defensive passives suffer badly with Sword. Avoid using it unless absolutely necessary for unlocks.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- When to Replace -->
-        <section class="section">
-            <h2>🔄 When to Replace Sword</h2>
-            
-            <h3>Immediate Replacement Triggers</h3>
-            <p style="margin-bottom: 1.5rem;">Replace Sword as soon as ANY of these conditions are met:</p>
-
-            <div class="stats-grid">
-                <div class="stat-card" style="border-left-color: #ff4444;">
-                    <div class="stat-label">Time Marker</div>
-                    <div class="stat-value">5-10 Min</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Replace at first opportunity</p>
-                </div>
-                <div class="stat-card" style="border-left-color: #ff4444;">
-                    <div class="stat-label">Struggle Indicator</div>
-                    <div class="stat-value">Dying Often</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">If runs consistently fail early</p>
-                </div>
-                <div class="stat-card" style="border-left-color: #00ff88;">
-                    <div class="stat-label">Opportunity</div>
-                    <div class="stat-value">Any A+ Weapon</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Replace immediately when found</p>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 2rem;">Best Replacement Options (Priority Order)</h3>
-            <ol style="padding-left: 1.5rem; line-height: 2;">
-                <li><strong>🪓 Axe</strong> - First unlock from Sword kills (2K), massive upgrade</li>
-                <li><strong>⚡ Lightning Staff</strong> - Default weapon, S-tier AoE, range advantage</li>
-                <li><strong>💫 Aura</strong> - Passive damage, no aim required, S-tier</li>
-                <li><strong>⚔️ Dexecutioner</strong> - Ultimate Sword upgrade (12.5K kills), S-tier</li>
-                <li><strong>🛡️ Aegis</strong> - If you unlocked it, better defensive option</li>
-            </ol>
-
-            <div class="tip-card" style="margin-top: 2rem;">
-                <span class="tip-icon">🎯</span>
-                <strong>Reality Check:</strong> Don't try to force Sword into late game. Even with perfect upgrades, it's outclassed by dozens of better options. Use it for unlocks, then move on. Your win rate will thank you.
-            </div>
-        </section>
-
-        <!-- Advanced Tips -->
-        <section class="section">
-            <h2>🎓 Advanced Sword Farming Tips</h2>
-
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <span class="tip-icon">📊</span>
-                    <strong>Kill Efficiency Tracking:</strong> A typical 20-minute run should net 800-1,200 sword kills with basic builds. Aim for 1,500+ with optimized setups. Track your average to estimate total runs needed.
-                </div>
-
-                <div class="tip-card">
-                    <span class="tip-icon">🔄</span>
-                    <strong>Secondary Weapon Strategy:</strong> Keep Sword in slot 2-3 after unlocking Axe. Passive kills from Sword still count toward Dexecutioner unlock while Axe does the heavy lifting.
-                </div>
-
-                <div class="tip-card">
-                    <span class="tip-icon">🎯</span>
-                    <strong>Positioning is Everything:</strong> With forward-only attacks, constantly adjust your facing direction. Practice "attack-move" patterns: slash, step forward, slash, repeat.
-                </div>
-
-                <div class="tip-card">
-                    <span class="tip-icon">⚡</span>
-                    <strong>Attack Speed Breakpoints:</strong> At ~150% attack speed, Sword becomes noticeably more responsive. At 200%+, it's actually playable. Prioritize this stat early if grinding kills.
-                </div>
-
-                <div class="tip-card">
-                    <span class="tip-icon">📏</span>
-                    <strong>Size > Damage Early:</strong> Counterintuitively, Size upgrades help more than Damage early on. Wider attack arc = hitting more enemies per swing = faster clear = more kills.
-                </div>
-
-                <div class="tip-card">
-                    <span class="tip-icon">🛡️</span>
-                    <strong>Armor is Mandatory:</strong> You will take damage in melee range. Period. Armor Tome + defensive items aren't optional – they're required for any run past 15 minutes.
-                </div>
-
-                <div class="tip-card">
-                    <span class="tip-icon">⏱️</span>
-                    <strong>Optimal Run Length:</strong> 20-25 minute runs are the sweet spot. Longer runs have diminishing returns on kill count while increasing risk. Better to do more medium-length runs.
-                </div>
-
-                <div class="tip-card">
-                    <span class="tip-icon">🎮</span>
-                    <strong>Mental Preparation:</strong> Grinding 12,500 Sword kills for Dexecutioner is tedious. Set realistic goals (e.g., "2K kills this session"), take breaks, listen to podcasts. It's a marathon, not a sprint.
-                </div>
-            </div>
-        </section>
-
-        <!-- Common Mistakes -->
-        <section class="section">
-            <h2>⚠️ Common Mistakes to Avoid</h2>
-            
-            <div class="tips-grid">
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Trying to Make Sword "Viable"</h4>
-                    <p>Stop. Just stop. Dozens of weapons are better. Your time is valuable. Use Sword for unlocks only, then immediately replace it. Don't fall for sunk cost fallacy.</p>
-                </div>
-
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Ignoring Movement Speed</h4>
-                    <p>Slow movement + slow attack + melee range = death. You NEED movement speed to kite, reposition, and avoid damage. It's not optional with Sword.</p>
-                </div>
-
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Fighting Explosive Enemies Head-On</h4>
-                    <p>Those green exploding bugs? They're your worst nightmare with Sword. Learn to recognize and avoid them, or accept frequent deaths. There's no tank build that survives multiple explosions at once.</p>
-                </div>
-
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Using Sword on Squishy Characters</h4>
-                    <p>Fox with Sword? Calcium with Sword? You're making it 10x harder than necessary. If farming Sword kills, use Sir Oofie. Period. Don't be a masochist.</p>
-                </div>
-
-                <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-left: 4px solid #ff4444; border-radius: 10px;">
-                    <h4 style="color: #ff4444; margin-bottom: 0.5rem;">❌ Grinding All 12.5K Kills with Sword Alone</h4>
-                    <p>After you unlock Axe at 2K kills, switch to it while keeping Sword in a secondary slot. Axe is massively superior while Sword's passive kills still count. Save yourself hours of frustration.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <div class="cta-section">
-            <h2 style="color: white; margin-bottom: 1rem;">Ready to Move Beyond the Sword?</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
-                Discover superior weapons and builds that actually work in late game
-            </p>
-            <a href="/database/weapons/" class="cta-button">View All Weapons</a>
-            <a href="/guides/builds/" class="cta-button">Browse Build Guides</a>
-            <a href="/guides/characters/sir-oofie-guide" class="cta-button">Sir Oofie Guide</a>
-        </div>
+<header>
+    <div class="breadcrumb">
+        <a href="/">Home</a> >
+        <a href="/database/">Database</a> >
+        <a href="/database/weapons/">Weapons</a> >
+        <span>Sword</span>
     </div>
 
-    <script>
-        // Unlock Progress Tracking
-        const unlocks = {
-            axe: { current: parseInt(localStorage.getItem('axeKills')) || 0, max: 2000 },
-            knuckles: { current: parseInt(localStorage.getItem('knucklesKills')) || 0, max: 5000 },
-            dex: { current: parseInt(localStorage.getItem('dexKills')) || 0, max: 12500 }
-        };
+    <div class="weapon-header">
+        <div class="weapon-icon">⚔️</div>
+        <img class="weapon-art" src="https://megabonk.org/images/database/weapons/Sword.png" alt="Megabonk Sword weapon art" loading="eager" width="120" height="120"/>
+        <div class="weapon-title-section">
+            <h1>Sword</h1>
+            <span class="weapon-tier">LOW–MID TIER (COMMUNITY)</span>
+            <p style="margin-top:1rem; opacity:.9;">Sir Oofie's starting melee blade — forward arc slashes that hit multiple targets.</p>
+        </div>
+    </div>
+</header>
 
-        function updateProgress(type) {
-            const unlock = unlocks[type];
-            const percentage = Math.min((unlock.current / unlock.max) * 100, 100);
-            
-            const progressFill = document.getElementById(`${type}Progress`);
-            const progressText = document.getElementById(`${type}Text`);
-            
-            progressFill.style.width = percentage + '%';
-            progressText.textContent = `${unlock.current.toLocaleString()} / ${unlock.max.toLocaleString()} Kills (${percentage.toFixed(1)}%)`;
-            
-            localStorage.setItem(`${type}Kills`, unlock.current);
+<div class="container">
 
-            if (unlock.current >= unlock.max) {
-                progressText.textContent = '✓ Unlock Complete! Purchase in Unlocks Menu!';
-                progressFill.style.background = 'linear-gradient(90deg, #00ff88, #00ffcc)';
-            }
-        }
+    <!-- Default / Caution Banners -->
+    <div class="default-banner">
+        <h3>✓ STARTING WEAPON — NO UNLOCK REQUIRED</h3>
+        <p style="font-size:1.1rem; opacity:.9;">
+            Available from the beginning on Sir Oofie. Progress toward certain unlocks is cumulative across runs.
+        </p>
+    </div>
 
-        function addKills(type, amount) {
-            unlocks[type].current = Math.min(unlocks[type].current + amount, unlocks[type].max);
-            updateProgress(type);
-        }
+    <div class="warning-banner">
+        <h3>⚠️ EARLY-GAME NOTICE</h3>
+        <p style="font-size:1.1rem; opacity:.9;">
+            Community tier lists often rate Sword on the lower side without strong support. Consider transitioning once better options appear.
+        </p>
+    </div>
 
-        function resetKills(type) {
-            if (confirm(`Reset ${type} counter to 0?`)) {
-                unlocks[type].current = 0;
-                const progressFill = document.getElementById(`${type}Progress`);
-                progressFill.style.background = 'linear-gradient(90deg, var(--accent-color), var(--highlight))';
-                updateProgress(type);
-            }
-        }
+    <!-- Overview -->
+    <section class="section">
+        <h2>⚔️ Weapon Overview</h2>
+        <p style="font-size:1.05rem; margin-bottom:2rem;">
+            The <strong>Sword</strong> is <strong>Sir Oofie's starting weapon</strong>. It performs straightforward <strong>melee slashes in a forward arc</strong> and can hit several enemies at once. Base attack speed is slow and range is melee-only, so stacking <em>Attack Speed</em> and <em>Size</em> helps the weapon feel responsive and widen coverage.
+        </p>
 
-        // Initialize all progress bars
-        Object.keys(unlocks).forEach(type => updateProgress(type));
-    </script>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Weapon Type</div>
+                <div class="stat-value">Melee Slash</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Community Tier*</div>
+                <div class="stat-value">Low → Mid</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Unlock Status</div>
+                <div class="stat-value">Starting (Sir Oofie)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Max Level</div>
+                <div class="stat-value">40</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Best Use Case</div>
+                <div class="stat-value">Early unlock progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Default Character</div>
+                <div class="stat-value">🛡️ Sir Oofie</div>
+            </div>
+        </div>
+        <p style="opacity:.7; font-size:.9rem;">*Tier labels are subjective and vary by list/version.</p>
+    </section>
+
+    <!-- UNLOCKS (Weapons) -->
+    <section class="section">
+        <h2>🔓 Weapons Unlocked via <em>Sword Kills</em></h2>
+        <p style="margin-bottom:1.5rem;">
+            Meeting the kill milestone unlocks the entry in <strong>Unlocks</strong>; you then <strong>purchase with Silver</strong> (price varies by weapon).
+        </p>
+
+        <div class="unlock-tracker">
+            <!-- Axe -->
+            <div class="unlock-item">
+                <div class="unlock-header">
+                    <h3 style="margin:0; color:var(--highlight);">🪓 Axe</h3>
+                    <span class="unlock-note">Milestone: 2,000 Sword kills</span>
+                </div>
+                <p style="margin-bottom:1rem;">Reliable early upgrade with circular coverage and better crowd control than Sword.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="axeProgress" style="width:0%"></div>
+                    <div class="progress-text" id="axeText">0 / 2,000 Kills (0%)</div>
+                </div>
+                <div class="counter-controls">
+                    <button class="counter-button" onclick="addKills('axe',50)">+50</button>
+                    <button class="counter-button" onclick="addKills('axe',100)">+100</button>
+                    <button class="counter-button" onclick="addKills('axe',500)">+500</button>
+                    <button class="counter-button" onclick="resetKills('axe')">Reset</button>
+                </div>
+            </div>
+
+            <!-- Dexecutioner -->
+            <div class="unlock-item">
+                <div class="unlock-header">
+                    <h3 style="margin:0; color:var(--highlight);">⚔️ Dexecutioner</h3>
+                    <span class="unlock-note">Milestone: 12,500 Sword kills</span>
+                </div>
+                <p style="margin-bottom:1rem;">Piercing blade with a chance to instantly execute enemies — a major power spike once unlocked.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="dexProgress" style="width:0%"></div>
+                    <div class="progress-text" id="dexText">0 / 12,500 Kills (0%)</div>
+                </div>
+                <div class="counter-controls">
+                    <button class="counter-button" onclick="addKills('dex',250)">+250</button>
+                    <button class="counter-button" onclick="addKills('dex',500)">+500</button>
+                    <button class="counter-button" onclick="addKills('dex',1000)">+1000</button>
+                    <button class="counter-button" onclick="resetKills('dex')">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-card" style="margin-top:1.5rem;">
+            <span class="tip-icon">💡</span>
+            <strong>Progress is cumulative</strong> — you don't need to complete these kills in a single run.
+        </div>
+    </section>
+
+    <!-- ITEMS unlocked by Sword kills -->
+    <section class="section">
+        <h2>🎒 Items Unlocked via <em>Sword Kills</em></h2>
+        <div class="unlock-tracker">
+            <!-- Brass Knuckles (Item) -->
+            <div class="unlock-item">
+                <div class="unlock-header">
+                    <h3 style="margin:0; color:var(--highlight);">👊 Brass Knuckles <span style="font-size:.9rem; opacity:.8;">(Item)</span></h3>
+                    <span class="unlock-note">Milestone: 5,000 Sword kills</span>
+                </div>
+                <p style="margin-bottom:1rem;">Effect: <strong>+20% damage</strong> to nearby enemies. Unlocks in <em>Items</em>, then purchase with Silver.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="knucklesProgress" style="width:0%"></div>
+                    <div class="progress-text" id="knucklesText">0 / 5,000 Kills (0%)</div>
+                </div>
+                <div class="counter-controls">
+                    <button class="counter-button" onclick="addKills('knuckles',100)">+100</button>
+                    <button class="counter-button" onclick="addKills('knuckles',250)">+250</button>
+                    <button class="counter-button" onclick="addKills('knuckles',500)">+500</button>
+                    <button class="counter-button" onclick="resetKills('knuckles')">Reset</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mechanics -->
+    <section class="section">
+        <h2>⚙️ Weapon Mechanics</h2>
+
+        <h3>Core Mechanics</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Damage Type</div>
+                <div class="stat-value">Melee Slash</div>
+                <p style="margin-top:.5rem; font-size:.9rem; opacity:.8;">Close-range, multi-hit forward slashes</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Attack Pattern</div>
+                <div class="stat-value">Forward Arc</div>
+                <p style="margin-top:.5rem; font-size:.9rem; opacity:.8;">Primarily hits enemies in front</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Attack Speed</div>
+                <div class="stat-value">Slow (base)</div>
+                <p style="margin-top:.5rem; font-size:.9rem; opacity:.8;">Benefits greatly from Attack Speed</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Range</div>
+                <div class="stat-value">Melee</div>
+                <p style="margin-top:.5rem; font-size:.9rem; opacity:.8;">Requires safe positioning</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top:2rem;">Common Pain Points</h3>
+        <div class="tips-grid">
+            <div style="padding:1.5rem; background:rgba(255,68,68,.1); border-left:4px solid #ff4444; border-radius:10px;">
+                <h4 style="color:#ff4444; margin-bottom:.5rem;">🐌 Slow Base Speed</h4>
+                <p>Invest in <strong>Attack Speed</strong> early to reduce clunkiness and increase hit frequency.</p>
+            </div>
+            <div style="padding:1.5rem; background:rgba(255,68,68,.1); border-left:4px solid #ff4444; border-radius:10px;">
+                <h4 style="color:#ff4444; margin-bottom:.5rem;">➡️ Narrow Coverage</h4>
+                <p><strong>Size</strong> upgrades widen the swing and help tag more enemies per slash.</p>
+            </div>
+            <div style="padding:1.5rem; background:rgba(255,68,68,.1); border-left:4px solid #ff4444; border-radius:10px;">
+                <h4 style="color:#ff4444; margin-bottom:.5rem;">👊 Melee Risk</h4>
+                <p>Pair with defensive tools (Armor/HP/Thorns) or add a ranged secondary for safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Builds (safe, verified names) -->
+    <section class="section">
+        <h2>🛠️ Practical Early Builds (for Kill Farming)</h2>
+        <p style="margin-bottom:1.5rem;">Focus on survivability and kill throughput until key unlocks are secured.</p>
+
+        <div class="builds-grid">
+            <!-- Build 1 -->
+            <div class="build-card">
+                <div class="build-header">
+                    <h3 style="margin:0;">🛡️ Oofie Tank & Slash</h3>
+                    <div class="build-rating"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span></div>
+                </div>
+                <div class="build-tags">
+                    <span class="tag">Sir Oofie</span><span class="tag">Armor Scaling</span><span class="tag">Kill Farming</span>
+                </div>
+                <p>Leverage Oofie’s passive (gain <strong>+1% Armor per level</strong>) to survive melee range while stacking Attack Speed and Size on Sword.</p>
+                <h4 style="margin-top:1.5rem; color:var(--warning);">Core Tomes</h4>
+                <ul style="list-style:none; padding-left:1rem;">
+                    <li>⚡ <strong>Attack Speed Tome</strong></li>
+                    <li>📏 <strong>Size Tome</strong></li>
+                    <li>❤️ <strong>HP / Armor Tome</strong></li>
+                    <li>📈 <strong>XP / Luck Tome</strong> (faster scaling)</li>
+                </ul>
+                <h4 style="margin-top:1.5rem; color:var(--warning);">Helpful Items</h4>
+                <ul style="list-style:none; padding-left:1rem;">
+                    <li>💪 <strong>Beefy Ring</strong></li>
+                    <li>🛡️ <strong>Spiky Shield</strong></li>
+                    <li>👟 <strong>Turbo Socks / Turbo Skates</strong></li>
+                    <li>🥤 <strong>Gym Sauce</strong></li>
+                </ul>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Pros</h4>
+                        <ul><li>Very forgiving defensively</li><li>Smooth early unlock grinding</li><li>Beginner friendly</li></ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Cons</h4>
+                        <ul><li>Lower peak DPS</li><li>Relies on tomes/items to feel good</li></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Build 2 -->
+            <div class="build-card">
+                <div class="build-header">
+                    <h3 style="margin:0;">⚡ Speed Slash Hybrid</h3>
+                    <div class="build-rating"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span></div>
+                </div>
+                <div class="build-tags">
+                    <span class="tag">Attack Speed</span><span class="tag">Size Scaling</span><span class="tag">Ranged Backup</span>
+                </div>
+                <p>Stack Attack Speed & Size on Sword, then add a ranged weapon (e.g., <strong>Lightning Staff</strong>) to clean up elites safely.</p>
+                <h4 style="margin-top:1.5rem; color:var(--warning);">Priority</h4>
+                <ol style="padding-left:1.5rem;">
+                    <li>Attack Speed</li><li>Size</li><li>Damage</li><li>Movement Speed</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Character synergy -->
+    <section class="section">
+        <h2>👥 Character Compatibility</h2>
+        <p style="margin-bottom:1.5rem;">Sword naturally fits <strong>Sir Oofie</strong> thanks to his armor-scaling passive. Tank-leaning characters and defensive tomes/items make Sword safer to pilot.</p>
+
+        <div class="character-grid">
+            <div class="character-card" onclick="window.open('/guides/characters/sir-oofie-guide','_blank')">
+                <div class="character-icon">🛡️</div>
+                <h4>Sir Oofie</h4>
+                <div class="synergy-rating">⭐⭐⭐⭐⭐ Best Fit</div>
+                <p style="font-size:.9rem; margin-top:.5rem; opacity:.9;">Starts with Sword. Passive: +1% Armor/level — ideal for melee survivability.</p>
+            </div>
+
+            <div class="character-card">
+                <div class="character-icon">🧱</div>
+                <h4>Tanky Archetypes</h4>
+                <div class="synergy-rating">⭐⭐⭐ Viable</div>
+                <p style="font-size:.9rem; margin-top:.5rem; opacity:.9;">Any build that stacks Armor/HP/Thorns can farm early unlocks with Sword more safely.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Replace timing -->
+    <section class="section">
+        <h2>🔄 When to Replace Sword</h2>
+        <h3>Common Triggers</h3>
+        <div class="stats-grid">
+            <div class="stat-card" style="border-left-color:#ff4444;">
+                <div class="stat-label">Early Struggles</div>
+                <div class="stat-value">Frequent deaths</div>
+                <p style="margin-top:.5rem; font-size:.9rem; opacity:.8;">If waves start overwhelming you</p>
+            </div>
+            <div class="stat-card" style="border-left-color:#00ff88;">
+                <div class="stat-label">Better Options</div>
+                <div class="stat-value">Pick upgrades</div>
+                <p style="margin-top:.5rem; font-size:.9rem; opacity:.8;">Swap when a stronger weapon appears</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top:2rem;">Common Replacements</h3>
+        <ol style="padding-left:1.5rem; line-height:2;">
+            <li><strong>🪓 Axe</strong> — Unlocked via Sword 2,000 kills; superior crowd control.</li>
+            <li><strong>⚡ Lightning Staff</strong> — Starting/ranged coverage; strong AoE in many lists.</li>
+            <li><strong>💫 Aura</strong> — Passive 360° damage; great for density.</li>
+            <li><strong>⚔️ Dexecutioner</strong> — Sword 12,500 kills; high ceiling with execute.</li>
+            <li><strong>🛡️ Aegis</strong> — Defensive utility if available.</li>
+        </ol>
+
+        <div class="tip-card" style="margin-top:1.5rem;">
+            <span class="tip-icon">🎯</span>
+            <strong>Time-saving tip:</strong> After unlocking Axe, keep Sword in a secondary slot to continue accumulating Sword kills passively while Axe carries.
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2 style="color:white; margin-bottom:1rem;">Ready to move beyond Sword?</h2>
+        <p style="font-size:1.1rem; margin-bottom:2rem; opacity:.9;">See weapons and builds that scale harder into late game.</p>
+        <a href="/database/weapons/" class="cta-button">View All Weapons</a>
+        <a href="/guides/builds/" class="cta-button">Browse Build Guides</a>
+        <a href="/guides/characters/sir-oofie-guide" class="cta-button">Sir Oofie Guide</a>
+    </div>
+</div>
+
+<script>
+/* Kill progress tracker (localStorage persists between visits on same browser) */
+const unlocks = {
+  axe:       { current: parseInt(localStorage.getItem('axeKills')) || 0,       max: 2000,   key: 'axeKills',       elFill: 'axeProgress',       elText: 'axeText' },
+  knuckles:  { current: parseInt(localStorage.getItem('knucklesKills')) || 0,  max: 5000,   key: 'knucklesKills',  elFill: 'knucklesProgress',  elText: 'knucklesText' },
+  dex:       { current: parseInt(localStorage.getItem('dexKills')) || 0,       max: 12500,  key: 'dexKills',       elFill: 'dexProgress',       elText: 'dexText' }
+};
+
+function updateProgress(type){
+  const u = unlocks[type];
+  const pct = Math.min((u.current / u.max) * 100, 100);
+  const fill = document.getElementById(u.elFill);
+  const text = document.getElementById(u.elText);
+  if(!fill || !text) return;
+  fill.style.width = pct + '%';
+  text.textContent = `${u.current.toLocaleString()} / ${u.max.toLocaleString()} Kills (${pct.toFixed(1)}%)`;
+  localStorage.setItem(u.key, u.current);
+  if(u.current >= u.max){
+    text.textContent = '✓ Milestone reached — purchase in Unlocks';
+    fill.style.background = 'linear-gradient(90deg,#00ff88,#00ffcc)';
+  }
+}
+
+function addKills(type, amount){ unlocks[type].current = Math.min(unlocks[type].current + amount, unlocks[type].max); updateProgress(type); }
+function resetKills(type){
+  if(confirm(`Reset ${type} counter to 0?`)){
+    unlocks[type].current = 0;
+    const fill = document.getElementById(unlocks[type].elFill);
+    if(fill) fill.style.background = 'linear-gradient(90deg, var(--accent-color), var(--highlight))';
+    updateProgress(type);
+  }
+}
+Object.keys(unlocks).forEach(updateProgress);
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
