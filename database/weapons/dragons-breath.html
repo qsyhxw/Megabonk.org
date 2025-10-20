@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dragon's Breath Weapon Guide - Megabonk Database</title>
-    <meta name="description" content="Complete Dragon's Breath weapon guide for Megabonk. Learn unlock requirements, best builds, scaling strategies, and dominate with this fire AoE weapon.">
+    <title>Dragon's Breath Guide – Unlock & Best Builds | Megabonk</title>
+    <meta name="description" content="Unlock Dragon's Breath by killing 1,000 Wisps as Fox on Desert. See verified upgrades (Damage/Duration/Size), tome choices, and proven build tips.">
     <meta name="keywords" content="megabonk dragon's breath, dragons breath guide, megabonk fire weapon, fox unlock, wisp farming">
 
     <link rel="canonical" href="https://megabonk.org/database/weapons/dragons-breath">
@@ -15,7 +15,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-V5X87M8JFL');
     </script>
 
@@ -25,16 +24,16 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Dragon's Breath Weapon Guide - Megabonk">
-    <meta property="og:description" content="Master the Dragon's Breath weapon in Megabonk. Unlock by killing 1,000 Wisps as Fox on Desert.">
+    <meta property="og:description" content="Unlock by killing 1,000 Wisps as Fox on Desert. Real data: upgrade paths (Damage/Duration/Size), builds, and v1.0.12 notes.">
     <meta property="og:image" content="https://megabonk.org/images/dragons-breath-og.jpg">
     
     <!-- Schema.org markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Dragon's Breath Weapon Guide - Megabonk Database",
-      "description": "Complete guide to Dragon's Breath weapon in Megabonk including unlock requirements, builds, and strategies",
+      "description": "Verified guide to Dragon's Breath in Megabonk: unlock requirement, upgrade paths, builds, and patch notes.",
       "author": {
         "@type": "Organization",
         "name": "Megabonk.org"
@@ -47,12 +46,7 @@
     </script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -60,421 +54,149 @@
             line-height: 1.6;
             min-height: 100vh;
         }
-        
         /* Fire particle animation */
         .fire-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
         }
-        
         .flame {
-            position: absolute;
-            width: 4px;
-            height: 4px;
+            position: absolute; width: 4px; height: 4px;
             background: radial-gradient(circle, #ff4500 0%, #ff8c00 50%, transparent 70%);
-            border-radius: 50%;
-            animation: flame-rise 3s ease-in infinite;
-            opacity: 0;
+            border-radius: 50%; animation: flame-rise 3s ease-in infinite; opacity: 0;
         }
-        
         @keyframes flame-rise {
-            0% {
-                transform: translateY(100vh) scale(0.8);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) scale(1.5);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
         }
-        
         header {
             background: linear-gradient(135deg, #d35400 0%, #e74c3c 100%);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(255, 69, 0, 0.3);
-            position: relative;
-            z-index: 10;
+            padding: 1rem 2rem; box-shadow: 0 2px 10px rgba(255, 69, 0, 0.3);
+            position: relative; z-index: 10;
         }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #fff;
-            text-decoration: none;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-        
-        .nav-links a:hover {
-            color: #ffeb3b;
-            text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
-        }
-        
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; text-decoration: none; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #fff; text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .nav-links a:hover { color: #ffeb3b; text-shadow: 0 0 10px rgba(255, 235, 59, 0.5); }
         .breadcrumb {
-            background: rgba(211, 84, 0, 0.2);
-            padding: 0.8rem 2rem;
-            border-bottom: 1px solid rgba(255, 69, 0, 0.3);
-            position: relative;
-            z-index: 10;
+            background: rgba(211, 84, 0, 0.2); padding: 0.8rem 2rem;
+            border-bottom: 1px solid rgba(255, 69, 0, 0.3); position: relative; z-index: 10;
         }
-        
-        .breadcrumb-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            color: #ffab91;
-            font-size: 0.9rem;
-        }
-        
-        .breadcrumb a {
-            color: #ff6b35;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .breadcrumb a:hover {
-            color: #ffeb3b;
-        }
-        
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-        
+        .breadcrumb-content { max-width: 1200px; margin: 0 auto; color: #ffab91; font-size: 0.9rem; }
+        .breadcrumb a { color: #ff6b35; text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: #ffeb3b; }
+        main { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; position: relative; z-index: 1; }
         .hero {
-            text-align: center;
-            padding: 3rem 0;
+            display: grid; grid-template-columns: 1fr 320px; gap: 1.5rem;
+            align-items: center; text-align: left; padding: 3rem 2rem;
             background: linear-gradient(135deg, rgba(211, 84, 0, 0.1), rgba(231, 76, 60, 0.1));
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            border: 2px solid rgba(255, 69, 0, 0.3);
-            box-shadow: 0 4px 6px rgba(255, 69, 0, 0.2);
-            position: relative;
-            overflow: hidden;
+            border-radius: 10px; margin-bottom: 2rem; border: 2px solid rgba(255, 69, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(255, 69, 0, 0.2); position: relative; overflow: hidden;
         }
-        
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
+            content: ''; position: absolute; top: 50%; left: 50%; width: 300px; height: 300px;
             background: radial-gradient(circle, rgba(255, 69, 0, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse-glow 3s ease-in-out infinite;
+            border-radius: 50%; transform: translate(-50%, -50%); animation: pulse-glow 3s ease-in-out infinite;
         }
-        
         @keyframes pulse-glow {
             0%, 100% { transform: translate(-50%, -50%) scale(1); }
             50% { transform: translate(-50%, -50%) scale(1.2); }
         }
-        
-        .hero-icon {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 20px #ff4500);
-            position: relative;
-            z-index: 1;
-        }
-        
+        .hero-icon { font-size: 5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 20px #ff4500); position: relative; z-index: 1; }
         .hero h1 {
-            font-size: 3rem;
-            color: #ff6b35;
+            font-size: 3rem; color: #ff6b35;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255, 69, 0, 0.5);
-            margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 0.5rem; position: relative; z-index: 1;
         }
-        
+        .hero p.lead { color: #ffab91; font-size: 1.1rem; margin-top: 0.5rem; position: relative; z-index: 1; }
         .tier-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b35 0%, #f44336 100%);
-            color: #fff;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin: 1rem 0;
-            box-shadow: 0 4px 6px rgba(255, 69, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 1;
+            display: inline-block; background: linear-gradient(135deg, #ff6b35 0%, #f44336 100%);
+            color: #fff; padding: 0.5rem 1.5rem; border-radius: 25px; font-size: 1.2rem; font-weight: bold;
+            margin: 1rem 0; box-shadow: 0 4px 6px rgba(255, 69, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative; z-index: 1;
         }
-        
-        .weapon-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+        .hero-figure { position: relative; z-index: 1; display: flex; justify-content: center; }
+        .hero-figure img {
+            width: 100%; max-width: 320px; height: auto; border-radius: 12px;
+            border: 2px solid rgba(255,69,0,0.35); box-shadow: 0 8px 20px rgba(255, 69, 0, 0.25);
+            background: rgba(0,0,0,0.2);
         }
-        
+        .weapon-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
         .stat-card {
             background: linear-gradient(135deg, rgba(211, 84, 0, 0.2), rgba(231, 76, 60, 0.1));
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 69, 0, 0.3);
+            padding: 1.5rem; border-radius: 10px; border: 2px solid rgba(255, 69, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(255, 69, 0, 0.3);
-        }
-        
-        .stat-card h3 {
-            color: #ff6b35;
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .stat-card p {
-            color: #ffab91;
-            font-size: 0.95rem;
-        }
-        
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(255, 69, 0, 0.3); }
+        .stat-card h3 { color: #ff6b35; margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .stat-card p { color: #ffab91; font-size: 0.95rem; }
         .section {
-            background: rgba(20, 20, 40, 0.8);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 69, 0, 0.2);
-            backdrop-filter: blur(10px);
+            background: rgba(20, 20, 40, 0.8); padding: 2rem; border-radius: 10px; margin-bottom: 2rem;
+            border: 1px solid rgba(255, 69, 0, 0.2); backdrop-filter: blur(10px);
         }
-        
-        .section h2 {
-            color: #ff6b35;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(255, 69, 0, 0.3);
-        }
-        
-        .section h3 {
-            color: #ff8c00;
-            font-size: 1.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .section ul, .section ol {
-            margin-left: 2rem;
-            color: #ffab91;
-        }
-        
-        .section li {
-            margin-bottom: 0.5rem;
-            line-height: 1.8;
-        }
-        
-        .warning-box {
-            background: rgba(244, 67, 54, 0.1);
-            border-left: 4px solid #f44336;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 5px;
-        }
-        
-        .warning-box h4 {
-            color: #ff6b35;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tip-box {
-            background: rgba(76, 175, 80, 0.1);
-            border-left: 4px solid #4caf50;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 5px;
-        }
-        
-        .tip-box h4 {
-            color: #66bb6a;
-            margin-bottom: 0.5rem;
-        }
-        
-        .info-box {
-            background: rgba(255, 152, 0, 0.1);
-            border-left: 4px solid #ff9800;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 5px;
-        }
-        
-        .info-box h4 {
-            color: #ffa726;
-            margin-bottom: 0.5rem;
-        }
-        
-        .build-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
+        .section h2 { color: #ff6b35; font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid rgba(255, 69, 0, 0.3); }
+        .section h3 { color: #ff8c00; font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.8rem; }
+        .section ul, .section ol { margin-left: 2rem; color: #ffab91; }
+        .section li { margin-bottom: 0.5rem; line-height: 1.8; }
+        .warning-box { background: rgba(244, 67, 54, 0.1); border-left: 4px solid #f44336; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .warning-box h4 { color: #ff6b35; margin-bottom: 0.5rem; }
+        .tip-box { background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .tip-box h4 { color: #66bb6a; margin-bottom: 0.5rem; }
+        .info-box { background: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .info-box h4 { color: #ffa726; margin-bottom: 0.5rem; }
+        .build-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
         .build-card {
             background: linear-gradient(135deg, rgba(211, 84, 0, 0.15), rgba(231, 76, 60, 0.1));
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 69, 0, 0.3);
+            padding: 1.5rem; border-radius: 10px; border: 2px solid rgba(255, 69, 0, 0.3);
             transition: transform 0.3s;
         }
-        
-        .build-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(255, 69, 0, 0.3);
-        }
-        
-        .build-card h4 {
-            color: #ff6b35;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .build-card ul {
-            list-style: none;
-            margin-left: 0;
-        }
-        
-        .build-card li {
-            padding-left: 1.5rem;
-            position: relative;
-            margin-bottom: 0.5rem;
-        }
-        
-        .build-card li::before {
-            content: "🔥";
-            position: absolute;
-            left: 0;
-        }
-        
+        .build-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(255, 69, 0, 0.3); }
+        .build-card h4 { color: #ff6b35; font-size: 1.3rem; margin-bottom: 1rem; }
+        .build-card ul { list-style: none; margin-left: 0; }
+        .build-card li { padding-left: 1.5rem; position: relative; margin-bottom: 0.5rem; }
+        .build-card li::before { content: "🔥"; position: absolute; left: 0; }
         .cta-section {
-            text-align: center;
-            padding: 2rem;
+            text-align: center; padding: 2rem;
             background: linear-gradient(135deg, rgba(211, 84, 0, 0.2), rgba(231, 76, 60, 0.2));
-            border-radius: 10px;
-            margin-top: 3rem;
+            border-radius: 10px; margin-top: 3rem;
         }
-        
         .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
+            display: inline-block; padding: 1rem 2rem;
             background: linear-gradient(135deg, #d35400 0%, #e74c3c 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin: 0.5rem;
+            color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s; margin: 0.5rem;
         }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
-        }
-        
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4); }
         footer {
             background: linear-gradient(135deg, #0f0f1e 0%, #16213e 100%);
-            padding: 2rem;
-            margin-top: 3rem;
-            border-top: 2px solid rgba(255, 69, 0, 0.3);
-            text-align: center;
-            position: relative;
-            z-index: 10;
+            padding: 2rem; margin-top: 3rem; border-top: 2px solid rgba(255, 69, 0, 0.3);
+            text-align: center; position: relative; z-index: 10;
         }
-        
-        footer a {
-            color: #ff6b35;
-            text-decoration: none;
-            margin: 0 1rem;
-        }
-        
-        footer a:hover {
-            color: #ffeb3b;
-        }
-        
+        footer a { color: #ff6b35; text-decoration: none; margin: 0 1rem; }
+        footer a:hover { color: #ffeb3b; }
+
         /* Scroll to top button */
         #scrollToTop {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            position: fixed; bottom: 2rem; right: 2rem;
             background: linear-gradient(135deg, #d35400 0%, #e74c3c 100%);
-            color: #fff;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(255, 69, 0, 0.3);
+            color: #fff; width: 50px; height: 50px; border-radius: 50%; border: none;
+            font-size: 1.5rem; cursor: pointer; opacity: 0; transition: opacity 0.3s, transform 0.3s;
+            z-index: 1000; box-shadow: 0 4px 6px rgba(255, 69, 0, 0.3);
         }
-        
-        #scrollToTop.visible {
-            opacity: 1;
+        #scrollToTop.visible { opacity: 1; }
+        #scrollToTop:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(255, 69, 0, 0.5); }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-figure { order: -1; }
         }
-        
-        #scrollToTop:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(255, 69, 0, 0.5);
-        }
-        
         @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .weapon-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .build-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            main {
-                padding: 0 1rem;
-            }
+            .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .hero h1 { font-size: 2rem; }
+            .weapon-stats { grid-template-columns: 1fr; }
+            .build-grid { grid-template-columns: 1fr; }
+            main { padding: 0 1rem; }
         }
     </style>
 </head>
@@ -489,7 +211,7 @@
                 <li><a href="/guides/">Guides</a></li>
                 <li><a href="/database/">Database</a></li>
                 <li><a href="/tier-lists/">Tier Lists</a></li>
-                <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam</a></li>
+                <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener">Steam</a></li>
             </ul>
         </nav>
     </header>
@@ -502,68 +224,68 @@
 
     <main>
         <div class="hero">
-            <div class="hero-icon">🐉</div>
-            <h1>Dragon's Breath</h1>
-            <div class="tier-badge">A/B-Tier AoE Fire Weapon</div>
-            <p style="color: #ffab91; font-size: 1.1rem; margin-top: 1rem; position: relative; z-index: 1;">Movement-Based Flamethrower | Burn Everything in Your Path</p>
+            <div>
+                <div class="hero-icon">🐉</div>
+                <h1>Dragon's Breath</h1>
+                <div class="tier-badge">A-tier (Destructoid) / B-tier (Twinfinite & PGG)</div>
+                <p class="lead">Movement-directed flame stream that applies fire damage over time while you move.</p>
+            </div>
+            <figure class="hero-figure">
+                <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragon's Breath weapon image">
+            </figure>
         </div>
 
         <div class="weapon-stats">
             <div class="stat-card">
                 <h3>🎯 Weapon Type</h3>
-                <p><strong>AoE Fire Stream</strong><br>Movement-directed flamethrower that burns enemies in your path</p>
+                <p><strong>Flame Stream (movement-directed)</strong><br>Fires in the direction you move and burns enemies along the path.</p>
             </div>
             <div class="stat-card">
                 <h3>🔓 Unlock Requirement</h3>
-                <p><strong>Kill 1,000 Wisps as Fox on Desert</strong><br>Permanent unlock, then purchase with Silver</p>
+                <p><strong>Kill 1,000 Wisps as Fox on Desert</strong><br>Then purchase in <em>Unlocks</em> with Silver (price as shown in-game).</p>
             </div>
             <div class="stat-card">
-                <h3>⚔️ Damage Type</h3>
-                <p><strong>Direct Fire + Burn DoT</strong><br>Instant damage plus damage over time</p>
+                <h3>⚔️ Damage Profile</h3>
+                <p><strong>Direct Fire + DoT (Burn)</strong><br>Maintain contact for maximum DPS; movement control is key.</p>
             </div>
             <div class="stat-card">
-                <h3>📊 Tier Ranking</h3>
-                <p><strong>A-Tier (Destructoid) / B-Tier (Twinfinite)</strong><br>Solid AoE option, easy to learn</p>
+                <h3>📊 Upgrade Paths (3)</h3>
+                <p><strong>Damage • Duration • Size</strong><br>No built-in upgrade nodes for Crit, Projectile Count/Speed, or Bounces.</p>
             </div>
         </div>
 
         <div class="section">
             <h2>🐉 Weapon Overview</h2>
-            <p>Dragon's Breath is one of the most straightforward AoE weapons in Megabonk. It fires a continuous stream of flame in the direction you move, burning everything caught in its path. Unlike weapons that require aiming, Dragon's Breath always follows your movement direction, making positioning your primary skill.</p>
+            <p>Dragon's Breath is a straightforward AoE weapon: a continuous flame stream that follows your movement direction. Your positioning and route through enemy packs determine how much damage you deal—sweeping crowds and “cutting across” their approach yields the best results. Stopping movement effectively halts your output.</p>
             
             <div class="info-box">
                 <h4>💡 Key Mechanic: Movement-Based Targeting</h4>
-                <p>The flames always fire in the direction you're moving. This means you deal the most damage by sweeping across groups of enemies and forcing them through the flames. <strong>Standing still stops the weapon from firing</strong>, making this incompatible with AFK builds.</p>
+                <p>The stream always points in your current movement direction. Keep moving to keep burning; sweep through mobs and herd them into the flame to maintain DoT ticks.</p>
             </div>
 
-            <h3>Core Weapon Properties</h3>
+            <h3>Core Properties</h3>
             <ul>
-                <li><strong>Attack Pattern</strong>: Continuous flame stream that follows movement direction</li>
-                <li><strong>Damage Type</strong>: Direct fire damage + Burn effect over time (DoT)</li>
-                <li><strong>Range</strong>: Medium-range cone that extends from your character</li>
-                <li><strong>Upgrade Paths</strong>: Damage (primary), Duration, Size</li>
-                <li><strong>Special Features</strong>: No crit scaling, no projectile count, pure damage focus</li>
+                <li><strong>Pattern:</strong> Continuous stream that tracks your movement</li>
+                <li><strong>Range:</strong> Short-to-medium cone from your character</li>
+                <li><strong>Scaling:</strong> Simple, reliable increases from <em>Damage</em> and useful coverage/duration boosts from <em>Size</em>/<em>Duration</em></li>
+                <li><strong>Limitations:</strong> No crit/quantity/shot speed upgrades; output depends on your pathing</li>
             </ul>
 
             <div class="tip-box">
-                <h4>✅ Best Use Cases</h4>
-                <p><strong>Dragon's Breath excels at:</strong></p>
+                <h4>✅ Excels At</h4>
                 <ul>
-                    <li>Clearing dense swarms of enemies</li>
-                    <li>Consistent boss damage through burn stacking</li>
-                    <li>High-mobility kiting builds</li>
-                    <li>Players who want simple, effective AoE</li>
+                    <li>Clearing dense groups via controlled sweeps</li>
+                    <li>Sustained damage on bosses while circle-kiting</li>
+                    <li>High-mobility “hit & herd” playstyles</li>
                 </ul>
             </div>
 
             <div class="warning-box">
-                <h4>⚠️ Critical Weaknesses</h4>
-                <p><strong>Dragon's Breath struggles with:</strong></p>
+                <h4>⚠️ Keep In Mind</h4>
                 <ul>
-                    <li>Requires constant movement (no AFK potential)</li>
-                    <li>No crit scaling in crit-focused meta</li>
-                    <li>Lower tier ranking compared to meta weapons</li>
-                    <li>Positioning-dependent damage output</li>
+                    <li>Requires constant movement (not for idle/AFK builds)</li>
+                    <li>No built-in crit/quantity scaling compared to meta carries</li>
+                    <li>Damage heavily depends on positioning discipline</li>
                 </ul>
             </div>
         </div>
@@ -571,315 +293,178 @@
         <div class="section">
             <h2>🔓 How to Unlock Dragon's Breath</h2>
             
-            <h3>Step-by-Step Unlock Guide</h3>
+            <h3>Step-by-Step</h3>
             <ol>
-                <li><strong>Select Fox Character</strong> - Start any run with Fox (default character, no unlock required)</li>
-                <li><strong>Play on Desert Map</strong> - Choose Desert Tier 1, 2, or 3 (Tier 1 recommended for easier unlock)</li>
-                <li><strong>Kill 1,000 Wisps</strong> - Red flying enemies that appear throughout Desert maps. They spawn naturally and in dedicated swarms</li>
-                <li><strong>Purchase with Silver</strong> - After meeting the requirement, go to Main Menu → Unlocks → Weapons and purchase Dragon's Breath</li>
+                <li><strong>Pick Fox</strong> — default character with a Luck-scaling passive.</li>
+                <li><strong>Select Desert</strong> — any tier works; Tier 2–3 see Wisps more consistently.</li>
+                <li><strong>Kill 1,000 Wisps</strong> — progress accumulates across runs.</li>
+                <li><strong>Purchase</strong> — open <em>Main Menu → Unlocks → Weapons</em> and buy it with Silver.</li>
             </ol>
 
             <div class="info-box">
-                <h4>💰 Cost & Time Investment</h4>
-                <p><strong>Silver Cost</strong>: Standard weapon purchase cost (2 Silver)<br>
-                <strong>Estimated Time</strong>: 2-4 hours of Desert runs as Fox<br>
-                <strong>Difficulty</strong>: Easy - Wisps spawn frequently and count accumulates across runs</p>
-            </div>
-
-            <h3>Efficient Wisp Farming Strategy</h3>
-            <ul>
-                <li><strong>Use Fox's Luck Passive</strong> - His +1% Luck per level helps with XP and survival</li>
-                <li><strong>Desert Tier 1 Optimal</strong> - Easier difficulty means longer survival and more Wisp encounters</li>
-                <li><strong>Focus Survival</strong> - Use defensive tomes (Shield, HP, Regen) to extend runs</li>
-                <li><strong>Prioritize AoE Weapons</strong> - Aura, Lightning Staff help kill Wisps efficiently</li>
-                <li><strong>Watch for Swarm Events</strong> - "Wisp swarm incoming!" means guaranteed mass spawns</li>
-            </ul>
-
-            <div class="tip-box">
-                <h4>✅ Pro Farming Tips</h4>
-                <p>Wisps are harder to find in Tier 1 but appear regularly in Tier 2-3. <strong>Swarm popup events featuring only Wisps</strong> are the fastest way to accumulate kills. Position yourself centrally and use AoE weapons to clear entire swarms at once. Progress accumulates across all runs—you don't need to complete them.</p>
+                <h4>🌀 Faster Wisp Farming</h4>
+                <p>Use the <strong>Swarm challenge</strong> to increase enemy spawns, and restart Desert runs until Wisps appear early. AoE weapons like <em>Aura</em> or <em>Lightning Staff</em> help secure fast kills.</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>📈 Upgrade Paths & Scaling</h2>
+            <h2>📈 Upgrades & Tome Synergy</h2>
             
             <h3>Available Upgrade Stats</h3>
-            <p>Dragon's Breath has <strong>only 3 upgrade paths</strong>, making it one of the simplest weapons to build:</p>
-
             <div class="build-grid">
                 <div class="build-card">
-                    <h4>🔥 Damage (Priority #1)</h4>
+                    <h4>🔥 Damage (Priority)</h4>
                     <ul>
-                        <li>Increases direct hit damage</li>
-                        <li>Boosts burn DoT damage</li>
-                        <li>Scales multiplicatively with Damage Tome</li>
-                        <li><strong>Always prioritize this upgrade</strong></li>
+                        <li>Boosts both direct hit and ongoing burn DPS</li>
+                        <li>Most consistent power gain</li>
                     </ul>
                 </div>
                 <div class="build-card">
-                    <h4>⏱️ Duration (Priority #2)</h4>
+                    <h4>⏱️ Duration</h4>
                     <ul>
-                        <li>Extends flame persistence</li>
-                        <li>Prolongs burn effect on enemies</li>
-                        <li>More coverage area over time</li>
-                        <li><em>V1.0.12: Duration cap prevents infinite flames</em></li>
+                        <li>Extends flame persistence and DoT uptime</li>
+                        <li><em>v1.0.12</em> introduced a <strong>max duration cap</strong>; still valuable, just not abusable</li>
                     </ul>
                 </div>
                 <div class="build-card">
-                    <h4>📏 Size (Priority #3)</h4>
+                    <h4>📏 Size</h4>
                     <ul>
-                        <li>Widens flame cone</li>
-                        <li>Increases coverage area</li>
-                        <li>Hits more enemies simultaneously</li>
-                        <li>Valuable but lower priority than Damage</li>
+                        <li>Wider cone → hits more targets per sweep</li>
+                        <li>Useful for wave clear and crowd control lanes</li>
                     </ul>
                 </div>
             </div>
 
-            <h3>What Dragon's Breath DOESN'T Have</h3>
-            <div class="warning-box">
-                <h4>⚠️ Missing Upgrade Paths</h4>
-                <p><strong>Dragon's Breath cannot upgrade:</strong></p>
-                <ul>
-                    <li>❌ <strong>Crit Chance or Crit Damage</strong> - Major weakness in crit-focused meta</li>
-                    <li>❌ <strong>Projectile Count</strong> - Only one flame stream per movement</li>
-                    <li>❌ <strong>Projectile Speed</strong> - Not applicable to stream weapon</li>
-                    <li>❌ <strong>Projectile Bounces</strong> - Flame doesn't bounce</li>
-                    <li>❌ <strong>Attack Speed/Cooldown</strong> - Always fires while moving</li>
-                </ul>
-            </div>
-
-            <h3>Tome Synergies</h3>
-            <p><strong>Best Tomes for Dragon's Breath builds:</strong></p>
+            <h3>Recommended Tomes</h3>
             <ul>
-                <li>🔥 <strong>Damage Tome (S-tier)</strong> - Directly multiplies both hit and burn damage</li>
-                <li>⏱️ <strong>Duration Tome (A-tier)</strong> - Extends flame and burn persistence</li>
-                <li>🎯 <strong>Size Tome (B-tier)</strong> - Widens coverage area for better swarm clearing</li>
-                <li>🏃 <strong>Agility Tome (B-tier)</strong> - Movement speed enhances kiting effectiveness</li>
-                <li>🍀 <strong>Luck Tome (Universal)</strong> - Improves upgrade quality and item drops</li>
-                <li>⚡ <strong>XP Tome (Universal)</strong> - Faster leveling for more upgrade opportunities</li>
+                <li><strong>Damage Tome</strong> — best raw scaling for both hit & burn</li>
+                <li><strong>Duration Tome</strong> — complements sustained contact (now capped by patch)</li>
+                <li><strong>Size Tome</strong> — improves coverage for swarm clears</li>
+                <li><strong>Agility Tome</strong> — faster movement = easier herding and safer kiting</li>
+                <li><strong>XP/Luck Tomes</strong> — generic economy/quality boosts depending on build goals</li>
             </ul>
 
             <div class="info-box">
-                <h4>💡 Scaling Philosophy</h4>
-                <p>Dragon's Breath has <strong>simple but effective scaling</strong> - every percentage boost or flat Damage increase raises both direct hit and burn DoT. There are no hidden silver rewards or special effects, making it straightforward to optimize. Just stack Damage upgrades and watch everything burn.</p>
+                <h4>💡 Practical Note</h4>
+                <p>Keep enemies in contact with the flames to <strong>continuously refresh</strong> the burn damage. Circle-kiting bosses lets you dodge while maintaining DPS.</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>🎮 Optimal Builds & Strategies</h2>
+            <h2>🎮 Builds & Play Patterns</h2>
 
-            <h3>Movement-Based Kiting Build (Recommended)</h3>
+            <h3>Movement-Based Kiting</h3>
             <div class="build-card">
-                <h4>🔥 Flame Sweeper Build</h4>
-                <p><strong>Core Strategy</strong>: High-mobility kiting that forces enemies through flames</p>
+                <h4>🔥 Flame Sweeper</h4>
+                <p><strong>Idea:</strong> Mobility-first sweeping through waves.</p>
                 <ul>
-                    <li><strong>Weapons</strong>: Dragon's Breath + Aura + Lightning Staff + Aegis</li>
-                    <li><strong>Tomes</strong>: Damage → Duration → Agility → XP</li>
-                    <li><strong>Items</strong>: Turbo Socks, Turbo Skates, Gym Sauce, Beefy Ring</li>
-                    <li><strong>Playstyle</strong>: Circular movement, sweep flames across enemy paths</li>
+                    <li><strong>Weapons:</strong> Dragon's Breath • Aura • Lightning Staff • Aegis</li>
+                    <li><strong>Tomes:</strong> Damage → Duration → Agility → XP</li>
+                    <li><strong>Items (examples):</strong> Turbo Socks, Turbo Skates, Gym Sauce, Overpowered Lamp</li>
+                    <li><strong>How to play:</strong> Curve around packs; cut across their approach paths.</li>
                 </ul>
             </div>
 
-            <h3>Boss Killing Build</h3>
+            <h3>Boss Focus</h3>
             <div class="build-card">
-                <h4>💀 Sustained Burn Damage</h4>
-                <p><strong>Core Strategy</strong>: Maximize burn DoT for high-HP bosses</p>
+                <h4>💀 Sustained Burn</h4>
+                <p><strong>Idea:</strong> Longer contact windows, safe circles.</p>
                 <ul>
-                    <li><strong>Focus</strong>: Damage scaling + Duration extension</li>
-                    <li><strong>Tomes</strong>: Damage (max priority) → Duration → HP/Shield</li>
-                    <li><strong>Items</strong>: Boss Buster, Big Bonk, Spicy Meatball, Holy Book</li>
-                    <li><strong>Technique</strong>: Circle-kite bosses, maintain constant flame contact</li>
+                    <li><strong>Focus:</strong> Damage & Duration; add survivability if needed</li>
+                    <li><strong>Items (examples):</strong> Big Bonk, Spicy Meatball, Holy Book</li>
+                    <li><strong>Technique:</strong> Tight circles to refresh DoT while dodging.</li>
                 </ul>
             </div>
 
-            <h3>Swarm Clearing Build</h3>
+            <h3>Swarm Clearing</h3>
             <div class="build-card">
                 <h4>🌊 Wave Annihilation</h4>
-                <p><strong>Core Strategy</strong>: Wide coverage for mass enemy clearing</p>
+                <p><strong>Idea:</strong> Max coverage for mobbing phases.</p>
                 <ul>
-                    <li><strong>Weapons</strong>: Dragon's Breath + Flamewalker + Aura + Bone</li>
-                    <li><strong>Tomes</strong>: Damage → Size → Duration → Quantity</li>
-                    <li><strong>Items</strong>: Moldy Cheese, Spicy Meatball, Overpowered Lamp</li>
-                    <li><strong>Strategy</strong>: Maximize AoE coverage, sweep through packed waves</li>
+                    <li><strong>Weapons:</strong> Dragon's Breath • Flamewalker • Aura • Bone</li>
+                    <li><strong>Tomes:</strong> Damage → Size → Duration → Quantity</li>
+                    <li><strong>Items (examples):</strong> Moldy Cheese, Overpowered Lamp, Battery</li>
                 </ul>
             </div>
 
-            <h3>Combat Strategies</h3>
+            <h3>Combat Tips</h3>
             <div class="tip-box">
                 <h4>✅ Core Tactics</h4>
-                <p><strong>Positioning & Movement:</strong></p>
                 <ul>
-                    <li><strong>Circular Kiting</strong> - Move in circles around enemy groups, flames sweep continuously</li>
-                    <li><strong>Directional Sweeps</strong> - Move perpendicular to enemy approach for maximum coverage</li>
-                    <li><strong>Never Stop Moving</strong> - Standing still = no damage output</li>
-                    <li><strong>Force Enemies Through Flames</strong> - Predict paths and cut them off with fire</li>
-                    <li><strong>Use Walls/Obstacles</strong> - Funnel enemies into narrow paths for concentrated burns</li>
+                    <li><strong>Circular Kiting:</strong> keep contact while dodging</li>
+                    <li><strong>Perpendicular Sweeps:</strong> cross the enemy flow to maximize hits</li>
+                    <li><strong>Use Obstacles:</strong> funnel packs into narrow lanes</li>
+                    <li><strong>Keep Moving:</strong> stopping = no stream/no damage</li>
                 </ul>
-            </div>
-
-            <h3>Boss Fight Strategy</h3>
-            <p><strong>Dragon's Breath excels against bosses:</strong></p>
-            <ol>
-                <li><strong>Start with Aggressive Positioning</strong> - Get close for maximum flame contact</li>
-                <li><strong>Circle-Kite Continuously</strong> - Maintain constant movement around boss</li>
-                <li><strong>Apply Burn Stacks</strong> - Initial hits apply DoT that continues while kiting</li>
-                <li><strong>Dodge Attacks While Moving</strong> - Movement serves dual purpose</li>
-                <li><strong>Re-apply Burns</strong> - Keep flame contact to refresh and stack burn damage</li>
-            </ol>
-
-            <div class="info-box">
-                <h4>💡 Why Dragon's Breath Works for Bosses</h4>
-                <p>Burn damage continues ticking even while you're dodging, creating <strong>sustained DPS without requiring constant attack windows</strong>. High-HP bosses (500K+ HP) take escalating damage over time, often more effective than burst weapons that require precise timing.</p>
             </div>
         </div>
 
         <div class="section">
             <h2>👥 Character Synergies</h2>
 
-            <h3>🦊 Fox (Unlock Character)</h3>
-            <p><strong>Synergy Rating: B-tier</strong></p>
-            <ul>
-                <li>+1% Luck per level helps with upgrade quality</li>
-                <li>Required to unlock the weapon</li>
-                <li>High mobility matches movement-based gameplay</li>
-                <li>Firestaff starter complements fire theme</li>
-            </ul>
+            <h3>🦊 Fox</h3>
+            <p><strong>Notes:</strong> Luck scales per level; default starter with Firestaff. Great for unlocking and general farming.</p>
 
-            <h3>💀 Calcium (Speed Demon)</h3>
-            <p><strong>Synergy Rating: A-tier</strong></p>
-            <ul>
-                <li>Speed builds up over time = perfect for kiting</li>
-                <li>Damage scales from movement speed</li>
-                <li>Dragon's Breath requires constant movement anyway</li>
-                <li><strong>Best synergy for Dragon's Breath</strong></li>
-            </ul>
+            <h3>💀 Calcium</h3>
+            <p><strong>Notes:</strong> Speed builds over time and ties into damage; pairs well with a weapon that rewards constant movement.</p>
 
-            <h3>🏃 Tony McZoom (Mobility Expert)</h3>
-            <p><strong>Synergy Rating: A-tier</strong></p>
-            <ul>
-                <li>+2% Pickup Range per level (collect XP while kiting)</li>
-                <li>Hoverboard mobility enhances sweeping patterns</li>
-                <li>Electric charge from movement adds bonus damage</li>
-                <li>Already built for high-speed gameplay</li>
-            </ul>
-
-            <h3>🛡️ Sir Oofie / Megachad (Tanks)</h3>
-            <p><strong>Synergy Rating: C-tier</strong></p>
-            <ul>
-                <li>Dragon's Breath requires mobility, tanks are slow</li>
-                <li>Conflicts with stationary defensive playstyle</li>
-                <li>Better options exist for tank builds</li>
-            </ul>
+            <h3>🏃 Tony McZoom</h3>
+            <p><strong>Notes:</strong> Charges an electric attack while moving and gains <em>+2% Pickup Range per level</em>, making high-speed sweep play smoother.</p>
 
             <div class="warning-box">
-                <h4>⚠️ Anti-Synergies</h4>
-                <p><strong>Dragon's Breath does NOT work with:</strong></p>
-                <ul>
-                    <li>AFK builds (requires constant movement)</li>
-                    <li>Stationary defensive characters</li>
-                    <li>Crit-focused builds (no crit scaling)</li>
-                    <li>Idle Juice strategies (movement stops damage bonus)</li>
-                </ul>
+                <h4>⚠️ Weaker Pairings</h4>
+                <p>Stationary/defensive playstyles and idle/AFK item setups (e.g., standing-still damage bonuses) conflict with Dragon’s Breath’s movement requirement.</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>📊 Version History & Balance Changes</h2>
+            <h2>📊 Version History & Balance Notes</h2>
 
-            <h3>Patch v1.0.12 (October 8, 2025) - Duration System Rework</h3>
-            <p><strong>Major Change</strong>: Duration stat received a system-wide rework affecting all duration-scaling weapons including Dragon's Breath.</p>
+            <h3>v1.0.12 (Oct 8, 2025)</h3>
             <ul>
-                <li><strong>Duration Cap Added</strong> - "Prevent projectiles staying out indefinitely"</li>
-                <li><strong>Effect on Dragon's Breath</strong> - Flames no longer persist forever with high Duration investment</li>
-                <li><strong>Why It Matters</strong> - Previous unlimited duration allowed screen-covering flames; now more balanced</li>
-                <li><strong>Compensation</strong> - Duration still valuable but not game-breaking</li>
+                <li>Added a <strong>max duration cap</strong> to prevent effects lingering indefinitely; duration builds remain good but are no longer abusable.</li>
             </ul>
 
-            <h3>Patch v1.0.7 (September 25, 2025) - No Direct Changes</h3>
-            <p>Dragon's Breath unaffected by character buffs and weapon slot adjustments.</p>
+            <h3>v1.0.7 (Sep 25, 2025)</h3>
+            <p>No direct changes to Dragon’s Breath reported.</p>
 
-            <h3>Launch Version (September 18, 2025) - Initial Release</h3>
-            <p>Dragon's Breath released with current mechanics, no significant changes since launch.</p>
+            <h3>Launch (Sep 18, 2025)</h3>
+            <p>Weapon available with current movement-directed flame behavior.</p>
 
             <div class="info-box">
-                <h4>💡 Balance State</h4>
-                <p>Dragon's Breath has remained <strong>stable and consistent</strong> since launch. The only mechanical change (Duration cap in v1.0.12) affected all duration weapons equally and prevented exploit-level stacking. The weapon occupies a "solid but not meta" position that developers appear satisfied with.</p>
+                <h4>💡 Balance Snapshot</h4>
+                <p>Community lists generally place Dragon’s Breath in the <strong>A–B range</strong>: reliable and easy to use, but without meta-defining crit/quantity scaling.</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>🎯 Community Consensus & Tier Rankings</h2>
-
-            <h3>Tier List Placements</h3>
+            <h2>🎯 Community Tiering</h2>
             <ul>
-                <li><strong>Destructoid (September 26, 2025)</strong>: A-tier - "Offers the ability to burn enemies and cause damage over time"</li>
-                <li><strong>Twinfinite (September 27, 2025)</strong>: B-tier - Listed under "Mediocre Weapons"</li>
-                <li><strong>Dexerto</strong>: Not individually ranked but mentioned as viable option</li>
-                <li><strong>Steam Community Guides</strong>: Recognized as duration scaling weapon similar to Flamewalker</li>
+                <li><strong>Destructoid:</strong> A-tier — emphasizes burn/DoT value.</li>
+                <li><strong>Twinfinite:</strong> B-tier — “mediocre” relative to top meta options.</li>
+                <li><strong>Pro Game Guides:</strong> B-tier — solid as a secondary pick.</li>
             </ul>
-
-            <h3>Community Sentiment</h3>
-            <div class="tip-box">
-                <h4>✅ Positive Opinions</h4>
-                <ul>
-                    <li>"Easy to learn and powerful to scale"</li>
-                    <li>"Straightforward AoE weapon"</li>
-                    <li>"Consistent for both mob clearing and boss fights"</li>
-                    <li>"Rewards movement control"</li>
-                    <li>"Simple but effective"</li>
-                </ul>
-            </div>
-
-            <div class="warning-box">
-                <h4>⚠️ Criticisms</h4>
-                <ul>
-                    <li>Lacks crit scaling in crit-focused meta</li>
-                    <li>Requires active gameplay (no AFK potential)</li>
-                    <li>Positioning-dependent damage</li>
-                    <li>Lower tier than meta weapons (Dexecutioner, Katana, etc.)</li>
-                    <li>Tier ranking inconsistency (A vs B placement)</li>
-                </ul>
-            </div>
-
-            <h3>Competitive Viability</h3>
-            <p><strong>Consensus Assessment</strong>: Dragon's Breath is a <strong>solid mid-tier weapon for casual-to-mid-tier content</strong> but not competitive for leaderboard runs. It performs well in Tier 1-2 progression and provides reliable AoE coverage, but cannot match the raw power of S-tier meta weapons.</p>
-
-            <div class="info-box">
-                <h4>💡 Best Use Case</h4>
-                <p>Dragon's Breath works best as a <strong>secondary or tertiary weapon in balanced builds</strong> rather than a primary carry option. Pair it with meta weapons (Dexecutioner, Katana, Bow) for coverage while they handle primary DPS. For players who enjoy movement-based gameplay and straightforward mechanics, it's a fun and effective choice that teaches positioning fundamentals.</p>
-            </div>
         </div>
 
         <div class="section">
-            <h2>❓ Frequently Asked Questions</h2>
+            <h2>❓ FAQ</h2>
 
-            <h3>Q: Do I need to complete the runs to accumulate Wisp kills?</h3>
-            <p><strong>A:</strong> No! Wisp kills accumulate across all runs regardless of whether you complete them or die. Your progress is saved automatically.</p>
+            <h3>Do I need to finish the run for Wisp kills to count?</h3>
+            <p><strong>Answer:</strong> No — progress accumulates across runs.</p>
 
-            <h3>Q: Can I unlock Dragon's Breath with characters other than Fox?</h3>
-            <p><strong>A:</strong> No. The unlock requirement specifically states "as Fox" - you must use Fox character on Desert map to count Wisp kills toward the unlock.</p>
+            <h3>Which Desert tier is best for farming?</h3>
+            <p><strong>Answer:</strong> Tier 2–3 spawn Wisps more consistently; using the <em>Swarm</em> challenge further accelerates spawns.</p>
 
-            <h3>Q: Does Dragon's Breath work with AFK builds?</h3>
-            <p><strong>A:</strong> No. Standing still stops the weapon from firing. Dragon's Breath requires constant movement, making it incompatible with AFK/Idle strategies.</p>
+            <h3>Does the burn “stack”?</h3>
+            <p><strong>Answer:</strong> Treat it as a <strong>damage-over-time that refreshes with contact</strong>. Keep enemies in the flame to sustain DPS.</p>
 
-            <h3>Q: Is Dragon's Breath better than Flamewalker?</h3>
-            <p><strong>A:</strong> No. Flamewalker is generally considered superior (S/A-tier) with better scaling and higher tier rankings. Dragon's Breath works as a simpler alternative but doesn't match Flamewalker's power ceiling.</p>
-
-            <h3>Q: Should I prioritize Size or Duration upgrades?</h3>
-            <p><strong>A:</strong> Always prioritize <strong>Damage first</strong>. For your second priority, choose Duration for boss fights (sustained burn) or Size for swarm clearing (wider coverage). Both are situationally valuable after Damage.</p>
-
-            <h3>Q: Does burn damage stack from multiple Dragon's Breath hits?</h3>
-            <p><strong>A:</strong> Yes! Each hit refreshes and stacks the burn effect, making sustained contact more damaging than brief touches. Circle-kiting bosses maximizes this stacking mechanic.</p>
-
-            <h3>Q: Why is Dragon's Breath not considered meta?</h3>
-            <p><strong>A:</strong> Primarily because it lacks crit scaling in a meta dominated by crit-focused builds. Weapons with Crit Chance/Damage upgrades deal 5-10x more damage late-game. Dragon's Breath's simple Damage-only scaling can't compete at the highest levels.</p>
+            <h3>Is Dragon’s Breath a primary carry?</h3>
+            <p><strong>Answer:</strong> It can carry early/mid content, but most top-end metas lean on crit/quantity-centric weapons. Use Dragon’s Breath for reliable coverage alongside a meta DPS.</p>
         </div>
 
         <div class="cta-section">
             <h2>🔥 Master Dragon's Breath in Megabonk</h2>
-            <p style="margin: 1rem 0;">Unlock this straightforward AoE fire weapon and dominate with movement-based combat</p>
+            <p style="margin: 1rem 0;">Unlock it with Fox on Desert and practice movement-driven sweeps to maximize burn uptime.</p>
             <a href="/guides/characters/fox-kitsune-guide" class="cta-button">Fox Character Guide</a>
             <a href="/database/weapons/" class="cta-button">All Weapons Database</a>
             <a href="/guides/builds/" class="cta-button">Build Guides</a>
@@ -894,9 +479,9 @@
             <a href="/guides/">Guides</a>
             <a href="/database/">Database</a>
             <a href="/tier-lists/">Tier Lists</a>
-            <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Steam</a>
+            <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener">Steam</a>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Last Updated: October 14, 2025 | Version 1.0.12</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Last Updated: October 20, 2025 | Verified with v1.0.12 notes</p>
     </footer>
 
     <button id="scrollToTop" aria-label="Scroll to top">↑</button>
@@ -910,51 +495,29 @@
             flame.style.animationDuration = (Math.random() * 2 + 2) + 's';
             flame.style.animationDelay = Math.random() * 2 + 's';
             document.getElementById('fireParticles').appendChild(flame);
-            
             setTimeout(() => flame.remove(), 5000);
         }
-        
-        // Create 30 initial flames
-        for(let i = 0; i < 30; i++) {
-            createFlame();
-        }
-        
-        // Continuously create new flames
+        for(let i = 0; i < 30; i++) createFlame();
         setInterval(createFlame, 300);
         
-        // Scroll to top functionality
+        // Scroll to top
         const scrollButton = document.getElementById('scrollToTop');
-        
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollButton.classList.add('visible');
-            } else {
-                scrollButton.classList.remove('visible');
-            }
+            if (window.pageYOffset > 300) scrollButton.classList.add('visible');
+            else scrollButton.classList.remove('visible');
         });
-        
-        scrollButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        scrollButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         
         // Smooth scroll for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
         
-        // Add fade-in animation to sections
+        // Fade-in on view
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -963,7 +526,6 @@
                 }
             });
         });
-        
         document.querySelectorAll('.section, .weapon-stats, .hero').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
@@ -971,5 +533,6 @@
             observer.observe(el);
         });
     </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
