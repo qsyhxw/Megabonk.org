@@ -1469,7 +1469,373 @@
     </div>
 </section>
 
-    <section class="section quick-nav-section">
+   
+   <section id="achievements" class="section">
+    <div class="container">
+        <h2 class="section-title">Achievement Guide System</h2>
+        <p class="section-subtitle">Complete every achievement and unlock all Steam rewards - 100% completion roadmap</p>
+        
+        <div class="achievement-showcase">
+            <!-- Basic & Progress -->
+            <div class="achievement-card" onclick="window.open('guides/achievements/story-milestones.html', '_blank')">
+                <div class="achievement-icon">📖</div>
+                <span class="achievement-category">BASIC & PROGRESS</span>
+                <h3 class="achievement-title">Basic & Progress</h3>
+                <div class="achievement-meta">
+                    <span>~25 Achievements</span>
+                    <span>⏱️ Easy - 3-5 hours</span>
+                </div>
+                <p class="achievement-description">
+                    Fundamental achievements earned through natural gameplay progression. Includes surviving time intervals, defeating bosses, upgrading tomes, and completing basic challenges.
+                </p>
+                <div class="achievement-features">
+                    ✅ Time-based survival • ✅ Tome upgrades • ✅ Early game milestones
+                </div>
+                <span class="guide-link">Master Basic Achievements →</span>
+            </div>
+
+            <!-- Character Unlocks -->
+            <div class="achievement-card" onclick="window.open('guides/achievements/character-unlocks.html', '_blank')">
+                <div class="achievement-icon">👥</div>
+                <span class="achievement-category">CHARACTER UNLOCKS</span>
+                <h3 class="achievement-title">Character Unlocks</h3>
+                <div class="achievement-meta">
+                    <span>~20 Achievements</span>
+                    <span class="character-badge">20 Characters Total</span>
+                </div>
+                <p class="achievement-description">
+                    Unlock all 20 playable characters through specific challenges, hidden bosses, tier completions, and special conditions. Includes efficient silver farming strategies.
+                </p>
+                <div class="achievement-features">
+                    ✅ Silver farming guide • ✅ Secret character unlocks • ✅ Optimal order planning
+                </div>
+                <span class="guide-link">Unlock All Characters →</span>
+            </div>
+
+            <!-- Combat Mastery -->
+            <div class="achievement-card" onclick="window.open('guides/achievements/combat-mastery.html', '_blank')">
+                <div class="achievement-icon">⚔️</div>
+                <span class="achievement-category">COMBAT MASTERY</span>
+                <h3 class="achievement-title">Combat Mastery</h3>
+                <div class="achievement-meta">
+                    <span>~30 Achievements</span>
+                    <span>⏱️ Hard - 20+ hours</span>
+                </div>
+                <p class="achievement-description">
+                    Kill count achievements, weapon-specific challenges, damage records, and combat technique demonstrations. Includes defeating specific enemy types and boss speed kills.
+                </p>
+                <div class="achievement-features">
+                    ✅ Weapon kill counts • ✅ Damage optimization • ✅ Boss speed kills
+                </div>
+                <span class="guide-link">Master Combat Skills →</span>
+            </div>
+
+            <!-- Collection & Secrets -->
+            <div class="achievement-card premium" onclick="window.open('guides/achievements/collection-secrets.html', '_blank')">
+                <div class="achievement-icon">💎</div>
+                <span class="achievement-category">COLLECTION & SECRETS</span>
+                <h3 class="achievement-title">Collections & Secrets</h3>
+                <div class="achievement-meta">
+                    <span>~15 Achievements</span>
+                    <span class="collectible-badge">73 Collectibles</span>
+                </div>
+                <p class="achievement-description">
+                    Find hidden items, purchase chests, complete quest milestones, discover secret areas, and unlock all weapons and upgrades in the game.
+                </p>
+                <div class="achievement-features">
+                    ✅ Complete location maps • ✅ Secret area access • ✅ Easter egg discoveries
+                </div>
+                <span class="guide-link">Find All Secrets →</span>
+            </div>
+
+            <!-- Extreme Challenges -->
+            <div class="achievement-card extreme" onclick="window.open('guides/achievements/extreme-challenges.html', '_blank')">
+                <div class="achievement-icon">🏆</div>
+                <span class="achievement-category">EXTREME CHALLENGES</span>
+                <h3 class="achievement-title">Extreme Challenges</h3>
+                <div class="achievement-meta">
+                    <span>~12 Achievements</span>
+                    <span>⏱️ Extreme - 30+ hours</span>
+                </div>
+                <p class="achievement-description">
+                    The toughest achievements requiring perfect execution, specific builds, extreme grinding, or pure luck. Includes Final Swarm survival and difficulty modifiers.
+                </p>
+                <div class="achievement-features">
+                    ✅ Final Swarm mastery • ✅ Perfect execution • ✅ God-tier builds
+                </div>
+                <span class="guide-link">Face Extreme Challenges →</span>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="guides/achievements/" class="btn btn-secondary">🏆 Complete Achievement Index (102 Total)</a>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Achievement Section Styles */
+.section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #a0a0a0;
+    font-size: 1.2rem;
+    margin-bottom: 4rem;
+}
+
+.achievement-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.achievement-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+}
+
+.achievement-card:hover::before {
+    opacity: 0.1;
+}
+
+.achievement-card:hover {
+    border-color: #6c5ce7;
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(108, 92, 231, 0.3);
+}
+
+.achievement-card.premium::before {
+    background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+}
+
+.achievement-card.premium:hover {
+    border-color: #fd79a8;
+    box-shadow: 0 15px 40px rgba(253, 121, 168, 0.3);
+}
+
+.achievement-card.extreme::before {
+    background: linear-gradient(135deg, #ff7675, #d63031);
+}
+
+.achievement-card.extreme:hover {
+    border-color: #ff7675;
+    box-shadow: 0 15px 40px rgba(255, 118, 117, 0.3);
+}
+
+.achievement-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.achievement-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
+}
+
+.achievement-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #6c5ce7;
+    margin-bottom: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(108, 92, 231, 0.15);
+    border-radius: 8px;
+}
+
+.achievement-card.premium .achievement-category {
+    color: #fd79a8;
+    background: rgba(253, 121, 168, 0.15);
+}
+
+.achievement-card.extreme .achievement-category {
+    color: #ff7675;
+    background: rgba(255, 118, 117, 0.15);
+}
+
+.achievement-title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #e4e4e4;
+    font-weight: 700;
+}
+
+.achievement-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.achievement-meta span {
+    font-size: 0.9rem;
+    color: #a29bfe;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    background: rgba(162, 155, 254, 0.1);
+    border-radius: 8px;
+}
+
+.character-badge {
+    background: rgba(0, 184, 148, 0.15) !important;
+    color: #00b894 !important;
+}
+
+.collectible-badge {
+    background: rgba(253, 203, 110, 0.15) !important;
+    color: #fdcb6e !important;
+}
+
+.achievement-description {
+    color: #a0a0a0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+}
+
+.achievement-features {
+    font-size: 0.85rem;
+    color: #74b9ff;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.guide-link {
+    display: inline-block;
+    color: #6c5ce7;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.achievement-card.premium .guide-link {
+    color: #fd79a8;
+}
+
+.achievement-card.extreme .guide-link {
+    color: #ff7675;
+}
+
+.achievement-card:hover .guide-link {
+    transform: translateX(5px);
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s;
+    border: 2px solid #6c5ce7;
+    color: #6c5ce7;
+    background: transparent;
+}
+
+.btn:hover {
+    background: #6c5ce7;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(108, 92, 231, 0.3);
+}
+
+.btn-secondary {
+    border-color: #6c5ce7;
+    color: #6c5ce7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .achievement-showcase {
+        grid-template-columns: 1fr;
+    }
+    
+    .achievement-icon {
+        font-size: 2.5rem;
+    }
+    
+    .achievement-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.achievement-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.achievement-card:nth-child(1) { animation-delay: 0s; }
+.achievement-card:nth-child(2) { animation-delay: 0.1s; }
+.achievement-card:nth-child(3) { animation-delay: 0.2s; }
+.achievement-card:nth-child(4) { animation-delay: 0.3s; }
+.achievement-card:nth-child(5) { animation-delay: 0.4s; }
+</style>
+
+     <section class="section quick-nav-section">
         <div class="container">
             <h2 class="section-title">Complete Site Navigation</h2>
             <p class="section-subtitle">Everything you need to master Megabonk - guides, tools, and community</p>
@@ -1545,92 +1911,7 @@
         </div>
     </section>
 
-
-
-    <section id="achievements" class="section">
-        <div class="container">
-            <h2 class="section-title">Achievement Guide System</h2>
-            <p class="section-subtitle">Complete every achievement and unlock all Steam rewards - 100% completion roadmap</p>
-            
-            <div class="achievement-showcase">
-                <div class="achievement-card" onclick="window.open('guides/achievements/story-milestones.html', '_blank')">
-                    <div class="achievement-icon">📖</div>
-                    <span class="achievement-category">STORY PROGRESSION</span>
-                    <h3 class="achievement-title">Story Milestones</h3>
-                    <div class="achievement-meta">
-                        <span>15 Achievements</span>
-                        <span>⏱️ Easy - 2 hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Complete guide to all time-based achievements. Survive 5, 10, 20, and 30+ minutes 
-                        with detailed strategies for each milestone.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Time-based progression • ✅ Survival strategies • ✅ Character recommendations
-                    </div>
-                    <span class="guide-link">Master Time Challenges →</span>
-                </div>
-
-                <div class="achievement-card" onclick="window.open('guides/achievements/character-unlocks.html', '_blank')">
-                    <div class="achievement-icon">👥</div>
-                    <span class="achievement-category">CHARACTER UNLOCKS</span>
-                    <h3 class="achievement-title">Character Unlocks</h3>
-                    <div class="achievement-meta">
-                        <span>20 Characters</span>
-                        <span>⏱️ Medium - 8 hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Unlock every character with efficient silver farming strategies. Includes secret 
-                        characters and optimal unlock order for maximum efficiency.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Silver farming guide • ✅ Secret character unlocks • ✅ Optimal order planning
-                    </div>
-                    <span class="guide-link">Unlock All Characters →</span>
-                </div>
-
-                <div class="achievement-card" onclick="window.open('guides/achievements/combat-mastery.html', '_blank')">
-                    <div class="achievement-icon">⚔️</div>
-                    <span class="achievement-category">COMBAT MASTERY</span>
-                    <h3 class="achievement-title">Combat Mastery</h3>
-                    <div class="achievement-meta">
-                        <span>10 Achievements</span>
-                        <span>⏱️ Hard - 20+ hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Master the most challenging combat achievements. Perfect runs, damage records, 
-                        and advanced techniques for dedicated players only.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Perfect execution training • ✅ Damage optimization • ✅ Advanced techniques
-                    </div>
-                    <span class="guide-link">Master Combat Skills →</span>
-                </div>
-
-                <div class="achievement-card premium" onclick="window.open('guides/achievements/collection-secrets.html', '_blank')">
-                    <div class="achievement-icon">💎</div>
-                    <span class="achievement-category">COLLECTION & SECRETS</span>
-                    <h3 class="achievement-title">Collections & Secrets</h3>
-                    <div class="achievement-meta">
-                        <span>73 Collectibles</span>
-                        <span>⏱️ Extreme - 30+ hours</span>
-                    </div>
-                    <p class="achievement-description">
-                        Find every hidden item, secret area, and easter egg. Complete collectible tracking 
-                        with exact locations and access methods.
-                    </p>
-                    <div class="achievement-features">
-                        ✅ Complete location maps • ✅ Secret area access • ✅ Easter egg discoveries
-                    </div>
-                    <span class="guide-link">Find All Secrets →</span>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="guides/achievements/" class="btn btn-secondary">🏆 Complete Achievement Index</a>
-            </div>
-        </div>
-    </section>
+    
 
     <section class="section stats-section">
         <div class="container">
