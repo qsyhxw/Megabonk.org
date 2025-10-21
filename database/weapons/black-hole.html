@@ -1,558 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Black Hole Guide - Crowd Control Weapon (Version 1.0.12)</title>
-    <meta name="description" content="Complete Black Hole weapon guide for Megabonk. Master gravitational crowd control, Bandit world record builds & post-nerf strategies. B-tier specialist weapon.">
-    <meta name="keywords" content="megabonk black hole, black hole guide, spaceman weapon, black hole bandit build, crowd control weapon, megabonk weapons">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Megabonk Black Hole Guide: Unlock, Builds & Stats</title>
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Meta -->
+    <meta name="description" content="Learn how to unlock Black Hole (Knockback Tome Lv.10), see true base stats, and build it right with Dexecutioner/Aura. Updated for v1.0.12."/>
+    <meta name="keywords" content="megabonk black hole, black hole guide, spaceman starting weapon, crowd control weapon, megabonk weapons, dexecutioner synergy"/>
+
+    <!-- Analytics (unchanged) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-V5X87M8JFL');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-V5X87M8JFL');
     </script>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
-     crossorigin="anonymous"></script>
-  
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
     <!-- Open Graph -->
-    <meta property="og:title" content="Megabonk Black Hole Guide - Crowd Control Weapon">
-    <meta property="og:description" content="Complete Black Hole weapon guide with Bandit world record builds, post-nerf strategies & crowd control mastery.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://megabonk.org/database/weapons/black-hole">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://megabonk.org/database/weapons/black-hole">
-    
+    <meta property="og:title" content="Megabonk Black Hole Guide - Crowd Control Weapon (v1.0.12)"/>
+    <meta property="og:description" content="True stats & mechanics, unlock steps, v1.0.12 changes, and reliable build ideas for Black Hole."/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="https://megabonk.org/database/weapons/black-hole"/>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://megabonk.org/database/weapons/black-hole"/>
+
+    <!-- Styles (kept) -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a0b2e 0%, #16213e 100%);
-            color: #e0e0e0;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 星空背景 */
-        #starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* 引力波动画 */
-        .gravity-pulse {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 4s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 导航栏 */
-        nav {
-            background: rgba(26, 11, 46, 0.95);
-            padding: 1rem 2rem;
-            border-bottom: 2px solid #8a2be2;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        nav a:hover {
-            color: #8a2be2;
-            background: rgba(138, 43, 226, 0.1);
-        }
-
-        /* 面包屑 */
-        .breadcrumb {
-            padding: 1rem 0;
-            font-size: 0.9rem;
-            color: #a0a0a0;
-        }
-
-        .breadcrumb a {
-            color: #8a2be2;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .breadcrumb a:hover {
-            color: #9d4edd;
-        }
-
-        /* Hero区域 */
-        .hero {
-            text-align: center;
-            padding: 3rem 1rem;
-            background: rgba(22, 33, 62, 0.6);
-            border-radius: 20px;
-            margin-bottom: 3rem;
-            border: 2px solid rgba(138, 43, 226, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .black-hole-icon {
-            font-size: 6rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            animation: rotate 10s linear infinite;
-            filter: drop-shadow(0 0 30px rgba(138, 43, 226, 0.8));
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #8a2be2, #9d4edd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tier-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ffa500, #ff8c00);
-            color: #000;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin: 0.5rem;
-            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4);
-        }
-
-        .version-badge {
-            display: inline-block;
-            background: rgba(138, 43, 226, 0.2);
-            border: 1px solid #8a2be2;
-            color: #8a2be2;
-            padding: 0.3rem 1rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            margin: 0.5rem;
-        }
-
-        /* 信息框 */
-        .info-box {
-            background: rgba(138, 43, 226, 0.1);
-            border-left: 4px solid #8a2be2;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-        }
-
-        .warning-box {
-            background: rgba(220, 20, 60, 0.1);
-            border-left: 4px solid #dc143c;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-        }
-
-        .success-box {
-            background: rgba(50, 205, 50, 0.1);
-            border-left: 4px solid #32cd32;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-        }
-
-        /* 卡片 */
-        .card {
-            background: rgba(22, 33, 62, 0.8);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #8a2be2;
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
-        }
-
-        .card h2 {
-            color: #8a2be2;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-            border-bottom: 2px solid rgba(138, 43, 226, 0.3);
-            padding-bottom: 0.5rem;
-        }
-
-        .card h3 {
-            color: #9d4edd;
-            margin: 1.5rem 0 1rem 0;
-            font-size: 1.5rem;
-        }
-
-        /* 统计网格 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .stat-item {
-            background: rgba(138, 43, 226, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #8a2be2;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #a0a0a0;
-            display: block;
-            margin-top: 0.5rem;
-        }
-
-        /* 构建卡片 */
-        .builds-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .build-card {
-            background: rgba(22, 33, 62, 0.9);
-            border-radius: 15px;
-            padding: 1.5rem;
-            border: 2px solid rgba(138, 43, 226, 0.3);
-            transition: all 0.3s;
-        }
-
-        .build-card:hover {
-            border-color: #8a2be2;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
-        }
-
-        .build-header {
-            text-align: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid rgba(138, 43, 226, 0.3);
-        }
-
-        .build-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .build-title {
-            font-size: 1.3rem;
-            color: #8a2be2;
-            font-weight: bold;
-        }
-
-        .build-tier {
-            display: inline-block;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
-            padding: 0.3rem 1rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 0.5rem;
-        }
-
-        .build-section {
-            margin: 1rem 0;
-        }
-
-        .build-section h4 {
-            color: #9d4edd;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .weapon-list, .tome-list, .item-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .weapon-list li, .tome-list li, .item-list li {
-            padding: 0.5rem;
-            margin: 0.3rem 0;
-            background: rgba(138, 43, 226, 0.05);
-            border-radius: 5px;
-            border-left: 3px solid #8a2be2;
-        }
-
-        /* 武器组合网格 */
-        .weapon-combo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .combo-card {
-            background: rgba(138, 43, 226, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            transition: all 0.3s;
-        }
-
-        .combo-card:hover {
-            background: rgba(138, 43, 226, 0.2);
-            border-color: #8a2be2;
-        }
-
-        .combo-title {
-            font-weight: bold;
-            color: #8a2be2;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        /* 社区评价区 */
-        .community-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .review-card {
-            background: rgba(22, 33, 62, 0.8);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 2px solid rgba(138, 43, 226, 0.3);
-        }
-
-        .review-positive {
-            border-color: rgba(50, 205, 50, 0.5);
-        }
-
-        .review-negative {
-            border-color: rgba(220, 20, 60, 0.5);
-        }
-
-        .review-header {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(138, 43, 226, 0.3);
-        }
-
-        .review-positive .review-header {
-            color: #32cd32;
-        }
-
-        .review-negative .review-header {
-            color: #dc143c;
-        }
-
-        .quote {
-            font-style: italic;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            margin: 1rem 0;
-            border-left: 3px solid #8a2be2;
-        }
-
-        /* 按钮 */
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #8a2be2, #9d4edd);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
-        }
-
-        /* 页脚 */
-        footer {
-            background: rgba(26, 11, 46, 0.95);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-            border-top: 2px solid #8a2be2;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            color: #8a2be2;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: #a0a0a0;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: block;
-            padding: 0.3rem 0;
-        }
-
-        .footer-section a:hover {
-            color: #8a2be2;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(138, 43, 226, 0.3);
-            color: #a0a0a0;
-        }
-
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .builds-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .community-section {
-                grid-template-columns: 1fr;
-            }
-
-            .weapon-combo-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* 滚动动画 */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s, transform 0.6s;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+            background:linear-gradient(135deg,#1a0b2e 0%,#16213e 100%);
+            color:#e0e0e0;line-height:1.6;overflow-x:hidden;position:relative;
+        }
+        #starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+        .star{position:absolute;background:white;border-radius:50%;animation:twinkle 3s infinite;}
+        @keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+        .gravity-pulse{
+            position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+            width:600px;height:600px;background:radial-gradient(circle,rgba(138,43,226,.1) 0%,transparent 70%);
+            border-radius:50%;animation:pulse 4s ease-in-out infinite;pointer-events:none;z-index:1;
+        }
+        @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(.8);opacity:.3}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.6}}
+        .container{max-width:1200px;margin:0 auto;padding:20px;position:relative;z-index:2;}
+        nav{background:rgba(26,11,46,.95);padding:1rem 2rem;border-bottom:2px solid #8a2be2;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+        nav ul{list-style:none;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
+        nav a{color:#e0e0e0;text-decoration:none;font-weight:500;transition:.3s;padding:.5rem 1rem;border-radius:5px;}
+        nav a:hover{color:#8a2be2;background:rgba(138,43,226,.1);}
+        .breadcrumb{padding:1rem 0;font-size:.9rem;color:#a0a0a0;}
+        .breadcrumb a{color:#8a2be2;text-decoration:none;transition:color .3s;}
+        .breadcrumb a:hover{color:#9d4edd;}
+
+        .hero{
+            text-align:center;padding:3rem 1rem;background:rgba(22,33,62,.6);
+            border-radius:20px;margin-bottom:3rem;border:2px solid rgba(138,43,226,.3);position:relative;overflow:hidden;
+        }
+        .black-hole-icon{font-size:6rem;margin-bottom:1rem;display:inline-block;animation:rotate 10s linear infinite;filter:drop-shadow(0 0 30px rgba(138,43,226,.8));}
+        @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+        .hero h1{
+            font-size:3rem;margin-bottom:1rem;background:linear-gradient(135deg,#8a2be2,#9d4edd);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        }
+        .tier-badge{
+            display:inline-block;background:linear-gradient(135deg,#36d1dc,#5b86e5);
+            color:#000;padding:.5rem 1.5rem;border-radius:25px;font-weight:bold;font-size:1.1rem;margin:.5rem;
+            box-shadow:0 4px 15px rgba(91,134,229,.4);
+        }
+        .version-badge{
+            display:inline-block;background:rgba(138,43,226,.2);border:1px solid #8a2be2;color:#8a2be2;
+            padding:.3rem 1rem;border-radius:15px;font-size:.9rem;margin:.5rem;
+        }
+
+        .weapon-art{
+            margin:1.25rem auto 0;max-width:560px;border-radius:12px;overflow:hidden;border:1px solid rgba(138,43,226,.25);
+            background:linear-gradient(135deg,rgba(138,43,226,.15),rgba(22,33,62,.4));
+        }
+        .weapon-art img{width:100%;display:block}
+        .caption{font-size:.9rem;color:#bdbdbd;margin-top:.5rem}
+
+        .info-box{background:rgba(138,43,226,.1);border-left:4px solid #8a2be2;padding:1rem;margin:1.5rem 0;border-radius:8px;}
+        .warning-box{background:rgba(220,20,60,.08);border-left:4px solid #dc143c;padding:1rem;margin:1.5rem 0;border-radius:8px;}
+        .success-box{background:rgba(50,205,50,.08);border-left:4px solid #32cd32;padding:1rem;margin:1.5rem 0;border-radius:8px;}
+
+        .card{background:rgba(22,33,62,.8);border-radius:15px;padding:2rem;margin:2rem 0;border:1px solid rgba(138,43,226,.3);transition:.3s;}
+        .card:hover{transform:translateY(-5px);border-color:#8a2be2;box-shadow:0 10px 30px rgba(138,43,226,.3);}
+        .card h2{color:#8a2be2;margin-bottom:1rem;font-size:2rem;border-bottom:2px solid rgba(138,43,226,.3);padding-bottom:.5rem;}
+        .card h3{color:#9d4edd;margin:1.5rem 0 1rem;font-size:1.5rem;}
+
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:2rem 0;}
+        .stat-item{background:rgba(138,43,226,.1);padding:1rem;border-radius:10px;border:1px solid rgba(138,43,226,.3);text-align:center;}
+        .stat-value{font-size:2rem;font-weight:bold;color:#8a2be2;display:block;}
+        .stat-label{font-size:.9rem;color:#a0a0a0;display:block;margin-top:.5rem;}
+
+        .builds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;margin:2rem 0;}
+        .build-card{background:rgba(22,33,62,.9);border-radius:15px;padding:1.5rem;border:2px solid rgba(138,43,226,.3);transition:.3s;}
+        .build-card:hover{border-color:#8a2be2;transform:translateY(-5px);box-shadow:0 10px 30px rgba(138,43,226,.4);}
+        .build-header{text-align:center;margin-bottom:1rem;padding-bottom:1rem;border-bottom:2px solid rgba(138,43,226,.3);}
+        .build-icon{font-size:3rem;margin-bottom:.5rem;}
+        .build-title{font-size:1.3rem;color:#8a2be2;font-weight:bold;}
+        .build-tier{display:inline-block;background:linear-gradient(135deg,#ffd700,#ffed4e);color:#000;padding:.3rem 1rem;border-radius:15px;font-size:.9rem;font-weight:bold;margin-top:.5rem;}
+        .build-section{margin:1rem 0;}
+        .build-section h4{color:#9d4edd;margin-bottom:.5rem;font-size:1.1rem;}
+        .weapon-list,.tome-list,.item-list{list-style:none;padding-left:0;}
+        .weapon-list li,.tome-list li,.item-list li{padding:.5rem;margin:.3rem 0;background:rgba(138,43,226,.05);border-radius:5px;border-left:3px solid #8a2be2;}
+
+        .weapon-combo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:2rem 0;}
+        .combo-card{background:rgba(138,43,226,.1);padding:1rem;border-radius:10px;border:1px solid rgba(138,43,226,.3);transition:.3s;}
+        .combo-card:hover{background:rgba(138,43,226,.2);border-color:#8a2be2;}
+        .combo-title{font-weight:bold;color:#8a2be2;margin-bottom:.5rem;font-size:1.1rem;}
+
+        .community-section{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2rem;margin:2rem 0;}
+        .review-card{background:rgba(22,33,62,.8);padding:1.5rem;border-radius:15px;border:2px solid rgba(138,43,226,.3);}
+        .review-positive{border-color:rgba(50,205,50,.5);}
+        .review-negative{border-color:rgba(220,20,60,.5);}
+        .review-header{font-size:1.3rem;font-weight:bold;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid rgba(138,43,226,.3);}
+        .review-positive .review-header{color:#32cd32;}
+        .review-negative .review-header{color:#dc143c;}
+        .quote{font-style:italic;padding:1rem;background:rgba(0,0,0,.3);border-radius:8px;margin:1rem 0;border-left:3px solid #8a2be2;}
+
+        .cta-button{
+            display:inline-block;background:linear-gradient(135deg,#8a2be2,#9d4edd);color:white;
+            padding:1rem 2rem;border-radius:25px;text-decoration:none;font-weight:bold;transition:.3s;border:none;cursor:pointer;box-shadow:0 4px 15px rgba(138,43,226,.4);
+        }
+        .cta-button:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(138,43,226,.6);}
+
+        footer{background:rgba(26,11,46,.95);padding:3rem 2rem;margin-top:4rem;border-top:2px solid #8a2be2;}
+        .footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
+        .footer-section h3{color:#8a2be2;margin-bottom:1rem;}
+        .footer-section ul{list-style:none;}
+        .footer-section a{color:#a0a0a0;text-decoration:none;transition:color .3s;display:block;padding:.3rem 0;}
+        .footer-section a:hover{color:#8a2be2;}
+        .footer-bottom{text-align:center;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(138,43,226,.3);color:#a0a0a0;}
+
+        @media (max-width:768px){
+            .hero h1{font-size:2rem;}
+            .builds-grid{grid-template-columns:1fr;}
+            .community-section{grid-template-columns:1fr;}
+            .weapon-combo-grid{grid-template-columns:1fr;}
+            nav ul{flex-direction:column;gap:.5rem;}
+            .stats-grid{grid-template-columns:repeat(2,1fr);}
+        }
+
+        .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s;}
+        .fade-in.visible{opacity:1;transform:translateY(0);}
     </style>
 </head>
 <body>
-    <!-- 星空背景 -->
+    <!-- Starfield -->
     <div id="starfield"></div>
-    
-    <!-- 引力波动画 -->
+    <!-- Gravity pulse -->
     <div class="gravity-pulse"></div>
 
-    <!-- 导航栏 -->
+    <!-- Nav -->
     <nav>
         <ul>
             <li><a href="/">🏠 Home</a></li>
@@ -564,492 +167,279 @@
     </nav>
 
     <div class="container">
-        <!-- 面包屑 -->
+        <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="/">Home</a> → 
-            <a href="/database/">Database</a> → 
-            <a href="/database/weapons/">Weapons</a> → 
+            <a href="/">Home</a> →
+            <a href="/database/">Database</a> →
+            <a href="/database/weapons/">Weapons</a> →
             <span>Black Hole</span>
         </div>
 
-        <!-- Hero区域 -->
+        <!-- Hero -->
         <div class="hero">
             <div class="black-hole-icon">🌌</div>
-            <h1>Black Hole Complete Guide</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 1rem;">The Ultimate Crowd Control Weapon</p>
-            <div class="tier-badge">B-Tier</div>
-            <div class="tier-badge" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">Situational A-Tier</div>
-            <div class="version-badge">Version 1.0.12 Post-Nerf</div>
+            <h1>Black Hole — Accurate Guide (v1.0.12)</h1>
+            <p style="font-size:1.15rem;margin-bottom:1rem;">Specialist <strong>Crowd Control</strong> weapon that clusters enemies for AoE follow-ups.</p>
+            <div class="tier-badge">Role: Crowd Control / Setup</div>
+            <div class="tier-badge" style="background:linear-gradient(135deg,#90f7ec,#32ccbc);">Best With: Size • Quantity • Duration</div>
+            <div class="version-badge">Verified for Version 1.0.12 (Oct 8, 2025)</div>
+
+            <!-- Weapon & Character art (images optional; keep placeholders safe) -->
+            <div class="weapon-art">
+                <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole weapon artwork"/>
+            </div>
         </div>
 
-        <!-- 武器基础信息 -->
+        <!-- Overview -->
         <div class="card fade-in">
             <h2>🎯 Weapon Overview</h2>
-            
+
             <div class="stats-grid">
                 <div class="stat-item">
                     <span class="stat-value">4</span>
-                    <span class="stat-label">Base Damage (Lowest)</span>
+                    <span class="stat-label">Base Damage</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-value">7s</span>
-                    <span class="stat-label">Cooldown</span>
+                    <span class="stat-value">≈ 7 s</span>
+                    <span class="stat-label">Base Cooldown</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-value">2s</span>
+                    <span class="stat-value">2 s</span>
                     <span class="stat-label">Base Duration</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-value">B</span>
-                    <span class="stat-label">Tier Rating</span>
+                    <span class="stat-value">Knockback Tome Lv.10</span>
+                    <span class="stat-label">Unlock Requirement</span>
                 </div>
             </div>
 
-            <div class="warning-box">
-                <strong>⚠️ CRITICAL NOTE:</strong> Black Hole is NOT a damage weapon - it's a crowd control enabler! Success requires understanding its unique setup-and-execute gameplay loop. Low base damage (4) means secondary weapons must carry damage output.
+            <div class="info-box">
+                <strong>What it actually does:</strong> Fires a projectile that spawns a gravitational field, <em>pulling</em> enemies into a cluster.
+                Damage is modest; its real value is setting up your <em>other</em> weapons to hit big groups safely and efficiently.
             </div>
 
             <h3>🔓 How to Unlock</h3>
-            <ol style="padding-left: 2rem;">
-                <li><strong>Level Knockback Tome to Level 10</strong> in any run (15-20 minutes)</li>
-                <li>Use any character - Fox, Megachad, or CL4NK recommended for survivability</li>
-                <li>Focus on XP gain and survival rather than damage</li>
-                <li>Purchase Black Hole for <strong>2 Silver</strong> from Unlocks menu</li>
+            <ol style="padding-left:2rem;">
+                <li>Start a run with <strong>Knockback Tome</strong> and upgrade it to <strong>Level 10</strong>.</li>
+                <li>End the run; Black Hole becomes purchasable in the Unlocks menu (cost varies by your save state).</li>
             </ol>
 
             <div class="success-box">
-                <strong>✅ Beginner-Friendly Unlock:</strong> Knockback Tome is available by default with no prerequisites. This is one of the simplest weapon unlocks in Megabonk!
+                <strong>Tip:</strong> Knockback Tome is available by default. Focus early upgrades and survivability to reach Lv.10 quickly.
             </div>
         </div>
 
-        <!-- 核心机制 -->
+        <!-- Core Mechanics -->
         <div class="card fade-in">
-            <h2>⚙️ Core Mechanics</h2>
-            
-            <h3>Gravitational Pull System</h3>
-            <p>Black Hole fires projectiles that create gravitational fields, pulling enemies toward a central point and clustering them for devastating AoE follow-up attacks. Enemies are grouped but NOT stunned - they continue attacking if you position poorly!</p>
+            <h2>⚙️ Core Mechanics & Upgrades</h2>
 
-            <div class="info-box">
-                <strong>💡 Strategic Depth:</strong> Predictive placement matters more than reactive firing. Shoot where enemies WILL BE, not where they are. Think defensively - Black Holes create safe zones where enemies can't reach you.
-            </div>
+            <h3>Gravitational Pull</h3>
+            <p>Black Hole groups enemies at a point. They are not stunned—just displaced—so keep positioning discipline. Use the window to
+               detonate with AoE (Aura, Axe, Poison, Mines, etc.).</p>
 
-            <h3>Four Upgrade Paths</h3>
+            <h3>Upgrade Tracks</h3>
             <div class="weapon-combo-grid">
                 <div class="combo-card">
                     <div class="combo-title">📈 Damage</div>
-                    <p>Increases direct damage from 4 base. Low priority since crowd control is the main value.</p>
+                    <p>Increases tick damage. Helpful but secondary to its setup role.</p>
                 </div>
                 <div class="combo-card">
                     <div class="combo-title">⏱️ Duration</div>
-                    <p><strong>CRITICAL!</strong> Base 2s requires tome investment. Keeps enemies grouped longer for combo execution.</p>
+                    <p>Keeps the pull active longer so your AoE can fully connect and you can reposition.</p>
                 </div>
                 <div class="combo-card">
-                    <div class="combo-title">🔢 Projectile Count</div>
-                    <p>Multiple Black Hole zones = screen-wide control. Essential for late-game swarms.</p>
+                    <div class="combo-title">🔢 Quantity (Projectile Count)</div>
+                    <p>More holes = more zones of control across the screen, especially during swarms.</p>
                 </div>
                 <div class="combo-card">
                     <div class="combo-title">📐 Size</div>
-                    <p><strong>MANDATORY!</strong> "Size Tome is what makes this build function" - Martyr_Dom. Difference between 3 enemies vs 30.</p>
+                    <p>The most impactful scaling for crowd control—bigger radius means more enemies grouped per cast.</p>
                 </div>
             </div>
         </div>
 
-        <!-- 版本历史 -->
+        <!-- Patch 1.0.12 -->
         <div class="card fade-in">
-            <h2>📜 Version 1.0.12 Balance Changes (October 8, 2025)</h2>
-            
-            <h3>✅ Buffs</h3>
+            <h2>📜 Patch 1.0.12 Changes (Oct 8, 2025)</h2>
+
+            <h3>Key Black Hole Changes</h3>
             <ul>
-                <li><strong>+20% Base Size:</strong> Compensatory buff addressing community complaints about ineffective pull radius</li>
-                <li><strong>Duration Bug Fixes:</strong> Projectiles no longer stop prematurely. Duration Tome now scales consistently</li>
-                <li><strong>Performance Optimization:</strong> "Significantly less FPS drop when combined with Dexecutioner" - no more slideshow gameplay</li>
+                <li><strong>Default Size +20%</strong> (wider pull radius).</li>
+                <li><strong>Proc Coefficient reduced: 0.9 → 0.7</strong> (on-hit effect multiplier adjusted to match similar weapons).</li>
+                <li><strong>Fixed oversized hitbox bug</strong> (no longer affects off-screen enemies by mistake).</li>
+                <li><strong>Performance optimized</strong> when combined with high-proc weapons (e.g., Dexecutioner).</li>
             </ul>
 
-            <h3>❌ Nerfs</h3>
+            <h3>Global System Changes Affecting It</h3>
             <ul>
-                <li><strong>Proc Coefficient: 0.9 → 0.7</strong> (30% reduction in item synergy effectiveness)</li>
-                <li><strong>Hitbox Bug Fix:</strong> Eliminated map-wide coverage. Previously affected enemies across ENTIRE map regardless of projectile location</li>
+                <li><strong>Duration fix:</strong> added max-duration handling so high Duration no longer blocks new projectiles—this is effectively a buff to many builds.</li>
+                <li><strong>Final Swarm rework:</strong> the endgame swarm is tougher; relying on executes/black holes alone is less effective than before.</li>
             </ul>
 
             <div class="warning-box">
-                <strong>⚠️ Developer Quote:</strong> "Fixed a bug where the Black Hole hitboxes were like 10x the size of the actual projectile, basically covering the entire map lol." This "bug fix" was actually the largest effective nerf - Black Hole lost its unintentional god-tier status.
+                <strong>Practical takeaway:</strong> Black Hole is <em>more consistent</em> as a control tool post-1.0.12, but raw “cheese” strategies relying only on executes + black holes are weaker in Final Swarm.
             </div>
-
-            <h3>Net Result</h3>
-            <p>Black Hole dropped from A-tier/low S-tier to solid <strong>B-tier with A-tier potential in specific builds</strong>. No longer a universal power pick but remains a respected specialist tool for crowd control enabler strategies.</p>
         </div>
 
-        <!-- 完整构建 -->
+        <!-- Builds -->
         <div class="card fade-in">
-            <h2>🏗️ Complete Build Strategies</h2>
-            
+            <h2>🏗️ Reliable Build Ideas (No hype, just what works)</h2>
+
             <div class="builds-grid">
-                <!-- Bandit世界记录构建 -->
+                <!-- Bandit synergy -->
                 <div class="build-card">
                     <div class="build-header">
-                        <div class="build-icon">🏆</div>
-                        <div class="build-title">Bandit World Record Build</div>
-                        <div class="build-tier">1M+ Kills Achieved</div>
+                        <div class="build-icon">🗡️</div>
+                        <div class="build-title">Bandit Execute Engine</div>
+                        <div class="build-tier">Synergy Pick</div>
                     </div>
 
                     <div class="build-section">
-                        <h4>💪 Core Weapons</h4>
+                        <h4>Core Weapons</h4>
                         <ul class="weapon-list">
-                            <li><strong>Black Hole</strong> - Mandatory crowd control</li>
-                            <li><strong>Katana</strong> - Early-game carry + Size synergy</li>
-                            <li><strong>Dexecutioner</strong> - Execute mechanics + Size scaling</li>
-                            <li><strong>Aura/Flamewalker</strong> - AoE coverage + FPS stability</li>
+                            <li><strong>Dexecutioner</strong> – execute chances scale with attack rate.</li>
+                            <li><strong>Black Hole</strong> – groups enemies for multi-execute/AoE hits.</li>
+                            <li><strong>Aura</strong> or <strong>Katana</strong> – reliable follow-through damage.</li>
+                            <li>Flex: <strong>Revolver</strong> or <strong>Flamewalker</strong> for coverage.</li>
                         </ul>
                     </div>
 
                     <div class="build-section">
-                        <h4>📚 Tome Priority</h4>
+                        <h4>Tomes (priority)</h4>
                         <ul class="tome-list">
-                            <li><strong>Size Tome</strong> - ABSOLUTELY MANDATORY! Creates screen-wide control</li>
-                            <li><strong>XP Tome</strong> - Accelerates scaling</li>
-                            <li><strong>Luck Tome</strong> - Uncapped scaling, legendary drops</li>
-                            <li><strong>Cursed Tome</strong> - Only after 2-3 weapons deal decent DPS</li>
+                            <li><strong>Quantity</strong> / <strong>Size</strong> – more/larger Black Holes.</li>
+                            <li><strong>XP</strong> – accelerates Bandit’s attack-speed scaling per level.</li>
+                            <li><strong>Cooldown</strong> situational (Bandit already scales attack speed).</li>
                         </ul>
                     </div>
 
                     <div class="build-section">
-                        <h4>✨ Essential Items</h4>
+                        <h4>Items to Watch</h4>
                         <ul class="item-list">
-                            <li><strong>Joe's Dagger (15-20x)</strong> - TRUE win condition! Collect then banish</li>
-                            <li><strong>Overpowered Lamp</strong> - Doubles execution procs</li>
-                            <li><strong>Za Wardo</strong> - Survival past 60min ghost phase</li>
-                            <li><strong>Sucky Magnet</strong> - Legendary XP collection</li>
-                            <li><strong>Moldy Cheese</strong> - Early DOT scaling</li>
+                            <li><strong>Overpowered Lamp</strong> – grants an additional on-hit proc roll (great with executes/on-hit items).</li>
+                            <li><strong>Joe’s Dagger</strong> – execute-centric scaling over long runs.</li>
+                            <li><strong>Sucky Magnet</strong> – periodically vacuums XP so you can stand your ground.</li>
+                            <li><strong>Za Warudo</strong> – time-stop lifesaver when you’d otherwise die.</li>
                         </ul>
                     </div>
 
                     <div class="info-box">
-                        <strong>💡 Strategy:</strong> Size Tome expands Black Holes to screen-covering area control. Enemies trapped become grouped targets for secondary weapons. Bandit's attack speed + Joe's Dagger = constant execution procs with exponential scaling. Holy Trinity (XP + Luck + Cursed) generates exponential growth!
+                        <strong>Why it works:</strong> Black Hole feeds grouped targets into Dexectioner and other AoE weapons.
+                        Bandit’s per-level attack speed pushes more procs and executes through the clumped mobs.
                     </div>
                 </div>
 
-                <!-- Spaceman构建 -->
+                <!-- Spaceman starter -->
                 <div class="build-card">
                     <div class="build-header">
                         <div class="build-icon">🚀</div>
-                        <div class="build-title">Spaceman Zone Control</div>
-                        <div class="build-tier" style="background: linear-gradient(135deg, #c0c0c0, #b0b0b0);">Character Specific</div>
+                        <div class="build-title">Spaceman Starter Control</div>
+                        <div class="build-tier" style="background:linear-gradient(135deg,#c0c0c0,#b0b0b0);">Starting Weapon User</div>
                     </div>
 
                     <div class="warning-box">
-                        <strong>⚠️ WARNING:</strong> Community overwhelmingly considers Spaceman the WEAKEST character despite having Black Hole as default weapon. "Pitifully weak" early game. Only attempt if you understand the challenge!
+                        <strong>Playstyle note:</strong> Early game is fragile; Black Hole provides control, not kills. Lean on safe pathing and ranged support until your tomes scale up. (v1.0.12 also fixed Spaceman’s passive so it works as intended.)
                     </div>
 
                     <div class="build-section">
-                        <h4>💪 Weapon Selection</h4>
+                        <h4>Complementary Weapons</h4>
                         <ul class="weapon-list">
-                            <li><strong>Black Hole</strong> - Default starter weapon</li>
-                            <li><strong>Bananarang</strong> - Ranged single-target coverage</li>
-                            <li><strong>Bone</strong> - Projectile bouncing coverage</li>
-                            <li><strong>Projectile Weapons</strong> - Handle enemies outside Black Hole range</li>
+                            <li><strong>Aura</strong> / <strong>Flamewalker</strong> – passive AoE ticks while enemies are grouped.</li>
+                            <li><strong>Katana</strong> / <strong>Revolver</strong> – single-target coverage outside the hole.</li>
+                            <li><strong>Mines</strong> – pre-place within pull zones for burst.</li>
                         </ul>
                     </div>
 
                     <div class="build-section">
-                        <h4>📚 Tome Priority</h4>
+                        <h4>Tomes</h4>
                         <ul class="tome-list">
-                            <li><strong>Projectile Speed</strong> - CRITICAL! Makes Black Hole activate faster</li>
-                            <li><strong>Size</strong> - Increases pull radius</li>
-                            <li><strong>Agility</strong> - Compensates slow base movement</li>
-                            <li><strong>Damage</strong> - Addresses weak early-game output</li>
+                            <li><strong>Size</strong> → <strong>Quantity</strong> → <strong>Duration</strong></li>
+                            <li><strong>Projectile Speed</strong> (if offered) helps holes “arm” in the right place.</li>
+                            <li><strong>Agility</strong> / <strong>Evasion</strong> for survivability.</li>
                         </ul>
-                    </div>
-
-                    <div class="build-section">
-                        <h4>🎯 Survival Strategy</h4>
-                        <ol style="padding-left: 2rem;">
-                            <li>Survive brutal early phase (0-10 minutes)</li>
-                            <li>XP farm until Black Hole upgrades available</li>
-                            <li>Use projectile weapons for enemies outside range</li>
-                            <li>Pray for good RNG on upgrade choices</li>
-                        </ol>
-                    </div>
-
-                    <div class="info-box">
-                        <strong>ℹ️ Spaceman's Actual Passive:</strong> "Quantum XP Theory" grants +1.5% XP gain per level (NOT "Gravitational Mastery"). At level 50, this becomes 75% increased XP - helps reach critical tome levels 20-30% faster. But no defensive/damage passives to help survive!
                     </div>
                 </div>
 
-                <!-- 通用组合构建 -->
+                <!-- Universal -->
                 <div class="build-card">
                     <div class="build-header">
                         <div class="build-icon">🌀</div>
-                        <div class="build-title">Universal Combo Build</div>
-                        <div class="build-tier" style="background: linear-gradient(135deg, #4169e1, #6495ed);">Works on Any Character</div>
+                        <div class="build-title">Universal AoE Follow-Ups</div>
+                        <div class="build-tier" style="background:linear-gradient(135deg,#4169e1,#6495ed);">Any Character</div>
                     </div>
 
                     <div class="build-section">
-                        <h4>💪 Best Secondary Weapons</h4>
+                        <h4>Best Partners</h4>
                         <ul class="weapon-list">
-                            <li><strong>Axe</strong> - Overlapping AoE circles on grouped enemies</li>
-                            <li><strong>Poison Flask</strong> - DOT on clustered groups</li>
-                            <li><strong>Mines</strong> - Place in Black Hole zones</li>
-                            <li><strong>Katana</strong> - Size scaling synergy</li>
+                            <li><strong>Dexecutioner</strong> – executes across the clump.</li>
+                            <li><strong>Aura</strong> – 360° damage around you hits everything pulled in.</li>
+                            <li><strong>Axe</strong> – overlapping AoE arcs on the cluster.</li>
+                            <li><strong>Poison Flask</strong> – DoT ramps fast on packed mobs.</li>
+                            <li><strong>Mines</strong> – detonate the grouped wave.</li>
+                            <li><strong>Katana</strong> – fast follow-through and early carry.</li>
                         </ul>
                     </div>
 
                     <div class="build-section">
-                        <h4>📚 Universal Tome Priorities</h4>
+                        <h4>Tomes (generic order)</h4>
                         <ul class="tome-list">
-                            <li><strong>Duration</strong> - Keeps enemies grouped longer</li>
-                            <li><strong>Projectile Count</strong> - Multiple Black Hole zones</li>
-                            <li><strong>Size</strong> - Larger control area</li>
+                            <li><strong>Size</strong> & <strong>Quantity</strong> first for control coverage, then <strong>Duration</strong>.</li>
+                            <li><strong>XP</strong> for faster access to higher tome levels and weapon upgrades.</li>
                         </ul>
-                    </div>
-
-                    <div class="build-section">
-                        <h4>🎯 Execution Loop</h4>
-                        <ol style="padding-left: 2rem;">
-                            <li>Fire Black Hole into enemy horde</li>
-                            <li>Immediately follow with AoE weapon</li>
-                            <li>Grouped enemies take simultaneous damage</li>
-                            <li>Reposition during 7s cooldown</li>
-                            <li>Repeat</li>
-                        </ol>
                     </div>
 
                     <div class="success-box">
-                        <strong>✅ Setup-and-Execute Strategy:</strong> "Fire a Black Hole into a horde of enemies and immediately follow up with a high-damage AoE attack. The grouped enemies will all be hit simultaneously, resulting in massive damage." - Megabonk Wiki
+                        <strong>Execution loop:</strong> Cast Black Hole into an approaching pack → drop/aim AoE → reposition while the pull keeps the pack inside damage.
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 最佳武器组合 -->
+        <!-- Boss Mechanics -->
         <div class="card fade-in">
-            <h2>⚔️ Best Weapon Combinations</h2>
-            
-            <div class="weapon-combo-grid">
-                <div class="combo-card">
-                    <div class="combo-title">🎯 Black Hole + Dexecutioner</div>
-                    <p><strong>Most Recommended Pairing!</strong> PCGamesN: "pairs perfectly." Group enemies with Black Hole, then Dexecutioner's execute chance hits multiple targets simultaneously. Post-optimization, no performance drops!</p>
-                </div>
-
-                <div class="combo-card">
-                    <div class="combo-title">🔥 Black Hole + Aura</div>
-                    <p>PCGamesN: "works exceptionally well." Aura's 360° damage synergizes perfectly with clustered enemies. Creates death zones.</p>
-                </div>
-
-                <div class="combo-card">
-                    <div class="combo-title">⚡ Black Hole + Flamewalker</div>
-                    <p>AoE vortex builds. Flame trails on grouped enemies = screen-wide burn. Excellent for swarms.</p>
-                </div>
-
-                <div class="combo-card">
-                    <div class="combo-title">⚔️ Black Hole + Katana</div>
-                    <p>World record Bandit build component. Fast attacks + Size scaling synergy. Great early-game carry.</p>
-                </div>
-
-                <div class="combo-card">
-                    <div class="combo-title">💣 Black Hole + Mines</div>
-                    <p>Place mines in Black Hole zones. Enemies walk into trap clusters. Excellent crowd control combo.</p>
-                </div>
-
-                <div class="combo-card">
-                    <div class="combo-title">🪓 Black Hole + Axe</div>
-                    <p>Overlapping AoE circles shred grouped enemies. Size Tome makes axes screen-fillers.</p>
-                </div>
-
-                <div class="combo-card">
-                    <div class="combo-title">☠️ Black Hole + Poison Flask</div>
-                    <p>DOT on clustered groups. Especially powerful with Moldy Cheese stacking for lifesteal healing.</p>
-                </div>
-            </div>
-
-            <div class="warning-box">
-                <strong>⚠️ AVOID:</strong> Using Black Hole as sole damage source! Base damage is only 4 - you MUST pair with high-damage secondary weapons to succeed.
-            </div>
-        </div>
-
-        <!-- 角色协同 -->
-        <div class="card fade-in">
-            <h2>👥 Character Synergies</h2>
-            
-            <h3>✅ Best Characters</h3>
-            <div class="weapon-combo-grid">
-                <div class="combo-card" style="border-color: rgba(50, 205, 50, 0.5);">
-                    <div class="combo-title">🗡️ Bandit - S-Tier</div>
-                    <p><strong>+1% Attack Speed per level</strong> multiplies Black Hole firing frequency AND secondary weapon effectiveness. World records consistently use Bandit + Black Hole. High levels = near-constant battlefield coverage!</p>
-                </div>
-
-                <div class="combo-card" style="border-color: rgba(50, 205, 50, 0.5);">
-                    <div class="combo-title">💪 Megachad - B-Tier</div>
-                    <p>Defensive bonuses allow safer positioning for optimal Black Hole placement. Survival-focused playstyle capitalizes on zone control.</p>
-                </div>
-
-                <div class="combo-card" style="border-color: rgba(138, 43, 226, 0.5);">
-                    <div class="combo-title">🦊 Fox / 🤖 CL4NK - Neutral</div>
-                    <p>General purpose characters work adequately with Black Hole as utility weapon, though lack specialized synergies.</p>
-                </div>
-            </div>
-
-            <h3>⚠️ Spaceman - The Controversy</h3>
-            <div class="warning-box">
-                <strong>Default Black Hole Character, But...</strong>
-                <p>Despite having Black Hole as starter weapon, community overwhelmingly considers Spaceman the WEAKEST and most challenging character. Player quote: "Completing 6 challenges which took me at least 10 hours... to get such a pitifully weak character... was so disappointing it makes me not want to play anymore."</p>
-                <p><strong>Why?</strong> Black Hole's inherently weak early game + Spaceman having NO defensive or damage-boosting passives = brutal difficulty spike. His +1.5% XP per level helps reach tome scaling faster, but doesn't compensate for survival struggles.</p>
-            </div>
-
-            <h3>❌ Anti-Synergy Characters</h3>
+            <h2>👑 Final Boss Mechanics (What actually happens)</h2>
             <ul>
-                <li><strong>Calcium (Speed Demon):</strong> High mobility conflicts with Black Hole's stationary zone control</li>
-                <li><strong>Crit-Focused Builds:</strong> Black Hole has low proc coefficient and minimal base damage for crit scaling</li>
-                <li><strong>Single-Target Specialists:</strong> Gain minimal benefit since Black Hole's strength is grouping multiple enemies</li>
-            </ul>
-        </div>
-
-        <!-- 高级技巧 -->
-        <div class="card fade-in">
-            <h2>🎓 Advanced Strategies</h2>
-            
-            <h3>🎯 Positioning Tactics</h3>
-            <ul>
-                <li><strong>Think Defensively:</strong> Black Holes create safe zones where enemies can't reach you. Use them as shields!</li>
-                <li><strong>Predictive Placement:</strong> Shoot where enemies WILL BE, not where they are. Lead your shots!</li>
-                <li><strong>Corner/Wall Positioning:</strong> Limits enemy approach angles and concentrates Black Holes</li>
-                <li><strong>Circular Movement:</strong> While kiting, place Black Holes in enemy pursuit paths</li>
-                <li><strong>Choke Point Control:</strong> Excels at narrow passages where Black Hole forces clustering</li>
+                <li>At the start of the final boss, you typically fight using <strong>only your starting weapon</strong>.</li>
+                <li>As phases progress (pylons/objectives), <strong>additional weapons are returned</strong> to you—so don’t panic if you see them “missing” at first.</li>
+                <li>Plan ahead: ensure your <strong>starter weapon</strong> can handle single-target DPS checks.</li>
             </ul>
 
-            <h3>⏱️ Timing Strategies</h3>
-            <ul>
-                <li><strong>Early Game (0-10min):</strong> Focus mobility between 7s cooldown shots. Black Hole alone won't carry damage</li>
-                <li><strong>Mid Game (10-30min):</strong> Coordinate Black Hole shots with secondary weapon high-damage windows</li>
-                <li><strong>Late Game (30min+):</strong> Maintain constant battlefield coverage through high Projectile Count</li>
-            </ul>
-
-            <h3>👑 Boss Fight Strategies</h3>
-            <div class="warning-box">
-                <strong>⚠️ CRITICAL BOSS WARNING:</strong> Final Boss deletes all weapons except your HIGHEST-LEVELED weapon. If Black Hole is highest level, you face final boss with only 4 base damage!
-                <br><br>
-                <strong>Solution:</strong> Keep a high-damage weapon (Dexecutioner, Katana, Revolver) as highest level throughout run!
-            </div>
-            <ul>
-                <li><strong>Single Target Weakness:</strong> Low base damage (4) means secondary weapons must carry boss DPS</li>
-                <li><strong>Add Control:</strong> Black Hole excels at controlling boss-spawned minions. Group adds for AoE clear</li>
-                <li><strong>Positioning Over Damage:</strong> Use Black Hole to create safe zones during boss special attacks</li>
-            </ul>
-
-            <h3>🌊 Swarm Strategies</h3>
-            <p><strong>Where Black Hole Truly Dominates:</strong></p>
-            <ul>
-                <li><strong>Dense Mob Swarms:</strong> Pull 10-30+ enemies into single points for massive AoE damage</li>
-                <li><strong>Multiple Approach Angles:</strong> Create defensive zones at chokepoints</li>
-                <li><strong>Ghost Overtime (60min+):</strong> Black Hole required for survival in endless swarms</li>
-                <li><strong>Cursed Tome Runs:</strong> Massive hordes that Black Hole uniquely controls</li>
-            </ul>
-        </div>
-
-        <!-- 常见错误 -->
-        <div class="card fade-in">
-            <h2>⚠️ Common Mistakes to Avoid</h2>
-            
-            <h3>🔴 Newbie Errors</h3>
-            <ul>
-                <li><strong>Treating Black Hole as Primary Damage Source:</strong> Base damage is only 4! You MUST pair with damage follow-up weapons</li>
-                <li><strong>Ignoring Size Tome:</strong> Prima Games: "Size Tome is what makes this build function." Without it, pull radius is too small</li>
-                <li><strong>Poor Positioning:</strong> Destructoid: "you'll have to position the hole carefully." Random placement wastes utility</li>
-                <li><strong>Expecting Instant Results:</strong> Early game is genuinely weak. Don't abandon before mid-game scaling transforms it!</li>
-                <li><strong>Playing Spaceman:</strong> Despite having Black Hole as starter, he's widely considered the worst character</li>
-            </ul>
-
-            <h3>🟡 Experienced Player Mistakes</h3>
-            <ul>
-                <li><strong>Over-Investing in Proc Synergies Post-Nerf:</strong> Coefficient reduction to 0.7 reduced on-hit effectiveness by 30%</li>
-                <li><strong>Neglecting Duration Tome:</strong> Enemies won't stay grouped long enough for combo execution without duration scaling</li>
-                <li><strong>Over-Relying on Final Swarm:</strong> Developers specifically nerfed Black Hole's late-game ghost effectiveness</li>
-                <li><strong>Wrong Weapon Priority for Final Boss:</strong> If Black Hole is highest level, you're stuck with 4 damage against the boss!</li>
-            </ul>
-
-            <div class="success-box">
-                <strong>✅ Pro Tip:</strong> "The ultimate combo enabler strategy: Fire a Black Hole into a horde of enemies and immediately follow up with a high-damage AoE attack. The grouped enemies will all be hit simultaneously, resulting in massive damage." - Megabonk Wiki
-            </div>
-        </div>
-
-        <!-- 社区评价 -->
-        <div class="card fade-in">
-            <h2>💬 Community Consensus</h2>
-            
-            <div class="community-section">
-                <!-- 正面评价 -->
-                <div class="review-card review-positive">
-                    <div class="review-header">👍 Top Player Perspective</div>
-                    
-                    <div class="quote">
-                        "Black hole is insanely OP bro. it CCs the entire screen with enough size, most of my 1m+ runs has been with black hole. If anything it will be nerfed."
-                        <br>- Steam User SnUs
-                    </div>
-
-                    <h4>What Experienced Players Love:</h4>
-                    <ul>
-                        <li>✅ Visual satisfaction of pulling enemies together</li>
-                        <li>✅ Strategic gameplay requiring positioning thought</li>
-                        <li>✅ Strong power fantasy when scaled properly</li>
-                        <li>✅ Combo enabler for creative builds</li>
-                        <li>✅ Late-game scaling transforms liability to powerhouse</li>
-                    </ul>
-
-                    <h4>Meta Status:</h4>
-                    <p><strong>World Record Inclusion:</strong> Martyr_Dom (top leaderboard player) continues featuring Black Hole in 1M+ kill runs. Prima Games includes it in "Best Bandit Build" guides for competitive play.</p>
-                </div>
-
-                <!-- 负面评价 -->
-                <div class="review-card review-negative">
-                    <div class="review-header">👎 Casual Player Frustration</div>
-                    
-                    <div class="quote">
-                        "Completing 6 challenges which took me at least 10 hours... to get such a pitifully weak character... was so disappointing it makes me not want to play anymore."
-                        <br>- Frustrated Spaceman Unlocker
-                    </div>
-
-                    <div class="quote">
-                        "a short term tiny ball that can barely hurt two enemies"
-                        <br>- Steam Community Member
-                    </div>
-
-                    <h4>Common Complaints:</h4>
-                    <ul>
-                        <li>❌ Spaceman character weakness most vociferous issue</li>
-                        <li>❌ Build dependency - requires specific tomes/items to function</li>
-                        <li>❌ Early game frustratingly weak</li>
-                        <li>❌ Positioning requirements feel like work vs fun</li>
-                        <li>❌ Post-nerf identity crisis for casual players</li>
-                    </ul>
-
-                    <h4>Tier List Rankings:</h4>
-                    <p><strong>B-Tier Consensus:</strong> Twinfinite: "seldom seen in high-scoring runs." Multiple post-1.0.12 lists consistently place it in B-tier or lower. Pre-nerf rankings placed it in A-tier to low S-tier.</p>
-                </div>
-            </div>
-
-            <h3>📊 Final Community Assessment</h3>
             <div class="info-box">
-                <strong>Community Rating: MIXED to POSITIVE with Caveats</strong>
-                <ul style="margin-top: 1rem;">
-                    <li>🟢 Top Players: POSITIVE - "insanely OP with proper scaling"</li>
-                    <li>🟢 Experienced Players: POSITIVE - understand enabler role</li>
-                    <li>🟡 Casual Players: MIXED - works but requires effort</li>
-                    <li>🔴 New Players: NEGATIVE - frustrating early game</li>
-                    <li>🔴 Spaceman Players: VERY NEGATIVE - character disappointment</li>
-                </ul>
-            </div>
-
-            <div class="success-box">
-                <strong>💭 Community Wisdom:</strong> "Black Hole is the ultimate 'setup' weapon that requires proper build knowledge but rewards strategic play with screen-wide crowd control. Not beginner-friendly, not universally powerful, but incredibly strong in the right hands with the right build."
-                <br><br>
-                <strong>Final Rating:</strong> B-tier weapon with A-tier potential in specific builds. No longer the controversial powerhouse of pre-1.0.12, but a respected specialist tool for experienced players.
+                <strong>Practical tip:</strong> If Black Hole is your starter (e.g., Spaceman), bring at least one strong single-target weapon as a secondary during the run so that it returns in later boss phases.
             </div>
         </div>
 
-        <!-- CTA区域 -->
-        <div class="card fade-in" style="text-align: center; background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(157, 78, 221, 0.2));">
-            <h2>🚀 Master Black Hole Today!</h2>
-            <p style="font-size: 1.1rem; margin: 1rem 0;">Ready to dominate with gravitational crowd control? Explore more weapons and builds!</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+        <!-- Advanced -->
+        <div class="card fade-in">
+            <h2>🎓 Advanced Tips</h2>
+
+            <h3>Positioning</h3>
+            <ul>
+                <li><strong>Lead your casts:</strong> aim where the pack will be, not where it is.</li>
+                <li><strong>Chokepoints & walls:</strong> pull plus terrain funnels waves into tight clusters.</li>
+                <li><strong>Circle-kite:</strong> drop holes along your kite path to “harvest” the chase pack.</li>
+            </ul>
+
+            <h3>Timing</h3>
+            <ul>
+                <li><strong>Early (0–10m):</strong> play safe; Black Hole is control, not damage.</li>
+                <li><strong>Mid (10–30m):</strong> sync holes with your AoE weapon windows.</li>
+                <li><strong>Late (30m+):</strong> Quantity + Size for near-constant control coverage.</li>
+            </ul>
+
+            <h3>Common Mistakes</h3>
+            <ul>
+                <li>Using Black Hole as your <em>only</em> damage plan.</li>
+                <li>Skipping <strong>Size</strong>/<strong>Quantity</strong>—these are core to its identity.</li>
+                <li>Ignoring single-target DPS for the boss if your starter is Black Hole.</li>
+            </ul>
+        </div>
+
+        <!-- CTA -->
+        <div class="card fade-in" style="text-align:center;background:linear-gradient(135deg,rgba(138,43,226,.2),rgba(157,78,221,.2));">
+            <h2>🚀 Master Black Hole</h2>
+            <p style="font-size:1.05rem;margin:1rem 0;">Use it to control space, then let your real damage dealers go to work.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
                 <a href="/database/weapons/" class="cta-button">⚔️ All Weapons</a>
                 <a href="/guides/characters/spaceman-guide" class="cta-button">🚀 Spaceman Guide</a>
                 <a href="/guides/characters/bandit-guide" class="cta-button">🗡️ Bandit Guide</a>
@@ -1058,7 +448,7 @@
         </div>
     </div>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -1093,7 +483,7 @@
                 <ul>
                     <li><a href="/guides/meta-strategy/">Meta Strategy</a></li>
                     <li><a href="/guides/tips-tricks/">Tips & Tricks</a></li>
-                    <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank">Buy on Steam</a></li>
+                    <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener">Buy on Steam</a></li>
                 </ul>
             </div>
         </div>
@@ -1103,51 +493,42 @@
         </div>
     </footer>
 
+    <!-- Scripts (kept) -->
     <script>
-        // 创建星空
-        function createStarfield() {
-            const starfield = document.getElementById('starfield');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = star.style.height = Math.random() * 3 + 'px';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starfield.appendChild(star);
+        // Starfield
+        function createStarfield(){
+            const starfield=document.getElementById('starfield');
+            for(let i=0;i<100;i++){
+                const s=document.createElement('div');
+                s.className='star';
+                s.style.left=Math.random()*100+'%';
+                s.style.top=Math.random()*100+'%';
+                s.style.width=s.style.height=Math.random()*3+'px';
+                s.style.animationDelay=Math.random()*3+'s';
+                starfield.appendChild(s);
             }
         }
-
-        // 滚动动画
-        function handleScrollAnimation() {
-            const elements = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            elements.forEach(el => observer.observe(el));
+        // Scroll reveal
+        function handleScrollAnimation(){
+            const els=document.querySelectorAll('.fade-in');
+            const obs=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); } });
+            },{threshold:.1});
+            els.forEach(el=>obs.observe(el));
         }
-
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // Smooth anchor
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+            a.addEventListener('click',e=>{
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                const t=document.querySelector(a.getAttribute('href'));
+                if(t){ t.scrollIntoView({behavior:'smooth',block:'start'}); }
             });
         });
-
-        // 初始化
-        window.addEventListener('DOMContentLoaded', () => {
-            createStarfield();
-            handleScrollAnimation();
-        });
+        window.addEventListener('DOMContentLoaded',()=>{ createStarfield(); handleScrollAnimation(); });
     </script>
+
+    <!-- Cloudflare (unchanged) -->
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'991d3f8df92fd88e',t:'MTc2MTAxMjkzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
