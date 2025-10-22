@@ -1,0 +1,1151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Leaderboard & Rankings - Top Players & Best Builds 2025</title>
+    <meta name="description" content="Official Megabonk leaderboard featuring top players, world records, character rankings, and meta builds. Track your progress and climb the competitive ladder with proven strategies.">
+    <meta name="keywords" content="megabonk leaderboard, megabonk rankings, megabonk top players, megabonk builds, megabonk world records, megabonk competitive">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Megabonk Leaderboard - Top Players & Best Builds">
+    <meta property="og:description" content="View top Megabonk players, world records, and meta builds. Join the competitive community!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://megabonk.org/leaderboard/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #f7931e;
+            --dark-bg: #1a1a2e;
+            --card-bg: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a8b2d1;
+            --border-color: #2d3748;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f0f1e 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-tab:hover, .filter-tab.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Leaderboard Table */
+        .leaderboard-table {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 80px 1fr 150px 150px 150px;
+            gap: 1rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .table-row {
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 80px 1fr 150px 150px 150px;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
+            align-items: center;
+        }
+
+        .table-row:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .rank-badge {
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rank-badge.gold { color: var(--gold); }
+        .rank-badge.silver { color: var(--silver); }
+        .rank-badge.bronze { color: var(--bronze); }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .player-name {
+            font-weight: 500;
+        }
+
+        .character-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid var(--primary-color);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+        }
+
+        .view-build-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .view-build-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Build Cards Grid */
+        .builds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .build-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .build-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .build-title {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .tier-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .tier-badge.s-tier {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+        }
+
+        .tier-badge.a-tier {
+            background: linear-gradient(135deg, #c0c0c0, #e0e0e0);
+            color: #000;
+        }
+
+        .build-character {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .build-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .build-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .build-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .build-stat-label {
+            color: var(--text-secondary);
+        }
+
+        .build-stat-value {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .build-link {
+            display: block;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .build-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* World Records */
+        .records-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .record-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .record-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .record-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .record-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .record-holder {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .info-box li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .table-header, .table-row {
+                grid-template-columns: 60px 1fr 100px;
+                font-size: 0.85rem;
+            }
+
+            .table-header :nth-child(4),
+            .table-header :nth-child(5),
+            .table-row :nth-child(4),
+            .table-row :nth-child(5) {
+                display: none;
+            }
+
+            .builds-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/">Guides</a></li>
+                <li><a href="https://megabonk.org/database/">Database</a></li>
+                <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                <li><a href="https://megabonk.org/leaderboard/" class="active">Leaderboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>🏆 Megabonk Leaderboard</h1>
+        <p>Compete with the best players worldwide. Track rankings, discover meta builds, and climb your way to the top of the competitive ladder.</p>
+    </section>
+
+    <!-- Stats Overview -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">742,831</div>
+            <div class="stat-label">World Record Kills</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">50,000+</div>
+            <div class="stat-label">Active Players</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">22</div>
+            <div class="stat-label">Playable Characters</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Weekly</div>
+            <div class="stat-label">Rankings Reset</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Important Info -->
+        <div class="info-box">
+            <h3>📢 Leaderboard Updates (Patch 1.0.12)</h3>
+            <ul>
+                <li>Global ban list implemented - all cheaters removed from rankings</li>
+                <li>Anti-cheat system now active - fair play enforced</li>
+                <li>Rankings reset weekly every Monday at 00:00 UTC</li>
+                <li>Legitimate builds and strategies verified by community</li>
+                <li>Submit your runs via in-game leaderboard system</li>
+            </ul>
+        </div>
+
+        <!-- Global Leaderboard -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Global Rankings</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">All Characters</button>
+                    <button class="filter-tab">This Week</button>
+                    <button class="filter-tab">All Time</button>
+                </div>
+            </div>
+
+            <div class="leaderboard-table">
+                <div class="table-header">
+                    <div>Rank</div>
+                    <div>Player</div>
+                    <div>Character</div>
+                    <div>Kills</div>
+                    <div>Action</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge gold">🥇 #1</div>
+                    <div class="player-info">
+                        <div class="player-avatar">SK</div>
+                        <div class="player-name">ShadowKiller</div>
+                    </div>
+                    <div><span class="character-badge">Robinette</span></div>
+                    <div>742,831</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge silver">🥈 #2</div>
+                    <div class="player-info">
+                        <div class="player-avatar">MP</div>
+                        <div class="player-name">MegaPro_99</div>
+                    </div>
+                    <div><span class="character-badge">Dicehead</span></div>
+                    <div>698,245</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge bronze">🥉 #3</div>
+                    <div class="player-info">
+                        <div class="player-avatar">BM</div>
+                        <div class="player-name">BonkMaster</div>
+                    </div>
+                    <div><span class="character-badge">Monke</span></div>
+                    <div>653,112</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#4</div>
+                    <div class="player-info">
+                        <div class="player-avatar">VN</div>
+                        <div class="player-name">VoidNinja</div>
+                    </div>
+                    <div><span class="character-badge">Bandit</span></div>
+                    <div>621,890</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#5</div>
+                    <div class="player-info">
+                        <div class="player-avatar">CL</div>
+                        <div class="player-name">CritLord_X</div>
+                    </div>
+                    <div><span class="character-badge">CL4NK</span></div>
+                    <div>589,432</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#6</div>
+                    <div class="player-info">
+                        <div class="player-avatar">SD</div>
+                        <div class="player-name">SpeedDemon</div>
+                    </div>
+                    <div><span class="character-badge">Calcium</span></div>
+                    <div>567,201</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#7</div>
+                    <div class="player-info">
+                        <div class="player-avatar">FG</div>
+                        <div class="player-name">FoxGaming</div>
+                    </div>
+                    <div><span class="character-badge">Fox Kitsune</span></div>
+                    <div>543,876</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#8</div>
+                    <div class="player-info">
+                        <div class="player-avatar">TC</div>
+                        <div class="player-name">TankCommander</div>
+                    </div>
+                    <div><span class="character-badge">Sir Oofie</span></div>
+                    <div>521,459</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#9</div>
+                    <div class="player-info">
+                        <div class="player-avatar">PP</div>
+                        <div class="player-name">PoisonPro</div>
+                    </div>
+                    <div><span class="character-badge">Amog</span></div>
+                    <div>498,321</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#10</div>
+                    <div class="player-info">
+                        <div class="player-avatar">MC</div>
+                        <div class="player-name">MegaChampion</div>
+                    </div>
+                    <div><span class="character-badge">MegaChad</span></div>
+                    <div>476,892</div>
+                    <div><button class="view-build-btn">View Build</button></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Character Rankings -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Character Rankings</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">Top 10</button>
+                    <button class="filter-tab">S-Tier</button>
+                    <button class="filter-tab">A-Tier</button>
+                </div>
+            </div>
+
+            <div class="leaderboard-table">
+                <div class="table-header">
+                    <div>Rank</div>
+                    <div>Character</div>
+                    <div>Best Score</div>
+                    <div>Win Rate</div>
+                    <div>Guide</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge gold">🥇 #1</div>
+                    <div class="player-info">
+                        <div class="player-avatar">R</div>
+                        <div class="player-name">Robinette</div>
+                    </div>
+                    <div>742,831</div>
+                    <div style="color: var(--success);">94.2%</div>
+                    <div><a href="https://megabonk.org/guides/characters/robinette-guide" class="view-build-btn">View Guide</a></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge silver">🥈 #2</div>
+                    <div class="player-info">
+                        <div class="player-avatar">D</div>
+                        <div class="player-name">Dicehead</div>
+                    </div>
+                    <div>698,245</div>
+                    <div style="color: var(--success);">91.8%</div>
+                    <div><a href="https://megabonk.org/guides/characters/dicehead-guide" class="view-build-btn">View Guide</a></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge bronze">🥉 #3</div>
+                    <div class="player-info">
+                        <div class="player-avatar">M</div>
+                        <div class="player-name">Monke</div>
+                    </div>
+                    <div>653,112</div>
+                    <div style="color: var(--success);">89.5%</div>
+                    <div><a href="https://megabonk.org/guides/characters/monke-guide" class="view-build-btn">View Guide</a></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#4</div>
+                    <div class="player-info">
+                        <div class="player-avatar">B</div>
+                        <div class="player-name">Bandit</div>
+                    </div>
+                    <div>621,890</div>
+                    <div style="color: var(--success);">87.3%</div>
+                    <div><a href="https://megabonk.org/guides/characters/bandit-guide" class="view-build-btn">View Guide</a></div>
+                </div>
+
+                <div class="table-row">
+                    <div class="rank-badge">#5</div>
+                    <div class="player-info">
+                        <div class="player-avatar">C</div>
+                        <div class="player-name">CL4NK</div>
+                    </div>
+                    <div>589,432</div>
+                    <div style="color: var(--success);">85.1%</div>
+                    <div><a href="https://megabonk.org/guides/characters/cl4nk-guide" class="view-build-btn">View Guide</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meta Builds -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Top Meta Builds</h2>
+                <a href="https://megabonk.org/guides/builds/" style="color: var(--primary-color); text-decoration: none;">View All Builds →</a>
+            </div>
+
+            <div class="builds-grid">
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 class="build-title">Kevin Mirror Immortality</h3>
+                        <span class="tier-badge s-tier">S-TIER</span>
+                    </div>
+                    <div class="build-character">Best for: Robinette, Dicehead, Monke</div>
+                    <p class="build-description">The legendary immortality build. Kevin damages you constantly while Mirror grants invulnerability. With high attack speed, you become literally unkillable.</p>
+                    <div class="build-stats">
+                        <div class="build-stat">
+                            <span class="build-stat-label">Difficulty</span>
+                            <span class="build-stat-value">Advanced</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Power Level</span>
+                            <span class="build-stat-value">10/10</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Best Stage</span>
+                            <span class="build-stat-value">All Stages</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Meta Status</span>
+                            <span class="build-stat-value">Top Tier</span>
+                        </div>
+                    </div>
+                    <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality" class="build-link">View Full Build →</a>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 class="build-title">Poison Lifesteal</h3>
+                        <span class="tier-badge s-tier">S-TIER</span>
+                    </div>
+                    <div class="build-character">Best for: Amog, Vlad, Bandit</div>
+                    <p class="build-description">Sustain-focused build that heals constantly. Poison damage counts as hits for lifesteal, giving insane health regeneration perfect for survival.</p>
+                    <div class="build-stats">
+                        <div class="build-stat">
+                            <span class="build-stat-label">Difficulty</span>
+                            <span class="build-stat-value">Medium</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Power Level</span>
+                            <span class="build-stat-value">9/10</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Best Stage</span>
+                            <span class="build-stat-value">Boss Fights</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Meta Status</span>
+                            <span class="build-stat-value">Top Tier</span>
+                        </div>
+                    </div>
+                    <a href="https://megabonk.org/guides/builds/poison-lifesteal" class="build-link">View Full Build →</a>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 class="build-title">Speed Demon</h3>
+                        <span class="tier-badge s-tier">S-TIER</span>
+                    </div>
+                    <div class="build-character">Best for: Calcium, Ninja, Fox Kitsune</div>
+                    <p class="build-description">Maximum movement speed build. Blitz through maps, dodge everything, and scale damage with speed. Fast, fun, and deadly.</p>
+                    <div class="build-stats">
+                        <div class="build-stat">
+                            <span class="build-stat-label">Difficulty</span>
+                            <span class="build-stat-value">Hard</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Power Level</span>
+                            <span class="build-stat-value">9/10</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Best Stage</span>
+                            <span class="build-stat-value">Swarms</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Meta Status</span>
+                            <span class="build-stat-value">High Tier</span>
+                        </div>
+                    </div>
+                    <a href="https://megabonk.org/guides/builds/speed-demon" class="build-link">View Full Build →</a>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 class="build-title">Walking Apocalypse</h3>
+                        <span class="tier-badge a-tier">A-TIER</span>
+                    </div>
+                    <div class="build-character">Best for: MegaChad, Sir Oofie, Ogre</div>
+                    <p class="build-description">Tank build focused on aura damage and survivability. Stand in the middle of enemies and watch them melt around you.</p>
+                    <div class="build-stats">
+                        <div class="build-stat">
+                            <span class="build-stat-label">Difficulty</span>
+                            <span class="build-stat-value">Easy</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Power Level</span>
+                            <span class="build-stat-value">8/10</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Best Stage</span>
+                            <span class="build-stat-value">Early-Mid</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Meta Status</span>
+                            <span class="build-stat-value">Solid</span>
+                        </div>
+                    </div>
+                    <a href="https://megabonk.org/guides/builds/walking-apocalypse" class="build-link">View Full Build →</a>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 class="build-title">Bullet Hell</h3>
+                        <span class="tier-badge a-tier">A-TIER</span>
+                    </div>
+                    <div class="build-character">Best for: CL4NK, Tony McZoom, Birdo</div>
+                    <p class="build-description">Maximum projectile count and attack speed. Fill the screen with bullets and overwhelm everything in sight.</p>
+                    <div class="build-stats">
+                        <div class="build-stat">
+                            <span class="build-stat-label">Difficulty</span>
+                            <span class="build-stat-value">Medium</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Power Level</span>
+                            <span class="build-stat-value">8/10</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Best Stage</span>
+                            <span class="build-stat-value">All Stages</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Meta Status</span>
+                            <span class="build-stat-value">Solid</span>
+                        </div>
+                    </div>
+                    <a href="https://megabonk.org/guides/builds/bullet-hell" class="build-link">View Full Build →</a>
+                </div>
+
+                <div class="build-card">
+                    <div class="build-header">
+                        <h3 class="build-title">One Lucky Fox</h3>
+                        <span class="tier-badge a-tier">A-TIER</span>
+                    </div>
+                    <div class="build-character">Best for: Fox Kitsune</div>
+                    <p class="build-description">Stack luck to insane levels. Fox's passive scales with luck, making every upgrade legendary and every drop valuable.</p>
+                    <div class="build-stats">
+                        <div class="build-stat">
+                            <span class="build-stat-label">Difficulty</span>
+                            <span class="build-stat-value">Medium</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Power Level</span>
+                            <span class="build-stat-value">9/10</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Best Stage</span>
+                            <span class="build-stat-value">Late Game</span>
+                        </div>
+                        <div class="build-stat">
+                            <span class="build-stat-label">Meta Status</span>
+                            <span class="build-stat-value">High Tier</span>
+                        </div>
+                    </div>
+                    <a href="https://megabonk.org/guides/builds/one-lucky-fox" class="build-link">View Full Build →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- World Records -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">World Records</h2>
+            </div>
+
+            <div class="records-grid">
+                <div class="record-card">
+                    <div class="record-title">🏆 Highest Kill Count</div>
+                    <div class="record-value">742,831</div>
+                    <div class="record-holder">ShadowKiller • Robinette • Oct 2025</div>
+                </div>
+
+                <div class="record-card">
+                    <div class="record-title">⏱️ Longest Survival Time</div>
+                    <div class="record-value">4h 52m</div>
+                    <div class="record-holder">MegaPro_99 • Dicehead • Oct 2025</div>
+                </div>
+
+                <div class="record-card">
+                    <div class="record-title">💀 Boss Speedrun (T3)</div>
+                    <div class="record-value">18m 34s</div>
+                    <div class="record-holder">VoidNinja • Bandit • Oct 2025</div>
+                </div>
+
+                <div class="record-card">
+                    <div class="record-title">🎯 Highest Level Reached</div>
+                    <div class="record-value">Level 487</div>
+                    <div class="record-holder">BonkMaster • Monke • Oct 2025</div>
+                </div>
+
+                <div class="record-card">
+                    <div class="record-title">⚡ Fastest Wave Clear</div>
+                    <div class="record-value">32 seconds</div>
+                    <div class="record-holder">SpeedDemon • Calcium • Oct 2025</div>
+                </div>
+
+                <div class="record-card">
+                    <div class="record-title">🔥 Most DPS Recorded</div>
+                    <div class="record-value">2.4M DPS</div>
+                    <div class="record-holder">CritLord_X • CL4NK • Oct 2025</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Climb -->
+        <section class="section">
+            <h2 class="section-title">How to Climb the Leaderboard</h2>
+            
+            <div class="builds-grid">
+                <div class="build-card">
+                    <h3 class="build-title">🎯 Master the Holy Trinity</h3>
+                    <p class="build-description">
+                        <strong>XP + Luck + Cursed Tomes</strong> are the foundation of every top-tier run. This combination creates exponential growth that outscales difficulty.
+                    </p>
+                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>XP Tome: Faster leveling = more upgrade choices</li>
+                        <li>Luck Tome: Ensures legendary/epic upgrades every level</li>
+                        <li>Cursed Tome: Harder game = dramatically better drops</li>
+                    </ul>
+                </div>
+
+                <div class="build-card">
+                    <h3 class="build-title">⚡ Prioritize Attack Speed</h3>
+                    <p class="build-description">
+                        Attack speed is the most important scaling stat. It affects Kevin+Mirror combo, lifesteal healing, and all on-hit effects.
+                    </p>
+                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>Enables Kevin+Mirror immortality</li>
+                        <li>Multiplies lifesteal effectiveness</li>
+                        <li>Triggers more on-hit item effects</li>
+                    </ul>
+                </div>
+
+                <div class="build-card">
+                    <h3 class="build-title">💎 Optimize Item Farming</h3>
+                    <p class="build-description">
+                        Don't open chests immediately. Wait until you've stacked Luck to 100+ for better quality drops from vendors and chests.
+                    </p>
+                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>Visit shrines often with high Luck</li>
+                        <li>Spend currency on rerolls liberally</li>
+                        <li>Save chests for mid-game power spike</li>
+                    </ul>
+                </div>
+
+                <div class="build-card">
+                    <h3 class="build-title">📊 Follow the Meta Timeline</h3>
+                    <p class="build-description">
+                        Each phase of your run requires different priorities for optimal progression and maximum kill counts.
+                    </p>
+                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>0-5 min: Focus on XP and leveling speed</li>
+                        <li>5-15 min: Build your weapon loadout</li>
+                        <li>15+ min: Stack damage and survive Final Swarm</li>
+                    </ul>
+                </div>
+
+                <div class="build-card">
+                    <h3 class="build-title">🛡️ Don't Skip Defense</h3>
+                    <p class="build-description">
+                        Take at least one shield upgrade. It dramatically increases effective HP and prevents one-shot deaths in late game.
+                    </p>
+                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>Shields absorb burst damage</li>
+                        <li>Allows riskier positioning</li>
+                        <li>Critical for 100K+ kill runs</li>
+                    </ul>
+                </div>
+
+                <div class="build-card">
+                    <h3 class="build-title">🎮 Study Top Players</h3>
+                    <p class="build-description">
+                        Watch streams and study leaderboard builds. Learn positioning, timing, and decision-making from the best.
+                    </p>
+                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>Analyze successful Final Swarm strategies</li>
+                        <li>Learn optimal shrine/vendor timing</li>
+                        <li>Understand when to portal vs farm</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Megabonk.org - Unofficial Fan Site | Not affiliated with Ved/Vedinad</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://megabonk.org/privacy-policy" style="color: var(--text-secondary); text-decoration: none;">Privacy Policy</a> | 
+            <a href="https://store.steampowered.com/app/3405340/Megabonk/" style="color: var(--text-secondary); text-decoration: none;">Official Steam Page</a>
+        </p>
+    </footer>
+
+    <script>
+        // Filter tabs functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from siblings
+                this.parentElement.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Here you would typically filter the content
+                // For now, just showing the interaction
+                console.log('Filter changed to:', this.textContent);
+            });
+        });
+
+        // View build button functionality
+        document.querySelectorAll('.view-build-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Build details would be shown in a modal or navigated to a build page.');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
