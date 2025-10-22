@@ -215,11 +215,11 @@
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 30px;
-            border: 1px solid var(--accent-color);
+            border: 1px solid var(--primary-color);
         }
 
         .tier-overview h2 {
-            color: var(--accent-color);
+            color: var(--primary-color);
             font-size: 2rem;
             margin-bottom: 25px;
             text-align: center;
@@ -235,24 +235,20 @@
             background: var(--bg-primary);
             padding: 20px;
             border-radius: 12px;
-            border-left: 4px solid;
+            border-left: 5px solid;
         }
 
-        .tier-s { border-left-color: var(--s-tier); }
-        .tier-a { border-left-color: var(--a-tier); }
-        .tier-b { border-left-color: var(--b-tier); }
-        .tier-c { border-left-color: var(--c-tier); }
+        .tier-s { border-color: var(--s-tier); }
+        .tier-a { border-color: var(--a-tier); }
+        .tier-b { border-color: var(--b-tier); }
+        .tier-c { border-color: var(--c-tier); }
 
         .tier-title {
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 10px;
+            color: var(--primary-color);
         }
-
-        .tier-s .tier-title { color: var(--s-tier); }
-        .tier-a .tier-title { color: var(--a-tier); }
-        .tier-b .tier-title { color: var(--b-tier); }
-        .tier-c .tier-title { color: var(--c-tier); }
 
         .tier-weapons {
             display: flex;
@@ -261,8 +257,8 @@
         }
 
         .tier-weapon {
-            background: rgba(255,255,255,0.1);
-            padding: 4px 8px;
+            background: rgba(255, 107, 53, 0.2);
+            padding: 5px 12px;
             border-radius: 6px;
             font-size: 0.9rem;
             cursor: pointer;
@@ -270,13 +266,13 @@
         }
 
         .tier-weapon:hover {
-            background: rgba(255,255,255,0.2);
+            background: var(--primary-color);
             transform: translateY(-2px);
         }
 
-        /* Weapons Grid */
+        /* Weapons Section */
         .weapons-section {
-            margin-bottom: 30px;
+            margin-top: 40px;
         }
 
         .section-header {
@@ -287,7 +283,7 @@
         }
 
         .section-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--primary-color);
         }
 
@@ -297,16 +293,16 @@
         }
 
         .view-btn {
-            padding: 8px 16px;
             background: var(--bg-secondary);
             color: var(--text-primary);
             border: 2px solid var(--primary-color);
+            padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .view-btn.active {
+        .view-btn.active, .view-btn:hover {
             background: var(--primary-color);
             color: white;
         }
@@ -317,21 +313,31 @@
             gap: 25px;
         }
 
+        /* Weapon Cards */
         .weapon-card {
             background: var(--bg-secondary);
             border-radius: 15px;
             padding: 25px;
             border: 2px solid transparent;
-            transition: all 0.4s ease;
-            cursor: pointer;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .weapon-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
             border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .weapon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
         }
 
         .weapon-header {
@@ -341,57 +347,88 @@
             margin-bottom: 15px;
         }
 
+        .weapon-image {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: rgba(255, 107, 53, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .weapon-image img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+
         .weapon-name {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .weapon-type {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .weapon-tier {
             padding: 6px 12px;
-            border-radius: 20px;
+            border-radius: 6px;
             font-size: 0.8rem;
             font-weight: bold;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .tier-s-badge {
+            background: var(--s-tier);
             color: white;
         }
 
-        .tier-s-badge { background: var(--s-tier); }
-        .tier-a-badge { background: var(--a-tier); }
-        .tier-b-badge { background: var(--b-tier); }
-        .tier-c-badge { background: var(--c-tier); }
-        .tier-default-badge { background: var(--default-tier); }
+        .tier-a-badge {
+            background: var(--a-tier);
+            color: white;
+        }
 
-        .weapon-type {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+        .tier-b-badge {
+            background: var(--b-tier);
+            color: #333;
+        }
+
+        .tier-c-badge {
+            background: var(--c-tier);
+            color: #333;
         }
 
         .weapon-description {
             color: var(--text-secondary);
-            margin-bottom: 15px;
             font-size: 0.95rem;
+            margin-bottom: 15px;
             line-height: 1.5;
         }
 
         .weapon-unlock {
             background: rgba(255, 107, 53, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            border-left: 3px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 15px;
         }
 
         .unlock-title {
-            font-size: 0.9rem;
-            color: var(--primary-color);
             font-weight: bold;
+            color: var(--accent-color);
             margin-bottom: 5px;
+            font-size: 0.9rem;
         }
 
         .unlock-requirement {
-            font-size: 0.85rem;
             color: var(--text-secondary);
+            font-size: 0.85rem;
         }
 
         .weapon-footer {
@@ -537,6 +574,25 @@
         .weapon-card {
             animation: fadeInUp 0.6s ease forwards;
         }
+
+        .disclaimer {
+            background: rgba(247, 127, 0, 0.1);
+            padding: 15px 20px;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .version-note {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -571,10 +627,14 @@
                     <span class="stat-number">22</span>
                     <span class="stat-label">Unlock Required</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">11</span>
-                    <span class="stat-label">S+A Tier</span>
-                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <strong>⚠️ Important Note:</strong> Tier rankings represent community consensus and subjective evaluations from multiple sources. Different playstyles and builds may yield different results. Silver costs may vary between game versions.
+            <div class="version-note">
+                <strong>Latest Update v1.0.17:</strong> Fixed Hero Sword and Corrupted Sword projectile speed scaling issues. Information current as of October 2025.
             </div>
         </div>
 
@@ -589,7 +649,7 @@
         <script>
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-            </div>
+        </div>
 
         <!-- Search and Filters -->
         <div class="search-filters">
@@ -599,8 +659,9 @@
                     <button class="filter-btn active" data-filter="all">All Weapons</button>
                     <button class="filter-btn" data-filter="s-tier">S-Tier</button>
                     <button class="filter-btn" data-filter="a-tier">A-Tier</button>
+                    <button class="filter-btn" data-filter="b-tier">B-Tier</button>
+                    <button class="filter-btn" data-filter="c-tier">C-Tier</button>
                     <button class="filter-btn" data-filter="default">Default Unlocked</button>
-                    <button class="filter-btn" data-filter="character">Character Weapons</button>
                 </div>
             </div>
         </div>
@@ -643,6 +704,8 @@
                         <span class="tier-weapon" data-weapon="bone">Bone</span>
                         <span class="tier-weapon" data-weapon="axe">Axe</span>
                         <span class="tier-weapon" data-weapon="sniper-rifle">Sniper Rifle</span>
+                        <span class="tier-weapon" data-weapon="hero-sword">Hero Sword</span>
+                        <span class="tier-weapon" data-weapon="wireless-dagger">Wireless Dagger</span>
                     </div>
                 </div>
                 
@@ -655,6 +718,12 @@
                         <span class="tier-weapon" data-weapon="shotgun">Shotgun</span>
                         <span class="tier-weapon" data-weapon="black-hole">Black Hole</span>
                         <span class="tier-weapon" data-weapon="tornado">Tornado</span>
+                        <span class="tier-weapon" data-weapon="space-noodle">Space Noodle</span>
+                        <span class="tier-weapon" data-weapon="dragons-breath">Dragons Breath</span>
+                        <span class="tier-weapon" data-weapon="slutty-rocket">Slutty Rocket</span>
+                        <span class="tier-weapon" data-weapon="mines">Mines</span>
+                        <span class="tier-weapon" data-weapon="chunkers">Chunkers</span>
+                        <span class="tier-weapon" data-weapon="poison-flask">Poison Flask</span>
                     </div>
                 </div>
             </div>
@@ -670,7 +739,7 @@
                         <li>Sword - Simple and reliable</li>
                         <li>Lightning Staff - Great AoE</li>
                         <li>Aegis - Defensive + offensive</li>
-                        <li>Firestaff - Default availability</li>
+                        <li>Bow - Learn positioning</li>
                     </ul>
                 </div>
                 
@@ -689,27 +758,27 @@
                     <ul class="reference-list">
                         <li>Megachad → Aura</li>
                         <li>Athena → Aegis</li>
-                        <li>Ogre → Axe</li>
-                        <li>Ninja → Katana</li>
+                        <li>Fox → Firestaff</li>
+                        <li>Calcium → Bone</li>
                     </ul>
                 </div>
                 
                 <div class="reference-card">
                     <div class="reference-title">⏰ Hardest to Unlock</div>
                     <ul class="reference-list">
-                        <li>Corrupted Sword - 8 Silver</li>
-                        <li>Hero Sword - No items/shrines</li>
-                        <li>Dice - Luck Tome Lv12</li>
-                        <li>Dexecutioner - 12,500 sword kills</li>
+                        <li>Corrupted Sword - Cursed Tome Lv.20</li>
+                        <li>Hero Sword - No items boss defeat</li>
+                        <li>Dexecutioner - 12,500 kills</li>
+                        <li>Aura - 2 min no damage</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Weapons Grid Section -->
+        <!-- Weapons Database Section -->
         <div class="weapons-section">
             <div class="section-header">
-                <h2 class="section-title">🗡️ All Weapons</h2>
+                <h2 class="section-title">🗡️ Complete Weapons List</h2>
                 <div class="view-toggle">
                     <button class="view-btn active" data-view="grid">Grid View</button>
                     <button class="view-btn" data-view="list">List View</button>
@@ -719,9 +788,12 @@
             <div class="weapons-grid" id="weaponsGrid">
                 <!-- S-TIER WEAPONS -->
                 <div class="weapon-card" data-tier="s-tier" data-category="character" data-name="aura">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🔮 Aura</div>
+                            <div class="weapon-name">Aura</div>
                             <div class="weapon-type">Area Damage • Megachad's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-s-badge">S-TIER</div>
@@ -735,14 +807,17 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Megachad, Tank builds</div>
-                        <button class="view-guide-btn" onclick="location.href='aura.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/aura'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="s-tier" data-category="character" data-name="aegis">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🛡️ Aegis</div>
+                            <div class="weapon-name">Aegis</div>
                             <div class="weapon-type">Shield • Athena's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-s-badge">S-TIER</div>
@@ -752,18 +827,21 @@
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Block 500 damage with Armor as Sir Oofie</div>
+                        <div class="unlock-requirement">Block 500 damage with Sir Oofie's Armor</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Athena, Sir Oofie</div>
-                        <button class="view-guide-btn" onclick="location.href='aegis.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/aegis'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="s-tier" data-category="default" data-name="flamewalker">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🔥 Flamewalker</div>
+                            <div class="weapon-name">Flamewalker</div>
                             <div class="weapon-type">Fire AoE • Default Unlocked</div>
                         </div>
                         <div class="weapon-tier tier-s-badge">S-TIER</div>
@@ -777,14 +855,17 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Universal weapon</div>
-                        <button class="view-guide-btn" onclick="location.href='flamewalker.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/flamewalker'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="s-tier" data-category="character" data-name="katana">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🗾 Katana</div>
+                            <div class="weapon-name">Katana</div>
                             <div class="weapon-type">Melee • Ninja's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-s-badge">S-TIER</div>
@@ -794,39 +875,45 @@
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Break Tumbleweeds on Desert Stage 1 (5% drop)</div>
+                        <div class="unlock-requirement">Break Tumbleweeds on Desert Stage 1 (5% drop chance)</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Ninja, Speed builds</div>
-                        <button class="view-guide-btn" onclick="location.href='katana.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/katana'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="s-tier" data-category="unlock" data-name="dice">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Dice.png" alt="Dice">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🎲 Dice</div>
+                            <div class="weapon-name">Dice</div>
                             <div class="weapon-type">Critical • Dicehead's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-s-badge">S-TIER</div>
                     </div>
                     <div class="weapon-description">
-                        The most broken weapon in the game. Permanently increases crit chance with each throw. Infinite scaling potential.
+                        Rolling a 6 permanently increases crit chance. Infinite scaling potential makes this the most broken weapon in the game.
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Get Luck Tome to Level 12 (4 Silver cost)</div>
+                        <div class="unlock-requirement">Get Luck Tome to Level 12 (in single run)</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Dicehead, Crit builds</div>
-                        <button class="view-guide-btn" onclick="location.href='dice.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/dice'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="s-tier" data-category="unlock" data-name="dexecutioner">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Dexecutioner.png" alt="Dexecutioner">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">⚡ Dexecutioner</div>
+                            <div class="weapon-name">Dexecutioner</div>
                             <div class="weapon-type">High DPS • Bandit's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-s-badge">S-TIER</div>
@@ -836,40 +923,46 @@
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Kill 12,500 enemies using the Sword (2 Silver)</div>
+                        <div class="unlock-requirement">Kill 12,500 enemies using the Sword</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Bandit, DPS builds</div>
-                        <button class="view-guide-btn" onclick="location.href='dexecutioner.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/dexecutioner'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="s-tier" data-category="unlock" data-name="blood-magic">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🩸 Blood Magic</div>
+                            <div class="weapon-name">Blood Magic</div>
                             <div class="weapon-type">Lifesteal • Vlad's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-s-badge">S-TIER</div>
                     </div>
                     <div class="weapon-description">
-                        Increases max HP with kills (5% rate). Excellent for sustain builds and long survival runs.
+                        Each kill has 5% chance to permanently increase max HP. Combines offense with survivability for incredible sustain.
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Get Blood Tome to Level 12 (2 Silver)</div>
+                        <div class="unlock-requirement">Get Bloody Tome to Level 12 (in single run)</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Vlad, Lifesteal builds</div>
-                        <button class="view-guide-btn" onclick="location.href='blood-magic.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/blood-magic'">View Guide</button>
                     </div>
                 </div>
 
                 <!-- A-TIER WEAPONS -->
                 <div class="weapon-card" data-tier="a-tier" data-category="default" data-name="lightning-staff">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">⚡ Lightning Staff</div>
+                            <div class="weapon-name">Lightning Staff</div>
                             <div class="weapon-type">Electric AoE • Default Unlocked</div>
                         </div>
                         <div class="weapon-tier tier-a-badge">A-TIER</div>
@@ -883,14 +976,17 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Universal weapon</div>
-                        <button class="view-guide-btn" onclick="location.href='lightning-staff.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/lightning-staff'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="a-tier" data-category="character" data-name="bananarang">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🍌 Bananarang</div>
+                            <div class="weapon-name">Bananarang</div>
                             <div class="weapon-type">Boomerang • Monke's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-a-badge">A-TIER</div>
@@ -904,14 +1000,17 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Monke, Range builds</div>
-                        <button class="view-guide-btn" onclick="location.href='bananarang.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/bananarang'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="a-tier" data-category="unlock" data-name="corrupted-sword">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/CorruptedSword.png" alt="Corrupted Sword">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🗡️ Corrupted Sword</div>
+                            <div class="weapon-name">Corrupted Sword</div>
                             <div class="weapon-type">Heavy Melee • Sir Chadwell's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-a-badge">A-TIER</div>
@@ -921,18 +1020,21 @@
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Get Cursed Tome to Level 20 in under 10 minutes (8 Silver)</div>
+                        <div class="unlock-requirement">Get Cursed Tome to Level 20 in under 10 minutes</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Sir Chadwell, Power builds</div>
-                        <button class="view-guide-btn" onclick="location.href='corrupted-sword.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/corrupted-sword'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="a-tier" data-category="default" data-name="bow">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🏹 Bow</div>
+                            <div class="weapon-name">Bow</div>
                             <div class="weapon-type">Ranged • Default Unlocked</div>
                         </div>
                         <div class="weapon-tier tier-a-badge">A-TIER</div>
@@ -946,15 +1048,18 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Universal weapon</div>
-                        <button class="view-guide-btn" onclick="location.href='bow.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/bow'">View Guide</button>
                     </div>
                 </div>
 
                 <!-- B-TIER WEAPONS -->
                 <div class="weapon-card" data-tier="b-tier" data-category="character" data-name="revolver">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🔫 Revolver</div>
+                            <div class="weapon-name">Revolver</div>
                             <div class="weapon-type">Precision • CL4NK's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-b-badge">B-TIER</div>
@@ -964,18 +1069,21 @@
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Kill 7,500 enemies with any weapon (1 Silver)</div>
+                        <div class="unlock-requirement">Kill 7,500 enemies with any weapon</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: CL4NK, Crit builds</div>
-                        <button class="view-guide-btn" onclick="location.href='revolver.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/revolver'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="b-tier" data-category="character" data-name="axe">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🪓 Axe</div>
+                            <div class="weapon-name">Axe</div>
                             <div class="weapon-type">Cleave • Ogre's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-b-badge">B-TIER</div>
@@ -985,24 +1093,27 @@
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Kill 2,000 enemies using only the Sword (1 Silver)</div>
+                        <div class="unlock-requirement">Kill 2,000 enemies using only the Sword</div>
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Ogre, AoE builds</div>
-                        <button class="view-guide-btn" onclick="location.href='axe.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/axe'">View Guide</button>
                     </div>
                 </div>
 
                 <div class="weapon-card" data-tier="b-tier" data-category="default" data-name="bone">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🦴 Bone</div>
+                            <div class="weapon-name">Bone</div>
                             <div class="weapon-type">Bounce • Calcium's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-b-badge">B-TIER</div>
                     </div>
                     <div class="weapon-description">
-                        Unique bouncing projectiles that can hit multiple enemies. Strange but fun weapon with decent utility.
+                        Throws bones that bounce off walls and enemies. Calcium's starting weapon with unique ricochet mechanics.
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">✅ Default Unlocked</div>
@@ -1010,57 +1121,114 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Calcium, Bounce builds</div>
-                        <button class="view-guide-btn" onclick="location.href='bone.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/bone'">View Guide</button>
                     </div>
                 </div>
 
-                <div class="weapon-card" data-tier="b-tier" data-category="unlock" data-name="sniper-rifle">
+                <div class="weapon-card" data-tier="b-tier" data-category="character" data-name="sniper-rifle">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Sniper.png" alt="Sniper Rifle">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🎯 Sniper Rifle</div>
+                            <div class="weapon-name">Sniper Rifle</div>
                             <div class="weapon-type">Long Range • Bush's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-b-badge">B-TIER</div>
                     </div>
                     <div class="weapon-description">
-                        High-damage piercing weapon that requires precise aiming. Great with crit builds but requires skill to master.
+                        Long-range precision weapon with high single-target damage. Bush's starting weapon for stealth builds.
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Get Precision Tome to Level 10 (2 Silver)</div>
+                        <div class="unlock-requirement">Get Precision Tome to Level 10</div>
                     </div>
                     <div class="weapon-footer">
-                        <div class="character-synergy">Best with: Bush, Precision builds</div>
-                        <button class="view-guide-btn" onclick="location.href='sniper-rifle.html'">View Guide</button>
+                        <div class="character-synergy">Best with: Bush, Sniper builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/sniper-rifle'">View Guide</button>
                     </div>
                 </div>
 
-                <div class="weapon-card" data-tier="b-tier" data-category="unlock" data-name="frostwalker">
+                <div class="weapon-card" data-tier="b-tier" data-category="character" data-name="frostwalker">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Frostwalker.png" alt="Frostwalker">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">❄️ Frostwalker</div>
-                            <div class="weapon-type">Ice Control • Noelle's Weapon</div>
+                            <div class="weapon-name">Frostwalker</div>
+                            <div class="weapon-type">Ice Trail • Cold builds</div>
                         </div>
                         <div class="weapon-tier tier-b-badge">B-TIER</div>
                     </div>
                     <div class="weapon-description">
-                        Provides excellent crowd control with freeze effects but lacks raw damage compared to other options.
+                        Leaves a trail of ice that slows and damages enemies. Excellent for crowd control and kiting.
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Freeze 1,000 enemies with Ice Cube (2 Silver)</div>
+                        <div class="unlock-requirement">Freeze 1,000 enemies with Ice Cube</div>
                     </div>
                     <div class="weapon-footer">
-                        <div class="character-synergy">Best with: Noelle, Control builds</div>
-                        <button class="view-guide-btn" onclick="location.href='frostwalker.html'">View Guide</button>
+                        <div class="character-synergy">Best with: Ice builds, Control</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/frostwalker'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="b-tier" data-category="unlock" data-name="hero-sword">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Hero_Sword.png" alt="Hero Sword">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Hero Sword</div>
+                            <div class="weapon-type">Challenge Weapon • High Damage</div>
+                        </div>
+                        <div class="weapon-tier tier-b-badge">B-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        High damage but slow weapon. Requires the ultimate challenge: defeating a boss without any items or shrines.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Defeat Stage Boss without items/power-ups/shrines</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Challenge weapon</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/hero-sword'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="b-tier" data-category="unlock" data-name="wireless-dagger">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Wireless_Dagger.png" alt="Wireless Dagger">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Wireless Dagger</div>
+                            <div class="weapon-type">Homing • Remote Attack</div>
+                        </div>
+                        <div class="weapon-tier tier-b-badge">B-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Throws daggers that home in on enemies. Good for passive damage without precise aiming.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Get Lightning Staff to Level 15</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: AFK builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/wireless-dagger'">View Guide</button>
                     </div>
                 </div>
 
                 <!-- C-TIER WEAPONS -->
                 <div class="weapon-card" data-tier="c-tier" data-category="default" data-name="firestaff">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Firestaff.png" alt="Firestaff">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🔥 Firestaff</div>
+                            <div class="weapon-name">Firestaff</div>
                             <div class="weapon-type">Fire Projectile • Fox's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-c-badge">C-TIER</div>
@@ -1074,14 +1242,17 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Fox, Fire builds</div>
-                        <button class="view-guide-btn" onclick="location.href='firestaff.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/firestaff'">View Guide</button>
                     </div>
                 </div>
 
-                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="sword">
+                <div class="weapon-card" data-tier="c-tier" data-category="default" data-name="sword">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">⚔️ Sword</div>
+                            <div class="weapon-name">Sword</div>
                             <div class="weapon-type">Basic Melee • Sir Oofie's Weapon</div>
                         </div>
                         <div class="weapon-tier tier-c-badge">C-TIER</div>
@@ -1095,36 +1266,229 @@
                     </div>
                     <div class="weapon-footer">
                         <div class="character-synergy">Best with: Sir Oofie, Beginners</div>
-                        <button class="view-guide-btn" onclick="location.href='sword.html'">View Guide</button>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/sword'">View Guide</button>
                     </div>
                 </div>
 
-                <!-- Additional weapons continue with similar pattern... -->
-                <div class="weapon-card" data-tier="unlock" data-category="unlock" data-name="hero-sword">
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="tornado">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Tornado.png" alt="Tornado">
+                    </div>
                     <div class="weapon-header">
                         <div>
-                            <div class="weapon-name">🏆 Hero Sword</div>
-                            <div class="weapon-type">Challenge Weapon • High Damage</div>
+                            <div class="weapon-name">Tornado</div>
+                            <div class="weapon-type">Wind AoE • Area Control</div>
                         </div>
-                        <div class="weapon-tier tier-b-badge">B-TIER</div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
                     </div>
                     <div class="weapon-description">
-                        High damage but slow weapon. Requires the ultimate challenge: defeating a boss without any items or shrines.
+                        Creates spinning tornadoes that pull in and damage enemies. Situational but can be effective in tight spaces.
                     </div>
                     <div class="weapon-unlock">
                         <div class="unlock-title">🔓 Unlock Requirement</div>
-                        <div class="unlock-requirement">Defeat Stage Boss without items/power-ups/shrines (4 Silver)</div>
+                        <div class="unlock-requirement">Get Wind Tome to Level 8</div>
                     </div>
                     <div class="weapon-footer">
-                        <div class="character-synergy">Challenge weapon</div>
-                        <button class="view-guide-btn" onclick="location.href='hero-sword.html'">View Guide</button>
+                        <div class="character-synergy">Best with: Wind builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/tornado'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="space-noodle">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Space_Noodle.png" alt="Space Noodle">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Space Noodle</div>
+                            <div class="weapon-type">Beam Weapon • Energy</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Fires continuous energy beam that sweeps across enemies. Unique mechanics but requires good positioning.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Get Energy Tome to Level 10</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: Energy builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/space-noodle'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="dragons-breath">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragons Breath">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Dragon's Breath</div>
+                            <div class="weapon-type">Flamethrower • Cone Attack</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Short-range flamethrower attack. High damage in close quarters but limited range makes it challenging.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Kill 500 enemies with fire damage</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: Fire builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/dragons-breath'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="slutty-rocket">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/SluttyRocket.png" alt="Slutty Rocket">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Slutty Rocket</div>
+                            <div class="weapon-type">Explosive • Area Damage</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Launches explosive rockets with area damage. High damage but slow projectile speed requires prediction.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Deal 50,000 explosive damage</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: Explosive builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/slutty-rocket'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="shotgun">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Shotgun</div>
+                            <div class="weapon-type">Spread Shot • Close Range</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Fires spread of pellets at close range. Devastating up close but limited by short effective range.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Kill 100 enemies at point-blank range</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: Close combat builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/shotgun'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="mines">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Mines.png" alt="Mines">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Mines</div>
+                            <div class="weapon-type">Trap • Area Denial</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Places explosive mines that detonate when enemies approach. Good for defensive strategies and choke points.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Kill 250 enemies with traps</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: Trap builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/mines'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="default" data-name="chunkers">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Chunkers.png" alt="Chunkers">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Chunkers</div>
+                            <div class="weapon-type">Heavy Projectile • Slow Attack</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Throws large chunks that deal heavy damage. Default weapon with high damage but very slow attack speed.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">✅ Default Unlocked</div>
+                        <div class="unlock-requirement">Available from game start</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Universal weapon</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/chunkers'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="black-hole">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Black Hole</div>
+                            <div class="weapon-type">Gravity • Pull Effect</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Creates black holes that pull in and damage enemies. Interesting mechanics but inconsistent damage output.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Get Gravity Tome to Level 12</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: Gravity builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/black-hole'">View Guide</button>
+                    </div>
+                </div>
+
+                <div class="weapon-card" data-tier="c-tier" data-category="character" data-name="poison-flask">
+                    <div class="weapon-image">
+                        <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                    </div>
+                    <div class="weapon-header">
+                        <div>
+                            <div class="weapon-name">Poison Flask</div>
+                            <div class="weapon-type">DoT • Area Poison</div>
+                        </div>
+                        <div class="weapon-tier tier-c-badge">C-TIER</div>
+                    </div>
+                    <div class="weapon-description">
+                        Throws poison flasks that create toxic clouds. Deals damage over time but requires enemies to stay in the area.
+                    </div>
+                    <div class="weapon-unlock">
+                        <div class="unlock-title">🔓 Unlock Requirement</div>
+                        <div class="unlock-requirement">Deal 25,000 poison damage</div>
+                    </div>
+                    <div class="weapon-footer">
+                        <div class="character-synergy">Best with: Poison builds</div>
+                        <button class="view-guide-btn" onclick="location.href='https://megabonk.org/database/weapons/poison-flask'">View Guide</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Megabonk_Weapons_Footer -->
-        
         <div style="margin: 30px auto; text-align: center;">
         <ins class="adsbygoogle"
              style="display:block"
@@ -1135,7 +1499,7 @@
         <script>
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-            </div>
+        </div>
 
         <!-- Navigation -->
         <div class="database-navigation">
