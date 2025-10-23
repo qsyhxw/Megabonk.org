@@ -4,424 +4,302 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Megabonk Leaderboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
 <style>
-:root{
-  --bg:#0f1a25;
-  --panel:#0c1721;
-  --panel-2:#0b1520;
-  --muted:#8aa1b5;
-  --text:#e6f1ff;
-  --accent:#19b6ff;
-  --chip:#112233;
-  --chip-h:#17324a;
-  --good:#11c46a;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:"Inter","Noto Sans SC",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-  color:var(--text);
-  background:linear-gradient(180deg,#0f1a25,#0a1520 30%,#08111a);
-}
-.container{max-width:1200px;margin:32px auto;padding:0 16px}
-.header{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  margin-bottom:16px
-}
-.h-title{font-size:34px;font-weight:800;letter-spacing:.5px}
-.badge{background:#102335;border:1px solid #203444;border-radius:999px;padding:6px 10px;color:#d5e6f7}
-.select, .btn{
-  appearance:none;border:1px solid #2a4157;background:#0f2234;color:#d5e6f7;
-  border-radius:10px;padding:10px 12px;font-size:14px;outline:none
-}
-.btn{cursor:pointer}
-.status-dot{width:8px;height:8px;background:var(--good);border-radius:50%}
-.status{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#0c2336;border:1px solid #1b364b}
+  :root{
+    --bg:#0b1420;
+    --card:#0f1b2a;
+    --muted:#7d8b9b;
+    --text:#e7f0fb;
+    --text-weak:#a8b3c2;
+    --primary:#1f6feb;
+    --chip:#13253a;
+    --ok:#14532d;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:24px auto;padding:0 16px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .select,.input,.btn{
+    height:36px;padding:0 12px;border:1px solid #213246;border-radius:10px;
+    background:#0f2033;color:var(--text);outline:none
+  }
+  .btn{cursor:pointer;background:#113250}
+  .hint{color:var(--text-weak);font-size:14px}
 
-.table{
-  width:100%;border-collapse:separate;border-spacing:0 10px;margin-top:8px
-}
-.tr{
-  background:var(--panel);
-  border:1px solid #1a2a3a;
-  border-radius:12px;overflow:hidden
-}
-.td{padding:16px}
-.table .tr{display:grid;grid-template-columns:60px 1fr 140px 160px 80px}
-.cell-header{color:#9bb2c8;font-size:13px;margin:4px 0 10px}
+  /* 表格区域 */
+  .table{margin-top:12px;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid #1a2a3f}
+  .thead,.tr{display:grid;grid-template-columns:80px 1fr 160px 160px 120px;align-items:center}
+  .thead{padding:14px 18px;background:#0f2033;color:var(--text-weak);font-weight:600}
+  .tr{padding:14px 18px;border-top:1px solid #18283a}
+  .tr:hover{background:#0d1c2b}
+  .status{margin-left:auto}
+  .state-chip{background:var(--ok);color:#c6f6d5;border-radius:999px;padding:6px 10px;font-size:12px}
 
-.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:36px;height:28px;border-radius:999px;background:#0f2a3f;border:1px solid #214059}
-.flag{font-size:16px;margin-left:8px}
-.char-chip{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 10px;border-radius:999px;background:#112335;border:1px solid #29445b
-}
-.k-num{font-weight:700}
+  /* 展开卡片 */
+  .detail{grid-column:1/-1;padding:18px;border-top:1px dashed #20364f;background:#0b1a2a}
+  .top{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .avatar{width:52px;height:52px;border-radius:12px;background:#0e2030;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #1a2a3f}
+  .avatar img{width:100%;height:100%;object-fit:contain}
+  .tag{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;background:#122233;color:#cfe0f8;font-size:12px;border:1px solid #1e3148}
+  .big-number{font-size:18px;font-weight:700}
 
-.details{
-  margin-top:10px;padding:18px;border:1px solid #193045;background:var(--panel-2);
-  border-radius:12px
-}
-.row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
-.portrait{width:56px;height:56px;border-radius:12px;border:1px solid #2b4156;background:#0f2234;object-fit:contain}
-.pills{display:flex;gap:8px;flex-wrap:wrap}
-.pill{
-  background:var(--chip);border:1px solid #23425a;border-radius:12px;
-  padding:6px 10px;font-size:12px;color:#cfe6ff
-}
-.grid{display:grid;grid-template-columns:repeat(6,56px);gap:12px}
-.icon{
-  width:56px;height:56px;border-radius:12px;background:#0e2133;border:1px solid #2a4056;
-  display:flex;align-items:center;justify-content:center;overflow:hidden
-}
-.icon img{display:block;width:100%;height:100%;object-fit:contain}
-.sec-title{margin:8px 0;color:#9db7cd}
-.toggle{
-  margin-top:10px;cursor:pointer;color:#9bd4ff;background:#0f2b44;border:1px solid #245677;border-radius:10px;padding:8px 10px;display:inline-flex;gap:8px;align-items:center
-}
-.link{color:#9bd4ff;text-decoration:none}
-.footer{margin:16px 0 32px;color:#7ea1bb}
-.hint{color:#98b1c8;font-size:12px}
-@media (max-width:840px){
-  .table .tr{grid-template-columns:60px 1fr 120px 130px 70px}
-  .grid{grid-template-columns:repeat(5,56px)}
-}
-@media (max-width:560px){
-  .table .tr{grid-template-columns:50px 1fr 100px 110px 70px}
-  .grid{grid-template-columns:repeat(4,56px)}
-}
+  .section{margin-top:12px}
+  .section h4{margin:0 0 8px 0;color:var(--text-weak);font-size:14px}
+  .icons{display:flex;gap:12px;flex-wrap:wrap}
+  .icon{
+    width:56px;height:56px;border-radius:12px;background:#0e2030;border:1px solid #18283a;
+    display:flex;align-items:center;justify-content:center;overflow:hidden
+  }
+  .icon img{width:100%;height:100%;object-fit:contain}
+  .pill{padding:8px 10px;border-radius:999px;background:#0e2030;border:1px solid #1a2a3f;color:#9fb0c5;font-size:12px}
+
+  .flag{font-size:18px}
+  .player{display:flex;gap:8px;align-items:center;overflow:hidden}
+  .name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .link{color:#8ab4ff;text-decoration:underline}
+  .right{text-align:right}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <div class="h-title">Leaderboard</div>
-    <select id="patch" class="select">
-      <option value="1.0.17">1.0.17</option>
-    </select>
-    <div id="ds" class="badge">数据源: <span id="dsn">leaderboard-1.0.17.json</span></div>
-    <button id="refresh" class="btn">刷新</button>
-    <div class="status"><span class="status-dot"></span><span id="stxt">已加载</span></div>
+  <div class="wrap">
+    <h1 style="margin:0 0 10px 0">Megabonk Leaderboard</h1>
+
+    <div class="row">
+      <select id="patch" class="select">
+        <option value="1.0.17">1.0.17</option>
+      </select>
+      <input id="q" class="input" style="min-width:260px" placeholder="玩家 / 角色 / 国家代码..." />
+      <select id="charFilter" class="select">
+        <option value="">全部角色</option>
+      </select>
+      <button id="refresh" class="btn">刷新</button>
+
+      <span class="hint" id="meta" style="margin-left:auto"></span>
+      <span class="state-chip">已加载</span>
+    </div>
+
+    <div class="row" style="margin-top:8px">
+      <span class="hint">数据文件位于 <code>/data/leaderboard-&lt;patch&gt;.json</code></span>
+      <a class="link" id="dlJson" href="#" download style="margin-left:auto">下载 JSON</a>
+    </div>
+
+    <div id="list" class="table"></div>
   </div>
-
-  <div class="cell-header">总计 <span id="total">0</span> 条 · 上次更新 <span id="updated">--</span></div>
-
-  <div id="list"></div>
-
-  <div class="footer">
-    数据文件位于 <code>/data/leaderboard-&lt;patch&gt;.json</code>（优先）<br/>
-    <span class="hint">若图片未显示：确保放在 <code>/images/guides/characters</code>、<code>/images/database/weapons</code>、<code>/images/Tomes</code>、<code>/images/items</code> 且文件扩展名为 <code>.png</code>；本页会尝试多种大小写/下划线变体，并在缺图时回退为文本。</span>
-  </div>
-</div>
 
 <script>
-/* ---------- 基础路径（按你仓库保持默认即可） ---------- */
-const DATA_BASE = '/data';
-const IMG = {
-  characters: '/images/guides/characters',
-  weapons   : '/images/database/weapons',
-  tomes     : '/images/Tomes',
-  items     : '/images/items'
+/** ---------------------- 工具函数 ---------------------- */
+const $ = sel => document.querySelector(sel);
+const fmt = n => n.toLocaleString('en-US');
+const flag = cc => {
+  if(!cc) return '';
+  const up = cc.toUpperCase();
+  // 国旗 emoji（某些系统可能显示为地区字母）
+  return String.fromCodePoint(...[...up].map(c=>0x1F1E6 + (c.charCodeAt(0)-65)));
+};
+const toPascal = (s) => s.replace(/[^a-z0-9]+/gi,' ')
+  .trim()
+  .split(/\s+/)
+  .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+  .join('_');
+
+/** ---------------------- 图片路径映射 ---------------------- */
+/* 角色：/images/guides/characters/<Name>.png （首字母大写） */
+const characterImg = (name) => `/images/guides/characters/${toPascal(name)}.png`;
+
+/* 武器：/images/weapons/<Name>.png  */
+const WEAPON_ALIAS = {
+  frostwalker:'Frostwalker', flamewalker:'Flamewalker', axe:'Axe', katana:'Katana', aura:'Aura',
+  bomb:'Bomb', wrench:'Wrench', key:'Key'
+};
+const weaponImg = (id) => `/images/weapons/${(WEAPON_ALIAS[id] || toPascal(id))}.png`;
+
+/* 法典（Tomes）：/images/Tomes/<Name>_Tome.png
+   其中 xp → Golden_Tome 映射 */
+const TOME_ALIAS = {
+  xp:'Golden', chaos:'Chaos', precision:'Precision', cursed:'Cursed',
+  agility:'Agility', armor:'Armor', attraction:'Attraction', health:'Health',
+  luck:'Luck', cooldown:'Cooldown', duration:'Duration', evasion:'Evasion',
+  knockback:'Knockback', damage:'Damage', projectile_speed:'Projectile_Speed', bloody:'Bloody'
+};
+const tomeImg = (id) => {
+  const key = (TOME_ALIAS[id] || toPascal(id)).replace(/_Tome$/,'');
+  return `/images/Tomes/${key}_Tome.png`;
 };
 
-/* ---------- 工具：代码 -> 国旗 ---------- */
-function ccToFlag(cc='US'){
-  if(!cc) return '🌐';
-  const A = 127397; // 'A' 的区域指示符基码
-  return cc.toUpperCase().replace(/./g, c => String.fromCodePoint(c.charCodeAt(0)+A));
-}
-
-/* ---------- 工具：把 slug 变成多种“候选文件名” ---------- */
-function candidatesFromSlug(slug){
-  if(!slug) return [];
-  // 分词：下划线、连字符、数字边界、大小写过渡
-  let words = slug
-    .replace(/[-]+/g,'_')
-    .replace(/([a-z])([A-Z])/g,'$1_$2')
-    .replace(/(\d+)/g,'_$1_')
-    .replace(/__+/g,'_')
-    .replace(/^_|_$/g,'')
-    .split('_')
-    .filter(Boolean);
-  // 全小写的也拆成近似词（如 creditcardgreen -> credit card green）
-  if(words.length===1) {
-    words = words[0].match(/[a-z]+|\d+/gi) || [words[0]];
-  }
-  const cap = w => w ? (w[0].toUpperCase()+w.slice(1).toLowerCase()) : w;
-  const title = words.map(cap).join('');
-  const unders = words.map(cap).join('_');
-  const lowerU = words.map(w=>w.toLowerCase()).join('_');
-  const hyphen = unders.replaceAll('_','-');
-  const list = [
-    `${title}.png`, `${unders}.png`, `${lowerU}.png`, `${hyphen}.png`,
-    `${title}.PNG`, `${unders}.PNG`, `${lowerU}.PNG`, `${hyphen}.PNG`,
-    `${title}.webp`, `${unders}.webp`, `${lowerU}.webp`, `${hyphen}.webp`,
-  ];
-  // 去重
-  return [...new Set(list)];
-}
-
-/* ---------- 常见别名：法典 & 道具 ---------- */
-const TOME_MAP = {
-  chaos:'Chaos_Tome.png',
-  precision:'Precision_Tome.png',
-  cursed:'Cursed_Tome.png',
-  xp:'Golden_Tome.png',
-};
-
+/* 道具 Items：/images/items/<Name>.png
+   这里列了常见别名；若找不到会回退成文字 pill */
 const ITEM_ALIAS = {
-  // 你已上传里最常见的名称，尽量多给几个别名以适配命名
-  curseddoll: ['Cursed_Doll','CursedDoll'],
-  creditcardgreen: ['Credit_Card_Green','CreditCard_Green','Creditcardgreen'],
-  key: ['Key'],
-  goldenglove: ['Golden_Glove','Gold_Glove','GoldenGlove'],
-  wrench: ['Wrench'],
-  magnet: ['Magnet','Magnet_Item','MagnetIco'],
-  clover: ['Clover','Lucky_Clover','Luck_Clover'],
-  ring: ['Ring','Golden_Ring','Speed_Ring'],
-  boots: ['Boots','Speed_Boots'],
-  mirror: ['Mirror','Dark_Mirror'],
-  backpack: ['Backpack'],
-  spikyshield: ['Spiky_Shield','SpikyShield'],
-  syringe: ['Syringe'],
-  burger: ['Burger'],
-  medkit: ['Medkit','Med_Kit'],
-  bomb: ['Bomb'],
-  cheese: ['Cheese'],
-  wrenchgold: ['Golden_Wrench'],
-  // ……如有更多，可按 “slug: ['文件名不带扩展']” 的形式继续补
+  curseddoll:'Cursed_Doll',
+  cursed_doll:'Cursed_Doll',
+  creditcardgreen:'Credit_Card_Green',
+  credit_card_green:'Credit_Card_Green',
+  key:'Key',
+  goldenglove:'Golden_Glove',
+  golden_glove:'Golden_Glove',
+  wrench:'Wrench',
+  mirror:'Mirror',
+  chonkplate:'Chonk_Plate',
+  unstabletransfusion:'Unstable_Transfusion',
+  forbiddenjuice:'Forbidden_Juice',
+  brassknuckles:'Brass_Knuckles'
+};
+const itemImg = (id) => `/images/items/${(ITEM_ALIAS[id] || toPascal(id))}.png`;
+
+/** 创建一个图标方块，加载失败时自动回退为文字 pill */
+function createIcon(src, alt){
+  const box = document.createElement('div');
+  box.className = 'icon';
+  const img = new Image();
+  img.alt = alt || '';
+  img.src = src;
+  img.addEventListener('error', ()=>{ box.innerHTML = `<span class="pill">${alt || 'N/A'}</span>`; });
+  box.appendChild(img);
+  return box;
+}
+
+/** ---------------------- 渲染 ---------------------- */
+const state = {
+  data: [],
+  filtered: []
 };
 
-/* ---------- 异步检测某 url 是否存在（以 <img> 加载，不受 HEAD/CORS 限制） ---------- */
-function probeImage(url){
-  return new Promise(resolve=>{
-    const img = new Image();
-    img.onload = () => resolve(url);
-    img.onerror = () => resolve(null);
-    img.src = url + (url.includes('?') ? '&' : '?') + 'v=' + Date.now();
+async function load(){
+  const patch = $('#patch').value;
+  const url = `/data/leaderboard-${patch}.json`;
+  $('#dlJson').href = url;
+
+  const res = await fetch(url, {cache:'no-store'});
+  const data = await res.json();
+
+  // 角色下拉
+  const chars = [...new Set(data.map(r => r.character))].sort();
+  const sel = $('#charFilter');
+  sel.innerHTML = '<option value="">全部角色</option>' + chars.map(c => `<option value="${c}">${c}</option>`).join('');
+
+  state.data = data.sort((a,b)=> (b.kills||0) - (a.kills||0));
+  render();
+}
+
+function render(){
+  const q = $('#q').value.trim().toLowerCase();
+  const cf = $('#charFilter').value;
+  const list = $('#list'); list.innerHTML = '';
+
+  const arr = state.data.filter(r => {
+    const okChar = !cf || r.character === cf;
+    const text = [r.player, r.character, r.country_code, r.patch].join(' ').toLowerCase();
+    const okQ = !q || text.includes(q);
+    return okChar && okQ;
+  });
+
+  $('#meta').textContent = `总计 ${arr.length} 条 · 上次更新 ${new Date().toISOString().slice(0,10)} 08:00:00`;
+
+  // 表头
+  const thead = document.createElement('div');
+  thead.className = 'thead';
+  thead.innerHTML = `
+    <div>名次</div>
+    <div>玩家</div>
+    <div>角色</div>
+    <div>击杀</div>
+    <div class="right">视频</div>
+  `;
+  list.appendChild(thead);
+
+  arr.forEach((r, idx) => {
+    const tr = document.createElement('div');
+    tr.className = 'tr';
+
+    // 名次
+    const c1 = document.createElement('div');
+    c1.innerHTML = `<span class="pill">#${r.rank ?? (idx+1)}</span>`;
+    tr.appendChild(c1);
+
+    // 玩家
+    const c2 = document.createElement('div');
+    c2.className = 'player';
+    c2.innerHTML = `
+      <span class="flag">${flag(r.country_code)}</span>
+      <span class="name">${r.player || '--'}</span>
+    `;
+    tr.appendChild(c2);
+
+    // 角色
+    const c3 = document.createElement('div');
+    c3.innerHTML = `<span class="pill">${r.character}</span> <span class="pill">v${r.patch}</span>`;
+    tr.appendChild(c3);
+
+    // 击杀
+    const c4 = document.createElement('div');
+    c4.innerHTML = `<span class="big-number">${fmt(r.kills || 0)}</span>`;
+    tr.appendChild(c4);
+
+    // 视频
+    const c5 = document.createElement('div');
+    c5.className = 'right';
+    c5.innerHTML = r.video_url ? `<a class="link" href="${r.video_url}" target="_blank" rel="noreferrer">打开</a>` : '<span class="hint">-</span>';
+    tr.appendChild(c5);
+
+    // 展开区
+    const detail = document.createElement('div');
+    detail.className = 'detail'; detail.hidden = true;
+
+    // 顶部
+    const top = document.createElement('div'); top.className = 'top';
+    const av = document.createElement('div'); av.className = 'avatar';
+    av.appendChild(createIcon(characterImg(r.character), r.character));
+    top.appendChild(av);
+    const tags = document.createElement('div');
+    tags.innerHTML = `
+      <span class="tag">#${r.rank ?? (idx+1)}</span>
+      <span class="tag">KILLS ${fmt(r.kills||0)}</span>
+      <span class="tag">v${r.patch}</span>
+    `;
+    top.appendChild(tags);
+    detail.appendChild(top);
+
+    // 武器
+    const wSec = document.createElement('div'); wSec.className='section';
+    wSec.innerHTML = `<h4>武器</h4>`;
+    const wBox = document.createElement('div'); wBox.className='icons';
+    (r.weapons||[]).forEach(id => wBox.appendChild(createIcon(weaponImg(id), id)));
+    wSec.appendChild(wBox); detail.appendChild(wSec);
+
+    // 法典
+    const tSec = document.createElement('div'); tSec.className='section';
+    tSec.innerHTML = `<h4>法典</h4>`;
+    const tBox = document.createElement('div'); tBox.className='icons';
+    (r.tomes||[]).forEach(id => tBox.appendChild(createIcon(tomeImg(id), id)));
+    tSec.appendChild(tBox); detail.appendChild(tSec);
+
+    // 道具
+    const iSec = document.createElement('div'); iSec.className='section';
+    iSec.innerHTML = `<h4>道具</h4>`;
+    const iBox = document.createElement('div'); iBox.className='icons';
+    (r.items||[]).forEach(id => iBox.appendChild(createIcon(itemImg(id), id)));
+    iSec.appendChild(iBox); detail.appendChild(iSec);
+
+    // 点击展开/收起
+    tr.addEventListener('click', () => { detail.hidden = !detail.hidden; });
+
+    list.appendChild(tr);
+    list.appendChild(detail);
   });
 }
 
-/* ---------- 综合解析图片：按顺序尝试映射/变体，失败则返回 null ---------- */
-async function resolveSprite(baseDir, slug, kind='items'){
-  if(!slug) return null;
-  const lower = String(slug).toLowerCase();
+$('#refresh').addEventListener('click', load);
+$('#patch').addEventListener('change', load);
+$('#q').addEventListener('input', render);
+$('#charFilter').addEventListener('change', render);
 
-  // 1) 明确映射（法典）
-  if(kind==='tome' && TOME_MAP[lower]){
-    const try1 = `${baseDir}/${TOME_MAP[lower]}`;
-    const ok = await probeImage(try1);
-    if(ok) return ok;
-  }
-
-  // 2) 别名（道具）
-  const aliasList = (kind==='items' ? ITEM_ALIAS[lower] : null) || [];
-  for(const a of aliasList){
-    for(const f of candidatesFromSlug(a)){
-      const ok = await probeImage(`${baseDir}/${f}`);
-      if(ok) return ok;
-    }
-  }
-
-  // 3) 使用原 slug 的多种变体
-  for(const f of candidatesFromSlug(lower)){
-    const ok = await probeImage(`${baseDir}/${f}`);
-    if(ok) return ok;
-  }
-  return null;
-}
-
-/* ---------- 渲染徽章图标或回退文本 ---------- */
-async function renderIcon(baseDir, slug, kind='items'){
-  const url = await resolveSprite(baseDir, slug, kind);
-  const div = document.createElement('div');
-  div.className = 'icon';
-  if(url){
-    const img = document.createElement('img');
-    img.alt = slug;
-    img.src = url;
-    div.appendChild(img);
-  }else{
-    // 回退：文本 chip
-    const chip = document.createElement('div');
-    chip.className = 'pill';
-    chip.textContent = slug;
-    // 用透明背景撑满 icon 位
-    chip.style.width='100%';
-    chip.style.textAlign='center';
-    chip.style.background='#0f2234';
-    chip.style.border='1px dashed #2a4560';
-    chip.style.color='#9db7cd';
-    div.appendChild(chip);
-  }
-  return div;
-}
-
-/* ---------- 主渲染 ---------- */
-async function renderList(patch='1.0.17'){
-  const list = document.getElementById('list');
-  list.innerHTML = '';
-  document.getElementById('dsn').textContent = `leaderboard-${patch}.json`;
-  document.getElementById('stxt').textContent = '加载中…';
-
-  let data=[];
-  try{
-    const res = await fetch(`${DATA_BASE}/leaderboard-${patch}.json?ts=${Date.now()}`);
-    data = await res.json();
-  }catch(e){
-    document.getElementById('stxt').textContent = '数据加载失败';
-    console.error(e);
-    return;
-  }
-
-  // 排序（保险）：按 kills 降序
-  data.sort((a,b)=>(b.kills||0)-(a.kills||0));
-
-  document.getElementById('total').textContent = data.length;
-  // 取数据里的最大 updated_at_iso 作为“上次更新”
-  const tmax = data
-    .map(x=>x.updated_at_iso||x.created_at_iso)
-    .filter(Boolean)
-    .sort()
-    .pop();
-  document.getElementById('updated').textContent = tmax ? new Date(tmax).toLocaleString() : '--';
-  document.getElementById('stxt').textContent = '已加载';
-
-  for(const item of data){
-    const row = document.createElement('div');
-    row.className = 'tr';
-
-    const c1 = document.createElement('div'); c1.className='td';
-    const c2 = document.createElement('div'); c2.className='td';
-    const c3 = document.createElement('div'); c3.className='td';
-    const c4 = document.createElement('div'); c4.className='td';
-    const c5 = document.createElement('div'); c5.className='td';
-
-    // # 排名
-    const rank = document.createElement('div');
-    rank.className='rank-badge';
-    rank.textContent = item.rank || '-';
-    c1.appendChild(rank);
-
-    // 玩家
-    const name = document.createElement('div');
-    name.innerHTML = `<strong style="font-size:18px">${item.player||'-'}</strong> <span class="flag">${ccToFlag(item.country_code)}</span>`;
-    c2.appendChild(name);
-
-    // 角色 & 版本
-    const char = document.createElement('div');
-    char.className='char-chip';
-    char.textContent = (item.character||'-');
-    c3.appendChild(char);
-
-    const ver = document.createElement('div'); ver.className='pill';
-    ver.textContent = `v${item.patch||patch}`;
-    c4.appendChild(ver);
-
-    // Kills
-    const kills = document.createElement('div');
-    kills.className='k-num';
-    kills.textContent = (item.kills||0).toLocaleString();
-    c5.appendChild(kills);
-
-    row.append(c1,c2,c3,c4,c5);
-
-    // 详情区
-    const details = document.createElement('div');
-    details.className='details';
-    const top = document.createElement('div'); top.className='row';
-
-    // 左侧头像 + 几个 pill
-    const leftCol = document.createElement('div');
-    const portrait = document.createElement('img');
-    portrait.className='portrait';
-    // 角色图片
-    resolveSprite(IMG.characters, item.character, 'char').then(url=>{
-      portrait.src = url || `${IMG.characters}/Noelle.png`;
-    });
-    leftCol.appendChild(portrait);
-
-    const pills = document.createElement('div'); pills.className='pills';
-    const pRank = document.createElement('div'); pRank.className='pill'; pRank.textContent = `#${item.rank||'-'}`;
-    const pKills = document.createElement('div'); pKills.className='pill'; pKills.textContent=`KILLS ${ (item.kills||0).toLocaleString() }`;
-    const pVer = document.createElement('div'); pVer.className='pill'; pVer.textContent=`v${item.patch||patch}`;
-    pills.append(pRank,pKills,pVer);
-    leftCol.appendChild(pills);
-
-    // 右侧：武器/法典/道具
-    const rightCol = document.createElement('div'); rightCol.style.flex='1';
-
-    // 武器
-    const wTitle = document.createElement('div'); wTitle.className='sec-title'; wTitle.textContent='武器';
-    const wGrid = document.createElement('div'); wGrid.className='grid';
-    (item.weapons||[]).forEach(async w=>{
-      wGrid.appendChild(await renderIcon(IMG.weapons, w, 'weapon'));
-    });
-
-    // 法典
-    const tTitle = document.createElement('div'); tTitle.className='sec-title'; tTitle.textContent='法典';
-    const tGrid = document.createElement('div'); tGrid.className='grid';
-    (item.tomes||[]).forEach(async t=>{
-      tGrid.appendChild(await renderIcon(IMG.tomes, t, 'tome'));
-    });
-
-    // 道具（可展开）
-    const iTitle = document.createElement('div'); iTitle.className='sec-title'; iTitle.textContent='道具';
-    const iGrid = document.createElement('div'); iGrid.className='grid';
-    const items = Array.isArray(item.items)? item.items.slice() : [];
-    const COLLAPSE = 8;
-    let expanded = false;
-
-    async function paintItems(){
-      iGrid.innerHTML='';
-      const show = expanded ? items : items.slice(0, COLLAPSE);
-      for(const it of show){
-        iGrid.appendChild(await renderIcon(IMG.items, it, 'items'));
-      }
-      toggleBtn.textContent = expanded ? `收起（共 ${items.length}）` : `展开全部道具（${items.length}）`;
-      toggleBtn.style.display = items.length > COLLAPSE ? 'inline-flex':'none';
-    }
-
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className='toggle';
-    toggleBtn.onclick = () => { expanded = !expanded; paintItems(); };
-
-    rightCol.append(wTitle,wGrid,tTitle,tGrid,iTitle,iGrid,toggleBtn);
-    top.append(leftCol,rightCol);
-
-    // 视频
-    if(item.video_url){
-      const v = document.createElement('div');
-      v.style.marginTop='16px';
-      v.innerHTML = `<a class="link" href="${item.video_url}" target="_blank" rel="noopener">观看视频</a>`;
-      details.append(top,v);
-    }else{
-      details.appendChild(top);
-    }
-
-    // 渲染道具
-    paintItems();
-
-    // 追加到列表
-    const wrap = document.createElement('div'); wrap.style.marginBottom='12px';
-    wrap.appendChild(row);
-    wrap.appendChild(details);
-    list.appendChild(wrap);
-  }
-}
-
-/* ---------- 初始化 ---------- */
-const patchSel = document.getElementById('patch');
-const refreshBtn = document.getElementById('refresh');
-
-patchSel.addEventListener('change', () => renderList(patchSel.value));
-refreshBtn.addEventListener('click', () => renderList(patchSel.value));
-
-renderList('1.0.17');
+// 首次加载
+load();
 </script>
 </body>
 </html>
