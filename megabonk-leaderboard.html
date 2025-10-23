@@ -41,10 +41,8 @@
     <div class="pill status">状态：<span id="status" class="kbd">加载中</span></div>
   </div>
 
-  <!-- 汇总条 -->
   <div id="summary" class="muted" style="margin:6px 0 10px;"></div>
 
-  <!-- 排行表 -->
   <div class="card">
     <table id="tbl">
       <thead>
@@ -60,7 +58,6 @@
     </table>
   </div>
 
-  <!-- 选中详情 -->
   <div id="detail" class="card" style="display:none;"></div>
 
   <div class="muted" style="margin-top:14px">
@@ -69,28 +66,19 @@
 </div>
 
 <script>
-/* ------------------ 工具：命名与路径候选 ------------------ */
-
-// 转 PascalCase（含可选下划线）
+/* ------------------ 命名&路径工具 ------------------ */
 function toPascalCase(str){
   if(!str) return '';
-  // 先按非字母分割；若是纯小写粘连，则按词典再拆（尽量简单）
-  const parts = str
-    .replace(/[-\s]+/g,'_')
-    .split(/[_/]+/)
-    .filter(Boolean);
-
+  const parts = str.replace(/[-\s]+/g,'_').split(/[_/]+/).filter(Boolean);
   if(parts.length===1){
-    // 尝试把诸如 bloodmagic → Blood_Magic
     const guess = parts[0]
-      .replace(/([a-z])(\d)/g,'$1_$2')
-      .replace(/([a-z])(fire|magic|staff|card|glove|doll|tome|ring)/gi,'$1_$2'); // 适度插入
+      .replace(/([a-z])(\d)/g,'$1_$2');
     return guess.split('_').map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join('_');
   }
   return parts.map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join('_');
 }
 
-// Tome 名称映射（左侧是 JSON 值）
+/* ★ Tome 文件名映射 */
 const TOME_FILE = {
   chaos: 'Chaos_Tome',
   precision: 'Precision_Tome',
@@ -102,85 +90,128 @@ const TOME_FILE = {
   health: 'Health_Tome',
   golden: 'Golden_Tome',
   luck: 'Luck_Tome',
-  // 你的 JSON 里是“xp”，你资源里没有 XP_Tome，我把它指到 Golden_Tome（可按需改）
+  // 你的 JSON 里用 xp，这里暂时映射到 Golden_Tome；若你有 XP_Tome.png，改成 'XP_Tome'
   xp: 'Golden_Tome'
 };
 
-// 生成一个带回退的 <img> 列表候选
+/* ★ Item 智能切分 + 精确映射 */
+const ITEM_FILE = {
+  // 你数据里出现过的
+  curseddoll: 'Cursed_Doll',
+  creditcardgreen: 'Credit_Card_Green',
+  goldenglove: 'Golden_Glove',
+  wrench: 'Wrench',
+  key: 'Key',
+  mirror: 'Mirror',
+  brassknuckles: 'Brass_Knuckles',
+  forbiddenjuice: 'Forbidden_Juice',
+  chonkplate: 'Chonk_Plate',
+  unstabletransfusion: 'Unstable_Transfusion',
+  scarf: 'Scarf',
+  backpack: 'Backpack',
+  spikyshield: 'Spiky_Shield'
+};
+
+// 用常见词把 slug 切成 token，再转 Pascal_形式
+const COMMON_ITEM_TOKENS = [
+  'cursed','doll','credit','card','green','golden','glove','wrench','key','mirror',
+  'brass','knuckles','forbidden','juice','chonk','plate','unstable','transfusion',
+  'spiky','shield','backpack','scarf'
+];
+
+function toUnderscorePascalForItem(slug){
+  if(!slug) return '';
+  const s = slug.toLowerCase();
+  // 按词从长到短打标记，避免重叠
+  const tokens = [];
+  let i = 0;
+  while(i < s.length){
+    let matched = '';
+    for(const tk of COMMON_ITEM_TOKENS.sort((a,b)=>b.length-a.length)){
+      if(s.startsWith(tk, i)){ matched = tk; break; }
+    }
+    if(matched){
+      tokens.push(matched);
+      i += matched.length;
+    }else{
+      // 单字符吞并到上一个 token
+      if(tokens.length) tokens[tokens.length-1] += s[i];
+      else tokens.push(s[i]);
+      i++;
+    }
+  }
+  return tokens.map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join('_');
+}
+
+/* 生成带回退的路径列表 */
 function imageCandidates(kind, key){
   const k = (key||'').trim();
-  const pascal = toPascalCase(k).replace(/__/g,'_');       // e.g. bloodmagic → Blood_Magic
-  const title = pascal.replace(/_/g,'');                   // 去下划线版本
-
+  const pascal = toPascalCase(k).replace(/__/g,'_');
+  const tight  = pascal.replace(/_/g,''); // 无下划线形态
   const list = [];
 
   if(kind==='character'){
-    // /images/guides/characters/Noelle.png → 回退 /img/characters/noelle.png
     list.push(`/images/guides/characters/${pascal}.png`);
-    list.push(`/images/guides/characters/${title}.png`);
+    list.push(`/images/guides/characters/${tight}.png`);
     list.push(`/img/characters/${k.toLowerCase()}.png`);
   }else if(kind==='weapon'){
-    // 先 database，再普通目录，再旧站路径
     list.push(`/images/database/weapons/${pascal}.png`);
-    list.push(`/images/database/weapons/${title}.png`);
+    list.push(`/images/database/weapons/${tight}.png`);
     list.push(`/images/weapons/${pascal}.png`);
-    list.push(`/images/weapons/${title}.png`);
+    list.push(`/images/weapons/${tight}.png`);
     list.push(`/img/weapon/${k.toLowerCase()}.png`);
   }else if(kind==='tome'){
-    const base = TOME_FILE[k.toLowerCase()] || pascal; // Chaos_Tome 等
+    const base = TOME_FILE[k.toLowerCase()] || pascal;
+    const tightBase = base.replace(/_/g,'');
     list.push(`/images/Tomes/${base}.png`);
-    list.push(`/images/Tomes/${base.replace(/_Tome$/,'_Tome')}.png`);
+    list.push(`/images/Tomes/${tightBase}.png`);
     list.push(`/img/tome/${k.toLowerCase()}.png`);
   }else if(kind==='item'){
-    // 你没给固定目录，这里多路径回退
-    list.push(`/images/Items/${pascal}.png`);
-    list.push(`/images/Items/${title}.png`);
-    list.push(`/images/database/items/${pascal}.png`);
-    list.push(`/images/database/items/${title}.png`);
+    const mapped = ITEM_FILE[k.toLowerCase()] || toUnderscorePascalForItem(k);
+    const tightMapped = (mapped||'').replace(/_/g,'');
+    // 多路径回退（你可以把第一个目录换成你最终确定的物品图目录）
+    list.push(`/images/Items/${mapped}.png`);
+    list.push(`/images/Items/${tightMapped}.png`);
+    list.push(`/images/database/items/${mapped}.png`);
+    list.push(`/images/database/items/${tightMapped}.png`);
+    list.push(`/images/items/${mapped}.png`);
+    list.push(`/images/items/${tightMapped}.png`);
     list.push(`/img/items/${k.toLowerCase()}.png`);
   }
 
-  // 去重
   return Array.from(new Set(list));
 }
 
-// 生成“带回退”的 IMG 元素
+/* 生成有回退的图标 */
 function iconWithFallback(kind, key, label){
   const cands = imageCandidates(kind, key);
   const box = document.createElement('div');
   box.className = 'icon';
-
   if(!cands.length){
     const span = document.createElement('span');
     span.textContent = label || key;
     box.append(span);
     return box;
   }
-
   let idx = 0;
   const img = new Image();
   img.alt = label || key;
   img.src = cands[idx];
-
   img.onerror = () => {
     idx++;
-    if(idx < cands.length){
-      img.src = cands[idx];
-    }else{
-      // 最终失败，回退为文字
+    if(idx < cands.length){ img.src = cands[idx]; }
+    else{
       box.innerHTML = '';
       const span = document.createElement('span');
       span.textContent = label || key;
       box.append(span);
     }
   };
-
   box.append(img);
   return box;
 }
 
-/* ------------------ 业务：渲染 ------------------ */
-
+/* ------------------ 渲染逻辑 ------------------ */
 const PATCH = '1.0.17';
 const DATA_URL = `/data/leaderboard-${PATCH}.json`;
 
@@ -201,25 +232,19 @@ async function load(){
     const res = await fetch(DATA_URL, {cache:'no-store'});
     if(!res.ok) throw new Error(res.status+' '+res.statusText);
     const rows = await res.json();
-
-    // 顶部汇总
     const total = rows.length;
-    // 使用第一条的时间作“上次更新时间”展示
     const updated = rows[0]?.updated_at_iso || rows[0]?.created_at_iso;
     const localTime = updated ? new Date(updated).toLocaleString() : '—';
     $summary.innerHTML = `总计 <b>${total}</b> 条 · 上次更新 <span class="kbd">${localTime}</span>`;
 
-    // 渲染表格
     for(const r of rows){
       const tr = document.createElement('tr');
 
-      // 名次
       const tdRank = document.createElement('td');
       tdRank.className = 'rank';
       tdRank.textContent = r.rank;
       tr.append(tdRank);
 
-      // 玩家（含国旗）
       const tdPlayer = document.createElement('td');
       const flag = document.createElement('img');
       flag.className = 'flag';
@@ -233,33 +258,23 @@ async function load(){
       tdPlayer.append(flag, name);
       tr.append(tdPlayer);
 
-      // 角色 + patch
       const tdChar = document.createElement('td');
-      const chipC = document.createElement('span');
-      chipC.className = 'chip';
-      chipC.textContent = (r.character || '').toLowerCase();
-      const chipP = document.createElement('span');
-      chipP.className = 'chip';
-      chipP.textContent = `v${r.patch || PATCH}`;
+      const chipC = document.createElement('span'); chipC.className = 'chip'; chipC.textContent = (r.character||'').toLowerCase();
+      const chipP = document.createElement('span'); chipP.className = 'chip'; chipP.textContent = `v${r.patch||PATCH}`;
       tdChar.append(chipC, chipP);
       tr.append(tdChar);
 
-      // 击杀
       const tdKills = document.createElement('td');
       tdKills.textContent = Number(r.kills||0).toLocaleString();
       tr.append(tdKills);
 
-      // 视频
       const tdVid = document.createElement('td');
       const a = document.createElement('a');
-      a.href = r.video_url || '#';
-      a.target = '_blank';
-      a.rel = 'noopener';
+      a.href = r.video_url || '#'; a.target = '_blank'; a.rel='noopener';
       a.textContent = r.video_url ? '打开' : '—';
       tdVid.append(a);
       tr.append(tdVid);
 
-      // 点击展开详情
       tr.style.cursor='pointer';
       tr.onclick = () => showDetail(r);
       $tbody.append(tr);
@@ -275,72 +290,48 @@ async function load(){
 
 function showDetail(r){
   $detail.style.display = '';
-  $detail.innerHTML = ''; // reset
+  $detail.innerHTML = '';
 
   const row = document.createElement('div');
   row.className = 'row';
 
-  // 左侧信息
   const left = document.createElement('div');
 
-  // 玩家 + 国旗 + 标签
   const title = document.createElement('div');
-  title.style.display='flex';
-  title.style.gap='10px';
-  title.style.alignItems='center';
-  title.style.marginBottom='6px';
+  title.style.display='flex'; title.style.gap='10px'; title.style.alignItems='center'; title.style.marginBottom='6px';
 
-  const h2 = document.createElement('h2');
-  h2.style.margin='0';
-  h2.textContent = r.player || 'Unknown';
-
-  const cf = document.createElement('img');
-  cf.className='flag';
-  if(r.country_code){
-    cf.src = `https://flagcdn.com/24x18/${String(r.country_code).toLowerCase()}.png`;
-    cf.alt = r.country_code;
-  }
+  const h2 = document.createElement('h2'); h2.style.margin='0'; h2.textContent = r.player || 'Unknown';
+  const cf = document.createElement('img'); cf.className='flag';
+  if(r.country_code){ cf.src = `https://flagcdn.com/24x18/${String(r.country_code).toLowerCase()}.png`; cf.alt = r.country_code; }
 
   const chips = document.createElement('div');
   const chRank = document.createElement('span'); chRank.className='chip'; chRank.textContent = '#'+(r.rank||'?');
   const chKills= document.createElement('span'); chKills.className='chip'; chKills.textContent = 'KILLS '+Number(r.kills||0).toLocaleString();
-  const chPatch= document.createElement('span'); chPatch.className='chip'; chPatch.textContent = 'v'+(r.patch || PATCH);
+  const chPatch= document.createElement('span'); chPatch.className='chip'; chPatch.textContent = 'v'+(r.patch||PATCH);
   chips.append(chRank,chKills,chPatch);
 
   title.append(h2,cf,chips);
   left.append(title);
 
-  // 角色图标
-  const charWrap = document.createElement('div');
-  charWrap.className = 'icons';
+  const charWrap = document.createElement('div'); charWrap.className='icons';
   charWrap.append(iconWithFallback('character', r.character, r.character));
   left.append(charWrap);
 
-  // 武器
   left.append(label('武器'));
   const wBox = document.createElement('div'); wBox.className='icons';
-  (r.weapons||[]).forEach(w=>{
-    wBox.append(iconWithFallback('weapon', w, w));
-  });
+  (r.weapons||[]).forEach(w=> wBox.append(iconWithFallback('weapon', w, w)));
   left.append(wBox);
 
-  // 法典 / Tomes
   left.append(label('法典'));
   const tBox = document.createElement('div'); tBox.className='icons';
-  (r.tomes||[]).forEach(t=>{
-    tBox.append(iconWithFallback('tome', t, t));
-  });
+  (r.tomes||[]).forEach(t=> tBox.append(iconWithFallback('tome', t, t)));
   left.append(tBox);
 
-  // 道具 / Items
   left.append(label('道具'));
   const iBox = document.createElement('div'); iBox.className='icons';
-  (r.items||[]).forEach(it=>{
-    iBox.append(iconWithFallback('item', it, it));
-  });
+  (r.items||[]).forEach(it=> iBox.append(iconWithFallback('item', it, it)));
   left.append(iBox);
 
-  // 右侧视频
   const right = document.createElement('div');
   if(r.video_url){
     right.innerHTML = `<iframe class="video" src="${toEmbed(r.video_url)}" frameborder="0"
@@ -362,7 +353,6 @@ function label(text){
   return d;
 }
 
-// 将常见视频链接转换为可嵌入
 function toEmbed(url){
   try{
     const u = new URL(url);
@@ -372,17 +362,12 @@ function toEmbed(url){
       else if(u.searchParams.get('v')){ id = u.searchParams.get('v'); }
       return `https://www.youtube.com/embed/${id}`;
     }
-    if(u.hostname.includes('twitch.tv')){
-      // 用普通外链在新窗口打开；嵌入需要注册 domain，保留外链
-      return `about:blank`; // 这里仍显示黑框；点击表格“打开”去新窗播放
-    }
+    if(u.hostname.includes('twitch.tv')){ return `about:blank`; }
     return url;
   }catch{ return url; }
 }
 
-/* ------------------ 启动 ------------------ */
 load();
-
 </script>
 </body>
 </html>
