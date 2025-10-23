@@ -1,0 +1,620 @@
+<!-- Top Runs Section Component - 横版自适应 -->
+<!-- 用法：将此代码插入到页面内容中的任何位置 -->
+
+<style>
+.top-runs-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 40px 0;
+}
+
+.top-runs-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.top-runs-section-icon {
+    font-size: 2rem;
+}
+
+.top-runs-section-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #667eea;
+    font-weight: 700;
+}
+
+.section-subtitle {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.view-all-button {
+    padding: 10px 20px;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.view-all-button:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.top-runs-loading {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.top-runs-loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 横版网格布局 */
+.runs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.run-card {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.run-card:hover {
+    background: white;
+    border-color: #667eea;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.run-card.rank-1 {
+    background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+    border-color: #ffd700;
+}
+
+.run-card.rank-1:hover {
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+}
+
+.run-card.rank-2 {
+    background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+    border-color: #c0c0c0;
+}
+
+.run-card.rank-2:hover {
+    box-shadow: 0 8px 20px rgba(192, 192, 192, 0.3);
+}
+
+.run-card.rank-3 {
+    background: linear-gradient(135deg, #fff5f0 0%, #fff 100%);
+    border-color: #cd7f32;
+}
+
+.run-card.rank-3:hover {
+    box-shadow: 0 8px 20px rgba(205, 127, 50, 0.3);
+}
+
+/* 排名徽章 - 左上角 */
+.rank-badge-corner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 12px 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rank-badge-corner.top-1 {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #d97706;
+}
+
+.rank-badge-corner.top-2 {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+    color: #708090;
+}
+
+.rank-badge-corner.top-3 {
+    background: linear-gradient(135deg, #cd7f32, #e8a87c);
+    color: #8b4513;
+}
+
+.rank-emoji {
+    font-size: 1.2rem;
+}
+
+/* 分数 - 右上角 */
+.run-score-large {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 内容区域 */
+.run-card-content {
+    margin-top: 35px;
+}
+
+.run-player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.player-flag-large {
+    font-size: 1.8rem;
+}
+
+.player-name-large {
+    font-weight: 700;
+    color: #212529;
+    font-size: 1.1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+}
+
+.run-character-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: #e3f2fd;
+    color: #1976d2;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.character-icon-large {
+    width: 20px;
+    height: 20px;
+}
+
+.character-icon-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 配置预览 */
+.build-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.build-item-large {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: white;
+    padding: 4px;
+    border: 1px solid #dee2e6;
+    transition: transform 0.2s;
+}
+
+.build-item-large:hover {
+    transform: scale(1.1);
+    border-color: #667eea;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.2);
+}
+
+.build-item-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.build-more-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #e9ecef;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #6c757d;
+    font-weight: 700;
+}
+
+.no-runs-message {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+.error-message {
+    text-align: center;
+    padding: 40px;
+    color: #dc3545;
+    font-size: 1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .runs-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .top-runs-section {
+        padding: 20px;
+        margin: 30px 0;
+    }
+
+    .top-runs-section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .runs-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .run-card {
+        padding: 15px;
+    }
+
+    .run-score-large {
+        font-size: 1.2rem;
+    }
+
+    .player-name-large {
+        font-size: 1rem;
+    }
+
+    .build-preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
+        gap: 4px;
+    }
+
+    .build-item-large,
+    .build-more-badge {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .runs-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<section class="top-runs-section" id="topRunsSection">
+    <div class="top-runs-section-header">
+        <div class="section-title-group">
+            <span class="top-runs-section-icon">🏆</span>
+            <div>
+                <h2 id="topRunsSectionTitle">Top Runs</h2>
+                <p class="section-subtitle" id="topRunsSectionSubtitle">Real players' highest-scoring builds</p>
+            </div>
+        </div>
+        <a href="/leaderboard/" class="view-all-button">
+            <span>View Full Leaderboard</span>
+            <span>→</span>
+        </a>
+    </div>
+    <div id="topRunsSectionContent">
+        <div class="top-runs-loading">
+            <div class="top-runs-loading-spinner"></div>
+            <p>Loading top runs...</p>
+        </div>
+    </div>
+</section>
+
+<script>
+// Top Runs Section Component Script
+(function() {
+    const TopRunsSectionComponent = {
+        // 配置
+        config: {
+            dataUrl: '/data/leaderboard.json',
+            maxDisplay: 6,  // 横版显示更多
+            leaderboardUrl: '/leaderboard/',
+            updateInterval: 300000
+        },
+
+        // 图标映射
+        characterIcons: {
+            'noelle': 'https://megabonk.org/images/guides/characters/Noelle.png',
+            'fox': 'https://megabonk.org/images/guides/characters/Fox.png',
+            'oofie': 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+            'siroofie': 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+            'calcium': 'https://megabonk.org/images/guides/characters/Calcium.png',
+            'ninja': 'https://megabonk.org/images/guides/characters/Ninja.png',
+            'spaceman': 'https://megabonk.org/images/guides/characters/Spaceman.png',
+            'vlad': 'https://megabonk.org/images/guides/characters/Vlad.png',
+            'monke': 'https://megabonk.org/images/guides/characters/Monke.png',
+            'bush': 'https://megabonk.org/images/guides/characters/Bush.png',
+            'birdo': 'https://megabonk.org/images/guides/characters/Birdo.png',
+            'robinette': 'https://megabonk.org/images/guides/characters/Robinette.png',
+            'chadwell': 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+            'sirchadwell': 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+            'bandit': 'https://megabonk.org/images/guides/characters/Bandit.png',
+            'amog': 'https://megabonk.org/images/guides/characters/Amog.png',
+            'ogre': 'https://megabonk.org/images/guides/characters/Ogre.png',
+            'tonymczoom': 'https://megabonk.org/images/guides/characters/Tony_McZoom.png',
+            'cl4nk': 'https://megabonk.org/images/guides/characters/CL4NK.png',
+            'megachad': 'https://megabonk.org/images/guides/characters/Megachad.png',
+            'athena': 'https://megabonk.org/images/guides/characters/Athena.png',
+            'dicehead': 'https://megabonk.org/images/guides/characters/Dicehead.png'
+        },
+
+        weaponIcons: {
+            'frostwalker': 'https://megabonk.org/images/database/weapons/Frostwalker.png',
+            'axe': 'https://megabonk.org/images/database/weapons/Axe.png',
+            'flamewalker': 'https://megabonk.org/images/database/weapons/Flamewalker.png',
+            'dexecutioner': 'https://megabonk.org/images/database/weapons/Dexecutioner.png',
+            'sword': 'https://megabonk.org/images/database/weapons/Sword.png',
+            'katana': 'https://megabonk.org/images/database/weapons/Katana.png',
+            'bow': 'https://megabonk.org/images/database/weapons/Bow.png',
+            'revolver': 'https://megabonk.org/images/database/weapons/Revolver.png',
+            'blackhole': 'https://megabonk.org/images/database/weapons/Black_Hole.png',
+            'aura': 'https://megabonk.org/images/database/weapons/Aura.png',
+            'aegis': 'https://megabonk.org/images/database/weapons/Aegis.png',
+            'dice': 'https://megabonk.org/images/database/weapons/Dice.png'
+        },
+
+        itemIcons: {
+            'key': 'https://megabonk.org/images/Items/Item_Key.png',
+            'kevin': 'https://megabonk.org/images/Items/Item_Kevin.png',
+            'mirror': 'https://megabonk.org/images/Items/Item_Mirror.png',
+            'goldenshield': 'https://megabonk.org/images/Items/Item_Golden_Shield.png'
+        },
+
+        countryFlags: {
+            'TR': '🇹🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷',
+            'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'JP': '🇯🇵',
+            'KR': '🇰🇷', 'CN': '🇨🇳', 'BR': '🇧🇷', 'MX': '🇲🇽', 'RU': '🇷🇺'
+        },
+
+        // 初始化
+        init: function(filterType, filterValue) {
+            this.filterType = filterType;
+            this.filterValue = this.normalizeString(filterValue);
+            this.updateTitles();
+            this.loadData();
+            
+            setInterval(() => this.loadData(), this.config.updateInterval);
+        },
+
+        updateTitles: function() {
+            const title = document.getElementById('topRunsSectionTitle');
+            const subtitle = document.getElementById('topRunsSectionSubtitle');
+            
+            if (this.filterType === 'character') {
+                title.textContent = 'Top Runs with This Character';
+                subtitle.textContent = 'See how the best players use this character';
+            } else if (this.filterType === 'weapon') {
+                title.textContent = 'Top Builds Using This Weapon';
+                subtitle.textContent = 'Discover powerful combinations with this weapon';
+            }
+        },
+
+        normalizeString: function(str) {
+            return str.toLowerCase().replace(/[^a-z0-9]/g, '');
+        },
+
+        loadData: async function() {
+            try {
+                const response = await fetch(`${this.config.dataUrl}?t=${Date.now()}`);
+                if (!response.ok) throw new Error('Failed to load data');
+                
+                const result = await response.json();
+                this.data = result.data || [];
+                this.renderRuns();
+            } catch (error) {
+                console.error('Top Runs loading error:', error);
+                this.showError();
+            }
+        },
+
+        filterRuns: function() {
+            if (!this.data) return [];
+
+            return this.data.filter(run => {
+                if (this.filterType === 'character') {
+                    const runCharacter = this.normalizeString(run.character || '');
+                    return runCharacter === this.filterValue;
+                } else if (this.filterType === 'weapon') {
+                    const weapons = (run.weapons || []).map(w => this.normalizeString(w));
+                    return weapons.includes(this.filterValue);
+                }
+                return false;
+            }).slice(0, this.config.maxDisplay);
+        },
+
+        renderRuns: function() {
+            const runs = this.filterRuns();
+            const content = document.getElementById('topRunsSectionContent');
+
+            if (runs.length === 0) {
+                content.innerHTML = '<div class="no-runs-message">No top runs found for this ' + this.filterType + ' yet. Be the first!</div>';
+                return;
+            }
+
+            const html = `
+                <div class="runs-grid">
+                    ${runs.map(run => this.renderRunCard(run)).join('')}
+                </div>
+            `;
+
+            content.innerHTML = html;
+        },
+
+        renderRunCard: function(run) {
+            const rank = run.rank || '-';
+            const rankClass = rank <= 3 ? `rank-${rank}` : '';
+            const topClass = rank <= 3 ? `top-${rank}` : '';
+            const rankEmoji = this.getRankEmoji(rank);
+            const playerName = run.playerName || 'Anonymous';
+            const character = run.character || '-';
+            const kills = this.formatNumber(run.kills || 0);
+            const countryCode = run.country?.code || '';
+            const countryFlag = this.getCountryFlag(countryCode);
+            const characterIcon = this.getIcon(character, 'character');
+
+            // 配置预览
+            const weapons = (run.weapons || []).slice(0, 5);
+            const items = (run.items || []).slice(0, 3);
+            const allItems = [...weapons, ...items];
+            const remaining = (run.weapons?.length || 0) + (run.items?.length || 0) - allItems.length;
+
+            return `
+                <div class="run-card ${rankClass}" onclick="TopRunsSectionComponent.openLeaderboard(${rank})">
+                    <div class="rank-badge-corner ${topClass}">
+                        <span class="rank-emoji">${rankEmoji}</span>
+                        <span>#${rank}</span>
+                    </div>
+                    <div class="run-score-large">${kills}</div>
+                    
+                    <div class="run-card-content">
+                        <div class="run-player-info">
+                            <span class="player-flag-large">${countryFlag}</span>
+                            <span class="player-name-large">${this.escapeHtml(playerName)}</span>
+                        </div>
+                        
+                        ${this.filterType === 'weapon' ? `
+                            <span class="run-character-badge">
+                                <span class="character-icon-large">${characterIcon}</span>
+                                <span>${this.escapeHtml(character)}</span>
+                            </span>
+                        ` : ''}
+                        
+                        <div class="build-preview-grid">
+                            ${allItems.map(item => {
+                                const icon = this.getIcon(item, this.filterType === 'character' ? 'weapon' : 'item');
+                                return `
+                                    <div class="build-item-large" title="${this.escapeHtml(this.formatName(item))}">${icon}</div>
+                                `;
+                            }).join('')}
+                            ${remaining > 0 ? `<div class="build-more-badge">+${remaining}</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        },
+
+        openLeaderboard: function(rank) {
+            window.location.href = `${this.config.leaderboardUrl}#rank-${rank}`;
+        },
+
+        getIcon: function(name, type) {
+            const normalized = this.normalizeString(name);
+            let iconUrl;
+
+            if (type === 'character') {
+                iconUrl = this.characterIcons[normalized];
+            } else if (type === 'weapon') {
+                iconUrl = this.weaponIcons[normalized];
+            } else if (type === 'item') {
+                iconUrl = this.itemIcons[normalized];
+            }
+
+            if (iconUrl) {
+                return `<img src="${iconUrl}" alt="${name}">`;
+            }
+            return '❓';
+        },
+
+        getCountryFlag: function(code) {
+            return this.countryFlags[code] || '🌍';
+        },
+
+        getRankEmoji: function(rank) {
+            const emojis = { 1: '🥇', 2: '🥈', 3: '🥉' };
+            return emojis[rank] || '';
+        },
+
+        formatNumber: function(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        },
+
+        formatName: function(str) {
+            return str.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase()).trim();
+        },
+
+        escapeHtml: function(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        },
+
+        showError: function() {
+            const content = document.getElementById('topRunsSectionContent');
+            content.innerHTML = '<div class="error-message">Failed to load data. Please try again later.</div>';
+        }
+    };
+
+    window.TopRunsSectionComponent = TopRunsSectionComponent;
+})();
+
+// 使用示例:
+// TopRunsSectionComponent.init('character', 'Noelle');
+// TopRunsSectionComponent.init('weapon', 'Frostwalker');
+</script>
