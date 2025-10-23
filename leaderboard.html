@@ -257,7 +257,9 @@
         }
 
         .character-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             padding: 6px 12px;
             background: #e3f2fd;
             color: #1976d2;
@@ -265,6 +267,20 @@
             font-size: 0.9rem;
             font-weight: 600;
             text-transform: capitalize;
+        }
+
+        .character-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .character-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
 
         .score-cell {
@@ -367,7 +383,7 @@
             margin: 5% auto;
             padding: 0;
             width: 90%;
-            max-width: 800px;
+            max-width: 900px;
             border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             animation: slideIn 0.3s;
@@ -466,40 +482,66 @@
             color: #212529;
         }
 
-        .tags-container {
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .item-card {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            padding: 6px 14px;
-            background: #e9ecef;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #495057;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
             transition: all 0.2s;
+            border: 2px solid transparent;
         }
 
-        .tag:hover {
-            background: #dee2e6;
-            transform: translateY(-1px);
+        .item-card:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .tag.weapon {
-            background: #ffe0e0;
-            color: #d32f2f;
+        .item-card.weapon {
+            border-color: #ffcdd2;
+            background: #fff5f5;
         }
 
-        .tag.tome {
-            background: #e3f2fd;
-            color: #1976d2;
+        .item-card.tome {
+            border-color: #bbdefb;
+            background: #f0f7ff;
         }
 
-        .tag.item {
-            background: #f3e5f5;
-            color: #7b1fa2;
+        .item-card.item {
+            border-color: #e1bee7;
+            background: #faf5fb;
+        }
+
+        .item-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .item-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .item-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            color: #495057;
+            line-height: 1.3;
         }
 
         .video-link {
@@ -567,6 +609,10 @@
 
             .info-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
         }
     </style>
@@ -636,7 +682,180 @@
     <script>
         const CONFIG = {
             dataUrl: '/data/leaderboard.json',
-            maxDisplay: 100
+            maxDisplay: 100,
+            // 图标配置：可以替换为实际的游戏图标 URL
+            // 格式：'name': 'url' 或 'emoji'
+            iconBase: '', // 设置图标基础路径，例如：'https://your-cdn.com/icons/'
+        };
+
+        // 武器图标映射（真实游戏图标）
+        const weaponIcons = {
+            'frostwalker': 'https://megabonk.org/images/database/weapons/Frostwalker.png',
+            'axe': 'https://megabonk.org/images/database/weapons/Axe.png',
+            'flamewalker': 'https://megabonk.org/images/database/weapons/Flamewalker.png',
+            'dexecutioner': 'https://megabonk.org/images/database/weapons/Dexecutioner.png',
+            'sword': 'https://megabonk.org/images/database/weapons/Sword.png',
+            'herosword': 'https://megabonk.org/images/database/weapons/Hero_Sword.png',
+            'katana': 'https://megabonk.org/images/database/weapons/Katana.png',
+            'bow': 'https://megabonk.org/images/database/weapons/Bow.png',
+            'revolver': 'https://megabonk.org/images/database/weapons/Revolver.png',
+            'blackhole': 'https://megabonk.org/images/database/weapons/Black_Hole.png',
+            'aura': 'https://megabonk.org/images/database/weapons/Aura.png',
+            'aegis': 'https://megabonk.org/images/database/weapons/Aegis.png',
+            'dice': 'https://megabonk.org/images/database/weapons/Dice.png',
+            'bone': 'https://megabonk.org/images/database/weapons/Bone.png',
+            'bananarang': 'https://megabonk.org/images/database/weapons/Bananarang.png',
+            'shotgun': 'https://megabonk.org/images/database/weapons/Shotgun.png',
+            'lightningstaff': 'https://megabonk.org/images/database/weapons/Lightning_Staff.png',
+            'firestaff': 'https://megabonk.org/images/database/weapons/Firestaff.png',
+            'chunkers': 'https://megabonk.org/images/database/weapons/Chunkers.png',
+            'tornado': 'https://megabonk.org/images/database/weapons/Tornado.png',
+            'spacenoodle': 'https://megabonk.org/images/database/weapons/Space_Noodle.png',
+            'dragonsbreath': 'https://megabonk.org/images/database/weapons/Dragons_Breath.png',
+            'sluttyrocket': 'https://megabonk.org/images/database/weapons/SluttyRocket.png',
+            'mines': 'https://megabonk.org/images/database/weapons/Mines.png',
+            'poisonflask': 'https://megabonk.org/images/database/weapons/Poison_Flask.png',
+            'sniper': 'https://megabonk.org/images/database/weapons/Sniper.png',
+            'wirelessdagger': 'https://megabonk.org/images/database/weapons/Wireless_Dagger.png',
+            'corruptedsword': 'https://megabonk.org/images/database/weapons/CorruptedSword.png',
+            'bloodmagic': 'https://megabonk.org/images/database/weapons/Blood_Magic.png'
+        };
+
+        // 符文图标映射（真实游戏图标）
+        const tomeIcons = {
+            'chaos': 'https://megabonk.org/images/Tomes/Chaos_Tome.png',
+            'xp': 'https://megabonk.org/images/Tomes/XP_Tome.png',
+            'cursed': 'https://megabonk.org/images/Tomes/Cursed_Tome.png',
+            'precision': 'https://megabonk.org/images/Tomes/Precision_Tome.png',
+            'armor': 'https://megabonk.org/images/Tomes/Armor_Tome.png',
+            'attraction': 'https://megabonk.org/images/Tomes/Attraction_Tome.png',
+            'bloody': 'https://megabonk.org/images/Tomes/Bloody_Tome.png',
+            'duration': 'https://megabonk.org/images/Tomes/Duration_Tome.png',
+            'agility': 'https://megabonk.org/images/Tomes/Agility_Tome.png',
+            'speed': 'https://megabonk.org/images/Tomes/Agility_Tome.png',
+            'luck': 'https://megabonk.org/images/Tomes/Luck_Tome.png',
+            'size': 'https://megabonk.org/images/Tomes/Size_Tome.png',
+            'area': 'https://megabonk.org/images/Tomes/Size_Tome.png',
+            'projectile': 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+            'projectilespeed': 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+            'damage': 'https://megabonk.org/images/Tomes/Damage_Tome.png',
+            'health': 'https://megabonk.org/images/Tomes/Health_Tome.png',
+            'regen': 'https://megabonk.org/images/Tomes/Regen_Tome.png',
+            'shield': 'https://megabonk.org/images/Tomes/Shield_Tome.png',
+            'thorns': 'https://megabonk.org/images/Tomes/Thorns_Tome.png',
+            'knockback': 'https://megabonk.org/images/Tomes/Knockback_Tome.png',
+            'cooldown': 'https://megabonk.org/images/Tomes/Cooldown_Tome.png',
+            'quantity': 'https://megabonk.org/images/Tomes/Quantity_Tome.png',
+            'evasion': 'https://megabonk.org/images/Tomes/Evasion_Tome.png',
+            'golden': 'https://megabonk.org/images/Tomes/Golden_Tome.png',
+            'silver': 'https://megabonk.org/images/Tomes/Silver_Tome.png'
+        };
+
+        // 物品图标映射（真实游戏图标）
+        const itemIcons = {
+            'key': 'https://megabonk.org/images/Items/Item_Key.png',
+            'curseddoll': 'https://megabonk.org/images/Items/Item_Cursed_Doll.png',
+            'creditcardgreen': 'https://megabonk.org/images/Items/Item_Credit_Card_Green.png',
+            'clover': 'https://megabonk.org/images/Items/Item_Clover.png',
+            'battery': 'https://megabonk.org/images/Items/Item_Battery.png',
+            'icecube': 'https://megabonk.org/images/Items/Item_Ice_Cube.png',
+            'slurpgloves': 'https://megabonk.org/images/Items/Item_Slurp_Gloves.png',
+            'backpack': 'https://megabonk.org/images/Items/Item_Backpack.png',
+            'timebracelet': 'https://megabonk.org/images/Items/Item_Time_Bracelet.png',
+            'wrench': 'https://megabonk.org/images/Items/Item_Wrench.png',
+            'holybook': 'https://megabonk.org/images/Items/Item_Holy_Book.png',
+            'idlejuice': 'https://megabonk.org/images/Items/Item_Idle_Juice.png',
+            'lightningorb': 'https://megabonk.org/images/Items/Item_Lightning_Orb.png',
+            'overpoweredlamp': 'https://megabonk.org/images/Items/Item_Overpowered_Lamp.png',
+            'gymsauce': 'https://megabonk.org/images/Items/Item_Gym_Sauce.png',
+            'moldycheese': 'https://megabonk.org/images/Items/Item_Moldy_Cheese.png',
+            'goldenshield': 'https://megabonk.org/images/Items/Item_Golden_Shield.png',
+            'kevin': 'https://megabonk.org/images/Items/Item_Kevin.png',
+            'phantomshroud': 'https://megabonk.org/images/Items/Item_Phantom_Shroud.png',
+            'goldenglove': 'https://megabonk.org/images/Items/Item_Golden_Glove.png',
+            'borgar': 'https://megabonk.org/images/Items/Item_Borgar.png',
+            'oats': 'https://megabonk.org/images/Items/Item_Oats.png',
+            'medkit': 'https://megabonk.org/images/Items/Item_Medkit.png',
+            'mirror': 'https://megabonk.org/images/Items/Item_Mirror.png',
+            'feathers': 'https://megabonk.org/images/Items/Item_Feathers.png',
+            'slipperyring': 'https://megabonk.org/images/Items/Item_Slippery_Ring.png',
+            'suckymagnet': 'https://megabonk.org/images/Items/Item_Sucky_Magnet.png',
+            'giantfork': 'https://megabonk.org/images/Items/Item_Giant_Fork.png',
+            'creditcardred': 'https://megabonk.org/images/Items/Item_Credit_Card_Red.png',
+            'campfire': 'https://megabonk.org/images/Items/Item_Campfire.png',
+            'beer': 'https://megabonk.org/images/Items/Item_Beer.png',
+            'beefyring': 'https://megabonk.org/images/Items/Item_Beefy_Ring.png',
+            'anvil': 'https://megabonk.org/images/Items/Item_Anvil.png',
+            'thundermitts': 'https://megabonk.org/images/Items/Item_Thunder_Mitts.png',
+            'powergloves': 'https://megabonk.org/images/Items/Item_Power_Gloves.png',
+            'echoshard': 'https://megabonk.org/images/Items/Item_Echo_Shard.png',
+            'soulharvester': 'https://megabonk.org/images/Items/Item_Soul_Harvester.png',
+            'bigbonk': 'https://megabonk.org/images/Items/Item_Big_Bonk.png',
+            'unstabletransfusion': 'https://megabonk.org/images/Items/Item_Unstable_Transfusion.png',
+            'joesdagger': 'https://megabonk.org/images/Items/Item_Joes_Dagger.png',
+            'spicymeatball': 'https://megabonk.org/images/Items/Item_Spicy_Meatball.png',
+            'beacon': 'https://megabonk.org/images/Items/Item_Beacon.png',
+            'bossbuster': 'https://megabonk.org/images/Items/Item_Boss_Buster.png',
+            'brassknuckles': 'https://megabonk.org/images/Items/Item_Brass_Knuckles.png',
+            'cactus': 'https://megabonk.org/images/Items/Item_Cactus.png',
+            'chonkplate': 'https://megabonk.org/images/Items/Item_Chonkplate.png',
+            'cowardscloak': 'https://megabonk.org/images/Items/Item_Cowards_Cloak.png',
+            'cursedgrabbies': 'https://megabonk.org/images/Items/Item_Cursed_Grabbies.png',
+            'demonicblade': 'https://megabonk.org/images/Items/Item_Demonic_Blade.png',
+            'demonicblood': 'https://megabonk.org/images/Items/Item_Demonic_Blood.png',
+            'demonicsoul': 'https://megabonk.org/images/Items/Item_Demonic_Soul.png',
+            'dragonfire': 'https://megabonk.org/images/Items/Item_Dragonfire.png',
+            'eagleclaw': 'https://megabonk.org/images/Items/Item_Eagle_Claw.png',
+            'electricplug': 'https://megabonk.org/images/Items/Item_Electric_Plug.png',
+            'energycore': 'https://megabonk.org/images/Items/Item_Energy_Core.png',
+            'forbiddenjuice': 'https://megabonk.org/images/Items/Item_Forbidden_Juice.png',
+            'gamergoggles': 'https://megabonk.org/images/Items/Item_Gamer_Goggles.png',
+            'gasmask': 'https://megabonk.org/images/Items/Item_Gas_Mask.png',
+            'ghost': 'https://megabonk.org/images/Items/Item_Ghost.png',
+            'goldensneakers': 'https://megabonk.org/images/Items/Item_Golden_Sneakers.png',
+            'grandmassecrettonic': 'https://megabonk.org/images/Items/Item_Grandmas_Secret_Tonic.png',
+            'icecrystal': 'https://megabonk.org/images/Items/Item_Ice_Crystal.png',
+            'leechingcrystal': 'https://megabonk.org/images/Items/Item_Leeching_Crystal.png',
+            'moldygloves': 'https://megabonk.org/images/Items/Item_Moldy_Gloves.png',
+            'scarf': 'https://megabonk.org/images/Items/Item_Scarf.png',
+            'shatteredknowledge': 'https://megabonk.org/images/Items/Item_Shattered_Knowledge.png',
+            'skuleg': 'https://megabonk.org/images/Items/Item_Skuleg.png',
+            'sluttycannon': 'https://megabonk.org/images/Items/Item_Slutty_Cannon.png',
+            'speedboi': 'https://megabonk.org/images/Items/Item_Speed_Boi.png',
+            'spikyshield': 'https://megabonk.org/images/Items/Item_Spiky_Shield.png',
+            'tacticalglasses': 'https://megabonk.org/images/Items/Item_Tactical_Glasses.png',
+            'toxicbarrel': 'https://megabonk.org/images/Items/Item_Toxic_Barrel.png',
+            'turboskates': 'https://megabonk.org/images/Items/Item_Turbo_Skates.png',
+            'turbosocks': 'https://megabonk.org/images/Items/Item_Turbo_Socks.png',
+            'zawarudo': 'https://megabonk.org/images/Items/Item_Za_Warudo.png',
+            'bloodycleaver': 'https://megabonk.org/images/Items/Item_Bloody_Cleaver.png',
+            'bob': 'https://megabonk.org/images/Items/Item_Bob__28Dead_29.png'
+        };
+
+        // 角色图标映射（真实游戏图标）
+        const characterIcons = {
+            'noelle': 'https://megabonk.org/images/guides/characters/Noelle.png',
+            'fox': 'https://megabonk.org/images/guides/characters/Fox.png',
+            'oofie': 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+            'siroofie': 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+            'calcium': 'https://megabonk.org/images/guides/characters/Calcium.png',
+            'ninja': 'https://megabonk.org/images/guides/characters/Ninja.png',
+            'spaceman': 'https://megabonk.org/images/guides/characters/Spaceman.png',
+            'vlad': 'https://megabonk.org/images/guides/characters/Vlad.png',
+            'monke': 'https://megabonk.org/images/guides/characters/Monke.png',
+            'bush': 'https://megabonk.org/images/guides/characters/Bush.png',
+            'birdo': 'https://megabonk.org/images/guides/characters/Birdo.png',
+            'robinette': 'https://megabonk.org/images/guides/characters/Robinette.png',
+            'chadwell': 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+            'sirchadwell': 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+            'bandit': 'https://megabonk.org/images/guides/characters/Bandit.png',
+            'amog': 'https://megabonk.org/images/guides/characters/Amog.png',
+            'ogre': 'https://megabonk.org/images/guides/characters/Ogre.png',
+            'tonymczoom': 'https://megabonk.org/images/guides/characters/Tony_McZoom.png',
+            'cl4nk': 'https://megabonk.org/images/guides/characters/CL4NK.png',
+            'megachad': 'https://megabonk.org/images/guides/characters/Megachad.png',
+            'athena': 'https://megabonk.org/images/guides/characters/Athena.png',
+            'dicehead': 'https://megabonk.org/images/guides/characters/Dicehead.png'
         };
 
         let leaderboardData = [];
@@ -651,6 +870,46 @@
             'FI': '🇫🇮', 'PL': '🇵🇱', 'PT': '🇵🇹', 'GR': '🇬🇷', 'CH': '🇨🇭',
             'AT': '🇦🇹', 'BE': '🇧🇪', 'CZ': '🇨🇿', 'HU': '🇭🇺', 'RO': '🇷🇴'
         };
+
+        function getIcon(name, type) {
+            // 标准化名称
+            const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+            
+            // 根据类型选择图标映射
+            let iconMap;
+            switch(type) {
+                case 'weapon':
+                    iconMap = weaponIcons;
+                    break;
+                case 'tome':
+                    iconMap = tomeIcons;
+                    break;
+                case 'item':
+                    iconMap = itemIcons;
+                    break;
+                case 'character':
+                    iconMap = characterIcons;
+                    break;
+                default:
+                    return '❓';
+            }
+
+            // 查找图标
+            const icon = iconMap[normalizedName];
+            
+            // 如果找不到图标，返回默认图标
+            if (!icon) {
+                return '❓';
+            }
+            
+            // 如果是 URL（以 http 或 / 开头），返回 img 标签
+            if (icon.startsWith('http') || icon.startsWith('/')) {
+                return `<img src="${icon}" alt="${name}">`;
+            }
+            
+            // 否则返回 emoji
+            return icon;
+        }
 
         function getCountryFlag(countryCode) {
             return countryFlags[countryCode] || '🌍';
@@ -716,6 +975,7 @@
                             const kills = item.kills || 0;
                             const countryCode = item.country?.code || '';
                             const countryFlag = getCountryFlag(countryCode);
+                            const characterIcon = getIcon(character, 'character');
                             
                             return `
                                 <tr class="${topClass}" onclick="showDetails(${index})">
@@ -729,7 +989,10 @@
                                         </div>
                                     </td>
                                     <td class="character-cell">
-                                        <span class="character-badge">${escapeHtml(character)}</span>
+                                        <span class="character-badge">
+                                            <span class="character-icon">${characterIcon}</span>
+                                            <span>${escapeHtml(character)}</span>
+                                        </span>
                                     </td>
                                     <td class="score-cell">
                                         <span class="score">${formatNumber(kills)}</span>
@@ -800,8 +1063,13 @@
                 ${weapons.length > 0 ? `
                 <div class="detail-section">
                     <div class="section-title">⚔️ Weapons (${weapons.length})</div>
-                    <div class="tags-container">
-                        ${weapons.map(w => `<span class="tag weapon">${escapeHtml(formatName(w))}</span>`).join('')}
+                    <div class="items-grid">
+                        ${weapons.map(w => `
+                            <div class="item-card weapon">
+                                <div class="item-icon">${getIcon(w, 'weapon')}</div>
+                                <div class="item-name">${escapeHtml(formatName(w))}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
                 ` : ''}
@@ -809,8 +1077,13 @@
                 ${tomes.length > 0 ? `
                 <div class="detail-section">
                     <div class="section-title">📖 Tomes (${tomes.length})</div>
-                    <div class="tags-container">
-                        ${tomes.map(t => `<span class="tag tome">${escapeHtml(formatName(t))}</span>`).join('')}
+                    <div class="items-grid">
+                        ${tomes.map(t => `
+                            <div class="item-card tome">
+                                <div class="item-icon">${getIcon(t, 'tome')}</div>
+                                <div class="item-name">${escapeHtml(formatName(t))}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
                 ` : ''}
@@ -818,8 +1091,13 @@
                 ${items.length > 0 ? `
                 <div class="detail-section">
                     <div class="section-title">🎒 Items (${items.length})</div>
-                    <div class="tags-container">
-                        ${items.map(i => `<span class="tag item">${escapeHtml(formatName(i))}</span>`).join('')}
+                    <div class="items-grid">
+                        ${items.map(i => `
+                            <div class="item-card item">
+                                <div class="item-icon">${getIcon(i, 'item')}</div>
+                                <div class="item-name">${escapeHtml(formatName(i))}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
                 ` : ''}
@@ -935,7 +1213,6 @@
 
         function formatBuildVersion(version) {
             if (!version) return 'Unknown';
-            // Convert number like 10000000017 to 1.0.17
             const versionStr = version.toString();
             if (versionStr.length >= 11) {
                 const major = parseInt(versionStr.substring(0, 1));
