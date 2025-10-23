@@ -2,372 +2,426 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Megabonk Leaderboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
 <style>
-  :root{--bg:#0f1825;--card:#122034;--muted:#9fb3c8;--accent:#18b77e;--chip:#0e263c;}
-  body{margin:0;background:var(--bg);color:#e6f0ff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,sans-serif}
-  .wrap{max-width:1200px;margin-inline:auto;padding:20px}
-  h1{margin:0 0 18px;font-size:32px}
-  .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px}
-  .pill{background:#0e263c;border:1px solid #21364d;border-radius:10px;padding:10px 12px}
-  .btn{background:#18324a;border:1px solid #33506f;border-radius:10px;padding:10px 14px;color:#fff;cursor:pointer}
-  .btn:hover{filter:brightness(1.08)}
-  .status{margin-left:auto}
-  .card{background:var(--card);border:1px solid #233b58;border-radius:16px;padding:18px;margin-top:16px}
-  table{width:100%;border-collapse:collapse}
-  th,td{padding:14px;border-bottom:1px solid #203552}
-  th{color:#aecdff;text-align:left}
-  .rank{font-weight:700}
-  .muted{color:var(--muted)}
-  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);border:1px solid #264663;border-radius:999px;padding:4px 10px;font-size:12px;margin-right:8px}
-  .flag{width:18px;height:14px;object-fit:cover;border-radius:2px;border:1px solid #2a4764}
-  .row{display:grid;grid-template-columns:1fr 460px;gap:18px}
-  .icons{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
-  .icon{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;background:#0c1f33;border:1px solid #244462;border-radius:8px;overflow:hidden}
-  .icon img{width:100%;height:100%;object-fit:contain}
-  .icon span{font-size:11px;color:#8fb1d0;padding:0 6px;text-align:center}
-  .video{aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden}
-  .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;background:#0e263c;border:1px solid #2b4b6a;border-radius:6px;padding:2px 6px;font-size:12px;color:#b8d2ee}
+:root{
+  --bg:#0f1a25;
+  --panel:#0c1721;
+  --panel-2:#0b1520;
+  --muted:#8aa1b5;
+  --text:#e6f1ff;
+  --accent:#19b6ff;
+  --chip:#112233;
+  --chip-h:#17324a;
+  --good:#11c46a;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Inter","Noto Sans SC",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#0f1a25,#0a1520 30%,#08111a);
+}
+.container{max-width:1200px;margin:32px auto;padding:0 16px}
+.header{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:16px
+}
+.h-title{font-size:34px;font-weight:800;letter-spacing:.5px}
+.badge{background:#102335;border:1px solid #203444;border-radius:999px;padding:6px 10px;color:#d5e6f7}
+.select, .btn{
+  appearance:none;border:1px solid #2a4157;background:#0f2234;color:#d5e6f7;
+  border-radius:10px;padding:10px 12px;font-size:14px;outline:none
+}
+.btn{cursor:pointer}
+.status-dot{width:8px;height:8px;background:var(--good);border-radius:50%}
+.status{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#0c2336;border:1px solid #1b364b}
+
+.table{
+  width:100%;border-collapse:separate;border-spacing:0 10px;margin-top:8px
+}
+.tr{
+  background:var(--panel);
+  border:1px solid #1a2a3a;
+  border-radius:12px;overflow:hidden
+}
+.td{padding:16px}
+.table .tr{display:grid;grid-template-columns:60px 1fr 140px 160px 80px}
+.cell-header{color:#9bb2c8;font-size:13px;margin:4px 0 10px}
+
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:36px;height:28px;border-radius:999px;background:#0f2a3f;border:1px solid #214059}
+.flag{font-size:16px;margin-left:8px}
+.char-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 10px;border-radius:999px;background:#112335;border:1px solid #29445b
+}
+.k-num{font-weight:700}
+
+.details{
+  margin-top:10px;padding:18px;border:1px solid #193045;background:var(--panel-2);
+  border-radius:12px
+}
+.row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.portrait{width:56px;height:56px;border-radius:12px;border:1px solid #2b4156;background:#0f2234;object-fit:contain}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{
+  background:var(--chip);border:1px solid #23425a;border-radius:12px;
+  padding:6px 10px;font-size:12px;color:#cfe6ff
+}
+.grid{display:grid;grid-template-columns:repeat(6,56px);gap:12px}
+.icon{
+  width:56px;height:56px;border-radius:12px;background:#0e2133;border:1px solid #2a4056;
+  display:flex;align-items:center;justify-content:center;overflow:hidden
+}
+.icon img{display:block;width:100%;height:100%;object-fit:contain}
+.sec-title{margin:8px 0;color:#9db7cd}
+.toggle{
+  margin-top:10px;cursor:pointer;color:#9bd4ff;background:#0f2b44;border:1px solid #245677;border-radius:10px;padding:8px 10px;display:inline-flex;gap:8px;align-items:center
+}
+.link{color:#9bd4ff;text-decoration:none}
+.footer{margin:16px 0 32px;color:#7ea1bb}
+.hint{color:#98b1c8;font-size:12px}
+@media (max-width:840px){
+  .table .tr{grid-template-columns:60px 1fr 120px 130px 70px}
+  .grid{grid-template-columns:repeat(5,56px)}
+}
+@media (max-width:560px){
+  .table .tr{grid-template-columns:50px 1fr 100px 110px 70px}
+  .grid{grid-template-columns:repeat(4,56px)}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Megabonk Leaderboard</h1>
-
-  <div class="toolbar">
-    <div class="pill muted">数据源：<span id="dataSource" class="kbd">leaderboard-1.0.17.json</span></div>
-    <button id="refreshBtn" class="btn">刷新</button>
-    <div class="pill status">状态：<span id="status" class="kbd">加载中</span></div>
+<div class="container">
+  <div class="header">
+    <div class="h-title">Leaderboard</div>
+    <select id="patch" class="select">
+      <option value="1.0.17">1.0.17</option>
+    </select>
+    <div id="ds" class="badge">数据源: <span id="dsn">leaderboard-1.0.17.json</span></div>
+    <button id="refresh" class="btn">刷新</button>
+    <div class="status"><span class="status-dot"></span><span id="stxt">已加载</span></div>
   </div>
 
-  <div id="summary" class="muted" style="margin:6px 0 10px;"></div>
+  <div class="cell-header">总计 <span id="total">0</span> 条 · 上次更新 <span id="updated">--</span></div>
 
-  <div class="card">
-    <table id="tbl">
-      <thead>
-        <tr>
-          <th>名次</th>
-          <th>玩家</th>
-          <th>角色</th>
-          <th>击杀</th>
-          <th>视频</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
+  <div id="list"></div>
 
-  <div id="detail" class="card" style="display:none;"></div>
-
-  <div class="muted" style="margin-top:14px">
-    数据文件位于 <span class="kbd">/data/leaderboard-&lt;patch&gt;.json</span>（优先）或 <span class="kbd">.csv</span>
+  <div class="footer">
+    数据文件位于 <code>/data/leaderboard-&lt;patch&gt;.json</code>（优先）<br/>
+    <span class="hint">若图片未显示：确保放在 <code>/images/guides/characters</code>、<code>/images/database/weapons</code>、<code>/images/Tomes</code>、<code>/images/items</code> 且文件扩展名为 <code>.png</code>；本页会尝试多种大小写/下划线变体，并在缺图时回退为文本。</span>
   </div>
 </div>
 
 <script>
-/* ------------------ 命名&路径工具 ------------------ */
-function toPascalCase(str){
-  if(!str) return '';
-  const parts = str.replace(/[-\s]+/g,'_').split(/[_/]+/).filter(Boolean);
-  if(parts.length===1){
-    const guess = parts[0]
-      .replace(/([a-z])(\d)/g,'$1_$2');
-    return guess.split('_').map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join('_');
-  }
-  return parts.map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join('_');
-}
-
-/* ★ Tome 文件名映射 */
-const TOME_FILE = {
-  chaos: 'Chaos_Tome',
-  precision: 'Precision_Tome',
-  cursed: 'Cursed_Tome',
-  cooldown: 'Cooldown_Tome',
-  damage: 'Damage_Tome',
-  duration: 'Duration_Tome',
-  evasion: 'Evasion_Tome',
-  health: 'Health_Tome',
-  golden: 'Golden_Tome',
-  luck: 'Luck_Tome',
-  // 你的 JSON 里用 xp，这里暂时映射到 Golden_Tome；若你有 XP_Tome.png，改成 'XP_Tome'
-  xp: 'Golden_Tome'
+/* ---------- 基础路径（按你仓库保持默认即可） ---------- */
+const DATA_BASE = '/data';
+const IMG = {
+  characters: '/images/guides/characters',
+  weapons   : '/images/database/weapons',
+  tomes     : '/images/Tomes',
+  items     : '/images/items'
 };
 
-/* ★ Item 智能切分 + 精确映射 */
-const ITEM_FILE = {
-  // 你数据里出现过的
-  curseddoll: 'Cursed_Doll',
-  creditcardgreen: 'Credit_Card_Green',
-  goldenglove: 'Golden_Glove',
-  wrench: 'Wrench',
-  key: 'Key',
-  mirror: 'Mirror',
-  brassknuckles: 'Brass_Knuckles',
-  forbiddenjuice: 'Forbidden_Juice',
-  chonkplate: 'Chonk_Plate',
-  unstabletransfusion: 'Unstable_Transfusion',
-  scarf: 'Scarf',
-  backpack: 'Backpack',
-  spikyshield: 'Spiky_Shield'
+/* ---------- 工具：代码 -> 国旗 ---------- */
+function ccToFlag(cc='US'){
+  if(!cc) return '🌐';
+  const A = 127397; // 'A' 的区域指示符基码
+  return cc.toUpperCase().replace(/./g, c => String.fromCodePoint(c.charCodeAt(0)+A));
+}
+
+/* ---------- 工具：把 slug 变成多种“候选文件名” ---------- */
+function candidatesFromSlug(slug){
+  if(!slug) return [];
+  // 分词：下划线、连字符、数字边界、大小写过渡
+  let words = slug
+    .replace(/[-]+/g,'_')
+    .replace(/([a-z])([A-Z])/g,'$1_$2')
+    .replace(/(\d+)/g,'_$1_')
+    .replace(/__+/g,'_')
+    .replace(/^_|_$/g,'')
+    .split('_')
+    .filter(Boolean);
+  // 全小写的也拆成近似词（如 creditcardgreen -> credit card green）
+  if(words.length===1) {
+    words = words[0].match(/[a-z]+|\d+/gi) || [words[0]];
+  }
+  const cap = w => w ? (w[0].toUpperCase()+w.slice(1).toLowerCase()) : w;
+  const title = words.map(cap).join('');
+  const unders = words.map(cap).join('_');
+  const lowerU = words.map(w=>w.toLowerCase()).join('_');
+  const hyphen = unders.replaceAll('_','-');
+  const list = [
+    `${title}.png`, `${unders}.png`, `${lowerU}.png`, `${hyphen}.png`,
+    `${title}.PNG`, `${unders}.PNG`, `${lowerU}.PNG`, `${hyphen}.PNG`,
+    `${title}.webp`, `${unders}.webp`, `${lowerU}.webp`, `${hyphen}.webp`,
+  ];
+  // 去重
+  return [...new Set(list)];
+}
+
+/* ---------- 常见别名：法典 & 道具 ---------- */
+const TOME_MAP = {
+  chaos:'Chaos_Tome.png',
+  precision:'Precision_Tome.png',
+  cursed:'Cursed_Tome.png',
+  xp:'Golden_Tome.png',
 };
 
-// 用常见词把 slug 切成 token，再转 Pascal_形式
-const COMMON_ITEM_TOKENS = [
-  'cursed','doll','credit','card','green','golden','glove','wrench','key','mirror',
-  'brass','knuckles','forbidden','juice','chonk','plate','unstable','transfusion',
-  'spiky','shield','backpack','scarf'
-];
+const ITEM_ALIAS = {
+  // 你已上传里最常见的名称，尽量多给几个别名以适配命名
+  curseddoll: ['Cursed_Doll','CursedDoll'],
+  creditcardgreen: ['Credit_Card_Green','CreditCard_Green','Creditcardgreen'],
+  key: ['Key'],
+  goldenglove: ['Golden_Glove','Gold_Glove','GoldenGlove'],
+  wrench: ['Wrench'],
+  magnet: ['Magnet','Magnet_Item','MagnetIco'],
+  clover: ['Clover','Lucky_Clover','Luck_Clover'],
+  ring: ['Ring','Golden_Ring','Speed_Ring'],
+  boots: ['Boots','Speed_Boots'],
+  mirror: ['Mirror','Dark_Mirror'],
+  backpack: ['Backpack'],
+  spikyshield: ['Spiky_Shield','SpikyShield'],
+  syringe: ['Syringe'],
+  burger: ['Burger'],
+  medkit: ['Medkit','Med_Kit'],
+  bomb: ['Bomb'],
+  cheese: ['Cheese'],
+  wrenchgold: ['Golden_Wrench'],
+  // ……如有更多，可按 “slug: ['文件名不带扩展']” 的形式继续补
+};
 
-function toUnderscorePascalForItem(slug){
-  if(!slug) return '';
-  const s = slug.toLowerCase();
-  // 按词从长到短打标记，避免重叠
-  const tokens = [];
-  let i = 0;
-  while(i < s.length){
-    let matched = '';
-    for(const tk of COMMON_ITEM_TOKENS.sort((a,b)=>b.length-a.length)){
-      if(s.startsWith(tk, i)){ matched = tk; break; }
-    }
-    if(matched){
-      tokens.push(matched);
-      i += matched.length;
-    }else{
-      // 单字符吞并到上一个 token
-      if(tokens.length) tokens[tokens.length-1] += s[i];
-      else tokens.push(s[i]);
-      i++;
-    }
-  }
-  return tokens.map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join('_');
+/* ---------- 异步检测某 url 是否存在（以 <img> 加载，不受 HEAD/CORS 限制） ---------- */
+function probeImage(url){
+  return new Promise(resolve=>{
+    const img = new Image();
+    img.onload = () => resolve(url);
+    img.onerror = () => resolve(null);
+    img.src = url + (url.includes('?') ? '&' : '?') + 'v=' + Date.now();
+  });
 }
 
-/* 生成带回退的路径列表 */
-function imageCandidates(kind, key){
-  const k = (key||'').trim();
-  const pascal = toPascalCase(k).replace(/__/g,'_');
-  const tight  = pascal.replace(/_/g,''); // 无下划线形态
-  const list = [];
+/* ---------- 综合解析图片：按顺序尝试映射/变体，失败则返回 null ---------- */
+async function resolveSprite(baseDir, slug, kind='items'){
+  if(!slug) return null;
+  const lower = String(slug).toLowerCase();
 
-  if(kind==='character'){
-    list.push(`/images/guides/characters/${pascal}.png`);
-    list.push(`/images/guides/characters/${tight}.png`);
-    list.push(`/img/characters/${k.toLowerCase()}.png`);
-  }else if(kind==='weapon'){
-    list.push(`/images/database/weapons/${pascal}.png`);
-    list.push(`/images/database/weapons/${tight}.png`);
-    list.push(`/images/weapons/${pascal}.png`);
-    list.push(`/images/weapons/${tight}.png`);
-    list.push(`/img/weapon/${k.toLowerCase()}.png`);
-  }else if(kind==='tome'){
-    const base = TOME_FILE[k.toLowerCase()] || pascal;
-    const tightBase = base.replace(/_/g,'');
-    list.push(`/images/Tomes/${base}.png`);
-    list.push(`/images/Tomes/${tightBase}.png`);
-    list.push(`/img/tome/${k.toLowerCase()}.png`);
-  }else if(kind==='item'){
-    const mapped = ITEM_FILE[k.toLowerCase()] || toUnderscorePascalForItem(k);
-    const tightMapped = (mapped||'').replace(/_/g,'');
-    // 多路径回退（你可以把第一个目录换成你最终确定的物品图目录）
-    list.push(`/images/Items/${mapped}.png`);
-    list.push(`/images/Items/${tightMapped}.png`);
-    list.push(`/images/database/items/${mapped}.png`);
-    list.push(`/images/database/items/${tightMapped}.png`);
-    list.push(`/images/items/${mapped}.png`);
-    list.push(`/images/items/${tightMapped}.png`);
-    list.push(`/img/items/${k.toLowerCase()}.png`);
+  // 1) 明确映射（法典）
+  if(kind==='tome' && TOME_MAP[lower]){
+    const try1 = `${baseDir}/${TOME_MAP[lower]}`;
+    const ok = await probeImage(try1);
+    if(ok) return ok;
   }
 
-  return Array.from(new Set(list));
-}
-
-/* 生成有回退的图标 */
-function iconWithFallback(kind, key, label){
-  const cands = imageCandidates(kind, key);
-  const box = document.createElement('div');
-  box.className = 'icon';
-  if(!cands.length){
-    const span = document.createElement('span');
-    span.textContent = label || key;
-    box.append(span);
-    return box;
-  }
-  let idx = 0;
-  const img = new Image();
-  img.alt = label || key;
-  img.src = cands[idx];
-  img.onerror = () => {
-    idx++;
-    if(idx < cands.length){ img.src = cands[idx]; }
-    else{
-      box.innerHTML = '';
-      const span = document.createElement('span');
-      span.textContent = label || key;
-      box.append(span);
+  // 2) 别名（道具）
+  const aliasList = (kind==='items' ? ITEM_ALIAS[lower] : null) || [];
+  for(const a of aliasList){
+    for(const f of candidatesFromSlug(a)){
+      const ok = await probeImage(`${baseDir}/${f}`);
+      if(ok) return ok;
     }
-  };
-  box.append(img);
-  return box;
-}
-
-/* ------------------ 渲染逻辑 ------------------ */
-const PATCH = '1.0.17';
-const DATA_URL = `/data/leaderboard-${PATCH}.json`;
-
-const $status  = document.getElementById('status');
-const $source  = document.getElementById('dataSource');
-const $tbody   = document.getElementById('tbody');
-const $detail  = document.getElementById('detail');
-const $summary = document.getElementById('summary');
-document.getElementById('refreshBtn').onclick = load;
-
-$source.textContent = `leaderboard-${PATCH}.json`;
-
-async function load(){
-  $status.textContent = '加载中…';
-  $tbody.innerHTML = '';
-  $detail.style.display = 'none';
-  try{
-    const res = await fetch(DATA_URL, {cache:'no-store'});
-    if(!res.ok) throw new Error(res.status+' '+res.statusText);
-    const rows = await res.json();
-    const total = rows.length;
-    const updated = rows[0]?.updated_at_iso || rows[0]?.created_at_iso;
-    const localTime = updated ? new Date(updated).toLocaleString() : '—';
-    $summary.innerHTML = `总计 <b>${total}</b> 条 · 上次更新 <span class="kbd">${localTime}</span>`;
-
-    for(const r of rows){
-      const tr = document.createElement('tr');
-
-      const tdRank = document.createElement('td');
-      tdRank.className = 'rank';
-      tdRank.textContent = r.rank;
-      tr.append(tdRank);
-
-      const tdPlayer = document.createElement('td');
-      const flag = document.createElement('img');
-      flag.className = 'flag';
-      if(r.country_code){
-        flag.src = `https://flagcdn.com/24x18/${String(r.country_code).toLowerCase()}.png`;
-        flag.alt = r.country_code;
-      }
-      const name = document.createElement('span');
-      name.style.marginLeft = '8px';
-      name.textContent = r.player || 'Unknown';
-      tdPlayer.append(flag, name);
-      tr.append(tdPlayer);
-
-      const tdChar = document.createElement('td');
-      const chipC = document.createElement('span'); chipC.className = 'chip'; chipC.textContent = (r.character||'').toLowerCase();
-      const chipP = document.createElement('span'); chipP.className = 'chip'; chipP.textContent = `v${r.patch||PATCH}`;
-      tdChar.append(chipC, chipP);
-      tr.append(tdChar);
-
-      const tdKills = document.createElement('td');
-      tdKills.textContent = Number(r.kills||0).toLocaleString();
-      tr.append(tdKills);
-
-      const tdVid = document.createElement('td');
-      const a = document.createElement('a');
-      a.href = r.video_url || '#'; a.target = '_blank'; a.rel='noopener';
-      a.textContent = r.video_url ? '打开' : '—';
-      tdVid.append(a);
-      tr.append(tdVid);
-
-      tr.style.cursor='pointer';
-      tr.onclick = () => showDetail(r);
-      $tbody.append(tr);
-    }
-
-    $status.textContent = '已加载';
-  }catch(err){
-    console.error(err);
-    $status.textContent = '失败';
-    $tbody.innerHTML = `<tr><td colspan="5" class="muted">加载失败：${err.message}</td></tr>`;
   }
+
+  // 3) 使用原 slug 的多种变体
+  for(const f of candidatesFromSlug(lower)){
+    const ok = await probeImage(`${baseDir}/${f}`);
+    if(ok) return ok;
+  }
+  return null;
 }
 
-function showDetail(r){
-  $detail.style.display = '';
-  $detail.innerHTML = '';
-
-  const row = document.createElement('div');
-  row.className = 'row';
-
-  const left = document.createElement('div');
-
-  const title = document.createElement('div');
-  title.style.display='flex'; title.style.gap='10px'; title.style.alignItems='center'; title.style.marginBottom='6px';
-
-  const h2 = document.createElement('h2'); h2.style.margin='0'; h2.textContent = r.player || 'Unknown';
-  const cf = document.createElement('img'); cf.className='flag';
-  if(r.country_code){ cf.src = `https://flagcdn.com/24x18/${String(r.country_code).toLowerCase()}.png`; cf.alt = r.country_code; }
-
-  const chips = document.createElement('div');
-  const chRank = document.createElement('span'); chRank.className='chip'; chRank.textContent = '#'+(r.rank||'?');
-  const chKills= document.createElement('span'); chKills.className='chip'; chKills.textContent = 'KILLS '+Number(r.kills||0).toLocaleString();
-  const chPatch= document.createElement('span'); chPatch.className='chip'; chPatch.textContent = 'v'+(r.patch||PATCH);
-  chips.append(chRank,chKills,chPatch);
-
-  title.append(h2,cf,chips);
-  left.append(title);
-
-  const charWrap = document.createElement('div'); charWrap.className='icons';
-  charWrap.append(iconWithFallback('character', r.character, r.character));
-  left.append(charWrap);
-
-  left.append(label('武器'));
-  const wBox = document.createElement('div'); wBox.className='icons';
-  (r.weapons||[]).forEach(w=> wBox.append(iconWithFallback('weapon', w, w)));
-  left.append(wBox);
-
-  left.append(label('法典'));
-  const tBox = document.createElement('div'); tBox.className='icons';
-  (r.tomes||[]).forEach(t=> tBox.append(iconWithFallback('tome', t, t)));
-  left.append(tBox);
-
-  left.append(label('道具'));
-  const iBox = document.createElement('div'); iBox.className='icons';
-  (r.items||[]).forEach(it=> iBox.append(iconWithFallback('item', it, it)));
-  left.append(iBox);
-
-  const right = document.createElement('div');
-  if(r.video_url){
-    right.innerHTML = `<iframe class="video" src="${toEmbed(r.video_url)}" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+/* ---------- 渲染徽章图标或回退文本 ---------- */
+async function renderIcon(baseDir, slug, kind='items'){
+  const url = await resolveSprite(baseDir, slug, kind);
+  const div = document.createElement('div');
+  div.className = 'icon';
+  if(url){
+    const img = document.createElement('img');
+    img.alt = slug;
+    img.src = url;
+    div.appendChild(img);
   }else{
-    right.innerHTML = `<div class="video"></div>`;
+    // 回退：文本 chip
+    const chip = document.createElement('div');
+    chip.className = 'pill';
+    chip.textContent = slug;
+    // 用透明背景撑满 icon 位
+    chip.style.width='100%';
+    chip.style.textAlign='center';
+    chip.style.background='#0f2234';
+    chip.style.border='1px dashed #2a4560';
+    chip.style.color='#9db7cd';
+    div.appendChild(chip);
+  }
+  return div;
+}
+
+/* ---------- 主渲染 ---------- */
+async function renderList(patch='1.0.17'){
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  document.getElementById('dsn').textContent = `leaderboard-${patch}.json`;
+  document.getElementById('stxt').textContent = '加载中…';
+
+  let data=[];
+  try{
+    const res = await fetch(`${DATA_BASE}/leaderboard-${patch}.json?ts=${Date.now()}`);
+    data = await res.json();
+  }catch(e){
+    document.getElementById('stxt').textContent = '数据加载失败';
+    console.error(e);
+    return;
   }
 
-  row.append(left,right);
-  $detail.append(row);
-}
+  // 排序（保险）：按 kills 降序
+  data.sort((a,b)=>(b.kills||0)-(a.kills||0));
 
-function label(text){
-  const d = document.createElement('div');
-  d.className='muted';
-  d.style.marginTop='10px';
-  d.textContent = text;
-  return d;
-}
+  document.getElementById('total').textContent = data.length;
+  // 取数据里的最大 updated_at_iso 作为“上次更新”
+  const tmax = data
+    .map(x=>x.updated_at_iso||x.created_at_iso)
+    .filter(Boolean)
+    .sort()
+    .pop();
+  document.getElementById('updated').textContent = tmax ? new Date(tmax).toLocaleString() : '--';
+  document.getElementById('stxt').textContent = '已加载';
 
-function toEmbed(url){
-  try{
-    const u = new URL(url);
-    if(u.hostname.includes('youtube.com') || u.hostname==='youtu.be'){
-      let id = '';
-      if(u.hostname==='youtu.be'){ id = u.pathname.slice(1); }
-      else if(u.searchParams.get('v')){ id = u.searchParams.get('v'); }
-      return `https://www.youtube.com/embed/${id}`;
+  for(const item of data){
+    const row = document.createElement('div');
+    row.className = 'tr';
+
+    const c1 = document.createElement('div'); c1.className='td';
+    const c2 = document.createElement('div'); c2.className='td';
+    const c3 = document.createElement('div'); c3.className='td';
+    const c4 = document.createElement('div'); c4.className='td';
+    const c5 = document.createElement('div'); c5.className='td';
+
+    // # 排名
+    const rank = document.createElement('div');
+    rank.className='rank-badge';
+    rank.textContent = item.rank || '-';
+    c1.appendChild(rank);
+
+    // 玩家
+    const name = document.createElement('div');
+    name.innerHTML = `<strong style="font-size:18px">${item.player||'-'}</strong> <span class="flag">${ccToFlag(item.country_code)}</span>`;
+    c2.appendChild(name);
+
+    // 角色 & 版本
+    const char = document.createElement('div');
+    char.className='char-chip';
+    char.textContent = (item.character||'-');
+    c3.appendChild(char);
+
+    const ver = document.createElement('div'); ver.className='pill';
+    ver.textContent = `v${item.patch||patch}`;
+    c4.appendChild(ver);
+
+    // Kills
+    const kills = document.createElement('div');
+    kills.className='k-num';
+    kills.textContent = (item.kills||0).toLocaleString();
+    c5.appendChild(kills);
+
+    row.append(c1,c2,c3,c4,c5);
+
+    // 详情区
+    const details = document.createElement('div');
+    details.className='details';
+    const top = document.createElement('div'); top.className='row';
+
+    // 左侧头像 + 几个 pill
+    const leftCol = document.createElement('div');
+    const portrait = document.createElement('img');
+    portrait.className='portrait';
+    // 角色图片
+    resolveSprite(IMG.characters, item.character, 'char').then(url=>{
+      portrait.src = url || `${IMG.characters}/Noelle.png`;
+    });
+    leftCol.appendChild(portrait);
+
+    const pills = document.createElement('div'); pills.className='pills';
+    const pRank = document.createElement('div'); pRank.className='pill'; pRank.textContent = `#${item.rank||'-'}`;
+    const pKills = document.createElement('div'); pKills.className='pill'; pKills.textContent=`KILLS ${ (item.kills||0).toLocaleString() }`;
+    const pVer = document.createElement('div'); pVer.className='pill'; pVer.textContent=`v${item.patch||patch}`;
+    pills.append(pRank,pKills,pVer);
+    leftCol.appendChild(pills);
+
+    // 右侧：武器/法典/道具
+    const rightCol = document.createElement('div'); rightCol.style.flex='1';
+
+    // 武器
+    const wTitle = document.createElement('div'); wTitle.className='sec-title'; wTitle.textContent='武器';
+    const wGrid = document.createElement('div'); wGrid.className='grid';
+    (item.weapons||[]).forEach(async w=>{
+      wGrid.appendChild(await renderIcon(IMG.weapons, w, 'weapon'));
+    });
+
+    // 法典
+    const tTitle = document.createElement('div'); tTitle.className='sec-title'; tTitle.textContent='法典';
+    const tGrid = document.createElement('div'); tGrid.className='grid';
+    (item.tomes||[]).forEach(async t=>{
+      tGrid.appendChild(await renderIcon(IMG.tomes, t, 'tome'));
+    });
+
+    // 道具（可展开）
+    const iTitle = document.createElement('div'); iTitle.className='sec-title'; iTitle.textContent='道具';
+    const iGrid = document.createElement('div'); iGrid.className='grid';
+    const items = Array.isArray(item.items)? item.items.slice() : [];
+    const COLLAPSE = 8;
+    let expanded = false;
+
+    async function paintItems(){
+      iGrid.innerHTML='';
+      const show = expanded ? items : items.slice(0, COLLAPSE);
+      for(const it of show){
+        iGrid.appendChild(await renderIcon(IMG.items, it, 'items'));
+      }
+      toggleBtn.textContent = expanded ? `收起（共 ${items.length}）` : `展开全部道具（${items.length}）`;
+      toggleBtn.style.display = items.length > COLLAPSE ? 'inline-flex':'none';
     }
-    if(u.hostname.includes('twitch.tv')){ return `about:blank`; }
-    return url;
-  }catch{ return url; }
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className='toggle';
+    toggleBtn.onclick = () => { expanded = !expanded; paintItems(); };
+
+    rightCol.append(wTitle,wGrid,tTitle,tGrid,iTitle,iGrid,toggleBtn);
+    top.append(leftCol,rightCol);
+
+    // 视频
+    if(item.video_url){
+      const v = document.createElement('div');
+      v.style.marginTop='16px';
+      v.innerHTML = `<a class="link" href="${item.video_url}" target="_blank" rel="noopener">观看视频</a>`;
+      details.append(top,v);
+    }else{
+      details.appendChild(top);
+    }
+
+    // 渲染道具
+    paintItems();
+
+    // 追加到列表
+    const wrap = document.createElement('div'); wrap.style.marginBottom='12px';
+    wrap.appendChild(row);
+    wrap.appendChild(details);
+    list.appendChild(wrap);
+  }
 }
 
-load();
+/* ---------- 初始化 ---------- */
+const patchSel = document.getElementById('patch');
+const refreshBtn = document.getElementById('refresh');
+
+patchSel.addEventListener('change', () => renderList(patchSel.value));
+refreshBtn.addEventListener('click', () => renderList(patchSel.value));
+
+renderList('1.0.17');
 </script>
 </body>
 </html>
