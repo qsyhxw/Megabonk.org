@@ -904,23 +904,109 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
+<!-- 改进的 Top Runs 加载脚本 - 解决时序问题 -->
+
 <script>
+/**
+ * 改进的组件加载器
+ * 解决 "TopRunsSectionComponent is not defined" 错误
+ */
+
 async function loadTopRunsComponent() {
     try {
-        const response = await fetch('/components/top-runs-section-horizontal.html');
-        const html = await response.text();
-        document.getElementById('topRunsContainer').innerHTML = html;
+        console.log('🔄 开始加载 Top Runs 组件...');
         
-        setTimeout(() => {
-            TopRunsSectionComponent.init('weapon', 'Aura');
-        }, 1000);
+        // 1. 加载组件 HTML
+        const response = await fetch('/components/top-runs-section-horizontal.html');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const html = await response.text();
+        console.log('✅ 组件 HTML 加载成功');
+        
+        // 2. 插入到页面
+        const container = document.getElementById('topRunsContainer');
+        if (!container) {
+            throw new Error('找不到容器 #topRunsContainer');
+        }
+        
+        container.innerHTML = html;
+        console.log('✅ 组件 HTML 已插入');
+        
+        // 3. 等待脚本执行完成（轮询检查）
+        console.log('⏳ 等待组件脚本加载...');
+        
+        let attempts = 0;
+        const maxAttempts = 50; // 最多等待 5 秒
+        
+        const waitForComponent = setInterval(() => {
+            attempts++;
+            
+            // 检查组件是否已定义
+            if (typeof TopRunsSectionComponent !== 'undefined') {
+                clearInterval(waitForComponent);
+                console.log('✅ 组件脚本加载成功！');
+                
+                // 4. 初始化组件
+                try {
+                    // 🔥 在这里修改你的角色/武器名称
+                    TopRunsSectionComponent.init('character', 'Noelle');
+                    // 或者武器页面：
+                    // TopRunsSectionComponent.init('weapon', 'Frostwalker');
+                    
+                    console.log('✅ 组件初始化成功！');
+                } catch (initError) {
+                    console.error('❌ 组件初始化失败:', initError);
+                }
+            } else if (attempts >= maxAttempts) {
+                clearInterval(waitForComponent);
+                console.error('❌ 组件加载超时（5秒）');
+                console.error('💡 建议：尝试直接嵌入组件而不是动态加载');
+            } else if (attempts % 10 === 0) {
+                console.log(`⏳ 等待中... (${attempts * 100}ms)`);
+            }
+        }, 100);
+        
     } catch (error) {
-        console.error('Failed to load component:', error);
+        console.error('❌ 加载失败:', error);
+        
+        // 显示错误信息
+        const container = document.getElementById('topRunsContainer');
+        if (container) {
+            container.innerHTML = `
+                <div style="padding: 40px; background: #fff5f5; border: 2px solid #ff6b6b; border-radius: 12px; text-align: center;">
+                    <p style="font-size: 1.2rem; color: #dc3545; margin-bottom: 10px;">
+                        ⚠️ 组件加载失败
+                    </p>
+                    <p style="color: #6c757d;">
+                        <strong>错误:</strong> ${error.message}
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #6c757d;">
+                        请检查控制台 (F12) 查看详细错误信息
+                    </p>
+                </div>
+            `;
+        }
     }
 }
 
-window.addEventListener('DOMContentLoaded', loadTopRunsComponent);
+// 页面加载完成后执行
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadTopRunsComponent);
+} else {
+    // 如果 DOM 已经加载完成，直接执行
+    loadTopRunsComponent();
+}
 </script>
+
+<!-- 
+使用方法：
+1. 把这段代码放在 </body> 标签前
+2. 确保页面中有 <div id="topRunsContainer"></div>
+3. 修改第 45 行的角色/武器名称
+-->
     
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
