@@ -1,345 +1,319 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Megabonk Leaderboard</title>
-  <style>
-    :root {
-      --bg: #0b0d10; --panel:#12151a; --muted:#8b9bb4; --text:#e6edf3; --accent:#ffd166; --ring:#000; --row:#0f1318;
-      --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444;
-    }
-    * { box-sizing: border-box; }
-    html,body { margin:0; height:100%; background:var(--bg); color:var(--text); font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji"; }
-    a { color: #7cc7ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-    header { display:flex; gap:16px; align-items:center; justify-content: space-between; margin-bottom: 16px; }
-    h1 { font-size: 20px; margin:0; letter-spacing:.2px; }
-    .controls { display:flex; gap:8px; flex-wrap: wrap; align-items:center; }
-    .control { background: var(--panel); border:1px solid #1f2530; border-radius:10px; padding:8px 10px; display:flex; gap:8px; align-items:center; }
-    .control label { color: var(--muted); font-size: 12px; }
-    select, input[type="search"] { appearance:none; background:#0f1318; color:var(--text); border:1px solid #1f2530; border-radius:8px; padding:8px 10px; min-width: 180px; }
-    .pill { display:inline-flex; align-items:center; gap:6px; background:#0f1318; border:1px solid #1f2530; border-radius:999px; padding:6px 10px; font-size:12px; color:var(--muted); }
-
-    .panel { background: var(--panel); border:1px solid #1f2530; border-radius: 14px; overflow: clip; }
-    .table-wrap { overflow:auto; max-height: calc(100vh - 195px); }
-
-    table { width:100%; border-collapse: separate; border-spacing: 0; }
-    thead th { position: sticky; top:0; background: #0f1318; color:#b9c6d2; z-index:2; text-align: left; font-weight:600; font-size:12px; text-transform: uppercase; letter-spacing:.08em; border-bottom:1px solid #1f2530; padding:10px 12px; }
-    tbody td { border-bottom:1px solid #151c24; padding:12px; vertical-align: top; }
-    tbody tr:nth-child(even) { background: #0d1117; }
-    tbody tr:hover { background: #0f141b; }
-    .rank { font-weight:700; width:64px; }
-    .kills { font-variant-numeric: tabular-nums; text-align:right; width:140px; }
-    .player { display:flex; align-items:center; gap:10px; }
-    .flag { font-size:18px; width: 1.2em; text-align:center; opacity:.9 }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
-    .badge { display:inline-block; padding:2px 8px; border-radius:999px; background:#19202a; border:1px solid #223044; color:#a9bbd2; font-size:11px; }
-    .btn { cursor:pointer; background:#0f1318; color:var(--text); border:1px solid #243043; border-radius: 9px; padding:6px 10px; }
-    .btn:hover { border-color:#2f3f58; }
-    .btn-ghost { background: transparent; border-color: #2a3547; }
-    .btn-small { padding: 4px 8px; font-size: 12px; }
-
-    .details { background: #0b1016; border-top: 1px dashed #1f2a3a; }
-    .stack { display:flex; flex-wrap: wrap; gap:6px; }
-
-    .empty { color: var(--muted); text-align:center; padding: 28px 12px; }
-    .foot { display:flex; justify-content: space-between; align-items:center; color:var(--muted); padding:10px 12px; font-size:12px; border-top:1px solid #1f2530; background:#0f1318; }
-
-    .loading { display:flex; align-items:center; gap:10px; color: var(--muted); padding: 16px; }
-    .dot { width:6px; height:6px; border-radius:50%; background: var(--muted); opacity:.5; animation: blink 1.2s infinite ease-in-out; }
-    .dot:nth-child(2){ animation-delay:.15s } .dot:nth-child(3){ animation-delay:.3s }
-    @keyframes blink{ 0%,100%{ opacity:.25 } 50%{ opacity:1 } }
-
-    @media (max-width: 700px) {
-      .kills { width:auto; }
-      .controls { gap:6px; }
-      select, input[type="search"] { min-width: unset; width: 100%; }
-      header { flex-direction: column; align-items: stretch; gap: 12px; }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Megabonk Leaderboard</title>
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #121821;
+    --muted: #6b7280;
+    --text: #e5e7eb;
+    --accent: #60a5fa;
+    --line: #1f2937;
+    --chip: #0f172a;
+    --chip-border: #334155;
+    --green: #22c55e;
+  }
+  html,body { margin:0; padding:0; background:var(--bg); color:var(--text); font:14px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;}
+  .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+  h1 { margin:0 0 16px; font-size: 28px; font-weight: 800; letter-spacing:.3px; }
+  .toolbar { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px; }
+  .toolbar .group { display:flex; gap:8px; align-items:center; }
+  .input, select { background:#0b1220; color:var(--text); border:1px solid var(--line); border-radius:10px; padding:10px 12px; outline:none; }
+  .input::placeholder{ color:#748096; }
+  .btn { background:#111827; color:#e5e7eb; border:1px solid var(--line); border-radius:10px; padding:10px 14px; cursor:pointer; }
+  .btn:hover { border-color:#2b374a; background:#0e1624; }
+  .pill { display:inline-block; font-size:12px; color:#9aa6b2; background:var(--chip); border:1px solid var(--chip-border); padding:4px 8px; border-radius:99px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .panel-head { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line); }
+  .small { color:var(--muted); font-size:12px; }
+  table { width:100%; border-collapse:collapse; }
+  thead th { text-align:left; padding:12px 16px; color:#cbd5e1; font-weight:700; border-bottom:1px solid var(--line); background:#0e1520; position:sticky; top:0; z-index:1;}
+  tbody td { padding:12px 16px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tbody tr:hover { background:rgba(255,255,255,.02); }
+  .num { text-align:right; font-variant-numeric: tabular-nums; }
+  .muted { color:var(--muted); }
+  .link { color:#9bd2ff; text-decoration:none; }
+  .link:hover { text-decoration:underline; }
+  .flex { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .right { text-align:right; }
+  .foot { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; color:#9aa6b2; }
+  .spinner { display:inline-flex; gap:6px; align-items:center; }
+  .dot { width:6px; height:6px; border-radius:50%; background:#94a3b8; animation: b 1.2s infinite ease-in-out; }
+  .dot:nth-child(2){ animation-delay:.15s } .dot:nth-child(3){ animation-delay:.3s }
+  @keyframes b { 0%,80%,100%{ opacity:.2; transform:translateY(0) } 40%{ opacity:1; transform:translateY(-3px) } }
+  .badge-green { color:#86efac; border-color:#1e3a2a; background:#0b1f14; }
+  .btn-sort { color:#cbd5e1; cursor:pointer; user-select:none; }
+  .btn-sort:hover { color:#fff; }
+  .sr { border:0; clip:rect(0 0 0 0); clip-path: inset(50%); height:1px; width:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; }
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Megabonk Leaderboard</h1>
-      <div class="controls">
-        <div class="control">
-          <label for="patch">补丁</label>
-          <select id="patch"></select>
-        </div>
-        <div class="control">
-          <label for="q">搜索</label>
-          <input id="q" type="search" placeholder="玩家 / 角色 / 国家代码…" />
-        </div>
-        <div class="control">
-          <label for="character">角色</label>
-          <select id="character">
-            <option value="">全部</option>
-          </select>
-        </div>
-        <button id="refresh" class="btn">刷新</button>
-      </div>
-    </header>
+<div class="wrap">
+  <h1>Megabonk Leaderboard</h1>
 
-    <div class="panel">
-      <div id="meta" class="foot" style="border-bottom:1px solid #1f2530;">
-        <span class="pill">数据源：<code class="mono" id="sourceName">(未加载)</code></span>
-        <span>总计 <b id="count">0</b> 条 · 上次更新 <span id="updated">-</span></span>
+  <!-- 工具栏 -->
+  <div class="toolbar">
+    <div class="group">
+      <label for="patch" class="sr">补丁</label>
+      <input id="patch" class="input" style="width:140px" placeholder="补丁（如 1.0.17）" />
+    </div>
+    <div class="group">
+      <label for="q" class="sr">搜索</label>
+      <input id="q" class="input" style="width:280px" placeholder="玩家 / 角色 / 国家代码…" />
+    </div>
+    <div class="group">
+      <label for="char" class="sr">角色</label>
+      <select id="char">
+        <option value="">全部</option>
+      </select>
+    </div>
+    <button id="btn-refresh" class="btn">刷新</button>
+    <span class="pill">数据源：<span id="data-source-badge">（未加载）</span></span>
+  </div>
+
+  <!-- 列表 -->
+  <div class="panel" id="panel">
+    <div class="panel-head">
+      <div class="flex">
+        <span class="small">总计 <b id="stat-count">0</b> 条</span>
+        <span class="small">· 上次更新 <span id="stat-last" class="muted">-</span></span>
       </div>
-      <div class="table-wrap" id="wrap">
-        <div class="loading" id="loading" hidden>
-          <span>正在加载</span>
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        </div>
-        <table id="grid" aria-label="Leaderboard">
-          <thead>
-            <tr>
-              <th class="rank">名次</th>
-              <th>玩家</th>
-              <th>角色</th>
-              <th class="kills" data-sort="kills">击杀 ▾</th>
-              <th>视频</th>
-            </tr>
-          </thead>
-          <tbody id="rows">
-            <tr><td colspan="5" class="empty">尚无数据</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="foot">
-        <div>数据文件位于 <code class="mono">/data/leaderboard-&lt;patch&gt;.json</code>（优先）或 <code class="mono">.csv</code></div>
-        <div>
-          <a id="dlJson" href="#">下载 JSON</a>
-          ·
-          <a id="dlCsv" href="#">下载 CSV</a>
-        </div>
+      <div class="small">状态：<span id="status"><span class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:70px">名次</th>
+            <th>玩家</th>
+            <th style="width:180px">角色</th>
+            <th class="right btn-sort" id="sort-kills" style="width:110px">击杀 ▲▼</th>
+            <th style="width:150px">视频</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="5" class="muted" style="padding:24px 16px">尚无数据</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="foot">
+      <div>数据文件位于 <code>/data/leaderboard-&lt;patch&gt;.json</code>（优先）或 <code>.csv</code></div>
+      <div class="flex">
+        <a id="link-json" class="link" href="#" download>下载 JSON</a> ·
+        <a id="link-csv" class="link" href="#" download>下载 CSV</a>
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-  /* ======================= 配置区 =======================
-   * 将本文件放在你的仓库（例如 /leaderboard/index.html）
-   * 在 /data 目录放置数据文件：leaderboard-<补丁>.json（或 .csv）
-   * 需要新增补丁：只在 PATCHES 中追加版本号，并新增对应数据文件即可。
-   */
-  // 自动推断 GitHub Pages 的 /<repo>/ 前缀，返回  /<repo>/data/ ；
-// 自定义域名时返回 /data/
-function guessDataDir(){
-  const segs = location.pathname.split('/').filter(Boolean);
-  // project pages: https://user.github.io/<repo>/...
-  const repo = segs.length ? `/${segs[0]}/` : '/';
-  const candidates = [ `${repo}data/`, '/data/', 'data/' ];
-  return candidates[0]; // 首选 /<repo>/data/
-}
-
-const CONFIG = {
-    dataDir: guessDataDir(),
-    PATCHES: ['1.0.17'],     // ← 在这里加入新的补丁版本，例如 '1.0.18'
+<script>
+  // ---------- 配置 ----------
+  const CONFIG = {
+    dataDir: '/data/',           // 你的站点在根域名，固定使用根路径
     defaultPatch: '1.0.17',
-    prefer: 'json'           // 优先使用 json；若 404 则自动尝试 csv
+    PATCHES: ['1.0.17']
   };
 
-  // ===== 小工具 =====
-  const $ = sel => document.querySelector(sel);
-  const $$ = sel => Array.from(document.querySelectorAll(sel));
-  const fmt = n => (typeof n === 'number' ? n.toLocaleString() : n);
-  const escapeHtml = s => (s+'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
-  function countryFlag(cc) {
-    if (!cc || cc.length !== 2) return '🏳️';
-    const A = 127397; // regional indicator base
-    return String.fromCodePoint(...cc.toUpperCase().split('').map(ch => ch.charCodeAt(0) + A));
-  }
+  // ---------- 状态 ----------
+  const state = {
+    rows: [],
+    filtered: [],
+    sort: { key: 'kills', dir: 'desc' }
+  };
 
-  // 轻量 CSV 解析（支持引号和逗号）
+  // ---------- 工具 ----------
+  const $ = (sel) => document.querySelector(sel);
+  const fmt = (n) => n == null ? '' : Number(n).toLocaleString();
+  const by = (k, dir='asc') => (a,b) => (a[k]??0) === (b[k]??0) ? 0 : ((a[k]??0) > (b[k]??0) ? 1 : -1) * (dir==='asc'?1:-1);
+  const setStatus = (html) => $('#status').innerHTML = html;
+  const updateSourceBadge = (text) => $('#data-source-badge').textContent = text;
+
+  // 兼容多种 JSON 外层结构
+  function coerceRows(input) {
+    let rows = Array.isArray(input) ? input
+      : (input?.data || input?.rows || input?.leaderboard || input?.results || input?.list || []);
+    if (!Array.isArray(rows)) rows = [];
+    // 归一化字段与类型
+    return rows.map((r,i) => ({
+      rank: num(r.rank ?? i+1),
+      player: str(r.player || r.playerName || r.name),
+      character: str(r.character),
+      kills: num(r.kills),
+      country_code: str(r.country_code || r.country || r.countryCode || r.code || '').slice(0,2).toUpperCase(),
+      video_url: str(r.video_url || r.videoURL || r.video || ''),
+      patch: str(r.patch || ''),
+      weapons: arr(r.weapons),
+      tomes: arr(r.tomes),
+      items: arr(r.items),
+      created_at_iso: str(r.created_at_iso || r.createdAt),
+      updated_at_iso: str(r.updated_at_iso || r.updatedAt)
+    })).filter(x => x.player && x.character);
+  }
+  const num = (v)=> (v===''||v==null) ? 0 : Number(v);
+  const str = (v)=> (v==null) ? '' : String(v);
+  const arr = (v)=> Array.isArray(v) ? v : (typeof v==='string' && v ? v.split(/[;,]\s*/).filter(Boolean) : []);
+
+  // CSV 解析（weapons/tomes/items 分号分隔）
   function parseCSV(text) {
-    const lines = text.trim().split(/
-?
-/);
-    const header = lines.shift().split(',').map(s=>s.trim());
-    return lines.map(line=>{
-      const cols = line.split(',').map(s=>s.trim());
-      const obj = {};
-      header.forEach((h,i)=>obj[h]=cols[i]||'');
-      // 类型转换
-      obj.rank = Number(obj.rank||0);
-      obj.kills = Number(obj.kills||0);
-      obj.weapons = (obj.weapons||'').split(';').filter(Boolean);
-      obj.tomes   = (obj.tomes||'').split(';').filter(Boolean);
-      obj.items   = (obj.items||'').split(';').filter(Boolean);
-      return obj;
-    });
-  }
-
-  // 兼容多种 JSON 形态：数组 或 {data|rows|leaderboard|results:[...]}
-  function coerceRows(input, patch){
-    if (Array.isArray(input)) return input;
-    const keys = ['data','rows','leaderboard','results','list'];
-    for (const k of keys){
-      if (Array.isArray(input?.[k])) return input[k];
-    }
-    // 单对象也允许（至少要包含必要字段）
-    if (input && typeof input === 'object' && 'player' in input){
-      return [input];
-    }
-    console.warn('无法从 JSON 中解析出数组，返回空集');
-    return [];
+    const lines = text.trim().split(/\r?\n/);
+    if (!lines.length) return [];
+    const head = lines.shift().split(',').map(s=>s.trim());
+    const idx = (k)=> head.indexOf(k);
+    return lines.map((ln,i)=>{
+      const cols = ln.split(',').map(s=>s.trim());
+      const get = (k)=> idx(k) >=0 ? cols[idx(k)] : '';
+      return {
+        rank: num(get('rank') || (i+1)),
+        player: get('player'),
+        character: get('character'),
+        kills: num(get('kills')),
+        country_code: (get('country_code')||'').slice(0,2).toUpperCase(),
+        video_url: get('video_url'),
+        patch: get('patch'),
+        weapons: (get('weapons')||'').split(';').filter(Boolean),
+        tomes: (get('tomes')||'').split(';').filter(Boolean),
+        items: (get('items')||'').split(';').filter(Boolean),
+        created_at_iso: get('created_at_iso'),
+        updated_at_iso: get('updated_at_iso')
+      };
+    }).filter(x => x.player && x.character);
   }
 
   async function fetchData(patch) {
     const base = CONFIG.dataDir + `leaderboard-${patch}`;
-    const tryJson = async () => {
-      const base = CONFIG.dataDir + `leaderboard-${patch}`;
-      const res = await fetch(base + '.json', { cache: 'no-store' });
-      if (!res.ok) throw new Error('json:'+res.status);
-      const raw = await res.json();
-      const data = coerceRows(raw, patch);
-      return { kind:'json', data };
-    };
-    const tryCsv = async () => {
-      const res = await fetch(base + '.csv', { cache: 'no-store' });
-      if (!res.ok) throw new Error('csv:'+res.status);
-      const text = await res.text();
-      const rows = parseCSV(text);
-      // 尝试把 CSV 的 list 字段拆分；允许分号分隔
-      const normalize = (v) => (v==null||v==='') ? [] : String(v).split(';').map(s=>s.trim()).filter(Boolean);
-      const data = rows.map(r => ({
-        rank: +r.rank || null,
-        player: r.player || '',
-        character: r.character || '',
-        kills: +r.kills || 0,
-        country_code: r.country_code || '',
-        video_url: r.video_url || '',
-        patch: r.patch || patch,
-        weapons: normalize(r.weapons),
-        tomes: normalize(r.tomes),
-        items: normalize(r.items),
-        created_at_iso: r.created_at_iso || '',
-        updated_at_iso: r.updated_at_iso || '',
-        notes: r.notes || ''
-      }));
-      return { kind:'csv', data };
-    };
-    const order = CONFIG.prefer === 'json' ? [tryJson, tryCsv] : [tryCsv, tryJson];
-    let err; for (const fn of order) { try { return await fn(); } catch(e){ err=e; } }
-    throw err;
+    // 先 JSON
+    try {
+      const r = await fetch(base + '.json', { cache: 'no-store' });
+      if (r.ok) {
+        updateSourceBadge(`leaderboard-${patch}.json`);
+        return coerceRows(await r.json());
+      }
+    } catch(e) {}
+    // 再 CSV
+    try {
+      const r = await fetch(base + '.csv', { cache: 'no-store' });
+      if (r.ok) {
+        updateSourceBadge(`leaderboard-${patch}.csv`);
+        return parseCSV(await r.text());
+      }
+    } catch(e) {}
+    updateSourceBadge('（未加载）');
+    return [];
   }
 
-  function uniqueCharacters(rows){
-    const s = new Set(rows.map(r => r.character).filter(Boolean));
-    return [''].concat([...s].sort());
+  function setDownloadLinks(patch) {
+    $('#link-json').href = CONFIG.dataDir + `leaderboard-${patch}.json`;
+    $('#link-csv').href  = CONFIG.dataDir + `leaderboard-${patch}.csv`;
   }
 
-  function renderCharacterOptions(list){
-    const sel = $('#character');
-    sel.innerHTML = '<option value="">全部</option>' + list.filter(Boolean).map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+  // 渲染角色过滤选项（从数据中提取去重）
+  function renderCharOptions(rows) {
+    const sel = $('#char');
+    const cur = sel.value;
+    const set = new Set(rows.map(r => r.character).filter(Boolean));
+    const list = [''].concat([...set].sort());
+    sel.innerHTML = list.map(v => `<option value="${escapeHtml(v)}">${v || '全部'}</option>`).join('');
+    if (set.has(cur)) sel.value = cur;
   }
 
-  function applyFilters(rows) {
-    const q = $('#q').value.trim().toLowerCase();
-    const char = $('#character').value;
-    let out = rows;
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  // 过滤 + 排序 + 渲染
+  function applyFilters() {
+    const q = ($('#q').value || '').trim().toLowerCase();
+    const pickChar = $('#char').value || '';
+    let rows = state.rows.slice();
+
     if (q) {
-      out = out.filter(r =>
-        (r.player && r.player.toLowerCase().includes(q)) ||
-        (r.character && r.character.toLowerCase().includes(q)) ||
-        (r.country_code && r.country_code.toLowerCase().includes(q))
+      rows = rows.filter(r =>
+        (r.player||'').toLowerCase().includes(q) ||
+        (r.character||'').toLowerCase().includes(q) ||
+        (r.country_code||'').toLowerCase().includes(q)
       );
     }
-    if (char) out = out.filter(r => r.character === char);
-    return out;
-  }
+    if (pickChar) rows = rows.filter(r => r.character === pickChar);
 
-  function mostRecentUpdatedISO(rows){
-    const t = rows.map(r => Date.parse(r.updated_at_iso||r.created_at_iso||0)).filter(n=>!isNaN(n));
-    if (!t.length) return '-';
-    const d = new Date(Math.max(...t));
-    return d.toLocaleString();
+    rows.sort(by(state.sort.key, state.sort.dir));
+    state.filtered = rows;
+    renderTable(rows);
+    $('#stat-count').textContent = rows.length;
+
+    // 取最近更新时间
+    const last = rows
+      .map(r => Date.parse(r.updated_at_iso || r.created_at_iso || 0))
+      .filter(n => !isNaN(n))
+      .sort((a,b)=>b-a)[0];
+    $('#stat-last').textContent = last ? new Date(last).toLocaleString() : '-';
   }
 
   function renderTable(rows) {
-    const tbody = $('#rows');
-    if (!rows.length) { tbody.innerHTML = '<tr><td colspan="5" class="empty">没有匹配的结果</td></tr>'; return; }
-    const html = rows.map((r, i) => {
-      const flag = countryFlag(r.country_code||'');
-      const video = r.video_url ? `<a href="${escapeHtml(r.video_url)}" target="_blank" rel="noopener">打开</a>` : '<span style="color:var(--muted)">无</span>';
-      const detailsId = `det_${i}`;
-      const itemsPreview = (r.items||[]).slice(0,6).join(', ');
-      return `
-        <tr class="row" data-i="${i}">
-          <td class="rank">${r.rank ?? ''}</td>
-          <td class="player"><span class="flag" title="${escapeHtml(r.country_code||'')}">${flag}</span><span>${escapeHtml(r.player||'')}</span></td>
-          <td>${escapeHtml(r.character||'')}</td>
-          <td class="kills mono" title="Items: ${escapeHtml(itemsPreview)}">${fmt(r.kills)}</td>
-          <td>
-            ${video}
-            <button class="btn btn-ghost btn-small" data-toggle="${detailsId}">详情</button>
-          </td>
-        </tr>
-        <tr class="details" id="${detailsId}" hidden>
-          <td colspan="5">
-            <div style="display:flex; gap:18px; flex-wrap:wrap;">
-              <div><div class="badge">Weapons</div><div class="stack" style="margin-top:8px;">${(r.weapons||[]).map(x=>`<span class="badge">${escapeHtml(x)}</span>`).join('') || '<span class="pill">—</span>'}</div></div>
-              <div><div class="badge">Tomes</div><div class="stack" style="margin-top:8px;">${(r.tomes||[]).map(x=>`<span class="badge">${escapeHtml(x)}</span>`).join('') || '<span class="pill">—</span>'}</div></div>
-              <div style="min-width:260px;"><div class="badge">Items</div><div class="stack" style="margin-top:8px; max-height:110px; overflow:auto;">${(r.items||[]).map(x=>`<span class="badge">${escapeHtml(x)}</span>`).join('') || '<span class="pill">—</span>'}</div></div>
-            </div>
-          </td>
-        </tr>`;
+    const tb = $('#tbody');
+    if (!rows.length) {
+      tb.innerHTML = `<tr><td colspan="5" class="muted" style="padding:24px 16px">没有匹配的结果</td></tr>`;
+      return;
+    }
+    tb.innerHTML = rows.map(r => {
+      const flag = r.country_code ? `<span class="pill">${escapeHtml(r.country_code)}</span>` : '';
+      const vid = r.video_url ? `<a class="link" href="${escapeHtml(r.video_url)}" target="_blank" rel="noopener">打开</a>` : `<span class="muted">-</span>`;
+      return `<tr>
+        <td>${fmt(r.rank)}</td>
+        <td>${escapeHtml(r.player)} ${flag}</td>
+        <td>${escapeHtml(r.character)}</td>
+        <td class="num">${fmt(r.kills)}</td>
+        <td>${vid}</td>
+      </tr>`;
     }).join('');
-    tbody.innerHTML = html;
-    $$('button[data-toggle]').forEach(btn => btn.addEventListener('click', e => {
-      const id = e.currentTarget.getAttribute('data-toggle');
-      const row = document.getElementById(id);
-      row.hidden = !row.hidden;
-      e.currentTarget.textContent = row.hidden ? '详情' : '收起';
-    }));
   }
 
-  // ===== 主流程 =====
-  const state = { raw: [], view: [], patch: CONFIG.defaultPatch, sourceKind: '' };
-
-  function populatePatchOptions() {
-    const sel = $('#patch');
-    sel.innerHTML = CONFIG.PATCHES.map(p => `<option ${p===CONFIG.defaultPatch?'selected':''}>${p}</option>`).join('');
-  }
-
-  async function loadAndRender(patch){
-    $('#loading').hidden = false; $('#rows').innerHTML = '';
+  // 加载主流程
+  async function loadLeaderboard() {
+    const patch = ($('#patch').value || '').trim();
+    if (!patch) {
+      setStatus(`<span class="muted">请输入补丁号后刷新</span>`);
+      updateSourceBadge('（未加载）');
+      renderTable([]);
+      $('#stat-count').textContent = '0';
+      $('#stat-last').textContent = '-';
+      setDownloadLinks('');
+      return;
+    }
+    setDownloadLinks(patch);
+    setStatus(`<span class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>`);
     try {
-      const { kind, data } = await fetchData(patch);
-      state.raw = Array.isArray(data) ? data.slice() : [];
-      // 排序：kills 降序，rank（如有）升序
-      state.raw.sort((a,b)=> (b.kills||0) - (a.kills||0) || (a.rank||999999) - (b.rank||999999));
-      state.sourceKind = kind;
-      $('#sourceName').textContent = `leaderboard-${patch}.${kind}`;
-      $('#dlJson').href = CONFIG.dataDir + `leaderboard-${patch}.json`;
-      $('#dlCsv').href  = CONFIG.dataDir + `leaderboard-${patch}.csv`;
-      renderCharacterOptions(uniqueCharacters(state.raw));
-      state.view = applyFilters(state.raw);
-      renderTable(state.view);
-      $('#count').textContent = state.view.length;
-      $('#updated').textContent = mostRecentUpdatedISO(state.raw);
-    } catch (err) {
-      $('#rows').innerHTML = `<tr><td colspan="5" class="empty">加载失败：${escapeHtml(err+'' )}<br>请检查 <code class=mono>/data/leaderboard-${patch}.json</code> 或 <code class=mono>.csv</code> 文件是否存在</td></tr>`;
-      $('#count').textContent = '0';
-      $('#updated').textContent = '-';
-      $('#sourceName').textContent = '(未找到)';
-    } finally {
-      $('#loading').hidden = true;
+      const rows = await fetchData(patch);
+      state.rows = rows;
+      renderCharOptions(rows);
+      applyFilters();
+      setStatus(`<span class="badge-green pill">已加载</span>`);
+    } catch (e) {
+      console.error(e);
+      state.rows = [];
+      applyFilters();
+      setStatus(`<span class="muted">加载失败</span>`);
     }
   }
 
-  // 事件 & 初始化
-  document.addEventListener('DOMContentLoaded', () => {
-    populatePatchOptions();
-    $('#patch').addEventListener('change', e => loadAndRender(e.target.value));
-    $('#q').addEventListener('input', () => { state.view = applyFilters(state.raw); renderTable(state.view); $('#count').textContent = state.view.length; });
-    $('#character').addEventListener('change', () => { state.view = applyFilters(state.raw); renderTable(state.view); $('#count').textContent = state.view.length; });
-    $('#refresh').addEventListener('click', () => loadAndRender($('#patch').value));
-    loadAndRender(CONFIG.defaultPatch);
+  // 事件
+  function debounce(fn, ms=250){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms); } }
+  $('#btn-refresh').addEventListener('click', loadLeaderboard);
+  $('#q').addEventListener('input', debounce(applyFilters, 120));
+  $('#char').addEventListener('change', applyFilters);
+  $('#sort-kills').addEventListener('click', () => {
+    state.sort.dir = (state.sort.key==='kills' && state.sort.dir==='desc') ? 'asc' : 'desc';
+    state.sort.key = 'kills';
+    applyFilters();
   });
-  </script>
+
+  // 初始化
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!$('#patch').value) $('#patch').value = CONFIG.defaultPatch;
+    loadLeaderboard();
+  });
+</script>
 </body>
 </html>
