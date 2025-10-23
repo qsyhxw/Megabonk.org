@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk 排行榜 | Megabonk.org</title>
-    <meta name="description" content="Megabonk 全球排行榜 - 实时更新的玩家排名">
+    <title>Megabonk Leaderboard</title>
+    <meta name="description" content="Megabonk Global Leaderboard - Real-time Rankings">
     <style>
         * {
             margin: 0;
@@ -13,14 +13,14 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -31,49 +31,72 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
         }
 
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
 
-        .card-header {
+        .stats-bar {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px 30px;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
+        .stat-box {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .controls {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .update-info {
-            font-size: 0.9rem;
-            opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            color: #6c757d;
         }
 
         .pulse {
-            width: 8px;
-            height: 8px;
-            background: #4ade80;
+            width: 10px;
+            height: 10px;
+            background: #28a745;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -85,52 +108,17 @@
             }
             50% {
                 opacity: 0.5;
-                transform: scale(1.2);
+                transform: scale(1.3);
             }
         }
 
-        .controls {
-            padding: 20px 30px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .stats {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: #6c757d;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-value {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #212529;
-        }
-
         .btn-refresh {
-            padding: 10px 20px;
+            padding: 10px 24px;
             background: #667eea;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -153,6 +141,8 @@
 
         .content {
             overflow-x: auto;
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
         table {
@@ -168,14 +158,14 @@
         }
 
         th {
-            padding: 16px;
+            padding: 18px 20px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             color: #495057;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 2px solid #dee2e6;
         }
 
         tbody tr {
@@ -185,17 +175,23 @@
 
         tbody tr:hover {
             background: #f8f9fa;
+            transform: scale(1.005);
         }
 
         td {
-            padding: 16px;
+            padding: 16px 20px;
             color: #212529;
         }
 
+        .rank-cell {
+            width: 80px;
+            text-align: center;
+        }
+
         .rank {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: inline-block;
         }
 
         .top-1 {
@@ -203,30 +199,61 @@
         }
 
         .top-1 .rank {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .top-2 {
             background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
         }
 
+        .top-2 .rank {
+            font-size: 1.8rem;
+            color: #708090;
+        }
+
         .top-3 {
             background: linear-gradient(135deg, #cd7f32 0%, #e8a87c 100%);
         }
 
-        .player {
-            font-weight: 600;
-            color: #212529;
+        .top-3 .rank {
+            font-size: 1.7rem;
+            color: #8b4513;
         }
 
-        .character {
+        .player-cell {
+            min-width: 200px;
+            max-width: 300px;
+        }
+
+        .player-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #212529;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .character-cell {
+            min-width: 120px;
             color: #6c757d;
+            font-style: italic;
+        }
+
+        .score-cell {
+            min-width: 150px;
+            text-align: right;
         }
 
         .score {
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 1.3rem;
             color: #28a745;
-            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
         }
 
         .loading {
@@ -255,27 +282,36 @@
             color: #dc3545;
         }
 
-        .source-info {
-            padding: 20px 30px;
+        .footer {
+            padding: 25px 40px;
             background: #f8f9fa;
             text-align: center;
             color: #6c757d;
             font-size: 0.9rem;
+            border-top: 1px solid #dee2e6;
         }
 
-        .source-info a {
+        .footer a {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
         }
 
-        .source-info a:hover {
+        .footer a:hover {
             text-decoration: underline;
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+
+            .stats-bar {
+                padding: 20px;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
             }
 
             .controls {
@@ -283,16 +319,20 @@
                 align-items: stretch;
             }
 
-            .stats {
-                justify-content: space-between;
-            }
-
             th, td {
-                padding: 12px 8px;
-                font-size: 0.85rem;
+                padding: 12px 10px;
+                font-size: 0.9rem;
             }
 
             .rank {
+                font-size: 1.2rem;
+            }
+
+            .player-name {
+                font-size: 1rem;
+            }
+
+            .score {
                 font-size: 1.1rem;
             }
         }
@@ -301,72 +341,60 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏆 Megabonk 排行榜</h1>
-            <p>实时更新的全球玩家排名</p>
+            <h1>🏆 Megabonk Leaderboard</h1>
+            <p>Global Player Rankings - Live Updates</p>
         </div>
 
         <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span>全球排行榜</span>
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <div class="stat-label">Total Players</div>
+                    <div class="stat-value" id="total-players">-</div>
                 </div>
-                <div class="update-info">
-                    <span class="pulse"></span>
-                    <span id="update-time">加载中...</span>
+                <div class="stat-box">
+                    <div class="stat-label">Top Score</div>
+                    <div class="stat-value" id="top-score">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Average Score</div>
+                    <div class="stat-value" id="avg-score">-</div>
                 </div>
             </div>
 
             <div class="controls">
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-label">总玩家</span>
-                        <span class="stat-value" id="total-players">-</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">最高分</span>
-                        <span class="stat-value" id="top-score">-</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">平均分</span>
-                        <span class="stat-value" id="avg-score">-</span>
-                    </div>
+                <div class="update-info">
+                    <span class="pulse"></span>
+                    <span id="update-time">Loading...</span>
                 </div>
                 <button class="btn-refresh" id="refresh-btn" onclick="loadLeaderboard()">
                     <span>🔄</span>
-                    <span>刷新数据</span>
+                    <span>Refresh</span>
                 </button>
             </div>
 
             <div class="content" id="content">
                 <div class="loading">
                     <div class="loading-spinner"></div>
-                    <p>正在加载排行榜数据...</p>
+                    <p>Loading leaderboard data...</p>
                 </div>
             </div>
 
-            <div class="source-info">
-                📊 数据来源: <a href="https://megabonk.fun" target="_blank" rel="noopener">megabonk.fun</a>
+            <div class="footer">
+                📊 Data source: <a href="https://megabonk.fun" target="_blank" rel="noopener">megabonk.fun</a>
                 <span style="margin: 0 10px;">|</span>
-                ⚡ 每5分钟自动更新
+                ⚡ Updates every 5 minutes
             </div>
         </div>
     </div>
 
     <script>
-        // 配置
         const CONFIG = {
-            // GitHub Pages 上的 JSON 文件路径
-            dataUrl: './data/leaderboard.json',
-            // 或者使用压缩版（更快）
-            // dataUrl: './data/leaderboard.min.json',
-            maxDisplay: 100  // 显示前100名
+            dataUrl: '/data/leaderboard.json',
+            maxDisplay: 100
         };
 
         let isLoading = false;
 
-        /**
-         * 加载排行榜数据
-         */
         async function loadLeaderboard() {
             if (isLoading) return;
             
@@ -375,9 +403,8 @@
             refreshBtn.disabled = true;
 
             try {
-                console.log('📡 正在加载数据...');
+                console.log('📡 Loading data...');
                 
-                // 添加时间戳避免缓存
                 const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
                 const response = await fetch(url);
                 
@@ -386,15 +413,15 @@
                 }
 
                 const result = await response.json();
-                console.log('✅ 数据加载成功');
+                console.log('✅ Data loaded successfully');
+                console.log('Data structure:', result.data[0]); // 调试：查看数据结构
 
-                // 渲染数据
                 renderLeaderboard(result);
                 updateStats(result);
                 updateTime(result.fetched_at);
 
             } catch (error) {
-                console.error('❌ 加载失败:', error);
+                console.error('❌ Loading failed:', error);
                 showError(error.message);
             } finally {
                 isLoading = false;
@@ -402,9 +429,6 @@
             }
         }
 
-        /**
-         * 渲染排行榜表格
-         */
         function renderLeaderboard(result) {
             const data = result.data || [];
             const displayData = data.slice(0, CONFIG.maxDisplay);
@@ -413,10 +437,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="width: 80px">排名</th>
-                            <th>玩家</th>
-                            <th>角色</th>
-                            <th style="width: 150px">分数</th>
+                            <th class="rank-cell">Rank</th>
+                            <th class="player-cell">Player</th>
+                            <th class="character-cell">Character</th>
+                            <th class="score-cell">Score</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -425,20 +449,31 @@
                             const topClass = rank <= 3 ? `top-${rank}` : '';
                             const rankEmoji = getRankEmoji(rank);
                             
+                            // 尝试多个可能的字段名获取玩家名
+                            const playerName = item.name || item.player || item.username || item.user || 'Anonymous';
+                            const character = item.character || item.hero || item.class || '-';
+                            const score = item.kills || item.score || item.points || 0;
+                            
                             return `
                                 <tr class="${topClass}">
-                                    <td class="rank">${rankEmoji}</td>
-                                    <td class="player">${escapeHtml(item.player || item.username || 'Unknown')}</td>
-                                    <td class="character">${escapeHtml(item.character || item.hero || '-')}</td>
-                                    <td class="score">${formatNumber(item.score || item.kills || 0)}</td>
+                                    <td class="rank-cell">
+                                        <span class="rank">${rankEmoji}</span>
+                                    </td>
+                                    <td class="player-cell">
+                                        <div class="player-name" title="${escapeHtml(playerName)}">${escapeHtml(playerName)}</div>
+                                    </td>
+                                    <td class="character-cell">${escapeHtml(character)}</td>
+                                    <td class="score-cell">
+                                        <span class="score">${formatNumber(score)}</span>
+                                    </td>
                                 </tr>
                             `;
                         }).join('')}
                     </tbody>
                 </table>
                 ${data.length > CONFIG.maxDisplay ? `
-                    <div style="padding: 20px; text-align: center; color: #6c757d;">
-                        显示前 ${CONFIG.maxDisplay} 名 / 共 ${data.length} 名玩家
+                    <div style="padding: 20px; text-align: center; color: #6c757d; background: #f8f9fa;">
+                        Showing top ${CONFIG.maxDisplay} / ${data.length} players
                     </div>
                 ` : ''}
             `;
@@ -446,22 +481,16 @@
             document.getElementById('content').innerHTML = html;
         }
 
-        /**
-         * 更新统计数据
-         */
         function updateStats(result) {
             const data = result.data || [];
             
-            // 总玩家数
-            document.getElementById('total-players').textContent = data.length;
+            document.getElementById('total-players').textContent = formatNumber(data.length);
             
-            // 最高分
-            const topScore = data.length > 0 ? (data[0].score || data[0].kills || 0) : 0;
+            const topScore = data.length > 0 ? (data[0].kills || data[0].score || 0) : 0;
             document.getElementById('top-score').textContent = formatNumber(topScore);
             
-            // 平均分
             if (data.length > 0) {
-                const sum = data.reduce((acc, item) => acc + (item.score || item.kills || 0), 0);
+                const sum = data.reduce((acc, item) => acc + (item.kills || item.score || 0), 0);
                 const avg = Math.round(sum / data.length);
                 document.getElementById('avg-score').textContent = formatNumber(avg);
             } else {
@@ -469,12 +498,9 @@
             }
         }
 
-        /**
-         * 更新时间显示
-         */
         function updateTime(timestamp) {
             if (!timestamp) {
-                document.getElementById('update-time').textContent = '未知';
+                document.getElementById('update-time').textContent = 'Unknown';
                 return;
             }
 
@@ -485,61 +511,49 @@
 
             let timeText;
             if (minutes < 1) {
-                timeText = '刚刚更新';
+                timeText = 'Updated just now';
             } else if (minutes < 60) {
-                timeText = `${minutes} 分钟前更新`;
+                timeText = `Updated ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
             } else {
-                timeText = `更新于 ${date.toLocaleString('zh-CN')}`;
+                timeText = `Updated at ${date.toLocaleString('en-US')}`;
             }
 
             document.getElementById('update-time').textContent = timeText;
         }
 
-        /**
-         * 显示错误信息
-         */
         function showError(message) {
             document.getElementById('content').innerHTML = `
                 <div class="error">
                     <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
-                    <p style="font-size: 1.2rem; margin-bottom: 10px;">加载失败</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 10px;">Failed to Load</p>
                     <p style="font-size: 0.9rem;">${escapeHtml(message)}</p>
                     <button class="btn-refresh" onclick="loadLeaderboard()" style="margin: 20px auto;">
-                        重试
+                        Retry
                     </button>
                 </div>
             `;
         }
 
-        /**
-         * 获取排名图标
-         */
         function getRankEmoji(rank) {
             const emojis = { 1: '🥇', 2: '🥈', 3: '🥉' };
             return emojis[rank] || `#${rank}`;
         }
 
-        /**
-         * 格式化数字（添加千位分隔符）
-         */
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
-        /**
-         * HTML 转义
-         */
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // 页面加载时自动获取数据
+        // Load on page load
         window.addEventListener('DOMContentLoaded', () => {
             loadLeaderboard();
             
-            // 每分钟自动刷新（GitHub Actions 每5分钟更新数据）
+            // Auto-refresh every minute
             setInterval(() => {
                 loadLeaderboard();
             }, 60000);
