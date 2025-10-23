@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,8 @@
     <title>Megabonk Fun: Best Builds & Leaderboard Rankings</title>
     <meta name="description" content="Discover the most fun Megabonk builds and compete on our leaderboard! View top player rankings, world records, and meta strategies to dominate.">
     <meta name="keywords" content="megabonk leaderboard, megabonk rankings, megabonk top players, megabonk builds, megabonk world records, megabonk competitive">
+
+    <link rel="canonical" href="https://megabonk.org/leaderboard/">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
@@ -18,14 +19,9 @@
     gtag('config', 'G-V5X87M8JFL');
     </script>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
      crossorigin="anonymous"></script>
-    
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Megabonk Leaderboard - Top Players & Best Builds">
-    <meta property="og:description" content="View top Megabonk players, world records, and meta builds. Join the competitive community!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://megabonk.org/leaderboard/">
+
     
     <style>
         * {
@@ -34,1130 +30,1521 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #ff6b35;
-            --secondary-color: #f7931e;
-            --dark-bg: #1a1a2e;
-            --card-bg: #16213e;
-            --text-primary: #ffffff;
-            --text-secondary: #a8b2d1;
-            --border-color: #2d3748;
-            --gold: #ffd700;
-            --silver: #c0c0c0;
-            --bronze: #cd7f32;
-            --success: #10b981;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f0f1e 100%);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
 
-        /* Header Styles */
-        .header {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
+        /* Header & Navigation */
+        .site-header {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--primary-color);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: 100;
         }
 
-        .nav-container {
+        .header-top {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links {
+        .site-logo {
             display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 800;
+            transition: transform 0.2s;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary-color);
+        .site-logo:hover {
+            transform: scale(1.05);
         }
 
-        /* Hero Section */
-        .hero {
+        .main-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            color: #495057;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .main-nav a:hover {
+            color: #667eea;
+        }
+
+        .main-nav a.active {
+            color: #667eea;
+        }
+
+        .main-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #667eea;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
             max-width: 1400px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-            text-align: center;
+            margin: 0 auto;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid #e9ecef;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            max-width: 1400px;
-            margin: 0 auto 3rem;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
+        .breadcrumb-list {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            align-items: center;
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #6c757d;
+        }
+
+        .breadcrumb-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .breadcrumb-list a {
+            color: #667eea;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumb-list a:hover {
+            opacity: 0.8;
+        }
+
+        .breadcrumb-separator {
+            color: #adb5bd;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #495057;
+            cursor: pointer;
         }
 
         /* Main Content */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 20px;
         }
 
-        .section {
-            margin-bottom: 4rem;
+        .page-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
         }
 
-        .section-header {
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .stats-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px 40px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+            justify-content: space-around;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 20px;
         }
 
-        .section-title {
-            font-size: 2rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 30px;
-            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-        }
-
-        /* Filter Tabs */
-        .filter-tabs {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-tab {
-            padding: 0.5rem 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .filter-tab:hover, .filter-tab.active {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
+        .stat-box {
+            text-align: center;
             color: white;
         }
 
-        /* Leaderboard Table */
-        .leaderboard-table {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .table-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1rem;
-            display: grid;
-            grid-template-columns: 80px 1fr 150px 150px 150px;
-            gap: 1rem;
-            font-weight: bold;
-            font-size: 0.9rem;
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
         }
 
-        .table-row {
-            padding: 1rem;
-            display: grid;
-            grid-template-columns: 80px 1fr 150px 150px 150px;
-            gap: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.3s;
+        .controls {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .table-row:hover {
-            background: rgba(255, 107, 53, 0.1);
-        }
-
-        .rank-badge {
-            font-weight: bold;
-            font-size: 1.2rem;
+        .update-info {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
+            color: #6c757d;
         }
 
-        .rank-badge.gold { color: var(--gold); }
-        .rank-badge.silver { color: var(--silver); }
-        .rank-badge.bronze { color: var(--bronze); }
+        .pulse {
+            width: 10px;
+            height: 10px;
+            background: #28a745;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.3);
+            }
+        }
+
+        .btn-refresh {
+            padding: 10px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-refresh:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-refresh:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .content {
+            overflow-x: auto;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 700;
+            color: #495057;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+            transform: scale(1.002);
+        }
+
+        td {
+            padding: 16px 20px;
+            color: #212529;
+        }
+
+        .rank-cell {
+            width: 80px;
+            text-align: center;
+        }
+
+        .rank {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: inline-block;
+        }
+
+        .top-1 {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        }
+
+        .top-1 .rank {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .top-2 {
+            background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+        }
+
+        .top-2 .rank {
+            font-size: 1.8rem;
+            color: #708090;
+        }
+
+        .top-3 {
+            background: linear-gradient(135deg, #cd7f32 0%, #e8a87c 100%);
+        }
+
+        .top-3 .rank {
+            font-size: 1.7rem;
+            color: #8b4513;
+        }
+
+        .player-cell {
+            min-width: 200px;
+            max-width: 300px;
+        }
 
         .player-info {
             display: flex;
             align-items: center;
-            gap: 1rem;
-        }
-
-        .player-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            gap: 12px;
         }
 
         .player-name {
-            font-weight: 500;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #212529;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .character-cell {
+            min-width: 120px;
         }
 
         .character-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(255, 107, 53, 0.2);
-            border: 1px solid var(--primary-color);
-            border-radius: 15px;
-            font-size: 0.85rem;
-            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: capitalize;
         }
 
-        .view-build-btn {
-            padding: 0.5rem 1rem;
-            background: var(--primary-color);
+        .character-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .character-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .score-cell {
+            min-width: 150px;
+            text-align: right;
+        }
+
+        .score {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .actions-cell {
+            text-align: center;
+            width: 100px;
+        }
+
+        .btn-details {
+            padding: 6px 16px;
+            background: #667eea;
+            color: white;
             border: none;
             border-radius: 6px;
-            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
+            transition: all 0.2s;
         }
 
-        .view-build-btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
+        .btn-details:hover {
+            background: #5568d3;
+            transform: scale(1.05);
         }
 
-        /* Build Cards Grid */
-        .builds-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
+        .card-footer {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9ecef;
         }
 
-        .build-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s;
+        .card-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
         }
 
-        .build-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-            border-color: var(--primary-color);
+        .card-footer a:hover {
+            text-decoration: underline;
         }
 
-        .build-header {
+        .loading, .error {
+            padding: 60px 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 16px 16px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
         }
 
-        .build-title {
-            font-size: 1.3rem;
-            color: var(--text-primary);
+        .modal-header h2 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .close {
+            color: white;
+            font-size: 32px;
             font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: transform 0.2s;
         }
 
-        .tier-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
+        .close:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .detail-section {
+            margin-bottom: 30px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-label {
             font-size: 0.85rem;
-            font-weight: bold;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .tier-badge.s-tier {
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212529;
         }
 
-        .tier-badge.a-tier {
-            background: linear-gradient(135deg, #c0c0c0, #e0e0e0);
-            color: #000;
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
         }
 
-        .build-character {
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+        .item-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.2s;
+            border: 2px solid transparent;
         }
 
-        .build-description {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
+        .item-card:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .item-card.weapon {
+            border-color: #ffcdd2;
+            background: #fff5f5;
+        }
+
+        .item-card.tome {
+            border-color: #bbdefb;
+            background: #f0f7ff;
+        }
+
+        .item-card.item {
+            border-color: #e1bee7;
+            background: #faf5fb;
+        }
+
+        .item-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .item-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .item-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            color: #495057;
+            line-height: 1.3;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .video-link:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background: rgba(255, 255, 255, 0.98);
+            margin-top: 40px;
+            border-top: 4px solid #667eea;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.2s;
             font-size: 0.95rem;
         }
 
-        .build-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+        .footer-links a:hover {
+            color: #667eea;
         }
 
-        .build-stat {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
-            font-size: 0.85rem;
-        }
-
-        .build-stat-label {
-            color: var(--text-secondary);
-        }
-
-        .build-stat-value {
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        .build-link {
-            display: block;
+        .footer-bottom {
+            background: #f8f9fa;
+            padding: 20px;
             text-align: center;
-            padding: 0.75rem;
-            background: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .build-link:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        /* World Records */
-        .records-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .record-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .record-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        }
-
-        .record-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .record-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .record-holder {
-            color: var(--text-secondary);
+            color: #6c757d;
             font-size: 0.9rem;
         }
 
-        /* Info Box */
-        .info-box {
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid var(--primary-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+        .footer-bottom a {
+            color: #667eea;
+            text-decoration: none;
         }
 
-        .info-box h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info-box ul {
-            list-style: none;
-            padding-left: 1rem;
-        }
-
-        .info-box li {
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .info-box li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-            margin-top: 4rem;
+        .footer-bottom a:hover {
+            text-decoration: underline;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero h1 {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .page-header h1 {
                 font-size: 2rem;
             }
 
-            .table-header, .table-row {
-                grid-template-columns: 60px 1fr 100px;
-                font-size: 0.85rem;
+            .stats-bar {
+                padding: 20px;
             }
 
-            .table-header :nth-child(4),
-            .table-header :nth-child(5),
-            .table-row :nth-child(4),
-            .table-row :nth-child(5) {
-                display: none;
+            .stat-value {
+                font-size: 1.5rem;
             }
 
-            .builds-grid {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            th, td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+
+            .rank {
+                font-size: 1.2rem;
+            }
+
+            .player-name {
+                font-size: 1rem;
+            }
+
+            .score {
+                font-size: 1.1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .info-grid {
                 grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
-        }
 
-        /* Loading Animation */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .loading {
-            animation: pulse 2s ease-in-out infinite;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
-            <ul class="nav-links">
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="header-top">
+            <a href="https://megabonk.org/" class="site-logo">
+                <span>🏆</span>
+                <span>Megabonk</span>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="https://megabonk.org/guides/">Guides</a>
+                <a href="https://megabonk.org/database/">Database</a>
+                <a href="https://megabonk.org/tier-lists/">Tier Lists</a>
+                <a href="https://megabonk.org/leaderboard/" class="active">Leaderboard</a>
+            </nav>
+        </div>
+        <nav class="breadcrumb">
+            <ul class="breadcrumb-list">
                 <li><a href="https://megabonk.org/">Home</a></li>
-                <li><a href="https://megabonk.org/guides/">Guides</a></li>
-                <li><a href="https://megabonk.org/database/">Database</a></li>
-                <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
-                <li><a href="https://megabonk.org/leaderboard/" class="active">Leaderboard</a></li>
+                <li class="breadcrumb-separator">›</li>
+                <li>Leaderboard</li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>🏆 Megabonk Leaderboard</h1>
-        <p>Compete with the best players worldwide. Track rankings, discover meta builds, and climb your way to the top of the competitive ladder.</p>
-    </section>
-
-    <!-- Stats Overview -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-value">742,831</div>
-            <div class="stat-label">World Record Kills</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">50,000+</div>
-            <div class="stat-label">Active Players</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">22</div>
-            <div class="stat-label">Playable Characters</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">Weekly</div>
-            <div class="stat-label">Rankings Reset</div>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <div class="container">
-        <!-- Important Info -->
-        <div class="info-box">
-            <h3>📢 Leaderboard Updates (Patch 1.0.12)</h3>
-            <ul>
-                <li>Global ban list implemented - all cheaters removed from rankings</li>
-                <li>Anti-cheat system now active - fair play enforced</li>
-                <li>Rankings reset weekly every Monday at 00:00 UTC</li>
-                <li>Legitimate builds and strategies verified by community</li>
-                <li>Submit your runs via in-game leaderboard system</li>
-            </ul>
+        <div class="page-header">
+            <h1>🏆 Global Leaderboard</h1>
+            <p>Real-time Player Rankings & Build Analysis</p>
         </div>
 
-        <!-- Global Leaderboard -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">Global Rankings</h2>
-                <div class="filter-tabs">
-                    <button class="filter-tab active">All Characters</button>
-                    <button class="filter-tab">This Week</button>
-                    <button class="filter-tab">All Time</button>
+        <div class="card">
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <div class="stat-label">Total Players</div>
+                    <div class="stat-value" id="total-players">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Top Score</div>
+                    <div class="stat-value" id="top-score">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Average Score</div>
+                    <div class="stat-value" id="avg-score">-</div>
                 </div>
             </div>
 
-            <div class="leaderboard-table">
-                <div class="table-header">
-                    <div>Rank</div>
-                    <div>Player</div>
-                    <div>Character</div>
-                    <div>Kills</div>
-                    <div>Action</div>
+            <div class="controls">
+                <div class="update-info">
+                    <span class="pulse"></span>
+                    <span id="update-time">Loading...</span>
                 </div>
-
-                <div class="table-row">
-                    <div class="rank-badge gold">🥇 #1</div>
-                    <div class="player-info">
-                        <div class="player-avatar">SK</div>
-                        <div class="player-name">ShadowKiller</div>
-                    </div>
-                    <div><span class="character-badge">Robinette</span></div>
-                    <div>742,831</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge silver">🥈 #2</div>
-                    <div class="player-info">
-                        <div class="player-avatar">MP</div>
-                        <div class="player-name">MegaPro_99</div>
-                    </div>
-                    <div><span class="character-badge">Dicehead</span></div>
-                    <div>698,245</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge bronze">🥉 #3</div>
-                    <div class="player-info">
-                        <div class="player-avatar">BM</div>
-                        <div class="player-name">BonkMaster</div>
-                    </div>
-                    <div><span class="character-badge">Monke</span></div>
-                    <div>653,112</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#4</div>
-                    <div class="player-info">
-                        <div class="player-avatar">VN</div>
-                        <div class="player-name">VoidNinja</div>
-                    </div>
-                    <div><span class="character-badge">Bandit</span></div>
-                    <div>621,890</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#5</div>
-                    <div class="player-info">
-                        <div class="player-avatar">CL</div>
-                        <div class="player-name">CritLord_X</div>
-                    </div>
-                    <div><span class="character-badge">CL4NK</span></div>
-                    <div>589,432</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#6</div>
-                    <div class="player-info">
-                        <div class="player-avatar">SD</div>
-                        <div class="player-name">SpeedDemon</div>
-                    </div>
-                    <div><span class="character-badge">Calcium</span></div>
-                    <div>567,201</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#7</div>
-                    <div class="player-info">
-                        <div class="player-avatar">FG</div>
-                        <div class="player-name">FoxGaming</div>
-                    </div>
-                    <div><span class="character-badge">Fox Kitsune</span></div>
-                    <div>543,876</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#8</div>
-                    <div class="player-info">
-                        <div class="player-avatar">TC</div>
-                        <div class="player-name">TankCommander</div>
-                    </div>
-                    <div><span class="character-badge">Sir Oofie</span></div>
-                    <div>521,459</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#9</div>
-                    <div class="player-info">
-                        <div class="player-avatar">PP</div>
-                        <div class="player-name">PoisonPro</div>
-                    </div>
-                    <div><span class="character-badge">Amog</span></div>
-                    <div>498,321</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#10</div>
-                    <div class="player-info">
-                        <div class="player-avatar">MC</div>
-                        <div class="player-name">MegaChampion</div>
-                    </div>
-                    <div><span class="character-badge">MegaChad</span></div>
-                    <div>476,892</div>
-                    <div><button class="view-build-btn">View Build</button></div>
-                </div>
+                <button class="btn-refresh" id="refresh-btn" onclick="loadLeaderboard()">
+                    <span>🔄</span>
+                    <span>Refresh</span>
+                </button>
             </div>
-        </section>
 
-        <!-- Character Rankings -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">Character Rankings</h2>
-                <div class="filter-tabs">
-                    <button class="filter-tab active">Top 10</button>
-                    <button class="filter-tab">S-Tier</button>
-                    <button class="filter-tab">A-Tier</button>
+            <div class="content" id="content">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading leaderboard data...</p>
                 </div>
             </div>
 
-            <div class="leaderboard-table">
-                <div class="table-header">
-                    <div>Rank</div>
-                    <div>Character</div>
-                    <div>Best Score</div>
-                    <div>Win Rate</div>
-                    <div>Guide</div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge gold">🥇 #1</div>
-                    <div class="player-info">
-                        <div class="player-avatar">R</div>
-                        <div class="player-name">Robinette</div>
-                    </div>
-                    <div>742,831</div>
-                    <div style="color: var(--success);">94.2%</div>
-                    <div><a href="https://megabonk.org/guides/characters/robinette-guide" class="view-build-btn">View Guide</a></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge silver">🥈 #2</div>
-                    <div class="player-info">
-                        <div class="player-avatar">D</div>
-                        <div class="player-name">Dicehead</div>
-                    </div>
-                    <div>698,245</div>
-                    <div style="color: var(--success);">91.8%</div>
-                    <div><a href="https://megabonk.org/guides/characters/dicehead-guide" class="view-build-btn">View Guide</a></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge bronze">🥉 #3</div>
-                    <div class="player-info">
-                        <div class="player-avatar">M</div>
-                        <div class="player-name">Monke</div>
-                    </div>
-                    <div>653,112</div>
-                    <div style="color: var(--success);">89.5%</div>
-                    <div><a href="https://megabonk.org/guides/characters/monke-guide" class="view-build-btn">View Guide</a></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#4</div>
-                    <div class="player-info">
-                        <div class="player-avatar">B</div>
-                        <div class="player-name">Bandit</div>
-                    </div>
-                    <div>621,890</div>
-                    <div style="color: var(--success);">87.3%</div>
-                    <div><a href="https://megabonk.org/guides/characters/bandit-guide" class="view-build-btn">View Guide</a></div>
-                </div>
-
-                <div class="table-row">
-                    <div class="rank-badge">#5</div>
-                    <div class="player-info">
-                        <div class="player-avatar">C</div>
-                        <div class="player-name">CL4NK</div>
-                    </div>
-                    <div>589,432</div>
-                    <div style="color: var(--success);">85.1%</div>
-                    <div><a href="https://megabonk.org/guides/characters/cl4nk-guide" class="view-build-btn">View Guide</a></div>
-                </div>
+            <div class="card-footer">
+                📊 Data source: <a href="https://megabonk.fun" target="_blank" rel="nofollow noopener">megabonk.fun</a>
+                <span style="margin: 0 10px;">|</span>
+                ⚡ Updates every 5 minutes
             </div>
-        </section>
+        </div>
 
-        <!-- Meta Builds -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">Top Meta Builds</h2>
-                <a href="https://megabonk.org/guides/builds/" style="color: var(--primary-color); text-decoration: none;">View All Builds →</a>
+        <!-- Quick Links Section -->
+        <div class="card" style="padding: 30px;">
+            <h2 style="color: #667eea; margin-bottom: 20px;">📚 Related Resources</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <a href="https://megabonk.org/guides/characters/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
+                    👥 Character Guides
+                </a>
+                <a href="https://megabonk.org/database/weapons/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
+                    ⚔️ Weapons Database
+                </a>
+                <a href="https://megabonk.org/guides/builds/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
+                    🏗️ Build Guides
+                </a>
+                <a href="https://megabonk.org/tier-lists/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
+                    📊 Tier Lists
+                </a>
             </div>
-
-            <div class="builds-grid">
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 class="build-title">Kevin Mirror Immortality</h3>
-                        <span class="tier-badge s-tier">S-TIER</span>
-                    </div>
-                    <div class="build-character">Best for: Robinette, Dicehead, Monke</div>
-                    <p class="build-description">The legendary immortality build. Kevin damages you constantly while Mirror grants invulnerability. With high attack speed, you become literally unkillable.</p>
-                    <div class="build-stats">
-                        <div class="build-stat">
-                            <span class="build-stat-label">Difficulty</span>
-                            <span class="build-stat-value">Advanced</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Power Level</span>
-                            <span class="build-stat-value">10/10</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Best Stage</span>
-                            <span class="build-stat-value">All Stages</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Meta Status</span>
-                            <span class="build-stat-value">Top Tier</span>
-                        </div>
-                    </div>
-                    <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality" class="build-link">View Full Build →</a>
-                </div>
-
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 class="build-title">Poison Lifesteal</h3>
-                        <span class="tier-badge s-tier">S-TIER</span>
-                    </div>
-                    <div class="build-character">Best for: Amog, Vlad, Bandit</div>
-                    <p class="build-description">Sustain-focused build that heals constantly. Poison damage counts as hits for lifesteal, giving insane health regeneration perfect for survival.</p>
-                    <div class="build-stats">
-                        <div class="build-stat">
-                            <span class="build-stat-label">Difficulty</span>
-                            <span class="build-stat-value">Medium</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Power Level</span>
-                            <span class="build-stat-value">9/10</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Best Stage</span>
-                            <span class="build-stat-value">Boss Fights</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Meta Status</span>
-                            <span class="build-stat-value">Top Tier</span>
-                        </div>
-                    </div>
-                    <a href="https://megabonk.org/guides/builds/poison-lifesteal" class="build-link">View Full Build →</a>
-                </div>
-
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 class="build-title">Speed Demon</h3>
-                        <span class="tier-badge s-tier">S-TIER</span>
-                    </div>
-                    <div class="build-character">Best for: Calcium, Ninja, Fox Kitsune</div>
-                    <p class="build-description">Maximum movement speed build. Blitz through maps, dodge everything, and scale damage with speed. Fast, fun, and deadly.</p>
-                    <div class="build-stats">
-                        <div class="build-stat">
-                            <span class="build-stat-label">Difficulty</span>
-                            <span class="build-stat-value">Hard</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Power Level</span>
-                            <span class="build-stat-value">9/10</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Best Stage</span>
-                            <span class="build-stat-value">Swarms</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Meta Status</span>
-                            <span class="build-stat-value">High Tier</span>
-                        </div>
-                    </div>
-                    <a href="https://megabonk.org/guides/builds/speed-demon" class="build-link">View Full Build →</a>
-                </div>
-
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 class="build-title">Walking Apocalypse</h3>
-                        <span class="tier-badge a-tier">A-TIER</span>
-                    </div>
-                    <div class="build-character">Best for: MegaChad, Sir Oofie, Ogre</div>
-                    <p class="build-description">Tank build focused on aura damage and survivability. Stand in the middle of enemies and watch them melt around you.</p>
-                    <div class="build-stats">
-                        <div class="build-stat">
-                            <span class="build-stat-label">Difficulty</span>
-                            <span class="build-stat-value">Easy</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Power Level</span>
-                            <span class="build-stat-value">8/10</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Best Stage</span>
-                            <span class="build-stat-value">Early-Mid</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Meta Status</span>
-                            <span class="build-stat-value">Solid</span>
-                        </div>
-                    </div>
-                    <a href="https://megabonk.org/guides/builds/walking-apocalypse" class="build-link">View Full Build →</a>
-                </div>
-
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 class="build-title">Bullet Hell</h3>
-                        <span class="tier-badge a-tier">A-TIER</span>
-                    </div>
-                    <div class="build-character">Best for: CL4NK, Tony McZoom, Birdo</div>
-                    <p class="build-description">Maximum projectile count and attack speed. Fill the screen with bullets and overwhelm everything in sight.</p>
-                    <div class="build-stats">
-                        <div class="build-stat">
-                            <span class="build-stat-label">Difficulty</span>
-                            <span class="build-stat-value">Medium</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Power Level</span>
-                            <span class="build-stat-value">8/10</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Best Stage</span>
-                            <span class="build-stat-value">All Stages</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Meta Status</span>
-                            <span class="build-stat-value">Solid</span>
-                        </div>
-                    </div>
-                    <a href="https://megabonk.org/guides/builds/bullet-hell" class="build-link">View Full Build →</a>
-                </div>
-
-                <div class="build-card">
-                    <div class="build-header">
-                        <h3 class="build-title">One Lucky Fox</h3>
-                        <span class="tier-badge a-tier">A-TIER</span>
-                    </div>
-                    <div class="build-character">Best for: Fox Kitsune</div>
-                    <p class="build-description">Stack luck to insane levels. Fox's passive scales with luck, making every upgrade legendary and every drop valuable.</p>
-                    <div class="build-stats">
-                        <div class="build-stat">
-                            <span class="build-stat-label">Difficulty</span>
-                            <span class="build-stat-value">Medium</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Power Level</span>
-                            <span class="build-stat-value">9/10</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Best Stage</span>
-                            <span class="build-stat-value">Late Game</span>
-                        </div>
-                        <div class="build-stat">
-                            <span class="build-stat-label">Meta Status</span>
-                            <span class="build-stat-value">High Tier</span>
-                        </div>
-                    </div>
-                    <a href="https://megabonk.org/guides/builds/one-lucky-fox" class="build-link">View Full Build →</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- World Records -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">World Records</h2>
-            </div>
-
-            <div class="records-grid">
-                <div class="record-card">
-                    <div class="record-title">🏆 Highest Kill Count</div>
-                    <div class="record-value">742,831</div>
-                    <div class="record-holder">ShadowKiller • Robinette • Oct 2025</div>
-                </div>
-
-                <div class="record-card">
-                    <div class="record-title">⏱️ Longest Survival Time</div>
-                    <div class="record-value">4h 52m</div>
-                    <div class="record-holder">MegaPro_99 • Dicehead • Oct 2025</div>
-                </div>
-
-                <div class="record-card">
-                    <div class="record-title">💀 Boss Speedrun (T3)</div>
-                    <div class="record-value">18m 34s</div>
-                    <div class="record-holder">VoidNinja • Bandit • Oct 2025</div>
-                </div>
-
-                <div class="record-card">
-                    <div class="record-title">🎯 Highest Level Reached</div>
-                    <div class="record-value">Level 487</div>
-                    <div class="record-holder">BonkMaster • Monke • Oct 2025</div>
-                </div>
-
-                <div class="record-card">
-                    <div class="record-title">⚡ Fastest Wave Clear</div>
-                    <div class="record-value">32 seconds</div>
-                    <div class="record-holder">SpeedDemon • Calcium • Oct 2025</div>
-                </div>
-
-                <div class="record-card">
-                    <div class="record-title">🔥 Most DPS Recorded</div>
-                    <div class="record-value">2.4M DPS</div>
-                    <div class="record-holder">CritLord_X • CL4NK • Oct 2025</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How to Climb -->
-        <section class="section">
-            <h2 class="section-title">How to Climb the Leaderboard</h2>
-            
-            <div class="builds-grid">
-                <div class="build-card">
-                    <h3 class="build-title">🎯 Master the Holy Trinity</h3>
-                    <p class="build-description">
-                        <strong>XP + Luck + Cursed Tomes</strong> are the foundation of every top-tier run. This combination creates exponential growth that outscales difficulty.
-                    </p>
-                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
-                        <li>XP Tome: Faster leveling = more upgrade choices</li>
-                        <li>Luck Tome: Ensures legendary/epic upgrades every level</li>
-                        <li>Cursed Tome: Harder game = dramatically better drops</li>
-                    </ul>
-                </div>
-
-                <div class="build-card">
-                    <h3 class="build-title">⚡ Prioritize Attack Speed</h3>
-                    <p class="build-description">
-                        Attack speed is the most important scaling stat. It affects Kevin+Mirror combo, lifesteal healing, and all on-hit effects.
-                    </p>
-                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
-                        <li>Enables Kevin+Mirror immortality</li>
-                        <li>Multiplies lifesteal effectiveness</li>
-                        <li>Triggers more on-hit item effects</li>
-                    </ul>
-                </div>
-
-                <div class="build-card">
-                    <h3 class="build-title">💎 Optimize Item Farming</h3>
-                    <p class="build-description">
-                        Don't open chests immediately. Wait until you've stacked Luck to 100+ for better quality drops from vendors and chests.
-                    </p>
-                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
-                        <li>Visit shrines often with high Luck</li>
-                        <li>Spend currency on rerolls liberally</li>
-                        <li>Save chests for mid-game power spike</li>
-                    </ul>
-                </div>
-
-                <div class="build-card">
-                    <h3 class="build-title">📊 Follow the Meta Timeline</h3>
-                    <p class="build-description">
-                        Each phase of your run requires different priorities for optimal progression and maximum kill counts.
-                    </p>
-                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
-                        <li>0-5 min: Focus on XP and leveling speed</li>
-                        <li>5-15 min: Build your weapon loadout</li>
-                        <li>15+ min: Stack damage and survive Final Swarm</li>
-                    </ul>
-                </div>
-
-                <div class="build-card">
-                    <h3 class="build-title">🛡️ Don't Skip Defense</h3>
-                    <p class="build-description">
-                        Take at least one shield upgrade. It dramatically increases effective HP and prevents one-shot deaths in late game.
-                    </p>
-                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
-                        <li>Shields absorb burst damage</li>
-                        <li>Allows riskier positioning</li>
-                        <li>Critical for 100K+ kill runs</li>
-                    </ul>
-                </div>
-
-                <div class="build-card">
-                    <h3 class="build-title">🎮 Study Top Players</h3>
-                    <p class="build-description">
-                        Watch streams and study leaderboard builds. Learn positioning, timing, and decision-making from the best.
-                    </p>
-                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
-                        <li>Analyze successful Final Swarm strategies</li>
-                        <li>Learn optimal shrine/vendor timing</li>
-                        <li>Understand when to portal vs farm</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 Megabonk.org - Unofficial Fan Site | Not affiliated with Ved/Vedinad</p>
-        <p style="margin-top: 0.5rem;">
-            <a href="https://megabonk.org/privacy-policy" style="color: var(--text-secondary); text-decoration: none;">Privacy Policy</a> | 
-            <a href="https://store.steampowered.com/app/3405340/Megabonk/" style="color: var(--text-secondary); text-decoration: none;">Official Steam Page</a>
-        </p>
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Player Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Guides</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                    <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                    <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+                    <li><a href="https://megabonk.org/guides/achievements/">Achievements</a></li>
+                    <li><a href="https://megabonk.org/guides/secrets/">Secrets</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Database</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                    <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
+                    <li><a href="https://megabonk.org/tier-lists/tomes/">Tomes</a></li>
+                    <li><a href="https://megabonk.org/guides/best-weapons/">Best Weapons</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                    <li><a href="https://megabonk.org/guides/meta-strategy/">Meta Strategy</a></li>
+                    <li><a href="https://megabonk.org/guides/tips-tricks/">Tips & Tricks</a></li>
+                    <li><a href="https://megabonk.org/guides/progression/">Progression Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/leaderboard/">Global Leaderboard</a></li>
+                    <li><a href="https://megabonk.org/guides/challenges/">Challenges</a></li>
+                    <li><a href="https://megabonk.fun" target="_blank" rel="nofollow noopener">Official Site</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Megabonk.org - Community Resource for Megabonk Game</p>
+            <p><a href="https://megabonk.org/privacy-policy/">Privacy Policy</a> | Not affiliated with the official game</p>
+        </div>
     </footer>
 
     <script>
-        // Filter tabs functionality
-        document.querySelectorAll('.filter-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from siblings
-                this.parentElement.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-                // Add active class to clicked tab
-                this.classList.add('active');
+        const CONFIG = {
+            dataUrl: '/data/leaderboard.json',
+            maxDisplay: 100,
+        };
+
+        // 武器图标映射（真实游戏图标）
+        const weaponIcons = {
+            'frostwalker': 'https://megabonk.org/images/database/weapons/Frostwalker.png',
+            'axe': 'https://megabonk.org/images/database/weapons/Axe.png',
+            'flamewalker': 'https://megabonk.org/images/database/weapons/Flamewalker.png',
+            'dexecutioner': 'https://megabonk.org/images/database/weapons/Dexecutioner.png',
+            'sword': 'https://megabonk.org/images/database/weapons/Sword.png',
+            'herosword': 'https://megabonk.org/images/database/weapons/Hero_Sword.png',
+            'katana': 'https://megabonk.org/images/database/weapons/Katana.png',
+            'bow': 'https://megabonk.org/images/database/weapons/Bow.png',
+            'revolver': 'https://megabonk.org/images/database/weapons/Revolver.png',
+            'blackhole': 'https://megabonk.org/images/database/weapons/Black_Hole.png',
+            'aura': 'https://megabonk.org/images/database/weapons/Aura.png',
+            'aegis': 'https://megabonk.org/images/database/weapons/Aegis.png',
+            'dice': 'https://megabonk.org/images/database/weapons/Dice.png',
+            'bone': 'https://megabonk.org/images/database/weapons/Bone.png',
+            'bananarang': 'https://megabonk.org/images/database/weapons/Bananarang.png',
+            'shotgun': 'https://megabonk.org/images/database/weapons/Shotgun.png',
+            'lightningstaff': 'https://megabonk.org/images/database/weapons/Lightning_Staff.png',
+            'firestaff': 'https://megabonk.org/images/database/weapons/Firestaff.png',
+            'chunkers': 'https://megabonk.org/images/database/weapons/Chunkers.png',
+            'tornado': 'https://megabonk.org/images/database/weapons/Tornado.png',
+            'spacenoodle': 'https://megabonk.org/images/database/weapons/Space_Noodle.png',
+            'dragonsbreath': 'https://megabonk.org/images/database/weapons/Dragons_Breath.png',
+            'sluttyrocket': 'https://megabonk.org/images/database/weapons/SluttyRocket.png',
+            'mines': 'https://megabonk.org/images/database/weapons/Mines.png',
+            'poisonflask': 'https://megabonk.org/images/database/weapons/Poison_Flask.png',
+            'sniper': 'https://megabonk.org/images/database/weapons/Sniper.png',
+            'wirelessdagger': 'https://megabonk.org/images/database/weapons/Wireless_Dagger.png',
+            'corruptedsword': 'https://megabonk.org/images/database/weapons/CorruptedSword.png',
+            'bloodmagic': 'https://megabonk.org/images/database/weapons/Blood_Magic.png'
+        };
+
+        // 符文图标映射（真实游戏图标）
+        const tomeIcons = {
+            'chaos': 'https://megabonk.org/images/Tomes/Chaos_Tome.png',
+            'xp': 'https://megabonk.org/images/Tomes/XP_Tome.png',
+            'cursed': 'https://megabonk.org/images/Tomes/Cursed_Tome.png',
+            'precision': 'https://megabonk.org/images/Tomes/Precision_Tome.png',
+            'armor': 'https://megabonk.org/images/Tomes/Armor_Tome.png',
+            'attraction': 'https://megabonk.org/images/Tomes/Attraction_Tome.png',
+            'bloody': 'https://megabonk.org/images/Tomes/Bloody_Tome.png',
+            'duration': 'https://megabonk.org/images/Tomes/Duration_Tome.png',
+            'agility': 'https://megabonk.org/images/Tomes/Agility_Tome.png',
+            'speed': 'https://megabonk.org/images/Tomes/Agility_Tome.png',
+            'luck': 'https://megabonk.org/images/Tomes/Luck_Tome.png',
+            'size': 'https://megabonk.org/images/Tomes/Size_Tome.png',
+            'area': 'https://megabonk.org/images/Tomes/Size_Tome.png',
+            'projectile': 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+            'projectilespeed': 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+            'damage': 'https://megabonk.org/images/Tomes/Damage_Tome.png',
+            'health': 'https://megabonk.org/images/Tomes/Health_Tome.png',
+            'regen': 'https://megabonk.org/images/Tomes/Regen_Tome.png',
+            'shield': 'https://megabonk.org/images/Tomes/Shield_Tome.png',
+            'thorns': 'https://megabonk.org/images/Tomes/Thorns_Tome.png',
+            'knockback': 'https://megabonk.org/images/Tomes/Knockback_Tome.png',
+            'cooldown': 'https://megabonk.org/images/Tomes/Cooldown_Tome.png',
+            'quantity': 'https://megabonk.org/images/Tomes/Quantity_Tome.png',
+            'evasion': 'https://megabonk.org/images/Tomes/Evasion_Tome.png',
+            'golden': 'https://megabonk.org/images/Tomes/Golden_Tome.png',
+            'silver': 'https://megabonk.org/images/Tomes/Silver_Tome.png'
+        };
+
+        // 物品图标映射（真实游戏图标）
+        const itemIcons = {
+            'key': 'https://megabonk.org/images/Items/Item_Key.png',
+            'curseddoll': 'https://megabonk.org/images/Items/Item_Cursed_Doll.png',
+            'creditcardgreen': 'https://megabonk.org/images/Items/Item_Credit_Card_Green.png',
+            'clover': 'https://megabonk.org/images/Items/Item_Clover.png',
+            'battery': 'https://megabonk.org/images/Items/Item_Battery.png',
+            'icecube': 'https://megabonk.org/images/Items/Item_Ice_Cube.png',
+            'slurpgloves': 'https://megabonk.org/images/Items/Item_Slurp_Gloves.png',
+            'backpack': 'https://megabonk.org/images/Items/Item_Backpack.png',
+            'timebracelet': 'https://megabonk.org/images/Items/Item_Time_Bracelet.png',
+            'wrench': 'https://megabonk.org/images/Items/Item_Wrench.png',
+            'holybook': 'https://megabonk.org/images/Items/Item_Holy_Book.png',
+            'idlejuice': 'https://megabonk.org/images/Items/Item_Idle_Juice.png',
+            'lightningorb': 'https://megabonk.org/images/Items/Item_Lightning_Orb.png',
+            'overpoweredlamp': 'https://megabonk.org/images/Items/Item_Overpowered_Lamp.png',
+            'gymsauce': 'https://megabonk.org/images/Items/Item_Gym_Sauce.png',
+            'moldycheese': 'https://megabonk.org/images/Items/Item_Moldy_Cheese.png',
+            'goldenshield': 'https://megabonk.org/images/Items/Item_Golden_Shield.png',
+            'kevin': 'https://megabonk.org/images/Items/Item_Kevin.png',
+            'phantomshroud': 'https://megabonk.org/images/Items/Item_Phantom_Shroud.png',
+            'goldenglove': 'https://megabonk.org/images/Items/Item_Golden_Glove.png',
+            'borgar': 'https://megabonk.org/images/Items/Item_Borgar.png',
+            'oats': 'https://megabonk.org/images/Items/Item_Oats.png',
+            'medkit': 'https://megabonk.org/images/Items/Item_Medkit.png',
+            'mirror': 'https://megabonk.org/images/Items/Item_Mirror.png',
+            'feathers': 'https://megabonk.org/images/Items/Item_Feathers.png',
+            'slipperyring': 'https://megabonk.org/images/Items/Item_Slippery_Ring.png',
+            'suckymagnet': 'https://megabonk.org/images/Items/Item_Sucky_Magnet.png',
+            'giantfork': 'https://megabonk.org/images/Items/Item_Giant_Fork.png',
+            'creditcardred': 'https://megabonk.org/images/Items/Item_Credit_Card_Red.png',
+            'campfire': 'https://megabonk.org/images/Items/Item_Campfire.png',
+            'beer': 'https://megabonk.org/images/Items/Item_Beer.png',
+            'beefyring': 'https://megabonk.org/images/Items/Item_Beefy_Ring.png',
+            'anvil': 'https://megabonk.org/images/Items/Item_Anvil.png',
+            'thundermitts': 'https://megabonk.org/images/Items/Item_Thunder_Mitts.png',
+            'powergloves': 'https://megabonk.org/images/Items/Item_Power_Gloves.png',
+            'echoshard': 'https://megabonk.org/images/Items/Item_Echo_Shard.png',
+            'soulharvester': 'https://megabonk.org/images/Items/Item_Soul_Harvester.png',
+            'bigbonk': 'https://megabonk.org/images/Items/Item_Big_Bonk.png',
+            'unstabletransfusion': 'https://megabonk.org/images/Items/Item_Unstable_Transfusion.png',
+            'joesdagger': 'https://megabonk.org/images/Items/Item_Joes_Dagger.png',
+            'spicymeatball': 'https://megabonk.org/images/Items/Item_Spicy_Meatball.png',
+            'beacon': 'https://megabonk.org/images/Items/Item_Beacon.png',
+            'bossbuster': 'https://megabonk.org/images/Items/Item_Boss_Buster.png',
+            'brassknuckles': 'https://megabonk.org/images/Items/Item_Brass_Knuckles.png',
+            'cactus': 'https://megabonk.org/images/Items/Item_Cactus.png',
+            'chonkplate': 'https://megabonk.org/images/Items/Item_Chonkplate.png',
+            'cowardscloak': 'https://megabonk.org/images/Items/Item_Cowards_Cloak.png',
+            'cursedgrabbies': 'https://megabonk.org/images/Items/Item_Cursed_Grabbies.png',
+            'demonicblade': 'https://megabonk.org/images/Items/Item_Demonic_Blade.png',
+            'demonicblood': 'https://megabonk.org/images/Items/Item_Demonic_Blood.png',
+            'demonicsoul': 'https://megabonk.org/images/Items/Item_Demonic_Soul.png',
+            'dragonfire': 'https://megabonk.org/images/Items/Item_Dragonfire.png',
+            'eagleclaw': 'https://megabonk.org/images/Items/Item_Eagle_Claw.png',
+            'electricplug': 'https://megabonk.org/images/Items/Item_Electric_Plug.png',
+            'energycore': 'https://megabonk.org/images/Items/Item_Energy_Core.png',
+            'forbiddenjuice': 'https://megabonk.org/images/Items/Item_Forbidden_Juice.png',
+            'gamergoggles': 'https://megabonk.org/images/Items/Item_Gamer_Goggles.png',
+            'gasmask': 'https://megabonk.org/images/Items/Item_Gas_Mask.png',
+            'ghost': 'https://megabonk.org/images/Items/Item_Ghost.png',
+            'goldensneakers': 'https://megabonk.org/images/Items/Item_Golden_Sneakers.png',
+            'grandmassecrettonic': 'https://megabonk.org/images/Items/Item_Grandmas_Secret_Tonic.png',
+            'icecrystal': 'https://megabonk.org/images/Items/Item_Ice_Crystal.png',
+            'leechingcrystal': 'https://megabonk.org/images/Items/Item_Leeching_Crystal.png',
+            'moldygloves': 'https://megabonk.org/images/Items/Item_Moldy_Gloves.png',
+            'scarf': 'https://megabonk.org/images/Items/Item_Scarf.png',
+            'shatteredknowledge': 'https://megabonk.org/images/Items/Item_Shattered_Knowledge.png',
+            'skuleg': 'https://megabonk.org/images/Items/Item_Skuleg.png',
+            'sluttycannon': 'https://megabonk.org/images/Items/Item_Slutty_Cannon.png',
+            'speedboi': 'https://megabonk.org/images/Items/Item_Speed_Boi.png',
+            'spikyshield': 'https://megabonk.org/images/Items/Item_Spiky_Shield.png',
+            'tacticalglasses': 'https://megabonk.org/images/Items/Item_Tactical_Glasses.png',
+            'toxicbarrel': 'https://megabonk.org/images/Items/Item_Toxic_Barrel.png',
+            'turboskates': 'https://megabonk.org/images/Items/Item_Turbo_Skates.png',
+            'turbosocks': 'https://megabonk.org/images/Items/Item_Turbo_Socks.png',
+            'zawarudo': 'https://megabonk.org/images/Items/Item_Za_Warudo.png',
+            'bloodycleaver': 'https://megabonk.org/images/Items/Item_Bloody_Cleaver.png',
+            'bob': 'https://megabonk.org/images/Items/Item_Bob__28Dead_29.png'
+        };
+
+        // 角色图标映射（真实游戏图标）
+        const characterIcons = {
+            'noelle': 'https://megabonk.org/images/guides/characters/Noelle.png',
+            'fox': 'https://megabonk.org/images/guides/characters/Fox.png',
+            'oofie': 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+            'siroofie': 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+            'calcium': 'https://megabonk.org/images/guides/characters/Calcium.png',
+            'ninja': 'https://megabonk.org/images/guides/characters/Ninja.png',
+            'spaceman': 'https://megabonk.org/images/guides/characters/Spaceman.png',
+            'vlad': 'https://megabonk.org/images/guides/characters/Vlad.png',
+            'monke': 'https://megabonk.org/images/guides/characters/Monke.png',
+            'bush': 'https://megabonk.org/images/guides/characters/Bush.png',
+            'birdo': 'https://megabonk.org/images/guides/characters/Birdo.png',
+            'robinette': 'https://megabonk.org/images/guides/characters/Robinette.png',
+            'chadwell': 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+            'sirchadwell': 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+            'bandit': 'https://megabonk.org/images/guides/characters/Bandit.png',
+            'amog': 'https://megabonk.org/images/guides/characters/Amog.png',
+            'ogre': 'https://megabonk.org/images/guides/characters/Ogre.png',
+            'tonymczoom': 'https://megabonk.org/images/guides/characters/Tony_McZoom.png',
+            'cl4nk': 'https://megabonk.org/images/guides/characters/CL4NK.png',
+            'megachad': 'https://megabonk.org/images/guides/characters/Megachad.png',
+            'athena': 'https://megabonk.org/images/guides/characters/Athena.png',
+            'dicehead': 'https://megabonk.org/images/guides/characters/Dicehead.png'
+        };
+
+        let leaderboardData = [];
+        let isLoading = false;
+
+        // Country code to flag emoji mapping
+        const countryFlags = {
+            'TR': '🇹🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷',
+            'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'JP': '🇯🇵',
+            'KR': '🇰🇷', 'CN': '🇨🇳', 'BR': '🇧🇷', 'MX': '🇲🇽', 'RU': '🇷🇺',
+            'IN': '🇮🇳', 'NL': '🇳🇱', 'SE': '🇸🇪', 'NO': '🇳🇴', 'DK': '🇩🇰',
+            'FI': '🇫🇮', 'PL': '🇵🇱', 'PT': '🇵🇹', 'GR': '🇬🇷', 'CH': '🇨🇭',
+            'AT': '🇦🇹', 'BE': '🇧🇪', 'CZ': '🇨🇿', 'HU': '🇭🇺', 'RO': '🇷🇴'
+        };
+
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        function getIcon(name, type) {
+            const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+            
+            let iconMap;
+            switch(type) {
+                case 'weapon':
+                    iconMap = weaponIcons;
+                    break;
+                case 'tome':
+                    iconMap = tomeIcons;
+                    break;
+                case 'item':
+                    iconMap = itemIcons;
+                    break;
+                case 'character':
+                    iconMap = characterIcons;
+                    break;
+                default:
+                    return '❓';
+            }
+
+            const icon = iconMap[normalizedName];
+            
+            if (!icon) {
+                return '❓';
+            }
+            
+            if (icon.startsWith('http') || icon.startsWith('/')) {
+                return `<img src="${icon}" alt="${name}">`;
+            }
+            
+            return icon;
+        }
+
+        function getCountryFlag(countryCode) {
+            return countryFlags[countryCode] || '🌍';
+        }
+
+        async function loadLeaderboard() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            const refreshBtn = document.getElementById('refresh-btn');
+            refreshBtn.disabled = true;
+
+            try {
+                console.log('📡 Loading data...');
                 
-                // Here you would typically filter the content
-                // For now, just showing the interaction
-                console.log('Filter changed to:', this.textContent);
-            });
-        });
-
-        // View build button functionality
-        document.querySelectorAll('.view-build-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert('Build details would be shown in a modal or navigated to a build page.');
-            });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
+
+                const result = await response.json();
+                console.log('✅ Data loaded successfully');
+
+                leaderboardData = result.data || [];
+                renderLeaderboard(result);
+                updateStats(result);
+                updateTime(result.fetched_at);
+
+            } catch (error) {
+                console.error('❌ Loading failed:', error);
+                showError(error.message);
+            } finally {
+                isLoading = false;
+                refreshBtn.disabled = false;
+            }
+        }
+
+        function renderLeaderboard(result) {
+            const data = result.data || [];
+            const displayData = data.slice(0, CONFIG.maxDisplay);
+
+            const html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="rank-cell">Rank</th>
+                            <th class="player-cell">Player</th>
+                            <th class="character-cell">Character</th>
+                            <th class="score-cell">Kills</th>
+                            <th class="actions-cell">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${displayData.map((item, index) => {
+                            const rank = item.rank || (index + 1);
+                            const topClass = rank <= 3 ? `top-${rank}` : '';
+                            const rankEmoji = getRankEmoji(rank);
+                            
+                            const playerName = item.playerName || item.name || 'Anonymous';
+                            const character = item.character || '-';
+                            const kills = item.kills || 0;
+                            const countryCode = item.country?.code || '';
+                            const countryFlag = getCountryFlag(countryCode);
+                            const characterIcon = getIcon(character, 'character');
+                            
+                            return `
+                                <tr class="${topClass}" onclick="showDetails(${index})">
+                                    <td class="rank-cell">
+                                        <span class="rank">${rankEmoji}</span>
+                                    </td>
+                                    <td class="player-cell">
+                                        <div class="player-info">
+                                            <span style="font-size: 1.5rem;">${countryFlag}</span>
+                                            <div class="player-name" title="${escapeHtml(playerName)}">${escapeHtml(playerName)}</div>
+                                        </div>
+                                    </td>
+                                    <td class="character-cell">
+                                        <span class="character-badge">
+                                            <span class="character-icon">${characterIcon}</span>
+                                            <span>${escapeHtml(character)}</span>
+                                        </span>
+                                    </td>
+                                    <td class="score-cell">
+                                        <span class="score">${formatNumber(kills)}</span>
+                                    </td>
+                                    <td class="actions-cell">
+                                        <button class="btn-details" onclick="event.stopPropagation(); showDetails(${index});">
+                                            View Build
+                                        </button>
+                                    </td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+                ${data.length > CONFIG.maxDisplay ? `
+                    <div style="padding: 20px; text-align: center; color: #6c757d; background: #f8f9fa;">
+                        Showing top ${CONFIG.maxDisplay} / ${data.length} players
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function showDetails(index) {
+            const item = leaderboardData[index];
+            if (!item) return;
+
+            const modal = document.getElementById('detailModal');
+            const modalBody = document.getElementById('modal-body');
+            const modalTitle = document.getElementById('modal-title');
+
+            const playerName = item.playerName || 'Anonymous';
+            const countryCode = item.country?.code || '';
+            const countryName = item.country?.name || 'Unknown';
+            const countryFlag = getCountryFlag(countryCode);
+
+            modalTitle.innerHTML = `${countryFlag} ${escapeHtml(playerName)}`;
+
+            const weapons = item.weapons || [];
+            const tomes = item.tomes || [];
+            const items = item.items || [];
+            const videoURL = item.videoURL || '';
+
+            modalBody.innerHTML = `
+                <div class="detail-section">
+                    <div class="section-title">📊 Player Statistics</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Rank</div>
+                            <div class="info-value">#${item.rank || '-'}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Character</div>
+                            <div class="info-value" style="text-transform: capitalize;">${escapeHtml(item.character || '-')}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Total Kills</div>
+                            <div class="info-value">${formatNumber(item.kills || 0)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Country</div>
+                            <div class="info-value">${countryFlag} ${escapeHtml(countryName)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                ${weapons.length > 0 ? `
+                <div class="detail-section">
+                    <div class="section-title">⚔️ Weapons (${weapons.length})</div>
+                    <div class="items-grid">
+                        ${weapons.map(w => `
+                            <div class="item-card weapon">
+                                <div class="item-icon">${getIcon(w, 'weapon')}</div>
+                                <div class="item-name">${escapeHtml(formatName(w))}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${tomes.length > 0 ? `
+                <div class="detail-section">
+                    <div class="section-title">📖 Tomes (${tomes.length})</div>
+                    <div class="items-grid">
+                        ${tomes.map(t => `
+                            <div class="item-card tome">
+                                <div class="item-icon">${getIcon(t, 'tome')}</div>
+                                <div class="item-name">${escapeHtml(formatName(t))}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${items.length > 0 ? `
+                <div class="detail-section">
+                    <div class="section-title">🎒 Items (${items.length})</div>
+                    <div class="items-grid">
+                        ${items.map(i => `
+                            <div class="item-card item">
+                                <div class="item-icon">${getIcon(i, 'item')}</div>
+                                <div class="item-name">${escapeHtml(formatName(i))}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${videoURL ? `
+                <div class="detail-section">
+                    <div class="section-title">🎥 Video Proof</div>
+                    <a href="${escapeHtml(videoURL)}" target="_blank" rel="nofollow noopener" class="video-link">
+                        <span>▶️</span>
+                        <span>Watch on YouTube</span>
+                    </a>
+                </div>
+                ` : ''}
+
+                <div class="detail-section">
+                    <div class="section-title">ℹ️ Additional Info</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Build Version</div>
+                            <div class="info-value">${formatBuildVersion(item.buildVersion)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Submission Date</div>
+                            <div class="info-value">${formatDate(item.createdAt)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        function updateStats(result) {
+            const data = result.data || [];
+            
+            document.getElementById('total-players').textContent = formatNumber(data.length);
+            
+            const topScore = data.length > 0 ? (data[0].kills || 0) : 0;
+            document.getElementById('top-score').textContent = formatNumber(topScore);
+            
+            if (data.length > 0) {
+                const sum = data.reduce((acc, item) => acc + (item.kills || 0), 0);
+                const avg = Math.round(sum / data.length);
+                document.getElementById('avg-score').textContent = formatNumber(avg);
+            } else {
+                document.getElementById('avg-score').textContent = '0';
+            }
+        }
+
+        function updateTime(timestamp) {
+            if (!timestamp) {
+                document.getElementById('update-time').textContent = 'Unknown';
+                return;
+            }
+
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+
+            let timeText;
+            if (minutes < 1) {
+                timeText = 'Updated just now';
+            } else if (minutes < 60) {
+                timeText = `Updated ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+            } else {
+                timeText = `Updated at ${date.toLocaleString('en-US')}`;
+            }
+
+            document.getElementById('update-time').textContent = timeText;
+        }
+
+        function showError(message) {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 10px;">Failed to Load</p>
+                    <p style="font-size: 0.9rem;">${escapeHtml(message)}</p>
+                    <button class="btn-refresh" onclick="loadLeaderboard()" style="margin: 20px auto;">
+                        Retry
+                    </button>
+                </div>
+            `;
+        }
+
+        function getRankEmoji(rank) {
+            const emojis = { 1: '🥇', 2: '🥈', 3: '🥉' };
+            return emojis[rank] || `#${rank}`;
+        }
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function formatName(str) {
+            return str
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, s => s.toUpperCase())
+                .trim();
+        }
+
+        function formatBuildVersion(version) {
+            if (!version) return 'Unknown';
+            const versionStr = version.toString();
+            if (versionStr.length >= 11) {
+                const major = parseInt(versionStr.substring(0, 1));
+                const minor = parseInt(versionStr.substring(1, 9));
+                const patch = parseInt(versionStr.substring(9));
+                return `v${major}.${minor}.${patch}`;
+            }
+            return version;
+        }
+
+        function formatDate(dateObj) {
+            if (!dateObj || !dateObj._seconds) return 'Unknown';
+            const date = new Date(dateObj._seconds * 1000);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
             });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLeaderboard();
+            
+            // Auto-refresh every minute
+            setInterval(() => {
+                loadLeaderboard();
+            }, 60000);
         });
     </script>
 </body>
