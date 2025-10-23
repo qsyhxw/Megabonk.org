@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Leaderboard</title>
-    <meta name="description" content="Megabonk Global Leaderboard - Real-time Rankings">
+    <title>Megabonk Leaderboard - Global Rankings</title>
+    <meta name="description" content="Megabonk Global Leaderboard - Real-time Rankings with Detailed Build Information">
     <style>
         * {
             margin: 0;
@@ -171,11 +171,12 @@
         tbody tr {
             border-bottom: 1px solid #e9ecef;
             transition: all 0.2s;
+            cursor: pointer;
         }
 
         tbody tr:hover {
             background: #f8f9fa;
-            transform: scale(1.005);
+            transform: scale(1.002);
         }
 
         td {
@@ -229,6 +230,19 @@
             max-width: 300px;
         }
 
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .country-flag {
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
         .player-name {
             font-weight: 700;
             font-size: 1.1rem;
@@ -240,8 +254,17 @@
 
         .character-cell {
             min-width: 120px;
-            color: #6c757d;
-            font-style: italic;
+        }
+
+        .character-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: capitalize;
         }
 
         .score-cell {
@@ -250,45 +273,43 @@
         }
 
         .score {
+            font-size: 1.4rem;
             font-weight: 800;
-            font-size: 1.3rem;
-            color: #28a745;
-            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .loading {
+        .actions-cell {
             text-align: center;
-            padding: 60px 20px;
-            color: #6c757d;
+            width: 100px;
         }
 
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #e9ecef;
-            border-top-color: #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+        .btn-details {
+            padding: 6px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .error {
-            text-align: center;
-            padding: 60px 20px;
-            color: #dc3545;
+        .btn-details:hover {
+            background: #5568d3;
+            transform: scale(1.05);
         }
 
         .footer {
-            padding: 25px 40px;
+            padding: 20px 40px;
             background: #f8f9fa;
             text-align: center;
             color: #6c757d;
             font-size: 0.9rem;
-            border-top: 1px solid #dee2e6;
+            border-top: 1px solid #e9ecef;
         }
 
         .footer a {
@@ -299,6 +320,205 @@
 
         .footer a:hover {
             text-decoration: underline;
+        }
+
+        .loading, .error {
+            padding: 60px 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .close {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: transform 0.2s;
+        }
+
+        .close:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .detail-section {
+            margin-bottom: 30px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            background: #e9ecef;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #495057;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background: #dee2e6;
+            transform: translateY(-1px);
+        }
+
+        .tag.weapon {
+            background: #ffe0e0;
+            color: #d32f2f;
+        }
+
+        .tag.tome {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .tag.item {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .video-link:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -334,6 +554,19 @@
 
             .score {
                 font-size: 1.1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -387,13 +620,41 @@
         </div>
     </div>
 
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Player Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
     <script>
         const CONFIG = {
             dataUrl: '/data/leaderboard.json',
             maxDisplay: 100
         };
 
+        let leaderboardData = [];
         let isLoading = false;
+
+        // Country code to flag emoji mapping
+        const countryFlags = {
+            'TR': '🇹🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷',
+            'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'JP': '🇯🇵',
+            'KR': '🇰🇷', 'CN': '🇨🇳', 'BR': '🇧🇷', 'MX': '🇲🇽', 'RU': '🇷🇺',
+            'IN': '🇮🇳', 'NL': '🇳🇱', 'SE': '🇸🇪', 'NO': '🇳🇴', 'DK': '🇩🇰',
+            'FI': '🇫🇮', 'PL': '🇵🇱', 'PT': '🇵🇹', 'GR': '🇬🇷', 'CH': '🇨🇭',
+            'AT': '🇦🇹', 'BE': '🇧🇪', 'CZ': '🇨🇿', 'HU': '🇭🇺', 'RO': '🇷🇴'
+        };
+
+        function getCountryFlag(countryCode) {
+            return countryFlags[countryCode] || '🌍';
+        }
 
         async function loadLeaderboard() {
             if (isLoading) return;
@@ -414,8 +675,8 @@
 
                 const result = await response.json();
                 console.log('✅ Data loaded successfully');
-                console.log('Data structure:', result.data[0]); // 调试：查看数据结构
 
+                leaderboardData = result.data || [];
                 renderLeaderboard(result);
                 updateStats(result);
                 updateTime(result.fetched_at);
@@ -440,31 +701,43 @@
                             <th class="rank-cell">Rank</th>
                             <th class="player-cell">Player</th>
                             <th class="character-cell">Character</th>
-                            <th class="score-cell">Score</th>
+                            <th class="score-cell">Kills</th>
+                            <th class="actions-cell">Details</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${displayData.map((item, index) => {
-                            const rank = index + 1;
+                            const rank = item.rank || (index + 1);
                             const topClass = rank <= 3 ? `top-${rank}` : '';
                             const rankEmoji = getRankEmoji(rank);
                             
-                            // 尝试多个可能的字段名获取玩家名
-                            const playerName = item.name || item.player || item.username || item.user || 'Anonymous';
-                            const character = item.character || item.hero || item.class || '-';
-                            const score = item.kills || item.score || item.points || 0;
+                            const playerName = item.playerName || item.name || 'Anonymous';
+                            const character = item.character || '-';
+                            const kills = item.kills || 0;
+                            const countryCode = item.country?.code || '';
+                            const countryFlag = getCountryFlag(countryCode);
                             
                             return `
-                                <tr class="${topClass}">
+                                <tr class="${topClass}" onclick="showDetails(${index})">
                                     <td class="rank-cell">
                                         <span class="rank">${rankEmoji}</span>
                                     </td>
                                     <td class="player-cell">
-                                        <div class="player-name" title="${escapeHtml(playerName)}">${escapeHtml(playerName)}</div>
+                                        <div class="player-info">
+                                            <span style="font-size: 1.5rem;">${countryFlag}</span>
+                                            <div class="player-name" title="${escapeHtml(playerName)}">${escapeHtml(playerName)}</div>
+                                        </div>
                                     </td>
-                                    <td class="character-cell">${escapeHtml(character)}</td>
+                                    <td class="character-cell">
+                                        <span class="character-badge">${escapeHtml(character)}</span>
+                                    </td>
                                     <td class="score-cell">
-                                        <span class="score">${formatNumber(score)}</span>
+                                        <span class="score">${formatNumber(kills)}</span>
+                                    </td>
+                                    <td class="actions-cell">
+                                        <button class="btn-details" onclick="event.stopPropagation(); showDetails(${index});">
+                                            View Build
+                                        </button>
                                     </td>
                                 </tr>
                             `;
@@ -481,16 +754,125 @@
             document.getElementById('content').innerHTML = html;
         }
 
+        function showDetails(index) {
+            const item = leaderboardData[index];
+            if (!item) return;
+
+            const modal = document.getElementById('detailModal');
+            const modalBody = document.getElementById('modal-body');
+            const modalTitle = document.getElementById('modal-title');
+
+            const playerName = item.playerName || 'Anonymous';
+            const countryCode = item.country?.code || '';
+            const countryName = item.country?.name || 'Unknown';
+            const countryFlag = getCountryFlag(countryCode);
+
+            modalTitle.innerHTML = `${countryFlag} ${escapeHtml(playerName)}`;
+
+            const weapons = item.weapons || [];
+            const tomes = item.tomes || [];
+            const items = item.items || [];
+            const videoURL = item.videoURL || '';
+
+            modalBody.innerHTML = `
+                <div class="detail-section">
+                    <div class="section-title">📊 Player Statistics</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Rank</div>
+                            <div class="info-value">#${item.rank || '-'}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Character</div>
+                            <div class="info-value" style="text-transform: capitalize;">${escapeHtml(item.character || '-')}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Total Kills</div>
+                            <div class="info-value">${formatNumber(item.kills || 0)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Country</div>
+                            <div class="info-value">${countryFlag} ${escapeHtml(countryName)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                ${weapons.length > 0 ? `
+                <div class="detail-section">
+                    <div class="section-title">⚔️ Weapons (${weapons.length})</div>
+                    <div class="tags-container">
+                        ${weapons.map(w => `<span class="tag weapon">${escapeHtml(formatName(w))}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${tomes.length > 0 ? `
+                <div class="detail-section">
+                    <div class="section-title">📖 Tomes (${tomes.length})</div>
+                    <div class="tags-container">
+                        ${tomes.map(t => `<span class="tag tome">${escapeHtml(formatName(t))}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${items.length > 0 ? `
+                <div class="detail-section">
+                    <div class="section-title">🎒 Items (${items.length})</div>
+                    <div class="tags-container">
+                        ${items.map(i => `<span class="tag item">${escapeHtml(formatName(i))}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${videoURL ? `
+                <div class="detail-section">
+                    <div class="section-title">🎥 Video Proof</div>
+                    <a href="${escapeHtml(videoURL)}" target="_blank" rel="noopener" class="video-link">
+                        <span>▶️</span>
+                        <span>Watch on YouTube</span>
+                    </a>
+                </div>
+                ` : ''}
+
+                <div class="detail-section">
+                    <div class="section-title">ℹ️ Additional Info</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Build Version</div>
+                            <div class="info-value">${formatBuildVersion(item.buildVersion)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Submission Date</div>
+                            <div class="info-value">${formatDate(item.createdAt)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
         function updateStats(result) {
             const data = result.data || [];
             
             document.getElementById('total-players').textContent = formatNumber(data.length);
             
-            const topScore = data.length > 0 ? (data[0].kills || data[0].score || 0) : 0;
+            const topScore = data.length > 0 ? (data[0].kills || 0) : 0;
             document.getElementById('top-score').textContent = formatNumber(topScore);
             
             if (data.length > 0) {
-                const sum = data.reduce((acc, item) => acc + (item.kills || item.score || 0), 0);
+                const sum = data.reduce((acc, item) => acc + (item.kills || 0), 0);
                 const avg = Math.round(sum / data.length);
                 document.getElementById('avg-score').textContent = formatNumber(avg);
             } else {
@@ -541,6 +923,37 @@
 
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function formatName(str) {
+            // Convert camelCase or lowercase to Title Case with spaces
+            return str
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, s => s.toUpperCase())
+                .trim();
+        }
+
+        function formatBuildVersion(version) {
+            if (!version) return 'Unknown';
+            // Convert number like 10000000017 to 1.0.17
+            const versionStr = version.toString();
+            if (versionStr.length >= 11) {
+                const major = parseInt(versionStr.substring(0, 1));
+                const minor = parseInt(versionStr.substring(1, 9));
+                const patch = parseInt(versionStr.substring(9));
+                return `v${major}.${minor}.${patch}`;
+            }
+            return version;
+        }
+
+        function formatDate(dateObj) {
+            if (!dateObj || !dateObj._seconds) return 'Unknown';
+            const date = new Date(dateObj._seconds * 1000);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
         }
 
         function escapeHtml(text) {
