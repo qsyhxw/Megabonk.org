@@ -423,6 +423,8 @@
             </ol>
         </div>
 
+        <div id="topRunsContainer"></div>
+
         <!-- Build Strategies -->
         <div class="guide-section">
             <h2>🏗️ Aura Build Strategies</h2>
@@ -902,7 +904,23 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
+<script>
+async function loadTopRunsComponent() {
+    try {
+        const response = await fetch('/components/top-runs-section-horizontal.html');
+        const html = await response.text();
+        document.getElementById('topRunsContainer').innerHTML = html;
+        
+        setTimeout(() => {
+            TopRunsSectionComponent.init('weapon', 'Aura');
+        }, 100);
+    } catch (error) {
+        console.error('Failed to load component:', error);
+    }
+}
 
+window.addEventListener('DOMContentLoaded', loadTopRunsComponent);
+</script>
     
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
