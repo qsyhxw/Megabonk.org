@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk 排行榜 | Megabonk.org</title>
+    <meta name="description" content="Megabonk 全球排行榜 - 实时更新的玩家排名">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .update-info {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #212529;
+        }
+
+        .btn-refresh {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-refresh:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-refresh:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .content {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        td {
+            padding: 16px;
+            color: #212529;
+        }
+
+        .rank {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .top-1 {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        }
+
+        .top-1 .rank {
+            font-size: 1.8rem;
+        }
+
+        .top-2 {
+            background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+        }
+
+        .top-3 {
+            background: linear-gradient(135deg, #cd7f32 0%, #e8a87c 100%);
+        }
+
+        .player {
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .character {
+            color: #6c757d;
+        }
+
+        .score {
+            font-weight: 700;
+            color: #28a745;
+            font-size: 1.1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e9ecef;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            text-align: center;
+            padding: 60px 20px;
+            color: #dc3545;
+        }
+
+        .source-info {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .source-info a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .source-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stats {
+                justify-content: space-between;
+            }
+
+            th, td {
+                padding: 12px 8px;
+                font-size: 0.85rem;
+            }
+
+            .rank {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Megabonk 排行榜</h1>
+            <p>实时更新的全球玩家排名</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span>全球排行榜</span>
+                </div>
+                <div class="update-info">
+                    <span class="pulse"></span>
+                    <span id="update-time">加载中...</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">总玩家</span>
+                        <span class="stat-value" id="total-players">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">最高分</span>
+                        <span class="stat-value" id="top-score">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">平均分</span>
+                        <span class="stat-value" id="avg-score">-</span>
+                    </div>
+                </div>
+                <button class="btn-refresh" id="refresh-btn" onclick="loadLeaderboard()">
+                    <span>🔄</span>
+                    <span>刷新数据</span>
+                </button>
+            </div>
+
+            <div class="content" id="content">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载排行榜数据...</p>
+                </div>
+            </div>
+
+            <div class="source-info">
+                📊 数据来源: <a href="https://megabonk.fun" target="_blank" rel="noopener">megabonk.fun</a>
+                <span style="margin: 0 10px;">|</span>
+                ⚡ 每5分钟自动更新
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 配置
+        const CONFIG = {
+            // GitHub Pages 上的 JSON 文件路径
+            dataUrl: './data/leaderboard.json',
+            // 或者使用压缩版（更快）
+            // dataUrl: './data/leaderboard.min.json',
+            maxDisplay: 100  // 显示前100名
+        };
+
+        let isLoading = false;
+
+        /**
+         * 加载排行榜数据
+         */
+        async function loadLeaderboard() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            const refreshBtn = document.getElementById('refresh-btn');
+            refreshBtn.disabled = true;
+
+            try {
+                console.log('📡 正在加载数据...');
+                
+                // 添加时间戳避免缓存
+                const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                console.log('✅ 数据加载成功');
+
+                // 渲染数据
+                renderLeaderboard(result);
+                updateStats(result);
+                updateTime(result.fetched_at);
+
+            } catch (error) {
+                console.error('❌ 加载失败:', error);
+                showError(error.message);
+            } finally {
+                isLoading = false;
+                refreshBtn.disabled = false;
+            }
+        }
+
+        /**
+         * 渲染排行榜表格
+         */
+        function renderLeaderboard(result) {
+            const data = result.data || [];
+            const displayData = data.slice(0, CONFIG.maxDisplay);
+
+            const html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 80px">排名</th>
+                            <th>玩家</th>
+                            <th>角色</th>
+                            <th style="width: 150px">分数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${displayData.map((item, index) => {
+                            const rank = index + 1;
+                            const topClass = rank <= 3 ? `top-${rank}` : '';
+                            const rankEmoji = getRankEmoji(rank);
+                            
+                            return `
+                                <tr class="${topClass}">
+                                    <td class="rank">${rankEmoji}</td>
+                                    <td class="player">${escapeHtml(item.player || item.username || 'Unknown')}</td>
+                                    <td class="character">${escapeHtml(item.character || item.hero || '-')}</td>
+                                    <td class="score">${formatNumber(item.score || item.kills || 0)}</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+                ${data.length > CONFIG.maxDisplay ? `
+                    <div style="padding: 20px; text-align: center; color: #6c757d;">
+                        显示前 ${CONFIG.maxDisplay} 名 / 共 ${data.length} 名玩家
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        /**
+         * 更新统计数据
+         */
+        function updateStats(result) {
+            const data = result.data || [];
+            
+            // 总玩家数
+            document.getElementById('total-players').textContent = data.length;
+            
+            // 最高分
+            const topScore = data.length > 0 ? (data[0].score || data[0].kills || 0) : 0;
+            document.getElementById('top-score').textContent = formatNumber(topScore);
+            
+            // 平均分
+            if (data.length > 0) {
+                const sum = data.reduce((acc, item) => acc + (item.score || item.kills || 0), 0);
+                const avg = Math.round(sum / data.length);
+                document.getElementById('avg-score').textContent = formatNumber(avg);
+            } else {
+                document.getElementById('avg-score').textContent = '0';
+            }
+        }
+
+        /**
+         * 更新时间显示
+         */
+        function updateTime(timestamp) {
+            if (!timestamp) {
+                document.getElementById('update-time').textContent = '未知';
+                return;
+            }
+
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+
+            let timeText;
+            if (minutes < 1) {
+                timeText = '刚刚更新';
+            } else if (minutes < 60) {
+                timeText = `${minutes} 分钟前更新`;
+            } else {
+                timeText = `更新于 ${date.toLocaleString('zh-CN')}`;
+            }
+
+            document.getElementById('update-time').textContent = timeText;
+        }
+
+        /**
+         * 显示错误信息
+         */
+        function showError(message) {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 10px;">加载失败</p>
+                    <p style="font-size: 0.9rem;">${escapeHtml(message)}</p>
+                    <button class="btn-refresh" onclick="loadLeaderboard()" style="margin: 20px auto;">
+                        重试
+                    </button>
+                </div>
+            `;
+        }
+
+        /**
+         * 获取排名图标
+         */
+        function getRankEmoji(rank) {
+            const emojis = { 1: '🥇', 2: '🥈', 3: '🥉' };
+            return emojis[rank] || `#${rank}`;
+        }
+
+        /**
+         * 格式化数字（添加千位分隔符）
+         */
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        /**
+         * HTML 转义
+         */
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 页面加载时自动获取数据
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLeaderboard();
+            
+            // 每分钟自动刷新（GitHub Actions 每5分钟更新数据）
+            setInterval(() => {
+                loadLeaderboard();
+            }, 60000);
+        });
+    </script>
+</body>
+</html>
