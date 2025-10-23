@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Megabonk Leaderboard Row",
+  "type": "object",
+  "required": [
+    "rank",
+    "player",
+    "character",
+    "kills",
+    "video_url",
+    "patch"
+  ],
+  "properties": {
+    "rank": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "player": {
+      "type": "string",
+      "minLength": 1
+    },
+    "character": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kills": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "country_code": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2,
+      "description": "ISO 3166-1 alpha-2"
+    },
+    "video_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "patch": {
+      "type": "string",
+      "description": "e.g., 1.0.17"
+    },
+    "weapons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tomes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at_iso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at_iso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
