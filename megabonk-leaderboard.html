@@ -125,8 +125,18 @@
    * 在 /data 目录放置数据文件：leaderboard-<补丁>.json（或 .csv）
    * 需要新增补丁：只在 PATCHES 中追加版本号，并新增对应数据文件即可。
    */
-  const CONFIG = {
-    dataDir: '/data/',
+  // 自动推断 GitHub Pages 的 /<repo>/ 前缀，返回  /<repo>/data/ ；
+// 自定义域名时返回 /data/
+function guessDataDir(){
+  const segs = location.pathname.split('/').filter(Boolean);
+  // project pages: https://user.github.io/<repo>/...
+  const repo = segs.length ? `/${segs[0]}/` : '/';
+  const candidates = [ `${repo}data/`, '/data/', 'data/' ];
+  return candidates[0]; // 首选 /<repo>/data/
+}
+
+const CONFIG = {
+    dataDir: guessDataDir(),
     PATCHES: ['1.0.17'],     // ← 在这里加入新的补丁版本，例如 '1.0.18'
     defaultPatch: '1.0.17',
     prefer: 'json'           // 优先使用 json；若 404 则自动尝试 csv
@@ -145,34 +155,47 @@
 
   // 轻量 CSV 解析（支持引号和逗号）
   function parseCSV(text) {
-    const rows = []; let i=0, field='', row=[], inQ=false;
-    while (i < text.length) {
-      const ch = text[i];
-      if (inQ) {
-        if (ch === '"') {
-          if (text[i+1] === '"') { field += '"'; i++; } else { inQ = false; }
-        } else field += ch;
-      } else {
-        if (ch === '"') inQ = true;
-        else if (ch === ',') { row.push(field); field=''; }
-        else if (ch === '\n') { row.push(field); rows.push(row); field=''; row=[]; }
-        else if (ch === '\r') {/* ignore */}
-        else field += ch;
-      }
-      i++;
+    const lines = text.trim().split(/
+?
+/);
+    const header = lines.shift().split(',').map(s=>s.trim());
+    return lines.map(line=>{
+      const cols = line.split(',').map(s=>s.trim());
+      const obj = {};
+      header.forEach((h,i)=>obj[h]=cols[i]||'');
+      // 类型转换
+      obj.rank = Number(obj.rank||0);
+      obj.kills = Number(obj.kills||0);
+      obj.weapons = (obj.weapons||'').split(';').filter(Boolean);
+      obj.tomes   = (obj.tomes||'').split(';').filter(Boolean);
+      obj.items   = (obj.items||'').split(';').filter(Boolean);
+      return obj;
+    });
+  }
+
+  // 兼容多种 JSON 形态：数组 或 {data|rows|leaderboard|results:[...]}
+  function coerceRows(input, patch){
+    if (Array.isArray(input)) return input;
+    const keys = ['data','rows','leaderboard','results','list'];
+    for (const k of keys){
+      if (Array.isArray(input?.[k])) return input[k];
     }
-    if (field.length || row.length) { row.push(field); rows.push(row); }
-    const [header, ...body] = rows;
-    if (!header) return [];
-    return body.filter(r=>r.length && r.some(x=>x && x.trim())).map(r => Object.fromEntries(header.map((h,idx)=>[h.trim(), (r[idx]||'').trim()])));
+    // 单对象也允许（至少要包含必要字段）
+    if (input && typeof input === 'object' && 'player' in input){
+      return [input];
+    }
+    console.warn('无法从 JSON 中解析出数组，返回空集');
+    return [];
   }
 
   async function fetchData(patch) {
     const base = CONFIG.dataDir + `leaderboard-${patch}`;
     const tryJson = async () => {
+      const base = CONFIG.dataDir + `leaderboard-${patch}`;
       const res = await fetch(base + '.json', { cache: 'no-store' });
       if (!res.ok) throw new Error('json:'+res.status);
-      const data = await res.json();
+      const raw = await res.json();
+      const data = coerceRows(raw, patch);
       return { kind:'json', data };
     };
     const tryCsv = async () => {
