@@ -1,319 +1,332 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Megabonk Leaderboard</title>
 <style>
-  :root {
-    --bg: #0b0f14;
-    --panel: #121821;
-    --muted: #6b7280;
-    --text: #e5e7eb;
-    --accent: #60a5fa;
-    --line: #1f2937;
-    --chip: #0f172a;
-    --chip-border: #334155;
-    --green: #22c55e;
+  :root{
+    --bg:#0b0f14;--panel:#101722;--line:#1e293b;--text:#e5e7eb;--muted:#8aa0b2;--accent:#7dd3fc;
+    --chip:#0e1624;--chip-border:#334155;--good:#16a34a;--card:#0c1220
   }
-  html,body { margin:0; padding:0; background:var(--bg); color:var(--text); font:14px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;}
-  .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-  h1 { margin:0 0 16px; font-size: 28px; font-weight: 800; letter-spacing:.3px; }
-  .toolbar { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px; }
-  .toolbar .group { display:flex; gap:8px; align-items:center; }
-  .input, select { background:#0b1220; color:var(--text); border:1px solid var(--line); border-radius:10px; padding:10px 12px; outline:none; }
-  .input::placeholder{ color:#748096; }
-  .btn { background:#111827; color:#e5e7eb; border:1px solid var(--line); border-radius:10px; padding:10px 14px; cursor:pointer; }
-  .btn:hover { border-color:#2b374a; background:#0e1624; }
-  .pill { display:inline-block; font-size:12px; color:#9aa6b2; background:var(--chip); border:1px solid var(--chip-border); padding:4px 8px; border-radius:99px; }
-  .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
-  .panel-head { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line); }
-  .small { color:var(--muted); font-size:12px; }
-  table { width:100%; border-collapse:collapse; }
-  thead th { text-align:left; padding:12px 16px; color:#cbd5e1; font-weight:700; border-bottom:1px solid var(--line); background:#0e1520; position:sticky; top:0; z-index:1;}
-  tbody td { padding:12px 16px; border-bottom:1px solid var(--line); vertical-align:top; }
-  tbody tr:hover { background:rgba(255,255,255,.02); }
-  .num { text-align:right; font-variant-numeric: tabular-nums; }
-  .muted { color:var(--muted); }
-  .link { color:#9bd2ff; text-decoration:none; }
-  .link:hover { text-decoration:underline; }
-  .flex { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
-  .right { text-align:right; }
-  .foot { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; color:#9aa6b2; }
-  .spinner { display:inline-flex; gap:6px; align-items:center; }
-  .dot { width:6px; height:6px; border-radius:50%; background:#94a3b8; animation: b 1.2s infinite ease-in-out; }
-  .dot:nth-child(2){ animation-delay:.15s } .dot:nth-child(3){ animation-delay:.3s }
-  @keyframes b { 0%,80%,100%{ opacity:.2; transform:translateY(0) } 40%{ opacity:1; transform:translateY(-3px) } }
-  .badge-green { color:#86efac; border-color:#1e3a2a; background:#0b1f14; }
-  .btn-sort { color:#cbd5e1; cursor:pointer; user-select:none; }
-  .btn-sort:hover { color:#fff; }
-  .sr { border:0; clip:rect(0 0 0 0); clip-path: inset(50%); height:1px; width:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; }
+  html,body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  .wrap{max-width:1200px;margin:24px auto;padding:0 16px}
+  h1{margin:0 0 16px;font:800 28px/1.2 system-ui}
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .input,select,.btn{background:#0b1220;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .btn{cursor:pointer} .btn:hover{background:#0d1727}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:var(--chip);border:1px solid var(--chip-border);color:#aab6c5;border-radius:999px;padding:4px 10px;font-size:12px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .panel-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .small{color:var(--muted);font-size:12px}
+  table{width:100%;border-collapse:collapse}
+  thead th{position:sticky;top:0;z-index:1;background:#0e1520;border-bottom:1px solid var(--line);padding:12px 16px;text-align:left}
+  tbody td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:hover{background:rgba(255,255,255,.02)}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .muted{color:var(--muted)}
+  .right{text-align:right}
+  .foot{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;color:#9aa6b2}
+  .spinner{display:inline-flex;gap:6px;align-items:center}
+  .dot{width:6px;height:6px;border-radius:50%;background:#94a3b8;animation:b 1.2s infinite ease-in-out}
+  .dot:nth-child(2){animation-delay:.15s}.dot:nth-child(3){animation-delay:.3s}
+  @keyframes b{0%,80%,100%{opacity:.2;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+  .list-compact{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{background:var(--chip);border:1px solid var(--chip-border);padding:3px 8px;border-radius:8px;color:#b3c0cf;font-size:12px}
+  .row-h{display:flex;align-items:center;gap:10px}
+  .avatar{width:28px;height:28px;border-radius:8px;background:#0b1220;object-fit:cover;border:1px solid var(--line)}
+  .flag{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-border);color:#cde1ef;font-size:12px}
+  .btn-sort{cursor:pointer}
+  /* 详情卡 */
+  .detail{background:var(--card);border-top:1px dashed #1b2839}
+  .detail-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;padding:16px}
+  .header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .portrait{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);object-fit:cover;background:#0b1220}
+  .grid-icons{display:grid;grid-template-columns:repeat(10, 42px);gap:12px}
+  .icon{width:42px;height:42px;border-radius:10px;background:#0b1220;border:1px solid #1b2840;object-fit:contain}
+  .kbar{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+  .badge{display:inline-flex;gap:6px;align-items:center;background:#0b1f14;border:1px solid #1f3b2c;color:#93f7b5;border-radius:8px;padding:4px 8px}
+  .video{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;background:#000;overflow:hidden}
+  .link{color:#9bd2ff;text-decoration:none} .link:hover{text-decoration:underline}
+  .toggle{cursor:pointer}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Megabonk Leaderboard</h1>
 
-  <!-- 工具栏 -->
   <div class="toolbar">
-    <div class="group">
-      <label for="patch" class="sr">补丁</label>
-      <input id="patch" class="input" style="width:140px" placeholder="补丁（如 1.0.17）" />
-    </div>
-    <div class="group">
-      <label for="q" class="sr">搜索</label>
-      <input id="q" class="input" style="width:280px" placeholder="玩家 / 角色 / 国家代码…" />
-    </div>
-    <div class="group">
-      <label for="char" class="sr">角色</label>
-      <select id="char">
-        <option value="">全部</option>
-      </select>
-    </div>
+    <input id="patch" class="input" style="width:140px" placeholder="补丁（如 1.0.17）">
+    <input id="q" class="input" style="width:280px" placeholder="玩家 / 角色 / 国家代码…">
+    <select id="char"><option value="">全部角色</option></select>
     <button id="btn-refresh" class="btn">刷新</button>
     <span class="pill">数据源：<span id="data-source-badge">（未加载）</span></span>
   </div>
 
-  <!-- 列表 -->
-  <div class="panel" id="panel">
+  <div class="panel">
     <div class="panel-head">
-      <div class="flex">
-        <span class="small">总计 <b id="stat-count">0</b> 条</span>
-        <span class="small">· 上次更新 <span id="stat-last" class="muted">-</span></span>
-      </div>
+      <div class="small">总计 <b id="stat-count">0</b> 条 · 上次更新 <span id="stat-last">-</span></div>
       <div class="small">状态：<span id="status"><span class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></span></div>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:70px">名次</th>
-            <th>玩家</th>
-            <th style="width:180px">角色</th>
-            <th class="right btn-sort" id="sort-kills" style="width:110px">击杀 ▲▼</th>
-            <th style="width:150px">视频</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <tr><td colspan="5" class="muted" style="padding:24px 16px">尚无数据</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:70px">名次</th>
+          <th>玩家</th>
+          <th style="width:240px">角色</th>
+          <th class="right btn-sort" id="sort-kills" style="width:120px">击杀 ▲▼</th>
+          <th style="width:150px">视频</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"><tr><td colspan="5" class="muted" style="padding:24px 16px">正在加载…</td></tr></tbody>
+    </table>
 
     <div class="foot">
-      <div>数据文件位于 <code>/data/leaderboard-&lt;patch&gt;.json</code>（优先）或 <code>.csv</code></div>
-      <div class="flex">
-        <a id="link-json" class="link" href="#" download>下载 JSON</a> ·
-        <a id="link-csv" class="link" href="#" download>下载 CSV</a>
-      </div>
+      <div>数据文件在 <code>/data/leaderboard-&lt;patch&gt;.json</code>（优先）或 <code>.csv</code></div>
+      <div><a id="link-json" class="link" href="#" download>下载 JSON</a> · <a id="link-csv" class="link" href="#" download>下载 CSV</a></div>
     </div>
   </div>
 </div>
 
 <script>
-  // ---------- 配置 ----------
-  const CONFIG = {
-    dataDir: '/data/',           // 你的站点在根域名，固定使用根路径
-    defaultPatch: '1.0.17',
-    PATCHES: ['1.0.17']
-  };
+/* ================= 基本配置 ================= */
+const CONFIG = {
+  dataDir: '/data/',
+  assets: {
+    characters: '/img/characters/',
+    weapon: '/img/weapon/',
+    tome: '/img/tome/',
+    items: '/img/items/'
+  },
+  defaultPatch: '1.0.17'
+};
 
-  // ---------- 状态 ----------
-  const state = {
-    rows: [],
-    filtered: [],
-    sort: { key: 'kills', dir: 'desc' }
-  };
+/* ================= 工具函数 ================= */
+const $ = s => document.querySelector(s);
+const fmt = n => n==null ? '' : Number(n).toLocaleString();
+const by = (k,dir='asc') => (a,b)=> (a[k]??0)===(b[k]??0)?0:((a[k]??0)>(b[k]??0)?1:-1)*(dir==='asc'?1:-1);
+const setStatus = html => $('#status').innerHTML = html;
+const setBadge = t => $('#data-source-badge').textContent = t;
+const esc = s => String(s??'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const num = v => (v==null||v==='')?0:Number(v);
+const arr = v => Array.isArray(v)?v:(typeof v==='string'?v.split(/[;,]\s*/).filter(Boolean):[]);
+const str = v => v==null?'':String(v);
 
-  // ---------- 工具 ----------
-  const $ = (sel) => document.querySelector(sel);
-  const fmt = (n) => n == null ? '' : Number(n).toLocaleString();
-  const by = (k, dir='asc') => (a,b) => (a[k]??0) === (b[k]??0) ? 0 : ((a[k]??0) > (b[k]??0) ? 1 : -1) * (dir==='asc'?1:-1);
-  const setStatus = (html) => $('#status').innerHTML = html;
-  const updateSourceBadge = (text) => $('#data-source-badge').textContent = text;
+/* ================= 解析数据（JSON/CSV 兼容） ================= */
+function coerceRows(input, patch){
+  let rows = Array.isArray(input) ? input : (input?.data||input?.rows||input?.leaderboard||input?.results||input?.list||[]);
+  if(!Array.isArray(rows)) rows=[];
+  return rows.map((r,i)=>({
+    rank: num(r.rank ?? i+1),
+    player: str(r.player || r.playerName || r.name),
+    character: str(r.character),
+    kills: num(r.kills),
+    country_code: str(r.country_code || r.country || r.countryCode || r.code || '').slice(0,2).toUpperCase(),
+    video_url: str(r.video_url || r.videoURL || r.video || ''),
+    patch: str(r.patch || patch || ''),
+    weapons: arr(r.weapons),
+    tomes: arr(r.tomes),
+    items: arr(r.items),
+    created_at_iso: str(r.created_at_iso || r.createdAt),
+    updated_at_iso: str(r.updated_at_iso || r.updatedAt)
+  })).filter(x=>x.player && x.character);
+}
+function parseCSV(text, patch){
+  const lines = text.trim().split(/\r?\n/);
+  if(!lines.length) return [];
+  const head = lines.shift().split(',').map(s=>s.trim());
+  const idx = k => head.indexOf(k);
+  return lines.map((ln,i)=>{
+    const c = ln.split(','); const g = k => idx(k)>=0?c[idx(k)].trim():'';
+    return {
+      rank: num(g('rank')||i+1),
+      player: g('player'),
+      character: g('character'),
+      kills: num(g('kills')),
+      country_code: (g('country_code')||'').slice(0,2).toUpperCase(),
+      video_url: g('video_url'),
+      patch: g('patch')||patch||'',
+      weapons: (g('weapons')||'').split(';').filter(Boolean),
+      tomes: (g('tomes')||'').split(';').filter(Boolean),
+      items: (g('items')||'').split(';').filter(Boolean),
+      created_at_iso: g('created_at_iso'),
+      updated_at_iso: g('updated_at_iso')
+    };
+  }).filter(x=>x.player&&x.character);
+}
 
-  // 兼容多种 JSON 外层结构
-  function coerceRows(input) {
-    let rows = Array.isArray(input) ? input
-      : (input?.data || input?.rows || input?.leaderboard || input?.results || input?.list || []);
-    if (!Array.isArray(rows)) rows = [];
-    // 归一化字段与类型
-    return rows.map((r,i) => ({
-      rank: num(r.rank ?? i+1),
-      player: str(r.player || r.playerName || r.name),
-      character: str(r.character),
-      kills: num(r.kills),
-      country_code: str(r.country_code || r.country || r.countryCode || r.code || '').slice(0,2).toUpperCase(),
-      video_url: str(r.video_url || r.videoURL || r.video || ''),
-      patch: str(r.patch || ''),
-      weapons: arr(r.weapons),
-      tomes: arr(r.tomes),
-      items: arr(r.items),
-      created_at_iso: str(r.created_at_iso || r.createdAt),
-      updated_at_iso: str(r.updated_at_iso || r.updatedAt)
-    })).filter(x => x.player && x.character);
+/* ================= 远程加载 ================= */
+async function fetchRows(patch){
+  const base = CONFIG.dataDir + `leaderboard-${patch}`;
+  try{
+    const r = await fetch(base+'.json',{cache:'no-store'});
+    if(r.ok){ setBadge(`leaderboard-${patch}.json`); return coerceRows(await r.json(), patch); }
+  }catch(e){}
+  try{
+    const r = await fetch(base+'.csv',{cache:'no-store'});
+    if(r.ok){ setBadge(`leaderboard-${patch}.csv`); return parseCSV(await r.text(), patch); }
+  }catch(e){}
+  setBadge('（未加载）'); return [];
+}
+
+/* ================= 资源路径 & 降级 ================= */
+function asset(category, name){
+  if(!name) return '';
+  const base = CONFIG.assets[category] || '/img/';
+  return `${base}${encodeURIComponent(name)}.png`;
+}
+function imgTag(src, cls, alt=''){
+  return `<img class="${cls}" src="${esc(src)}" alt="${esc(alt)}" onerror="this.style.display='none'">`;
+}
+
+/* ================= 渲染 ================= */
+const state = { rows:[], filtered:[], sort:{key:'kills',dir:'desc'} };
+
+function renderOptions(rows){
+  const s = $('#char'); const cur = s.value;
+  const set = new Set(rows.map(r=>r.character).filter(Boolean));
+  s.innerHTML = `<option value="">全部角色</option>` + [...set].sort().map(v=>`<option>${esc(v)}</option>`).join('');
+  if(set.has(cur)) s.value=cur;
+}
+
+function applyFilters(){
+  const q = ($('#q').value||'').toLowerCase().trim();
+  const ch = $('#char').value||'';
+  let rows = state.rows.slice();
+  if(q) rows = rows.filter(r => r.player.toLowerCase().includes(q) || r.character.toLowerCase().includes(q) || (r.country_code||'').toLowerCase().includes(q));
+  if(ch) rows = rows.filter(r => r.character===ch);
+  rows.sort(by(state.sort.key, state.sort.dir));
+  state.filtered = rows;
+  renderTable(rows);
+  $('#stat-count').textContent = rows.length;
+  const last = rows.map(r=>Date.parse(r.updated_at_iso||r.created_at_iso||0)).filter(x=>!isNaN(x)).sort((a,b)=>b-a)[0];
+  $('#stat-last').textContent = last ? new Date(last).toLocaleString() : '-';
+}
+
+function renderTable(rows){
+  const tb = $('#tbody');
+  if(!rows.length){ tb.innerHTML = `<tr><td colspan="5" class="muted" style="padding:24px 16px">没有匹配的结果</td></tr>`; return; }
+  tb.innerHTML = rows.map((r,idx)=>rowHtml(r, idx)).join('');
+  // 绑定展开/收起
+  tb.querySelectorAll('.toggle').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const id = el.dataset.id;
+      const card = document.getElementById('detail-'+id);
+      card.style.display = card.style.display==='none'?'table-row':'none';
+    });
+  });
+}
+
+function rowHtml(r, idx){
+  const id = `${r.rank}-${idx}`;
+  const portrait = asset('characters', r.character);
+  const flag = r.country_code ? `<span class="flag">${esc(r.country_code)}</span>` : '';
+  const videoCell = r.video_url ? `<a class="link" href="${esc(r.video_url)}" target="_blank">打开</a>` : `<span class="muted">-</span>`;
+  /* 主行 */
+  const tr = `<tr class="toggle" data-id="${id}" style="cursor:pointer">
+    <td>${fmt(r.rank)}</td>
+    <td><div class="row-h">${imgTag(portrait,'avatar',r.character)} <b>${esc(r.player)}</b> ${flag}</div></td>
+    <td><div class="list-compact"><span class="chip">${esc(r.character)}</span><span class="chip">v${esc(r.patch||'')}</span></div></td>
+    <td class="num">${fmt(r.kills)}</td>
+    <td>${videoCell}</td>
+  </tr>`;
+  /* 详情卡（默认隐藏） */
+  const detail = `<tr id="detail-${id}" class="detail" style="display:none"><td colspan="5">
+    <div class="detail-wrap">
+      <div>
+        <div class="header">
+          <img class="portrait" src="${esc(portrait)}" alt="${esc(r.character)}" onerror="this.style.display='none'">
+          <div>
+            <div style="font-weight:800;font-size:18px">${esc(r.player)} ${flag}</div>
+            <div class="kbar">
+              <span class="badge">#${fmt(r.rank)}</span>
+              <span class="badge">KILLS ${fmt(r.kills)}</span>
+              ${r.patch?`<span class="badge">v${esc(r.patch)}</span>`:''}
+            </div>
+          </div>
+        </div>
+        ${sectionIcons('武器', 'weapon', r.weapons)}
+        ${sectionIcons('法典', 'tome', r.tomes)}
+        ${sectionIconsGrid('道具', 'items', r.items)}
+      </div>
+      <div>
+        ${videoEmbed(r.video_url)}
+      </div>
+    </div>
+  </td></tr>`;
+  return tr + detail;
+}
+
+function sectionIcons(title, category, list){
+  if(!list?.length) return '';
+  const icons = list.map(n => imgTag(asset(category, n),'icon',n) + `<div class="muted" style="font-size:11px;text-align:center">${esc(n)}</div>`)
+                   .map(html=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px">${html}</div>`).join('');
+  return `<div style="margin:8px 0 10px">
+    <div class="small" style="margin-bottom:6px">${esc(title)}</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">${icons}</div>
+  </div>`;
+}
+function sectionIconsGrid(title, category, list){
+  if(!list?.length) return '';
+  const icons = list.map(n => imgTag(asset(category, n),'icon',n)).join('');
+  return `<div style="margin:8px 0 10px">
+    <div class="small" style="margin-bottom:6px">${esc(title)}</div>
+    <div class="grid-icons">${icons}</div>
+  </div>`;
+}
+
+/* ================= 视频内嵌 ================= */
+function videoEmbed(url){
+  if(!url) return `<div class="video" style="display:flex;align-items:center;justify-content:center;color:#64748b">无视频</div>`;
+  // YouTube
+  const yt1 = url.match(/youtube\.com\/watch\?v=([^&]+)/i);
+  const yt2 = url.match(/youtu\.be\/([^?&]+)/i);
+  if(yt1||yt2){
+    const id = (yt1?yt1[1]:yt2[1]).replace(/[^-\w]/g,'');
+    const src = `https://www.youtube.com/embed/${id}?rel=0&autoplay=0`;
+    return `<iframe class="video" loading="lazy" src="${src}" allow="accelerometer;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>`;
   }
-  const num = (v)=> (v===''||v==null) ? 0 : Number(v);
-  const str = (v)=> (v==null) ? '' : String(v);
-  const arr = (v)=> Array.isArray(v) ? v : (typeof v==='string' && v ? v.split(/[;,]\s*/).filter(Boolean) : []);
-
-  // CSV 解析（weapons/tomes/items 分号分隔）
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r?\n/);
-    if (!lines.length) return [];
-    const head = lines.shift().split(',').map(s=>s.trim());
-    const idx = (k)=> head.indexOf(k);
-    return lines.map((ln,i)=>{
-      const cols = ln.split(',').map(s=>s.trim());
-      const get = (k)=> idx(k) >=0 ? cols[idx(k)] : '';
-      return {
-        rank: num(get('rank') || (i+1)),
-        player: get('player'),
-        character: get('character'),
-        kills: num(get('kills')),
-        country_code: (get('country_code')||'').slice(0,2).toUpperCase(),
-        video_url: get('video_url'),
-        patch: get('patch'),
-        weapons: (get('weapons')||'').split(';').filter(Boolean),
-        tomes: (get('tomes')||'').split(';').filter(Boolean),
-        items: (get('items')||'').split(';').filter(Boolean),
-        created_at_iso: get('created_at_iso'),
-        updated_at_iso: get('updated_at_iso')
-      };
-    }).filter(x => x.player && x.character);
+  // Twitch VOD
+  const tv = url.match(/twitch\.tv\/videos\/(\d+)/i);
+  if(tv){
+    const parent = location.hostname || 'megabonk.org';
+    const src = `https://player.twitch.tv/?video=${tv[1]}&parent=${encodeURIComponent(parent)}&autoplay=false&muted=false`;
+    return `<iframe class="video" loading="lazy" src="${src}" allowfullscreen></iframe>`;
   }
+  // 其他：显示链接
+  return `<div class="video" style="display:flex;align-items:center;justify-content:center">
+    <a class="link" href="${esc(url)}" target="_blank" rel="noopener">打开视频</a>
+  </div>`;
+}
 
-  async function fetchData(patch) {
-    const base = CONFIG.dataDir + `leaderboard-${patch}`;
-    // 先 JSON
-    try {
-      const r = await fetch(base + '.json', { cache: 'no-store' });
-      if (r.ok) {
-        updateSourceBadge(`leaderboard-${patch}.json`);
-        return coerceRows(await r.json());
-      }
-    } catch(e) {}
-    // 再 CSV
-    try {
-      const r = await fetch(base + '.csv', { cache: 'no-store' });
-      if (r.ok) {
-        updateSourceBadge(`leaderboard-${patch}.csv`);
-        return parseCSV(await r.text());
-      }
-    } catch(e) {}
-    updateSourceBadge('（未加载）');
-    return [];
-  }
+/* ================= 主流程 ================= */
+async function load(){
+  const patch = ($('#patch').value||'').trim();
+  if(!patch){ setStatus('<span class="muted">请输入补丁号</span>'); return; }
+  setStatus(`<span class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>`);
+  $('#link-json').href = CONFIG.dataDir + `leaderboard-${patch}.json`;
+  $('#link-csv').href  = CONFIG.dataDir + `leaderboard-${patch}.csv`;
+  const rows = await fetchRows(patch);
+  state.rows = rows;
+  renderOptions(rows);
+  applyFilters();
+  setStatus('<span class="pill" style="background:#0b1f14;border-color:#1f3b2c;color:#93f7b5">已加载</span>');
+}
 
-  function setDownloadLinks(patch) {
-    $('#link-json').href = CONFIG.dataDir + `leaderboard-${patch}.json`;
-    $('#link-csv').href  = CONFIG.dataDir + `leaderboard-${patch}.csv`;
-  }
+function debounce(fn,ms=250){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms); } }
 
-  // 渲染角色过滤选项（从数据中提取去重）
-  function renderCharOptions(rows) {
-    const sel = $('#char');
-    const cur = sel.value;
-    const set = new Set(rows.map(r => r.character).filter(Boolean));
-    const list = [''].concat([...set].sort());
-    sel.innerHTML = list.map(v => `<option value="${escapeHtml(v)}">${v || '全部'}</option>`).join('');
-    if (set.has(cur)) sel.value = cur;
-  }
-
-  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-
-  // 过滤 + 排序 + 渲染
-  function applyFilters() {
-    const q = ($('#q').value || '').trim().toLowerCase();
-    const pickChar = $('#char').value || '';
-    let rows = state.rows.slice();
-
-    if (q) {
-      rows = rows.filter(r =>
-        (r.player||'').toLowerCase().includes(q) ||
-        (r.character||'').toLowerCase().includes(q) ||
-        (r.country_code||'').toLowerCase().includes(q)
-      );
-    }
-    if (pickChar) rows = rows.filter(r => r.character === pickChar);
-
-    rows.sort(by(state.sort.key, state.sort.dir));
-    state.filtered = rows;
-    renderTable(rows);
-    $('#stat-count').textContent = rows.length;
-
-    // 取最近更新时间
-    const last = rows
-      .map(r => Date.parse(r.updated_at_iso || r.created_at_iso || 0))
-      .filter(n => !isNaN(n))
-      .sort((a,b)=>b-a)[0];
-    $('#stat-last').textContent = last ? new Date(last).toLocaleString() : '-';
-  }
-
-  function renderTable(rows) {
-    const tb = $('#tbody');
-    if (!rows.length) {
-      tb.innerHTML = `<tr><td colspan="5" class="muted" style="padding:24px 16px">没有匹配的结果</td></tr>`;
-      return;
-    }
-    tb.innerHTML = rows.map(r => {
-      const flag = r.country_code ? `<span class="pill">${escapeHtml(r.country_code)}</span>` : '';
-      const vid = r.video_url ? `<a class="link" href="${escapeHtml(r.video_url)}" target="_blank" rel="noopener">打开</a>` : `<span class="muted">-</span>`;
-      return `<tr>
-        <td>${fmt(r.rank)}</td>
-        <td>${escapeHtml(r.player)} ${flag}</td>
-        <td>${escapeHtml(r.character)}</td>
-        <td class="num">${fmt(r.kills)}</td>
-        <td>${vid}</td>
-      </tr>`;
-    }).join('');
-  }
-
-  // 加载主流程
-  async function loadLeaderboard() {
-    const patch = ($('#patch').value || '').trim();
-    if (!patch) {
-      setStatus(`<span class="muted">请输入补丁号后刷新</span>`);
-      updateSourceBadge('（未加载）');
-      renderTable([]);
-      $('#stat-count').textContent = '0';
-      $('#stat-last').textContent = '-';
-      setDownloadLinks('');
-      return;
-    }
-    setDownloadLinks(patch);
-    setStatus(`<span class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>`);
-    try {
-      const rows = await fetchData(patch);
-      state.rows = rows;
-      renderCharOptions(rows);
-      applyFilters();
-      setStatus(`<span class="badge-green pill">已加载</span>`);
-    } catch (e) {
-      console.error(e);
-      state.rows = [];
-      applyFilters();
-      setStatus(`<span class="muted">加载失败</span>`);
-    }
-  }
-
-  // 事件
-  function debounce(fn, ms=250){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms); } }
-  $('#btn-refresh').addEventListener('click', loadLeaderboard);
-  $('#q').addEventListener('input', debounce(applyFilters, 120));
+document.addEventListener('DOMContentLoaded', ()=>{
+  $('#patch').value = CONFIG.defaultPatch;
+  $('#btn-refresh').addEventListener('click', load);
+  $('#q').addEventListener('input', debounce(applyFilters,120));
   $('#char').addEventListener('change', applyFilters);
-  $('#sort-kills').addEventListener('click', () => {
+  $('#sort-kills').addEventListener('click', ()=>{
     state.sort.dir = (state.sort.key==='kills' && state.sort.dir==='desc') ? 'asc' : 'desc';
-    state.sort.key = 'kills';
-    applyFilters();
+    state.sort.key = 'kills'; applyFilters();
   });
-
-  // 初始化
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!$('#patch').value) $('#patch').value = CONFIG.defaultPatch;
-    loadLeaderboard();
-  });
+  load();
+});
 </script>
 </body>
 </html>
