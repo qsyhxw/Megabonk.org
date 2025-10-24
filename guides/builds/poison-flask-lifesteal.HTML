@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabonk Poison Flask Build: Lifesteal + Black Hole</title>
+  <meta name="description" content="Poison Flask build for Megabonk: lifesteal sustain with Black Hole grouping and Aura safety. Best tomes, key items, finisher picks, and upgrade path." />
+  <meta name="keywords" content="poison flask build, lifesteal poison, black hole aura, lightning staff revolver, duration quantity cooldown damage, megabonk mechanics archetype, amog poison" />
+  <link rel="canonical" href="https://megabonk.org/guides/builds/poison-flask-lifesteal" />
+
+<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+  <!-- FAQPage schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What is the Poison Flask lifesteal poison‑explosion archetype?","acceptedAnswer":{"@type":"Answer","text":"A character‑agnostic mechanics build centered on Poison Flask DoT chains and explosions. Black Hole groups packs to amplify poison spread, Aura protects you up close, and Lightning Staff or Revolver finishes targets."}},
+      {"@type":"Question","name":"Which tomes are best?","acceptedAnswer":{"@type":"Answer","text":"Duration ▶ Damage ▶ Quantity ▶ Cooldown. Optionally add Bloody (Lifesteal) and Regeneration depending on version and comfort."}},
+      {"@type":"Question","name":"How do I play it?","acceptedAnswer":{"@type":"Answer","text":"Kite and survive early while stacking Duration and Damage. Mid‑late game, rely on grouped poison chains and detonations to snowball waves, sustaining through lifesteal and regen."}},
+      {"@type":"Question","name":"Why does this work?","acceptedAnswer":{"@type":"Answer","text":"Community guides commonly recommend Flask + Black Hole with Duration/Quantity/Cooldown scaling and lifesteal support. Poison benefits heavily from grouping and sustained uptime, keeping you topped off while packs explode."}}
+    ]
+  }
+  </script>
+
+  <!-- ItemList schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Poison Flask Lifesteal — Equipment",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"item":{"@type":"Thing","name":"Poison Flask","description":"Poison chains + explosions core"}},
+      {"@type":"ListItem","position":2,"item":{"@type":"Thing","name":"Black Hole","description":"Grouping to amplify poison spread"}},
+      {"@type":"ListItem","position":3,"item":{"@type":"Thing","name":"Aura","description":"Bodyguard ring for melee safety"}},
+      {"@type":"ListItem","position":4,"item":{"@type":"Thing","name":"Lightning Staff","description":"Finisher option (clear)"}},
+      {"@type":"ListItem","position":5,"item":{"@type":"Thing","name":"Revolver","description":"Finisher option (single‑target)"}},
+      {"@type":"ListItem","position":6,"item":{"@type":"Thing","name":"Duration Tome"}},
+      {"@type":"ListItem","position":7,"item":{"@type":"Thing","name":"Damage Tome"}},
+      {"@type":"ListItem","position":8,"item":{"@type":"Thing","name":"Quantity Tome"}},
+      {"@type":"ListItem","position":9,"item":{"@type":"Thing","name":"Cooldown Tome"}},
+      {"@type":"ListItem","position":10,"item":{"@type":"Thing","name":"Bloody Tome (Lifesteal)"}},
+      {"@type":"ListItem","position":11,"item":{"@type":"Thing","name":"Regeneration Tome"}},
+      {"@type":"ListItem","position":12,"item":{"@type":"Thing","name":"Toxic Barrel"}},
+      {"@type":"ListItem","position":13,"item":{"@type":"Thing","name":"Leeching Crystal"}},
+      {"@type":"ListItem","position":14,"item":{"@type":"Thing","name":"Moldy Gloves"}},
+      {"@type":"ListItem","position":15,"item":{"@type":"Thing","name":"Demonic Blood"}}
+    ]
+  }
+  </script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--primary-bg:#1a1a2e;--secondary-bg:#16213e;--accent-purple:#9d4edd;--accent-blue:#3a86ff;--accent-pink:#ff006e;--text-light:#f8f9fa;--text-gray:#adb5bd;--card-bg:#0f3460;--success:#06ffa5;--warning:#ffbe0b;--danger:#ff006e}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:var(--text-light);background:var(--primary-bg);overflow-x:hidden}
+    header{background:rgba(15,52,96,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;box-shadow:0 4px 30px rgba(0,0,0,.3)}
+    nav{max-width:1400px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+    .nav-links{display:flex;list-style:none;gap:2rem}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-weight:500;transition:all .3s ease}
+    .nav-links a:hover{color:var(--accent-purple)}
+    .mobile-menu{display:none;background:none;border:none;color:var(--text-light);font-size:1.5rem;cursor:pointer}
+    .hero{background:linear-gradient(135deg,rgba(157,78,221,.2),rgba(58,134,255,.2));padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.02) 10px,rgba(255,255,255,.02) 20px)}
+    .hero-content{max-width:1400px;margin:0 auto;position:relative;z-index:1}
+    .hero h1{font-size:3rem;font-weight:900;margin-bottom:.5rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-subtitle{font-size:1.1rem;color:var(--text-gray);margin-bottom:1rem}
+    .tier-badge{display:inline-block;background:linear-gradient(135deg,var(--warning),var(--accent-purple));padding:.6rem 1.5rem;border-radius:30px;font-size:1rem;font-weight:800;margin-bottom:1rem;box-shadow:0 5px 20px rgba(255,190,11,.25)}
+    .comp-belt{display:flex;justify-content:center;gap:.85rem;flex-wrap:wrap;margin-top:.75rem}
+    .comp-pill{display:flex;align-items:center;gap:.5rem;background:rgba(15,52,96,.6);border:1px solid rgba(157,78,221,.25);padding:.5rem .75rem;border-radius:999px}
+    .comp-pill img{width:28px;height:28px;border-radius:6px;border:1px solid rgba(157,78,221,.25);object-fit:cover}
+    .container{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+    .section-title{font-size:2.2rem;font-weight:800;margin-bottom:.75rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section-subtitle{color:var(--text-gray);font-size:1.05rem;margin-bottom:1.25rem}
+    .build-overview{background:linear-gradient(135deg,rgba(157,78,221,.1),rgba(58,134,255,.1));border:2px solid rgba(157,78,221,.3);border-radius:20px;padding:2rem;margin-bottom:2.5rem}
+    .overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:1rem}
+    .overview-card{background:rgba(15,52,96,.5);padding:1.25rem;border-radius:15px;text-align:center;border:1px solid rgba(157,78,221,.2)}
+    .overview-card h3{color:var(--accent-purple);margin-bottom:.35rem;font-size:1.05rem}
+    .overview-card p{color:var(--text-gray);font-size:.95rem}
+    .equipment-section{margin-bottom:2.75rem}
+    .equipment-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:1rem}
+    .equipment-card{background:var(--card-bg);border-radius:15px;padding:1.25rem;border:2px solid rgba(157,78,221,.2);transition:all .3s ease;position:relative;overflow:hidden}
+    .equipment-card:hover{transform:translateY(-5px);border-color:var(--accent-purple);box-shadow:0 10px 30px rgba(157,78,221,.3)}
+    .priority-1{border-color:var(--success);background:linear-gradient(135deg,rgba(6,255,165,.12),rgba(15,52,96,1))}
+    .priority-2{border-color:var(--warning)}
+    .priority-3{border-color:var(--accent-purple)}
+    .equipment-header{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem}
+    .equipment-icon{width:64px;height:64px;border-radius:10px;object-fit:cover;border:2px solid rgba(157,78,221,.3)}
+    .equipment-info h3{color:var(--text-light);font-size:1.1rem;margin-bottom:.15rem}
+    .priority-badge{display:inline-block;padding:.25rem .7rem;border-radius:20px;font-size:.75rem;font-weight:700}
+    .priority-1 .priority-badge{background:var(--success);color:#052a2a}
+    .priority-2 .priority-badge{background:var(--warning);color:#1a1a2e}
+    .priority-3 .priority-badge{background:var(--accent-purple);color:#fff}
+    .equipment-description{color:var(--text-gray);font-size:.95rem;line-height:1.6}
+    .timeline{position:relative;padding-left:3rem;margin-top:1.25rem}
+    .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-purple),var(--accent-blue))}
+    .timeline-item{position:relative;margin-bottom:1.5rem;padding:1.25rem;background:var(--card-bg);border-radius:15px;border:1px solid rgba(157,78,221,.2)}
+    .timeline-item::before{content:'';position:absolute;left:-3.5rem;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:var(--accent-purple);border:3px solid var(--primary-bg)}
+    .timeline-time{display:inline-block;background:var(--accent-purple);color:#fff;padding:.3rem .9rem;border-radius:20px;font-size:.82rem;font-weight:700;margin-bottom:.5rem}
+    .timeline-item h3{color:var(--accent-blue);margin-bottom:.35rem}
+    .timeline-item p{color:var(--text-gray)}
+    table.alternatives-table{width:100%;border-collapse:collapse;margin-top:1rem;background:var(--card-bg);border-radius:15px;overflow:hidden}
+    .alternatives-table th{background:rgba(157,78,221,.2);color:var(--accent-purple);padding:1rem;text-align:left;font-weight:700}
+    .alternatives-table td{padding:1rem;border-bottom:1px solid rgba(157,78,221,.1);color:var(--text-gray)}
+    .alternatives-table tr:last-child td{border-bottom:none}
+    .alternatives-table tr:hover{background:rgba(157,78,221,.05)}
+    .faq-section{margin-top:2.5rem}
+    .faq-item{background:var(--card-bg);border-radius:15px;padding:1.5rem;margin-bottom:1rem;border:1px solid rgba(157,78,221,.2)}
+    .faq-question{color:var(--accent-purple);font-size:1.2rem;font-weight:700;margin-bottom:.6rem}
+    .faq-answer{color:var(--text-gray)}
+    footer{background:var(--secondary-bg);padding:3rem 2rem;text-align:center;margin-top:4rem;border-top:1px solid rgba(157,78,221,.2)}
+    .footer-links{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap}
+    .footer-links a{color:var(--accent-purple);text-decoration:none;transition:color .3s}
+    .footer-links a:hover{color:var(--accent-blue)}
+    @media (max-width:768px){.hero h1{font-size:2.4rem}.nav-links{display:none}.mobile-menu{display:block}.timeline{padding-left:2rem}.equipment-grid{grid-template-columns:1fr}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .equipment-card,.timeline-item,.faq-item{animation:fadeInUp .6s ease-out}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../../" class="logo">Megabonk.org</a>
+      <ul class="nav-links">
+        <li><a href="../../../">Home</a></li>
+        <li><a href="../../../leaderboard/">Leaderboard</a></li>
+        <li><a href="/guides/characters/">Characters</a></li>
+        <li><a href="/guides/builds/">Builds</a></li>
+        <li><a href="/guides/bosses/">Bosses</a></li>
+        <li><a href="../../../database/weapons/">Weapons</a></li>
+      </ul>
+      <button class="mobile-menu">☰</button>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <span class="tier-badge">⭐ A‑TIER MECHANICS (Poison Sustain)</span>
+      <h1>🧪 Poison Flask Lifesteal Poison‑Explosion (Mechanics Archetype)</h1>
+      <p class="hero-subtitle">Flask chains + detonations • Black Hole grouping • Aura bodyguard • Lightning Staff/Revolver to finish</p>
+
+      <!-- Above‑the‑fold composition belt -->
+      <div class="comp-belt" aria-label="Core composition">
+        <div class="comp-pill" title="Poison Flask"><img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask icon"/><span>Poison Flask</span></div>
+        <div class="comp-pill" title="Black Hole"><img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole icon"/><span>Black Hole</span></div>
+        <div class="comp-pill" title="Aura"><img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura icon"/><span>Aura</span></div>
+        <div class="comp-pill" title="Lightning Staff"><img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff icon"/><span>Lightning Staff</span></div>
+        <div class="comp-pill" title="Revolver"><img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver icon"/><span>Revolver</span></div>
+        <div class="comp-pill" title="Duration Tome"><img src="https://megabonk.org/images/Tomes/Duration_Tome.png" alt="Duration Tome"/><span>Duration</span></div>
+        <div class="comp-pill" title="Damage Tome"><img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome"/><span>Damage</span></div>
+        <div class="comp-pill" title="Quantity Tome"><img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome"/><span>Quantity</span></div>
+        <div class="comp-pill" title="Cooldown Tome"><img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome"/><span>Cooldown</span></div>
+        <div class="comp-pill" title="Bloody Tome"><img src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome"/><span>Lifesteal</span></div>
+        <div class="comp-pill" title="Regeneration Tome"><img src="https://megabonk.org/images/Tomes/Regen_Tome.png" alt="Regen Tome"/><span>Regen</span></div>
+      </div>
+
+      <div class="comp-belt" aria-label="Recommended items" style="margin-top:.5rem;">
+        <div class="comp-pill" title="Toxic Barrel"><img src="https://megabonk.org/images/Items/Item_Toxic_Barrel.png" alt="Toxic Barrel"/><span>Toxic Barrel</span></div>
+        <div class="comp-pill" title="Leeching Crystal"><img src="https://megabonk.org/images/Items/Item_Leeching_Crystal.png" alt="Leeching Crystal"/><span>Leeching Crystal</span></div>
+        <div class="comp-pill" title="Moldy Gloves"><img src="https://megabonk.org/images/Items/Item_Moldy_Gloves.png" alt="Moldy Gloves"/><span>Moldy Gloves</span></div>
+        <div class="comp-pill" title="Demonic Blood"><img src="https://megabonk.org/images/Items/Item_Demonic_Blood.png" alt="Demonic Blood"/><span>Demonic Blood</span></div>
+        <div class="comp-pill" title="Sucky Magnet"><img src="https://megabonk.org/images/Items/Item_Sucky_Magnet.png" alt="Sucky Magnet"/><span>Sucky Magnet</span></div>
+        <div class="comp-pill" title="Battery"><img src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery"/><span>Battery</span></div>
+        <div class="comp-pill" title="Gas Mask"><img src="https://megabonk.org/images/Items/Item_Gas_Mask.png" alt="Gas Mask"/><span>Gas Mask</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="build-overview">
+      <h2 class="section-title">🎯 Build Overview</h2>
+      <p class="section-subtitle">A <strong>poison sustain</strong> shell that snowballs off chain DoTs and detonations. <em>Poison Flask</em> spreads stacks; <em>Black Hole</em> groups packs so more enemies share the same poison cloud; <em>Aura</em> protects you while you weave; finish with <em>Lightning Staff</em> (clear) or <em>Revolver</em> (single‑target). Tome order: <strong>Duration ▶ Damage ▶ Quantity ▶ Cooldown</strong>, with optional <strong>Lifesteal/Regeneration</strong> for comfort. Works especially well on poison‑leaning kits (e.g., Amog) but remains character‑agnostic.</p>
+      <div class="overview-grid">
+        <div class="overview-card"><h3>Playstyle</h3><p>Kiting sustain • grouped DoT chains • on‑contact detonations</p></div>
+        <div class="overview-card"><h3>Difficulty</h3><p>Medium — early survival matters; late game snowballs</p></div>
+        <div class="overview-card"><h3>Power Spike</h3><p>Mid‑game once Duration/Damage + Black Hole are online</p></div>
+        <div class="overview-card"><h3>Best For</h3><p>Endless waves, dense maps, sustain learners</p></div>
+      </div>
+    </section>
+
+    <!-- Weapons -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚔️ Core & Supporting Weapons</h2>
+      <p class="section-subtitle">Keep to 3–4 total weapons to avoid upgrade dilution</p>
+      <div class="equipment-grid">
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask" class="equipment-icon"><div class="equipment-info"><h3>Poison Flask</h3><span class="priority-badge">CORE</span></div></div><p class="equipment-description">Applies stacking poison and triggers explosions. Scales hardest with <strong>Duration</strong> and then <strong>Damage</strong>.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole" class="equipment-icon"><div class="equipment-info"><h3>Black Hole</h3><span class="priority-badge">GROUPING</span></div></div><p class="equipment-description">Pulls mobs together so poison chains/explosions overlap more targets, accelerating snowball.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura" class="equipment-icon"><div class="equipment-info"><h3>Aura</h3><span class="priority-badge">BODYGUARD</span></div></div><p class="equipment-description">Passive ring that shreds melee chip damage and keeps you safe while pathing.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff" class="equipment-icon"><div class="equipment-info"><h3>Lightning Staff (or Revolver)</h3><span class="priority-badge">FINISHER</span></div></div><p class="equipment-description">Choose Lightning for chain finishing and interrupts; pick Revolver if you want precise elite deletion.</p></div>
+      </div>
+    </section>
+
+    <!-- Tomes -->
+    <section class="equipment-section">
+      <h2 class="section-title">📚 Tome Priority</h2>
+      <p class="section-subtitle">Order: <strong>Duration ▶ Damage ▶ Quantity ▶ Cooldown</strong> · Optional: <strong>Bloody (Lifesteal)</strong> + <strong>Regeneration</strong> depending on patch</p>
+      <div class="equipment-grid">
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Duration_Tome.png" alt="Duration Tome" class="equipment-icon"><div class="equipment-info"><h3>Duration</h3><span class="priority-badge">#1</span></div></div><p class="equipment-description">Longer poison uptime = more ticks and more chances to explode.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="equipment-icon"><div class="equipment-info"><h3>Damage</h3><span class="priority-badge">#2</span></div></div><p class="equipment-description">Pushes DoT + explosion thresholds over key breakpoints.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="equipment-icon"><div class="equipment-info"><h3>Quantity</h3><span class="priority-badge">#3</span></div></div><p class="equipment-description">More projectiles/instances to seed poison faster across groups.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="equipment-icon"><div class="equipment-info"><h3>Cooldown</h3><span class="priority-badge">#4</span></div></div><p class="equipment-description">Quality‑of‑life finisher that smooths the rotation once your core is rolling.</p></div>
+        <div class="equipment-card priority-3"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome" class="equipment-icon"><div class="equipment-info"><h3>Bloody (Lifesteal)</h3><span class="priority-badge">OPTIONAL</span></div></div><p class="equipment-description">Pairs perfectly with continuous DoTs for sustain.
+        </p></div>
+        <div class="equipment-card priority-3"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Regen_Tome.png" alt="Regen Tome" class="equipment-icon"><div class="equipment-info"><h3>Regeneration</h3><span class="priority-badge">OPTIONAL</span></div></div><p class="equipment-description">Safety net if lifesteal values are toned down in your version.</p></div>
+      </div>
+    </section>
+
+    <!-- Items -->
+    <section class="equipment-section">
+      <h2 class="section-title">🎁 Essential Items</h2>
+      <p class="section-subtitle">Poison amplification + sustain + uptime</p>
+      <div class="equipment-grid">
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Toxic_Barrel.png" alt="Toxic Barrel" class="equipment-icon"><div class="equipment-info"><h3>Toxic Barrel</h3><span class="priority-badge">POISON</span></div></div><p class="equipment-description">Bread‑and‑butter poison amplifier for the theme.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Leeching_Crystal.png" alt="Leeching Crystal" class="equipment-icon"><div class="equipment-info"><h3>Leeching Crystal</h3><span class="priority-badge">SUSTAIN</span></div></div><p class="equipment-description">Converts constant damage ticks into steady healing.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Moldy_Gloves.png" alt="Moldy Gloves" class="equipment-icon"><div class="equipment-info"><h3>Moldy Gloves</h3><span class="priority-badge">STATUS</span></div></div><p class="equipment-description">Status‑centric synergy that helps seed and maintain stacks.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Demonic_Blood.png" alt="Demonic Blood" class="equipment-icon"><div class="equipment-info"><h3>Demonic Blood</h3><span class="priority-badge">POWER</span></div></div><p class="equipment-description">Greedy damage/convert options for confident pilots.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery" class="equipment-icon"><div class="equipment-info"><h3>Battery</h3><span class="priority-badge">UPTIME</span></div></div><p class="equipment-description">More frequent procs across all tools; great mid‑game pickup.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Sucky_Magnet.png" alt="Sucky Magnet" class="equipment-icon"><div class="equipment-info"><h3>Sucky Magnet</h3><span class="priority-badge">PICKUP</span></div></div><p class="equipment-description">Vacuum XP safely to keep levels rolling without backtracking.</p></div>
+        <div class="equipment-card priority-3"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Gas_Mask.png" alt="Gas Mask" class="equipment-icon"><div class="equipment-info"><h3>Gas Mask</h3><span class="priority-badge">THEME</span></div></div><p class="equipment-description">On‑theme pick that can help in hazard‑heavy maps.
+        </p></div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="equipment-section">
+      <h2 class="section-title">📈 Upgrade Path Timeline</h2>
+      <p class="section-subtitle">Minute‑by‑minute; high‑rarity rolls can preempt</p>
+      <div class="timeline">
+        <div class="timeline-item"><span class="timeline-time">0–3 min</span><h3>Stabilize & Seed</h3><p>Secure <em>Poison Flask</em>. Prioritize <strong>Duration</strong> first, then a bit of <strong>Damage</strong>. If fragile, grab <em>Aura</em> early.</p></div>
+        <div class="timeline-item"><span class="timeline-time">3–6 min</span><h3>Group & Grow</h3><p>Add <em>Black Hole</em> to start grouping. Keep stacking <strong>Damage</strong>. Limit weapons to 3 for focused upgrades.</p></div>
+        <div class="timeline-item"><span class="timeline-time">6–10 min</span><h3>Uptime & Spread</h3><p>Begin <strong>Quantity</strong>; your poison now blankets packs. Slot <em>Lightning Staff</em> or <em>Revolver</em> for finishing.</p></div>
+        <div class="timeline-item"><span class="timeline-time">10–15 min</span><h3>Spike & Sustain</h3><p>Add <strong>Cooldown</strong> and lifesteal/regeneration tomes as needed. Pick up <em>Leeching Crystal</em> and <em>Battery</em>.</p></div>
+        <div class="timeline-item"><span class="timeline-time">15+ min</span><h3>Close Out</h3><p>Cap remaining Duration/Damage. Sprinkle comfort/QoL items (pickup, mobility). Enjoy the chain‑poison detonations.</p></div>
+      </div>
+    </section>
+
+    <div style="margin:30px auto; text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Alternatives -->
+    <section class="equipment-section">
+      <h2 class="section-title">🔄 Alternatives & Replacements</h2>
+      <p class="section-subtitle">If a key roll doesn’t show</p>
+      <table class="alternatives-table">
+        <thead><tr><th>Category</th><th>Primary</th><th>Alternatives</th></tr></thead>
+        <tbody>
+          <tr><td>Finisher</td><td>Lightning Staff</td><td>Revolver (tighter angles, elite focus)</td></tr>
+          <tr><td>Control</td><td>Black Hole</td><td>Aura emphasis (safer, less grouping); delay BH until Damage online</td></tr>
+          <tr><td>Tomes</td><td>Duration ▶ Damage ▶ Quantity ▶ Cooldown</td><td>Insert Lifesteal/Regeneration where comfort demands</td></tr>
+          <tr><td>Items</td><td>Toxic Barrel, Leeching Crystal, Moldy Gloves</td><td>Demonic Blood (greed), Battery, Sucky Magnet</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Mistakes -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚠️ Common Mistakes</h2>
+      <div class="overview-grid">
+        <div class="overview-card"><h3>Over‑grouping too early</h3><p>Black Hole shines after Damage/Duration — grouping healthy mobs is risky.</p></div>
+        <div class="overview-card"><h3>Skipping sustain</h3><p>Without Lifesteal/Regeneration or Leeching Crystal, mid‑game can feel brittle.</p></div>
+        <div class="overview-card"><h3>Too many weapons</h3><p>3–4 total to keep upgrade density high.</p></div>
+        <div class="overview-card"><h3>Ignoring pickup radius</h3><p>No Sucky Magnet = stalled levels, fewer tomes, slower snowball.</p></div>
+      </div>
+    </section>
+
+    <!-- Why it works -->
+    <section class="equipment-section">
+      <h2 class="section-title">🧠 Why This Works</h2>
+      <p class="section-subtitle"><strong>Poison Flask</strong> scales superbly with <strong>Duration</strong> and <strong>Damage</strong>, and grouping via <strong>Black Hole</strong> multiplies poison spread and explosion overlap. <strong>Aura</strong> adds hands‑free safety so you can kite, while a finisher (<strong>Lightning Staff</strong> or <strong>Revolver</strong>) tightens the loop. Popular meta guides similarly recommend Flask + grouping + sustain tomes/items, and community discussion continues to track its tuning across patches.</p>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Megabonk.org — All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="../../../">Home</a>
+      <a href="/guides/characters/">Characters</a>
+      <a href="/guides/builds/">All Builds</a>
+      <a href="../../../privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
