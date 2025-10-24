@@ -656,6 +656,264 @@
         .build-card, .trinity-card, .tip-card {
             animation: fadeInUp 0.6s ease-out;
         }
+
+        /* ========== 新增：标签页和角色卡片样式 ========== */
+        .build-type-tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: rgba(15, 52, 96, 0.5);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            transform: translate(-50%, -50%);
+            transition: all 0.4s ease;
+            z-index: 0;
+        }
+
+        .tab-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab-button:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .tab-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.4);
+        }
+
+        .tab-button.active::before {
+            display: none;
+        }
+
+        .build-section {
+            display: none;
+        }
+
+        .build-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .builds-grid-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .build-card-compact {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(157, 78, 221, 0.2);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .build-card-compact:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.4);
+            border-color: var(--accent-purple);
+        }
+
+        .build-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            object-position: center;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(58, 134, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .build-card-image img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .build-card-compact:hover .build-card-image img {
+            transform: scale(1.1);
+        }
+
+        .build-card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .build-card-content {
+            padding: 1.25rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .build-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .build-card-character {
+            color: var(--accent-purple);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .build-card-description {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .build-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(157, 78, 221, 0.2);
+        }
+
+        .difficulty-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .difficulty-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .difficulty-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .difficulty-dot.filled {
+            background: linear-gradient(135deg, var(--success), var(--warning), var(--danger));
+        }
+
+        .view-build-btn {
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .tier-s-bg {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(255, 0, 110, 0.3));
+        }
+
+        .tier-a-bg {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.3), rgba(6, 255, 165, 0.3));
+        }
+
+        .tier-b-bg {
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.3), rgba(6, 255, 165, 0.3));
+        }
+
+        .meta-bg {
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.3), rgba(255, 0, 110, 0.3));
+        }
+
+        @media (max-width: 768px) {
+            .builds-grid-compact {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .tab-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -665,9 +923,9 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="../../">Home</a></li>
                 <li><a href="/leaderboard/">Leaderboard</a></li>
-                <li><a href="../characters/">Characters</a></li>
-                <li><a href="../bosses/">Bosses</a></li>
-                <li><a href="../achievements/">Achievements</a></li>
+                <li><a href="/guides/characters/">Characters</a></li>
+                <li><a href="/guides/bosses/">Bosses</a></li>
+                <li><a href="/guides/achievements/">Achievements</a></li>
                 <li><a href="../../database/weapons/">Weapons</a></li>
             </ul>
             <button class="mobile-menu" id="mobileMenu">☰</button>
@@ -680,11 +938,11 @@
             <p>Master the most powerful character builds and dominate the leaderboards</p>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">7</div>
+                    <div class="stat-number">35+</div>
                     <div class="stat-label">Meta Builds</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">20+</div>
+                    <div class="stat-number">30+</div>
                     <div class="stat-label">Weapon Combos</div>
                 </div>
                 <div class="stat-item">
@@ -696,6 +954,529 @@
     </div>
 
     <div class="container">
+        <!-- Build Type Tabs -->
+        <div class="build-type-tabs">
+            <button class="tab-button active" data-tab="character-builds">
+                <span>🎭 Browse by Character</span>
+            </button>
+            <button class="tab-button" data-tab="playstyle-builds">
+                <span>⚔️ Browse by Playstyle</span>
+            </button>
+        </div>
+
+        <!-- Character Builds Section -->
+        <div class="build-section active" id="character-builds">
+            <div class="section-header">
+                <h2 class="section-title">🎭 Character-Specific Builds</h2>
+                <p class="section-subtitle">Optimized builds tailored for each character's unique strengths and abilities</p>
+            </div>
+
+            <div class="builds-grid-compact">
+                <!-- Fox Build -->
+                <a href="https://megabonk.org/guides/builds/fox-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Fox.png" alt="Fox">
+                        <span class="build-card-badge">⭐ S-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🦊 Fox Luck Master</h3>
+                        <p class="build-card-character">Best for: Fox (Kitsune)</p>
+                        <p class="build-card-description">
+                            Stack Luck to absurd levels and watch legendary items rain from the sky. Fox's 1% Luck per level creates the ultimate RNG manipulation build.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Robinette Build -->
+                <a href="https://megabonk.org/guides/builds/robinette-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Robinette.png" alt="Robinette">
+                        <span class="build-card-badge">⭐ A-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🏹 Robinette Piercing Arrows</h3>
+                        <p class="build-card-character">Best for: Robinette</p>
+                        <p class="build-card-description">
+                            Master the bow with piercing projectiles that cut through enemy lines. Perfect for clearing dense swarms efficiently.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Ninja Build -->
+                <a href="https://megabonk.org/guides/builds/ninja-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Ninja.png" alt="Ninja">
+                        <span class="build-card-badge">⭐ S-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🥷 Ninja Critical Assassin</h3>
+                        <p class="build-card-character">Best for: Ninja</p>
+                        <p class="build-card-description">
+                            Stack critical strike chance and damage for massive burst potential. Ninja's crit passive makes every hit potentially deadly.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Megachad Build -->
+                <a href="https://megabonk.org/guides/builds/megachad-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Megachad.png" alt="Megachad">
+                        <span class="build-card-badge">⭐ S-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">💪 Megachad Tank Build</h3>
+                        <p class="build-card-character">Best for: Megachad</p>
+                        <p class="build-card-description">
+                            Become an unstoppable fortress with massive health pool and AOE damage. Stand your ground and let enemies come to you.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Birdo Build -->
+                <a href="https://megabonk.org/guides/builds/birdo-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Birdo.png" alt="Birdo">
+                        <span class="build-card-badge">⭐ A-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🐦 Birdo Aerial Assault</h3>
+                        <p class="build-card-character">Best for: Birdo</p>
+                        <p class="build-card-description">
+                            Utilize high mobility and evasion for a hit-and-run playstyle. Stay in the air and rain destruction from above.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Noelle Build -->
+                <a href="https://megabonk.org/guides/builds/noelle-best-build" class="build-card-compact">
+                    <div class="build-card-image meta-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Noelle.png" alt="Noelle">
+                        <span class="build-card-badge">🎄 SEASONAL</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">❄️ Noelle Frost Mage</h3>
+                        <p class="build-card-character">Best for: Noelle</p>
+                        <p class="build-card-description">
+                            Freeze and slow enemies with devastating ice magic. Control the battlefield while dealing consistent damage over time.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Dicehead Build -->
+                <a href="https://megabonk.org/guides/builds/dicehead-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Dicehead.png" alt="Dicehead">
+                        <span class="build-card-badge">🎲 RNG META</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🎲 Dicehead RNG Chaos</h3>
+                        <p class="build-card-character">Best for: Dicehead</p>
+                        <p class="build-card-description">
+                            Embrace the chaos with random damage rolls. High risk, high reward gameplay that can produce insane damage spikes.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Bandit Build -->
+                <a href="https://megabonk.org/guides/builds/bandit-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Bandit.png" alt="Bandit">
+                        <span class="build-card-badge">⭐ A-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🔫 Bandit Gold Rush</h3>
+                        <p class="build-card-character">Best for: Bandit</p>
+                        <p class="build-card-description">
+                            Maximize gold collection and use economy advantage to dominate. More rerolls means better items and faster scaling.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Tony McZoom Build -->
+                <a href="https://megabonk.org/guides/builds/tony-mczoom-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Tony_McZoom.png" alt="Tony McZoom">
+                        <span class="build-card-badge">⚡ SPEED META</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🏎️ Tony McZoom Hyperspeed</h3>
+                        <p class="build-card-character">Best for: Tony McZoom</p>
+                        <p class="build-card-description">
+                            Push movement speed to the absolute limit. Become untouchable while dealing damage based on your velocity.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Sir Chadwell Build -->
+                <a href="https://megabonk.org/guides/builds/sir-chadwell-best-build" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Sir_Chadwell.png" alt="Sir Chadwell">
+                        <span class="build-card-badge">🛡️ DEFENSE</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">⚔️ Sir Chadwell Knight</h3>
+                        <p class="build-card-character">Best for: Sir Chadwell</p>
+                        <p class="build-card-description">
+                            Balance offense and defense with shield mechanics. Block attacks and counter with devastating shockwaves.
+                        </p>
+                        <div class="build-card-footer">
+                            <div class="difficulty-indicator">
+                                <span>Difficulty:</span>
+                                <div class="difficulty-dots">
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot filled"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                    <div class="difficulty-dot"></div>
+                                </div>
+                            </div>
+                            <span class="view-build-btn">View Guide →</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Playstyle Builds Section -->
+        <div class="build-section" id="playstyle-builds">
+            <div class="section-header">
+                <h2 class="section-title">⚔️ Build by Playstyle</h2>
+                <p class="section-subtitle">Universal build strategies that work across multiple characters</p>
+            </div>
+
+            <div class="builds-grid-compact">
+                <!-- 先展示未被要求后移的 8 个 -->
+                <a href="https://megabonk.org/guides/builds/aura-aegis-fortified-field" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+                        <span class="build-card-badge">🛡️ DEFENSE</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🛡️ Aura Aegis Fortified</h3>
+                        <p class="build-card-character">Tank Build</p>
+                        <p class="build-card-description">
+                            Combine Aura's passive damage with Aegis blocking for an impenetrable fortress. Block attacks and reflect damage back at enemies.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/flamewalker-tornado-kite" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+                        <span class="build-card-badge">🔥 AOE</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🔥 Flamewalker Tornado Kite</h3>
+                        <p class="build-card-character">Kiting Build</p>
+                        <p class="build-card-description">
+                            Leave a trail of fire while summoning tornadoes. Perfect for kiting playstyle with constant area denial and crowd control.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/katana-dexecutioner-execute-melee" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+                        <span class="build-card-badge">⚔️ EXECUTE</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">⚔️ Katana Dexecutioner</h3>
+                        <p class="build-card-character">Melee Execute</p>
+                        <p class="build-card-description">
+                            Master close-range combat with devastating execute mechanics. Low health enemies get instantly eliminated with massive damage.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/lightning-staff-stun-chain" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+                        <span class="build-card-badge">⚡ CHAIN</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">⚡ Lightning Staff Chain</h3>
+                        <p class="build-card-character">Chain Damage</p>
+                        <p class="build-card-description">
+                            Unleash devastating chain lightning that bounces between enemies. Stun and electrocute entire groups with branching damage.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/poison-flask-lifesteal" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                        <span class="build-card-badge">☠️ DOT</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">☠️ Poison Flask DOT</h3>
+                        <p class="build-card-character">Damage Over Time</p>
+                        <p class="build-card-description">
+                            Apply poison stacks to large groups and watch them melt. Damage over time builds up to unstoppable levels with proper scaling.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/bow-pierce-arc" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+                        <span class="build-card-badge">🏹 PIERCE</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🏹 Bow Pierce Arc</h3>
+                        <p class="build-card-character">Piercing Projectiles</p>
+                        <p class="build-card-description">
+                            Shoot arrows that pierce through multiple enemies in a line. Arc mechanics allow hitting enemies behind cover for tactical advantage.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/black-hole-grouping-control" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                        <span class="build-card-badge">⚫ CONTROL</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">⚫ Black Hole Control</h3>
+                        <p class="build-card-character">Crowd Control</p>
+                        <p class="build-card-description">
+                            Group enemies together with gravitational pull then unleash AOE destruction. Perfect combo setup for massive damage bursts.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/revolver-crit-headshot" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                        <span class="build-card-badge">🎯 CRIT</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🔫 Revolver Crit Headshot</h3>
+                        <p class="build-card-character">Critical Strike</p>
+                        <p class="build-card-description">
+                            Stack critical chance and damage for devastating headshots. High single-target burst perfect for boss encounters and elites.
+                        </p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <!-- 再把这 7 个指定卡片放到末尾，链接改为绝对路径 -->
+                <a href="https://megabonk.org/guides/builds/speed-demon" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone Weapon">
+                        <span class="build-card-badge">⚡ SPEED META</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">⚡ Speed Demon</h3>
+                        <p class="build-card-character">Best: Calcium</p>
+                        <p class="build-card-description">Zoom across the map at impossible speeds. Damage scales with movement speed, making you functionally invulnerable while dealing insane damage.</p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/walking-apocalypse" class="build-card-compact">
+                    <div class="build-card-image tier-s-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura Weapon">
+                        <span class="build-card-badge">⭐ S-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">💪 Walking Apocalypse</h3>
+                        <p class="build-card-character">Best: Megachad / Sir Oofie</p>
+                        <p class="build-card-description">The ultimate AFK build. Create a massive death zone around you that instantly melts anything nearby. Stand still and watch everything die.</p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/bullet-hell" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                        <span class="build-card-badge">⭐ A-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🔫 Bullet Hell</h3>
+                        <p class="build-card-character">Best: CL4NK</p>
+                        <p class="build-card-description">Turn the screen into pure chaos with projectiles everywhere. CL4NK's crit passive makes every bullet potentially deadly.</p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/one-lucky-fox" class="build-card-compact">
+                    <div class="build-card-image meta-bg">
+                        <img src="https://megabonk.org/images/guides/characters/Fox.png" alt="Fox">
+                        <span class="build-card-badge">🎲 RNG META</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🦊 One Lucky Fox</h3>
+                        <p class="build-card-character">Best: Fox</p>
+                        <p class="build-card-description">Stack Luck to absurd levels and watch legendary items rain from the sky. Fox gains 1% Luck per level for the best RNG manipulation.</p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/sword-master" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                        <span class="build-card-badge">⭐ A-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">⚔️ Sword Master</h3>
+                        <p class="build-card-character">Best: Sir Oofie</p>
+                        <p class="build-card-description">The simplest yet most reliable build. Stack sword swipes until they cover the entire screen. Become an immortal spinning death machine.</p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/poison-lifesteal" class="build-card-compact">
+                    <div class="build-card-image tier-a-bg">
+                        <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                        <span class="build-card-badge">⭐ A-TIER</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">☠️ Poison Lifesteal</h3>
+                        <p class="build-card-character">Best: Amog</p>
+                        <p class="build-card-description">Risk-free sustain build that heals you constantly. Poison damage ticks count as hits for lifesteal, giving you insane health regeneration.</p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div><div class="difficulty-dot"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+
+                <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality" class="build-card-compact">
+                    <div class="build-card-image meta-bg">
+                        <img src="https://megabonk.org/images/Items/Item_Kevin.png" alt="Kevin Item">
+                        <span class="build-card-badge">🔥 BROKEN META</span>
+                    </div>
+                    <div class="build-card-content">
+                        <h3 class="build-card-title">🛡️ Kevin + Mirror Immortality</h3>
+                        <p class="build-card-character">Universal Build</p>
+                        <p class="build-card-description">The most broken combo in Megabonk. Kevin damages you, Mirror gives invulnerability. With high attack speed, you become literally immortal.</p>
+                        <div class="build-card-footer"><div class="difficulty-indicator"><span>Difficulty:</span><div class="difficulty-dots"><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div><div class="difficulty-dot filled"></div></div></div><span class="view-build-btn">View Guide →</span></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <!-- The Holy Trinity Meta Strategy -->
         <section class="section">
             <div class="meta-card">
@@ -733,25 +1514,27 @@
                 </div>
             </div>
         </section>
-<div style="margin: 30px auto; text-align: center;">
-<!-- Megabonk_Builds_Header -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8830315294299920"
-     data-ad-slot="8173956372"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
+
+           <!-- Megabonk_Builds_Mid -->
+        <div style="margin: 30px auto; text-align: center;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8830315294299920"
+                 data-ad-slot="1068464303"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
         <!-- Build Cards -->
         <section class="section">
             <h2 class="section-title">🎯 Top Meta Builds</h2>
 
             <div class="builds-grid">
                 <!-- Build 1: Walking Apocalypse -->
-                <a href="walking-apocalypse" class="build-card">
+                <a href="/guides/builds/walking-apocalypse" class="build-card">
                     <div class="build-header s-tier">
                         <span class="build-badge">⭐ S-TIER</span>
                         <h3 class="build-title">💪 Walking Apocalypse</h3>
@@ -804,7 +1587,7 @@
                 </a>
 
                 <!-- Build 2: Speed Demon -->
-                <a href="speed-demon" class="build-card">
+                <a href="/guides/builds/speed-demon" class="build-card">
                     <div class="build-header s-tier">
                         <span class="build-badge">⭐ S-TIER</span>
                         <h3 class="build-title">⚡ Speed Demon</h3>
@@ -861,7 +1644,7 @@
                 </a>
 
                 <!-- Build 3: Bullet Hell -->
-                <a href="bullet-hell" class="build-card">
+                <a href="/guides/builds/bullet-hell" class="build-card">
                     <div class="build-header a-tier">
                         <span class="build-badge">⭐ A-TIER</span>
                         <h3 class="build-title">🔫 Bullet Hell</h3>
@@ -915,7 +1698,7 @@
                 </a>
 
                 <!-- Build 4: One Lucky Fox -->
-                <a href="one-lucky-fox" class="build-card">
+                <a href="/guides/builds/one-lucky-fox" class="build-card">
                     <div class="build-header meta">
                         <span class="build-badge">🎲 RNG META</span>
                         <h3 class="build-title">🦊 One Lucky Fox</h3>
@@ -973,7 +1756,7 @@
                 </a>
 
                 <!-- Build 5: Sword Master -->
-                <a href="sword-master" class="build-card">
+                <a href="/guides/builds/sword-master" class="build-card">
                     <div class="build-header a-tier">
                         <span class="build-badge">⭐ A-TIER</span>
                         <h3 class="build-title">⚔️ Sword Master</h3>
@@ -1030,7 +1813,7 @@
                 </a>
 
                 <!-- Build 6: Poison Lifesteal -->
-                <a href="poison-lifesteal" class="build-card">
+                <a href="/guides/builds/poison-lifesteal" class="build-card">
                     <div class="build-header a-tier">
                         <span class="build-badge">⭐ A-TIER</span>
                         <h3 class="build-title">☠️ Poison Lifesteal</h3>
@@ -1059,6 +1842,19 @@
                             </ul>
                         </div>
 
+                        <!-- Megabonk_Builds_Header -->
+                        <div style="margin: 30px auto; text-align: center;">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-8830315294299920"
+                             data-ad-slot="8173956372"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        </div>
+
                         <div class="build-section">
                             <h4>🎁 Key Items</h4>
                             <ul class="item-list">
@@ -1085,7 +1881,7 @@
                 </a>
 
                 <!-- Build 7: Kevin + Mirror Immortality -->
-                <a href="kevin-mirror-immortality" class="build-card">
+                <a href="/guides/builds/kevin-mirror-immortality" class="build-card">
                     <div class="build-header meta">
                         <span class="build-badge">🔥 BROKEN META</span>
                         <h3 class="build-title">🛡️ Kevin + Mirror Immortality</h3>
@@ -1147,18 +1943,7 @@
             </div>
         </section>
 
-        <!-- Megabonk_Builds_Mid -->
-        <div style="margin: 30px auto; text-align: center;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-8830315294299920"
-                 data-ad-slot="1068464303"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+     
         
         <!-- Weapon Tier List -->
         <section class="section">
@@ -1326,9 +2111,9 @@
                 adapt to your playstyle, and start climbing those leaderboards!
             </p>
             <div class="cta-buttons">
-                <a href="../characters/" class="btn">View Character Guides</a>
+                <a href="guides/characters//" class="btn">View Character Guides</a>
                 <a href="../../database/weapons/" class="btn btn-secondary">Browse Weapon Database</a>
-                <a href="../bosses/" class="btn btn-success">Master Boss Fights</a>
+                <a href="/guides/bosses/" class="btn btn-success">Master Boss Fights</a>
             </div>
         </div>
     </div>
@@ -1338,16 +2123,34 @@
             <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide</p>
             <div class="footer-links">
                 <a href="../../">Home</a>
-                <a href="../characters/">Characters</a>
-                <a href="./">Builds</a>
-                <a href="../bosses/">Bosses</a>
-                <a href="../achievements/">Achievements</a>
+                <a href="/guides/characters/">Characters</a>
+                <a href="/guides/builds/">Builds</a>
+                <a href="/guides/bosses/">Bosses</a>
+                <a href="/guides/achievements/">Achievements</a>
                 <a href="../../database/weapons/">Weapons</a>
             </div>
         </div>
     </footer>
 
     <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const buildSections = document.querySelectorAll('.build-section');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and sections
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                buildSections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding section
+                button.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
         // Mobile menu toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');
@@ -1384,12 +2187,13 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.build-card, .trinity-card, .tip-card').forEach(el => {
+        document.querySelectorAll('.build-card, .build-card-compact, .trinity-card, .tip-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
     </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
