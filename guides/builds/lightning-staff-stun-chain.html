@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lightning Staff Stun-Chain Build — Megabonk (2025)</title>
+  <meta name="description" content="Chain-stun control build for Megabonk: Lightning Staff core with Shotgun/Revolver coverage plus Aegis or Black Hole. Tome order: Cooldown ▶ Quantity." />
+  <meta name="keywords" content="lightning staff build, chain lightning stun, shotgun revolver aegis black hole, cooldown quantity damage size, megabonk mechanics build" />
+  <link rel="canonical" href="https://megabonk.org/guides/builds/lightning-staff-stun-chain" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config','G-V5X87M8JFL');</script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+  <!-- FAQPage schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What is the Lightning Staff stun‑chain clear build?","acceptedAnswer":{"@type":"Answer","text":"A character‑agnostic mechanics archetype built around Lightning Staff’s reliable chain stuns/clears. Pair it with Shotgun or Revolver to cover angles and add Aegis or Black Hole for safety/control."}},
+      {"@type":"Question","name":"Which tomes should I prioritize?","acceptedAnswer":{"@type":"Answer","text":"Cooldown ▶ Quantity ▶ Damage ▶ Size. Cooldown first for uptime and more stun chains; Quantity next to multiply procs; Damage and Size finish scaling."}},
+      {"@type":"Question","name":"How do I play it?","acceptedAnswer":{"@type":"Answer","text":"Use chain lightning to keep trash perma‑interrupted while your sidearm (Shotgun/Revolver) cleans blind spots. Late‑game, Black Hole grouping increases hit efficiency; Aegis is the safer alternative for block + shockwaves."}},
+      {"@type":"Question","name":"Why does this work?","acceptedAnswer":{"@type":"Answer","text":"Multiple meta roundups list Lightning Staff as a top universal control tool. It scales strongly with Cooldown/Quantity and remains consistent across maps and characters, while control picks (Aegis/Black Hole) stabilize waves and bosses."}}
+    ]
+  }
+  </script>
+
+  <!-- ItemList schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Lightning Staff Stun‑Chain Clear — Equipment",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"item":{"@type":"Thing","name":"Lightning Staff","description":"Core chain‑stun clearer"}},
+      {"@type":"ListItem","position":2,"item":{"@type":"Thing","name":"Shotgun","description":"Angle coverage option"}},
+      {"@type":"ListItem","position":3,"item":{"@type":"Thing","name":"Revolver","description":"Single‑target/angle option"}},
+      {"@type":"ListItem","position":4,"item":{"@type":"Thing","name":"Aegis","description":"Safety (block + shockwave)"}},
+      {"@type":"ListItem","position":5,"item":{"@type":"Thing","name":"Black Hole","description":"Grouping control"}},
+      {"@type":"ListItem","position":6,"item":{"@type":"Thing","name":"Cooldown Tome"}},
+      {"@type":"ListItem","position":7,"item":{"@type":"Thing","name":"Quantity Tome"}},
+      {"@type":"ListItem","position":8,"item":{"@type":"Thing","name":"Damage Tome"}},
+      {"@type":"ListItem","position":9,"item":{"@type":"Thing","name":"Size Tome"}},
+      {"@type":"ListItem","position":10,"item":{"@type":"Thing","name":"Battery"}},
+      {"@type":"ListItem","position":11,"item":{"@type":"Thing","name":"Lightning Orb"}},
+      {"@type":"ListItem","position":12,"item":{"@type":"Thing","name":"Electric Plug"}},
+      {"@type":"ListItem","position":13,"item":{"@type":"Thing","name":"Sucky Magnet"}},
+      {"@type":"ListItem","position":14,"item":{"@type":"Thing","name":"Golden Shield"}},
+      {"@type":"ListItem","position":15,"item":{"@type":"Thing","name":"Turbo Socks"}}
+    ]
+  }
+  </script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--primary-bg:#1a1a2e;--secondary-bg:#16213e;--accent-purple:#9d4edd;--accent-blue:#3a86ff;--accent-pink:#ff006e;--text-light:#f8f9fa;--text-gray:#adb5bd;--card-bg:#0f3460;--success:#06ffa5;--warning:#ffbe0b;--danger:#ff006e}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:var(--text-light);background:var(--primary-bg);overflow-x:hidden}
+    header{background:rgba(15,52,96,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;box-shadow:0 4px 30px rgba(0,0,0,.3)}
+    nav{max-width:1400px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+    .nav-links{display:flex;list-style:none;gap:2rem}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-weight:500;transition:all .3s ease}
+    .nav-links a:hover{color:var(--accent-purple)}
+    .mobile-menu{display:none;background:none;border:none;color:var(--text-light);font-size:1.5rem;cursor:pointer}
+    .hero{background:linear-gradient(135deg,rgba(157,78,221,.2),rgba(58,134,255,.2));padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.02) 10px,rgba(255,255,255,.02) 20px)}
+    .hero-content{max-width:1400px;margin:0 auto;position:relative;z-index:1}
+    .hero h1{font-size:3rem;font-weight:900;margin-bottom:.5rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-subtitle{font-size:1.1rem;color:var(--text-gray);margin-bottom:1rem}
+    .tier-badge{display:inline-block;background:linear-gradient(135deg,var(--warning),var(--accent-purple));padding:.6rem 1.5rem;border-radius:30px;font-size:1rem;font-weight:800;margin-bottom:1rem;box-shadow:0 5px 20px rgba(255,190,11,.25)}
+    .comp-belt{display:flex;justify-content:center;gap:.85rem;flex-wrap:wrap;margin-top:.75rem}
+    .comp-pill{display:flex;align-items:center;gap:.5rem;background:rgba(15,52,96,.6);border:1px solid rgba(157,78,221,.25);padding:.5rem .75rem;border-radius:999px}
+    .comp-pill img{width:28px;height:28px;border-radius:6px;border:1px solid rgba(157,78,221,.25);object-fit:cover}
+    .container{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+    .section-title{font-size:2.2rem;font-weight:800;margin-bottom:.75rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section-subtitle{color:var(--text-gray);font-size:1.05rem;margin-bottom:1.25rem}
+    .build-overview{background:linear-gradient(135deg,rgba(157,78,221,.1),rgba(58,134,255,.1));border:2px solid rgba(157,78,221,.3);border-radius:20px;padding:2rem;margin-bottom:2.5rem}
+    .overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:1rem}
+    .overview-card{background:rgba(15,52,96,.5);padding:1.25rem;border-radius:15px;text-align:center;border:1px solid rgba(157,78,221,.2)}
+    .overview-card h3{color:var(--accent-purple);margin-bottom:.35rem;font-size:1.05rem}
+    .overview-card p{color:var(--text-gray);font-size:.95rem}
+    .equipment-section{margin-bottom:2.75rem}
+    .equipment-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:1rem}
+    .equipment-card{background:var(--card-bg);border-radius:15px;padding:1.25rem;border:2px solid rgba(157,78,221,.2);transition:all .3s ease;position:relative;overflow:hidden}
+    .equipment-card:hover{transform:translateY(-5px);border-color:var(--accent-purple);box-shadow:0 10px 30px rgba(157,78,221,.3)}
+    .priority-1{border-color:var(--success);background:linear-gradient(135deg,rgba(6,255,165,.12),rgba(15,52,96,1))}
+    .priority-2{border-color:var(--warning)}
+    .priority-3{border-color:var(--accent-purple)}
+    .equipment-header{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem}
+    .equipment-icon{width:64px;height:64px;border-radius:10px;object-fit:cover;border:2px solid rgba(157,78,221,.3)}
+    .equipment-info h3{color:var(--text-light);font-size:1.1rem;margin-bottom:.15rem}
+    .priority-badge{display:inline-block;padding:.25rem .7rem;border-radius:20px;font-size:.75rem;font-weight:700}
+    .priority-1 .priority-badge{background:var(--success);color:#052a2a}
+    .priority-2 .priority-badge{background:var(--warning);color:#1a1a2e}
+    .priority-3 .priority-badge{background:var(--accent-purple);color:#fff}
+    .equipment-description{color:var(--text-gray);font-size:.95rem;line-height:1.6}
+    .timeline{position:relative;padding-left:3rem;margin-top:1.25rem}
+    .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-purple),var(--accent-blue))}
+    .timeline-item{position:relative;margin-bottom:1.5rem;padding:1.25rem;background:var(--card-bg);border-radius:15px;border:1px solid rgba(157,78,221,.2)}
+    .timeline-item::before{content:'';position:absolute;left:-3.5rem;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:var(--accent-purple);border:3px solid var(--primary-bg)}
+    .timeline-time{display:inline-block;background:var(--accent-purple);color:#fff;padding:.3rem .9rem;border-radius:20px;font-size:.82rem;font-weight:700;margin-bottom:.5rem}
+    .timeline-item h3{color:var(--accent-blue);margin-bottom:.35rem}
+    .timeline-item p{color:var(--text-gray)}
+    table.alternatives-table{width:100%;border-collapse:collapse;margin-top:1rem;background:var(--card-bg);border-radius:15px;overflow:hidden}
+    .alternatives-table th{background:rgba(157,78,221,.2);color:var(--accent-purple);padding:1rem;text-align:left;font-weight:700}
+    .alternatives-table td{padding:1rem;border-bottom:1px solid rgba(157,78,221,.1);color:var(--text-gray)}
+    .alternatives-table tr:last-child td{border-bottom:none}
+    .alternatives-table tr:hover{background:rgba(157,78,221,.05)}
+    .faq-section{margin-top:2.5rem}
+    .faq-item{background:var(--card-bg);border-radius:15px;padding:1.5rem;margin-bottom:1rem;border:1px solid rgba(157,78,221,.2)}
+    .faq-question{color:var(--accent-purple);font-size:1.2rem;font-weight:700;margin-bottom:.6rem}
+    .faq-answer{color:var(--text-gray)}
+    footer{background:var(--secondary-bg);padding:3rem 2rem;text-align:center;margin-top:4rem;border-top:1px solid rgba(157,78,221,.2)}
+    .footer-links{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap}
+    .footer-links a{color:var(--accent-purple);text-decoration:none;transition:color .3s}
+    .footer-links a:hover{color:var(--accent-blue)}
+    @media (max-width:768px){.hero h1{font-size:2.4rem}.nav-links{display:none}.mobile-menu{display:block}.timeline{padding-left:2rem}.equipment-grid{grid-template-columns:1fr}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .equipment-card,.timeline-item,.faq-item{animation:fadeInUp .6s ease-out}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../../" class="logo">Megabonk.org</a>
+      <ul class="nav-links">
+        <li><a href="../../../">Home</a></li>
+        <li><a href="../../../leaderboard/">Leaderboard</a></li>
+        <li><a href="/guides/characters/">Characters</a></li>
+        <li><a href="/guides/builds/">Builds</a></li>
+        <li><a href="/guides/bosses/">Bosses</a></li>
+        <li><a href="../../../database/weapons/">Weapons</a></li>
+      </ul>
+      <button class="mobile-menu">☰</button>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <span class="tier-badge">⭐ A‑TIER MECHANICS (Universal Control)</span>
+      <h1>⚡ Lightning Staff Stun‑Chain Clear (Mechanics Archetype)</h1>
+      <p class="hero-subtitle">Chain lightning keeps waves stunned • Shotgun/Revolver cover angles • Aegis/Black Hole for safety/control</p>
+
+      <!-- Above‑the‑fold composition belt -->
+      <div class="comp-belt" aria-label="Core composition">
+        <div class="comp-pill" title="Lightning Staff"><img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff icon"/><span>Lightning Staff</span></div>
+        <div class="comp-pill" title="Shotgun"><img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun icon"/><span>Shotgun</span></div>
+        <div class="comp-pill" title="Revolver"><img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver icon"/><span>Revolver</span></div>
+        <div class="comp-pill" title="Aegis"><img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis icon"/><span>Aegis</span></div>
+        <div class="comp-pill" title="Black Hole"><img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole icon"/><span>Black Hole</span></div>
+        <div class="comp-pill" title="Cooldown Tome"><img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome"/><span>Cooldown</span></div>
+        <div class="comp-pill" title="Quantity Tome"><img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome"/><span>Quantity</span></div>
+        <div class="comp-pill" title="Damage Tome"><img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome"/><span>Damage</span></div>
+        <div class="comp-pill" title="Size Tome"><img src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome"/><span>Size</span></div>
+      </div>
+
+      <div class="comp-belt" aria-label="Recommended items" style="margin-top:.5rem;">
+        <div class="comp-pill" title="Battery"><img src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery"/><span>Battery</span></div>
+        <div class="comp-pill" title="Lightning Orb"><img src="https://megabonk.org/images/Items/Item_Lightning_Orb.png" alt="Lightning Orb"/><span>Lightning Orb</span></div>
+        <div class="comp-pill" title="Electric Plug"><img src="https://megabonk.org/images/Items/Item_Electric_Plug.png" alt="Electric Plug"/><span>Electric Plug</span></div>
+        <div class="comp-pill" title="Sucky Magnet"><img src="https://megabonk.org/images/Items/Item_Sucky_Magnet.png" alt="Sucky Magnet"/><span>Sucky Magnet</span></div>
+        <div class="comp-pill" title="Golden Shield"><img src="https://megabonk.org/images/Items/Item_Golden_Shield.png" alt="Golden Shield"/><span>Golden Shield</span></div>
+        <div class="comp-pill" title="Turbo Socks"><img src="https://megabonk.org/images/Items/Item_Turbo_Socks.png" alt="Turbo Socks"/><span>Turbo Socks</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="build-overview">
+      <h2 class="section-title">🎯 Build Overview</h2>
+      <p class="section-subtitle">Lightning Staff is your <strong>primary control engine</strong>: frequent chains apply constant interrupts and soften packs. Add <strong>Shotgun</strong> or <strong>Revolver</strong> to cover front/back/side blind spots. Choose <strong>Aegis</strong> if you want safe block‑and‑retaliate, or <strong>Black Hole</strong> if you prefer late‑game grouping to maximize hit efficiency. Tome order: <strong>Cooldown ▶ Quantity ▶ Damage ▶ Size</strong>.</p>
+      <div class="overview-grid">
+        <div class="overview-card"><h3>Playstyle</h3><p>Low‑aim wave control • chain stuns • sidearm cleanup</p></div>
+        <div class="overview-card"><h3>Difficulty</h3><p>Low–Medium — positioning matters, aim pressure is light</p></div>
+        <div class="overview-card"><h3>Power Spike</h3><p>Early–Mid when Cooldown + Quantity land</p></div>
+        <div class="overview-card"><h3>Best For</h3><p>Universal maps, mixed waves, relaxed clears</p></div>
+      </div>
+    </section>
+
+    <!-- Weapons -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚔️ Core & Supporting Weapons</h2>
+      <p class="section-subtitle">Keep to 3–4 total weapons to avoid upgrade dilution</p>
+      <div class="equipment-grid">
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff" class="equipment-icon"><div class="equipment-info"><h3>Lightning Staff</h3><span class="priority-badge">CORE</span></div></div><p class="equipment-description">Reliable chain stuns/clears. <strong>Cooldown</strong> and <strong>Quantity</strong> massively increase proc frequency and chain length.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun" class="equipment-icon"><div class="equipment-info"><h3>Shotgun (or Revolver)</h3><span class="priority-badge">COVERAGE</span></div></div><p class="equipment-description">Choose <em>Shotgun</em> for cone coverage or <em>Revolver</em> for precise single‑target angles. Both fill Lightning’s blind spots.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis" class="equipment-icon"><div class="equipment-info"><h3>Aegis (or Black Hole)</h3><span class="priority-badge">CONTROL</span></div></div><p class="equipment-description">Pick <em>Aegis</em> for safety (block + shockwave). Swap to <em>Black Hole</em> later if you want grouping to concentrate chains.</p></div>
+      </div>
+    </section>
+
+    <!-- Tomes -->
+    <section class="equipment-section">
+      <h2 class="section-title">📚 Tome Priority</h2>
+      <p class="section-subtitle">Order: <strong>Cooldown ▶ Quantity ▶ Damage ▶ Size</strong></p>
+      <div class="equipment-grid">
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="equipment-icon"><div class="equipment-info"><h3>Cooldown</h3><span class="priority-badge">#1</span></div></div><p class="equipment-description">More chains per minute = more interrupts and clears. The safest and strongest first pick.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="equipment-icon"><div class="equipment-info"><h3>Quantity</h3><span class="priority-badge">#2</span></div></div><p class="equipment-description">Adds instances/bolts to extend coverage and consistency.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="equipment-icon"><div class="equipment-info"><h3>Damage</h3><span class="priority-badge">#3</span></div></div><p class="equipment-description">Pushes chains over thresholds so packs pop without babysitting.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome" class="equipment-icon"><div class="equipment-info"><h3>Size</h3><span class="priority-badge">#4</span></div></div><p class="equipment-description">Nice QoL for cone/arc based tools and Black Hole synergies, but not mandatory early.</p></div>
+      </div>
+    </section>
+
+    <!-- Items -->
+    <section class="equipment-section">
+      <h2 class="section-title">🎁 Essential Items</h2>
+      <p class="section-subtitle">Uptime + control + XP flow</p>
+      <div class="equipment-grid">
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery" class="equipment-icon"><div class="equipment-info"><h3>Battery</h3><span class="priority-badge">UPTIME</span></div></div><p class="equipment-description">Smooths chain cadence and keeps interrupts rolling.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Lightning_Orb.png" alt="Lightning Orb" class="equipment-icon"><div class="equipment-info"><h3>Lightning Orb</h3><span class="priority-badge">CHAIN</span></div></div><p class="equipment-description">Extra lightning‑themed pressure; pairs naturally with the core.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Electric_Plug.png" alt="Electric Plug" class="equipment-icon"><div class="equipment-info"><h3>Electric Plug</h3><span class="priority-badge">UTILITY</span></div></div><p class="equipment-description">Amplifies the control theme; flexible utility slot.</p></div>
+        <div class="equipment-card priority-1"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Sucky_Magnet.png" alt="Sucky Magnet" class="equipment-icon"><div class="equipment-info"><h3>Sucky Magnet</h3><span class="priority-badge">PICKUP</span></div></div><p class="equipment-description">Keeps XP income flowing while you hold positions.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Golden_Shield.png" alt="Golden Shield" class="equipment-icon"><div class="equipment-info"><h3>Golden Shield</h3><span class="priority-badge">SAFETY</span></div></div><p class="equipment-description">Pairs well with Aegis for mistake insurance.</p></div>
+        <div class="equipment-card priority-2"><div class="equipment-header"><img src="https://megabonk.org/images/Items/Item_Turbo_Socks.png" alt="Turbo Socks" class="equipment-icon"><div class="equipment-info"><h3>Turbo Socks</h3><span class="priority-badge">MOBILITY</span></div></div><p class="equipment-description">Lets you reposition between volleys without losing control.</p></div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="equipment-section">
+      <h2 class="section-title">📈 Upgrade Path Timeline</h2>
+      <p class="section-subtitle">Minute‑by‑minute; high‑rarity rolls can preempt</p>
+      <div class="timeline">
+        <div class="timeline-item"><span class="timeline-time">0–3 min</span><h3>Go Online</h3><p>Secure <em>Lightning Staff</em> and stack <strong>Cooldown</strong> immediately. If fragile, take <em>Aegis</em> early.</p></div>
+        <div class="timeline-item"><span class="timeline-time">3–6 min</span><h3>Cover Angles</h3><p>Add <em>Shotgun</em> (cone coverage) or <em>Revolver</em> (precision). Begin <strong>Quantity</strong>.</p></div>
+        <div class="timeline-item"><span class="timeline-time">6–10 min</span><h3>Control Slot</h3><p>Pick <em>Black Hole</em> if you want grouping to supercharge chains; otherwise upgrade <em>Aegis</em>. Add <strong>Damage</strong>.</p></div>
+        <div class="timeline-item"><span class="timeline-time">10–15 min</span><h3>Spike</h3><p>Finish <strong>Quantity</strong> ranks and add <strong>Size</strong> as a QoL finisher. Slot core items (Battery, pickup radius).</p></div>
+        <div class="timeline-item"><span class="timeline-time">15+ min</span><h3>Close Out</h3><p>Cap remaining tomes. Flex items to comfort (mobility/safety). Hold lanes and let the storm work.</p></div>
+      </div>
+    </section>
+
+    <div style="margin:30px auto; text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Alternatives -->
+    <section class="equipment-section">
+      <h2 class="section-title">🔄 Alternatives & Replacements</h2>
+      <p class="section-subtitle">If a key roll doesn’t show</p>
+      <table class="alternatives-table">
+        <thead><tr><th>Category</th><th>Primary</th><th>Alternatives</th></tr></thead>
+        <tbody>
+          <tr><td>Sidearm</td><td>Shotgun</td><td>Revolver (tighter angles, better single‑target)</td></tr>
+          <tr><td>Control</td><td>Aegis</td><td>Black Hole (late‑game grouping)</td></tr>
+          <tr><td>Tomes</td><td>Cooldown ▶ Quantity ▶ Damage ▶ Size</td><td>Delay Size until mid‑late; focus CDR first</td></tr>
+          <tr><td>Items</td><td>Battery, Lightning Orb, Electric Plug</td><td>Golden Shield, Turbo Socks, Sucky Magnet</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Mistakes -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚠️ Common Mistakes</h2>
+      <div class="overview-grid">
+        <div class="overview-card"><h3>Skipping Cooldown first</h3><p>Uptime drives the whole build — always CDR before anything else.</p></div>
+        <div class="overview-card"><h3>Too many weapons</h3><p>3–4 total keeps upgrade density high and chains consistent.</p></div>
+        <div class="overview-card"><h3>Over‑grouping too early</h3><p>Black Hole is best when Lightning DPS is already online; otherwise you just herd healthy mobs.</p></div>
+        <div class="overview-card"><h3>No pickup radius</h3><p>Without Sucky Magnet you stall leveling while holding positions.</p></div>
+      </div>
+    </section>
+
+    <!-- Why it works -->
+    <section class="equipment-section">
+      <h2 class="section-title">🧠 Why This Works</h2>
+      <p class="section-subtitle"><strong>Lightning Staff</strong> is consistently rated as a go‑to universal control/clear tool in community roundups and “best combos” lists. It scales exceptionally with <strong>Cooldown</strong> and <strong>Quantity</strong>, keeping waves perma‑interrupted while sidearms clean angles. <strong>Aegis/Black Hole</strong> finalize the shell, giving you either safety or hyper‑efficient grouping.</p>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Megabonk.org — All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="../../../">Home</a>
+      <a href="/guides/characters/">Characters</a>
+      <a href="/guides/builds/">All Builds</a>
+      <a href="../../../privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
