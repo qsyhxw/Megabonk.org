@@ -1,0 +1,673 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <!-- ====== TDK: kept EXACTLY as provided ====== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Athena Best Build: Aegis + Lightning Staff</title>
+    <meta name="description" content="Megabonk Athena best build 2025: Aegis core + Lightning Staff. Prioritize Cooldown & Agility tomes, then Battery/Turbo Skates; add Mirror for safety.">
+    <meta name="keywords" content="athena build, athena megabonk, best athena build, athena lightning build, athena guide, megabonk athena">
+    <link rel="canonical" href="https://megabonk.org/guides/builds/athena-best-build">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <!-- Structured data (corrected) -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"What is the best weapon for Athena?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Aegis is Athena's signature main weapon in current meta. Use it as your core and add Lightning Staff as a secondary for hands-free wave clear. Bananarang or Revolver can occupy the flex slot depending on preference."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Which tomes should I prioritize for Athena?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Community starts often use XP → Luck (Cursed increases difficulty, use with care). For Aegis-Athena, prioritize Cooldown to tighten cycles, then Agility for mobility. Precision supports crit-oriented setups (crit chance/precision), Quantity increases projectile count; pick one path. Damage is a later multiplier."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Is Athena good for beginners?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Athena is moderate difficulty. With Aegis + mobility tomes she becomes sturdy but still rewards active positioning and movement."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What items work best with Athena?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Turbo Socks for movement speed, Battery for attack speed. Turbo Skates convert movement speed into attack speed when conditions are met. For defense, Mirror reflects all incoming damage with brief invulnerability; Slippery Ring provides evasion. Phantom Shroud triggers a burst after a successful dodge."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"ItemList",
+      "name":"Athena Build — Core Equipment",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"item":{"@type":"Thing","name":"Aegis","description":"Signature main weapon"}},
+        {"@type":"ListItem","position":2,"item":{"@type":"Thing","name":"Lightning Staff","description":"Secondary — chain lightning wave clear"}},
+        {"@type":"ListItem","position":3,"item":{"@type":"Thing","name":"Bananarang","description":"Mobile lane control / boomerang hits on return"}},
+        {"@type":"ListItem","position":4,"item":{"@type":"Thing","name":"Turbo Socks","description":"Key movement speed item"}},
+        {"@type":"ListItem","position":5,"item":{"@type":"Thing","name":"Battery","description":"Direct attack speed increase"}},
+        {"@type":"ListItem","position":6,"item":{"@type":"Thing","name":"Turbo Skates","description":"Converts move speed to attack speed"}}
+      ]
+    }
+    </script>
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        :root{
+            --primary-bg:#1a1a2e;
+            --secondary-bg:#16213e;
+            --accent-purple:#9d4edd;
+            --accent-blue:#3a86ff;
+            --accent-pink:#ff006e;
+            --text-light:#f8f9fa;
+            --text-gray:#adb5bd;
+            --card-bg:#0f3460;
+            --success:#06ffa5;
+            --warning:#ffbe0b;
+            --danger:#ff006e;
+        }
+
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:var(--text-light);background:var(--primary-bg);overflow-x:hidden;}
+
+        /* Header */
+        header{background:rgba(15,52,96,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;box-shadow:0 4px 30px rgba(0,0,0,.3);}
+        nav{max-width:1400px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+        .logo{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;}
+        .nav-links{display:flex;list-style:none;gap:2rem;}
+        .nav-links a{color:var(--text-light);text-decoration:none;font-weight:500;transition:all .3s ease;}
+        .nav-links a:hover{color:var(--accent-purple);}
+
+        /* Hero */
+        .hero{background:linear-gradient(135deg,var(--secondary-bg) 0%,var(--card-bg) 100%);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden;}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(157,78,221,.1),transparent 70%);pointer-events:none;}
+        .hero-content{max-width:1200px;margin:0 auto;position:relative;z-index:1;}
+        .character-showcase{display:flex;align-items:center;justify-content:center;gap:3rem;margin-bottom:2rem;flex-wrap:wrap;}
+        .character-image{width:200px;height:200px;border-radius:20px;border:4px solid var(--accent-purple);box-shadow:0 0 40px rgba(157,78,221,.5);object-fit:cover;}
+        .hero h1{font-size:3rem;margin-bottom:1rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero-subtitle{font-size:1.3rem;color:var(--text-gray);margin-bottom:2rem;}
+        .tier-badge{display:inline-block;padding:.5rem 1.5rem;background:linear-gradient(135deg,#ffd700,#ffed4e);color:#1a1a2e;border-radius:30px;font-weight:800;font-size:1.2rem;box-shadow:0 4px 20px rgba(255,215,0,.4);margin-bottom:1.5rem;}
+        .key-points{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:2rem;}
+        .key-point{background:rgba(255,255,255,.05);padding:1rem 2rem;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(157,78,221,.3);}
+        .key-point strong{color:var(--accent-purple);}
+
+        /* Container */
+        .container{max-width:1400px;margin:0 auto;padding:3rem 2rem;}
+        .section-title{font-size:2.2rem;margin-bottom:1rem;color:var(--text-light);text-align:center;}
+        .section-subtitle{text-align:center;color:var(--text-gray);margin-bottom:2rem;font-size:1.1rem;}
+
+        /* Equipment */
+        .equipment-section{margin-bottom:4rem;}
+        .equipment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:2rem;}
+        .equipment-card{background:var(--card-bg);border-radius:15px;padding:2rem;border:2px solid rgba(157,78,221,.3);transition:all .3s ease;}
+        .equipment-card:hover{transform:translateY(-5px);border-color:var(--accent-purple);box-shadow:0 10px 30px rgba(157,78,221,.3);}
+        .equipment-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+        .equipment-icon{width:60px;height:60px;border-radius:10px;border:2px solid var(--accent-purple);object-fit:cover;}
+        .equipment-card h3{color:var(--accent-purple);font-size:1.5rem;}
+        .priority-badge{display:inline-block;padding:.3rem .8rem;background:var(--success);color:var(--primary-bg);border-radius:20px;font-size:.8rem;font-weight:700;margin-left:auto;}
+        .equipment-card p{color:var(--text-gray);line-height:1.8;}
+        .equipment-card strong{color:var(--text-light);}
+
+        /* Weapons showcase */
+        .weapons-showcase{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:2rem 0;}
+        .weapon-item{text-align:center;}
+        .weapon-item img{width:80px;height:80px;border:3px solid var(--accent-blue);border-radius:12px;padding:.5rem;background:rgba(58,134,255,.1);transition:all .3s ease;}
+        .weapon-item img:hover{transform:scale(1.1);box-shadow:0 0 20px rgba(58,134,255,.5);}
+        .weapon-item p{margin-top:.5rem;font-size:.9rem;color:var(--text-gray);}
+        .weapon-link{color:var(--accent-blue);text-decoration:none;transition:color .3s ease;}
+        .weapon-link:hover{color:var(--accent-purple);}
+
+        /* Timeline */
+        .timeline{position:relative;padding:2rem 0;}
+        .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-purple),var(--accent-blue));transform:translateX(-50%);}
+        .timeline-item{background:var(--card-bg);padding:2rem;border-radius:15px;margin-bottom:2rem;position:relative;width:calc(50% - 3rem);border:2px solid rgba(157,78,221,.3);}
+        .timeline-item:nth-child(odd){margin-left:auto;}
+        .timeline-item:nth-child(even){margin-right:auto;}
+        .timeline-time{display:inline-block;padding:.5rem 1rem;background:var(--accent-purple);color:#fff;border-radius:20px;font-weight:700;margin-bottom:1rem;}
+        .timeline-item h3{color:var(--accent-blue);margin-bottom:1rem;}
+        .timeline-item p{color:var(--text-gray);line-height:1.8;}
+
+        /* Alternatives table */
+        .alternatives-table{width:100%;background:var(--card-bg);border-radius:15px;overflow:hidden;border-collapse:collapse;}
+        .alternatives-table thead{background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));}
+        .alternatives-table th{padding:1.2rem;text-align:left;font-weight:700;color:#fff;}
+        .alternatives-table td{padding:1.2rem;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text-gray);}
+        .alternatives-table tr:hover{background:rgba(157,78,221,.1);}
+
+        /* Pitfalls */
+        .pitfall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;}
+        .pitfall-card{background:rgba(255,0,110,.1);border:2px solid var(--danger);border-radius:12px;padding:1.5rem;}
+        .pitfall-card h3{color:var(--danger);margin-bottom:.8rem;}
+        .pitfall-card p{color:var(--text-gray);line-height:1.7;}
+
+        /* FAQ */
+        .faq-section{margin:4rem 0;}
+        .faq-item{background:var(--card-bg);border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:2px solid rgba(157,78,221,.3);}
+        .faq-question{color:var(--accent-purple);margin-bottom:1rem;font-size:1.3rem;}
+        .faq-answer{color:var(--text-gray);line-height:1.8;}
+
+        /* Alert */
+        .alert-box{background:linear-gradient(135deg,rgba(6,255,165,.1),rgba(58,134,255,.1));border:2px solid var(--success);border-radius:15px;padding:2rem;margin:3rem 0;color:var(--text-light);line-height:1.8;}
+
+        /* Footer */
+        footer{background:var(--secondary-bg);padding:2rem;text-align:center;border-top:3px solid var(--accent-purple);}
+        .footer-links{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap;}
+        .footer-links a{color:var(--text-gray);text-decoration:none;transition:color .3s ease;}
+        .footer-links a:hover{color:var(--accent-purple);}
+
+        /* Responsive */
+        @media (max-width:768px){
+            .hero h1{font-size:2rem;}
+            .nav-links{gap:1rem;}
+            .timeline::before{left:20px;}
+            .timeline-item{width:calc(100% - 40px);margin-left:40px !important;}
+            .timeline-item:nth-child(even){margin-right:0;}
+            .character-showcase{flex-direction:column;}
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+      <ul class="nav-links">
+        <li><a href="https://megabonk.org/">Home</a></li>
+        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+        <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+        <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+        <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+        <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="character-showcase">
+        <img src="https://megabonk.org/images/guides/characters/Athena.png" alt="Athena" class="character-image">
+        <div>
+          <div class="tier-badge">⚡ HIGH-SPEED CONTROL</div>
+          <h1>Athena Lightning Mobility Build</h1>
+          <p class="hero-subtitle">Aegis as the core; Lightning Staff for chain-clear; mobility-first tomes & items</p>
+        </div>
+      </div>
+
+      <div class="key-points">
+        <div class="key-point"><strong>Primary Style:</strong> Mobility + Shield Cycling</div>
+        <div class="key-point"><strong>Difficulty:</strong> Moderate</div>
+        <div class="key-point"><strong>Power Spike:</strong> Mid Game</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Core Weapons -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚔️ Core Weapons Setup</h2>
+      <p class="section-subtitle">Aegis main; Lightning Staff secondary; third slot flex</p>
+
+      <div class="weapons-showcase">
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/aegis">
+            <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+            <p>Aegis (Core)</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">
+            <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+            <p>Lightning Staff</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">
+            <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+            <p>Bananarang</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">
+            <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+            <p>Revolver</p>
+          </a>
+        </div>
+      </div>
+
+      <p class="section-subtitle" style="margin-top:-.5rem;">
+        See all weapons in the <a class="weapon-link" href="https://megabonk.org/database/weapons/">Weapons Database</a>.
+      </p>
+
+      <div class="equipment-grid">
+        <!-- Aegis -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+            <div><h3>Aegis</h3><span class="priority-badge">CORE</span></div>
+          </div>
+          <p>
+            <strong>Athena’s signature main weapon.</strong> Builds around shield cycling and benefits heavily from
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Cooldown &amp; Damage tomes</a>.
+            Use Aegis as your anchor and play around safe, mobile positioning.
+          </p>
+        </div>
+
+        <!-- Lightning Staff -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+            <div><h3>Lightning Staff</h3><span class="priority-badge" style="background:var(--accent-blue);">WAVE CLEAR</span></div>
+          </div>
+          <p>
+            <strong>Hands-free chain lightning clear.</strong> Bolts chain between enemies for excellent crowd coverage.
+            Pairs well with <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Cooldown</a>.
+            (Note: use for chaining/coverage; it’s not Athena’s signature.)
+          </p>
+        </div>
+
+        <!-- Flex: Bananarang -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+            <div><h3>Bananarang</h3><span class="priority-badge" style="background:var(--accent-blue);">MOBILE DPS</span></div>
+          </div>
+          <p>
+            <strong>Boomerang pathing — hits out and on return.</strong> Great while kiting. Scales with
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity</a>.
+          </p>
+        </div>
+
+        <!-- Flex: Revolver -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+            <div><h3>Revolver</h3><span class="priority-badge" style="background:var(--warning);">FLEX</span></div>
+          </div>
+          <p>
+            <strong>Precision single-target option.</strong> Use if you prefer controlled angles and boss focus.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad block -->
+    <div style="margin: 30px auto; text-align: center;">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-8830315294299920"
+        data-ad-slot="8173956372"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Tomes -->
+    <section class="equipment-section">
+      <h2 class="section-title">📚 Tome Priority</h2>
+      <p class="section-subtitle">
+        Reference: <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Tomes Index</a>
+      </p>
+
+      <div class="equipment-grid">
+        <!-- Start package -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+            <div><h3>Early Snowball</h3><span class="priority-badge">OPTIONAL</span></div>
+          </div>
+          <p>
+            A common start is <strong>XP → Luck</strong>.
+            <em>Cursed</em> increases difficulty—only add if you want a harder but faster scaling run.
+          </p>
+        </div>
+
+        <!-- Cooldown -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+            <div><h3>Cooldown</h3><span class="priority-badge">TOP PRIORITY</span></div>
+          </div>
+          <p>
+            <strong>Tightens Aegis cycles and accelerates Lightning Staff chains.</strong> Usually your first maxed tome.
+          </p>
+        </div>
+
+        <!-- Agility -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome">
+            <div><h3>Agility</h3><span class="priority-badge" style="background:var(--accent-blue);">ESSENTIAL</span></div>
+          </div>
+          <p>
+            Movement speed and mobility bonuses that fit Athena’s high-movement playstyle.
+          </p>
+        </div>
+
+        <!-- Precision -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Precision_Tome.png" alt="Precision Tome">
+            <div><h3>Precision</h3><span class="priority-badge" style="background:var(--warning);">PATH A</span></div>
+          </div>
+          <p>
+            <strong>Crit/precision-oriented path.</strong> Supports builds chasing higher crit chance/accuracy.
+            (This tome does <em>not</em> directly increase critical damage.)
+          </p>
+        </div>
+
+        <!-- Quantity -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome">
+            <div><h3>Quantity</h3><span class="priority-badge" style="background:var(--warning);">PATH B</span></div>
+          </div>
+          <p>
+            Projectile count/coverage path. Pick <strong>Precision OR Quantity</strong> based on drops—don’t split.
+          </p>
+        </div>
+
+        <!-- Damage -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+            <div><h3>Damage</h3><span class="priority-badge" style="background:var(--accent-blue);">LATE MULTIPLIER</span></div>
+          </div>
+          <p>
+            Add after your core tomes are established to multiply output.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Items -->
+    <section class="equipment-section">
+      <h2 class="section-title">🎯 Key Items</h2>
+      <p class="section-subtitle">
+        Reference: <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Items Index</a>
+      </p>
+
+      <div class="equipment-grid">
+        <!-- Turbo Socks -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Turbo_Socks.png" alt="Turbo Socks">
+            <div><h3>Turbo Socks</h3><span class="priority-badge">TOP PRIORITY</span></div>
+          </div>
+          <p><strong>Major movement speed boost.</strong> Staple pick for mobility builds.</p>
+        </div>
+
+        <!-- Battery -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery">
+            <div><h3>Battery</h3><span class="priority-badge" style="background:var(--accent-blue);">CORE AS</span></div>
+          </div>
+          <p><strong>Direct attack speed increase.</strong> Synergizes with Cooldown and chain clear.</p>
+        </div>
+
+        <!-- Turbo Skates -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Turbo_Skates.png" alt="Turbo Skates">
+            <div><h3>Turbo Skates</h3><span class="priority-badge" style="background:var(--accent-blue);">AS CONVERTER</span></div>
+          </div>
+          <p>Converts movement speed into attack speed under the right conditions; pairs with Agility/Cooldown.</p>
+        </div>
+
+        <!-- Mirror -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Mirror.png" alt="Mirror">
+            <div><h3>Mirror</h3><span class="priority-badge" style="background:var(--success);">SAFETY</span></div>
+          </div>
+          <p><strong>Reflects all incoming damage and grants brief invulnerability.</strong> Excellent emergency button.</p>
+        </div>
+
+        <!-- Slippery Ring -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Slippery_Ring.png" alt="Slippery Ring">
+            <div><h3>Slippery Ring</h3><span class="priority-badge" style="background:var(--success);">EVASION</span></div>
+          </div>
+          <p><strong>Adds true evasion chance.</strong> The straightforward way to get dodge.</p>
+        </div>
+
+        <!-- Phantom Shroud -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Phantom_Shroud.png" alt="Phantom Shroud">
+            <div><h3>Phantom Shroud</h3><span class="priority-badge" style="background:var(--warning);">ON DODGE</span></div>
+          </div>
+          <p><strong>After a successful dodge</strong>, gain a brief burst (×2 next hit + temporary speed/AS). Does not add evasion by itself.</p>
+        </div>
+
+        <!-- Power Gloves (fix) -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Power_Gloves.png" alt="Power Gloves">
+            <div><h3>Power Gloves</h3><span class="priority-badge" style="background:var(--warning);">UTILITY</span></div>
+          </div>
+          <p>On-hit explosions utility — <strong>not</strong> an attack speed item.</p>
+        </div>
+
+        <!-- Thunder Mitts / Time Bracelet note -->
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Thunder_Mitts.png" alt="Thunder Mitts">
+            <div><h3>Thunder Mitts / Time Bracelet</h3><span class="priority-badge" style="background:var(--warning);">NOT AS</span></div>
+          </div>
+          <p>Thunder Mitts: periodic lightning. Time Bracelet: XP bonus. Helpful, but <strong>do not</strong> replace Battery/Turbo Skates for attack speed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad block -->
+    <div style="margin: 30px auto; text-align: center;">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-8830315294299920"
+        data-ad-slot="8173956372"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Progression -->
+    <section class="equipment-section">
+      <h2 class="section-title">⏱️ Minute-by-Minute Progression</h2>
+      <p class="section-subtitle">Prioritize safety, mobility, and consistent DPS uptime</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-time">0–3</span>
+          <h3>🌱 Foundation</h3>
+          <p>
+            Look for <a class="weapon-link" href="https://megabonk.org/database/weapons/aegis">Aegis</a> asap.
+            Consider <strong>XP → Luck</strong> start; add <em>Cursed</em> only if you want extra challenge.
+            Grab <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Turbo_Socks.png">Turbo Socks</a> on sight.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">3–7</span>
+          <h3>⚡ Set the Pace</h3>
+          <p>
+            Stack <strong>Cooldown</strong> first, then <strong>Agility</strong>.
+            Add <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a> as secondary.
+            Pick up <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Battery.png">Battery</a>.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">7–12</span>
+          <h3>💨 Mobility Online</h3>
+          <p>
+            Decide your path: <strong>Precision</strong> (crit/accuracy) or <strong>Quantity</strong> (projectiles).
+            Add <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Turbo_Skates.png">Turbo Skates</a> to convert speed → attack speed.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">12–18</span>
+          <h3>🔥 Sustain & Safety</h3>
+          <p>
+            Add <strong>Damage</strong> tomes. For defense, <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Mirror.png">Mirror</a> (reflect + i-frames)
+            and/or <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Slippery_Ring.png">Slippery Ring</a> (evasion).
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">18+</span>
+          <h3>🏆 Endgame Cleanup</h3>
+          <p>
+            Max your chosen path (Precision or Quantity) and finish Cooldown/Agility caps.
+            Keep moving; let Aegis cycles and Lightning Staff chains control the screen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alternatives -->
+    <section class="equipment-section">
+      <h2 class="section-title">🔄 Alternatives & Swaps</h2>
+      <p class="section-subtitle">Use these when preferred options don’t show up</p>
+
+      <table class="alternatives-table">
+        <thead><tr><th>Category</th><th>Primary Choice</th><th>Alternatives</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Main Weapon</strong></td>
+            <td>Aegis</td>
+            <td>— keep it core; swap only if a different build</td>
+          </tr>
+          <tr>
+            <td><strong>Secondary Clear</strong></td>
+            <td>Lightning Staff</td>
+            <td>Bananarang (mobile), Revolver (single-target)</td>
+          </tr>
+          <tr>
+            <td><strong>Movement</strong></td>
+            <td>Turbo Socks</td>
+            <td>Golden Sneakers (if seen)</td>
+          </tr>
+          <tr>
+            <td><strong>Attack Speed</strong></td>
+            <td>Battery</td>
+            <td>Turbo Skates (speed→AS). <em>Power Gloves/Thunder Mitts/Time Bracelet are not AS items.</em></td>
+          </tr>
+          <tr>
+            <td><strong>Defense</strong></td>
+            <td>Mirror</td>
+            <td>Golden Shield (shielding), Slippery Ring (evasion)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Pitfalls -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚠️ Common Mistakes</h2>
+      <div class="pitfall-grid">
+        <div class="pitfall-card">
+          <h3>❌ Calling Lightning Staff the “signature”</h3>
+          <p>Use Lightning Staff for wave clear; <strong>Aegis</strong> is Athena’s core.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Equating Power Gloves/Thunder Mitts/Time Bracelet with AS</h3>
+          <p>They don’t replace <strong>Battery</strong> or <strong>Turbo Skates</strong> for attack speed.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Confusing Evasion sources</h3>
+          <p><strong>Slippery Ring</strong> provides evasion; <strong>Phantom Shroud</strong> triggers on dodge but doesn’t add evasion by itself.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Standing still</h3>
+          <p>This is a movement-driven build; keep kiting to maximize coverage and safety.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <h2 class="section-title">❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What is the best weapon for Athena?</h3>
+        <p class="faq-answer">
+          <strong>Aegis</strong> is her core weapon. Add <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a> for chaining,
+          and use <a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">Bananarang</a> or
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">Revolver</a> as the flex slot.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Which tomes should I take?</h3>
+        <p class="faq-answer">
+          <strong>Cooldown</strong> → <strong>Agility</strong> first. Choose one path:
+          <strong>Precision</strong> (crit/accuracy) <em>or</em> <strong>Quantity</strong> (projectiles). Add <strong>Damage</strong> later.
+          XP/Luck are good snowball tomes; <em>Cursed</em> increases difficulty.
+          See <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Tomes Index</a>.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Best defensive items?</h3>
+        <p class="faq-answer">
+          <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Mirror.png">Mirror</a> (reflects all damage + brief i-frames),
+          <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Slippery_Ring.png">Slippery Ring</a> (evasion).
+          <a class="weapon-link" href="https://megabonk.org/images/Items/Item_Phantom_Shroud.png">Phantom Shroud</a> triggers a burst after you dodge but doesn’t add evasion.
+        </p>
+      </div>
+    </section>
+
+    <div class="alert-box">
+      <strong>💡 Pro Tip:</strong> Play around <strong>Aegis</strong> uptime while constantly moving.
+      Use <strong>Cooldown</strong> to tighten cycles, stack <strong>Agility</strong>, and convert speed
+      into extra casts via <strong>Turbo Skates</strong>. When things get hectic, <strong>Mirror</strong>
+      buys space with reflect + invulnerability, letting your Lightning Staff clean the map.
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Megabonk.org - All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="https://megabonk.org/">Home</a>
+      <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      <a href="https://megabonk.org/guides/characters/">Characters</a>
+      <a href="https://megabonk.org/guides/builds/">Builds</a>
+      <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+      <a href="https://megabonk.org/database/weapons/">Weapons</a>
+      <a href="https://megabonk.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
