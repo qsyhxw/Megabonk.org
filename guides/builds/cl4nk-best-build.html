@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===== DO NOT CHANGE TDK (kept exactly as provided) ===== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CL4NK Best Crit Build (2025) — Revolver & Bow Guide</title>
+  <meta name="description" content="CL4NK crit build 2025: Revolver + Bow core; Bananarang/Bone crowd clear. Tomes: Quantity, Precision, Cooldown. Items: Tactical Glasses & Boss Buster.">
+  <meta name="keywords" content="cl4nk build, cl4nk megabonk, best cl4nk build, cl4nk crit build, cl4nk guide, megabonk cl4nk, cl4nk revolver build">
+  <link rel="canonical" href="https://megabonk.org/guides/builds/cl4nk-best-build">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+  <!-- ===== Structured Data (FAQ) — corrected to match real data ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best weapon for CL4NK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Revolver pairs naturally with crit-focused builds and is CL4NK's starter weapon. Bow offers piercing line clears, while Bananarang or Bone provide reliable crowd coverage. Use internal database pages for details."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which tomes should I prioritize for CL4NK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A common early pattern is XP Tome, Luck Tome, and Cursed Tome for faster scaling and enemy density. Then stack Quantity (more projectiles) and Precision (crit chance; can enable overcrit beyond 100% crit chance), plus Projectile Speed and Cooldown as needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is CL4NK good for beginners?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CL4NK has a moderate learning curve: precise aim is rewarded, and crit chance/quantity scaling feel strong once set up. If crit enablers are delayed, consider a safer lane-clear secondary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What items work best with CL4NK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tactical Glasses grants bonus damage to high-HP enemies and is a strong early amplifier; Battery adds attack speed. Power Gloves create explosions on hit (not attack speed). Gym Sauce adds flat damage; Demonic Soul scales damage per kill; Boss Buster buffs boss/elite damage. Clover raises Luck; Eagle Claw improves damage against airborne targets."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ===== Optional List schema (equipment list) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "CL4NK Best Build Equipment",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"item":{"@type":"Thing","name":"Revolver","description":"Starter weapon; strong single-target with crit chance synergy"}},
+      {"@type":"ListItem","position":2,"item":{"@type":"Thing","name":"Bow","description":"Arrows pierce enemies for line clears"}},
+      {"@type":"ListItem","position":3,"item":{"@type":"Thing","name":"Quantity Tome","description":"Increases projectile count for all weapons"}},
+      {"@type":"ListItem","position":4,"item":{"@type":"Thing","name":"Precision Tome","description":"Increases crit chance; enables overcrit above 100%"}}
+    ]
+  }
+  </script>
+
+  <style>
+    /* ====== keep original look & animations ====== */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary-bg:#1a1a2e;--secondary-bg:#16213e;--accent-purple:#9d4edd;--accent-blue:#3a86ff;
+      --accent-pink:#ff006e;--text-light:#f8f9fa;--text-gray:#adb5bd;--card-bg:#0f3460;
+      --success:#06ffa5;--warning:#ffbe0b;--danger:#ff006e
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:var(--text-light);background:var(--primary-bg);overflow-x:hidden}
+    header{background:rgba(15,52,96,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;box-shadow:0 4px 30px rgba(0,0,0,.3)}
+    nav{max-width:1400px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+    .nav-links{display:flex;list-style:none;gap:2rem}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-weight:500;transition:.3s}
+    .nav-links a:hover{color:var(--accent-purple)}
+    .hero{background:linear-gradient(135deg,var(--secondary-bg) 0%,var(--card-bg) 100%);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(157,78,221,.1),transparent 70%)}
+    .hero-content{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+    .character-showcase{display:flex;align-items:center;justify-content:center;gap:3rem;margin-bottom:2rem;flex-wrap:wrap}
+    .character-image{width:200px;height:200px;border-radius:20px;border:4px solid var(--accent-purple);box-shadow:0 0 40px rgba(157,78,221,.5);object-fit:cover}
+    .hero h1{font-size:3rem;margin-bottom:1rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-subtitle{font-size:1.3rem;color:var(--text-gray);margin-bottom:2rem}
+    .tier-badge{display:inline-block;padding:.5rem 1.5rem;background:linear-gradient(135deg,#ffd700,#ffed4e);color:#1a1a2e;border-radius:30px;font-weight:800;font-size:1.2rem;box-shadow:0 4px 20px rgba(255,215,0,.4);margin-bottom:1.5rem}
+    .key-points{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+    .key-point{background:rgba(255,255,255,.05);padding:1rem 2rem;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(157,78,221,.3)}
+    .key-point strong{color:var(--accent-purple)}
+    .container{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+    .section-title{font-size:2.2rem;margin-bottom:1rem;color:var(--text-light);text-align:center}
+    .section-subtitle{text-align:center;color:var(--text-gray);margin-bottom:2rem;font-size:1.1rem}
+    .equipment-section{margin-bottom:4rem}
+    .equipment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:2rem}
+    .equipment-card{background:var(--card-bg);border-radius:15px;padding:2rem;border:2px solid rgba(157,78,221,.3);transition:.3s}
+    .equipment-card:hover{transform:translateY(-5px);border-color:var(--accent-purple);box-shadow:0 10px 30px rgba(157,78,221,.3)}
+    .equipment-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+    .equipment-icon{width:60px;height:60px;border-radius:10px;border:2px solid var(--accent-purple);object-fit:cover}
+    .equipment-card h3{color:var(--accent-purple);font-size:1.5rem}
+    .priority-badge{display:inline-block;padding:.3rem .8rem;background:var(--success);color:var(--primary-bg);border-radius:20px;font-size:.8rem;font-weight:700;margin-left:auto}
+    .equipment-card p{color:var(--text-gray);line-height:1.8}
+    .equipment-card strong{color:var(--text-light)}
+    .weapons-showcase{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:2rem 0}
+    .weapon-item{text-align:center}
+    .weapon-item img{width:80px;height:80px;border:3px solid var(--accent-blue);border-radius:12px;padding:.5rem;background:rgba(58,134,255,.1);transition:.3s}
+    .weapon-item img:hover{transform:scale(1.1);box-shadow:0 0 20px rgba(58,134,255,.5)}
+    .weapon-item p{margin-top:.5rem;font-size:.9rem;color:var(--text-gray)}
+    .weapon-link{color:var(--accent-blue);text-decoration:none;transition:color .3s}
+    .weapon-link:hover{color:var(--accent-purple)}
+    .timeline{position:relative;padding:2rem 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-purple),var(--accent-blue));transform:translateX(-50%)}
+    .timeline-item{background:var(--card-bg);padding:2rem;border-radius:15px;margin-bottom:2rem;position:relative;width:calc(50% - 3rem);border:2px solid rgba(157,78,221,.3)}
+    .timeline-item:nth-child(odd){margin-left:auto}
+    .timeline-item:nth-child(even){margin-right:auto}
+    .timeline-time{display:inline-block;padding:.5rem 1rem;background:var(--accent-purple);color:#fff;border-radius:20px;font-weight:700;margin-bottom:1rem}
+    .timeline-item h3{color:var(--accent-blue);margin-bottom:1rem}
+    .timeline-item p{color:var(--text-gray);line-height:1.8}
+    .alternatives-table{width:100%;background:var(--card-bg);border-radius:15px;overflow:hidden;border-collapse:collapse}
+    .alternatives-table thead{background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue))}
+    .alternatives-table th{padding:1.2rem;text-align:left;font-weight:700;color:#fff}
+    .alternatives-table td{padding:1.2rem;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text-gray)}
+    .alternatives-table tr:hover{background:rgba(157,78,221,.1)}
+    .pitfall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+    .pitfall-card{background:rgba(255,0,110,.1);border:2px solid var(--danger);border-radius:12px;padding:1.5rem}
+    .pitfall-card h3{color:var(--danger);margin-bottom:.8rem}
+    .pitfall-card p{color:var(--text-gray);line-height:1.7}
+    .faq-section{margin:4rem 0}
+    .faq-item{background:var(--card-bg);border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:2px solid rgba(157,78,221,.3)}
+    .faq-question{color:var(--accent-purple);margin-bottom:1rem;font-size:1.3rem}
+    .faq-answer{color:var(--text-gray);line-height:1.8}
+    .alert-box{background:linear-gradient(135deg,rgba(6,255,165,.1),rgba(58,134,255,.1));border:2px solid var(--success);border-radius:15px;padding:2rem;margin:3rem 0;color:var(--text-light);line-height:1.8}
+    footer{background:var(--secondary-bg);padding:2rem;text-align:center;border-top:3px solid var(--accent-purple)}
+    .footer-links{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap}
+    .footer-links a{color:var(--text-gray);text-decoration:none;transition:color .3s}
+    .footer-links a:hover{color:var(--accent-purple)}
+    @media (max-width:768px){
+      .hero h1{font-size:2rem}
+      .nav-links{gap:1rem}
+      .timeline::before{left:20px}
+      .timeline-item{width:calc(100% - 40px);margin-left:40px !important}
+      .timeline-item:nth-child(even){margin-right:0}
+      .character-showcase{flex-direction:column}
+    }
+    /* small helper pills */
+    .index-links{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:10px}
+    .index-links a{font-size:.85rem;padding:.35rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.2);text-decoration:none;color:var(--text-gray)}
+    .index-links a:hover{color:#fff;border-color:var(--accent-purple)}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo" aria-label="Megabonk Home">MEGABONK</a>
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="https://megabonk.org/">Home</a></li>
+        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+        <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+        <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+        <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+        <li><a href="https://megabonk.org/database/weapons/">Weapons DB</a></li>
+        <li><a href="https://megabonk.org/tier-lists/tomes/">Tomes</a></li>
+        <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="character-showcase">
+        <img src="https://megabonk.org/images/guides/characters/CL4NK.png" alt="CL4NK" class="character-image" loading="lazy">
+        <div>
+          <div class="tier-badge">🎯 S-TIER BUILD</div>
+          <h1>CL4NK Critical Strike Master Build</h1>
+          <p class="hero-subtitle">Precise revolver shots, piercing lanes, and safe crowd control</p>
+          <div class="index-links" aria-label="Quick indexes">
+            <a href="https://megabonk.org/database/">Database</a>
+            <a href="https://megabonk.org/database/weapons/">Weapons</a>
+            <a href="https://megabonk.org/tier-lists/tomes/">Tomes Index</a>
+            <a href="https://megabonk.org/tier-lists/items/">Items Index</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="key-points" role="list">
+        <div class="key-point" role="listitem"><strong>Primary Style:</strong> Critical-focused ranged DPS</div>
+        <div class="key-point" role="listitem"><strong>Difficulty:</strong> Moderate (aiming & positioning)</div>
+        <div class="key-point" role="listitem"><strong>Power Curve:</strong> Mid → Late once crit enablers appear</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ===== Core Weapons ===== -->
+    <section class="equipment-section" id="weapons">
+      <h2 class="section-title">⚔️ Core Weapons Setup</h2>
+      <p class="section-subtitle">Accurate single-target, lane pierce, and hands-off crowd coverage</p>
+
+      <div class="weapons-showcase" aria-label="Core weapons">
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">
+            <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+            <p>Revolver</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/bow">
+            <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+            <p>Bow (Pierce)</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">
+            <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+            <p>Bananarang</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/bone">
+            <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone">
+            <p>Bone (Bounce)</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="equipment-grid">
+        <!-- Revolver -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver icon" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">Revolver</a></h3></div>
+            <span class="priority-badge">CORE</span>
+          </div>
+          <p>
+            <strong>CL4NK’s starter weapon.</strong> High single-target damage that scales cleanly with
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Precision Tome</a> (crit chance) and
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity Tome</a> (projectiles).
+            Excellent for elites/bosses when your crit chance builds up.
+          </p>
+        </article>
+
+        <!-- Bow -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow icon" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/database/weapons/bow">Bow</a></h3></div>
+            <span class="priority-badge" style="background:var(--accent-blue)">PIERCE</span>
+          </div>
+          <p>
+            <strong>Piercing arrows</strong> to clear lines of enemies. Scales with
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Projectile Speed</a> and
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity</a>.
+            Complements Revolver by cleaning lanes while you focus high-value targets.
+          </p>
+        </article>
+
+        <!-- Bananarang -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang icon" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">Bananarang</a></h3></div>
+            <span class="priority-badge" style="background:var(--warning)">CROWD</span>
+          </div>
+          <p>
+            <strong>Boomerang projectiles</strong> travel out and return, covering wide lanes. Great passive crowd-clear,
+            improved further by <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity</a>.
+          </p>
+        </article>
+
+        <!-- Bone -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone icon" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/database/weapons/bone">Bone</a></h3></div>
+            <span class="priority-badge" style="background:var(--warning)">ALT</span>
+          </div>
+          <p>
+            Throws <strong>bouncing bones</strong> that ricochet between enemies. Hands-off coverage while you aim the Revolver.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <div style="margin:30px auto;text-align:center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- ===== Tomes ===== -->
+    <section class="equipment-section" id="tomes">
+      <h2 class="section-title">📚 Essential Tomes (real effects)</h2>
+      <p class="section-subtitle">Links point to your Tomes index for quick reference</p>
+
+      <div class="equipment-grid">
+        <!-- Early trio -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Early Scaling: XP → Luck → Cursed</a></h3></div>
+            <span class="priority-badge">COMMON</span>
+          </div>
+          <p>
+            A widely used opener for faster snowballing:
+            <strong>XP Tome</strong> (experience gain),
+            <strong>Luck Tome</strong> (luck up),
+            <strong>Cursed Tome</strong> (enemy density/difficulty). Cursed increases challenge rather than directly multiplying damage.
+          </p>
+        </article>
+
+        <!-- Quantity -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity Tome</a></h3></div>
+            <span class="priority-badge">TOP</span>
+          </div>
+          <p>
+            <strong>More projectiles</strong> for every weapon; multiplies overall output for Revolver and Bow alike.
+          </p>
+        </article>
+
+        <!-- Precision -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Tomes/Precision_Tome.png" alt="Precision Tome" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Precision Tome</a></h3></div>
+            <span class="priority-badge" style="background:var(--accent-blue)">CRIT CHANCE</span>
+          </div>
+          <p>
+            <strong>Increases crit chance.</strong> Can enable <em>overcrit</em> when total crit chance exceeds 100%,
+            greatly boosting single-target bursts.
+          </p>
+        </article>
+
+        <!-- Projectile Speed -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png" alt="Projectile Speed Tome" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Projectile Speed Tome</a></h3></div>
+            <span class="priority-badge" style="background:var(--accent-blue)">RELIABILITY</span>
+          </div>
+          <p>
+            Faster bullets/arrows improve hit rate on moving targets and feel great with Bow lanes.
+          </p>
+        </article>
+
+        <!-- Cooldown -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Cooldown Tome</a></h3></div>
+            <span class="priority-badge" style="background:var(--warning)">RECOMMENDED</span>
+          </div>
+          <p>
+            Reduces intervals so you fire more often — effectively higher attack frequency for all weapons.
+          </p>
+        </article>
+
+        <!-- Damage -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Damage Tome</a></h3></div>
+            <span class="priority-badge" style="background:var(--warning)">LATE</span>
+          </div>
+          <p>
+            Adds straight damage once your projectile count and reliability are in place.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <div style="margin:30px auto;text-align:center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- ===== Items ===== -->
+    <section class="equipment-section" id="items">
+      <h2 class="section-title">🎯 Key Items (accurate effects)</h2>
+      <p class="section-subtitle">Each card links to your Items index for full list</p>
+
+      <div class="equipment-grid">
+        <!-- Tactical Glasses -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Tactical_Glasses.png" alt="Tactical Glasses" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Tactical Glasses</a></h3></div>
+            <span class="priority-badge">EARLY AMP</span>
+          </div>
+          <p>
+            Bonus damage to high-HP enemies (great early amplifier). <em>Note:</em> this item does <strong>not</strong> grant crit chance.
+          </p>
+        </article>
+
+        <!-- Battery -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Battery</a></h3></div>
+            <span class="priority-badge" style="background:var(--accent-blue)">ATTACK SPEED</span>
+          </div>
+          <p>
+            Increases attack speed to produce more shots — a natural pair for Quantity and Precision.
+          </p>
+        </article>
+
+        <!-- Power Gloves -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Power_Gloves.png" alt="Power Gloves" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Power Gloves</a></h3></div>
+            <span class="priority-badge" style="background:var(--accent-blue)">AOE ON HIT</span>
+          </div>
+          <p>
+            Attacks <strong>explode on hit</strong>, dealing extra area damage. (It is not an attack-speed item.)
+          </p>
+        </article>
+
+        <!-- Gym Sauce -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Gym_Sauce.png" alt="Gym Sauce" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Gym Sauce</a></h3></div>
+            <span class="priority-badge" style="background:var(--accent-blue)">DAMAGE</span>
+          </div>
+          <p>
+            Provides a <strong>flat damage increase</strong> — a simple, reliable multiplier for all hits.
+          </p>
+        </article>
+
+        <!-- Demonic Soul -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Demonic_Soul.png" alt="Demonic Soul" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Demonic Soul</a></h3></div>
+            <span class="priority-badge" style="background:var(--warning)">SCALING</span>
+          </div>
+          <p>
+            <strong>Damage scales per kill</strong> up to a large cap — great snowball when waves are dense.
+          </p>
+        </article>
+
+        <!-- Boss Buster -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Boss_Buster.png" alt="Boss Buster" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Boss Buster</a></h3></div>
+            <span class="priority-badge" style="background:var(--success)">BOSS</span>
+          </div>
+          <p>
+            <strong>Bonus damage vs elites & bosses.</strong> Synergizes with Revolver focus fire.
+          </p>
+        </article>
+
+        <!-- Clover -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Clover.png" alt="Clover" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Clover</a></h3></div>
+            <span class="priority-badge" style="background:var(--success)">LUCK</span>
+          </div>
+          <p>
+            Increases <strong>Luck</strong>, improving drops and synergies — complements the XP/Luck opener.
+          </p>
+        </article>
+
+        <!-- Eagle Claw -->
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img src="https://megabonk.org/images/Items/Item_Eagle_Claw.png" alt="Eagle Claw" class="equipment-icon">
+            <div><h3><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Eagle Claw</a></h3></div>
+            <span class="priority-badge" style="background:var(--warning)">SITUATIONAL</span>
+          </div>
+          <p>
+            Adds damage against <strong>airborne</strong> foes and a chance to launch enemies — niche but useful in some maps.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <div style="margin:30px auto;text-align:center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- ===== Progression (neutral wording) ===== -->
+    <section class="equipment-section" id="progression">
+      <h2 class="section-title">⏱️ Minute-by-Minute Progression (suggested)</h2>
+      <p class="section-subtitle">Adjust to what the shop offers; avoid over-committing before key items appear</p>
+
+      <div class="timeline" aria-label="Progression timeline">
+        <div class="timeline-item">
+          <span class="timeline-time">0–3</span>
+          <h3>🌱 Set Up Economy & Safety</h3>
+          <p>
+            Look for <strong>XP/Luck/Cursed</strong> to accelerate scaling. Secure
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">Revolver</a> early and add a
+            defensive/coverage weapon if offered.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">3–7</span>
+          <h3>🎯 Build Crit Engine</h3>
+          <p>
+            Start stacking <strong>Quantity</strong> and <strong>Precision</strong>. Add
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/bow">Bow</a> for piercing lines.
+            Pick up <strong>Battery</strong> for attack speed when available.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">7–12</span>
+          <h3>⚡ Stabilize Clear & Targets</h3>
+          <p>
+            Take <strong>Projectile Speed</strong> and <strong>Cooldown</strong> as needed. Choose
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">Bananarang</a> or
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/bone">Bone</a> for comfortable crowd clear.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">12–18</span>
+          <h3>🔥 Push Damage</h3>
+          <p>
+            Add <strong>Damage</strong> tomes, <strong>Gym Sauce</strong> or <strong>Demonic Soul</strong> for scaling,
+            and <strong>Boss Buster</strong> before major bosses.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">18+</span>
+          <h3>🏆 Clean Finish</h3>
+          <p>
+            Fine-tune stack distribution (Quantity/Precision/Speed/Cooldown) and maintain safe positioning for elites.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Alternatives (descriptive, not tiered) ===== -->
+    <section class="equipment-section" id="alternatives">
+      <h2 class="section-title">🔄 Alternatives & Role Equivalents</h2>
+      <p class="section-subtitle">Swap by role if the shop doesn’t offer your first picks</p>
+
+      <table class="alternatives-table" aria-label="Alternatives">
+        <thead>
+          <tr><th>Role</th><th>Primary Choice</th><th>Other Options (different patterns)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Single-Target Focus</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">Revolver</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/sniper-rifle">Sniper Rifle</a>, <a class="weapon-link" href="https://megabonk.org/database/weapons/shotgun">Shotgun</a></td>
+          </tr>
+          <tr>
+            <td><strong>Lane / Line Clear</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/bow">Bow (Pierce)</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/dragons-breath">Dragon’s Breath</a> (broad lanes)</td>
+          </tr>
+          <tr>
+            <td><strong>Crowd Coverage</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">Bananarang</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/bone">Bone (Bounce)</a>, <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a>, <a class="weapon-link" href="https://megabonk.org/database/weapons/flamewalker">Flamewalker</a></td>
+          </tr>
+          <tr>
+            <td><strong>Boss / Elite Damage</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Boss Buster</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Big Bonk</a>, <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Bloody Cleaver</a></td>
+          </tr>
+          <tr>
+            <td><strong>Reliability Boosters</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Projectile Speed</a>, <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Cooldown</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Battery (AS)</a>, <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Clover (Luck)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== Pitfalls (corrected) ===== -->
+    <section class="equipment-section" id="pitfalls">
+      <h2 class="section-title">⚠️ Common Mistakes to Avoid</h2>
+      <div class="pitfall-grid">
+        <div class="pitfall-card">
+          <h3>❌ Misreading Item Effects</h3>
+          <p><strong>Tactical Glasses</strong> is a high-HP bonus damage item, not crit chance. <strong>Power Gloves</strong> add explosions, while <strong>Battery</strong> is the attack-speed item.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Overcommitting Too Early</h3>
+          <p>Quantity and Precision are great, but take <em>Projectile Speed/Cooldown</em> as needed so arrows and bullets actually connect.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Wrong Coverage Mix</h3>
+          <p>Running only single-target can feel shaky on swarms. Add <strong>Bananarang</strong> or <strong>Bone</strong> for comfortable crowd clear.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ (on-page, mirrors schema) ===== -->
+    <section class="faq-section" id="faq">
+      <h2 class="section-title">❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What is the best weapon for CL4NK?</h3>
+        <p class="faq-answer">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">Revolver</a> works naturally with crit-focused setups and is CL4NK’s starter.
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/bow">Bow</a> pierces for line clears.
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">Bananarang</a> or
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/bone">Bone</a> handle crowds.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Which tomes should I prioritize?</h3>
+        <p class="faq-answer">
+          A common early trio is <strong>XP → Luck → Cursed</strong> to accelerate scaling.
+          Then stack <strong>Quantity</strong> and <strong>Precision</strong> (crit chance; enables overcrit),
+          plus <strong>Projectile Speed</strong> and <strong>Cooldown</strong> to keep hits consistent.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What items are most impactful?</h3>
+        <p class="faq-answer">
+          <strong>Tactical Glasses</strong> (bonus damage vs high-HP), <strong>Battery</strong> (attack speed),
+          <strong>Power Gloves</strong> (explosions on hit), <strong>Gym Sauce</strong> (damage),
+          <strong>Demonic Soul</strong> (damage per kill), and <strong>Boss Buster</strong> (elite/boss damage).
+          <strong>Clover</strong> raises Luck; <strong>Eagle Claw</strong> helps vs airborne targets.
+        </p>
+      </div>
+    </section>
+
+    <div class="alert-box" role="note">
+      <strong>Pro Tip:</strong> Keep your aim for elites with <em>Revolver</em>, let <em>Bow</em> and a crowd-clear slot
+      do lane work, and pick tomes that improve reliability before pure damage. Use the index links above whenever you need exact stats or icons.
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Megabonk.org — All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="https://megabonk.org/">Home</a>
+      <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      <a href="https://megabonk.org/guides/characters/">Characters</a>
+      <a href="https://megabonk.org/guides/builds/">Builds</a>
+      <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+      <a href="https://megabonk.org/database/weapons/">Weapons</a>
+      <a href="https://megabonk.org/tier-lists/items/">Items</a>
+      <a href="https://megabonk.org/tier-lists/tomes/">Tomes</a>
+      <a href="https://megabonk.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+    crossorigin="anonymous"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
