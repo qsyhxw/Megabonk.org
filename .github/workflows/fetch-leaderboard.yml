@@ -2,13 +2,8 @@ name: Fetch Megabonk Leaderboard
 
 on:
   schedule:
-    # Every 5 minutes
-    - cron: '*/30 * * * *'
-  
-  # Allow manual trigger
+    - cron: '*/5 * * * *'
   workflow_dispatch:
-  
-  # Also run on push to main
   push:
     branches: [ main ]
 
@@ -29,41 +24,38 @@ jobs:
     
     - name: Install dependencies
       run: |
+        echo "📦 Installing Python packages..."
         pip install requests brotli
+        echo "✅ Packages installed:"
+        pip list | grep -E "(requests|[Bb]rotli)"
     
     - name: Fetch leaderboard data
       run: |
         python << 'EOF'
         import requests
         import json
+        import brotli
         import time
         from datetime import datetime
         from pathlib import Path
 
         API_URL = 'https://megabonk.fun/api/leaderboard'
 
-        # More realistic headers to bypass anti-bot protection
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'en-US,en;q=0.9',
-            'Accept-Encoding': 'gzip, deflate, br',
             'Referer': 'https://megabonk.fun/',
             'Origin': 'https://megabonk.fun',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin',
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
+            'Connection': 'keep-alive'
         }
 
         print('📡 Fetching data from megabonk.fun...')
+        print(f'🔧 Brotli available: {brotli is not None}')
         
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                # Add a small delay before request
                 if attempt > 0:
                     wait_time = attempt * 2
                     print(f'⏳ Waiting {wait_time}s before retry...')
@@ -77,12 +69,29 @@ jobs:
                 )
                 
                 print(f'📊 Response status: {response.status_code}')
-                print(f'📋 Response headers: {dict(response.headers)}')
+                print(f'📦 Content-Encoding: {response.headers.get("Content-Encoding")}')
+                print(f'📏 Content length: {len(response.content)} bytes')
                 
                 response.raise_for_status()
-                data = response.json()
                 
-                print(f'✅ Successfully fetched {len(data)} entries')
+                # Manual Brotli decompression if needed
+                content_encoding = response.headers.get('Content-Encoding', '').lower()
+                
+                if content_encoding == 'br':
+                    print('🔓 Manually decompressing Brotli data...')
+                    try:
+                        decompressed = brotli.decompress(response.content)
+                        print(f'✅ Decompressed: {len(decompressed)} bytes')
+                        data = json.loads(decompressed.decode('utf-8'))
+                    except Exception as e:
+                        print(f'❌ Brotli decompression failed: {e}')
+                        raise
+                else:
+                    # Try normal JSON parsing
+                    print('📄 Using normal JSON parsing...')
+                    data = response.json()
+                
+                print(f'✅ Successfully parsed {len(data)} entries')
                 
                 # Create output directory
                 output_dir = Path('data')
@@ -109,23 +118,33 @@ jobs:
                 print(f'📊 Total entries: {len(data)}')
                 
                 if len(data) > 0:
-                    print(f'🥇 Top player: {data[0]}')
+                    first_entry = data[0]
+                    print(f'🥇 First entry: {first_entry}')
+                    
+                    # Try to find player name field
+                    player_name = (first_entry.get('name') or 
+                                 first_entry.get('player') or 
+                                 first_entry.get('username') or 
+                                 'Unknown')
+                    score = (first_entry.get('kills') or 
+                           first_entry.get('score') or 
+                           first_entry.get('points') or 0)
+                    print(f'👤 Top player: {player_name} - {score:,}')
                 
                 # Success - exit the retry loop
                 break
                 
-            except requests.exceptions.HTTPError as e:
-                print(f'❌ HTTP Error on attempt {attempt + 1}/{max_retries}: {e}')
-                if e.response is not None:
-                    print(f'Response body: {e.response.text[:500]}')
-                if attempt == max_retries - 1:
-                    raise
             except requests.exceptions.RequestException as e:
                 print(f'❌ Request error on attempt {attempt + 1}/{max_retries}: {e}')
                 if attempt == max_retries - 1:
                     raise
+            except json.JSONDecodeError as e:
+                print(f'❌ JSON decode error on attempt {attempt + 1}/{max_retries}: {e}')
+                print(f'📝 Response text (first 500 chars): {response.text[:500]}')
+                if attempt == max_retries - 1:
+                    raise
             except Exception as e:
-                print(f'❌ Unexpected error on attempt {attempt + 1}/{max_retries}: {e}')
+                print(f'❌ Unexpected error on attempt {attempt + 1}/{max_retries}: {type(e).__name__}: {e}')
                 if attempt == max_retries - 1:
                     raise
         
@@ -137,10 +156,8 @@ jobs:
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         
-        # Add data files
         git add data/leaderboard.json data/leaderboard.min.json
         
-        # Check if there are changes
         if git diff --staged --quiet; then
           echo "📝 No changes in data, skipping commit"
         else
