@@ -1,0 +1,611 @@
+
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <!-- ====== TDK: kept EXACTLY as provided ====== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Megabonk Ogre Build (2025): Best Berserker Melee</title>
+  <meta name="description" content="Top Megabonk Ogre build: Axe core with Aura coverage and Lightning Staff. Best tomes (Damage, Quantity, Cooldown, Size) and items for melee clears.">
+  <meta name="keywords" content="ogre build, ogre megabonk, best ogre build, ogre axe build, ogre guide, megabonk ogre, ogre berserker build">
+  <link rel="canonical" href="https://megabonk.org/guides/builds/ogre-best-build">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+  <!-- ==== Structured data (corrected facts; TDK unchanged) ==== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best weapon for Ogre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Axe is a strong core pick for Ogre's melee-cleave playstyle because its wide swings hit multiple targets. Pair it with Aura for passive close-range coverage or Sword for active slashes. Lightning Staff adds safe chaining from range; add the Lightning Orb item if you specifically want stuns."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which tomes should I prioritize for Ogre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After early economy picks like XP/Luck/Curse when offered, focus on combat scaling: Damage, Quantity, Cooldown, and Size. The precise order depends on your drops; all four significantly increase Axe + Aura effectiveness."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Ogre good for beginners?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many players find Ogre approachable because the melee-cleave plan is straightforward: stay close, position safely, and let wide swings plus a passive coverage tool (Aura) do most of the work."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What items work best with Ogre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Great options include Gym Sauce (+damage), Demonic Soul (damage stacking from kills), Idle Juice (standing damage bonus), and Mirror (reflects projectiles with brief i-frames). Power Gloves provide on-hit explosions for extra wave clear. Consider defensive tools like Aegis (weapon) or Chonkplate (overheal + sustain)."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":"Ogre Best Build Equipment",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"item":{"@type":"Thing","name":"Axe","description":"Core melee-cleave weapon with wide arcs"}},
+      {"@type":"ListItem","position":2,"item":{"@type":"Thing","name":"Aura","description":"Passive close-range AoE field"}},
+      {"@type":"ListItem","position":3,"item":{"@type":"Thing","name":"Damage Tome","description":"Increases overall damage of all weapons"}},
+      {"@type":"ListItem","position":4,"item":{"@type":"Thing","name":"Gym Sauce","description":"Flat damage boost; synergizes with cleave builds"}}
+    ]
+  }
+  </script>
+
+  <!-- ====== Styles (kept; small tweaks only) ====== -->
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary-bg:#1a1a2e;--secondary-bg:#16213e;--accent-purple:#9d4edd;
+      --accent-blue:#3a86ff;--accent-pink:#ff006e;--text-light:#f8f9fa;
+      --text-gray:#adb5bd;--card-bg:#0f3460;--success:#06ffa5;--warning:#ffbe0b;--danger:#ff006e
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:var(--text-light);background:var(--primary-bg);overflow-x:hidden}
+    header{background:rgba(15,52,96,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;box-shadow:0 4px 30px rgba(0,0,0,.3)}
+    nav{max-width:1400px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+    .nav-links{display:flex;list-style:none;gap:2rem}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-weight:500;transition:.3s}
+    .nav-links a:hover{color:var(--accent-purple)}
+    .hero{background:linear-gradient(135deg,var(--secondary-bg) 0%,var(--card-bg) 100%);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(157,78,221,.1),transparent 70%);pointer-events:none}
+    .hero-content{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+    .character-showcase{display:flex;align-items:center;justify-content:center;gap:3rem;margin-bottom:2rem;flex-wrap:wrap}
+    .character-image{width:200px;height:200px;border-radius:20px;border:4px solid var(--accent-purple);box-shadow:0 0 40px rgba(157,78,221,.5);object-fit:cover}
+    .hero h1{font-size:3rem;margin-bottom:1rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-subtitle{font-size:1.1rem;color:var(--text-gray);margin-bottom:1rem}
+    .tier-badge{display:inline-block;padding:.5rem 1.5rem;background:linear-gradient(135deg,#ffd700,#ffed4e);color:#1a1a2e;border-radius:30px;font-weight:800;font-size:1.1rem;box-shadow:0 4px 20px rgba(255,215,0,.4);margin-bottom:1rem}
+    .key-points{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1rem}
+    .key-point{background:rgba(255,255,255,.05);padding:1rem 1.25rem;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(157,78,221,.3)}
+    .key-point strong{color:var(--accent-purple)} 
+    .container{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+    .section-title{font-size:2.2rem;margin-bottom:.75rem;color:var(--text-light);text-align:center}
+    .section-subtitle{text-align:center;color:var(--text-gray);margin-bottom:1.25rem;font-size:1.05rem}
+    .equipment-section{margin-bottom:3rem}
+    .equipment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:1.25rem}
+    .equipment-card{background:var(--card-bg);border-radius:15px;padding:2rem;border:2px solid rgba(157,78,221,.3);transition:.3s}
+    .equipment-card:hover{transform:translateY(-5px);border-color:var(--accent-purple);box-shadow:0 10px 30px rgba(157,78,221,.3)}
+    .equipment-header{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem}
+    .equipment-icon{width:60px;height:60px;border-radius:10px;border:2px solid var(--accent-purple);object-fit:cover;background:rgba(0,0,0,.15)}
+    .equipment-card h3{color:var(--accent-purple);font-size:1.35rem}
+    .priority-badge{display:inline-block;padding:.3rem .8rem;background:var(--success);color:var(--primary-bg);border-radius:20px;font-size:.75rem;font-weight:700;margin-left:auto}
+    .weapons-showcase{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:1.25rem 0 1.5rem}
+    .weapon-item{text-align:center}
+    .weapon-item img{width:80px;height:80px;border:3px solid var(--accent-blue);border-radius:12px;padding:.5rem;background:rgba(58,134,255,.1);transition:.25s}
+    .weapon-item img:hover{transform:scale(1.06);box-shadow:0 0 20px rgba(58,134,255,.5)}
+    .weapon-item p{margin-top:.5rem;font-size:.9rem;color:var(--text-gray)}
+    .weapon-link{color:var(--accent-blue);text-decoration:none;transition:.3s}
+    .weapon-link:hover{color:var(--accent-purple)}
+    .timeline{position:relative;padding:1.75rem 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-purple),var(--accent-blue));transform:translateX(-50%)}
+    .timeline-item{background:var(--card-bg);padding:1.5rem;border-radius:15px;margin-bottom:1.5rem;position:relative;width:calc(50% - 3rem);border:2px solid rgba(157,78,221,.3)}
+    .timeline-item:nth-child(odd){margin-left:auto}.timeline-item:nth-child(even){margin-right:auto}
+    .timeline-time{display:inline-block;padding:.4rem .9rem;background:var(--accent-purple);color:#fff;border-radius:20px;font-weight:700;margin-bottom:.75rem}
+    .alternatives-table{width:100%;background:var(--card-bg);border-radius:15px;overflow:hidden;border-collapse:collapse}
+    .alternatives-table thead{background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue))}
+    .alternatives-table th{padding:1rem;text-align:left;font-weight:700;color:#fff}
+    .alternatives-table td{padding:1rem;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text-gray)}
+    .alternatives-table tr:hover{background:rgba(157,78,221,.1)}
+    .pitfall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:1.25rem}
+    .pitfall-card{background:rgba(255,0,110,.1);border:2px solid var(--danger);border-radius:12px;padding:1.25rem}
+    .pitfall-card h3{color:var(--danger);margin-bottom:.6rem}
+    .faq-section{margin:3rem 0}
+    .faq-item{background:var(--card-bg);border-radius:12px;padding:1.5rem;margin-bottom:1rem;border:2px solid rgba(157,78,221,.3)}
+    .faq-question{color:var(--accent-purple);margin-bottom:.6rem;font-size:1.2rem}
+    .faq-answer{color:var(--text-gray);line-height:1.8}
+    .alert-box{background:linear-gradient(135deg,rgba(6,255,165,.1),rgba(58,134,255,.1));border:2px solid var(--success);border-radius:15px;padding:1.5rem;margin:2rem 0;color:var(--text-light);line-height:1.8}
+    footer{background:var(--secondary-bg);padding:2rem;text-align:center;border-top:3px solid var(--accent-purple)}
+    .footer-links{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap}
+    .footer-links a{color:var(--text-gray);text-decoration:none;transition:.3s}
+    .footer-links a:hover{color:var(--accent-purple)}
+    @media (max-width:768px){
+      .hero h1{font-size:2rem}
+      .nav-links{gap:1rem}
+      .timeline::before{left:20px}
+      .timeline-item{width:calc(100% - 40px);margin-left:40px !important}
+      .timeline-item:nth-child(even){margin-right:0}
+      .character-showcase{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== Header ====== -->
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo" aria-label="MEGABONK Home">MEGABONK</a>
+      <ul class="nav-links">
+        <li><a href="https://megabonk.org/">Home</a></li>
+        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+        <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+        <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+        <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+        <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ====== Hero ====== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="character-showcase">
+        <img src="https://megabonk.org/images/guides/characters/Ogre.png" alt="Ogre character portrait" class="character-image" width="200" height="200" loading="eager">
+        <div>
+          <div class="tier-badge">💥 S-TIER BUILD</div>
+          <h1>Ogre Pure Berserker Build</h1>
+          <p class="hero-subtitle">Wide cleaves, stable close-range coverage, and safe chain control.</p>
+          <div class="key-points" aria-label="Build highlights">
+            <div class="key-point"><strong>Primary Style:</strong> Melee cleave (aggressive)</div>
+            <div class="key-point"><strong>Difficulty:</strong> Beginner-friendly positioning</div>
+            <div class="key-point"><strong>Power Curve:</strong> Strong early → snowballs on scaling</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- ====== Core Weapons ====== -->
+    <section class="equipment-section" id="core-weapons">
+      <h2 class="section-title">⚔️ Core Weapons Setup</h2>
+      <p class="section-subtitle">Use a wide-cleave core with passive coverage and a safe ranged chainer.</p>
+
+      <!-- Showcase (with internal DB links & images) -->
+      <div class="weapons-showcase" role="list">
+        <div class="weapon-item" role="listitem">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/axe">
+            <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+            <p>Axe (core)</p>
+          </a>
+        </div>
+        <div class="weapon-item" role="listitem">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/aura">
+            <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+            <p>Aura (passive AoE)</p>
+          </a>
+        </div>
+        <div class="weapon-item" role="listitem">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">
+            <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+            <p>Lightning Staff (chains)</p>
+          </a>
+        </div>
+        <div class="weapon-item" role="listitem">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/sword">
+            <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+            <p>Sword (alt melee)</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="equipment-grid">
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe icon">
+            <div><h3>Axe</h3><span class="priority-badge">CORE</span></div>
+          </div>
+          <p>
+            Broad cleaving arcs that reliably hit multiple targets. Scales excellently with 
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Damage</a>, 
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity</a>, 
+            and <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Size</a>.
+            Not the single highest base damage in the game, but its <em>coverage + scaling</em> makes it a premier Ogre core.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura icon">
+            <div><h3>Aura</h3><span class="priority-badge" style="background:var(--accent-blue)">COVERAGE</span></div>
+          </div>
+          <p>
+            Passive close-range AoE that constantly chips enemies who enter melee. Pairs perfectly with Axe to clean up
+            small foes and protect your space. Scales with 
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Size</a> and 
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Cooldown</a>.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff icon">
+            <div><h3>Lightning Staff</h3><span class="priority-badge" style="background:var(--success)">CHAIN</span></div>
+          </div>
+          <p>
+            Safe, bouncing chains that thin out packs and pick off ranged threats. For reliable <strong>stuns</strong>, 
+            add the <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Lightning Orb</a> item—Lightning Staff itself focuses on chaining.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword icon">
+            <div><h3>Sword (Alternative)</h3><span class="priority-badge" style="background:var(--warning)">ALT</span></div>
+          </div>
+          <p>
+            Consistent close-range slashes. Use if you prefer active swings over passive coverage; still scales on 
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Damage</a>,
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Cooldown</a>, and 
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity</a>.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ad -->
+    <div style="margin:30px auto;text-align:center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- ====== Tomes ====== -->
+    <section class="equipment-section" id="tomes">
+      <h2 class="section-title">📚 Tome Priorities (real mechanics)</h2>
+      <p class="section-subtitle">Linking to the <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Tomes index</a>. Pick based on shop RNG and your current needs.</p>
+
+      <div class="equipment-grid">
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+            <div><h3>Early Economy (Optional)</h3><span class="priority-badge">UTILITY</span></div>
+          </div>
+          <p>
+            <strong>XP / Luck / Curse</strong> are common early picks when offered; they are helpful but not mandatory “must-takes”.
+            Take them if they appear early without skipping key combat tomes.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+            <div><h3>Damage</h3><span class="priority-badge">CORE</span></div>
+          </div>
+          <p>Global damage scaling for all weapons. Extremely efficient for Axe cleaves.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome">
+            <div><h3>Quantity</h3><span class="priority-badge" style="background:var(--accent-blue)">MAJOR</span></div>
+          </div>
+          <p>More projectiles or swings → faster clears and better coverage.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+            <div><h3>Cooldown</h3><span class="priority-badge" style="background:var(--accent-blue)">MAJOR</span></div>
+          </div>
+          <p>Higher attack frequency for all weapons; noticeably improves feel and DPS.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome">
+            <div><h3>Size</h3><span class="priority-badge" style="background:var(--accent-blue)">MAJOR</span></div>
+          </div>
+          <p>Bigger Axe arcs & Aura radius → more enemies hit per swing.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Shield_Tome.png" alt="Shield Tome">
+            <div><h3>Shield</h3><span class="priority-badge" style="background:var(--warning)">OPTIONAL</span></div>
+          </div>
+          <p>Extra barrier that soaks hits before HP—take if you need survivability for melee positioning.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====== Items (corrected mechanics) ====== -->
+    <section class="equipment-section" id="items">
+      <h2 class="section-title">🎯 Items That Actually Work With Ogre</h2>
+      <p class="section-subtitle">Linked to the <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Items index</a>. Use images below to visually match drops.</p>
+
+      <div class="equipment-grid">
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Gym_Sauce.png" alt="Gym Sauce">
+            <div><h3>Gym Sauce</h3><span class="priority-badge">DAMAGE</span></div>
+          </div>
+          <p>Flat <strong>+damage</strong> increase that multiplies well with cleave scaling. Simple and strong.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Demonic_Soul.png" alt="Demonic Soul">
+            <div><h3>Demonic Soul</h3><span class="priority-badge">STACKING</span></div>
+          </div>
+          <p>Gains damage from kills up to a high cap. Excellent snowball tool if you’re already clearing waves fast.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Power_Gloves.png" alt="Power Gloves">
+            <div><h3>Power Gloves</h3><span class="priority-badge">ON-HIT</span></div>
+          </div>
+          <p>On-hit explosions/impacts for extra wave clear. (Not an attack-speed item—pair with Cooldown Tome or Battery for speed.)</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Idle_Juice.png" alt="Idle Juice">
+            <div><h3>Idle Juice</h3><span class="priority-badge" style="background:var(--success)">STANCE</span></div>
+          </div>
+          <p>Builds a strong damage bonus while standing still—great when your coverage keeps enemies at bay.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Mirror.png" alt="Mirror">
+            <div><h3>Mirror</h3><span class="priority-badge" style="background:var(--accent-blue)">DEFENSE</span></div>
+          </div>
+          <p>Reflects projectiles and provides brief i-frames. Superb versus ranged pressure.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Chonkplate.png" alt="Chonkplate">
+            <div><h3>Chonkplate</h3><span class="priority-badge" style="background:var(--accent-blue)">SUSTAIN</span></div>
+          </div>
+          <p>Overheal/ sustain-focused item that pairs with defensive routes. Use if you need more staying power.</p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Lightning_Orb.png" alt="Lightning Orb">
+            <div><h3>Lightning Orb</h3><span class="priority-badge" style="background:var(--success)">STUN</span></div>
+          </div>
+          <p>Adds reliable <strong>stuns</strong> to your hits—great synergy with <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a> chains.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ad -->
+    <div style="margin:30px auto;text-align:center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- ====== Progression (toned, factual) ====== -->
+    <section class="equipment-section" id="progression">
+      <h2 class="section-title">⏱️ Practical Progression</h2>
+      <p class="section-subtitle">Prioritize upgrades based on what the shop offers; don’t force a fixed script.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-time">0–3</span>
+          <h3>Get Online</h3>
+          <p>Look for <a class="weapon-link" href="https://megabonk.org/database/weapons/axe">Axe</a> and a coverage tool (preferably <a class="weapon-link" href="https://megabonk.org/database/weapons/aura">Aura</a>).  
+             Pick early economy tomes if they show without skipping strong combat tomes.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">3–7</span>
+          <h3>Scale Damage & Frequency</h3>
+          <p>Start stacking <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Damage</a>, 
+             <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Quantity</a>, and 
+             <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Cooldown</a>. 
+             Add <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a> as ranged chainer.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">7–12</span>
+          <h3>Lock Stability</h3>
+          <p>Grow <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Size</a> for much larger Axe arcs & Aura radius. 
+             Slot in items like <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Gym Sauce</a> / 
+             <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Demonic Soul</a> and 
+             <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Mirror</a> or 
+             <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Chonkplate</a> for comfort.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">12+</span>
+          <h3>Snowball</h3>
+          <p>Continue stacking your best tomes and fill remaining slots. If you unlocked more weapon slots, 
+             consider a fourth slot only when it truly complements your scaling.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== Alternatives (cleaned) ====== -->
+    <section class="equipment-section" id="alternatives">
+      <h2 class="section-title">🔄 Sensible Alternatives</h2>
+      <p class="section-subtitle">Sub in based on drops and comfort. Links point to DB pages.</p>
+
+      <table class="alternatives-table">
+        <thead><tr><th>Category</th><th>Primary Choice</th><th>Alternatives</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Core Melee</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/axe">Axe</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/hero-sword">Hero Sword</a>, 
+                <a class="weapon-link" href="https://megabonk.org/database/weapons/sword">Sword</a></td>
+          </tr>
+          <tr>
+            <td><strong>Coverage</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/aura">Aura</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/flamewalker">Flamewalker</a>, 
+                <a class="weapon-link" href="https://megabonk.org/database/weapons/tornado">Tornado</a></td>
+          </tr>
+          <tr>
+            <td><strong>Ranged Utility</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff (chains)</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/database/weapons/revolver">Revolver</a>, 
+                <a class="weapon-link" href="https://megabonk.org/database/weapons/bow">Bow</a></td>
+          </tr>
+          <tr>
+            <td><strong>Damage Items</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Gym Sauce</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Demonic Soul</a>, 
+                <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Brass Knuckles (close-range bonus)</a></td>
+          </tr>
+          <tr>
+            <td><strong>On-Hit / Control</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Power Gloves</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Lightning Orb (stun)</a></td>
+          </tr>
+          <tr>
+            <td><strong>Defense & Sustain</strong></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Mirror</a></td>
+            <td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Chonkplate</a>, 
+                <a class="weapon-link" href="https://megabonk.org/database/weapons/aegis">Aegis (defensive weapon)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ====== Common Pitfalls (updated facts) ====== -->
+    <section class="equipment-section" id="pitfalls">
+      <h2 class="section-title">⚠️ Common Mistakes to Avoid</h2>
+      <div class="pitfall-grid">
+        <div class="pitfall-card">
+          <h3>❌ Treating Power Gloves as “attack speed”</h3>
+          <p>They create on-hit explosions. For faster swings, use <strong>Cooldown Tome</strong> (and items like Battery if available).</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Locking into a fixed 3-weapon rule</h3>
+          <p>Aim for a focused set of 3–4 depending on your unlocks. A tight kit often outperforms unfocused 4-slot setups.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Confusing “stun” source</h3>
+          <p><strong>Lightning Staff</strong> chains; stuns come from <strong>Lightning Orb</strong>. Combine them for control.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Overvaluing Size before Frequency</h3>
+          <p>Size is great, but <strong>Quantity</strong> and <strong>Cooldown</strong> often increase real DPS earlier.</p>
+        </div>
+        <div class="pitfall-card">
+          <h3>❌ Expecting Gym Sauce to “scale over time”</h3>
+          <p>It’s a reliable flat damage boost—still excellent, just not a ramping effect on its own.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== FAQ (page content; JSON-LD already added) ====== -->
+    <section class="faq-section" id="faq">
+      <h2 class="section-title">❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What’s the safest 3-weapon core?</h3>
+        <p class="faq-answer">Axe + Aura + Lightning Staff covers melee cleave, passive protection, and safe ranged chaining. If you unlock a 4th slot, add a comfort pick like Sword or a utility weapon.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Do I always open with XP → Luck → Curse?</h3>
+        <p class="faq-answer">They are excellent early options when offered, but not mandatory. If strong combat tomes appear early, it’s fine to take those first.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Best defensive choice?</h3>
+        <p class="faq-answer">Mirror for projectile matchups; Shield Tome when learning melee spacing; Aegis (weapon) if you prefer active blocks and shockwaves; Chonkplate if you lean into sustain.</p>
+      </div>
+    </section>
+
+    <div class="alert-box">
+      <strong>Tip:</strong> Ogre excels when you stack <em>Frequency (Cooldown/Quantity)</em> and <em>Damage</em> while keeping a steady
+      <em>coverage layer (Aura/Lightning Staff)</em>. Use the <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Lightning Orb</a>
+      if you want consistent stuns, and don’t forget to add at least one defensive tool (Mirror, Shield Tome, or Aegis).
+    </div>
+  </main>
+
+  <!-- ====== Footer ====== -->
+  <footer>
+    <p>&copy; 2025 Megabonk.org — All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="https://megabonk.org/">Home</a>
+      <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      <a href="https://megabonk.org/guides/characters/">Characters</a>
+      <a href="https://megabonk.org/guides/builds/">Builds</a>
+      <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+      <a href="https://megabonk.org/database/weapons/">Weapons</a>
+      <a href="https://megabonk.org/tier-lists/items/">Items</a>
+      <a href="https://megabonk.org/tier-lists/tomes/">Tomes</a>
+      <a href="https://megabonk.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- CF beacon (kept) -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
