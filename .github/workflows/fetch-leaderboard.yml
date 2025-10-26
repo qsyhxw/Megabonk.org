@@ -24,10 +24,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        echo "📦 Installing Python packages..."
         pip install requests brotli
-        echo "✅ Packages installed:"
-        pip list | grep -E "(requests|[Bb]rotli)"
     
     - name: Fetch leaderboard data
       run: |
@@ -46,12 +43,10 @@ jobs:
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'en-US,en;q=0.9',
             'Referer': 'https://megabonk.fun/',
-            'Origin': 'https://megabonk.fun',
-            'Connection': 'keep-alive'
+            'Origin': 'https://megabonk.fun'
         }
 
         print('📡 Fetching data from megabonk.fun...')
-        print(f'🔧 Brotli available: {brotli is not None}')
         
         max_retries = 3
         for attempt in range(max_retries):
@@ -64,34 +59,58 @@ jobs:
                 response = requests.get(
                     API_URL,
                     headers=headers,
-                    timeout=30,
-                    allow_redirects=True
+                    timeout=30
                 )
                 
                 print(f'📊 Response status: {response.status_code}')
-                print(f'📦 Content-Encoding: {response.headers.get("Content-Encoding")}')
+                print(f'📦 Content-Encoding: {response.headers.get("Content-Encoding", "none")}')
                 print(f'📏 Content length: {len(response.content)} bytes')
                 
                 response.raise_for_status()
                 
-                # Manual Brotli decompression if needed
-                content_encoding = response.headers.get('Content-Encoding', '').lower()
+                # Smart parsing: try multiple methods
+                data = None
                 
-                if content_encoding == 'br':
-                    print('🔓 Manually decompressing Brotli data...')
-                    try:
-                        decompressed = brotli.decompress(response.content)
-                        print(f'✅ Decompressed: {len(decompressed)} bytes')
-                        data = json.loads(decompressed.decode('utf-8'))
-                    except Exception as e:
-                        print(f'❌ Brotli decompression failed: {e}')
-                        raise
-                else:
-                    # Try normal JSON parsing
-                    print('📄 Using normal JSON parsing...')
+                # Method 1: Try direct JSON parsing (most common case)
+                try:
+                    print('🔍 Method 1: Trying direct JSON parsing...')
                     data = response.json()
+                    print(f'✅ Method 1 succeeded! Parsed {len(data)} entries')
+                except Exception as e:
+                    print(f'❌ Method 1 failed: {e}')
                 
-                print(f'✅ Successfully parsed {len(data)} entries')
+                # Method 2: Try parsing response.text as JSON
+                if data is None:
+                    try:
+                        print('🔍 Method 2: Trying response.text parsing...')
+                        data = json.loads(response.text)
+                        print(f'✅ Method 2 succeeded! Parsed {len(data)} entries')
+                    except Exception as e:
+                        print(f'❌ Method 2 failed: {e}')
+                
+                # Method 3: Try manual Brotli decompression
+                if data is None and response.headers.get('Content-Encoding') == 'br':
+                    try:
+                        print('🔍 Method 3: Trying manual Brotli decompression...')
+                        decompressed = brotli.decompress(response.content)
+                        data = json.loads(decompressed.decode('utf-8'))
+                        print(f'✅ Method 3 succeeded! Parsed {len(data)} entries')
+                    except Exception as e:
+                        print(f'❌ Method 3 failed: {e}')
+                
+                # Method 4: Try decoding raw content
+                if data is None:
+                    try:
+                        print('🔍 Method 4: Trying raw content decode...')
+                        data = json.loads(response.content.decode('utf-8'))
+                        print(f'✅ Method 4 succeeded! Parsed {len(data)} entries')
+                    except Exception as e:
+                        print(f'❌ Method 4 failed: {e}')
+                
+                if data is None:
+                    raise Exception('All parsing methods failed')
+                
+                print(f'✅ Successfully got {len(data)} entries')
                 
                 # Create output directory
                 output_dir = Path('data')
@@ -119,12 +138,13 @@ jobs:
                 
                 if len(data) > 0:
                     first_entry = data[0]
-                    print(f'🥇 First entry: {first_entry}')
+                    print(f'🥇 First entry keys: {list(first_entry.keys())}')
                     
                     # Try to find player name field
                     player_name = (first_entry.get('name') or 
                                  first_entry.get('player') or 
                                  first_entry.get('username') or 
+                                 first_entry.get('user') or
                                  'Unknown')
                     score = (first_entry.get('kills') or 
                            first_entry.get('score') or 
@@ -134,18 +154,10 @@ jobs:
                 # Success - exit the retry loop
                 break
                 
-            except requests.exceptions.RequestException as e:
-                print(f'❌ Request error on attempt {attempt + 1}/{max_retries}: {e}')
-                if attempt == max_retries - 1:
-                    raise
-            except json.JSONDecodeError as e:
-                print(f'❌ JSON decode error on attempt {attempt + 1}/{max_retries}: {e}')
-                print(f'📝 Response text (first 500 chars): {response.text[:500]}')
-                if attempt == max_retries - 1:
-                    raise
             except Exception as e:
-                print(f'❌ Unexpected error on attempt {attempt + 1}/{max_retries}: {type(e).__name__}: {e}')
+                print(f'❌ Error on attempt {attempt + 1}/{max_retries}: {type(e).__name__}: {e}')
                 if attempt == max_retries - 1:
+                    print('🚨 All attempts failed!')
                     raise
         
         print('✨ Fetch completed successfully')
