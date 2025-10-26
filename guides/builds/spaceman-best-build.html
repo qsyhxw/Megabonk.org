@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ====== TDK: kept EXACTLY as provided ====== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Spaceman Build 2025: Black Hole Control</title>
+  <meta name="description" content="Learn the Spaceman control loop: Black Hole grouping, Aura AOE, Lightning chains. Tomes, items, routing, and positioning tips for consistent wins.">
+  <meta name="keywords" content="spaceman build, spaceman megabonk, best spaceman build, spaceman black hole build, spaceman guide, megabonk spaceman">
+  <link rel="canonical" href="https://megabonk.org/guides/builds/spaceman-best-build">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+  <!-- ====== Structured data (updated to reflect corrected facts) ====== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best weapon for Spaceman?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Black Hole is Spaceman's signature control tool, creating singularities that pull enemies together. Pair with Aura for close-range AOE and Lightning Staff for chain hits on grouped targets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which tomes should I prioritize for Spaceman?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with XP Tome for faster levels (as of v1.0.17 ~7% per stack), then add Quantity for more projectiles and Cooldown for higher uptime. Projectile Speed is a feel-based alternative. Cursed Tome increases difficulty and is not a damage boost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Spaceman beginner-friendly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It can be approachable if you enjoy positioning and crowd control. Black Hole helps manage swarms, but proper placement is still important."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What items work well with this build?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Battery (attack speed), Mirror (reflects damage and grants brief invulnerability), Demonic Soul (on-kill stacking damage up to +100%), Clover and Credit Card (Green) for luck-related consistency. Power Gloves and Thunder Mitts provide on-hit explosions/lightning respectively—these are damage/utility, not attack speed."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Spaceman Best Build — Core Equipment",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1,
+        "item": { "@type": "Thing", "name": "Black Hole", "url": "https://megabonk.org/database/weapons/black-hole",
+          "description": "Primary weapon — gravity crowd control" } },
+      { "@type": "ListItem", "position": 2,
+        "item": { "@type": "Thing", "name": "Aura", "url": "https://megabonk.org/database/weapons/aura",
+          "description": "Secondary weapon — sustained AOE field" } },
+      { "@type": "ListItem", "position": 3,
+        "item": { "@type": "Thing", "name": "Lightning Staff", "url": "https://megabonk.org/database/weapons/lightning-staff",
+          "description": "Chain lightning on clustered enemies" } }
+    ]
+  }
+  </script>
+
+  <!-- ====== Page styles (keep visual style/animations) ====== -->
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root{
+      --primary-bg:#1a1a2e; --secondary-bg:#16213e; --card-bg:#0f3460;
+      --accent-purple:#9d4edd; --accent-blue:#3a86ff; --accent-pink:#ff006e;
+      --text-light:#f8f9fa; --text-gray:#adb5bd; --success:#06ffa5; --warning:#ffbe0b; --danger:#ff006e; --space:#8b5cf6;
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:var(--text-light);background:var(--primary-bg);overflow-x:hidden;}
+    header{background:rgba(15,52,96,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;box-shadow:0 4px 30px rgba(0,0,0,.3);}
+    nav{max-width:1400px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .logo{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;}
+    .nav-links{display:flex;list-style:none;gap:2rem;}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-weight:500;transition:.3s;}
+    .nav-links a:hover{color:var(--accent-purple);}
+    .hero{background:linear-gradient(135deg,var(--secondary-bg) 0%,var(--card-bg) 100%);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, rgba(139,92,246,.15), transparent 70%);pointer-events:none;}
+    .hero-content{max-width:1200px;margin:0 auto;position:relative;z-index:1;}
+    .character-showcase{display:flex;align-items:center;justify-content:center;gap:3rem;margin-bottom:2rem;flex-wrap:wrap;}
+    .character-image{width:200px;height:200px;border-radius:20px;border:4px solid var(--space);box-shadow:0 0 40px rgba(139,92,246,.5);object-fit:cover;}
+    .hero h1{font-size:3rem;margin-bottom:1rem;background:linear-gradient(135deg,var(--space),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-subtitle{font-size:1.2rem;color:var(--text-gray);margin-bottom:1rem;}
+    .tier-badge{display:inline-block;padding:.5rem 1.5rem;background:linear-gradient(135deg,var(--space),var(--accent-blue));color:#fff;border-radius:30px;font-weight:800;font-size:1.1rem;box-shadow:0 4px 20px rgba(139,92,246,.4);margin-bottom:1rem;}
+    .key-points{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+    .key-point{background:rgba(255,255,255,.05);padding:0.75rem 1.25rem;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(139,92,246,.3);}
+    .key-point strong{color:var(--space);}
+    .container{max-width:1400px;margin:0 auto;padding:3rem 2rem;}
+    .section-title{font-size:2.1rem;margin-bottom:.8rem;color:var(--text-light);text-align:center;}
+    .section-subtitle{text-align:center;color:var(--text-gray);margin-bottom:1.5rem;font-size:1.05rem;}
+    .equipment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:1.25rem;}
+    .equipment-card{background:var(--card-bg);border-radius:15px;padding:1.5rem;border:2px solid rgba(139,92,246,.3);transition:.3s;}
+    .equipment-card:hover{transform:translateY(-5px);border-color:var(--space);box-shadow:0 10px 30px rgba(139,92,246,.3);}
+    .equipment-header{display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;}
+    .equipment-icon{width:60px;height:60px;border-radius:10px;border:2px solid var(--space);object-fit:cover;background:rgba(139,92,246,.1);}
+    .equipment-card h3{color:var(--space);font-size:1.25rem;}
+    .priority-badge{display:inline-block;padding:.25rem .6rem;background:var(--success);color:var(--primary-bg);border-radius:20px;font-size:.8rem;font-weight:700;margin-left:auto;}
+    .warning-box{background:rgba(255,190,11,.1);border:2px solid var(--warning);border-radius:12px;padding:1rem;margin:1rem 0;color:var(--text-light);}
+    .weapons-showcase{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:1.25rem 0;}
+    .weapon-item{text-align:center}
+    .weapon-item img{width:80px;height:80px;border:3px solid var(--space);border-radius:12px;padding:.5rem;background:rgba(139,92,246,.1);transition:.3s;}
+    .weapon-item img:hover{transform:scale(1.1);box-shadow:0 0 20px rgba(139,92,246,.5);}
+    .weapon-item p{margin-top:.5rem;font-size:.9rem;color:var(--text-gray);}
+    .weapon-link{color:var(--space);text-decoration:none;transition:.3s;}
+    .weapon-link:hover{color:var(--accent-blue);}
+    .links-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:.75rem}
+    .links-row a{color:var(--text-gray);text-decoration:none;border-bottom:1px dashed rgba(139,92,246,.6)}
+    .links-row a:hover{color:var(--space)}
+    .timeline{position:relative;padding:1.5rem 0;margin-top:.5rem;}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--space),var(--accent-blue));transform:translateX(-50%);}
+    .timeline-item{background:var(--card-bg);padding:1.5rem;border-radius:15px;margin:1rem 0;position:relative;width:calc(50% - 3rem);border:2px solid rgba(139,92,246,.3);}
+    .timeline-item:nth-child(odd){margin-left:auto;}
+    .timeline-item:nth-child(even){margin-right:auto;}
+    .timeline-time{display:inline-block;padding:.3rem .8rem;background:var(--space);color:#fff;border-radius:20px;font-weight:700;margin-bottom:.6rem;}
+    .alternatives-table{width:100%;background:var(--card-bg);border-radius:15px;overflow:hidden;border-collapse:collapse}
+    .alternatives-table thead{background:linear-gradient(135deg,var(--space),var(--accent-blue));}
+    .alternatives-table th{padding:1rem;text-align:left;font-weight:700;color:#fff;}
+    .alternatives-table td{padding:1rem;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text-gray);}
+    .alternatives-table tr:hover{background:rgba(139,92,246,.1);}
+    .badge{display:inline-block;margin-left:.35rem;padding:.1rem .45rem;border-radius:.45rem;background:rgba(248,249,250,.15);font-size:.75rem;color:#fff;border:1px solid rgba(248,249,250,.25)}
+    .pitfall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:1rem;}
+    .pitfall-card{background:rgba(255,0,110,.1);border:2px solid var(--danger);border-radius:12px;padding:1rem;}
+    .faq-section{margin:3rem 0;}
+    .faq-item{background:var(--card-bg);border-radius:12px;padding:1.5rem;margin-bottom:1rem;border:2px solid rgba(139,92,246,.3);}
+    .faq-question{color:var(--space);margin-bottom:.6rem;font-size:1.2rem;}
+    .alert-box{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(58,134,255,.1));border:2px solid var(--space);border-radius:15px;padding:1.5rem;margin:2rem 0;color:var(--text-light);line-height:1.8;}
+    .version-note{background:rgba(6,255,165,.08);border:2px dashed var(--success);border-radius:12px;padding:1rem;margin:2rem 0;}
+    footer{background:var(--secondary-bg);padding:2rem;text-align:center;border-top:3px solid var(--space);}
+    .footer-links{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap;}
+    .footer-links a{color:var(--text-gray);text-decoration:none;transition:.3s;}
+    .footer-links a:hover{color:var(--space);}
+    @media (max-width:768px){
+      .hero h1{font-size:2rem;}
+      .nav-links{gap:1rem;}
+      .timeline::before{left:20px;}
+      .timeline-item{width:calc(100% - 40px);margin-left:40px !important;}
+      .timeline-item:nth-child(even){margin-right:0;}
+      .character-showcase{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav aria-label="Primary">
+      <a class="logo" href="https://megabonk.org/">MEGABONK</a>
+      <ul class="nav-links">
+        <li><a href="https://megabonk.org/">Home</a></li>
+        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+        <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+        <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+        <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+        <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="character-showcase">
+          <img src="https://megabonk.org/images/guides/characters/Spaceman.png" alt="Spaceman character portrait" class="character-image">
+          <div>
+            <div class="tier-badge">🌌 CONTROL-FOCUSED BUILD</div>
+            <h1>Spaceman Gravity Control Build</h1>
+            <p class="hero-subtitle">Black Hole grouping with Aura & Lightning Staff for dependable crowd control.</p>
+            <div class="links-row" aria-label="Quick index links">
+              <a href="https://megabonk.org/database/weapons/">Weapons Database</a> •
+              <a href="https://megabonk.org/tier-lists/tomes/">Tomes Index</a> •
+              <a href="https://megabonk.org/tier-lists/items/">Items Index</a>
+            </div>
+          </div>
+        </div>
+        <div class="key-points" role="list">
+          <div class="key-point" role="listitem"><strong>Primary Style:</strong> Gravity crowd control</div>
+          <div class="key-point" role="listitem"><strong>Learning Curve:</strong> Positioning focused</div>
+          <div class="key-point" role="listitem"><strong>Patch Context:</strong> Balanced since late-game updates</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Core weapons -->
+      <section class="equipment-section" aria-labelledby="core-weapons">
+        <h2 id="core-weapons" class="section-title">⚔️ Core Weapons Setup</h2>
+        <p class="section-subtitle">Reliable trio for grouping → AOE conversion → chain finishing.</p>
+
+        <div class="weapons-showcase" aria-label="Core weapon icons">
+          <div class="weapon-item">
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/black-hole">
+              <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole weapon icon">
+              <p>Black Hole</p>
+            </a>
+          </div>
+          <div class="weapon-item">
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/aura">
+              <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura weapon icon">
+              <p>Aura</p>
+            </a>
+          </div>
+          <div class="weapon-item">
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">
+              <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff weapon icon">
+              <p>Lightning Staff</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="equipment-grid">
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole icon">
+              <div><h3>Black Hole</h3><span class="priority-badge">CORE</span></div>
+            </div>
+            <p>
+              Creates singularities that <strong>pull enemies together</strong>—the build’s control engine. Use it to stack foes, then
+              finish with Aura and chains. Placement and rhythm matter more in recent patches; drop holes where they intercept the largest streams.
+            </p>
+            <div class="warning-box"><strong>Balance note:</strong> Post-1.0.12 difficulty changes mean less free wins—Black Hole remains strong, but good placement is expected.</div>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura icon">
+              <div><h3>Aura</h3><span class="priority-badge" style="background: var(--accent-blue);">AOE</span></div>
+            </div>
+            <p>
+              A persistent circle of <strong>close-range AOE</strong>. Converts grouped mobs into safe clears while you reposition. Scale with Quantity/Cooldown to keep enemies inside damage for longer.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff icon">
+              <div><h3>Lightning Staff</h3><span class="priority-badge" style="background: var(--accent-blue);">CHAIN</span></div>
+            </div>
+            <p>
+              Fires bolts that <strong>chain between clustered targets</strong>. Naturally spikes once Black Hole is online; chains jump through condensed packs and clean stragglers.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Ad slot -->
+      <div style="margin: 30px auto; text-align: center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <!-- Tomes -->
+      <section class="equipment-section" aria-labelledby="tomes">
+        <h2 id="tomes" class="section-title">📚 Essential Tomes Priority</h2>
+        <p class="section-subtitle">
+          Level momentum first, then scale projectile count and uptime.
+          <span class="links-row">See: <a href="https://megabonk.org/tier-lists/tomes/">Tomes Index</a></span>
+        </p>
+
+        <div class="equipment-grid">
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+              <div><h3>XP Tome</h3><span class="priority-badge">LEVELING</span></div>
+            </div>
+            <p>
+              Speeds up early access to key upgrades. <strong>As of v1.0.17 the bonus is ~7% per stack</strong>. One early stack is highly impactful; add more if drops allow and pacing feels good.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome">
+              <div><h3>Quantity Tome</h3><span class="priority-badge" style="background: var(--accent-blue);">PROJECTILES</span></div>
+            </div>
+            <p>
+              <strong>+Projectile count</strong>—more Black Holes, Aura pulses and lightning chains. Dramatically improves map coverage and control density.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+              <div><h3>Cooldown Tome</h3><span class="priority-badge" style="background: var(--accent-blue);">UPTIME</span></div>
+            </div>
+            <p>
+              <strong>Lower cooldowns</strong> = higher cast frequency. Feels like attack speed for most weapons and keeps pulls/auras rolling.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png" alt="Projectile Speed Tome">
+              <div><h3>Projectile Speed Tome</h3><span class="priority-badge" style="background: var(--warning);">ALTERNATIVE</span></div>
+            </div>
+            <p>
+              Increases projectile travel speed—use if you prefer faster holes/bolts over pure cooldown reductions.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+              <div><h3>Damage Tome</h3><span class="priority-badge" style="background: var(--warning);">LATE GAME</span></div>
+            </div>
+            <p>
+              Add once your control package is online to multiply clears on dense packs.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome">
+              <div><h3>Cursed Tome</h3><span class="priority-badge" style="background: var(--warning);">OPTIONAL</span></div>
+            </div>
+            <p>
+              <strong>Increases difficulty (more/stronger/faster enemies)</strong>. It does <em>not</em> directly boost your damage—take only when your control & defense are stable.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Items -->
+      <section class="equipment-section" aria-labelledby="items">
+        <h2 id="items" class="section-title">🎯 Recommended Items</h2>
+        <p class="section-subtitle">
+          Keep pulls frequent, add safety, and scale damage.
+          <span class="links-row">See: <a href="https://megabonk.org/tier-lists/items/">Items Index</a></span>
+        </p>
+
+        <div class="equipment-grid">
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery">
+              <div><h3>Battery</h3><span class="priority-badge">ATTACK SPEED</span></div>
+            </div>
+            <p>
+              Boosts attack rate—great synergy with Black Hole and Aura for steadier control.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Mirror.png" alt="Mirror">
+              <div><h3>Mirror</h3><span class="priority-badge" style="background: var(--accent-blue);">DEFENSE</span></div>
+            </div>
+            <p>
+              Reflects incoming damage and grants brief invulnerability on trigger—excellent safety net while grouping packs.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Demonic_Soul.png" alt="Demonic Soul">
+              <div><h3>Demonic Soul</h3><span class="priority-badge" style="background: var(--accent-blue);">SCALING</span></div>
+            </div>
+            <p>
+              On-kill stacking damage up to <strong>+100%</strong>. No health cost—simply rewards continuous clears.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Clover.png" alt="Clover">
+              <div><h3>Clover</h3><span class="priority-badge" style="background: var(--success);">CONSISTENCY</span></div>
+            </div>
+            <p>
+              Improves luck for better rolls and rewards—helps you find key tomes/items earlier.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Credit_Card_Green.png" alt="Credit Card (Green)">
+              <div><h3>Credit Card (Green)</h3><span class="priority-badge" style="background: var(--success);">LOOT LUCK</span></div>
+            </div>
+            <p>
+              Chest bonus that also grants a small <strong>+Luck</strong>. Use with Clover if you want maximum drop consistency.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Power_Gloves.png" alt="Power Gloves">
+              <div><h3>Power Gloves</h3><span class="priority-badge" style="background: var(--warning);">ON-HIT</span></div>
+            </div>
+            <p>
+              Chance to create large explosions on hit. <strong>Not</strong> an attack-speed item—use as damage/clear utility.
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Thunder_Mitts.png" alt="Thunder Mitts">
+              <div><h3>Thunder Mitts</h3><span class="priority-badge" style="background: var(--warning);">ON-HIT</span></div>
+            </div>
+            <p>
+              Triggers lightning strikes on hit on a cooldown—extra coverage for grouped packs (utility, not speed).
+            </p>
+          </article>
+
+          <article class="equipment-card">
+            <div class="equipment-header">
+              <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Time_Bracelet.png" alt="Time Bracelet">
+              <div><h3>Time Bracelet</h3><span class="priority-badge" style="background: var(--warning);">XP</span></div>
+            </div>
+            <p>
+              Grants bonus <strong>XP gain</strong>. Helps reach your key breakpoints faster; complements XP Tome early.
+            </p>
+          </article>
+        </div>
+
+        <div class="warning-box">
+          <strong>Classification note:</strong> <em>Aegis</em> is a <strong>weapon</strong>, not an item. If you want a defensive substitute that uses a weapon slot,
+          consider <a class="weapon-link" href="https://megabonk.org/database/weapons/aegis">Aegis</a> in the weapon section below.
+        </div>
+      </section>
+
+      <!-- Timeline (strategy—not absolute rules) -->
+      <section class="equipment-section" aria-labelledby="timeline">
+        <h2 id="timeline" class="section-title">⏱️ Suggested Progression</h2>
+        <p class="section-subtitle">Adjust to your drops and map pressure; numbers are guidance, not hard rules.</p>
+
+        <div class="timeline" aria-label="Suggested minute-by-minute plan">
+          <article class="timeline-item">
+            <span class="timeline-time">Early</span>
+            <h3>Secure Control & Levels</h3>
+            <p>Pick up <strong>XP Tome</strong> early to accelerate unlocks, then lock in <strong>Black Hole</strong> as your first weapon.
+              Add either <strong>Quantity</strong> or <strong>Cooldown</strong> next based on drops.</p>
+          </article>
+
+          <article class="timeline-item">
+            <span class="timeline-time">Mid</span>
+            <h3>Stabilize the Loop</h3>
+            <p>Add <strong>Aura</strong> for reliable AOE. Begin stacking <strong>Quantity</strong> and <strong>Cooldown</strong> to keep holes and pulses flowing.
+              Grab <strong>Battery</strong> for steadier output and <strong>Mirror</strong> for safety.</p>
+          </article>
+
+          <article class="timeline-item">
+            <span class="timeline-time">Late</span>
+            <h3>Scale & Close</h3>
+            <p>Pick up <strong>Lightning Staff</strong> to chain through condensed packs. Add <strong>Damage Tome</strong> and
+               <strong>Demonic Soul</strong> for finishing power. Consider <strong>Cursed Tome</strong> only if your control and defense are comfortable.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Alternatives -->
+      <section class="equipment-section" aria-labelledby="alts">
+        <h2 id="alts" class="section-title">🔄 Alternatives & Swaps</h2>
+        <p class="section-subtitle">Use these when your primary picks don’t appear.</p>
+
+        <table class="alternatives-table" role="table" aria-label="Alternatives table">
+          <thead><tr><th>Category</th><th>Primary Choice</th><th>Alternatives</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Control Weapon</strong></td>
+              <td><a class="weapon-link" href="https://megabonk.org/database/weapons/black-hole">Black Hole</a></td>
+              <td><a class="weapon-link" href="https://megabonk.org/database/weapons/tornado">Tornado</a> <span class="badge">different feel</span></td>
+            </tr>
+            <tr>
+              <td><strong>AOE Weapon</strong></td>
+              <td><a class="weapon-link" href="https://megabonk.org/database/weapons/aura">Aura</a></td>
+              <td><a class="weapon-link" href="https://megabonk.org/database/weapons/flamewalker">Flamewalker</a>, <a class="weapon-link" href="https://megabonk.org/database/weapons/firestaff">Firestaff</a></td>
+            </tr>
+            <tr>
+              <td><strong>Chain/Finish</strong></td>
+              <td><a class="weapon-link" href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a></td>
+              <td><a class="weapon-link" href="https://megabonk.org/database/weapons/bananarang">Bananarang</a>, <a class="weapon-link" href="https://megabonk.org/database/weapons/bow">Bow</a></td>
+            </tr>
+            <tr>
+              <td><strong>Defense (Item)</strong></td>
+              <td>Mirror</td>
+              <td>Chonkplate, Golden Shield</td>
+            </tr>
+            <tr>
+              <td><strong>Defense (Weapon)</strong></td>
+              <td>—</td>
+              <td><a class="weapon-link" href="https://megabonk.org/database/weapons/aegis">Aegis</a> <span class="badge">weapon slot</span></td>
+            </tr>
+            <tr>
+              <td><strong>Damage/Utility (Item)</strong></td>
+              <td>Demonic Soul</td>
+              <td>Power Gloves <span class="badge">explosions</span>, Thunder Mitts <span class="badge">lightning</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Pitfalls -->
+      <section class="equipment-section" aria-labelledby="pitfalls">
+        <h2 id="pitfalls" class="section-title">⚠️ Common Pitfalls</h2>
+        <div class="pitfall-grid">
+          <article class="pitfall-card">
+            <h3>❌ Mislabeling items</h3>
+            <p><strong>Power Gloves</strong> and <strong>Thunder Mitts</strong> are on-hit effects, not attack speed. Keep <strong>Battery</strong> for speed needs.</p>
+          </article>
+          <article class="pitfall-card">
+            <h3>❌ Treating Cursed Tome as damage</h3>
+            <p>It raises <strong>difficulty</strong>, not your damage. Add it only when your control & survivability are stable.</p>
+          </article>
+          <article class="pitfall-card">
+            <h3>❌ Forgetting defense</h3>
+            <p><strong>Mirror</strong> dramatically increases run consistency. Don’t drop all defenses for greed.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq-section" aria-labelledby="faq">
+        <h2 id="faq" class="section-title">❓ Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Was Black Hole nerfed? Is it still worth using?</h3>
+          <p class="faq-answer">End-game difficulty increased in later patches, so placement matters more. Black Hole remains a top control pick and synergizes perfectly with Aura and chain weapons.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">How many weapons should I run?</h3>
+          <p class="faq-answer">The <em>core trio</em> (Black Hole, Aura, Lightning Staff) covers control, AOE, and finish. You can flex a defensive or utility option if your mode/rolls allow—just keep tomes scaling in mind.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">What’s a safe early plan?</h3>
+          <p class="faq-answer">Pick XP Tome early, secure Black Hole, then weave in Quantity/Cooldown. Add Mirror when pressure spikes; take Cursed Tome later if you want more challenge and drops.</p>
+        </div>
+      </section>
+
+      <div class="alert-box">
+        <strong>Pro Tip:</strong> Drop Black Holes where lanes converge—let mobs walk into your Aura instead of chasing. Quantity increases coverage, Cooldown smooths uptime, and Lightning Staff mops up condensed packs.
+      </div>
+
+      <!-- Patch / version notes -->
+      <section class="version-note" aria-label="Version notes">
+        <strong>Version notes:</strong> As of v1.0.17, XP Tome provides ~7% XP per stack. Late-game difficulty was increased in earlier updates, so control placement and survivability matter more than before.
+      </section>
+
+      <!-- Ad slot -->
+      <div style="margin: 30px auto; text-align: center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Megabonk.org — All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="https://megabonk.org/">Home</a>
+      <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      <a href="https://megabonk.org/guides/characters/">Characters</a>
+      <a href="https://megabonk.org/guides/builds/">Builds</a>
+      <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+      <a href="https://megabonk.org/database/weapons/">Weapons</a>
+      <a href="https://megabonk.org/tier-lists/tomes/">Tomes</a>
+      <a href="https://megabonk.org/tier-lists/items/">Items</a>
+      <a href="https://megabonk.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- Cloudflare analytics (kept) -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+    crossorigin="anonymous"></script>
+</body>
+</html>
