@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ====== TDK: kept EXACTLY as provided (UNCHANGED) ====== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amog Best Build 2025: Poison Flask, Black Hole</title>
+  <meta name="description" content="Amog poison build 2025: Poison Flask DoT with Black Hole grouping. Prioritize Bloody Tome (Lifesteal), Battery, Cooldown, and Moldy Cheese.">
+  <meta name="keywords" content="amog build, amog megabonk, best amog build, amog poison build, amog guide, megabonk amog, amog dot build">
+  <link rel="canonical" href="https://megabonk.org/guides/builds/amog-best-build">
+
+  <!-- Google tag (gtag.js) — unchanged -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <!-- AdSense — unchanged -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+  <!-- ====== Structured Data (UPDATED with corrected facts) ====== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best weapon for Amog?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Poison Flask is the core for Amog's poison-over-time playstyle. Pair it with Black Hole to group enemies so poison hits many targets at once, and add Flamewalker for sustained area damage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which tomes should I prioritize for Amog?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common early curve: XP → Luck → Cursed (Cursed increases enemy difficulty, not player damage). Then stack Bloody Tome (Lifesteal) for sustain, followed by Damage and Cooldown to apply poison faster and amplify overall damage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Amog good for beginners?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Poison Flask plus Black Hole is easy to pilot, and stacking Bloody Tome (Lifesteal) provides steady sustain while you focus on positioning."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What items work best with Amog?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Moldy Cheese (+poison-on-hit) strongly complements Poison Flask. Battery (+Attack Speed) helps apply stacks faster. Mirror reflects incoming damage and grants brief invulnerability. Demonic Soul gives damage per kill (up to a cap), and Chonkplate provides Overheal and extra Lifesteal."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ItemList for key equipment (names only; facts corrected) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Amog Best Build Equipment",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Thing", "name": "Poison Flask", "url": "https://megabonk.org/database/weapons/poison-flask" } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Thing", "name": "Black Hole", "url": "https://megabonk.org/database/weapons/black-hole" } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Thing", "name": "Flamewalker", "url": "https://megabonk.org/database/weapons/flamewalker" } }
+    ]
+  }
+  </script>
+
+  <!-- ====== Styles (kept + minimal tweaks) ====== -->
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root{
+      --primary-bg:#1a1a2e; --secondary-bg:#16213e; --card-bg:#0f3460;
+      --accent-purple:#9d4edd; --accent-blue:#3a86ff; --accent-pink:#ff006e;
+      --text-light:#f8f9fa; --text-gray:#adb5bd; --success:#06ffa5; --warning:#ffbe0b; --danger:#ff006e; --poison:#7cfc00;
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif; line-height:1.6; color:var(--text-light); background:var(--primary-bg); overflow-x:hidden;}
+
+    header{background:rgba(15,52,96,.95); backdrop-filter:blur(10px); position:sticky; top:0; z-index:1000; box-shadow:0 4px 30px rgba(0,0,0,.3);}
+    nav{max-width:1400px; margin:0 auto; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center;}
+    .logo{font-size:1.8rem; font-weight:800; background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; text-decoration:none;}
+    .nav-links{display:flex; list-style:none; gap:2rem;}
+    .nav-links a{color:var(--text-light); text-decoration:none; font-weight:500; transition:.3s;}
+    .nav-links a:hover{color:var(--accent-purple);}
+
+    .hero{background:linear-gradient(135deg,var(--secondary-bg) 0%,var(--card-bg) 100%); padding:4rem 2rem; text-align:center; position:relative; overflow:hidden;}
+    .hero::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(124,252,0,.1), transparent 70%); pointer-events:none;}
+    .hero-content{max-width:1200px; margin:0 auto; position:relative; z-index:1;}
+    .character-showcase{display:flex; align-items:center; justify-content:center; gap:3rem; margin-bottom:2rem; flex-wrap:wrap;}
+    .character-image{width:200px; height:200px; border-radius:20px; border:4px solid var(--poison); box-shadow:0 0 40px rgba(124,252,0,.5); object-fit:cover;}
+    .hero h1{font-size:3rem; margin-bottom:1rem; background:linear-gradient(135deg,var(--poison),var(--success)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+    .hero-subtitle{font-size:1.2rem; color:var(--text-gray); margin-bottom:2rem;}
+    .tier-badge{display:inline-block; padding:.5rem 1.5rem; background:linear-gradient(135deg,var(--poison),var(--success)); color:#1a1a2e; border-radius:30px; font-weight:800; font-size:1.2rem; box-shadow:0 4px 20px rgba(124,252,0,.4); margin-bottom:1.25rem;}
+    .key-points{display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:2rem;}
+    .key-point{background:rgba(255,255,255,.05); padding:1rem 2rem; border-radius:10px; backdrop-filter:blur(10px); border:1px solid rgba(124,252,0,.3);}
+    .key-point strong{color:var(--poison);}
+
+    .container{max-width:1400px; margin:0 auto; padding:3rem 2rem;}
+    .section-title{font-size:2.2rem; margin-bottom:1rem; text-align:center;}
+    .section-subtitle{text-align:center; color:var(--text-gray); margin-bottom:2rem; font-size:1.05rem;}
+
+    .equipment-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:2rem; margin-top:2rem;}
+    .equipment-card{background:var(--card-bg); border-radius:15px; padding:2rem; border:2px solid rgba(124,252,0,.3); transition:.3s;}
+    .equipment-card:hover{transform:translateY(-5px); border-color:var(--poison); box-shadow:0 10px 30px rgba(124,252,0,.3);}
+    .equipment-header{display:flex; align-items:center; gap:1rem; margin-bottom:1rem;}
+    .equipment-icon{width:60px; height:60px; border-radius:10px; border:2px solid var(--poison); object-fit:cover;}
+    .equipment-card h3{color:var(--poison); font-size:1.4rem;}
+    .priority-badge{display:inline-block; padding:.3rem .8rem; background:var(--success); color:var(--primary-bg); border-radius:20px; font-size:.8rem; font-weight:700; margin-left:auto;}
+    .equipment-card p{color:var(--text-gray); line-height:1.8;}
+    .equipment-card a{color:var(--poison); text-decoration:none;}
+    .equipment-card a:hover{color:var(--success);}
+
+    .weapons-showcase{display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin:2rem 0;}
+    .weapon-item{text-align:center;}
+    .weapon-item img{width:80px; height:80px; border:3px solid var(--poison); border-radius:12px; padding:.5rem; background:rgba(124,252,0,.1); transition:.3s;}
+    .weapon-item img:hover{transform:scale(1.1); box-shadow:0 0 20px rgba(124,252,0,.5);}
+    .weapon-item p{margin-top:.5rem; font-size:.9rem; color:var(--text-gray);}
+    .weapon-link{color:var(--poison); text-decoration:none;}
+    .weapon-link:hover{color:var(--success);}
+
+    .timeline{position:relative; padding:2rem 0;}
+    .timeline::before{content:''; position:absolute; left:50%; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--poison),var(--success)); transform:translateX(-50%);}
+    .timeline-item{background:var(--card-bg); padding:2rem; border-radius:15px; margin-bottom:2rem; position:relative; width:calc(50% - 3rem); border:2px solid rgba(124,252,0,.3);}
+    .timeline-item:nth-child(odd){margin-left:auto;} .timeline-item:nth-child(even){margin-right:auto;}
+    .timeline-time{display:inline-block; padding:.5rem 1rem; background:var(--poison); color:var(--primary-bg); border-radius:20px; font-weight:700; margin-bottom:1rem;}
+    .timeline-item h3{color:var(--success); margin-bottom:1rem;}
+    .timeline-item p{color:var(--text-gray); line-height:1.8;}
+
+    .alternatives-table{width:100%; background:var(--card-bg); border-radius:15px; overflow:hidden; border-collapse:collapse;}
+    .alternatives-table thead{background:linear-gradient(135deg,var(--poison),var(--success));}
+    .alternatives-table th{padding:1.2rem; text-align:left; font-weight:700; color:var(--primary-bg);}
+    .alternatives-table td{padding:1.2rem; border-bottom:1px solid rgba(255,255,255,.1); color:var(--text-gray);}
+    .alternatives-table tr:hover{background:rgba(124,252,0,.1);}
+
+    .pitfall-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1.5rem; margin-top:2rem;}
+    .pitfall-card{background:rgba(255,0,110,.1); border:2px solid var(--danger); border-radius:12px; padding:1.5rem;}
+    .pitfall-card h3{color:var(--danger); margin-bottom:.8rem;}
+    .pitfall-card p{color:var(--text-gray); line-height:1.7;}
+
+    .faq-section{margin:4rem 0;}
+    .faq-item{background:var(--card-bg); border-radius:12px; padding:2rem; margin-bottom:1.5rem; border:2px solid rgba(124,252,0,.3);}
+    .faq-question{color:var(--poison); margin-bottom:1rem; font-size:1.25rem;}
+    .faq-answer{color:var(--text-gray); line-height:1.8;}
+
+    .alert-box{background:linear-gradient(135deg, rgba(124,252,0,.1), rgba(6,255,165,.1)); border:2px solid var(--poison); border-radius:15px; padding:2rem; margin:3rem 0; color:var(--text-light); line-height:1.8;}
+
+    footer{background:var(--secondary-bg); padding:2rem; text-align:center; border-top:3px solid var(--poison);}
+    .footer-links{display:flex; justify-content:center; gap:2rem; margin-top:1rem; flex-wrap:wrap;}
+    .footer-links a{color:var(--text-gray); text-decoration:none; transition:.3s;}
+    .footer-links a:hover{color:var(--poison);}
+
+    @media (max-width: 768px){
+      .hero h1{font-size:2rem;}
+      .nav-links{gap:1rem;}
+      .timeline::before{left:20px;}
+      .timeline-item{width:calc(100% - 40px); margin-left:40px !important;}
+      .timeline-item:nth-child(even){margin-right:0;}
+      .character-showcase{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== Top Nav ====== -->
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+      <ul class="nav-links">
+        <li><a href="https://megabonk.org/">Home</a></li>
+        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+        <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+        <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+        <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+        <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ====== Hero ====== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="character-showcase">
+        <img src="https://megabonk.org/images/guides/characters/Amog.png" alt="Amog character" class="character-image" width="200" height="200">
+        <div>
+          <div class="tier-badge">☠️ POISON DoT SUSTAIN</div>
+          <h1>Amog Toxic Sustain Build</h1>
+          <p class="hero-subtitle">Reliable poison-over-time with grouping control and steady lifesteal</p>
+          <div class="key-points">
+            <div class="key-point"><strong>Primary Style:</strong> Poison DoT + Crowd Control</div>
+            <div class="key-point"><strong>Difficulty:</strong> Beginner-friendly</div>
+            <div class="key-point"><strong>Power Spike:</strong> Mid game</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- ====== Core Weapons ====== -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚔️ Core Weapons Setup</h2>
+      <p class="section-subtitle">Poison Flask for DoT, Black Hole for grouping, Flamewalker for sustained coverage.<br>
+        Browse the full <a href="https://megabonk.org/database/weapons/" target="_blank" rel="noopener">Weapon Database</a>.
+      </p>
+
+      <div class="weapons-showcase" aria-label="Core Weapons">
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/poison-flask">
+            <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask icon">
+            <p>Poison Flask</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/black-hole">
+            <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole icon">
+            <p>Black Hole</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/flamewalker">
+            <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker icon">
+            <p>Flamewalker</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="equipment-grid">
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+            <div><h3>Poison Flask</h3><span class="priority-badge">CORE</span></div>
+          </div>
+          <p>
+            Throws toxic flasks that apply <strong>poison</strong> to enemies, dealing damage over time. Works best when
+            enemies are clustered. See entry:&nbsp;<a href="https://megabonk.org/database/weapons/poison-flask">database/weapons/poison-flask</a>.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+            <div><h3>Black Hole</h3><span class="priority-badge" style="background:var(--accent-blue)">GROUPING</span></div>
+          </div>
+          <p>
+            Creates a singularity that <strong>pulls enemies together</strong>, letting Poison Flask tag many targets at once.
+            Entry:&nbsp;<a href="https://megabonk.org/database/weapons/black-hole">database/weapons/black-hole</a>.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+            <div><h3>Flamewalker</h3><span class="priority-badge" style="background:var(--accent-blue)">SUSTAINED AOE</span></div>
+          </div>
+          <p>
+            Leaves burning trails that damage foes standing in them—great sustained coverage that complements poison.
+            Entry:&nbsp;<a href="https://megabonk.org/database/weapons/flamewalker">database/weapons/flamewalker</a>.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====== Ad ====== -->
+    <div style="margin:30px auto; text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- ====== Tomes (Corrected) ====== -->
+    <section class="equipment-section" id="tomes">
+      <h2 class="section-title">📚 Essential Tomes Priority (Corrected)</h2>
+      <p class="section-subtitle">
+        Community-favorite early curve and how each tome actually works. Browse all tomes:
+        <a href="https://megabonk.org/tier-lists/tomes/" target="_blank" rel="noopener">Tomes Index</a>.
+      </p>
+
+      <div class="equipment-grid">
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+            <div><h3>Early Curve: XP → Luck → Cursed</h3><span class="priority-badge">RUSH</span></div>
+          </div>
+          <p>
+            <strong>XP Tome</strong> speeds leveling. <strong>Luck Tome</strong> improves odds of higher-tier offers (level-ups, shrines, etc.).
+            <strong>Cursed Tome</strong> <em>increases enemy difficulty</em> (quantity/HP/speed/strength)—it is not a direct damage multiplier.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome">
+            <div><h3>Bloody Tome (Lifesteal)</h3><span class="priority-badge">SUSTAIN</span></div>
+          </div>
+          <p>
+            Adds <strong>lifesteal</strong> on hit (at 100% chance you reliably heal 1 per hit; above 100% can heal more).
+            Stack until sustain feels comfortable for poison play.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+            <div><h3>Cooldown Tome</h3><span class="priority-badge" style="background:var(--warning)">FASTER STACKS</span></div>
+          </div>
+          <p>
+            Increases <strong>attack speed</strong>/frequency so Poison Flask applies stacks faster—smoothest DPS gain once sustain is online.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+            <div><h3>Damage Tome</h3><span class="priority-badge" style="background:var(--accent-blue)">MULTIPLIER</span></div>
+          </div>
+          <p>
+            Global damage increase that benefits most weapons. Generally picked after Bloody + Cooldown to convert uptime into kills.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome">
+            <div><h3>Quantity / Size (Situational)</h3><span class="priority-badge" style="background:var(--success)">OPTIONAL</span></div>
+          </div>
+          <p>
+            <strong>Quantity</strong> adds more projectiles; <strong>Size</strong> enlarges areas—both can help hit more targets when clustered by Black Hole.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====== Items (Corrected) ====== -->
+    <section class="equipment-section" id="items">
+      <h2 class="section-title">🎯 Must-Have & Synergy Items (Corrected)</h2>
+      <p class="section-subtitle">
+        Item images below use the site’s assets; browse the full list on the
+        <a href="https://megabonk.org/tier-lists/items/" target="_blank" rel="noopener">Items Index</a>.
+      </p>
+
+      <div class="equipment-grid">
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Moldy_Cheese.png" alt="Moldy Cheese">
+            <div><h3>Moldy Cheese</h3><span class="priority-badge">POISON CORE</span></div>
+          </div>
+          <p>
+            Grants additional <strong>poison-on-hit chance</strong>—excellent with Poison Flask to infect packs quickly.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery">
+            <div><h3>Battery</h3><span class="priority-badge" style="background:var(--accent-blue)">ATTACK SPEED</span></div>
+          </div>
+          <p>
+            Adds <strong>Attack Speed</strong> (site database icon provided). Faster throws = faster poison stacking.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Mirror.png" alt="Mirror">
+            <div><h3>Mirror</h3><span class="priority-badge" style="background:var(--success)">SAFETY</span></div>
+          </div>
+          <p>
+            <strong>Reflects incoming damage</strong> and grants a brief window of <strong>invulnerability</strong>—great emergency button.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Demonic_Soul.png" alt="Demonic Soul">
+            <div><h3>Demonic Soul</h3><span class="priority-badge" style="background:var(--warning)">SCALING</span></div>
+          </div>
+          <p>
+            <strong>+Damage per kill</strong> up to a cap—steady snowball once waves thicken.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Chonkplate.png" alt="Chonkplate">
+            <div><h3>Chonkplate</h3><span class="priority-badge" style="background:var(--success)">SUSTAIN</span></div>
+          </div>
+          <p>
+            Converts overheal and provides extra <strong>Lifesteal</strong>, reinforcing the sustain loop for poison builds.
+          </p>
+        </article>
+
+        <article class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Gas_Mask.png" alt="Gas Mask">
+            <div><h3>Gas Mask / Toxic Barrel</h3><span class="priority-badge">SYNERGY</span></div>
+          </div>
+          <p>
+            Poison-themed picks that pair naturally with Amog’s plan; take them if offered alongside your core.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====== Ad ====== -->
+    <div style="margin:30px auto; text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- ====== Progression Timeline (soft, factual) ====== -->
+    <section class="equipment-section">
+      <h2 class="section-title">⏱️ Minute-by-Minute Progression (Guideline)</h2>
+      <p class="section-subtitle">A safe curve that respects how tomes/items actually work.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-time">0–3 min</span>
+          <h3>Foundation</h3>
+          <p>Grab <strong>XP → Luck → Cursed</strong> to accelerate offers and scale difficulty for better rewards. Take <strong>Poison Flask</strong> as soon as it appears.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">3–7 min</span>
+          <h3>Control Online</h3>
+          <p>Add <strong>Black Hole</strong> for grouping. Start stacking <strong>Bloody Tome (Lifesteal)</strong> until sustain feels stable; pick up <strong>Battery</strong> if offered.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">7–12 min</span>
+          <h3>Clear Speed</h3>
+          <p>Take <strong>Cooldown</strong> to apply poison faster and add <strong>Damage</strong> to convert uptime into kills. Slot <strong>Flamewalker</strong> as the third weapon for constant coverage.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">12–18 min</span>
+          <h3>Scaling</h3>
+          <p>Consider <strong>Demonic Soul</strong> for per-kill damage scaling; <strong>Mirror</strong> as a safety layer. Keep stacking Bloody/Cooldown/Damage as offers allow.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">18+ min</span>
+          <h3>Polish</h3>
+          <p>Round out situational picks (<strong>Quantity/Size</strong>). Maintain grouping discipline—drop Black Hole, then spread poison through the packed wave.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== Alternatives (no fabricated items) ====== -->
+    <section class="equipment-section">
+      <h2 class="section-title">🔄 Alternatives & Flex Picks</h2>
+      <p class="section-subtitle">Use these when core offers don’t show up.</p>
+      <table class="alternatives-table">
+        <thead>
+          <tr><th>Role</th><th>Primary</th><th>Alternatives</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Core DoT</strong></td>
+            <td>Poison Flask</td>
+            <td>— (build identity)</td>
+          </tr>
+          <tr>
+            <td><strong>Grouping</strong></td>
+            <td>Black Hole</td>
+            <td>Tornado (lighter control)</td>
+          </tr>
+          <tr>
+            <td><strong>Coverage</strong></td>
+            <td>Flamewalker</td>
+            <td>Aura, Firestaff</td>
+          </tr>
+          <tr>
+            <td><strong>Sustain</strong></td>
+            <td>Bloody Tome (Lifesteal)</td>
+            <td>Chonkplate (extra lifesteal & overheal)</td>
+          </tr>
+          <tr>
+            <td><strong>Speed</strong></td>
+            <td>Cooldown Tome / Battery</td>
+            <td>Power Gloves, Thunder Mitts, Time Bracelet</td>
+          </tr>
+          <tr>
+            <td><strong>Safety</strong></td>
+            <td>Mirror</td>
+            <td>Aegis, Golden Shield</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ====== FAQ (page copy aligned with structured data) ====== -->
+    <section class="faq-section">
+      <h2 class="section-title">❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What is the best weapon for Amog?</h3>
+        <p class="faq-answer">
+          <strong>Poison Flask</strong> anchors the build. Use <strong>Black Hole</strong> to group enemies so flasks tag many targets, and add <strong>Flamewalker</strong> for constant area damage.
+          Browse: <a href="https://megabonk.org/database/weapons/">Weapon Database</a>.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Which tomes should I prioritize?</h3>
+        <p class="faq-answer">
+          A common start is <strong>XP → Luck → Cursed</strong> (note: Cursed raises enemy difficulty). Then stack <strong>Bloody Tome (Lifesteal)</strong> for sustain, followed by <strong>Cooldown</strong> and <strong>Damage</strong>.
+          All tomes: <a href="https://megabonk.org/tier-lists/tomes/">Tomes Index</a>.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What items pair well with this build?</h3>
+        <p class="faq-answer">
+          <strong>Moldy Cheese</strong> (extra poison-on-hit), <strong>Battery</strong> (attack speed), <strong>Mirror</strong> (reflect + brief invulnerability),
+          <strong>Demonic Soul</strong> (damage per kill), and <strong>Chonkplate</strong> (overheal + lifesteal). See <a href="https://megabonk.org/tier-lists/items/">Items Index</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== Note box (toned-down language) ====== -->
+    <div class="alert-box">
+      <strong>Tip:</strong> Drop <em>Black Hole</em> first to pull waves together, then pepper the pack with <em>Poison Flask</em>.
+      Prioritize <em>Bloody Tome (Lifesteal)</em> until sustain is consistent, then invest in <em>Cooldown</em> and <em>Damage</em>.
+      Items like <em>Moldy Cheese</em>, <em>Battery</em>, and <em>Mirror</em> make the loop smoother and safer.
+    </div>
+  </main>
+
+  <!-- ====== Footer ====== -->
+  <footer>
+    <p>&copy; 2025 Megabonk.org — All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="https://megabonk.org/">Home</a>
+      <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      <a href="https://megabonk.org/guides/characters/">Characters</a>
+      <a href="https://megabonk.org/guides/builds/">Builds</a>
+      <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+      <a href="https://megabonk.org/database/weapons/">Weapons</a>
+      <a href="https://megabonk.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- Cloudflare beacon (unchanged) -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+    crossorigin="anonymous"></script>
+</body>
+</html>
