@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ====== TDK: kept EXACTLY as provided ====== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Megabonk Vlad Build Guide 2025: Blood Magic Lifesteal</title>
+  <meta name="description" content="Learn the best Megabonk Vlad build: Blood Magic for Max HP on kills, Bloody Tome on-hit healing, plus Aura and fast melee for steady clears.">
+  <meta name="keywords" content="vlad build, vlad megabonk, best vlad build, vlad blood magic build, vlad guide, megabonk vlad, vlad lifesteal build">
+  <link rel="canonical" href="https://megabonk.org/guides/builds/vlad-best-build">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+  <!-- ====== Structured Data (UPDATED to match corrected facts) ====== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best weapon for Vlad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Blood Magic is Vlad's signature weapon and the core of this build. Blood Magic itself increases Max HP on kills; healing comes primarily from Bloody Tome (on-hit life gain) and a few items. Pair with Sword or Katana for frequent hits, and Aura for constant on-hit checks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which tomes should I prioritize for Vlad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common early priority is XP → Luck → Cursed, then Bloody Tome for on-hit healing, followed by Cooldown and Damage. Size is good for melee/Aura coverage; Quantity does not create multiple Auras (it helps many projectiles/melee swings instead)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Vlad good for beginners?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. With Bloody Tome and steady attack speed, Vlad becomes very forgiving because frequent hits trigger reliable healing. Focus on survivability first, then ramp damage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What items work best with Vlad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mirror (defense and brief i-frames), Battery (attack speed; unlocked via Cooldown Tome progress), Slurp Gloves (healing on hit with a cooldown), Chonkplate (lifesteal with an attack speed trade-off), and Demonic Blade (crit-based healing). Aegis is a defensive weapon option, not an item."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Vlad Best Build Equipment",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Thing", "name": "Blood Magic", "description": "Signature weapon — increases Max HP on kills" } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Thing", "name": "Sword", "description": "Fast melee for frequent on-hit checks" } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Thing", "name": "Katana", "description": "Alternative fast melee" } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "Thing", "name": "Aura", "description": "Damage field — many on-hit opportunities" } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "Thing", "name": "Bloody Tome", "description": "On-hit life gain; >100% can double trigger" } }
+    ]
+  }
+  </script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary-bg:#1a1a2e;--secondary-bg:#16213e;--accent-purple:#9d4edd;--accent-blue:#3a86ff;--accent-pink:#ff006e;
+      --text-light:#f8f9fa;--text-gray:#adb5bd;--card-bg:#0f3460;--success:#06ffa5;--warning:#ffbe0b;--danger:#ff006e;
+      --blood:#dc143c;--dark-red:#8b0000;
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:var(--text-light);background:var(--primary-bg);overflow-x:hidden}
+    header{background:rgba(15,52,96,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;box-shadow:0 4px 30px rgba(0,0,0,.3)}
+    nav{max-width:1400px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+    .nav-links{display:flex;list-style:none;gap:2rem}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-weight:500;transition:.3s}
+    .nav-links a:hover{color:var(--accent-purple)}
+    .hero{background:linear-gradient(135deg,var(--secondary-bg) 0%,var(--card-bg) 100%);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(220,20,60,.15),transparent 70%);pointer-events:none}
+    .hero-content{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+    .character-showcase{display:flex;align-items:center;justify-content:center;gap:3rem;margin-bottom:2rem;flex-wrap:wrap}
+    .character-image{width:200px;height:200px;border-radius:20px;border:4px solid var(--blood);box-shadow:0 0 40px rgba(220,20,60,.5);object-fit:cover}
+    .hero h1{font-size:3rem;margin-bottom:1rem;background:linear-gradient(135deg,var(--blood),var(--dark-red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-subtitle{font-size:1.1rem;color:var(--text-gray);margin-bottom:1rem}
+    .tier-badge{display:inline-block;padding:.5rem 1.5rem;background:linear-gradient(135deg,var(--blood),var(--dark-red));color:#fff;border-radius:30px;font-weight:800;font-size:1.1rem;box-shadow:0 4px 20px rgba(220,20,60,.4);margin-bottom:1rem}
+    .key-points{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.2rem}
+    .key-point{background:rgba(255,255,255,.05);padding:1rem 1.5rem;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(220,20,60,.3)}
+    .key-point strong{color:var(--blood)}
+    .container{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+    .section-title{font-size:2.2rem;margin-bottom:1rem;color:var(--text-light);text-align:center}
+    .section-subtitle{text-align:center;color:var(--text-gray);margin-bottom:2rem;font-size:1.05rem}
+    .equipment-section{margin-bottom:4rem}
+    .equipment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:2rem}
+    .equipment-card{background:var(--card-bg);border-radius:15px;padding:2rem;border:2px solid rgba(220,20,60,.3);transition:.3s}
+    .equipment-card:hover{transform:translateY(-5px);border-color:var(--blood);box-shadow:0 10px 30px rgba(220,20,60,.3)}
+    .equipment-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+    .equipment-icon{width:60px;height:60px;border-radius:10px;border:2px solid var(--blood);object-fit:cover}
+    .equipment-card h3{color:var(--blood);font-size:1.35rem}
+    .priority-badge{display:inline-block;padding:.3rem .8rem;background:var(--success);color:var(--primary-bg);border-radius:20px;font-size:.8rem;font-weight:700;margin-left:auto}
+    .equipment-card p{color:var(--text-gray);line-height:1.8}
+    .equipment-card strong{color:var(--text-light)}
+    .weapons-showcase{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:2rem 0}
+    .weapon-item{text-align:center}
+    .weapon-item img{width:80px;height:80px;border:3px solid var(--blood);border-radius:12px;padding:.5rem;background:rgba(220,20,60,.1);transition:.3s}
+    .weapon-item img:hover{transform:scale(1.1);box-shadow:0 0 20px rgba(220,20,60,.5)}
+    .weapon-item p{margin-top:.5rem;font-size:.9rem;color:var(--text-gray)}
+    .weapon-link{color:var(--blood);text-decoration:none;transition:color .3s}
+    .weapon-link:hover{color:var(--dark-red)}
+    .timeline{position:relative;padding:2rem 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--blood),var(--dark-red));transform:translateX(-50%)}
+    .timeline-item{background:var(--card-bg);padding:2rem;border-radius:15px;margin-bottom:2rem;position:relative;width:calc(50% - 3rem);border:2px solid rgba(220,20,60,.3)}
+    .timeline-item:nth-child(odd){margin-left:auto}
+    .timeline-item:nth-child(even){margin-right:auto}
+    .timeline-time{display:inline-block;padding:.5rem 1rem;background:var(--blood);color:#fff;border-radius:20px;font-weight:700;margin-bottom:1rem}
+    .timeline-item h3{color:var(--blood);margin-bottom:1rem}
+    .timeline-item p{color:var(--text-gray);line-height:1.8}
+    .alternatives-table{width:100%;background:var(--card-bg);border-radius:15px;overflow:hidden;border-collapse:collapse}
+    .alternatives-table thead{background:linear-gradient(135deg,var(--blood),var(--dark-red))}
+    .alternatives-table th{padding:1.2rem;text-align:left;font-weight:700;color:#fff}
+    .alternatives-table td{padding:1.2rem;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text-gray)}
+    .alternatives-table tr:hover{background:rgba(220,20,60,.1)}
+    .pitfall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+    .pitfall-card{background:rgba(255,0,110,.1);border:2px solid var(--danger);border-radius:12px;padding:1.5rem}
+    .pitfall-card h3{color:var(--danger);margin-bottom:.8rem}
+    .pitfall-card p{color:var(--text-gray);line-height:1.7}
+    .faq-section{margin:4rem 0}
+    .faq-item{background:var(--card-bg);border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:2px solid rgba(220,20,60,.3)}
+    .faq-question{color:var(--blood);margin-bottom:1rem;font-size:1.2rem}
+    .faq-answer{color:var(--text-gray);line-height:1.8}
+    .alert-box{background:linear-gradient(135deg,rgba(220,20,60,.1),rgba(139,0,0,.1));border:2px solid var(--blood);border-radius:15px;padding:2rem;margin:3rem 0;color:var(--text-light);line-height:1.8}
+    footer{background:var(--secondary-bg);padding:2rem;text-align:center;border-top:3px solid var(--blood)}
+    .footer-links{display:flex;justify-content:center;gap:2rem;margin-top:1rem;flex-wrap:wrap}
+    .footer-links a{color:var(--text-gray);text-decoration:none;transition:.3s}
+    .footer-links a:hover{color:var(--blood)}
+    @media (max-width:768px){
+      .hero h1{font-size:2rem}
+      .nav-links{gap:1rem}
+      .timeline::before{left:20px}
+      .timeline-item{width:calc(100% - 40px);margin-left:40px !important}
+      .timeline-item:nth-child(even){margin-right:0}
+      .character-showcase{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+      <ul class="nav-links">
+        <li><a href="https://megabonk.org/">Home</a></li>
+        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+        <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+        <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+        <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+        <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="character-showcase">
+        <img src="https://megabonk.org/images/guides/characters/Vlad.png" alt="Vlad" class="character-image">
+        <div>
+          <div class="tier-badge">🩸 S-TIER BUILD</div>
+          <h1>Vlad — Blood Magic Sustain Build</h1>
+          <p class="hero-subtitle">Frequent on-hit healing via Bloody Tome + fast melee; Blood Magic scales Max HP on kills.</p>
+          <div class="key-points">
+            <div class="key-point"><strong>Primary Style:</strong> Sustain / On-hit Lifegain</div>
+            <div class="key-point"><strong>Difficulty:</strong> Beginner-Friendly</div>
+            <div class="key-point"><strong>Power Spike:</strong> Mid Game (once Bloody Tome stacks)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Core Weapons -->
+    <section class="equipment-section">
+      <h2 class="section-title">⚔️ Core Weapons Setup</h2>
+      <p class="section-subtitle">Fast hits to trigger on-hit healing; Blood Magic for long-run Max HP scaling</p>
+
+      <div class="weapons-showcase">
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/blood-magic">
+            <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+            <p>Blood Magic</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/sword">
+            <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+            <p>Sword</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/katana">
+            <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+            <p>Katana</p>
+          </a>
+        </div>
+        <div class="weapon-item">
+          <a class="weapon-link" href="https://megabonk.org/database/weapons/aura">
+            <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+            <p>Aura</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="equipment-grid">
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+            <div><h3>Blood Magic</h3><span class="priority-badge">CORE</span></div>
+          </div>
+          <p>
+            Vlad’s signature weapon. <strong>On kill, Blood Magic has a chance to increase Max HP</strong>, giving strong scaling across a run.
+            It <strong>does not provide healing by itself</strong> — your sustain comes from <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Bloody Tome</a> and certain items.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+            <div><h3>Sword</h3><span class="priority-badge" style="background:var(--accent-blue)">MELEE DPS</span></div>
+          </div>
+          <p>
+            <strong>Fast, consistent hits</strong> to trigger Bloody Tome’s on-hit life gain frequently. Excellent crowd control at close range.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+            <div><h3>Katana</h3><span class="priority-badge" style="background:var(--warning)">ALTERNATIVE</span></div>
+          </div>
+          <p>
+            Alternative melee if you prefer Katana’s pattern. Same idea: <strong>maximize hit frequency</strong> to fuel on-hit healing.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+            <div><h3>Aura</h3><span class="priority-badge" style="background:var(--accent-blue)">CONSTANT HITS</span></div>
+          </div>
+          <p>
+            A pulsing damage field around you — <strong>many small ticks = many on-hit checks</strong> for Bloody Tome.
+            Scales well with <strong>Size</strong> and <strong>Cooldown</strong>. <em>Quantity does not create multiple Auras.</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div style="margin:30px auto;text-align:center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- Essential Tomes -->
+    <section class="equipment-section">
+      <h2 class="section-title">📚 Essential Tomes Priority</h2>
+      <p class="section-subtitle">Reliable sustain first, then attack rate and damage; names and effects match in-game data</p>
+
+      <div class="equipment-grid">
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+            <div><h3>Early Economy: XP → Luck → Cursed</h3><span class="priority-badge">RECOMMENDED</span></div>
+          </div>
+          <p>
+            A common early plan is the so-called “Holy Trinity”: <strong>XP Tome → Luck Tome → Cursed Tome</strong> for faster levels,
+            better drops, and early damage scaling. Strong but not mandatory — adjust to the run.
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/tomes/">Tomes Index »</a>
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome">
+            <div><h3>Bloody Tome (Lifegain)</h3><span class="priority-badge">TOP PRIORITY</span></div>
+          </div>
+          <p>
+            <strong>On hit, has a chance to restore 1 HP</strong>. Stacking increases proc chance; at &gt;100% it can double-trigger.
+            This is the centerpiece of Vlad’s sustain. Aim to stack it early.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+            <div><h3>Cooldown Tome</h3><span class="priority-badge" style="background:var(--accent-blue)">ESSENTIAL</span></div>
+          </div>
+          <p>
+            More attacks and Aura ticks per second = <strong>more on-hit checks</strong>. Synergizes with Bloody Tome and melee.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+            <div><h3>Damage Tome</h3><span class="priority-badge" style="background:var(--accent-blue)">ESSENTIAL</span></div>
+          </div>
+          <p>
+            Boosts clear speed and boss damage. Indirectly improves sustain because you secure kills faster while Aura ticks more meaningfully.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome">
+            <div><h3>Size Tome</h3><span class="priority-badge" style="background:var(--warning)">OPTIONAL</span></div>
+          </div>
+          <p>
+            Increases melee swings’ reach and <strong>Aura radius</strong>, improving hit coverage for steady on-hit healing.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome">
+            <div><h3>Quantity Tome</h3><span class="priority-badge" style="background:var(--warning)">SITUATIONAL</span></div>
+          </div>
+          <p>
+            Adds projectiles / extra swings for many weapons, but <strong>does not create multiple Auras</strong>. Take if it benefits your current weapon mix.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Must-Have Items -->
+    <section class="equipment-section">
+      <h2 class="section-title">🎯 Key Items for Vlad</h2>
+      <p class="section-subtitle">Real item effects; link to your items index for details</p>
+
+      <div class="equipment-grid">
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Slurp_Gloves.png" alt="Slurp Gloves">
+            <div><h3>Slurp Gloves</h3><span class="priority-badge">SUSTAIN</span></div>
+          </div>
+          <p>
+            Healing on hit with an internal cooldown — pairs perfectly with fast melee and Aura ticks.
+            <a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Items Index »</a>
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Battery.png" alt="Battery">
+            <div><h3>Battery</h3><span class="priority-badge" style="background:var(--accent-blue)">ATTACK SPEED</span></div>
+          </div>
+          <p>
+            Grants attack speed (unlocked via Cooldown Tome progress). More hits → more on-hit healing checks.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Mirror.png" alt="Mirror">
+            <div><h3>Mirror</h3><span class="priority-badge" style="background:var(--success)">DEFENSE</span></div>
+          </div>
+          <p>
+            Reflects projectiles and provides brief invulnerability windows. A reliable defensive slot item.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Chonkplate.png" alt="Chonkplate">
+            <div><h3>Chonkplate</h3><span class="priority-badge" style="background:var(--warning)">TRADE-OFF</span></div>
+          </div>
+          <p>
+            Lifesteal with an attack speed penalty. Take it only if your hit frequency remains high enough.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Demonic_Blade.png" alt="Demonic Blade">
+            <div><h3>Demonic Blade</h3><span class="priority-badge">ON-CRIT HEAL</span></div>
+          </div>
+          <p>
+            Chance to heal on critical strikes — useful when your build already has decent crit access.
+          </p>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/Items/Item_Gym_Sauce.png" alt="Gym Sauce">
+            <div><h3>Gym Sauce</h3><span class="priority-badge" style="background:var(--success)">DAMAGE</span></div>
+          </div>
+          <p>
+            Static damage increase — helps clear waves and shorten danger windows; complements sustain.
+          </p>
+        </div>
+      </div>
+
+      <div class="equipment-grid" style="margin-top:1.5rem">
+        <div class="equipment-card">
+          <div class="equipment-header">
+            <img class="equipment-icon" src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+            <div><h3>Aegis (Weapon Option)</h3><span class="priority-badge">DEFENSIVE WEAPON</span></div>
+          </div>
+          <p>
+            Aegis is a <strong>weapon</strong> (not an item). If you want extra safety, you can swap Aura for Aegis in some runs:
+            it blocks and counterattacks while you maintain Bloody Tome procs via melee.
+            <a class="weapon-link" href="https://megabonk.org/database/weapons/aegis">Aegis Page »</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div style="margin:30px auto;text-align:center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="8173956372" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- Progression Timeline -->
+    <section class="equipment-section">
+      <h2 class="section-title">⏱️ Minute-by-Minute Progression</h2>
+      <p class="section-subtitle">Measured progression based on in-game mechanics (data-correct)</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-time">0–3 Minutes</span>
+          <h3>Setup Fundamentals</h3>
+          <p>
+            Look for <strong>Bloody Tome</strong> early. A common opener is <strong>XP → Luck → Cursed</strong> to accelerate levels and drops.
+            Grab a fast melee (Sword/Katana) and position safely while Aura/Bloody Tome come online.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">3–7 Minutes</span>
+          <h3>Sustain Online</h3>
+          <p>
+            Stack <strong>Bloody Tome</strong> for reliable on-hit healing. Add <strong>Cooldown</strong> so melee and Aura tick more often.
+            Pick up <strong>Battery</strong> if offered. You should now stabilize even in dense packs.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">7–12 Minutes</span>
+          <h3>Scaling & Safety</h3>
+          <p>
+            Add <strong>Damage</strong> for faster clears; take <strong>Size</strong> for Aura radius/melee reach if needed.
+            Slot a defensive pick like <strong>Mirror</strong>. Keep <strong>Blood Magic</strong> active to build Max HP via kills.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">12–18 Minutes</span>
+          <h3>Boss Readiness</h3>
+          <p>
+            Maintain hit frequency (Cooldown + Battery) and finish core items. Consider <strong>Demonic Blade</strong> or
+            <strong>Chonkplate</strong> depending on crit/attack-speed comfort. You should comfortably out-sustain most pressure.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">18+ Minutes</span>
+          <h3>Optimize & Close</h3>
+          <p>
+            Tune tomes to the map and boss patterns. If defense feels shaky, swap or add the <strong>Aegis weapon</strong> route.
+            Otherwise push damage to shorten end-game waves.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alternatives -->
+    <section class="equipment-section">
+      <h2 class="section-title">🔄 Alternatives & Notes</h2>
+      <p class="section-subtitle">Choose per drops and comfort; classifications fixed</p>
+      <table class="alternatives-table">
+        <thead>
+          <tr><th>Category</th><th>Primary Choice</th><th>Alternatives</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Signature Weapon</strong></td><td><a class="weapon-link" href="https://megabonk.org/database/weapons/blood-magic">Blood Magic</a></td><td>None — keep for Max HP scaling</td></tr>
+          <tr><td><strong>Melee DPS</strong></td><td><a class="weapon-link" href="https://megabonk.org/database/weapons/sword">Sword</a></td><td><a class="weapon-link" href="https://megabonk.org/database/weapons/katana">Katana</a></td></tr>
+          <tr><td><strong>Third Weapon</strong></td><td><a class="weapon-link" href="https://megabonk.org/database/weapons/aura">Aura</a></td><td><a class="weapon-link" href="https://megabonk.org/database/weapons/aegis">Aegis</a> (defensive weapon)</td></tr>
+          <tr><td><strong>Sustain Items</strong></td><td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Slurp Gloves</a></td><td>Chonkplate, Demonic Blade</td></tr>
+          <tr><td><strong>Defense (Item)</strong></td><td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Mirror</a></td><td>Golden Shield</td></tr>
+          <tr><td><strong>Attack Speed</strong></td><td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Battery</a></td><td>— (Power Gloves is explosion-on-hit, not attack speed)</td></tr>
+          <tr><td><strong>Damage</strong></td><td><a class="weapon-link" href="https://megabonk.org/tier-lists/items/">Gym Sauce</a></td><td>Demonic Soul, Brass Knuckles</td></tr>
+          <tr><td><strong>Tome Cautions</strong></td><td colspan="2"><em>Quantity</em> does not create multiple Auras; prioritize Cooldown/Size for Aura builds.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <h2 class="section-title">❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What actually heals Vlad?</h3>
+        <p class="faq-answer">
+          <strong>Bloody Tome</strong> (on-hit life gain) and a few items (e.g., <strong>Slurp Gloves</strong>, crit-based <strong>Demonic Blade</strong>, trade-off <strong>Chonkplate</strong>).
+          <strong>Blood Magic</strong> increases Max HP on kills; it is not the source of healing.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Why Aura over a third direct weapon?</h3>
+        <p class="faq-answer">
+          Aura provides many small ticks, generating frequent on-hit checks for Bloody Tome around you while you reposition.
+          If you want more safety instead, consider the <strong>Aegis weapon</strong>.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Does Quantity make multiple Auras?</h3>
+        <p class="faq-answer">
+          No. Quantity adds projectiles/extra swings for many weapons but does not duplicate Aura. Use <strong>Size</strong> and <strong>Cooldown</strong> for Aura scaling.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Suggested early tomes?</h3>
+        <p class="faq-answer">
+          A widely used start is <strong>XP → Luck → Cursed</strong>, then <strong>Bloody Tome</strong>, followed by <strong>Cooldown</strong> and <strong>Damage</strong>.
+          Adjust to what the map and shops offer.
+        </p>
+      </div>
+    </section>
+
+    <div class="alert-box">
+      <strong>Data note:</strong> Names and effects here use in-game terminology — <em>Bloody Tome</em> (on-hit life gain), <em>Blood Magic</em> (Max HP on kill),
+      <em>Aegis</em> is a weapon, and items like <em>Mirror</em>, <em>Battery</em>, <em>Slurp Gloves</em>, <em>Chonkplate</em>, <em>Demonic Blade</em> provide the listed roles.
+      Revisit priorities after major patches; XP/Luck/Cursed values and some unlocks may shift over time.
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Megabonk.org - All game content © their respective owners</p>
+    <div class="footer-links">
+      <a href="https://megabonk.org/">Home</a>
+      <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      <a href="https://megabonk.org/guides/characters/">Characters</a>
+      <a href="https://megabonk.org/guides/builds/">Builds</a>
+      <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+      <a href="https://megabonk.org/database/weapons/">Weapons</a>
+      <a href="https://megabonk.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+    crossorigin="anonymous"></script>
+</body>
+</html>
