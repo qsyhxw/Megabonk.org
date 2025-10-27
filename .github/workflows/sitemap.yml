@@ -1,0 +1,39 @@
+name: Generate sitemap.xml
+
+on:
+  push:
+    branches: [ main ]   # 如用其他分支发布，改这里
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo (with full history for lastmod)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 必须为0，否则 <lastmod> 时间会不准
+
+      - name: Generate sitemap.xml
+        id: sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://megabonk.org/
+          # 如果你的站点源码在 docs/ 目录发布，取消下一行注释：
+          # path-to-root: docs
+          # 如希望去掉非 index 页面的 .html 扩展，可启用：
+          # drop-html-extension: true
+          # 如需排除某些路径（示例）：
+          # exclude-paths: >
+          #   /drafts
+          #   /dev/test.html
+          # 若用 docs/ 发布，且想把文件写到 docs/sitemap.xml，添加：
+          # sitemap-path: docs/sitemap.xml
+
+      - name: Commit sitemap
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: update sitemap" || echo "no changes"
+          git push
