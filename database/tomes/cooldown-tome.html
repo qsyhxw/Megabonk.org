@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,12 +183,11 @@
             display: inline-block;
             padding: 0.5rem 1rem;
             background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 1.2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            color: #1a1a2e;
             margin-left: 1rem;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+            font-size: 0.9rem;
         }
 
         /* Container */
@@ -199,360 +197,299 @@
             padding: 3rem 2rem;
         }
 
-        /* Main Layout */
-        .content-wrapper {
+        .content-grid {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 300px 1fr;
             gap: 3rem;
-            margin-bottom: 3rem;
+            align-items: start;
         }
 
-        /* Infobox */
-        .infobox {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        /* Sidebar */
+        .sidebar {
             position: sticky;
             top: 100px;
-            height: fit-content;
-            border: 1px solid rgba(255, 190, 11, 0.3);
         }
 
-        .infobox-image {
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tome-image {
             width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 0, 110, 0.1));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            border: 2px solid rgba(255, 190, 11, 0.3);
-            overflow: hidden;
-            position: relative;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(255, 190, 11, 0.3);
         }
 
-        .infobox-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
-            z-index: 1;
+        .info-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .infobox-image img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            position: relative;
-            z-index: 2;
-            filter: drop-shadow(0 0 20px rgba(255, 190, 11, 0.5));
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .stat-grid {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .stat-item {
-            background: rgba(255, 190, 11, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 3px solid var(--warning);
-        }
-
-        .stat-label {
+        .info-label {
             color: var(--text-gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .stat-value {
-            color: var(--success);
-            font-weight: 700;
-            font-size: 1.1rem;
+            color: var(--warning);
+            font-size: 1.3rem;
+            font-weight: 800;
         }
 
-        .stat-value.primary {
-            background: linear-gradient(135deg, var(--warning), var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.3rem;
+        .unlock-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--success), #00b894);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
 
         /* Main Content */
-        .main-content {
-            min-width: 0;
+        main {
+            min-height: 600px;
         }
 
         .section {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
+            border-radius: 20px;
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 190, 11, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .section-title {
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--warning), var(--accent-pink));
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
 
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 2rem;
-            background: linear-gradient(135deg, var(--warning), var(--accent-pink));
-            border-radius: 4px;
-        }
-
-        .intro-text {
-            font-size: 1.15rem;
-            color: var(--text-light);
+        .description {
+            font-size: 1.1rem;
             line-height: 1.8;
-            margin-bottom: 1rem;
-            padding: 1.5rem;
-            background: rgba(255, 190, 11, 0.05);
-            border-radius: 12px;
-            border-left: 4px solid var(--warning);
-        }
-
-        .intro-text strong {
-            color: var(--warning);
-        }
-
-        .info-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .info-list li {
-            padding: 0.8rem 0 0.8rem 2.5rem;
-            position: relative;
             color: var(--text-gray);
-            transition: all 0.3s;
+            margin-bottom: 1.5rem;
         }
 
-        .info-list li::before {
-            content: '⚡';
+        .highlight-box {
+            background: rgba(255, 190, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box.danger {
+            background: rgba(255, 0, 110, 0.1);
+            border-left-color: var(--danger);
+        }
+
+        .highlight-box.info {
+            background: rgba(58, 134, 255, 0.1);
+            border-left-color: var(--accent-blue);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '▸';
             position: absolute;
-            left: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .info-list li:hover {
-            color: var(--text-light);
-            transform: translateX(5px);
-        }
-
-        .info-list li strong {
+            left: 0;
             color: var(--warning);
+            font-weight: 800;
+        }
+
+        .highlight-box.danger li::before {
+            color: var(--danger);
+        }
+
+        .highlight-box.info li::before {
+            color: var(--accent-blue);
         }
 
         /* Synergies Grid */
         .synergies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         .synergy-card {
-            background: rgba(255, 190, 11, 0.1);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             padding: 1.5rem;
-            border: 1px solid rgba(255, 190, 11, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .synergy-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--warning), var(--accent-pink));
         }
 
         .synergy-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(255, 190, 11, 0.3);
-            border-color: var(--warning);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+            border-color: var(--accent-purple);
         }
 
         .synergy-title {
+            font-size: 1.2rem;
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .synergy-title a {
-            color: var(--warning);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .synergy-title a:hover {
-            color: var(--accent-pink);
-        }
-
-        .synergy-icon {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
+            margin-bottom: 0.5rem;
+            color: var(--accent-purple);
         }
 
         .synergy-desc {
             color: var(--text-gray);
-            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        /* Highlight Boxes */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 0, 110, 0.1));
-            border-radius: 12px;
+        /* Weapons Grid */
+        .weapons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .weapon-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             padding: 1.5rem;
-            border: 1px solid var(--warning);
-            margin-top: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .highlight-box.info {
-            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
-            border-color: var(--accent-blue);
+        .weapon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 190, 11, 0.3);
+            border-color: var(--warning);
         }
 
-        .highlight-box.danger {
-            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(255, 190, 11, 0.1));
-            border-color: var(--danger);
-        }
-
-        .highlight-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .highlight-box li {
-            padding: 0.6rem 0 0.6rem 2rem;
-            position: relative;
-            color: var(--text-light);
-        }
-
-        .highlight-box li::before {
-            content: '💡';
-            position: absolute;
-            left: 0;
-        }
-
-        .highlight-box.info li::before {
-            content: 'ℹ️';
-        }
-
-        .highlight-box.danger li::before {
-            content: '⚠️';
-        }
-
-        /* Unlock Badge */
-        .unlock-badge {
-            display: inline-flex;
+        .weapon-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: rgba(255, 190, 11, 0.1);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, var(--success), #00d97e);
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #000;
-            box-shadow: 0 4px 12px rgba(6, 255, 165, 0.3);
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .weapon-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .weapon-name {
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         /* Tags */
         .tags {
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 0.8rem;
             margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 190, 11, 0.2);
         }
 
         .tag {
-            padding: 0.5rem 1.5rem;
-            background: linear-gradient(135deg, var(--warning), var(--accent-pink));
-            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            background: rgba(157, 78, 221, 0.2);
+            border: 1px solid var(--accent-purple);
+            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: var(--accent-purple);
         }
 
         /* Related Tomes */
         .related-tomes {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
         }
 
         .tome-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
             text-align: center;
-            border: 1px solid rgba(255, 190, 11, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             text-decoration: none;
-            display: block;
+            color: inherit;
         }
 
         .tome-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(255, 190, 11, 0.3);
-            border-color: var(--warning);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(157, 78, 221, 0.4);
+            border-color: var(--accent-purple);
         }
 
         .tome-card-icon {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto 1rem;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .tome-card-icon img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(255, 190, 11, 0.3));
         }
 
         .tome-card-title {
+            font-size: 1.2rem;
             font-weight: 700;
-            color: var(--text-light);
             margin-bottom: 0.5rem;
         }
 
@@ -564,96 +501,51 @@
         /* Navigation Buttons */
         .nav-buttons {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             margin: 3rem 0;
         }
 
         .btn {
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--warning), var(--accent-pink));
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
             color: var(--text-light);
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 50px;
             font-weight: 700;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 190, 11, 0.3);
+            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 190, 11, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(157, 78, 221, 0.5);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-        }
-
-        /* Popular Weapons Section */
-        .weapons-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .weapon-item {
-            background: rgba(255, 190, 11, 0.05);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid rgba(255, 190, 11, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .weapon-item:hover {
-            transform: translateY(-3px);
-            border-color: var(--warning);
-            box-shadow: 0 8px 16px rgba(255, 190, 11, 0.2);
-        }
-
-        .weapon-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .weapon-icon img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(255, 190, 11, 0.3));
-        }
-
-        .weapon-name {
-            font-weight: 600;
-            color: var(--text-light);
-            font-size: 0.9rem;
+            background: linear-gradient(135deg, var(--warning), var(--accent-pink));
         }
 
         /* Footer */
         footer {
             background: var(--secondary-bg);
             padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 190, 11, 0.2);
-            margin-top: 4rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .footer-links {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+            margin-top: 2rem;
         }
 
         .footer-links a {
@@ -663,16 +555,16 @@
         }
 
         .footer-links a:hover {
-            color: var(--warning);
+            color: var(--accent-purple);
         }
 
         /* Responsive */
         @media (max-width: 968px) {
-            .content-wrapper {
+            .content-grid {
                 grid-template-columns: 1fr;
             }
 
-            .infobox {
+            .sidebar {
                 position: static;
             }
 
@@ -680,41 +572,34 @@
                 font-size: 2.5rem;
             }
 
-            .synergies-grid,
-            .related-tomes {
-                grid-template-columns: 1fr;
-            }
-
             .nav-links {
                 display: none;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
             .hero h1 {
                 font-size: 2rem;
             }
 
-            .container {
-                padding: 2rem 1rem;
+            .synergies-grid,
+            .weapons-grid {
+                grid-template-columns: 1fr;
             }
+        }
 
-            .section {
-                padding: 1.5rem;
-            }
+        .version-note {
+            background: rgba(58, 134, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
 
-            .nav-buttons {
-                flex-direction: column;
-            }
-
-            .weapons-showcase {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .tier-badge {
-                display: block;
-                margin: 1rem 0 0 0;
-            }
+        .version-note strong {
+            color: var(--accent-blue);
         }
     </style>
 </head>
@@ -722,14 +607,13 @@
     <!-- Header -->
     <header>
         <nav>
-            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <a href="https://megabonk.org/" class="logo">Megabonk.org</a>
             <ul class="nav-links">
-                <li><a href="https://megabonk.org/">Home</a></li>
                 <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
                 <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
                 <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
                 <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
-                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+                <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
             </ul>
         </nav>
     </header>
@@ -739,169 +623,141 @@
         <a href="https://megabonk.org/">Home</a> / 
         <a href="https://megabonk.org/database/">Database</a> / 
         <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
-        <strong>Cooldown Tome</strong>
+        <span>Cooldown Tome</span>
     </div>
 
     <!-- Hero Section -->
-    <div class="hero">
+    <section class="hero">
         <div class="hero-content">
             <h1>⚡ Cooldown Tome</h1>
-            <span class="tier-badge">S-TIER</span>
-            <p class="hero-subtitle">Unleash Lightning-Fast Attacks and Dominate the Battlefield</p>
+            <p class="hero-subtitle">Increases Attack Speed - A Core Offensive Stat</p>
             <div class="tome-category">Attack Speed Tome</div>
+            <span class="tier-badge">High-Value Pick</span>
         </div>
-    </div>
+    </section>
 
-    <!-- Main Container -->
+    <!-- Main Content -->
     <div class="container">
-        <div class="content-wrapper">
-            <!-- Infobox Sidebar -->
-            <aside class="infobox">
-                <div class="infobox-image">
-                    <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
-                </div>
-                
-                <div class="stat-grid">
-                    <div class="stat-item">
-                        <span class="stat-label">📊 Stat Type</span>
-                        <span class="stat-value">Attack Speed</span>
+        <div class="content-grid">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="info-card">
+                    <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="tome-image">
+                    
+                    <div class="info-item">
+                        <div class="info-label">Stat Type</div>
+                        <div class="info-value">Attack Speed (Global)</div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">⬆️ Upgrade</span>
-                        <span class="stat-value primary">+7.5%</span>
+
+                    <div class="info-item">
+                        <div class="info-label">Base Upgrade (Common)</div>
+                        <div class="stat-value">+7.5% per level</div>
+                        <div class="version-note" style="margin-top: 0.5rem; padding: 0.5rem; font-size: 0.8rem;">
+                            Higher rarities: 1.2× / 1.4× / 1.6× / 2.0× multipliers
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">🔓 Unlock</span>
-                        <span class="stat-value">Default</span>
+
+                    <div class="info-item">
+                        <div class="info-label">Unlock Requirement</div>
+                        <div class="info-value">
+                            <span class="unlock-badge">✓ Default Unlocked</span>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">🎯 Max Level</span>
-                        <span class="stat-value primary">99</span>
+
+                    <div class="info-item">
+                        <div class="info-label">Max Level</div>
+                        <div class="info-value">99 (Community Consensus)</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Scaling Type</div>
+                        <div class="info-value">Additive Stacking</div>
                     </div>
                 </div>
             </aside>
 
             <!-- Main Content -->
-            <main class="main-content">
-                <!-- Introduction -->
-                <section class="section">
-                    <p class="intro-text">
-                        The <strong>Cooldown Tome</strong> speeds up your attacks in <strong><a href="https://megabonk.org/" style="color: var(--warning);">Megabonk</a></strong>. It lowers the delay between actions, making projectiles fire faster and melee swings feel smoother. <strong>It's one of the strongest offensive Tomes</strong>, especially when paired with damage scaling, and is considered <strong>mandatory in most meta builds</strong>.
-                    </p>
-                </section>
-
+            <main>
                 <!-- Overview -->
                 <section class="section">
                     <h2 class="section-title">Overview</h2>
-                    <ul class="info-list">
-                        <li><strong>Stat:</strong> Attack Speed</li>
-                        <li><strong>Base upgrade per level:</strong> +7.5%</li>
-                        <li><strong>How to unlock:</strong> Default (available at start)</li>
-                        <li><strong>Max level:</strong> 99</li>
-                    </ul>
-                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
-                        Attack speed is the foundation of DPS builds. Cooldown Tome reduces the time between attacks across all <a href="https://megabonk.org/database/weapons/" style="color: var(--warning);">weapons</a>, making gameplay feel more fluid and aggressive. It's one of the best Tomes to rush early for snowball potential.
+                    <p class="description">
+                        The <strong>Cooldown Tome</strong> boosts your character's <strong>Attack Speed</strong>, a global stat that reduces the time between attacks for all weapons. This makes projectile weapons fire faster and melee weapons swing more rapidly, directly increasing your damage output and on-hit effect triggers.
                     </p>
-                </section>
-
-                <!-- Effects -->
-                <section class="section">
-                    <h2 class="section-title">Effects</h2>
-                    <ul class="info-list">
-                        <li>Increases attack speed across <strong>all weapons</strong></li>
-                        <li>Reduces downtime between shots or strikes</li>
-                        <li>Makes gameplay feel more fluid and aggressive</li>
-                        <li>Scales exponentially with other offensive Tomes</li>
-                        <li>Increases on-hit effect procs and lifesteal healing</li>
-                    </ul>
-                </section>
-
-                <!-- How to Unlock -->
-                <section class="section">
-                    <h2 class="section-title">How to Unlock</h2>
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <div class="unlock-badge">
-                            ✅ Unlocked by Default
-                        </div>
-                        <p style="color: var(--text-gray); margin-top: 1rem;">
-                            This Tome is available from the start of the game. No quest or condition is required.
-                        </p>
+                    <p class="description">
+                        According to v1.0.7 community documentation, Tome upgrades stack <strong>additively</strong> with each level providing the same percentage increase. Different rarity tiers apply multipliers (Common baseline, with Uncommon at 1.2×, Rare at 1.4×, Epic at 1.6×, and Legendary at 2.0×) to the base +7.5% per level value.
+                    </p>
+                    <div class="version-note">
+                        <strong>Version Note:</strong> Data based on v1.0.7 (September-October 2025) community guides and technical documentation. Official patch notes may supersede this information.
                     </div>
                 </section>
 
-                <!-- Synergies -->
+                <!-- How It Works -->
                 <section class="section">
-                    <h2 class="section-title">Synergies</h2>
+                    <h2 class="section-title">How Attack Speed Works</h2>
+                    <p class="description">
+                        Attack Speed is a character-level stat that affects <strong>all equipped weapons</strong>, reducing their attack intervals universally. This makes it one of the most versatile offensive upgrades in the game.
+                    </p>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Universal Application:</strong> Affects every weapon you use during a run</li>
+                            <li><strong>Additive Scaling:</strong> Each level adds the same percentage increase (not multiplicative or exponential)</li>
+                            <li><strong>Rarity Matters:</strong> Higher rarity Cooldown Tomes provide larger boosts per level</li>
+                            <li><strong>Immediate Impact:</strong> Attack speed changes are noticeable from the first upgrade</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Best Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergy Guide</h2>
                     <div class="synergies-grid">
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/damage-tome/">Damage Tome</a>
-                            </div>
+                            <div class="synergy-title">🩸 Lifesteal Synergy</div>
                             <div class="synergy-desc">
-                                Faster attacks mean more damage per second. This is the core synergy for any DPS build.
+                                Lifesteal in Megabonk triggers per hit (with >100% lifesteal giving additional chances). More attacks per second means more healing triggers, making this combination extremely powerful for sustain.
                             </div>
                         </div>
-                        
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/quantity-tome/">Quantity Tome</a>
-                            </div>
+                            <div class="synergy-title">💥 Damage Tome</div>
                             <div class="synergy-desc">
-                                More projectiles combined with faster firing overwhelms enemies. Creates screen-filling bullet storms.
+                                Complements attack speed by increasing per-hit damage. Together they provide both higher attack frequency and harder-hitting attacks for superior DPS.
                             </div>
                         </div>
-                        
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Precision_Tome.png" alt="Precision Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/precision-tome/">Precision Tome</a>
-                            </div>
+                            <div class="synergy-title">🎯 Precision Tome</div>
                             <div class="synergy-desc">
-                                More attack rolls give more chances for critical hits. Essential for crit-focused builds.
+                                Higher attack speed means more chances to trigger critical hits. Great synergy for crit-focused builds that benefit from frequent attacks.
                             </div>
                         </div>
-                        
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Knockback_Tome.png" alt="Knockback Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/knockback-tome/">Knockback Tome</a>
-                            </div>
+                            <div class="synergy-title">🔢 Quantity Tome</div>
                             <div class="synergy-desc">
-                                Faster hits push enemies back more often, controlling space and keeping threats at bay.
+                                More projectiles per shot combined with faster shooting creates screen-filling bullet patterns. Excellent for projectile-heavy builds.
                             </div>
                         </div>
-                        
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/agility-tome/">Agility Tome</a>
-                            </div>
+                            <div class="synergy-title">💨 Agility Tome</div>
                             <div class="synergy-desc">
-                                Faster attack speed combined with mobility helps maintain safe DPS with kiting tactics.
+                                Movement speed pairs well with attack speed for kiting playstyles, allowing you to maintain offense while repositioning constantly.
                             </div>
                         </div>
-
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Lifesteal Tome" class="synergy-icon">
-                                <span>Lifesteal / <a href="https://megabonk.org/database/tomes/regen-tome/">Regen Tome</a></span>
-                            </div>
+                            <div class="synergy-title">🎲 On-Hit Items</div>
                             <div class="synergy-desc">
-                                More attacks mean more healing. Critical for sustain in long runs without defense investment.
+                                Items with on-hit effects (like Kevin, Mirror, status applications) benefit greatly from increased attack frequency since they trigger more often.
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Popular Weapons -->
+                <!-- Best Weapons -->
                 <section class="section">
-                    <h2 class="section-title">Best Weapons with Cooldown</h2>
-                    <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
-                        Attack speed benefits <strong>every weapon</strong> in the game, but these scale especially well:
+                    <h2 class="section-title">Example High-Synergy Weapons</h2>
+                    <p class="description">
+                        These weapons are commonly mentioned in community discussions as benefiting noticeably from increased attack speed:
                     </p>
-                    <div class="weapons-showcase">
+                    <div class="weapons-grid">
                         <div class="weapon-item">
                             <div class="weapon-icon">
                                 <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
@@ -939,6 +795,9 @@
                             <div class="weapon-name">Firestaff</div>
                         </div>
                     </div>
+                    <div class="version-note" style="margin-top: 1.5rem;">
+                        <strong>Note:</strong> The above weapons are examples frequently discussed in community guides, not an exhaustive or ranked list. Attack speed can benefit virtually any weapon depending on your build strategy.
+                    </div>
                 </section>
 
                 <!-- Strategy -->
@@ -946,39 +805,55 @@
                     <h2 class="section-title">Strategy Guide</h2>
                     <div class="highlight-box">
                         <ul>
-                            <li><strong>Rush early for snowball potential</strong> - One of the best first Tome investments</li>
-                            <li><strong>Works with almost every weapon and playstyle</strong> - Universal offensive boost</li>
-                            <li>Stacks multiplicatively with <a href="https://megabonk.org/database/weapons/" style="color: var(--warning);">weapon</a> base attack speed</li>
-                            <li>Essential for <a href="https://megabonk.org/guides/builds/" style="color: var(--warning);">builds</a> that rely on on-hit effects like Kevin+Mirror</li>
-                            <li>Increases lifesteal healing rate dramatically when combined with lifesteal items</li>
-                            <li>Core part of the "Speed Demon" and "Bullet Hell" meta builds</li>
+                            <li><strong>Early Priority:</strong> Often recommended as an early Tome investment due to immediate DPS improvements</li>
+                            <li><strong>Universal Value:</strong> Works effectively with virtually every weapon and playstyle</li>
+                            <li><strong>On-Hit Builds:</strong> Essential for builds relying on on-hit effects like Kevin+Mirror combinations</li>
+                            <li><strong>Healing Synergy:</strong> Significantly increases healing rate when combined with lifesteal items</li>
+                            <li><strong>Build Foundation:</strong> Core component of popular community builds like "Speed Demon" and "Bullet Hell"</li>
                         </ul>
                     </div>
                 </section>
 
-                <!-- Important Warnings -->
+                <!-- Important Considerations -->
                 <section class="section">
                     <h2 class="section-title">Important Considerations</h2>
                     <div class="highlight-box danger">
                         <ul>
-                            <li><strong>Without sustain or defense, you might outpace your survivability</strong></li>
-                            <li>High attack speed can drain ammunition-based weapons faster</li>
-                            <li>Some weapons have attack speed caps - check weapon-specific pages</li>
-                            <li>Balance with <a href="https://megabonk.org/database/tomes/agility-tome/" style="color: var(--danger);">Agility</a> for kiting capability</li>
+                            <li><strong>Balance Defense:</strong> High attack speed without sustain or defensive stats may leave you vulnerable</li>
+                            <li><strong>Resource Management:</strong> Faster attacking may require more careful positioning and resource awareness</li>
+                            <li><strong>Complement with Survivability:</strong> Consider pairing with defensive Tomes like Health, Armor, or Evasion for balanced progression</li>
+                            <li><strong>Movement Speed Balance:</strong> Pair with <a href="https://megabonk.org/database/tomes/agility-tome/" style="color: var(--danger);">Agility</a> to maintain kiting capability</li>
                         </ul>
                     </div>
                 </section>
 
-                <!-- Notes -->
+                <!-- Theoretical Calculations -->
                 <section class="section">
-                    <h2 class="section-title">Pro Tips</h2>
+                    <h2 class="section-title">Theoretical Maximum Potential</h2>
                     <div class="highlight-box info">
                         <ul>
-                            <li>A core DPS Tome, <strong>often considered mandatory in offensive builds</strong></li>
-                            <li>Greatly increases synergy potential with other scaling Tomes</li>
-                            <li>Pairs exceptionally well with <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-blue);">characters</a> that have attack speed bonuses</li>
-                            <li>At max level (99), provides over 700% attack speed - transforming any weapon</li>
-                            <li>One of the three "must-have" Tomes in most leaderboard builds</li>
+                            <li><strong>Community Consensus:</strong> Most sources indicate Tomes can reach level 99</li>
+                            <li><strong>Common Rarity Calculation:</strong> At 7.5% per level × 99 levels = approximately 742.5% attack speed increase (theoretical)</li>
+                            <li><strong>Higher Rarities:</strong> Legendary (2.0× multiplier) would theoretically provide 1,485% increase at max level</li>
+                            <li><strong>Important Caveat:</strong> These are mathematical projections based on community data; actual in-game caps and mechanics may differ</li>
+                            <li><strong>Official Documentation:</strong> No official formula or hard cap has been publicly confirmed by developers as of October 2025</li>
+                        </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Disclaimer:</strong> The above calculations are theoretical extrapolations based on community-documented values. Actual game mechanics may include caps, diminishing returns, or other factors not yet publicly documented.
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Community Tips</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li>A highly valued offensive Tome frequently featured in community build guides</li>
+                            <li>Enhances synergy potential when combined with other scaling Tomes</li>
+                            <li>Particularly effective with <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-blue);">characters</a> that have built-in attack speed bonuses</li>
+                            <li>At higher levels, dramatically transforms weapon feel and performance</li>
+                            <li>Commonly included in high-damage focused build strategies shared by the community</li>
                         </ul>
                     </div>
                 </section>
@@ -987,9 +862,10 @@
                 <div class="tags">
                     <span class="tag">Tomes</span>
                     <span class="tag">Attack Speed</span>
-                    <span class="tag">S-Tier</span>
-                    <span class="tag">Meta Build</span>
+                    <span class="tag">High-Value</span>
+                    <span class="tag">Offensive</span>
                     <span class="tag">DPS</span>
+                    <span class="tag">Universal Synergy</span>
                 </div>
             </main>
         </div>
