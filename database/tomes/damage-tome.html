@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>amage Tome (Megabonk): Effects & Best Builds</title>
+    <title>Damage Tome (Megabonk): Effects & Best Builds</title>
     <meta name="description" content="Learn what the Damage Tome does in Megabonk, how it boosts base damage, the best synergies and weapons to pair it with, and tips for DPS builds.">
     <meta name="keywords" content="megabonk damage tome, base damage tome, megabonk tomes, damage guide, megabonk wiki, DPS builds">
 
@@ -184,13 +185,12 @@
         .tier-badge {
             display: inline-block;
             padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 1.2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: 25px;
+            font-weight: 700;
+            color: #fff;
             margin-left: 1rem;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+            font-size: 0.9rem;
         }
 
         /* Container */
@@ -200,360 +200,308 @@
             padding: 3rem 2rem;
         }
 
-        /* Main Layout */
-        .content-wrapper {
+        .content-grid {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 300px 1fr;
             gap: 3rem;
-            margin-bottom: 3rem;
+            align-items: start;
         }
 
-        /* Infobox */
-        .infobox {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        /* Sidebar */
+        .sidebar {
             position: sticky;
             top: 100px;
-            height: fit-content;
-            border: 1px solid rgba(239, 35, 60, 0.3);
         }
 
-        .infobox-image {
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tome-image {
             width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, rgba(239, 35, 60, 0.1), rgba(251, 86, 7, 0.1));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            border: 2px solid rgba(239, 35, 60, 0.3);
-            overflow: hidden;
-            position: relative;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(239, 35, 60, 0.3);
         }
 
-        .infobox-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
-            z-index: 1;
+        .info-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .infobox-image img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            position: relative;
-            z-index: 2;
-            filter: drop-shadow(0 0 20px rgba(239, 35, 60, 0.5));
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .stat-grid {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .stat-item {
-            background: rgba(239, 35, 60, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 3px solid var(--accent-red);
-        }
-
-        .stat-label {
+        .info-label {
             color: var(--text-gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .stat-value {
-            color: var(--success);
-            font-weight: 700;
-            font-size: 1.1rem;
+            color: var(--accent-red);
+            font-size: 1.3rem;
+            font-weight: 800;
         }
 
-        .stat-value.primary {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.3rem;
+        .unlock-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--success), #00b894);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
 
         /* Main Content */
-        .main-content {
-            min-width: 0;
+        main {
+            min-height: 600px;
         }
 
         .section {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
+            border-radius: 20px;
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(239, 35, 60, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .section-title {
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
 
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 2rem;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
-            border-radius: 4px;
-        }
-
-        .intro-text {
-            font-size: 1.15rem;
-            color: var(--text-light);
+        .description {
+            font-size: 1.1rem;
             line-height: 1.8;
-            margin-bottom: 1rem;
-            padding: 1.5rem;
-            background: rgba(239, 35, 60, 0.05);
-            border-radius: 12px;
-            border-left: 4px solid var(--accent-red);
-        }
-
-        .intro-text strong {
-            color: var(--accent-red);
-        }
-
-        .info-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .info-list li {
-            padding: 0.8rem 0 0.8rem 2.5rem;
-            position: relative;
             color: var(--text-gray);
-            transition: all 0.3s;
+            margin-bottom: 1.5rem;
         }
 
-        .info-list li::before {
-            content: '💥';
+        .highlight-box {
+            background: rgba(239, 35, 60, 0.1);
+            border-left: 4px solid var(--accent-red);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box.danger {
+            background: rgba(255, 0, 110, 0.1);
+            border-left-color: var(--danger);
+        }
+
+        .highlight-box.info {
+            background: rgba(58, 134, 255, 0.1);
+            border-left-color: var(--accent-blue);
+        }
+
+        .highlight-box.success {
+            background: rgba(6, 255, 165, 0.1);
+            border-left-color: var(--success);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '▸';
             position: absolute;
-            left: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .info-list li:hover {
-            color: var(--text-light);
-            transform: translateX(5px);
-        }
-
-        .info-list li strong {
+            left: 0;
             color: var(--accent-red);
+            font-weight: 800;
+        }
+
+        .highlight-box.danger li::before {
+            color: var(--danger);
+        }
+
+        .highlight-box.info li::before {
+            color: var(--accent-blue);
+        }
+
+        .highlight-box.success li::before {
+            color: var(--success);
         }
 
         /* Synergies Grid */
         .synergies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         .synergy-card {
-            background: rgba(239, 35, 60, 0.1);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             padding: 1.5rem;
-            border: 1px solid rgba(239, 35, 60, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .synergy-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--accent-red), var(--accent-orange));
         }
 
         .synergy-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(239, 35, 60, 0.3);
+            box-shadow: 0 10px 30px rgba(239, 35, 60, 0.3);
             border-color: var(--accent-red);
         }
 
         .synergy-title {
+            font-size: 1.2rem;
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .synergy-title a {
+            margin-bottom: 0.5rem;
             color: var(--accent-red);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .synergy-title a:hover {
-            color: var(--accent-orange);
-        }
-
-        .synergy-icon {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
         }
 
         .synergy-desc {
             color: var(--text-gray);
-            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        /* Highlight Boxes */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(239, 35, 60, 0.1), rgba(251, 86, 7, 0.1));
-            border-radius: 12px;
+        /* Weapons Grid */
+        .weapons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .weapon-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             padding: 1.5rem;
-            border: 1px solid var(--accent-red);
-            margin-top: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .highlight-box.info {
-            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
-            border-color: var(--accent-blue);
+        .weapon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(239, 35, 60, 0.3);
+            border-color: var(--accent-red);
         }
 
-        .highlight-box.success {
-            background: linear-gradient(135deg, rgba(6, 255, 165, 0.1), rgba(0, 217, 126, 0.1));
-            border-color: var(--success);
-        }
-
-        .highlight-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .highlight-box li {
-            padding: 0.6rem 0 0.6rem 2rem;
-            position: relative;
-            color: var(--text-light);
-        }
-
-        .highlight-box li::before {
-            content: '💡';
-            position: absolute;
-            left: 0;
-        }
-
-        .highlight-box.info li::before {
-            content: 'ℹ️';
-        }
-
-        .highlight-box.success li::before {
-            content: '✅';
-        }
-
-        /* Unlock Badge */
-        .unlock-badge {
-            display: inline-flex;
+        .weapon-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: rgba(239, 35, 60, 0.1);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, var(--success), #00d97e);
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #000;
-            box-shadow: 0 4px 12px rgba(6, 255, 165, 0.3);
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .weapon-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .weapon-name {
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         /* Tags */
         .tags {
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 0.8rem;
             margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(239, 35, 60, 0.2);
         }
 
         .tag {
-            padding: 0.5rem 1.5rem;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
-            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            background: rgba(239, 35, 60, 0.2);
+            border: 1px solid var(--accent-red);
+            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: var(--accent-red);
         }
 
         /* Related Tomes */
         .related-tomes {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
         }
 
         .tome-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
             text-align: center;
-            border: 1px solid rgba(239, 35, 60, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             text-decoration: none;
-            display: block;
+            color: inherit;
         }
 
         .tome-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(239, 35, 60, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(239, 35, 60, 0.4);
             border-color: var(--accent-red);
         }
 
         .tome-card-icon {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto 1rem;
+            background: rgba(239, 35, 60, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .tome-card-icon img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(239, 35, 60, 0.3));
         }
 
         .tome-card-title {
+            font-size: 1.2rem;
             font-weight: 700;
-            color: var(--text-light);
             margin-bottom: 0.5rem;
         }
 
@@ -565,7 +513,7 @@
         /* Navigation Buttons */
         .nav-buttons {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             margin: 3rem 0;
         }
@@ -575,86 +523,41 @@
             background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
             color: var(--text-light);
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 50px;
             font-weight: 700;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(239, 35, 60, 0.3);
+            box-shadow: 0 5px 20px rgba(239, 35, 60, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(239, 35, 60, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(239, 35, 60, 0.5);
         }
 
         .btn-secondary {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
         }
 
-        /* Popular Weapons Section */
-        .weapons-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .weapon-item {
-            background: rgba(239, 35, 60, 0.05);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid rgba(239, 35, 60, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .weapon-item:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-red);
-            box-shadow: 0 8px 16px rgba(239, 35, 60, 0.2);
-        }
-
-        .weapon-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .weapon-icon img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(239, 35, 60, 0.3));
-        }
-
-        .weapon-name {
-            font-weight: 600;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
         /* Footer */
         footer {
             background: var(--secondary-bg);
             padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(239, 35, 60, 0.2);
-            margin-top: 4rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .footer-links {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+            margin-top: 2rem;
         }
 
         .footer-links a {
@@ -669,11 +572,11 @@
 
         /* Responsive */
         @media (max-width: 968px) {
-            .content-wrapper {
+            .content-grid {
                 grid-template-columns: 1fr;
             }
 
-            .infobox {
+            .sidebar {
                 position: static;
             }
 
@@ -681,41 +584,34 @@
                 font-size: 2.5rem;
             }
 
-            .synergies-grid,
-            .related-tomes {
-                grid-template-columns: 1fr;
-            }
-
             .nav-links {
                 display: none;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
             .hero h1 {
                 font-size: 2rem;
             }
 
-            .container {
-                padding: 2rem 1rem;
+            .synergies-grid,
+            .weapons-grid {
+                grid-template-columns: 1fr;
             }
+        }
 
-            .section {
-                padding: 1.5rem;
-            }
+        .version-note {
+            background: rgba(58, 134, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
 
-            .nav-buttons {
-                flex-direction: column;
-            }
-
-            .weapons-showcase {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .tier-badge {
-                display: block;
-                margin: 1rem 0 0 0;
-            }
+        .version-note strong {
+            color: var(--accent-blue);
         }
     </style>
 </head>
@@ -723,14 +619,13 @@
     <!-- Header -->
     <header>
         <nav>
-            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <a href="https://megabonk.org/" class="logo">Megabonk.org</a>
             <ul class="nav-links">
-                <li><a href="https://megabonk.org/">Home</a></li>
                 <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
                 <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
                 <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
                 <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
-                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+                <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
             </ul>
         </nav>
     </header>
@@ -740,169 +635,147 @@
         <a href="https://megabonk.org/">Home</a> / 
         <a href="https://megabonk.org/database/">Database</a> / 
         <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
-        <strong>Damage Tome</strong>
+        <span>Damage Tome</span>
     </div>
 
     <!-- Hero Section -->
-    <div class="hero">
+    <section class="hero">
         <div class="hero-content">
             <h1>💥 Damage Tome</h1>
-            <span class="tier-badge">S-TIER</span>
-            <p class="hero-subtitle">Amplify Every Hit with Raw Power - The Foundation of All DPS Builds</p>
-            <div class="tome-category">Base Damage Tome</div>
+            <p class="hero-subtitle">Increases Base Attack Damage - Universal Offensive Multiplier</p>
+            <div class="tome-category">Damage Tome</div>
+            <span class="tier-badge">High-Tier (A-S)</span>
         </div>
-    </div>
+    </section>
 
-    <!-- Main Container -->
+    <!-- Main Content -->
     <div class="container">
-        <div class="content-wrapper">
-            <!-- Infobox Sidebar -->
-            <aside class="infobox">
-                <div class="infobox-image">
-                    <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
-                </div>
-                
-                <div class="stat-grid">
-                    <div class="stat-item">
-                        <span class="stat-label">📊 Stat Type</span>
-                        <span class="stat-value">Damage</span>
+        <div class="content-grid">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="info-card">
+                    <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="tome-image">
+                    
+                    <div class="info-item">
+                        <div class="info-label">Stat Type</div>
+                        <div class="info-value">Base Damage (Universal)</div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">⬆️ Upgrade</span>
-                        <span class="stat-value primary">+0.08x</span>
+
+                    <div class="info-item">
+                        <div class="info-label">Upgrade Value</div>
+                        <div class="stat-value">+0.08x per level</div>
+                        <div class="version-note" style="margin-top: 0.5rem; padding: 0.5rem; font-size: 0.8rem;">
+                            Approximately 8% damage increase per level
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">🔓 Unlock</span>
-                        <span class="stat-value">Default</span>
+
+                    <div class="info-item">
+                        <div class="info-label">Unlock Requirement</div>
+                        <div class="info-value">
+                            <span class="unlock-badge">✓ Default Unlocked</span>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">🎯 Max Level</span>
-                        <span class="stat-value primary">99</span>
+
+                    <div class="info-item">
+                        <div class="info-label">Max Level</div>
+                        <div class="info-value">Community Consensus: 99*</div>
+                        <div class="version-note" style="margin-top: 0.5rem; padding: 0.5rem; font-size: 0.75rem;">
+                            *Some sources suggest different caps; verify in-game
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Scaling Type</div>
+                        <div class="info-value">Additive Stacking</div>
                     </div>
                 </div>
             </aside>
 
             <!-- Main Content -->
-            <main class="main-content">
-                <!-- Introduction -->
-                <section class="section">
-                    <p class="intro-text">
-                        The <strong>Damage Tome</strong> is one of the most straightforward but powerful Tomes in <strong><a href="https://megabonk.org/" style="color: var(--accent-red);">Megabonk</a></strong>. It boosts the base damage of your attacks, making every hit stronger. <strong>Since it multiplies with other effects, it's a core part of nearly every offensive build</strong> and provides consistent scaling throughout your entire run.
-                    </p>
-                </section>
-
+            <main>
                 <!-- Overview -->
                 <section class="section">
                     <h2 class="section-title">Overview</h2>
-                    <ul class="info-list">
-                        <li><strong>Stat:</strong> Damage</li>
-                        <li><strong>Base upgrade per level:</strong> +0.08x (+8% per level)</li>
-                        <li><strong>How to unlock:</strong> Default (available at start)</li>
-                        <li><strong>Max level:</strong> 99</li>
-                    </ul>
-                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
-                        Damage is the most fundamental offensive stat. The Damage Tome directly increases the damage dealt by all attacks, providing universal benefit across melee, ranged, and AoE <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-red);">weapons</a>. It's essential for scaling your power as runs progress.
+                    <p class="description">
+                        The <strong>Damage Tome</strong> increases your character's <strong>Base Damage</strong>, a universal stat that acts as a damage multiplier affecting all weapon types. Each level adds +0.08x (approximately 8%) to your damage multiplier, which then gets applied to your weapon's base damage in the final damage calculation.
                     </p>
-                </section>
-
-                <!-- Effects -->
-                <section class="section">
-                    <h2 class="section-title">Effects</h2>
-                    <ul class="info-list">
-                        <li><strong>Directly increases the damage dealt by all attacks</strong></li>
-                        <li>Works with melee, ranged, and AoE weapons universally</li>
-                        <li>Provides strong scaling when combined with critical chance or attack speed</li>
-                        <li>Multiplies with other damage modifiers for exponential growth</li>
-                        <li>At max level (99), provides nearly 800% base damage increase</li>
-                    </ul>
-                </section>
-
-                <!-- How to Unlock -->
-                <section class="section">
-                    <h2 class="section-title">How to Unlock</h2>
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <div class="unlock-badge">
-                            ✅ Unlocked by Default
-                        </div>
-                        <p style="color: var(--text-gray); margin-top: 1rem;">
-                            This Tome is available from the start of the game. No special condition is needed.
-                        </p>
+                    <p class="description">
+                        According to community technical documentation from v1.0.7-v1.0.12 (September-October 2025), <strong>upgrades within the same Tome stack additively</strong> with each other. The final damage multiplier from all your Damage Tome levels is then multiplied with your weapon's base damage to calculate your actual damage output.
+                    </p>
+                    <div class="version-note">
+                        <strong>Version Note:</strong> Data based on community guides and player documentation from v1.0.7-v1.0.12 (September-October 2025). Official patch notes may supersede this information.
                     </div>
                 </section>
 
-                <!-- Synergies -->
+                <!-- How It Works -->
                 <section class="section">
-                    <h2 class="section-title">Synergies</h2>
+                    <h2 class="section-title">How Damage Scaling Works</h2>
+                    <p class="description">
+                        The Damage Tome modifies a character-level damage multiplier that applies universally to all weapons. Understanding how it scales is important for build optimization:
+                    </p>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Additive Within Itself:</strong> Each Damage Tome level adds +0.08x to your total damage multiplier (e.g., 10 levels = +0.8x total)</li>
+                            <li><strong>Multiplicative with Weapon Base:</strong> Your total damage multiplier then multiplies with your weapon's base damage</li>
+                            <li><strong>Universal Application:</strong> Affects all weapon types equally - melee, ranged, and AoE</li>
+                            <li><strong>Character Stat:</strong> Modifies a character-level stat, so it works with every weapon you use</li>
+                        </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Example Calculation:</strong> If you have 10 levels in Common Damage Tome (+0.8x multiplier) and a weapon with 50 base damage, your actual damage would be: 50 × (1 + 0.8) = 90 damage per hit.
+                    </div>
+                </section>
+
+                <!-- Best Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Practical Synergies</h2>
                     <div class="synergies-grid">
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Precision_Tome.png" alt="Precision Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/precision-tome/">Precision Tome</a>
-                            </div>
+                            <div class="synergy-title">🎯 Precision (Crit Chance)</div>
                             <div class="synergy-desc">
-                                Critical hits deal more when base damage is higher. Essential synergy for crit-focused builds.
+                                Higher base damage amplifies critical hit outcomes. Critical strikes multiply your damage, so increasing your base damage makes each crit hit even harder - widely recommended in DPS builds.
                             </div>
                         </div>
-                        
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/cooldown-tome/">Cooldown Tome</a>
-                            </div>
+                            <div class="synergy-title">⚡ Cooldown (Attack Speed)</div>
                             <div class="synergy-desc">
-                                Faster attacks combined with more damage = massive DPS. The ultimate offensive combo.
+                                More hits per second combined with higher damage per hit creates reliable DPS scaling. This is one of the most common and effective offensive combinations.
                             </div>
                         </div>
-                        
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/quantity-tome/">Quantity Tome</a>
-                            </div>
+                            <div class="synergy-title">🔢 Quantity (Projectile Count)</div>
                             <div class="synergy-desc">
-                                More projectiles each benefit from the damage boost. Multiplies your total damage output.
+                                Each additional projectile benefits from your damage multiplier. More projectiles × higher damage per projectile = exponential damage increase.
                             </div>
                         </div>
-                        
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/size-tome/">Size Tome</a>
-                            </div>
+                            <div class="synergy-title">📏 Size (Attack Size)</div>
                             <div class="synergy-desc">
-                                Larger hitboxes plus more damage make AoE clear stronger. Perfect for crowd control builds.
+                                Larger hitboxes make it easier to apply your amplified damage to more targets, especially valuable for AoE weapons and on-hit effects.
                             </div>
                         </div>
-
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Knockback_Tome.png" alt="Knockback Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/knockback-tome/">Knockback Tome</a>
-                            </div>
+                            <div class="synergy-title">⏱️ Duration</div>
                             <div class="synergy-desc">
-                                Higher damage makes knockback more effective, creating space and controlling enemy positioning.
+                                Helps lingering damage effects (burn, damage fields, DoT) deal your multiplied damage for longer periods, increasing total damage output over time.
                             </div>
                         </div>
-
                         <div class="synergy-card">
-                            <div class="synergy-title">
-                                <img src="https://megabonk.org/images/Tomes/Duration_Tome.png" alt="Duration Tome" class="synergy-icon">
-                                <a href="https://megabonk.org/database/tomes/duration-tome/">Duration Tome</a>
-                            </div>
+                            <div class="synergy-title">⚠️ Knockback (Unconfirmed)</div>
                             <div class="synergy-desc">
-                                Longer-lasting damage-over-time effects benefit from higher base damage values.
+                                Note: Whether knockback scales with damage is not confirmed by official sources. Treat knockback as build-dependent utility rather than a direct damage synergy.
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Popular Weapons -->
+                <!-- Best Weapons -->
                 <section class="section">
-                    <h2 class="section-title">Universal Weapon Compatibility</h2>
-                    <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
-                        Damage Tome benefits <strong>every weapon</strong> in the game. Here are some top performers:
+                    <h2 class="section-title">Example Weapons (Universal Benefit)</h2>
+                    <p class="description">
+                        Since Damage Tome affects all weapons universally, every weapon benefits from it. Here are some commonly discussed examples from community guides:
                     </p>
-                    <div class="weapons-showcase">
+                    <div class="weapons-grid">
                         <div class="weapon-item">
                             <div class="weapon-icon">
                                 <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
@@ -940,6 +813,9 @@
                             <div class="weapon-name">Axe</div>
                         </div>
                     </div>
+                    <div class="version-note" style="margin-top: 1.5rem;">
+                        <strong>Note:</strong> These are examples from community discussions, not a definitive "best weapons" ranking. All weapons benefit equally from the damage multiplier.
+                    </div>
                 </section>
 
                 <!-- Strategy -->
@@ -947,41 +823,75 @@
                     <h2 class="section-title">Strategy Guide</h2>
                     <div class="highlight-box">
                         <ul>
-                            <li><strong>A must-have for most offensive builds</strong> - Core DPS foundation</li>
-                            <li><strong>Best to invest early</strong> for snowballing damage as runs go longer</li>
-                            <li>Combine with defense Tomes if you're struggling to survive while scaling damage</li>
-                            <li>Works universally with every weapon type - never a wasted investment</li>
-                            <li>Scales exponentially with other damage multipliers like crits and attack speed</li>
-                            <li>Essential for <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-red);">meta builds</a> and leaderboard runs</li>
+                            <li><strong>High-value offensive investment</strong> - Consistently ranked in top tiers across community tier lists</li>
+                            <li><strong>Early scaling advantage:</strong> Investing early allows damage to snowball throughout longer runs</li>
+                            <li>Balance with defensive Tomes if struggling with survivability - raw damage requires staying alive to be effective</li>
+                            <li>Works universally with every weapon type - rarely a wasted investment</li>
+                            <li>Multiplies well with other damage multipliers like critical hits and attack speed</li>
+                            <li>Common component of high-damage <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-red);">meta builds</a> and leaderboard strategies</li>
                         </ul>
                     </div>
                 </section>
 
-                <!-- Why It's Essential -->
+                <!-- Tier List Context -->
                 <section class="section">
-                    <h2 class="section-title">Why Damage Tome is Essential</h2>
+                    <h2 class="section-title">Community Tier Rankings</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>Tier Placement Varies by Source:</strong> Damage Tome ranks between A-tier and S-tier depending on the guide and patch version</li>
+                            <li><strong>Destructoid (Sept 28, 2025):</strong> Rated as A-tier</li>
+                            <li><strong>AmiiboDoctor (Oct 7, 2025):</strong> Rated as S-tier</li>
+                            <li><strong>GameRant (Oct 14, 2025):</strong> Listed among top-tier offensive Tomes</li>
+                            <li>Tier rankings are subjective and patch-dependent - always verify with current community consensus</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Holy Trinity Clarification -->
+                <section class="section">
+                    <h2 class="section-title">Build Foundations & "Holy Trinity"</h2>
                     <div class="highlight-box success">
                         <ul>
-                            <li>Considered one of the strongest "always useful" Tomes</li>
-                            <li>High synergy with almost every offensive Tome in the game</li>
-                            <li>Simple, straightforward damage boost with no complex mechanics</li>
-                            <li>Scales consistently from early to late game</li>
-                            <li>Core component of virtually all competitive <a href="https://megabonk.org/guides/characters/" style="color: var(--success);">character</a> builds</li>
-                            <li>Provides immediate, noticeable power increase at all levels</li>
+                            <li><strong>The Actual "Holy Trinity":</strong> Community consensus identifies the core progression combo as <strong>XP + Luck + Cursed (Difficulty)</strong> - not Damage</li>
+                            <li><strong>Damage as Fourth Slot:</strong> Damage Tome is commonly added as a <strong>fourth offensive slot</strong> in high-DPS builds, not part of the Trinity itself</li>
+                            <li>The Trinity focuses on <strong>faster progression and better rewards</strong>, while Damage focuses purely on combat power</li>
+                            <li><strong>Luck Tome:</strong> Increases chances of higher rarity upgrades and rewards at level-ups, shrines, and chests - pairs well with offensive builds</li>
+                            <li>Build strategies vary by playstyle and patch - experiment to find what works for your approach</li>
                         </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Source:</strong> ProGameGuides (v1.0.12, October 2025) and multiple Steam/Reddit community discussions confirm this Trinity definition.
                     </div>
                 </section>
 
-                <!-- Notes -->
+                <!-- Theoretical Calculations -->
+                <section class="section">
+                    <h2 class="section-title">Theoretical Maximum Potential</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>Max Level Debate:</strong> Community sources report Tome caps ranging from Level 40 to Level 99 - official confirmation pending</li>
+                            <li><strong>If 99 Levels (Theoretical):</strong> At +0.08x per level × 99 = +7.92x multiplier (approximately +792% damage increase)</li>
+                            <li><strong>Important Caveat:</strong> These are mathematical projections based on community-documented values and assumed caps</li>
+                            <li><strong>Version Dependency:</strong> Actual caps may vary by game version, patch, or demo vs. full release</li>
+                            <li><strong>Verification Needed:</strong> Check your in-game pause menu and upgrade interface to confirm current version caps</li>
+                        </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Disclaimer:</strong> Maximum level and resulting calculations are theoretical. Official game documentation has not confirmed exact caps. Player reports suggest variation exists.
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
                 <section class="section">
                     <h2 class="section-title">Pro Tips</h2>
                     <div class="highlight-box info">
                         <ul>
-                            <li>Prioritize Damage Tome early to maximize scaling throughout your run</li>
-                            <li>Pairs with <a href="https://megabonk.org/database/tomes/luck-tome/" style="color: var(--accent-blue);">Luck Tome</a> to increase legendary item drops that boost damage further</li>
-                            <li>Balance damage investment with survivability - raw damage won't help if you can't stay alive</li>
-                            <li>Each level provides 8% more damage - stacks multiplicatively with itself</li>
-                            <li>Part of the "Holy Trinity" build when combined with Luck and XP Tomes</li>
+                            <li>Prioritize Damage Tome early to maximize scaling benefits throughout your run</li>
+                            <li>Pair with <a href="https://megabonk.org/database/tomes/luck-tome/" style="color: var(--accent-blue);">Luck Tome</a> to increase chances of legendary item drops that further boost damage</li>
+                            <li>Balance damage investment with survivability - high damage requires staying alive to be effective</li>
+                            <li>Each level provides approximately 8% more damage through additive stacking</li>
+                            <li>Consider as a strong fourth slot after establishing your core progression Trinity (XP + Luck + Cursed)</li>
+                            <li>Works excellently with <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-blue);">characters</a> that have damage-scaling abilities</li>
                         </ul>
                     </div>
                 </section>
@@ -990,8 +900,8 @@
                 <div class="tags">
                     <span class="tag">Tomes</span>
                     <span class="tag">Damage</span>
-                    <span class="tag">S-Tier</span>
-                    <span class="tag">Meta Build</span>
+                    <span class="tag">High-Tier</span>
+                    <span class="tag">Offensive</span>
                     <span class="tag">DPS</span>
                     <span class="tag">Universal</span>
                 </div>
