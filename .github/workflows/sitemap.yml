@@ -1,15 +1,13 @@
-# 这个是 GitHub Action 的配置文件
 name: Generate Sitemap
 
-# 触发条件：当你推送到 main/master 分支时
 on:
   push:
     branches:
-      - main  # 如果你的主分支叫 master，就改成 master
+      - main  # 或者 master
 
 jobs:
   build:
-    runs-on: ubuntu-latest # 在一台 Linux 虚拟机上运行
+    runs-on: ubuntu-latest
 
     steps:
       # 第一步：把你的代码下载到虚拟机
@@ -22,14 +20,15 @@ jobs:
         with:
           # 必填！改成你自己的网站域名
           base-url-path: https://megabonk.org 
-          # (我猜你可能想用这个，哈哈，记得换成你需要的那个站)
 
-      # 第三步：把生成的 sitemap.xml 文件提交回你的仓库
-      - name: Push Sitemap to Repository
-        run: |
-          git config --global user.name "Sitemap Bot"
-          git config --global user.email "bot@users.noreply.github.com"
-          git add sitemap.xml
-          # 检查是否有改动，有才提交
-          git diff-index --quiet HEAD || git commit -m "Auto-generate sitemap.xml"
-          git push
+      # 第三步：使用“自动提交”插件
+      - name: Commit and push sitemap.xml
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # 提交信息
+          commit_message: "Auto-generate sitemap.xml"
+          # 要提交的文件
+          file_pattern: sitemap.xml
+          # 提交的用户
+          commit_user_name: Sitemap Bot
+          commit_user_email: bot@users.noreply.github.com
