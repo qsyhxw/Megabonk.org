@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Knockback Tome: Effects, Weapons & Unlock</title>
+    <meta name="description" content="Learn what Megabonk’s Knockback Tome does, which weapons benefit, top synergies, and how to control crowds—plus its unlock path and practical tips.">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/knockback-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-indigo: #5e60ce;
+            --accent-violet: #7209b7;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(94, 96, 206, 0.2));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(157,78,221,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tome-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.3);
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            color: var(--accent-purple);
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .unlock-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--success), #00b894);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        main {
+            min-height: 600px;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: rgba(157, 78, 221, 0.1);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(255, 190, 11, 0.1);
+            border-left-color: var(--warning);
+        }
+
+        .highlight-box.info {
+            background: rgba(94, 96, 206, 0.1);
+            border-left-color: var(--accent-indigo);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-weight: 800;
+        }
+
+        .highlight-box.warning li::before {
+            color: var(--warning);
+        }
+
+        .highlight-box.info li::before {
+            color: var(--accent-indigo);
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .synergy-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+            border-color: var(--accent-purple);
+        }
+
+        .synergy-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-violet);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .synergy-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .synergy-title a {
+            color: var(--accent-violet);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-purple);
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Weapons Grid */
+        .weapons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .weapon-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .weapon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+            border-color: var(--accent-purple);
+        }
+
+        .weapon-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .weapon-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .weapon-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: rgba(157, 78, 221, 0.2);
+            border: 1px solid var(--accent-purple);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-violet);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(157, 78, 221, 0.4);
+            border-color: var(--accent-purple);
+        }
+
+        .tome-card-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .tome-card-icon img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .tome-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(157, 78, 221, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .synergies-grid,
+            .weapons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .version-note {
+            background: rgba(94, 96, 206, 0.1);
+            border: 1px solid var(--accent-indigo);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .version-note strong {
+            color: var(--accent-indigo);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <span>Knockback Tome</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>💨 Knockback Tome</h1>
+            <p class="hero-subtitle">Increases Pushback Distance - Weapon-Dependent Crowd Control</p>
+            <div class="tome-category">Control Tome</div>
+            <span class="tier-badge">B-Tier (Situational)</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-grid">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="info-card">
+                    <img src="https://megabonk.org/images/Tomes/Knockback_Tome.png" alt="Knockback Tome" class="tome-image">
+                    
+                    <div class="info-item">
+                        <div class="info-label">Stat Type</div>
+                        <div class="info-value">Knockback Distance</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Per-Level Increase</div>
+                        <div class="stat-value">Not Publicly Documented</div>
+                        <div class="version-note" style="margin-top: 0.5rem; padding: 0.5rem; font-size: 0.75rem;">
+                            Exact percentage per level is not officially confirmed
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Unlock Requirement</div>
+                        <div class="info-value">
+                            <span class="unlock-badge">✓ Default Unlocked</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Max Level</div>
+                        <div class="info-value">Varies / Unconfirmed</div>
+                        <div class="version-note" style="margin-top: 0.5rem; padding: 0.5rem; font-size: 0.75rem;">
+                            Community consensus varies; official cap not documented
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Scaling Type</div>
+                        <div class="info-value">Likely Additive*</div>
+                        <div class="version-note" style="margin-top: 0.5rem; padding: 0.5rem; font-size: 0.75rem;">
+                            *Most Tomes use additive stacking except Damage Tome
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <p class="description">
+                        The <strong>Knockback Tome</strong> increases the distance enemies are pushed back when hit by your attacks. This effect is <strong>weapon-dependent</strong> - it only works with weapons that have built-in knockback effects in their upgrade paths.
+                    </p>
+                    <p class="description">
+                        The exact per-level percentage increase is <strong>not publicly documented</strong> in official sources. Community analyses suggest that most Tomes (except Damage Tome which uses multiplicative scaling) stack <strong>additively</strong> rather than multiplicatively.
+                    </p>
+                    <div class="version-note">
+                        <strong>Critical Note:</strong> This Tome is completely ineffective with weapons that lack knockback in their base mechanics or upgrade options. Always verify your weapon has knockback before investing points.
+                    </div>
+                </section>
+
+                <!-- How It Works -->
+                <section class="section">
+                    <h2 class="section-title">How Knockback Works</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Weapon Dependency:</strong> Only affects weapons that have knockback in their upgrade list or base effects</li>
+                            <li><strong>Distance Scaling:</strong> Increases how far enemies are pushed back per hit</li>
+                            <li><strong>Likely Additive Stacking:</strong> Based on community analysis, levels stack additively (not multiplicatively)</li>
+                            <li><strong>Crowd Control Tool:</strong> Creates space between you and enemies, useful for defensive positioning</li>
+                            <li><strong>Boss Limitations:</strong> Developers have mentioned plans to limit maximum knockback on boss enemies</li>
+                        </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Source:</strong> Steam community guides (Sept-Oct 2025) and technical analysis suggest additive stacking for most Tomes except Damage Tome which uses multiplicative scaling.
+                    </div>
+                </section>
+
+                <!-- Compatible Weapons -->
+                <section class="section">
+                    <h2 class="section-title">Verified Compatible Weapons</h2>
+                    <p class="description">
+                        These weapons have been verified to have Knockback in their upgrade paths, making them compatible with Knockback Tome:
+                    </p>
+                    <div class="weapons-grid">
+                        <div class="weapon-item">
+                            <div class="weapon-icon">
+                                <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                            </div>
+                            <div class="weapon-name">Sword</div>
+                        </div>
+                        <div class="weapon-item">
+                            <div class="weapon-icon">
+                                <img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun">
+                            </div>
+                            <div class="weapon-name">Shotgun</div>
+                        </div>
+                        <div class="weapon-item">
+                            <div class="weapon-icon">
+                                <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+                            </div>
+                            <div class="weapon-name">Aegis</div>
+                        </div>
+                        <div class="weapon-item">
+                            <div class="weapon-icon">
+                                <img src="https://megabonk.org/images/database/weapons/Tornado.png" alt="Tornado">
+                            </div>
+                            <div class="weapon-name">Tornado</div>
+                        </div>
+                    </div>
+                    <div class="version-note" style="margin-top: 1.5rem;">
+                        <strong>Important:</strong> Weapons without built-in knockback upgrades/effects will not benefit from this Tome. Check your weapon's "Affected by/Upgrades" list in-game before investing points. This list represents verified examples, not a complete list of all knockback weapons.
+                    </div>
+                </section>
+
+                <!-- Best Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergy Guide</h2>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/agility-tome/">Agility Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Movement speed pairs with knockback for hit-and-run tactics. Push enemies away, then reposition quickly for safety.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cooldown-tome/">Cooldown Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Attack speed increases knockback instances per second. More frequent hits means more frequent enemy displacement.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/damage-tome/">Damage Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Combine control with damage. Push enemies away while dealing higher damage per hit for safe, effective DPS.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More enemies make knockback more valuable for survival. Essential crowd control mechanism in high-density scenarios.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/size-tome/">Size Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Larger hitboxes hit more enemies, applying knockback to entire groups at once for wide area control.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/quantity-tome/">Quantity Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More projectiles means more knockback instances across the battlefield. Wide area control for projectile weapons.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Weapon verification first:</strong> Check if your weapon has knockback before investing any points</li>
+                            <li><strong>Defensive playstyles:</strong> Great for creating space when overwhelmed by enemies</li>
+                            <li><strong>Melee builds:</strong> Essential for creating safe attack windows after each strike</li>
+                            <li><strong>Positioning control:</strong> Can protect objectives or funnel enemies into kill zones</li>
+                            <li><strong>Boss fights with adds:</strong> Valuable for managing additional enemies during <a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-purple);">boss encounters</a></li>
+                            <li><strong>Community strategy note:</strong> Commonly discussed in high-density run strategies, though effectiveness varies by build</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="section">
+                    <h2 class="section-title">When to Invest</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>Using verified knockback weapons</strong> - Sword, Shotgun, Aegis, Tornado, or other confirmed weapons</li>
+                            <li><strong>Melee <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-indigo);">character</a> builds</strong> - Create space after each strike for safety</li>
+                            <li><strong>Defensive strategies</strong> - Control enemy positioning and flow to survive longer</li>
+                            <li><strong>High enemy density runs</strong> - More enemies = more value from crowd control effects</li>
+                            <li><strong>Hybrid builds</strong> - Combine offensive power with positioning control for balanced play</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Important Warning -->
+                <section class="section">
+                    <h2 class="section-title">Critical Warnings</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li><strong>⚠️ Weapon Dependency</strong> - Completely ineffective if your weapon lacks knockback mechanics</li>
+                            <li><strong>⚠️ Check Before Investing</strong> - Always verify your weapon has knockback in its upgrade list first</li>
+                            <li><strong>⚠️ Can Backfire</strong> - May push enemies into unfavorable positions or spread them too far apart</li>
+                            <li><strong>⚠️ Situational Value</strong> - Strong when compatible, but not universally useful like Damage or Health</li>
+                            <li><strong>⚠️ Build Conflicts</strong> - Some builds actively avoid knockback to keep enemies grouped for AoE damage</li>
+                            <li><strong>⚠️ Boss Limitations</strong> - Developers are implementing limits on maximum boss knockback (recent Reddit discussion)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Developer Notes -->
+                <section class="section">
+                    <h2 class="section-title">Developer & Community Notes</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>Recent Developer Note:</strong> Plans to limit maximum knockback on boss enemies mentioned in Reddit discussion (October 2025)</li>
+                            <li><strong>Scaling Uncertainty:</strong> Exact per-level percentage not publicly documented; community estimates vary</li>
+                            <li><strong>Max Level Debate:</strong> Community consensus on Tome level caps is inconsistent; verify in-game pause menu</li>
+                            <li><strong>Stacking Mechanics:</strong> Most community analysis suggests additive stacking (unlike Damage Tome's multiplicative scaling)</li>
+                        </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Version Context:</strong> Information based on v1.0.7-v1.0.12 period (Sept-Oct 2025). Mechanics may change in future patches - monitor Steam News and official Discord for updates.
+                    </div>
+                </section>
+
+                <!-- Additional Notes -->
+                <section class="section">
+                    <h2 class="section-title">Additional Notes</h2>
+                    <p style="color: var(--text-gray); line-height: 1.8;">
+                        Considered <strong>situational but very effective when properly synergized</strong> with compatible weapons. The Tome's value is binary: either incredibly useful or completely wasted depending on weapon selection. Can make melee runs significantly safer by creating breathing room after each strike. Always prioritize verifying weapon compatibility before investing Tome points into Knockback.
+                    </p>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Knockback</span>
+                    <span class="tag">B-Tier</span>
+                    <span class="tag">Control</span>
+                    <span class="tag">Situational</span>
+                    <span class="tag">Utility</span>
+                    <span class="tag">Weapon-Dependent</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/agility-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome">
+                    </div>
+                    <div class="tome-card-title">Agility Tome</div>
+                    <div class="tome-card-stat">Movement Speed</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cooldown-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+                    </div>
+                    <div class="tome-card-title">Cooldown Tome</div>
+                    <div class="tome-card-stat">Attack Speed</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/size-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome">
+                    </div>
+                    <div class="tome-card-title">Size Tome</div>
+                    <div class="tome-card-stat">Attack Size</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cursed-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome">
+                    </div>
+                    <div class="tome-card-title">Cursed Tome</div>
+                    <div class="tome-card-stat">Enemy Density</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/database/weapons/" class="btn btn-secondary">View Weapon Database →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .weapon-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

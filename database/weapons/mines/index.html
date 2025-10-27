@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Megabonk Mines Guide: Unlock, Stats & Best Uses</title>
+    <meta name="description" content="Unlock Mines in Megabonk with 7,500 Slutty Rocket kills. See verified stats, top tomes/items, and trap-lane tactics for reliable AoE damage."/>
+    <meta name="keywords" content="Megabonk Mines, Mines weapon unlock, Slutty Rocket 7500 kills, Megabonk weapons, mines base damage 10"/>
+
+    <link rel="canonical" href="https://megabonk.org/database/weapons/mines" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Megabonk Mines Guide — Verified Stats & Unlock"/>
+    <meta property="og:description" content="Mines in Megabonk: base damage 10, unlock by 7,500 Slutty Rocket kills, upgrade stats, and practical tips. All data verified from external sources."/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="https://megabonk.org/database/weapons/mines"/>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Megabonk Mines — Verified Weapon Guide",
+      "description": "Accurate data for the Mines weapon in Megabonk (base damage 10; unlock via 7,500 Slutty Rocket kills), plus upgrade stats and item/tome synergy.",
+      "author": {
+        "@type": "Organization",
+        "name": "Megabonk.org (Unofficial)"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Megabonk.org (Unofficial)"
+      },
+      "datePublished": "2025-10-21",
+      "dateModified": "2025-10-21",
+      "inLanguage": "en"
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Explosion Particles Animation */
+        .explosion-particle {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #ff6b35, #ff8c42);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: explode 3s ease-out infinite;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+        @keyframes explode {
+            0% { transform: translate(50vw, 50vh) scale(0); opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(calc(50vw + var(--x)), calc(50vh + var(--y))) scale(1); opacity: 0; }
+        }
+
+        /* Background Pulse */
+        @keyframes pulse {
+            0%, 100% { background: radial-gradient(circle at center, rgba(255, 107, 53, 0.1), transparent 70%); }
+            50% { background: radial-gradient(circle at center, rgba(255, 107, 53, 0.2), transparent 70%); }
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            animation: pulse 4s ease-in-out infinite;
+            pointer-events: none; z-index: 0;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 2px solid #ff6b35;
+        }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-size: 1.5rem; font-weight: bold;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: #e0e0e0; text-decoration: none; transition: all 0.3s; padding: 0.5rem 1rem; border-radius: 5px;
+        }
+        .nav-links a:hover { background: linear-gradient(135deg, #ff6b35, #ff8c42); color: white; transform: translateY(-2px); }
+
+        /* Main */
+        main { max-width: 1200px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+
+        /* Breadcrumb */
+        .breadcrumb { margin-bottom: 2rem; color: #888; }
+        .breadcrumb a { color: #ff6b35; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* Hero */
+        .hero {
+            text-align: center; padding: 3rem 0; margin-bottom: 3rem;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 15px; border: 2px solid rgba(255, 107, 53, 0.3);
+        }
+        .hero h1 {
+            font-size: 3rem; margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .weapon-icon { font-size: 4rem; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .tier-badges { display: flex; gap: 1rem; justify-content: center; margin: 1rem 0; }
+        .tier-badge { padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: bold; font-size: 0.9rem; }
+        .tier-c { background: linear-gradient(135deg, #ff6b35, #ff8c42); color: #fff; }
+        .tier-b { background: linear-gradient(135deg, #1976d2, #42a5f5); color: #fff; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .stat-card {
+            background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 10px;
+            border: 1px solid rgba(255, 107, 53, 0.3); transition: all 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3); border-color: #ff6b35; }
+        .stat-label { color: #888; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .stat-value { font-size: 1.5rem; font-weight: bold; color: #ff6b35; }
+
+        /* Sections */
+        section {
+            margin: 3rem 0; padding: 2rem;
+            background: rgba(255, 255, 255, 0.05); border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s forwards;
+        }
+        section:nth-child(even){ animation-delay: .1s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        h2 { font-size: 2rem; margin-bottom: 1.5rem; color: #ff6b35; border-bottom: 2px solid #ff6b35; padding-bottom: .5rem; }
+        h3 { font-size: 1.5rem; margin: 1.5rem 0 1rem; color: #ff8c42; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: rgba(0,0,0,0.3); border-radius: 10px; overflow: hidden; }
+        th,td { padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255, 107, 53, 0.2); }
+        th { background: rgba(255, 107, 53, 0.2); color: #ff8c42; font-weight: bold; }
+        tr:hover { background: rgba(255, 107, 53, 0.1); }
+
+        /* Lists */
+        ul,ol { margin: 1rem 0 1rem 2rem; }
+        li { margin: .5rem 0; }
+
+        /* Info boxes */
+        .info-box { padding: 1.5rem; margin: 1.5rem 0; border-radius: 10px; border-left: 4px solid; }
+        .info-box.warning { background: rgba(255,107,53,.1); border-color: #ff6b35; }
+        .info-box.tip { background: rgba(76,175,80,.1); border-color: #4caf50; }
+        .info-box.note { background: rgba(33,150,243,.1); border-color: #2196f3; }
+
+        /* Footer */
+        footer { background: #1a1a1a; padding: 2rem; text-align: center; margin-top: 4rem; border-top: 2px solid #ff6b35; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .footer-links a { color: #ff6b35; text-decoration: none; transition: all 0.3s; }
+        .footer-links a:hover { color: #ff8c42; transform: translateY(-2px); }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42); color: #fff;
+            width: 50px; height: 50px; border-radius: 50%;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer; opacity:0; transition: all .3s; z-index:1000;
+            box-shadow: 0 4px 10px rgba(255,107,53,.3);
+        }
+        .back-to-top.visible { opacity: 1; }
+        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(255,107,53,.5); }
+
+        /* Image styling */
+        .hero img {
+            width: 140px; height: 140px; object-fit: contain;
+            border-radius: 12px; border: 1px solid rgba(255,107,53,.3);
+            background: rgba(0,0,0,.2); margin-bottom: .75rem;
+            box-shadow: 0 5px 16px rgba(255,107,53,.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .nav-links { flex-direction: column; gap: 1rem; }
+            main { padding: 1rem; }
+            section { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Explosion Particles -->
+    <div class="explosion-particle" style="--x: 200px; --y: -300px; animation-delay: 0s;"></div>
+    <div class="explosion-particle" style="--x: -250px; --y: 200px; animation-delay: 0.3s;"></div>
+    <div class="explosion-particle" style="--x: 300px; --y: 150px; animation-delay: 0.6s;"></div>
+    <div class="explosion-particle" style="--x: -200px; --y: -250px; animation-delay: 0.9s;"></div>
+    <div class="explosion-particle" style="--x: 250px; --y: -100px; animation-delay: 1.2s;"></div>
+    <div class="explosion-particle" style="--x: -300px; --y: 100px; animation-delay: 1.5s;"></div>
+    <div class="explosion-particle" style="--x: 150px; --y: 250px; animation-delay: 1.8s;"></div>
+    <div class="explosion-particle" style="--x: -150px; --y: -200px; animation-delay: 2.1s;"></div>
+    <div class="explosion-particle" style="--x: 280px; --y: -50px; animation-delay: 2.4s;"></div>
+    <div class="explosion-particle" style="--x: -280px; --y: 180px; animation-delay: 2.7s;"></div>
+    <div class="explosion-particle" style="--x: 100px; --y: -280px; animation-delay: 0.5s;"></div>
+    <div class="explosion-particle" style="--x: -100px; --y: 280px; animation-delay: 1s;"></div>
+    <div class="explosion-particle" style="--x: 220px; --y: 120px; animation-delay: 1.4s;"></div>
+    <div class="explosion-particle" style="--x: -220px; --y: -120px; animation-delay: 1.9s;"></div>
+    <div class="explosion-particle" style="--x: 180px; --y: -180px; animation-delay: 2.3s;"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">💣 Megabonk.org</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/database/">Database</a></li>
+                <li><a href="/tier-lists/">Tier Lists</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="/">Home</a> &gt;
+            <a href="/database/">Database</a> &gt;
+            <a href="/database/weapons/">Weapons</a> &gt;
+            <span>Mines</span>
+        </div>
+
+        <!-- Hero -->
+        <div class="hero">
+            <img src="https://megabonk.org/images/database/weapons/Mines.png" alt="Mines weapon icon from Megabonk"/>
+            <div class="weapon-icon">💣</div>
+            <h1>Mines — Verified Weapon Guide</h1>
+            <p style="font-size:1.2rem;color:#888;">Trap Placement • Zone Control • Passive AoE</p>
+            <div class="tier-badges">
+                <span class="tier-badge tier-c">Community Tier: C</span>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Base Damage</div>
+                <div class="stat-value">10</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Weapon Type</div>
+                <div class="stat-value">Trap / Area Denial (mines explode on proximity)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Unlock Requirement</div>
+                <div class="stat-value">7,500 kills with Slutty Rocket</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Community Viability</div>
+                <div class="stat-value">Often ranked C-tier</div>
+            </div>
+        </div>
+
+        <!-- Overview -->
+        <section id="overview">
+            <h2>📋 Overview</h2>
+            <p><strong>Mines</strong> places stationary explosives that detonate when enemies enter their trigger radius. It is best thought of as a <em>support</em> or <em>area-control</em> weapon: you kite through chokepoints, leave traps behind, and let waves pop as they follow. Community tier lists commonly place Mines in <strong>C-tier</strong> due to delayed damage and limited control over placement, though it can shine in slower, route-based play.)</p>
+
+            <div class="info-box note">
+                <strong>Stat block (documented):</strong> Base damage 10; upgrade stats include <em>Damage</em>, <em>Duration</em>, <em>Projectile Count</em>, and <em>Size</em>. This is consistent with community documentation of weapon stats. 
+            </div>
+        </section>
+
+        <!-- Unlock -->
+        <section id="unlock">
+            <h2>🔓 How to Unlock Mines</h2>
+            <ul>
+                <li><strong>Primary requirement:</strong> Get <strong>7,500 enemy kills</strong> using <strong>Slutty Rocket</strong>.</li>
+                <li><strong>Slutty Rocket prerequisite:</strong> Unlock Slutty Rocket by killing <strong>15,000 enemies as CL4NK</strong>.</li>
+                <li><strong>CL4NK note:</strong> If you don’t have CL4NK yet, complete <strong>Forest Tier 1</strong> and acquire the <strong>Revolver</strong> (per character unlock guides) to access him.</li>
+                <li><strong>Unlock reward:</strong> Many lists note a <em>2 Silver</em> reward for completing the Mines unlock task.</li>
+            </ul>
+
+            <div class="info-box tip">
+                <strong>Tip:</strong> While grinding Slutty Rocket kills, prioritize survivability and projectile count so more homing rockets connect and last-hitting is more consistent.
+            </div>
+        </section>
+
+        <!-- Mechanics -->
+        <section id="mechanics">
+            <h2>⚙️ Mechanics & Upgrades</h2>
+            <h3>How Mines Deal Damage</h3>
+            <ul>
+                <li>Mines are dropped periodically near your position.</li>
+                <li>They detonate when enemies step into their proximity, dealing AoE damage.</li>
+                <li>Because placement is passive and path-dependent, Mines work best along planned kite routes and chokepoints.</li>
+            </ul>
+
+            <h3>Documented Upgrade Stats</h3>
+            <table>
+                <thead><tr><th>Stat</th><th>Effect on Mines</th><th>Practical Notes</th></tr></thead>
+                <tbody>
+                    <tr><td>Damage</td><td>Increases explosion damage</td><td>Most impactful, scales all hits</td></tr>
+                    <tr><td>Duration</td><td>Mines persist longer before despawning</td><td>Helps set up lanes and choke traps</td></tr>
+                    <tr><td>Projectile Count</td><td>More mines are deployed</td><td>Better coverage and reliability</td></tr>
+                    <tr><td>Size</td><td>Increases explosion radius</td><td>Improves multi-hit potential in crowds</td></tr>
+                </tbody>
+            </table>
+
+            <div class="info-box warning">
+                <strong>Limitations:</strong> Because placement is automatic and trigger-based, you have less control than with aimed weapons. Mines are weaker versus fast enemies that path around or burst through without stepping on them.
+            </div>
+        </section>
+
+        <!-- Synergy -->
+        <section id="synergy">
+            <h2>🧩 Tome & Item Synergy (Real Numbers)</h2>
+
+            <h3>Recommended Tomes</h3>
+            <ul>
+                <li><strong>Damage Tome</strong> — universal DPS increase.</li>
+                <li><strong>Duration Tome</strong> — extends mine lifetime, making lanes stay “armed” longer.</li>
+                <li><strong>Quantity Tome</strong> — more mines placed over time.</li>
+                <li><strong>Size Tome</strong> — larger blast radius for better coverage.</li>
+            </ul>
+
+            <h3>Helpful Items (with verified effects)</h3>
+            <ul>
+                <li><strong>Big Bonk:</strong> <em>2% chance</em> to deal <em>20×</em> damage (RNG burst that applies to hits). </li>
+                <li><strong>Spicy Meatball:</strong> Attacks have a <em>25%</em> chance to explode for <em>65%</em> AoE damage (pairs well with clustered mine pops).</li>
+                <li><strong>Boss Buster:</strong> <em>+15%</em> damage vs. Elites/Bosses.</li>
+                <li><strong>Turbo Socks:</strong> <em>+15%</em> movement speed (easier laneing/kiting to “seed” traps).</li>
+                <li><strong>Gym Sauce:</strong> flat <em>+10%</em> damage (simple, reliable scaler).</li>
+            </ul>
+
+            <div class="info-box note">
+                <strong>Play pattern:</strong> path through chokepoints, circle back through your minefield, and let adds run into stacked traps while your primary weapons handle bosses.
+            </div>
+        </section>
+
+        <!-- Builds -->
+        <section id="builds">
+            <h2>🔨 Practical Loadouts</h2>
+            <p>Mines should rarely be your main damage. Treat it as a <strong>fourth-slot utility</strong> that creates breathing room while your core weapons farm kills.</p>
+
+            <h3>Example Loadout</h3>
+            <ol>
+                <li><strong>Primary:</strong> Lightning Staff / Dexecutioner / Katana (direct DPS)</li>
+                <li><strong>Secondary:</strong> Bow / Revolver (clear + crit scaling)</li>
+                <li><strong>Support:</strong> Black Hole / Flamewalker (grouping or passive AoE)</li>
+                <li><strong>Utility:</strong> Mines (trap lanes & kiting routes)</li>
+            </ol>
+        </section>
+
+        <!-- Tier & Comparison -->
+        <section id="tier">
+            <h2>📊 Community Ranking & Comparisons</h2>
+            <table>
+                <thead><tr><th>Source</th><th>Listed Tier</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td>Sportskeeda (Oct 2025)</td><td>C</td><td>Mines grouped in C-tier with other situational picks.</td></tr>
+                    <tr><td>GameRant (Oct 2025)</td><td>C (context)</td><td>Describes the concept as solid but underwhelming in practice.</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Mines vs Aura (context)</h3>
+            <p>Although Aura’s base damage is lower (listed around 6 in community docs), it deals <em>constant 360°</em> damage and scales extremely well with Size—hence its strong popularity despite the number. Mines, by contrast, is gated by enemy pathing and trigger timing.</p>
+        </section>
+
+        <!-- Version History -->
+        <section id="history">
+            <h2>📜 Version Notes (What Affects Mines)</h2>
+            <ul>
+                <li><strong>v1.0.7 (late Sep 2025):</strong> Fixes around invincibility exploits (Kevin), leaderboard reset. Indirect effect: healthier late-game pacing.</li>
+                <li><strong>v1.0.12 (Oct 8, 2025):</strong> <em>XP Tome</em> nerf (9% → 7%) and leaderboard protections; broader balance/perf work. Indirectly slows leveling, so reaching high-rank upgrades takes longer.</li>
+            </ul>
+        </section>
+
+    
+    </main>
+
+    <!-- All Weapons Navigation Section -->
+<section class="all-weapons-nav" style="background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%); padding: 4rem 2rem; margin-top: 4rem; border-top: 3px solid #ff6b35;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #f4c430; font-weight: 800;">
+            All Weapons in <span style="font-style: italic;">Megabonk</span>
+        </h2>
+
+        <div class="weapons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Aura -->
+            <a href="https://megabonk.org/database/weapons/aura" class="weapon-nav-item" data-weapon="aura">
+                <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+                <span>Aura</span>
+            </a>
+
+            <!-- Aegis -->
+            <a href="https://megabonk.org/database/weapons/aegis" class="weapon-nav-item" data-weapon="aegis">
+                <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+                <span>Aegis</span>
+            </a>
+
+            <!-- Flamewalker -->
+            <a href="https://megabonk.org/database/weapons/flamewalker" class="weapon-nav-item" data-weapon="flamewalker">
+                <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+                <span>Flamewalker</span>
+            </a>
+
+            <!-- Katana -->
+            <a href="https://megabonk.org/database/weapons/katana" class="weapon-nav-item" data-weapon="katana">
+                <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+                <span>Katana</span>
+            </a>
+
+            <!-- Dice -->
+            <a href="https://megabonk.org/database/weapons/dice" class="weapon-nav-item" data-weapon="dice">
+                <img src="https://megabonk.org/images/database/weapons/Dice.png" alt="Dice">
+                <span>Dice</span>
+            </a>
+
+            <!-- Dexecutioner -->
+            <a href="https://megabonk.org/database/weapons/dexecutioner" class="weapon-nav-item" data-weapon="dexecutioner">
+                <img src="https://megabonk.org/images/database/weapons/Dexecutioner.png" alt="Dexecutioner">
+                <span>Dexecutioner</span>
+            </a>
+
+            <!-- Blood Magic -->
+            <a href="https://megabonk.org/database/weapons/blood-magic" class="weapon-nav-item" data-weapon="blood-magic">
+                <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+                <span>Blood Magic</span>
+            </a>
+
+            <!-- Lightning Staff -->
+            <a href="https://megabonk.org/database/weapons/lightning-staff" class="weapon-nav-item" data-weapon="lightning-staff">
+                <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+                <span>Lightning Staff</span>
+            </a>
+
+            <!-- Bananarang -->
+            <a href="https://megabonk.org/database/weapons/bananarang" class="weapon-nav-item" data-weapon="bananarang">
+                <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+                <span>Bananarang</span>
+            </a>
+
+            <!-- Corrupted Sword -->
+            <a href="https://megabonk.org/database/weapons/corrupted-sword" class="weapon-nav-item" data-weapon="corrupted-sword">
+                <img src="https://megabonk.org/images/database/weapons/CorruptedSword.png" alt="Corrupted Sword">
+                <span>Corrupted Sword</span>
+            </a>
+
+            <!-- Bow -->
+            <a href="https://megabonk.org/database/weapons/bow" class="weapon-nav-item" data-weapon="bow">
+                <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+                <span>Bow</span>
+            </a>
+
+            <!-- Revolver -->
+            <a href="https://megabonk.org/database/weapons/revolver" class="weapon-nav-item" data-weapon="revolver">
+                <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                <span>Revolver</span>
+            </a>
+
+            <!-- Axe -->
+            <a href="https://megabonk.org/database/weapons/axe" class="weapon-nav-item" data-weapon="axe">
+                <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+                <span>Axe</span>
+            </a>
+
+            <!-- Bone -->
+            <a href="https://megabonk.org/database/weapons/bone" class="weapon-nav-item" data-weapon="bone">
+                <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone">
+                <span>Bone</span>
+            </a>
+
+            <!-- Sniper Rifle -->
+            <a href="https://megabonk.org/database/weapons/sniper-rifle" class="weapon-nav-item" data-weapon="sniper-rifle">
+                <img src="https://megabonk.org/images/database/weapons/Sniper.png" alt="Sniper Rifle">
+                <span>Sniper Rifle</span>
+            </a>
+
+            <!-- Frostwalker -->
+            <a href="https://megabonk.org/database/weapons/frostwalker" class="weapon-nav-item" data-weapon="frostwalker">
+                <img src="https://megabonk.org/images/database/weapons/Frostwalker.png" alt="Frostwalker">
+                <span>Frostwalker</span>
+            </a>
+
+            <!-- Hero Sword -->
+            <a href="https://megabonk.org/database/weapons/hero-sword" class="weapon-nav-item" data-weapon="hero-sword">
+                <img src="https://megabonk.org/images/database/weapons/Hero_Sword.png" alt="Hero Sword">
+                <span>Hero Sword</span>
+            </a>
+
+            <!-- Wireless Dagger -->
+            <a href="https://megabonk.org/database/weapons/wireless-dagger" class="weapon-nav-item" data-weapon="wireless-dagger">
+                <img src="https://megabonk.org/images/database/weapons/Wireless_Dagger.png" alt="Wireless Dagger">
+                <span>Wireless Dagger</span>
+            </a>
+
+            <!-- Firestaff -->
+            <a href="https://megabonk.org/database/weapons/firestaff" class="weapon-nav-item" data-weapon="firestaff">
+                <img src="https://megabonk.org/images/database/weapons/Firestaff.png" alt="Firestaff">
+                <span>Firestaff</span>
+            </a>
+
+            <!-- Sword -->
+            <a href="https://megabonk.org/database/weapons/sword" class="weapon-nav-item" data-weapon="sword">
+                <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                <span>Sword</span>
+            </a>
+
+            <!-- Tornado -->
+            <a href="https://megabonk.org/database/weapons/tornado" class="weapon-nav-item" data-weapon="tornado">
+                <img src="https://megabonk.org/images/database/weapons/Tornado.png" alt="Tornado">
+                <span>Tornado</span>
+            </a>
+
+            <!-- Space Noodle -->
+            <a href="https://megabonk.org/database/weapons/space-noodle" class="weapon-nav-item" data-weapon="space-noodle">
+                <img src="https://megabonk.org/images/database/weapons/Space_Noodle.png" alt="Space Noodle">
+                <span>Space Noodle</span>
+            </a>
+
+            <!-- Dragons Breath -->
+            <a href="https://megabonk.org/database/weapons/dragons-breath" class="weapon-nav-item" data-weapon="dragons-breath">
+                <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragons Breath">
+                <span>Dragon's Breath</span>
+            </a>
+
+            <!-- Slutty Rocket -->
+            <a href="https://megabonk.org/database/weapons/slutty-rocket" class="weapon-nav-item" data-weapon="slutty-rocket">
+                <img src="https://megabonk.org/images/database/weapons/SluttyRocket.png" alt="Slutty Rocket">
+                <span>Slutty Rocket</span>
+            </a>
+
+            <!-- Shotgun -->
+            <a href="https://megabonk.org/database/weapons/shotgun" class="weapon-nav-item" data-weapon="shotgun">
+                <img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun">
+                <span>Shotgun</span>
+            </a>
+
+            <!-- Mines -->
+            <a href="https://megabonk.org/database/weapons/mines" class="weapon-nav-item" data-weapon="mines">
+                <img src="https://megabonk.org/images/database/weapons/Mines.png" alt="Mines">
+                <span>Mines</span>
+            </a>
+
+            <!-- Chunkers -->
+            <a href="https://megabonk.org/database/weapons/chunkers" class="weapon-nav-item" data-weapon="chunkers">
+                <img src="https://megabonk.org/images/database/weapons/Chunkers.png" alt="Chunkers">
+                <span>Chunkers</span>
+            </a>
+
+            <!-- Black Hole -->
+            <a href="https://megabonk.org/database/weapons/black-hole" class="weapon-nav-item" data-weapon="black-hole">
+                <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                <span>Black Hole</span>
+            </a>
+
+            <!-- Poison Flask -->
+            <a href="https://megabonk.org/database/weapons/poison-flask" class="weapon-nav-item" data-weapon="poison-flask">
+                <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                <span>Poison Flask</span>
+            </a>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://megabonk.org/database/weapons/" style="display: inline-block; padding: 1rem 2.5rem; background: linear-gradient(45deg, #ff6b35, #e55a2b); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: transform 0.3s ease;">
+                ⚔️ View Complete Weapon Tier List
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.weapon-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.weapon-nav-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+    filter: brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.weapon-nav-item span {
+    color: #f4c430;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.weapon-nav-item:hover {
+    transform: translateY(-5px);
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.weapon-nav-item:hover img {
+    filter: brightness(1.1);
+}
+
+/* Current weapon highlight */
+.weapon-nav-item.current {
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.weapon-nav-item.current span {
+    color: #ff6b35;
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .weapon-nav-item img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .weapon-nav-item span {
+        font-size: 0.75rem;
+    }
+}
+</style>
+
+<script>
+// Highlight current weapon
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page URL
+    const currentPath = window.location.pathname;
+    
+    // Find matching weapon link
+    const weaponLinks = document.querySelectorAll('.weapon-nav-item');
+    weaponLinks.forEach(link => {
+        if (currentPath.includes(link.getAttribute('data-weapon'))) {
+            link.classList.add('current');
+        }
+    });
+});
+</script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/guides/">All Guides</a>
+            <a href="/database/weapons/">Weapons Database</a>
+            <a href="/tier-lists/">Tier Lists</a>
+            <a href="/guides/meta-strategy/">Meta Strategy</a>
+        </div>
+        <p>&copy; 2025 Megabonk.org — Unofficial Fan Guide (Data verified against third-party sources)</p>
+        <p style="font-size:0.9rem;color:#888;margin-top:.5rem;">
+            Last Updated: October 21, 2025
+        </p>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+    <script>
+      // Back to top button visibility
+      window.addEventListener('scroll', function() {
+        const backToTop = document.querySelector('.back-to-top');
+        if (window.pageYOffset > 300) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // Fade in sections on scroll
+      const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      document.querySelectorAll('section').forEach(section => observer.observe(section));
+    </script>
+
+    <!-- Cloudflare script kept as-is -->
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'991ce0904e06b84e',t:'MTc2MTAwOTA0Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

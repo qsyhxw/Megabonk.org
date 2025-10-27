@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Megabonk Tornado: Unlock, Build & Birdo Synergy</title>
+    <meta name="description" content="Learn how to unlock Tornado in Megabonk by charging 5 Desert Shrines during Sandstorms. See knockback uses, Birdo Float synergy, and key tomes.">
+    <meta name="keywords" content="megabonk tornado, tornado weapon, birdo, float, knockback, sandstorm, shrine, unlock, crit build, tomes, items">
+    <meta name="author" content="Megabonk.org">
+    <link rel="canonical" href="https://megabonk.org/database/weapons/tornado">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+  
+    <!-- Open Graph -->
+    <meta property="og:title" content="Tornado Weapon Guide – Knockback & Unlock (Megabonk)">
+    <meta property="og:description" content="Base damage 8. Unlock by charging 5 Desert shrines during Sandstorms. Birdo Float synergy, tomes & items.">
+    <meta property="og:url" content="https://megabonk.org/database/weapons/tornado">
+    <meta property="og:type" content="article">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Megabonk Tornado Weapon Guide",
+      "description": "All-real data: base damage 8, unlock by charging 5 Desert shrines during Sandstorms. Birdo synergy, recommended tomes and items.",
+      "author": {
+        "@type": "Organization",
+        "name": "Megabonk.org"
+      },
+      "datePublished": "2025-10-20",
+      "dateModified": "2025-10-20"
+    }
+    </script>
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #7fb3d5;
+            --accent-color: #e8491d;
+            --bg-dark: #1a1a2e;
+            --bg-medium: #16213e;
+            --bg-light: #0f3460;
+            --text-light: #eaeaea;
+            --text-gray: #a0a0a0;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --tornado-blue: #4dd0e1;
+            --tornado-gray: #78909c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 50%, var(--bg-light) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Tornado Background Animation */
+        .tornado-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .tornado-spin {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(77, 208, 225, 0.1) 90deg,
+                rgba(120, 144, 156, 0.15) 180deg,
+                transparent 270deg
+            );
+            animation: spin 6s linear infinite;
+            opacity: 0.3;
+        }
+
+        .tornado-spin:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .tornado-spin:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .tornado-spin:nth-child(3) { bottom: 15%; left: 50%; animation-delay: 4s; }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Wind Lines */
+        .wind-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(77, 208, 225, 0.3), transparent);
+            animation: windFlow 8s linear infinite;
+        }
+
+        .wind-line:nth-child(4) { top: 20%; width: 300px; animation-delay: 0s; }
+        .wind-line:nth-child(5) { top: 40%; width: 250px; animation-delay: 2s; }
+        .wind-line:nth-child(6) { top: 60%; width: 280px; animation-delay: 4s; }
+        .wind-line:nth-child(7) { top: 80%; width: 320px; animation-delay: 6s; }
+
+        @keyframes windFlow {
+            from { left: -300px; opacity: 0; }
+            50% { opacity: 1; }
+            to { left: 100%; opacity: 0; }
+        }
+
+        /* Main Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+
+        /* Header */
+        header {
+            background: rgba(22, 33, 62, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .logo { font-size: 1.8rem; font-weight: bold; background: linear-gradient(135deg, var(--tornado-blue), var(--tornado-gray)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: var(--text-light); text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .nav-links a:hover { color: var(--tornado-blue); }
+
+        /* Breadcrumb */
+        .breadcrumb { margin: 20px 0; font-size: 0.9rem; color: var(--text-gray); }
+        .breadcrumb a { color: var(--tornado-blue); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(77, 208, 225, 0.1), rgba(120, 144, 156, 0.1));
+            border-radius: 20px; margin-bottom: 40px;
+            border: 2px solid rgba(77, 208, 225, 0.3);
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '🌪️'; position: absolute; font-size: 150px; opacity: 0.1;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+        .weapon-icon { font-size: 80px; margin-bottom: 12px; display: inline-block; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        h1 {
+            font-size: 3rem; margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--tornado-blue), var(--tornado-gray));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .subtitle { font-size: 1.3rem; color: var(--text-gray); margin-bottom: 20px; }
+
+        /* Tier / Tag Badge repurposed for utility */
+        .tier-badge {
+            display: inline-block; padding: 10px 30px;
+            background: linear-gradient(135deg, var(--tornado-blue), var(--tornado-gray));
+            border-radius: 25px; font-weight: bold; font-size: 1.05rem; letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(77, 208, 225, 0.25); color: #0b1c2e;
+        }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 28px 0; }
+        .stat-card {
+            background: rgba(22, 33, 62, 0.8); padding: 22px; border-radius: 15px;
+            border: 2px solid rgba(77, 208, 225, 0.3); text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(77, 208, 225, 0.3); }
+        .stat-label { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 10px; }
+        .stat-value { font-size: 1.6rem; font-weight: 800; color: var(--tornado-blue); }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(22, 33, 62, 0.8); padding: 40px; border-radius: 15px; margin-bottom: 30px;
+            border: 2px solid rgba(77, 208, 225, 0.2); backdrop-filter: blur(10px);
+        }
+        .content-section h2 {
+            font-size: 2rem; margin-bottom: 20px; color: var(--tornado-blue);
+            border-bottom: 3px solid var(--tornado-blue); padding-bottom: 10px;
+        }
+        .content-section h3 { font-size: 1.4rem; margin-top: 24px; margin-bottom: 12px; color: var(--secondary-color); }
+        .content-section p { margin-bottom: 12px; line-height: 1.8; }
+        .content-section ul, .content-section ol { margin-left: 25px; margin-bottom: 12px; }
+        .content-section li { margin-bottom: 8px; }
+
+        /* Info Boxes */
+        .info-box { padding: 18px; border-radius: 10px; margin: 18px 0; border-left: 5px solid; }
+        .info-box.tip { background: rgba(46, 204, 113, 0.1); border-color: var(--success); }
+        .info-box.warning { background: rgba(243, 156, 18, 0.1); border-color: var(--warning); }
+        .info-box.danger { background: rgba(231, 76, 60, 0.1); border-color: var(--danger); }
+        .info-box strong { display: block; margin-bottom: 8px; font-size: 1.05rem; }
+
+        /* Table Styles */
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; background: rgba(15, 52, 96, 0.5); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 14px; text-align: left; border-bottom: 1px solid rgba(77, 208, 225, 0.2); }
+        th { background: rgba(77, 208, 225, 0.2); font-weight: bold; color: var(--tornado-blue); }
+        tr:hover { background: rgba(77, 208, 225, 0.05); }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, var(--tornado-blue), var(--tornado-gray));
+            color: white; width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            opacity: 0; transition: opacity 0.3s, transform 0.3s; z-index: 1000; border: none; font-size: 1.5rem;
+        }
+        .back-to-top.visible { opacity: 1; }
+        .back-to-top:hover { transform: translateY(-5px); }
+
+        /* Footer */
+        footer {
+            background: rgba(22, 33, 62, 0.95);
+            padding: 40px 20px; margin-top: 60px; text-align: center; border-top: 3px solid var(--tornado-blue);
+        }
+        .footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-gray); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--tornado-blue); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .nav-links { flex-direction: column; gap: 15px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .content-section { padding: 20px; }
+            table { font-size: 0.9rem; }
+            th, td { padding: 10px; }
+        }
+
+        /* Fade-in */
+        .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s ease-out forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* Image */
+        .weapon-image {
+            width: 160px; height: auto; border-radius: 14px;
+            border: 2px solid rgba(77, 208, 225, 0.35);
+            box-shadow: 0 6px 20px rgba(77, 208, 225, 0.25);
+        }
+        .hero-img-wrap { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="tornado-bg">
+        <div class="tornado-spin"></div>
+        <div class="tornado-spin"></div>
+        <div class="tornado-spin"></div>
+        <div class="wind-line"></div>
+        <div class="wind-line"></div>
+        <div class="wind-line"></div>
+        <div class="wind-line"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">🌪️ MEGABONK</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/database/">Database</a></li>
+                <li><a href="/tier-lists/">Tier Lists</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="/">Home</a> → <a href="/database/">Database</a> → <a href="/database/weapons/">Weapons</a> → Tornado
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero fade-in">
+            <div class="hero-img-wrap">
+                <span class="weapon-icon" aria-hidden="true">🌪️</span>
+                <!-- Weapon image (added per request) -->
+                <img class="weapon-image" src="https://megabonk.org/images/database/weapons/Tornado.png" alt="Megabonk Tornado weapon image">
+            </div>
+            <h1>Tornado</h1>
+            <p class="subtitle">Defensive crowd-control weapon focused on knockback.</p>
+            <div class="tier-badge" aria-label="Weapon Tag">KNOCKBACK • UTILITY</div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid fade-in">
+            <div class="stat-card">
+                <div class="stat-label">Base Damage</div>
+                <div class="stat-value">8</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Primary Function</div>
+                <div class="stat-value">Knockback (space control)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Unlock Requirement</div>
+                <div class="stat-value">Charge 5 Shrines (Desert Sandstorms)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Best Synergy</div>
+                <div class="stat-value">Birdo (Float)</div>
+            </div>
+        </div>
+
+        <!-- Section: Unlocking -->
+        <section class="content-section fade-in" id="unlocking">
+            <h2>🔓 Unlocking Tornado</h2>
+            <p><strong>How:</strong> In the <em>Desert</em>, wait for a <strong>Sandstorm</strong> and <strong>charge a Charge Shrine</strong> during the storm. Do this a <strong>total of 5 times (cumulative across runs)</strong>. After meeting the requirement, <strong>claim/purchase the weapon in the <em>Unlocks</em> tab</strong> from the main menu.</p>
+
+            <div class="info-box tip">
+                <strong>Tips</strong>
+                <ul>
+                    <li>Sandstorms occur <em>randomly</em>—roam near known shrine spots so you can reach one quickly when the storm begins.</li>
+                    <li>The UI in <em>Unlocks</em> shows your running progress; you don’t need all 5 in one attempt.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: Mechanics -->
+        <section class="content-section fade-in" id="mechanics">
+            <h2>📊 Mechanics & Behavior</h2>
+            <p>Tornado <strong>sends out small tornado projectiles</strong> that push enemies away on contact. Its damage is modest, but the <strong>displacement</strong> creates breathing room for repositioning and item pickup.</p>
+
+            <h3>Upgrades This Weapon Can Roll</h3>
+            <ul>
+                <li><strong>Damage</strong></li>
+                <li><strong>Knockback</strong></li>
+                <li><strong>Projectile Count</strong></li>
+                <li><strong>Projectile Speed</strong></li>
+                <li><strong>Size</strong></li>
+            </ul>
+
+            <div class="info-box warning">
+                <strong>Note on “Piercing” / exact cooldown values</strong>
+                Public guides focus on Tornado’s knockback utility and do not provide official piercing/cooldown figures. Treat in-game descriptions as the source of truth.
+            </div>
+
+            <table aria-label="Tornado quick reference">
+                <thead><tr><th>Property</th><th>Value</th><th>Comment</th></tr></thead>
+                <tbody>
+                    <tr><td>Base Damage</td><td><strong>8</strong></td><td>Low; complements its defensive role</td></tr>
+                    <tr><td>Role</td><td>Space control</td><td>Pushes mobs back to buy time</td></tr>
+                    <tr><td>Best use</td><td>With precision or setup weapons</td><td>Maintain safe distance for aim/setups</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section: Recommended Scaling -->
+        <section class="content-section fade-in" id="scaling">
+            <h2>⬆️ Recommended Scaling (Tomes & Items)</h2>
+            <h3>Tomes</h3>
+            <ul>
+                <li><strong>Size Tome</strong> – increases area per level (excellent for coverage).</li>
+                <li><strong>Precision Tome</strong> – raises crit chance; enables crit-based hybrids.</li>
+                <li><strong>Cooldown / Quantity</strong> – more spawns and more projectiles for steadier control.</li>
+            </ul>
+
+            <h3>On-Hit & Crit Items</h3>
+            <ul>
+                <li><strong>Forbidden Juice</strong> – <em>+10% Crit Chance</em>; staple for crit paths.</li>
+                <li><strong>Overpowered Lamp</strong> – grants an <em>extra proc roll</em> for on-hit effects (e.g., freeze, lightning, explosions).</li>
+                <li><strong>Giant Fork</strong> – gives a chance for <em>MegaCrits</em> (crits that escalate into even bigger crits).</li>
+            </ul>
+
+            <div class="info-box tip">
+                <strong>Build Idea</strong>
+                Use Tornado to maintain distance while your high-DPS weapons (e.g., Sniper Rifle/Revolver/Lightning Staff) do the killing. Size/Cooldown/Quantity ensure consistent crowd control; add crit layers only if your other weapons scale with crits.
+            </div>
+        </section>
+
+        <!-- Section: Birdo Synergy -->
+        <section class="content-section fade-in" id="birdo">
+            <h2>🦅 Birdo Synergy (Float)</h2>
+            <p><strong>Birdo’s passive “Float”</strong> lets you hold Jump to <strong>hover in the air</strong>, which pairs naturally with Tornado’s pushback—create safe ground space, then descend or glide to reposition.</p>
+            <div class="info-box tip">
+                <strong>Birdo Unlock (for reference)</strong>
+                <p>Kill <strong>100 enemies</strong> with Tornado while being carried by a <strong>natural Desert tornado</strong>, then claim the character. This requirement teaches the aerial play pattern that works well with Tornado.</p>
+            </div>
+        </section>
+
+        <!-- Section: Play Patterns -->
+        <section class="content-section fade-in" id="patterns">
+            <h2>🎯 Practical Play Patterns</h2>
+            <ul>
+                <li><strong>Kite & Control:</strong> Circle strafe and let Tornado push mobs off you while precision weapons aim safely.</li>
+                <li><strong>Shrine/Chest Windows:</strong> Use the knockback “bubble” to safely interact with shrines or pick-ups.</li>
+                <li><strong>Boss Prep:</strong> Control adds with Tornado; swap attention to a single-target weapon for the boss.</li>
+            </ul>
+        </section>
+
+        <!-- Back to Top -->
+        <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    </div>
+
+    <!-- All Weapons Navigation Section -->
+<section class="all-weapons-nav" style="background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%); padding: 4rem 2rem; margin-top: 4rem; border-top: 3px solid #ff6b35;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #f4c430; font-weight: 800;">
+            All Weapons in <span style="font-style: italic;">Megabonk</span>
+        </h2>
+
+        <div class="weapons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Aura -->
+            <a href="https://megabonk.org/database/weapons/aura" class="weapon-nav-item" data-weapon="aura">
+                <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+                <span>Aura</span>
+            </a>
+
+            <!-- Aegis -->
+            <a href="https://megabonk.org/database/weapons/aegis" class="weapon-nav-item" data-weapon="aegis">
+                <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+                <span>Aegis</span>
+            </a>
+
+            <!-- Flamewalker -->
+            <a href="https://megabonk.org/database/weapons/flamewalker" class="weapon-nav-item" data-weapon="flamewalker">
+                <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+                <span>Flamewalker</span>
+            </a>
+
+            <!-- Katana -->
+            <a href="https://megabonk.org/database/weapons/katana" class="weapon-nav-item" data-weapon="katana">
+                <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+                <span>Katana</span>
+            </a>
+
+            <!-- Dice -->
+            <a href="https://megabonk.org/database/weapons/dice" class="weapon-nav-item" data-weapon="dice">
+                <img src="https://megabonk.org/images/database/weapons/Dice.png" alt="Dice">
+                <span>Dice</span>
+            </a>
+
+            <!-- Dexecutioner -->
+            <a href="https://megabonk.org/database/weapons/dexecutioner" class="weapon-nav-item" data-weapon="dexecutioner">
+                <img src="https://megabonk.org/images/database/weapons/Dexecutioner.png" alt="Dexecutioner">
+                <span>Dexecutioner</span>
+            </a>
+
+            <!-- Blood Magic -->
+            <a href="https://megabonk.org/database/weapons/blood-magic" class="weapon-nav-item" data-weapon="blood-magic">
+                <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+                <span>Blood Magic</span>
+            </a>
+
+            <!-- Lightning Staff -->
+            <a href="https://megabonk.org/database/weapons/lightning-staff" class="weapon-nav-item" data-weapon="lightning-staff">
+                <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+                <span>Lightning Staff</span>
+            </a>
+
+            <!-- Bananarang -->
+            <a href="https://megabonk.org/database/weapons/bananarang" class="weapon-nav-item" data-weapon="bananarang">
+                <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+                <span>Bananarang</span>
+            </a>
+
+            <!-- Corrupted Sword -->
+            <a href="https://megabonk.org/database/weapons/corrupted-sword" class="weapon-nav-item" data-weapon="corrupted-sword">
+                <img src="https://megabonk.org/images/database/weapons/CorruptedSword.png" alt="Corrupted Sword">
+                <span>Corrupted Sword</span>
+            </a>
+
+            <!-- Bow -->
+            <a href="https://megabonk.org/database/weapons/bow" class="weapon-nav-item" data-weapon="bow">
+                <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+                <span>Bow</span>
+            </a>
+
+            <!-- Revolver -->
+            <a href="https://megabonk.org/database/weapons/revolver" class="weapon-nav-item" data-weapon="revolver">
+                <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                <span>Revolver</span>
+            </a>
+
+            <!-- Axe -->
+            <a href="https://megabonk.org/database/weapons/axe" class="weapon-nav-item" data-weapon="axe">
+                <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+                <span>Axe</span>
+            </a>
+
+            <!-- Bone -->
+            <a href="https://megabonk.org/database/weapons/bone" class="weapon-nav-item" data-weapon="bone">
+                <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone">
+                <span>Bone</span>
+            </a>
+
+            <!-- Sniper Rifle -->
+            <a href="https://megabonk.org/database/weapons/sniper-rifle" class="weapon-nav-item" data-weapon="sniper-rifle">
+                <img src="https://megabonk.org/images/database/weapons/Sniper.png" alt="Sniper Rifle">
+                <span>Sniper Rifle</span>
+            </a>
+
+            <!-- Frostwalker -->
+            <a href="https://megabonk.org/database/weapons/frostwalker" class="weapon-nav-item" data-weapon="frostwalker">
+                <img src="https://megabonk.org/images/database/weapons/Frostwalker.png" alt="Frostwalker">
+                <span>Frostwalker</span>
+            </a>
+
+            <!-- Hero Sword -->
+            <a href="https://megabonk.org/database/weapons/hero-sword" class="weapon-nav-item" data-weapon="hero-sword">
+                <img src="https://megabonk.org/images/database/weapons/Hero_Sword.png" alt="Hero Sword">
+                <span>Hero Sword</span>
+            </a>
+
+            <!-- Wireless Dagger -->
+            <a href="https://megabonk.org/database/weapons/wireless-dagger" class="weapon-nav-item" data-weapon="wireless-dagger">
+                <img src="https://megabonk.org/images/database/weapons/Wireless_Dagger.png" alt="Wireless Dagger">
+                <span>Wireless Dagger</span>
+            </a>
+
+            <!-- Firestaff -->
+            <a href="https://megabonk.org/database/weapons/firestaff" class="weapon-nav-item" data-weapon="firestaff">
+                <img src="https://megabonk.org/images/database/weapons/Firestaff.png" alt="Firestaff">
+                <span>Firestaff</span>
+            </a>
+
+            <!-- Sword -->
+            <a href="https://megabonk.org/database/weapons/sword" class="weapon-nav-item" data-weapon="sword">
+                <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                <span>Sword</span>
+            </a>
+
+            <!-- Tornado -->
+            <a href="https://megabonk.org/database/weapons/tornado" class="weapon-nav-item" data-weapon="tornado">
+                <img src="https://megabonk.org/images/database/weapons/Tornado.png" alt="Tornado">
+                <span>Tornado</span>
+            </a>
+
+            <!-- Space Noodle -->
+            <a href="https://megabonk.org/database/weapons/space-noodle" class="weapon-nav-item" data-weapon="space-noodle">
+                <img src="https://megabonk.org/images/database/weapons/Space_Noodle.png" alt="Space Noodle">
+                <span>Space Noodle</span>
+            </a>
+
+            <!-- Dragons Breath -->
+            <a href="https://megabonk.org/database/weapons/dragons-breath" class="weapon-nav-item" data-weapon="dragons-breath">
+                <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragons Breath">
+                <span>Dragon's Breath</span>
+            </a>
+
+            <!-- Slutty Rocket -->
+            <a href="https://megabonk.org/database/weapons/slutty-rocket" class="weapon-nav-item" data-weapon="slutty-rocket">
+                <img src="https://megabonk.org/images/database/weapons/SluttyRocket.png" alt="Slutty Rocket">
+                <span>Slutty Rocket</span>
+            </a>
+
+            <!-- Shotgun -->
+            <a href="https://megabonk.org/database/weapons/shotgun" class="weapon-nav-item" data-weapon="shotgun">
+                <img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun">
+                <span>Shotgun</span>
+            </a>
+
+            <!-- Mines -->
+            <a href="https://megabonk.org/database/weapons/mines" class="weapon-nav-item" data-weapon="mines">
+                <img src="https://megabonk.org/images/database/weapons/Mines.png" alt="Mines">
+                <span>Mines</span>
+            </a>
+
+            <!-- Chunkers -->
+            <a href="https://megabonk.org/database/weapons/chunkers" class="weapon-nav-item" data-weapon="chunkers">
+                <img src="https://megabonk.org/images/database/weapons/Chunkers.png" alt="Chunkers">
+                <span>Chunkers</span>
+            </a>
+
+            <!-- Black Hole -->
+            <a href="https://megabonk.org/database/weapons/black-hole" class="weapon-nav-item" data-weapon="black-hole">
+                <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                <span>Black Hole</span>
+            </a>
+
+            <!-- Poison Flask -->
+            <a href="https://megabonk.org/database/weapons/poison-flask" class="weapon-nav-item" data-weapon="poison-flask">
+                <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                <span>Poison Flask</span>
+            </a>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://megabonk.org/database/weapons/" style="display: inline-block; padding: 1rem 2.5rem; background: linear-gradient(45deg, #ff6b35, #e55a2b); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: transform 0.3s ease;">
+                ⚔️ View Complete Weapon Tier List
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.weapon-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.weapon-nav-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+    filter: brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.weapon-nav-item span {
+    color: #f4c430;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.weapon-nav-item:hover {
+    transform: translateY(-5px);
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.weapon-nav-item:hover img {
+    filter: brightness(1.1);
+}
+
+/* Current weapon highlight */
+.weapon-nav-item.current {
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.weapon-nav-item.current span {
+    color: #ff6b35;
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .weapon-nav-item img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .weapon-nav-item span {
+        font-size: 0.75rem;
+    }
+}
+</style>
+
+<script>
+// Highlight current weapon
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page URL
+    const currentPath = window.location.pathname;
+    
+    // Find matching weapon link
+    const weaponLinks = document.querySelectorAll('.weapon-nav-item');
+    weaponLinks.forEach(link => {
+        if (currentPath.includes(link.getAttribute('data-weapon'))) {
+            link.classList.add('current');
+        }
+    });
+});
+</script>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/guides/">Guides</a>
+            <a href="/database/">Database</a>
+        </div>
+        <div>&copy; 2025 Megabonk.org. All rights reserved.</div>
+    </footer>
+
+    <script>
+      // simple back-to-top reveal
+      const btt = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) btt.classList.add('visible'); else btt.classList.remove('visible');
+      });
+      btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
+
+    <!-- Cloudflare beacon (kept) -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'991717722c3a9063',t:'MTc2MDk0ODM4MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>

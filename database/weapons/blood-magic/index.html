@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Magic Weapon Guide – Unlock, Mechanics & Builds | Megabonk</title>
+    <meta name="description" content="Accurate Blood Magic guide for Megabonk: how to unlock it (raise Bloody Tome to Level 12), real mechanics (+Max HP on kill), and practical builds with Vlad.">
+    <meta name="keywords" content="Megabonk Blood Magic, Bloody Tome Level 12, Vlad Blood Magic, lifesteal tome, +Max HP on kill">
+
+    <link rel="canonical" href="https://megabonk.org/database/weapons/blood-magic">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blood Magic Weapon Guide – Unlock, Mechanics & Builds">
+    <meta property="og:description" content="Unlock by raising Bloody Tome to Level 12 in a single run. Blood Magic gives a 5% chance to gain +1 Max HP on kill and scales with Size/Cooldown/Damage.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/database/weapons/blood-magic">
+    <meta property="og:image" content="https://megabonk.org/images/database/weapons/Blood_Magic.png">
+
+    <!-- Schema.org (HowTo: Unlock Blood Magic) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Unlock Blood Magic in Megabonk",
+      "description": "Unlock requirement: get the Bloody Tome to Level 12 in a single run. Bloody Tome itself is typically unlocked by killing 12,500 enemies.",
+      "image": "https://megabonk.org/images/database/weapons/Blood_Magic.png",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Unlock Bloody Tome",
+          "text": "Unlock the Bloody Tome Tome (commonly by killing 12,500 enemies)."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Reach Level 12 on Bloody Tome",
+          "text": "In a single run, upgrade the Bloody Tome to Level 12 to trigger the Blood Magic weapon unlock."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Purchase in Unlocks (if required)",
+          "text": "Open the Unlocks screen after the run and purchase Blood Magic with Silver if your version requires it."
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --blood-red: #8B0000;
+            --dark-red: #660000;
+            --crimson: #DC143C;
+            --vampire-purple: #4B0082;
+            --shadow-black: #1C0000;
+            --bg-primary: #0A0000;
+            --bg-secondary: #180808;
+            --text-primary: #F5F5F5;
+            --text-secondary: #DCDCDC;
+            --life-green: #00FF00;
+            --magic-gold: #DAA520;
+            --warning-orange: #FF4500;
+            --death-black: #000000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--shadow-black) 50%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Blood Magic Animation Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(75, 0, 130, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(220, 20, 60, 0.04) 0%, transparent 50%);
+            z-index: -1;
+            animation: bloodPulse 6s ease-in-out infinite alternate;
+        }
+        @keyframes bloodPulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.02); }
+            100% { opacity: 0.4; transform: scale(1.01); }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navigation */
+        .breadcrumb {
+            background: rgba(139, 0, 0, 0.3);
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--blood-red);
+            box-shadow: 0 2px 10px rgba(139, 0, 0, 0.2);
+        }
+        .breadcrumb nav { font-size: 14px; }
+        .breadcrumb a { color: var(--crimson); text-decoration: none; transition: color 0.3s ease; }
+        .breadcrumb a:hover { color: var(--life-green); text-shadow: 0 0 8px var(--life-green); }
+        .breadcrumb span { color: var(--text-secondary); margin: 0 8px; }
+
+        /* Header */
+        .weapon-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(135deg, var(--blood-red), var(--vampire-purple), var(--dark-red));
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .weapon-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(139, 0, 0, 0.1) 10px, rgba(139, 0, 0, 0.1) 20px);
+            animation: bloodFlow 8s linear infinite;
+        }
+        @keyframes bloodFlow { 0% { transform: translate(-20px,-20px); } 100% { transform: translate(20px,20px); } }
+
+        .weapon-title {
+            font-size: 3.6rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            position: relative; z-index: 1;
+            background: linear-gradient(45deg, var(--life-green), var(--crimson), var(--magic-gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .weapon-subtitle {
+            font-size: 1.45rem;
+            margin-bottom: 18px;
+            opacity: 0.95;
+            position: relative; z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .weapon-tier {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            position: relative; z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--life-green);
+        }
+
+        .weapon-image {
+            position: relative;
+            z-index: 1;
+            margin-top: 20px;
+        }
+        .weapon-image img {
+            width: 160px; height: auto;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-bottom: 40px;
+        }
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 25px; border-radius: 15px; border-left: 4px solid var(--blood-red);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.2);
+        }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(139, 0, 0, 0.4); border-left-color: var(--life-green); }
+        .stat-title { color: var(--crimson); font-size: 1.05rem; margin-bottom: 10px; font-weight: 700; }
+        .stat-value { font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin-bottom: 5px; }
+        .stat-description { color: var(--text-secondary); font-size: 0.92rem; }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--bg-secondary); margin-bottom: 30px; border-radius: 15px; overflow: visible;
+            border: 1px solid var(--blood-red); box-shadow: 0 4px 20px rgba(139, 0, 0, 0.15); width: 100%; min-height: 200px;
+            animation: slideInUp 0.6s ease forwards;
+        }
+        .section-header {
+            background: linear-gradient(135deg, var(--blood-red), var(--vampire-purple));
+            padding: 20px 30px; border-bottom: 2px solid var(--crimson); border-radius: 15px 15px 0 0;
+        }
+        .section-title { font-size: 1.7rem; font-weight: 800; margin-bottom: 5px; color: var(--text-primary); }
+        .section-subtitle { opacity: 0.9; font-size: 1rem; color: var(--text-primary); }
+        .section-content { padding: 30px; width: 100%; box-sizing: border-box; }
+
+        /* Unlock Guide */
+        .unlock-box {
+            background: linear-gradient(135deg, var(--vampire-purple), var(--dark-red));
+            color: var(--text-primary); padding: 25px; border-radius: 12px; margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(75, 0, 130, 0.3); border: 2px solid var(--magic-gold);
+        }
+        .unlock-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; color: var(--magic-gold); }
+        .unlock-description { font-size: 1rem; margin-bottom: 15px; opacity: 0.95; }
+        .unlock-steps { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border-left: 4px solid var(--life-green); }
+        .unlock-step { margin: 8px 0; padding: 5px 0; border-left: 3px solid var(--blood-red); padding-left: 10px; }
+
+        /* Desert/Vlad note */
+        .desert-note {
+            background: var(--bg-primary); padding: 18px; border-radius: 10px; border: 1px dashed var(--magic-gold);
+            font-size: 0.95rem; color: var(--text-secondary);
+        }
+
+        /* Weapon Mechanics */
+        .mechanics-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; margin-bottom: 10px;
+        }
+        .mechanic-card {
+            background: var(--bg-primary);
+            padding: 20px; border-radius: 12px; border-left: 4px solid var(--vampire-purple);
+            transition: transform 0.3s ease;
+        }
+        .mechanic-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(75, 0, 130, 0.3); }
+        .mechanic-title { color: var(--crimson); font-size: 1.15rem; margin-bottom: 10px; font-weight: 800; }
+        .mechanic-description { color: var(--text-secondary); margin-bottom: 12px; }
+        .mechanic-stats { background: rgba(139, 0, 0, 0.2); padding: 10px; border-radius: 8px; font-size: 0.92rem; border: 1px solid var(--blood-red); }
+
+        /* Builds */
+        .builds-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 10px; }
+        .build-card { background: var(--bg-primary); border-radius: 15px; overflow: visible; transition: transform 0.3s ease; border: 2px solid transparent; }
+        .build-card:hover { transform: translateY(-5px); border-color: var(--blood-red); box-shadow: 0 15px 30px rgba(139, 0, 0, 0.4); }
+        .build-header { background: linear-gradient(135deg, var(--blood-red), var(--vampire-purple)); padding: 20px; text-align: center; border-radius: 15px 15px 0 0; }
+        .build-name { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; }
+        .build-rating { font-size: 0.9rem; opacity: 0.95; }
+        .build-content { padding: 24px; }
+
+        .build-section { margin-bottom: 18px; }
+        .build-section:last-child { margin-bottom: 0; }
+        .build-section h4 { color: var(--crimson); font-size: 1rem; margin-bottom: 10px; font-weight: 800; }
+        .build-list { list-style: none; color: var(--text-secondary); padding: 0; margin: 0; }
+        .build-list li { margin: 8px 0; padding-left: 20px; position: relative; line-height: 1.4; }
+        .build-list li::before { content: "🩸"; position: absolute; left: 0; top: 0; }
+
+        /* Character Synergy (kept minimal & accurate) */
+        .synergy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .synergy-card { background: var(--bg-primary); padding: 15px; border-radius: 10px; text-align: center; border: 2px solid transparent; transition: all 0.3s ease; }
+        .synergy-perfect { border-color: var(--life-green); box-shadow: 0 0 15px rgba(0, 255, 0, 0.25); }
+        .synergy-character { font-weight: 800; margin-bottom: 6px; }
+        .synergy-rating { font-size: 0.9rem; padding: 4px 8px; border-radius: 15px; color: var(--death-black); background: var(--life-green); display: inline-block; }
+
+        /* Tips */
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .tip-card { background: var(--bg-primary); padding: 20px; border-radius: 12px; border-left: 4px solid var(--crimson); }
+        .tip-title { color: var(--crimson); font-size: 1.05rem; margin-bottom: 10px; font-weight: 800; }
+        .tip-content { color: var(--text-secondary); }
+
+        /* Navigation Footer */
+        .weapon-navigation { background: var(--bg-secondary); padding: 30px; border-radius: 15px; text-align: center; margin-top: 40px; border: 1px solid var(--blood-red); }
+        .nav-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .nav-link { background: var(--blood-red); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 800; transition: all 0.3s ease; }
+        .nav-link:hover { background: var(--vampire-purple); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5); }
+
+        /* Animation */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes lifeSteal {
+            0% { transform: scale(1); color: var(--text-primary); }
+            50% { transform: scale(1.05); color: var(--life-green); }
+            100% { transform: scale(1); color: var(--text-primary); }
+        }
+        .life-steal-effect { animation: lifeSteal 2s ease-in-out infinite; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .weapon-title { font-size: 2.6rem; }
+            .weapon-subtitle { font-size: 1.15rem; }
+            .builds-grid { grid-template-columns: 1fr; gap: 20px; }
+            .nav-links { flex-direction: column; align-items: center; gap: 10px; }
+            .section-content { padding: 20px; }
+            .quick-stats { grid-template-columns: 1fr; }
+            .mechanics-grid { grid-template-columns: 1fr; }
+            .synergy-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+            .container { padding: 0 15px; }
+        }
+        @media (max-width: 480px) {
+            .weapon-title { font-size: 2rem; }
+            .weapon-subtitle { font-size: 1rem; }
+            .section-content { padding: 15px; }
+            .stat-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav>
+                <a href="../../index.html">Home</a>
+                <span>></span>
+                <a href="/database/">Database</a>
+                <span>></span>
+                <a href="index.html">Weapons</a>
+                <span>></span>
+                <span>Blood Magic</span>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Weapon Header -->
+        <div class="weapon-header">
+            <div class="weapon-title">🩸 BLOOD MAGIC</div>
+            <div class="weapon-subtitle">AoE pulses • +Max HP on Kill • Vlad’s default weapon</div>
+            <div class="weapon-tier">Role: Sustain / Scaling</div>
+            <div class="weapon-image" aria-hidden="false" aria-label="Blood Magic icon">
+                <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Megabonk Blood Magic weapon icon">
+            </div>
+        </div>
+
+        <!-- Quick Stats (facts only) -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-title">🩸 Core Effect</div>
+                <div class="stat-value">+1 Max HP on Kill (5%)</div>
+                <div class="stat-description">Each enemy kill has a 5% chance to permanently grant +1 Max HP.</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">🔓 Unlock Requirement</div>
+                <div class="stat-value">Bloody Tome → Lv.12</div>
+                <div class="stat-description">Unlock Bloody Tome (commonly 12,500 kills), then reach Level 12 in one run.</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">🎮 Best User</div>
+                <div class="stat-value">Vlad</div>
+                <div class="stat-description">Vlad wields Blood Magic by default and synergizes with lifesteal tomes.</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">⚙️ Scaling</div>
+                <div class="stat-value">Size • Cooldown • Damage • Quantity</div>
+                <div class="stat-description">Standard AoE weapon scalars greatly improve clear speed and HP stacking.</div>
+            </div>
+        </div>
+
+        <!-- Unlock Guide -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-title">🔓 How to Unlock Blood Magic</div>
+                <div class="section-subtitle">Verified unlock path using real game data</div>
+            </div>
+            <div class="section-content">
+                <div class="unlock-box">
+                    <div class="unlock-title">Required Steps</div>
+                    <div class="unlock-description">
+                        Blood Magic is unlocked by progressing the <strong>Bloody Tome</strong> Tome. Once you upgrade Bloody Tome to <strong>Level 12 in a single run</strong>, Blood Magic becomes available to purchase in <em>Unlocks</em> (if your version requires a purchase).
+                    </div>
+                    <div class="unlock-steps">
+                        <div class="unlock-step">1) Unlock <strong>Bloody Tome</strong> (commonly: kill <strong>12,500</strong> enemies).</div>
+                        <div class="unlock-step">2) During a run, level Bloody Tome to <strong>Lv.12</strong>.</div>
+                        <div class="unlock-step">3) After the run, open <strong>Unlocks</strong> and buy Blood Magic with Silver (if prompted).</div>
+                    </div>
+                </div>
+
+                <div class="desert-note">
+                    <strong>Note about Vlad & Desert T2:</strong> <em>Vlad</em> (who uses Blood Magic) is typically unlocked by clearing <strong>Desert Tier 2</strong>, then purchasing him/weapon in Unlocks. This is a <u>character unlock</u>, not the Blood Magic weapon unlock itself.
+                </div>
+            </div>
+        </div>
+
+        <!-- Weapon Mechanics -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-title">⚙️ Blood Magic Mechanics</div>
+                <div class="section-subtitle">What it actually does in-game</div>
+            </div>
+            <div class="section-content">
+                <div class="mechanics-grid">
+                    <div class="mechanic-card">
+                        <div class="mechanic-title">🩸 On-Kill: Max HP Growth</div>
+                        <div class="mechanic-description">
+                            Every enemy kill has a <strong>5% chance</strong> to grant <strong>+1 permanent Max HP</strong>, enabling long-run survivability and scaling.
+                        </div>
+                        <div class="mechanic-stats">
+                            • Type: Area-of-effect pulses<br>
+                            • Benefit: Long-term Max HP stacking on kills<br>
+                            • Works best in dense waves and long stages
+                        </div>
+                    </div>
+
+                    <div class="mechanic-card">
+                        <div class="mechanic-title">💉 Lifesteal Clarification</div>
+                        <div class="mechanic-description">
+                            Blood Magic itself does <em>not</em> heal by damage percentage. Lifesteal primarily comes from the <strong>Bloody Tome</strong> (chance to heal <strong>1 HP per hit</strong>; above 100% lifesteal adds a chance to double-heal).
+                        </div>
+                        <div class="mechanic-stats">
+                            • Source: Bloody Tome (Tome, not weapon)<br>
+                            • Heal Unit: +1 HP on hit by chance<br>
+                            • Synergy: More hits → more healing chances
+                        </div>
+                    </div>
+
+                    <div class="mechanic-card">
+                        <div class="mechanic-title">📈 Stat Scaling</div>
+                        <div class="mechanic-description">
+                            As an AoE weapon, Blood Magic scales excellently with <strong>Size</strong> (coverage), <strong>Cooldown</strong> (frequency), <strong>Damage</strong> (clear), and <strong>Quantity</strong> (more pulses/projectiles).
+                        </div>
+                        <div class="mechanic-stats">
+                            • Priorities: Size → Cooldown/Damage → Quantity<br>
+                            • Result: Faster clears → more kill rolls → more +Max HP procs
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Builds -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-title">🏗️ Practical Builds</div>
+                <div class="section-subtitle">Safe, factual recommendations</div>
+            </div>
+            <div class="section-content">
+                <div class="builds-grid">
+                    <div class="build-card">
+                        <div class="build-header">
+                            <div class="build-name">🧛 Vlad Lifesteal Scaler</div>
+                            <div class="build-rating">Focus: Tome synergy & HP stacking</div>
+                        </div>
+                        <div class="build-content">
+                            <div class="build-section">
+                                <h4>🎯 Plan</h4>
+                                <p>Use <strong>Vlad</strong> with <strong>Bloody Tome</strong> to accumulate lifesteal and let Blood Magic roll +Max HP on kills throughout long waves.</p>
+                            </div>
+                            <div class="build-section">
+                                <h4>📚 Priority Tomes</h4>
+                                <ul class="build-list">
+                                    <li><strong>Bloody Tome</strong> (lifesteal; aim for high levels)</li>
+                                    <li><strong>Size</strong> (bigger AoE coverage)</li>
+                                    <li><strong>Cooldown</strong> (more frequent pulses)</li>
+                                    <li><strong>Damage</strong> (clear speed → more kills)</li>
+                                </ul>
+                            </div>
+                            <div class="build-section">
+                                <h4>🧩 Helpful Items</h4>
+                                <ul class="build-list">
+                                    <li><strong>Slurp Gloves</strong> – cast blood magic on hit & heal (AoE burst on a cooldown)</li>
+                                    <li>Pickup/Magnet options to gather XP faster</li>
+                                    <li>Armor/Evasion for survivability on higher tiers</li>
+                                </ul>
+                            </div>
+                            <div class="build-section">
+                                <h4>⚡ Tips</h4>
+                                <ul class="build-list">
+                                    <li>Stay in dense packs to maximize kill rolls.</li>
+                                    <li>Don’t tunnel on raw DPS—HP stacking is your win condition.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="build-card">
+                        <div class="build-header">
+                            <div class="build-name">🌊 AoE Clear & Farm</div>
+                            <div class="build-rating">Focus: Size/Cooldown efficiency</div>
+                        </div>
+                        <div class="build-content">
+                            <div class="build-section">
+                                <h4>🎯 Plan</h4>
+                                <p>Maximize <strong>Size</strong> and <strong>Cooldown</strong> so Blood Magic clears crowds quickly, generating more kill checks for +Max HP.</p>
+                            </div>
+                            <div class="build-section">
+                                <h4>📚 Priority Tomes</h4>
+                                <ul class="build-list">
+                                    <li>Size → Cooldown → Damage → Quantity</li>
+                                    <li>Consider <strong>Attraction/Pickup</strong> for faster leveling</li>
+                                </ul>
+                            </div>
+                            <div class="build-section">
+                                <h4>🧩 Helpful Items</h4>
+                                <ul class="build-list">
+                                    <li>Movement/Speed for positioning in dense packs</li>
+                                    <li>Defensive items to stay aggressive safely</li>
+                                </ul>
+                            </div>
+                            <div class="build-section">
+                                <h4>⚡ Tips</h4>
+                                <ul class="build-list">
+                                    <li>Play center-field so pulses contact as many enemies as possible.</li>
+                                    <li>Prioritize XP flow early to hit key tome breakpoints.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="build-card">
+                        <div class="build-header">
+                            <div class="build-name">⚖️ Balanced Learner</div>
+                            <div class="build-rating">Focus: Safer progression</div>
+                        </div>
+                        <div class="build-content">
+                            <div class="build-section">
+                                <h4>🎯 Plan</h4>
+                                <p>Keep a balance of damage, cooldown, and survivability while learning Blood Magic pacing and HP growth tempo.</p>
+                            </div>
+                            <div class="build-section">
+                                <h4>📚 Priority Tomes</h4>
+                                <ul class="build-list">
+                                    <li>Cooldown / Damage</li>
+                                    <li>Size (mid-game)</li>
+                                    <li>Optional: Quantity if available</li>
+                                </ul>
+                            </div>
+                            <div class="build-section">
+                                <h4>🧩 Helpful Items</h4>
+                                <ul class="build-list">
+                                    <li>General defensive picks (Armor/Evasion)</li>
+                                    <li>Pickup range for comfortable XP flow</li>
+                                </ul>
+                            </div>
+                            <div class="build-section">
+                                <h4>⚡ Tips</h4>
+                                <ul class="build-list">
+                                    <li>Adjust priorities based on map pressure and shrine luck.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="color:var(--text-secondary); font-size:0.92rem; margin-top:8px;">
+                    <em>Note:</em> Community tier lists vary widely for Blood Magic; treat rankings as opinions rather than facts.
+                </p>
+            </div>
+        </div>
+
+        <!-- Character Synergy -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-title">👥 Character Synergy</div>
+                <div class="section-subtitle">Kept factual to avoid misinformation</div>
+            </div>
+            <div class="section-content">
+                <div class="synergy-grid">
+                    <div class="synergy-card synergy-perfect">
+                        <div class="synergy-character">🧛 Vlad</div>
+                        <div class="synergy-rating">Default Weapon</div>
+                        <p style="margin-top:10px; font-size:0.92rem; color:var(--text-secondary);">
+                            Vlad starts with Blood Magic and pairs naturally with lifesteal from Bloody Tome.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Tips (neutral, verified-safe) -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-title">🧠 Advanced Tips</div>
+                <div class="section-subtitle">Play patterns that match real mechanics</div>
+            </div>
+            <div class="section-content">
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-title">📍 Stay in the Crowd</div>
+                        <div class="tip-content">More enemies around you means more kills and more 5% rolls for +Max HP.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">⚙️ Scale Coverage First</div>
+                        <div class="tip-content">Size and Cooldown upgrades accelerate clear speed, which fuels HP stacking.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">💉 Tome = Healing</div>
+                        <div class="tip-content">Remember: the heal is from <strong>Bloody Tome</strong> (+1 HP on hit by chance), not from Blood Magic’s damage percentage.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">🛡️ Survive to Scale</div>
+                        <div class="tip-content">Defensive picks keep you alive long enough for +Max HP to snowball.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison (neutral wording) -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-title">⚖️ Blood Magic vs. Other Options</div>
+                <div class="section-subtitle">Different roles, different strengths</div>
+            </div>
+            <div class="section-content">
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:20px;">
+                    <div style="background: var(--bg-primary); padding: 20px; border-radius: 12px; border-left: 4px solid var(--life-green);">
+                        <h4 style="color: var(--life-green); margin-bottom: 10px;">🛡️ vs Aegis</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 10px;">Aegis focuses on defense/blocks; Blood Magic focuses on long-run Max HP scaling.</p>
+                    </div>
+                    <div style="background: var(--bg-primary); padding: 20px; border-radius: 12px; border-left: 4px solid var(--life-green);">
+                        <h4 style="color: var(--life-green); margin-bottom: 10px;">💫 vs Aura</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 10px;">Aura prevents damage in a radius; Blood Magic rewards kills with permanent Max HP.</p>
+                    </div>
+                    <div style="background: var(--bg-primary); padding: 20px; border-radius: 12px; border-left: 4px solid var(--life-green);">
+                        <h4 style="color: var(--life-green); margin-bottom: 10px;">🔥 vs Firestaff</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 10px;">Firestaff is raw DPS; Blood Magic is sustain/scaling. Choose based on map pressure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Weapons Navigation Section -->
+<section class="all-weapons-nav" style="background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%); padding: 4rem 2rem; margin-top: 4rem; border-top: 3px solid #ff6b35;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #f4c430; font-weight: 800;">
+            All Weapons in <span style="font-style: italic;">Megabonk</span>
+        </h2>
+
+        <div class="weapons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Aura -->
+            <a href="https://megabonk.org/database/weapons/aura" class="weapon-nav-item" data-weapon="aura">
+                <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+                <span>Aura</span>
+            </a>
+
+            <!-- Aegis -->
+            <a href="https://megabonk.org/database/weapons/aegis" class="weapon-nav-item" data-weapon="aegis">
+                <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+                <span>Aegis</span>
+            </a>
+
+            <!-- Flamewalker -->
+            <a href="https://megabonk.org/database/weapons/flamewalker" class="weapon-nav-item" data-weapon="flamewalker">
+                <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+                <span>Flamewalker</span>
+            </a>
+
+            <!-- Katana -->
+            <a href="https://megabonk.org/database/weapons/katana" class="weapon-nav-item" data-weapon="katana">
+                <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+                <span>Katana</span>
+            </a>
+
+            <!-- Dice -->
+            <a href="https://megabonk.org/database/weapons/dice" class="weapon-nav-item" data-weapon="dice">
+                <img src="https://megabonk.org/images/database/weapons/Dice.png" alt="Dice">
+                <span>Dice</span>
+            </a>
+
+            <!-- Dexecutioner -->
+            <a href="https://megabonk.org/database/weapons/dexecutioner" class="weapon-nav-item" data-weapon="dexecutioner">
+                <img src="https://megabonk.org/images/database/weapons/Dexecutioner.png" alt="Dexecutioner">
+                <span>Dexecutioner</span>
+            </a>
+
+            <!-- Blood Magic -->
+            <a href="https://megabonk.org/database/weapons/blood-magic" class="weapon-nav-item" data-weapon="blood-magic">
+                <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+                <span>Blood Magic</span>
+            </a>
+
+            <!-- Lightning Staff -->
+            <a href="https://megabonk.org/database/weapons/lightning-staff" class="weapon-nav-item" data-weapon="lightning-staff">
+                <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+                <span>Lightning Staff</span>
+            </a>
+
+            <!-- Bananarang -->
+            <a href="https://megabonk.org/database/weapons/bananarang" class="weapon-nav-item" data-weapon="bananarang">
+                <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+                <span>Bananarang</span>
+            </a>
+
+            <!-- Corrupted Sword -->
+            <a href="https://megabonk.org/database/weapons/corrupted-sword" class="weapon-nav-item" data-weapon="corrupted-sword">
+                <img src="https://megabonk.org/images/database/weapons/CorruptedSword.png" alt="Corrupted Sword">
+                <span>Corrupted Sword</span>
+            </a>
+
+            <!-- Bow -->
+            <a href="https://megabonk.org/database/weapons/bow" class="weapon-nav-item" data-weapon="bow">
+                <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+                <span>Bow</span>
+            </a>
+
+            <!-- Revolver -->
+            <a href="https://megabonk.org/database/weapons/revolver" class="weapon-nav-item" data-weapon="revolver">
+                <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                <span>Revolver</span>
+            </a>
+
+            <!-- Axe -->
+            <a href="https://megabonk.org/database/weapons/axe" class="weapon-nav-item" data-weapon="axe">
+                <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+                <span>Axe</span>
+            </a>
+
+            <!-- Bone -->
+            <a href="https://megabonk.org/database/weapons/bone" class="weapon-nav-item" data-weapon="bone">
+                <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone">
+                <span>Bone</span>
+            </a>
+
+            <!-- Sniper Rifle -->
+            <a href="https://megabonk.org/database/weapons/sniper-rifle" class="weapon-nav-item" data-weapon="sniper-rifle">
+                <img src="https://megabonk.org/images/database/weapons/Sniper.png" alt="Sniper Rifle">
+                <span>Sniper Rifle</span>
+            </a>
+
+            <!-- Frostwalker -->
+            <a href="https://megabonk.org/database/weapons/frostwalker" class="weapon-nav-item" data-weapon="frostwalker">
+                <img src="https://megabonk.org/images/database/weapons/Frostwalker.png" alt="Frostwalker">
+                <span>Frostwalker</span>
+            </a>
+
+            <!-- Hero Sword -->
+            <a href="https://megabonk.org/database/weapons/hero-sword" class="weapon-nav-item" data-weapon="hero-sword">
+                <img src="https://megabonk.org/images/database/weapons/Hero_Sword.png" alt="Hero Sword">
+                <span>Hero Sword</span>
+            </a>
+
+            <!-- Wireless Dagger -->
+            <a href="https://megabonk.org/database/weapons/wireless-dagger" class="weapon-nav-item" data-weapon="wireless-dagger">
+                <img src="https://megabonk.org/images/database/weapons/Wireless_Dagger.png" alt="Wireless Dagger">
+                <span>Wireless Dagger</span>
+            </a>
+
+            <!-- Firestaff -->
+            <a href="https://megabonk.org/database/weapons/firestaff" class="weapon-nav-item" data-weapon="firestaff">
+                <img src="https://megabonk.org/images/database/weapons/Firestaff.png" alt="Firestaff">
+                <span>Firestaff</span>
+            </a>
+
+            <!-- Sword -->
+            <a href="https://megabonk.org/database/weapons/sword" class="weapon-nav-item" data-weapon="sword">
+                <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                <span>Sword</span>
+            </a>
+
+            <!-- Tornado -->
+            <a href="https://megabonk.org/database/weapons/tornado" class="weapon-nav-item" data-weapon="tornado">
+                <img src="https://megabonk.org/images/database/weapons/Tornado.png" alt="Tornado">
+                <span>Tornado</span>
+            </a>
+
+            <!-- Space Noodle -->
+            <a href="https://megabonk.org/database/weapons/space-noodle" class="weapon-nav-item" data-weapon="space-noodle">
+                <img src="https://megabonk.org/images/database/weapons/Space_Noodle.png" alt="Space Noodle">
+                <span>Space Noodle</span>
+            </a>
+
+            <!-- Dragons Breath -->
+            <a href="https://megabonk.org/database/weapons/dragons-breath" class="weapon-nav-item" data-weapon="dragons-breath">
+                <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragons Breath">
+                <span>Dragon's Breath</span>
+            </a>
+
+            <!-- Slutty Rocket -->
+            <a href="https://megabonk.org/database/weapons/slutty-rocket" class="weapon-nav-item" data-weapon="slutty-rocket">
+                <img src="https://megabonk.org/images/database/weapons/SluttyRocket.png" alt="Slutty Rocket">
+                <span>Slutty Rocket</span>
+            </a>
+
+            <!-- Shotgun -->
+            <a href="https://megabonk.org/database/weapons/shotgun" class="weapon-nav-item" data-weapon="shotgun">
+                <img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun">
+                <span>Shotgun</span>
+            </a>
+
+            <!-- Mines -->
+            <a href="https://megabonk.org/database/weapons/mines" class="weapon-nav-item" data-weapon="mines">
+                <img src="https://megabonk.org/images/database/weapons/Mines.png" alt="Mines">
+                <span>Mines</span>
+            </a>
+
+            <!-- Chunkers -->
+            <a href="https://megabonk.org/database/weapons/chunkers" class="weapon-nav-item" data-weapon="chunkers">
+                <img src="https://megabonk.org/images/database/weapons/Chunkers.png" alt="Chunkers">
+                <span>Chunkers</span>
+            </a>
+
+            <!-- Black Hole -->
+            <a href="https://megabonk.org/database/weapons/black-hole" class="weapon-nav-item" data-weapon="black-hole">
+                <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                <span>Black Hole</span>
+            </a>
+
+            <!-- Poison Flask -->
+            <a href="https://megabonk.org/database/weapons/poison-flask" class="weapon-nav-item" data-weapon="poison-flask">
+                <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                <span>Poison Flask</span>
+            </a>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://megabonk.org/database/weapons/" style="display: inline-block; padding: 1rem 2.5rem; background: linear-gradient(45deg, #ff6b35, #e55a2b); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: transform 0.3s ease;">
+                ⚔️ View Complete Weapon Tier List
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.weapon-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.weapon-nav-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+    filter: brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.weapon-nav-item span {
+    color: #f4c430;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.weapon-nav-item:hover {
+    transform: translateY(-5px);
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.weapon-nav-item:hover img {
+    filter: brightness(1.1);
+}
+
+/* Current weapon highlight */
+.weapon-nav-item.current {
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.weapon-nav-item.current span {
+    color: #ff6b35;
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .weapon-nav-item img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .weapon-nav-item span {
+        font-size: 0.75rem;
+    }
+}
+</style>
+
+<script>
+// Highlight current weapon
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page URL
+    const currentPath = window.location.pathname;
+    
+    // Find matching weapon link
+    const weaponLinks = document.querySelectorAll('.weapon-nav-item');
+    weaponLinks.forEach(link => {
+        if (currentPath.includes(link.getAttribute('data-weapon'))) {
+            link.classList.add('current');
+        }
+    });
+});
+</script>
+
+        <!-- Navigation Footer -->
+        <div class="weapon-navigation">
+            <h3 style="margin-bottom: 20px; color: var(--crimson);">🧭 Explore More Weapons</h3>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🗡️ All Weapons</a>
+                <a href="aura.html" class="nav-link">💫 Aura Guide</a>
+                <a href="aegis.html" class="nav-link">🛡️ Aegis Guide</a>
+                <a href="../../guides/characters/vlad-guide.html" class="nav-link">🧛 Vlad Character</a>
+                <a href="../../index.html" class="nav-link">🏠 Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Subtle periodic highlight
+        setInterval(() => {
+            const lifeStealElements = document.querySelectorAll('.stat-value, .mechanic-title');
+            const randomElement = lifeStealElements[Math.floor(Math.random() * lifeStealElements.length)];
+            randomElement.classList.add('life-steal-effect');
+            setTimeout(() => randomElement.classList.remove('life-steal-effect'), 2000);
+        }, 5000);
+
+        // Fun hue pulse on faster scroll (kept from original)
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+            if (scrollDelta > 15) {
+                document.body.style.filter = `hue-rotate(${scrollDelta * 2}deg)`;
+                setTimeout(() => { document.body.style.filter = 'hue-rotate(0deg)'; }, 300);
+            }
+            lastScrollY = currentScrollY;
+        });
+    </script>
+
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

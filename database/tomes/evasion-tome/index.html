@@ -1,0 +1,1024 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evasion Tome Guide - Dodge Chance Tome | Megabonk Wiki</title>
+    <meta name="description" content="Evasion Tome in Megabonk. Learn how it increases dodge chance, its synergies, and tips for survival builds.">
+    <meta name="keywords" content="megabonk evasion tome, dodge tome, megabonk tomes, evasion guide, megabonk wiki, defense builds">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/evasion-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-cyan: #06ffa5;
+            --accent-teal: #4cc9f0;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.2), rgba(76, 201, 240, 0.2));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(58,134,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #3a86ff, #4cc9f0);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tome-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(58, 134, 255, 0.3);
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            color: var(--accent-teal);
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .unlock-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--success), #00b894);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        main {
+            min-height: 600px;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: rgba(58, 134, 255, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(255, 190, 11, 0.1);
+            border-left-color: var(--warning);
+        }
+
+        .highlight-box.info {
+            background: rgba(76, 201, 240, 0.1);
+            border-left-color: var(--accent-teal);
+        }
+
+        .highlight-box.success {
+            background: rgba(6, 255, 165, 0.1);
+            border-left-color: var(--success);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: 800;
+        }
+
+        .highlight-box.warning li::before {
+            color: var(--warning);
+        }
+
+        .highlight-box.info li::before {
+            color: var(--accent-teal);
+        }
+
+        .highlight-box.success li::before {
+            color: var(--success);
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .synergy-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(58, 134, 255, 0.3);
+            border-color: var(--accent-blue);
+        }
+
+        .synergy-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-teal);
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Builds Showcase */
+        .builds-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .build-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .build-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(76, 201, 240, 0.3);
+            border-color: var(--accent-teal);
+        }
+
+        .build-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        .build-desc {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: rgba(58, 134, 255, 0.2);
+            border: 1px solid var(--accent-blue);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(58, 134, 255, 0.4);
+            border-color: var(--accent-blue);
+        }
+
+        .tome-card-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+            background: rgba(58, 134, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .tome-card-icon img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .tome-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(58, 134, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(58, 134, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .synergies-grid,
+            .builds-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .version-note {
+            background: rgba(58, 134, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .version-note strong {
+            color: var(--accent-blue);
+        }
+
+        .formula-box {
+            background: rgba(76, 201, 240, 0.1);
+            border: 2px solid var(--accent-teal);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .formula-box .formula {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .formula-box .formula-desc {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <span>Evasion Tome</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🌀 Evasion Tome</h1>
+            <p class="hero-subtitle">Increases Dodge Chance - Complete Damage Immunity on Trigger</p>
+            <div class="tome-category">Defense Tome</div>
+            <span class="tier-badge">Rating: B-C Tier (Varies)</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-grid">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="info-card">
+                    <img src="https://megabonk.org/images/Tomes/Evasion_Tome.png" alt="Evasion Tome" class="tome-image">
+                    
+                    <div class="info-item">
+                        <div class="info-label">Stat Type</div>
+                        <div class="info-value">Evasion (Dodge)</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Internal Value Per Level</div>
+                        <div class="stat-value">+10% per level</div>
+                        <div class="version-note" style="margin-top: 0.5rem; padding: 0.5rem; font-size: 0.75rem;">
+                            *Internal value, not effective dodge rate
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Unlock Requirement</div>
+                        <div class="info-value">
+                            <span class="unlock-badge">✓ Default Unlocked</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Max Level</div>
+                        <div class="info-value">99 (Community Consensus)</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Scaling Type</div>
+                        <div class="info-value">Hyperbolic Diminishing</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <p class="description">
+                        The <strong>Evasion Tome</strong> increases your character's dodge chance. When Evasion triggers, you <strong>completely avoid the incoming damage</strong> - taking zero damage from that attack. This makes it a powerful defensive option, though it relies on probability rather than guaranteed damage reduction.
+                    </p>
+                    <p class="description">
+                        Each level adds +10% to your <strong>internal Evasion value</strong>, but due to the game's hyperbolic diminishing returns formula, this does not translate to a flat +10% effective dodge rate. Understanding the scaling mechanics is crucial for making informed upgrade decisions.
+                    </p>
+                    <div class="version-note">
+                        <strong>Version Note:</strong> Data based on community guides and technical documentation from v1.0.7 (September-October 2025). Mechanics subject to change in future patches.
+                    </div>
+                </section>
+
+                <!-- How Evasion Works -->
+                <section class="section">
+                    <h2 class="section-title">How Evasion Scaling Works</h2>
+                    <p class="description">
+                        Evasion uses a <strong>hyperbolic diminishing returns formula</strong> that prevents stacking to 100% dodge chance. The actual formula is:
+                    </p>
+                    <div class="formula-box">
+                        <div class="formula">Effective Evasion = Internal Value / (1 + Internal Value)</div>
+                        <div class="formula-desc">
+                            This means higher internal values give progressively smaller increases in effective dodge rate
+                        </div>
+                    </div>
+                    <div class="highlight-box info">
+                        <strong>Example Scaling:</strong>
+                        <ul>
+                            <li>100% Internal (10 levels) = ~50% effective dodge rate</li>
+                            <li>200% Internal (20 levels) = ~66.7% effective dodge rate</li>
+                            <li>500% Internal (50 levels) = ~83.3% effective dodge rate</li>
+                            <li>1000% Internal (100 levels) = ~90.9% effective dodge rate</li>
+                        </ul>
+                    </div>
+                    <p class="description">
+                        The effective dodge rate approaches a soft cap around <strong>~90%</strong> as you invest heavily. This diminishing returns curve means early levels are more cost-effective than later ones.
+                    </p>
+                    <div class="version-note">
+                        <strong>Source:</strong> Steam community guides (Sept 28, 2025) and AmiiboDoctor stat calculations (Oct 9, 2025) independently document this formula with matching examples.
+                    </div>
+                </section>
+
+                <!-- Effects -->
+                <section class="section">
+                    <h2 class="section-title">Effects & Mechanics</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Complete Damage Immunity:</strong> When Evasion triggers, you take absolutely no damage from that attack</li>
+                            <li><strong>Hit-Based Trigger:</strong> Works on attacks that have a "hit" check - applies to most standard enemy attacks</li>
+                            <li><strong>Independent from Armor:</strong> Evasion and Armor are separate defensive mechanisms that can coexist</li>
+                            <li><strong>Probability-Based:</strong> Unlike flat damage reduction, Evasion is RNG-dependent and can be inconsistent at low values</li>
+                            <li><strong>Early Investment Value:</strong> Due to diminishing returns, earlier levels provide better marginal benefit than later levels</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Defense Interaction -->
+                <section class="section">
+                    <h2 class="section-title">Interaction with Other Defense Stats</h2>
+                    <p class="description">
+                        Evasion works alongside other defensive mechanics, but the exact interaction details vary:
+                    </p>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>With Armor:</strong> These are separate defensive paths - Evasion = "avoid hit event" while Armor = "reduce damage taken". Both independently verified to coexist.</li>
+                            <li><strong>With Shield:</strong> The exact interaction order between Shield and Evasion is not officially documented. They appear to function as separate systems.</li>
+                            <li><strong>With Health:</strong> More max health gives you more buffer to survive when Evasion fails to proc, making them complementary.</li>
+                            <li><strong>Layered Defense:</strong> Multiple defense stats create redundancy - if one fails, others may still protect you.</li>
+                        </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Note:</strong> Specific damage calculation order and interaction between Shield/Evasion mechanics are not officially confirmed by developers. Community understanding is based on observed behavior.
+                    </div>
+                </section>
+
+                <!-- Best Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergy Guide</h2>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">💨 Agility Tome</div>
+                            <div class="synergy-desc">
+                                Movement speed complements dodge chance perfectly - manual dodging + automatic dodging creates a double layer of defense for mobile playstyles.
+                            </div>
+                        </div>
+                        <div class="synergy-card">
+                            <div class="synergy-title">🛡️ Armor Tome</div>
+                            <div class="synergy-desc">
+                                Provides damage reduction on hits that bypass Evasion. Creates a probabilistic + guaranteed defense combo where you either dodge or reduce damage.
+                            </div>
+                        </div>
+                        <div class="synergy-card">
+                            <div class="synergy-title">💚 Health Tome</div>
+                            <div class="synergy-desc">
+                                More HP gives you buffer for when dodge doesn't trigger. Larger health pool means Evasion RNG has more chances to work in your favor over time.
+                            </div>
+                        </div>
+                        <div class="synergy-card">
+                            <div class="synergy-title">🔵 Shield Tome</div>
+                            <div class="synergy-desc">
+                                Provides an additional defensive layer. Shield can absorb hits when Evasion fails, though exact interaction order is not officially confirmed.
+                            </div>
+                        </div>
+                        <div class="synergy-card">
+                            <div class="synergy-title">🩸 Lifesteal Items</div>
+                            <div class="synergy-desc">
+                                Dodged attacks give you time to heal through lifesteal effects without taking damage, improving your net survivability over extended fights.
+                            </div>
+                        </div>
+                        <div class="synergy-card">
+                            <div class="synergy-title">⚔️ Melee Weapons</div>
+                            <div class="synergy-desc">
+                                Close-range combat exposes you to more danger - Evasion helps melee builds survive sustained contact with enemies and bosses.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Popular Builds -->
+                <section class="section">
+                    <h2 class="section-title">Example Builds with Evasion</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                        Evasion works best in agility-focused and defense-layered builds:
+                    </p>
+                    <div class="builds-showcase">
+                        <div class="build-item">
+                            <div class="build-name">Speed Demon</div>
+                            <div class="build-desc">
+                                Combines Agility + Evasion + Cooldown for a fast, hard-to-hit playstyle. Perfect for hit-and-run tactics and kiting.
+                            </div>
+                        </div>
+                        <div class="build-item">
+                            <div class="build-name">Tank Build</div>
+                            <div class="build-desc">
+                                Stacks multiple defense Tomes: Health + Shield + Armor + Evasion for maximum survivability through layered defenses.
+                            </div>
+                        </div>
+                        <div class="build-item">
+                            <div class="build-name">High-Risk Runner</div>
+                            <div class="build-desc">
+                                Uses Evasion + Cursed + Luck for challenge runs with high rewards, relying on dodge to handle increased difficulty.
+                            </div>
+                        </div>
+                        <div class="build-item">
+                            <div class="build-name">Mobile DPS</div>
+                            <div class="build-desc">
+                                Agility + Evasion + Damage + Cooldown for safe, aggressive damage dealing with high mobility and survivability.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Early investment efficiency:</strong> Due to diminishing returns, early levels provide better value than later ones</li>
+                            <li><strong>Don't rely solely on RNG:</strong> Combine with HP or shield for safety when dodge fails</li>
+                            <li><strong>Effective against burst damage:</strong> Excellent for avoiding <a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-teal);">boss</a> high-damage attacks</li>
+                            <li><strong>Pairs with mobility:</strong> Works best with <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-teal);">characters</a> that have speed bonuses</li>
+                            <li><strong>Manual + automatic dodging:</strong> Your own dodging skills stack with Evasion for double protection</li>
+                            <li><strong>Soft cap awareness:</strong> Effective dodge rate plateaus around 90% regardless of further investment</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Important Notes -->
+                <section class="section">
+                    <h2 class="section-title">Important Considerations</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li><strong>RNG-dependent at low values:</strong> Can be inconsistent before reaching higher effective dodge rates</li>
+                            <li><strong>Not a replacement for other defenses:</strong> Use as one layer in a multi-defense strategy</li>
+                            <li><strong>Diminishing returns:</strong> Later levels provide less marginal benefit due to the hyperbolic scaling formula</li>
+                            <li><strong>Multiple quick attacks:</strong> Rapid-fire attacks can still overwhelm you even with high dodge chance</li>
+                            <li><strong>Build-dependent effectiveness:</strong> More valuable for aggressive/mobile playstyles than passive ones</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Community Tier Rankings -->
+                <section class="section">
+                    <h2 class="section-title">Community Tier Rankings</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>Tier Placement Varies by Source:</strong> Evasion Tome ranks between B-tier and C-tier in most community tier lists</li>
+                            <li><strong>Destructoid (Sept 28, 2025):</strong> Rated as B-tier</li>
+                            <li><strong>ProGameGuides (October 2025):</strong> Rated as C-tier</li>
+                            <li><strong>AmiiboDoctor (Oct 7, 2025):</strong> Rated as B-tier</li>
+                            <li>Rankings reflect that Evasion is viable but situational - effectiveness heavily depends on build composition and playstyle</li>
+                        </ul>
+                    </div>
+                    <div class="version-note">
+                        <strong>Context:</strong> The B-C tier placement reflects community consensus that Evasion is a solid defensive option but not universally essential like some offensive or progression Tomes. Actual value varies significantly by build.
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Pro Tips</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li>Works best with fast builds where you're already avoiding damage manually</li>
+                            <li>Invest early if planning a mobility-focused run due to better early-level value</li>
+                            <li>Combine with lifesteal items - dodged attacks give you more time to heal</li>
+                            <li>Essential for melee <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-cyan);">weapons</a> that keep you in constant danger</li>
+                            <li>As you approach the soft cap (~90% effective rate), overall hit rate becomes low and consistent</li>
+                            <li>Consider your playstyle - aggressive players benefit more than cautious ones</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Evasion</span>
+                    <span class="tag">B-C Tier</span>
+                    <span class="tag">Defense</span>
+                    <span class="tag">Mobility</span>
+                    <span class="tag">Dodge</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/agility-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome">
+                    </div>
+                    <div class="tome-card-title">Agility Tome</div>
+                    <div class="tome-card-stat">Movement Speed</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/shield-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Shield_Tome.png" alt="Shield Tome">
+                    </div>
+                    <div class="tome-card-title">Shield Tome</div>
+                    <div class="tome-card-stat">Shield Capacity</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/health-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Health_Tome.png" alt="Health Tome">
+                    </div>
+                    <div class="tome-card-title">Health Tome</div>
+                    <div class="tome-card-stat">Max Health</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/armor-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Armor_Tome.png" alt="Armor Tome">
+                    </div>
+                    <div class="tome-card-title">Armor Tome</div>
+                    <div class="tome-card-stat">Damage Reduction</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">View Defense Builds →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .build-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

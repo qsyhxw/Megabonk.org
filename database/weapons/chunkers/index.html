@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chunkers – Megabonk Weapon Guide: Stats & Builds</title>
+    <meta name="description" content="Master Chunkers in Megabonk with stats, upgrades and build tips. Default-unlocked orbiting rocks with knockback—prioritize Size and Count.">
+    <meta name="keywords" content="megabonk chunkers, chunkers weapon, orbiting rocks, defensive weapon, default weapon, knockback">
+
+    <link rel="canonical" href="https://megabonk.org/database/weapons/chunkers">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Chunkers Weapon Guide – Orbiting Rocks (Base DMG 12)">
+    <meta property="og:description" content="Default-unlocked orbital rocks with knockback. Base damage 12, verified upgrade stats, mechanics & patch notes.">
+    <meta property="og:url" content="https://megabonk.org/database/weapons/chunkers">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://megabonk.org/images/database/weapons/Chunkers.png">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Chunkers Weapon Guide – Orbiting Rocks (Base DMG 12)",
+      "description": "Verified Chunkers weapon data for Megabonk: default unlock, base damage 12, and five upgrade stats from community-tested tables. Includes mechanics, tips, and patch 1.0.12 notes.",
+      "author": { "@type": "Organization", "name": "Megabonk.org" },
+      "dateModified": "2025-10-21",
+      "mainEntityOfPage": "https://megabonk.org/database/weapons/chunkers"
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; color: #e0e0e0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+        /* Rock Particles Animation */
+        .rock-particle {
+            position: fixed; width: 20px; height: 20px;
+            background: linear-gradient(135deg, #8b7355 0%, #5c4a3a 100%);
+            border-radius: 40% 60% 70% 30%; opacity: 0.6;
+            animation: float 8s infinite ease-in-out; z-index: 1; pointer-events: none;
+            box-shadow: 0 0 15px rgba(139, 115, 85, 0.5);
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+            25% { transform: translate(30px, -30px) rotate(90deg); opacity: 0.8; }
+            50% { transform: translate(-20px, -60px) rotate(180deg); opacity: 0.4; }
+            75% { transform: translate(-40px, -30px) rotate(270deg); opacity: 0.7; }
+        }
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 1rem 2rem; border-bottom: 3px solid #8b7355;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 20px rgba(139, 115, 85, 0.3);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 1.8rem; font-weight: bold; color: #8b7355; text-decoration: none; text-shadow: 0 0 10px rgba(139, 115, 85, 0.5); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: #e0e0e0; text-decoration: none; transition: all 0.3s ease;
+            padding: 0.5rem 1rem; border-radius: 8px;
+        }
+        .nav-links a:hover { color: #8b7355; background: rgba(139, 115, 85, 0.1); transform: translateY(-2px); }
+        .breadcrumb {
+            padding: 1rem 2rem; background: rgba(26, 26, 46, 0.6);
+            border-bottom: 1px solid rgba(139, 115, 85, 0.3); position: relative; z-index: 10;
+        }
+        .breadcrumb a { color: #8b7355; text-decoration: none; transition: color 0.3s ease; }
+        .breadcrumb a:hover { color: #a69078; }
+
+        .hero {
+            text-align: center; padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(139, 115, 85, 0.1) 0%, rgba(92, 74, 58, 0.1) 100%);
+            border-bottom: 2px solid #8b7355; position: relative; z-index: 10;
+        }
+        .weapon-icon { font-size: 6rem; margin-bottom: 1rem; animation: orbit 4s linear infinite; }
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+        }
+        .hero h1 {
+            font-size: 3rem; margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, #8b7355 0%, #5c4a3a 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-sub { font-size: 1rem; color: #a0a0a0; }
+        .tier-badge {
+            display: inline-block; padding: 0.5rem 2rem;
+            background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+            border-radius: 25px; font-weight: bold; font-size: 1.1rem; margin: 1rem;
+            box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4); border: 2px solid #8b4513;
+        }
+        .unlock-badge {
+            display: inline-block; padding: 0.5rem 2rem;
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            border-radius: 25px; font-weight: bold; margin: 1rem;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem; max-width: 1400px; margin: 2rem auto; padding: 0 2rem; position: relative; z-index: 10;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+            padding: 1.5rem; border-radius: 15px; border: 2px solid #8b7355; text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;
+        }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(139, 115, 85, 0.4); border-color: #a69078; }
+        .stat-label { font-size: 0.9rem; color: #a0a0a0; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-value { font-size: 1.8rem; font-weight: bold; color: #8b7355; text-shadow: 0 0 10px rgba(139, 115, 85, 0.5); }
+
+        .content-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; position: relative; z-index: 10; }
+        .section-title {
+            font-size: 2.2rem; margin-bottom: 1.5rem; color: #8b7355;
+            border-bottom: 3px solid #8b7355; padding-bottom: 0.75rem; position: relative;
+        }
+        .section-title::before {
+            content: ''; position: absolute; bottom: -3px; left: 0; width: 100px; height: 3px;
+            background: linear-gradient(90deg, #8b7355 0%, transparent 100%);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(139, 115, 85, 0.2) 0%, rgba(92, 74, 58, 0.1) 100%);
+            border-left: 4px solid #8b7355; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .warning-box {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(198, 40, 40, 0.1) 100%);
+            border-left: 4px solid #f44336; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px;
+        }
+        .success-box {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(56, 142, 60, 0.1) 100%);
+            border-left: 4px solid #4caf50; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px;
+        }
+
+        .pros-cons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .pros-list, .cons-list {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.6) 0%, rgba(22, 33, 62, 0.6) 100%);
+            padding: 2rem; border-radius: 15px; border: 2px solid;
+        }
+        .pros-list { border-color: #4caf50; }
+        .cons-list { border-color: #f44336; }
+        .pros-list h3 { color: #4caf50; margin-bottom: 1rem; }
+        .cons-list h3 { color: #f44336; margin-bottom: 1rem; }
+        .pros-list li, .cons-list li { margin: 1rem 0; padding-left: 1.5rem; position: relative; }
+        .pros-list li::before { content: "✓"; position: absolute; left: 0; color: #4caf50; font-weight: bold; }
+        .cons-list li::before { content: "✗"; position: absolute; left: 0; color: #f44336; font-weight: bold; }
+
+        .build-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .build-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
+            padding: 2rem; border-radius: 15px; border: 2px solid #8b7355; transition: all 0.3s ease;
+        }
+        .build-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(139, 115, 85, 0.4); border-color: #a69078; }
+        .build-card h3 { color: #8b7355; font-size: 1.6rem; margin-bottom: 0.5rem; border-bottom: 2px solid #8b7355; padding-bottom: 0.4rem; }
+
+        .comparison-table {
+            width: 100%; border-collapse: collapse; margin: 2rem 0;
+            background: rgba(26, 26, 46, 0.6); border-radius: 10px; overflow: hidden;
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #8b7355 0%, #5c4a3a 100%);
+            padding: 1rem; text-align: left; font-weight: bold;
+        }
+        .comparison-table td { padding: 1rem; border-bottom: 1px solid rgba(139, 115, 85, 0.2); }
+        .comparison-table tr:hover { background: rgba(139, 115, 85, 0.1); }
+
+        .weapon-img {
+            max-width: 160px; border-radius: 12px; border: 2px solid #8b7355;
+            background: rgba(0,0,0,0.25); box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 3rem 2rem; margin-top: 4rem; border-top: 3px solid #8b7355; position: relative; z-index: 10;
+        }
+        .footer-content {
+            max-width: 1400px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
+        }
+        .footer-section h3 { color: #8b7355; margin-bottom: 1rem; }
+        .footer-section a { color: #a0a0a0; text-decoration: none; display: block; padding: 0.5rem 0; transition: all 0.3s ease; }
+        .footer-section a:hover { color: #8b7355; padding-left: 10px; }
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem;
+            background: linear-gradient(135deg, #8b7355 0%, #5c4a3a 100%); color: white;
+            width: 50px; height: 50px; border-radius: 50%; display: none;
+            align-items: center; justify-content: center; text-decoration: none; font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.4); transition: all 0.3s ease; z-index: 1000;
+        }
+        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(139, 115, 85, 0.6); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .pros-cons-grid { grid-template-columns: 1fr; }
+            .build-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Rock Particles -->
+    <script>
+        for(let i = 0; i < 12; i++) {
+            const rock = document.createElement('div');
+            rock.className = 'rock-particle';
+            rock.style.left = Math.random() * 100 + '%';
+            rock.style.top = Math.random() * 100 + '%';
+            rock.style.animationDelay = Math.random() * 4 + 's';
+            rock.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            document.body.appendChild(rock);
+        }
+    </script>
+
+    <header>
+        <nav>
+            <a href="../../index.html" class="logo">🎮 Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="../../guides/">Guides</a></li>
+                <li><a href="../">Weapons</a></li>
+                <li><a href="../../guides/characters/">Characters</a></li>
+                <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener">Buy on Steam</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../../index.html">Home</a> >
+        <a href="../">Weapons</a> >
+        Chunkers Guide
+    </div>
+
+    <div class="hero">
+        <div class="weapon-icon">🪨</div>
+        <h1>Chunkers Weapon Complete Guide</h1>
+        <div class="hero-sub">Orbiting rocks with knockback · Default-unlocked · Verified data</div>
+        <div class="tier-badge">C-TIER (Community)</div>
+        <div class="unlock-badge">✅ DEFAULT UNLOCK</div>
+        <p style="font-size: 1.1rem; margin-top: 0.5rem;">360° orbital defense that pushes enemies away on hit</p>
+        <div style="margin-top: 1.25rem;">
+            <img src="https://megabonk.org/images/database/weapons/Chunkers.png" alt="Chunkers weapon image" class="weapon-img" loading="lazy" width="160" height="160">
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Base Damage</div>
+            <div class="stat-value">12</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Unlock Status</div>
+            <div class="stat-value">Default</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Upgrade Stats</div>
+            <div class="stat-value">DMG · Knockback · Count · Speed · Size</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Role</div>
+            <div class="stat-value">Supplemental Orbital</div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-title">🎯 Weapon Overview</h2>
+        <div class="info-box">
+            <p><strong>Chunkers</strong> summons chunky rocks that orbit your character, dealing damage on contact and <strong>knocking enemies back</strong>. It is <strong>unlocked by default</strong>, making it one of the starter weapons available from the beginning of the game.</p>
+        </div>
+
+        <h2 class="section-title">⚙️ Verified Mechanics & Stats</h2>
+        <div class="info-box">
+            <p style="margin-bottom:0.75rem;">The following initial values and per-level upgrades are taken from community-tested upgrade tables:</p>
+            <table class="comparison-table" aria-label="Chunkers verified stats">
+                <thead>
+                    <tr><th>Stat</th><th>Initial</th><th>Per Upgrade</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Damage</strong></td><td>12</td><td>+3</td></tr>
+                    <tr><td><strong>Knockback</strong></td><td>2.5</td><td>+0.6</td></tr>
+                    <tr><td><strong>Projectile Count</strong></td><td>2</td><td>+1</td></tr>
+                    <tr><td><strong>Projectile Speed</strong></td><td>1.5</td><td>+0.4</td></tr>
+                    <tr><td><strong>Size</strong></td><td>100%</td><td>+20%</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:0.5rem; font-size:0.95rem; color:#cfcfcf;">Tip: Increasing <strong>Size</strong> improves contact coverage; extra <strong>Count</strong> increases orbital density, but knockback still reduces hit uptime at close range.</p>
+        </div>
+
+        <h2 class="section-title">📌 Notes on Playstyle</h2>
+        <div class="pros-cons-grid">
+            <div class="pros-list">
+                <h3>✓ Strengths</h3>
+                <ul style="list-style:none;">
+                    <li><strong>Default-unlocked:</strong> immediately usable in new saves.</li>
+                    <li><strong>High base damage (12):</strong> strong hits on contact.</li>
+                    <li><strong>360° passive coverage:</strong> orbits while you focus on movement.</li>
+                    <li><strong>Size scaling:</strong> large orbits improve tag-rate on crowds.</li>
+                </ul>
+            </div>
+            <div class="cons-list">
+                <h3>✗ Weaknesses</h3>
+                <ul style="list-style:none;">
+                    <li><strong>Knockback paradox:</strong> pushes enemies out of your damage range.</li>
+                    <li><strong>Close-range reliance:</strong> risky positioning in late waves.</li>
+                    <li><strong>Five upgrade stats:</strong> rolls are diluted vs. focused weapons.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">📊 Recommended Upgrade Focus</h2>
+        <table class="comparison-table">
+            <thead><tr><th>Priority</th><th>Stat</th><th>Why</th></tr></thead>
+            <tbody>
+                <tr><td><strong>High</strong></td><td>Size</td><td>Increases contact window and coverage around you.</td></tr>
+                <tr><td><strong>High</strong></td><td>Projectile Count</td><td>More rocks = higher chance to tag enemies despite knockback.</td></tr>
+                <tr><td>Medium</td><td>Damage</td><td>Always useful, but uptime is still knockback-limited.</td></tr>
+                <tr><td>Low</td><td>Projectile Speed</td><td>Faster orbits can reduce time-on-target; situational.</td></tr>
+                <tr><td>Situational</td><td>Knockback</td><td>May create space defensively, but hurts DPS consistency.</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">🛡️ Where It Fits (Build Ideas)</h2>
+        <div class="build-grid">
+            <div class="build-card">
+                <h3>Tanky Orbital Add-On</h3>
+                <p><strong>Use:</strong> 3rd/4th slot to add passive coverage on durable characters.</p>
+                <p><strong>Pairs well with:</strong> Aegis (shockwave blocks) or melee primaries (Sword variants) to finish pushed targets.</p>
+                <p><strong>Focus:</strong> Size → Count → Damage.</p>
+            </div>
+            <div class="build-card">
+                <h3>Crowd Control Tilt</h3>
+                <p><strong>Use:</strong> If you value breathing room over pure DPS.</p>
+                <p><strong>Avoid:</strong> Over-investing in Knockback; pick defensive tomes/items instead.</p>
+            </div>
+            <div class="build-card">
+                <h3>Not a Primary DPS</h3>
+                <p><strong>Reality check:</strong> Treat Chunkers as utility; most runs benefit more from meta DPS options as primaries.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">⚖️ Comparison (Stats-Accurate)</h2>
+        <table class="comparison-table" aria-label="Chunkers comparisons">
+            <thead>
+                <tr><th>Weapon</th><th>Base DMG</th><th>Upgrade Stats</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr style="background: rgba(76, 175, 80, 0.1);">
+                    <td><strong>Aura</strong></td>
+                    <td>6</td>
+                    <td>Damage · Size</td>
+                    <td>Constant AoE field; focused upgrades make scaling consistent.</td>
+                </tr>
+                <tr style="background: rgba(76, 175, 80, 0.1);">
+                    <td><strong>Axe</strong></td>
+                    <td>6</td>
+                    <td>Damage · Duration · Count · Size</td>
+                    <td>Duration scaling enables long-lasting axes at high levels.</td>
+                </tr>
+                <tr>
+                    <td><strong>Bone</strong></td>
+                    <td>11</td>
+                    <td>Damage · Knockback · Bounces · Count · Speed</td>
+                    <td>Bounces extend reach; less anti-synergy with knockback.</td>
+                </tr>
+                <tr style="background: rgba(244, 67, 54, 0.08);">
+                    <td><strong>Chunkers</strong></td>
+                    <td>12</td>
+                    <td>Damage · Knockback · Count · Speed · Size</td>
+                    <td>High base DMG but knockback shortens hit uptime; rolls diluted.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">🎮 Version Notes</h2>
+        <div class="info-box">
+            <h4 style="margin-bottom:0.5rem;">Patch 1.0.12 (Oct 8–9, 2025)</h4>
+            <ul style="margin-left:1.25rem;">
+                <li>Fixes around <strong>Duration</strong> interactions and projectile caps made duration-based weapons (e.g., Axe, Dexecutioner) behave properly at high Duration values.</li>
+                <li>This is broadly a <strong>buff</strong> to many weapons’ late-game behavior; no direct stat change to Chunkers itself.</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">🔧 Toggler & Avoiding Unwanted Rolls</h2>
+        <div class="info-box">
+            <p><strong>Toggler</strong> (shop upgrade) lets you disable many unlocked weapons/items for your next run via the <em>Unlocks</em> menu. Note that <strong>default starters</strong> may remain available; in-run tools like <em>Banish</em> can still help prune choices.</p>
+        </div>
+
+        <h2 class="section-title">💡 Quick Tips</h2>
+        <div class="success-box">
+            <ul style="list-style:none; padding:0;">
+                <li style="padding:0.6rem 0; border-bottom:1px solid rgba(76,175,80,0.18);"><strong>Prioritize Size</strong> (then Count) to offset knockback’s lost uptime.</li>
+                <li style="padding:0.6rem 0; border-bottom:1px solid rgba(76,175,80,0.18);"><strong>Use defensively</strong> on tankier characters or alongside blocking tools (e.g., Aegis).</li>
+                <li style="padding:0.6rem 0;"><strong>Don’t over-invest</strong> expecting meta DPS—treat as utility unless experimenting.</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">❓ FAQ</h2>
+        <div class="info-box">
+            <h4>Is Chunkers good?</h4>
+            <p><strong>It’s generally rated lower-tier by recent tier lists.</strong> High base damage is nice, but knockback and diluted upgrades hurt consistency.</p>
+        </div>
+        <div class="info-box">
+            <h4>How do I unlock it?</h4>
+            <p><strong>It’s unlocked by default.</strong> You’ll have it from the start of a new save.</p>
+        </div>
+
+        <div style="text-align:center; padding: 3rem 2rem; background: linear-gradient(135deg, rgba(139,115,85,0.1) 0%, rgba(92,74,58,0.1) 100%); border-radius: 15px; margin: 3rem 0;">
+            <h3 style="color:#8b7355; margin-bottom:1rem;">🔗 Explore More Weapons</h3>
+            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top: 1rem;">
+                <a href="aura" style="padding:1rem 2rem; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color:#1a1a2e; text-decoration:none; border-radius:10px; font-weight:bold;">⭐ Aura</a>
+                <a href="axe" style="padding:1rem 2rem; background: linear-gradient(135deg, #4caf50 0%, #45a049 100%); color:white; text-decoration:none; border-radius:10px; font-weight:bold;">🪓 Axe</a>
+                <a href="bone" style="padding:1rem 2rem; background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); color:white; text-decoration:none; border-radius:10px; font-weight:bold;">💀 Bone</a>
+                <a href="../" style="padding:1rem 2rem; background: linear-gradient(135deg, #8b7355 0%, #5c4a3a 100%); color:white; text-decoration:none; border-radius:10px; font-weight:bold;">📚 All Weapons</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Weapons Navigation Section -->
+<section class="all-weapons-nav" style="background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%); padding: 4rem 2rem; margin-top: 4rem; border-top: 3px solid #ff6b35;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #f4c430; font-weight: 800;">
+            All Weapons in <span style="font-style: italic;">Megabonk</span>
+        </h2>
+
+        <div class="weapons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Aura -->
+            <a href="https://megabonk.org/database/weapons/aura" class="weapon-nav-item" data-weapon="aura">
+                <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+                <span>Aura</span>
+            </a>
+
+            <!-- Aegis -->
+            <a href="https://megabonk.org/database/weapons/aegis" class="weapon-nav-item" data-weapon="aegis">
+                <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis">
+                <span>Aegis</span>
+            </a>
+
+            <!-- Flamewalker -->
+            <a href="https://megabonk.org/database/weapons/flamewalker" class="weapon-nav-item" data-weapon="flamewalker">
+                <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+                <span>Flamewalker</span>
+            </a>
+
+            <!-- Katana -->
+            <a href="https://megabonk.org/database/weapons/katana" class="weapon-nav-item" data-weapon="katana">
+                <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+                <span>Katana</span>
+            </a>
+
+            <!-- Dice -->
+            <a href="https://megabonk.org/database/weapons/dice" class="weapon-nav-item" data-weapon="dice">
+                <img src="https://megabonk.org/images/database/weapons/Dice.png" alt="Dice">
+                <span>Dice</span>
+            </a>
+
+            <!-- Dexecutioner -->
+            <a href="https://megabonk.org/database/weapons/dexecutioner" class="weapon-nav-item" data-weapon="dexecutioner">
+                <img src="https://megabonk.org/images/database/weapons/Dexecutioner.png" alt="Dexecutioner">
+                <span>Dexecutioner</span>
+            </a>
+
+            <!-- Blood Magic -->
+            <a href="https://megabonk.org/database/weapons/blood-magic" class="weapon-nav-item" data-weapon="blood-magic">
+                <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+                <span>Blood Magic</span>
+            </a>
+
+            <!-- Lightning Staff -->
+            <a href="https://megabonk.org/database/weapons/lightning-staff" class="weapon-nav-item" data-weapon="lightning-staff">
+                <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+                <span>Lightning Staff</span>
+            </a>
+
+            <!-- Bananarang -->
+            <a href="https://megabonk.org/database/weapons/bananarang" class="weapon-nav-item" data-weapon="bananarang">
+                <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+                <span>Bananarang</span>
+            </a>
+
+            <!-- Corrupted Sword -->
+            <a href="https://megabonk.org/database/weapons/corrupted-sword" class="weapon-nav-item" data-weapon="corrupted-sword">
+                <img src="https://megabonk.org/images/database/weapons/CorruptedSword.png" alt="Corrupted Sword">
+                <span>Corrupted Sword</span>
+            </a>
+
+            <!-- Bow -->
+            <a href="https://megabonk.org/database/weapons/bow" class="weapon-nav-item" data-weapon="bow">
+                <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+                <span>Bow</span>
+            </a>
+
+            <!-- Revolver -->
+            <a href="https://megabonk.org/database/weapons/revolver" class="weapon-nav-item" data-weapon="revolver">
+                <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                <span>Revolver</span>
+            </a>
+
+            <!-- Axe -->
+            <a href="https://megabonk.org/database/weapons/axe" class="weapon-nav-item" data-weapon="axe">
+                <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+                <span>Axe</span>
+            </a>
+
+            <!-- Bone -->
+            <a href="https://megabonk.org/database/weapons/bone" class="weapon-nav-item" data-weapon="bone">
+                <img src="https://megabonk.org/images/database/weapons/Bone.png" alt="Bone">
+                <span>Bone</span>
+            </a>
+
+            <!-- Sniper Rifle -->
+            <a href="https://megabonk.org/database/weapons/sniper-rifle" class="weapon-nav-item" data-weapon="sniper-rifle">
+                <img src="https://megabonk.org/images/database/weapons/Sniper.png" alt="Sniper Rifle">
+                <span>Sniper Rifle</span>
+            </a>
+
+            <!-- Frostwalker -->
+            <a href="https://megabonk.org/database/weapons/frostwalker" class="weapon-nav-item" data-weapon="frostwalker">
+                <img src="https://megabonk.org/images/database/weapons/Frostwalker.png" alt="Frostwalker">
+                <span>Frostwalker</span>
+            </a>
+
+            <!-- Hero Sword -->
+            <a href="https://megabonk.org/database/weapons/hero-sword" class="weapon-nav-item" data-weapon="hero-sword">
+                <img src="https://megabonk.org/images/database/weapons/Hero_Sword.png" alt="Hero Sword">
+                <span>Hero Sword</span>
+            </a>
+
+            <!-- Wireless Dagger -->
+            <a href="https://megabonk.org/database/weapons/wireless-dagger" class="weapon-nav-item" data-weapon="wireless-dagger">
+                <img src="https://megabonk.org/images/database/weapons/Wireless_Dagger.png" alt="Wireless Dagger">
+                <span>Wireless Dagger</span>
+            </a>
+
+            <!-- Firestaff -->
+            <a href="https://megabonk.org/database/weapons/firestaff" class="weapon-nav-item" data-weapon="firestaff">
+                <img src="https://megabonk.org/images/database/weapons/Firestaff.png" alt="Firestaff">
+                <span>Firestaff</span>
+            </a>
+
+            <!-- Sword -->
+            <a href="https://megabonk.org/database/weapons/sword" class="weapon-nav-item" data-weapon="sword">
+                <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                <span>Sword</span>
+            </a>
+
+            <!-- Tornado -->
+            <a href="https://megabonk.org/database/weapons/tornado" class="weapon-nav-item" data-weapon="tornado">
+                <img src="https://megabonk.org/images/database/weapons/Tornado.png" alt="Tornado">
+                <span>Tornado</span>
+            </a>
+
+            <!-- Space Noodle -->
+            <a href="https://megabonk.org/database/weapons/space-noodle" class="weapon-nav-item" data-weapon="space-noodle">
+                <img src="https://megabonk.org/images/database/weapons/Space_Noodle.png" alt="Space Noodle">
+                <span>Space Noodle</span>
+            </a>
+
+            <!-- Dragons Breath -->
+            <a href="https://megabonk.org/database/weapons/dragons-breath" class="weapon-nav-item" data-weapon="dragons-breath">
+                <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragons Breath">
+                <span>Dragon's Breath</span>
+            </a>
+
+            <!-- Slutty Rocket -->
+            <a href="https://megabonk.org/database/weapons/slutty-rocket" class="weapon-nav-item" data-weapon="slutty-rocket">
+                <img src="https://megabonk.org/images/database/weapons/SluttyRocket.png" alt="Slutty Rocket">
+                <span>Slutty Rocket</span>
+            </a>
+
+            <!-- Shotgun -->
+            <a href="https://megabonk.org/database/weapons/shotgun" class="weapon-nav-item" data-weapon="shotgun">
+                <img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun">
+                <span>Shotgun</span>
+            </a>
+
+            <!-- Mines -->
+            <a href="https://megabonk.org/database/weapons/mines" class="weapon-nav-item" data-weapon="mines">
+                <img src="https://megabonk.org/images/database/weapons/Mines.png" alt="Mines">
+                <span>Mines</span>
+            </a>
+
+            <!-- Chunkers -->
+            <a href="https://megabonk.org/database/weapons/chunkers" class="weapon-nav-item" data-weapon="chunkers">
+                <img src="https://megabonk.org/images/database/weapons/Chunkers.png" alt="Chunkers">
+                <span>Chunkers</span>
+            </a>
+
+            <!-- Black Hole -->
+            <a href="https://megabonk.org/database/weapons/black-hole" class="weapon-nav-item" data-weapon="black-hole">
+                <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                <span>Black Hole</span>
+            </a>
+
+            <!-- Poison Flask -->
+            <a href="https://megabonk.org/database/weapons/poison-flask" class="weapon-nav-item" data-weapon="poison-flask">
+                <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                <span>Poison Flask</span>
+            </a>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://megabonk.org/database/weapons/" style="display: inline-block; padding: 1rem 2.5rem; background: linear-gradient(45deg, #ff6b35, #e55a2b); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: transform 0.3s ease;">
+                ⚔️ View Complete Weapon Tier List
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.weapon-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.weapon-nav-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+    filter: brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.weapon-nav-item span {
+    color: #f4c430;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.weapon-nav-item:hover {
+    transform: translateY(-5px);
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.weapon-nav-item:hover img {
+    filter: brightness(1.1);
+}
+
+/* Current weapon highlight */
+.weapon-nav-item.current {
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.weapon-nav-item.current span {
+    color: #ff6b35;
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .weapon-nav-item img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .weapon-nav-item span {
+        font-size: 0.75rem;
+    }
+}
+</style>
+
+<script>
+// Highlight current weapon
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page URL
+    const currentPath = window.location.pathname;
+    
+    // Find matching weapon link
+    const weaponLinks = document.querySelectorAll('.weapon-nav-item');
+    weaponLinks.forEach(link => {
+        if (currentPath.includes(link.getAttribute('data-weapon'))) {
+            link.classList.add('current');
+        }
+    });
+});
+</script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🎮 Megabonk.org</h3>
+                <p style="color:#a0a0a0;">Your complete resource for Megabonk guides, strategies, and tier lists.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="../../index.html">Home</a>
+                <a href="../../guides/">All Guides</a>
+                <a href="../../guides/characters/">Character Guides</a>
+                <a href="../">Weapon Database</a>
+            </div>
+            <div class="footer-section">
+                <h3>Popular Weapons</h3>
+                <a href="aura">Aura Guide</a>
+                <a href="katana">Katana Guide</a>
+                <a href="dice">Dice Guide</a>
+                <a href="black-hole">Black Hole Guide</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="../../tier-lists/">Tier Lists</a>
+                <a href="../../guides/meta-strategy/">Meta Strategy</a>
+                <a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener">Buy on Steam</a>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:2rem; padding-top:2rem; border-top:1px solid rgba(139,115,85,0.3); color:#a0a0a0;">
+            <p>© 2025 Megabonk.org — Unofficial Fan Guide | Last Updated: October 21, 2025</p>
+            <p style="margin-top:0.5rem; font-size:0.9rem;">Not affiliated with Megabonk or vedinad</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        // Reveal-on-scroll
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.content-section > *').forEach(el => {
+            el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'all 0.6s ease-out'; observer.observe(el);
+        });
+        // Back to top
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => { backToTop.style.display = (window.pageYOffset > 300) ? 'flex' : 'none'; });
+    </script>
+
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+        crossorigin="anonymous"></script>
+</body>
+</html>
