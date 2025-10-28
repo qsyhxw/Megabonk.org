@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Cursed Tome Guide: Unlock & Best Builds</title>
+    <meta name="description" content="Unlock and master the Cursed Tome: effects, 5-minute boss requirement, level-20 strategies for Corrupted Sword, and best builds for XP/loot farming.">
+    <meta name="keywords" content="megabonk cursed tome, difficulty tome, hard mode, challenge tome, megabonk tomes, farming guide, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/cursed-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-curse: #6a0dad;
+            --accent-dark-purple: #4b0082;
+            --accent-blood: #8b0000;
+            --accent-shadow: #2e003e;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.3), rgba(75, 0, 130, 0.3), rgba(46, 0, 62, 0.3));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="curse" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 50 10 L 55 30 L 75 30 L 60 42 L 65 62 L 50 50 L 35 62 L 40 42 L 25 30 L 45 30 Z" fill="rgba(106,13,173,0.15)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23curse)"/></svg>');
+            opacity: 0.3;
+            animation: curseFloat 15s ease-in-out infinite;
+        }
+
+        @keyframes curseFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple), var(--accent-blood));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(106, 13, 173, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #6a0dad, #4b0082);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            box-shadow: 0 4px 12px rgba(106, 13, 173, 0.4);
+        }
+
+        /* Warning Banner */
+        .warning-banner {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.15), rgba(139, 0, 0, 0.15));
+            border: 2px solid var(--danger);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 0, 110, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 0, 110, 0.6); }
+        }
+
+        .warning-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-desc {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Main Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Infobox */
+        .infobox {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), rgba(75, 0, 130, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(106, 13, 173, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .infobox-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(106, 13, 173, 0.6));
+        }
+
+        .stat-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(106, 13, 173, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--accent-curse);
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--accent-curse);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .stat-value.primary {
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(106, 13, 173, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            border-radius: 4px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: rgba(106, 13, 173, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-curse);
+        }
+
+        .intro-text strong {
+            color: var(--accent-curse);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            color: var(--text-gray);
+            transition: all 0.3s;
+        }
+
+        .info-list li::before {
+            content: '☠️';
+            position: absolute;
+            left: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .info-list li strong {
+            color: var(--accent-curse);
+        }
+
+        /* Difficulty Ladder */
+        .difficulty-ladder {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .difficulty-stage {
+            background: rgba(106, 13, 173, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(106, 13, 173, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .difficulty-stage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-curse), var(--accent-blood));
+        }
+
+        .difficulty-stage:hover {
+            transform: translateX(5px);
+            border-color: var(--accent-curse);
+            box-shadow: 0 8px 16px rgba(106, 13, 173, 0.2);
+        }
+
+        .difficulty-stage.extreme {
+            border: 2px solid var(--danger);
+            background: rgba(139, 0, 0, 0.1);
+        }
+
+        .difficulty-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .difficulty-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .difficulty-level {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .difficulty-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .enemy-stats {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.8rem;
+            border: 1px solid rgba(106, 13, 173, 0.2);
+        }
+
+        .enemy-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .enemy-stat {
+            text-align: center;
+        }
+
+        .enemy-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .enemy-stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        /* Reward Analysis */
+        .reward-analysis {
+            background: linear-gradient(135deg, rgba(6, 255, 165, 0.1), rgba(0, 217, 126, 0.1));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--success);
+            margin-top: 1.5rem;
+        }
+
+        .reward-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--success);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .reward-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .reward-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(6, 255, 165, 0.2);
+            text-align: center;
+        }
+
+        .reward-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-label {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .reward-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Boss Challenge */
+        .boss-challenge {
+            background: rgba(106, 13, 173, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(106, 13, 173, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .challenge-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .challenge-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--danger), var(--accent-blood));
+            color: var(--text-light);
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .strategy-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .strategy-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-curse);
+        }
+
+        .strategy-title {
+            font-weight: 700;
+            color: var(--accent-curse);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .strategy-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Survival Checklist */
+        .survival-checklist {
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.15), rgba(75, 0, 130, 0.15));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-curse);
+            margin-top: 1.5rem;
+        }
+
+        .checklist-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .checklist-items {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checklist-item {
+            background: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid rgba(106, 13, 173, 0.2);
+        }
+
+        .checklist-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .checklist-text {
+            flex: 1;
+            color: var(--text-light);
+        }
+
+        /* Build Recommendations */
+        .build-recs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .build-category {
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid;
+        }
+
+        .build-category.good {
+            background: rgba(6, 255, 165, 0.1);
+            border-color: var(--success);
+        }
+
+        .build-category.bad {
+            background: rgba(255, 0, 110, 0.1);
+            border-color: var(--danger);
+        }
+
+        .build-category-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .build-category-title.good {
+            color: var(--success);
+        }
+
+        .build-category-title.bad {
+            color: var(--danger);
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .synergy-card {
+            background: rgba(106, 13, 173, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synergy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-curse), var(--accent-dark-purple));
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(106, 13, 173, 0.3);
+            border-color: var(--accent-curse);
+        }
+
+        .synergy-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .synergy-title a {
+            color: var(--accent-curse);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-dark-purple);
+        }
+
+        .synergy-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), rgba(75, 0, 130, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-curse);
+            margin-top: 1rem;
+        }
+
+        .highlight-box.info {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border-color: var(--accent-blue);
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 0, 110, 0.1));
+            border-color: var(--warning);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .highlight-box li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box.info li::before {
+            content: 'ℹ️';
+        }
+
+        .highlight-box.warning li::before {
+            content: '⚠️';
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(106, 13, 173, 0.2);
+        }
+
+        .tag {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(106, 13, 173, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(106, 13, 173, 0.3);
+            border-color: var(--accent-curse);
+        }
+
+        .tome-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tome-card-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(106, 13, 173, 0.3));
+        }
+
+        .tome-card-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-curse), var(--accent-dark-purple));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(106, 13, 173, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-curse);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .infobox {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .synergies-grid,
+            .related-tomes {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .reward-grid,
+            .build-recs,
+            .enemy-stat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .tier-badge {
+                display: block;
+                margin: 1rem 0 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <strong>Cursed Tome</strong>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>☠️ Cursed Tome</h1>
+            <span class="tier-badge">A-TIER</span>
+            <p class="hero-subtitle">Hard Mode Activated - More Enemies, More Danger, More Rewards!</p>
+            <div class="tome-category">Challenge Tome / Difficulty Modifier</div>
+        </div>
+    </div>
+
+    <!-- Warning Banner -->
+    <div class="container">
+        <div class="warning-banner">
+            <div class="warning-title">⚠️ HARDCORE WARNING</div>
+            <div class="warning-desc">
+                This Tome makes enemies <strong>faster, stronger, and more numerous</strong>. Only for skilled players who can handle extreme chaos!
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Infobox Sidebar -->
+            <aside class="infobox">
+                <div class="infobox-image">
+                    <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome">
+                </div>
+                
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">📊 Stat Type</span>
+                        <span class="stat-value">Difficulty</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⬆️ Upgrade</span>
+                        <span class="stat-value primary">+3.5%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🔓 Unlock</span>
+                        <span class="stat-value">Boss < 5 min</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🎯 Max Level</span>
+                        <span class="stat-value primary">99</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Introduction -->
+                <section class="section">
+                    <p class="intro-text">
+                        The <strong>Cursed Tome</strong> is basically the "hard mode" button in <strong><a href="https://megabonk.org/" style="color: var(--accent-curse);">Megabonk</a></strong>. Instead of buffing you, <strong>it buffs the enemies</strong>. They come faster, hit harder and there are a lot more of them. The upside is that <strong>all this chaos gives you way more XP and loot</strong> if you can survive.
+                    </p>
+                </section>
+
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <ul class="info-list">
+                        <li><strong>Stat:</strong> Difficulty (Enemy Scaling)</li>
+                        <li><strong>Base upgrade per level:</strong> +3.5% difficulty per level</li>
+                        <li><strong>How to unlock:</strong> Beat a Stage Boss in under 5 minutes</li>
+                        <li><strong>Max level:</strong> 99</li>
+                        <li><strong>Category:</strong> Challenge Tome</li>
+                    </ul>
+                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
+                        Cursed Tome is for players who want to push their limits. It transforms every run into a brutal survival challenge, but compensates with significantly increased rewards. This is the ultimate "risk equals reward" Tome in Megabonk.
+                    </p>
+                </section>
+
+                <!-- Difficulty Scaling -->
+                <section class="section">
+                    <h2 class="section-title">Difficulty Scaling</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        See how enemy difficulty increases with each level:
+                    </p>
+                    <div class="difficulty-ladder">
+                        <div class="difficulty-stage">
+                            <div class="difficulty-header">
+                                <div class="difficulty-value">+17.5% Difficulty</div>
+                                <div class="difficulty-level">Level ~5</div>
+                            </div>
+                            <div class="difficulty-desc">
+                                Noticeable increase. More enemies spawn, they move slightly faster and hit a bit harder.
+                            </div>
+                            <div class="enemy-stats">
+                                <div class="enemy-stat-grid">
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Spawn Rate</div>
+                                        <div class="enemy-stat-value">+17.5%</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy HP</div>
+                                        <div class="enemy-stat-value">+17.5%</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy Damage</div>
+                                        <div class="enemy-stat-value">+17.5%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="difficulty-stage">
+                            <div class="difficulty-header">
+                                <div class="difficulty-value">+52.5% Difficulty</div>
+                                <div class="difficulty-level">Level ~15</div>
+                            </div>
+                            <div class="difficulty-desc">
+                                Significant challenge. The screen fills with enemies quickly. You need solid AoE and survivability.
+                            </div>
+                            <div class="enemy-stats">
+                                <div class="enemy-stat-grid">
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Spawn Rate</div>
+                                        <div class="enemy-stat-value">+52.5%</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy HP</div>
+                                        <div class="enemy-stat-value">+52.5%</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy Damage</div>
+                                        <div class="enemy-stat-value">+52.5%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="difficulty-stage">
+                            <div class="difficulty-header">
+                                <div class="difficulty-value">+105% Difficulty</div>
+                                <div class="difficulty-level">Level ~30</div>
+                            </div>
+                            <div class="difficulty-desc">
+                                Hardcore mode. Enemy waves are relentless. Only optimized builds survive this level of chaos.
+                            </div>
+                            <div class="enemy-stats">
+                                <div class="enemy-stat-grid">
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Spawn Rate</div>
+                                        <div class="enemy-stat-value">+105%</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy HP</div>
+                                        <div class="enemy-stat-value">+105%</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy Damage</div>
+                                        <div class="enemy-stat-value">+105%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="difficulty-stage extreme">
+                            <div class="difficulty-header">
+                                <div class="difficulty-value">+175%+ Difficulty</div>
+                                <div class="difficulty-level">Level 50+ (EXTREME)</div>
+                            </div>
+                            <div class="difficulty-desc">
+                                <strong style="color: var(--danger);">NIGHTMARE MODE.</strong> The screen is a constant sea of enemies. Enemies are nearly twice as strong in every way. Only god-tier builds with perfect synergies can handle this.
+                            </div>
+                            <div class="enemy-stats">
+                                <div class="enemy-stat-grid">
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Spawn Rate</div>
+                                        <div class="enemy-stat-value">+175%+</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy HP</div>
+                                        <div class="enemy-stat-value">+175%+</div>
+                                    </div>
+                                    <div class="enemy-stat">
+                                        <div class="enemy-stat-label">Enemy Damage</div>
+                                        <div class="enemy-stat-value">+175%+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Effects -->
+                <section class="section">
+                    <h2 class="section-title">Effects</h2>
+                    <ul class="info-list">
+                        <li><strong>Enemies spawn in bigger numbers</strong> and scale in health, speed and strength</li>
+                        <li>The harder it gets, the more XP and drops you can grab</li>
+                        <li>Runs feel way more intense once you start stacking levels of this Tome</li>
+                        <li>Rewards scale proportionally with difficulty increase</li>
+                        <li><a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-curse);">Boss fights</a> become significantly more challenging</li>
+                        <li>Screen becomes crowded with enemies at higher levels</li>
+                    </ul>
+                </section>
+
+                <!-- Reward Analysis -->
+                <section class="section">
+                    <h2 class="section-title">The Reward Trade-Off</h2>
+                    <div class="reward-analysis">
+                        <div class="reward-title">💎 Increased Rewards</div>
+                        <p style="color: var(--text-gray); text-align: center; margin-bottom: 1rem;">
+                            Higher difficulty = proportionally higher rewards:
+                        </p>
+                        <div class="reward-grid">
+                            <div class="reward-item">
+                                <div class="reward-icon">✨</div>
+                                <div class="reward-label">More XP Orbs</div>
+                                <div class="reward-desc">
+                                    Enemy kills yield significantly more experience. Perfect for power-leveling and faster progression.
+                                </div>
+                            </div>
+                            <div class="reward-item">
+                                <div class="reward-icon">💰</div>
+                                <div class="reward-label">Better Drop Rates</div>
+                                <div class="reward-desc">
+                                    More enemies = more drops. Increased gold, silver, and item drops across the board.
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: var(--success); margin-top: 1.5rem; font-weight: 600; text-align: center;">
+                            The rewards scale proportionally with difficulty, making Cursed Tome the ultimate farming tool for skilled players!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock</h2>
+                    <div class="boss-challenge">
+                        <div class="challenge-header">
+                            <div class="challenge-title">Boss Speed Kill Challenge</div>
+                            <div class="time-badge">⏱️ Under 5 Minutes</div>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-curse);">
+                            <strong style="color: var(--accent-curse);">Requirement:</strong><br>
+                            <span style="color: var(--text-gray);">
+                                Beat a <strong>Stage Boss</strong> in under <strong>5 minutes</strong>. This means you need solid DPS and good movement to clear fast.
+                            </span>
+                        </div>
+
+                        <div class="strategy-grid">
+                            <div class="strategy-item">
+                                <div class="strategy-title">
+                                    ⚔️ Maximize Damage Output
+                                </div>
+                                <div class="strategy-desc">
+                                    Focus on damage-oriented <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-curse);">builds</a>. Stack Damage Tome, Cooldown Tome, and Precision Tome. Every second counts.
+                                </div>
+                            </div>
+
+                            <div class="strategy-item">
+                                <div class="strategy-title">
+                                    🚀 Prioritize Fast Weapons
+                                </div>
+                                <div class="strategy-desc">
+                                    Use high-DPS <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-curse);">weapons</a> with good boss damage. Multi-hit weapons or weapons with high base damage work best.
+                                </div>
+                            </div>
+
+                            <div class="strategy-item">
+                                <div class="strategy-title">
+                                    💨 Skip Add Management
+                                </div>
+                                <div class="strategy-desc">
+                                    Don't waste time clearing every add. Focus fire on the boss. Use movement to dodge while attacking continuously.
+                                </div>
+                            </div>
+
+                            <div class="strategy-item">
+                                <div class="strategy-title">
+                                    🎯 Choose Easy Bosses
+                                </div>
+                                <div class="strategy-desc">
+                                    Pick stages with simpler boss mechanics. Early-stage bosses or bosses with predictable patterns are easiest to speed-kill.
+                                </div>
+                            </div>
+
+                            <div class="strategy-item">
+                                <div class="strategy-title">
+                                    ⚡ Use Strong Characters
+                                </div>
+                                <div class="strategy-desc">
+                                    Pick <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-curse);">characters</a> with high damage potential or boss-killing abilities. Glass cannon builds work great here.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Survival Checklist -->
+                <section class="section">
+                    <h2 class="section-title">Survival Requirements</h2>
+                    <div class="survival-checklist">
+                        <div class="checklist-title">☠️ Can You Handle Cursed Tome?</div>
+                        <p style="color: var(--text-gray); text-align: center; margin-bottom: 1rem;">
+                            Before investing in Cursed Tome, make sure your build has:
+                        </p>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <div class="checklist-icon">⚔️</div>
+                                <div class="checklist-text">
+                                    <strong>High DPS:</strong> Strong offense to clear the increased enemy waves
+                                </div>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">🛡️</div>
+                                <div class="checklist-text">
+                                    <strong>Survivability:</strong> Armor, Shield, HP Regen, or Lifesteal to sustain through chaos
+                                </div>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">🌊</div>
+                                <div class="checklist-text">
+                                    <strong>AoE Coverage:</strong> Area damage to handle massive enemy density
+                                </div>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">💨</div>
+                                <div class="checklist-text">
+                                    <strong>Mobility:</strong> Movement speed to dodge and reposition in packed screens
+                                </div>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">🧲</div>
+                                <div class="checklist-text">
+                                    <strong>Pickup Range:</strong> Attraction Tome to collect XP orbs without risky movement
+                                </div>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">🧠</div>
+                                <div class="checklist-text">
+                                    <strong>Experience:</strong> Game knowledge and skill to handle chaotic situations
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergies</h2>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/xp-tome/">XP Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More enemies means way more XP. Perfect combo for power-leveling and snowballing.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Attraction_Tome.png" alt="Attraction Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/attraction-tome/">Attraction Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Lets you scoop up all the extra orbs without wasting time or risking dangerous movement.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Regen_Tome.png" alt="Regen Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/regen-tome/">Regen Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Extra sustain is key when waves get overwhelming. Passive healing keeps you alive.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/bloody-tome/">Bloody Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More enemies = more lifesteal procs. Turn enemy density into healing power.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/damage-tome/">Damage Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                You'll need strong offense to keep up with buffed enemies. Essential for clearing speed.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cooldown-tome/">Cooldown Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Faster attacks = better crowd control. Attack speed is crucial for handling swarms.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/quantity-tome/">Quantity Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More projectiles to handle more enemies. AoE coverage scales with difficulty.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/agility-tome/">Agility Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Helps you dodge and reposition when the screen is packed. Mobility is survival.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Build Recommendations -->
+                <section class="section">
+                    <h2 class="section-title">Build Recommendations</h2>
+                    <div class="build-recs">
+                        <div class="build-category good">
+                            <div class="build-category-title good">
+                                ✅ Excellent for Cursed Tome
+                            </div>
+                            <ul class="info-list">
+                                <li><strong>AoE Spam Builds</strong> - High coverage, constant damage</li>
+                                <li><strong>Lifesteal Builds</strong> - More enemies = more healing</li>
+                                <li><strong>Tank Builds</strong> - Can facetank swarms with defense</li>
+                                <li><strong>Fast Attack Builds</strong> - Rapid-fire weapons mow down hordes</li>
+                                <li><strong>Balanced Builds</strong> - Mix of offense and defense</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-category bad">
+                            <div class="build-category-title bad">
+                                ❌ Poor for Cursed Tome
+                            </div>
+                            <ul class="info-list">
+                                <li><strong>Glass Cannon Builds</strong> - Will get overwhelmed and die</li>
+                                <li><strong>Single-Target Builds</strong> - Can't handle enemy density</li>
+                                <li><strong>Slow Weapon Builds</strong> - Not enough DPS to clear waves</li>
+                                <li><strong>Low Mobility Builds</strong> - Can't dodge in packed screens</li>
+                                <li><strong>Experimental Builds</strong> - Needs optimization to survive</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Don't pick this Tome unless you're confident in your build</strong></li>
+                            <li>Stack some defense and healing so you don't just melt</li>
+                            <li>It's a great farming tool if you can control the chaos</li>
+                            <li>Boss fights get scarier, so make sure you're killing them quickly</li>
+                            <li>Start with low levels (5-10) and gradually increase as you get stronger</li>
+                            <li>Combine with XP Tome for maximum power-leveling efficiency</li>
+                            <li>Always have an escape plan - mobility saves lives</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Pro Tips</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li>At max level (99), provides 346.5% difficulty increase - absolute nightmare mode</li>
+                            <li>Feels like an endgame Tome for experienced players</li>
+                            <li>Some players love the challenge, others avoid it until they're stacked</li>
+                            <li><strong>Amazing for farming</strong>, but brutal if your run is weak</li>
+                            <li>Test your build on lower Cursed levels before going all-in</li>
+                            <li>Perfect for speedrunners who want max XP/hour efficiency</li>
+                            <li>Rewards are worth the pain if you can survive</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Important Notes -->
+                <section class="section">
+                    <h2 class="section-title">Important Considerations</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li><strong>⚠️ Not for beginners</strong> - requires solid game knowledge and build optimization</li>
+                            <li>Can turn winning runs into instant death if you're not prepared</li>
+                            <li>Boss fights become significantly harder and may require specific strategies</li>
+                            <li>Some builds simply cannot handle high Cursed levels - know your limits</li>
+                            <li>Farming efficiency drops to zero if you die - balance risk carefully</li>
+                            <li>Screen clutter at high levels can make it hard to see danger</li>
+                            <li>The ultimate "git gud" Tome - forces you to improve or fail</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Difficulty</span>
+                    <span class="tag">A-Tier</span>
+                    <span class="tag">Challenge</span>
+                    <span class="tag">Farming</span>
+                    <span class="tag">Hard Mode</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/xp-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+                    </div>
+                    <div class="tome-card-title">XP Tome</div>
+                    <div class="tome-card-stat">XP Gain</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/attraction-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Attraction_Tome.png" alt="Attraction Tome">
+                    </div>
+                    <div class="tome-card-title">Attraction Tome</div>
+                    <div class="tome-card-stat">Pickup Range</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/bloody-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome">
+                    </div>
+                    <div class="tome-card-title">Bloody Tome</div>
+                    <div class="tome-card-stat">Lifesteal</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/damage-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+                    </div>
+                    <div class="tome-card-title">Damage Tome</div>
+                    <div class="tome-card-stat">Base Damage</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">View Farming Builds →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .difficulty-stage, .strategy-item, .checklist-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
