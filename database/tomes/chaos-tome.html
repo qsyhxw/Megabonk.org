@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaos Tome Guide - Random Stats Tome | Megabonk Wiki</title>
+    <meta name="description" content="Chaos Tome in Megabonk. Learn how this Tome boosts random stats, its unlock condition, synergies, and tips for using it effectively. Reward bonus increased by 50% in Patch 1.0.12.">
+    <meta name="keywords" content="megabonk chaos tome, random stats, rng tome, chaos build, megabonk tomes, patch 1.0.12, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/chaos-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-chaos: #ff006e;
+            --accent-magenta: #d90368;
+            --accent-violet: #8b5cf6;
+            --accent-pink: #f72585;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.25), rgba(217, 3, 104, 0.25), rgba(139, 92, 246, 0.25));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="chaos" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(255,0,110,0.2)"/><circle cx="75" cy="75" r="2" fill="rgba(139,92,246,0.2)"/><circle cx="50" cy="10" r="2" fill="rgba(217,3,104,0.2)"/><circle cx="10" cy="50" r="2" fill="rgba(247,37,133,0.2)"/><circle cx="90" cy="30" r="2" fill="rgba(255,0,110,0.2)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23chaos)"/></svg>');
+            opacity: 0.3;
+            animation: chaosMove 20s linear infinite;
+        }
+
+        @keyframes chaosMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta), var(--accent-violet), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: colorShift 3s ease-in-out infinite;
+        }
+
+        @keyframes colorShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #ff006e, #d90368);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            box-shadow: 0 4px 12px rgba(255, 0, 110, 0.4);
+        }
+
+        /* Patch Banner */
+        .patch-banner {
+            background: linear-gradient(135deg, rgba(6, 255, 165, 0.15), rgba(0, 217, 126, 0.15));
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(6, 255, 165, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(6, 255, 165, 0.6); }
+        }
+
+        .patch-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+
+        .patch-desc {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Main Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Infobox */
+        .infobox {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            border: 1px solid rgba(255, 0, 110, 0.3);
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .infobox-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 110, 0.6));
+        }
+
+        .stat-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 0, 110, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--accent-chaos);
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--accent-chaos);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .stat-value.primary {
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+        }
+
+        .stat-value.random {
+            background: linear-gradient(90deg, #ff006e, #d90368, #8b5cf6, #f72585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: randomShift 2s linear infinite;
+        }
+
+        @keyframes randomShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 0, 110, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            border-radius: 4px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 0, 110, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-chaos);
+        }
+
+        .intro-text strong {
+            color: var(--accent-chaos);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            color: var(--text-gray);
+            transition: all 0.3s;
+        }
+
+        .info-list li::before {
+            content: '🎲';
+            position: absolute;
+            left: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .info-list li strong {
+            color: var(--accent-chaos);
+        }
+
+        /* Random Stat Pool */
+        .stat-pool {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.15), rgba(139, 92, 246, 0.15));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-chaos);
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-pool::before {
+            content: '🎲';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .pool-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .stat-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat-category {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 0, 110, 0.2);
+        }
+
+        .category-title {
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-title.offense {
+            color: #ff006e;
+        }
+
+        .category-title.defense {
+            color: #3a86ff;
+        }
+
+        .category-title.economy {
+            color: #ffbe0b;
+        }
+
+        .category-title.utility {
+            color: #06ffa5;
+        }
+
+        .stat-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .stat-list li {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .stat-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-chaos);
+            font-weight: 800;
+        }
+
+        /* Sample Builds */
+        .sample-builds {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .build-example {
+            background: rgba(255, 0, 110, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .build-example.lucky {
+            border-color: var(--success);
+        }
+
+        .build-example.unlucky {
+            border-color: var(--warning);
+        }
+
+        .build-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .build-title.lucky {
+            color: var(--success);
+        }
+
+        .build-title.unlucky {
+            color: var(--warning);
+        }
+
+        .build-stats {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .build-stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 0, 110, 0.1);
+        }
+
+        .build-stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .build-stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .build-stat-value {
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .build-verdict {
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .build-verdict.lucky {
+            background: rgba(6, 255, 165, 0.1);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .build-verdict.unlucky {
+            background: rgba(255, 190, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        /* Charge Shrine Challenge */
+        .shrine-challenge {
+            background: rgba(255, 0, 110, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 0, 110, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .challenge-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .challenge-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, #ff006e, #d90368);
+            color: var(--text-light);
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .challenge-steps {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .challenge-step {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-chaos);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--text-light);
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .step-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .challenge-tips {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--accent-chaos);
+        }
+
+        .tips-title {
+            font-weight: 700;
+            color: var(--accent-chaos);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        /* Risk vs Reward */
+        .risk-reward {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .risk-box, .reward-box {
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid;
+        }
+
+        .risk-box {
+            background: rgba(255, 190, 11, 0.1);
+            border-color: var(--warning);
+        }
+
+        .reward-box {
+            background: rgba(6, 255, 165, 0.1);
+            border-color: var(--success);
+        }
+
+        .box-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .box-title.risk {
+            color: var(--warning);
+        }
+
+        .box-title.reward {
+            color: var(--success);
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .synergy-card {
+            background: rgba(255, 0, 110, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 0, 110, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synergy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-chaos), var(--accent-magenta));
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(255, 0, 110, 0.3);
+            border-color: var(--accent-chaos);
+        }
+
+        .synergy-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .synergy-title a {
+            color: var(--accent-chaos);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-magenta);
+        }
+
+        .synergy-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-chaos);
+            margin-top: 1rem;
+        }
+
+        .highlight-box.info {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border-color: var(--accent-blue);
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 0, 110, 0.1));
+            border-color: var(--warning);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .highlight-box li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box.info li::before {
+            content: 'ℹ️';
+        }
+
+        .highlight-box.warning li::before {
+            content: '⚠️';
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 0, 110, 0.2);
+        }
+
+        .tag {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 110, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(255, 0, 110, 0.3);
+            border-color: var(--accent-chaos);
+        }
+
+        .tome-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tome-card-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.3));
+        }
+
+        .tome-card-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-chaos), var(--accent-magenta));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 110, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 0, 110, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-chaos);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .infobox {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .synergies-grid,
+            .related-tomes {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stat-categories,
+            .sample-builds,
+            .risk-reward {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .tier-badge {
+                display: block;
+                margin: 1rem 0 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <strong>Chaos Tome</strong>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>🎲 Chaos Tome</h1>
+            <span class="tier-badge">B-TIER</span>
+            <p class="hero-subtitle">Random Stats - Embrace the Chaos for Unpredictable Power!</p>
+            <div class="tome-category">RNG Tome / High-Risk High-Reward</div>
+        </div>
+    </div>
+
+    <!-- Patch Banner -->
+    <div class="container">
+        <div class="patch-banner">
+            <div class="patch-title">🎉 PATCH 1.0.12 UPDATE</div>
+            <div class="patch-desc">
+                Reward bonus increased by <strong>50%</strong>! Chaos Tome is now significantly more rewarding, making the gamble more worthwhile!
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Infobox Sidebar -->
+            <aside class="infobox">
+                <div class="infobox-image">
+                    <img src="https://megabonk.org/images/Tomes/Chaos_Tome.png" alt="Chaos Tome">
+                </div>
+                
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">📊 Stat Type</span>
+                        <span class="stat-value random">Random Stat</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⬆️ Upgrade</span>
+                        <span class="stat-value primary">Varies</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🔓 Unlock</span>
+                        <span class="stat-value">Charge Shrines</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🎯 Max Level</span>
+                        <span class="stat-value primary">99</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">✨ Patch 1.0.12</span>
+                        <span class="stat-value" style="color: var(--success);">+50% Bonus</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Introduction -->
+                <section class="section">
+                    <p class="intro-text">
+                        The <strong>Chaos Tome</strong> is one of the most unpredictable Tomes in <strong><a href="https://megabonk.org/" style="color: var(--accent-chaos);">Megabonk</a></strong>. Instead of giving a clear and fixed bonus, <strong>each upgrade randomly increases a different stat</strong>. This makes it risky to invest in but also fun if you enjoy unpredictable <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-chaos);">builds</a>. <strong>As of Patch 1.0.12, the reward bonus from this Tome has been increased by 50%, making it a more worthwhile gamble.</strong>
+                    </p>
+                </section>
+
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <ul class="info-list">
+                        <li><strong>Stat:</strong> Random Stat (Changes Each Level)</li>
+                        <li><strong>Base upgrade per level:</strong> Varies (RNG-dependent)</li>
+                        <li><strong>How to unlock:</strong> Charge all Charge Shrines on Tier 3 across all 3 stages without leaving charge zone</li>
+                        <li><strong>Max level:</strong> 99</li>
+                        <li><strong>Category:</strong> RNG Tome</li>
+                        <li><strong>Patch 1.0.12:</strong> Reward bonus increased by 50%</li>
+                    </ul>
+                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
+                        Chaos Tome represents the ultimate gamble in Megabonk. Every level provides a random stat boost that could go into offense, defense, economy, or utility. Sometimes the rolls line up perfectly to create surprisingly strong builds. Other times, the stats might spread too thin to be effective. With the Patch 1.0.12 buff, the rewards are now 50% higher, making the risk more worth taking!
+                    </p>
+                </section>
+
+                <!-- Random Stat Pool -->
+                <section class="section">
+                    <h2 class="section-title">Possible Random Stats</h2>
+                    <div class="stat-pool">
+                        <div class="pool-title">🎲 What Can You Roll?</div>
+                        <p style="color: var(--text-gray); text-align: center; margin-bottom: 1.5rem;">
+                            Every level of Chaos Tome grants a boost to one randomly-selected stat from these categories:
+                        </p>
+                        <div class="stat-categories">
+                            <div class="stat-category">
+                                <div class="category-title offense">
+                                    ⚔️ Offense Stats
+                                </div>
+                                <ul class="stat-list">
+                                    <li>Damage</li>
+                                    <li>Attack Speed (Cooldown)</li>
+                                    <li>Critical Hit Chance</li>
+                                    <li>Projectile Speed</li>
+                                    <li>Projectile Quantity</li>
+                                    <li>Attack Size</li>
+                                    <li>Knockback</li>
+                                </ul>
+                            </div>
+
+                            <div class="stat-category">
+                                <div class="category-title defense">
+                                    🛡️ Defense Stats
+                                </div>
+                                <ul class="stat-list">
+                                    <li>Max HP</li>
+                                    <li>HP Regeneration</li>
+                                    <li>Armor (Damage Reduction)</li>
+                                    <li>Shield</li>
+                                    <li>Evasion</li>
+                                    <li>Lifesteal</li>
+                                </ul>
+                            </div>
+
+                            <div class="stat-category">
+                                <div class="category-title economy">
+                                    💰 Economy Stats
+                                </div>
+                                <ul class="stat-list">
+                                    <li>Gold Gain</li>
+                                    <li>Silver Gain</li>
+                                    <li>XP Gain</li>
+                                    <li>Item Drop Rate (Luck)</li>
+                                </ul>
+                            </div>
+
+                            <div class="stat-category">
+                                <div class="category-title utility">
+                                    ⚡ Utility Stats
+                                </div>
+                                <ul class="stat-list">
+                                    <li>Movement Speed</li>
+                                    <li>Pickup Range</li>
+                                    <li>Duration</li>
+                                    <li>Area</li>
+                                    <li>Dash Cooldown</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p style="color: var(--accent-chaos); margin-top: 1.5rem; font-weight: 600; text-align: center;">
+                            With the Patch 1.0.12 buff, all these values are now 50% higher! Better odds, better rewards!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Sample Builds -->
+                <section class="section">
+                    <h2 class="section-title">Sample RNG Outcomes</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Here's how Chaos Tome can play out differently depending on RNG luck:
+                    </p>
+                    <div class="sample-builds">
+                        <div class="build-example lucky">
+                            <div class="build-title lucky">
+                                ✅ Lucky Roll Example (10 Levels)
+                            </div>
+                            <div class="build-stats">
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Damage</span>
+                                    <span class="build-stat-value">+3 levels</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Attack Speed</span>
+                                    <span class="build-stat-value">+2 levels</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Critical Hit</span>
+                                    <span class="build-stat-value">+2 levels</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Armor</span>
+                                    <span class="build-stat-value">+2 levels</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Movement Speed</span>
+                                    <span class="build-stat-value">+1 level</span>
+                                </div>
+                            </div>
+                            <div class="build-verdict lucky">
+                                <strong>Verdict:</strong> Excellent rolls! Heavy focus on damage stats with some defensive support. This creates a powerful offensive build with survivability backup.
+                            </div>
+                        </div>
+
+                        <div class="build-example unlucky">
+                            <div class="build-title unlucky">
+                                ⚠️ Unlucky Roll Example (10 Levels)
+                            </div>
+                            <div class="build-stats">
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Pickup Range</span>
+                                    <span class="build-stat-value">+2 levels</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Silver Gain</span>
+                                    <span class="build-stat-value">+2 levels</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Projectile Speed</span>
+                                    <span class="build-stat-value">+1 level</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Duration</span>
+                                    <span class="build-stat-value">+2 levels</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Damage</span>
+                                    <span class="build-stat-value">+1 level</span>
+                                </div>
+                                <div class="build-stat-item">
+                                    <span class="build-stat-label">Knockback</span>
+                                    <span class="build-stat-value">+2 levels</span>
+                                </div>
+                            </div>
+                            <div class="build-verdict unlucky">
+                                <strong>Verdict:</strong> Spread too thin. Stats are scattered across utility and economy with minimal offensive or defensive focus. Not terrible, but not cohesive.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Effects -->
+                <section class="section">
+                    <h2 class="section-title">Effects</h2>
+                    <ul class="info-list">
+                        <li><strong>Every level of Chaos Tome increases a random stat</strong></li>
+                        <li>The boost can go into offense, defense, economy, or utility</li>
+                        <li>Reward bonus from this Tome is now 50% higher (Patch 1.0.12)</li>
+                        <li>Sometimes the rolls line up and create a surprisingly strong build</li>
+                        <li>Other times it might spread thin across non-synergistic stats</li>
+                        <li>No control over which stats you receive</li>
+                    </ul>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock</h2>
+                    <div class="shrine-challenge">
+                        <div class="challenge-header">
+                            <div class="challenge-title">Charge Shrine Challenge</div>
+                            <div class="difficulty-badge">🔥 HARD DIFFICULTY</div>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-chaos);">
+                            <strong style="color: var(--accent-chaos);">Requirement:</strong><br>
+                            <span style="color: var(--text-gray);">
+                                Charge all Charge Shrines on a <strong>Tier 3</strong> run across all <strong>3 stages</strong> without leaving the charge zone.
+                            </span>
+                        </div>
+
+                        <div class="challenge-steps">
+                            <div class="challenge-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <div class="step-title">Start a Tier 3 Run</div>
+                                    <div class="step-desc">
+                                        Must be on Tier 3 difficulty. Lower tiers don't count toward the unlock.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="challenge-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">Find Charge Shrines</div>
+                                    <div class="step-desc">
+                                        Charge Shrines spawn randomly on the map. You need to stand in the circular charge zone around them.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="challenge-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <div class="step-title">Charge Without Leaving</div>
+                                    <div class="step-desc">
+                                        Stay inside the shrine's charge zone until it's fully charged. If you leave the zone, the charge resets!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="challenge-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <div class="step-title">Complete All 3 Stages</div>
+                                    <div class="step-desc">
+                                        You must charge all shrines across all 3 stages in a single run. Dying or quitting resets progress.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-tips">
+                            <div class="tips-title">💡 Tips for Success</div>
+                            <ul class="stat-list">
+                                <li>Prioritize survivability - you'll be standing still while charging</li>
+                                <li>Use defensive <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-chaos);">characters</a> or builds with high HP/Armor</li>
+                                <li>Area-of-effect <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-chaos);">weapons</a> help you defend while stationary</li>
+                                <li>Clear enemies around the shrine before starting to charge</li>
+                                <li>Shield Tome and Regen Tome are excellent for this challenge</li>
+                                <li>Don't rush - take your time and play safely</li>
+                                <li>Some builds can tank through the charge period - test your survivability first</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Risk vs Reward -->
+                <section class="section">
+                    <h2 class="section-title">Risk vs Reward Analysis</h2>
+                    <div class="risk-reward">
+                        <div class="risk-box">
+                            <div class="box-title risk">⚠️ The Risks</div>
+                            <ul class="stat-list">
+                                <li><strong>Unpredictable outcomes</strong> - no control over stat distribution</li>
+                                <li>Can spread stats too thin across unrelated bonuses</li>
+                                <li>Might roll stats you don't need for your build</li>
+                                <li>No guarantee of getting core stats like Damage or HP</li>
+                                <li>Difficult unlock condition (Charge Shrine challenge)</li>
+                                <li>Investment could be wasted on utility when you need power</li>
+                            </ul>
+                        </div>
+
+                        <div class="reward-box">
+                            <div class="box-title reward">✅ The Rewards</div>
+                            <ul class="stat-list">
+                                <li><strong>50% higher bonus (Patch 1.0.12)</strong> - significantly better value!</li>
+                                <li>Potential for god-tier RNG creating overpowered builds</li>
+                                <li>Free stats across multiple categories</li>
+                                <li>Fun and unpredictable gameplay experience</li>
+                                <li>Can fill gaps in your build you didn't know you needed</li>
+                                <li>When it works, it REALLY works - clutch stats at the right time</li>
+                                <li>High-risk, high-reward excitement factor</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergies</h2>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/luck-tome/">Luck Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More chances for favorable rolls from Chaos Tome. Better RNG outcomes overall.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Extra difficulty plus random buffs can turn a run into a high-risk, high-reward experience.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/xp-tome/">XP Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More level-ups give more chances to roll Chaos upgrades. More rolls = better odds of good stats.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                🎯 Strong Core Build
+                            </div>
+                            <div class="synergy-desc">
+                                Works well if you already have a stable build and can afford to gamble on extra stats. Use Chaos as icing on the cake, not the foundation.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Don't rely on Chaos Tome alone</strong> - use it as a side investment after your core stats are covered</li>
+                            <li>Best used in runs where you already feel strong and can afford some randomness</li>
+                            <li><strong>Since its reward bonus is 50% higher,</strong> it might now be worth prioritizing slightly earlier</li>
+                            <li>Be ready for inconsistent results—sometimes you'll get great offense, other times mostly utility</li>
+                            <li>Works best as a "bonus" Tome after establishing a solid foundation</li>
+                            <li>Great for players who enjoy RNG and experimentation</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="section">
+                    <h2 class="section-title">When to Use Chaos Tome</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>✅ Use it when:</strong> Your core build is already established and functional</li>
+                            <li><strong>✅ Use it when:</strong> You're feeling lucky and want to spice up a run</li>
+                            <li><strong>✅ Use it when:</strong> You have lots of XP gain for frequent level-ups</li>
+                            <li><strong>✅ Use it when:</strong> You enjoy unpredictable, experimental gameplay</li>
+                            <li><strong>❌ Avoid when:</strong> You need specific stats to survive or complete a challenge</li>
+                            <li><strong>❌ Avoid when:</strong> Playing on highest difficulty where consistency matters</li>
+                            <li><strong>❌ Avoid when:</strong> Your build is already struggling and needs targeted improvements</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Important Notes -->
+                <section class="section">
+                    <h2 class="section-title">Important Considerations</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li>Considered one of the most "fun" Tomes, but not always reliable</li>
+                            <li>Unlock condition is one of the tougher shrine challenges</li>
+                            <li><strong>Patch V1.0.12</strong> greatly increased the reward bonus by 50%, making the Chaos Tome a much more appealing high-risk, high-reward investment</li>
+                            <li>RNG can be cruel - don't get frustrated if rolls are bad</li>
+                            <li>Can create surprisingly broken builds with good luck</li>
+                            <li>Not recommended for <a href="https://megabonk.org/guides/bosses/" style="color: var(--warning);">boss rush</a> or speedrun attempts where consistency is key</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Random Stats</span>
+                    <span class="tag">B-Tier</span>
+                    <span class="tag">RNG</span>
+                    <span class="tag">High-Risk</span>
+                    <span class="tag">Patch 1.0.12</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/luck-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome">
+                    </div>
+                    <div class="tome-card-title">Luck Tome</div>
+                    <div class="tome-card-stat">Item Drop Rate</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cursed-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome">
+                    </div>
+                    <div class="tome-card-title">Cursed Tome</div>
+                    <div class="tome-card-stat">Enemy Density</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/xp-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+                    </div>
+                    <div class="tome-card-title">XP Tome</div>
+                    <div class="tome-card-stat">XP Gain</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/damage-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+                    </div>
+                    <div class="tome-card-title">Damage Tome</div>
+                    <div class="tome-card-stat">Base Damage</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">View Fun Builds →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .build-example, .challenge-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
