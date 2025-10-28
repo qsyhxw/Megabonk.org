@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Silver Tome: Effect, Unlock, Toggle & Tips</title>
+    <meta name="description" content="Megabonk Silver Tome: effect, default unlock, community-reported +12% per level, v1.0.17 toggle, and concise tips to farm silver faster.">
+    <meta name="keywords" content="megabonk silver tome, silver gain, currency tome, megabonk tomes, progression guide, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/silver-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-silver: #c0c0c0;
+            --accent-chrome: #e8e8e8;
+            --accent-steel: #a9a9a9;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.2), rgba(169, 169, 169, 0.2));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(192,192,192,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-chrome), var(--accent-silver), var(--accent-steel));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-silver), var(--accent-steel));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: #000;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #c0c0c0, #a9a9a9);
+            color: #000;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            box-shadow: 0 4px 12px rgba(192, 192, 192, 0.4);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Main Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Infobox */
+        .infobox {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            border: 1px solid rgba(192, 192, 192, 0.3);
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(169, 169, 169, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(192, 192, 192, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .infobox-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(192, 192, 192, 0.5));
+        }
+
+        .stat-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(192, 192, 192, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--accent-silver);
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--accent-silver);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .stat-value.primary {
+            background: linear-gradient(135deg, var(--accent-chrome), var(--accent-silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(192, 192, 192, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-chrome), var(--accent-silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--accent-chrome), var(--accent-silver));
+            border-radius: 4px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: rgba(192, 192, 192, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-silver);
+        }
+
+        .intro-text strong {
+            color: var(--accent-silver);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            color: var(--text-gray);
+            transition: all 0.3s;
+        }
+
+        .info-list li::before {
+            content: '🪙';
+            position: absolute;
+            left: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .info-list li strong {
+            color: var(--accent-silver);
+        }
+
+        /* Silver Ladder */
+        .silver-ladder {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .silver-stage {
+            background: rgba(192, 192, 192, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(192, 192, 192, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .silver-stage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-chrome), var(--accent-silver));
+        }
+
+        .silver-stage:hover {
+            transform: translateX(5px);
+            border-color: var(--accent-silver);
+            box-shadow: 0 8px 16px rgba(192, 192, 192, 0.2);
+        }
+
+        .silver-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .silver-boost {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-chrome), var(--accent-silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .silver-level {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .silver-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .silver-example {
+            color: var(--accent-silver);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Meta Box */
+        .meta-box {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.15), rgba(169, 169, 169, 0.15));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-silver);
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meta-box::before {
+            content: '🪙';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .meta-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-chrome), var(--accent-silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .meta-desc {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Comparison Box */
+        .comparison-box {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(169, 169, 169, 0.1));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-silver);
+            margin-top: 1.5rem;
+        }
+
+        .comparison-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-chrome), var(--accent-silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .comparison-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+
+        .comparison-item-title {
+            font-weight: 700;
+            color: var(--accent-silver);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-item-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ROI Calculator */
+        .roi-box {
+            background: rgba(192, 192, 192, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(192, 192, 192, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .roi-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-silver);
+        }
+
+        .roi-header {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .roi-calculation {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .roi-result {
+            color: var(--accent-silver);
+            font-weight: 700;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .synergy-card {
+            background: rgba(192, 192, 192, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(192, 192, 192, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synergy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-chrome), var(--accent-silver));
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(192, 192, 192, 0.3);
+            border-color: var(--accent-silver);
+        }
+
+        .synergy-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .synergy-title a {
+            color: var(--accent-silver);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-chrome);
+        }
+
+        .synergy-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(169, 169, 169, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-silver);
+            margin-top: 1rem;
+        }
+
+        .highlight-box.info {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border-color: var(--accent-blue);
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 0, 110, 0.1));
+            border-color: var(--warning);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .highlight-box li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box.info li::before {
+            content: 'ℹ️';
+        }
+
+        .highlight-box.warning li::before {
+            content: '⚠️';
+        }
+
+        /* Unlock Badge */
+        .unlock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--success), #00d97e);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #000;
+            box-shadow: 0 4px 12px rgba(6, 255, 165, 0.3);
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(192, 192, 192, 0.2);
+        }
+
+        .tag {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-silver), var(--accent-steel));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000;
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(192, 192, 192, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(192, 192, 192, 0.3);
+            border-color: var(--accent-silver);
+        }
+
+        .tome-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tome-card-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(192, 192, 192, 0.3));
+        }
+
+        .tome-card-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-silver), var(--accent-steel));
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(192, 192, 192, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(192, 192, 192, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(192, 192, 192, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-silver);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .infobox {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .synergies-grid,
+            .related-tomes {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .tier-badge {
+                display: block;
+                margin: 1rem 0 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <strong>Silver Tome</strong>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>🪙 Silver Tome</h1>
+            <span class="tier-badge">B-TIER</span>
+            <p class="hero-subtitle">Long-Term Investment - Boost Silver Gain for Faster Account Progression</p>
+            <div class="tome-category">Meta Progression Tome</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Infobox Sidebar -->
+            <aside class="infobox">
+                <div class="infobox-image">
+                    <img src="https://megabonk.org/images/Tomes/Silver_Tome.png" alt="Silver Tome">
+                </div>
+                
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">📊 Stat Type</span>
+                        <span class="stat-value">Silver Gain</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⬆️ Upgrade</span>
+                        <span class="stat-value primary">+12%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🔓 Unlock</span>
+                        <span class="stat-value">Default</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🎯 Max Level</span>
+                        <span class="stat-value primary">99</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Introduction -->
+                <section class="section">
+                    <p class="intro-text">
+                        The <strong>Silver Tome</strong> increases how much Silver you earn in <strong><a href="https://megabonk.org/" style="color: var(--accent-silver);">Megabonk</a></strong>. <strong>Silver is used for progression and unlocks</strong>, making this Tome an important option for building resources across multiple runs. While it doesn't directly help you win individual runs, it accelerates your long-term account growth significantly.
+                    </p>
+                </section>
+
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <ul class="info-list">
+                        <li><strong>Stat:</strong> Silver Gain</li>
+                        <li><strong>Base upgrade per level:</strong> +12% silver from all sources</li>
+                        <li><strong>How to unlock:</strong> Default (available at start)</li>
+                        <li><strong>Max level:</strong> 99</li>
+                    </ul>
+                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
+                        Silver is the primary currency for unlocking new <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-silver);">characters</a>, <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-silver);">weapons</a>, and upgrades. This Tome is a meta-progression investment that pays dividends across your entire Megabonk journey.
+                    </p>
+                </section>
+
+                <!-- Silver Gain Progression -->
+                <section class="section">
+                    <h2 class="section-title">Silver Gain Progression</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        See how your silver earnings multiply with investment:
+                    </p>
+                    <div class="silver-ladder">
+                        <div class="silver-stage">
+                            <div class="silver-header">
+                                <div class="silver-boost">+60% Silver</div>
+                                <div class="silver-level">Level ~5</div>
+                            </div>
+                            <div class="silver-desc">
+                                Noticeable boost. You're earning 1.6x the base silver from all sources.
+                            </div>
+                            <div class="silver-example">Example: 100 Silver → 160 Silver per run</div>
+                        </div>
+
+                        <div class="silver-stage">
+                            <div class="silver-header">
+                                <div class="silver-boost">+180% Silver</div>
+                                <div class="silver-level">Level ~15</div>
+                            </div>
+                            <div class="silver-desc">
+                                Significant multiplier. Nearly 3x base silver earnings.
+                            </div>
+                            <div class="silver-example">Example: 100 Silver → 280 Silver per run</div>
+                        </div>
+
+                        <div class="silver-stage">
+                            <div class="silver-header">
+                                <div class="silver-boost">+360% Silver</div>
+                                <div class="silver-level">Level ~30</div>
+                            </div>
+                            <div class="silver-desc">
+                                Major acceleration. Over 4.5x base earnings speeds up unlocks dramatically.
+                            </div>
+                            <div class="silver-example">Example: 100 Silver → 460 Silver per run</div>
+                        </div>
+
+                        <div class="silver-stage">
+                            <div class="silver-header">
+                                <div class="silver-boost">+600%+ Silver</div>
+                                <div class="silver-level">Level 50+</div>
+                            </div>
+                            <div class="silver-desc">
+                                Exponential growth. 7x+ base earnings makes unlocking everything much faster.
+                            </div>
+                            <div class="silver-example">Example: 100 Silver → 700+ Silver per run</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Effects -->
+                <section class="section">
+                    <h2 class="section-title">Effects</h2>
+                    <ul class="info-list">
+                        <li><strong>Every level increases Silver gained from all sources by 12%</strong></li>
+                        <li>Does not affect Gold or XP directly, but helps with long-term account growth</li>
+                        <li>Especially useful for unlocking new characters, weapons, or features faster</li>
+                        <li>Multiplies silver from enemy kills, chests, events, and end-of-run rewards</li>
+                        <li>Compounds with other silver gain bonuses for exponential growth</li>
+                    </ul>
+                </section>
+
+                <!-- Meta-Game Value -->
+                <section class="section">
+                    <h2 class="section-title">Meta-Game Value</h2>
+                    <div class="meta-box">
+                        <div class="meta-title">🪙 Understanding Meta Progression</div>
+                        <div class="meta-desc">
+                            <strong>In-Run Value:</strong> Silver Tome provides ZERO direct benefit during a run. It won't help you kill enemies faster, survive longer, or clear stages easier.
+                        </div>
+                        <div class="meta-desc">
+                            <strong>Outside-Run Value:</strong> After the run ends, Silver Tome shines. Every run with Silver Tome invested earns significantly more currency, accelerating your ability to unlock new content and power up your account.
+                        </div>
+                        <div class="meta-desc">
+                            <strong>Long-Term Impact:</strong> Over dozens or hundreds of runs, Silver Tome investment compounds dramatically. The difference between 0 levels and 30 levels can mean unlocking everything weeks faster.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock</h2>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div class="unlock-badge">
+                            ✅ Unlocked by Default
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 1rem;">
+                            This Tome is available from the start of the game. No special condition is required.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Progression Currency Comparison -->
+                <section class="section">
+                    <h2 class="section-title">Progression Currency Comparison</h2>
+                    <div class="comparison-box">
+                        <div class="comparison-title">🪙 Silver vs Gold vs XP</div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            Three currencies drive different aspects of progression:
+                        </p>
+                        <div class="comparison-grid">
+                            <div class="comparison-item">
+                                <div class="comparison-item-title">🪙 Silver (This Tome)</div>
+                                <div class="comparison-item-desc">
+                                    <strong>Major unlocks</strong><br>
+                                    Characters, weapons, game modes. Slower to earn but opens new content. Long-term focus.
+                                </div>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-item-title">💰 Gold</div>
+                                <div class="comparison-item-desc">
+                                    <strong>In-run purchases</strong><br>
+                                    Items, upgrades during runs. Easier to earn. Immediate tactical value.
+                                </div>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-item-title">⭐ XP</div>
+                                <div class="comparison-item-desc">
+                                    <strong>Account levels</strong><br>
+                                    Unlocks features and Tome points. Gradual progression system.
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
+                            <strong>Best strategy:</strong> Invest in both Silver Tome and Golden Tome for comprehensive economic growth.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ROI Analysis -->
+                <section class="section">
+                    <h2 class="section-title">Return on Investment</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Understanding when Silver Tome pays for itself:
+                    </p>
+                    <div class="roi-box">
+                        <div class="roi-item">
+                            <div class="roi-header">Early Investment (Level 10)</div>
+                            <div class="roi-calculation">
+                                • Cost: ~10 Tome points<br>
+                                • Benefit: +120% Silver gain (2.2x multiplier)<br>
+                                • Typical run: 50 Silver → 110 Silver (+60 per run)<br>
+                                • Payoff: ~17 runs to break even on opportunity cost
+                            </div>
+                            <div class="roi-result">✅ Excellent value if you plan to play 20+ runs</div>
+                        </div>
+
+                        <div class="roi-item">
+                            <div class="roi-header">Mid Investment (Level 25)</div>
+                            <div class="roi-calculation">
+                                • Cost: ~25 Tome points<br>
+                                • Benefit: +300% Silver gain (4x multiplier)<br>
+                                • Typical run: 50 Silver → 200 Silver (+150 per run)<br>
+                                • Payoff: Massive acceleration for content unlocks
+                            </div>
+                            <div class="roi-result">✅ Great value for dedicated players</div>
+                        </div>
+
+                        <div class="roi-item">
+                            <div class="roi-header">Heavy Investment (Level 50+)</div>
+                            <div class="roi-calculation">
+                                • Cost: ~50+ Tome points<br>
+                                • Benefit: +600%+ Silver gain (7x+ multiplier)<br>
+                                • Typical run: 50 Silver → 350+ Silver (+300+ per run)<br>
+                                • Payoff: Fastest possible account progression
+                            </div>
+                            <div class="roi-result">⚠️ Requires sacrificing combat Tomes - evaluate priorities</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergies</h2>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Golden_Tome.png" alt="Golden Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/golden-tome/">Golden Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Silver plus Gold boosts cover both main currencies. Complete economic dominance.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/xp-tome/">XP Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Progression speed scales better when paired with stronger accounts and unlocks. Triple meta boost.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/luck-tome/">Luck Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More frequent better offers can be afforded more easily with extra Silver. Quality meets quantity.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More enemies means more potential Silver gains per run. Harder runs = more rewards.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Duration_Tome.png" alt="Duration Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/duration-tome/">Duration Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Longer runs mean more enemy kills and silver opportunities. Endurance pays dividends.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/damage-tome/">Damage Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Kill enemies faster to maximize silver per minute. Combat + economy optimization.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Prioritize this Tome if your focus is long-term progression</strong></li>
+                            <li>Not always the strongest choice inside a single run, but pays off outside runs</li>
+                            <li>Consider mixing it with combat Tomes so you don't sacrifice survival for economy</li>
+                            <li>Particularly valuable for new players looking to unlock everything quickly</li>
+                            <li>Works best when combined with <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-silver);">builds</a> that can clear high-difficulty content</li>
+                            <li>The longer you plan to play, the more valuable this Tome becomes</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- When to Invest -->
+                <section class="section">
+                    <h2 class="section-title">When to Invest</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>You're a new player</strong> - Accelerate unlocks to access all content faster</li>
+                            <li><strong>You play regularly</strong> - Many runs means massive cumulative silver gain</li>
+                            <li><strong>You want to try everything</strong> - More silver = faster access to all <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-blue);">characters</a> and weapons</li>
+                            <li><strong>You're grinding for specific unlocks</strong> - Speed up progress toward expensive purchases</li>
+                            <li><strong>You have combat Tomes covered</strong> - Can afford the meta investment</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Considerations -->
+                <section class="section">
+                    <h2 class="section-title">Important Considerations</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li><strong>⚠️ Zero In-Run Value</strong> - Doesn't help you win the current run</li>
+                            <li><strong>⚠️ Opportunity Cost</strong> - Points spent here can't go to combat stats</li>
+                            <li>Less impactful in short casual runs, more valuable if you grind regularly</li>
+                            <li>Diminishing returns at very high levels - consider balance with other Tomes</li>
+                            <li>Only valuable if you actually have unlocks remaining to purchase</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Notes -->
+                <section class="section">
+                    <h2 class="section-title">Final Thoughts</h2>
+                    <p style="color: var(--text-gray); line-height: 1.8;">
+                        One of the <strong>"meta" Tomes for account progression</strong>. While it won't help you clear <a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-silver);">bosses</a> or survive longer in individual runs, it dramatically accelerates your long-term journey through Megabonk. The compounding effect of earning 2x, 4x, or even 7x silver per run adds up to hundreds or thousands of extra silver over dozens of runs. Essential for completionists and dedicated players.
+                    </p>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Silver Gain</span>
+                    <span class="tag">B-Tier</span>
+                    <span class="tag">Meta</span>
+                    <span class="tag">Progression</span>
+                    <span class="tag">Economy</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/golden-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Golden_Tome.png" alt="Golden Tome">
+                    </div>
+                    <div class="tome-card-title">Golden Tome</div>
+                    <div class="tome-card-stat">Gold Gain</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/xp-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+                    </div>
+                    <div class="tome-card-title">XP Tome</div>
+                    <div class="tome-card-stat">XP Gain</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/luck-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome">
+                    </div>
+                    <div class="tome-card-title">Luck Tome</div>
+                    <div class="tome-card-stat">Drop Quality</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cursed-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome">
+                    </div>
+                    <div class="tome-card-title">Cursed Tome</div>
+                    <div class="tome-card-stat">Enemy Density</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/database/tomes/golden-tome/" class="btn btn-secondary">View Golden Tome →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .silver-stage, .roi-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
