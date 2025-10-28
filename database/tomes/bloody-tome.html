@@ -1,0 +1,1149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Bloody Tome: Lifesteal, Unlock & Scaling</title>
+    <meta name="description" content="Guide to Bloody Tome in Megabonk: how lifesteal works, +10% per level, the 100% breakpoint, how to unlock (12,500 kills), best weapon synergies.">
+    <meta name="keywords" content="megabonk bloody tome, lifesteal, healing, sustain tome, megabonk tomes, lifesteal guide, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/bloody-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-blood: #dc143c;
+            --accent-crimson: #8b0000;
+            --accent-ruby: #e32636;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.25), rgba(139, 0, 0, 0.25));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(220,20,60,0.15)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-blood), var(--accent-crimson), var(--accent-ruby));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-blood), var(--accent-crimson));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--success), #04d98b);
+            border-radius: 50px;
+            font-weight: 700;
+            margin-left: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        main {
+            background: rgba(15, 52, 96, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        aside {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-blood), var(--accent-ruby));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .highlight-box {
+            background: rgba(220, 20, 60, 0.15);
+            border-left: 4px solid var(--accent-blood);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(255, 190, 11, 0.15);
+            border-left-color: var(--warning);
+        }
+
+        .highlight-box.info {
+            background: rgba(58, 134, 255, 0.15);
+            border-left-color: var(--accent-blue);
+        }
+
+        .highlight-box ul {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .highlight-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.2), rgba(139, 0, 0, 0.2));
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(220, 20, 60, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blood);
+            box-shadow: 0 8px 20px rgba(220, 20, 60, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-blood);
+        }
+
+        /* Lifesteal Stages */
+        .lifesteal-stages {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .lifesteal-stage {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(139, 0, 0, 0.1));
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-blood);
+            transition: all 0.3s ease;
+        }
+
+        .lifesteal-stage:hover {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.2), rgba(139, 0, 0, 0.2));
+            transform: translateX(5px);
+        }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stage-level {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blood);
+        }
+
+        .stage-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .stage-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Weapons List */
+        .weapons-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .weapon-item {
+            background: rgba(220, 20, 60, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid rgba(220, 20, 60, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .weapon-item:hover {
+            background: rgba(220, 20, 60, 0.2);
+            border-color: var(--accent-blood);
+            transform: translateY(-3px);
+        }
+
+        .weapon-name {
+            font-weight: 700;
+            color: var(--accent-blood);
+            margin-bottom: 0.3rem;
+        }
+
+        .weapon-desc {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Synergies */
+        .synergies-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .synergy-card {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid rgba(58, 134, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .synergy-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(58, 134, 255, 0.2);
+        }
+
+        .synergy-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .synergy-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+        }
+
+        .synergy-title a {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-purple);
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .tag {
+            background: rgba(220, 20, 60, 0.2);
+            color: var(--accent-blood);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(220, 20, 60, 0.3);
+        }
+
+        /* Quick Navigation Links */
+        .quick-nav-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(58, 134, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .quick-nav-link:hover {
+            background: rgba(58, 134, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+        }
+
+        /* Weapon Item Links */
+        .weapon-item a {
+            transition: all 0.3s ease;
+        }
+
+        .weapon-item a:hover {
+            opacity: 0.8;
+        }
+
+        .weapon-item img {
+            transition: all 0.3s ease;
+        }
+
+        .weapon-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+        }
+
+        .tome-card {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.6), rgba(22, 33, 62, 0.6));
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            border: 2px solid rgba(58, 134, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 15px 35px rgba(58, 134, 255, 0.3);
+        }
+
+        .tome-card-icon img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+        }
+
+        .tome-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-blood), var(--accent-crimson));
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 10px 25px rgba(220, 20, 60, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .related-tomes {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/tier-lists/items/">Tier Lists</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <span>Bloody Tome</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome" style="width: 120px; height: 120px; border-radius: 20px; box-shadow: 0 8px 32px rgba(220, 20, 60, 0.5);">
+            </div>
+            <h1>Bloody Tome</h1>
+            <p class="hero-subtitle">Lifesteal - Heal by Hitting Enemies</p>
+            <div>
+                <span class="tome-category">+Lifesteal Tome</span>
+                <span class="tier-badge">High-Value Sustain</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-wrapper">
+            <main>
+                <!-- Quick Stats -->
+                <section class="section">
+                    <h2 class="section-title">Quick Stats</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Per Level</div>
+                            <div class="stat-value">~+10%*</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Max Level</div>
+                            <div class="stat-value">High*</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Unlock</div>
+                            <div class="stat-value">12,500</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value" style="font-size: 1.3rem;">Kills</div>
+                        </div>
+                    </div>
+                    <div class="highlight-box info" style="margin-top: 1.5rem;">
+                        <p><strong>📌 Data Notice:</strong> Values marked with * are community-reported based on v1.0.7-era testing (September-October 2025). Max level is widely reported as ~99 by multiple sources but not officially documented. Always verify current patch values in-game.</p>
+                    </div>
+                    <div style="text-align: center; margin-top: 1.5rem; padding: 1rem; background: rgba(58, 134, 255, 0.1); border-radius: 10px;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.8rem;">📚 <strong>Quick Navigation</strong></p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center;">
+                            <a href="https://megabonk.org/database/tomes/" style="color: var(--accent-blue); text-decoration: none; padding: 0.5rem 1rem; background: rgba(58, 134, 255, 0.2); border-radius: 20px; transition: all 0.3s;">All Tomes</a>
+                            <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-blue); text-decoration: none; padding: 0.5rem 1rem; background: rgba(58, 134, 255, 0.2); border-radius: 20px; transition: all 0.3s;">All Weapons</a>
+                            <a href="https://megabonk.org/tier-lists/tomes/" style="color: var(--accent-blue); text-decoration: none; padding: 0.5rem 1rem; background: rgba(58, 134, 255, 0.2); border-radius: 20px; transition: all 0.3s;">Tome Tier List</a>
+                            <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-blue); text-decoration: none; padding: 0.5rem 1rem; background: rgba(58, 134, 255, 0.2); border-radius: 20px; transition: all 0.3s;">Build Guides</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Core Mechanics -->
+                <section class="section">
+                    <h2 class="section-title">Core Mechanics</h2>
+                    <div class="highlight-box">
+                        <h3 style="color: var(--accent-blood); margin-bottom: 1rem;">How Lifesteal Works</h3>
+                        <ul>
+                            <li><strong>On-Hit Healing:</strong> Each time you hit an enemy, there's a chance to recover 1 HP</li>
+                            <li><strong>100% Threshold:</strong> At ≥100% lifesteal, you are guaranteed 1 HP per hit</li>
+                            <li><strong>Overflow Mechanic:</strong> Lifesteal beyond 100% provides additional proc chances
+                                <ul style="margin-top: 0.5rem;">
+                                    <li>200% lifesteal ≈ guaranteed 1 HP + high chance for +1 HP (≈2 HP/hit)</li>
+                                    <li>300%+ ≈ near-guaranteed 2 HP per hit</li>
+                                    <li>Community reports suggest overflow works as separate proc rolls</li>
+                                </ul>
+                            </li>
+                            <li><strong>All Damage Sources:</strong> Triggers on melee, projectiles, AoE, DoT ticks, and other damage types (subject to proc coefficients)</li>
+                            <li><strong>Healing Cap:</strong> Cannot overheal beyond max HP; excess healing is wasted (community consensus)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Lifesteal Stages -->
+                <section class="section">
+                    <h2 class="section-title">Lifesteal Progression (Example Levels)</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                        <em>Based on ~+10% per level community data. These are illustrative examples:</em>
+                    </p>
+                    <div class="lifesteal-stages">
+                        <div class="lifesteal-stage">
+                            <div class="stage-header">
+                                <span class="stage-level">Level ~1-9</span>
+                                <span class="stage-value">10%-90%</span>
+                            </div>
+                            <div class="stage-desc">
+                                Inconsistent healing. Every 1-5 hits triggers lifesteal. Better than nothing but unreliable for sustain.
+                            </div>
+                        </div>
+                        
+                        <div class="lifesteal-stage">
+                            <div class="stage-header">
+                                <span class="stage-level">Level ~10</span>
+                                <span class="stage-value">~100%</span>
+                            </div>
+                            <div class="stage-desc">
+                                <strong>Critical Breakpoint:</strong> Guaranteed 1 HP per hit. First reliable sustain threshold. Essential for aggressive playstyles.
+                            </div>
+                        </div>
+                        
+                        <div class="lifesteal-stage">
+                            <div class="stage-header">
+                                <span class="stage-level">Level ~20</span>
+                                <span class="stage-value">~200%</span>
+                            </div>
+                            <div class="stage-desc">
+                                Guaranteed 1 HP + high chance for second 1 HP. Near-guaranteed 2 HP/hit. Extremely strong sustain with multi-hit weapons.
+                            </div>
+                        </div>
+                        
+                        <div class="lifesteal-stage">
+                            <div class="stage-header">
+                                <span class="stage-level">Level ~30+</span>
+                                <span class="stage-value">300%+</span>
+                            </div>
+                            <div class="stage-desc">
+                                Near-guaranteed 2 HP per hit. Combined with rapid-fire weapons, enables "facetank" playstyles against most content.
+                            </div>
+                        </div>
+                        
+                        <div class="lifesteal-stage">
+                            <div class="stage-header">
+                                <span class="stage-level">High Level</span>
+                                <span class="stage-value">Very High</span>
+                            </div>
+                            <div class="stage-desc">
+                                At reported max levels, lifesteal becomes extremely consistent. With high attack speed and proper positioning, enables near-immortal builds.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock</h2>
+                    <div class="highlight-box">
+                        <h3 style="color: var(--accent-blood); margin-bottom: 1rem;">Unlock Requirement</h3>
+                        <ul>
+                            <li><strong>Condition:</strong> Kill <strong>12,500 enemies</strong> (cumulative across all runs)</li>
+                            <li><strong>Track Progress:</strong> View in the in-game <strong>Quests</strong> menu (not the Stats page)</li>
+                            <li><strong>Cumulative Progress:</strong> Progress carries over between runs unless quest explicitly states "in a single run"</li>
+                            <li><strong>Version Note:</strong> Unlock count confirmed as 12,500 in multiple October 2025 sources (earlier community data may list 12,000)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Best Weapon Types -->
+                <section class="section">
+                    <h2 class="section-title">Best Weapon Types (Official Names)</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Bloody Tome scales with <strong>hits per second</strong>, so it shines on multi-hit or rapid-tick weapons. Using official weapon names:
+                    </p>
+                    <p style="text-align: center; margin-bottom: 1.5rem;">
+                        <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-blue); text-decoration: none; padding: 0.6rem 1.2rem; background: rgba(58, 134, 255, 0.2); border-radius: 20px; display: inline-block; font-weight: 600; transition: all 0.3s;">🗡️ View All Weapons Database</a>
+                    </p>
+                    
+                    <h3 style="color: var(--accent-blood); margin: 1.5rem 0 1rem;">Excellent Synergy</h3>
+                    <div class="weapons-list">
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/lightning-staff" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Lightning Staff</div>
+                            </a>
+                            <div class="weapon-desc">Chain lightning = multiple hits per attack</div>
+                        </div>
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/dragons-breath" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragon's Breath" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Dragon's Breath</div>
+                            </a>
+                            <div class="weapon-desc">Continuous flame ticks trigger lifesteal constantly</div>
+                        </div>
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/aura" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Aura</div>
+                            </a>
+                            <div class="weapon-desc">Persistent AoE damage = constant healing</div>
+                        </div>
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/poison-flask" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Poison Flask</div>
+                            </a>
+                            <div class="weapon-desc">DoT ticks provide sustained lifesteal procs</div>
+                        </div>
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/sword" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Sword (High Attack Speed)</div>
+                            </a>
+                            <div class="weapon-desc">Rapid melee strikes = frequent healing</div>
+                        </div>
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/black-hole" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Black Hole</div>
+                            </a>
+                            <div class="weapon-desc">Multi-tick damage on all trapped enemies</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--accent-blood); margin: 1.5rem 0 1rem;">Good Synergy</h3>
+                    <div class="weapons-list">
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/bow" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Bow</div>
+                            </a>
+                            <div class="weapon-desc">Standard-rate projectiles</div>
+                        </div>
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/crossbow" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Crossbow.png" alt="Crossbow" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Crossbow</div>
+                            </a>
+                            <div class="weapon-desc">Moderate fire rate</div>
+                        </div>
+                        <div class="weapon-item">
+                            <a href="https://megabonk.org/database/weapons/revolver" style="text-decoration: none;">
+                                <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver" style="width: 48px; height: 48px; display: block; margin: 0 auto 0.5rem; border-radius: 8px;">
+                                <div class="weapon-name">Revolver</div>
+                            </a>
+                            <div class="weapon-desc">Decent attack speed</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--warning); margin: 1.5rem 0 1rem;">⚠️ Low Value</h3>
+                    <div class="highlight-box warning">
+                        <p>Very slow, single-hit burst weapons (e.g., slow heavy melee) benefit minimally. For these builds, focus on burst mitigation (Shield Tome, Armor Tome) instead of on-hit lifesteal.</p>
+                    </div>
+                    
+                    <div class="highlight-box info" style="margin-top: 1.5rem;">
+                        <p><strong>Why This Matters:</strong> More projectiles/ticks = more on-hit lifesteal procs. Pair with <a href="https://megabonk.org/database/tomes/cooldown-tome" style="color: var(--accent-blue); text-decoration: underline;">Cooldown Tome</a> and <a href="https://megabonk.org/database/tomes/quantity-tome" style="color: var(--accent-blue); text-decoration: underline;">Quantity Tome</a> for maximum trigger density; <a href="https://megabonk.org/database/tomes/cursed-tome" style="color: var(--accent-blue); text-decoration: underline;">Cursed Tome</a> (enemy density) further increases proc opportunities.</p>
+                        <p style="margin-top: 0.8rem;"><strong>📚 Explore More:</strong> View all <a href="https://megabonk.org/database/tomes/" style="color: var(--accent-blue); text-decoration: underline;">Tomes in Database</a> | <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-blue); text-decoration: underline;">All Weapons</a></p>
+                    </div>
+                </section>
+
+                <!-- Tome Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Popular Tome Pairings (Build Advice)</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                        <em>These are subjective strategy suggestions based on community builds, not definitive combinations:</em>
+                    </p>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cooldown-tome/">Cooldown Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                <strong>Core Pairing:</strong> Higher attack speed = more hits per second = exponentially more healing. Essential for maximizing lifesteal effectiveness.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/damage-tome/">Damage Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More damage = faster enemy kills = staying in optimal lifesteal range for longer. Balanced offense and defense.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Armor_Tome.png" alt="Armor Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/armor-tome/">Armor Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Reduces incoming damage while lifesteal recovers what gets through. The classic "drain tank" combination.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Shield_Tome.png" alt="Shield Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/shield-tome/">Shield Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Shield absorbs burst damage while lifesteal handles sustained healing. Layered defense.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Higher enemy density creates more opportunities to proc lifesteal. More targets = more healing.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/quantity-tome/">Quantity Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More projectiles = more hits per second = significantly more healing. Strong synergy with projectile builds.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Prioritize on melee and high-tick-rate builds</strong> - Weapons that hit frequently benefit most (<a href="https://megabonk.org/database/weapons/" style="color: var(--accent-blood);">view all weapons</a>)</li>
+                            <li><strong>Rush to 100% lifesteal (Level ~10)</strong> - This is the guaranteed healing breakpoint; prioritize reaching it</li>
+                            <li>Combine with area or duration effects to blanket crowds and sustain through chip damage</li>
+                            <li>Don't neglect mitigation—lifesteal shines when you can safely stay in range to keep hitting</li>
+                            <li>Extremely powerful in <a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-blood);">boss fights</a> with adds (many targets = constant healing)</li>
+                            <li>Essential for aggressive facetank playstyles (<a href="https://megabonk.org/guides/builds/" style="color: var(--accent-blood);">explore builds</a>)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Pro Tips</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li>The 100% threshold (Level ~10) is the most important breakpoint - prioritize reaching it early</li>
+                            <li>At high levels, lifesteal becomes very consistent - potentially near-guaranteed 2 HP per hit</li>
+                            <li>Actual sustain depends heavily on hit frequency and enemy density</li>
+                            <li>Works best with weapons that have many small hits rather than few large hits (<a href="https://megabonk.org/database/weapons/" style="color: var(--accent-blue);">compare weapons</a>)</li>
+                            <li>Combines exceptionally well with AoE and duration effects</li>
+                            <li>Can enable "immortal" builds when combined with high attack speed and mitigation (<a href="https://megabonk.org/guides/builds/" style="color: var(--accent-blue);">view builds</a>)</li>
+                            <li><strong>Proc Coefficients:</strong> Some multi-hit abilities may have reduced lifesteal trigger rates (introduced in September 2025 patches)</li>
+                        </ul>
+                        <p style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(58, 134, 255, 0.3); font-style: italic; color: var(--text-gray);">
+                            💡 <strong>Pro Tip:</strong> Pair Bloody Tome with <a href="https://megabonk.org/database/tomes/cooldown-tome" style="color: var(--accent-blue);">Cooldown Tome</a> and fast-hitting weapons like <a href="https://megabonk.org/database/weapons/lightning-staff" style="color: var(--accent-blue);">Lightning Staff</a> or <a href="https://megabonk.org/database/weapons/dragons-breath" style="color: var(--accent-blue);">Dragon's Breath</a> for maximum healing output.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Important Notes -->
+                <section class="section">
+                    <h2 class="section-title">Important Considerations</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li><strong>⚠️ Attack Speed Dependent</strong> - Nearly useless with slow weapons, extremely powerful with fast ones</li>
+                            <li>Over-healing does not stack beyond current missing HP - healing is wasted at full health (community consensus)</li>
+                            <li>Requires actually hitting enemies - doesn't help if you're running away or dodging</li>
+                            <li>Not effective in "glass cannon" builds where you get one-shot before lifesteal can trigger</li>
+                            <li>Must be unlocked through cumulative kill count (12,500 enemies)</li>
+                            <li>Some abilities affected by proc coefficients (impact varies by weapon type)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Community Tier Rating -->
+                <section class="section">
+                    <h2 class="section-title">Community Tier Ratings</h2>
+                    <div class="highlight-box info">
+                        <p><strong>Tier Note:</strong> Community tier lists frequently place <em>Bloody Tome</em> near the top for sustain-focused builds, but <strong>tiers are subjective</strong> and shift with patches and playstyles.</p>
+                        <ul style="margin-top: 1rem;">
+                            <li><strong>PCGamesN (Oct 2025):</strong> High-value sustain option</li>
+                            <li><strong>AmiiboDoctor (Oct 2025):</strong> Strong utility for aggressive builds</li>
+                            <li><strong>YouTube Tier Lists:</strong> Rankings vary by creator and build focus</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-style: italic;">Always cross-check with the latest patch notes and your specific build goals. Effectiveness varies significantly based on weapon choice and playstyle.</p>
+                        <p style="margin-top: 1rem; text-align: center;">
+                            <a href="https://megabonk.org/tier-lists/tomes/" style="color: var(--accent-blue); text-decoration: none; padding: 0.7rem 1.5rem; background: rgba(58, 134, 255, 0.2); border-radius: 25px; display: inline-block; font-weight: 600; transition: all 0.3s;">📊 View Full Tome Tier List</a>
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Version & Accuracy Notes -->
+                <section class="section">
+                    <h2 class="section-title">Data Accuracy & Version Notes</h2>
+                    <div class="highlight-box warning">
+                        <h3 style="color: var(--warning); margin-bottom: 1rem;">📋 Data Sources & Confidence</h3>
+                        <ul>
+                            <li><strong>Values:</strong> ~+10% per level, high max level - community-reported based on v1.0.7-era testing (September-October 2025)</li>
+                            <li><strong>Unlock:</strong> 12,500 enemies - verified across multiple October 2025 sources (earlier data may show 12,000)</li>
+                            <li><strong>Mechanics:</strong> 100% threshold, overflow proc system - consistent across community testing and discussions</li>
+                            <li><strong>Weapon Names:</strong> Official game names used throughout based on TheGamer and Prima Games weapon lists</li>
+                            <li><strong>Version:</strong> Based on v1.0.7-v1.0.12+ data (September-October 2025)</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-style: italic; color: var(--warning);">
+                            ⚠️ <strong>Always verify current patch values in-game.</strong> Megabonk is in active development; mechanics and values may change. Check the in-game UI tooltips for the most accurate information.
+                        </p>
+                        <p style="margin-top: 1.2rem; text-align: center;">
+                            <a href="https://megabonk.org/tier-lists/" style="color: var(--accent-blue); text-decoration: none; padding: 0.6rem 1.2rem; background: rgba(58, 134, 255, 0.2); border-radius: 20px; display: inline-block; font-weight: 600; margin-right: 0.5rem;">📊 Tier Lists</a>
+                            <a href="https://megabonk.org/guides/achievements/" style="color: var(--accent-blue); text-decoration: none; padding: 0.6rem 1.2rem; background: rgba(58, 134, 255, 0.2); border-radius: 20px; display: inline-block; font-weight: 600;">🏆 Achievements</a>
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Lifesteal</span>
+                    <span class="tag">High-Value</span>
+                    <span class="tag">Sustain</span>
+                    <span class="tag">Healing</span>
+                    <span class="tag">Recovery</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/regen-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Regen_Tome.png" alt="Regen Tome">
+                    </div>
+                    <div class="tome-card-title">Regen Tome</div>
+                    <div class="tome-card-stat">HP Regeneration</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/armor-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Armor_Tome.png" alt="Armor Tome">
+                    </div>
+                    <div class="tome-card-title">Armor Tome</div>
+                    <div class="tome-card-stat">Damage Reduction</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cooldown-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+                    </div>
+                    <div class="tome-card-title">Cooldown Tome</div>
+                    <div class="tome-card-stat">Attack Speed</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/shield-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Shield_Tome.png" alt="Shield Tome">
+                    </div>
+                    <div class="tome-card-title">Shield Tome</div>
+                    <div class="tome-card-stat">Regenerating Shield</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/damage-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+                    </div>
+                    <div class="tome-card-title">Damage Tome</div>
+                    <div class="tome-card-stat">Increased Damage</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/" class="tome-card" style="background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(58, 134, 255, 0.3)); border-color: var(--accent-purple);">
+                    <div class="tome-card-icon" style="font-size: 3rem;">📚</div>
+                    <div class="tome-card-title">View All Tomes</div>
+                    <div class="tome-card-stat">Complete Database</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/tier-lists/tomes/" class="btn" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));">Tome Tier List</a>
+            <a href="https://megabonk.org/guides/builds/poison-lifesteal" class="btn btn-secondary">Lifesteal Build Guide →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .lifesteal-stage, .weapon-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
