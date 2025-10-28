@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Shield Tome: Effects, Unlock, Synergies</title>
+    <meta name="description" content="Learn how the Megabonk Shield Tome works: shield takes damage before HP and regenerates after short downtime. Unlock info, synergies, and build tips.">
+    <meta name="keywords" content="megabonk shield tome, regenerating shield, defense tome, megabonk tomes, survival guide, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/shield-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-cyan: #00d4ff;
+            --accent-electric: #00f0ff;
+            --accent-sky: #4cc9f0;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(76, 201, 240, 0.25));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0,212,255,0.15)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-electric), var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: #000;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #00d4ff, #4cc9f0);
+            color: #000;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Main Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Infobox */
+        .infobox {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(76, 201, 240, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .infobox-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+        }
+
+        .stat-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .stat-value.primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            border-radius: 4px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        .intro-text strong {
+            color: var(--accent-cyan);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            color: var(--text-gray);
+            transition: all 0.3s;
+        }
+
+        .info-list li::before {
+            content: '🛡️';
+            position: absolute;
+            left: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .info-list li strong {
+            color: var(--accent-cyan);
+        }
+
+        /* Shield Ladder */
+        .shield-ladder {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .shield-stage {
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shield-stage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-sky));
+        }
+
+        .shield-stage:hover {
+            transform: translateX(5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 16px rgba(0, 212, 255, 0.2);
+        }
+
+        .shield-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .shield-capacity {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .shield-level {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .shield-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Mechanic Box */
+        .mechanic-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(76, 201, 240, 0.15));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-cyan);
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mechanic-box::before {
+            content: '🛡️';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .mechanic-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .mechanic-desc {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Comparison Box */
+        .comparison-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(76, 201, 240, 0.1));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-cyan);
+            margin-top: 1.5rem;
+        }
+
+        .comparison-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .comparison-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .comparison-item-title {
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-item-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Defense Layers */
+        .defense-layers {
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .layer-item {
+            background: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .layer-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 30px;
+        }
+
+        .layer-content {
+            flex: 1;
+        }
+
+        .layer-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .layer-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .synergy-card {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synergy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-sky));
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 212, 255, 0.3);
+            border-color: var(--accent-cyan);
+        }
+
+        .synergy-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .synergy-title a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-electric);
+        }
+
+        .synergy-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(76, 201, 240, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-cyan);
+            margin-top: 1rem;
+        }
+
+        .highlight-box.info {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border-color: var(--accent-blue);
+        }
+
+        .highlight-box.success {
+            background: linear-gradient(135deg, rgba(6, 255, 165, 0.1), rgba(0, 217, 126, 0.1));
+            border-color: var(--success);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .highlight-box li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box.info li::before {
+            content: 'ℹ️';
+        }
+
+        .highlight-box.success li::before {
+            content: '✅';
+        }
+
+        /* Unlock Badge */
+        .unlock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--success), #00d97e);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #000;
+            box-shadow: 0 4px 12px rgba(6, 255, 165, 0.3);
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .tag {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000;
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 212, 255, 0.3);
+            border-color: var(--accent-cyan);
+        }
+
+        .tome-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tome-card-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+        }
+
+        .tome-card-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-sky));
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .infobox {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .synergies-grid,
+            .related-tomes {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .tier-badge {
+                display: block;
+                margin: 1rem 0 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <strong>Shield Tome</strong>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>🛡️ Shield Tome</h1>
+            <span class="tier-badge">A-TIER</span>
+            <p class="hero-subtitle">Regenerating Defense Layer - Absorb Damage and Recover Between Hits</p>
+            <div class="tome-category">Regenerating Shield Tome</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Infobox Sidebar -->
+            <aside class="infobox">
+                <div class="infobox-image">
+                    <img src="https://megabonk.org/images/Tomes/Shield_Tome.png" alt="Shield Tome">
+                </div>
+                
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">📊 Stat Type</span>
+                        <span class="stat-value">Shield</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⬆️ Upgrade</span>
+                        <span class="stat-value primary">+25</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🔓 Unlock</span>
+                        <span class="stat-value">Default</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🎯 Max Level</span>
+                        <span class="stat-value primary">99</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Introduction -->
+                <section class="section">
+                    <p class="intro-text">
+                        The <strong>Shield Tome</strong> adds a regenerating shield to your <a href="https://megabonk.org/guides/characters/" style="color: var(--accent-cyan);">character</a> in <strong><a href="https://megabonk.org/" style="color: var(--accent-cyan);">Megabonk</a></strong>. <strong>The shield takes damage first, protecting your HP</strong>. If you don't take hits for a while, the shield refills, letting you absorb more punishment during long fights. Think of it as a second health bar that rewards careful play.
+                    </p>
+                </section>
+
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <ul class="info-list">
+                        <li><strong>Stat:</strong> Shield</li>
+                        <li><strong>Base upgrade per level:</strong> +25 shield capacity</li>
+                        <li><strong>How to unlock:</strong> Default (available at start)</li>
+                        <li><strong>Max level:</strong> 99</li>
+                    </ul>
+                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
+                        Shields are a cornerstone of defensive <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-cyan);">builds</a>. Unlike HP which requires healing or regeneration, shields automatically recharge after avoiding damage. This makes them excellent for hit-and-run tactics and extended survival runs.
+                    </p>
+                </section>
+
+                <!-- Shield Progression -->
+                <section class="section">
+                    <h2 class="section-title">Shield Capacity Progression</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        See how your shield buffer scales with investment:
+                    </p>
+                    <div class="shield-ladder">
+                        <div class="shield-stage">
+                            <div class="shield-header">
+                                <div class="shield-capacity">125 Shield</div>
+                                <div class="shield-level">Level ~5</div>
+                            </div>
+                            <div class="shield-desc">
+                                Small buffer. Can absorb 2-3 hits from weak enemies before breaking.
+                            </div>
+                        </div>
+
+                        <div class="shield-stage">
+                            <div class="shield-header">
+                                <div class="shield-capacity">375 Shield</div>
+                                <div class="shield-level">Level ~15</div>
+                            </div>
+                            <div class="shield-desc">
+                                Moderate protection. Absorbs most chip damage and several direct hits.
+                            </div>
+                        </div>
+
+                        <div class="shield-stage">
+                            <div class="shield-header">
+                                <div class="shield-capacity">750 Shield</div>
+                                <div class="shield-level">Level ~30</div>
+                            </div>
+                            <div class="shield-desc">
+                                Significant buffer. Can tank multiple heavy hits before depletion.
+                            </div>
+                        </div>
+
+                        <div class="shield-stage">
+                            <div class="shield-header">
+                                <div class="shield-capacity">1,500+ Shield</div>
+                                <div class="shield-level">Level 60+</div>
+                            </div>
+                            <div class="shield-desc">
+                                Massive protection. Effectively a second health bar that fully regenerates.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Shield Mechanic -->
+                <section class="section">
+                    <h2 class="section-title">How Shields Work</h2>
+                    <div class="mechanic-box">
+                        <div class="mechanic-title">🛡️ Shield Mechanics</div>
+                        <div class="mechanic-desc">
+                            <strong>Damage Priority:</strong> Shields always take damage before your HP. If you have 100 HP and 200 Shield, all incoming damage hits the shield first. Once the shield is depleted, damage goes to your HP.
+                        </div>
+                        <div class="mechanic-desc">
+                            <strong>Regeneration:</strong> After you avoid taking damage for a short period (typically 3-5 seconds), your shield begins regenerating. It will gradually refill to its maximum capacity, even during combat.
+                        </div>
+                        <div class="mechanic-desc">
+                            <strong>Strategic Value:</strong> Shields encourage hit-and-run tactics. Attack, take some hits on your shield, retreat briefly to let it regenerate, then re-engage with full protection.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Effects -->
+                <section class="section">
+                    <h2 class="section-title">Effects</h2>
+                    <ul class="info-list">
+                        <li><strong>Provides a shield buffer that blocks incoming damage</strong></li>
+                        <li>Shield regenerates automatically when you avoid damage for a short time</li>
+                        <li>Scales well in long fights and survival runs</li>
+                        <li>Acts as a "second health bar" that fully recovers</li>
+                        <li>Particularly effective against consistent chip damage</li>
+                    </ul>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock</h2>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div class="unlock-badge">
+                            ✅ Unlocked by Default
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 1rem;">
+                            This Tome is available from the start of the game. No conditions are required.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Shield vs Health vs Regen -->
+                <section class="section">
+                    <h2 class="section-title">Defense Comparison</h2>
+                    <div class="comparison-box">
+                        <div class="comparison-title">🛡️ Understanding Defensive Stats</div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            Three primary defensive stats serve different roles:
+                        </p>
+                        <div class="comparison-grid">
+                            <div class="comparison-item">
+                                <div class="comparison-item-title">🛡️ Shield Tome</div>
+                                <div class="comparison-item-desc">
+                                    <strong>Regenerating buffer</strong><br>
+                                    Takes damage first. Auto-regenerates after avoiding hits. Best for active play with dodging. More forgiving of mistakes.
+                                </div>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-item-title">❤️ Health Tome</div>
+                                <div class="comparison-item-desc">
+                                    <strong>Raw capacity</strong><br>
+                                    Increases maximum HP pool. Requires healing to recover. Best for face-tanking. More stable baseline.
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+                            <div style="font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.5rem;">💚 Regen Tome</div>
+                            <div style="color: var(--text-gray); font-size: 0.9rem;">
+                                <strong>Passive healing</strong><br>
+                                Recovers HP continuously. Works with shields and HP. Best for sustained survival.
+                            </div>
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
+                            <strong>Layered Defense:</strong> Combining all three creates the tankiest possible <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-cyan);">build</a> - shields absorb burst, HP provides baseline, regen recovers between encounters.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Defense Layering -->
+                <section class="section">
+                    <h2 class="section-title">Optimal Defense Layering</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Stack defensive mechanics in the right order for maximum survivability:
+                    </p>
+                    <div class="defense-layers">
+                        <div class="layer-item">
+                            <div class="layer-number">1</div>
+                            <div class="layer-content">
+                                <div class="layer-title">Evasion / Dodging</div>
+                                <div class="layer-desc">Avoid damage completely - best defense is not getting hit</div>
+                            </div>
+                        </div>
+                        <div class="layer-item">
+                            <div class="layer-number">2</div>
+                            <div class="layer-content">
+                                <div class="layer-title">Shield (This Tome)</div>
+                                <div class="layer-desc">Absorbs hits that you can't dodge - regenerates automatically</div>
+                            </div>
+                        </div>
+                        <div class="layer-item">
+                            <div class="layer-number">3</div>
+                            <div class="layer-content">
+                                <div class="layer-title">Armor</div>
+                                <div class="layer-desc">Reduces damage to both shield and HP - makes everything last longer</div>
+                            </div>
+                        </div>
+                        <div class="layer-item">
+                            <div class="layer-number">4</div>
+                            <div class="layer-content">
+                                <div class="layer-title">HP Pool</div>
+                                <div class="layer-desc">Final buffer before death - your last line of defense</div>
+                            </div>
+                        </div>
+                        <div class="layer-item">
+                            <div class="layer-number">5</div>
+                            <div class="layer-content">
+                                <div class="layer-title">HP Regen / Lifesteal</div>
+                                <div class="layer-desc">Recovers HP between encounters - long-term sustainability</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergies</h2>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Regen_Tome.png" alt="Regen Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/regen-tome/">Regen Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Combine shield regen with HP regen for layered sustain. Multiple recovery sources.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Evasion_Tome.png" alt="Evasion Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/evasion-tome/">Evasion Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Evading hits keeps your shield up longer. Less damage taken = more shield uptime.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Armor_Tome.png" alt="Armor Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/armor-tome/">Armor Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Reduces incoming damage, making the shield last even more. Damage mitigation amplifies shield value.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Extra enemy density makes shield sustain more important. Essential for high-difficulty survival.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Health_Tome.png" alt="Health Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/health-tome/">Health Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Stack shield and HP for maximum effective health pool. Two health bars are better than one.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/agility-tome/">Agility Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Move faster to avoid damage and give shields time to regenerate. Mobility enables shield recovery.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Great defensive option, especially early in a run</strong></li>
+                            <li>Best when combined with other sustain sources so you don't lose both shield and HP too quickly</li>
+                            <li>Works well for melee builds that take chip damage while staying close to enemies</li>
+                            <li>Perfect for learning players - provides forgiveness without requiring active healing management</li>
+                            <li>Excels in <a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-cyan);">boss fights</a> with predictable attack patterns</li>
+                            <li>Practice hit-and-run tactics to maximize shield regeneration windows</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Best For -->
+                <section class="section">
+                    <h2 class="section-title">Best Use Cases</h2>
+                    <div class="highlight-box success">
+                        <ul>
+                            <li><strong>Melee <a href="https://megabonk.org/database/weapons/" style="color: var(--success);">weapon</a> builds</strong> - Constant chip damage protection</li>
+                            <li><strong>Learning the game</strong> - Forgiving of positioning mistakes</li>
+                            <li><strong>Kiting strategies</strong> - Attack, retreat, regenerate, repeat</li>
+                            <li><strong>Long survival runs</strong> - Regeneration scales infinitely with time</li>
+                            <li><strong>Tank builds</strong> - Core component of defensive strategies</li>
+                            <li><strong>Hit-and-run playstyles</strong> - Burst damage then retreat to recover</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Pro Tips</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li>Shield can be thought of as a "second health bar" that encourages careful play</li>
+                            <li>Synergizes with many defensive and sustain-focused Tomes</li>
+                            <li>At max level (99), provides 2,475 shield capacity</li>
+                            <li>Shield regeneration typically starts 3-5 seconds after last damage taken</li>
+                            <li>Unlike HP, shields are "free" - they cost nothing to recover except time</li>
+                            <li>Particularly effective against projectile-based enemies with gaps between attacks</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Shield</span>
+                    <span class="tag">A-Tier</span>
+                    <span class="tag">Defense</span>
+                    <span class="tag">Sustain</span>
+                    <span class="tag">Regeneration</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/health-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Health_Tome.png" alt="Health Tome">
+                    </div>
+                    <div class="tome-card-title">Health Tome</div>
+                    <div class="tome-card-stat">Max Health</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/regen-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Regen_Tome.png" alt="Regen Tome">
+                    </div>
+                    <div class="tome-card-title">Regen Tome</div>
+                    <div class="tome-card-stat">HP Regeneration</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/armor-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Armor_Tome.png" alt="Armor Tome">
+                    </div>
+                    <div class="tome-card-title">Armor Tome</div>
+                    <div class="tome-card-stat">Damage Reduction</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/evasion-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Evasion_Tome.png" alt="Evasion Tome">
+                    </div>
+                    <div class="tome-card-title">Evasion Tome</div>
+                    <div class="tome-card-stat">Dodge Chance</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">View Tank Builds →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .shield-stage, .layer-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
