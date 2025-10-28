@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Luck Tome: Drop Rate, Unlock & Synergies</title>
+    <meta name="description" content="Unlock the Luck Tome in Megabonk: see drop rate facts, what Luck affects (level-ups, shrines, chests), top synergies, and tips to snowball your runs.">
+    <meta name="keywords" content="megabonk luck tome, luck stat, rare tome, reward quality, megabonk tomes, rng guide, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/luck-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-luck: #ffd700;
+            --accent-gold: #ffb700;
+            --accent-amber: #ff9500;
+            --accent-shine: #fffacd;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+            --common: #20854b;
+            --uncommon: #0c5582;
+            --rare: #7e0079;
+            --epic: #7e1011;
+            --legendary: #897900;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 183, 0, 0.25), rgba(255, 149, 0, 0.25));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="luck" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 50 20 L 55 35 L 70 35 L 58 45 L 63 60 L 50 50 L 37 60 L 42 45 L 30 35 L 45 35 Z" fill="rgba(255,215,0,0.15)" stroke="rgba(255,215,0,0.2)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23luck)"/></svg>');
+            opacity: 0.3;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; transform: translateX(0); }
+            50% { opacity: 0.5; transform: translateX(10px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-luck), var(--accent-gold), var(--accent-shine));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShine 2s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes goldShine {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-luck);
+            display: block;
+        }
+
+        .hero-stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Content Wrapper with Sidebar */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* Infobox (Left Sidebar) */
+        .infobox {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 183, 0, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-luck);
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+            align-self: start;
+        }
+
+        .infobox-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .infobox-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            padding: 1rem;
+            background: rgba(255, 215, 0, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .infobox-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .infobox-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-luck);
+            margin-bottom: 0.5rem;
+        }
+
+        .infobox-subtitle {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .infobox-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .infobox-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-luck);
+        }
+
+        .infobox-label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .infobox-value {
+            font-weight: 600;
+            color: var(--accent-luck);
+            text-align: right;
+        }
+
+        /* Main Content */
+        main {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-luck), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .highlight-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid var(--accent-luck);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(255, 190, 11, 0.1);
+            border-left-color: var(--warning);
+        }
+
+        .highlight-box.info {
+            background: rgba(58, 134, 255, 0.1);
+            border-left-color: var(--accent-blue);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent-luck);
+            font-weight: bold;
+        }
+
+        .highlight-box a {
+            color: var(--accent-luck);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .highlight-box a:hover {
+            border-bottom-color: var(--accent-luck);
+        }
+
+        /* Synergy Cards */
+        .synergy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .synergy-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 183, 0, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            border-color: var(--accent-luck);
+        }
+
+        .synergy-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-luck);
+        }
+
+        .synergy-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .synergy-title a {
+            color: var(--accent-luck);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-shine);
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Impact Cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .impact-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 183, 0, 0.08));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .impact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .impact-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-luck);
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-desc {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Snowball Steps */
+        .snowball-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .snowball-step {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 183, 0, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-luck);
+            color: var(--primary-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            color: var(--accent-luck);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            color: var(--text-gray);
+        }
+
+        /* Calculation Display */
+        .calc-display {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .calc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-luck);
+        }
+
+        .calc-label {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .calc-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-luck);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tome-card {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(58, 134, 255, 0.1));
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+            border-color: var(--accent-purple);
+        }
+
+        .tome-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .tome-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .tome-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, var(--accent-luck), var(--accent-gold));
+            color: var(--primary-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-luck), var(--accent-gold));
+            color: var(--primary-bg);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(157, 78, 221, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .infobox {
+                position: static;
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .synergy-grid,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> » 
+        <a href="https://megabonk.org/database/">Database</a> » 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> » 
+        <span>Luck Tome</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>⭐ Luck Tome ⭐</h1>
+            <p class="hero-subtitle">The Rarest & Most Rewarding Tome - Improve Your Entire Run</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-value">🎲</span>
+                    <span class="hero-stat-label">Luck Boost</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">S-Tier</span>
+                    <span class="hero-stat-label">Community Rating</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">0.01%</span>
+                    <span class="hero-stat-label">Drop Chance</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">⚡</span>
+                    <span class="hero-stat-label">Snowball Power</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Infobox (Left Sidebar) -->
+            <aside class="infobox">
+                <div class="infobox-header">
+                    <div class="infobox-icon">
+                        <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome Icon">
+                    </div>
+                    <h2 class="infobox-title">Luck Tome</h2>
+                    <p class="infobox-subtitle">Rarest Tome - Reward Quality</p>
+                </div>
+                
+                <div class="infobox-content">
+                    <div class="infobox-item">
+                        <span class="infobox-label">Per Level</span>
+                        <span class="infobox-value">~Increases*</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label">Max Level</span>
+                        <span class="infobox-value">High*</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label">Unlock Method</span>
+                        <span class="infobox-value">0.01% Drop</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label">Stat Type</span>
+                        <span class="infobox-value">Luck</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label">Tier Rating</span>
+                        <span class="infobox-value">S-Tier</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box warning" style="margin-top: 1.5rem; font-size: 0.85rem;">
+                    <strong>⚠️ Data Notice:</strong><br>
+                    Specific percentages and level caps vary by version. The values shown are based on community testing (v1.0.7-v1.0.12+). Always verify with current patch notes.
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <p><strong>Luck Tome</strong> boosts your <strong>Luck</strong> stat. According to media testing and community guides, Luck improves the probability of obtaining <strong>higher rarity rewards</strong> during <strong>level-ups, Shrine interactions, and Chest/enemy drops</strong>. While it doesn't directly enhance combat stats, it significantly improves <strong>overall reward quality</strong> and growth potential throughout your run. It's commonly paired with <strong><a href="https://megabonk.org/database/tomes/xp-tome/">XP Tome</a></strong> and <strong><a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a></strong> for snowball-style builds (based on current version).</p>
+                    
+                    <div class="highlight-box info">
+                        <p><strong>💡 Key Point:</strong> Luck Tome is universally considered one of the <strong>best Tomes in the game</strong> once unlocked, but its extreme rarity makes it a late-game achievement for most players. Its compound effect means the earlier you invest in it during a run, the more impactful it becomes.</p>
+                    </div>
+                    
+                    <p><strong>Sources:</strong> Destructoid (2025-09-22), TheGamer (2025-09-26), FandomWire (2025-10-15)</p>
+                </section>
+
+                <!-- What Luck Affects -->
+                <section class="section">
+                    <h2 class="section-title">What Luck Affects</h2>
+                    <div class="impact-grid">
+                        <div class="impact-card">
+                            <div class="impact-icon">📈</div>
+                            <div class="impact-title">Level-Up Rewards</div>
+                            <div class="impact-desc">Increases the frequency of Rare, Epic, and Legendary upgrade options at each level</div>
+                        </div>
+                        
+                        <div class="impact-card">
+                            <div class="impact-icon">✨</div>
+                            <div class="impact-title">Shrine Rewards</div>
+                            <div class="impact-desc">Improves the quality of rewards from Shrine interactions throughout the map</div>
+                        </div>
+                        
+                        <div class="impact-card">
+                            <div class="impact-icon">🎁</div>
+                            <div class="impact-title">Chest & Drops</div>
+                            <div class="impact-desc">Better loot quality from chests and enemy drops during combat</div>
+                        </div>
+                        
+                        <div class="impact-card">
+                            <div class="impact-icon">🎯</div>
+                            <div class="impact-title">Build Quality</div>
+                            <div class="impact-desc">Access to higher-tier upgrades enables more powerful and synergistic builds</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box warning" style="margin-top: 1.5rem;">
+                        <p><strong>⚠️ Shop Note:</strong> Community discussions suggest that <strong>Shady Guy shop inventory</strong> may be determined when entering a stage, potentially limiting Luck's impact on shop offerings. However, this remains unconfirmed by developers. For now, focus on Luck's proven benefits to level-ups, Shrines, and drops.</p>
+                    </div>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock Luck Tome</h2>
+                    <div class="highlight-box">
+                        <p>Based on multiple recent sources, <strong>Luck Tome</strong> is obtained as an <strong>extremely rare drop</strong>, commonly described as having a <strong>~0.01% chance</strong> to drop when killing any enemy.</p>
+                        
+                        <p style="margin-top: 1rem;">There are also references in some older guides to unlocking it by "breaking 20 pots in a single run," though this may reflect outdated information or version differences. The rare enemy drop method appears to be the current standard across most media and wiki sources.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Recommendation:</strong> Treat this as a rare drop and expect to play many runs before obtaining it. When it does drop, prioritize it immediately.</p>
+                    </div>
+
+                    <p><strong>Sources:</strong> GameRant (2025-10-01), Fandom Wiki (regularly updated), Destructoid, Deltia's Gaming</p>
+
+                    <div class="highlight-box info" style="margin-top: 1.5rem;">
+                        <p><strong>💡 Expected Kill Count (Theoretical Probability):</strong></p>
+                        <ul>
+                            <li><strong>~10,000 kills:</strong> Approximately 63% chance to have obtained it</li>
+                            <li><strong>~30,000 kills:</strong> Approximately 95% chance</li>
+                            <li><strong>~50,000 kills:</strong> Approximately 99% chance</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;"><em>*These are statistical estimates based on independent Bernoulli events, not official figures. Actual results may vary.</em></p>
+                    </div>
+                </section>
+
+                <!-- Stats & Progression -->
+                <section class="section">
+                    <h2 class="section-title">Stats & Progression</h2>
+                    <div class="highlight-box warning">
+                        <p><strong>⚠️ Important Note on Values:</strong></p>
+                        <p>The game does not provide official documentation for exact per-level percentages or maximum Tome levels. Community consensus suggests:</p>
+                        <ul>
+                            <li><strong>Per Level:</strong> Luck increase varies (~7% is mentioned in some sources, but not universally confirmed)</li>
+                            <li><strong>Max Level:</strong> Community commonly refers to <strong>Tome level cap of 99</strong> (though some older discussions mention different values)</li>
+                            <li><strong>Total Impact:</strong> High-level Luck Tome dramatically shifts reward pools toward Rare/Epic/Legendary tiers</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Recommendation:</strong> Assume that "higher Luck = better rewards" without fixating on exact numbers, as these may change with patches. Always verify with the <a href="https://megabonk.org/" style="color: var(--accent-luck);">latest patch notes</a>.</p>
+                    </div>
+
+                    <p><strong>Sources:</strong> AmiiboDoctor (2025-09-23), Steam Community Discussions (2025-10)</p>
+                </section>
+
+                <!-- Snowball Effect -->
+                <section class="section">
+                    <h2 class="section-title">Why Luck Tome is S-Tier: The Snowball Effect</h2>
+                    <p>The true power of Luck Tome lies in its <strong>compound snowball effect</strong>. Here's how it works:</p>
+                    
+                    <div class="snowball-steps">
+                        <div class="snowball-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Early Investment</h3>
+                                <p>You acquire Luck Tome and invest a few levels into it during the first 5-10 character levels</p>
+                            </div>
+                        </div>
+                        
+                        <div class="snowball-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Better Level-Ups</h3>
+                                <p>Higher Luck means more Rare/Epic/Legendary options appear at subsequent level-ups</p>
+                            </div>
+                        </div>
+                        
+                        <div class="snowball-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Stronger Build</h3>
+                                <p>You select superior upgrades, making your character significantly more powerful</p>
+                            </div>
+                        </div>
+                        
+                        <div class="snowball-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Faster Progress</h3>
+                                <p>A stronger build clears stages faster and survives longer, leading to more level-ups</p>
+                            </div>
+                        </div>
+                        
+                        <div class="snowball-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Exponential Growth</h3>
+                                <p>More levels + better rewards from Luck = exponential power curve that carries you through late-game content</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box info" style="margin-top: 2rem;">
+                        <p><strong>💡 Pro Insight:</strong> This is why <strong><a href="https://megabonk.org/database/tomes/xp-tome/" style="color: var(--accent-luck);">XP Tome</a></strong> + Luck Tome is considered one of the most powerful combinations in the game. XP Tome accelerates leveling, which multiplies the benefit from Luck Tome's improved rewards.</p>
+                    </div>
+                </section>
+
+                <!-- Best Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Best Synergies & Pairings</h2>
+                    <p>While Luck Tome is powerful on its own, combining it with certain Tomes and Items creates game-breaking strategies:</p>
+                    
+                    <div class="synergy-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/xp-tome/">XP Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                The ultimate synergy. XP Tome accelerates leveling, multiplying the number of high-quality rewards you receive from Luck. This combo enables the fastest possible power spikes.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Cursed Tome dramatically increases enemy density, leading to more kills, more XP, more drops, and more opportunities for Luck to shine. Risk vs. reward at its finest.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Golden_Tome.png" alt="Golden Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/golden-tome/">Golden Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Better rewards from Luck pair perfectly with more currency to buy them. Alternatively, <strong><a href="https://megabonk.org/guides/characters/kevin-guide/" style="color: inherit;">Kevin</a></strong> + <strong>Golden Shield</strong> can generate infinite money if you can outheal the self-damage.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Chaos_Tome.png" alt="Chaos Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/chaos-tome/">Chaos Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Chaos Tome provides random stat bonuses. Higher Luck increases the frequency of Legendary-tier Chaos rolls, which can lead to absurd stat combinations.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box" style="margin-top: 1.5rem;">
+                        <p><strong>🎯 Advanced Strategy:</strong></p>
+                        <ul>
+                            <li>Prioritize <strong>Luck Tome in your first 5-10 levels</strong> for maximum compound effect</li>
+                            <li>Combine with <a href="https://megabonk.org/database/tomes/xp-tome/" style="color: var(--accent-luck);">XP Tome</a> for absurd snowball potential</li>
+                            <li>Use <a href="https://megabonk.org/database/tomes/cursed-tome/" style="color: var(--accent-luck);">Cursed Tome</a> to multiply enemy kills and drop opportunities</li>
+                            <li>Even a few levels of Luck make a noticeable difference in reward quality</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Strategy Guide -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Once obtained, invest in it early</strong> so you can snowball with better rewards</li>
+                            <li>Works especially well in long runs where you can see many level-up screens</li>
+                            <li>Prioritize Luck Tome in your first 5-10 levels for maximum compound effect</li>
+                            <li>Combine with <a href="https://megabonk.org/database/tomes/xp-tome/" style="color: var(--accent-luck);">XP Tome</a> for absurd snowball potential</li>
+                            <li>Even a few levels of Luck make a noticeable difference in reward quality</li>
+                            <li>Perfect for players who enjoy optimization and perfect runs</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="section">
+                    <h2 class="section-title">When to Use Luck Tome</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>✅ Best for:</strong> Long runs where you'll gain many levels</li>
+                            <li><strong>✅ Best for:</strong> Players who want to optimize build quality</li>
+                            <li><strong>✅ Best for:</strong> Combining with XP farming strategies</li>
+                            <li><strong>✅ Best for:</strong> Runs where you're confident you won't die early</li>
+                            <li><strong>⚠️ Less useful:</strong> Short speedruns with limited level-ups</li>
+                            <li><strong>⚠️ Less useful:</strong> If you're struggling to survive (prioritize combat stats first)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Pro Tips & Important Notes</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li>Considered a <strong>late-game Tome</strong> because of its very low unlock chance</li>
+                            <li>More of a <strong>utility Tome than a direct combat booster</strong></li>
+                            <li>High-level Luck Tome dramatically shifts reward pools toward Rare/Epic/Legendary tiers</li>
+                            <li>The earlier you invest in a run, the more it pays off exponentially</li>
+                            <li>Don't neglect combat stats entirely - you still need to survive to benefit from better rewards</li>
+                            <li>Many players consider this the best Tome in the game once unlocked</li>
+                            <li>Shop mechanics remain unclear - focus on Luck's proven benefits to level-ups, Shrines, and drops</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Version Notes -->
+                <section class="section">
+                    <h2 class="section-title">Version History & Bug Notes</h2>
+                    <div class="highlight-box warning">
+                        <p><strong>⚠️ Important Historical Note:</strong></p>
+                        <p><strong>Version 1.0.17 Patch (October 2025):</strong> Fixed a bug where Luck and <a href="https://megabonk.org/database/tomes/chaos-tome/" style="color: var(--warning);">Chaos Tome</a> were causing Rare/Epic/Legendary rolls to be multiplied twice, leading to abnormally high drop rates for high-tier rewards.</p>
+                        
+                        <p style="margin-top: 1rem;">If you're watching older guides or videos from before October 2025, be aware that they may showcase this bugged behavior. The current version has corrected this issue.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Source:</strong> Developer patch notes (2025-10-03), Reddit r/MegabonkOfficial</p>
+                    </div>
+                </section>
+
+                <!-- Community Tier Ratings -->
+                <section class="section">
+                    <h2 class="section-title">Community Tier Ratings</h2>
+                    <p>Luck Tome consistently ranks at the top of community tier lists:</p>
+                    
+                    <div class="calc-display">
+                        <div class="calc-item">
+                            <span class="calc-label">Pro Game Guides (2025-10)</span>
+                            <span class="calc-value">S-Tier</span>
+                        </div>
+                        <div class="calc-item">
+                            <span class="calc-label">AmiiboDoctor (2025-09)</span>
+                            <span class="calc-value">S-Tier</span>
+                        </div>
+                        <div class="calc-item">
+                            <span class="calc-label">Steam Community</span>
+                            <span class="calc-value">Best Tome</span>
+                        </div>
+                        <div class="calc-item">
+                            <span class="calc-label">Reddit Consensus</span>
+                            <span class="calc-value">S-Tier</span>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box info" style="margin-top: 1.5rem;">
+                        <p><strong>💡 Note on Tier Ratings:</strong> Tier lists are subjective and reflect community opinion, which can shift with balance patches and evolving strategies. Always cross-check with the <a href="https://megabonk.org/" style="color: var(--accent-luck);">latest patch notes</a> for current meta.</p>
+                    </div>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Luck</span>
+                    <span class="tag">S-Tier</span>
+                    <span class="tag">Utility</span>
+                    <span class="tag">Rare Unlock</span>
+                    <span class="tag">Snowball</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/xp-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+                    </div>
+                    <div class="tome-card-title">XP Tome</div>
+                    <div class="tome-card-stat">XP Gain</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cursed-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome">
+                    </div>
+                    <div class="tome-card-title">Cursed Tome</div>
+                    <div class="tome-card-stat">Enemy Density</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/chaos-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Chaos_Tome.png" alt="Chaos Tome">
+                    </div>
+                    <div class="tome-card-title">Chaos Tome</div>
+                    <div class="tome-card-stat">Random Stats</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/golden-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Golden_Tome.png" alt="Golden Tome">
+                    </div>
+                    <div class="tome-card-title">Golden Tome</div>
+                    <div class="tome-card-stat">Gold Gain</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">View Snowball Builds →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .impact-card, .snowball-step, .calc-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
