@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XP Tome (Megabonk): XP Gain, Rarity, Unlock Guide</title>
+    <meta name="description" content="XP Tome guide for Megabonk: effect, per-level XP gain (v1.0.12), rarity multipliers, best synergies, and how to unlock—break 20 pots in a single run.">
+    <meta name="keywords" content="megabonk xp tome, experience gain, xp boost, snowball tome, megabonk tomes, progression guide, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/xp-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-xp: #4169e1;
+            --accent-royal: #4b0082;
+            --accent-bright: #6495ed;
+            --accent-glow: #00bfff;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+            --common: #20854b;
+            --uncommon: #0c5582;
+            --rare: #7e0079;
+            --epic: #7e1011;
+            --legendary: #897900;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.25), rgba(75, 0, 130, 0.25), rgba(100, 149, 237, 0.25));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="xp" width="100" height="100" patternUnits="userSpaceOnUse"><text x="10" y="30" font-family="Arial" font-size="20" fill="rgba(65,105,225,0.15)" font-weight="bold">XP</text><text x="50" y="60" font-family="Arial" font-size="20" fill="rgba(100,149,237,0.15)" font-weight="bold">+7%%</text><text x="20" y="90" font-family="Arial" font-size="20" fill="rgba(0,191,255,0.15)" font-weight="bold">UP</text></pattern></defs><rect width="100%" height="100%" fill="url(%23xp)"/></svg>');
+            opacity: 0.4;
+            animation: xpFlow 10s linear infinite;
+        }
+
+        @keyframes xpFlow {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal), var(--accent-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: levelUp 2s ease-in-out infinite;
+        }
+
+        @keyframes levelUp {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #4169e1, #4b0082);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            box-shadow: 0 4px 12px rgba(65, 105, 225, 0.4);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Main Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Infobox */
+        .infobox {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(75, 0, 130, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(65, 105, 225, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .infobox-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(65, 105, 225, 0.6));
+        }
+
+        .stat-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(65, 105, 225, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--accent-xp);
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--accent-xp);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .stat-value.primary {
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(65, 105, 225, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            border-radius: 4px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: rgba(65, 105, 225, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-xp);
+        }
+
+        .intro-text strong {
+            color: var(--accent-xp);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            color: var(--text-gray);
+            transition: all 0.3s;
+        }
+
+        .info-list li::before {
+            content: '⬆️';
+            position: absolute;
+            left: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .info-list li strong {
+            color: var(--accent-xp);
+        }
+
+        /* Rarity Table */
+        .rarity-table-section {
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.15), rgba(75, 0, 130, 0.15));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-xp);
+            margin-top: 1.5rem;
+        }
+
+        .rarity-table-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .rarity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .rarity-table th {
+            padding: 1rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rarity-table td {
+            padding: 1rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rarity-common-header {
+            background-color: var(--common);
+        }
+
+        .rarity-uncommon-header {
+            background-color: var(--uncommon);
+        }
+
+        .rarity-rare-header {
+            background-color: var(--rare);
+        }
+
+        .rarity-epic-header {
+            background-color: var(--epic);
+        }
+
+        .rarity-legendary-header {
+            background-color: var(--legendary);
+        }
+
+        .rarity-common {
+            background-color: rgba(32, 133, 75, 0.3);
+        }
+
+        .rarity-uncommon {
+            background-color: rgba(12, 85, 130, 0.3);
+        }
+
+        .rarity-rare {
+            background-color: rgba(126, 0, 121, 0.3);
+        }
+
+        .rarity-epic {
+            background-color: rgba(126, 16, 17, 0.3);
+        }
+
+        .rarity-legendary {
+            background-color: rgba(137, 121, 0, 0.3);
+        }
+
+        /* XP Calculator */
+        .xp-calc {
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(75, 0, 130, 0.1));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-xp);
+            margin-top: 1.5rem;
+        }
+
+        .calc-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .calc-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+        }
+
+        .calc-level {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-desc {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Leveling Speed */
+        .leveling-speed {
+            background: linear-gradient(135deg, rgba(6, 255, 165, 0.1), rgba(0, 217, 126, 0.1));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--success);
+            margin-top: 1.5rem;
+        }
+
+        .speed-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--success);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .speed-examples {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .speed-example {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+        }
+
+        .speed-example-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .speed-scenario {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .speed-result {
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.8rem;
+            background: rgba(6, 255, 165, 0.1);
+            border-radius: 6px;
+        }
+
+        /* Snowball Effect */
+        .snowball-effect {
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(75, 0, 130, 0.1));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-xp);
+            margin-top: 1.5rem;
+        }
+
+        .snowball-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .snowball-steps {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .snowball-step {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-xp);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--text-light);
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .step-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Pot Breaking Challenge */
+        .pot-challenge {
+            background: rgba(65, 105, 225, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(65, 105, 225, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+        }
+
+        .challenge-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 12px rgba(65, 105, 225, 0.3);
+        }
+
+        .challenge-details {
+            flex: 1;
+        }
+
+        .challenge-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-xp);
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .progress-tracker {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background: rgba(65, 105, 225, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-xp), var(--accent-royal));
+            width: 100%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .progress-label {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .synergy-card {
+            background: rgba(65, 105, 225, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synergy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-xp), var(--accent-bright));
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(65, 105, 225, 0.3);
+            border-color: var(--accent-xp);
+        }
+
+        .synergy-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .synergy-title a {
+            color: var(--accent-xp);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-bright);
+        }
+
+        .synergy-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(75, 0, 130, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-xp);
+            margin-top: 1rem;
+        }
+
+        .highlight-box.info {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border-color: var(--accent-blue);
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 0, 110, 0.1));
+            border-color: var(--warning);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .highlight-box li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box.info li::before {
+            content: 'ℹ️';
+        }
+
+        .highlight-box.warning li::before {
+            content: '⚠️';
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(65, 105, 225, 0.2);
+        }
+
+        .tag {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(65, 105, 225, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(65, 105, 225, 0.3);
+            border-color: var(--accent-xp);
+        }
+
+        .tome-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tome-card-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(65, 105, 225, 0.3));
+        }
+
+        .tome-card-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-xp), var(--accent-royal));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(65, 105, 225, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(65, 105, 225, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-xp);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .infobox {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .synergies-grid,
+            .related-tomes {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .challenge-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .tier-badge {
+                display: block;
+                margin: 1rem 0 0 0;
+            }
+
+            .rarity-table {
+                font-size: 0.85rem;
+            }
+
+            .rarity-table th,
+            .rarity-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <strong>XP Tome</strong>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>⬆️ XP Tome</h1>
+            <span class="tier-badge">S-TIER</span>
+            <p class="hero-subtitle">Level Faster - Scale Harder - Snowball to Victory!</p>
+            <div class="tome-category">Economy / Tempo Tome</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Infobox Sidebar -->
+            <aside class="infobox">
+                <div class="infobox-image">
+                    <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+                </div>
+                
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">📊 Stat Type</span>
+                        <span class="stat-value">XP Gain</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⬆️ Upgrade</span>
+                        <span class="stat-value primary">+7%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🔓 Unlock</span>
+                        <span class="stat-value">20 Pots/Run</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🎯 Max Level</span>
+                        <span class="stat-value primary">99</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">📂 Category</span>
+                        <span class="stat-value">Economy/Tempo</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Introduction -->
+                <section class="section">
+                    <p class="intro-text">
+                        The <strong>XP Tome</strong> increases the total amount of experience the player earns in <strong><a href="https://megabonk.org/" style="color: var(--accent-xp);">Megabonk</a></strong>, leading to <strong>faster level-ups and earlier access to stronger choices</strong>. By accelerating progression, it enables builds to come online sooner and snowball more reliably.
+                    </p>
+                </section>
+
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <ul class="info-list">
+                        <li><strong>Stat:</strong> XP Gain (Experience Multiplier)</li>
+                        <li><strong>Base upgrade per level:</strong> +7% XP gain</li>
+                        <li><strong>How to unlock:</strong> Break 20 pots in a single run</li>
+                        <li><strong>Max level:</strong> 99</li>
+                        <li><strong>Category:</strong> Economy / Tempo</li>
+                    </ul>
+                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
+                        XP Tome is one of the most powerful tempo Tomes in Megabonk. By increasing experience gain, you level up faster, which means more upgrade opportunities, earlier power spikes, and stronger overall builds. The earlier you invest in XP Tome, the more levels you'll gain over the course of a run—creating a compound snowball effect that can transform decent runs into dominant ones.
+                    </p>
+                </section>
+
+                <!-- Rarity Table -->
+                <section class="section">
+                    <h2 class="section-title">XP Gain by Rarity</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Higher rarity upgrades provide significantly better XP multipliers:
+                    </p>
+                    <div class="rarity-table-section">
+                        <div class="rarity-table-title">⬆️ XP Gain per Upgrade</div>
+                        <table class="rarity-table">
+                            <thead>
+                                <tr>
+                                    <th class="rarity-common-header">Common</th>
+                                    <th class="rarity-uncommon-header">Uncommon</th>
+                                    <th class="rarity-rare-header">Rare</th>
+                                    <th class="rarity-epic-header">Epic</th>
+                                    <th class="rarity-legendary-header">Legendary</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="rarity-common">+7%</td>
+                                    <td class="rarity-uncommon">+8%</td>
+                                    <td class="rarity-rare">+10%</td>
+                                    <td class="rarity-epic">+11%</td>
+                                    <td class="rarity-legendary">+14%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="color: var(--text-gray); margin-top: 1rem; text-align: center; font-size: 0.9rem;">
+                            Legendary upgrades provide double the XP gain of Common upgrades! Combine with <a href="https://megabonk.org/database/tomes/luck-tome/" style="color: var(--accent-xp);">Luck Tome</a> for maximum value.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- XP Calculator -->
+                <section class="section">
+                    <h2 class="section-title">XP Multiplier Scaling</h2>
+                    <div class="xp-calc">
+                        <div class="calc-title">📈 Total XP Gain at Different Levels</div>
+                        <p style="color: var(--text-gray); text-align: center; margin-bottom: 1rem;">
+                            See how XP gain compounds with investment:
+                        </p>
+                        <div class="calc-grid">
+                            <div class="calc-item">
+                                <div class="calc-level">Base (Level 0)</div>
+                                <div class="calc-value">100%</div>
+                                <div class="calc-desc">
+                                    Standard XP gain
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 10</div>
+                                <div class="calc-value">170%</div>
+                                <div class="calc-desc">
+                                    1.7x faster leveling
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 25</div>
+                                <div class="calc-value">275%</div>
+                                <div class="calc-desc">
+                                    2.75x faster leveling
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 50</div>
+                                <div class="calc-value">450%</div>
+                                <div class="calc-desc">
+                                    4.5x faster leveling
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 75</div>
+                                <div class="calc-value">625%</div>
+                                <div class="calc-desc">
+                                    6.25x faster leveling
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Max (Level 99)</div>
+                                <div class="calc-value">793%</div>
+                                <div class="calc-desc">
+                                    7.93x faster leveling!
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: var(--accent-xp); margin-top: 1.5rem; font-weight: 600; text-align: center;">
+                            At max level, you gain XP nearly 8x faster than baseline!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Effects -->
+                <section class="section">
+                    <h2 class="section-title">Effects</h2>
+                    <ul class="info-list">
+                        <li><strong>Increases XP gained from all sources</strong> (enemy kills, objectives, etc.)</li>
+                        <li>Faster level-ups provide more offers over the same timeframe, improving overall build quality</li>
+                        <li>Multiplicative scaling - compounds with other XP sources</li>
+                        <li>Earlier access to power spike upgrades</li>
+                        <li>More total upgrades per run</li>
+                        <li>Enables snowball strategies</li>
+                    </ul>
+                </section>
+
+                <!-- Leveling Speed Comparison -->
+                <section class="section">
+                    <h2 class="section-title">Leveling Speed Analysis</h2>
+                    <div class="leveling-speed">
+                        <div class="speed-title">⚡ How Much Faster Do You Level?</div>
+                        <p style="color: var(--text-gray); text-align: center; margin-bottom: 1rem;">
+                            Real-world impact of XP Tome on leveling speed:
+                        </p>
+                        <div class="speed-examples">
+                            <div class="speed-example">
+                                <div class="speed-example-title">Scenario 1: Early Game Investment</div>
+                                <div class="speed-scenario">
+                                    <strong>Setup:</strong> XP Tome Level 10 (+70% XP gain)<br>
+                                    <strong>Standard Run:</strong> Reach level 20 in 15 minutes<br>
+                                    <strong>With XP Tome:</strong> Reach level 20 in ~8.8 minutes
+                                </div>
+                                <div class="speed-result">
+                                    Result: <strong>6.2 minutes saved</strong> - You're level 20 while others are level 12!
+                                </div>
+                            </div>
+
+                            <div class="speed-example">
+                                <div class="speed-example-title">Scenario 2: Mid Game Snowball</div>
+                                <div class="speed-scenario">
+                                    <strong>Setup:</strong> XP Tome Level 25 (+175% XP gain)<br>
+                                    <strong>Standard Run:</strong> 40 total levels gained<br>
+                                    <strong>With XP Tome:</strong> 70 total levels gained (2.75x multiplier)
+                                </div>
+                                <div class="speed-result">
+                                    Result: <strong>+30 extra levels</strong> = 30 more upgrade opportunities!
+                                </div>
+                            </div>
+
+                            <div class="speed-example">
+                                <div class="speed-example-title">Scenario 3: Late Game Dominance</div>
+                                <div class="speed-scenario">
+                                    <strong>Setup:</strong> XP Tome Level 50 (+350% XP gain) + Echo Shard<br>
+                                    <strong>Standard Run:</strong> Level 50 at 30 minute mark<br>
+                                    <strong>With XP Tome:</strong> Level 50 at ~10 minute mark
+                                </div>
+                                <div class="speed-result">
+                                    Result: <strong>20 minutes of extra time</strong> at peak power level!
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: var(--success); margin-top: 1.5rem; font-weight: 600; text-align: center;">
+                            XP Tome transforms timing windows—you reach your power spikes dramatically earlier!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Snowball Effect -->
+                <section class="section">
+                    <h2 class="section-title">The Compound Snowball Effect</h2>
+                    <div class="snowball-effect">
+                        <div class="snowball-title">📈 How XP Creates Exponential Growth</div>
+                        <p style="color: var(--text-gray); text-align: center; margin-bottom: 1rem;">
+                            Understanding the compounding power of early XP investment:
+                        </p>
+                        <div class="snowball-steps">
+                            <div class="snowball-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <div class="step-title">Invest Early</div>
+                                    <div class="step-desc">
+                                        Take XP Tome in your first 3-5 levels. The sooner XP scaling starts, the more total level-ups you gain over a run.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="snowball-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">Level Faster</div>
+                                    <div class="step-desc">
+                                        With bonus XP, you reach your next level-up significantly faster than without it. This creates a time advantage.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="snowball-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <div class="step-title">More Upgrades</div>
+                                    <div class="step-desc">
+                                        Faster leveling means more upgrade opportunities. Each upgrade makes you stronger, which speeds up clear speed.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="snowball-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <div class="step-title">Kill Faster</div>
+                                    <div class="step-desc">
+                                        Stronger upgrades = faster kills = more XP collected per minute. This amplifies your XP gain rate further.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="snowball-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <div class="step-title">Dominate</div>
+                                    <div class="step-desc">
+                                        The gap widens exponentially. You're 20+ levels ahead with better upgrades, faster clear speed, and unstoppable momentum.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: var(--accent-xp); margin-top: 1.5rem; font-weight: 600; text-align: center;">
+                            Early XP investment creates a positive feedback loop that compounds throughout the entire run!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock</h2>
+                    <div class="pot-challenge">
+                        <div class="challenge-header">
+                            <div class="challenge-icon">
+                                🏺
+                            </div>
+                            <div class="challenge-details">
+                                <div class="challenge-name">Pot Breaking Challenge</div>
+                                <div class="challenge-desc">
+                                    This is a skill-check on routing and map awareness; plan a path that passes through clustered pots without losing survival tempo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-xp);">
+                            <strong style="color: var(--accent-xp);">Unlock Requirement:</strong><br>
+                            <span style="color: var(--text-gray);">
+                                <strong>Break 20 pots in a single run.</strong><br>
+                                Pots are destructible objects found throughout stages that drop rewards. This unlock tests your routing efficiency.
+                            </span>
+                        </div>
+
+                        <div class="progress-tracker">
+                            <div class="progress-bar">
+                                <div class="progress-fill">20 / 20</div>
+                            </div>
+                            <div class="progress-label">Example: Unlock complete!</div>
+                        </div>
+
+                        <div class="highlight-box info" style="margin-top: 1.5rem;">
+                            <ul>
+                                <li><strong>💡 Tip:</strong> Prioritize stages with visible pot clusters</li>
+                                <li><strong>💡 Tip:</strong> Use AoE weapons to break multiple pots quickly</li>
+                                <li><strong>💡 Tip:</strong> Don't sacrifice survival tempo for pot hunting</li>
+                                <li><strong>💡 Tip:</strong> Progress must be in a single run, not cumulative</li>
+                                <li><strong>💡 Tip:</strong> Pots often cluster near stage edges and corners</li>
+                                <li><strong>💡 Tip:</strong> Movement speed helps you efficiently route to pots</li>
+                                <li><strong>💡 Tip:</strong> Most players unlock this within first 5-10 runs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Synergies</h2>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <span>🔷</span>
+                                <span>Echo Shard</span>
+                            </div>
+                            <div class="synergy-desc">
+                                Enemies dropping extra XP pairs very well with having higher XP Gain. This combo creates ridiculous leveling speed.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/luck-tome/">Luck Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Faster leveling allows you to build up Luck earlier which will result in more high rarity items from your chests. Perfect snowball combo.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cursed-tome/">Cursed Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More enemies → more XP orbs → greater benefit from XP multipliers. Risk/reward at its finest.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cooldown-tome/">Cooldown Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Killing enemies faster allows you to gather XP faster. More kills per minute = more XP per minute.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/damage-tome/">Damage Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Higher damage = faster kills = faster XP collection. The offensive-economy combo.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Precision_Tome.png" alt="Precision Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/precision-tome/">Precision Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Crits speed up kills, speeding up XP collection. Another strong offensive-economy pairing.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/quantity-tome/">Quantity Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More projectiles = more kills = faster XP farming. Screen clear efficiency.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/agility-tome/">Agility Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Mobility helps sweep orbs quickly and maintain tempo between packs. Efficiency optimization.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Attraction_Tome.png" alt="Attraction Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/attraction-tome/">Attraction Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Larger pickup range gathers scattered XP orbs efficiently, maximizing returns from XP scaling. Note: Using two tome slots solely to level faster will result in a notably weaker build at high levels compared to others.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Golden_Tome.png" alt="Golden Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/golden-tome/">Golden Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Economy-focused paths often align with XP-driven snowball strategies. May be more worth it in high level runs compared to Attraction Tome as it allows you to open more chests. Especially good on Robinette who gains damage based on money held.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Invest early:</strong> The sooner XP scaling starts, the more total level-ups you gain over a run</li>
+                            <li>Don't over-invest at the cost of survivability—balance with damage or defensive Tomes if pressure is high</li>
+                            <li><strong>You gain 100% more XP when you're not dead</strong> - don't sacrifice survival</li>
+                            <li>In <a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-xp);">boss fights</a>, rely on prior XP advantage (extra upgrades) rather than expecting new XP bursts</li>
+                            <li>Real payoff depends on sustained clear speed and safe pickup paired with control or mobility</li>
+                            <li>Works across all builds; value is highest in long runs and high-density tiers</li>
+                            <li>Perfect for snowball strategies and optimization-focused playstyles</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="section">
+                    <h2 class="section-title">When to Use XP Tome</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>✅ Always use:</strong> In long runs where you'll gain many levels</li>
+                            <li><strong>✅ Always use:</strong> When building for late-game snowball</li>
+                            <li><strong>✅ Always use:</strong> In combination with Luck Tome for quality + quantity</li>
+                            <li><strong>✅ Best for:</strong> Players who enjoy optimization and perfect runs</li>
+                            <li><strong>✅ Best for:</strong> High-density enemy stages</li>
+                            <li><strong>✅ Best for:</strong> Builds with good clear speed</li>
+                            <li><strong>⚠️ Be careful:</strong> Don't over-invest early if struggling to survive</li>
+                            <li><strong>⚠️ Less useful:</strong> Short speedruns with limited leveling opportunities</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Pro Tips & Important Notes</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li>At max level (99), provides <strong>693% XP gain (7.93x multiplier)</strong> - absurd scaling!</li>
+                            <li>XP Tome is a <strong>force multiplier</strong>—it amplifies everything else you do</li>
+                            <li>Early investment is critical—Level 5 XP Tome will give you more total value than Level 50 XP Tome started late</li>
+                            <li>Balance is key: <strong>Dead players gain 0 XP</strong>. Don't neglect combat stats entirely</li>
+                            <li>Combine with Echo Shard for maximum XP farming potential</li>
+                            <li>Works multiplicatively with <a href="https://megabonk.org/database/tomes/luck-tome/" style="color: var(--warning);">Luck Tome</a>—the ultimate snowball combo</li>
+                            <li>More levels = more upgrade options = better build quality over time</li>
+                            <li>The compound interest of skill trees—invest early, reap rewards all run</li>
+                            <li>One of the few Tomes that provides value without direct combat application</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">XP Gain</span>
+                    <span class="tag">S-Tier</span>
+                    <span class="tag">Economy</span>
+                    <span class="tag">Tempo</span>
+                    <span class="tag">Snowball</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/luck-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome">
+                    </div>
+                    <div class="tome-card-title">Luck Tome</div>
+                    <div class="tome-card-stat">Reward Quality</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cursed-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cursed_Tome.png" alt="Cursed Tome">
+                    </div>
+                    <div class="tome-card-title">Cursed Tome</div>
+                    <div class="tome-card-stat">Enemy Density</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/golden-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Golden_Tome.png" alt="Golden Tome">
+                    </div>
+                    <div class="tome-card-title">Golden Tome</div>
+                    <div class="tome-card-stat">Gold Gain</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/attraction-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Attraction_Tome.png" alt="Attraction Tome">
+                    </div>
+                    <div class="tome-card-title">Attraction Tome</div>
+                    <div class="tome-card-stat">Pickup Range</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">View Snowball Builds →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .calc-item, .snowball-step, .speed-example').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
