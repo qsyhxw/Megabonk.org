@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Tome (Projectile Count) Guide – Megabonk</title>
+    <meta name="description" content="Quantity Tome boosts projectile count. Learn effects, best weapons, rarity scaling (Legendary +2), and how to unlock it by firing 5,000 projectiles.">
+    <meta name="keywords" content="megabonk quantity tome, projectile count, quantity stat, dps tome, megabonk tomes, offensive guide, megabonk wiki">
+
+    <link rel="canonical" href="https://megabonk.org/database/tomes/quantity-tome">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-quantity: #8b5cf6;
+            --accent-violet: #7c3aed;
+            --accent-indigo: #6366f1;
+            --accent-electric: #a78bfa;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+            --common: #20854b;
+            --uncommon: #0c5582;
+            --rare: #7e0079;
+            --epic: #7e1011;
+            --legendary: #897900;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(124, 58, 237, 0.25), rgba(99, 102, 241, 0.25));
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="projectiles" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="3" fill="rgba(139,92,246,0.3)"/><circle cx="50" cy="30" r="3" fill="rgba(124,58,237,0.3)"/><circle cx="80" cy="40" r="3" fill="rgba(99,102,241,0.3)"/><circle cx="35" cy="60" r="3" fill="rgba(167,139,250,0.3)"/><circle cx="65" cy="70" r="3" fill="rgba(139,92,246,0.3)"/><circle cx="85" cy="85" r="3" fill="rgba(124,58,237,0.3)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23projectiles)"/></svg>');
+            opacity: 0.4;
+            animation: projectileFlow 5s linear infinite;
+        }
+
+        @keyframes projectileFlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet), var(--accent-electric));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .tome-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Main Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            align-items: start;
+        }
+
+        /* Infobox */
+        .infobox {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            align-self: start;
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .infobox-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 46, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
+        }
+
+        .stat-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--accent-quantity);
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--accent-quantity);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .stat-value.primary {
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            border-radius: 4px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: rgba(139, 92, 246, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-quantity);
+        }
+
+        .intro-text strong {
+            color: var(--accent-quantity);
+        }
+
+        .intro-text a {
+            color: var(--accent-quantity);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .intro-text a:hover {
+            border-bottom-color: var(--accent-quantity);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            color: var(--text-gray);
+            transition: all 0.3s;
+        }
+
+        .info-list li::before {
+            content: '🔮';
+            position: absolute;
+            left: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .info-list li strong {
+            color: var(--accent-quantity);
+        }
+
+        /* Rarity Table */
+        .rarity-table-section {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.15));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-quantity);
+            margin-top: 1.5rem;
+        }
+
+        .rarity-table-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .rarity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .rarity-table th {
+            padding: 1rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rarity-table td {
+            padding: 1rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rarity-common-header {
+            background-color: var(--common);
+        }
+
+        .rarity-uncommon-header {
+            background-color: var(--uncommon);
+        }
+
+        .rarity-rare-header {
+            background-color: var(--rare);
+        }
+
+        .rarity-epic-header {
+            background-color: var(--epic);
+        }
+
+        .rarity-legendary-header {
+            background-color: var(--legendary);
+        }
+
+        .rarity-common {
+            background-color: rgba(32, 133, 75, 0.3);
+        }
+
+        .rarity-uncommon {
+            background-color: rgba(12, 85, 130, 0.3);
+        }
+
+        .rarity-rare {
+            background-color: rgba(126, 0, 121, 0.3);
+        }
+
+        .rarity-epic {
+            background-color: rgba(126, 16, 17, 0.3);
+        }
+
+        .rarity-legendary {
+            background-color: rgba(137, 121, 0, 0.3);
+        }
+
+        /* Quantity Calculator */
+        .quantity-calc {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.1));
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--accent-quantity);
+            margin-top: 1.5rem;
+        }
+
+        .calc-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .calc-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .calc-level {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-desc {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Weapon Compatibility */
+        .weapon-compat {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .compat-category {
+            background: rgba(139, 92, 246, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .compat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .compat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .compat-icon.excellent {
+            background: linear-gradient(135deg, var(--success), #00d98f);
+        }
+
+        .compat-icon.moderate {
+            background: linear-gradient(135deg, var(--warning), #ff9500);
+        }
+
+        .compat-icon.none {
+            background: linear-gradient(135deg, var(--danger), #d90368);
+        }
+
+        .compat-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .compat-title.excellent {
+            color: var(--success);
+        }
+
+        .compat-title.moderate {
+            color: var(--warning);
+        }
+
+        .compat-title.none {
+            color: var(--danger);
+        }
+
+        .weapon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .weapon-item {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .weapon-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-quantity);
+            box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
+        }
+
+        .weapon-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .weapon-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.3));
+        }
+
+        .weapon-name {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* Unlock Progress */
+        .unlock-progress {
+            background: rgba(139, 92, 246, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .progress-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .progress-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            color: var(--text-light);
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-tracker {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-quantity), var(--accent-violet));
+            width: 100%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .progress-label {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Synergies Grid */
+        .synergies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .synergy-card {
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synergy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-quantity), var(--accent-indigo));
+        }
+
+        .synergy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.3);
+            border-color: var(--accent-quantity);
+        }
+
+        .synergy-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .synergy-title a {
+            color: var(--accent-quantity);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .synergy-title a:hover {
+            color: var(--accent-violet);
+        }
+
+        .synergy-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .synergy-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-quantity);
+            margin-top: 1rem;
+        }
+
+        .highlight-box.info {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border-color: var(--accent-blue);
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 0, 110, 0.1));
+            border-color: var(--warning);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .highlight-box li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box.info li::before {
+            content: 'ℹ️';
+        }
+
+        .highlight-box.warning li::before {
+            content: '⚠️';
+        }
+
+        .highlight-box a {
+            color: var(--accent-quantity);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .highlight-box a:hover {
+            border-bottom-color: var(--accent-quantity);
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .tag {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+
+        /* Related Tomes */
+        .related-tomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tome-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .tome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.3);
+            border-color: var(--accent-quantity);
+        }
+
+        .tome-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tome-card-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));
+        }
+
+        .tome-card-title {
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tome-card-stat {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-quantity), var(--accent-violet));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-quantity);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .infobox {
+                position: static;
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .synergies-grid,
+            .related-tomes {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .calc-grid,
+            .weapon-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .rarity-table {
+                font-size: 0.85rem;
+            }
+
+            .rarity-table th,
+            .rarity-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">MEGABONK</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://megabonk.org/">Home</a> / 
+        <a href="https://megabonk.org/database/">Database</a> / 
+        <a href="https://megabonk.org/database/tomes/">Tomes</a> / 
+        <strong>Quantity Tome</strong>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>🔮 Quantity Tome</h1>
+            <p class="hero-subtitle">More Projectiles = More Damage Output!</p>
+            <div class="tome-category">Offensive Tome / DPS Multiplier</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Infobox Sidebar -->
+            <aside class="infobox">
+                <div class="infobox-image">
+                    <img src="https://megabonk.org/images/Tomes/Quantity_Tome.png" alt="Quantity Tome">
+                </div>
+                
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">📊 Stat Type</span>
+                        <span class="stat-value">Projectile Count</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⬆️ Per Level</span>
+                        <span class="stat-value primary">+1*</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🔓 Unlock</span>
+                        <span class="stat-value">5,000 Projectiles</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🎯 Max Level</span>
+                        <span class="stat-value primary">99*</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box warning" style="margin-top: 1.5rem; font-size: 0.85rem;">
+                    <strong>⚠️ Data Notice:</strong><br>
+                    Values shown are based on community testing (Common rarity). Max level 99 is community consensus. Always verify with current patch.
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Introduction -->
+                <section class="section">
+                    <p class="intro-text">
+                        <strong>Quantity Tome</strong> increases your <strong>Projectile Count</strong> (投射物数量) for <a href="https://megabonk.org/database/weapons/">weapons</a> that use projectile-type attacks. It <strong>does not</strong> affect non-projectile area weapons like <strong><a href="https://megabonk.org/database/weapons/aura">Aura</a></strong>, <strong><a href="https://megabonk.org/database/weapons/frostwalker">Frostwalker</a></strong>, or <strong><a href="https://megabonk.org/database/weapons/dragons-breath">Dragon's Breath</a></strong>.
+                    </p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Sources:</strong> Destructoid (Sep 29, 2025), GameRant (Oct 1, 2025), Steam Community Guides (Sep 28, 2025)
+                    </p>
+                </section>
+
+                <!-- Overview -->
+                <section class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <ul class="info-list">
+                        <li><strong>Stat:</strong> Projectile Count (Attack Instances)</li>
+                        <li><strong>Base upgrade per level:</strong> +1 projectile (Common rarity)</li>
+                        <li><strong>How to unlock:</strong> Fire 5,000 projectiles (community consensus: progress is cumulative across runs)</li>
+                        <li><strong>Max level:</strong> 99 (community/media consensus; not officially documented)</li>
+                    </ul>
+                    <p style="color: var(--text-gray); margin-top: 1.5rem; line-height: 1.8;">
+                        Quantity Tome is highly valued for projectile-based weapons in Megabonk. By multiplying the number of projectiles or attacks, it can dramatically increase DPS and screen coverage. However, <strong>weapon compatibility is critical</strong>—some weapons benefit massively while others gain nothing at all.
+                    </p>
+                </section>
+
+                <!-- Rarity Table -->
+                <section class="section">
+                    <h2 class="section-title">Projectile Count by Rarity</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Higher rarity upgrades provide bonus projectiles beyond the base +1 (based on community-validated data):
+                    </p>
+                    <div class="rarity-table-section">
+                        <div class="rarity-table-title">🔮 Projectiles Added per Upgrade</div>
+                        <table class="rarity-table">
+                            <thead>
+                                <tr>
+                                    <th class="rarity-common-header">Common</th>
+                                    <th class="rarity-uncommon-header">Uncommon</th>
+                                    <th class="rarity-rare-header">Rare</th>
+                                    <th class="rarity-epic-header">Epic</th>
+                                    <th class="rarity-legendary-header">Legendary</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="rarity-common">+1</td>
+                                    <td class="rarity-uncommon">+1.2</td>
+                                    <td class="rarity-rare">+1.4</td>
+                                    <td class="rarity-epic">+1.6</td>
+                                    <td class="rarity-legendary">+2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="color: var(--text-gray); margin-top: 1rem; text-align: center; font-size: 0.9rem;">
+                            Legendary upgrades add double the projectiles! Combine with <a href="https://megabonk.org/database/tomes/luck-tome/" style="color: var(--accent-quantity);">Luck Tome</a> for more high-rarity rolls.
+                        </p>
+                        <p style="color: var(--warning); margin-top: 0.5rem; text-align: center; font-size: 0.85rem;">
+                            <strong>Note:</strong> These multipliers are from community testing. Official values not documented.
+                        </p>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Sources:</strong> Steam Guide "Weapon and Tome Upgrades" (Sep 28, 2025), Community rarity testing
+                    </p>
+                </section>
+
+                <!-- Quantity Calculator -->
+                <section class="section">
+                    <h2 class="section-title">Projectile Count Scaling</h2>
+                    <div class="quantity-calc">
+                        <div class="calc-title">📈 Estimated Total Projectiles at Different Levels</div>
+                        <p style="color: var(--text-gray); text-align: center; margin-bottom: 1rem;">
+                            Example progression (assuming Common rarity +1/level and base projectile count of 1):
+                        </p>
+                        <div class="calc-grid">
+                            <div class="calc-item">
+                                <div class="calc-level">Base (Level 0)</div>
+                                <div class="calc-value">1</div>
+                                <div class="calc-desc">
+                                    Starting projectile count
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 10</div>
+                                <div class="calc-value">11</div>
+                                <div class="calc-desc">
+                                    ~11x damage output
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 25</div>
+                                <div class="calc-value">26</div>
+                                <div class="calc-desc">
+                                    ~26x damage output
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 50</div>
+                                <div class="calc-value">51</div>
+                                <div class="calc-desc">
+                                    ~51x damage output
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Level 75</div>
+                                <div class="calc-value">76</div>
+                                <div class="calc-desc">
+                                    ~76x damage output
+                                </div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-level">Max (Level 99)</div>
+                                <div class="calc-value">~100</div>
+                                <div class="calc-desc">
+                                    ~100x damage output!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="highlight-box warning" style="margin-top: 1.5rem;">
+                            <p><strong>⚠️ Important Assumptions:</strong></p>
+                            <ul>
+                                <li>These calculations assume Common rarity (+1/level) and base projectile count of 1</li>
+                                <li>Actual values vary by weapon's base projectile count</li>
+                                <li>Rarity multipliers (e.g., Legendary +2) significantly alter these numbers</li>
+                                <li>High projectile counts may have visual display limitations (but damage still applies)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Sources:</strong> Amiibo Doctor (Oct 9, 2025), Deltia's Gaming (Oct 16, 2025)
+                    </p>
+                </section>
+
+                <!-- Effects -->
+                <section class="section">
+                    <h2 class="section-title">Effects</h2>
+                    <ul class="info-list">
+                        <li><strong>Adds extra projectiles or attack instances</strong> for compatible weapons</li>
+                        <li>Does NOT affect <a href="https://megabonk.org/database/weapons/aura" style="color: var(--accent-quantity);">Aura</a>, <a href="https://megabonk.org/database/weapons/frostwalker" style="color: var(--accent-quantity);">Frostwalker</a>, or <a href="https://megabonk.org/database/weapons/dragons-breath" style="color: var(--accent-quantity);">Dragon's Breath</a></li>
+                        <li>Linear scaling - each level adds +1 projectile (Common base)</li>
+                        <li>Part of DPS formulas that may interact multiplicatively with other stats (exact formulas are community-derived)</li>
+                        <li>Improves both single-target DPS and crowd control</li>
+                        <li>More projectiles = better screen coverage</li>
+                    </ul>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Sources:</strong> Steam discussions (Sep 29, 2025), Reddit r/MegabonkOfficial (Sep 2025)
+                    </p>
+                </section>
+
+                <!-- Weapon Compatibility -->
+                <section class="section">
+                    <h2 class="section-title">Weapon Compatibility</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        <strong>CRITICAL:</strong> Not all weapons benefit from Quantity Tome. Check compatibility before investing!
+                    </p>
+                    <div class="weapon-compat">
+                        <div class="compat-category">
+                            <div class="compat-header">
+                                <div class="compat-icon excellent">✅</div>
+                                <div class="compat-title excellent">High Value for Projectile-Based Weapons</div>
+                            </div>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                                Projectile-based weapons benefit significantly from Quantity Tome. Examples include (but are not limited to):
+                            </p>
+                            <div class="weapon-grid">
+                                <a href="https://megabonk.org/database/weapons/bow" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Bow.png" alt="Bow">
+                                    </div>
+                                    <div class="weapon-name">Bow</div>
+                                </a>
+                                <a href="https://megabonk.org/database/weapons/revolver" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver">
+                                    </div>
+                                    <div class="weapon-name">Revolver</div>
+                                </a>
+                                <a href="https://megabonk.org/database/weapons/lightning-staff" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff">
+                                    </div>
+                                    <div class="weapon-name">Lightning Staff</div>
+                                </a>
+                                <a href="https://megabonk.org/database/weapons/shotgun" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Shotgun.png" alt="Shotgun">
+                                    </div>
+                                    <div class="weapon-name">Shotgun</div>
+                                </a>
+                                <a href="https://megabonk.org/database/weapons/bananarang" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+                                    </div>
+                                    <div class="weapon-name">Bananarang</div>
+                                </a>
+                                <a href="https://megabonk.org/database/weapons/sniper-rifle" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Sniper.png" alt="Sniper Rifle">
+                                    </div>
+                                    <div class="weapon-name">Sniper Rifle</div>
+                                </a>
+                            </div>
+                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 1rem;">
+                                See the <a href="https://megabonk.org/database/weapons/" style="color: var(--accent-quantity);">full weapons database</a> for complete compatibility details.
+                            </p>
+                        </div>
+
+                        <div class="compat-category">
+                            <div class="compat-header">
+                                <div class="compat-icon moderate">⚠️</div>
+                                <div class="compat-title moderate">Conditional or Limited Value</div>
+                            </div>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                                Some weapons have limited or conditional benefits. Examples include melee weapons with projectile components, or weapons where Quantity affects secondary effects. Test before heavy investment.
+                            </p>
+                        </div>
+
+                        <div class="compat-category">
+                            <div class="compat-header">
+                                <div class="compat-icon none">❌</div>
+                                <div class="compat-title none">Typically No Value</div>
+                            </div>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                                These weapons typically do NOT benefit from Quantity Tome:
+                            </p>
+                            <div class="weapon-grid">
+                                <a href="https://megabonk.org/database/weapons/aura" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+                                    </div>
+                                    <div class="weapon-name">Aura</div>
+                                </a>
+                                <a href="https://megabonk.org/database/weapons/frostwalker" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Frostwalker.png" alt="Frostwalker">
+                                    </div>
+                                    <div class="weapon-name">Frostwalker</div>
+                                </a>
+                                <a href="https://megabonk.org/database/weapons/dragons-breath" class="weapon-item">
+                                    <div class="weapon-icon">
+                                        <img src="https://megabonk.org/images/database/weapons/Dragons_Breath.png" alt="Dragon's Breath">
+                                    </div>
+                                    <div class="weapon-name">Dragon's Breath</div>
+                                </a>
+                            </div>
+                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 1rem;">
+                                These weapons lack Projectile Count in their upgrade paths, indicating no benefit from Quantity Tome.
+                            </p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Sources:</strong> Steam Guide weapon upgrade tables (Sep 28, 2025), Reddit discussions (Sep 2025)
+                    </p>
+                </section>
+
+                <!-- How to Unlock -->
+                <section class="section">
+                    <h2 class="section-title">How to Unlock</h2>
+                    <div class="unlock-progress">
+                        <div class="progress-header">
+                            <div class="progress-title">Projectile Milestone</div>
+                            <div class="progress-badge">5,000 Projectiles</div>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-quantity);">
+                            <strong style="color: var(--accent-quantity);">Unlock Requirement:</strong><br>
+                            <span style="color: var(--text-gray);">
+                                <strong>Fire 5,000 projectiles</strong> (community/media consensus: cumulative across runs).<br>
+                                This happens naturally over time with ranged builds.
+                            </span>
+                        </div>
+
+                        <div class="progress-tracker">
+                            <div class="progress-bar">
+                                <div class="progress-fill">5,000 / 5,000</div>
+                            </div>
+                            <div class="progress-label">Example: Unlock complete!</div>
+                        </div>
+
+                        <div class="highlight-box info" style="margin-top: 1.5rem;">
+                            <ul>
+                                <li><strong>💡 Tip:</strong> Progress is widely believed to be cumulative across all runs (though not officially confirmed)</li>
+                                <li><strong>💡 Tip:</strong> Play with projectile-based weapons to unlock faster</li>
+                                <li><strong>💡 Tip:</strong> One of the easiest and earliest Tome unlocks</li>
+                                <li><strong>💡 Tip:</strong> Check in-game Quests menu to track progress</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Sources:</strong> GameRant (Oct 6, 2025), DualShockers (Oct 3, 2025)
+                    </p>
+                </section>
+
+                <!-- Synergies -->
+                <section class="section">
+                    <h2 class="section-title">Popular Synergies (Build Suggestions)</h2>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Many build guides suggest pairing Quantity Tome with the following for enhanced DPS and screen coverage:
+                    </p>
+                    <div class="synergies-grid">
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/damage-tome/">Damage Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                More damage per projectile combined with more projectiles creates powerful DPS scaling.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Precision_Tome.png" alt="Precision Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/precision-tome/">Precision Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Critical hits with multiple projectiles can dramatically improve kill speed, especially for clearing enemy swarms.
+                            </div>
+                        </div>
+                        
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/cooldown-tome/">Cooldown Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Faster attacks combined with more projectiles floods the screen with damage.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/size-tome/">Size Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Larger projectiles with higher quantity improves coverage and hit consistency.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Duration_Tome.png" alt="Duration Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/duration-tome/">Duration Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Longer-lasting projectiles with higher quantity creates screen saturation and overlapping damage.
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <div class="synergy-title">
+                                <img src="https://megabonk.org/images/Tomes/Luck_Tome.png" alt="Luck Tome" class="synergy-icon">
+                                <a href="https://megabonk.org/database/tomes/luck-tome/">Luck Tome</a>
+                            </div>
+                            <div class="synergy-desc">
+                                Higher Luck increases the chance of Legendary upgrades, which give +2 projectiles per level instead of +1.
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color: var(--warning); font-size: 0.9rem; margin-top: 1.5rem;">
+                        <strong>Note:</strong> These are build strategy suggestions from community guides. Exact stat interactions (additive vs. multiplicative) vary. Consult community formulas for details.
+                    </p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                        <strong>Sources:</strong> TheGamer (Oct 12, 2025), ProGameGuides (Oct 2025), Steam formulas (Sep 28, 2025)
+                    </p>
+                </section>
+
+                <!-- Strategy -->
+                <section class="section">
+                    <h2 class="section-title">Strategy Guide</h2>
+                    <div class="highlight-box">
+                        <ul>
+                            <li><strong>Highly valuable with projectile-based weapons</strong></li>
+                            <li>Some weapons don't benefit, so prioritize only if your weapon is compatible</li>
+                            <li>Community guides suggest combining with other offensive Tomes for enhanced scaling</li>
+                            <li>Perfect for <a href="https://megabonk.org/guides/builds/" style="color: var(--accent-quantity);">screen clear builds</a></li>
+                            <li>Effective against both crowds and <a href="https://megabonk.org/guides/bosses/" style="color: var(--accent-quantity);">bosses</a></li>
+                            <li>Linear scaling means consistent value at every level</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="section">
+                    <h2 class="section-title">When to Use Quantity Tome</h2>
+                    <div class="highlight-box info">
+                        <ul>
+                            <li><strong>✅ Best for:</strong> Projectile-based weapons (Bow, Revolver, Lightning Staff, etc.)</li>
+                            <li><strong>✅ Best for:</strong> Building for pure DPS optimization</li>
+                            <li><strong>✅ Best for:</strong> Combining with Damage and Cooldown Tomes</li>
+                            <li><strong>✅ Best for:</strong> Improving crowd control and screen coverage</li>
+                            <li><strong>❌ Skip for:</strong> Aura, Frostwalker, and Dragon's Breath (typically no effect)</li>
+                            <li><strong>❌ Skip for:</strong> Builds that don't fire projectiles</li>
+                            <li><strong>⚠️ Test first:</strong> Melee weapons or weapons with unclear projectile mechanics</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Pro Tips -->
+                <section class="section">
+                    <h2 class="section-title">Pro Tips & Important Notes</h2>
+                    <div class="highlight-box warning">
+                        <ul>
+                            <li>Highly valued by the community for compatible weapons</li>
+                            <li>Unlock condition is straightforward and comes naturally with ranged play</li>
+                            <li>At max level (99), can provide ~100 total projectiles (assuming Common +1/level and base of 1)</li>
+                            <li>Linear scaling means every level is equally valuable</li>
+                            <li>Works best when invested in early for consistent growth</li>
+                            <li>Can dramatically impact runs when paired with compatible weapons</li>
+                            <li>Community-suggested "DPS trinity": Damage + Quantity + Cooldown Tomes</li>
+                            <li>Higher rarity upgrades (Legendary = +2 projectiles) make it even stronger</li>
+                            <li>High projectile counts may have visual display limitations but still apply full damage</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Data Sources -->
+                <section class="section">
+                    <h2 class="section-title">Data Accuracy & Version Notes</h2>
+                    <div class="highlight-box info">
+                        <p><strong>ℹ️ Important Information About This Page:</strong></p>
+                        <ul>
+                            <li><strong>Max Level (99):</strong> Based on community consensus and multiple media sources; not officially documented by developers</li>
+                            <li><strong>Per-Level Values (+1 Common):</strong> From community testing and widely-referenced Steam guides</li>
+                            <li><strong>Rarity Multipliers (1.0/1.2/1.4/1.6/2.0):</strong> Community-validated data; official formulas not published</li>
+                            <li><strong>Unlock Progress (cumulative):</strong> Community belief; not explicitly confirmed by official sources</li>
+                            <li><strong>Weapon Compatibility:</strong> Based on weapon upgrade path data from community guides</li>
+                            <li><strong>Stat Interactions:</strong> Some stats may interact additively or multiplicatively; consult community formula documentation</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Always verify values with the latest patch notes and in-game testing.</strong></p>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Primary Sources:</strong> Destructoid (Sep 2025), GameRant (Oct 2025), DualShockers (Oct 2025), Steam Community Guides (Sep 2025), Amiibo Doctor (Oct 2025), Reddit r/MegabonkOfficial (Sep-Oct 2025)
+                    </p>
+                </section>
+
+                <!-- Tags -->
+                <div class="tags">
+                    <span class="tag">Tomes</span>
+                    <span class="tag">Quantity</span>
+                    <span class="tag">Offensive</span>
+                    <span class="tag">DPS</span>
+                    <span class="tag">Projectiles</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- Related Tomes -->
+        <section class="section">
+            <h2 class="section-title">Related Tomes</h2>
+            <div class="related-tomes">
+                <a href="https://megabonk.org/database/tomes/damage-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+                    </div>
+                    <div class="tome-card-title">Damage Tome</div>
+                    <div class="tome-card-stat">Base Damage</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/cooldown-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Cooldown_Tome.png" alt="Cooldown Tome">
+                    </div>
+                    <div class="tome-card-title">Cooldown Tome</div>
+                    <div class="tome-card-stat">Attack Speed</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/precision-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Precision_Tome.png" alt="Precision Tome">
+                    </div>
+                    <div class="tome-card-title">Precision Tome</div>
+                    <div class="tome-card-stat">Critical Hit</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/size-tome/" class="tome-card">
+                    <div class="tome-card-icon">
+                        <img src="https://megabonk.org/images/Tomes/Size_Tome.png" alt="Size Tome">
+                    </div>
+                    <div class="tome-card-title">Size Tome</div>
+                    <div class="tome-card-stat">Attack Size</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://megabonk.org/database/tomes/" class="btn">← All Tomes</a>
+            <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">View DPS Builds →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Megabonk.org - Complete Megabonk Strategy Guide & Database</p>
+            <div class="footer-links">
+                <a href="https://megabonk.org/">Home</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/database/weapons/">Weapons</a>
+                <a href="https://megabonk.org/database/tomes/">Tomes</a>
+                <a href="https://megabonk.org/tier-lists/items/">Items</a>
+                <a href="https://megabonk.org/guides/bosses/">Bosses</a>
+                <a href="https://megabonk.org/guides/achievements/">Achievements</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .synergy-card, .tome-card, .calc-item, .weapon-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
