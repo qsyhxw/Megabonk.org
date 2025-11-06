@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -615,7 +614,7 @@
             gap: 12px;
         }
 
-        /* ⭐ 新增：可点击的物品卡片样式 */
+        /* ⭐ 可点击的物品卡片样式 */
         .item-card {
             display: flex;
             flex-direction: column;
@@ -637,7 +636,7 @@
             box-shadow: 0 6px 16px rgba(102, 126, 234, 0.25);
         }
 
-        /* ⭐ 新增：悬停时显示"点击查看"提示 */
+        /* ⭐ 悬停时显示"点击查看"提示 */
         .item-card::after {
             content: 'Click to view';
             position: absolute;
@@ -927,7 +926,7 @@
                 </button>
             </div>
 
-            <!-- ADS: In-Article #1 (Leaderboard top, before #content) -->
+            <!-- ADS: In-Article #1 -->
             <div class="ad-box ad-in-article-top">
                 <ins class="adsbygoogle"
                      style="display:block; text-align:center;"
@@ -1006,32 +1005,29 @@
                     <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
                     <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
                     <li><a href="https://megabonk.org/guides/achievements/">Achievements</a></li>
-                    <li><a href="https://megabonk.org/guides/secrets/">Secrets</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Database</h3>
                 <ul class="footer-links">
                     <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
-                    <li><a href="https://megabonk.org/tier-lists/items/">Items</a></li>
-                    <li><a href="https://megabonk.org/tier-lists/tomes/">Tomes</a></li>
-                    <li><a href="https://megabonk.org/guides/best-weapons/">Best Weapons</a></li>
+                    <li><a href="https://megabonk.org/database/items/">Items</a></li>
+                    <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Resources</h3>
                 <ul class="footer-links">
                     <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
-                    <li><a href="https://megabonk.org/guides/meta-strategy/">Meta Strategy</a></li>
-                    <li><a href="https://megabonk.org/guides/tips-tricks/">Tips & Tricks</a></li>
-                    <li><a href="https://megabonk.org/guides/progression/">Progression Guide</a></li>
+                    <li><a href="https://megabonk.org/tier-lists/items/">Items Tier List</a></li>
+                    <li><a href="https://megabonk.org/tier-lists/tomes/">Tomes Tier List</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Community</h3>
                 <ul class="footer-links">
                     <li><a href="https://megabonk.org/leaderboard/">Global Leaderboard</a></li>
-                    <li><a href="https://megabonk.org/guides/challenges/">Challenges</a></li>
+                    <li><a href="https://megabonk.org/download/megabonk">Download</a></li>
                 </ul>
             </div>
         </div>
@@ -1047,7 +1043,248 @@
             maxDisplay: 100,
         };
 
-        // 武器图标映射（真实游戏图标）
+        // ⭐ 精确的URL映射表 - 基于现有链接文件
+        const EXACT_URL_MAP = {
+            // 武器映射 (不带结尾斜杠)
+            weapons: {
+                'aura': 'https://megabonk.org/database/weapons/aura',
+                'aegis': 'https://megabonk.org/database/weapons/aegis',
+                'axe': 'https://megabonk.org/database/weapons/axe',
+                'bananarang': 'https://megabonk.org/database/weapons/bananarang',
+                'blackhole': 'https://megabonk.org/database/weapons/black-hole',
+                'black hole': 'https://megabonk.org/database/weapons/black-hole',
+                'bloodmagic': 'https://megabonk.org/database/weapons/blood-magic',
+                'blood magic': 'https://megabonk.org/database/weapons/blood-magic',
+                'bone': 'https://megabonk.org/database/weapons/bone',
+                'bow': 'https://megabonk.org/database/weapons/bow',
+                'chunkers': 'https://megabonk.org/database/weapons/chunkers',
+                'corruptedsword': 'https://megabonk.org/database/weapons/corrupted-sword',
+                'corrupted sword': 'https://megabonk.org/database/weapons/corrupted-sword',
+                'dexecutioner': 'https://megabonk.org/database/weapons/dexecutioner',
+                'dice': 'https://megabonk.org/database/weapons/dice',
+                'dragonsbreath': 'https://megabonk.org/database/weapons/dragons-breath',
+                "dragon's breath": 'https://megabonk.org/database/weapons/dragons-breath',
+                'firestaff': 'https://megabonk.org/database/weapons/fire-staff',
+                'fire staff': 'https://megabonk.org/database/weapons/fire-staff',
+                'flamewalker': 'https://megabonk.org/database/weapons/flamewalker',
+                'frostwalker': 'https://megabonk.org/database/weapons/frostwalker',
+                'herosword': 'https://megabonk.org/database/weapons/hero-sword',
+                "hero's sword": 'https://megabonk.org/database/weapons/hero-sword',
+                'katana': 'https://megabonk.org/database/weapons/katana',
+                'lightningstaff': 'https://megabonk.org/database/weapons/lightning-staff',
+                'lightning staff': 'https://megabonk.org/database/weapons/lightning-staff',
+                'mines': 'https://megabonk.org/database/weapons/mines',
+                'poisonflask': 'https://megabonk.org/database/weapons/poison-flask',
+                'poison flask': 'https://megabonk.org/database/weapons/poison-flask',
+                'revolver': 'https://megabonk.org/database/weapons/revolver',
+                'shotgun': 'https://megabonk.org/database/weapons/shotgun',
+                'sluttyrocket': 'https://megabonk.org/database/weapons/slutty-rocket',
+                'slutty rocket': 'https://megabonk.org/database/weapons/slutty-rocket',
+                'sniper': 'https://megabonk.org/database/weapons/sniper',
+                'spacenoodle': 'https://megabonk.org/database/weapons/space-noodle',
+                'space noodle': 'https://megabonk.org/database/weapons/space-noodle',
+                'sword': 'https://megabonk.org/database/weapons/sword',
+                'tornado': 'https://megabonk.org/database/weapons/tornado',
+                'wirelessdagger': 'https://megabonk.org/database/weapons/wireless-dagger',
+                'wireless dagger': 'https://megabonk.org/database/weapons/wireless-dagger'
+            },
+            
+            // 符文映射 (不带结尾斜杠)
+            tomes: {
+                'agility': 'https://megabonk.org/database/tomes/agility-tome',
+                'agilitytome': 'https://megabonk.org/database/tomes/agility-tome',
+                'armor': 'https://megabonk.org/database/tomes/armor-tome',
+                'armortome': 'https://megabonk.org/database/tomes/armor-tome',
+                'attraction': 'https://megabonk.org/database/tomes/attraction-tome',
+                'attractiontome': 'https://megabonk.org/database/tomes/attraction-tome',
+                'bloody': 'https://megabonk.org/database/tomes/bloody-tome',
+                'bloodytome': 'https://megabonk.org/database/tomes/bloody-tome',
+                'chaos': 'https://megabonk.org/database/tomes/chaos-tome',
+                'chaostome': 'https://megabonk.org/database/tomes/chaos-tome',
+                'cooldown': 'https://megabonk.org/database/tomes/cooldown-tome',
+                'cooldowntome': 'https://megabonk.org/database/tomes/cooldown-tome',
+                'cursed': 'https://megabonk.org/database/tomes/cursed-tome',
+                'cursedtome': 'https://megabonk.org/database/tomes/cursed-tome',
+                'damage': 'https://megabonk.org/database/tomes/damage-tome',
+                'damagetome': 'https://megabonk.org/database/tomes/damage-tome',
+                'duration': 'https://megabonk.org/database/tomes/duration-tome',
+                'durationtome': 'https://megabonk.org/database/tomes/duration-tome',
+                'evasion': 'https://megabonk.org/database/tomes/evasion-tome',
+                'evasiontome': 'https://megabonk.org/database/tomes/evasion-tome',
+                'golden': 'https://megabonk.org/database/tomes/golden-tome',
+                'goldentome': 'https://megabonk.org/database/tomes/golden-tome',
+                'health': 'https://megabonk.org/database/tomes/health-tome',
+                'healthtome': 'https://megabonk.org/database/tomes/health-tome',
+                'knockback': 'https://megabonk.org/database/tomes/knockback-tome',
+                'knockbacktome': 'https://megabonk.org/database/tomes/knockback-tome',
+                'luck': 'https://megabonk.org/database/tomes/luck-tome',
+                'lucktome': 'https://megabonk.org/database/tomes/luck-tome',
+                'precision': 'https://megabonk.org/database/tomes/precision-tome',
+                'precisiontome': 'https://megabonk.org/database/tomes/precision-tome',
+                'projectile': 'https://megabonk.org/database/tomes/projectile-speed-tome',
+                'projectilespeed': 'https://megabonk.org/database/tomes/projectile-speed-tome',
+                'projectile speed': 'https://megabonk.org/database/tomes/projectile-speed-tome',
+                'projectilespeedtome': 'https://megabonk.org/database/tomes/projectile-speed-tome',
+                'quantity': 'https://megabonk.org/database/tomes/quantity-tome',
+                'quantitytome': 'https://megabonk.org/database/tomes/quantity-tome',
+                'regen': 'https://megabonk.org/database/tomes/regen-tome',
+                'regentome': 'https://megabonk.org/database/tomes/regen-tome',
+                'shield': 'https://megabonk.org/database/tomes/shield-tome',
+                'shieldtome': 'https://megabonk.org/database/tomes/shield-tome',
+                'silver': 'https://megabonk.org/database/tomes/silver-tome',
+                'silvertome': 'https://megabonk.org/database/tomes/silver-tome',
+                'size': 'https://megabonk.org/database/tomes/size-tome',
+                'sizetome': 'https://megabonk.org/database/tomes/size-tome',
+                'thorns': 'https://megabonk.org/database/tomes/thorns-tome',
+                'thornstome': 'https://megabonk.org/database/tomes/thorns-tome',
+                'xp': 'https://megabonk.org/database/tomes/xp-tome',
+                'xptome': 'https://megabonk.org/database/tomes/xp-tome'
+            },
+            
+            // 物品映射 (不带结尾斜杠)
+            items: {
+                'anvil': 'https://megabonk.org/database/items/anvil',
+                'backpack': 'https://megabonk.org/database/items/backpack',
+                'battery': 'https://megabonk.org/database/items/battery',
+                'beacon': 'https://megabonk.org/database/items/beacon',
+                'beer': 'https://megabonk.org/database/items/beer',
+                'beefyring': 'https://megabonk.org/database/items/beefy-ring',
+                'beefy ring': 'https://megabonk.org/database/items/beefy-ring',
+                'bigbonk': 'https://megabonk.org/database/items/big-bonk',
+                'big bonk': 'https://megabonk.org/database/items/big-bonk',
+                'bob': 'https://megabonk.org/database/items/bob-dead',
+                'bobdead': 'https://megabonk.org/database/items/bob-dead',
+                'bob (dead)': 'https://megabonk.org/database/items/bob-dead',
+                'borgar': 'https://megabonk.org/database/items/borgar',
+                'bossbuster': 'https://megabonk.org/database/items/boss-buster',
+                'boss buster': 'https://megabonk.org/database/items/boss-buster',
+                'brassknuckles': 'https://megabonk.org/database/items/brass-knuckles',
+                'brass knuckles': 'https://megabonk.org/database/items/brass-knuckles',
+                'bloodycleaver': 'https://megabonk.org/database/items/bloody-cleaver',
+                'bloody cleaver': 'https://megabonk.org/database/items/bloody-cleaver',
+                'cactus': 'https://megabonk.org/database/items/cactus',
+                'campfire': 'https://megabonk.org/database/items/campfire',
+                'chonkplate': 'https://megabonk.org/database/items/chonkplate',
+                'clover': 'https://megabonk.org/database/items/clover',
+                'cowardscloak': 'https://megabonk.org/database/items/cowards-cloak',
+                "coward's cloak": 'https://megabonk.org/database/items/cowards-cloak',
+                'creditcardgreen': 'https://megabonk.org/database/items/credit-card-green',
+                'credit card green': 'https://megabonk.org/database/items/credit-card-green',
+                'creditcardred': 'https://megabonk.org/database/items/credit-card-red',
+                'credit card red': 'https://megabonk.org/database/items/credit-card-red',
+                'curseddoll': 'https://megabonk.org/database/items/cursed-doll',
+                'cursed doll': 'https://megabonk.org/database/items/cursed-doll',
+                'cursedgrabbies': 'https://megabonk.org/database/items/cursed-grabbies',
+                'cursed grabbies': 'https://megabonk.org/database/items/cursed-grabbies',
+                'demonicblade': 'https://megabonk.org/database/items/demonic-blade',
+                'demonic blade': 'https://megabonk.org/database/items/demonic-blade',
+                'demonicblood': 'https://megabonk.org/database/items/demonic-blood',
+                'demonic blood': 'https://megabonk.org/database/items/demonic-blood',
+                'demonicsoul': 'https://megabonk.org/database/items/demonic-soul',
+                'demonic soul': 'https://megabonk.org/database/items/demonic-soul',
+                'dragonfire': 'https://megabonk.org/database/items/dragonfire',
+                'eagleclaw': 'https://megabonk.org/database/items/eagle-claw',
+                'eagle claw': 'https://megabonk.org/database/items/eagle-claw',
+                'echoshard': 'https://megabonk.org/database/items/echo-shard',
+                'echo shard': 'https://megabonk.org/database/items/echo-shard',
+                'electricplug': 'https://megabonk.org/database/items/electric-plug',
+                'electric plug': 'https://megabonk.org/database/items/electric-plug',
+                'energycore': 'https://megabonk.org/database/items/energy-core',
+                'energy core': 'https://megabonk.org/database/items/energy-core',
+                'feathers': 'https://megabonk.org/database/items/feathers',
+                'forbiddenjuice': 'https://megabonk.org/database/items/forbidden-juice',
+                'forbidden juice': 'https://megabonk.org/database/items/forbidden-juice',
+                'gamergoggles': 'https://megabonk.org/database/items/gamer-goggles',
+                'gamer goggles': 'https://megabonk.org/database/items/gamer-goggles',
+                'gasmask': 'https://megabonk.org/database/items/gas-mask',
+                'gas mask': 'https://megabonk.org/database/items/gas-mask',
+                'ghost': 'https://megabonk.org/database/items/ghost',
+                'giantfork': 'https://megabonk.org/database/items/giant-fork',
+                'giant fork': 'https://megabonk.org/database/items/giant-fork',
+                'goldenglove': 'https://megabonk.org/database/items/golden-glove',
+                'golden glove': 'https://megabonk.org/database/items/golden-glove',
+                'goldenring': 'https://megabonk.org/database/items/golden-ring',
+                'golden ring': 'https://megabonk.org/database/items/golden-ring',
+                'goldenshield': 'https://megabonk.org/database/items/golden-shield',
+                'golden shield': 'https://megabonk.org/database/items/golden-shield',
+                'goldensneakers': 'https://megabonk.org/database/items/golden-sneakers',
+                'golden sneakers': 'https://megabonk.org/database/items/golden-sneakers',
+                'grandmassecrettonic': 'https://megabonk.org/database/items/grandmas-secret-tonic',
+                "grandma's secret tonic": 'https://megabonk.org/database/items/grandmas-secret-tonic',
+                'gymsauce': 'https://megabonk.org/database/items/gym-sauce',
+                'gym sauce': 'https://megabonk.org/database/items/gym-sauce',
+                'holybook': 'https://megabonk.org/database/items/holy-book',
+                'holy book': 'https://megabonk.org/database/items/holy-book',
+                'icecrystal': 'https://megabonk.org/database/items/ice-crystal',
+                'ice crystal': 'https://megabonk.org/database/items/ice-crystal',
+                'icecube': 'https://megabonk.org/database/items/ice-cube',
+                'ice cube': 'https://megabonk.org/database/items/ice-cube',
+                'idlejuice': 'https://megabonk.org/database/items/idle-juice',
+                'idle juice': 'https://megabonk.org/database/items/idle-juice',
+                'joesdagger': 'https://megabonk.org/database/items/joes-dagger',
+                "joe's dagger": 'https://megabonk.org/database/items/joes-dagger',
+                'kevin': 'https://megabonk.org/database/items/kevin',
+                'key': 'https://megabonk.org/database/items/key',
+                'leechingcrystal': 'https://megabonk.org/database/items/leeching-crystal',
+                'leeching crystal': 'https://megabonk.org/database/items/leeching-crystal',
+                'lightningorb': 'https://megabonk.org/database/items/lightning-orb',
+                'lightning orb': 'https://megabonk.org/database/items/lightning-orb',
+                'medkit': 'https://megabonk.org/database/items/medkit',
+                'mirror': 'https://megabonk.org/database/items/mirror',
+                'moldycheese': 'https://megabonk.org/database/items/moldy-cheese',
+                'moldy cheese': 'https://megabonk.org/database/items/moldy-cheese',
+                'moldygloves': 'https://megabonk.org/database/items/moldy-gloves',
+                'moldy gloves': 'https://megabonk.org/database/items/moldy-gloves',
+                'oats': 'https://megabonk.org/database/items/oats',
+                'overpoweredlamp': 'https://megabonk.org/database/items/overpowered-lamp',
+                'overpowered lamp': 'https://megabonk.org/database/items/overpowered-lamp',
+                'phantomshroud': 'https://megabonk.org/database/items/phantom-shroud',
+                'phantom shroud': 'https://megabonk.org/database/items/phantom-shroud',
+                'powergloves': 'https://megabonk.org/database/items/power-gloves',
+                'power gloves': 'https://megabonk.org/database/items/power-gloves',
+                'quinsmask': 'https://megabonk.org/database/items/quins-mask',
+                "quin's mask": 'https://megabonk.org/database/items/quins-mask',
+                'scarf': 'https://megabonk.org/database/items/scarf',
+                'shatteredknowledge': 'https://megabonk.org/database/items/shattered-knowledge',
+                'shattered knowledge': 'https://megabonk.org/database/items/shattered-knowledge',
+                'skuleg': 'https://megabonk.org/database/items/skuleg',
+                'slipperyring': 'https://megabonk.org/database/items/slippery-ring',
+                'slippery ring': 'https://megabonk.org/database/items/slippery-ring',
+                'slurpgloves': 'https://megabonk.org/database/items/slurp-gloves',
+                'slurp gloves': 'https://megabonk.org/database/items/slurp-gloves',
+                'sluttycannon': 'https://megabonk.org/database/items/slutty-cannon',
+                'slutty cannon': 'https://megabonk.org/database/items/slutty-cannon',
+                'soulharvester': 'https://megabonk.org/database/items/soul-harvester',
+                'soul harvester': 'https://megabonk.org/database/items/soul-harvester',
+                'speedboi': 'https://megabonk.org/database/items/speed-boi',
+                'speed boi': 'https://megabonk.org/database/items/speed-boi',
+                'spicymeatball': 'https://megabonk.org/database/items/spicy-meatball',
+                'spicy meatball': 'https://megabonk.org/database/items/spicy-meatball',
+                'spikyshield': 'https://megabonk.org/database/items/spiky-shield',
+                'spiky shield': 'https://megabonk.org/database/items/spiky-shield',
+                'suckymagnet': 'https://megabonk.org/database/items/sucky-magnet',
+                'sucky magnet': 'https://megabonk.org/database/items/sucky-magnet',
+                'tacticalglasses': 'https://megabonk.org/database/items/tactical-glasses',
+                'tactical glasses': 'https://megabonk.org/database/items/tactical-glasses',
+                'thundermitts': 'https://megabonk.org/database/items/thunder-mitts',
+                'thunder mitts': 'https://megabonk.org/database/items/thunder-mitts',
+                'timebracelet': 'https://megabonk.org/database/items/time-bracelet',
+                'time bracelet': 'https://megabonk.org/database/items/time-bracelet',
+                'toxicbarrel': 'https://megabonk.org/database/items/toxic-barrel',
+                'toxic barrel': 'https://megabonk.org/database/items/toxic-barrel',
+                'turboskates': 'https://megabonk.org/database/items/turbo-skates',
+                'turbo skates': 'https://megabonk.org/database/items/turbo-skates',
+                'turbosocks': 'https://megabonk.org/database/items/turbo-socks',
+                'turbo socks': 'https://megabonk.org/database/items/turbo-socks',
+                'unstabletransfusion': 'https://megabonk.org/database/items/unstable-transfusion',
+                'unstable transfusion': 'https://megabonk.org/database/items/unstable-transfusion',
+                'wrench': 'https://megabonk.org/database/items/wrench',
+                'zawarudo': 'https://megabonk.org/database/items/za-warudo',
+                'za warudo': 'https://megabonk.org/database/items/za-warudo'
+            }
+        };
+
+        // 武器图标映射
         const weaponIcons = {
             'frostwalker': 'https://megabonk.org/images/database/weapons/Frostwalker.png',
             'axe': 'https://megabonk.org/images/database/weapons/Axe.png',
@@ -1080,7 +1317,7 @@
             'bloodmagic': 'https://megabonk.org/images/database/weapons/Blood_Magic.png'
         };
 
-        // 符文图标映射（真实游戏图标）
+        // 符文图标映射
         const tomeIcons = {
             'chaos': 'https://megabonk.org/images/Tomes/Chaos_Tome.png',
             'xp': 'https://megabonk.org/images/Tomes/XP_Tome.png',
@@ -1091,10 +1328,8 @@
             'bloody': 'https://megabonk.org/images/Tomes/Bloody_Tome.png',
             'duration': 'https://megabonk.org/images/Tomes/Duration_Tome.png',
             'agility': 'https://megabonk.org/images/Tomes/Agility_Tome.png',
-            'speed': 'https://megabonk.org/images/Tomes/Agility_Tome.png',
             'luck': 'https://megabonk.org/images/Tomes/Luck_Tome.png',
             'size': 'https://megabonk.org/images/Tomes/Size_Tome.png',
-            'area': 'https://megabonk.org/images/Tomes/Size_Tome.png',
             'projectile': 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
             'projectilespeed': 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
             'damage': 'https://megabonk.org/images/Tomes/Damage_Tome.png',
@@ -1110,7 +1345,7 @@
             'silver': 'https://megabonk.org/images/Tomes/Silver_Tome.png'
         };
 
-        // 物品图标映射（真实游戏图标）
+        // 物品图标映射
         const itemIcons = {
             'key': 'https://megabonk.org/images/Items/Item_Key.png',
             'curseddoll': 'https://megabonk.org/images/Items/Item_Cursed_Doll.png',
@@ -1188,10 +1423,12 @@
             'turbosocks': 'https://megabonk.org/images/Items/Item_Turbo_Socks.png',
             'zawarudo': 'https://megabonk.org/images/Items/Item_Za_Warudo.png',
             'bloodycleaver': 'https://megabonk.org/images/Items/Item_Bloody_Cleaver.png',
-            'bob': 'https://megabonk.org/images/Items/Item_Bob__28Dead_29.png'
+            'bob': 'https://megabonk.org/images/Items/Item_Bob__28Dead_29.png',
+            'goldenring': 'https://megabonk.org/images/Items/Item_Golden_Ring.png',
+            'quinsmask': 'https://megabonk.org/images/Items/Item_Quins_Mask.png'
         };
 
-        // 角色图标映射（真实游戏图标）
+        // 角色图标映射
         const characterIcons = {
             'noelle': 'https://megabonk.org/images/guides/characters/Noelle.png',
             'fox': 'https://megabonk.org/images/guides/characters/Fox.png',
@@ -1235,28 +1472,25 @@
             nav.classList.toggle('active');
         }
 
-        // ⭐ 新增：URL标准化函数
-        function normalizeSlug(name) {
-            return name.toLowerCase()
-                       .replace(/[^a-z0-9]+/g, '-')
-                       .replace(/^-|-$/g, '');
-        }
-
-        // ⭐ 新增：根据类型生成物品URL
+        // ⭐ 精确获取物品URL - 使用映射表
         function getItemUrl(name, type) {
-            const slug = normalizeSlug(name);
-            const baseUrl = 'https://megabonk.org/database';
+            const normalizedName = name.toLowerCase().replace(/[^a-z0-9 ]/g, '');
+            const map = EXACT_URL_MAP[type + 's'] || {};
             
-            switch(type) {
-                case 'weapon':
-                    return `${baseUrl}/weapons/${slug}/`;
-                case 'tome':
-                    return `${baseUrl}/tomes/${slug}/`;
-                case 'item':
-                    return `${baseUrl}/items/${slug}/`;
-                default:
-                    return '#';
+            // 尝试精确匹配
+            if (map[normalizedName]) {
+                return map[normalizedName];
             }
+            
+            // 尝试没有空格的版本
+            const noSpaceName = normalizedName.replace(/\s+/g, '');
+            if (map[noSpaceName]) {
+                return map[noSpaceName];
+            }
+            
+            // 找不到匹配，返回通用链接
+            console.warn(`❌ No URL mapping found for: ${name} (${type})`);
+            return '#';
         }
 
         function getIcon(name, type) {
