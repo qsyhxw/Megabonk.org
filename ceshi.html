@@ -728,6 +728,134 @@
             box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
         }
 
+        /* Popular Builds Card Styles */
+        .popular-build-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 16px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .popular-build-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .popular-build-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .popular-build-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .popular-build-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .popular-build-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            border: 3px solid #e9ecef;
+            object-fit: cover;
+            transition: all 0.3s;
+        }
+
+        .popular-build-card:hover .popular-build-icon {
+            border-color: #667eea;
+            transform: scale(1.1);
+        }
+
+        .popular-build-info {
+            flex: 1;
+        }
+
+        .popular-build-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+
+        .popular-build-subtitle {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .popular-build-stats {
+            display: flex;
+            gap: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .popular-stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .popular-stat-label {
+            font-size: 0.75rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+
+        .popular-stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .trending-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 4px 16px rgba(255, 107, 107, 0.5);
+            }
+        }
+
         /* Site Footer */
         .site-footer {
             background: rgba(255, 255, 255, 0.98);
@@ -948,6 +1076,28 @@
                 📊 Data source: <a href="https://megabonk.fun" target="_blank" rel="nofollow noopener">megabonk.fun</a>
                 <span style="margin: 0 10px;">|</span>
                 ⚡ Updates every 5 minutes
+            </div>
+        </div>
+
+        <!-- Popular Builds Section -->
+        <div class="card" style="padding: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <div>
+                    <h2 style="color: #667eea; margin: 0 0 5px 0; display: flex; align-items: center; gap: 10px;">
+                        🔥 Popular Right Now
+                    </h2>
+                    <p style="color: #6c757d; margin: 0; font-size: 0.9rem;">Top builds from the current meta</p>
+                </div>
+                <span id="meta-update-badge" style="padding: 6px 12px; background: #e3f2fd; color: #1976d2; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+                    🕐 Updated just now
+                </span>
+            </div>
+            <div id="popular-builds-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <!-- Builds will be dynamically inserted here -->
+                <div style="text-align: center; padding: 40px; color: #6c757d; grid-column: 1 / -1;">
+                    <div class="loading-spinner" style="margin: 0 auto 15px;"></div>
+                    <p>Analyzing current meta...</p>
+                </div>
             </div>
         </div>
 
@@ -1457,6 +1607,33 @@
         let leaderboardData = [];
         let isLoading = false;
 
+        // ⭐ 角色对应的Build链接映射（基于现有链接文件）
+        const CHARACTER_BUILD_MAP = {
+            'fox': 'https://megabonk.org/guides/builds/fox-best-build',
+            'robinette': 'https://megabonk.org/guides/builds/robinette-best-build',
+            'birdo': 'https://megabonk.org/guides/builds/birdo-best-build',
+            'tony mczoom': 'https://megabonk.org/guides/builds/tony-mczoom-best-build',
+            'tonymczoom': 'https://megabonk.org/guides/builds/tony-mczoom-best-build',
+            'sir chadwell': 'https://megabonk.org/guides/builds/sir-chadwell-best-build',
+            'sirchadwell': 'https://megabonk.org/guides/builds/sir-chadwell-best-build',
+            'bandit': 'https://megabonk.org/guides/builds/bandit-best-build',
+            'dicehead': 'https://megabonk.org/guides/builds/dicehead-best-build',
+            'noelle': 'https://megabonk.org/guides/builds/noelle-best-build',
+            'ninja': 'https://megabonk.org/guides/builds/ninja-best-build',
+            'megachad': 'https://megabonk.org/guides/builds/megachad-best-build',
+            'calcium': 'https://megabonk.org/guides/builds/calcium-best-build',
+            'cl4nk': 'https://megabonk.org/guides/builds/cl4nk-best-build',
+            'monke': 'https://megabonk.org/guides/builds/monke-best-build',
+            'bush': 'https://megabonk.org/guides/builds/bush-best-build',
+            'sir oofie': 'https://megabonk.org/guides/builds/sir-oofie-best-build',
+            'siroofie': 'https://megabonk.org/guides/builds/sir-oofie-best-build',
+            'athena': 'https://megabonk.org/guides/builds/athena-best-build',
+            'ogre': 'https://megabonk.org/guides/builds/ogre-best-build',
+            'amog': 'https://megabonk.org/guides/builds/amog-best-build',
+            'spaceman': 'https://megabonk.org/guides/builds/spaceman-best-build',
+            'vlad': 'https://megabonk.org/guides/builds/vlad-best-build'
+        };
+
         // Country code to flag emoji mapping
         const countryFlags = {
             'TR': '🇹🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷',
@@ -1555,6 +1732,9 @@
                 renderLeaderboard(result);
                 updateStats(result);
                 updateTime(result.fetched_at);
+                
+                // ⭐ 生成热门Build卡片
+                renderPopularBuilds(result.data || []);
 
             } catch (error) {
                 console.error('❌ Loading failed:', error);
@@ -1876,6 +2056,109 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // ⭐ 分析排行榜数据并生成热门Build
+        function renderPopularBuilds(data) {
+            const container = document.getElementById('popular-builds-container');
+            const updateBadge = document.getElementById('meta-update-badge');
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #6c757d; padding: 40px;">No data available</p>';
+                return;
+            }
+
+            // 统计角色使用频率
+            const characterStats = {};
+            const topPlayers = data.slice(0, 50); // 只分析TOP 50玩家（更能代表Meta）
+            
+            topPlayers.forEach(player => {
+                const char = (player.character || '').toLowerCase();
+                if (!char) return;
+                
+                if (!characterStats[char]) {
+                    characterStats[char] = {
+                        character: player.character,
+                        count: 0,
+                        totalKills: 0,
+                        topRank: player.rank || 999
+                    };
+                }
+                
+                characterStats[char].count++;
+                characterStats[char].totalKills += (player.kills || 0);
+                characterStats[char].topRank = Math.min(characterStats[char].topRank, player.rank || 999);
+            });
+
+            // 转换为数组并排序（按使用频率）
+            const sortedCharacters = Object.values(characterStats)
+                .sort((a, b) => {
+                    // 优先考虑使用频率，其次考虑最高排名
+                    if (b.count !== a.count) return b.count - a.count;
+                    return a.topRank - b.topRank;
+                })
+                .slice(0, 6); // 取TOP 6
+
+            // 计算总使用次数（用于计算百分比）
+            const totalUsage = sortedCharacters.reduce((sum, char) => sum + char.count, 0);
+
+            // 生成卡片HTML
+            const cardsHTML = sortedCharacters.map((charData, index) => {
+                const charName = charData.character;
+                const charKey = charName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const buildUrl = CHARACTER_BUILD_MAP[charName.toLowerCase()] || 
+                                CHARACTER_BUILD_MAP[charKey] || 
+                                'https://megabonk.org/guides/builds/';
+                
+                const charIcon = getIcon(charName, 'character');
+                const usageRate = ((charData.count / totalUsage) * 100).toFixed(1);
+                const avgKills = Math.round(charData.totalKills / charData.count);
+                
+                // 前3名显示Trending徽章
+                const trendingBadge = index < 3 ? `
+                    <span class="trending-badge">
+                        <span>🔥</span>
+                        <span>HOT</span>
+                    </span>
+                ` : '';
+                
+                return `
+                    <a href="${buildUrl}" 
+                       class="popular-build-card" 
+                       target="_blank"
+                       rel="noopener">
+                        ${trendingBadge}
+                        <div class="popular-build-header">
+                            <div class="character-icon" style="width: 64px; height: 64px; font-size: 3rem;">
+                                ${charIcon}
+                            </div>
+                            <div class="popular-build-info">
+                                <div class="popular-build-name">${escapeHtml(charName)}</div>
+                                <div class="popular-build-subtitle">Best Build Guide</div>
+                            </div>
+                        </div>
+                        <div class="popular-build-stats">
+                            <div class="popular-stat">
+                                <div class="popular-stat-label">Pick Rate</div>
+                                <div class="popular-stat-value">${usageRate}%</div>
+                            </div>
+                            <div class="popular-stat">
+                                <div class="popular-stat-label">Avg Kills</div>
+                                <div class="popular-stat-value">${formatNumber(avgKills)}</div>
+                            </div>
+                            <div class="popular-stat">
+                                <div class="popular-stat-label">Top Rank</div>
+                                <div class="popular-stat-value">#${charData.topRank}</div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+
+            container.innerHTML = cardsHTML;
+            
+            // 更新时间徽章
+            updateBadge.innerHTML = '🕐 Updated just now';
         }
 
         // Load on page load
