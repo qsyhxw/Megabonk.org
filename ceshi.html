@@ -425,7 +425,7 @@
 
         .actions-cell {
             text-align: center;
-            width: 100px;
+            width: 150px;
         }
 
         .btn-details {
@@ -779,6 +779,127 @@
         .tier-a { background: #90ee90; color: #228b22; }
         .tier-b { background: #87ceeb; color: #1e90ff; }
         .tier-c { background: #dda0dd; color: #8b008b; }
+
+        /* Social Share Buttons */
+        .share-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 2px solid #dee2e6;
+        }
+
+        .share-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-share {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-share:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-share-twitter {
+            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+        }
+
+        .btn-share-reddit {
+            background: linear-gradient(135deg, #ff4500, #e03d00);
+        }
+
+        .btn-share-discord {
+            background: linear-gradient(135deg, #5865f2, #4752c4);
+        }
+
+        .btn-share-copy {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .btn-share-native {
+            background: linear-gradient(135deg, #28a745, #20893a);
+        }
+
+        /* Inline Share Button (in table) */
+        .btn-share-inline {
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            background: #f8f9fa;
+            color: #667eea;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-share-inline:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Copy Success Tooltip */
+        .copy-success {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+            z-index: 10000;
+            animation: slideInRight 0.3s, fadeOut 0.3s 2.7s;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
 
         .detail-section {
             margin-bottom: 30px;
@@ -1209,6 +1330,20 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 30px;
+            }
+
+            .share-buttons {
+                flex-direction: column;
+            }
+
+            .btn-share {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-share-inline {
+                padding: 6px 8px;
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -2058,6 +2193,9 @@
                 
                 // ⭐ 生成热门Build卡片
                 renderPopularBuilds(result.data || []);
+                
+                // ⭐ 处理分享链接锚点
+                handleShareAnchor();
 
             } catch (error) {
                 console.error('❌ Loading failed:', error);
@@ -2119,6 +2257,9 @@
                                     <td class="actions-cell">
                                         <button class="btn-details" onclick="event.stopPropagation(); showDetails(${index});">
                                             View Build
+                                        </button>
+                                        <button class="btn-share-inline" onclick="event.stopPropagation(); shareRank(${index});" title="Share this build">
+                                            🔗
                                         </button>
                                     </td>
                                 </tr>
@@ -2428,6 +2569,37 @@
                 </div>
                 ` : ''}
 
+                <div class="share-section">
+                    <div class="share-section-title">
+                        <span>🔗</span>
+                        <span>Share This Build</span>
+                    </div>
+                    <div class="share-buttons">
+                        <button class="btn-share btn-share-twitter" onclick="shareToTwitter(${index})">
+                            <span>𝕏</span>
+                            <span>Twitter</span>
+                        </button>
+                        <button class="btn-share btn-share-reddit" onclick="shareToReddit(${index})">
+                            <span>🤖</span>
+                            <span>Reddit</span>
+                        </button>
+                        <button class="btn-share btn-share-discord" onclick="shareToDiscord(${index})">
+                            <span>💬</span>
+                            <span>Discord</span>
+                        </button>
+                        <button class="btn-share btn-share-copy" onclick="copyShareLink(${index})">
+                            <span>📋</span>
+                            <span>Copy Link</span>
+                        </button>
+                        ${navigator.share ? `
+                        <button class="btn-share btn-share-native" onclick="nativeShare(${index})">
+                            <span>📤</span>
+                            <span>Share</span>
+                        </button>
+                        ` : ''}
+                    </div>
+                </div>
+
                 <div class="detail-section">
                     <div class="section-title">ℹ️ Additional Info</div>
                     <div class="info-grid">
@@ -2552,6 +2724,190 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // ⭐ 社交分享功能
+        function generateShareData(index) {
+            const item = leaderboardData[index];
+            if (!item) return null;
+
+            const playerName = item.playerName || 'Anonymous';
+            const character = item.character || 'Unknown';
+            const rank = item.rank || (index + 1);
+            const kills = formatNumber(item.kills || 0);
+            const weapons = (item.weapons || []).slice(0, 3).join(', ');
+            
+            // 生成唯一的分享链接（带锚点）
+            const shareUrl = `https://megabonk.org/leaderboard/#rank-${rank}`;
+            
+            // 生成分享文案
+            const shareText = `🏆 Rank #${rank} on Megabonk Leaderboard!\n\n` +
+                             `👤 Player: ${playerName}\n` +
+                             `🎮 Character: ${character}\n` +
+                             `💀 Kills: ${kills}\n` +
+                             (weapons ? `⚔️ Top Weapons: ${weapons}` : '');
+            
+            const shareTitle = `${playerName}'s #${rank} Megabonk Build - ${character}`;
+            
+            return {
+                url: shareUrl,
+                text: shareText,
+                title: shareTitle,
+                hashtags: 'Megabonk,Gaming,Leaderboard',
+                item: item
+            };
+        }
+
+        // 快速分享（从表格行）
+        function shareRank(index) {
+            const shareData = generateShareData(index);
+            if (!shareData) return;
+
+            // 优先使用原生分享（移动端）
+            if (navigator.share) {
+                nativeShare(index);
+            } else {
+                // 桌面端默认复制链接
+                copyShareLink(index);
+            }
+        }
+
+        // Twitter分享
+        function shareToTwitter(index) {
+            const shareData = generateShareData(index);
+            if (!shareData) return;
+
+            const twitterText = `🏆 Check out Rank #${shareData.item.rank || (index + 1)} on Megabonk!\n\n` +
+                               `👤 ${shareData.item.playerName || 'Player'}\n` +
+                               `🎮 ${shareData.item.character || 'Unknown'}\n` +
+                               `💀 ${formatNumber(shareData.item.kills || 0)} Kills\n\n`;
+            
+            const twitterUrl = `https://twitter.com/intent/tweet?` +
+                              `text=${encodeURIComponent(twitterText)}` +
+                              `&url=${encodeURIComponent(shareData.url)}` +
+                              `&hashtags=${shareData.hashtags}` +
+                              `&via=megabonkgame`;
+            
+            window.open(twitterUrl, '_blank', 'width=550,height=420');
+        }
+
+        // Reddit分享
+        function shareToReddit(index) {
+            const shareData = generateShareData(index);
+            if (!shareData) return;
+
+            const redditTitle = `🏆 Rank #${shareData.item.rank || (index + 1)} ${shareData.item.character || 'Build'} - ${formatNumber(shareData.item.kills || 0)} Kills!`;
+            
+            const redditUrl = `https://www.reddit.com/submit?` +
+                             `url=${encodeURIComponent(shareData.url)}` +
+                             `&title=${encodeURIComponent(redditTitle)}`;
+            
+            window.open(redditUrl, '_blank', 'width=850,height=600');
+        }
+
+        // Discord分享（复制格式化的Discord消息）
+        function shareToDiscord(index) {
+            const shareData = generateShareData(index);
+            if (!shareData) return;
+
+            const discordText = `🏆 **Megabonk Leaderboard - Rank #${shareData.item.rank || (index + 1)}**\n\n` +
+                               `👤 **Player:** ${shareData.item.playerName || 'Anonymous'}\n` +
+                               `🎮 **Character:** ${shareData.item.character || 'Unknown'}\n` +
+                               `💀 **Kills:** ${formatNumber(shareData.item.kills || 0)}\n` +
+                               `⚔️ **Weapons:** ${(shareData.item.weapons || []).join(', ')}\n\n` +
+                               `🔗 ${shareData.url}`;
+            
+            // 复制到剪贴板
+            navigator.clipboard.writeText(discordText).then(() => {
+                showCopySuccess('Discord message copied! Paste it in your server 🎮');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                alert('Please copy manually:\n\n' + discordText);
+            });
+        }
+
+        // 复制分享链接
+        function copyShareLink(index) {
+            const shareData = generateShareData(index);
+            if (!shareData) return;
+
+            const copyText = `${shareData.title}\n\n${shareData.url}`;
+            
+            navigator.clipboard.writeText(copyText).then(() => {
+                showCopySuccess('Link copied to clipboard! 📋');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = copyText;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopySuccess('Link copied to clipboard! 📋');
+                } catch (err) {
+                    alert('Failed to copy. Please copy manually:\n\n' + copyText);
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+
+        // 原生分享（移动端）
+        function nativeShare(index) {
+            const shareData = generateShareData(index);
+            if (!shareData) return;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: shareData.title,
+                    text: shareData.text,
+                    url: shareData.url
+                }).then(() => {
+                    console.log('Shared successfully');
+                }).catch((error) => {
+                    console.log('Share failed:', error);
+                });
+            } else {
+                copyShareLink(index);
+            }
+        }
+
+        // 显示复制成功提示
+        function showCopySuccess(message) {
+            const existingToast = document.querySelector('.copy-success');
+            if (existingToast) {
+                existingToast.remove();
+            }
+
+            const toast = document.createElement('div');
+            toast.className = 'copy-success';
+            toast.innerHTML = `
+                <span style="margin-right: 8px;">✅</span>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // 页面加载时检查URL锚点（用于直接定位到分享的排名）
+        function handleShareAnchor() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#rank-')) {
+                const rank = parseInt(hash.replace('#rank-', ''));
+                if (rank && leaderboardData.length > 0) {
+                    const index = leaderboardData.findIndex(item => (item.rank || 0) === rank);
+                    if (index !== -1) {
+                        setTimeout(() => {
+                            showDetails(index);
+                        }, 500);
+                    }
+                }
+            }
         }
 
         // ⭐ 分析排行榜数据并生成热门Build
