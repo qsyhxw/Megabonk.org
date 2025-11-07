@@ -425,7 +425,7 @@
 
         .actions-cell {
             text-align: center;
-            width: 150px;
+            width: 120px;
         }
 
         .btn-details {
@@ -443,6 +443,46 @@
         .btn-details:hover {
             background: #5568d3;
             transform: scale(1.05);
+        }
+
+        /* ⭐ 加载更多按钮样式 */
+        .load-more-container {
+            padding: 30px;
+            text-align: center;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .btn-load-more {
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-load-more:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-load-more:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .load-more-info {
+            margin-top: 15px;
+            color: #6c757d;
+            font-size: 0.9rem;
         }
 
         .card-footer {
@@ -843,27 +883,6 @@
 
         .btn-share-native {
             background: linear-gradient(135deg, #28a745, #20893a);
-        }
-
-        /* Inline Share Button (in table) */
-        .btn-share-inline {
-            padding: 4px 10px;
-            font-size: 0.8rem;
-            background: #f8f9fa;
-            color: #667eea;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .btn-share-inline:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
         }
 
         /* Copy Success Tooltip */
@@ -1340,11 +1359,6 @@
                 width: 100%;
                 justify-content: center;
             }
-
-            .btn-share-inline {
-                padding: 6px 8px;
-                font-size: 0.75rem;
-            }
         }
     </style>
 </head>
@@ -1423,6 +1437,15 @@
                     <div class="loading-spinner"></div>
                     <p>Loading leaderboard data...</p>
                 </div>
+            </div>
+
+            <!-- ⭐ 加载更多按钮区域 -->
+            <div class="load-more-container" id="load-more-container" style="display: none;">
+                <button class="btn-load-more" id="btn-load-more" onclick="loadMoreRanks()">
+                    <span>⬇️</span>
+                    <span>Load More Rankings</span>
+                </button>
+                <div class="load-more-info" id="load-more-info"></div>
             </div>
 
             <div class="card-footer">
@@ -1543,7 +1566,8 @@
     <script>
         const CONFIG = {
             dataUrl: '/data/leaderboard.json',
-            maxDisplay: 100,
+            initialDisplay: 100,  // 初始显示100条
+            loadMoreIncrement: 50  // 每次加载更多显示50条
         };
 
         // ⭐ 精确的URL映射表 - 基于现有链接文件
@@ -1957,9 +1981,6 @@
             'dicehead': 'https://megabonk.org/images/guides/characters/Dicehead.png'
         };
 
-        let leaderboardData = [];
-        let isLoading = false;
-
         // ⭐ 角色对应的Build链接映射（基于现有链接文件）
         const CHARACTER_BUILD_MAP = {
             'fox': 'https://megabonk.org/guides/builds/fox-best-build',
@@ -2102,6 +2123,10 @@
             'AT': '🇦🇹', 'BE': '🇧🇪', 'CZ': '🇨🇿', 'HU': '🇭🇺', 'RO': '🇷🇴'
         };
 
+        let leaderboardData = [];
+        let currentDisplayCount = CONFIG.initialDisplay;
+        let isLoading = false;
+
         function toggleMobileMenu() {
             const nav = document.getElementById('mainNav');
             nav.classList.toggle('active');
@@ -2187,9 +2212,11 @@
                 console.log('✅ Data loaded successfully');
 
                 leaderboardData = result.data || [];
-                renderLeaderboard(result);
+                currentDisplayCount = CONFIG.initialDisplay; // 重置显示计数
+                renderLeaderboard();
                 updateStats(result);
                 updateTime(result.fetched_at);
+                updateLoadMoreButton();
                 
                 // ⭐ 生成热门Build卡片
                 renderPopularBuilds(result.data || []);
@@ -2206,9 +2233,38 @@
             }
         }
 
-        function renderLeaderboard(result) {
-            const data = result.data || [];
-            const displayData = data.slice(0, CONFIG.maxDisplay);
+        // ⭐ 加载更多排名
+        function loadMoreRanks() {
+            currentDisplayCount += CONFIG.loadMoreIncrement;
+            renderLeaderboard();
+            updateLoadMoreButton();
+        }
+
+        // ⭐ 更新"加载更多"按钮状态
+        function updateLoadMoreButton() {
+            const loadMoreContainer = document.getElementById('load-more-container');
+            const loadMoreBtn = document.getElementById('btn-load-more');
+            const loadMoreInfo = document.getElementById('load-more-info');
+            
+            const remainingCount = leaderboardData.length - currentDisplayCount;
+            
+            if (remainingCount > 0) {
+                loadMoreContainer.style.display = 'block';
+                loadMoreBtn.disabled = false;
+                loadMoreInfo.innerHTML = `Showing ${currentDisplayCount} of ${leaderboardData.length} players<br>` +
+                                        `${remainingCount} more rankings available`;
+            } else if (leaderboardData.length > CONFIG.initialDisplay) {
+                loadMoreContainer.style.display = 'block';
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.innerHTML = '<span>✅</span><span>All Rankings Loaded</span>';
+                loadMoreInfo.innerHTML = `Showing all ${leaderboardData.length} players`;
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        }
+
+        function renderLeaderboard() {
+            const displayData = leaderboardData.slice(0, currentDisplayCount);
 
             const html = `
                 <table>
@@ -2258,20 +2314,12 @@
                                         <button class="btn-details" onclick="event.stopPropagation(); showDetails(${index});">
                                             View Build
                                         </button>
-                                        <button class="btn-share-inline" onclick="event.stopPropagation(); shareRank(${index});" title="Share this build">
-                                            🔗
-                                        </button>
                                     </td>
                                 </tr>
                             `;
                         }).join('')}
                     </tbody>
                 </table>
-                ${data.length > CONFIG.maxDisplay ? `
-                    <div style="padding: 20px; text-align: center; color: #6c757d; background: #f8f9fa;">
-                        Showing top ${CONFIG.maxDisplay} / ${data.length} players
-                    </div>
-                ` : ''}
             `;
 
             document.getElementById('content').innerHTML = html;
@@ -2756,20 +2804,6 @@
                 hashtags: 'Megabonk,Gaming,Leaderboard',
                 item: item
             };
-        }
-
-        // 快速分享（从表格行）
-        function shareRank(index) {
-            const shareData = generateShareData(index);
-            if (!shareData) return;
-
-            // 优先使用原生分享（移动端）
-            if (navigator.share) {
-                nativeShare(index);
-            } else {
-                // 桌面端默认复制链接
-                copyShareLink(index);
-            }
         }
 
         // Twitter分享
