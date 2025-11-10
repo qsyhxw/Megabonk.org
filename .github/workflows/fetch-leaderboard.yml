@@ -2,7 +2,7 @@ name: Fetch Megabonk Leaderboard
 
 on:
   schedule:
-    - cron: '*/180 * * * *'
+    - cron: '*/180 * * * *'  # Every 30 minutes
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -24,122 +24,79 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install requests brotli fake-useragent
+        echo "📦 Installing cloudscraper for Cloudflare bypass..."
+        pip install cloudscraper
+        echo "✅ Installation complete"
     
     - name: Fetch leaderboard data
       run: |
         python << 'EOF'
-        import requests
+        import cloudscraper
         import json
         import time
-        import random
         from datetime import datetime
         from pathlib import Path
-        try:
-            from fake_useragent import UserAgent
-            ua = UserAgent()
-            user_agent = ua.chrome
-        except:
-            user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
         API_URL = 'https://megabonk.fun/api/leaderboard'
 
-        # Complete browser-like headers
-        headers = {
-            'User-Agent': user_agent,
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Referer': 'https://megabonk.fun/',
-            'Origin': 'https://megabonk.fun',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin',
-            'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'DNT': '1',
-            'Upgrade-Insecure-Requests': '1',
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
-        }
-
         print('📡 Fetching data from megabonk.fun...')
-        print(f'🔧 User-Agent: {user_agent[:80]}...')
+        print('🛡️  Using cloudscraper to bypass Cloudflare challenge...')
         
         max_retries = 3
         for attempt in range(max_retries):
             try:
                 if attempt > 0:
-                    # Exponential backoff with jitter
-                    wait_time = (2 ** attempt) + random.uniform(0, 2)
-                    print(f'⏳ Waiting {wait_time:.1f}s before retry...')
+                    wait_time = attempt * 3
+                    print(f'⏳ Waiting {wait_time}s before retry...')
                     time.sleep(wait_time)
                 
-                # Create a session to maintain cookies
-                session = requests.Session()
-                session.headers.update(headers)
-                
-                # First, visit the main page to get cookies
-                print('🌐 Visiting main page to get cookies...')
-                try:
-                    main_page = session.get('https://megabonk.fun/', timeout=15)
-                    print(f'✅ Main page status: {main_page.status_code}')
-                    time.sleep(random.uniform(1, 2))  # Human-like delay
-                except Exception as e:
-                    print(f'⚠️  Main page visit failed: {e}')
-                
-                # Now fetch the API
-                print('📊 Fetching API data...')
-                response = session.get(
-                    API_URL,
-                    timeout=30
+                # Create cloudscraper instance (handles Cloudflare automatically)
+                scraper = cloudscraper.create_scraper(
+                    browser={
+                        'browser': 'chrome',
+                        'platform': 'windows',
+                        'desktop': True
+                    }
                 )
                 
+                print('🌐 Sending request...')
+                response = scraper.get(API_URL, timeout=30)
+                
                 print(f'📊 Response status: {response.status_code}')
-                print(f'📦 Content-Encoding: {response.headers.get("Content-Encoding", "none")}')
                 print(f'📏 Content length: {len(response.content)} bytes')
                 
-                if response.status_code == 403:
-                    print('⚠️  403 Forbidden - possible IP blocking')
+                if response.status_code != 200:
+                    print(f'⚠️  Non-200 status code: {response.status_code}')
                     print(f'🔍 Response headers: {dict(response.headers)}')
                     if attempt < max_retries - 1:
                         continue
                 
                 response.raise_for_status()
                 
-                # Smart parsing: try multiple methods
+                # Parse JSON
                 data = None
                 
-                # Method 1: Try direct JSON parsing
+                # Method 1: Direct JSON parsing
                 try:
-                    print('🔍 Method 1: Trying direct JSON parsing...')
+                    print('🔍 Parsing JSON...')
                     data = response.json()
-                    print(f'✅ Method 1 succeeded! Parsed {len(data)} entries')
+                    print(f'✅ Successfully parsed {len(data)} entries')
                 except Exception as e:
-                    print(f'❌ Method 1 failed: {e}')
-                
-                # Method 2: Try parsing response.text as JSON
-                if data is None:
+                    print(f'❌ JSON parsing failed: {e}')
+                    print(f'📝 First 500 chars of response: {response.text[:500]}')
+                    
+                    # Method 2: Try manual parsing
                     try:
-                        print('🔍 Method 2: Trying response.text parsing...')
                         data = json.loads(response.text)
-                        print(f'✅ Method 2 succeeded! Parsed {len(data)} entries')
-                    except Exception as e:
-                        print(f'❌ Method 2 failed: {e}')
+                        print(f'✅ Manual parsing succeeded! {len(data)} entries')
+                    except Exception as e2:
+                        print(f'❌ Manual parsing also failed: {e2}')
+                        if attempt < max_retries - 1:
+                            continue
+                        raise
                 
-                # Method 3: Try decoding raw content
-                if data is None:
-                    try:
-                        print('🔍 Method 3: Trying raw content decode...')
-                        data = json.loads(response.content.decode('utf-8'))
-                        print(f'✅ Method 3 succeeded! Parsed {len(data)} entries')
-                    except Exception as e:
-                        print(f'❌ Method 3 failed: {e}')
-                
-                if data is None:
-                    raise Exception('All parsing methods failed')
+                if data is None or not isinstance(data, list):
+                    raise Exception(f'Invalid data format. Got: {type(data)}')
                 
                 print(f'✅ Successfully got {len(data)} entries')
                 
@@ -181,6 +138,7 @@ jobs:
                            first_entry.get('score') or 
                            first_entry.get('points') or 0)
                     print(f'👤 Top player: {player_name} - {score:,}')
+                    print(f'🥇 First entry: {first_entry}')
                 
                 # Success - exit the retry loop
                 break
@@ -189,10 +147,6 @@ jobs:
                 print(f'❌ Error on attempt {attempt + 1}/{max_retries}: {type(e).__name__}: {e}')
                 if attempt == max_retries - 1:
                     print('🚨 All attempts failed!')
-                    print('💡 Possible reasons:')
-                    print('   - GitHub Actions IP is blocked')
-                    print('   - API requires additional authentication')
-                    print('   - Rate limiting in effect')
                     raise
         
         print('✨ Fetch completed successfully')
