@@ -397,49 +397,45 @@
         let isLoading = false;
 
         async function loadLeaderboard() {
-            if (isLoading) return;
-            
-            isLoading = true;
-            const refreshBtn = document.getElementById('refresh-btn');
-            refreshBtn.disabled = true;
+    if (isLoading) return;
+    
+    isLoading = true;
+    const refreshBtn = document.getElementById('refresh-btn');
+    refreshBtn.disabled = true;
 
-            try {
-                console.log('📡 Loading data from API...');
-                
-                const url = `${CONFIG.apiUrl}?t=${Date.now()}`;
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                console.log('✅ Data loaded successfully');
-                console.log('Data count:', data.length);
-                if (data.length > 0) {
-                    console.log('First entry:', data[0]);
-                }
-
-                // Wrap in result object for compatibility
-                const result = {
-                    source: 'megabonk.fun',
-                    fetched_at: new Date().toISOString(),
-                    count: data.length,
-                    data: data
-                };
-
-                renderLeaderboard(result);
-                updateStats(result);
-                updateTime(result.fetched_at);
-
-            } catch (error) {
-                console.error('❌ Loading failed:', error);
-                showError(error.message);
-            } finally {
-                isLoading = false;
-                refreshBtn.disabled = false;
-            }
+    try {
+        console.log('📡 Loading data from API...');
+        
+        const url = `${CONFIG.apiUrl}?t=${Date.now()}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
+
+        // Worker 已经返回完整格式，直接使用
+        const result = await response.json();
+        
+        console.log('✅ Data loaded successfully');
+        console.log('Data count:', result.count);
+        console.log('Data entries:', result.data?.length || 0);
+        
+        if (result.data && result.data.length > 0) {
+            console.log('First entry:', result.data[0]);
+        }
+
+        renderLeaderboard(result);
+        updateStats(result);
+        updateTime(result.fetched_at);
+
+    } catch (error) {
+        console.error('❌ Loading failed:', error);
+        showError(error.message);
+    } finally {
+        isLoading = false;
+        refreshBtn.disabled = false;
+    }
+}
 
         function renderLeaderboard(result) {
             const data = result.data || [];
