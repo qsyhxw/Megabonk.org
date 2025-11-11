@@ -17,6 +17,7 @@
     <meta property="og:description" content="Complete database for Megabonk with weapons, characters, items, enemies and more. Your ultimate game reference.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://megabonk.org/database/">
+    <meta property="og:image" content="https://megabonk.org/images/database/database-og.png">
     
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -27,7 +28,7 @@
         "description": "Comprehensive database covering all aspects of Megabonk game",
         "mainEntity": {
             "@type": "ItemList",
-            "numberOfItems": 4,
+            "numberOfItems": 6,
             "itemListElement": [
                 {
                     "@type": "CreativeWork",
@@ -46,8 +47,18 @@
                 },
                 {
                     "@type": "CreativeWork",
+                    "name": "Tomes Database",
+                    "description": "All 23 tomes with upgrade strategies"
+                },
+                {
+                    "@type": "CreativeWork",
                     "name": "Enemies Database",
                     "description": "All enemy types, behaviors and strategies"
+                },
+                {
+                    "@type": "CreativeWork",
+                    "name": "Bosses Database",
+                    "description": "Complete boss fight guides and strategies"
                 }
             ]
         }
@@ -126,10 +137,21 @@
         }
 
         .database-title {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: bold;
             margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .database-title-icon {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
         }
 
         .database-subtitle {
@@ -215,9 +237,12 @@
         }
 
         .category-icon {
-            font-size: 3rem;
+            width: 80px;
+            height: 80px;
             margin-bottom: 20px;
             display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
 
         .category-title {
@@ -289,6 +314,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
+            display: inline-block;
         }
 
         .action-btn:hover {
@@ -339,17 +365,34 @@
             border-radius: 15px;
             padding: 25px;
             border-left: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .featured-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .featured-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .featured-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
         .featured-title {
             color: var(--primary-color);
             font-size: 1.3rem;
-            margin-bottom: 10px;
+            margin: 0;
             font-weight: bold;
         }
 
@@ -362,6 +405,7 @@
             color: var(--accent-color);
             text-decoration: none;
             font-weight: bold;
+            margin-top: auto;
         }
 
         .featured-link:hover {
@@ -374,6 +418,14 @@
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 30px;
+        }
+
+        .quick-access-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
         }
 
         .quick-links {
@@ -390,11 +442,21 @@
             color: var(--text-primary);
             transition: all 0.3s ease;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .quick-link:hover {
             background: var(--primary-color);
             transform: translateY(-3px);
+        }
+
+        .quick-link-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         /* Navigation Footer */
@@ -404,6 +466,13 @@
             border-radius: 15px;
             text-align: center;
             margin-top: 40px;
+        }
+
+        .nav-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .nav-links {
@@ -428,10 +497,40 @@
             transform: translateY(-2px);
         }
 
+        /* Expansion Plans */
+        .expansion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .expansion-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .expansion-title {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .expansion-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .database-title {
                 font-size: 2.5rem;
+                flex-direction: column;
+            }
+
+            .database-title-icon {
+                width: 50px;
+                height: 50px;
             }
 
             .database-stats {
@@ -447,6 +546,16 @@
             .nav-links {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .category-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .featured-icon {
+                width: 40px;
+                height: 40px;
             }
         }
 
@@ -477,6 +586,14 @@
         .category-card:nth-child(4) {
             animation-delay: 0.3s;
         }
+
+        .category-card:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .category-card:nth-child(6) {
+            animation-delay: 0.5s;
+        }
     </style>
 </head>
 <body>
@@ -494,8 +611,11 @@
     <div class="container">
         <!-- Database Header -->
         <div class="database-header">
-            <div class="database-title">📊 MEGABONK DATABASE</div>
-            <div class="database-subtitle">Complete Reference for Characters, Weapons, Items & More</div>
+            <div class="database-title">
+                <img src="https://megabonk.org/images/database/database-icon.png" alt="Database Icon" class="database-title-icon" onerror="this.style.display='none'">
+                MEGABONK DATABASE
+            </div>
+            <div class="database-subtitle">Complete Reference for Characters, Weapons, Items, Tomes & More</div>
             <div class="database-stats">
                 <div class="stat-item">
                     <span class="stat-number">29</span>
@@ -506,8 +626,12 @@
                     <span class="stat-label">Playable Characters</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">40+</span>
+                    <span class="stat-number">70+</span>
                     <span class="stat-label">Items & Upgrades</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">23</span>
+                    <span class="stat-label">Tomes</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">15+</span>
@@ -518,19 +642,19 @@
 
         <!-- Database Categories -->
         <div class="categories-section">
-            <h2 class="section-title">🗃️ Database Categories</h2>
+            <h2 class="section-title">Database Categories</h2>
             <div class="categories-grid">
                 
                 <!-- Weapons Database -->
                 <div class="category-card available" onclick="location.href='weapons/'">
-                    <span class="category-icon">⚔️</span>
+                    <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Weapons" class="category-icon" onerror="this.style.display='none'">
                     <h3 class="category-title">Weapons Database</h3>
                     <p class="category-description">
                         Complete guide to all 29 weapons in Megabonk. Unlock requirements, tier rankings, build strategies, and character synergies.
                     </p>
                     <div class="category-stats">
-                        <span>📈 Completed: 3/29 guides</span>
-                        <span>🎯 S-Tier weapons covered</span>
+                        <span>Completed: 3/29 guides</span>
+                        <span>S-Tier weapons covered</span>
                     </div>
                     <div class="category-progress">
                         <div>Progress: Featured weapons complete</div>
@@ -545,61 +669,107 @@
                 </div>
 
                 <!-- Characters Database -->
-                <div class="category-card partial">
-                    <span class="category-icon">👥</span>
+                <div class="category-card available" onclick="location.href='../guides/characters/'">
+                    <img src="https://megabonk.org/images/guides/characters/Ninja.png" alt="Characters" class="category-icon" onerror="this.style.display='none'">
                     <h3 class="category-title">Characters Database</h3>
                     <p class="category-description">
                         All 20 playable characters with detailed unlock guides, build strategies, passive abilities, and signature weapons.
                     </p>
                     <div class="category-stats">
-                        <span>📈 Completed: 10/20 characters</span>
-                        <span>🎯 Major characters covered</span>
+                        <span>Completed: 20/20 characters</span>
+                        <span>All characters covered</span>
                     </div>
                     <div class="category-progress">
-                        <div>Progress: Core characters complete</div>
+                        <div>Progress: All characters complete</div>
                         <div class="progress-bar">
-                            <div class="progress-fill progress-partial" style="width: 50%"></div>
+                            <div class="progress-fill progress-complete" style="width: 100%"></div>
                         </div>
                     </div>
                     <div class="category-action">
                         <a href="../guides/characters/" class="action-btn">View Characters</a>
-                        <span class="status-badge status-partial">EXPANDING</span>
+                        <span class="status-badge status-complete">COMPLETE</span>
                     </div>
                 </div>
 
                 <!-- Items Database -->
-                <div class="category-card coming-soon">
-                    <span class="category-icon">💎</span>
+                <div class="category-card available" onclick="location.href='items/'">
+                    <img src="https://megabonk.org/images/Items/Item_Golden_Ring.png" alt="Items" class="category-icon" onerror="this.style.display='none'">
                     <h3 class="category-title">Items Database</h3>
                     <p class="category-description">
-                        Complete collection of all items, power-ups, tomes, and upgrades. Effect descriptions, synergies, and optimization strategies.
+                        Complete collection of all items, power-ups, and upgrades. Effect descriptions, synergies, and optimization strategies for 70+ items.
                     </p>
                     <div class="category-stats">
-                        <span>📈 Planned: 40+ items</span>
-                        <span>🎯 Tier lists and guides</span>
+                        <span>Available: 70+ items</span>
+                        <span>Common to Legendary</span>
                     </div>
                     <div class="category-progress">
-                        <div>Progress: Planning phase</div>
+                        <div>Progress: All items catalogued</div>
                         <div class="progress-bar">
-                            <div class="progress-fill progress-none" style="width: 5%"></div>
+                            <div class="progress-fill progress-complete" style="width: 100%"></div>
                         </div>
                     </div>
                     <div class="category-action">
-                        <span class="action-btn disabled">Coming Soon</span>
-                        <span class="status-badge status-coming">PLANNED</span>
+                        <a href="items/" class="action-btn">Browse Items</a>
+                        <span class="status-badge status-complete">COMPLETE</span>
+                    </div>
+                </div>
+
+                <!-- Tomes Database -->
+                <div class="category-card available" onclick="location.href='tomes/'">
+                    <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Tomes" class="category-icon" onerror="this.style.display='none'">
+                    <h3 class="category-title">Tomes Database</h3>
+                    <p class="category-description">
+                        All 23 tomes with detailed stat breakdowns, upgrade paths, and build synergies. Essential for optimizing your character builds.
+                    </p>
+                    <div class="category-stats">
+                        <span>Available: 23 tomes</span>
+                        <span>Default & Unlockable</span>
+                    </div>
+                    <div class="category-progress">
+                        <div>Progress: All tomes documented</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-complete" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="category-action">
+                        <a href="tomes/" class="action-btn">View Tomes</a>
+                        <span class="status-badge status-complete">COMPLETE</span>
+                    </div>
+                </div>
+
+                <!-- Bosses Database -->
+                <div class="category-card available" onclick="location.href='../guides/bosses/'">
+                    <img src="https://megabonk.org/images/guides/bosses/bark-vader.png" alt="Bosses" class="category-icon" onerror="this.style.display='none'">
+                    <h3 class="category-title">Bosses Database</h3>
+                    <p class="category-description">
+                        Complete boss fight guides including Lil Bark, Chadbark, Bark Vader, and Anubis. Attack patterns, counter strategies, and rewards.
+                    </p>
+                    <div class="category-stats">
+                        <span>Available: 6+ bosses</span>
+                        <span>Boss Curse explained</span>
+                    </div>
+                    <div class="category-progress">
+                        <div>Progress: All major bosses covered</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-complete" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="category-action">
+                        <a href="../guides/bosses/" class="action-btn">View Bosses</a>
+                        <span class="status-badge status-complete">COMPLETE</span>
                     </div>
                 </div>
 
                 <!-- Enemies Database -->
                 <div class="category-card coming-soon">
-                    <span class="category-icon">👹</span>
+                    <img src="https://megabonk.org/images/database/enemy-placeholder.png" alt="Enemies" class="category-icon" onerror="this.style.display='none'">
                     <h3 class="category-title">Enemies Database</h3>
                     <p class="category-description">
-                        All enemy types, attack patterns, weaknesses, and counter strategies. Boss guides and elite enemy tactics included.
+                        All enemy types, attack patterns, weaknesses, and counter strategies. Regular enemies, elites, and special encounters.
                     </p>
                     <div class="category-stats">
-                        <span>📈 Planned: 15+ enemy types</span>
-                        <span>🎯 Boss strategies included</span>
+                        <span>Planned: 15+ enemy types</span>
+                        <span>Elite enemy tactics</span>
                     </div>
                     <div class="category-progress">
                         <div>Progress: Research phase</div>
@@ -618,26 +788,61 @@
 
         <!-- Quick Access Links -->
         <div class="quick-access">
-            <h3 style="color: var(--primary-color); margin-bottom: 20px; text-align: center;">🚀 Quick Access</h3>
+            <h3 class="quick-access-title">Quick Access</h3>
             <div class="quick-links">
-                <a href="weapons/" class="quick-link">🗡️ All Weapons</a>
-                <a href="weapons/aura.html" class="quick-link">🔮 Aura Guide</a>
-                <a href="weapons/flamewalker.html" class="quick-link">🔥 Flamewalker</a>
-                <a href="weapons/katana.html" class="quick-link">🗾 Katana Guide</a>
-                <a href="../guides/characters/" class="quick-link">👥 Characters</a>
-                <a href="../guides/builds/" class="quick-link">🏗️ Build Guides</a>
-                <a href="../guides/bosses/" class="quick-link">👹 Boss Strategies</a>
-                <a href="../guides/achievements/" class="quick-link">🏆 Achievements</a>
+                <a href="weapons/" class="quick-link">
+                    <img src="https://megabonk.org/images/database/weapons/Aura.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    All Weapons
+                </a>
+                <a href="weapons/aura.html" class="quick-link">
+                    <img src="https://megabonk.org/images/database/weapons/Aura.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Aura Guide
+                </a>
+                <a href="weapons/flamewalker.html" class="quick-link">
+                    <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Flamewalker
+                </a>
+                <a href="weapons/katana.html" class="quick-link">
+                    <img src="https://megabonk.org/images/database/weapons/Katana.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Katana Guide
+                </a>
+                <a href="../guides/characters/" class="quick-link">
+                    <img src="https://megabonk.org/images/guides/characters/Fox.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Characters
+                </a>
+                <a href="items/" class="quick-link">
+                    <img src="https://megabonk.org/images/Items/Item_Giant_Fork.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Items
+                </a>
+                <a href="tomes/" class="quick-link">
+                    <img src="https://megabonk.org/images/Tomes/Golden_Tome.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Tomes
+                </a>
+                <a href="../guides/builds/" class="quick-link">
+                    <img src="https://megabonk.org/images/guides/builds/build-icon.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Build Guides
+                </a>
+                <a href="../guides/bosses/" class="quick-link">
+                    <img src="https://megabonk.org/images/guides/bosses/boss-icon.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Boss Strategies
+                </a>
+                <a href="../guides/achievements/" class="quick-link">
+                    <img src="https://megabonk.org/images/guides/achievement-icon.png" class="quick-link-icon" onerror="this.style.display='none'" alt="">
+                    Achievements
+                </a>
             </div>
         </div>
 
         <!-- Featured Content -->
         <div class="featured-section">
-            <h2 class="section-title">🌟 Featured Database Content</h2>
+            <h2 class="section-title">Featured Database Content</h2>
             <div class="featured-grid">
                 
                 <div class="featured-card">
-                    <h4 class="featured-title">🔮 Aura Weapon Guide</h4>
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Aura Weapon Guide</h4>
+                    </div>
                     <p class="featured-description">
                         Master the ultimate S-tier defensive weapon. Complete guide to Megachad's signature weapon with builds and strategies.
                     </p>
@@ -645,7 +850,10 @@
                 </div>
 
                 <div class="featured-card">
-                    <h4 class="featured-title">🥷 Ninja Character Guide</h4>
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/guides/characters/Ninja.png" alt="Ninja" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Ninja Character Guide</h4>
+                    </div>
                     <p class="featured-description">
                         Complete unlock guide for the most powerful character in Megabonk. Execution mechanics and katana synergy explained.
                     </p>
@@ -653,7 +861,10 @@
                 </div>
 
                 <div class="featured-card">
-                    <h4 class="featured-title">🗾 Katana Weapon Mastery</h4>
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Katana Weapon Mastery</h4>
+                    </div>
                     <p class="featured-description">
                         High-speed melee weapon guide. Learn hit-and-run tactics, speed builds, and ninja synergies for maximum lethality.
                     </p>
@@ -661,7 +872,10 @@
                 </div>
 
                 <div class="featured-card">
-                    <h4 class="featured-title">🔥 Flamewalker Trail Guide</h4>
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Flamewalker Trail Guide</h4>
+                    </div>
                     <p class="featured-description">
                         S-tier crowd control weapon. Master fire trail mechanics, kiting strategies, and movement-based damage optimization.
                     </p>
@@ -669,7 +883,32 @@
                 </div>
 
                 <div class="featured-card">
-                    <h4 class="featured-title">🏆 Weapons Tier List 2025</h4>
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/Items/Item_Golden_Ring.png" alt="Items" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Items Tier List 2025</h4>
+                    </div>
+                    <p class="featured-description">
+                        Complete ranking of all 70+ items. Understand the meta, discover hidden synergies, and optimize your item choices.
+                    </p>
+                    <a href="../tier-lists/items/" class="featured-link">View Tier List →</a>
+                </div>
+
+                <div class="featured-card">
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/Tomes/Damage_Tome.png" alt="Tomes" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Tomes Tier List</h4>
+                    </div>
+                    <p class="featured-description">
+                        Rankings of all 23 tomes based on real gameplay data. Find the perfect tomes for your build strategy.
+                    </p>
+                    <a href="../tier-lists/tomes/" class="featured-link">See Rankings →</a>
+                </div>
+
+                <div class="featured-card">
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Weapons" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Weapons Tier List 2025</h4>
+                    </div>
                     <p class="featured-description">
                         Complete ranking of all 29 weapons. Understand the meta, discover hidden gems, and optimize your weapon choices.
                     </p>
@@ -677,7 +916,10 @@
                 </div>
 
                 <div class="featured-card">
-                    <h4 class="featured-title">💀 Character Tier List</h4>
+                    <div class="featured-card-header">
+                        <img src="https://megabonk.org/images/guides/characters/Megachad.png" alt="Characters" class="featured-icon" onerror="this.style.display='none'">
+                        <h4 class="featured-title">Character Tier List</h4>
+                    </div>
                     <p class="featured-description">
                         Rankings of all 20 characters based on real gameplay data. Find your perfect character for any playstyle.
                     </p>
@@ -689,48 +931,49 @@
 
         <!-- Expansion Plans -->
         <div class="categories-section">
-            <h2 class="section-title">🚧 Coming Soon</h2>
+            <h2 class="section-title">Coming Soon</h2>
             <div style="background: var(--bg-secondary); padding: 30px; border-radius: 15px; text-align: center;">
-                <h3 style="color: var(--accent-color); margin-bottom: 20px;">📅 Planned Database Expansions</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                <h3 style="color: var(--accent-color); margin-bottom: 20px; font-size: 1.5rem;">Planned Database Expansions</h3>
+                <div class="expansion-grid">
                     
-                    <div style="background: var(--bg-primary); padding: 20px; border-radius: 10px;">
-                        <h4 style="color: var(--warning-yellow); margin-bottom: 10px;">💎 Items & Tomes</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Complete item database with synergies, tier rankings, and optimization guides.</p>
+                    <div class="expansion-card">
+                        <h4 class="expansion-title" style="color: var(--info-blue);">Enemy Encyclopedia</h4>
+                        <p class="expansion-description">Complete enemy database with attack patterns and counter-strategies for all enemy types.</p>
                     </div>
 
-                    <div style="background: var(--bg-primary); padding: 20px; border-radius: 10px;">
-                        <h4 style="color: var(--info-blue); margin-bottom: 10px;">👹 Enemies & Bosses</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">All enemy types, attack patterns, and detailed counter-strategies.</p>
+                    <div class="expansion-card">
+                        <h4 class="expansion-title" style="color: var(--success-green);">Maps & Stages</h4>
+                        <p class="expansion-description">Interactive maps, stage mechanics, and progression strategies for all game areas.</p>
                     </div>
 
-                    <div style="background: var(--bg-primary); padding: 20px; border-radius: 10px;">
-                        <h4 style="color: var(--success-green); margin-bottom: 10px;">🗺️ Maps & Stages</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Interactive maps, stage mechanics, and progression strategies.</p>
+                    <div class="expansion-card">
+                        <h4 class="expansion-title" style="color: var(--danger-red);">Game Mechanics</h4>
+                        <p class="expansion-description">Deep dive into damage calculations, scaling formulas, and advanced mechanics.</p>
                     </div>
 
-                    <div style="background: var(--bg-primary); padding: 20px; border-radius: 10px;">
-                        <h4 style="color: var(--danger-red); margin-bottom: 10px;">📊 Game Mechanics</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Deep dive into damage calculations, scaling, and advanced mechanics.</p>
+                    <div class="expansion-card">
+                        <h4 class="expansion-title" style="color: var(--warning-yellow);">Synergy Calculator</h4>
+                        <p class="expansion-description">Interactive tool to calculate optimal weapon, item, and tome synergies for builds.</p>
                     </div>
 
                 </div>
-                <p style="color: var(--text-secondary);">
-                    🔄 Database is constantly expanding based on community feedback and game updates. Check back regularly for new content!
+                <p style="color: var(--text-secondary); margin-top: 20px;">
+                    Database is constantly expanding based on community feedback and game updates. Check back regularly for new content!
                 </p>
             </div>
         </div>
 
         <!-- Navigation -->
         <div class="database-navigation">
-            <h3 style="color: var(--primary-color); margin-bottom: 20px;">🧭 Navigation</h3>
+            <h3 class="nav-title">Navigation</h3>
             <div class="nav-links">
-                <a href="../index.html" class="nav-link">🏠 Back to Home</a>
-                <a href="../guides/" class="nav-link">📚 All Guides</a>
-                <a href="../guides/characters/" class="nav-link">👥 Characters</a>
-                <a href="../guides/builds/" class="nav-link">🏗️ Builds</a>
-                <a href="../guides/bosses/" class="nav-link">👹 Bosses</a>
-                <a href="../guides/achievements/" class="nav-link">🏆 Achievements</a>
+                <a href="../index.html" class="nav-link">Back to Home</a>
+                <a href="../guides/" class="nav-link">All Guides</a>
+                <a href="../guides/characters/" class="nav-link">Characters</a>
+                <a href="../guides/builds/" class="nav-link">Builds</a>
+                <a href="../guides/bosses/" class="nav-link">Bosses</a>
+                <a href="../guides/achievements/" class="nav-link">Achievements</a>
+                <a href="../tier-lists/" class="nav-link">Tier Lists</a>
             </div>
         </div>
     </div>
@@ -790,7 +1033,10 @@
             });
         });
 
-        statsObserver.observe(document.querySelector('.database-stats'));
+        const statsElement = document.querySelector('.database-stats');
+        if (statsElement) {
+            statsObserver.observe(statsElement);
+        }
     </script>
 </body>
 </html>
