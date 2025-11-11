@@ -1609,7 +1609,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
     <script>
         const CONFIG = {
-            dataUrl: 'https://megabonk.fun/api/leaderboard',
+            dataUrl: 'https://megabonk.org/data/leaderboard-data.json',
             initialDisplay: 100,  // 初始显示100条
             loadMoreIncrement: 50  // 每次加载更多显示50条
         };
@@ -2235,47 +2235,43 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             return countryFlags[countryCode] || '🌍';
         }
 
-        async function loadLeaderboard() {
-            if (isLoading) return;
-            
-            isLoading = true;
-            const refreshBtn = document.getElementById('refresh-btn');
-            refreshBtn.disabled = true;
+       async function loadLeaderboard() {
+    if (isLoading) return;
+    
+    isLoading = true;
+    const refreshBtn = document.getElementById('refresh-btn');
+    refreshBtn.disabled = true;
 
-            try {
-                console.log('📡 Loading data...');
-                
-                const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-
-                const result = await response.json();
-                console.log('✅ Data loaded successfully');
-
-                leaderboardData = result.data || [];
-                currentDisplayCount = CONFIG.initialDisplay; // 重置显示计数
-                renderLeaderboard();
-                updateStats(result);
-                updateTime(result.fetched_at);
-                updateLoadMoreButton();
-                
-                // ⭐ 生成热门Build卡片
-                renderPopularBuilds(result.data || []);
-                
-                // ⭐ 处理分享链接锚点
-                handleShareAnchor();
-
-            } catch (error) {
-                console.error('❌ Loading failed:', error);
-                showError(error.message);
-            } finally {
-                isLoading = false;
-                refreshBtn.disabled = false;
-            }
+    try {
+        console.log('📡 Loading data...');
+        
+        const url = `${CONFIG.dataUrl}?t=${Date.now()}`; // 防止缓存
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
+
+        const result = await response.json();
+        console.log('✅ Data loaded successfully');
+
+        leaderboardData = result.data || [];
+        currentDisplayCount = CONFIG.initialDisplay;
+        renderLeaderboard();
+        updateStats(result);
+        updateTime(result.fetched_at);
+        updateLoadMoreButton();
+        renderPopularBuilds(result.data || []);
+        handleShareAnchor();
+
+    } catch (error) {
+        console.error('❌ Loading failed:', error);
+        showError(error.message);
+    } finally {
+        isLoading = false;
+        refreshBtn.disabled = false;
+    }
+}
 
         // ⭐ 加载更多排名
         function loadMoreRanks() {
