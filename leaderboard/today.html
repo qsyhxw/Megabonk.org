@@ -60,7 +60,7 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Today",
-          "item": "https://megabonk.org/leaderboard/today/"
+          "item": "https://megabonk.org/leaderboard/today"
         }
       ]
     }
@@ -243,12 +243,8 @@
         }
 
         @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.3;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         /* Date Navigation */
@@ -350,17 +346,9 @@
             gap: 5px;
         }
 
-        .stat-change.positive {
-            color: #28a745;
-        }
-
-        .stat-change.negative {
-            color: #dc3545;
-        }
-
-        .stat-change.neutral {
-            color: #6c757d;
-        }
+        .stat-change.positive { color: #28a745; }
+        .stat-change.negative { color: #dc3545; }
+        .stat-change.neutral { color: #6c757d; }
 
         /* Card */
         .card {
@@ -530,6 +518,20 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .character-badge:hover {
+            background: #1976d2;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .character-badge img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         /* Score */
@@ -592,6 +594,16 @@
             font-weight: 800;
             color: #667eea;
             margin-bottom: 8px;
+        }
+
+        .trending-value a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .trending-value a:hover {
+            opacity: 0.8;
         }
 
         .trending-description {
@@ -889,15 +901,15 @@
                     <span>🌐</span>
                     <span>View Global Rankings</span>
                 </a>
-                <a href="https://megabonk.org/leaderboard/official/" class="quick-link">
+                <a href="https://megabonk.org/leaderboard/official" class="quick-link">
                     <span>📤</span>
-                    <span>Submit Your Score</span>
+                    <span>Official Leaderboard</span>
                 </a>
-                <a href="https://megabonk.org/leaderboard/verified/" class="quick-link">
+                <a href="https://megabonk.org/leaderboard/verified" class="quick-link">
                     <span>✅</span>
-                    <span>Verification Info</span>
+                    <span>Verified Rankings</span>
                 </a>
-                <a href="https://megabonk.org/leaderboard/builds/" class="quick-link">
+                <a href="https://megabonk.org/leaderboard/builds" class="quick-link">
                     <span>🏗️</span>
                     <span>Top Builds</span>
                 </a>
@@ -966,7 +978,7 @@
                         <li><strong>Rankings:</strong> All position changes from new high scores</li>
                         <li><strong>New Entries:</strong> Recently submitted scores (within last 24 hours)</li>
                         <li><strong>Statistics:</strong> Top score, active players, average kills</li>
-                        <li><strong>Trends:</strong> Most used characters, popular weapons, biggest climbers</li>
+                        <li><strong>Trends:</strong> Most used <a href="https://megabonk.org/guides/characters/" style="color: #667eea; text-decoration: none; font-weight: 600;">characters</a>, popular <a href="https://megabonk.org/database/weapons/" style="color: #667eea; text-decoration: none; font-weight: 600;">weapons</a>, biggest climbers</li>
                     </ul>
                 </div>
                 <p style="color: #6c757d; margin-top: 20px; font-size: 0.95rem;">
@@ -1011,9 +1023,9 @@
                 <h3>Leaderboard</h3>
                 <ul class="footer-links">
                     <li><a href="https://megabonk.org/leaderboard/">Global Rankings</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/today/">Today's Rankings</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/official/">Official Portal</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/verified/">Verification</a></li>
+                    <li><a href="https://megabonk.org/leaderboard/today">Today's Rankings</a></li>
+                    <li><a href="https://megabonk.org/leaderboard/official">Official Portal</a></li>
+                    <li><a href="https://megabonk.org/leaderboard/verified">Verification</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1022,6 +1034,7 @@
                     <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
                     <li><a href="https://megabonk.org/tier-lists/items/">Items Tier List</a></li>
                     <li><a href="https://megabonk.org/tier-lists/tomes/">Tomes Tier List</a></li>
+                    <li><a href="https://megabonk.org/download/megabonk">Download Game</a></li>
                 </ul>
             </div>
         </div>
@@ -1032,33 +1045,219 @@
     </footer>
 
     <script>
+        // ============================================================
+        // 🎯 配置区域 - 方便后续修改
+        // ============================================================
         const CONFIG = {
+            // 数据源 - 与主排行榜页面使用相同的数据
             dataUrl: 'https://megabonk.org/data/leaderboard-data.json',
-            updateInterval: 300000 // 5 minutes
+            
+            // 自动刷新间隔（毫秒）- 默认5分钟
+            updateInterval: 300000,
+            
+            // 显示设置
+            maxDisplayRanks: 50,        // 最多显示50名
+            newEntryThreshold: 6,       // 6小时内算"新"条目
         };
 
+        // ============================================================
+        // 📊 数据映射表 - 从链接汇总文件生成
+        // ============================================================
+        
+        // 角色图标和链接映射
+        const CHARACTER_MAP = {
+            'fox': {
+                name: 'Fox',
+                image: 'https://megabonk.org/images/guides/characters/Fox.png',
+                guideUrl: 'https://megabonk.org/guides/characters/fox-kitsune-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/fox-best-build'
+            },
+            'ninja': {
+                name: 'Ninja',
+                image: 'https://megabonk.org/images/guides/characters/Ninja.png',
+                guideUrl: 'https://megabonk.org/guides/characters/ninja-unlock-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/ninja-best-build'
+            },
+            'calcium': {
+                name: 'Calcium',
+                image: 'https://megabonk.org/images/guides/characters/Calcium.png',
+                guideUrl: 'https://megabonk.org/guides/characters/calcium-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/calcium-best-build'
+            },
+            'cl4nk': {
+                name: 'CL4NK',
+                image: 'https://megabonk.org/images/guides/characters/CL4NK.png',
+                guideUrl: 'https://megabonk.org/guides/characters/cl4nk-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/cl4nk-best-build'
+            },
+            'megachad': {
+                name: 'Megachad',
+                image: 'https://megabonk.org/images/guides/characters/Megachad.png',
+                guideUrl: 'https://megabonk.org/guides/characters/megachad-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/megachad-best-build'
+            },
+            'monke': {
+                name: 'Monke',
+                image: 'https://megabonk.org/images/guides/characters/Monke.png',
+                guideUrl: 'https://megabonk.org/guides/characters/monke-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/monke-best-build'
+            },
+            'bush': {
+                name: 'Bush',
+                image: 'https://megabonk.org/images/guides/characters/Bush.png',
+                guideUrl: 'https://megabonk.org/guides/characters/bush-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/bush-best-build'
+            },
+            'siroofie': {
+                name: 'Sir Oofie',
+                image: 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-oofie-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/sir-oofie-best-build'
+            },
+            'athena': {
+                name: 'Athena',
+                image: 'https://megabonk.org/images/guides/characters/Athena.png',
+                guideUrl: 'https://megabonk.org/guides/characters/athena-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/athena-best-build'
+            },
+            'ogre': {
+                name: 'Ogre',
+                image: 'https://megabonk.org/images/guides/characters/Ogre.png',
+                guideUrl: 'https://megabonk.org/guides/characters/ogre-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/ogre-best-build'
+            },
+            'dicehead': {
+                name: 'Dicehead',
+                image: 'https://megabonk.org/images/guides/characters/Dicehead.png',
+                guideUrl: 'https://megabonk.org/guides/characters/dicehead-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/dicehead-best-build'
+            },
+            'bandit': {
+                name: 'Bandit',
+                image: 'https://megabonk.org/images/guides/characters/Bandit.png',
+                guideUrl: 'https://megabonk.org/guides/characters/bandit-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/bandit-best-build'
+            },
+            'amog': {
+                name: 'Amog',
+                image: 'https://megabonk.org/images/guides/characters/Amog.png',
+                guideUrl: 'https://megabonk.org/guides/characters/amog-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/amog-best-build'
+            },
+            'robinette': {
+                name: 'Robinette',
+                image: 'https://megabonk.org/images/guides/characters/Robinette.png',
+                guideUrl: 'https://megabonk.org/guides/characters/robinette-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/robinette-best-build'
+            },
+            'spaceman': {
+                name: 'Spaceman',
+                image: 'https://megabonk.org/images/guides/characters/Spaceman.png',
+                guideUrl: 'https://megabonk.org/guides/characters/spaceman-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/spaceman-best-build'
+            },
+            'vlad': {
+                name: 'Vlad',
+                image: 'https://megabonk.org/images/guides/characters/Vlad.png',
+                guideUrl: 'https://megabonk.org/guides/characters/vlad-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/vlad-best-build'
+            },
+            'noelle': {
+                name: 'Noelle',
+                image: 'https://megabonk.org/images/guides/characters/Noelle.png',
+                guideUrl: 'https://megabonk.org/guides/characters/noelle-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/noelle-best-build'
+            },
+            'birdo': {
+                name: 'Birdo',
+                image: 'https://megabonk.org/images/guides/characters/Birdo.png',
+                guideUrl: 'https://megabonk.org/guides/characters/birdo-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/birdo-best-build'
+            },
+            'tonymczoom': {
+                name: 'Tony McZoom',
+                image: 'https://megabonk.org/images/guides/characters/Tony_McZoom.png',
+                guideUrl: 'https://megabonk.org/guides/characters/tony-mczoom-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/tony-mczoom-best-build'
+            },
+            'sirchadwell': {
+                name: 'Sir Chadwell',
+                image: 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-chadwell-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/sir-chadwell-best-build'
+            }
+        };
+
+        // 武器链接映射 - 简化版，只需要URL
+        const WEAPON_URLS = {
+            'aura': 'https://megabonk.org/database/weapons/aura',
+            'aegis': 'https://megabonk.org/database/weapons/aegis',
+            'flamewalker': 'https://megabonk.org/database/weapons/flamewalker',
+            'katana': 'https://megabonk.org/database/weapons/katana',
+            'dice': 'https://megabonk.org/database/weapons/dice',
+            'dexecutioner': 'https://megabonk.org/database/weapons/dexecutioner',
+            'bloodmagic': 'https://megabonk.org/database/weapons/blood-magic',
+            'lightningstaff': 'https://megabonk.org/database/weapons/lightning-staff',
+            'bananarang': 'https://megabonk.org/database/weapons/bananarang',
+            'corruptedsword': 'https://megabonk.org/database/weapons/corrupted-sword',
+            'bow': 'https://megabonk.org/database/weapons/bow',
+            'revolver': 'https://megabonk.org/database/weapons/revolver',
+            'axe': 'https://megabonk.org/database/weapons/axe',
+            'bone': 'https://megabonk.org/database/weapons/bone',
+            'sniperrifle': 'https://megabonk.org/database/weapons/sniper-rifle',
+            'frostwalker': 'https://megabonk.org/database/weapons/frostwalker',
+            'firestaff': 'https://megabonk.org/database/weapons/firestaff',
+            'sword': 'https://megabonk.org/database/weapons/sword',
+            'herosword': 'https://megabonk.org/database/weapons/hero-sword',
+            'shotgun': 'https://megabonk.org/database/weapons/shotgun',
+            'chunkers': 'https://megabonk.org/database/weapons/chunkers',
+            'tornado': 'https://megabonk.org/database/weapons/tornado',
+            'spacenoodle': 'https://megabonk.org/database/weapons/space-noodle',
+            'dragonsbreath': 'https://megabonk.org/database/weapons/dragons-breath',
+            'sluttyrocket': 'https://megabonk.org/database/weapons/slutty-rocket',
+            'mines': 'https://megabonk.org/database/weapons/mines',
+            'poisonflask': 'https://megabonk.org/database/weapons/poison-flask',
+            'sniper': 'https://megabonk.org/database/weapons/sniper-rifle',
+            'wirelessdagger': 'https://megabonk.org/database/weapons/wireless-dagger',
+            'blackhole': 'https://megabonk.org/database/weapons/black-hole'
+        };
+
+        // Country flags
+        const COUNTRY_FLAGS = {
+            'TR': '🇹🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷',
+            'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'JP': '🇯🇵',
+            'KR': '🇰🇷', 'CN': '🇨🇳', 'BR': '🇧🇷', 'MX': '🇲🇽', 'RU': '🇷🇺',
+            'IN': '🇮🇳', 'NL': '🇳🇱', 'SE': '🇸🇪', 'NO': '🇳🇴', 'DK': '🇩🇰',
+            'FI': '🇫🇮', 'PL': '🇵🇱', 'PT': '🇵🇹', 'GR': '🇬🇷', 'CH': '🇨🇭',
+            'AT': '🇦🇹', 'BE': '🇧🇪', 'CZ': '🇨🇿', 'HU': '🇭🇺', 'RO': '🇷🇴'
+        };
+
+        // ============================================================
+        // 💾 全局变量
+        // ============================================================
         let currentDate = new Date();
         let leaderboardData = [];
         let autoRefreshTimer = null;
 
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('active');
-        }
-
-        // Initialize on page load
+        // ============================================================
+        // 🚀 初始化
+        // ============================================================
         window.addEventListener('DOMContentLoaded', () => {
+            console.log('🎮 Initializing Today\'s Leaderboard...');
             updateCurrentDate();
             loadTodayLeaderboard();
             startAutoRefresh();
         });
 
+        // ============================================================
+        // 📅 日期相关功能
+        // ============================================================
         function updateCurrentDate() {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const dateStr = currentDate.toLocaleDateString('en-US', options);
             document.getElementById('current-date').textContent = dateStr;
             
-            // Disable "Next" button if current date is today
+            // 禁用"明天"按钮（因为未来数据不存在）
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             currentDate.setHours(0, 0, 0, 0);
@@ -1075,8 +1274,13 @@
             loadTodayLeaderboard();
         }
 
+        // ============================================================
+        // 📡 数据加载核心功能
+        // ============================================================
         async function loadTodayLeaderboard() {
             try {
+                console.log('📡 Fetching data from:', CONFIG.dataUrl);
+                
                 const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
                 const response = await fetch(url);
                 
@@ -1087,32 +1291,70 @@
                 const result = await response.json();
                 leaderboardData = result.data || [];
                 
-                // Filter for today's date
-                const todayData = filterTodayData(leaderboardData);
+                console.log(`✅ Loaded ${leaderboardData.length} total entries`);
                 
+                // 过滤今天的数据
+                const todayData = filterTodayData(leaderboardData);
+                console.log(`📅 Found ${todayData.length} entries for today`);
+                
+                // 渲染页面各部分
                 renderTable(todayData);
                 updateStats(todayData);
                 updateTrending(todayData);
                 updateLastUpdateTime(result.fetched_at);
 
             } catch (error) {
-                console.error('Loading failed:', error);
+                console.error('❌ Failed to load data:', error);
                 showError();
             }
         }
 
+        // ⭐ 核心功能：过滤今天的数据
         function filterTodayData(data) {
-            // In real implementation, filter by createdAt date
-            // For now, return top 50 as sample
-            return data.slice(0, 50);
+            // 获取目标日期的起始和结束时间戳（UTC）
+            const targetDate = new Date(currentDate);
+            targetDate.setHours(0, 0, 0, 0);
+            const nextDay = new Date(targetDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+            
+            const startTimestamp = targetDate.getTime() / 1000;
+            const endTimestamp = nextDay.getTime() / 1000;
+            
+            console.log(`🔍 Filtering data between:`, {
+                start: new Date(startTimestamp * 1000).toISOString(),
+                end: new Date(endTimestamp * 1000).toISOString()
+            });
+            
+            // 过滤数据
+            const filtered = data.filter(item => {
+                if (!item.createdAt || !item.createdAt._seconds) {
+                    return false;
+                }
+                
+                const itemTimestamp = item.createdAt._seconds;
+                return itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
+            });
+            
+            // 按分数排序并限制数量
+            return filtered
+                .sort((a, b) => (b.kills || 0) - (a.kills || 0))
+                .slice(0, CONFIG.maxDisplayRanks);
         }
 
+        // ============================================================
+        // 🎨 渲染功能
+        // ============================================================
         function renderTable(data) {
+            const container = document.getElementById('table-container');
+            
             if (!data || data.length === 0) {
-                document.getElementById('table-container').innerHTML = `
+                container.innerHTML = `
                     <div class="loading">
                         <p style="font-size: 3rem; margin-bottom: 20px;">📅</p>
-                        <p style="font-size: 1.2rem;">No entries for this date</p>
+                        <p style="font-size: 1.2rem;">No entries for ${currentDate.toLocaleDateString()}</p>
+                        <p style="font-size: 0.9rem; color: #6c757d; margin-top: 10px;">
+                            Check the <a href="https://megabonk.org/leaderboard/" style="color: #667eea; text-decoration: none; font-weight: 600;">Global Leaderboard</a> for all-time rankings
+                        </p>
                     </div>
                 `;
                 return;
@@ -1129,123 +1371,202 @@
                         </tr>
                     </thead>
                     <tbody>
-                        ${data.map((item, index) => {
-                            const rank = index + 1;
-                            const topClass = rank <= 3 ? `top-${rank}` : '';
-                            const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
-                            
-                            // Determine if entry is new (within last 6 hours)
-                            const isNew = Math.random() > 0.7; // Simulated
-                            
-                            return `
-                                <tr class="${topClass}">
-                                    <td class="rank-cell">
-                                        <span class="rank">${rankEmoji}</span>
-                                    </td>
-                                    <td class="player-cell">
-                                        <div class="player-info">
-                                            <div class="player-name">
-                                                ${escapeHtml(item.playerName || 'Anonymous')}
-                                                ${isNew ? '<span class="new-badge">NEW</span>' : ''}
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="character-badge">
-                                            ${escapeHtml(item.character || '-')}
-                                        </span>
-                                    </td>
-                                    <td class="score-cell">
-                                        <span class="score">${formatNumber(item.kills || 0)}</span>
-                                    </td>
-                                </tr>
-                            `;
-                        }).join('')}
+                        ${data.map((item, index) => renderTableRow(item, index)).join('')}
                     </tbody>
                 </table>
             `;
 
-            document.getElementById('table-container').innerHTML = html;
+            container.innerHTML = html;
         }
 
+        function renderTableRow(item, index) {
+            const rank = index + 1;
+            const topClass = rank <= 3 ? `top-${rank}` : '';
+            const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
+            
+            // 判断是否为新条目（最近6小时内）
+            const now = Date.now();
+            const itemTime = (item.createdAt?._seconds || 0) * 1000;
+            const hoursDiff = (now - itemTime) / (1000 * 60 * 60);
+            const isNew = hoursDiff < CONFIG.newEntryThreshold;
+            
+            // 获取角色信息
+            const character = item.character || 'Unknown';
+            const charKey = normalizeKey(character);
+            const charInfo = CHARACTER_MAP[charKey] || { name: character, image: null, guideUrl: '#' };
+            
+            // 国家旗帜
+            const countryFlag = COUNTRY_FLAGS[item.country?.code] || '🌍';
+            
+            return `
+                <tr class="${topClass}">
+                    <td class="rank-cell">
+                        <span class="rank">${rankEmoji}</span>
+                    </td>
+                    <td class="player-cell">
+                        <div class="player-info">
+                            <span style="font-size: 1.5rem;">${countryFlag}</span>
+                            <div class="player-name">
+                                ${escapeHtml(item.playerName || 'Anonymous')}
+                                ${isNew ? '<span class="new-badge">NEW</span>' : ''}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="${charInfo.guideUrl}" 
+                           class="character-badge" 
+                           title="View ${escapeHtml(charInfo.name)} Guide">
+                            ${charInfo.image ? `<img src="${charInfo.image}" alt="${escapeHtml(charInfo.name)}">` : ''}
+                            <span>${escapeHtml(charInfo.name)}</span>
+                        </a>
+                    </td>
+                    <td class="score-cell">
+                        <span class="score">${formatNumber(item.kills || 0)}</span>
+                    </td>
+                </tr>
+            `;
+        }
+
+        // ============================================================
+        // 📊 统计更新功能
+        // ============================================================
         function updateStats(data) {
             if (!data || data.length === 0) {
+                // 无数据时的显示
                 document.getElementById('top-score-today').textContent = '0';
                 document.getElementById('active-players').textContent = '0';
                 document.getElementById('new-entries').textContent = '0';
                 document.getElementById('avg-score-today').textContent = '0';
+                
+                document.getElementById('top-score-change').innerHTML = '<span>→</span><span>No data</span>';
+                document.getElementById('players-change').innerHTML = '<span>→</span><span>No data</span>';
+                document.getElementById('entries-change').innerHTML = '<span>→</span><span>No data</span>';
+                document.getElementById('avg-change').innerHTML = '<span>→</span><span>No data</span>';
                 return;
             }
 
-            // Top Score
+            // 最高分
             const topScore = data[0]?.kills || 0;
             document.getElementById('top-score-today').textContent = formatNumber(topScore);
             document.getElementById('top-score-change').innerHTML = `
-                <span>↗</span>
-                <span>+${Math.floor(topScore * 0.1)} from yesterday</span>
+                <span>🏆</span>
+                <span>Best score today</span>
             `;
 
-            // Active Players
+            // 活跃玩家数
             document.getElementById('active-players').textContent = formatNumber(data.length);
             document.getElementById('players-change').innerHTML = `
-                <span>↗</span>
-                <span>+${Math.floor(data.length * 0.15)} today</span>
+                <span>→</span>
+                <span>${data.length} submissions</span>
             `;
 
-            // New Entries (simulated - count entries with "NEW" badge)
-            const newCount = Math.floor(data.length * 0.3);
+            // 新条目数（最近6小时）
+            const now = Date.now();
+            const newCount = data.filter(item => {
+                const itemTime = (item.createdAt?._seconds || 0) * 1000;
+                const hoursDiff = (now - itemTime) / (1000 * 60 * 60);
+                return hoursDiff < CONFIG.newEntryThreshold;
+            }).length;
+            
             document.getElementById('new-entries').textContent = formatNumber(newCount);
             document.getElementById('entries-change').innerHTML = `
-                <span>↗</span>
-                <span>${newCount} in last 6 hours</span>
+                <span>⚡</span>
+                <span>Last ${CONFIG.newEntryThreshold} hours</span>
             `;
 
-            // Average Score
+            // 平均分数
             const sum = data.reduce((acc, item) => acc + (item.kills || 0), 0);
             const avg = Math.round(sum / data.length);
             document.getElementById('avg-score-today').textContent = formatNumber(avg);
             document.getElementById('avg-change').innerHTML = `
-                <span>↗</span>
-                <span>+${Math.floor(avg * 0.08)} from yesterday</span>
+                <span>📊</span>
+                <span>Average</span>
             `;
         }
 
+        // ============================================================
+        // 🔥 趋势更新功能
+        // ============================================================
         function updateTrending(data) {
-            if (!data || data.length === 0) return;
+            if (!data || data.length === 0) {
+                document.getElementById('trending-character').textContent = '-';
+                document.getElementById('character-count').textContent = 'No data available';
+                document.getElementById('trending-weapon').textContent = '-';
+                document.getElementById('weapon-count').textContent = 'No data available';
+                document.getElementById('biggest-climber').textContent = '-';
+                document.getElementById('climb-info').textContent = 'No data available';
+                return;
+            }
 
-            // Most used character
+            // 最受欢迎的角色
             const characterCount = {};
             data.forEach(item => {
                 const char = item.character || 'Unknown';
                 characterCount[char] = (characterCount[char] || 0) + 1;
             });
-            const topChar = Object.keys(characterCount).reduce((a, b) => 
-                characterCount[a] > characterCount[b] ? a : b
-            );
-            document.getElementById('trending-character').textContent = topChar;
-            document.getElementById('character-count').textContent = 
-                `Used by ${characterCount[topChar]} players today`;
+            
+            if (Object.keys(characterCount).length > 0) {
+                const topChar = Object.keys(characterCount).reduce((a, b) => 
+                    characterCount[a] > characterCount[b] ? a : b
+                );
+                const charKey = normalizeKey(topChar);
+                const charInfo = CHARACTER_MAP[charKey] || { name: topChar, guideUrl: '#' };
+                
+                document.getElementById('trending-character').innerHTML = `
+                    <a href="${charInfo.guideUrl}">${escapeHtml(topChar)}</a>
+                `;
+                document.getElementById('character-count').textContent = 
+                    `Used by ${characterCount[topChar]} players today`;
+            }
 
-            // Most used weapon (simulated)
-            const weapons = ['Frostwalker', 'Katana', 'Lightning Staff', 'Bow', 'Black Hole'];
-            const topWeapon = weapons[Math.floor(Math.random() * weapons.length)];
-            document.getElementById('trending-weapon').textContent = topWeapon;
-            document.getElementById('weapon-count').textContent = 
-                `Appeared in ${Math.floor(data.length * 0.4)} builds`;
+            // 最受欢迎的武器（统计第一个武器）
+            const weaponCount = {};
+            data.forEach(item => {
+                const weapon = (item.weapons || [])[0];
+                if (weapon) {
+                    weaponCount[weapon] = (weaponCount[weapon] || 0) + 1;
+                }
+            });
+            
+            if (Object.keys(weaponCount).length > 0) {
+                const topWeapon = Object.keys(weaponCount).reduce((a, b) => 
+                    weaponCount[a] > weaponCount[b] ? a : b
+                );
+                const weaponKey = normalizeKey(topWeapon);
+                const weaponUrl = WEAPON_URLS[weaponKey] || 'https://megabonk.org/database/weapons/';
+                
+                document.getElementById('trending-weapon').innerHTML = `
+                    <a href="${weaponUrl}">${escapeHtml(topWeapon)}</a>
+                `;
+                document.getElementById('weapon-count').textContent = 
+                    `Used in ${weaponCount[topWeapon]} builds today`;
+            } else {
+                document.getElementById('trending-weapon').textContent = '-';
+                document.getElementById('weapon-count').textContent = 'No weapon data';
+            }
 
-            // Biggest climber (simulated)
-            const climber = data[Math.floor(Math.random() * Math.min(10, data.length))];
-            if (climber) {
+            // 最大进步者（随机选择前10名中的一个）
+            if (data.length >= 5) {
+                const randomIndex = Math.floor(Math.random() * Math.min(10, data.length));
+                const climber = data[randomIndex];
                 document.getElementById('biggest-climber').textContent = 
-                    climber.playerName || 'Anonymous';
+                    escapeHtml(climber.playerName || 'Anonymous');
                 document.getElementById('climb-info').textContent = 
-                    `Climbed ${Math.floor(Math.random() * 50 + 10)} ranks today`;
+                    `Ranked #${randomIndex + 1} today`;
+            } else {
+                document.getElementById('biggest-climber').textContent = '-';
+                document.getElementById('climb-info').textContent = 'Not enough data';
             }
         }
 
+        // ============================================================
+        // ⏰ 更新时间显示
+        // ============================================================
         function updateLastUpdateTime(timestamp) {
+            const element = document.getElementById('last-update');
+            
             if (!timestamp) {
-                document.getElementById('last-update').innerHTML = '<span>🕐</span><span>Unknown</span>';
+                element.innerHTML = '<span>🕐</span><span>Unknown</span>';
                 return;
             }
 
@@ -1260,32 +1581,44 @@
             } else if (minutes < 60) {
                 timeText = `${minutes}m ago`;
             } else {
-                timeText = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                timeText = date.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
             }
 
-            document.getElementById('last-update').innerHTML = 
-                `<span>🕐</span><span>${timeText}</span>`;
+            element.innerHTML = `<span>🕐</span><span>${timeText}</span>`;
         }
 
-        function showError() {
-            document.getElementById('table-container').innerHTML = `
-                <div class="loading">
-                    <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
-                    <p style="font-size: 1.2rem;">Failed to Load</p>
-                    <button class="btn-date" onclick="loadTodayLeaderboard()" style="margin: 20px auto;">
-                        Retry
-                    </button>
-                </div>
-            `;
-        }
-
+        // ============================================================
+        // 🔄 自动刷新功能
+        // ============================================================
         function startAutoRefresh() {
             if (autoRefreshTimer) {
                 clearInterval(autoRefreshTimer);
             }
+            
             autoRefreshTimer = setInterval(() => {
-                loadTodayLeaderboard();
+                // 只在查看今天的数据时自动刷新
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const viewing = new Date(currentDate);
+                viewing.setHours(0, 0, 0, 0);
+                
+                if (viewing.getTime() === today.getTime()) {
+                    console.log('🔄 Auto-refreshing today\'s data...');
+                    loadTodayLeaderboard();
+                }
             }, CONFIG.updateInterval);
+            
+            console.log(`⏰ Auto-refresh enabled (every ${CONFIG.updateInterval / 1000}s)`);
+        }
+
+        // ============================================================
+        // 🛠️ 工具函数
+        // ============================================================
+        function normalizeKey(str) {
+            return str.toLowerCase().replace(/[^a-z0-9]/g, '');
         }
 
         function formatNumber(num) {
@@ -1298,12 +1631,70 @@
             return div.innerHTML;
         }
 
-        // Cleanup on page unload
+        function showError() {
+            document.getElementById('table-container').innerHTML = `
+                <div class="loading">
+                    <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 15px;">Failed to Load Data</p>
+                    <p style="font-size: 0.9rem; color: #6c757d; margin-bottom: 20px;">
+                        Please check your connection and try again
+                    </p>
+                    <button class="btn-date" onclick="loadTodayLeaderboard()">
+                        🔄 Retry
+                    </button>
+                </div>
+            `;
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // 页面卸载时清理定时器
         window.addEventListener('beforeunload', () => {
             if (autoRefreshTimer) {
                 clearInterval(autoRefreshTimer);
             }
         });
     </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 </html>
