@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is the Megabonk Leaderboard Legit? Verification Rules & Anti-Cheat</title>
-    <meta name="description" content="Learn how Megabonk leaderboard verification works, anti-cheat measures, common flags, appeal process, and how to get verified. Updated for latest version.">
-    <meta name="keywords" content="megabonk leaderboard legit, verified leaderboard, megabonk verification, legit leaderboard, anti-cheat, leaderboard rules">
+    <title>Megabonk: Legit Leaderboard vs Verified Leaderboard</title>
+    <meta name="description" content="Compare the official Steam legit leaderboard to the community VOD verified leaderboard. Rules, anti-cheat, video proof, and how to submit runs.">
+    <meta name="keywords" content="megabonk leaderboard, steam leaderboard, megabonk.fun, vod leaderboard, megabonk rankings, leaderboard verification">
 
     <link rel="canonical" href="https://megabonk.org/leaderboard/verified">
 
@@ -29,42 +30,34 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is the Megabonk leaderboard legit?",
+          "name": "What's the difference between official and community Megabonk leaderboards?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, the Megabonk leaderboard is legitimate and uses multiple anti-cheat measures including automated detection, manual review, and video proof requirements for top scores. All verified entries have passed strict validation checks."
+            "text": "The official leaderboard is built into the Steam version of Megabonk and maintained by the developers. Megabonk.fun is a community-run VOD verified leaderboard that requires full video proof for all submissions. They operate independently with different rules."
           }
         },
         {
           "@type": "Question",
-          "name": "How does leaderboard verification work?",
+          "name": "Does the Steam leaderboard require video proof?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Verification involves three steps: 1) Automated anti-cheat detection scans for impossible stats, 2) Manual review by moderators for suspicious patterns, 3) Video proof requirement for top 100 rankings. Verified scores display a checkmark badge."
+            "text": "No, the official Steam leaderboard does not require video proof. However, developers maintain a global ban list for confirmed cheaters who will never appear on the leaderboards again."
           }
         },
         {
           "@type": "Question",
-          "name": "What causes a leaderboard score to be flagged?",
+          "name": "What are the requirements for megabonk.fun community leaderboard?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Common flags include: impossible stat combinations, modified game files, suspiciously perfect timing, inconsistent damage patterns, and missing video proof for high rankings. Flagged scores are marked as 'Under Review' until verification."
+            "text": "All submissions to megabonk.fun require full unedited video proof and must be performed on the current game patch. Reviews are typically completed within about an hour during EST working hours."
           }
         },
         {
           "@type": "Question",
-          "name": "How do I appeal a flagged leaderboard score?",
+          "name": "How do I report a suspicious leaderboard score?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "To appeal a flag: 1) Provide video proof of your run, 2) Submit detailed build information, 3) Include game version and timestamp. Appeals typically take 3-7 days. Contact support through the official Discord or email."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's the difference between verified and unverified scores?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Verified scores have a green checkmark, video proof, and passed all anti-cheat checks. Unverified scores lack video proof, haven't been manually reviewed, or are pending verification. Only verified scores appear in official rankings."
+            "text": "Contact the official Megabonk Discord at discord.com/invite/BGxud7HPEe to report suspicious scores on the Steam leaderboard. For megabonk.fun, use their contact form on the website."
           }
         }
       ]
@@ -92,7 +85,7 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Verification",
+          "name": "Guide",
           "item": "https://megabonk.org/leaderboard/verified/"
         }
       ]
@@ -344,62 +337,96 @@
             font-size: 1.05rem;
         }
 
-        /* Steps */
-        .steps-container {
+        /* Leaderboard Type Cards */
+        .leaderboard-types {
             display: grid;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
         }
 
-        .step-card {
-            background: #f8f9fa;
-            padding: 25px;
+        .type-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 30px;
             border-radius: 12px;
-            border-left: 5px solid #667eea;
+            border: 3px solid #e9ecef;
             transition: all 0.3s;
         }
 
-        .step-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        .type-card:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
         }
 
-        .step-header {
+        .type-card.official {
+            border-color: #667eea;
+        }
+
+        .type-card.community {
+            border-color: #28a745;
+        }
+
+        .type-header {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 15px;
         }
 
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
+        .type-icon {
+            font-size: 2.5rem;
         }
 
-        .step-title {
-            font-size: 1.3rem;
+        .type-title {
+            font-size: 1.5rem;
             font-weight: 700;
             color: #495057;
         }
 
-        .step-content {
+        .type-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .type-badge.official {
+            background: #667eea;
+            color: white;
+        }
+
+        .type-badge.community {
+            background: #28a745;
+            color: white;
+        }
+
+        .type-description {
             color: #6c757d;
+            margin-bottom: 20px;
             line-height: 1.7;
         }
 
-        .step-details {
-            margin-top: 12px;
-            padding: 12px;
-            background: white;
-            border-radius: 8px;
-            font-size: 0.95rem;
+        .type-features {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .type-features li {
+            padding: 8px 0;
+            color: #495057;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .type-features li::before {
+            content: '✓';
+            color: #28a745;
+            font-weight: 700;
+            flex-shrink: 0;
         }
 
         /* Comparison Table */
@@ -461,58 +488,8 @@
             font-weight: 600;
         }
 
-        .feature-pending {
+        .feature-partial {
             color: #ffc107;
-            font-weight: 600;
-        }
-
-        /* Flag Table */
-        .flag-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .flag-table thead {
-            background: #495057;
-            color: white;
-        }
-
-        .flag-table th,
-        .flag-table td {
-            padding: 15px 18px;
-            text-align: left;
-        }
-
-        .flag-table th {
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .flag-table tbody tr {
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .flag-table tbody tr:last-child {
-            border-bottom: none;
-        }
-
-        .flag-table tbody tr:hover {
-            background: #f8f9fa;
-        }
-
-        .flag-type {
-            font-weight: 600;
-            color: #dc3545;
-        }
-
-        .appeal-time {
-            color: #667eea;
             font-weight: 600;
         }
 
@@ -788,16 +765,14 @@
                 font-size: 1.5rem;
             }
 
+            .leaderboard-types {
+                grid-template-columns: 1fr;
+            }
+
             .comparison-table th,
             .comparison-table td {
                 padding: 12px 10px;
                 font-size: 0.9rem;
-            }
-
-            .flag-table th,
-            .flag-table td {
-                padding: 12px 10px;
-                font-size: 0.85rem;
             }
 
             .quick-links {
@@ -840,7 +815,7 @@
                 <li class="breadcrumb-separator">›</li>
                 <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
                 <li class="breadcrumb-separator">›</li>
-                <li>Verification</li>
+                <li>Guide</li>
             </ul>
         </nav>
     </header>
@@ -848,11 +823,11 @@
     <!-- Main Content -->
     <div class="container">
         <div class="page-header">
-            <h1>✅ Is the Megabonk Leaderboard Legit?</h1>
-            <p>Verification Rules, Anti-Cheat & Appeal Process</p>
+            <h1>🏆 Megabonk Leaderboard Guide</h1>
+            <p>Official Steam Rankings vs Community VOD Leaderboard</p>
             <div class="status-badge">
                 <span class="status-indicator"></span>
-                <span>Active Anti-Cheat Protection</span>
+                <span>Updated for v1.0.12+</span>
             </div>
         </div>
 
@@ -861,67 +836,74 @@
             <div class="card-content">
                 <!-- Lead Statement -->
                 <div class="lead-text">
-                    <strong>Yes, the Megabonk leaderboard is legitimate.</strong> All rankings use strict verification measures including automated anti-cheat detection, manual review by moderators, and video proof requirements for top scores. Every verified entry has passed multiple validation checks to ensure fairness.
+                    Megabonk has <strong>two separate leaderboard systems</strong>: the official Steam in-game leaderboard maintained by developers, and megabonk.fun — a community-run VOD verified leaderboard. Each operates independently with different rules and requirements.
                 </div>
 
-                <!-- How Verification Works -->
+                <!-- Two Leaderboard Systems -->
                 <section class="content-section">
                     <h2 class="section-title">
-                        <span class="section-icon">🔍</span>
-                        <span>How Verification Works</span>
+                        <span class="section-icon">📊</span>
+                        <span>Two Leaderboard Systems Explained</span>
                     </h2>
                     <p class="section-description">
-                        The Megabonk leaderboard uses a three-layer verification system to ensure all scores are legitimate and fair.
+                        Understanding the key differences between official and community rankings.
                     </p>
 
-                    <div class="steps-container">
-                        <div class="step-card">
-                            <div class="step-header">
-                                <div class="step-number">1</div>
-                                <h3 class="step-title">Automated Anti-Cheat Detection</h3>
+                    <div class="leaderboard-types">
+                        <!-- Official Steam Leaderboard -->
+                        <div class="type-card official">
+                            <div class="type-header">
+                                <span class="type-icon">🎮</span>
+                                <h3 class="type-title">Official Steam Leaderboard</h3>
                             </div>
-                            <div class="step-content">
-                                Every submitted score is automatically scanned by anti-cheat algorithms that detect impossible stat combinations, modified game files, and suspicious timing patterns.
-                                <div class="step-details">
-                                    <strong>Checks include:</strong> Damage per second thresholds, kill count vs. run time ratios, weapon combination validation, build possibility analysis, and game version verification.
+                            <span class="type-badge official">Developer Maintained</span>
+                            <div class="type-description">
+                                The official leaderboard is built into the Steam version of Megabonk and maintained directly by the game developers (vedinad). Scores are automatically submitted from within the game.
+                            </div>
+                            <ul class="type-features">
+                                <li>Integrated into Steam game client</li>
+                                <li>Automatic score submission</li>
+                                <li>No video proof required</li>
+                                <li>Global ban list for confirmed cheaters</li>
+                                <li>Fixed with v1.0.12 patch (Oct 8, 2025)</li>
+                            </ul>
+                            <div class="alert-box info" style="margin-top: 15px;">
+                                <div class="alert-title">
+                                    <span>🛡️</span>
+                                    <span>Anti-Cheat Protection</span>
+                                </div>
+                                <div class="alert-content">
+                                    As of v1.0.12, developers established a global ban list. Confirmed cheaters are permanently removed from leaderboards and will never appear again.
                                 </div>
                             </div>
                         </div>
 
-                        <div class="step-card">
-                            <div class="step-header">
-                                <div class="step-number">2</div>
-                                <h3 class="step-title">Manual Moderator Review</h3>
+                        <!-- Community VOD Leaderboard -->
+                        <div class="type-card community">
+                            <div class="type-header">
+                                <span class="type-icon">📹</span>
+                                <h3 class="type-title">Community VOD Leaderboard</h3>
                             </div>
-                            <div class="step-content">
-                                Scores that pass automated checks are reviewed by experienced moderators who look for suspicious patterns, verify build viability, and check for consistency with known game mechanics.
-                                <div class="step-details">
-                                    <strong>Review criteria:</strong> Build synergy validation, damage calculation verification, boss kill timing analysis, item/tome combination checks, and comparison with established records.
+                            <span class="type-badge community">Community Operated</span>
+                            <div class="type-description">
+                                Megabonk.fun is a community-run leaderboard that requires full video proof for all submissions. This system is <strong>not affiliated with the developers</strong> and operates independently.
+                            </div>
+                            <ul class="type-features">
+                                <li>All submissions require full unedited video</li>
+                                <li>Must be performed on current patch</li>
+                                <li>Typically reviewed within ~1 hour (EST working hours)</li>
+                                <li>Displays detailed build information</li>
+                                <li>Submission statuses: pending/approved/denied</li>
+                            </ul>
+                            <div class="alert-box" style="margin-top: 15px;">
+                                <div class="alert-title">
+                                    <span>⚠️</span>
+                                    <span>Independent Operation</span>
+                                </div>
+                                <div class="alert-content">
+                                    Megabonk.fun is community-operated and not affiliated with vedinad (the game developer). It follows separate rules from the official Steam leaderboard.
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="step-card">
-                            <div class="step-header">
-                                <div class="step-number">3</div>
-                                <h3 class="step-title">Video Proof Requirement</h3>
-                            </div>
-                            <div class="step-content">
-                                All scores in the top 100 rankings must provide video proof of the complete run. This allows the community to verify legitimacy and helps other players learn winning strategies.
-                                <div class="step-details">
-                                    <strong>Video requirements:</strong> Full unedited run from start to finish, clearly visible UI showing stats, build details visible at end screen, and audio/gameplay sync verification.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="alert-box success">
-                        <div class="alert-title">
-                            <span>✅</span>
-                            <span>Verification Badge</span>
-                        </div>
-                        <div class="alert-content">
-                            Scores that pass all three verification steps receive a green checkmark badge (✅) next to their ranking. Only verified scores appear in the official global leaderboard rankings.
                         </div>
                     </div>
                 </section>
@@ -937,173 +919,148 @@
                 </div>
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-                <!-- Verified vs Unverified -->
+                <!-- Detailed Comparison -->
                 <section class="content-section">
                     <h2 class="section-title">
                         <span class="section-icon">⚖️</span>
-                        <span>Verified vs Unverified Scores</span>
+                        <span>Feature Comparison</span>
                     </h2>
                     <p class="section-description">
-                        Understanding the key differences between verified and unverified leaderboard entries.
+                        Side-by-side comparison of official Steam leaderboard vs community VOD leaderboard.
                     </p>
 
                     <table class="comparison-table">
                         <thead>
                             <tr>
                                 <th>Feature</th>
-                                <th>Verified ✅</th>
-                                <th>Unverified ⏳</th>
+                                <th>Steam Official 🎮</th>
+                                <th>Megabonk.fun 📹</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="feature-name">Anti-Cheat Scan</td>
-                                <td class="feature-yes">✅ Passed</td>
-                                <td class="feature-pending">⏳ Pending</td>
+                                <td class="feature-name">Operated By</td>
+                                <td>Game developers (vedinad)</td>
+                                <td>Community volunteers</td>
                             </tr>
                             <tr>
-                                <td class="feature-name">Manual Review</td>
-                                <td class="feature-yes">✅ Approved</td>
-                                <td class="feature-no">❌ Not Reviewed</td>
+                                <td class="feature-name">Submission Method</td>
+                                <td>Automatic (in-game)</td>
+                                <td>Manual (website form)</td>
                             </tr>
                             <tr>
-                                <td class="feature-name">Video Proof</td>
-                                <td class="feature-yes">✅ Provided</td>
-                                <td class="feature-no">❌ Missing</td>
+                                <td class="feature-name">Video Proof Required</td>
+                                <td class="feature-no">❌ Not Required</td>
+                                <td class="feature-yes">✅ All Submissions</td>
                             </tr>
                             <tr>
-                                <td class="feature-name">Official Ranking</td>
-                                <td class="feature-yes">✅ Included</td>
-                                <td class="feature-no">❌ Excluded</td>
+                                <td class="feature-name">Review Process</td>
+                                <td>Automated + Ban List</td>
+                                <td>Manual Review (~1 hour)</td>
                             </tr>
                             <tr>
                                 <td class="feature-name">Build Details</td>
-                                <td class="feature-yes">✅ Complete</td>
-                                <td class="feature-pending">⏳ Partial</td>
+                                <td class="feature-partial">⚠️ Basic Stats</td>
+                                <td class="feature-yes">✅ Complete Build Info</td>
                             </tr>
                             <tr>
-                                <td class="feature-name">Community Trust</td>
-                                <td class="feature-yes">✅ High</td>
-                                <td class="feature-no">❌ Low</td>
+                                <td class="feature-name">Version Requirements</td>
+                                <td>Current Steam version</td>
+                                <td>Current patch only</td>
                             </tr>
                             <tr>
-                                <td class="feature-name">Leaderboard Badge</td>
-                                <td class="feature-yes">✅ Green Checkmark</td>
-                                <td class="feature-no">⏳ Under Review</td>
+                                <td class="feature-name">Cheater Protection</td>
+                                <td>Global ban list (v1.0.12+)</td>
+                                <td>VOD verification</td>
                             </tr>
                             <tr>
-                                <td class="feature-name">Appeal Option</td>
-                                <td class="feature-yes">✅ Available</td>
-                                <td class="feature-yes">✅ Available</td>
+                                <td class="feature-name">Appeals</td>
+                                <td>Via official Discord</td>
+                                <td>Via website contact form</td>
                             </tr>
                         </tbody>
                     </table>
+                </section>
 
-                    <div class="alert-box info">
+                <!-- Official Steam Leaderboard Details -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">🎮</span>
+                        <span>Official Steam Leaderboard</span>
+                    </h2>
+                    <p class="section-description">
+                        How the official in-game leaderboard works and what protection measures are in place.
+                    </p>
+
+                    <div class="alert-box success">
                         <div class="alert-title">
-                            <span>ℹ️</span>
-                            <span>Unverified Scores</span>
+                            <span>✅</span>
+                            <span>v1.0.12 Update (October 8, 2025)</span>
                         </div>
                         <div class="alert-content">
-                            Unverified scores are not necessarily cheated—they may simply be awaiting review, missing video proof, or submitted by new accounts. However, only verified scores count toward official rankings and competitive seasons.
+                            <strong>Leaderboards Fixed:</strong> The developers repaired the previously broken leaderboard system and established a global ban list. Known cheaters are permanently banned and will never appear on leaderboards again.
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 30px 0 20px 0; color: #495057; font-size: 1.4rem;">How It Works</h3>
+                    <ul style="color: #6c757d; line-height: 2; list-style-position: inside;">
+                        <li><strong>Automatic submission:</strong> Scores are automatically uploaded to Steam when you complete a run</li>
+                        <li><strong>No video required:</strong> Players don't need to provide video proof for any ranking</li>
+                        <li><strong>Access location:</strong> View rankings directly in the Steam game client</li>
+                        <li><strong>Ban system:</strong> Developers maintain a global list of confirmed cheaters who are permanently excluded</li>
+                        <li><strong>Version tracking:</strong> Leaderboards may be reset with major patches (e.g., v1.0.7 reset on Sept 28, 2025)</li>
+                    </ul>
+
+                    <div class="alert-box danger">
+                        <div class="alert-title">
+                            <span>🚫</span>
+                            <span>Reporting Cheaters</span>
+                        </div>
+                        <div class="alert-content">
+                            If you suspect cheating on the Steam leaderboard, report it through the official Megabonk Discord: <strong>discord.com/invite/BGxud7HPEe</strong>
                         </div>
                     </div>
                 </section>
 
-                <!-- Common Flags & Appeal Process -->
+                <!-- Community VOD Leaderboard Details -->
                 <section class="content-section">
                     <h2 class="section-title">
-                        <span class="section-icon">🚩</span>
-                        <span>Common Flags & How to Appeal</span>
+                        <span class="section-icon">📹</span>
+                        <span>Community VOD Leaderboard (megabonk.fun)</span>
                     </h2>
                     <p class="section-description">
-                        Learn why scores get flagged and how to successfully appeal if your legitimate run was marked.
+                        Requirements and process for the community-operated video-verified leaderboard.
                     </p>
 
-                    <table class="flag-table">
-                        <thead>
-                            <tr>
-                                <th>Flag Reason</th>
-                                <th>Description</th>
-                                <th>How to Appeal</th>
-                                <th>Review Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="flag-type">🔴 Impossible Stats</td>
-                                <td>Damage, kills, or timing exceeds known game limits</td>
-                                <td>Provide full video proof + build details</td>
-                                <td class="appeal-time">3-5 days</td>
-                            </tr>
-                            <tr>
-                                <td class="flag-type">🔴 Modified Files</td>
-                                <td>Game file checksum mismatch detected</td>
-                                <td>Reinstall game, submit new clean run</td>
-                                <td class="appeal-time">7-10 days</td>
-                            </tr>
-                            <tr>
-                                <td class="flag-type">🟡 Missing Video</td>
-                                <td>Top 100 score without required video proof</td>
-                                <td>Upload video to YouTube/Twitch, submit link</td>
-                                <td class="appeal-time">1-3 days</td>
-                            </tr>
-                            <tr>
-                                <td class="flag-type">🟡 Suspicious Pattern</td>
-                                <td>Unusual damage spikes or perfect timing</td>
-                                <td>Explain build synergy, provide detailed log</td>
-                                <td class="appeal-time">3-7 days</td>
-                            </tr>
-                            <tr>
-                                <td class="flag-type">🟡 New Account</td>
-                                <td>High score from account <7 days old</td>
-                                <td>Link previous account or wait 7 days</td>
-                                <td class="appeal-time">7 days</td>
-                            </tr>
-                            <tr>
-                                <td class="flag-type">🟠 Version Mismatch</td>
-                                <td>Score submitted on outdated game version</td>
-                                <td>Update game, submit new run on current version</td>
-                                <td class="appeal-time">1-2 days</td>
-                            </tr>
-                            <tr>
-                                <td class="flag-type">🟠 Incomplete Data</td>
-                                <td>Missing build, weapon, or item information</td>
-                                <td>Complete build details in submission form</td>
-                                <td class="appeal-time">1-3 days</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="alert-box danger">
-                        <div class="alert-title">
-                            <span>⚠️</span>
-                            <span>Permanent Bans</span>
-                        </div>
-                        <div class="alert-content">
-                            Repeated attempts to submit cheated scores, use of third-party tools, or harassment of moderators will result in permanent account ban from the leaderboard with no appeal option.
-                        </div>
+                    <h3 style="margin: 30px 0 20px 0; color: #495057; font-size: 1.4rem;">📝 Submission Requirements</h3>
+                    
+                    <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; border-left: 5px solid #28a745;">
+                        <ul style="color: #495057; line-height: 2; list-style-position: inside; margin-left: 15px;">
+                            <li><strong>Full unedited video:</strong> Complete run from start to finish, no cuts or edits</li>
+                            <li><strong>Current patch only:</strong> Run must be performed on the most recent game version</li>
+                            <li><strong>Visible UI:</strong> All game stats, build details, and final score screen must be clearly visible</li>
+                            <li><strong>Build information:</strong> Complete details of weapons, items, and tomes used</li>
+                            <li><strong>Video platform:</strong> Upload to YouTube, Twitch, or similar and submit link</li>
+                        </ul>
                     </div>
 
-                    <h3 style="margin-top: 30px; margin-bottom: 15px; color: #495057;">📝 How to Submit an Appeal</h3>
-                    <div class="steps-container">
-                        <div class="step-card">
-                            <div class="step-content">
-                                <strong>Step 1: Gather Evidence</strong><br>
-                                Collect video proof (full run, unedited), build screenshots, game logs, and version number. Ensure video clearly shows all UI elements and final score screen.
-                            </div>
+                    <h3 style="margin: 30px 0 20px 0; color: #495057; font-size: 1.4rem;">⏱️ Review Process</h3>
+                    <p style="color: #6c757d; line-height: 1.8;">
+                        Submissions are typically reviewed within approximately <strong>1 hour during EST working hours</strong>. Real-time updates are provided, and you can check your submission status on the website. Status options include:
+                    </p>
+                    <ul style="color: #6c757d; line-height: 2; list-style-position: inside; margin: 15px 0 15px 20px;">
+                        <li><strong>Pending:</strong> Awaiting review</li>
+                        <li><strong>Approved:</strong> Verified and added to leaderboard</li>
+                        <li><strong>Denied:</strong> Does not meet requirements (reason provided)</li>
+                    </ul>
+
+                    <div class="alert-box info">
+                        <div class="alert-title">
+                            <span>ℹ️</span>
+                            <span>Not Affiliated with Developer</span>
                         </div>
-                        <div class="step-card">
-                            <div class="step-content">
-                                <strong>Step 2: Submit Appeal</strong><br>
-                                Contact support via <a href="https://discord.gg/megabonk" target="_blank" rel="noopener">Official Discord</a> or email <a href="mailto:support@megabonk.fun">support@megabonk.fun</a> with your evidence and detailed explanation.
-                            </div>
-                        </div>
-                        <div class="step-card">
-                            <div class="step-content">
-                                <strong>Step 3: Wait for Review</strong><br>
-                                Moderators review appeals in order received (typically 3-7 days). You'll receive email notification with decision and explanation.
-                            </div>
+                        <div class="alert-content">
+                            Megabonk.fun clearly states at the bottom of their FAQ: "Not affiliated with vedinad." This is a community initiative operated independently from the game developers.
                         </div>
                     </div>
                 </section>
@@ -1118,60 +1075,84 @@
                     <div class="faq-container">
                         <div class="faq-item">
                             <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>Why is my score marked "Under Review"?</span>
+                                <span>Which leaderboard should I focus on?</span>
                                 <span class="faq-icon">▼</span>
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-answer-content">
-                                    Scores are automatically marked "Under Review" if they trigger any anti-cheat flags or fall within the top 100 rankings. This is normal—most legitimate scores pass review within 24-48 hours. Check your email for updates or provide video proof to speed up verification.
+                                    Both have value! The Steam official leaderboard is the "official" ranking maintained by developers and automatically tracks all players. Megabonk.fun is great if you want detailed build visibility and proof of legitimacy through video, as it requires full VOD verification and shows complete build details for every submission.
                                 </div>
                             </div>
                         </div>
 
                         <div class="faq-item">
                             <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>Do I need video proof for every submission?</span>
+                                <span>Can my score appear on both leaderboards?</span>
                                 <span class="faq-icon">▼</span>
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-answer-content">
-                                    Video proof is only required for top 100 leaderboard positions. However, providing video proof for any score significantly speeds up verification and helps the community learn from your strategies. Lower-ranked scores (101+) are verified through automated checks and manual spot-checking.
+                                    Yes! Your score will automatically appear on the Steam leaderboard when you complete a run. If you also want it on megabonk.fun, you need to separately submit it through their website with video proof. They are completely independent systems.
                                 </div>
                             </div>
                         </div>
 
                         <div class="faq-item">
                             <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>Can I get banned for using specific builds or strategies?</span>
+                                <span>Do I need video proof to be on the official Steam leaderboard?</span>
                                 <span class="faq-icon">▼</span>
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-answer-content">
-                                    No, all in-game builds, item combinations, and strategies are allowed as long as they don't involve modified game files or external tools. Even if a build seems "overpowered," it's legitimate if it's achievable within normal game mechanics. Report bugs through proper channels instead.
+                                    No. The official Steam leaderboard does not require video proof for any ranking. Scores are automatically submitted from the game. However, developers maintain a global ban list for confirmed cheaters who are permanently excluded from all leaderboards.
                                 </div>
                             </div>
                         </div>
 
                         <div class="faq-item">
                             <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>How can I report a suspicious leaderboard score?</span>
+                                <span>How do I report a suspicious score?</span>
                                 <span class="faq-icon">▼</span>
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-answer-content">
-                                    Use the "Report Score" button on the leaderboard page or contact moderators via Discord. Provide the player name, rank, and specific reason for suspicion. False reports or spam reporting may result in your account being flagged, so only report genuinely suspicious entries.
+                                    For the Steam official leaderboard, report through the official Megabonk Discord at <strong>discord.com/invite/BGxud7HPEe</strong>. For megabonk.fun, use their website contact form. Each system handles reports independently.
                                 </div>
                             </div>
                         </div>
 
                         <div class="faq-item">
                             <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>What happens if I accidentally submit a bugged run?</span>
+                                <span>Will leaderboards be reset with new patches?</span>
                                 <span class="faq-icon">▼</span>
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-answer-content">
-                                    If you unknowingly benefited from a game bug, your score will be flagged but you won't be banned—bugs are the developers' responsibility, not yours. Simply explain the situation in your appeal. However, intentionally exploiting known bugs repeatedly may be considered cheating.
+                                    Both leaderboards may reset with major version updates. The Steam leaderboard was reset with v1.0.7 on September 28, 2025. Megabonk.fun requires runs to be on the current patch and manages submissions by version. Check official announcements for reset information.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Can I appeal if my megabonk.fun submission is denied?</span>
+                                <span class="faq-icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Yes. If your submission is denied, you'll receive a reason. You can resubmit with corrections or contact megabonk.fun through their website contact form to discuss the denial. Make sure your video meets all requirements: full unedited run, current patch, visible UI, and complete build details.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Are powerful builds or strategies considered cheating?</span>
+                                <span class="faq-icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    No. Any build, item combination, or strategy that's achievable within normal game mechanics is legitimate, even if it seems overpowered. Cheating only refers to modified game files, external tools, or exploiting known bugs intentionally. If you discover a bug, report it through proper channels.
                                 </div>
                             </div>
                         </div>
@@ -1180,18 +1161,18 @@
 
                 <!-- CTA Section -->
                 <section class="content-section" style="text-align: center; padding: 30px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px;">
-                    <h3 style="margin-bottom: 20px; color: #495057; font-size: 1.5rem;">Ready to Submit Your Score?</h3>
+                    <h3 style="margin-bottom: 20px; color: #495057; font-size: 1.5rem;">Ready to Compete?</h3>
                     <p style="color: #6c757d; margin-bottom: 25px;">
-                        Prepare your video proof, verify your build is complete, and submit to the official leaderboard.
+                        Choose your leaderboard: Steam's automatic official rankings or community VOD verification.
                     </p>
                     <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                        <a href="https://megabonk.org/leaderboard/" class="cta-button">
-                            <span>📊</span>
-                            <span>View Leaderboard</span>
+                        <a href="https://discord.com/invite/BGxud7HPEe" target="_blank" rel="noopener noreferrer" class="cta-button">
+                            <span>💬</span>
+                            <span>Official Discord</span>
                         </a>
-                        <a href="https://megabonk.org/leaderboard/official/" class="cta-button cta-button-secondary">
-                            <span>🌐</span>
-                            <span>Official Submission</span>
+                        <a href="https://megabonk.fun/" target="_blank" rel="noopener noreferrer" class="cta-button cta-button-secondary">
+                            <span>📹</span>
+                            <span>Community VOD Board</span>
                         </a>
                     </div>
                 </section>
@@ -1203,28 +1184,28 @@
             <div class="card-content">
                 <h2 class="section-title" style="margin-bottom: 20px;">
                     <span class="section-icon">🔗</span>
-                    <span>Related Leaderboard Resources</span>
+                    <span>Related Resources</span>
                 </h2>
                 <div class="quick-links">
-                    <a href="https://megabonk.org/leaderboard/" class="quick-link-card">
-                        <div class="quick-link-icon">🏆</div>
-                        <div class="quick-link-title">Global Leaderboard</div>
-                        <div class="quick-link-description">View all-time top player rankings and scores</div>
-                    </a>
-                    <a href="https://megabonk.org/leaderboard/official/" class="quick-link-card">
-                        <div class="quick-link-icon">🌐</div>
-                        <div class="quick-link-title">Official Portal</div>
-                        <div class="quick-link-description">Submit scores on megabonk.fun</div>
-                    </a>
-                    <a href="https://megabonk.org/leaderboard/builds/" class="quick-link-card">
-                        <div class="quick-link-icon">🏗️</div>
-                        <div class="quick-link-title">Top Builds</div>
-                        <div class="quick-link-description">Builds used by leaderboard players</div>
-                    </a>
                     <a href="https://megabonk.org/guides/builds/" class="quick-link-card">
-                        <div class="quick-link-icon">📖</div>
+                        <div class="quick-link-icon">🏗️</div>
                         <div class="quick-link-title">Build Guides</div>
-                        <div class="quick-link-description">Detailed character build strategies</div>
+                        <div class="quick-link-description">Detailed character build strategies for competitive play</div>
+                    </a>
+                    <a href="https://megabonk.org/database/weapons/" class="quick-link-card">
+                        <div class="quick-link-icon">⚔️</div>
+                        <div class="quick-link-title">Weapon Database</div>
+                        <div class="quick-link-description">Complete weapon stats and synergies</div>
+                    </a>
+                    <a href="https://megabonk.org/tier-lists/" class="quick-link-card">
+                        <div class="quick-link-icon">📊</div>
+                        <div class="quick-link-title">Tier Lists</div>
+                        <div class="quick-link-description">Rankings for items, tomes, and builds</div>
+                    </a>
+                    <a href="https://megabonk.org/guides/achievements/" class="quick-link-card">
+                        <div class="quick-link-icon">🏆</div>
+                        <div class="quick-link-title">Achievements</div>
+                        <div class="quick-link-description">Complete achievement guide and unlock tips</div>
                     </a>
                 </div>
             </div>
@@ -1263,12 +1244,11 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Leaderboard</h3>
+                <h3>Community</h3>
                 <ul class="footer-links">
-                    <li><a href="https://megabonk.org/leaderboard/">Global Rankings</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/official/">Official Portal</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/verified/">Verification</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/builds/">Top Builds</a></li>
+                    <li><a href="https://discord.com/invite/BGxud7HPEe" target="_blank" rel="noopener noreferrer">Official Discord</a></li>
+                    <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener noreferrer">Steam Page</a></li>
+                    <li><a href="https://megabonk.fun/" target="_blank" rel="noopener noreferrer">Community VOD Board</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1282,7 +1262,7 @@
         </div>
         <div class="footer-bottom">
             <p>© 2025 Megabonk.org - Community Resource for Megabonk Game</p>
-            <p><a href="https://megabonk.org/privacy-policy/">Privacy Policy</a> | Not affiliated with the official game</p>
+            <p><a href="https://megabonk.org/privacy-policy/">Privacy Policy</a> | Not affiliated with the official game developers</p>
         </div>
     </footer>
 
@@ -1307,5 +1287,43 @@
             faqItem.classList.toggle('active');
         }
     </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 </html>
