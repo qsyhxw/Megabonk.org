@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,46 +46,6 @@
           "position": 3,
           "name": "Ninja Leaderboard Build",
           "url": "https://megabonk.org/leaderboard/builds/#ninja"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Megachad Leaderboard Build",
-          "url": "https://megabonk.org/leaderboard/builds/#megachad"
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "name": "Robinette Leaderboard Build",
-          "url": "https://megabonk.org/leaderboard/builds/#robinette"
-        }
-      ]
-    }
-    </script>
-
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://megabonk.org/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Leaderboard",
-          "item": "https://megabonk.org/leaderboard/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Builds",
-          "item": "https://megabonk.org/leaderboard/builds/"
         }
       ]
     }
@@ -138,6 +97,11 @@
 
         .site-logo:hover {
             transform: scale(1.05);
+        }
+
+        .site-logo img {
+            width: 40px;
+            height: 40px;
         }
 
         .main-nav {
@@ -259,6 +223,30 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Loading State */
+        .loading-container {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Character Navigation */
         .character-nav {
             background: rgba(255, 255, 255, 0.98);
@@ -296,6 +284,15 @@
             font-size: 0.9rem;
             transition: all 0.2s;
             border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .char-link img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         .char-link:hover, .char-link.active {
@@ -353,6 +350,15 @@
             font-weight: 800;
             color: #495057;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meta-card-value img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
 
         .meta-card-description {
@@ -391,13 +397,18 @@
         .character-icon-large {
             width: 80px;
             height: 80px;
-            font-size: 4rem;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 16px;
             backdrop-filter: blur(10px);
+        }
+
+        .character-icon-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .build-header-content {
@@ -490,11 +501,19 @@
             font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .equipment-item:hover {
+            color: #667eea;
         }
 
         .equipment-icon {
-            font-size: 1.2rem;
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         /* Key Stats */
@@ -694,6 +713,12 @@
             text-decoration: underline;
         }
 
+        /* Ad Container */
+        .ad-box {
+            margin: 30px 0;
+            text-align: center;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
@@ -777,12 +802,6 @@
                 gap: 30px;
             }
         }
-
-        /* Ad Container */
-        .ad-box {
-            margin: 30px 0;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -790,7 +809,7 @@
     <header class="site-header">
         <div class="header-top">
             <a href="https://megabonk.org/" class="site-logo">
-                <span>🏆</span>
+                <img src="https://megabonk.org/images/logo.png" alt="Megabonk Logo" onerror="this.style.display='none'">
                 <span>Megabonk</span>
             </a>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
@@ -820,605 +839,36 @@
             <p>What Top 100 Players Actually Use</p>
             <div class="meta-badge">
                 <span>📊</span>
-                <span>Based on Top 100 Rankings</span>
+                <span id="data-source-badge">Loading data...</span>
             </div>
         </div>
 
+        <!-- Loading State -->
+        <div id="loading-container" class="loading-container">
+            <div class="loading-spinner"></div>
+            <p style="color: #6c757d; font-size: 1.1rem;">Analyzing leaderboard data...</p>
+        </div>
+
         <!-- Character Quick Navigation -->
-        <div class="character-nav">
+        <div class="character-nav" id="character-nav" style="display: none;">
             <div class="nav-title">Jump to Character</div>
-            <div class="character-links">
-                <a href="#fox" class="char-link">🦊 Fox</a>
-                <a href="#noelle" class="char-link">❄️ Noelle</a>
-                <a href="#ninja" class="char-link">🥷 Ninja</a>
-                <a href="#megachad" class="char-link">💪 Megachad</a>
-                <a href="#robinette" class="char-link">🏹 Robinette</a>
-                <a href="#calcium" class="char-link">💀 Calcium</a>
-                <a href="#birdo" class="char-link">🐦 Birdo</a>
-                <a href="#vlad" class="char-link">🧛 Vlad</a>
+            <div class="character-links" id="character-links">
+                <!-- Dynamically populated -->
             </div>
         </div>
 
         <!-- Meta Overview -->
-        <div class="meta-overview">
-            <div class="meta-card">
-                <div class="meta-card-header">
-                    <div class="meta-card-title">Most Picked</div>
-                    <div class="meta-card-badge">HOT</div>
-                </div>
-                <div class="meta-card-value">Fox</div>
-                <div class="meta-card-description">32% of Top 100 players</div>
-            </div>
-
-            <div class="meta-card">
-                <div class="meta-card-header">
-                    <div class="meta-card-title">Highest Win Rate</div>
-                    <div class="meta-card-badge">S-TIER</div>
-                </div>
-                <div class="meta-card-value">Ninja</div>
-                <div class="meta-card-description">87% success in top 10</div>
-            </div>
-
-            <div class="meta-card">
-                <div class="meta-card-header">
-                    <div class="meta-card-title">Meta Weapon</div>
-                    <div class="meta-card-badge">CORE</div>
-                </div>
-                <div class="meta-card-value">Frostwalker</div>
-                <div class="meta-card-description">Used in 68% of builds</div>
-            </div>
-
-            <div class="meta-card">
-                <div class="meta-card-header">
-                    <div class="meta-card-title">Rising Star</div>
-                    <div class="meta-card-badge">TREND</div>
-                </div>
-                <div class="meta-card-value">Robinette</div>
-                <div class="meta-card-description">+15% usage this week</div>
-            </div>
+        <div class="meta-overview" id="meta-overview" style="display: none;">
+            <!-- Dynamically populated -->
         </div>
 
-        <!-- Fox Build -->
-        <section class="build-section" id="fox">
-            <div class="build-card">
-                <div class="build-header">
-                    <div class="character-icon-large">🦊</div>
-                    <div class="build-header-content">
-                        <h2 class="character-name">Fox Leaderboard Build</h2>
-                        <div class="build-stats">
-                            <div class="build-stat">
-                                <span>📊</span>
-                                <span>Usage: 32% in Top 100</span>
-                            </div>
-                            <div class="build-stat">
-                                <span>🏆</span>
-                                <span>Top Rank: #1</span>
-                            </div>
-                            <div class="build-stat">
-                                <span>⭐</span>
-                                <span>Avg Kills: 18,500</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tier-badge">S-TIER</div>
-                </div>
-                <div class="build-content">
-                    <p class="build-description">
-                        Fox dominates the leaderboard with high-mobility kiting strategies. Top players combine speed-boosting items with long-range weapons to maintain distance while dealing consistent damage. The meta build focuses on maximizing movement speed and projectile damage for safe, sustained DPS.
-                    </p>
-
-                    <div class="usage-bar-container">
-                        <div class="usage-bar-label">
-                            <span><strong>Leaderboard Presence</strong></span>
-                            <span><strong>32 out of 100 players</strong></span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 32%"></div>
-                        </div>
-                    </div>
-
-                    <h3 class="build-section-title">
-                        <span>⚔️</span>
-                        <span>Core Equipment</span>
-                    </h3>
-                    <div class="equipment-grid">
-                        <div class="equipment-category">
-                            <div class="category-label">Primary Weapons</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">❄️</span>
-                                    <span>Frostwalker</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🏹</span>
-                                    <span>Bow</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">⚡</span>
-                                    <span>Lightning Staff</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="equipment-category">
-                            <div class="category-label">Essential Tomes</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Agility Tome</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Damage Tome</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Projectile Speed</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="equipment-category">
-                            <div class="category-label">Key Items</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Speed Boi</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Turbo Skates</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Feathers</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="build-section-title">
-                        <span>📈</span>
-                        <span>Average Stats</span>
-                    </h3>
-                    <div class="key-stats-grid">
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Avg Kills</div>
-                            <div class="key-stat-value">18,500</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Run Time</div>
-                            <div class="key-stat-value">28m</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Success Rate</div>
-                            <div class="key-stat-value">76%</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Difficulty</div>
-                            <div class="key-stat-value">⭐⭐⭐</div>
-                        </div>
-                    </div>
-
-                    <div class="strategy-box">
-                        <div class="strategy-box-title">
-                            <span>💡</span>
-                            <span>Top Player Strategy</span>
-                        </div>
-                        <div class="strategy-box-content">
-                            <ul class="strategy-list">
-                                <li>Prioritize movement speed items in early game to establish kiting pattern</li>
-                                <li>Combine Frostwalker with Bow for consistent slow + damage</li>
-                                <li>Use Speed Boi + Turbo Skates for maximum mobility against boss patterns</li>
-                                <li>Stack Projectile Speed Tome to maintain DPS while kiting</li>
-                                <li>Focus on AOE weapons (Lightning Staff) for efficient wave clear</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="build-actions">
-                        <a href="https://megabonk.org/guides/builds/fox-best-build" class="btn-build">
-                            <span>📖</span>
-                            <span>Full Fox Build Guide</span>
-                        </a>
-                        <a href="https://megabonk.org/guides/characters/fox-guide" class="btn-build btn-build-secondary">
-                            <span>👤</span>
-                            <span>Fox Character Guide</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ADS: In-Article #1 -->
-        <div class="ad-box">
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-client="ca-pub-8830315294299920"
-                 data-ad-slot="4372980572"
-                 data-ad-format="fluid"
-                 data-ad-layout="in-article"></ins>
-        </div>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-        <!-- Noelle Build -->
-        <section class="build-section" id="noelle">
-            <div class="build-card">
-                <div class="build-header">
-                    <div class="character-icon-large">❄️</div>
-                    <div class="build-header-content">
-                        <h2 class="character-name">Noelle Leaderboard Build</h2>
-                        <div class="build-stats">
-                            <div class="build-stat">
-                                <span>📊</span>
-                                <span>Usage: 18% in Top 100</span>
-                            </div>
-                            <div class="build-stat">
-                                <span>🏆</span>
-                                <span>Top Rank: #3</span>
-                            </div>
-                            <div class="build-stat">
-                                <span>⭐</span>
-                                <span>Avg Kills: 17,200</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tier-badge">S-TIER</div>
-                </div>
-                <div class="build-content">
-                    <p class="build-description">
-                        Noelle excels with freeze-focused builds that lock down enemies while dealing massive AOE damage. Top leaderboard players maximize her ice synergies with Frostwalker and Ice Cube, creating a perma-freeze zone that trivializes most boss mechanics. The build prioritizes cooldown reduction and area size for maximum crowd control.
-                    </p>
-
-                    <div class="usage-bar-container">
-                        <div class="usage-bar-label">
-                            <span><strong>Leaderboard Presence</strong></span>
-                            <span><strong>18 out of 100 players</strong></span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 18%"></div>
-                        </div>
-                    </div>
-
-                    <h3 class="build-section-title">
-                        <span>⚔️</span>
-                        <span>Core Equipment</span>
-                    </h3>
-                    <div class="equipment-grid">
-                        <div class="equipment-category">
-                            <div class="category-label">Primary Weapons</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">❄️</span>
-                                    <span>Frostwalker</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🔥</span>
-                                    <span>Flamewalker</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🌀</span>
-                                    <span>Tornado</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="equipment-category">
-                            <div class="category-label">Essential Tomes</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Cooldown Tome</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Size Tome</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Duration Tome</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="equipment-category">
-                            <div class="category-label">Key Items</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Ice Cube</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Ice Crystal</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Time Bracelet</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="build-section-title">
-                        <span>📈</span>
-                        <span>Average Stats</span>
-                    </h3>
-                    <div class="key-stats-grid">
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Avg Kills</div>
-                            <div class="key-stat-value">17,200</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Run Time</div>
-                            <div class="key-stat-value">30m</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Success Rate</div>
-                            <div class="key-stat-value">82%</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Difficulty</div>
-                            <div class="key-stat-value">⭐⭐</div>
-                        </div>
-                    </div>
-
-                    <div class="strategy-box">
-                        <div class="strategy-box-title">
-                            <span>💡</span>
-                            <span>Top Player Strategy</span>
-                        </div>
-                        <div class="strategy-box-content">
-                            <ul class="strategy-list">
-                                <li>Rush Ice Cube as first item to activate freeze synergies early</li>
-                                <li>Pair Frostwalker + Flamewalker for elemental combo damage</li>
-                                <li>Stack Cooldown and Duration Tomes for near-permanent freeze zones</li>
-                                <li>Use Size Tome to maximize AOE coverage in late game</li>
-                                <li>Time Bracelet ensures constant ability uptime against bosses</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="build-actions">
-                        <a href="https://megabonk.org/guides/builds/noelle-best-build" class="btn-build">
-                            <span>📖</span>
-                            <span>Full Noelle Build Guide</span>
-                        </a>
-                        <a href="https://megabonk.org/guides/characters/noelle-guide" class="btn-build btn-build-secondary">
-                            <span>👤</span>
-                            <span>Noelle Character Guide</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ninja Build -->
-        <section class="build-section" id="ninja">
-            <div class="build-card">
-                <div class="build-header">
-                    <div class="character-icon-large">🥷</div>
-                    <div class="build-header-content">
-                        <h2 class="character-name">Ninja Leaderboard Build</h2>
-                        <div class="build-stats">
-                            <div class="build-stat">
-                                <span>📊</span>
-                                <span>Usage: 15% in Top 100</span>
-                            </div>
-                            <div class="build-stat">
-                                <span>🏆</span>
-                                <span>Top Rank: #2</span>
-                            </div>
-                            <div class="build-stat">
-                                <span>⭐</span>
-                                <span>Avg Kills: 19,800</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tier-badge">S-TIER</div>
-                </div>
-                <div class="build-content">
-                    <p class="build-description">
-                        Ninja achieves the highest average kill counts through critical hit-focused melee builds. Top players exploit Ninja's stealth mechanic with high-damage burst weapons like Katana and Dexecutioner, maximizing critical damage multipliers. This high-skill build requires precise positioning but offers unmatched damage potential.
-                    </p>
-
-                    <div class="usage-bar-container">
-                        <div class="usage-bar-label">
-                            <span><strong>Leaderboard Presence</strong></span>
-                            <span><strong>15 out of 100 players</strong></span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 15%"></div>
-                        </div>
-                    </div>
-
-                    <h3 class="build-section-title">
-                        <span>⚔️</span>
-                        <span>Core Equipment</span>
-                    </h3>
-                    <div class="equipment-grid">
-                        <div class="equipment-category">
-                            <div class="category-label">Primary Weapons</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">⚔️</span>
-                                    <span>Katana</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🪓</span>
-                                    <span>Dexecutioner</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🗡️</span>
-                                    <span>Wireless Dagger</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="equipment-category">
-                            <div class="category-label">Essential Tomes</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Precision Tome</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Damage Tome</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">📖</span>
-                                    <span>Bloody Tome</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="equipment-category">
-                            <div class="category-label">Key Items</div>
-                            <div class="equipment-list">
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Tactical Glasses</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Demonic Blade</span>
-                                </div>
-                                <div class="equipment-item">
-                                    <span class="equipment-icon">🎒</span>
-                                    <span>Bloody Cleaver</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="build-section-title">
-                        <span>📈</span>
-                        <span>Average Stats</span>
-                    </h3>
-                    <div class="key-stats-grid">
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Avg Kills</div>
-                            <div class="key-stat-value">19,800</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Run Time</div>
-                            <div class="key-stat-value">26m</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Success Rate</div>
-                            <div class="key-stat-value">87%</div>
-                        </div>
-                        <div class="key-stat-card">
-                            <div class="key-stat-label">Difficulty</div>
-                            <div class="key-stat-value">⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-
-                    <div class="strategy-box">
-                        <div class="strategy-box-title">
-                            <span>💡</span>
-                            <span>Top Player Strategy</span>
-                        </div>
-                        <div class="strategy-box-content">
-                            <ul class="strategy-list">
-                                <li>Maximize critical hit chance with Precision Tome + Tactical Glasses</li>
-                                <li>Use Katana as primary DPS, Dexecutioner for burst damage</li>
-                                <li>Stack Bloody Tome for lifesteal sustain during aggressive plays</li>
-                                <li>Time stealth ability to reset aggro during dangerous boss phases</li>
-                                <li>Pair Demonic Blade + Bloody Cleaver for scaling damage bonus</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="build-actions">
-                        <a href="https://megabonk.org/guides/builds/ninja-best-build" class="btn-build">
-                            <span>📖</span>
-                            <span>Full Ninja Build Guide</span>
-                        </a>
-                        <a href="https://megabonk.org/guides/characters/ninja-guide" class="btn-build btn-build-secondary">
-                            <span>👤</span>
-                            <span>Ninja Character Guide</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quick Reference Section -->
-        <div class="build-card" style="margin-top: 30px;">
-            <div class="build-header">
-                <h2 class="card-title" style="color: white; margin: 0;">
-                    <span>📊</span>
-                    <span>Other Top Characters (Quick Summary)</span>
-                </h2>
-            </div>
-            <div class="build-content">
-                <div class="equipment-grid">
-                    <div class="equipment-category" id="megachad">
-                        <div class="category-label" style="font-size: 1rem; color: #495057; margin-bottom: 8px;">💪 Megachad (12%)</div>
-                        <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">Raw damage bruiser build. Avg: 16,400 kills</p>
-                        <div style="margin-bottom: 10px;">
-                            <strong style="font-size: 0.85rem; color: #495057;">Core:</strong>
-                            <span style="font-size: 0.85rem; color: #6c757d;"> Axe, Sword, Gym Sauce, Power Gloves</span>
-                        </div>
-                        <a href="https://megabonk.org/guides/builds/megachad-best-build" style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600;">View Build Guide →</a>
-                    </div>
-
-                    <div class="equipment-category" id="robinette">
-                        <div class="category-label" style="font-size: 1rem; color: #495057; margin-bottom: 8px;">🏹 Robinette (11%)</div>
-                        <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">Projectile spam build. Avg: 17,600 kills</p>
-                        <div style="margin-bottom: 10px;">
-                            <strong style="font-size: 0.85rem; color: #495057;">Core:</strong>
-                            <span style="font-size: 0.85rem; color: #6c757d;"> Bow, Revolver, Quantity Tome, Eagle Claw</span>
-                        </div>
-                        <a href="https://megabonk.org/guides/builds/robinette-best-build" style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600;">View Build Guide →</a>
-                    </div>
-
-                    <div class="equipment-category" id="calcium">
-                        <div class="category-label" style="font-size: 1rem; color: #495057; margin-bottom: 8px;">💀 Calcium (8%)</div>
-                        <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">Tank AOE build. Avg: 15,100 kills</p>
-                        <div style="margin-bottom: 10px;">
-                            <strong style="font-size: 0.85rem; color: #495057;">Core:</strong>
-                            <span style="font-size: 0.85rem; color: #6c757d;"> Bone, Aura, Health Tome, Golden Shield</span>
-                        </div>
-                        <a href="https://megabonk.org/guides/builds/calcium-best-build" style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600;">View Build Guide →</a>
-                    </div>
-
-                    <div class="equipment-category" id="birdo">
-                        <div class="category-label" style="font-size: 1rem; color: #495057; margin-bottom: 8px;">🐦 Birdo (7%)</div>
-                        <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">Aerial bombardment. Avg: 16,900 kills</p>
-                        <div style="margin-bottom: 10px;">
-                            <strong style="font-size: 0.85rem; color: #495057;">Core:</strong>
-                            <span style="font-size: 0.85rem; color: #6c757d;"> Slutty Rocket, Mines, Feathers, Beacon</span>
-                        </div>
-                        <a href="https://megabonk.org/guides/builds/birdo-best-build" style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600;">View Build Guide →</a>
-                    </div>
-
-                    <div class="equipment-category" id="vlad">
-                        <div class="category-label" style="font-size: 1rem; color: #495057; margin-bottom: 8px;">🧛 Vlad (5%)</div>
-                        <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">Lifesteal vampire. Avg: 14,800 kills</p>
-                        <div style="margin-bottom: 10px;">
-                            <strong style="font-size: 0.85rem; color: #495057;">Core:</strong>
-                            <span style="font-size: 0.85rem; color: #6c757d;"> Blood Magic, Leeching Crystal, Soul Harvester</span>
-                        </div>
-                        <a href="https://megabonk.org/guides/builds/vlad-best-build" style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600;">View Build Guide →</a>
-                    </div>
-
-                    <div class="equipment-category">
-                        <div class="category-label" style="font-size: 1rem; color: #495057; margin-bottom: 8px;">➕ More Characters</div>
-                        <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">Remaining 12% spread across others</p>
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <a href="https://megabonk.org/guides/builds/" style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600;">All Build Guides →</a>
-                            <a href="https://megabonk.org/guides/characters/" style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600;">All Character Guides →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Build Sections -->
+        <div id="build-sections">
+            <!-- Dynamically populated -->
         </div>
 
         <!-- Meta Analysis -->
-        <div class="build-card" style="margin-top: 30px;">
+        <div class="build-card" id="meta-analysis" style="display: none; margin-top: 30px;">
             <div class="build-header">
                 <h2 class="card-title" style="color: white; margin: 0;">
                     <span>🔬</span>
@@ -1430,91 +880,45 @@
                     <span>⚔️</span>
                     <span>Most Used Weapons (Top 100)</span>
                 </h3>
-                <div style="margin-bottom: 30px;">
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <strong style="color: #495057;">Frostwalker</strong>
-                            <span style="color: #6c757d;">68%</span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 68%"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <strong style="color: #495057;">Katana</strong>
-                            <span style="color: #6c757d;">42%</span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 42%"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <strong style="color: #495057;">Lightning Staff</strong>
-                            <span style="color: #6c757d;">39%</span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 39%"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <strong style="color: #495057;">Bow</strong>
-                            <span style="color: #6c757d;">35%</span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 35%"></div>
-                        </div>
-                    </div>
+                <div id="weapons-analysis" style="margin-bottom: 30px;">
+                    <!-- Dynamically populated -->
                 </div>
 
                 <h3 class="build-section-title">
                     <span>📖</span>
                     <span>Most Popular Tomes</span>
                 </h3>
-                <div style="margin-bottom: 30px;">
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <strong style="color: #495057;">Damage Tome</strong>
-                            <span style="color: #6c757d;">82%</span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 82%"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <strong style="color: #495057;">Agility Tome</strong>
-                            <span style="color: #6c757d;">71%</span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 71%"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <strong style="color: #495057;">Cooldown Tome</strong>
-                            <span style="color: #6c757d;">64%</span>
-                        </div>
-                        <div class="usage-bar">
-                            <div class="usage-bar-fill" style="width: 64%"></div>
-                        </div>
-                    </div>
+                <div id="tomes-analysis" style="margin-bottom: 30px;">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <h3 class="build-section-title">
+                    <span>🎒</span>
+                    <span>Most Used Items</span>
+                </h3>
+                <div id="items-analysis" style="margin-bottom: 30px;">
+                    <!-- Dynamically populated -->
                 </div>
 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea;">
                     <h4 style="color: #495057; margin-bottom: 12px; font-size: 1.1rem;">📌 Key Takeaways</h4>
-                    <ul style="color: #6c757d; line-height: 1.8; margin-left: 20px;">
-                        <li><strong>Speed is king:</strong> High mobility builds (Fox, Noelle) dominate Top 10</li>
-                        <li><strong>Frostwalker meta:</strong> Appears in 68% of top 100 builds - core weapon choice</li>
-                        <li><strong>Damage scaling:</strong> All top builds prioritize Damage Tome for late-game scaling</li>
-                        <li><strong>Hybrid approach:</strong> Most successful builds mix ranged + melee weapons</li>
-                        <li><strong>Boss efficiency:</strong> Builds optimized for boss DPS perform 15% better</li>
+                    <ul id="key-takeaways" style="color: #6c757d; line-height: 1.8; margin-left: 20px;">
+                        <!-- Dynamically populated -->
                     </ul>
                 </div>
             </div>
         </div>
+
+        <!-- ADS: In-Article -->
+        <div class="ad-box">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-client="ca-pub-8830315294299920"
+                 data-ad-slot="4372980572"
+                 data-ad-format="fluid"
+                 data-ad-layout="in-article"></ins>
+        </div>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
         <!-- ADS: Bottom Responsive Display -->
         <div class="ad-box" aria-label="advertisement">
@@ -1538,6 +942,7 @@
                     <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
                     <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
                     <li><a href="https://megabonk.org/guides/achievements/">Achievements</a></li>
+                    <li><a href="https://megabonk.org/guides/tips-tricks/">Tips & Tricks</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1546,15 +951,14 @@
                     <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
                     <li><a href="https://megabonk.org/database/items/">Items</a></li>
                     <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                    <li><a href="https://megabonk.org/guides/best-weapons/">Best Weapons</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Leaderboard</h3>
                 <ul class="footer-links">
                     <li><a href="https://megabonk.org/leaderboard/">Global Rankings</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/today/">Today's Rankings</a></li>
                     <li><a href="https://megabonk.org/leaderboard/builds/">Top Builds</a></li>
-                    <li><a href="https://megabonk.org/leaderboard/official/">Official Portal</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1563,6 +967,8 @@
                     <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
                     <li><a href="https://megabonk.org/tier-lists/items/">Items Tier List</a></li>
                     <li><a href="https://megabonk.org/tier-lists/tomes/">Tomes Tier List</a></li>
+                    <li><a href="https://megabonk.org/guides/characters/character-tier-list-2025">Character Tier List</a></li>
+                    <li><a href="https://megabonk.org/download/megabonk">Download Game</a></li>
                 </ul>
             </div>
         </div>
@@ -1573,22 +979,1885 @@
     </footer>
 
     <script>
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('active');
+        // Configuration
+        const CONFIG = {
+            dataUrl: 'https://megabonk.org/data/leaderboard-data.json',
+            top100Only: true,
+            minUsageForDisplay: 1,
+            minCharactersToShow: 4,
+            maxCharactersToShow: 6
+        };
+
+        // ============================================
+        // DATA MAPPINGS - 从真实链接文件生成
+        // ============================================
+        
+        // 角色图片和链接
+        const CHARACTERS = {
+            'fox': {
+                image: 'https://megabonk.org/images/guides/characters/Fox.png',
+                guideUrl: 'https://megabonk.org/guides/characters/fox-kitsune-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/fox-best-build'
+            },
+            'ninja': {
+                image: 'https://megabonk.org/images/guides/characters/Ninja.png',
+                guideUrl: 'https://megabonk.org/guides/characters/ninja-unlock-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/ninja-best-build'
+            },
+            'calcium': {
+                image: 'https://megabonk.org/images/guides/characters/Calcium.png',
+                guideUrl: 'https://megabonk.org/guides/characters/calcium-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/calcium-best-build'
+            },
+            'cl4nk': {
+                image: 'https://megabonk.org/images/guides/characters/CL4NK.png',
+                guideUrl: 'https://megabonk.org/guides/characters/cl4nk-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/cl4nk-best-build'
+            },
+            'megachad': {
+                image: 'https://megabonk.org/images/guides/characters/Megachad.png',
+                guideUrl: 'https://megabonk.org/guides/characters/megachad-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/megachad-best-build'
+            },
+            'monke': {
+                image: 'https://megabonk.org/images/guides/characters/Monke.png',
+                guideUrl: 'https://megabonk.org/guides/characters/monke-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/monke-best-build'
+            },
+            'bush': {
+                image: 'https://megabonk.org/images/guides/characters/Bush.png',
+                guideUrl: 'https://megabonk.org/guides/characters/bush-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/bush-best-build'
+            },
+            'siroofie': {
+                image: 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-oofie-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/sir-oofie-best-build'
+            },
+            'sir oofie': {
+                image: 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-oofie-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/sir-oofie-best-build'
+            },
+            'athena': {
+                image: 'https://megabonk.org/images/guides/characters/Athena.png',
+                guideUrl: 'https://megabonk.org/guides/characters/athena-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/athena-best-build'
+            },
+            'ogre': {
+                image: 'https://megabonk.org/images/guides/characters/Ogre.png',
+                guideUrl: 'https://megabonk.org/guides/characters/ogre-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/ogre-best-build'
+            },
+            'dicehead': {
+                image: 'https://megabonk.org/images/guides/characters/Dicehead.png',
+                guideUrl: 'https://megabonk.org/guides/characters/dicehead-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/dicehead-best-build'
+            },
+            'bandit': {
+                image: 'https://megabonk.org/images/guides/characters/Bandit.png',
+                guideUrl: 'https://megabonk.org/guides/characters/bandit-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/bandit-best-build'
+            },
+            'amog': {
+                image: 'https://megabonk.org/images/guides/characters/Amog.png',
+                guideUrl: 'https://megabonk.org/guides/characters/amog-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/amog-best-build'
+            },
+            'robinette': {
+                image: 'https://megabonk.org/images/guides/characters/Robinette.png',
+                guideUrl: 'https://megabonk.org/guides/characters/robinette-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/robinette-best-build'
+            },
+            'spaceman': {
+                image: 'https://megabonk.org/images/guides/characters/Spaceman.png',
+                guideUrl: 'https://megabonk.org/guides/characters/spaceman-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/spaceman-best-build'
+            },
+            'vlad': {
+                image: 'https://megabonk.org/images/guides/characters/Vlad.png',
+                guideUrl: 'https://megabonk.org/guides/characters/vlad-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/vlad-best-build'
+            },
+            'noelle': {
+                image: 'https://megabonk.org/images/guides/characters/Noelle.png',
+                guideUrl: 'https://megabonk.org/guides/characters/noelle-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/noelle-best-build'
+            },
+            'birdo': {
+                image: 'https://megabonk.org/images/guides/characters/Birdo.png',
+                guideUrl: 'https://megabonk.org/guides/characters/birdo-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/birdo-best-build'
+            },
+            'tonymczoom': {
+                image: 'https://megabonk.org/images/guides/characters/Tony_McZoom.png',
+                guideUrl: 'https://megabonk.org/guides/characters/tony-mczoom-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/tony-mczoom-best-build'
+            },
+            'tony mczoom': {
+                image: 'https://megabonk.org/images/guides/characters/Tony_McZoom.png',
+                guideUrl: 'https://megabonk.org/guides/characters/tony-mczoom-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/tony-mczoom-best-build'
+            },
+            'sirchadwell': {
+                image: 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-chadwell-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/sir-chadwell-best-build'
+            },
+            'sir chadwell': {
+                image: 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-chadwell-guide',
+                buildUrl: 'https://megabonk.org/guides/builds/sir-chadwell-best-build'
+            }
+        };
+
+        // 武器图片和链接
+        const WEAPONS = {
+            'aura': {
+                image: 'https://megabonk.org/images/database/weapons/Aura.png',
+                url: 'https://megabonk.org/database/weapons/aura'
+            },
+            'aegis': {
+                image: 'https://megabonk.org/images/database/weapons/Aegis.png',
+                url: 'https://megabonk.org/database/weapons/aegis'
+            },
+            'flamewalker': {
+                image: 'https://megabonk.org/images/database/weapons/Flamewalker.png',
+                url: 'https://megabonk.org/database/weapons/flamewalker'
+            },
+            'katana': {
+                image: 'https://megabonk.org/images/database/weapons/Katana.png',
+                url: 'https://megabonk.org/database/weapons/katana'
+            },
+            'dice': {
+                image: 'https://megabonk.org/images/database/weapons/Dice.png',
+                url: 'https://megabonk.org/database/weapons/dice'
+            },
+            'dexecutioner': {
+                image: 'https://megabonk.org/images/database/weapons/Dexecutioner.png',
+                url: 'https://megabonk.org/database/weapons/dexecutioner'
+            },
+            'bloodmagic': {
+                image: 'https://megabonk.org/images/database/weapons/Blood_Magic.png',
+                url: 'https://megabonk.org/database/weapons/blood-magic'
+            },
+            'blood magic': {
+                image: 'https://megabonk.org/images/database/weapons/Blood_Magic.png',
+                url: 'https://megabonk.org/database/weapons/blood-magic'
+            },
+            'lightningstaff': {
+                image: 'https://megabonk.org/images/database/weapons/Lightning_Staff.png',
+                url: 'https://megabonk.org/database/weapons/lightning-staff'
+            },
+            'lightning staff': {
+                image: 'https://megabonk.org/images/database/weapons/Lightning_Staff.png',
+                url: 'https://megabonk.org/database/weapons/lightning-staff'
+            },
+            'bananarang': {
+                image: 'https://megabonk.org/images/database/weapons/Bananarang.png',
+                url: 'https://megabonk.org/database/weapons/bananarang'
+            },
+            'corruptedsword': {
+                image: 'https://megabonk.org/images/database/weapons/CorruptedSword.png',
+                url: 'https://megabonk.org/database/weapons/corrupted-sword'
+            },
+            'corrupted sword': {
+                image: 'https://megabonk.org/images/database/weapons/CorruptedSword.png',
+                url: 'https://megabonk.org/database/weapons/corrupted-sword'
+            },
+            'bow': {
+                image: 'https://megabonk.org/images/database/weapons/Bow.png',
+                url: 'https://megabonk.org/database/weapons/bow'
+            },
+            'revolver': {
+                image: 'https://megabonk.org/images/database/weapons/Revolver.png',
+                url: 'https://megabonk.org/database/weapons/revolver'
+            },
+            'axe': {
+                image: 'https://megabonk.org/images/database/weapons/Axe.png',
+                url: 'https://megabonk.org/database/weapons/axe'
+            },
+            'bone': {
+                image: 'https://megabonk.org/images/database/weapons/Bone.png',
+                url: 'https://megabonk.org/database/weapons/bone'
+            },
+            'sniper': {
+                image: 'https://megabonk.org/images/database/weapons/Sniper.png',
+                url: 'https://megabonk.org/database/weapons/sniper-rifle'
+            },
+            'sniper rifle': {
+                image: 'https://megabonk.org/images/database/weapons/Sniper.png',
+                url: 'https://megabonk.org/database/weapons/sniper-rifle'
+            },
+            'sniperrifle': {
+                image: 'https://megabonk.org/images/database/weapons/Sniper.png',
+                url: 'https://megabonk.org/database/weapons/sniper-rifle'
+            },
+            'frostwalker': {
+                image: 'https://megabonk.org/images/database/weapons/Frostwalker.png',
+                url: 'https://megabonk.org/database/weapons/frostwalker'
+            },
+            'blackhole': {
+                image: 'https://megabonk.org/images/database/weapons/Black_Hole.png',
+                url: 'https://megabonk.org/database/weapons/black-hole'
+            },
+            'black hole': {
+                image: 'https://megabonk.org/images/database/weapons/Black_Hole.png',
+                url: 'https://megabonk.org/database/weapons/black-hole'
+            },
+            'tornado': {
+                image: 'https://megabonk.org/images/database/weapons/Tornado.png',
+                url: 'https://megabonk.org/database/weapons/tornado'
+            },
+            'shotgun': {
+                image: 'https://megabonk.org/images/database/weapons/Shotgun.png',
+                url: 'https://megabonk.org/database/weapons/shotgun'
+            },
+            'sword': {
+                image: 'https://megabonk.org/images/database/weapons/Sword.png',
+                url: 'https://megabonk.org/database/weapons/sword'
+            },
+            'herosword': {
+                image: 'https://megabonk.org/images/database/weapons/Hero_Sword.png',
+                url: 'https://megabonk.org/database/weapons/hero-sword'
+            },
+            'hero sword': {
+                image: 'https://megabonk.org/images/database/weapons/Hero_Sword.png',
+                url: 'https://megabonk.org/database/weapons/hero-sword'
+            },
+            "hero's sword": {
+                image: 'https://megabonk.org/images/database/weapons/Hero_Sword.png',
+                url: 'https://megabonk.org/database/weapons/hero-sword'
+            },
+            'firestaff': {
+                image: 'https://megabonk.org/images/database/weapons/Firestaff.png',
+                url: 'https://megabonk.org/database/weapons/fire-staff'
+            },
+            'fire staff': {
+                image: 'https://megabonk.org/images/database/weapons/Firestaff.png',
+                url: 'https://megabonk.org/database/weapons/fire-staff'
+            },
+            'chunkers': {
+                image: 'https://megabonk.org/images/database/weapons/Chunkers.png',
+                url: 'https://megabonk.org/database/weapons/chunkers'
+            },
+            'spacenoodle': {
+                image: 'https://megabonk.org/images/database/weapons/Space_Noodle.png',
+                url: 'https://megabonk.org/database/weapons/space-noodle'
+            },
+            'space noodle': {
+                image: 'https://megabonk.org/images/database/weapons/Space_Noodle.png',
+                url: 'https://megabonk.org/database/weapons/space-noodle'
+            },
+            'dragonsbreath': {
+                image: 'https://megabonk.org/images/database/weapons/Dragons_Breath.png',
+                url: 'https://megabonk.org/database/weapons/dragons-breath'
+            },
+            'dragons breath': {
+                image: 'https://megabonk.org/images/database/weapons/Dragons_Breath.png',
+                url: 'https://megabonk.org/database/weapons/dragons-breath'
+            },
+            "dragon's breath": {
+                image: 'https://megabonk.org/images/database/weapons/Dragons_Breath.png',
+                url: 'https://megabonk.org/database/weapons/dragons-breath'
+            },
+            'sluttyrocket': {
+                image: 'https://megabonk.org/images/database/weapons/SluttyRocket.png',
+                url: 'https://megabonk.org/database/weapons/slutty-rocket'
+            },
+            'slutty rocket': {
+                image: 'https://megabonk.org/images/database/weapons/SluttyRocket.png',
+                url: 'https://megabonk.org/database/weapons/slutty-rocket'
+            },
+            'mines': {
+                image: 'https://megabonk.org/images/database/weapons/Mines.png',
+                url: 'https://megabonk.org/database/weapons/mines'
+            },
+            'poisonflask': {
+                image: 'https://megabonk.org/images/database/weapons/Poison_Flask.png',
+                url: 'https://megabonk.org/database/weapons/poison-flask'
+            },
+            'poison flask': {
+                image: 'https://megabonk.org/images/database/weapons/Poison_Flask.png',
+                url: 'https://megabonk.org/database/weapons/poison-flask'
+            },
+            'wirelessdagger': {
+                image: 'https://megabonk.org/images/database/weapons/Wireless_Dagger.png',
+                url: 'https://megabonk.org/database/weapons/wireless-dagger'
+            },
+            'wireless dagger': {
+                image: 'https://megabonk.org/images/database/weapons/Wireless_Dagger.png',
+                url: 'https://megabonk.org/database/weapons/wireless-dagger'
+            }
+        };
+
+        // 书籍图片和链接
+        const TOMES = {
+            'agilitytome': {
+                image: 'https://megabonk.org/images/Tomes/Agility_Tome.png',
+                url: 'https://megabonk.org/database/tomes/agility-tome'
+            },
+            'agility tome': {
+                image: 'https://megabonk.org/images/Tomes/Agility_Tome.png',
+                url: 'https://megabonk.org/database/tomes/agility-tome'
+            },
+            'agility': {
+                image: 'https://megabonk.org/images/Tomes/Agility_Tome.png',
+                url: 'https://megabonk.org/database/tomes/agility-tome'
+            },
+            'cooldowntome': {
+                image: 'https://megabonk.org/images/Tomes/Cooldown_Tome.png',
+                url: 'https://megabonk.org/database/tomes/cooldown-tome'
+            },
+            'cooldown tome': {
+                image: 'https://megabonk.org/images/Tomes/Cooldown_Tome.png',
+                url: 'https://megabonk.org/database/tomes/cooldown-tome'
+            },
+            'cooldown': {
+                image: 'https://megabonk.org/images/Tomes/Cooldown_Tome.png',
+                url: 'https://megabonk.org/database/tomes/cooldown-tome'
+            },
+            'damagetome': {
+                image: 'https://megabonk.org/images/Tomes/Damage_Tome.png',
+                url: 'https://megabonk.org/database/tomes/damage-tome'
+            },
+            'damage tome': {
+                image: 'https://megabonk.org/images/Tomes/Damage_Tome.png',
+                url: 'https://megabonk.org/database/tomes/damage-tome'
+            },
+            'damage': {
+                image: 'https://megabonk.org/images/Tomes/Damage_Tome.png',
+                url: 'https://megabonk.org/database/tomes/damage-tome'
+            },
+            'evasiontome': {
+                image: 'https://megabonk.org/images/Tomes/Evasion_Tome.png',
+                url: 'https://megabonk.org/database/tomes/evasion-tome'
+            },
+            'evasion tome': {
+                image: 'https://megabonk.org/images/Tomes/Evasion_Tome.png',
+                url: 'https://megabonk.org/database/tomes/evasion-tome'
+            },
+            'evasion': {
+                image: 'https://megabonk.org/images/Tomes/Evasion_Tome.png',
+                url: 'https://megabonk.org/database/tomes/evasion-tome'
+            },
+            'goldentome': {
+                image: 'https://megabonk.org/images/Tomes/Golden_Tome.png',
+                url: 'https://megabonk.org/database/tomes/golden-tome'
+            },
+            'golden tome': {
+                image: 'https://megabonk.org/images/Tomes/Golden_Tome.png',
+                url: 'https://megabonk.org/database/tomes/golden-tome'
+            },
+            'golden': {
+                image: 'https://megabonk.org/images/Tomes/Golden_Tome.png',
+                url: 'https://megabonk.org/database/tomes/golden-tome'
+            },
+            'healthtome': {
+                image: 'https://megabonk.org/images/Tomes/Health_Tome.png',
+                url: 'https://megabonk.org/database/tomes/health-tome'
+            },
+            'health tome': {
+                image: 'https://megabonk.org/images/Tomes/Health_Tome.png',
+                url: 'https://megabonk.org/database/tomes/health-tome'
+            },
+            'health': {
+                image: 'https://megabonk.org/images/Tomes/Health_Tome.png',
+                url: 'https://megabonk.org/database/tomes/health-tome'
+            },
+            'knockbacktome': {
+                image: 'https://megabonk.org/images/Tomes/Knockback_Tome.png',
+                url: 'https://megabonk.org/database/tomes/knockback-tome'
+            },
+            'knockback tome': {
+                image: 'https://megabonk.org/images/Tomes/Knockback_Tome.png',
+                url: 'https://megabonk.org/database/tomes/knockback-tome'
+            },
+            'knockback': {
+                image: 'https://megabonk.org/images/Tomes/Knockback_Tome.png',
+                url: 'https://megabonk.org/database/tomes/knockback-tome'
+            },
+            'precisiontome': {
+                image: 'https://megabonk.org/images/Tomes/Precision_Tome.png',
+                url: 'https://megabonk.org/database/tomes/precision-tome'
+            },
+            'precision tome': {
+                image: 'https://megabonk.org/images/Tomes/Precision_Tome.png',
+                url: 'https://megabonk.org/database/tomes/precision-tome'
+            },
+            'precision': {
+                image: 'https://megabonk.org/images/Tomes/Precision_Tome.png',
+                url: 'https://megabonk.org/database/tomes/precision-tome'
+            },
+            'projectilespeedtome': {
+                image: 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+                url: 'https://megabonk.org/database/tomes/projectile-speed-tome'
+            },
+            'projectile speed tome': {
+                image: 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+                url: 'https://megabonk.org/database/tomes/projectile-speed-tome'
+            },
+            'projectile speed': {
+                image: 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+                url: 'https://megabonk.org/database/tomes/projectile-speed-tome'
+            },
+            'projectilespeed': {
+                image: 'https://megabonk.org/images/Tomes/Projectile_Speed_Tome.png',
+                url: 'https://megabonk.org/database/tomes/projectile-speed-tome'
+            },
+            'regentome': {
+                image: 'https://megabonk.org/images/Tomes/Regen_Tome.png',
+                url: 'https://megabonk.org/database/tomes/regen-tome'
+            },
+            'regen tome': {
+                image: 'https://megabonk.org/images/Tomes/Regen_Tome.png',
+                url: 'https://megabonk.org/database/tomes/regen-tome'
+            },
+            'regen': {
+                image: 'https://megabonk.org/images/Tomes/Regen_Tome.png',
+                url: 'https://megabonk.org/database/tomes/regen-tome'
+            },
+            'shieldtome': {
+                image: 'https://megabonk.org/images/Tomes/Shield_Tome.png',
+                url: 'https://megabonk.org/database/tomes/shield-tome'
+            },
+            'shield tome': {
+                image: 'https://megabonk.org/images/Tomes/Shield_Tome.png',
+                url: 'https://megabonk.org/database/tomes/shield-tome'
+            },
+            'shield': {
+                image: 'https://megabonk.org/images/Tomes/Shield_Tome.png',
+                url: 'https://megabonk.org/database/tomes/shield-tome'
+            },
+            'silvertome': {
+                image: 'https://megabonk.org/images/Tomes/Silver_Tome.png',
+                url: 'https://megabonk.org/database/tomes/silver-tome'
+            },
+            'silver tome': {
+                image: 'https://megabonk.org/images/Tomes/Silver_Tome.png',
+                url: 'https://megabonk.org/database/tomes/silver-tome'
+            },
+            'silver': {
+                image: 'https://megabonk.org/images/Tomes/Silver_Tome.png',
+                url: 'https://megabonk.org/database/tomes/silver-tome'
+            },
+            'sizetome': {
+                image: 'https://megabonk.org/images/Tomes/Size_Tome.png',
+                url: 'https://megabonk.org/database/tomes/size-tome'
+            },
+            'size tome': {
+                image: 'https://megabonk.org/images/Tomes/Size_Tome.png',
+                url: 'https://megabonk.org/database/tomes/size-tome'
+            },
+            'size': {
+                image: 'https://megabonk.org/images/Tomes/Size_Tome.png',
+                url: 'https://megabonk.org/database/tomes/size-tome'
+            },
+            'armortome': {
+                image: 'https://megabonk.org/images/Tomes/Armor_Tome.png',
+                url: 'https://megabonk.org/database/tomes/armor-tome'
+            },
+            'armor tome': {
+                image: 'https://megabonk.org/images/Tomes/Armor_Tome.png',
+                url: 'https://megabonk.org/database/tomes/armor-tome'
+            },
+            'armor': {
+                image: 'https://megabonk.org/images/Tomes/Armor_Tome.png',
+                url: 'https://megabonk.org/database/tomes/armor-tome'
+            },
+            'attractiontome': {
+                image: 'https://megabonk.org/images/Tomes/Attraction_Tome.png',
+                url: 'https://megabonk.org/database/tomes/attraction-tome'
+            },
+            'attraction tome': {
+                image: 'https://megabonk.org/images/Tomes/Attraction_Tome.png',
+                url: 'https://megabonk.org/database/tomes/attraction-tome'
+            },
+            'attraction': {
+                image: 'https://megabonk.org/images/Tomes/Attraction_Tome.png',
+                url: 'https://megabonk.org/database/tomes/attraction-tome'
+            },
+            'bloodytome': {
+                image: 'https://megabonk.org/images/Tomes/Bloody_Tome.png',
+                url: 'https://megabonk.org/database/tomes/bloody-tome'
+            },
+            'bloody tome': {
+                image: 'https://megabonk.org/images/Tomes/Bloody_Tome.png',
+                url: 'https://megabonk.org/database/tomes/bloody-tome'
+            },
+            'bloody': {
+                image: 'https://megabonk.org/images/Tomes/Bloody_Tome.png',
+                url: 'https://megabonk.org/database/tomes/bloody-tome'
+            },
+            'chaostome': {
+                image: 'https://megabonk.org/images/Tomes/Chaos_Tome.png',
+                url: 'https://megabonk.org/database/tomes/chaos-tome'
+            },
+            'chaos tome': {
+                image: 'https://megabonk.org/images/Tomes/Chaos_Tome.png',
+                url: 'https://megabonk.org/database/tomes/chaos-tome'
+            },
+            'chaos': {
+                image: 'https://megabonk.org/images/Tomes/Chaos_Tome.png',
+                url: 'https://megabonk.org/database/tomes/chaos-tome'
+            },
+            'cursedtome': {
+                image: 'https://megabonk.org/images/Tomes/Cursed_Tome.png',
+                url: 'https://megabonk.org/database/tomes/cursed-tome'
+            },
+            'cursed tome': {
+                image: 'https://megabonk.org/images/Tomes/Cursed_Tome.png',
+                url: 'https://megabonk.org/database/tomes/cursed-tome'
+            },
+            'cursed': {
+                image: 'https://megabonk.org/images/Tomes/Cursed_Tome.png',
+                url: 'https://megabonk.org/database/tomes/cursed-tome'
+            },
+            'durationtome': {
+                image: 'https://megabonk.org/images/Tomes/Duration_Tome.png',
+                url: 'https://megabonk.org/database/tomes/duration-tome'
+            },
+            'duration tome': {
+                image: 'https://megabonk.org/images/Tomes/Duration_Tome.png',
+                url: 'https://megabonk.org/database/tomes/duration-tome'
+            },
+            'duration': {
+                image: 'https://megabonk.org/images/Tomes/Duration_Tome.png',
+                url: 'https://megabonk.org/database/tomes/duration-tome'
+            },
+            'lucktome': {
+                image: 'https://megabonk.org/images/Tomes/Luck_Tome.png',
+                url: 'https://megabonk.org/database/tomes/luck-tome'
+            },
+            'luck tome': {
+                image: 'https://megabonk.org/images/Tomes/Luck_Tome.png',
+                url: 'https://megabonk.org/database/tomes/luck-tome'
+            },
+            'luck': {
+                image: 'https://megabonk.org/images/Tomes/Luck_Tome.png',
+                url: 'https://megabonk.org/database/tomes/luck-tome'
+            },
+            'quantitytome': {
+                image: 'https://megabonk.org/images/Tomes/Quantity_Tome.png',
+                url: 'https://megabonk.org/database/tomes/quantity-tome'
+            },
+            'quantity tome': {
+                image: 'https://megabonk.org/images/Tomes/Quantity_Tome.png',
+                url: 'https://megabonk.org/database/tomes/quantity-tome'
+            },
+            'quantity': {
+                image: 'https://megabonk.org/images/Tomes/Quantity_Tome.png',
+                url: 'https://megabonk.org/database/tomes/quantity-tome'
+            },
+            'thornstome': {
+                image: 'https://megabonk.org/images/Tomes/Thorns_Tome.png',
+                url: 'https://megabonk.org/database/tomes/thorns-tome'
+            },
+            'thorns tome': {
+                image: 'https://megabonk.org/images/Tomes/Thorns_Tome.png',
+                url: 'https://megabonk.org/database/tomes/thorns-tome'
+            },
+            'thorns': {
+                image: 'https://megabonk.org/images/Tomes/Thorns_Tome.png',
+                url: 'https://megabonk.org/database/tomes/thorns-tome'
+            },
+            'xptome': {
+                image: 'https://megabonk.org/images/Tomes/XP_Tome.png',
+                url: 'https://megabonk.org/database/tomes/xp-tome'
+            },
+            'xp tome': {
+                image: 'https://megabonk.org/images/Tomes/XP_Tome.png',
+                url: 'https://megabonk.org/database/tomes/xp-tome'
+            },
+            'xp': {
+                image: 'https://megabonk.org/images/Tomes/XP_Tome.png',
+                url: 'https://megabonk.org/database/tomes/xp-tome'
+            }
+        };
+
+        // 物品图片和链接（这里只列举部分常用的,完整版见下面）
+        const ITEMS = {
+              // ========================================
+    // 普通物品 (Common Items)
+    // ========================================
+    
+    // Key
+    'key': {
+        image: 'https://megabonk.org/images/Items/Item_Key.png',
+        url: 'https://megabonk.org/database/items/key'
+    },
+    
+    // Cursed Doll
+    'curseddoll': {
+        image: 'https://megabonk.org/images/Items/Item_Cursed_Doll.png',
+        url: 'https://megabonk.org/database/items/cursed-doll'
+    },
+    'cursed doll': {
+        image: 'https://megabonk.org/images/Items/Item_Cursed_Doll.png',
+        url: 'https://megabonk.org/database/items/cursed-doll'
+    },
+    
+    // Credit Card Green
+    'creditcardgreen': {
+        image: 'https://megabonk.org/images/Items/Item_Credit_Card_Green.png',
+        url: 'https://megabonk.org/database/items/credit-card-green'
+    },
+    'credit card green': {
+        image: 'https://megabonk.org/images/Items/Item_Credit_Card_Green.png',
+        url: 'https://megabonk.org/database/items/credit-card-green'
+    },
+    
+    // Clover
+    'clover': {
+        image: 'https://megabonk.org/images/Items/Item_Clover.png',
+        url: 'https://megabonk.org/database/items/clover'
+    },
+    
+    // Battery
+    'battery': {
+        image: 'https://megabonk.org/images/Items/Item_Battery.png',
+        url: 'https://megabonk.org/database/items/battery'
+    },
+    
+    // Ice Cube
+    'icecube': {
+        image: 'https://megabonk.org/images/Items/Item_Ice_Cube.png',
+        url: 'https://megabonk.org/database/items/ice-cube'
+    },
+    'ice cube': {
+        image: 'https://megabonk.org/images/Items/Item_Ice_Cube.png',
+        url: 'https://megabonk.org/database/items/ice-cube'
+    },
+    
+    // Slurp Gloves
+    'slurpgloves': {
+        image: 'https://megabonk.org/images/Items/Item_Slurp_Gloves.png',
+        url: 'https://megabonk.org/database/items/slurp-gloves'
+    },
+    'slurp gloves': {
+        image: 'https://megabonk.org/images/Items/Item_Slurp_Gloves.png',
+        url: 'https://megabonk.org/database/items/slurp-gloves'
+    },
+    
+    // Wrench
+    'wrench': {
+        image: 'https://megabonk.org/images/Items/Item_Wrench.png',
+        url: 'https://megabonk.org/database/items/wrench'
+    },
+    
+    // Holy Book
+    'holybook': {
+        image: 'https://megabonk.org/images/Items/Item_Holy_Book.png',
+        url: 'https://megabonk.org/database/items/holy-book'
+    },
+    'holy book': {
+        image: 'https://megabonk.org/images/Items/Item_Holy_Book.png',
+        url: 'https://megabonk.org/database/items/holy-book'
+    },
+    
+    // Lightning Orb
+    'lightningorb': {
+        image: 'https://megabonk.org/images/Items/Item_Lightning_Orb.png',
+        url: 'https://megabonk.org/database/items/lightning-orb'
+    },
+    'lightning orb': {
+        image: 'https://megabonk.org/images/Items/Item_Lightning_Orb.png',
+        url: 'https://megabonk.org/database/items/lightning-orb'
+    },
+    
+    // Overpowered Lamp
+    'overpoweredlamp': {
+        image: 'https://megabonk.org/images/Items/Item_Overpowered_Lamp.png',
+        url: 'https://megabonk.org/database/items/overpowered-lamp'
+    },
+    'overpowered lamp': {
+        image: 'https://megabonk.org/images/Items/Item_Overpowered_Lamp.png',
+        url: 'https://megabonk.org/database/items/overpowered-lamp'
+    },
+    
+    // Gym Sauce
+    'gymsauce': {
+        image: 'https://megabonk.org/images/Items/Item_Gym_Sauce.png',
+        url: 'https://megabonk.org/database/items/gym-sauce'
+    },
+    'gym sauce': {
+        image: 'https://megabonk.org/images/Items/Item_Gym_Sauce.png',
+        url: 'https://megabonk.org/database/items/gym-sauce'
+    },
+    
+    // Moldy Cheese
+    'moldycheese': {
+        image: 'https://megabonk.org/images/Items/Item_Moldy_Cheese.png',
+        url: 'https://megabonk.org/database/items/moldy-cheese'
+    },
+    'moldy cheese': {
+        image: 'https://megabonk.org/images/Items/Item_Moldy_Cheese.png',
+        url: 'https://megabonk.org/database/items/moldy-cheese'
+    },
+    
+    // Golden Shield
+    'goldenshield': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Shield.png',
+        url: 'https://megabonk.org/database/items/golden-shield'
+    },
+    'golden shield': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Shield.png',
+        url: 'https://megabonk.org/database/items/golden-shield'
+    },
+    
+    // Kevin
+    'kevin': {
+        image: 'https://megabonk.org/images/Items/Item_Kevin.png',
+        url: 'https://megabonk.org/database/items/kevin'
+    },
+    
+    // Phantom Shroud
+    'phantomshroud': {
+        image: 'https://megabonk.org/images/Items/Item_Phantom_Shroud.png',
+        url: 'https://megabonk.org/database/items/phantom-shroud'
+    },
+    'phantom shroud': {
+        image: 'https://megabonk.org/images/Items/Item_Phantom_Shroud.png',
+        url: 'https://megabonk.org/database/items/phantom-shroud'
+    },
+    
+    // Golden Glove
+    'goldenglove': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Glove.png',
+        url: 'https://megabonk.org/database/items/golden-glove'
+    },
+    'golden glove': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Glove.png',
+        url: 'https://megabonk.org/database/items/golden-glove'
+    },
+    
+    // Borgar
+    'borgar': {
+        image: 'https://megabonk.org/images/Items/Item_Borgar.png',
+        url: 'https://megabonk.org/database/items/borgar'
+    },
+    
+    // Oats
+    'oats': {
+        image: 'https://megabonk.org/images/Items/Item_Oats.png',
+        url: 'https://megabonk.org/database/items/oats'
+    },
+    
+    // Medkit
+    'medkit': {
+        image: 'https://megabonk.org/images/Items/Item_Medkit.png',
+        url: 'https://megabonk.org/database/items/medkit'
+    },
+    
+    // Mirror
+    'mirror': {
+        image: 'https://megabonk.org/images/Items/Item_Mirror.png',
+        url: 'https://megabonk.org/database/items/mirror'
+    },
+    
+    // Feathers
+    'feathers': {
+        image: 'https://megabonk.org/images/Items/Item_Feathers.png',
+        url: 'https://megabonk.org/database/items/feathers'
+    },
+    
+    // Slippery Ring
+    'slipperyring': {
+        image: 'https://megabonk.org/images/Items/Item_Slippery_Ring.png',
+        url: 'https://megabonk.org/database/items/slippery-ring'
+    },
+    'slippery ring': {
+        image: 'https://megabonk.org/images/Items/Item_Slippery_Ring.png',
+        url: 'https://megabonk.org/database/items/slippery-ring'
+    },
+    
+    // Sucky Magnet
+    'suckymagnet': {
+        image: 'https://megabonk.org/images/Items/Item_Sucky_Magnet.png',
+        url: 'https://megabonk.org/database/items/sucky-magnet'
+    },
+    'sucky magnet': {
+        image: 'https://megabonk.org/images/Items/Item_Sucky_Magnet.png',
+        url: 'https://megabonk.org/database/items/sucky-magnet'
+    },
+    
+    // Credit Card Red
+    'creditcardred': {
+        image: 'https://megabonk.org/images/Items/Item_Credit_Card_Red.png',
+        url: 'https://megabonk.org/database/items/credit-card-red'
+    },
+    'credit card red': {
+        image: 'https://megabonk.org/images/Items/Item_Credit_Card_Red.png',
+        url: 'https://megabonk.org/database/items/credit-card-red'
+    },
+    
+    // Campfire
+    'campfire': {
+        image: 'https://megabonk.org/images/Items/Item_Campfire.png',
+        url: 'https://megabonk.org/database/items/campfire'
+    },
+    
+    // Beer
+    'beer': {
+        image: 'https://megabonk.org/images/Items/Item_Beer.png',
+        url: 'https://megabonk.org/database/items/beer'
+    },
+    
+    // Beefy Ring
+    'beefyring': {
+        image: 'https://megabonk.org/images/Items/Item_Beefy_Ring.png',
+        url: 'https://megabonk.org/database/items/beefy-ring'
+    },
+    'beefy ring': {
+        image: 'https://megabonk.org/images/Items/Item_Beefy_Ring.png',
+        url: 'https://megabonk.org/database/items/beefy-ring'
+    },
+    
+    // Anvil
+    'anvil': {
+        image: 'https://megabonk.org/images/Items/Item_Anvil.png',
+        url: 'https://megabonk.org/database/items/anvil'
+    },
+    
+    // Thunder Mitts
+    'thundermitts': {
+        image: 'https://megabonk.org/images/Items/Item_Thunder_Mitts.png',
+        url: 'https://megabonk.org/database/items/thunder-mitts'
+    },
+    'thunder mitts': {
+        image: 'https://megabonk.org/images/Items/Item_Thunder_Mitts.png',
+        url: 'https://megabonk.org/database/items/thunder-mitts'
+    },
+    
+    // Power Gloves
+    'powergloves': {
+        image: 'https://megabonk.org/images/Items/Item_Power_Gloves.png',
+        url: 'https://megabonk.org/database/items/power-gloves'
+    },
+    'power gloves': {
+        image: 'https://megabonk.org/images/Items/Item_Power_Gloves.png',
+        url: 'https://megabonk.org/database/items/power-gloves'
+    },
+    
+    // Big Bonk
+    'bigbonk': {
+        image: 'https://megabonk.org/images/Items/Item_Big_Bonk.png',
+        url: 'https://megabonk.org/database/items/big-bonk'
+    },
+    'big bonk': {
+        image: 'https://megabonk.org/images/Items/Item_Big_Bonk.png',
+        url: 'https://megabonk.org/database/items/big-bonk'
+    },
+    
+    // Spicy Meatball
+    'spicymeatball': {
+        image: 'https://megabonk.org/images/Items/Item_Spicy_Meatball.png',
+        url: 'https://megabonk.org/database/items/spicy-meatball'
+    },
+    'spicy meatball': {
+        image: 'https://megabonk.org/images/Items/Item_Spicy_Meatball.png',
+        url: 'https://megabonk.org/database/items/spicy-meatball'
+    },
+    
+    // Cactus
+    'cactus': {
+        image: 'https://megabonk.org/images/Items/Item_Cactus.png',
+        url: 'https://megabonk.org/database/items/cactus'
+    },
+    
+    // Chonkplate
+    'chonkplate': {
+        image: 'https://megabonk.org/images/Items/Item_Chonkplate.png',
+        url: 'https://megabonk.org/database/items/chonkplate'
+    },
+    
+    // Cowards Cloak / Coward's Cloak
+    'cowardscloak': {
+        image: 'https://megabonk.org/images/Items/Item_Cowards_Cloak.png',
+        url: 'https://megabonk.org/database/items/cowards-cloak'
+    },
+    'cowards cloak': {
+        image: 'https://megabonk.org/images/Items/Item_Cowards_Cloak.png',
+        url: 'https://megabonk.org/database/items/cowards-cloak'
+    },
+    "coward's cloak": {
+        image: 'https://megabonk.org/images/Items/Item_Cowards_Cloak.png',
+        url: 'https://megabonk.org/database/items/cowards-cloak'
+    },
+    
+    // Dragonfire
+    'dragonfire': {
+        image: 'https://megabonk.org/images/Items/Item_Dragonfire.png',
+        url: 'https://megabonk.org/database/items/dragonfire'
+    },
+    
+    // Electric Plug
+    'electricplug': {
+        image: 'https://megabonk.org/images/Items/Item_Electric_Plug.png',
+        url: 'https://megabonk.org/database/items/electric-plug'
+    },
+    'electric plug': {
+        image: 'https://megabonk.org/images/Items/Item_Electric_Plug.png',
+        url: 'https://megabonk.org/database/items/electric-plug'
+    },
+    
+    // Forbidden Juice
+    'forbiddenjuice': {
+        image: 'https://megabonk.org/images/Items/Item_Forbidden_Juice.png',
+        url: 'https://megabonk.org/database/items/forbidden-juice'
+    },
+    'forbidden juice': {
+        image: 'https://megabonk.org/images/Items/Item_Forbidden_Juice.png',
+        url: 'https://megabonk.org/database/items/forbidden-juice'
+    },
+    
+    // Gamer Goggles
+    'gamergoggles': {
+        image: 'https://megabonk.org/images/Items/Item_Gamer_Goggles.png',
+        url: 'https://megabonk.org/database/items/gamer-goggles'
+    },
+    'gamer goggles': {
+        image: 'https://megabonk.org/images/Items/Item_Gamer_Goggles.png',
+        url: 'https://megabonk.org/database/items/gamer-goggles'
+    },
+    
+    // Gas Mask
+    'gasmask': {
+        image: 'https://megabonk.org/images/Items/Item_Gas_Mask.png',
+        url: 'https://megabonk.org/database/items/gas-mask'
+    },
+    'gas mask': {
+        image: 'https://megabonk.org/images/Items/Item_Gas_Mask.png',
+        url: 'https://megabonk.org/database/items/gas-mask'
+    },
+    
+    // Ghost
+    'ghost': {
+        image: 'https://megabonk.org/images/Items/Item_Ghost.png',
+        url: 'https://megabonk.org/database/items/ghost'
+    },
+    
+    // Ice Crystal
+    'icecrystal': {
+        image: 'https://megabonk.org/images/Items/Item_Ice_Crystal.png',
+        url: 'https://megabonk.org/database/items/ice-crystal'
+    },
+    'ice crystal': {
+        image: 'https://megabonk.org/images/Items/Item_Ice_Crystal.png',
+        url: 'https://megabonk.org/database/items/ice-crystal'
+    },
+    
+    // Skuleg
+    'skuleg': {
+        image: 'https://megabonk.org/images/Items/Item_Skuleg.png',
+        url: 'https://megabonk.org/database/items/skuleg'
+    },
+    
+    // ========================================
+    // 稀有物品 (Rare Items)
+    // ========================================
+    
+    // Brass Knuckles
+    'brassknuckles': {
+        image: 'https://megabonk.org/images/Items/Item_Brass_Knuckles.png',
+        url: 'https://megabonk.org/database/items/brass-knuckles'
+    },
+    'brass knuckles': {
+        image: 'https://megabonk.org/images/Items/Item_Brass_Knuckles.png',
+        url: 'https://megabonk.org/database/items/brass-knuckles'
+    },
+    
+    // Demonic Blade
+    'demonicblade': {
+        image: 'https://megabonk.org/images/Items/Item_Demonic_Blade.png',
+        url: 'https://megabonk.org/database/items/demonic-blade'
+    },
+    'demonic blade': {
+        image: 'https://megabonk.org/images/Items/Item_Demonic_Blade.png',
+        url: 'https://megabonk.org/database/items/demonic-blade'
+    },
+    
+    // Demonic Blood
+    'demonicblood': {
+        image: 'https://megabonk.org/images/Items/Item_Demonic_Blood.png',
+        url: 'https://megabonk.org/database/items/demonic-blood'
+    },
+    'demonic blood': {
+        image: 'https://megabonk.org/images/Items/Item_Demonic_Blood.png',
+        url: 'https://megabonk.org/database/items/demonic-blood'
+    },
+    
+    // Echo Shard
+    'echoshard': {
+        image: 'https://megabonk.org/images/Items/Item_Echo_Shard.png',
+        url: 'https://megabonk.org/database/items/echo-shard'
+    },
+    'echo shard': {
+        image: 'https://megabonk.org/images/Items/Item_Echo_Shard.png',
+        url: 'https://megabonk.org/database/items/echo-shard'
+    },
+    
+    // Golden Sneakers
+    'goldensneakers': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Sneakers.png',
+        url: 'https://megabonk.org/database/items/golden-sneakers'
+    },
+    'golden sneakers': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Sneakers.png',
+        url: 'https://megabonk.org/database/items/golden-sneakers'
+    },
+    
+    // Moldy Gloves
+    'moldygloves': {
+        image: 'https://megabonk.org/images/Items/Item_Moldy_Gloves.png',
+        url: 'https://megabonk.org/database/items/moldy-gloves'
+    },
+    'moldy gloves': {
+        image: 'https://megabonk.org/images/Items/Item_Moldy_Gloves.png',
+        url: 'https://megabonk.org/database/items/moldy-gloves'
+    },
+    
+    // Idle Juice
+    'idlejuice': {
+        image: 'https://megabonk.org/images/Items/Item_Idle_Juice.png',
+        url: 'https://megabonk.org/database/items/idle-juice'
+    },
+    'idle juice': {
+        image: 'https://megabonk.org/images/Items/Item_Idle_Juice.png',
+        url: 'https://megabonk.org/database/items/idle-juice'
+    },
+    
+    // Leeching Crystal
+    'leechingcrystal': {
+        image: 'https://megabonk.org/images/Items/Item_Leeching_Crystal.png',
+        url: 'https://megabonk.org/database/items/leeching-crystal'
+    },
+    'leeching crystal': {
+        image: 'https://megabonk.org/images/Items/Item_Leeching_Crystal.png',
+        url: 'https://megabonk.org/database/items/leeching-crystal'
+    },
+    
+    // Backpack
+    'backpack': {
+        image: 'https://megabonk.org/images/Items/Item_Backpack.png',
+        url: 'https://megabonk.org/database/items/backpack'
+    },
+    
+    // Beacon
+    'beacon': {
+        image: 'https://megabonk.org/images/Items/Item_Beacon.png',
+        url: 'https://megabonk.org/database/items/beacon'
+    },
+    
+    // Unstable Transfusion
+    'unstabletransfusion': {
+        image: 'https://megabonk.org/images/Items/Item_Unstable_Transfusion.png',
+        url: 'https://megabonk.org/database/items/unstable-transfusion'
+    },
+    'unstable transfusion': {
+        image: 'https://megabonk.org/images/Items/Item_Unstable_Transfusion.png',
+        url: 'https://megabonk.org/database/items/unstable-transfusion'
+    },
+    
+    // Bob (Dead)
+    'bobdead': {
+        image: 'https://megabonk.org/images/Items/Item_Bob__28Dead_29.png',
+        url: 'https://megabonk.org/database/items/bob-dead'
+    },
+    'bob dead': {
+        image: 'https://megabonk.org/images/Items/Item_Bob__28Dead_29.png',
+        url: 'https://megabonk.org/database/items/bob-dead'
+    },
+    'bob (dead)': {
+        image: 'https://megabonk.org/images/Items/Item_Bob__28Dead_29.png',
+        url: 'https://megabonk.org/database/items/bob-dead'
+    },
+    
+    // Demonic Soul
+    'demonicsoul': {
+        image: 'https://megabonk.org/images/Items/Item_Demonic_Soul.png',
+        url: 'https://megabonk.org/database/items/demonic-soul'
+    },
+    'demonic soul': {
+        image: 'https://megabonk.org/images/Items/Item_Demonic_Soul.png',
+        url: 'https://megabonk.org/database/items/demonic-soul'
+    },
+    
+    // Eagle Claw
+    'eagleclaw': {
+        image: 'https://megabonk.org/images/Items/Item_Eagle_Claw.png',
+        url: 'https://megabonk.org/database/items/eagle-claw'
+    },
+    'eagle claw': {
+        image: 'https://megabonk.org/images/Items/Item_Eagle_Claw.png',
+        url: 'https://megabonk.org/database/items/eagle-claw'
+    },
+    
+    // Grandmas Secret Tonic / Grandma's Secret Tonic
+    'grandmassecrettonic': {
+        image: 'https://megabonk.org/images/Items/Item_Grandmas_Secret_Tonic.png',
+        url: 'https://megabonk.org/database/items/grandmas-secret-tonic'
+    },
+    'grandmas secret tonic': {
+        image: 'https://megabonk.org/images/Items/Item_Grandmas_Secret_Tonic.png',
+        url: 'https://megabonk.org/database/items/grandmas-secret-tonic'
+    },
+    "grandma's secret tonic": {
+        image: 'https://megabonk.org/images/Items/Item_Grandmas_Secret_Tonic.png',
+        url: 'https://megabonk.org/database/items/grandmas-secret-tonic'
+    },
+    
+    // Quins Mask / Quin's Mask
+    'quinsmask': {
+        image: 'https://megabonk.org/images/Items/Item_Quins_Mask.png',
+        url: 'https://megabonk.org/database/items/quins-mask'
+    },
+    'quins mask': {
+        image: 'https://megabonk.org/images/Items/Item_Quins_Mask.png',
+        url: 'https://megabonk.org/database/items/quins-mask'
+    },
+    "quin's mask": {
+        image: 'https://megabonk.org/images/Items/Item_Quins_Mask.png',
+        url: 'https://megabonk.org/database/items/quins-mask'
+    },
+    
+    // Shattered Knowledge
+    'shatteredknowledge': {
+        image: 'https://megabonk.org/images/Items/Item_Shattered_Knowledge.png',
+        url: 'https://megabonk.org/database/items/shattered-knowledge'
+    },
+    'shattered knowledge': {
+        image: 'https://megabonk.org/images/Items/Item_Shattered_Knowledge.png',
+        url: 'https://megabonk.org/database/items/shattered-knowledge'
+    },
+    
+    // Slutty Cannon
+    'sluttycannon': {
+        image: 'https://megabonk.org/images/Items/Item_Slutty_Cannon.png',
+        url: 'https://megabonk.org/database/items/slutty-cannon'
+    },
+    'slutty cannon': {
+        image: 'https://megabonk.org/images/Items/Item_Slutty_Cannon.png',
+        url: 'https://megabonk.org/database/items/slutty-cannon'
+    },
+    
+    // Toxic Barrel
+    'toxicbarrel': {
+        image: 'https://megabonk.org/images/Items/Item_Toxic_Barrel.png',
+        url: 'https://megabonk.org/database/items/toxic-barrel'
+    },
+    'toxic barrel': {
+        image: 'https://megabonk.org/images/Items/Item_Toxic_Barrel.png',
+        url: 'https://megabonk.org/database/items/toxic-barrel'
+    },
+    
+    // Turbo Skates
+    'turboskates': {
+        image: 'https://megabonk.org/images/Items/Item_Turbo_Skates.png',
+        url: 'https://megabonk.org/database/items/turbo-skates'
+    },
+    'turbo skates': {
+        image: 'https://megabonk.org/images/Items/Item_Turbo_Skates.png',
+        url: 'https://megabonk.org/database/items/turbo-skates'
+    },
+    
+    // Cursed Grabbies
+    'cursedgrabbies': {
+        image: 'https://megabonk.org/images/Items/Item_Cursed_Grabbies.png',
+        url: 'https://megabonk.org/database/items/cursed-grabbies'
+    },
+    'cursed grabbies': {
+        image: 'https://megabonk.org/images/Items/Item_Cursed_Grabbies.png',
+        url: 'https://megabonk.org/database/items/cursed-grabbies'
+    },
+    
+    // ========================================
+    // 传奇物品 (Legendary Items)
+    // ========================================
+    
+    // Giant Fork
+    'giantfork': {
+        image: 'https://megabonk.org/images/Items/Item_Giant_Fork.png',
+        url: 'https://megabonk.org/database/items/giant-fork'
+    },
+    'giant fork': {
+        image: 'https://megabonk.org/images/Items/Item_Giant_Fork.png',
+        url: 'https://megabonk.org/database/items/giant-fork'
+    },
+    
+    // Speed Boi
+    'speedboi': {
+        image: 'https://megabonk.org/images/Items/Item_Speed_Boi.png',
+        url: 'https://megabonk.org/database/items/speed-boi'
+    },
+    'speed boi': {
+        image: 'https://megabonk.org/images/Items/Item_Speed_Boi.png',
+        url: 'https://megabonk.org/database/items/speed-boi'
+    },
+    
+    // Energy Core
+    'energycore': {
+        image: 'https://megabonk.org/images/Items/Item_Energy_Core.png',
+        url: 'https://megabonk.org/database/items/energy-core'
+    },
+    'energy core': {
+        image: 'https://megabonk.org/images/Items/Item_Energy_Core.png',
+        url: 'https://megabonk.org/database/items/energy-core'
+    },
+    
+    // Soul Harvester
+    'soulharvester': {
+        image: 'https://megabonk.org/images/Items/Item_Soul_Harvester.png',
+        url: 'https://megabonk.org/database/items/soul-harvester'
+    },
+    'soul harvester': {
+        image: 'https://megabonk.org/images/Items/Item_Soul_Harvester.png',
+        url: 'https://megabonk.org/database/items/soul-harvester'
+    },
+    
+    // Joes Dagger / Joe's Dagger
+    'joesdagger': {
+        image: 'https://megabonk.org/images/Items/Item_Joes_Dagger.png',
+        url: 'https://megabonk.org/database/items/joes-dagger'
+    },
+    'joes dagger': {
+        image: 'https://megabonk.org/images/Items/Item_Joes_Dagger.png',
+        url: 'https://megabonk.org/database/items/joes-dagger'
+    },
+    "joe's dagger": {
+        image: 'https://megabonk.org/images/Items/Item_Joes_Dagger.png',
+        url: 'https://megabonk.org/database/items/joes-dagger'
+    },
+    
+    // Bloody Cleaver
+    'bloodycleaver': {
+        image: 'https://megabonk.org/images/Items/Item_Bloody_Cleaver.png',
+        url: 'https://megabonk.org/database/items/bloody-cleaver'
+    },
+    'bloody cleaver': {
+        image: 'https://megabonk.org/images/Items/Item_Bloody_Cleaver.png',
+        url: 'https://megabonk.org/database/items/bloody-cleaver'
+    },
+    
+    // Za Warudo
+    'zawarudo': {
+        image: 'https://megabonk.org/images/Items/Item_Za_Warudo.png',
+        url: 'https://megabonk.org/database/items/za-warudo'
+    },
+    'za warudo': {
+        image: 'https://megabonk.org/images/Items/Item_Za_Warudo.png',
+        url: 'https://megabonk.org/database/items/za-warudo'
+    },
+    
+    // Golden Ring
+    'goldenring': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Ring.png',
+        url: 'https://megabonk.org/database/items/golden-ring'
+    },
+    'golden ring': {
+        image: 'https://megabonk.org/images/Items/Item_Golden_Ring.png',
+        url: 'https://megabonk.org/database/items/golden-ring'
+    },
+    
+    // ========================================
+    // 其他额外物品
+    // ========================================
+    
+    // Time Bracelet
+    'timebracelet': {
+        image: 'https://megabonk.org/images/Items/Item_Time_Bracelet.png',
+        url: 'https://megabonk.org/database/items/time-bracelet'
+    },
+    'time bracelet': {
+        image: 'https://megabonk.org/images/Items/Item_Time_Bracelet.png',
+        url: 'https://megabonk.org/database/items/time-bracelet'
+    },
+    
+    // Tactical Glasses
+    'tacticalglasses': {
+        image: 'https://megabonk.org/images/Items/Item_Tactical_Glasses.png',
+        url: 'https://megabonk.org/database/items/tactical-glasses'
+    },
+    'tactical glasses': {
+        image: 'https://megabonk.org/images/Items/Item_Tactical_Glasses.png',
+        url: 'https://megabonk.org/database/items/tactical-glasses'
+    },
+    
+    // Boss Buster
+    'bossbuster': {
+        image: 'https://megabonk.org/images/Items/Item_Boss_Buster.png',
+        url: 'https://megabonk.org/database/items/boss-buster'
+    },
+    'boss buster': {
+        image: 'https://megabonk.org/images/Items/Item_Boss_Buster.png',
+        url: 'https://megabonk.org/database/items/boss-buster'
+    },
+    
+    // Spiky Shield
+    'spikyshield': {
+        image: 'https://megabonk.org/images/Items/Item_Spiky_Shield.png',
+        url: 'https://megabonk.org/database/items/spiky-shield'
+    },
+    'spiky shield': {
+        image: 'https://megabonk.org/images/Items/Item_Spiky_Shield.png',
+        url: 'https://megabonk.org/database/items/spiky-shield'
+    },
+    
+    // Turbo Socks
+    'turbosocks': {
+        image: 'https://megabonk.org/images/Items/Item_Turbo_Socks.png',
+        url: 'https://megabonk.org/database/items/turbo-socks'
+    },
+    'turbo socks': {
+        image: 'https://megabonk.org/images/Items/Item_Turbo_Socks.png',
+        url: 'https://megabonk.org/database/items/turbo-socks'
+    },
+    
+    // Scarf
+    'scarf': {
+        image: 'https://megabonk.org/images/Items/Item_Scarf.png',
+        url: 'https://megabonk.org/database/items/scarf'
+    }
+
+        };
+
+        // ============================================
+        // 工具函数
+        // ============================================
+        
+        function normalizeKey(str) {
+            return str.toLowerCase().replace(/[^a-z0-9]/g, '');
         }
 
-        // Smooth scroll and highlight active section
-        document.addEventListener('DOMContentLoaded', function() {
+        function getCharacterData(name) {
+            const key = normalizeKey(name);
+            return CHARACTERS[key] || CHARACTERS[name.toLowerCase()] || null;
+        }
+
+        function getWeaponData(name) {
+            const key = normalizeKey(name);
+            return WEAPONS[key] || WEAPONS[name.toLowerCase()] || null;
+        }
+
+        function getTomeData(name) {
+            const key = normalizeKey(name);
+            return TOMES[key] || TOMES[name.toLowerCase()] || null;
+        }
+
+        function getItemData(name) {
+            const key = normalizeKey(name);
+            return ITEMS[key] || ITEMS[name.toLowerCase()] || null;
+        }
+
+        function formatName(str) {
+            return str.replace(/([A-Z])/g, ' $1').trim().replace(/^./, s => s.toUpperCase());
+        }
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ============================================
+        // 数据处理
+        // ============================================
+        
+        async function loadAndAnalyzeData() {
+            try {
+                const response = await fetch(`${CONFIG.dataUrl}?t=${Date.now()}`);
+                if (!response.ok) throw new Error('Failed to load data');
+                
+                const result = await response.json();
+                const data = result.data || [];
+                
+                console.log(`📊 Total players in data: ${data.length}`);
+                
+                const topData = CONFIG.top100Only ? data.slice(0, 100) : data;
+                
+                console.log(`📊 Analyzing top ${topData.length} players...`);
+                
+                const analysis = analyzeLeaderboardData(topData);
+                
+                console.log(`✅ Found ${analysis.characters.length} characters to display`);
+                
+                document.getElementById('data-source-badge').textContent = `Based on Top ${topData.length} Players`;
+                
+                renderCharacterNav(analysis.characters);
+                renderMetaOverview(analysis);
+                renderBuildSections(analysis.characters, topData);
+                renderMetaAnalysis(analysis);
+                
+                document.getElementById('loading-container').style.display = 'none';
+                document.getElementById('character-nav').style.display = 'block';
+                document.getElementById('meta-overview').style.display = 'grid';
+                document.getElementById('meta-analysis').style.display = 'block';
+                
+                setupScrollBehavior();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loading-container').innerHTML = `
+                    <p style="color: #dc3545; font-size: 1.1rem;">❌ Failed to load leaderboard data</p>
+                    <p style="color: #6c757d; font-size: 0.9rem;">Please try again later or <a href="https://megabonk.org/leaderboard/" style="color: #667eea;">view the main leaderboard</a></p>
+                `;
+            }
+        }
+
+        function analyzeLeaderboardData(data) {
+            const characterStats = {};
+            const weaponStats = {};
+            const tomeStats = {};
+            const itemStats = {};
+            
+            let totalKills = 0;
+            let topRank = 999;
+            
+            data.forEach(player => {
+                const char = (player.character || '').toLowerCase();
+                const kills = player.kills || 0;
+                const rank = player.rank || 999;
+                
+                totalKills += kills;
+                topRank = Math.min(topRank, rank);
+                
+                if (char) {
+                    if (!characterStats[char]) {
+                        characterStats[char] = {
+                            name: player.character,
+                            count: 0,
+                            totalKills: 0,
+                            topRank: 999,
+                            weapons: [],
+                            tomes: [],
+                            items: []
+                        };
+                    }
+                    characterStats[char].count++;
+                    characterStats[char].totalKills += kills;
+                    characterStats[char].topRank = Math.min(characterStats[char].topRank, rank);
+                    
+                    (player.weapons || []).forEach(w => characterStats[char].weapons.push(w));
+                    (player.tomes || []).forEach(t => characterStats[char].tomes.push(t));
+                    (player.items || []).forEach(i => characterStats[char].items.push(i));
+                }
+                
+                (player.weapons || []).forEach(w => {
+                    const key = normalizeKey(w);
+                    weaponStats[key] = (weaponStats[key] || 0) + 1;
+                });
+                
+                (player.tomes || []).forEach(t => {
+                    const key = normalizeKey(t);
+                    tomeStats[key] = (tomeStats[key] || 0) + 1;
+                });
+                
+                (player.items || []).forEach(i => {
+                    const key = normalizeKey(i);
+                    itemStats[key] = (itemStats[key] || 0) + 1;
+                });
+            });
+            
+            Object.values(characterStats).forEach(char => {
+                char.avgKills = Math.round(char.totalKills / char.count);
+                char.usageRate = ((char.count / data.length) * 100).toFixed(1);
+            });
+            
+            let sortedCharacters = Object.values(characterStats)
+                .sort((a, b) => b.count - a.count);
+            
+            const filtered = sortedCharacters.filter(c => c.count >= CONFIG.minUsageForDisplay);
+            
+            if (filtered.length >= CONFIG.minCharactersToShow) {
+                sortedCharacters = filtered;
+            } else {
+                sortedCharacters = sortedCharacters.slice(0, CONFIG.minCharactersToShow);
+            }
+            
+            sortedCharacters = sortedCharacters.slice(0, CONFIG.maxCharactersToShow);
+            
+            const topWeapons = Object.entries(weaponStats)
+                .map(([key, count]) => ({
+                    name: key,
+                    count,
+                    percentage: ((count / data.length) * 100).toFixed(1)
+                }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 10);
+            
+            const topTomes = Object.entries(tomeStats)
+                .map(([key, count]) => ({
+                    name: key,
+                    count,
+                    percentage: ((count / data.length) * 100).toFixed(1)
+                }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 10);
+            
+            const topItems = Object.entries(itemStats)
+                .map(([key, count]) => ({
+                    name: key,
+                    count,
+                    percentage: ((count / data.length) * 100).toFixed(1)
+                }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 10);
+            
+            return {
+                characters: sortedCharacters,
+                weapons: topWeapons,
+                tomes: topTomes,
+                items: topItems,
+                avgKills: Math.round(totalKills / data.length),
+                topRank,
+                totalPlayers: data.length
+            };
+        }
+
+        // ============================================
+        // 渲染函数
+        // ============================================
+        
+        function renderCharacterNav(characters) {
+            const container = document.getElementById('character-links');
+            container.innerHTML = characters.map(char => {
+                const key = normalizeKey(char.name);
+                const charData = getCharacterData(char.name);
+                const img = charData ? charData.image : null;
+                
+                return `
+                    <a href="#${key}" class="char-link">
+                        ${img ? `<img src="${img}" alt="${escapeHtml(char.name)}">` : ''}
+                        <span>${escapeHtml(char.name)}</span>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function renderMetaOverview(analysis) {
+            const container = document.getElementById('meta-overview');
+            const topChar = analysis.characters[0];
+            const secondChar = analysis.characters[1] || topChar;
+            const topWeapon = analysis.weapons[0];
+            
+            const bestPerformer = [...analysis.characters].sort((a,b) => b.avgKills - a.avgKills)[0];
+            
+            const topCharData = getCharacterData(topChar.name);
+            const bestPerformerData = getCharacterData(bestPerformer.name);
+            const topWeaponData = getWeaponData(topWeapon.name);
+            const secondCharData = getCharacterData(secondChar.name);
+            
+            container.innerHTML = `
+                <div class="meta-card">
+                    <div class="meta-card-header">
+                        <div class="meta-card-title">Most Picked</div>
+                        <div class="meta-card-badge">HOT</div>
+                    </div>
+                    <div class="meta-card-value">
+                        ${topCharData && topCharData.image ? `<img src="${topCharData.image}" alt="${escapeHtml(topChar.name)}">` : ''}
+                        <span>${escapeHtml(topChar.name)}</span>
+                    </div>
+                    <div class="meta-card-description">${topChar.usageRate}% of Top ${analysis.totalPlayers}</div>
+                </div>
+
+                <div class="meta-card">
+                    <div class="meta-card-header">
+                        <div class="meta-card-title">Top Performer</div>
+                        <div class="meta-card-badge">S-TIER</div>
+                    </div>
+                    <div class="meta-card-value">
+                        ${bestPerformerData && bestPerformerData.image ? `<img src="${bestPerformerData.image}" alt="${escapeHtml(bestPerformer.name)}">` : ''}
+                        <span>${escapeHtml(bestPerformer.name)}</span>
+                    </div>
+                    <div class="meta-card-description">${formatNumber(bestPerformer.avgKills)} avg kills</div>
+                </div>
+
+                <div class="meta-card">
+                    <div class="meta-card-header">
+                        <div class="meta-card-title">Meta Weapon</div>
+                        <div class="meta-card-badge">CORE</div>
+                    </div>
+                    <div class="meta-card-value">
+                        ${topWeaponData && topWeaponData.image ? `<img src="${topWeaponData.image}" alt="${formatName(topWeapon.name)}">` : ''}
+                        <span>${escapeHtml(formatName(topWeapon.name))}</span>
+                    </div>
+                    <div class="meta-card-description">Used in ${topWeapon.percentage}% of builds</div>
+                </div>
+
+                <div class="meta-card">
+                    <div class="meta-card-header">
+                        <div class="meta-card-title">Rising Pick</div>
+                        <div class="meta-card-badge">TREND</div>
+                    </div>
+                    <div class="meta-card-value">
+                        ${secondCharData && secondCharData.image ? `<img src="${secondCharData.image}" alt="${escapeHtml(secondChar.name)}">` : ''}
+                        <span>${escapeHtml(secondChar.name)}</span>
+                    </div>
+                    <div class="meta-card-description">${secondChar.usageRate}% pick rate</div>
+                </div>
+            `;
+        }
+
+        function renderBuildSections(characters, rawData) {
+            const container = document.getElementById('build-sections');
+            
+            const displayCharacters = characters;
+            
+            const detailedSections = displayCharacters.map(char => {
+                const key = normalizeKey(char.name);
+                const charData = getCharacterData(char.name);
+                const img = charData ? charData.image : null;
+                const buildUrl = charData ? charData.buildUrl : '#';
+                const guideUrl = charData ? charData.guideUrl : '#';
+                
+                const weaponCounts = {};
+                const tomeCounts = {};
+                const itemCounts = {};
+                
+                char.weapons.forEach(w => {
+                    const wKey = normalizeKey(w);
+                    weaponCounts[wKey] = (weaponCounts[wKey] || 0) + 1;
+                });
+                
+                char.tomes.forEach(t => {
+                    const tKey = normalizeKey(t);
+                    tomeCounts[tKey] = (tomeCounts[tKey] || 0) + 1;
+                });
+                
+                char.items.forEach(i => {
+                    const iKey = normalizeKey(i);
+                    itemCounts[iKey] = (itemCounts[iKey] || 0) + 1;
+                });
+                
+                const topWeapons = Object.entries(weaponCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([name]) => name);
+                
+                const topTomes = Object.entries(tomeCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([name]) => name);
+                
+                const topItems = Object.entries(itemCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([name]) => name);
+                
+                let tier = 'B';
+                if (char.avgKills >= 18000) tier = 'S';
+                else if (char.avgKills >= 16000) tier = 'A';
+                
+                return `
+                    <section class="build-section" id="${key}">
+                        <div class="build-card">
+                            <div class="build-header">
+                                <div class="character-icon-large">
+                                    ${img ? `<img src="${img}" alt="${escapeHtml(char.name)}">` : ''}
+                                </div>
+                                <div class="build-header-content">
+                                    <h2 class="character-name">${escapeHtml(char.name)} Leaderboard Build</h2>
+                                    <div class="build-stats">
+                                        <div class="build-stat">
+                                            <span>📊</span>
+                                            <span>Usage: ${char.usageRate}% in Top ${rawData.length}</span>
+                                        </div>
+                                        <div class="build-stat">
+                                            <span>🏆</span>
+                                            <span>Top Rank: #${char.topRank}</span>
+                                        </div>
+                                        <div class="build-stat">
+                                            <span>⭐</span>
+                                            <span>Avg Kills: ${formatNumber(char.avgKills)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tier-badge">${tier}-TIER</div>
+                            </div>
+                            <div class="build-content">
+                                <p class="build-description">
+                                    ${escapeHtml(char.name)} is currently used by ${char.usageRate}% of top ${rawData.length} players with an average of ${formatNumber(char.avgKills)} kills per run. The highest ranked ${escapeHtml(char.name)} player reached #${char.topRank}.
+                                </p>
+
+                                <div class="usage-bar-container">
+                                    <div class="usage-bar-label">
+                                        <span><strong>Leaderboard Presence</strong></span>
+                                        <span><strong>${char.count} out of ${rawData.length} players</strong></span>
+                                    </div>
+                                    <div class="usage-bar">
+                                        <div class="usage-bar-fill" style="width: ${char.usageRate}%"></div>
+                                    </div>
+                                </div>
+
+                                <h3 class="build-section-title">
+                                    <span>⚔️</span>
+                                    <span>Most Popular Equipment</span>
+                                </h3>
+                                <div class="equipment-grid">
+                                    <div class="equipment-category">
+                                        <div class="category-label">Top Weapons</div>
+                                        <div class="equipment-list">
+                                            ${topWeapons.map(w => {
+                                                const weaponData = getWeaponData(w);
+                                                const wImg = weaponData ? weaponData.image : null;
+                                                const wUrl = weaponData ? weaponData.url : '#';
+                                                return `
+                                                    <a href="${wUrl}" class="equipment-item">
+                                                        ${wImg ? `<img src="${wImg}" alt="${formatName(w)}" class="equipment-icon">` : ''}
+                                                        <span>${escapeHtml(formatName(w))}</span>
+                                                    </a>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    </div>
+
+                                    <div class="equipment-category">
+                                        <div class="category-label">Top Tomes</div>
+                                        <div class="equipment-list">
+                                            ${topTomes.map(t => {
+                                                const tomeData = getTomeData(t);
+                                                const tImg = tomeData ? tomeData.image : null;
+                                                const tUrl = tomeData ? tomeData.url : '#';
+                                                return `
+                                                    <a href="${tUrl}" class="equipment-item">
+                                                        ${tImg ? `<img src="${tImg}" alt="${formatName(t)}" class="equipment-icon">` : ''}
+                                                        <span>${escapeHtml(formatName(t))}</span>
+                                                    </a>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    </div>
+
+                                    <div class="equipment-category">
+                                        <div class="category-label">Top Items</div>
+                                        <div class="equipment-list">
+                                            ${topItems.map(i => {
+                                                const itemData = getItemData(i);
+                                                const iImg = itemData ? itemData.image : null;
+                                                const iUrl = itemData ? itemData.url : '#';
+                                                return `
+                                                    <a href="${iUrl}" class="equipment-item">
+                                                        ${iImg ? `<img src="${iImg}" alt="${formatName(i)}" class="equipment-icon">` : ''}
+                                                        <span>${escapeHtml(formatName(i))}</span>
+                                                    </a>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="build-actions">
+                                    <a href="${buildUrl}" class="btn-build">
+                                        <span>📖</span>
+                                        <span>Full ${escapeHtml(char.name)} Build Guide</span>
+                                    </a>
+                                    <a href="${guideUrl}" class="btn-build btn-build-secondary">
+                                        <span>👤</span>
+                                        <span>${escapeHtml(char.name)} Character Guide</span>
+                                    </a>
+                                    <a href="https://megabonk.org/leaderboard/" class="btn-build btn-build-secondary">
+                                        <span>🏆</span>
+                                        <span>View Live Leaderboard</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            }).join('');
+            
+            container.innerHTML = detailedSections;
+        }
+
+        function renderMetaAnalysis(analysis) {
+            const weaponsHtml = analysis.weapons.slice(0, 5).map(w => {
+                const weaponData = getWeaponData(w.name);
+                const wImg = weaponData ? weaponData.image : null;
+                const wUrl = weaponData ? weaponData.url : '#';
+                return `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;">
+                            <a href="${wUrl}" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #495057; font-weight: 600;">
+                                ${wImg ? `<img src="${wImg}" style="width: 24px; height: 24px; object-fit: contain;">` : ''}
+                                <strong>${escapeHtml(formatName(w.name))}</strong>
+                            </a>
+                            <span style="color: #6c757d;">${w.percentage}%</span>
+                        </div>
+                        <div class="usage-bar">
+                            <div class="usage-bar-fill" style="width: ${w.percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('weapons-analysis').innerHTML = weaponsHtml;
+            
+            const tomesHtml = analysis.tomes.slice(0, 5).map(t => {
+                const tomeData = getTomeData(t.name);
+                const tImg = tomeData ? tomeData.image : null;
+                const tUrl = tomeData ? tomeData.url : '#';
+                return `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;">
+                            <a href="${tUrl}" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #495057; font-weight: 600;">
+                                ${tImg ? `<img src="${tImg}" style="width: 24px; height: 24px; object-fit: contain;">` : ''}
+                                <strong>${escapeHtml(formatName(t.name))}</strong>
+                            </a>
+                            <span style="color: #6c757d;">${t.percentage}%</span>
+                        </div>
+                        <div class="usage-bar">
+                            <div class="usage-bar-fill" style="width: ${t.percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('tomes-analysis').innerHTML = tomesHtml;
+            
+            const itemsHtml = analysis.items.slice(0, 5).map(i => {
+                const itemData = getItemData(i.name);
+                const iImg = itemData ? itemData.image : null;
+                const iUrl = itemData ? itemData.url : '#';
+                return `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;">
+                            <a href="${iUrl}" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #495057; font-weight: 600;">
+                                ${iImg ? `<img src="${iImg}" style="width: 24px; height: 24px; object-fit: contain;">` : ''}
+                                <strong>${escapeHtml(formatName(i.name))}</strong>
+                            </a>
+                            <span style="color: #6c757d;">${i.percentage}%</span>
+                        </div>
+                        <div class="usage-bar">
+                            <div class="usage-bar-fill" style="width: ${i.percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('items-analysis').innerHTML = itemsHtml;
+            
+            const topChar = analysis.characters[0];
+            const topWeapon = analysis.weapons[0];
+            const topTome = analysis.tomes[0];
+            
+            document.getElementById('key-takeaways').innerHTML = `
+                <li><strong>${escapeHtml(topChar.name)} dominates:</strong> ${topChar.usageRate}% of top ${analysis.totalPlayers} players choose this character</li>
+                <li><strong>${escapeHtml(formatName(topWeapon.name))} is meta:</strong> Appears in ${topWeapon.percentage}% of top builds - core weapon choice</li>
+                <li><strong>${escapeHtml(formatName(topTome.name))} essential:</strong> ${topTome.percentage}% of players prioritize this tome</li>
+                <li><strong>High skill ceiling:</strong> Average ${formatNumber(analysis.avgKills)} kills requires optimized builds</li>
+                <li><strong>Equipment matters:</strong> Top players consistently use proven weapon/tome/item combinations</li>
+            `;
+        }
+
+        function setupScrollBehavior() {
             const charLinks = document.querySelectorAll('.char-link');
             const sections = document.querySelectorAll('.build-section');
 
-            // Highlight active section on scroll
             window.addEventListener('scroll', function() {
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
                     if (pageYOffset >= sectionTop - 200) {
                         current = section.getAttribute('id');
                     }
@@ -1602,7 +2871,6 @@
                 });
             });
 
-            // Smooth scroll on click
             charLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1615,65 +2883,17 @@
                     }
                 });
             });
+        }
 
-            // Animate usage bars on scroll
-            const observerOptions = {
-                threshold: 0.5
-            };
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
 
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const fills = entry.target.querySelectorAll('.usage-bar-fill');
-                        fills.forEach(fill => {
-                            fill.style.width = fill.style.width; // Trigger animation
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.usage-bar-container, .build-content').forEach(el => {
-                observer.observe(el);
-            });
+        // 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            loadAndAnalyzeData();
         });
     </script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 </body>
 </html>
