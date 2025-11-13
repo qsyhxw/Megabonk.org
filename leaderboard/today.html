@@ -720,42 +720,6 @@
             text-decoration: underline;
         }
 
-        /* Debug Panel */
-        .debug-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            color: #00ff00;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            max-width: 400px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-
-        .debug-panel.active {
-            display: block;
-        }
-
-        .debug-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            z-index: 999;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
@@ -814,12 +778,6 @@
     </style>
 </head>
 <body>
-    <!-- Debug Toggle Button -->
-    <button class="debug-toggle" onclick="toggleDebug()">🐛 Debug</button>
-    <div class="debug-panel" id="debug-panel">
-        <div id="debug-log"></div>
-    </div>
-
     <!-- Site Header -->
     <header class="site-header">
         <div class="header-top">
@@ -1085,37 +1043,6 @@
 
     <script>
         // ============================================================
-        // 🐛 DEBUG LOGGING SYSTEM
-        // ============================================================
-        const debugLogs = [];
-        function debugLog(message, data = null) {
-            const timestamp = new Date().toLocaleTimeString();
-            const logEntry = `[${timestamp}] ${message}`;
-            
-            console.log(logEntry, data || '');
-            debugLogs.push(logEntry + (data ? `: ${JSON.stringify(data)}` : ''));
-            
-            // Keep only last 20 logs
-            if (debugLogs.length > 20) {
-                debugLogs.shift();
-            }
-            
-            updateDebugPanel();
-        }
-
-        function updateDebugPanel() {
-            const panel = document.getElementById('debug-log');
-            if (panel) {
-                panel.innerHTML = debugLogs.map(log => `<div>${log}</div>`).join('');
-            }
-        }
-
-        function toggleDebug() {
-            const panel = document.getElementById('debug-panel');
-            panel.classList.toggle('active');
-        }
-
-        // ============================================================
         // 🎯 配置区域
         // ============================================================
         const CONFIG = {
@@ -1304,7 +1231,7 @@
         // 🚀 初始化
         // ============================================================
         window.addEventListener('DOMContentLoaded', () => {
-            debugLog('🎮 Initializing Today\'s Leaderboard...');
+            console.log('🎮 Initializing Today\'s Leaderboard...');
             updateCurrentDate();
             loadTodayLeaderboard();
             startAutoRefresh();
@@ -1321,8 +1248,6 @@
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             currentDate.setHours(0, 0, 0, 0);
-            
-            debugLog('📅 Current date updated', { date: dateStr });
         }
 
         function navigateDate(days) {
@@ -1331,7 +1256,6 @@
             } else {
                 currentDate.setDate(currentDate.getDate() + days);
             }
-            debugLog(`🔄 Date navigation: ${days} days`, { newDate: currentDate.toISOString() });
             updateCurrentDate();
             loadTodayLeaderboard();
         }
@@ -1341,16 +1265,8 @@
         // ============================================================
         async function loadTodayLeaderboard() {
             try {
-                debugLog('📡 Starting data fetch...', { url: CONFIG.dataUrl });
-                
                 const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
                 const response = await fetch(url);
-                
-                debugLog('📬 Response received', { 
-                    status: response.status, 
-                    ok: response.ok,
-                    type: response.type 
-                });
                 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -1359,13 +1275,7 @@
                 const result = await response.json();
                 leaderboardData = result.data || [];
                 
-                debugLog(`✅ Data loaded successfully`, { 
-                    totalEntries: leaderboardData.length,
-                    sampleEntry: leaderboardData[0]
-                });
-                
                 const todayData = filterTodayData(leaderboardData);
-                debugLog(`📅 Filtered to today's data`, { filteredCount: todayData.length });
                 
                 renderTable(todayData);
                 updateStats(todayData);
@@ -1373,11 +1283,7 @@
                 updateLastUpdateTime(result.fetched_at);
 
             } catch (error) {
-                debugLog('❌ Error loading data', { 
-                    error: error.message,
-                    stack: error.stack 
-                });
-                console.error('Full error:', error);
+                console.error('Failed to load data:', error);
                 showError(error.message);
             }
         }
@@ -1398,12 +1304,6 @@
             const startTimestamp = startDate.getTime() / 1000;
             const endTimestamp = endDate.getTime() / 1000;
             
-            debugLog('🔍 Filtering data', {
-                startDate: startDate.toISOString(),
-                endDate: endDate.toISOString(),
-                totalItems: data.length
-            });
-            
             let filtered = data.filter(item => {
                 if (!item.createdAt || !item.createdAt._seconds) {
                     return false;
@@ -1413,8 +1313,6 @@
             });
             
             if (filtered.length === 0) {
-                debugLog('⚠️ No data for today, expanding to last 7 days');
-                
                 const sevenDaysAgo = startDate.getTime() / 1000 - (7 * 24 * 60 * 60);
                 
                 filtered = data.filter(item => {
@@ -1424,10 +1322,8 @@
                     return item.createdAt._seconds >= sevenDaysAgo;
                 });
                 
-                debugLog(`✅ Found items in last 7 days`, { count: filtered.length });
                 updateDateLabel('Last 7 Days');
             } else {
-                debugLog(`✅ Found items for today`, { count: filtered.length });
                 updateDateLabel('Today');
             }
             
@@ -1459,12 +1355,9 @@
         // ============================================================
         function renderTable(data) {
             const container = document.getElementById('table-container');
-            
-            // 立即清除loading类和转圈动画
             container.className = '';
             
             if (!data || data.length === 0) {
-                debugLog('⚠️ No data to render');
                 container.innerHTML = `
                     <div style="text-align: center; padding: 60px 20px; color: #6c757d;">
                         <p style="font-size: 3rem; margin-bottom: 20px;">📅</p>
@@ -1476,8 +1369,6 @@
                 `;
                 return;
             }
-
-            debugLog('🎨 Rendering table', { rows: data.length });
 
             const html = `
                 <table class="leaderboard-table">
@@ -1496,7 +1387,6 @@
             `;
 
             container.innerHTML = html;
-            debugLog('✅ Table rendering complete');
         }
 
         function renderTableRow(item, index) {
@@ -1594,8 +1484,6 @@
                 <span>📊</span>
                 <span>Average</span>
             `;
-
-            debugLog('📊 Stats updated', { topScore, activePlayers: data.length, newCount, avgScore: avg });
         }
 
         // ============================================================
@@ -1668,8 +1556,6 @@
                 document.getElementById('biggest-climber').textContent = '-';
                 document.getElementById('climb-info').textContent = 'Not enough data';
             }
-
-            debugLog('🔥 Trending updated');
         }
 
         // ============================================================
@@ -1701,7 +1587,6 @@
             }
 
             element.innerHTML = `<span>🕐</span><span>${timeText}</span>`;
-            debugLog('⏰ Update time displayed', { timeText });
         }
 
         // ============================================================
@@ -1719,12 +1604,9 @@
                 viewing.setHours(0, 0, 0, 0);
                 
                 if (viewing.getTime() === today.getTime()) {
-                    debugLog('🔄 Auto-refreshing data...');
                     loadTodayLeaderboard();
                 }
             }, CONFIG.updateInterval);
-            
-            debugLog(`⏰ Auto-refresh enabled (every ${CONFIG.updateInterval / 1000}s)`);
         }
 
         // ============================================================
@@ -1745,9 +1627,8 @@
         }
 
         function showError(errorMessage = 'Unknown error') {
-            debugLog('❌ Showing error to user', { error: errorMessage });
             const container = document.getElementById('table-container');
-            container.className = ''; // 清除loading类
+            container.className = '';
             container.innerHTML = `
                 <div style="text-align: center; padding: 60px 20px; color: #6c757d;">
                     <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
@@ -1760,9 +1641,6 @@
                     </p>
                     <button class="btn-date" onclick="loadTodayLeaderboard()">
                         🔄 Retry
-                    </button>
-                    <button class="btn-date" onclick="toggleDebug()" style="margin-left: 10px;">
-                        🐛 View Debug Log
                     </button>
                 </div>
             `;
