@@ -1311,48 +1311,34 @@
 
         // ⭐ 核心功能：过滤今天的数据
      function filterTodayData(data) {
-    // 🔧 临时方案：如果今天没有数据，显示最近7天的
-    const targetDate = new Date(currentDate);
+    // 先尝试今天
+    const todayData = filterByDate(data, 0); // 0 = today
     
-    const startDate = new Date(Date.UTC(
-        targetDate.getUTCFullYear(),
-        targetDate.getUTCMonth(),
-        targetDate.getUTCDate(),
-        0, 0, 0, 0
-    ));
-    
-    const endDate = new Date(startDate);
-    endDate.setUTCDate(endDate.getUTCDate() + 1);
-    
-    const startTimestamp = startDate.getTime() / 1000;
-    const endTimestamp = endDate.getTime() / 1000;
-    
-    let filtered = data.filter(item => {
-        if (!item.createdAt || !item.createdAt._seconds) return false;
-        const itemTimestamp = item.createdAt._seconds;
-        return itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
-    });
-    
-    // ⭐ 如果今天没有数据，改为显示最近7天
-    if (filtered.length === 0) {
-        console.warn('⚠️ No data for today, showing last 7 days instead');
-        const sevenDaysAgo = startDate.getTime() / 1000 - (7 * 24 * 60 * 60);
-        filtered = data.filter(item => {
-            if (!item.createdAt || !item.createdAt._seconds) return false;
-            return item.createdAt._seconds >= sevenDaysAgo;
-        });
-        
-        // 更新页面提示
-        document.getElementById('current-date').textContent += ' (Showing last 7 days)';
+    if (todayData.length > 0) {
+        console.log(`✅ Found ${todayData.length} items today`);
+        updateDateLabel('Today');
+        return todayData;
     }
     
-    console.log(`✅ Filtered ${filtered.length} items`);
-    
-    return filtered
-        .sort((a, b) => (b.kills || 0) - (a.kills || 0))
-        .slice(0, CONFIG.maxDisplayRanks);
+    // 没有今天的，扩展到7天
+    console.log('⚠️ No data today, showing last 7 days');
+    const weekData = filterByDateRange(data, 7);
+    updateDateLabel('Last 7 Days');
+    return weekData;
 }
 
+function updateDateLabel(label) {
+    const dateElement = document.getElementById('current-date');
+    const originalDate = currentDate.toLocaleDateString('en-US', { 
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+    });
+    
+    if (label === 'Today') {
+        dateElement.textContent = originalDate;
+    } else {
+        dateElement.innerHTML = `${originalDate} <span style="color: #ff6b6b; font-size: 0.85rem;">(Showing ${label})</span>`;
+    }
+}
         // ============================================================
         // 🎨 渲染功能
         // ============================================================
