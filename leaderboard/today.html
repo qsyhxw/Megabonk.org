@@ -1311,35 +1311,60 @@
 
         // ⭐ 核心功能：过滤今天的数据
         function filterTodayData(data) {
-            // 获取目标日期的起始和结束时间戳（UTC）
-            const targetDate = new Date(currentDate);
-            targetDate.setHours(0, 0, 0, 0);
-            const nextDay = new Date(targetDate);
-            nextDay.setDate(nextDay.getDate() + 1);
-            
-            const startTimestamp = targetDate.getTime() / 1000;
-            const endTimestamp = nextDay.getTime() / 1000;
-            
-            console.log(`🔍 Filtering data between:`, {
-                start: new Date(startTimestamp * 1000).toISOString(),
-                end: new Date(endTimestamp * 1000).toISOString()
-            });
-            
-            // 过滤数据
-            const filtered = data.filter(item => {
-                if (!item.createdAt || !item.createdAt._seconds) {
-                    return false;
-                }
-                
-                const itemTimestamp = item.createdAt._seconds;
-                return itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
-            });
-            
-            // 按分数排序并限制数量
-            return filtered
-                .sort((a, b) => (b.kills || 0) - (a.kills || 0))
-                .slice(0, CONFIG.maxDisplayRanks);
+    // ✅ 使用 UTC 时间计算今天的范围
+    const targetDate = new Date(currentDate);
+    
+    // 使用 UTC 方法设置时间
+    const startDate = new Date(Date.UTC(
+        targetDate.getUTCFullYear(),
+        targetDate.getUTCMonth(),
+        targetDate.getUTCDate(),
+        0, 0, 0, 0
+    ));
+    
+    const endDate = new Date(startDate);
+    endDate.setUTCDate(endDate.getUTCDate() + 1);
+    
+    const startTimestamp = startDate.getTime() / 1000;
+    const endTimestamp = endDate.getTime() / 1000;
+    
+    console.log(`🔍 Filtering data for UTC date:`, {
+        start: startDate.toISOString(),
+        end: endDate.toISOString(),
+        startTimestamp,
+        endTimestamp
+    });
+    
+    // 过滤数据
+    const filtered = data.filter(item => {
+        if (!item.createdAt || !item.createdAt._seconds) {
+            console.warn('⚠️ Item missing createdAt:', item);
+            return false;
         }
+        
+        const itemTimestamp = item.createdAt._seconds;
+        const isInRange = itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
+        
+        // 调试：输出前几个数据项
+        if (filtered.length < 3) {
+            console.log('📊 Item check:', {
+                player: item.playerName,
+                timestamp: itemTimestamp,
+                date: new Date(itemTimestamp * 1000).toISOString(),
+                inRange: isInRange
+            });
+        }
+        
+        return isInRange;
+    });
+    
+    console.log(`✅ Filtered ${filtered.length} items for today`);
+    
+    // 按分数排序并限制数量
+    return filtered
+        .sort((a, b) => (b.kills || 0) - (a.kills || 0))
+        .slice(0, CONFIG.maxDisplayRanks);
+}
 
         // ============================================================
         // 🎨 渲染功能
