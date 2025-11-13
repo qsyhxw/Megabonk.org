@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Activity - Latest Megabonk Submissions & Trending Builds</title>
+    <meta name="description" content="View the latest Megabonk player submissions from the last 7 days. See recent high scores, trending builds, and active players updated every 5 minutes.">
+    <meta name="keywords" content="megabonk recent, latest submissions, recent activity, new scores, trending builds, active players">
+
+    <link rel="canonical" href="https://megabonk.org/leaderboard/recent">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+
+    <!-- Schema.org Article Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Recent Activity - Latest Megabonk Submissions",
+      "description": "Real-time recent player submissions for Megabonk, updated every 5 minutes with the latest scores, trending builds, and active players.",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2025-01-15T00:00:00Z",
+      "author": {
+        "@type": "Organization",
+        "name": "Megabonk.org"
+      }
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://megabonk.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Leaderboard",
+          "item": "https://megabonk.org/leaderboard/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Recent Activity",
+          "item": "https://megabonk.org/leaderboard/recent"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #212529;
+        }
+
+        /* Header & Navigation */
+        .site-header {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 800;
+            transition: transform 0.2s;
+        }
+
+        .site-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            color: #495057;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .main-nav a:hover {
+            color: #667eea;
+        }
+
+        .main-nav a.active {
+            color: #667eea;
+        }
+
+        .main-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #667eea;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb-list {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .breadcrumb-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .breadcrumb-list a {
+            color: #667eea;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumb-list a:hover {
+            opacity: 0.8;
+        }
+
+        .breadcrumb-separator {
+            color: #adb5bd;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #495057;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* Live Badge */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .live-indicator {
+            width: 10px;
+            height: 10px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Time Range Filter */
+        .time-filter {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .current-range {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-filter {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            color: #495057;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-filter:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        .btn-filter.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Stats Dashboard */
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #6c757d;
+        }
+
+        /* Card */
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .update-badge {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-content {
+            padding: 0;
+        }
+
+        /* Table */
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .leaderboard-table th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 700;
+            color: #495057;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .leaderboard-table tbody tr {
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .leaderboard-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .leaderboard-table td {
+            padding: 16px 20px;
+            color: #212529;
+        }
+
+        /* Rank styles */
+        .rank-cell {
+            width: 80px;
+            text-align: center;
+        }
+
+        .rank {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        /* New Badge */
+        .new-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #28a745;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 8px;
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Player Cell */
+        .player-cell {
+            min-width: 200px;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .player-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #212529;
+        }
+
+        /* Character Badge */
+        .character-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .character-badge:hover {
+            background: #1976d2;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .character-badge img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        /* Score */
+        .score-cell {
+            text-align: right;
+        }
+
+        .score {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        /* Time Column */
+        .time-cell {
+            color: #6c757d;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .time-cell .time-icon {
+            margin-right: 4px;
+        }
+
+        /* Trending Section */
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .trending-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .trending-card:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .trending-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .trending-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #495057;
+        }
+
+        .trending-badge {
+            padding: 4px 10px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .trending-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .trending-value a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .trending-value a:hover {
+            opacity: 0.8;
+        }
+
+        .trending-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .quick-link {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #495057;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-link:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background: rgba(255, 255, 255, 0.98);
+            margin-top: 40px;
+            border-top: 4px solid #667eea;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .time-filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-controls {
+                width: 100%;
+            }
+
+            .btn-filter {
+                flex: 1;
+            }
+
+            .stats-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .trending-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .leaderboard-table th,
+            .leaderboard-table td {
+                padding: 12px 10px;
+                font-size: 0.85rem;
+            }
+
+            .time-cell {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Ad Container */
+        .ad-box {
+            margin: 30px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="header-top">
+            <a href="https://megabonk.org/" class="site-logo">
+                <span>🏆</span>
+                <span>Megabonk</span>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="https://megabonk.org/guides/builds/">Builds</a>
+                <a href="https://megabonk.org/guides/characters/">Characters</a>
+                <a href="https://megabonk.org/database/">Database</a>
+                <a href="https://megabonk.org/tier-lists/">Tier Lists</a>
+                <a href="https://megabonk.org/leaderboard/" class="active">Leaderboard</a>
+            </nav>
+        </div>
+        <nav class="breadcrumb">
+            <ul class="breadcrumb-list">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li class="breadcrumb-separator">›</li>
+                <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+                <li class="breadcrumb-separator">›</li>
+                <li>Recent Activity</li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>🔥 Recent Activity</h1>
+            <p>Latest Player Submissions & Trending Builds</p>
+            <div class="live-badge">
+                <span class="live-indicator"></span>
+                <span>LIVE - Updates Every 5 Minutes</span>
+            </div>
+        </div>
+
+        <!-- Time Range Filter -->
+        <div class="time-filter">
+            <div class="current-range">
+                <span>📅</span>
+                <span>Showing submissions from <span id="range-text">last 7 days</span></span>
+            </div>
+            <div class="filter-controls">
+                <button class="btn-filter active" data-days="7" onclick="setDaysFilter(7)">
+                    Last 7 Days
+                </button>
+                <button class="btn-filter" data-days="30" onclick="setDaysFilter(30)">
+                    Last 30 Days
+                </button>
+                <button class="btn-filter" data-days="90" onclick="setDaysFilter(90)">
+                    Last 3 Months
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Dashboard -->
+        <div class="stats-dashboard">
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-label">Highest Recent Score</div>
+                <div class="stat-value" id="top-recent-score">-</div>
+                <div class="stat-change">
+                    <span>🏆</span>
+                    <span id="top-score-info">Loading...</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-label">Active Players</div>
+                <div class="stat-value" id="active-players">-</div>
+                <div class="stat-change">
+                    <span>📊</span>
+                    <span id="players-info">Loading...</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-label">Latest Submission</div>
+                <div class="stat-value" id="latest-time">-</div>
+                <div class="stat-change">
+                    <span>🕐</span>
+                    <span id="latest-info">Loading...</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-label">Avg Recent Score</div>
+                <div class="stat-value" id="avg-recent-score">-</div>
+                <div class="stat-change">
+                    <span>📊</span>
+                    <span id="avg-info">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Submissions Table -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span>🔥</span>
+                    <span>Latest Submissions</span>
+                </h2>
+                <div class="update-badge" id="last-update">
+                    <span>🕐</span>
+                    <span>Loading...</span>
+                </div>
+            </div>
+            <div class="card-content">
+                <div id="table-container" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading recent submissions...</p>
+                </div>
+            </div>
+            <div class="quick-links">
+                <a href="https://megabonk.org/leaderboard/" class="quick-link">
+                    <span>🌐</span>
+                    <span>Global Rankings (All-Time)</span>
+                </a>
+                <a href="https://megabonk.org/leaderboard/official" class="quick-link">
+                    <span>📤</span>
+                    <span>Official Leaderboard</span>
+                </a>
+                <a href="https://megabonk.org/leaderboard/verified" class="quick-link">
+                    <span>✅</span>
+                    <span>Verified Rankings</span>
+                </a>
+                <a href="https://megabonk.org/leaderboard/builds" class="quick-link">
+                    <span>🏗️</span>
+                    <span>Top Builds Analysis</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ADS: In-Article #1 -->
+        <div class="ad-box">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-client="ca-pub-8830315294299920"
+                 data-ad-slot="4372980572"
+                 data-ad-format="fluid"
+                 data-ad-layout="in-article"></ins>
+        </div>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+        <!-- Trending Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span>🔥</span>
+                    <span>Trending in Recent Submissions</span>
+                </h2>
+            </div>
+            <div class="trending-grid" id="trending-container">
+                <div class="trending-card">
+                    <div class="trending-header">
+                        <div class="trending-title">Most Active Character</div>
+                        <div class="trending-badge">HOT</div>
+                    </div>
+                    <div class="trending-value" id="trending-character">-</div>
+                    <div class="trending-description" id="character-count">Loading...</div>
+                </div>
+
+                <div class="trending-card">
+                    <div class="trending-header">
+                        <div class="trending-title">Popular Weapon</div>
+                        <div class="trending-badge">HOT</div>
+                    </div>
+                    <div class="trending-value" id="trending-weapon">-</div>
+                    <div class="trending-description" id="weapon-count">Loading...</div>
+                </div>
+
+                <div class="trending-card">
+                    <div class="trending-header">
+                        <div class="trending-title">Most Recent</div>
+                        <div class="trending-badge">🆕</div>
+                    </div>
+                    <div class="trending-value" id="most-recent-player">-</div>
+                    <div class="trending-description" id="recent-info">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About This Page -->
+        <div class="card">
+            <div class="card-content" style="padding: 30px;">
+                <h2 style="color: #495057; margin-bottom: 20px; font-size: 1.5rem;">📊 About Recent Activity</h2>
+                <p style="color: #6c757d; line-height: 1.7; margin-bottom: 20px;">
+                    This page shows the <strong style="color: #667eea;">most recent player submissions</strong> sorted by submission time (newest first), giving you a real-time view of who's actively playing and pushing for high scores right now.
+                </p>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea; margin-bottom: 20px;">
+                    <h3 style="color: #495057; margin-bottom: 12px; font-size: 1.1rem;">🔄 Key Differences from Global Leaderboard:</h3>
+                    <ul style="color: #6c757d; line-height: 1.8; margin-left: 20px;">
+                        <li><strong>Sort Order:</strong> Recent Activity shows newest submissions first, while <a href="https://megabonk.org/leaderboard/" style="color: #667eea; text-decoration: none; font-weight: 600;">Global Leaderboard</a> sorts by highest score</li>
+                        <li><strong>Time Range:</strong> Filtered to last 7/30/90 days vs. all-time records</li>
+                        <li><strong>Purpose:</strong> See current player activity and trending builds vs. historical top scores</li>
+                    </ul>
+                </div>
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 12px; border-left: 4px solid #1976d2;">
+                    <h3 style="color: #495057; margin-bottom: 12px; font-size: 1.1rem;">⏰ Update Frequency:</h3>
+                    <p style="color: #6c757d; margin: 0; line-height: 1.7;">
+                        Data updates automatically <strong style="color: #1976d2;">every 5 minutes</strong>. 
+                        The "NEW" badge appears on submissions from the last 6 hours.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADS: Bottom Responsive Display -->
+        <div class="ad-box" aria-label="advertisement">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8830315294299920"
+                 data-ad-slot="4804225419"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Guides</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                    <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+                    <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+                    <li><a href="https://megabonk.org/guides/achievements/">Achievements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Database</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                    <li><a href="https://megabonk.org/database/items/">Items</a></li>
+                    <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Leaderboard</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/leaderboard/">Global Rankings</a></li>
+                    <li><a href="https://megabonk.org/leaderboard/recent">Recent Activity</a></li>
+                    <li><a href="https://megabonk.org/leaderboard/official">Official Portal</a></li>
+                    <li><a href="https://megabonk.org/leaderboard/verified">Verification</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                    <li><a href="https://megabonk.org/tier-lists/items/">Items Tier List</a></li>
+                    <li><a href="https://megabonk.org/tier-lists/tomes/">Tomes Tier List</a></li>
+                    <li><a href="https://megabonk.org/download/megabonk">Download Game</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Megabonk.org - Community Resource for Megabonk Game</p>
+            <p><a href="https://megabonk.org/privacy-policy/">Privacy Policy</a> | Not affiliated with the official game</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // 🎯 配置区域
+        // ============================================================
+        const CONFIG = {
+            dataUrl: 'https://megabonk.org/data/leaderboard-data.json',
+            updateInterval: 300000,  // 5分钟
+            maxDisplayRanks: 50,
+            defaultDays: 7,
+            newEntryThreshold: 6     // 6小时内显示NEW标签
+        };
+
+        // ============================================================
+        // 📊 角色映射数据
+        // ============================================================
+        const CHARACTER_MAP = {
+            'fox': {
+                name: 'Fox',
+                image: 'https://megabonk.org/images/guides/characters/Fox.png',
+                guideUrl: 'https://megabonk.org/guides/characters/fox-kitsune-guide'
+            },
+            'ninja': {
+                name: 'Ninja',
+                image: 'https://megabonk.org/images/guides/characters/Ninja.png',
+                guideUrl: 'https://megabonk.org/guides/characters/ninja-unlock-guide'
+            },
+            'calcium': {
+                name: 'Calcium',
+                image: 'https://megabonk.org/images/guides/characters/Calcium.png',
+                guideUrl: 'https://megabonk.org/guides/characters/calcium-guide'
+            },
+            'cl4nk': {
+                name: 'CL4NK',
+                image: 'https://megabonk.org/images/guides/characters/CL4NK.png',
+                guideUrl: 'https://megabonk.org/guides/characters/cl4nk-guide'
+            },
+            'megachad': {
+                name: 'Megachad',
+                image: 'https://megabonk.org/images/guides/characters/Megachad.png',
+                guideUrl: 'https://megabonk.org/guides/characters/megachad-guide'
+            },
+            'monke': {
+                name: 'Monke',
+                image: 'https://megabonk.org/images/guides/characters/Monke.png',
+                guideUrl: 'https://megabonk.org/guides/characters/monke-guide'
+            },
+            'bush': {
+                name: 'Bush',
+                image: 'https://megabonk.org/images/guides/characters/Bush.png',
+                guideUrl: 'https://megabonk.org/guides/characters/bush-guide'
+            },
+            'siroofie': {
+                name: 'Sir Oofie',
+                image: 'https://megabonk.org/images/guides/characters/Sir_Oofie.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-oofie-guide'
+            },
+            'athena': {
+                name: 'Athena',
+                image: 'https://megabonk.org/images/guides/characters/Athena.png',
+                guideUrl: 'https://megabonk.org/guides/characters/athena-guide'
+            },
+            'ogre': {
+                name: 'Ogre',
+                image: 'https://megabonk.org/images/guides/characters/Ogre.png',
+                guideUrl: 'https://megabonk.org/guides/characters/ogre-guide'
+            },
+            'dicehead': {
+                name: 'Dicehead',
+                image: 'https://megabonk.org/images/guides/characters/Dicehead.png',
+                guideUrl: 'https://megabonk.org/guides/characters/dicehead-guide'
+            },
+            'bandit': {
+                name: 'Bandit',
+                image: 'https://megabonk.org/images/guides/characters/Bandit.png',
+                guideUrl: 'https://megabonk.org/guides/characters/bandit-guide'
+            },
+            'amog': {
+                name: 'Amog',
+                image: 'https://megabonk.org/images/guides/characters/Amog.png',
+                guideUrl: 'https://megabonk.org/guides/characters/amog-guide'
+            },
+            'robinette': {
+                name: 'Robinette',
+                image: 'https://megabonk.org/images/guides/characters/Robinette.png',
+                guideUrl: 'https://megabonk.org/guides/characters/robinette-guide'
+            },
+            'spaceman': {
+                name: 'Spaceman',
+                image: 'https://megabonk.org/images/guides/characters/Spaceman.png',
+                guideUrl: 'https://megabonk.org/guides/characters/spaceman-guide'
+            },
+            'vlad': {
+                name: 'Vlad',
+                image: 'https://megabonk.org/images/guides/characters/Vlad.png',
+                guideUrl: 'https://megabonk.org/guides/characters/vlad-guide'
+            },
+            'noelle': {
+                name: 'Noelle',
+                image: 'https://megabonk.org/images/guides/characters/Noelle.png',
+                guideUrl: 'https://megabonk.org/guides/characters/noelle-guide'
+            },
+            'birdo': {
+                name: 'Birdo',
+                image: 'https://megabonk.org/images/guides/characters/Birdo.png',
+                guideUrl: 'https://megabonk.org/guides/characters/birdo-guide'
+            },
+            'tonymczoom': {
+                name: 'Tony McZoom',
+                image: 'https://megabonk.org/images/guides/characters/Tony_McZoom.png',
+                guideUrl: 'https://megabonk.org/guides/characters/tony-mczoom-guide'
+            },
+            'sirchadwell': {
+                name: 'Sir Chadwell',
+                image: 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png',
+                guideUrl: 'https://megabonk.org/guides/characters/sir-chadwell-guide'
+            }
+        };
+
+        // 武器URL映射（简化版）
+        const WEAPON_URLS = {
+            'flamewalker': 'https://megabonk.org/database/weapons/flamewalker',
+            'frostwalker': 'https://megabonk.org/database/weapons/frostwalker',
+            'katana': 'https://megabonk.org/database/weapons/katana',
+            'lightningstaff': 'https://megabonk.org/database/weapons/lightning-staff',
+            'bow': 'https://megabonk.org/database/weapons/bow',
+            'revolver': 'https://megabonk.org/database/weapons/revolver',
+            'blackhole': 'https://megabonk.org/database/weapons/black-hole',
+            'sword': 'https://megabonk.org/database/weapons/sword',
+            'axe': 'https://megabonk.org/database/weapons/axe',
+            'dexecutioner': 'https://megabonk.org/database/weapons/dexecutioner'
+        };
+
+        // 国旗映射
+        const COUNTRY_FLAGS = {
+            'TR': '🇹🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷',
+            'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'JP': '🇯🇵',
+            'KR': '🇰🇷', 'CN': '🇨🇳', 'BR': '🇧🇷', 'MX': '🇲🇽', 'RU': '🇷🇺',
+            'IN': '🇮🇳', 'NL': '🇳🇱', 'SE': '🇸🇪', 'NO': '🇳🇴', 'DK': '🇩🇰'
+        };
+
+        // ============================================================
+        // 💾 全局变量
+        // ============================================================
+        let leaderboardData = [];
+        let currentDays = CONFIG.defaultDays;
+        let autoRefreshTimer = null;
+
+        // ============================================================
+        // 🚀 初始化
+        // ============================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('🔥 Initializing Recent Activity page...');
+            loadRecentActivity();
+            startAutoRefresh();
+        });
+
+        // ============================================================
+        // 📡 数据加载
+        // ============================================================
+        async function loadRecentActivity() {
+            try {
+                console.log('📡 Fetching data from:', CONFIG.dataUrl);
+                
+                const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+                leaderboardData = result.data || [];
+                
+                console.log(`✅ Loaded ${leaderboardData.length} total entries`);
+                
+                // 过滤最近X天的数据
+                const recentData = filterRecentData(leaderboardData, currentDays);
+                console.log(`📅 Found ${recentData.length} submissions in last ${currentDays} days`);
+                
+                // 渲染页面
+                renderTable(recentData);
+                updateStats(recentData);
+                updateTrending(recentData);
+                updateLastUpdateTime(result.fetched_at);
+
+            } catch (error) {
+                console.error('❌ Failed to load data:', error);
+                showError();
+            }
+        }
+
+        // ============================================================
+        // 🔍 核心过滤逻辑 - 按时间过滤并按时间排序
+        // ============================================================
+        function filterRecentData(data, days) {
+            const now = Date.now();
+            const cutoffTimestamp = (now / 1000) - (days * 24 * 60 * 60);
+            
+            console.log(`🔍 Filtering submissions from last ${days} days`);
+            console.log(`Cutoff timestamp: ${new Date(cutoffTimestamp * 1000).toISOString()}`);
+            
+            const filtered = data.filter(item => {
+                if (!item.createdAt || !item.createdAt._seconds) {
+                    return false;
+                }
+                return item.createdAt._seconds >= cutoffTimestamp;
+            });
+            
+            console.log(`✅ Found ${filtered.length} recent submissions`);
+            
+            // ⭐ 按提交时间排序（最新的在前），而不是按分数
+            return filtered
+                .sort((a, b) => {
+                    const timeA = a.createdAt?._seconds || 0;
+                    const timeB = b.createdAt?._seconds || 0;
+                    return timeB - timeA;  // 降序：最新的在最上面
+                })
+                .slice(0, CONFIG.maxDisplayRanks);
+        }
+
+        // ============================================================
+        // 🎨 渲染表格
+        // ============================================================
+        function renderTable(data) {
+            const container = document.getElementById('table-container');
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = `
+                    <div class="loading">
+                        <p style="font-size: 3rem; margin-bottom: 20px;">📅</p>
+                        <p style="font-size: 1.2rem;">No submissions in the last ${currentDays} days</p>
+                        <p style="font-size: 0.9rem; color: #6c757d; margin-top: 10px;">
+                            Try a longer time range or check the <a href="https://megabonk.org/leaderboard/" style="color: #667eea; text-decoration: none; font-weight: 600;">Global Leaderboard</a>
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = `
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th class="rank-cell">#</th>
+                            <th class="player-cell">Player</th>
+                            <th>Character</th>
+                            <th class="score-cell">Kills</th>
+                            <th>Submitted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.map((item, index) => renderTableRow(item, index)).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function renderTableRow(item, index) {
+            // 判断是否为新条目（最近6小时）
+            const now = Date.now();
+            const itemTime = (item.createdAt?._seconds || 0) * 1000;
+            const hoursDiff = (now - itemTime) / (1000 * 60 * 60);
+            const isNew = hoursDiff < CONFIG.newEntryThreshold;
+            
+            // 获取角色信息
+            const character = item.character || 'Unknown';
+            const charKey = normalizeKey(character);
+            const charInfo = CHARACTER_MAP[charKey] || { name: character, image: null, guideUrl: '#' };
+            
+            // 国旗
+            const countryFlag = COUNTRY_FLAGS[item.country?.code] || '🌍';
+            
+            // 提交时间
+            const submittedAt = item.createdAt?._seconds 
+                ? formatTimeAgo(item.createdAt._seconds) 
+                : 'Unknown';
+            
+            return `
+                <tr>
+                    <td class="rank-cell">
+                        <span class="rank">#${index + 1}</span>
+                    </td>
+                    <td class="player-cell">
+                        <div class="player-info">
+                            <span style="font-size: 1.5rem;">${countryFlag}</span>
+                            <div class="player-name">
+                                ${escapeHtml(item.playerName || 'Anonymous')}
+                                ${isNew ? '<span class="new-badge">NEW</span>' : ''}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="${charInfo.guideUrl}" 
+                           class="character-badge" 
+                           title="View ${escapeHtml(charInfo.name)} Guide">
+                            ${charInfo.image ? `<img src="${charInfo.image}" alt="${escapeHtml(charInfo.name)}">` : ''}
+                            <span>${escapeHtml(charInfo.name)}</span>
+                        </a>
+                    </td>
+                    <td class="score-cell">
+                        <span class="score">${formatNumber(item.kills || 0)}</span>
+                    </td>
+                    <td class="time-cell">
+                        <span class="time-icon">⏰</span>
+                        <span>${submittedAt}</span>
+                    </td>
+                </tr>
+            `;
+        }
+
+        // ============================================================
+        // 📊 统计更新
+        // ============================================================
+        function updateStats(data) {
+            if (!data || data.length === 0) {
+                document.getElementById('top-recent-score').textContent = '0';
+                document.getElementById('active-players').textContent = '0';
+                document.getElementById('latest-time').textContent = '-';
+                document.getElementById('avg-recent-score').textContent = '0';
+                
+                document.getElementById('top-score-info').textContent = 'No data';
+                document.getElementById('players-info').textContent = 'No submissions';
+                document.getElementById('latest-info').textContent = 'No data';
+                document.getElementById('avg-info').textContent = 'No data';
+                return;
+            }
+
+            // 最高分（在这个时间范围内）
+            const topScore = Math.max(...data.map(item => item.kills || 0));
+            document.getElementById('top-recent-score').textContent = formatNumber(topScore);
+            document.getElementById('top-score-info').textContent = `In last ${currentDays} days`;
+
+            // 活跃玩家数
+            document.getElementById('active-players').textContent = formatNumber(data.length);
+            document.getElementById('players-info').textContent = `${data.length} unique submissions`;
+
+            // 最新提交时间
+            const latestTimestamp = data[0].createdAt?._seconds || 0;
+            const latestTimeAgo = formatTimeAgo(latestTimestamp);
+            document.getElementById('latest-time').textContent = latestTimeAgo;
+            document.getElementById('latest-info').textContent = data[0].playerName || 'Anonymous';
+
+            // 平均分数
+            const sum = data.reduce((acc, item) => acc + (item.kills || 0), 0);
+            const avg = Math.round(sum / data.length);
+            document.getElementById('avg-recent-score').textContent = formatNumber(avg);
+            document.getElementById('avg-info').textContent = 'Average';
+        }
+
+        // ============================================================
+        // 🔥 趋势更新
+        // ============================================================
+        function updateTrending(data) {
+            if (!data || data.length === 0) {
+                document.getElementById('trending-character').textContent = '-';
+                document.getElementById('character-count').textContent = 'No data';
+                document.getElementById('trending-weapon').textContent = '-';
+                document.getElementById('weapon-count').textContent = 'No data';
+                document.getElementById('most-recent-player').textContent = '-';
+                document.getElementById('recent-info').textContent = 'No data';
+                return;
+            }
+
+            // 最常用角色
+            const characterCount = {};
+            data.forEach(item => {
+                const char = item.character || 'Unknown';
+                characterCount[char] = (characterCount[char] || 0) + 1;
+            });
+            
+            if (Object.keys(characterCount).length > 0) {
+                const topChar = Object.keys(characterCount).reduce((a, b) => 
+                    characterCount[a] > characterCount[b] ? a : b
+                );
+                const charKey = normalizeKey(topChar);
+                const charInfo = CHARACTER_MAP[charKey] || { name: topChar, guideUrl: '#' };
+                
+                document.getElementById('trending-character').innerHTML = `
+                    <a href="${charInfo.guideUrl}">${escapeHtml(topChar)}</a>
+                `;
+                document.getElementById('character-count').textContent = 
+                    `Used in ${characterCount[topChar]} recent submissions`;
+            }
+
+            // 最常用武器
+            const weaponCount = {};
+            data.forEach(item => {
+                const weapon = (item.weapons || [])[0];
+                if (weapon) {
+                    weaponCount[weapon] = (weaponCount[weapon] || 0) + 1;
+                }
+            });
+            
+            if (Object.keys(weaponCount).length > 0) {
+                const topWeapon = Object.keys(weaponCount).reduce((a, b) => 
+                    weaponCount[a] > weaponCount[b] ? a : b
+                );
+                const weaponKey = normalizeKey(topWeapon);
+                const weaponUrl = WEAPON_URLS[weaponKey] || 'https://megabonk.org/database/weapons/';
+                
+                document.getElementById('trending-weapon').innerHTML = `
+                    <a href="${weaponUrl}">${escapeHtml(topWeapon)}</a>
+                `;
+                document.getElementById('weapon-count').textContent = 
+                    `Used in ${weaponCount[topWeapon]} recent builds`;
+            } else {
+                document.getElementById('trending-weapon').textContent = '-';
+                document.getElementById('weapon-count').textContent = 'No data';
+            }
+
+            // 最新玩家
+            const mostRecent = data[0];
+            document.getElementById('most-recent-player').textContent = 
+                escapeHtml(mostRecent.playerName || 'Anonymous');
+            const timeAgo = formatTimeAgo(mostRecent.createdAt?._seconds || 0);
+            document.getElementById('recent-info').textContent = 
+                `Submitted ${timeAgo} with ${formatNumber(mostRecent.kills || 0)} kills`;
+        }
+
+        // ============================================================
+        // ⏰ 更新时间显示
+        // ============================================================
+        function updateLastUpdateTime(timestamp) {
+            const element = document.getElementById('last-update');
+            
+            if (!timestamp) {
+                element.innerHTML = '<span>🕐</span><span>Unknown</span>';
+                return;
+            }
+
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+
+            let timeText;
+            if (minutes < 1) {
+                timeText = 'Just now';
+            } else if (minutes < 60) {
+                timeText = `${minutes}m ago`;
+            } else {
+                timeText = date.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+            }
+
+            element.innerHTML = `<span>🕐</span><span>${timeText}</span>`;
+        }
+
+        // ============================================================
+        // 🎛️ 时间范围过滤器
+        // ============================================================
+        function setDaysFilter(days) {
+            currentDays = days;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.btn-filter').forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.days) === days) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // 更新范围文本
+            const rangeText = days === 7 ? 'last 7 days' : 
+                            days === 30 ? 'last 30 days' : 
+                            'last 3 months';
+            document.getElementById('range-text').textContent = rangeText;
+            
+            // 重新过滤数据
+            const recentData = filterRecentData(leaderboardData, days);
+            renderTable(recentData);
+            updateStats(recentData);
+            updateTrending(recentData);
+            
+            console.log(`📅 Filter changed to ${days} days, showing ${recentData.length} items`);
+        }
+
+        // ============================================================
+        // 🔄 自动刷新
+        // ============================================================
+        function startAutoRefresh() {
+            if (autoRefreshTimer) {
+                clearInterval(autoRefreshTimer);
+            }
+            
+            autoRefreshTimer = setInterval(() => {
+                console.log('🔄 Auto-refreshing recent activity...');
+                loadRecentActivity();
+            }, CONFIG.updateInterval);
+            
+            console.log(`⏰ Auto-refresh enabled (every ${CONFIG.updateInterval / 1000}s)`);
+        }
+
+        // ============================================================
+        // 🛠️ 工具函数
+        // ============================================================
+        function normalizeKey(str) {
+            return str.toLowerCase().replace(/[^a-z0-9]/g, '');
+        }
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function formatTimeAgo(timestamp) {
+            const now = Date.now();
+            const diff = now - (timestamp * 1000);
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+            
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            if (days === 1) return 'Yesterday';
+            return `${days}d ago`;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showError() {
+            document.getElementById('table-container').innerHTML = `
+                <div class="loading">
+                    <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 15px;">Failed to Load Data</p>
+                    <p style="font-size: 0.9rem; color: #6c757d; margin-bottom: 20px;">
+                        Please check your connection and try again
+                    </p>
+                    <button class="btn-filter" onclick="loadRecentActivity()" style="background: #667eea; color: white; border-color: #667eea;">
+                        🔄 Retry
+                    </button>
+                </div>
+            `;
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // 页面卸载时清理
+        window.addEventListener('beforeunload', () => {
+            if (autoRefreshTimer) {
+                clearInterval(autoRefreshTimer);
+            }
+        });
+    </script>
+</body>
+</html>
