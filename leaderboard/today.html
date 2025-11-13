@@ -1309,28 +1309,75 @@
             }
         }
 
-        // ⭐ 核心功能：过滤今天的数据
-     function filterTodayData(data) {
-    // 先尝试今天
-    const todayData = filterByDate(data, 0); // 0 = today
+       // ⭐ 核心功能：智能过滤数据（优先今天，降级到7天）
+function filterTodayData(data) {
+    // 先尝试今天的数据
+    const targetDate = new Date(currentDate);
     
-    if (todayData.length > 0) {
-        console.log(`✅ Found ${todayData.length} items today`);
+    // 使用 UTC 时间计算今天的范围
+    const startDate = new Date(Date.UTC(
+        targetDate.getUTCFullYear(),
+        targetDate.getUTCMonth(),
+        targetDate.getUTCDate(),
+        0, 0, 0, 0
+    ));
+    
+    const endDate = new Date(startDate);
+    endDate.setUTCDate(endDate.getUTCDate() + 1);
+    
+    const startTimestamp = startDate.getTime() / 1000;
+    const endTimestamp = endDate.getTime() / 1000;
+    
+    console.log(`🔍 Checking for today's data (UTC):`, {
+        start: startDate.toISOString(),
+        end: endDate.toISOString()
+    });
+    
+    // 过滤今天的数据
+    let filtered = data.filter(item => {
+        if (!item.createdAt || !item.createdAt._seconds) {
+            return false;
+        }
+        const itemTimestamp = item.createdAt._seconds;
+        return itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
+    });
+    
+    // ⭐ 如果今天没有数据，自动扩展到最近7天
+    if (filtered.length === 0) {
+        console.warn('⚠️ No data for today, expanding to last 7 days');
+        
+        const sevenDaysAgo = startDate.getTime() / 1000 - (7 * 24 * 60 * 60);
+        
+        filtered = data.filter(item => {
+            if (!item.createdAt || !item.createdAt._seconds) {
+                return false;
+            }
+            return item.createdAt._seconds >= sevenDaysAgo;
+        });
+        
+        console.log(`✅ Found ${filtered.length} items in last 7 days`);
+        
+        // 更新页面提示
+        updateDateLabel('Last 7 Days');
+    } else {
+        console.log(`✅ Found ${filtered.length} items for today`);
         updateDateLabel('Today');
-        return todayData;
     }
     
-    // 没有今天的，扩展到7天
-    console.log('⚠️ No data today, showing last 7 days');
-    const weekData = filterByDateRange(data, 7);
-    updateDateLabel('Last 7 Days');
-    return weekData;
+    // 按分数排序
+    return filtered
+        .sort((a, b) => (b.kills || 0) - (a.kills || 0))
+        .slice(0, CONFIG.maxDisplayRanks);
 }
 
+// ⭐ 更新日期标签显示
 function updateDateLabel(label) {
     const dateElement = document.getElementById('current-date');
     const originalDate = currentDate.toLocaleDateString('en-US', { 
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
     });
     
     if (label === 'Today') {
