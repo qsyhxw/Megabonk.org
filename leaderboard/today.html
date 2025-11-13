@@ -720,6 +720,42 @@
             text-decoration: underline;
         }
 
+        /* Debug Panel */
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-width: 400px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .debug-panel.active {
+            display: block;
+        }
+
+        .debug-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 999;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
@@ -778,6 +814,12 @@
     </style>
 </head>
 <body>
+    <!-- Debug Toggle Button -->
+    <button class="debug-toggle" onclick="toggleDebug()">🐛 Debug</button>
+    <div class="debug-panel" id="debug-panel">
+        <div id="debug-log"></div>
+    </div>
+
     <!-- Site Header -->
     <header class="site-header">
         <div class="header-top">
@@ -1043,25 +1085,49 @@
 
     <script>
         // ============================================================
-        // 🎯 配置区域 - 方便后续修改
+        // 🐛 DEBUG LOGGING SYSTEM
+        // ============================================================
+        const debugLogs = [];
+        function debugLog(message, data = null) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            console.log(logEntry, data || '');
+            debugLogs.push(logEntry + (data ? `: ${JSON.stringify(data)}` : ''));
+            
+            // Keep only last 20 logs
+            if (debugLogs.length > 20) {
+                debugLogs.shift();
+            }
+            
+            updateDebugPanel();
+        }
+
+        function updateDebugPanel() {
+            const panel = document.getElementById('debug-log');
+            if (panel) {
+                panel.innerHTML = debugLogs.map(log => `<div>${log}</div>`).join('');
+            }
+        }
+
+        function toggleDebug() {
+            const panel = document.getElementById('debug-panel');
+            panel.classList.toggle('active');
+        }
+
+        // ============================================================
+        // 🎯 配置区域
         // ============================================================
         const CONFIG = {
-            // 数据源 - 与主排行榜页面使用相同的数据
             dataUrl: 'https://megabonk.org/data/leaderboard-data.json',
-            
-            // 自动刷新间隔（毫秒）- 默认5分钟
             updateInterval: 300000,
-            
-            // 显示设置
-            maxDisplayRanks: 50,        // 最多显示50名
-            newEntryThreshold: 6,       // 6小时内算"新"条目
+            maxDisplayRanks: 50,
+            newEntryThreshold: 6,
         };
 
         // ============================================================
-        // 📊 数据映射表 - 从链接汇总文件生成
+        // 📊 数据映射表
         // ============================================================
-        
-        // 角色图标和链接映射
         const CHARACTER_MAP = {
             'fox': {
                 name: 'Fox',
@@ -1185,7 +1251,6 @@
             }
         };
 
-        // 武器链接映射 - 简化版，只需要URL
         const WEAPON_URLS = {
             'aura': 'https://megabonk.org/database/weapons/aura',
             'aegis': 'https://megabonk.org/database/weapons/aegis',
@@ -1219,7 +1284,6 @@
             'blackhole': 'https://megabonk.org/database/weapons/black-hole'
         };
 
-        // Country flags
         const COUNTRY_FLAGS = {
             'TR': '🇹🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷',
             'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'JP': '🇯🇵',
@@ -1240,7 +1304,7 @@
         // 🚀 初始化
         // ============================================================
         window.addEventListener('DOMContentLoaded', () => {
-            console.log('🎮 Initializing Today\'s Leaderboard...');
+            debugLog('🎮 Initializing Today\'s Leaderboard...');
             updateCurrentDate();
             loadTodayLeaderboard();
             startAutoRefresh();
@@ -1254,11 +1318,11 @@
             const dateStr = currentDate.toLocaleDateString('en-US', options);
             document.getElementById('current-date').textContent = dateStr;
             
-            // 禁用"明天"按钮（因为未来数据不存在）
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             currentDate.setHours(0, 0, 0, 0);
-            document.getElementById('btn-next').disabled = (currentDate >= today);
+            
+            debugLog('📅 Current date updated', { date: dateStr });
         }
 
         function navigateDate(days) {
@@ -1267,6 +1331,7 @@
             } else {
                 currentDate.setDate(currentDate.getDate() + days);
             }
+            debugLog(`🔄 Date navigation: ${days} days`, { newDate: currentDate.toISOString() });
             updateCurrentDate();
             loadTodayLeaderboard();
         }
@@ -1276,122 +1341,132 @@
         // ============================================================
         async function loadTodayLeaderboard() {
             try {
-                console.log('📡 Fetching data from:', CONFIG.dataUrl);
+                debugLog('📡 Starting data fetch...', { url: CONFIG.dataUrl });
                 
                 const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
                 const response = await fetch(url);
                 
+                debugLog('📬 Response received', { 
+                    status: response.status, 
+                    ok: response.ok,
+                    type: response.type 
+                });
+                
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
 
                 const result = await response.json();
                 leaderboardData = result.data || [];
                 
-                console.log(`✅ Loaded ${leaderboardData.length} total entries`);
+                debugLog(`✅ Data loaded successfully`, { 
+                    totalEntries: leaderboardData.length,
+                    sampleEntry: leaderboardData[0]
+                });
                 
-                // 过滤今天的数据
                 const todayData = filterTodayData(leaderboardData);
-                console.log(`📅 Found ${todayData.length} entries for today`);
+                debugLog(`📅 Filtered to today's data`, { filteredCount: todayData.length });
                 
-                // 渲染页面各部分
                 renderTable(todayData);
                 updateStats(todayData);
                 updateTrending(todayData);
                 updateLastUpdateTime(result.fetched_at);
 
             } catch (error) {
-                console.error('❌ Failed to load data:', error);
-                showError();
+                debugLog('❌ Error loading data', { 
+                    error: error.message,
+                    stack: error.stack 
+                });
+                console.error('Full error:', error);
+                showError(error.message);
             }
         }
 
-       // ⭐ 核心功能：智能过滤数据（优先今天，降级到7天）
-function filterTodayData(data) {
-    // 先尝试今天的数据
-    const targetDate = new Date(currentDate);
-    
-    // 使用 UTC 时间计算今天的范围
-    const startDate = new Date(Date.UTC(
-        targetDate.getUTCFullYear(),
-        targetDate.getUTCMonth(),
-        targetDate.getUTCDate(),
-        0, 0, 0, 0
-    ));
-    
-    const endDate = new Date(startDate);
-    endDate.setUTCDate(endDate.getUTCDate() + 1);
-    
-    const startTimestamp = startDate.getTime() / 1000;
-    const endTimestamp = endDate.getTime() / 1000;
-    
-    console.log(`🔍 Checking for today's data (UTC):`, {
-        start: startDate.toISOString(),
-        end: endDate.toISOString()
-    });
-    
-    // 过滤今天的数据
-    let filtered = data.filter(item => {
-        if (!item.createdAt || !item.createdAt._seconds) {
-            return false;
-        }
-        const itemTimestamp = item.createdAt._seconds;
-        return itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
-    });
-    
-    // ⭐ 如果今天没有数据，自动扩展到最近7天
-    if (filtered.length === 0) {
-        console.warn('⚠️ No data for today, expanding to last 7 days');
-        
-        const sevenDaysAgo = startDate.getTime() / 1000 - (7 * 24 * 60 * 60);
-        
-        filtered = data.filter(item => {
-            if (!item.createdAt || !item.createdAt._seconds) {
-                return false;
+        function filterTodayData(data) {
+            const targetDate = new Date(currentDate);
+            
+            const startDate = new Date(Date.UTC(
+                targetDate.getUTCFullYear(),
+                targetDate.getUTCMonth(),
+                targetDate.getUTCDate(),
+                0, 0, 0, 0
+            ));
+            
+            const endDate = new Date(startDate);
+            endDate.setUTCDate(endDate.getUTCDate() + 1);
+            
+            const startTimestamp = startDate.getTime() / 1000;
+            const endTimestamp = endDate.getTime() / 1000;
+            
+            debugLog('🔍 Filtering data', {
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+                totalItems: data.length
+            });
+            
+            let filtered = data.filter(item => {
+                if (!item.createdAt || !item.createdAt._seconds) {
+                    return false;
+                }
+                const itemTimestamp = item.createdAt._seconds;
+                return itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
+            });
+            
+            if (filtered.length === 0) {
+                debugLog('⚠️ No data for today, expanding to last 7 days');
+                
+                const sevenDaysAgo = startDate.getTime() / 1000 - (7 * 24 * 60 * 60);
+                
+                filtered = data.filter(item => {
+                    if (!item.createdAt || !item.createdAt._seconds) {
+                        return false;
+                    }
+                    return item.createdAt._seconds >= sevenDaysAgo;
+                });
+                
+                debugLog(`✅ Found items in last 7 days`, { count: filtered.length });
+                updateDateLabel('Last 7 Days');
+            } else {
+                debugLog(`✅ Found items for today`, { count: filtered.length });
+                updateDateLabel('Today');
             }
-            return item.createdAt._seconds >= sevenDaysAgo;
-        });
-        
-        console.log(`✅ Found ${filtered.length} items in last 7 days`);
-        
-        // 更新页面提示
-        updateDateLabel('Last 7 Days');
-    } else {
-        console.log(`✅ Found ${filtered.length} items for today`);
-        updateDateLabel('Today');
-    }
-    
-    // 按分数排序
-    return filtered
-        .sort((a, b) => (b.kills || 0) - (a.kills || 0))
-        .slice(0, CONFIG.maxDisplayRanks);
-}
+            
+            return filtered
+                .sort((a, b) => (b.kills || 0) - (a.kills || 0))
+                .slice(0, CONFIG.maxDisplayRanks);
+        }
 
-// ⭐ 更新日期标签显示
-function updateDateLabel(label) {
-    const dateElement = document.getElementById('current-date');
-    const originalDate = currentDate.toLocaleDateString('en-US', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    });
-    
-    if (label === 'Today') {
-        dateElement.textContent = originalDate;
-    } else {
-        dateElement.innerHTML = `${originalDate} <span style="color: #ff6b6b; font-size: 0.85rem;">(Showing ${label})</span>`;
-    }
-}
+        function updateDateLabel(label) {
+            const dateElement = document.getElementById('current-date');
+            if (!dateElement) return;
+            
+            const originalDate = currentDate.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            if (label === 'Today') {
+                dateElement.textContent = originalDate;
+            } else {
+                dateElement.innerHTML = `${originalDate} <span style="color: #ff6b6b; font-size: 0.85rem;">(Showing ${label})</span>`;
+            }
+        }
+
         // ============================================================
         // 🎨 渲染功能
         // ============================================================
         function renderTable(data) {
             const container = document.getElementById('table-container');
             
+            // 立即清除loading类和转圈动画
+            container.className = '';
+            
             if (!data || data.length === 0) {
+                debugLog('⚠️ No data to render');
                 container.innerHTML = `
-                    <div class="loading">
+                    <div style="text-align: center; padding: 60px 20px; color: #6c757d;">
                         <p style="font-size: 3rem; margin-bottom: 20px;">📅</p>
                         <p style="font-size: 1.2rem;">No entries for ${currentDate.toLocaleDateString()}</p>
                         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 10px;">
@@ -1401,6 +1476,8 @@ function updateDateLabel(label) {
                 `;
                 return;
             }
+
+            debugLog('🎨 Rendering table', { rows: data.length });
 
             const html = `
                 <table class="leaderboard-table">
@@ -1419,6 +1496,7 @@ function updateDateLabel(label) {
             `;
 
             container.innerHTML = html;
+            debugLog('✅ Table rendering complete');
         }
 
         function renderTableRow(item, index) {
@@ -1426,18 +1504,15 @@ function updateDateLabel(label) {
             const topClass = rank <= 3 ? `top-${rank}` : '';
             const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
             
-            // 判断是否为新条目（最近6小时内）
             const now = Date.now();
             const itemTime = (item.createdAt?._seconds || 0) * 1000;
             const hoursDiff = (now - itemTime) / (1000 * 60 * 60);
             const isNew = hoursDiff < CONFIG.newEntryThreshold;
             
-            // 获取角色信息
             const character = item.character || 'Unknown';
             const charKey = normalizeKey(character);
             const charInfo = CHARACTER_MAP[charKey] || { name: character, image: null, guideUrl: '#' };
             
-            // 国家旗帜
             const countryFlag = COUNTRY_FLAGS[item.country?.code] || '🌍';
             
             return `
@@ -1474,7 +1549,6 @@ function updateDateLabel(label) {
         // ============================================================
         function updateStats(data) {
             if (!data || data.length === 0) {
-                // 无数据时的显示
                 document.getElementById('top-score-today').textContent = '0';
                 document.getElementById('active-players').textContent = '0';
                 document.getElementById('new-entries').textContent = '0';
@@ -1487,22 +1561,19 @@ function updateDateLabel(label) {
                 return;
             }
 
-            // 最高分
             const topScore = data[0]?.kills || 0;
             document.getElementById('top-score-today').textContent = formatNumber(topScore);
             document.getElementById('top-score-change').innerHTML = `
                 <span>🏆</span>
-                <span>Best score today</span>
+                <span>Best score</span>
             `;
 
-            // 活跃玩家数
             document.getElementById('active-players').textContent = formatNumber(data.length);
             document.getElementById('players-change').innerHTML = `
                 <span>→</span>
                 <span>${data.length} submissions</span>
             `;
 
-            // 新条目数（最近6小时）
             const now = Date.now();
             const newCount = data.filter(item => {
                 const itemTime = (item.createdAt?._seconds || 0) * 1000;
@@ -1516,7 +1587,6 @@ function updateDateLabel(label) {
                 <span>Last ${CONFIG.newEntryThreshold} hours</span>
             `;
 
-            // 平均分数
             const sum = data.reduce((acc, item) => acc + (item.kills || 0), 0);
             const avg = Math.round(sum / data.length);
             document.getElementById('avg-score-today').textContent = formatNumber(avg);
@@ -1524,6 +1594,8 @@ function updateDateLabel(label) {
                 <span>📊</span>
                 <span>Average</span>
             `;
+
+            debugLog('📊 Stats updated', { topScore, activePlayers: data.length, newCount, avgScore: avg });
         }
 
         // ============================================================
@@ -1540,7 +1612,6 @@ function updateDateLabel(label) {
                 return;
             }
 
-            // 最受欢迎的角色
             const characterCount = {};
             data.forEach(item => {
                 const char = item.character || 'Unknown';
@@ -1558,10 +1629,9 @@ function updateDateLabel(label) {
                     <a href="${charInfo.guideUrl}">${escapeHtml(topChar)}</a>
                 `;
                 document.getElementById('character-count').textContent = 
-                    `Used by ${characterCount[topChar]} players today`;
+                    `Used by ${characterCount[topChar]} players`;
             }
 
-            // 最受欢迎的武器（统计第一个武器）
             const weaponCount = {};
             data.forEach(item => {
                 const weapon = (item.weapons || [])[0];
@@ -1581,24 +1651,25 @@ function updateDateLabel(label) {
                     <a href="${weaponUrl}">${escapeHtml(topWeapon)}</a>
                 `;
                 document.getElementById('weapon-count').textContent = 
-                    `Used in ${weaponCount[topWeapon]} builds today`;
+                    `Used in ${weaponCount[topWeapon]} builds`;
             } else {
                 document.getElementById('trending-weapon').textContent = '-';
                 document.getElementById('weapon-count').textContent = 'No weapon data';
             }
 
-            // 最大进步者（随机选择前10名中的一个）
             if (data.length >= 5) {
                 const randomIndex = Math.floor(Math.random() * Math.min(10, data.length));
                 const climber = data[randomIndex];
                 document.getElementById('biggest-climber').textContent = 
                     escapeHtml(climber.playerName || 'Anonymous');
                 document.getElementById('climb-info').textContent = 
-                    `Ranked #${randomIndex + 1} today`;
+                    `Ranked #${randomIndex + 1}`;
             } else {
                 document.getElementById('biggest-climber').textContent = '-';
                 document.getElementById('climb-info').textContent = 'Not enough data';
             }
+
+            debugLog('🔥 Trending updated');
         }
 
         // ============================================================
@@ -1630,6 +1701,7 @@ function updateDateLabel(label) {
             }
 
             element.innerHTML = `<span>🕐</span><span>${timeText}</span>`;
+            debugLog('⏰ Update time displayed', { timeText });
         }
 
         // ============================================================
@@ -1641,19 +1713,18 @@ function updateDateLabel(label) {
             }
             
             autoRefreshTimer = setInterval(() => {
-                // 只在查看今天的数据时自动刷新
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
                 const viewing = new Date(currentDate);
                 viewing.setHours(0, 0, 0, 0);
                 
                 if (viewing.getTime() === today.getTime()) {
-                    console.log('🔄 Auto-refreshing today\'s data...');
+                    debugLog('🔄 Auto-refreshing data...');
                     loadTodayLeaderboard();
                 }
             }, CONFIG.updateInterval);
             
-            console.log(`⏰ Auto-refresh enabled (every ${CONFIG.updateInterval / 1000}s)`);
+            debugLog(`⏰ Auto-refresh enabled (every ${CONFIG.updateInterval / 1000}s)`);
         }
 
         // ============================================================
@@ -1673,16 +1744,25 @@ function updateDateLabel(label) {
             return div.innerHTML;
         }
 
-        function showError() {
-            document.getElementById('table-container').innerHTML = `
-                <div class="loading">
+        function showError(errorMessage = 'Unknown error') {
+            debugLog('❌ Showing error to user', { error: errorMessage });
+            const container = document.getElementById('table-container');
+            container.className = ''; // 清除loading类
+            container.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px; color: #6c757d;">
                     <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
                     <p style="font-size: 1.2rem; margin-bottom: 15px;">Failed to Load Data</p>
+                    <p style="font-size: 0.9rem; color: #dc3545; margin-bottom: 15px;">
+                        Error: ${escapeHtml(errorMessage)}
+                    </p>
                     <p style="font-size: 0.9rem; color: #6c757d; margin-bottom: 20px;">
                         Please check your connection and try again
                     </p>
                     <button class="btn-date" onclick="loadTodayLeaderboard()">
                         🔄 Retry
+                    </button>
+                    <button class="btn-date" onclick="toggleDebug()" style="margin-left: 10px;">
+                        🐛 View Debug Log
                     </button>
                 </div>
             `;
@@ -1693,7 +1773,6 @@ function updateDateLabel(label) {
             nav.classList.toggle('active');
         }
 
-        // 页面卸载时清理定时器
         window.addEventListener('beforeunload', () => {
             if (autoRefreshTimer) {
                 clearInterval(autoRefreshTimer);
