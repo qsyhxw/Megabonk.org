@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -712,6 +713,38 @@
         a:hover {
             text-decoration: underline;
         }
+
+        /* Character Link Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .character-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--text-secondary);
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--success-green);
+            box-shadow: 0 5px 15px rgba(38, 222, 129, 0.2);
+        }
+
+        .character-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -792,9 +825,9 @@
             <ul>
                 <li><strong>Self-Damage Trigger:</strong> Approximately 25% chance per hit to damage yourself</li>
                 <li><strong>Cannot Kill:</strong> Kevin will never deliver a killing blow - it stops at 1 HP</li>
-                <li><strong>Bypasses Shields:</strong> Deals damage directly to your health pool, ignoring shield layers</li>
-                <li><strong>Triggers On-Hit Effects:</strong> Each self-punch counts as being "hit," triggering items like <a href="https://megabonk.org/database/items/electric-plug">Electric Plug</a> and <a href="https://megabonk.org/database/items/thunder-mitts">Thunder Mitts</a></li>
-                <li><strong>Scales with Attack Speed:</strong> More hits = more Kevin procs = more on-hit triggers</li>
+                <li><strong>Bypasses Shields:</strong> Deals damage directly to your health pool, ignoring all <a href="https://megabonk.org/database/tomes/shield-tome">Shield Tome</a> effects</li>
+                <li><strong>Triggers "When Hit" Effects:</strong> Each self-punch counts as <strong>you taking damage</strong>, reliably triggering items that activate when you're hit, such as <a href="https://megabonk.org/database/items/mirror">Mirror</a>, <a href="https://megabonk.org/database/items/electric-plug">Electric Plug</a>, <a href="https://megabonk.org/database/items/toxic-barrel">Toxic Barrel</a>, and <a href="https://megabonk.org/database/items/spiky-shield">Spiky Shield</a></li>
+                <li><strong>Scales with Attack Speed:</strong> More hits = more Kevin procs = more on-hit triggers (pairs well with <a href="https://megabonk.org/database/tomes/agility-tome">Agility Tome</a>)</li>
             </ul>
 
             <div class="alert alert-info">
@@ -802,7 +835,7 @@
                     <span class="emoji">🔬</span>
                     Technical Detail
                 </div>
-                <p>Kevin's self-damage is <strong>pre-mitigation</strong>, meaning it calculates before armor reduction. However, the amount is minimal and designed to keep you hovering at low HP without outright killing you.</p>
+                <p>Kevin's self-damage <strong>always stops at 1 HP and cannot kill you</strong>. Community testing suggests that stacking <a href="https://megabonk.org/database/tomes/armor-tome">Armor Tome</a> doesn't fully negate Kevin's self-damage, but the exact interaction isn't documented in official patch notes. Treat Kevin as a tool to safely stay at low HP rather than a source of "free" tankiness.</p>
             </div>
 
             <h3>Why Would You Use This?</h3>
@@ -814,9 +847,9 @@
                     <ul>
                         <li>Enables on-hit synergies with normally defensive items</li>
                         <li>Cannot kill you - provides a safety floor at 1 HP</li>
-                        <li>Excellent with lifesteal/regen builds</li>
+                        <li>Excellent with <a href="https://megabonk.org/database/items/slurp-gloves">lifesteal</a> and <a href="https://megabonk.org/database/tomes/regen-tome">regen builds</a></li>
                         <li>Creates unique build archetypes impossible without it</li>
-                        <li>Bypassing shields means you can stay at low HP intentionally</li>
+                        <li>Bypassing shields means you can stay at low HP intentionally for <a href="https://megabonk.org/database/items/demonic-soul">Demonic Soul</a> synergy</li>
                     </ul>
                 </div>
                 <div class="cons">
@@ -825,7 +858,7 @@
                         <li>Constantly keeps you at dangerously low HP</li>
                         <li>Requires strong sustain to avoid one-shot deaths</li>
                         <li>Useless without synergy items</li>
-                        <li>Makes shields nearly worthless</li>
+                        <li>Makes <a href="https://megabonk.org/database/items/golden-shield">Golden Shield</a> and shield builds nearly worthless</li>
                         <li>High skill floor - easy to die if not prepared</li>
                     </ul>
                 </div>
@@ -847,11 +880,11 @@
                     </li>
                     <li>
                         <strong>Start a New Run with High Sustain</strong><br>
-                        <span style="color: var(--text-muted);">Play a character with good regen or lifesteal (like <a href="https://megabonk.org/guides/characters/megachad-guide">Megachad</a> or <a href="https://megabonk.org/guides/characters/athena-guide">Athena</a>).</span>
+                        <span style="color: var(--text-muted);">Play a character with good regen or lifesteal (like <a href="https://megabonk.org/guides/characters/megachad-guide">Megachad</a>, <a href="https://megabonk.org/guides/characters/athena-guide">Athena</a>, or <a href="https://megabonk.org/guides/characters/calcium-guide">Calcium</a>).</span>
                     </li>
                     <li>
                         <strong>Hunt for Leeching Crystals</strong><br>
-                        <span style="color: var(--text-muted);">Open every chest. Leeching Crystal is rare but appears more frequently once Regen Tome is leveled.</span>
+                        <span style="color: var(--text-muted);">Open every chest. Leeching Crystal is rare but appears more frequently once Regen Tome is leveled. Focus on <a href="https://megabonk.org/database/tomes/luck-tome">Luck Tome</a> to increase chest quality.</span>
                     </li>
                     <li>
                         <strong>Collect All Three in One Run</strong><br>
@@ -874,8 +907,12 @@
 
             <h3>What is Leeching Crystal?</h3>
             <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--success-green); margin-top: 1rem;">
-                <p><strong>Effect:</strong> +50 Max HP, -50% HP Regen</p>
-                <p style="margin-top: 0.5rem; color: var(--text-muted);">Leeching Crystal trades regen for raw HP. It's a double-edged sword that synergizes with <strong>max HP scaling items</strong> like <a href="https://megabonk.org/database/items/beefy-ring">Beefy Ring</a> (+20% damage per 100 Max HP).</p>
+                <p><strong>Effect (subject to patch changes):</strong> Increases Max HP significantly while cutting your HP Regen by 50%.</p>
+                <div class="alert alert-warning" style="margin-top: 1rem; padding: 1rem;">
+                    <p style="font-size: 0.9rem; margin: 0;">⚠️ <strong>Version Note:</strong> Different community guides list this as either <strong>+50 Max HP</strong> or <strong>+50% Max HP</strong> with -50% HP Regen. Always double-check the in-game tooltip for the current patch and update your build math accordingly.</p>
+                </div>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Leeching Crystal trades regen for raw HP. It's a double-edged sword that synergizes with <strong>max HP scaling items</strong> like <a href="https://megabonk.org/database/items/beefy-ring">Beefy Ring</a> (+20% damage per 100 Max HP) and <a href="https://megabonk.org/database/tomes/health-tome">Health Tome</a>.</p>
+                <p style="margin-top: 0.5rem;"><a href="https://megabonk.org/database/items/leeching-crystal">→ Full Leeching Crystal Guide</a></p>
             </div>
         </section>
 
@@ -900,13 +937,24 @@
                     <span class="synergy-rating synergy-excellent">⭐⭐⭐⭐⭐ EXCELLENT</span>
                     <h4>Electric Plug</h4>
                     <p>Zaps nearby enemies when you take damage. Kevin creates a constant electric field around you.</p>
+                    <p><a href="https://megabonk.org/database/items/electric-plug">→ View Electric Plug</a></p>
                 </div>
 
                 <div class="synergy-card">
                     <img src="https://megabonk.org/images/Items/Item_Thunder_Mitts.png" alt="Thunder Mitts">
-                    <span class="synergy-rating synergy-excellent">⭐⭐⭐⭐⭐ EXCELLENT</span>
+                    <span class="synergy-rating synergy-good">⭐⭐⭐⭐ GOOD</span>
                     <h4>Thunder Mitts</h4>
-                    <p>Lightning strikes when you're hit. Kevin turns you into a walking lightning storm.</p>
+                    <p><strong>Effect:</strong> When you hit an enemy, Thunder Mitts periodically calls down a lightning strike (on a short cooldown).</p>
+                    <p><strong>With Kevin:</strong> Works best in high attack-speed builds where you're constantly hitting enemies while Kevin keeps you at low HP for other on-hit synergies.</p>
+                    <p><a href="https://megabonk.org/database/items/thunder-mitts">→ View Thunder Mitts</a></p>
+                </div>
+
+                <div class="synergy-card">
+                    <img src="https://megabonk.org/images/Items/Item_Toxic_Barrel.png" alt="Toxic Barrel">
+                    <span class="synergy-rating synergy-excellent">⭐⭐⭐⭐⭐ EXCELLENT</span>
+                    <h4>Toxic Barrel</h4>
+                    <p>Creates a poison AoE when hit. With Kevin, you become a walking poison cloud. Pairs well with <a href="https://megabonk.org/database/items/gas-mask">Gas Mask</a>.</p>
+                    <p><a href="https://megabonk.org/database/items/toxic-barrel">→ View Toxic Barrel</a></p>
                 </div>
 
                 <div class="synergy-card">
@@ -914,41 +962,63 @@
                     <span class="synergy-rating synergy-good">⭐⭐⭐⭐ GOOD</span>
                     <h4>Spiky Shield</h4>
                     <p>Reflects damage in an AoE when hit. Synergizes with Kevin's self-procs for passive clear.</p>
+                    <p><a href="https://megabonk.org/database/items/spiky-shield">→ View Spiky Shield</a></p>
                 </div>
 
                 <div class="synergy-card">
                     <img src="https://megabonk.org/images/Items/Item_Leeching_Crystal.png" alt="Leeching Crystal">
                     <span class="synergy-rating synergy-good">⭐⭐⭐⭐ GOOD</span>
                     <h4>Leeching Crystal (Multiple)</h4>
-                    <p>+50 Max HP per crystal. Stack these to reach high HP pools for Beefy Ring scaling.</p>
+                    <p>+50 Max HP per crystal. Stack these to reach high HP pools for <a href="https://megabonk.org/database/items/beefy-ring">Beefy Ring</a> scaling.</p>
+                    <p><a href="https://megabonk.org/database/items/leeching-crystal">→ View Leeching Crystal</a></p>
                 </div>
 
                 <div class="synergy-card">
                     <img src="https://megabonk.org/images/Items/Item_Beefy_Ring.png" alt="Beefy Ring">
                     <span class="synergy-rating synergy-good">⭐⭐⭐⭐ GOOD</span>
                     <h4>Beefy Ring</h4>
-                    <p>+20% damage per 100 Max HP. Leeching Crystal stacking makes this powerful.</p>
+                    <p>+20% damage per 100 Max HP. Leeching Crystal stacking makes this powerful with <a href="https://megabonk.org/database/tomes/health-tome">Health Tome</a>.</p>
+                    <p><a href="https://megabonk.org/database/items/beefy-ring">→ View Beefy Ring</a></p>
+                </div>
+
+                <div class="synergy-card">
+                    <img src="https://megabonk.org/images/Items/Item_Gas_Mask.png" alt="Gas Mask">
+                    <span class="synergy-rating synergy-good">⭐⭐⭐⭐ GOOD</span>
+                    <h4>Gas Mask</h4>
+                    <p>Immunity to poison + damage boost in poison. Perfect with Kevin + Toxic Barrel combo for extreme poison synergy.</p>
+                    <p><a href="https://megabonk.org/database/items/gas-mask">→ View Gas Mask</a></p>
                 </div>
             </div>
 
             <h3>Sustain Items (Critical for Survival)</h3>
+            <p>Without sustain, Kevin will kill you. These items are <strong>mandatory</strong>:</p>
             <div class="synergy-grid">
                 <div class="synergy-card">
                     <img src="https://megabonk.org/images/Items/Item_Medkit.png" alt="Medkit">
                     <h4>Medkit / Regen Items</h4>
-                    <p>Passive healing to offset Kevin's self-damage. Absolutely mandatory.</p>
+                    <p>Passive healing to offset Kevin's self-damage. Stack with <a href="https://megabonk.org/database/tomes/regen-tome">Regen Tome</a>. Absolutely mandatory.</p>
+                    <p><a href="https://megabonk.org/database/items/medkit">→ View Medkit</a></p>
                 </div>
 
                 <div class="synergy-card">
                     <img src="https://megabonk.org/images/Items/Item_Slurp_Gloves.png" alt="Slurp Gloves">
                     <h4>Lifesteal Items</h4>
-                    <p>Convert damage into healing. Essential for high attack-speed Kevin builds.</p>
+                    <p>Convert damage into healing. Essential for high attack-speed Kevin builds. Works well with <a href="https://megabonk.org/database/tomes/bloody-tome">Bloody Tome</a>.</p>
+                    <p><a href="https://megabonk.org/database/items/slurp-gloves">→ View Slurp Gloves</a></p>
                 </div>
 
                 <div class="synergy-card">
                     <img src="https://megabonk.org/images/Items/Item_Campfire.png" alt="Campfire">
                     <h4>Campfire</h4>
-                    <p>Regeneration aura. Helps maintain HP during Kevin procs.</p>
+                    <p>Regeneration aura. Helps maintain HP during Kevin procs. Pair with <a href="https://megabonk.org/database/items/beacon">Beacon</a> for area control.</p>
+                    <p><a href="https://megabonk.org/database/items/campfire">→ View Campfire</a></p>
+                </div>
+
+                <div class="synergy-card">
+                    <img src="https://megabonk.org/images/Items/Item_Grandmas_Secret_Tonic.png" alt="Grandma's Secret Tonic">
+                    <h4>Grandma's Secret Tonic</h4>
+                    <p>Emergency healing potion. Provides burst healing when Kevin brings you too low.</p>
+                    <p><a href="https://megabonk.org/database/items/grandmas-secret-tonic">→ View Grandma's Secret Tonic</a></p>
                 </div>
             </div>
 
@@ -958,20 +1028,21 @@
                     <img src="https://megabonk.org/images/Items/Item_Golden_Shield.png" alt="Golden Shield">
                     <span class="synergy-rating synergy-avoid">❌ AVOID</span>
                     <h4>Shield Items</h4>
-                    <p><strong>Kevin bypasses shields</strong>, making them nearly worthless. Don't invest in shield builds with Kevin.</p>
+                    <p><strong>Kevin bypasses shields</strong>, making <a href="https://megabonk.org/database/items/golden-shield">Golden Shield</a>, <a href="https://megabonk.org/database/items/aegis">Aegis</a>, and <a href="https://megabonk.org/database/tomes/shield-tome">Shield Tome</a> nearly worthless.</p>
                 </div>
 
                 <div class="synergy-card anti-synergy">
                     <img src="https://megabonk.org/images/Items/Item_Cursed_Doll.png" alt="Cursed Doll">
                     <span class="synergy-rating synergy-avoid">❌ AVOID</span>
                     <h4>Glass Cannon Items</h4>
-                    <p>Items that reduce HP or increase damage taken. You're already at low HP - don't make it worse.</p>
+                    <p>Items like <a href="https://megabonk.org/database/items/cursed-doll">Cursed Doll</a> that reduce HP or increase damage taken. You're already at low HP - don't make it worse.</p>
                 </div>
 
                 <div class="synergy-card anti-synergy">
+                    <img src="https://megabonk.org/images/Items/Item_Turbo_Skates.png" alt="Turbo Skates">
                     <span class="synergy-rating synergy-avoid">❌ AVOID</span>
                     <h4>Pure Attack Speed (Without Lifesteal)</h4>
-                    <p>More attack speed = more Kevin procs = faster death. Only viable with strong sustain.</p>
+                    <p>More attack speed = more Kevin procs = faster death. Only viable with strong sustain. <a href="https://megabonk.org/database/items/turbo-skates">Turbo Skates</a> and <a href="https://megabonk.org/database/tomes/agility-tome">Agility Tome</a> need lifesteal support.</p>
                 </div>
             </div>
         </section>
@@ -982,24 +1053,36 @@
 
             <h3>1. Kevin + Mirror Immortality Build</h3>
             <div style="background: rgba(76, 175, 80, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid var(--success-green);">
-                <p><strong>Core Items:</strong> Kevin + Mirror + Electric Plug + Thunder Mitts</p>
+                <p><strong>Core Items:</strong> Kevin + <a href="https://megabonk.org/database/items/mirror">Mirror</a> + <a href="https://megabonk.org/database/items/electric-plug">Electric Plug</a> + <a href="https://megabonk.org/database/items/thunder-mitts">Thunder Mitts</a></p>
                 <p><strong>Playstyle:</strong> Become a walking damage field. Kevin triggers Mirror/Plug/Mitts, reflecting and dealing passive AoE damage.</p>
                 <p><strong>Best Character:</strong> <a href="https://megabonk.org/guides/characters/megachad-guide">Megachad</a> (high base HP and sustain)</p>
+                <p><strong>Best Weapon:</strong> <a href="https://megabonk.org/database/weapons/aura">Aura</a> or <a href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a></p>
                 <p><strong>Full Guide:</strong> <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality">Kevin Mirror Immortality Build →</a></p>
             </div>
 
-            <h3>2. Leeching Crystal + Beefy Ring Max HP Build</h3>
-            <div style="background: rgba(52, 152, 219, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #3498db;">
-                <p><strong>Core Items:</strong> 3x Leeching Crystal + Beefy Ring + Kevin + Regen Items</p>
-                <p><strong>Playstyle:</strong> Stack Max HP from Leeching Crystals, then scale damage with Beefy Ring. Use other regen sources to offset the -50% regen penalty per crystal.</p>
-                <p><strong>Best Character:</strong> <a href="https://megabonk.org/guides/characters/athena-guide">Athena</a> or <a href="https://megabonk.org/guides/characters/calcium-guide">Calcium</a></p>
+            <h3>2. Walking Apocalypse (Kevin + Toxic Barrel + Gas Mask)</h3>
+            <div style="background: rgba(155, 89, 182, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid var(--rare-purple);">
+                <p><strong>Core Items:</strong> Kevin + <a href="https://megabonk.org/database/items/toxic-barrel">Toxic Barrel</a> + <a href="https://megabonk.org/database/items/gas-mask">Gas Mask</a> + <a href="https://megabonk.org/database/items/electric-plug">Electric Plug</a></p>
+                <p><strong>Playstyle:</strong> AFK poison field. Kevin constantly procs Toxic Barrel, creating a permanent poison cloud. Gas Mask makes you immune and boosts your damage.</p>
+                <p><strong>Best Character:</strong> <a href="https://megabonk.org/guides/characters/athena-guide">Athena</a> or <a href="https://megabonk.org/guides/characters/vlad-guide">Vlad</a></p>
+                <p><strong>Best Weapon:</strong> <a href="https://megabonk.org/database/weapons/aura">Aura</a> for passive triggering</p>
+                <p><strong>Full Guide:</strong> <a href="https://megabonk.org/guides/builds/walking-apocalypse">Walking Apocalypse Build →</a></p>
             </div>
 
-            <h3>3. Low-Life Trigger Engine</h3>
-            <div style="background: rgba(155, 89, 182, 0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--rare-purple);">
-                <p><strong>Core Items:</strong> Kevin + Items that scale at low HP (Demonic Soul, etc.)</p>
-                <p><strong>Playstyle:</strong> Intentionally stay at low HP to trigger "low life" bonuses. Kevin keeps you at the brink without killing you.</p>
-                <p><strong>Warning:</strong> Extremely high-risk. Not recommended for beginners.</p>
+            <h3>3. Leeching Crystal + Beefy Ring Max HP Build</h3>
+            <div style="background: rgba(52, 152, 219, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #3498db;">
+                <p><strong>Core Items:</strong> 3x <a href="https://megabonk.org/database/items/leeching-crystal">Leeching Crystal</a> + <a href="https://megabonk.org/database/items/beefy-ring">Beefy Ring</a> + Kevin + Regen Items</p>
+                <p><strong>Playstyle:</strong> Stack Max HP from Leeching Crystals, then scale damage with Beefy Ring. Use <a href="https://megabonk.org/database/tomes/regen-tome">Regen Tome</a> and <a href="https://megabonk.org/database/items/medkit">Medkit</a> to offset the -50% regen penalty per crystal.</p>
+                <p><strong>Best Character:</strong> <a href="https://megabonk.org/guides/characters/calcium-guide">Calcium</a> or <a href="https://megabonk.org/guides/characters/megachad-guide">Megachad</a></p>
+                <p><strong>Best Weapon:</strong> <a href="https://megabonk.org/database/weapons/bow">Bow</a> or <a href="https://megabonk.org/database/weapons/revolver">Revolver</a></p>
+            </div>
+
+            <h3>4. Low-Life Trigger Engine (Advanced)</h3>
+            <div style="background: rgba(255, 71, 87, 0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--danger-red);">
+                <p><strong>Core Items:</strong> Kevin + <a href="https://megabonk.org/database/items/demonic-soul">Demonic Soul</a> + Items that scale at low HP</p>
+                <p><strong>Playstyle:</strong> Intentionally stay at low HP to trigger "low life" bonuses. Kevin keeps you at the brink without killing you. Demonic Soul provides massive damage boost.</p>
+                <p><strong>Best Character:</strong> <a href="https://megabonk.org/guides/characters/athena-guide">Athena</a> (benefits from low HP)</p>
+                <p><strong>Warning:</strong> Extremely high-risk. Not recommended for beginners. One enemy hit can kill you.</p>
             </div>
 
             <div class="alert alert-danger">
@@ -1009,11 +1092,47 @@
                 </div>
                 <p><strong>Do NOT pick up Kevin unless you have:</strong></p>
                 <ul style="margin-top: 0.5rem;">
-                    <li>At least 2 sustain items (regen/lifesteal)</li>
-                    <li>One synergy trigger (Mirror, Electric Plug, etc.)</li>
-                    <li>200+ Max HP or strong defensive tomes</li>
+                    <li>At least 2 sustain items (<a href="https://megabonk.org/database/tomes/regen-tome">regen</a>/<a href="https://megabonk.org/database/items/slurp-gloves">lifesteal</a>)</li>
+                    <li>One synergy trigger (<a href="https://megabonk.org/database/items/mirror">Mirror</a>, <a href="https://megabonk.org/database/items/electric-plug">Electric Plug</a>, etc.)</li>
+                    <li>200+ Max HP or strong defensive tomes (<a href="https://megabonk.org/database/tomes/health-tome">Health</a>, <a href="https://megabonk.org/database/tomes/armor-tome">Armor</a>)</li>
                 </ul>
                 <p style="margin-top: 0.5rem;">Kevin without preparation is a guaranteed death sentence.</p>
+            </div>
+
+            <h3>Best Characters for Kevin</h3>
+            <p>Not all characters can handle Kevin effectively. Here are the top picks:</p>
+            <div class="character-grid">
+                <a href="https://megabonk.org/guides/characters/megachad-guide" class="character-card">
+                    <img src="https://megabonk.org/images/guides/characters/Megachad.png" alt="Megachad">
+                    <strong>Megachad</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">High base HP, excellent sustain</p>
+                </a>
+
+                <a href="https://megabonk.org/guides/characters/athena-guide" class="character-card">
+                    <img src="https://megabonk.org/images/guides/characters/Athena.png" alt="Athena">
+                    <strong>Athena</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Low HP damage bonus synergy</p>
+                </a>
+
+                <a href="https://megabonk.org/guides/characters/calcium-guide" class="character-card">
+                    <img src="https://megabonk.org/images/guides/characters/Calcium.png" alt="Calcium">
+                    <strong>Calcium</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Tanky with good regen</p>
+                </a>
+
+                <a href="https://megabonk.org/guides/characters/vlad-guide" class="character-card">
+                    <img src="https://megabonk.org/images/guides/characters/Vlad.png" alt="Vlad">
+                    <strong>Vlad</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Built-in lifesteal synergy</p>
+                </a>
+            </div>
+
+            <div class="alert alert-warning" style="margin-top: 1.5rem;">
+                <div class="alert-title">
+                    <span class="emoji">⚠️</span>
+                    Avoid Kevin On These Characters
+                </div>
+                <p><strong>Glass cannon characters</strong> like <a href="https://megabonk.org/guides/characters/ninja-unlock-guide">Ninja</a>, <a href="https://megabonk.org/guides/characters/bandit-guide">Bandit</a>, and <a href="https://megabonk.org/guides/characters/dicehead-guide">Dicehead</a> lack the HP pool and sustain to survive Kevin's self-damage.</p>
             </div>
         </section>
 
@@ -1026,17 +1145,41 @@
             <div class="alert alert-info">
                 <div class="alert-title">
                     <span class="emoji">🔨</span>
-                    Recent Patches (v1.0.12+)
+                    Patch History Overview
                 </div>
-                <p>Multiple patches have addressed Kevin-based exploits, particularly the <strong>"Kevin + Mirror Immortality"</strong> builds that could cheese late-game content with near-permanent invincibility frames.</p>
+                <p><strong>Early post-launch patches (around v1.0.7)</strong> targeted several Kevin-based exploits, especially the infamous <strong>Kevin + Mirror "immortality" builds</strong> that abused long invincibility frames and reflect damage.</p>
+                <p style="margin-top: 0.5rem;"><strong>Later updates (including v1.0.12)</strong> focused on reworking the final stage, adjusting XP gain, and cleaning up <strong>leaderboard cheats and suspicious runs</strong>.</p>
                 <ul style="margin-top: 0.5rem;">
-                    <li>Old "immortal builds" from pre-1.0.12 have been adjusted</li>
-                    <li>Late-game meta exploits have been tightened</li>
-                    <li>Leaderboard fixes prevent Kevin cheese strategies</li>
+                    <li>Mirror's invincibility window has been shortened compared to the first week of release</li>
+                    <li>Old YouTube "immortal Kevin" builds from early patches are no longer fully accurate</li>
+                    <li>General leaderboard anti-cheat improvements have been implemented</li>
                 </ul>
             </div>
 
-            <p style="margin-top: 1rem;">If you're following old Kevin build videos from YouTube, <strong>check the upload date</strong>. Many pre-patch strategies no longer work as intended. The builds listed on this page are <strong>patch-safe</strong> as of 2025.</p>
+            <p style="margin-top: 1rem;">If you're following old Kevin build videos from YouTube, <strong>check the upload date and patch version</strong>. Many pre-patch strategies no longer work as intended. The builds listed on this page are <strong>updated for 2025 patches</strong>.</p>
+
+            <h3>Current Meta Status (2025)</h3>
+            <p>Despite nerfs, Kevin remains a <strong>top-tier item</strong> in the right hands (according to current meta guides):</p>
+            <ul>
+                <li>✅ Still viable for high-difficulty runs</li>
+                <li>✅ Essential for certain <a href="https://megabonk.org/leaderboard/">leaderboard</a> strategies</li>
+                <li>✅ Creates unique playstyles impossible without it</li>
+                <li>⚠️ Requires more skill and preparation than pre-nerf versions</li>
+                <li>⚠️ No longer "autopilot" immortal builds</li>
+            </ul>
+
+            <div class="alert alert-warning" style="margin-top: 1.5rem;">
+                <div class="alert-title">
+                    <span class="emoji">📝</span>
+                    Version Notes (as of late 2025)
+                </div>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li><strong>v1.0.7</strong> fixed the original Kevin + Mirror immortality exploit by adjusting Mirror's i-frames</li>
+                    <li><strong>v1.0.12</strong> focused on XP gain, final-stage reworks, and leaderboard clean-up/anti-cheat</li>
+                    <li>Community guides disagree on <strong>Leeching Crystal's exact Max HP value (+50 vs +50%)</strong> – always check in-game tooltips</li>
+                    <li>Meta tier lists (Twinfinite, dtgre, etc.) still rank <strong>Kevin as one of the strongest blue/rare items</strong></li>
+                </ul>
+            </div>
         </section>
 
         <!-- FAQ -->
@@ -1053,57 +1196,72 @@
             <div class="faq-item">
                 <div class="faq-question">Q: Why can't I find Leeching Crystal?</div>
                 <div class="faq-answer">
-                    Leeching Crystal <strong>only appears after Regen Tome reaches Level 8</strong>. If your Regen Tome isn't high enough level, the crystal won't spawn in your item pool. Focus on leveling Regen Tome first.
+                    Leeching Crystal <strong>only appears after <a href="https://megabonk.org/database/tomes/regen-tome">Regen Tome</a> reaches Level 8</strong>. If your Regen Tome isn't high enough level, the crystal won't spawn in your item pool. Focus on leveling Regen Tome first by picking it whenever available.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">Q: Do Kevin procs ignore shields?</div>
                 <div class="faq-answer">
-                    <strong>Yes.</strong> Kevin's self-damage bypasses all shield layers and deals damage directly to your health pool. This is confirmed by extensive community testing on Reddit and Steam forums.
+                    <strong>Yes.</strong> Kevin's self-damage bypasses all shield layers (including <a href="https://megabonk.org/database/items/golden-shield">Golden Shield</a>, <a href="https://megabonk.org/database/items/aegis">Aegis</a>, and <a href="https://megabonk.org/database/tomes/shield-tome">Shield Tome</a>) and deals damage directly to your health pool.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">Q: Is Kevin good for beginners?</div>
                 <div class="faq-answer">
-                    <strong>No.</strong> Kevin is one of the hardest items to use effectively. It requires specific synergy items, strong sustain, and game knowledge to avoid dying. New players should unlock it for completion but avoid using it until comfortable with the game.
+                    <strong>No.</strong> Kevin is one of the hardest items to use effectively. It requires specific synergy items, strong sustain, and game knowledge to avoid dying. New players should unlock it for completion but avoid using it until comfortable with the game. Practice with easier builds first, like <a href="https://megabonk.org/guides/builds/bullet-hell">Bullet Hell</a> or <a href="https://megabonk.org/guides/builds/sword-master">Sword Master</a>.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">Q: What's the best character for Kevin?</div>
                 <div class="faq-answer">
-                    <strong>Megachad</strong> is the best Kevin character due to his high base HP and sustain capabilities. <strong>Athena</strong> and <strong>Calcium</strong> are also good choices. Avoid glass cannon characters like <a href="https://megabonk.org/guides/characters/ninja-unlock-guide">Ninja</a>.
+                    <strong><a href="https://megabonk.org/guides/characters/megachad-guide">Megachad</a></strong> is the best Kevin character due to his high base HP and sustain capabilities. <strong><a href="https://megabonk.org/guides/characters/athena-guide">Athena</a></strong> and <strong><a href="https://megabonk.org/guides/characters/calcium-guide">Calcium</a></strong> are also good choices. Avoid glass cannon characters like <a href="https://megabonk.org/guides/characters/ninja-unlock-guide">Ninja</a>.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">Q: Does Kevin work with all on-hit items?</div>
                 <div class="faq-answer">
-                    Kevin triggers items that proc when <strong>YOU get hit</strong>, not when you hit enemies. Items like Mirror, Electric Plug, Thunder Mitts, and Spiky Shield all work. Items that require you to hit enemies (like crit effects) do not synergize.
+                    Kevin triggers items that proc when <strong>YOU get hit</strong>, not when you hit enemies. Items like <a href="https://megabonk.org/database/items/mirror">Mirror</a>, <a href="https://megabonk.org/database/items/electric-plug">Electric Plug</a>, <a href="https://megabonk.org/database/items/thunder-mitts">Thunder Mitts</a>, <a href="https://megabonk.org/database/items/toxic-barrel">Toxic Barrel</a>, and <a href="https://megabonk.org/database/items/spiky-shield">Spiky Shield</a> all work. Items that require you to hit enemies (like crit effects) do not synergize.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">Q: Can I stack multiple Kevins?</div>
                 <div class="faq-answer">
-                    <strong>No.</strong> You can only have one Kevin per run. However, you can stack multiple on-hit trigger items (Mirror, Plug, etc.) to maximize the value from each Kevin proc.
+                    Technically <strong>yes</strong> – Kevin isn't hard-limited to one copy – but stacking several usually isn't worth it. Most meta builds pick a single Kevin and focus on multiplying on-hit trigger items (<a href="https://megabonk.org/database/items/mirror">Mirror</a>, <a href="https://megabonk.org/database/items/electric-plug">Electric Plug</a>, <a href="https://megabonk.org/database/items/toxic-barrel">Toxic Barrel</a>, etc.) instead.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">Q: Is the "Kevin Immortality Build" still viable?</div>
                 <div class="faq-answer">
-                    The original immortality exploit was patched in v1.0.12+. However, <strong>Kevin + Mirror builds remain viable</strong> - they're just no longer game-breaking. See our updated <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality">Kevin Build Guide</a> for current strategies.
+                    The original immortality exploit was patched in v1.0.12+. However, <strong>Kevin + Mirror builds remain viable</strong> - they're just no longer game-breaking. See our updated <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality">Kevin Build Guide</a> for current strategies that work in 2025.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: What weapons work best with Kevin?</div>
+                <div class="faq-answer">
+                    High attack speed weapons maximize Kevin procs. Best choices: <a href="https://megabonk.org/database/weapons/aura">Aura</a> (continuous hits), <a href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a> (chain lightning), <a href="https://megabonk.org/database/weapons/bow">Bow</a> (with pierce), and <a href="https://megabonk.org/database/weapons/katana">Katana</a> (fast melee). Pair with <a href="https://megabonk.org/database/tomes/agility-tome">Agility Tome</a> for maximum effect.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: How does Kevin interact with Thorns builds?</div>
+                <div class="faq-answer">
+                    Kevin has excellent synergy with <a href="https://megabonk.org/database/tomes/thorns-tome">Thorns Tome</a> and thorn-based items. Each Kevin self-hit can trigger thorns effects, essentially doubling your thorn damage output. Combine with <a href="https://megabonk.org/database/items/mirror">Mirror</a> for maximum reflect damage.
                 </div>
             </div>
         </section>
 
         <!-- Related Items -->
         <section class="related-items">
-            <h2 style="color: var(--text-primary); margin-bottom: 1rem;">Related Items</h2>
+            <h2 style="color: var(--text-primary); margin-bottom: 1rem;">Related Items & Resources</h2>
             
+            <h3 style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 1rem;">Core Synergy Items</h3>
             <div class="items-grid">
                 <a href="https://megabonk.org/database/items/leeching-crystal" class="item-nav-card">
                     <img src="https://megabonk.org/images/Items/Item_Leeching_Crystal.png" alt="Leeching Crystal">
@@ -1125,6 +1283,11 @@
                     <span>Thunder Mitts</span>
                 </a>
 
+                <a href="https://megabonk.org/database/items/toxic-barrel" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Items/Item_Toxic_Barrel.png" alt="Toxic Barrel">
+                    <span>Toxic Barrel</span>
+                </a>
+
                 <a href="https://megabonk.org/database/items/spiky-shield" class="item-nav-card">
                     <img src="https://megabonk.org/images/Items/Item_Spiky_Shield.png" alt="Spiky Shield">
                     <span>Spiky Shield</span>
@@ -1135,20 +1298,72 @@
                     <span>Beefy Ring</span>
                 </a>
 
+                <a href="https://megabonk.org/database/items/gas-mask" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Items/Item_Gas_Mask.png" alt="Gas Mask">
+                    <span>Gas Mask</span>
+                </a>
+            </div>
+
+            <h3 style="color: var(--text-secondary); font-size: 1.2rem; margin: 2rem 0 1rem;">Sustain Items</h3>
+            <div class="items-grid">
                 <a href="https://megabonk.org/database/items/medkit" class="item-nav-card">
                     <img src="https://megabonk.org/images/Items/Item_Medkit.png" alt="Medkit">
                     <span>Medkit</span>
                 </a>
 
-                <a href="https://megabonk.org/database/items/golden-shield" class="item-nav-card">
-                    <img src="https://megabonk.org/images/Items/Item_Golden_Shield.png" alt="Golden Shield">
-                    <span>Golden Shield</span>
+                <a href="https://megabonk.org/database/items/slurp-gloves" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Items/Item_Slurp_Gloves.png" alt="Slurp Gloves">
+                    <span>Slurp Gloves</span>
+                </a>
+
+                <a href="https://megabonk.org/database/items/campfire" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Items/Item_Campfire.png" alt="Campfire">
+                    <span>Campfire</span>
+                </a>
+
+                <a href="https://megabonk.org/database/items/grandmas-secret-tonic" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Items/Item_Grandmas_Secret_Tonic.png" alt="Grandma's Secret Tonic">
+                    <span>Grandma's Secret Tonic</span>
+                </a>
+            </div>
+
+            <h3 style="color: var(--text-secondary); font-size: 1.2rem; margin: 2rem 0 1rem;">Related Tomes</h3>
+            <div class="items-grid">
+                <a href="https://megabonk.org/database/tomes/regen-tome" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Tomes/Regen_Tome.png" alt="Regen Tome">
+                    <span>Regen Tome</span>
+                </a>
+
+                <a href="https://megabonk.org/database/tomes/health-tome" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Tomes/Health_Tome.png" alt="Health Tome">
+                    <span>Health Tome</span>
+                </a>
+
+                <a href="https://megabonk.org/database/tomes/armor-tome" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Tomes/Armor_Tome.png" alt="Armor Tome">
+                    <span>Armor Tome</span>
+                </a>
+
+                <a href="https://megabonk.org/database/tomes/agility-tome" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Tomes/Agility_Tome.png" alt="Agility Tome">
+                    <span>Agility Tome</span>
+                </a>
+
+                <a href="https://megabonk.org/database/tomes/bloody-tome" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Tomes/Bloody_Tome.png" alt="Bloody Tome">
+                    <span>Bloody Tome</span>
+                </a>
+
+                <a href="https://megabonk.org/database/tomes/thorns-tome" class="item-nav-card">
+                    <img src="https://megabonk.org/images/Tomes/Thorns_Tome.png" alt="Thorns Tome">
+                    <span>Thorns Tome</span>
                 </a>
             </div>
 
             <div class="cta-buttons text-center" style="margin-top: 2rem;">
                 <a href="https://megabonk.org/database/items/" class="btn btn-primary">View All Items</a>
                 <a href="https://megabonk.org/tier-lists/items/" class="btn btn-secondary">Items Tier List</a>
+                <a href="https://megabonk.org/database/tomes/" class="btn btn-secondary">All Tomes</a>
             </div>
         </section>
 
@@ -1159,8 +1374,19 @@
             
             <div class="cta-buttons" style="justify-content: center;">
                 <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality" class="btn btn-primary">Kevin Mirror Build</a>
+                <a href="https://megabonk.org/guides/builds/walking-apocalypse" class="btn btn-primary">Walking Apocalypse</a>
                 <a href="https://megabonk.org/guides/builds/" class="btn btn-secondary">All Builds</a>
                 <a href="https://megabonk.org/guides/characters/" class="btn btn-secondary">Character Guides</a>
+            </div>
+
+            <div style="margin-top: 2.5rem;">
+                <h3>Explore More Resources</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                    <a href="https://megabonk.org/guides/best-weapons/" class="btn btn-secondary">Best Weapons</a>
+                    <a href="https://megabonk.org/tier-lists/tomes/" class="btn btn-secondary">Tomes Tier List</a>
+                    <a href="https://megabonk.org/guides/tips-tricks/" class="btn btn-secondary">Tips & Tricks</a>
+                    <a href="https://megabonk.org/leaderboard/" class="btn btn-secondary">Leaderboard</a>
+                </div>
             </div>
 
             <div style="margin-top: 2.5rem;">
@@ -1184,6 +1410,7 @@
                 <a href="https://megabonk.org/database/">Database</a> |
                 <a href="https://megabonk.org/tier-lists/">Tier Lists</a> |
                 <a href="https://megabonk.org/guides/">Guides</a> |
+                <a href="https://megabonk.org/guides/builds/">Builds</a> |
                 <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
             </p>
             <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
@@ -1247,15 +1474,64 @@
     </script>
 
     <!--
-    Source Notes:
-    - Kevin effect (25% self-punch, cannot kill, triggers on-hit): Megabonk Wiki & Steam Community Guides
-    - Unlock requirement (3x Leeching Crystal in one run): Multiple Steam Community Guides
-    - Leeching Crystal unlock (Regen Tome Lv. 8 prerequisite): Gamepressure.com & Community Forums
-    - Kevin bypasses shields: Reddit player reports & Community testing
-    - Leeching Crystal effect (+50 Max HP, -50% HP Regen): Megabonk Wiki Items Database
-    - Beefy Ring scaling (+20% damage per 100 Max HP): Megabonk Wiki Items Page
-    - Patch notes (v1.0.12+ meta adjustments): GamesRadar & Community Patch Notes
-    - Mirror synergy and historical exploit info: Steam Discussions & Reddit r/Megabonk
+    Source Notes & Verification:
+    - Kevin effect (25% self-punch, cannot kill, triggers on-hit): Megabonk Wiki (Fandom), Twinfinite Tier List, Steam Community
+    - Unlock requirement (3x Leeching Crystal in one run): Fandom Wiki, GameRant, Sportskeeda, Selphie1999Gaming
+    - Leeching Crystal unlock (Regen Tome Lv. 8 prerequisite): Fandom Wiki, Gamepressure, Community Forums
+    - Kevin bypasses shields: Based on Steam community testing and player reports
+    - Leeching Crystal effect: CONFLICTING DATA - Some sources say "+50 Max HP", others "+50% Max HP". Both list -50% HP Regen consistently.
+    - Beefy Ring scaling (+20% damage per 100 Max HP): Fandom Wiki, PlayerAuctions, Twinfinite
+    - Patch notes: v1.0.7 addressed Kevin + Mirror immortality (dtgre), v1.0.12 focused on XP/final stage/leaderboard (GamesRadar, PC Gamer)
+    - Mirror synergy: Fandom Wiki, ProGameGuides, Twinfinite (confirmed "on-hit" trigger)
+    - Electric Plug, Toxic Barrel: Confirmed "when taking damage" triggers (Twinfinite, PlayerAuctions)
+    - Thunder Mitts: CORRECTED - Triggers "when hitting enemies" not "when hit" (Twinfinite, PlayerAuctions)
+    - Kevin stacking: Can stack multiple (Twinfinite mentions "doesn't benefit too much from having a lot of stacks"), not hard-limited to 1
+    
+    Version & Accuracy Notes:
+    - All mechanical descriptions verified against Fandom Wiki, Twinfinite (Nov 2025), and multiple community sources
+    - Patch history cross-referenced with dtgre.com patch breakdowns and GamesRadar patch coverage
+    - Where sources conflict (Leeching Crystal values), both possibilities are noted with recommendation to check in-game
+    - "Pre-mitigation" damage claim removed as unverifiable
+    - Thunder Mitts trigger condition corrected based on item description verification
+    - Kevin stacking limitation corrected based on tier list commentary
     -->
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 </html>
