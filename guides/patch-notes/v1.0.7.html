@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk V1.0.7 Patch Notes - Kevin Fix & Performance</title>
+    <meta name="description" content="Complete V1.0.7 patch notes for Megabonk: Kevin invincibility fix, leaderboard reset, Bush buff, performance optimizations, and critical bug fixes from Sept 29, 2025.">
+    <link rel="canonical" href="https://megabonk.org/guides/patch-notes/v1.0.7">
+
+  <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Megabonk V1.0.7 Patch Notes - Kevin Fix & Performance">
+    <meta property="og:description" content="V1.0.7 patch fixed Kevin invincibility exploit, reset leaderboards, buffed Bush, and optimized late-game FPS. Full changelog.">
+    <meta property="og:url" content="https://megabonk.org/guides/patch-notes/v1.0.7">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://megabonk.org/images/guides/patch-notes/v107-header.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Megabonk V1.0.7 Patch Notes - Kevin Fix">
+    <meta name="twitter:description" content="V1.0.7 fixed Kevin exploit, reset leaderboards, buffed Bush, optimized FPS.">
+    <meta name="twitter:image" content="https://megabonk.org/images/guides/patch-notes/v107-header.jpg">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Megabonk Version 1.0.7 Patch Notes - September 2025",
+      "description": "Complete changelog for Megabonk V1.0.7 including Kevin invincibility fix, leaderboard reset, Bush character buff, and performance optimizations.",
+      "datePublished": "2025-09-29",
+      "dateModified": "2025-09-29",
+      "author": {
+        "@type": "Person",
+        "name": "vedinad"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Megabonk.org"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://megabonk.org/guides/patch-notes/v1.0.7"
+      }
+    }
+    </script>
+    
+   <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #0d0520 100%);
+            color: #e0d5f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(30, 10, 50, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #8b5cf6;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0d5f0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            margin: 20px 0;
+            padding: 10px 0;
+        }
+        
+        .breadcrumb a {
+            color: #a78bfa;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: #ff6b35;
+        }
+        
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #6b7280;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .patch-meta {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(139, 92, 246, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .meta-icon {
+            font-size: 18px;
+        }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #a78bfa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            background: rgba(30, 10, 50, 0.6);
+            border: 2px solid #6366f1;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .content-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ff6b35;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .content-section h3 {
+            font-size: 22px;
+            margin: 25px 0 15px 0;
+            color: #a78bfa;
+        }
+        
+        .section-icon {
+            font-size: 32px;
+        }
+        
+        /* Change List */
+        .change-list {
+            list-style: none;
+        }
+        
+        .change-item {
+            background: rgba(139, 92, 246, 0.1);
+            border-left: 4px solid #8b5cf6;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            transition: background 0.3s;
+        }
+        
+        .change-item:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+        
+        .change-item strong {
+            color: #ff6b35;
+            font-size: 16px;
+        }
+        
+        .change-item.bug-fix {
+            border-left-color: #10b981;
+        }
+        
+        .change-item.nerf {
+            border-left-color: #ef4444;
+        }
+        
+        .change-item.buff {
+            border-left-color: #22c55e;
+        }
+        
+        /* Impact Badge */
+        .impact-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        
+        .impact-critical {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .impact-high {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .impact-medium {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        /* Item/Weapon Cards */
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .item-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid #6366f1;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .item-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .item-card img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        
+        .item-card-name {
+            font-size: 12px;
+            color: #a78bfa;
+        }
+        
+        /* Character Showcase */
+        .character-showcase {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .character-showcase img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .character-info {
+            flex: 1;
+        }
+        
+        .character-info h4 {
+            color: #10b981;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        /* Developer Note */
+        .dev-note {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
+            border: 2px solid #ff6b35;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .dev-note::before {
+            content: "💬 Developer Note: ";
+            font-weight: bold;
+            color: #ff6b35;
+            font-style: normal;
+        }
+        
+        /* FAQ Section */
+        .faq-item {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid #6366f1;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #a78bfa;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            color: #d1d5db;
+            line-height: 1.8;
+        }
+        
+        .faq-answer a {
+            color: #10b981;
+            text-decoration: none;
+        }
+        
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Related Links */
+        .related-section {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .related-link {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            padding: 15px;
+            text-decoration: none;
+            color: #e0d5f0;
+            transition: transform 0.3s, background 0.3s;
+            display: block;
+        }
+        
+        .related-link:hover {
+            transform: translateX(5px);
+            background: rgba(16, 185, 129, 0.2);
+        }
+        
+        .related-link-title {
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(30, 10, 50, 0.8);
+            border-top: 2px solid #8b5cf6;
+            padding: 40px 0 20px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin: 10px 0;
+        }
+        
+        .footer-links a {
+            color: #a78bfa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ff6b35;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4b5563;
+            color: #9ca3af;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                font-size: 14px;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .character-showcase {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="https://megabonk.org" class="nav-logo">MEGABONK.ORG</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/guides/">Guides</a></li>
+                <li><a href="https://megabonk.org/database/">Database</a></li>
+                <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                <li><a href="https://megabonk.org/guides/builds/">Builds</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="https://megabonk.org/">Home</a>
+            <span>›</span>
+            <a href="https://megabonk.org/guides/">Guides</a>
+            <span>›</span>
+            <span>Patch V1.0.7</span>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Version 1.0.7 Patch Notes</h1>
+                <p style="font-size: 18px; color: #a78bfa; margin: 15px 0;">Quick fixes and balance changes based on community feedback</p>
+                
+                <div class="patch-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📅</span>
+                        <span>September 29, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎮</span>
+                        <span>All Platforms</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Balance & Bug Fixes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Major Exploit Fixed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">10+</div>
+                <div class="stat-label">Weapons Optimized</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">14</div>
+                <div class="stat-label">Bugs Resolved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Character Buffed</div>
+            </div>
+        </div>
+
+        <!-- Game Changes -->
+        <div class="content-section">
+            <h2><span class="section-icon">🎮</span>Game Changes</h2>
+            
+            <ul class="change-list">
+                <li class="change-item nerf">
+                    <strong>Kevin Invincibility Fixed</strong>
+                    <span class="impact-badge impact-critical">Critical</span>
+                    
+                    <div style="display: flex; align-items: center; gap: 20px; margin: 15px 0;">
+                        <img src="https://megabonk.org/images/Items/Item_Kevin.png" alt="Kevin Item" style="width: 80px; height: 80px; object-fit: contain; border-radius: 8px; background: rgba(139, 92, 246, 0.1); padding: 10px;">
+                        <div>
+                            <p><a href="https://megabonk.org/database/items/kevin" style="color: #10b981; text-decoration: none;">Kevin</a> no longer makes you invincible. Previously, Kevin's self-damage was triggering invincibility frames, making players completely untouchable. This exploit has been removed.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dev-note">
+                        RIP Kevin abusers. The item was creating an unintended immortality loop that broke game balance.
+                    </div>
+                    
+                    <p style="margin-top: 15px; color: #d1d5db;">Learn more about post-nerf Kevin strategies in our <a href="https://megabonk.org/database/items/kevin" style="color: #10b981;">Kevin Item Guide</a> and <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality" style="color: #10b981;">Kevin + Mirror Build Guide</a>.</p>
+                </li>
+                
+                <li class="change-item">
+                    <strong>Leaderboard Reset</strong>
+                    <span class="impact-badge impact-high">High Impact</span>
+                    <p>Full <a href="https://megabonk.org/leaderboard/" style="color: #10b981;">leaderboard</a> wipe implemented due to Kevin exploit abuse. Working on improving leaderboard stability and security to prevent future cheating.</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Optimizations -->
+        <div class="content-section">
+            <h2><span class="section-icon">⚡</span>Performance Optimizations</h2>
+            
+            <ul class="change-list">
+                <li class="change-item">
+                    <strong>Late-Game FPS Improvements</strong>
+                    <span class="impact-badge impact-high">High Impact</span>
+                    <p>Significant performance optimizations for the following <a href="https://megabonk.org/database/weapons/" style="color: #10b981;">weapons</a> when running extended sessions:</p>
+                    
+                    <div class="item-grid">
+                        <a href="https://megabonk.org/database/weapons/bananarang" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Bananarang.png" alt="Bananarang">
+                            <div class="item-card-name">Bananarang</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/chunkers" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Chunkers.png" alt="Chunkers">
+                            <div class="item-card-name">Chunkers</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/axe" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+                            <div class="item-card-name">Axe</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/flamewalker" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker">
+                            <div class="item-card-name">Flamewalker</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/blood-magic" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Blood_Magic.png" alt="Blood Magic">
+                            <div class="item-card-name">Blood Magic</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/poison-flask" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask">
+                            <div class="item-card-name">Poison Flask</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/black-hole" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                            <div class="item-card-name">Black Hole</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/frostwalker" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Frostwalker.png" alt="Frostwalker">
+                            <div class="item-card-name">Frostwalker</div>
+                        </a>
+                        <a href="https://megabonk.org/database/weapons/katana" class="item-card">
+                            <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana">
+                            <div class="item-card-name">Katana</div>
+                        </a>
+                    </div>
+                </li>
+                
+                <li class="change-item">
+                    <strong>Shield Recharge Fix</strong>
+                    <span class="impact-badge impact-medium">Medium Impact</span>
+                    <p>Shield recharge is no longer interrupted by <a href="https://megabonk.org/database/items/kevin" style="color: #10b981;">Kevin</a> or <a href="https://megabonk.org/database/items/leeching-crystal" style="color: #10b981;">Leeching Crystal</a>, making shield-based builds more viable. Check our <a href="https://megabonk.org/database/tomes/shield-tome" style="color: #10b981;">Shield Tome guide</a> for build tips.</p>
+                </li>
+                
+                <li class="change-item">
+                    <strong>Audio Improvements</strong>
+                    <p>Added volume slider for XP and gold pickup sound effects. No more ear-blasting late-game!</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Character Balance -->
+        <div class="content-section">
+            <h2><span class="section-icon">🦸</span>Character Changes</h2>
+            
+            <ul class="change-list">
+                <li class="change-item buff">
+                    <strong>Bush Passive Buffed</strong>
+                    <span class="impact-badge impact-high">High Impact</span>
+                    
+                    <div class="character-showcase">
+                        <img src="https://megabonk.org/images/guides/characters/Bush.png" alt="Bush Character">
+                        <div class="character-info">
+                            <h4>Bush - The Precision Sniper</h4>
+                            <p><a href="https://megabonk.org/guides/characters/bush-guide" style="color: #10b981; text-decoration: none;">Bush</a>'s Bullseye passive has been significantly improved:</p>
+                            <ul style="margin: 10px 0 0 20px; color: #d1d5db;">
+                                <li>Marks enemies more frequently</li>
+                                <li><strong>Fixed critical bug:</strong> Passive was incorrectly giving crit chance instead of crit damage</li>
+                                <li>Now properly grants +0.5-1% Crit Damage per character level</li>
+                                <li>Explosion size now scales with size multiplier</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Check out our <a href="https://megabonk.org/guides/builds/bush-best-build" style="color: #10b981;">Bush Best Build Guide</a> for optimized strategies.</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Bug Fixes -->
+        <div class="content-section">
+            <h2><span class="section-icon">🐛</span>Bug Fixes</h2>
+            
+            <h3>Gameplay Fixes</h3>
+            <ul class="change-list">
+                <li class="change-item bug-fix">
+                    <strong>Dice Weapon Corrected</strong>
+                    <div style="display: flex; align-items: center; gap: 20px; margin: 15px 0;">
+                        <img src="https://megabonk.org/images/database/weapons/Dice.png" alt="Dice Weapon" style="width: 80px; height: 80px; object-fit: contain; border-radius: 8px; background: rgba(139, 92, 246, 0.1); padding: 10px;">
+                        <div>
+                            <p>Fixed description and upgrade description for <a href="https://megabonk.org/database/weapons/dice" style="color: #10b981;">Dice</a>. The weapon was incorrectly increasing crit chance for ALL weapons instead of just the Dice itself.</p>
+                            <p style="margin-top: 8px; font-size: 14px; color: #9ca3af;">This makes <a href="https://megabonk.org/guides/characters/dicehead-guide" style="color: #10b981;">Dicehead</a> builds more balanced and strategic.</p>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="change-item bug-fix">
+                    <strong>Energy Core Audio</strong>
+                    <p><a href="https://megabonk.org/database/items/energy-core" style="color: #10b981;">Energy Core</a> is no longer excessively loud. Your ears are safe now.</p>
+                </li>
+                
+                <li class="change-item bug-fix">
+                    <strong>Final Stage XP Fixed</strong>
+                    <p>Leaving the final stage through the teleporter now properly gives Rank XP for the character you played.</p>
+                </li>
+                
+                <li class="change-item bug-fix">
+                    <strong>Anubis Laser Rendering</strong>
+                    <div style="display: flex; align-items: center; gap: 15px; margin: 10px 0;">
+                        <div>
+                            <p><a href="https://megabonk.org/guides/bosses/anubis-guide" style="color: #10b981;">Anubis</a> lasers now render correctly with lava and water surfaces. This fixes visual glitches during the Desert boss fight.</p>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="change-item bug-fix">
+                    <strong>Space Noodle Boss Interaction</strong>
+                    <div style="display: flex; align-items: center; gap: 20px; margin: 15px 0;">
+                        <img src="https://megabonk.org/images/database/weapons/Space_Noodle.png" alt="Space Noodle" style="width: 80px; height: 80px; object-fit: contain; border-radius: 8px; background: rgba(139, 92, 246, 0.1); padding: 10px;">
+                        <div>
+                            <p><a href="https://megabonk.org/database/weapons/space-noodle" style="color: #10b981;">Space Noodle</a> no longer stunlocks bosses when it attaches to them, preventing softlocks during boss fights.</p>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="change-item bug-fix">
+                    <strong>Menu ESC Key Fix</strong>
+                    <p>Pressing escape while hovering over a skin now properly hides the menu.</p>
+                </li>
+                
+                <li class="change-item bug-fix">
+                    <strong>Aegis + Shield Powerup</strong>
+                    <div style="display: flex; align-items: center; gap: 20px; margin: 15px 0;">
+                        <img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis" style="width: 80px; height: 80px; object-fit: contain; border-radius: 8px; background: rgba(139, 92, 246, 0.1); padding: 10px;">
+                        <div>
+                            <p>You no longer take damage when using <a href="https://megabonk.org/database/weapons/aegis" style="color: #10b981;">Aegis</a> while having a Shield Powerup active.</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+            <h3>Attempted Fixes</h3>
+            <ul class="change-list">
+                <li class="change-item bug-fix">
+                    <strong>Speedboi Time Slowdown Bug</strong>
+                    <p>Attempted to fix a bug where <a href="https://megabonk.org/database/items/speed-boi" style="color: #10b981;">Speedboi</a> could slow down time forever. Unable to consistently reproduce the issue for testing.</p>
+                    <div class="dev-note">
+                        I hope this is fixed, but I wasn't able to reproduce the issue to confirm.
+                    </div>
+                </li>
+                
+                <li class="change-item">
+                    <strong>Other Small Bugs</strong>
+                    <p>Various minor issues addressed throughout the game.</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Impact Analysis -->
+        <div class="content-section">
+            <h2><span class="section-icon">📊</span>Patch Impact Analysis</h2>
+            
+            <h3>Meta Changes</h3>
+            <p>The Kevin invincibility fix is the most significant change in this patch, fundamentally altering the game's meta:</p>
+            
+            <ul style="margin: 20px 0 20px 30px; color: #d1d5db; line-height: 2;">
+                <li><strong>Kevin + Mirror builds:</strong> No longer provide guaranteed immortality. Check our updated <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality" style="color: #10b981;">Kevin + Mirror guide</a> for new strategies.</li>
+                <li><strong>Leaderboard competition:</strong> Fresh start for competitive players after exploit removal. View current rankings on the <a href="https://megabonk.org/leaderboard/" style="color: #10b981;">official leaderboard</a>.</li>
+                <li><strong>Bush viability:</strong> Significant buff makes <a href="https://megabonk.org/guides/characters/bush-guide" style="color: #10b981;">Bush</a> a much stronger A-tier character for crit-focused builds.</li>
+                <li><strong>Shield builds:</strong> More reliable now that Kevin and Leeching Crystal don't interrupt shield recharge. Explore <a href="https://megabonk.org/guides/builds/" style="color: #10b981;">shield-based build strategies</a>.</li>
+            </ul>
+            
+            <h3>Performance Improvements</h3>
+            <p>Late-game optimization means longer runs are now more stable, particularly when using multiple projectile-heavy <a href="https://megabonk.org/database/weapons/" style="color: #10b981;">weapons</a> simultaneously. This especially benefits Final Swarm attempts and extended grinding sessions.</p>
+            
+            <h3>Affected Characters</h3>
+            <p>This patch impacts several <a href="https://megabonk.org/guides/characters/" style="color: #10b981;">characters</a> differently:</p>
+            <ul style="margin: 15px 0 15px 30px; color: #d1d5db;">
+                <li><a href="https://megabonk.org/guides/characters/bush-guide" style="color: #10b981;">Bush</a>: Major buff makes crit builds much stronger</li>
+                <li><a href="https://megabonk.org/guides/characters/dicehead-guide" style="color: #10b981;">Dicehead</a>: Dice weapon fix prevents global crit stacking</li>
+                <li><a href="https://megabonk.org/guides/characters/megachad-guide" style="color: #10b981;">Megachad</a>: Benefits from Kevin + Shield fixes</li>
+                <li><a href="https://megabonk.org/guides/characters/athena-guide" style="color: #10b981;">Athena</a>: Shield builds more reliable</li>
+            </ul>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="content-section">
+            <h2><span class="section-icon">❓</span>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: Can I still use Kevin after this patch?</div>
+                <div class="faq-answer">
+                    A: Yes! <a href="https://megabonk.org/database/items/kevin">Kevin</a> still works with on-hit builds, particularly with lifesteal and regeneration. It just no longer grants invincibility through I-frame abuse. You'll need to actually build sustain to survive the self-damage. See our <a href="https://megabonk.org/guides/builds/poison-lifesteal">Poison Lifesteal build</a> for viable strategies.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: Why was the leaderboard completely reset?</div>
+                <div class="faq-answer">
+                    A: The Kevin invincibility exploit allowed players to achieve impossibly high scores. A complete reset ensures fair competition going forward. Check the current <a href="https://megabonk.org/leaderboard/official">official leaderboard</a> for legitimate rankings.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: How much better is Bush now?</div>
+                <div class="faq-answer">
+                    A: Significantly improved! The passive was bugged and giving crit chance instead of crit damage. Now it properly scales with +0.5-1% Crit Damage per level AND marks enemies more frequently. Bush is now a solid A-tier character for precision sniper builds. Check our <a href="https://megabonk.org/guides/builds/bush-best-build">Bush Best Build guide</a> and <a href="https://megabonk.org/guides/characters/character-tier-list-2025">character tier list</a>.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: Does Dice still increase global crit chance?</div>
+                <div class="faq-answer">
+                    A: No. This was fixed in an earlier patch (V1.0.4+) but the tooltip was incorrect until V1.0.7. <a href="https://megabonk.org/database/weapons/dice">Dice</a> now only increases its own crit chance when rolling a 6, not your global crit chance. See our <a href="https://megabonk.org/database/weapons/dice">Dice weapon guide</a> for details.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: Which weapons got performance optimizations?</div>
+                <div class="faq-answer">
+                    A: Nine weapons received late-game FPS improvements: <a href="https://megabonk.org/database/weapons/bananarang">Bananarang</a>, <a href="https://megabonk.org/database/weapons/chunkers">Chunkers</a>, <a href="https://megabonk.org/database/weapons/axe">Axe</a>, <a href="https://megabonk.org/database/weapons/flamewalker">Flamewalker</a>, <a href="https://megabonk.org/database/weapons/blood-magic">Blood Magic</a>, <a href="https://megabonk.org/database/weapons/poison-flask">Poison Flask</a>, <a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a>, <a href="https://megabonk.org/database/weapons/frostwalker">Frostwalker</a>, and <a href="https://megabonk.org/database/weapons/katana">Katana</a>. Check our <a href="https://megabonk.org/guides/best-weapons/">best weapons guide</a> for tier rankings.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: What about boss fights?</div>
+                <div class="faq-answer">
+                    A: The <a href="https://megabonk.org/guides/bosses/anubis-guide">Anubis</a> boss fight is now more stable with fixed laser rendering. Space Noodle no longer causes boss stunlocks. For strategies on all bosses, visit our <a href="https://megabonk.org/guides/bosses/">boss guides section</a>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Content -->
+        <div class="related-section">
+            <h2 style="color: #10b981;"><span class="section-icon">🔗</span>Related Content</h2>
+            
+            <div class="related-grid">
+                <a href="https://megabonk.org/database/items/kevin" class="related-link">
+                    <div class="related-link-title">Kevin Item Guide</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Complete guide to using Kevin post-nerf with lifesteal builds</p>
+                </a>
+                
+                <a href="https://megabonk.org/guides/characters/bush-guide" class="related-link">
+                    <div class="related-link-title">Bush Character Guide</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Master the buffed sniper character with crit damage scaling</p>
+                </a>
+                
+                <a href="https://megabonk.org/database/weapons/dice" class="related-link">
+                    <div class="related-link-title">Dice Weapon Guide</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Understanding Dice crit scaling mechanics after bug fix</p>
+                </a>
+                
+                <a href="https://megabonk.org/guides/builds/" class="related-link">
+                    <div class="related-link-title">Best Builds Post-V1.0.7</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Updated meta builds after patch changes</p>
+                </a>
+                
+                <a href="https://megabonk.org/guides/bosses/anubis-guide" class="related-link">
+                    <div class="related-link-title">Anubis Boss Guide</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Beat the Desert boss with fixed laser rendering</p>
+                </a>
+                
+                <a href="https://megabonk.org/database/weapons/space-noodle" class="related-link">
+                    <div class="related-link-title">Space Noodle Weapon</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Fixed boss stunlock mechanics explained</p>
+                </a>
+                
+                <a href="https://megabonk.org/guides/characters/dicehead-guide" class="related-link">
+                    <div class="related-link-title">Dicehead Guide</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Dice weapon changes impact on Dicehead builds</p>
+                </a>
+                
+                <a href="https://megabonk.org/leaderboard/" class="related-link">
+                    <div class="related-link-title">Official Leaderboard</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Post-reset rankings and top players</p>
+                </a>
+                
+                <a href="https://megabonk.org/guides/best-weapons/" class="related-link">
+                    <div class="related-link-title">Best Weapons 2025</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Top-tier weapon rankings with performance data</p>
+                </a>
+                
+                <a href="https://megabonk.org/database/tomes/" class="related-link">
+                    <div class="related-link-title">Tome Database</div>
+                    <p style="font-size: 14px; color: #9ca3af;">All 23 tomes with upgrade strategies</p>
+                </a>
+                
+                <a href="https://megabonk.org/tier-lists/" class="related-link">
+                    <div class="related-link-title">Complete Tier Lists</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Characters, weapons, items, and tomes ranked</p>
+                </a>
+                
+                <a href="https://megabonk.org/guides/megabonk-beginners-guide" class="related-link">
+                    <div class="related-link-title">Beginner's Guide</div>
+                    <p style="font-size: 14px; color: #9ca3af;">Essential tips for new players post-patch</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Megabonk.org</h3>
+                    <p style="color: #9ca3af;">Your complete resource for Megabonk guides, builds, and strategies. Not affiliated with the official game.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://megabonk.org/">Home</a></li>
+                        <li><a href="https://megabonk.org/guides/">All Guides</a></li>
+                        <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                        <li><a href="https://megabonk.org/database/">Database</a></li>
+                        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Characters</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://megabonk.org/guides/characters/">All Characters</a></li>
+                        <li><a href="https://megabonk.org/guides/characters/bush-guide">Bush Guide</a></li>
+                        <li><a href="https://megabonk.org/guides/characters/dicehead-guide">Dicehead Guide</a></li>
+                        <li><a href="https://megabonk.org/guides/characters/ninja-unlock-guide">Ninja Guide</a></li>
+                        <li><a href="https://megabonk.org/guides/characters/character-tier-list-2025">Character Tier List</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://megabonk.org/guides/builds/">Build Guides</a></li>
+                        <li><a href="https://megabonk.org/database/weapons/">Weapon Database</a></li>
+                        <li><a href="https://megabonk.org/database/items/">Item Database</a></li>
+                        <li><a href="https://megabonk.org/database/tomes/">Tome Database</a></li>
+                        <li><a href="https://megabonk.org/guides/bosses/">Boss Guides</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener">Steam Page</a></li>
+                        <li><a href="https://x.com/megabonkgame" target="_blank" rel="noopener">Twitter</a></li>
+                        <li><a href="https://www.reddit.com/search/?q=Megabonk" target="_blank" rel="noopener">Reddit</a></li>
+                        <li><a href="https://www.youtube.com/results?search_query=megabonk" target="_blank" rel="noopener">YouTube</a></li>
+                        <li><a href="https://megabonk.org/download/megabonk">Download Game</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Megabonk.org - Unofficial fan resource. Megabonk is developed by vedinad.</p>
+                <p style="margin-top: 10px; font-size: 14px;">Last updated: November 17, 2025 | <a href="https://megabonk.org/guides/tips-tricks/" style="color: #a78bfa;">Tips & Tricks</a> | <a href="https://megabonk.org/guides/stats/" style="color: #a78bfa;">Stats Guide</a></p>
+            </div>
+        </div>
+    </footer>
+    
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
