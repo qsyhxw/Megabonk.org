@@ -1,0 +1,999 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V1.0.17 Patch Notes - Fog of War Update | Megabonk</title>
+    <meta name="description" content="Megabonk v1.0.17 adds fog of war mapping, particle opacity controls, DX12 support, and buffs 12 characters including Fox, Noelle, and Bush.">
+    <link rel="canonical" href="https://megabonk.org/guides/patch-notes/V1.0.17">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="V1.0.17 Patch Notes - Fog of War Update | Megabonk">
+    <meta property="og:description" content="Megabonk v1.0.17 adds fog of war mapping, particle opacity controls, DX12 support, and buffs 12 characters including Fox, Noelle, and Bush.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/guides/patch-notes/V1.0.17">
+    <meta property="og:image" content="https://megabonk.org/images/Stats_Page.png">
+    <meta property="og:site_name" content="Megabonk Wiki">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="V1.0.17 Patch Notes - Fog of War Update | Megabonk">
+    <meta name="twitter:description" content="Megabonk v1.0.17 adds fog of war mapping, particle opacity controls, DX12 support, and buffs 12 characters including Fox, Noelle, and Bush.">
+    <meta name="twitter:image" content="https://megabonk.org/images/Stats_Page.png">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Megabonk v1.0.17 Patch Notes - Fog of War & Visuals Update",
+      "datePublished": "2025-10-20",
+      "dateModified": "2025-10-20",
+      "author": {
+        "@type": "Organization",
+        "name": "VedinadGames"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Megabonk Wiki",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://megabonk.org/images/guides/characters/Fox.png"
+        }
+      },
+      "description": "Complete patch notes for Megabonk version 1.0.17 including fog of war system, visual optimizations, character rebalancing, and bug fixes.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://megabonk.org/guides/patch-notes/V1.0.17"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What are the main features in Megabonk v1.0.17?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Version 1.0.17 introduces a full map with fog of war exploration tracking, customizable particle/projectile opacity sliders, DX12 rendering support, and extensive character rebalancing affecting 13 characters."
+        }
+      },{
+        "@type": "Question",
+        "name": "Which characters were buffed in patch v1.0.17?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fox (2% luck per level), Birdo (1% airborne damage per level), Bush (1% crit damage per level), Megachad (2.5% damage per flex), Noelle (size scaling + frozen enemy damage), Dicehead (slower falloff), Calcium (0.75% damage per level), Ogre (1.5% per level), Spaceman (no fall damage), and items Scarf, Brass Knuckles, Cursed Doll."
+        }
+      },{
+        "@type": "Question",
+        "name": "Was Robinette nerfed in v1.0.17?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Robinette's passive damage gain now reduces after collecting 200,000 gold to balance super late-game leaderboard runs, though early and mid-game performance was buffed."
+        }
+      }]
+    }
+    </script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #00d9ff;
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d9ff;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #00d9ff;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+        
+        .breadcrumb span {
+            color: #999;
+            margin: 0 0.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://megabonk.org/images/Stats_Page.png') center/cover;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+        }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #00d9ff;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #999;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 4px solid #00d9ff;
+        }
+        
+        .content-section h2 {
+            color: #00d9ff;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+        }
+        
+        .content-section h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+        
+        /* Character/Item List */
+        .changes-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .change-item {
+            background: rgba(0, 217, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #00d9ff;
+            transition: background 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .change-item:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+        
+        .change-item img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid #00d9ff;
+            flex-shrink: 0;
+        }
+        
+        .change-item strong {
+            color: #00d9ff;
+            font-size: 1.1rem;
+        }
+        
+        .change-item a {
+            color: #00d9ff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .change-item a:hover {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+        
+        .buff {
+            border-left-color: #4ade80;
+        }
+        
+        .nerf {
+            border-left-color: #f87171;
+        }
+        
+        .buff strong, .buff a {
+            color: #4ade80;
+        }
+        
+        .nerf strong, .nerf a {
+            color: #f87171;
+        }
+        
+        /* TL;DR Box */
+        .tldr-box {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 217, 255, 0.05));
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #00d9ff;
+            margin: 2rem 0;
+        }
+        
+        .tldr-box h2 {
+            color: #00d9ff;
+            margin-bottom: 1rem;
+        }
+        
+        .tldr-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .tldr-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .tldr-box li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #00d9ff;
+        }
+        
+        /* Bug Fixes */
+        .bug-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+        
+        .bug-item {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .bug-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0.75rem;
+            color: #4ade80;
+            font-weight: bold;
+        }
+        
+        /* Dev Note */
+        .dev-note {
+            background: rgba(147, 51, 234, 0.1);
+            border: 2px solid #9333ea;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #e0e0e0;
+        }
+        
+        .dev-note:before {
+            content: "💬 Dev Note";
+            display: block;
+            font-weight: bold;
+            color: #9333ea;
+            margin-bottom: 1rem;
+            font-style: normal;
+        }
+        
+        /* Weapon Gallery */
+        .weapon-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+        
+        .weapon-item {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .weapon-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .weapon-item img {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            transition: border-color 0.3s;
+        }
+        
+        .weapon-item:hover img {
+            border-color: #00d9ff;
+        }
+        
+        .weapon-item span {
+            display: block;
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+        
+        /* Related Pages */
+        .related-pages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .related-card {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+        }
+        
+        .related-card:hover {
+            border-color: #00d9ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+        }
+        
+        .related-card h3 {
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-card p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 2px solid #00d9ff;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #00d9ff;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            display: block;
+            padding: 0.3rem 0;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #00d9ff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .weapon-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            }
+            
+            .change-item {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="https://megabonk.org/" class="nav-logo">MEGABONK WIKI</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/guides/">Guides</a></li>
+                <li><a href="https://megabonk.org/database/">Database</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="https://megabonk.org/">Home</a>
+            <span>›</span>
+            <a href="https://megabonk.org/guides/">Guides</a>
+            <span>›</span>
+            <span>Patch Notes</span>
+            <span>›</span>
+            <span>V1.0.17</span>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <div class="container">
+        <div class="hero">
+            <h1>Megabonk v1.0.17 Patch Notes</h1>
+            <p style="font-size: 1.2rem; color: #00d9ff; margin-bottom: 1.5rem;">Fog of War & Visuals Update</p>
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>October 20, 2025</span>
+                </div>
+                <div class="meta-item">
+                    <span>🎮</span>
+                    <span>Version 1.0.17</span>
+                </div>
+                <div class="meta-item">
+                    <span>👤</span>
+                    <span>VedinadGames</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-number">13</div>
+                <div class="stat-label">Characters Rebalanced</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Major Features Added</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Critical Bugs Fixed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Characters Buffed</div>
+            </div>
+        </div>
+        
+        <!-- TL;DR -->
+        <div class="tldr-box">
+            <h2>⚡ TL;DR — What's New</h2>
+            <ul>
+                <li>Full map with fog of war tracking shows where you've explored</li>
+                <li>Customizable particle and projectile opacity (no more late-game sunglasses needed!)</li>
+                <li>DX12 rendering support for crash troubleshooting</li>
+                <li>12 characters buffed: <a href="https://megabonk.org/guides/characters/fox-kitsune-guide" style="color: #00d9ff;">Fox</a>, <a href="https://megabonk.org/guides/characters/birdo-guide" style="color: #00d9ff;">Birdo</a>, <a href="https://megabonk.org/guides/characters/bush-guide" style="color: #00d9ff;">Bush</a>, <a href="https://megabonk.org/guides/characters/megachad-guide" style="color: #00d9ff;">Megachad</a>, <a href="https://megabonk.org/guides/characters/noelle-guide" style="color: #00d9ff;">Noelle</a>, and more</li>
+                <li><a href="https://megabonk.org/guides/characters/robinette-guide" style="color: #00d9ff;">Robinette</a> nerfed for late-game balance (after 200k gold)</li>
+                <li>Major bug fixes including <a href="https://megabonk.org/database/tomes/chaos-tome" style="color: #00d9ff;">Chaos Tome</a>, <a href="https://megabonk.org/database/weapons/hero-sword" style="color: #00d9ff;">Hero Sword</a> scaling</li>
+            </ul>
+        </div>
+        
+        <!-- System Changes -->
+        <div class="content-section">
+            <h2>🖥️ System & Graphics</h2>
+            
+            <h3>DirectX 12 Support</h3>
+            <p>The game now supports running in DX12 mode, though DX11 remains the recommended option. If you're experiencing crashes, DX12 might help stabilize performance. A Steam popup will appear when launching the game, allowing you to choose your rendering mode. If the popup doesn't appear, try restarting Steam.</p>
+            <p><strong>Note:</strong> When running in DX12, certain graphical features will be disabled or broken, including Ambient Occlusion and Color Grading.</p>
+            
+            <h3>Visual Opacity Controls</h3>
+            <p>A new particle and effects opacity slider has been added to <a href="https://megabonk.org/guides/stats/">Visual settings</a>. Auto opacity is enabled by default and should work well for most players. This feature addresses the infamous "late-game light show" that previously required wearing sunglasses.</p>
+            <p>While transparent projectiles are slightly more demanding on your GPU, performance impact is negligible until extreme late-game scenarios. Once your screen is completely covered with massive projectiles, you can experiment with full transparency for better FPS, or set to 0 transparency for absolute best performance.</p>
+        </div>
+        
+        <!-- Game Features -->
+        <div class="content-section">
+            <h2>🎮 New Game Features</h2>
+            
+            <h3>Fog of War Mapping</h3>
+            <p>The most significant addition in this patch is a full map with fog of war functionality. You can now track exactly where you've explored during each run, making navigation and area discovery much more intuitive. Check out our <a href="https://megabonk.org/guides/tips-tricks/">tips and tricks guide</a> for strategies on efficient map exploration.</p>
+            
+            <h3>Quality of Life Improvements</h3>
+            <ul class="changes-list">
+                <li class="change-item">
+                    <strong>Silver Tome:</strong> Can now be toggled on/off from the Unlocks menu using the Toggler. Learn more in our <a href="https://megabonk.org/database/tomes/silver-tome">Silver Tome database entry</a>.
+                </li>
+                <li class="change-item">
+                    <strong>Charge Shrines:</strong> Now display a different color on the minimap compared to other shrines for easier identification
+                </li>
+                <li class="change-item">
+                    <img src="https://megabonk.org/images/database/weapons/Hero_Sword.png" alt="Hero Sword">
+                    <div>
+                        <strong><a href="https://megabonk.org/database/weapons/hero-sword">Hero Sword</a> & <a href="https://megabonk.org/database/weapons/corrupted-sword">Corrupted Sword</a>:</strong> Fixed scaling issue where projectile speed didn't increase with size multiplier
+                    </div>
+                </li>
+                <li class="change-item">
+                    <strong>Money Particles:</strong> Move faster during final swarm, allowing you to collect them while running
+                </li>
+                <li class="change-item">
+                    <strong>Multi-Level Stats:</strong> When gaining multiple levels instantly, stat changes now appear in real-time on the right side as you pick upgrades
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Character Buffs -->
+        <div class="content-section">
+            <h2>📈 Character Buffs</h2>
+            
+            <ul class="changes-list">
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Fox.png" alt="Fox">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/fox-kitsune-guide">Fox</a></strong> — Passive luck increased from 1% to 2% per level. This doubles Fox's scaling potential with luck-based builds and legendary item acquisition. Check out our <a href="https://megabonk.org/guides/builds/fox-best-build">Fox best build guide</a> for updated strategies.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Birdo.png" alt="Birdo">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/birdo-guide">Birdo</a></strong> — Passive now grants 1% Airborne Damage per level. This new scaling mechanic significantly improves Birdo's damage output throughout the run. View the <a href="https://megabonk.org/guides/builds/birdo-best-build">Birdo best build</a> for aerial combat strategies.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Bush.png" alt="Bush">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/bush-guide">Bush</a></strong> — Passive crit damage increased from 0.5% to 1% per level. Additionally, Bullseyes now appear more frequently on enemies, and explosion size scales with size multiplier. These changes make Bush's crit-focused playstyle much more powerful. Try the <a href="https://megabonk.org/guides/builds/bush-best-build">Bush best build</a> with <a href="https://megabonk.org/database/weapons/sniper-rifle">Sniper Rifle</a>.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Megachad.png" alt="Megachad">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/megachad-guide">Megachad</a></strong> — Passive now grants 2.5% damage every time you flex. This stacking damage bonus rewards aggressive flexing throughout the run. Discover <a href="https://megabonk.org/guides/builds/megachad-best-build">Megachad's optimal build</a>.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Noelle.png" alt="Noelle">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/noelle-guide">Noelle</a></strong> — Major passive rework: Now gains Size instead of Duration per level. Additionally, gains a damage multiplier for each frozen enemy (0.02x per frozen enemy, meaning 50 frozen enemies = 2x damage multiplier). This change dramatically improves Noelle's scaling and <a href="https://megabonk.org/leaderboard/">leaderboard</a> viability. Her <a href="https://megabonk.org/database/weapons/frostwalker">Frostwalker</a> weapon synergizes perfectly with this new passive. See the updated <a href="https://megabonk.org/guides/builds/noelle-best-build">Noelle freeze build</a>.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Dicehead.png" alt="Dicehead">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/dicehead-guide">Dicehead</a></strong> — Passive rewards now fall off much slower. Previously rewards were halved by level 25; now they don't halve until level 50. This extends Dicehead's power curve significantly. Check the <a href="https://megabonk.org/guides/builds/dicehead-best-build">Dicehead build guide</a>.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Calcium.png" alt="Calcium">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/calcium-guide">Calcium</a></strong> — Passive simplified and buffed. Now gains 0.75% damage per level and an additional 0.5% damage per 1% Speed Multiplier. This damage is applied gradually as Calcium approaches top speed, making the speed-demon playstyle more rewarding. Perfect for <a href="https://megabonk.org/guides/builds/speed-demon">speed demon builds</a>.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Ogre.png" alt="Ogre">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/ogre-guide">Ogre</a></strong> — Passive damage buffed from 1% to 1.5% per level, providing a straightforward 50% increase to scaling. View the <a href="https://megabonk.org/guides/builds/ogre-best-build">Ogre best build</a>.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/guides/characters/Spaceman.png" alt="Spaceman">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/spaceman-guide">Spaceman</a></strong> — No longer takes fall damage, a quality-of-life improvement that removes a minor but annoying risk factor. His <a href="https://megabonk.org/database/weapons/space-noodle">Space Noodle</a> weapon remains unchanged.
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Character Nerfs -->
+        <div class="content-section">
+            <h2>📉 Character Nerfs</h2>
+            
+            <ul class="changes-list">
+                <li class="change-item nerf">
+                    <img src="https://megabonk.org/images/guides/characters/Robinette.png" alt="Robinette">
+                    <div>
+                        <strong><a href="https://megabonk.org/guides/characters/robinette-guide">Robinette</a></strong> — Passive damage gain is now reduced after collecting 200,000 gold to balance super late-game leaderboard runs. Early and mid-game performance has been buffed, but this change primarily affects extreme endgame scenarios. This nerf was implemented to increase character diversity on <a href="https://megabonk.org/leaderboard/official">official leaderboards</a>, as Robinette was dominating the rankings. Her <a href="https://megabonk.org/database/weapons/bow">Bow</a> weapon still excels in pierce builds.
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="dev-note">
+                <p>"It would be nice to buff all other characters to become as strong as Robinette, but that is not something I can do overnight, so a short-term solution was to just nerf her passive late-game for now. I'd like to eventually get in per-character leaderboards too, which also kinda solves this problem."</p>
+            </div>
+        </div>
+        
+        <!-- Item Buffs -->
+        <div class="content-section">
+            <h2>⚔️ Item & Weapon Changes</h2>
+            
+            <ul class="changes-list">
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Scarf.png" alt="Scarf">
+                    <div>
+                        <strong><a href="https://megabonk.org/database/items/scarf">Scarf</a></strong> — Damage increased from 33% to 50%, making it a much more valuable damage multiplier item. Essential for high-damage builds.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Brass_Knuckles.png" alt="Brass Knuckles">
+                    <div>
+                        <strong><a href="https://megabonk.org/database/items/brass-knuckles">Brass Knuckles</a></strong> — Scaling changed from Additive to Flat, which provides significantly stronger scaling. Additionally, now increases size per amount stacked, adding a new dimension to stacking this item. Check our <a href="https://megabonk.org/tier-lists/items/">item tier list</a> for updated rankings.
+                    </div>
+                </li>
+                
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Cursed_Doll.png" alt="Cursed Doll">
+                    <div>
+                        <strong><a href="https://megabonk.org/database/items/cursed-doll">Cursed Doll</a></strong> — Can now curse 5 enemies per tick (increased from 1) every 1 second. This 5x effectiveness increase makes Cursed Doll far more impactful for curse-based builds. Pairs well with <a href="https://megabonk.org/database/tomes/cursed-tome">Cursed Tome</a>.
+                    </div>
+                </li>
+            </ul>
+            
+            <h3>Popular Weapon Combinations</h3>
+            <p>These weapons benefit greatly from the new item changes. View our <a href="https://megabonk.org/database/weapons/">complete weapons database</a> for detailed stats.</p>
+            
+            <div class="weapon-gallery">
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/katana"><img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Katana"></a>
+                    <span>Katana</span>
+                </div>
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/dexecutioner"><img src="https://megabonk.org/images/database/weapons/Dexecutioner.png" alt="Dexecutioner"></a>
+                    <span>Dexecutioner</span>
+                </div>
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/flamewalker"><img src="https://megabonk.org/images/database/weapons/Flamewalker.png" alt="Flamewalker"></a>
+                    <span>Flamewalker</span>
+                </div>
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/aura"><img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura"></a>
+                    <span>Aura</span>
+                </div>
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/aegis"><img src="https://megabonk.org/images/database/weapons/Aegis.png" alt="Aegis"></a>
+                    <span>Aegis</span>
+                </div>
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/lightning-staff"><img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff"></a>
+                    <span>Lightning Staff</span>
+                </div>
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/revolver"><img src="https://megabonk.org/images/database/weapons/Revolver.png" alt="Revolver"></a>
+                    <span>Revolver</span>
+                </div>
+                <div class="weapon-item">
+                    <a href="https://megabonk.org/database/weapons/axe"><img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe"></a>
+                    <span>Axe</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bug Fixes -->
+        <div class="content-section">
+            <h2>🐛 Bug Fixes</h2>
+            
+            <ul class="bug-list">
+                <li class="bug-item">Fixed a bug where Shady Guy doesn't disappear after purchasing from him</li>
+                <li class="bug-item">Fixed a bug where HP gained from leveling didn't show in the stats screen and didn't work with items like <a href="https://megabonk.org/database/items/beefy-ring" style="color: #4ade80;">Beefy Ring</a> (all characters gain +1 Max HP per level)</li>
+                <li class="bug-item">Fixed a bug where Campfire didn't disappear after using Microwave on it</li>
+                <li class="bug-item">Chest text now changes from red to white immediately when you gain enough money to purchase, without needing to move away and back</li>
+                <li class="bug-item">Fixed an issue where <a href="https://megabonk.org/database/items/shattered-knowledge" style="color: #4ade80;">Shattered Wisdom</a> didn't deal any damage. It now works as intended and may be very strong</li>
+                <li class="bug-item">Fixed a bug where items could damage enemies when the game was paused</li>
+                <li class="bug-item">Hopefully fixed a bug where music stops playing at the intro of a game</li>
+                <li class="bug-item">Fixed a bug where banishing every Epic item would no longer grant any Legendary items</li>
+                <li class="bug-item">Fixed a critical bug where <a href="https://megabonk.org/database/tomes/chaos-tome" style="color: #4ade80;">Chaos Tome</a> reward was multiplied by <a href="https://megabonk.org/database/tomes/luck-tome" style="color: #4ade80;">Luck Multiplier</a> twice, causing legendary upgrades to grow exponentially</li>
+                <li class="bug-item">Attempted fix for an issue where some players couldn't play the game at all due to a bugged menu</li>
+            </ul>
+        </div>
+        
+        <!-- Other Changes -->
+        <div class="content-section">
+            <h2>🎵 Other Changes</h2>
+            
+            <ul class="changes-list">
+                <li class="change-item">
+                    <img src="https://megabonk.org/images/guides/characters/Calcium.png" alt="Calcium">
+                    <div>
+                        <strong>Calcium's Theme:</strong> Now extended and "goes twice as hard" with an improved soundtrack. Fans of <a href="https://megabonk.org/guides/characters/calcium-guide">Calcium</a> rejoice!
+                    </div>
+                </li>
+                <li class="change-item">
+                    <strong>Leaderboard Reset Time:</strong> Scheduled 4 hours earlier every Sunday so the developer doesn't have to stay up until 2 AM verifying functionality. Check your ranking on the <a href="https://megabonk.org/leaderboard/">leaderboard</a>.
+                </li>
+                <li class="change-item">
+                    <strong>Cloud Gaming:</strong> Developer signed up for Nvidia GeForce Now / Steam Cloud Play support. Approval pending, should be available soon. Download options at <a href="https://megabonk.org/download/megabonk">Megabonk download page</a>.
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Developer Note -->
+        <div class="dev-note" style="border-color: #00d9ff; background: rgba(0, 217, 255, 0.05);">
+            <p>"Yep that's it for now. Thanks for playing and for all the feedback. I realize there's still a lot of balancing changes that people wanna see, but keep in mind I'm just a single person working on this, so I can only do so much every week. Next week I might try to do some new content for Halloween, if I can cook something up in time."</p>
+            <p style="margin-top: 1rem;">— peace</p>
+        </div>
+        
+        <!-- Meta Impact -->
+        <div class="content-section">
+            <h2>🎯 Meta Impact Analysis</h2>
+            
+            <h3>Leaderboard Shake-Up</h3>
+            <p>The <a href="https://megabonk.org/guides/characters/robinette-guide">Robinette</a> nerf combined with buffs to <a href="https://megabonk.org/guides/characters/noelle-guide">Noelle</a>, <a href="https://megabonk.org/guides/characters/fox-kitsune-guide">Fox</a>, and <a href="https://megabonk.org/guides/characters/bush-guide">Bush</a> should significantly diversify <a href="https://megabonk.org/leaderboard/official">leaderboard</a> rankings. Noelle's new size scaling and frozen enemy damage multiplier make her a top-tier contender for high-curse runs. Check the updated <a href="https://megabonk.org/guides/characters/character-tier-list-2025">character tier list</a> for current meta rankings.</p>
+            
+            <h3>Quality of Life Wins</h3>
+            <p>The particle opacity controls address one of the community's most frequent complaints about late-game playability. Combined with fog of war mapping, these changes make extended runs much more enjoyable. New players should check our <a href="https://megabonk.org/guides/megabonk-beginners-guide">beginner's guide</a> for essential tips.</p>
+            
+            <h3>Build Diversity</h3>
+            <p><a href="https://megabonk.org/database/items/brass-knuckles">Brass Knuckles</a> and <a href="https://megabonk.org/database/items/cursed-doll">Cursed Doll</a> buffs open up new stacking strategies. Bush's crit improvements make precision builds more viable with <a href="https://megabonk.org/database/tomes/precision-tome">Precision Tome</a>. Calcium's simplified but stronger passive makes <a href="https://megabonk.org/guides/builds/speed-demon">speed builds</a> more accessible. Explore all <a href="https://megabonk.org/guides/builds/">character builds</a> for synergy ideas.</p>
+        </div>
+        
+        <!-- Related Pages -->
+        <h2 style="color: #00d9ff; margin: 3rem 0 1.5rem 0; font-size: 2rem;">📚 Related Pages</h2>
+        <div class="related-pages">
+            <a href="https://megabonk.org/guides/characters/noelle-guide" class="related-card">
+                <h3>Noelle Build Guide</h3>
+                <p>Complete guide to Noelle's reworked freeze mechanics and size scaling</p>
+            </a>
+            <a href="https://megabonk.org/guides/characters/fox-kitsune-guide" class="related-card">
+                <h3>Fox Build Guide</h3>
+                <p>Maximize Fox's buffed 2% luck scaling for legendary item farming</p>
+            </a>
+            <a href="https://megabonk.org/guides/characters/bush-guide" class="related-card">
+                <h3>Bush Crit Build</h3>
+                <p>Leverage Bush's doubled crit scaling and Bullseye improvements</p>
+            </a>
+            <a href="https://megabonk.org/database/items/brass-knuckles" class="related-card">
+                <h3>Brass Knuckles</h3>
+                <p>Item database entry with flat scaling mechanics and stacking tips</p>
+            </a>
+            <a href="https://megabonk.org/guides/characters/character-tier-list-2025" class="related-card">
+                <h3>Character Tier List 2025</h3>
+                <p>Updated rankings after v1.0.17 balance changes</p>
+            </a>
+            <a href="https://megabonk.org/guides/builds/" class="related-card">
+                <h3>All Character Builds</h3>
+                <p>Complete build guides for all 20 characters</p>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Megabonk Wiki</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://megabonk.org/">Home</a></li>
+                        <li><a href="https://megabonk.org/guides/">Guides</a></li>
+                        <li><a href="https://megabonk.org/guides/megabonk-beginners-guide">Beginner's Guide</a></li>
+                        <li><a href="https://megabonk.org/guides/tips-tricks/">Tips & Tricks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Database</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                        <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+                        <li><a href="https://megabonk.org/database/tomes/">Tomes</a></li>
+                        <li><a href="https://megabonk.org/database/items/">Items</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Builds & Tier Lists</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://megabonk.org/guides/builds/">All Builds</a></li>
+                        <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                        <li><a href="https://megabonk.org/guides/characters/character-tier-list-2025">Character Tier List</a></li>
+                        <li><a href="https://megabonk.org/tier-lists/items/">Item Rankings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+                        <li><a href="https://megabonk.org/leaderboard/official">Official Rankings</a></li>
+                        <li><a href="https://megabonk.org/download/megabonk">Download</a></li>
+                        <li><a href="https://megabonk.org/guides/mobile/">Mobile Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Megabonk Wiki is a fan-made resource. Megabonk © 2025 VedinadGames.</p>
+                <p>Not affiliated with or endorsed by the game developer.</p>
+            </div>
+        </div>
+    </footer>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
