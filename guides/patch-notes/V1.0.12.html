@@ -1,0 +1,977 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V1.0.12 Patch Notes – Leaderboard Fix & Final Swarm - Megabonk</title>
+    <meta name="description" content="Complete V1.0.12 patch notes for Megabonk: Final Swarm rework, leaderboard fixes, balance changes for Chaos Tome, Black Hole, Joe's Dagger, and XP Tome.">
+    <link rel="canonical" href="https://megabonk.org/guides/patch-notes/V1.0.12">
+
+  <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+     crossorigin="anonymous"></script>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Megabonk V1.0.12 Patch Notes - Final Swarm Update">
+    <meta property="og:description" content="Major update: Final Swarm redesign, leaderboard security, weapon balancing, and critical bug fixes for Megabonk's October 2025 patch.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/guides/patch-notes/V1.0.12">
+    <meta property="og:image" content="https://megabonk.org/images/Stats_Page.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Megabonk V1.0.12 Patch Notes">
+    <meta name="twitter:description" content="Final Swarm rework, leaderboard fixes, and major balance changes">
+    <meta name="twitter:image" content="https://megabonk.org/images/Stats_Page.png">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Megabonk Version 1.0.12 Patch Notes",
+      "description": "Complete patch notes for Megabonk V1.0.12 including Final Swarm rework, leaderboard fixes, and balance changes",
+      "datePublished": "2025-10-08",
+      "dateModified": "2025-10-08",
+      "author": {
+        "@type": "Organization",
+        "name": "Megabonk Wiki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Megabonk Wiki"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the main changes in Megabonk V1.0.12?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "V1.0.12 introduces a Final Swarm redesign to prevent marathon runs, fixes leaderboard exploits with permanent bans for cheaters, balances weapons (Joe's Dagger capped, Chaos Tome buffed), and resolves critical bugs including save file corruption."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was Joe's Dagger nerfed in V1.0.12?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Joe's Dagger now has a damage cap of 200% per minute per dagger. With 10 daggers, that's a maximum of 2000% damage per minute, preventing extreme late-game scaling while keeping it strong early and mid-game."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How did the Final Swarm change in this update?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Final Swarm was redesigned to end runs faster and prevent 5-hour slideshow matches. New ghost-type enemies were added, and control abilities like Black Hole and executes are significantly less effective."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #0a0a0a;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #1a1a1a;
+            border-bottom: 2px solid #2a2a2a;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        .breadcrumb span {
+            color: #666;
+            margin: 0 0.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+        }
+        
+        .hero-content {
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .patch-badge {
+            display: inline-block;
+            background: #00d4ff;
+            color: #0a0a0a;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #00d4ff;
+        }
+        
+        .stat-card h3 {
+            color: #00d4ff;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .stat-card p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            background: #1a1a1a;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        
+        .content-section h2 {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #2a2a2a;
+        }
+        
+        .content-section h3 {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #b0b0b0;
+        }
+        
+        .content-section ul, .content-section ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section li {
+            margin-bottom: 0.5rem;
+            color: #b0b0b0;
+        }
+        
+        .content-section a {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .content-section a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Buff/Nerf Lists */
+        .change-list {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .change-item {
+            background: #0f0f0f;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+        
+        .change-item.buff {
+            border-color: #00ff88;
+        }
+        
+        .change-item.nerf {
+            border-color: #ff4444;
+        }
+        
+        .change-item.fix {
+            border-color: #ffaa00;
+        }
+        
+        .change-item strong {
+            color: #00d4ff;
+        }
+        
+        .change-item a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        .change-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* TL;DR Box */
+        .tldr-box {
+            background: #2a1a4a;
+            border: 2px solid #00d4ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .tldr-box h3 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+        
+        .tldr-box ul {
+            margin-left: 1.5rem;
+        }
+        
+        /* Warning/Note Boxes */
+        .note-box {
+            background: #2a2a1a;
+            border-left: 4px solid #ffaa00;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .note-box.warning {
+            background: #2a1a1a;
+            border-color: #ff4444;
+        }
+        
+        /* Weapon/Item Gallery */
+        .item-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .item-card {
+            background: #0f0f0f;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .item-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-card .item-name {
+            font-size: 0.9rem;
+            color: #00d4ff;
+            font-weight: 500;
+        }
+        
+        /* Character Grid */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .character-card {
+            background: #0f0f0f;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .character-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
+        
+        .character-card .character-name {
+            font-size: 1rem;
+            color: #00d4ff;
+            font-weight: 500;
+        }
+        
+        /* Related Content */
+        .related-section {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .related-card {
+            background: #0f0f0f;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .related-card h3 {
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-card p {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 2px solid #2a2a2a;
+            text-align: center;
+            color: #666;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .item-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            
+            .character-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="https://megabonk.org/" class="nav-brand">Megabonk Wiki</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/guides">Guides</a></li>
+                <li><a href="https://megabonk.org/database">Database</a></li>
+                <li><a href="https://megabonk.org/tier-lists">Tier Lists</a></li>
+                <li><a href="https://megabonk.org/leaderboard">Leaderboard</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="https://megabonk.org/">Home</a>
+            <span>›</span>
+            <a href="https://megabonk.org/guides">Guides</a>
+            <span>›</span>
+            <span>Patch Notes</span>
+            <span>›</span>
+            <span>V1.0.12</span>
+        </div>
+    </div>
+    
+    <!-- Hero -->
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Version 1.0.12 Patch Notes</h1>
+                <div class="hero-meta">
+                    <span>📅 <strong>Released:</strong> October 8, 2025</span>
+                    <span>🏷️ <strong>Type:</strong> Balance & Stability</span>
+                </div>
+                <span class="patch-badge">Leaderboard Fix & Final Swarm Update</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <h3>Update Focus</h3>
+                <p>Leaderboard Security & Final Swarm Rework</p>
+            </div>
+            <div class="stat-card">
+                <h3>Major Changes</h3>
+                <p>6 Weapon Balances + Anti-Cheat System</p>
+            </div>
+            <div class="stat-card">
+                <h3>Critical Fixes</h3>
+                <p>Save Corruption + Hitbox Bugs Resolved</p>
+            </div>
+            <div class="stat-card">
+                <h3>Meta Impact</h3>
+                <p>High - Build Diversity Increased</p>
+            </div>
+        </div>
+        
+        <!-- TL;DR -->
+        <div class="tldr-box">
+            <h3>⚡ TL;DR - What You Need to Know</h3>
+            <ul>
+                <li><strong><a href="https://megabonk.org/leaderboard/official">Leaderboards</a> fixed and secured</strong> - Cheaters permanently banned, exploits patched</li>
+                <li><strong>Final Swarm redesigned</strong> - No more 5-hour runs; new ghost enemies counter stall tactics</li>
+                <li><strong>Save file corruption resolved</strong> - Crashes and Alt+F4 no longer corrupt your progress</li>
+                <li><strong>Weapon balancing</strong> - <a href="https://megabonk.org/database/items/joes-dagger">Joe's Dagger</a> capped, <a href="https://megabonk.org/database/tomes/chaos-tome">Chaos Tome</a> buffed 50%, <a href="https://megabonk.org/database/tomes/xp-tome">XP Tome</a> nerfed 9%→7%</li>
+                <li><strong>Performance boost</strong> - FPS improvements for <a href="https://megabonk.org/database/weapons/dexecutioner">Dexecutioner</a> and <a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a> users</li>
+            </ul>
+        </div>
+        
+        <!-- Overview -->
+        <section class="content-section">
+            <h2>📋 Overview</h2>
+            <p>Version 1.0.12 represents a major stability and balance update for Megabonk, addressing critical issues that emerged during the game's explosive first month. Following <a href="https://megabonk.org/leaderboard">leaderboard</a> exploits that disrupted the competitive community and meta strategies that resulted in multi-hour endgame sessions, developer vedinad implemented comprehensive fixes alongside targeted weapon adjustments.</p>
+            
+            <p>This patch focuses on three core areas: securing leaderboard integrity through anti-cheat measures and permanent ban systems, redesigning the Final Swarm phase to create faster and more challenging endgame experiences, and rebalancing progression systems to encourage <a href="https://megabonk.org/guides/builds">build diversity</a> rather than single-strategy dominance.</p>
+        </section>
+        
+        <!-- Affected Weapons -->
+        <section class="content-section">
+            <h2>⚔️ Weapons Affected by This Patch</h2>
+            <div class="item-gallery">
+                <a href="https://megabonk.org/database/weapons/black-hole" class="item-card">
+                    <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole">
+                    <div class="item-name">Black Hole</div>
+                </a>
+                <a href="https://megabonk.org/database/weapons/dexecutioner" class="item-card">
+                    <img src="https://megabonk.org/images/database/weapons/Dexecutioner.png" alt="Dexecutioner">
+                    <div class="item-name">Dexecutioner</div>
+                </a>
+                <a href="https://megabonk.org/database/weapons/axe" class="item-card">
+                    <img src="https://megabonk.org/images/database/weapons/Axe.png" alt="Axe">
+                    <div class="item-name">Axe</div>
+                </a>
+                <a href="https://megabonk.org/database/weapons/sword" class="item-card">
+                    <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword">
+                    <div class="item-name">Sword</div>
+                </a>
+                <a href="https://megabonk.org/database/weapons/aura" class="item-card">
+                    <img src="https://megabonk.org/images/database/weapons/Aura.png" alt="Aura">
+                    <div class="item-name">Aura</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Buffed & Nerfed Summary -->
+        <section class="content-section">
+            <h2>⚖️ Balance Changes at a Glance</h2>
+            
+            <h3 style="color: #00ff88;">🔼 Buffed</h3>
+            <div class="change-list">
+                <div class="change-item buff">
+                    <strong><a href="https://megabonk.org/database/tomes/chaos-tome">Chaos Tome</a></strong> – Reward bonus increased by 50%, making the high-risk gamble more worthwhile for experimental builds.
+                </div>
+                <div class="change-item buff">
+                    <strong><a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a></strong> – Default projectile size increased by 20%, improving base crowd control without item investment.
+                </div>
+                <div class="change-item buff">
+                    <strong><a href="https://megabonk.org/guides/characters/bush-guide">Bush</a> (Marksman Passive)</strong> – Cooldown now scales faster (-0.4s every 10 levels), reaching maximum efficiency (1s cooldown) at level 100.
+                </div>
+                <div class="change-item buff">
+                    <strong>Duration-Based Weapons</strong> – <a href="https://megabonk.org/database/weapons/dexecutioner">Dexecutioner</a>, <a href="https://megabonk.org/database/weapons/axe">Axe</a>, and <a href="https://megabonk.org/database/weapons/sword">Sword</a> now function properly at high duration values thanks to projectile cap fixes.
+                </div>
+            </div>
+            
+            <h3 style="color: #ff4444;">🔽 Nerfed</h3>
+            <div class="change-list">
+                <div class="change-item nerf">
+                    <strong><a href="https://megabonk.org/database/tomes/xp-tome">XP Tome</a></strong> – Experience gain reduced from 9% per level to 7%, slowing overall progression speed. <em>(Developer indicated willingness to revert based on community feedback)</em>
+                </div>
+                <div class="change-item nerf">
+                    <strong><a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a></strong> – Proc coefficient reduced from 0.9 to 0.7, bringing it in line with similar weapons (<a href="https://megabonk.org/database/weapons/sword">Sword</a>, <a href="https://megabonk.org/database/weapons/axe">Axe</a>, <a href="https://megabonk.org/database/weapons/aura">Aura</a>) and reducing synergy with on-hit effects like <a href="https://megabonk.org/database/items/moldy-cheese">Moldy Cheese</a>.
+                </div>
+                <div class="change-item nerf">
+                    <strong><a href="https://megabonk.org/database/items/joes-dagger">Joe's Dagger</a></strong> – Damage scaling capped at 200% per minute per dagger. With 10 daggers, maximum scaling is 2000% per minute, preventing extreme late-game dominance while preserving early/mid-game strength.
+                </div>
+                <div class="change-item nerf">
+                    <strong>Rolly Bones Enemies</strong> – Movement speed reduced in Desert biome to decrease late-game farming efficiency.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Affected Tomes & Items -->
+        <section class="content-section">
+            <h2>📚 Tomes & Items Affected</h2>
+            <div class="item-gallery">
+                <a href="https://megabonk.org/database/tomes/chaos-tome" class="item-card">
+                    <img src="https://megabonk.org/images/Tomes/Chaos_Tome.png" alt="Chaos Tome">
+                    <div class="item-name">Chaos Tome</div>
+                </a>
+                <a href="https://megabonk.org/database/tomes/xp-tome" class="item-card">
+                    <img src="https://megabonk.org/images/Tomes/XP_Tome.png" alt="XP Tome">
+                    <div class="item-name">XP Tome</div>
+                </a>
+                <a href="https://megabonk.org/database/items/joes-dagger" class="item-card">
+                    <img src="https://megabonk.org/images/Items/Item_Joes_Dagger.png" alt="Joe's Dagger">
+                    <div class="item-name">Joe's Dagger</div>
+                </a>
+                <a href="https://megabonk.org/database/items/moldy-cheese" class="item-card">
+                    <img src="https://megabonk.org/images/Items/Item_Moldy_Cheese.png" alt="Moldy Cheese">
+                    <div class="item-name">Moldy Cheese</div>
+                </a>
+                <a href="https://megabonk.org/database/items/spiky-shield" class="item-card">
+                    <img src="https://megabonk.org/images/Items/Item_Spiky_Shield.png" alt="Spiky Shield">
+                    <div class="item-name">Spiky Shield</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Final Swarm Changes -->
+        <section class="content-section">
+            <h2>👻 Final Swarm Rework</h2>
+            <p>The endgame phase received a complete overhaul to address the problematic meta that encouraged players to endure hours-long sessions at sub-2 FPS framerates. The previous Final Swarm could be indefinitely sustained through execution chains and <a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a> stalling, creating an unhealthy competitive environment where <a href="https://megabonk.org/leaderboard">leaderboard</a> positions were determined by endurance rather than skill.</p>
+            
+            <div class="note-box">
+                <strong>Developer Commentary:</strong> "The current meta required you to wear sunglasses and watch a slideshow at 1.5fps for 5 hours to get a WR. This was never intended, and I don't think anyone actually enjoyed that."
+            </div>
+            
+            <h3>Key Changes</h3>
+            <ul>
+                <li><strong>New Ghost-Type Enemies</strong> – Special enemy variants spawn during Final Swarm that are significantly harder to control</li>
+                <li><strong>Reduced Control Effectiveness</strong> – Execution mechanics and <a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a> crowd control are substantially less effective, forcing active movement and adaptation</li>
+                <li><strong>Faster Escalation</strong> – The swarm now reaches lethal density more quickly, creating natural run endings between 20-45 minutes instead of 3-5 hours</li>
+                <li><strong>Skill-Based Survival</strong> – Success now depends on positioning, resource management, and <a href="https://megabonk.org/guides/builds">build optimization</a> rather than patience</li>
+            </ul>
+            
+            <p><strong>Meta Impact:</strong> The update shifts competitive strategy from "infinite sustain + stall" to "burst damage + efficient routing." Builds focused on raw DPS and mobility are now favored over pure survivability compositions. Check out our updated <a href="https://megabonk.org/guides/builds">build guides</a> for post-patch strategies.</p>
+        </section>
+        
+        <!-- Affected Characters -->
+        <section class="content-section">
+            <h2>🎭 Characters Affected by This Patch</h2>
+            <div class="character-grid">
+                <a href="https://megabonk.org/guides/characters/bush-guide" class="character-card">
+                    <img src="https://megabonk.org/images/guides/characters/Bush.png" alt="Bush">
+                    <div class="character-name">Bush</div>
+                </a>
+                <a href="https://megabonk.org/guides/characters/spaceman-guide" class="character-card">
+                    <img src="https://megabonk.org/images/guides/characters/Spaceman.png" alt="Spaceman">
+                    <div class="character-name">Spaceman</div>
+                </a>
+                <a href="https://megabonk.org/guides/characters/megachad-guide" class="character-card">
+                    <img src="https://megabonk.org/images/guides/characters/Megachad.png" alt="Megachad">
+                    <div class="character-name">Megachad</div>
+                </a>
+            </div>
+            <p style="margin-top: 1rem;"><strong>Bush</strong> received significant buffs to his Marksman passive, <strong>Spaceman</strong> got bug fixes for his XP passive, and <strong>Megachad's Theme</strong> was reportedly added to the game soundtrack. View the full <a href="https://megabonk.org/guides/characters">character roster</a> and their updated <a href="https://megabonk.org/guides/builds">best builds</a>.</p>
+        </section>
+        
+        <!-- Leaderboard & Anti-Cheat -->
+        <section class="content-section">
+            <h2>🏆 Leaderboard Improvements & Anti-Cheat</h2>
+            <p>Following several days of leaderboard instability caused by exploits, comprehensive security measures have been implemented to protect competitive integrity.</p>
+            
+            <h3>Security Enhancements</h3>
+            <div class="change-list">
+                <div class="change-item fix">
+                    <strong>Backend Secured</strong> – Multiple exploits that allowed leaderboard manipulation have been patched
+                </div>
+                <div class="change-item fix">
+                    <strong>Permanent Ban System</strong> – Confirmed cheaters are added to a global ban list and permanently removed from all <a href="https://megabonk.org/leaderboard">leaderboard</a> displays
+                </div>
+                <div class="change-item fix">
+                    <strong>"All Leaderboards" Temporarily Removed</strong> – The combined leaderboard view has been disabled pending implementation of character-specific filtering and additional anti-cheat measures
+                </div>
+            </div>
+            
+            <div class="note-box warning">
+                <strong>⚠️ Warning to Cheaters:</strong> According to the developer: "Cheaters you better watch your ass or im clapping your cheeks back to the shadow realm where you belong."
+            </div>
+            
+            <p>View the legitimate rankings on our <a href="https://megabonk.org/leaderboard/official">official leaderboard</a> page or check out the <a href="https://megabonk.org/leaderboard/verified">verified community leaderboard</a>.</p>
+        </section>
+        
+        <!-- Stability & Bug Fixes -->
+        <section class="content-section">
+            <h2>🔧 Stability & Critical Bug Fixes</h2>
+            
+            <h3>Major Fixes</h3>
+            <div class="change-list">
+                <div class="change-item fix">
+                    <strong>Save File Corruption Fixed</strong> – Resolved the critical issue where crashes or forced exits (Alt+F4) could corrupt save data, preventing progress loss
+                </div>
+                <div class="change-item fix">
+                    <strong><a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a> Hitbox Corrected</strong> – Fixed bug where Black Hole hitboxes were approximately 10x larger than the visual projectile, essentially covering entire maps
+                </div>
+                <div class="change-item fix">
+                    <strong><a href="https://megabonk.org/guides/characters/spaceman-guide">Spaceman</a> Passive Restored</strong> – Spaceman's passive ability now correctly grants XP bonus per level as intended
+                </div>
+                <div class="change-item fix">
+                    <strong><a href="https://megabonk.org/database/items/spiky-shield">Spiky Shield</a> Stacking</strong> – Corrected stacking behavior for Spiky Shield item
+                </div>
+                <div class="change-item fix">
+                    <strong>Weapon Duration Logic Improved</strong> – Fixed projectile cap system preventing weapons like <a href="https://megabonk.org/database/weapons/dexecutioner">Dexecutioner</a>, <a href="https://megabonk.org/database/weapons/axe">Axe</a>, and <a href="https://megabonk.org/database/weapons/sword">Sword</a> from firing at high duration values. Previously, duration would keep projectiles "active" longer than intended, filling the cap with invisible/inactive projectiles
+                </div>
+            </div>
+            
+            <h3>Performance Optimizations</h3>
+            <ul>
+                <li>Major FPS improvements when using <strong><a href="https://megabonk.org/database/weapons/dexecutioner">Dexecutioner</a></strong> at high projectile counts</li>
+                <li>Significant performance boost for <strong><a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a></strong> builds with multiple simultaneous projectiles</li>
+                <li>General stability improvements across all game systems</li>
+            </ul>
+        </section>
+        
+        <!-- Weapon-Specific Changes -->
+        <section class="content-section">
+            <h2>⚔️ Detailed Weapon Analysis</h2>
+            
+            <h3><a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a></h3>
+            <p><strong>Role Change:</strong> Crowd Control → Crowd Control (Reduced Synergy)</p>
+            <ul>
+                <li><strong>Size Buff:</strong> 20% larger base projectile improves baseline effectiveness without item investment</li>
+                <li><strong>Proc Nerf:</strong> Coefficient reduced from 0.9 to 0.7, matching other AoE weapons</li>
+                <li><strong>Impact:</strong> Still excellent for pure crowd control, but less explosive when combined with on-hit items like <a href="https://megabonk.org/database/items/moldy-cheese">Moldy Cheese</a>. Remains viable but no longer dominates late-game compositions. See optimal builds in our <a href="https://megabonk.org/guides/builds/black-hole-grouping-control">Black Hole Build Guide</a>.</li>
+            </ul>
+            
+            <h3><a href="https://megabonk.org/database/items/joes-dagger">Joe's Dagger</a></h3>
+            <p><strong>Scaling Cap Introduced:</strong> 200% damage increase per minute per dagger</p>
+            <ul>
+                <li><strong>Example:</strong> With 10 daggers equipped, maximum scaling is 2000% damage per minute (previously unlimited)</li>
+                <li><strong>Timeline:</strong> At 10 daggers, reaching damage cap takes 10 minutes instead of scaling infinitely</li>
+                <li><strong>Developer Note:</strong> "Before this change, you could get 20,000% damage in 10 seconds, which nothing else in the game could contest lol"</li>
+                <li><strong>Impact:</strong> Remains a strong carry weapon through early and mid-game. No longer the sole viable option for record-breaking marathon runs. Encourages weapon diversity at high levels</li>
+            </ul>
+            
+            <h3><a href="https://megabonk.org/database/tomes/chaos-tome">Chaos Tome</a></h3>
+            <p><strong>Risk/Reward Rebalanced:</strong> 50% increase to all stat bonuses</p>
+            <ul>
+                <li><strong>Previous State:</strong> High-risk gamble with underwhelming random stat gains</li>
+                <li><strong>New State:</strong> All random stat bonuses are 50% higher, making favorable RNG significantly more impactful</li>
+                <li><strong>Best Use:</strong> Experimental builds with high XP gain for frequent rerolls; avoid on highest difficulties where consistency is critical</li>
+                <li><strong>Community Reception:</strong> Now considered a viable alternative to meta <a href="https://megabonk.org/database/tomes">Tome</a> selections. Check our <a href="https://megabonk.org/tier-lists/tomes">Tome Tier List</a> for updated rankings.</li>
+            </ul>
+            
+            <h3><a href="https://megabonk.org/database/tomes/xp-tome">XP Tome</a></h3>
+            <p><strong>Progression Speed Reduced:</strong> 9% → 7% XP gain per level</p>
+            <ul>
+                <li><strong>Justification:</strong> The majority of competitive players requested this nerf to reduce early-game power spike disparity</li>
+                <li><strong>Effect:</strong> Slower leveling means delayed power spikes and more deliberate early-game planning</li>
+                <li><strong>Developer Stance:</strong> "At least give it a try, and If everyone ends up hating it, I can just revert it back to 9% next week. please go easy on me"</li>
+                <li><strong>Current Status:</strong> Change is provisional pending community feedback</li>
+            </ul>
+            
+            <h3><a href="https://megabonk.org/guides/characters/bush-guide">Bush</a> (Marksman Passive)</h3>
+            <p><strong>Scaling Improved:</strong> Cooldown reduction now provides clear milestones</p>
+            <ul>
+                <li><strong>Starting Cooldown:</strong> 5 seconds</li>
+                <li><strong>Scaling Rate:</strong> -0.4 seconds every 10 levels</li>
+                <li><strong>Level 100 Cooldown:</strong> 1 second (cap)</li>
+                <li><strong>Breakpoints:</strong> Level 10 (4.6s), Level 50 (3s), Level 75 (2s), Level 100 (1s)</li>
+                <li><strong>Impact:</strong> More predictable power scaling makes Bush a stronger pick for execution-focused builds. See our <a href="https://megabonk.org/guides/builds/bush-best-build">Bush Best Build</a> guide for optimal strategies.</li>
+            </ul>
+        </section>
+        
+        <!-- What This Means For Players -->
+        <section class="content-section">
+            <h2>💡 Strategic Implications</h2>
+            
+            <h3>Build Diversity Opens Up</h3>
+            <p>With <a href="https://megabonk.org/database/items/joes-dagger">Joe's Dagger</a> capped and Final Swarm reworked, the competitive meta now rewards flexibility over single-strategy optimization. Previously dominant "stall until infinite scaling" approaches are no longer viable.</p>
+            
+            <h3>New Competitive Meta</h3>
+            <ul>
+                <li><strong>Favored Builds:</strong> High burst damage + mobility > pure survivability. Explore our <a href="https://megabonk.org/guides/best-weapons">best weapons guide</a> for top picks.</li>
+                <li><strong>Underutilized Weapons:</strong> Duration-based weapons (now fixed) offer new optimization paths. Try <a href="https://megabonk.org/guides/builds/sword-master">Sword Master</a> or <a href="https://megabonk.org/guides/builds/katana-dexecutioner-execute-melee">Katana/Dexecutioner</a> builds.</li>
+                <li><strong>Tome Choices:</strong> <a href="https://megabonk.org/database/tomes/chaos-tome">Chaos Tome</a> becomes viable for aggressive leveling strategies</li>
+                <li><strong>Character Impact:</strong> Characters with inherent mobility (<a href="https://megabonk.org/guides/characters/calcium-guide">Calcium</a>, <a href="https://megabonk.org/guides/characters/tony-mczoom-guide">Tony McZoom</a>) gain value. Check our <a href="https://megabonk.org/guides/characters/character-tier-list-2025">Character Tier List</a>.</li>
+            </ul>
+            
+            <h3>Quality of Life Wins</h3>
+            <ul>
+                <li>Save file integrity means you can safely close the game without fear of corruption</li>
+                <li>FPS improvements allow late-game builds to remain playable instead of becoming slideshows</li>
+                <li>Fixed weapon behaviors (<a href="https://megabonk.org/database/weapons/dexecutioner">Dexecutioner</a>, <a href="https://megabonk.org/database/weapons/axe">Axe</a>, <a href="https://megabonk.org/database/weapons/sword">Sword</a>) open new build possibilities</li>
+            </ul>
+            
+            <div class="note-box">
+                <strong>🎯 Pro Tip:</strong> Experiment with previously underused weapons now that <a href="https://megabonk.org/database/tomes/duration-tome">duration scaling</a> works correctly. The <a href="https://megabonk.org/database/weapons/dexecutioner">Dexecutioner</a> + <a href="https://megabonk.org/database/tomes/duration-tome">Duration Tome</a> combination, previously broken, is now a legitimate build path. See our <a href="https://megabonk.org/guides/tips-tricks">tips and tricks</a> page for more strategies.
+            </div>
+        </section>
+        
+        <!-- Known Issues -->
+        <section class="content-section">
+            <h2>⚠️ Known Issues & Limitations</h2>
+            <ul>
+                <li><strong><a href="https://megabonk.org/database/tomes/xp-tome">XP Tome</a> Change is Provisional:</strong> The 9%→7% nerf may be reverted in a future patch based on community feedback</li>
+                <li><strong>Character-Specific Leaderboards Pending:</strong> The "All Leaderboards" view remains disabled until proper filtering is implemented. Visit the <a href="https://megabonk.org/leaderboard">leaderboard hub</a> for available options.</li>
+                <li><strong>Balance Monitoring Ongoing:</strong> Developer vedinad has expressed openness to further adjustments based on emerging meta data</li>
+            </ul>
+        </section>
+        
+        <!-- Future Roadmap -->
+        <section class="content-section">
+            <h2>🔮 What's Next</h2>
+            <p>While not included in V1.0.12, the developer has outlined upcoming features planned for future updates:</p>
+            
+            <h3>Short-Term Goals (Subsequent Patches)</h3>
+            <ul>
+                <li>Adjustable opacity settings for particles and projectiles</li>
+                <li>Full-sized map with fog of war exploration tracking</li>
+                <li>Expanded hover tooltips showing detailed weapon and <a href="https://megabonk.org/guides/stats">stat information</a></li>
+                <li>In-game quest tracking and pinning from the pause menu</li>
+            </ul>
+            
+            <div class="note-box">
+                <strong>📅 Update:</strong> Some of these features (particle opacity, fog of war map) were released in V1.0.17 on October 19, 2025.
+            </div>
+            
+            <h3>Long-Term Vision</h3>
+            <ul>
+                <li><strong>Multiplayer Support</strong> – Co-op and competitive modes</li>
+                <li><strong>New Content</strong> – Additional maps, <a href="https://megabonk.org/database/weapons">weapons</a>, <a href="https://megabonk.org/guides/characters">characters</a>, and <a href="https://megabonk.org/database/items">items</a></li>
+                <li><strong>Expanded Leaderboards</strong> – Character-specific, difficulty-based, and seasonal rankings</li>
+            </ul>
+        </section>
+        
+        <!-- Related Content -->
+        <div class="related-section">
+            <h2>🔗 Related Resources</h2>
+            <div class="related-grid">
+                <a href="https://megabonk.org/guides" class="related-card">
+                    <h3>📋 All Guides</h3>
+                    <p>Complete guide collection including characters, builds, bosses, and advanced strategies</p>
+                </a>
+                <a href="https://megabonk.org/database/weapons" class="related-card">
+                    <h3>⚔️ Weapon Database</h3>
+                    <p>Stats, mechanics, and optimization guides for all weapons affected by this patch</p>
+                </a>
+                <a href="https://megabonk.org/database/tomes" class="related-card">
+                    <h3>📚 Tome Guide</h3>
+                    <p>Detailed analysis of Chaos Tome, XP Tome, and all progression systems</p>
+                </a>
+                <a href="https://megabonk.org/guides/builds" class="related-card">
+                    <h3>🎯 Build Guides</h3>
+                    <p>Updated character builds incorporating V1.0.12 balance changes</p>
+                </a>
+                <a href="https://megabonk.org/tier-lists" class="related-card">
+                    <h3>📊 Tier Lists</h3>
+                    <p>Current meta rankings for weapons, characters, items, and tomes post-patch</p>
+                </a>
+                <a href="https://megabonk.org/leaderboard/official" class="related-card">
+                    <h3>🏆 Official Leaderboard</h3>
+                    <p>View the secured leaderboard with anti-cheat protections and permanent ban system</p>
+                </a>
+                <a href="https://megabonk.org/guides/characters" class="related-card">
+                    <h3>🎭 Character Guides</h3>
+                    <p>Complete guides for Bush, Spaceman, Megachad, and all 20 playable characters</p>
+                </a>
+                <a href="https://megabonk.org/guides/megabonk-beginners-guide" class="related-card">
+                    <h3>🎮 Beginner's Guide</h3>
+                    <p>New to Megabonk? Start here for essential tips, mechanics, and progression strategies</p>
+                </a>
+                <a href="https://megabonk.org/download/megabonk" class="related-card">
+                    <h3>⬇️ Download Game</h3>
+                    <p>Get Megabonk on Steam and start your survival adventure today</p>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Megabonk Wiki. Game developed by vedinad. Not affiliated with the official developer.</p>
+            <p>All game content and materials are trademarks and copyrights of their respective owners.</p>
+            <p><a href="https://megabonk.org/privacy-policy" style="color: #00d4ff; text-decoration: none;">Privacy Policy</a></p>
+        </div>
+    </footer>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
