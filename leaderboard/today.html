@@ -1288,81 +1288,60 @@
             }
         }
 
-        这个页面不显示数据，通常有三个主要原因。请按照以下步骤进行排查和修复：
-
-1. 检查浏览器控制台 (F12)
-这是最快找到问题的方法：
-
-在页面上按 F12 键打开开发者工具。
-
-点击 Console (控制台) 标签。
-
-如果是红色的 CORS 错误 (Access to fetch... blocked by CORS policy)：
-
-原因：你正在本地电脑（如 Live Server 或直接打开 HTML 文件）运行代码，但试图请求远程服务器 https://megabonk.org 的数据。浏览器出于安全考虑拦截了请求。
-
-解决方法：
-
-方法 A（测试用）：使用我们之前提到的 python -m http.server 方法，并在本地也放一份 leaderboard-data.json，然后把代码里的 dataUrl 改成 './leaderboard-data.json'。
-
-方法 B（正式用）：将这个 HTML 文件上传到你的网站服务器上，只有在同一个域名下访问才不会报错。
-
-2. 数据结构不匹配 (最可能的代码原因)
-你的代码中，filterTodayData 函数对时间格式的要求非常严格：
-
-JavaScript
-
-// 你的代码第 717 行左右
-const itemTimestamp = item.createdAt._seconds;
-它期望 createdAt 是一个包含 _seconds 的对象（这是 Google Firestore 数据库的格式）。 但是，如果我们之前的 Python 采集脚本生成的 JSON 中 createdAt 是其他格式（例如 "2025-11-19..." 字符串，或者直接是一个数字时间戳），item.createdAt._seconds 就会是 undefined，导致所有数据都被过滤掉。
-
-修复代码： 我们需要让这个函数更“聪明”一点，能兼容各种时间格式。
-
-请用下面的代码 替换 原有的 filterTodayData 函数：
-
-JavaScript
-
+// ============================================================
+// 🛠️ 修复后的数据过滤函数 (兼容多种时间格式)
+// ============================================================
 function filterTodayData(data) {
-    // 如果没有数据，直接返回空数组
-    if (!data || !Array.isArray(data)) return [];
+    // 1. 安全检查：如果没有数据，直接返回空数组
+    if (!data || !Array.isArray(data)) {
+        console.warn("数据源为空或格式错误");
+        return [];
+    }
 
+    // 2. 定义时间解析工具 (这是修复的核心！)
+    const parseTimestamp = (item) => {
+        // 情况 A: 兼容 Firestore 格式 {_seconds: 123}
+        if (item.createdAt && typeof item.createdAt === 'object' && item.createdAt._seconds) {
+            return item.createdAt._seconds;
+        }
+        // 情况 B: 兼容 ISO 字符串格式 "2025-01-19T12:00:00Z"
+        if (typeof item.createdAt === 'string') {
+            return new Date(item.createdAt).getTime() / 1000;
+        }
+        // 情况 C: 兼容直接的数字时间戳 (秒或毫秒)
+        if (typeof item.createdAt === 'number') {
+            // 如果数字很大（13位），说明是毫秒，转成秒；如果是10位，直接用
+            return item.createdAt > 10000000000 ? item.createdAt / 1000 : item.createdAt;
+        }
+        // 情况 D: 有些采集脚本用的是 fetched_at 字段
+        if (item.fetched_at) {
+            return new Date(item.fetched_at).getTime() / 1000;
+        }
+        return 0; // 无法解析
+    };
+
+    // 3. 计算今天的起止时间 (UTC)
     const targetDate = new Date(currentDate);
-    
-    // 设置今天的开始和结束时间戳（秒）
     const startTimestamp = new Date(Date.UTC(
         targetDate.getUTCFullYear(),
         targetDate.getUTCMonth(),
         targetDate.getUTCDate(),
         0, 0, 0, 0
     )).getTime() / 1000;
-    
     const endTimestamp = startTimestamp + 86400; // +24小时
 
-    // === 核心修复：增强的时间解析逻辑 ===
-    const parseTimestamp = (item) => {
-        // 情况1: Firestore 格式 {_seconds: 123}
-        if (item.createdAt && item.createdAt._seconds) {
-            return item.createdAt._seconds;
-        }
-        // 情况2: 采集脚本生成的 ISO 字符串 "2025-01-01T..."
-        if (typeof item.fetched_at === 'string') {
-            return new Date(item.fetched_at).getTime() / 1000;
-        }
-        // 情况3: 采集脚本生成的 createdAt 是字符串
-        if (typeof item.createdAt === 'string') {
-            return new Date(item.createdAt).getTime() / 1000;
-        }
-        return 0; // 无法解析
-    };
-
-    // 第一轮筛选：只看今天的
+    // 4. 执行过滤
     let filtered = data.filter(item => {
         const ts = parseTimestamp(item);
         return ts >= startTimestamp && ts < endTimestamp;
     });
 
-    // 如果今天没数据，尝试显示"最近7天"
+    console.log(`找到 ${filtered.length} 条今日数据`);
+
+    // === 兜底策略 (非常重要) ===
+    // 如果“今天”没数据，为了不让页面开天窗，自动尝试加载“过去7天”的数据
     if (filtered.length === 0) {
+        console.log("今日无数据，尝试加载最近7天...");
         const sevenDaysAgo = startTimestamp - (7 * 86400);
         filtered = data.filter(item => {
             const ts = parseTimestamp(item);
@@ -1370,22 +1349,41 @@ function filterTodayData(data) {
         });
         
         if (filtered.length > 0) {
-            updateDateLabel('Last 7 Days');
+            // 更新页面上的日期显示，提示用户这是最近的数据
+            updateDateLabel('Recent 7 Days');
         }
     }
 
-    // === 兜底逻辑：如果7天也没数据，直接显示所有数据的前50名 ===
-    // 防止页面空白难看
+    // 如果7天也没数据，那就显示所有数据的前50名 (防止页面空白)
     if (filtered.length === 0 && data.length > 0) {
-        console.warn("No data found for today/week, showing all-time latest.");
+        console.log("最近无数据，显示全部历史记录前50名");
         updateDateLabel('All Time');
         filtered = data;
     }
 
+    // 5. 排序并截取前50名
     return filtered
-        .sort((a, b) => (b.kills || 0) - (a.kills || 0))
+        .sort((a, b) => (b.kills || 0) - (a.kills || 0)) // 按击杀数降序
         .slice(0, CONFIG.maxDisplayRanks);
 }
+
+// 辅助函数：更新日期标签提示
+function updateDateLabel(label) {
+    const dateElement = document.getElementById('current-date');
+    if (!dateElement) return;
+    
+    const originalDate = currentDate.toLocaleDateString('en-US', { 
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+    });
+    
+    if (label === 'Today') {
+        dateElement.textContent = originalDate;
+    } else {
+        dateElement.innerHTML = `${originalDate} <br><span style="color: #ff6b6b; font-size: 0.85rem; font-weight: 600;">(Showing: ${label})</span>`;
+    }
+}
+
+		
 
         function updateDateLabel(label) {
             const dateElement = document.getElementById('current-date');
