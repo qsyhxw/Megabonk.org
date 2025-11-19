@@ -1288,49 +1288,104 @@
             }
         }
 
-        function filterTodayData(data) {
-            const targetDate = new Date(currentDate);
-            
-            const startDate = new Date(Date.UTC(
-                targetDate.getUTCFullYear(),
-                targetDate.getUTCMonth(),
-                targetDate.getUTCDate(),
-                0, 0, 0, 0
-            ));
-            
-            const endDate = new Date(startDate);
-            endDate.setUTCDate(endDate.getUTCDate() + 1);
-            
-            const startTimestamp = startDate.getTime() / 1000;
-            const endTimestamp = endDate.getTime() / 1000;
-            
-            let filtered = data.filter(item => {
-                if (!item.createdAt || !item.createdAt._seconds) {
-                    return false;
-                }
-                const itemTimestamp = item.createdAt._seconds;
-                return itemTimestamp >= startTimestamp && itemTimestamp < endTimestamp;
-            });
-            
-            if (filtered.length === 0) {
-                const sevenDaysAgo = startDate.getTime() / 1000 - (7 * 24 * 60 * 60);
-                
-                filtered = data.filter(item => {
-                    if (!item.createdAt || !item.createdAt._seconds) {
-                        return false;
-                    }
-                    return item.createdAt._seconds >= sevenDaysAgo;
-                });
-                
-                updateDateLabel('Last 7 Days');
-            } else {
-                updateDateLabel('Today');
-            }
-            
-            return filtered
-                .sort((a, b) => (b.kills || 0) - (a.kills || 0))
-                .slice(0, CONFIG.maxDisplayRanks);
+        这个页面不显示数据，通常有三个主要原因。请按照以下步骤进行排查和修复：
+
+1. 检查浏览器控制台 (F12)
+这是最快找到问题的方法：
+
+在页面上按 F12 键打开开发者工具。
+
+点击 Console (控制台) 标签。
+
+如果是红色的 CORS 错误 (Access to fetch... blocked by CORS policy)：
+
+原因：你正在本地电脑（如 Live Server 或直接打开 HTML 文件）运行代码，但试图请求远程服务器 https://megabonk.org 的数据。浏览器出于安全考虑拦截了请求。
+
+解决方法：
+
+方法 A（测试用）：使用我们之前提到的 python -m http.server 方法，并在本地也放一份 leaderboard-data.json，然后把代码里的 dataUrl 改成 './leaderboard-data.json'。
+
+方法 B（正式用）：将这个 HTML 文件上传到你的网站服务器上，只有在同一个域名下访问才不会报错。
+
+2. 数据结构不匹配 (最可能的代码原因)
+你的代码中，filterTodayData 函数对时间格式的要求非常严格：
+
+JavaScript
+
+// 你的代码第 717 行左右
+const itemTimestamp = item.createdAt._seconds;
+它期望 createdAt 是一个包含 _seconds 的对象（这是 Google Firestore 数据库的格式）。 但是，如果我们之前的 Python 采集脚本生成的 JSON 中 createdAt 是其他格式（例如 "2025-11-19..." 字符串，或者直接是一个数字时间戳），item.createdAt._seconds 就会是 undefined，导致所有数据都被过滤掉。
+
+修复代码： 我们需要让这个函数更“聪明”一点，能兼容各种时间格式。
+
+请用下面的代码 替换 原有的 filterTodayData 函数：
+
+JavaScript
+
+function filterTodayData(data) {
+    // 如果没有数据，直接返回空数组
+    if (!data || !Array.isArray(data)) return [];
+
+    const targetDate = new Date(currentDate);
+    
+    // 设置今天的开始和结束时间戳（秒）
+    const startTimestamp = new Date(Date.UTC(
+        targetDate.getUTCFullYear(),
+        targetDate.getUTCMonth(),
+        targetDate.getUTCDate(),
+        0, 0, 0, 0
+    )).getTime() / 1000;
+    
+    const endTimestamp = startTimestamp + 86400; // +24小时
+
+    // === 核心修复：增强的时间解析逻辑 ===
+    const parseTimestamp = (item) => {
+        // 情况1: Firestore 格式 {_seconds: 123}
+        if (item.createdAt && item.createdAt._seconds) {
+            return item.createdAt._seconds;
         }
+        // 情况2: 采集脚本生成的 ISO 字符串 "2025-01-01T..."
+        if (typeof item.fetched_at === 'string') {
+            return new Date(item.fetched_at).getTime() / 1000;
+        }
+        // 情况3: 采集脚本生成的 createdAt 是字符串
+        if (typeof item.createdAt === 'string') {
+            return new Date(item.createdAt).getTime() / 1000;
+        }
+        return 0; // 无法解析
+    };
+
+    // 第一轮筛选：只看今天的
+    let filtered = data.filter(item => {
+        const ts = parseTimestamp(item);
+        return ts >= startTimestamp && ts < endTimestamp;
+    });
+
+    // 如果今天没数据，尝试显示"最近7天"
+    if (filtered.length === 0) {
+        const sevenDaysAgo = startTimestamp - (7 * 86400);
+        filtered = data.filter(item => {
+            const ts = parseTimestamp(item);
+            return ts >= sevenDaysAgo;
+        });
+        
+        if (filtered.length > 0) {
+            updateDateLabel('Last 7 Days');
+        }
+    }
+
+    // === 兜底逻辑：如果7天也没数据，直接显示所有数据的前50名 ===
+    // 防止页面空白难看
+    if (filtered.length === 0 && data.length > 0) {
+        console.warn("No data found for today/week, showing all-time latest.");
+        updateDateLabel('All Time');
+        filtered = data;
+    }
+
+    return filtered
+        .sort((a, b) => (b.kills || 0) - (a.kills || 0))
+        .slice(0, CONFIG.maxDisplayRanks);
+}
 
         function updateDateLabel(label) {
             const dateElement = document.getElementById('current-date');
