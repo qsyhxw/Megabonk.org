@@ -157,7 +157,7 @@ def scrape_repair():
     print(f"🚀 启动完美版采集 (含自动补录)...")
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False) 
+        browser = p.chromium.launch(headless=True) 
         page = browser.new_page()
         page.set_viewport_size({"width": 1400, "height": 900})
 
@@ -233,4 +233,5 @@ def scrape_repair():
         browser.close()
 
 if __name__ == "__main__":
+
     scrape_repair()
