@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Bloodmark – Effect, Unlock & Best Builds</title>
+    <meta name="description" content="Confused about Megabonk Bloodmark? Learn exactly what it does, how to unlock it with Unstable Transfusion & Bloody Cleaver, and the best Bloodmark builds to melt bosses.">
+    <meta name="keywords" content="megabonk bloodmark, what does bloodmark do, megabonk bloodmark build, megabonk unstable transfusion, megabonk bloody cleaver, megabonk status effects">
+    <link rel="canonical" href="https://megabonk.org/guides/bloodmark/">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+        crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0b1020;
+            --secondary-bg: #111827;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-pink: #ff006e;
+            --accent-gold: #fbbf24;
+            --text-light: #f9fafb;
+            --text-gray: #9ca3af;
+            --card-bg: #111827;
+            --border-soft: rgba(148, 163, 184, 0.3);
+            --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
+            --radius-lg: 20px;
+        }
+
+        html, body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #1f2937 0, #020617 50%, #000 100%);
+            color: var(--text-light);
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header / Nav */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.75), transparent);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .logo::before {
+            content: "🎮";
+            margin-right: 0.4rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(148, 163, 184, 0.15);
+            color: var(--text-light);
+            transform: translateY(-1px);
+        }
+
+        .nav-links a[href="/guides/"] {
+            border: 1px solid rgba(129, 140, 248, 0.6);
+            color: #e5e7eb;
+            background: radial-gradient(circle at top, rgba(129, 140, 248, 0.25), transparent 60%);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            border-radius: 999px;
+            width: 2.25rem;
+            height: 2.25rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero */
+
+        .hero {
+            position: relative;
+            padding: 4.5rem 1.5rem 3rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(244, 114, 182, 0.18), transparent 50%),
+                radial-gradient(circle at 80% 0%, rgba(129, 140, 248, 0.18), transparent 50%),
+                radial-gradient(circle at 50% 120%, rgba(52, 211, 153, 0.2), transparent 55%);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.3rem, 3vw, 3rem);
+            line-height: 1.08;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e0f2fe, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            color: var(--text-gray);
+            font-size: 0.98rem;
+            max-width: 34rem;
+        }
+
+        .hero-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(31, 41, 55, 0.9);
+            border: 1px solid rgba(249, 115, 22, 0.5);
+            color: #fed7aa;
+            margin-bottom: 0.9rem;
+        }
+
+        .hero-highlight span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 0%, #f97316, #b91c1c);
+            font-size: 0.68rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+        }
+
+        .hero-pill strong {
+            color: #e5e7eb;
+        }
+
+        .hero-pill-dot {
+            width: 0.35rem;
+            height: 0.35rem;
+            border-radius: 999px;
+            background: #4ade80;
+        }
+
+        .hero-side-card {
+            background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+            border-radius: var(--radius-lg);
+            padding: 1.4rem 1.3rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .hero-side-title {
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .hero-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: var(--text-gray);
+        }
+
+        .hero-badge.gold {
+            border-color: rgba(250, 204, 21, 0.7);
+            color: var(--accent-gold);
+        }
+
+        .hero-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .hero-stat {
+            padding: 0.6rem 0.7rem;
+            border-radius: 0.9rem;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(17, 24, 39, 0.95));
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .hero-stat-label {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            margin-bottom: 0.15rem;
+        }
+
+        .hero-stat-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Layout */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3.5rem;
+            display: grid;
+            grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.1fr);
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+
+        main {
+            min-width: 0;
+        }
+
+        /* TOC / Sidebar */
+
+        .toc-card {
+            position: sticky;
+            top: 6.5rem;
+            background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.2rem;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .toc-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .toc-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-bottom: 0.9rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.4rem;
+        }
+
+        .toc-list a {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.45rem;
+            border-radius: 999px;
+            transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+        }
+
+        .toc-list a::before {
+            content: "⟶";
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        .toc-list a:hover {
+            background: rgba(148, 163, 184, 0.18);
+            color: #e5e7eb;
+            transform: translateX(1px);
+        }
+
+        .toc-footer {
+            margin-top: 1rem;
+            padding-top: 0.7rem;
+            border-top: 1px dashed rgba(148, 163, 184, 0.35);
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        .toc-footer a {
+            color: #93c5fd;
+        }
+
+        /* Sections */
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-kicker {
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-lead {
+            font-size: 0.97rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 0.93rem;
+            line-height: 1.7;
+            color: #e5e7eb;
+            margin-bottom: 0.75rem;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        ul, ol {
+            padding-left: 1.1rem;
+            margin-bottom: 0.9rem;
+        }
+
+        li {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #e5e7eb;
+            margin-bottom: 0.35rem;
+        }
+
+        /* TL;DR callout */
+
+        .callout-tldr {
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.1rem;
+            margin-bottom: 1.8rem;
+            background: radial-gradient(circle at top, rgba(34, 197, 94, 0.08), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .callout-tldr-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .callout-tldr-title span {
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 30% 0%, #4ade80, #16a34a);
+            font-size: 0.85rem;
+        }
+
+        .callout-tldr p {
+            margin-bottom: 0.35rem;
+            font-size: 0.9rem;
+        }
+
+        /* Split layouts */
+
+        .split {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+            gap: 1.4rem;
+            align-items: flex-start;
+        }
+
+        .card {
+            background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.98));
+            border-radius: var(--radius-lg);
+            padding: 1.15rem 1.2rem;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: var(--text-gray);
+        }
+
+        .badge.rare {
+            border-color: rgba(96, 165, 250, 0.8);
+            color: #bfdbfe;
+        }
+
+        .badge.legendary {
+            border-color: rgba(251, 191, 36, 0.9);
+            color: #facc15;
+        }
+
+        .key-points-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .key-points-list li::before {
+            content: "◆";
+            font-size: 0.6rem;
+            margin-top: 0.35rem;
+            color: #38bdf8;
+        }
+
+        /* Build cards */
+
+        .builds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+        }
+
+        .build-card {
+            position: relative;
+            border-radius: 18px;
+            padding: 0.9rem 1rem;
+            background: radial-gradient(circle at top, rgba(24, 24, 27, 0.96), rgba(15, 23, 42, 0.98));
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.9);
+            overflow: hidden;
+        }
+
+        .build-card::before {
+            content: "";
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle at top left, rgba(251, 191, 36, 0.09), transparent 55%);
+            opacity: 0.85;
+            pointer-events: none;
+        }
+
+        .build-card-inner {
+            position: relative;
+        }
+
+        .build-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .build-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .build-tag {
+            font-size: 0.72rem;
+            padding: 0.1rem 0.55rem;
+            border-radius: 999px;
+            border: 1px solid rgba(52, 211, 153, 0.6);
+            color: #bbf7d0;
+        }
+
+        .build-meta {
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            margin-bottom: 0.4rem;
+        }
+
+        .build-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-right: 0.6rem;
+        }
+
+        .build-meta span::before {
+            content: "•";
+            opacity: 0.5;
+        }
+
+        .build-summary {
+            font-size: 0.82rem;
+            color: #e5e7eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .build-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+            color: #93c5fd;
+        }
+
+        .build-link span {
+            font-size: 0.85rem;
+        }
+
+        /* FAQ */
+
+        .faq-item {
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(15, 23, 42, 0.9);
+            padding: 0.85rem 0.95rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .faq-question {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-answer {
+            font-size: 0.88rem;
+            color: var(--text-gray);
+        }
+
+        /* Related links */
+
+        .related-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .related-card {
+            border-radius: 14px;
+            padding: 0.9rem 0.95rem;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .related-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .related-desc {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .related-link {
+            font-size: 0.83rem;
+            color: #93c5fd;
+        }
+
+        /* Footer */
+
+        footer {
+            border-top: 1px solid rgba(31, 41, 55, 1);
+            padding: 1.4rem 1.5rem 2rem;
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            text-align: center;
+        }
+
+        footer a {
+            color: #93c5fd;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 960px) {
+            .hero-inner {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero-side-card {
+                order: -1;
+            }
+
+            .container {
+                grid-template-columns: minmax(0, 1fr);
+                padding-top: 0;
+            }
+
+            .toc-card {
+                position: static;
+                order: -1;
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding-inline: 1.1rem;
+            }
+
+            .nav-links {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                margin-top: 0.3rem;
+                padding: 0.6rem 1rem 0.8rem;
+                flex-direction: column;
+                background: rgba(15, 23, 42, 0.98);
+                border-bottom: 1px solid rgba(31, 41, 55, 1);
+                display: none;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: inline-flex;
+            }
+
+            .hero {
+                padding-top: 3.4rem;
+            }
+
+            .hero-inner {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="https://megabonk.org/" class="logo">Megabonk.org</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="https://megabonk.org/">Home</a></li>
+                <li><a href="https://megabonk.org/leaderboard/">Leaderboard</a></li>
+                <li><a href="https://megabonk.org/guides/characters/">Characters</a></li>
+                <li><a href="https://megabonk.org/guides/bosses/">Bosses</a></li>
+                <li><a href="https://megabonk.org/guides/achievements/">Achievements</a></li>
+                <li><a href="https://megabonk.org/database/weapons/">Weapons</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenu">☰</button>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-highlight">
+                    <span>BM</span>
+                    <div>Bloodmark – Boss Melter Status Effect</div>
+                </div>
+                <h1>Megabonk Bloodmark Guide: Effect, Unlock & Best Builds</h1>
+                <p class="hero-tagline">
+                    Bloodmark is one of the strongest ways to delete chunky bosses in Megabonk – if you actually understand how it works.
+                    This guide explains the effect, how to unlock it, and the best builds that turn Bloodmark into a free win condition.
+                </p>
+                <div class="hero-meta">
+                    <div class="hero-pill">
+                        <span class="hero-pill-dot"></span>
+                        <span><strong>Goal:</strong> explain Bloodmark & show winning builds</span>
+                    </div>
+                    <div class="hero-pill">
+                        <span>★</span>
+                        <span>Beginner-friendly, leaderboard-ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="hero-side-card">
+                <div class="hero-side-title">Bloodmark at a Glance</div>
+                <div class="hero-badge-row">
+                    <span class="hero-badge gold">Boss shredder</span>
+                    <span class="hero-badge">Status Effect</span>
+                    <span class="hero-badge">Scales with HP</span>
+                </div>
+                <div class="hero-stats-grid">
+                    <div class="hero-stat">
+                        <div class="hero-stat-label">Best use case</div>
+                        <div class="hero-stat-value">High HP bosses</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-label">Ideal weapons</div>
+                        <div class="hero-stat-value">Aura / Katana / Tornado</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-label">Key items</div>
+                        <div class="hero-stat-value">Unstable Transfusion, Bloody Cleaver</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-label">Diff. to play</div>
+                        <div class="hero-stat-value">Low–Medium</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <div class="container">
+        <main>
+            <!-- TL;DR -->
+            <section class="section" id="overview">
+                <div class="callout-tldr">
+                    <div class="callout-tldr-title">
+                        <span>✓</span>
+                        <div>Bloodmark TL;DR – should you care?</div>
+                    </div>
+                    <p><strong>Bloodmark marks a chunk of a boss’s HP bar for execution.</strong> Once that HP threshold is reached, the enemy is instantly killed, no matter how tanky it is.</p>
+                    <p><strong>You mainly apply it via Unstable Transfusion and Bloody Cleaver.</strong> Fast-hitting weapons (Aura, Katana, Lightning Staff, Tornado…) stack Bloodmark quickly and make bosses evaporate.</p>
+                    <p><strong>Bloodmark shines in higher curses, long boss fights and leaderboard runs.</strong> In ultra-fast wave clear builds where everything already dies instantly, it’s nice to have but not mandatory.</p>
+                </div>
+            </section>
+
+            <!-- What is Bloodmark -->
+            <section class="section" id="what-is-bloodmark">
+                <div class="section-kicker">Core mechanic</div>
+                <h2 class="section-title">What is Bloodmark in Megabonk?</h2>
+                <p class="section-lead">
+                    Bloodmark is a special status effect that turns a piece of an enemy’s HP bar into a <strong>“execution zone”</strong>.
+                    Once the enemy’s health enters that zone, it’s immediately killed – even if it still has a lot of HP left on paper.
+                </p>
+                <p>
+                    Visually, you’ll see a darker or highlighted segment on boss health bars. That segment is the Bloodmark threshold:
+                    as you land hits and apply stacks, the segment grows. When the boss’s HP drops into that region, <strong>Bloodmark executes it instantly</strong>.
+                </p>
+                <p>
+                    The key idea is simple:
+                </p>
+                <ul>
+                    <li><strong>More Bloodmark stacks → higher execution threshold → bosses die much earlier than “normal”.</strong></li>
+                    <li>Bloodmark is especially powerful on <strong>high-HP bosses and elites</strong>, where shaving off a large chunk of effective max HP matters most.</li>
+                    <li>On tiny trash mobs, everything usually dies before Bloodmark does anything interesting – the value is almost all on big targets.</li>
+                </ul>
+            </section>
+
+            <!-- Mechanics -->
+            <section class="section" id="mechanics">
+                <div class="section-kicker">Under the hood</div>
+                <h2 class="section-title">How Bloodmark Works: Stacks, Threshold & Damage</h2>
+                <p class="section-lead">
+                    You don’t need to know every formula to use Bloodmark well – but knowing the basics lets you decide when to chase it and when to skip it.
+                </p>
+
+                <div class="split">
+                    <div>
+                        <p><strong>1. Applying Bloodmark</strong></p>
+                        <p>
+                            Bloodmark isn’t a generic debuff – you <em>need specific items</em> to apply it. In most runs, that means:
+                        </p>
+                        <ul>
+                            <li><strong>Unstable Transfusion</strong> – gives your hits a chance to apply Bloodmark stacks.</li>
+                            <li><strong>Bloody Cleaver</strong> – turns lifesteal into Bloodmark stacks and boosts the proc chance.</li>
+                        </ul>
+                        <p>
+                            Every time the effect procs on a hit, the target gains a stack and the execution threshold on its HP bar moves up a bit.
+                        </p>
+
+                        <p><strong>2. Stacks & execution threshold</strong></p>
+                        <p>
+                            Each Bloodmark stack represents some amount of “maximum life shaved off” from the enemy. Think of it like:
+                        </p>
+                        <ul>
+                            <li>At 0 stacks, the boss must hit 0 HP like normal.</li>
+                            <li>At a few stacks, it might get executed at, say, 20–30% remaining HP.</li>
+                            <li>At heavy stacking, it can die with <strong>half its HP bar still visually displayed</strong>.</li>
+                        </ul>
+                        <p>
+                            The exact threshold scales with <strong>your level, damage modifiers and how many stacks you’ve applied</strong>.
+                            The important takeaway: <strong>stacking Bloodmark aggressively massively shortens long boss fights.</strong>
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="badge-row">
+                            <span class="badge">Mechanic snapshot</span>
+                        </div>
+                        <p><strong>Quick mental model</strong></p>
+                        <ul class="key-points-list">
+                            <li><span><strong>Bloodmark = execute bar</strong> drawn across an enemy’s HP.</span></li>
+                            <li><span>Stacks are applied when your items proc (Transfusion, Cleaver, etc.).</span></li>
+                            <li><span>The more stacks you land, the higher on the HP bar the execution happens.</span></li>
+                            <li><span>Damage buffs make Bloodmark stronger indirectly by affecting how much HP you “skip”.</span></li>
+                            <li><span>Best combo: lots of hits per second + reliable Bloodmark application.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p><strong>3. Why Bloodmark feels insane on bosses</strong></p>
+                <p>
+                    On a chunky boss with a huge HP pool, the absolute value of that “skipped” HP can be enormous.
+                    Instead of grinding through the last 40%–60% of their bar, you just cross into the Bloodmark segment and the fight ends.
+                </p>
+                <p>
+                    That’s why leaderboard players and high-curse runs love Bloodmark: it <strong>converts long, risky boss phases into short ones</strong>,
+                    and that saves time, deaths and rerolls.
+                </p>
+            </section>
+
+            <!-- How to get -->
+            <section class="section" id="how-to-get">
+                <div class="section-kicker">Unlock & sources</div>
+                <h2 class="section-title">How to Get Bloodmark: Items & Unlock Paths</h2>
+                <p class="section-lead">
+                    Bloodmark isn’t a character skill – it comes from items. Two of them matter above all others.
+                </p>
+
+                <div class="split">
+                    <div class="card">
+                        <div class="badge-row">
+                            <span class="badge rare">Unstable Transfusion</span>
+                            <span class="badge">Core Bloodmark source</span>
+                        </div>
+                        <p>
+                            <strong>Unstable Transfusion</strong> is your most common way to add Bloodmark to a run. It gives your hits a chance
+                            to apply stacks directly to enemies you’re damaging.
+                        </p>
+                        <ul>
+                            <li><strong>Type:</strong> Rare item.</li>
+                            <li><strong>Effect:</strong> your attacks gain a chance to apply Bloodmark on hit.</li>
+                            <li><strong>Best with:</strong> multi-hit weapons (Aura, Katana, Lightning Staff, Tornado, Mines, etc.).</li>
+                        </ul>
+                        <p>
+                            If you see Transfusion early and your build already attacks very quickly, <strong>it’s almost always worth picking</strong>.
+                        </p>
+                        <p>
+                            Learn more on the database page:
+                            <a href="https://megabonk.org/database/items/unstable-transfusion" target="_blank" rel="noopener noreferrer">
+                                Unstable Transfusion item entry →
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="badge-row">
+                            <span class="badge legendary">Bloody Cleaver</span>
+                            <span class="badge">Bloodmark payoff</span>
+                        </div>
+                        <p>
+                            <strong>Bloody Cleaver</strong> is a legendary that supercharges Bloodmark by tying it to lifesteal.
+                            When combined with Transfusion and high hit-rate weapons, it can mark bosses incredibly fast.
+                        </p>
+                        <ul>
+                            <li><strong>Type:</strong> Legendary item.</li>
+                            <li><strong>Effect:</strong> lifesteal hits can apply Bloodmark and boost your chance to mark enemies.</li>
+                            <li><strong>Best with:</strong> Vlad and other lifesteal-heavy builds that already want to be in melee range.</li>
+                        </ul>
+                        <p>
+                            Bloody Cleaver is rarer, but when you already have Transfusion or strong sustain, it’s often a
+                            <strong>win-more accelerator</strong> that erases bosses the moment they spawn.
+                        </p>
+                        <p>
+                            Database link:
+                            <a href="https://megabonk.org/database/items/bloody-cleaver" target="_blank" rel="noopener noreferrer">
+                                Bloody Cleaver item entry →
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    There are other minor synergies and side-sources that mention Bloodmark or interact with lifesteal / on-hit effects.
+                    In practice though, <strong>Unstable Transfusion + fast weapons is the core package</strong>;
+                    Bloody Cleaver is the dream legendary that pushes the ceiling even higher.
+                </p>
+            </section>
+
+            <!-- Builds -->
+            <section class="section" id="best-builds">
+                <div class="section-kicker">Practical builds</div>
+                <h2 class="section-title">Best Bloodmark Builds & Playstyles</h2>
+                <p class="section-lead">
+                    Bloodmark isn’t a full build archetype by itself – it’s a <strong>win-condition layer</strong> you bolt onto strong characters.
+                    Below are three practical setups you can actually run, each linking out to deeper build guides on Megabonk.org.
+                </p>
+
+                <div class="builds-grid">
+                    <!-- Build 1 -->
+                    <article class="build-card">
+                        <div class="build-card-inner">
+                            <div class="build-card-header">
+                                <div class="build-name">Vlad Lifesteal Bloodmark Execute</div>
+                                <div class="build-tag">Boss melter</div>
+                            </div>
+                            <div class="build-meta">
+                                <span>Character: Vlad</span>
+                                <span>Weapons: Aura / Katana / Lightning Staff</span>
+                            </div>
+                            <p class="build-summary">
+                                Stack lifesteal and on-hit effects so Vlad can stand inside packs, feed Bloody Cleaver
+                                and Transfusion, and watch bosses explode as soon as they spawn.
+                            </p>
+                            <ul class="key-points-list">
+                                <li><span><strong>Core items:</strong> Unstable Transfusion, Bloody Cleaver, lifesteal pieces.</span></li>
+                                <li><span><strong>When to play:</strong> high curse, leaderboard pushing, long boss waves.</span></li>
+                            </ul>
+                            <a class="build-link" href="https://megabonk.org/guides/builds/vlad-best-build">
+                                View full Vlad Bloodmark build guide <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Build 2 -->
+                    <article class="build-card">
+                        <div class="build-card-inner">
+                            <div class="build-card-header">
+                                <div class="build-name">Fox & Aura: Fast-Hit Bloodmark Spam</div>
+                                <div class="build-tag">Beginner friendly</div>
+                            </div>
+                            <div class="build-meta">
+                                <span>Character: Fox (Kitsune)</span>
+                                <span>Weapons: Aura / Tornado / Mines</span>
+                            </div>
+                            <p class="build-summary">
+                                Lean into Fox’s high luck and pick up Transfusion with rapid multi-hit weapons.
+                                You’ll mark everything on screen while still having smooth wave clear.
+                            </p>
+                            <ul class="key-points-list">
+                                <li><span><strong>Core items:</strong> Unstable Transfusion, generic damage and attack speed.</span></li>
+                                <li><span><strong>When to play:</strong> early Bloodmark learning, all-round runs that still care about bosses.</span></li>
+                            </ul>
+                            <a class="build-link" href="https://megabonk.org/guides/builds/fox-best-build">
+                                View Fox best build (Bloodmark variant) <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Build 3 -->
+                    <article class="build-card">
+                        <div class="build-card-inner">
+                            <div class="build-card-header">
+                                <div class="build-name">Megachad / Ninja High-Speed Marking</div>
+                                <div class="build-tag">Speed-clear hybrid</div>
+                            </div>
+                            <div class="build-meta">
+                                <span>Characters: Megachad, Ninja</span>
+                                <span>Weapons: Katana / Hero Sword / Space Noodle</span>
+                            </div>
+                            <p class="build-summary">
+                                These characters already love attack speed and getting into melee.
+                                Adding Bloodmark lets them turn already strong clear into much faster boss kills.
+                            </p>
+                            <ul class="key-points-list">
+                                <li><span><strong>Core items:</strong> Unstable Transfusion + generic melee scalers.</span></li>
+                                <li><span><strong>When to play:</strong> if you naturally find Transfusion mid-run on a high-DPS build.</span></li>
+                            </ul>
+                            <a class="build-link" href="https://megabonk.org/guides/builds/ninja-best-build">
+                                See Ninja best build ideas <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <p style="margin-top:1rem;font-size:0.85rem;color:var(--text-gray);">
+                    Want to browse more setups? Check the general build hub:
+                    <a href="https://megabonk.org/guides/builds/" style="color:#93c5fd;">Megabonk best builds overview →</a>
+                </p>
+            </section>
+
+            <!-- When to pick / skip -->
+            <section class="section" id="when-to-pick">
+                <div class="section-kicker">Decision making</div>
+                <h2 class="section-title">When to Take Bloodmark – And When to Skip It</h2>
+                <p class="section-lead">
+                    Bloodmark is powerful, but not automatically correct in every build. Treat it like a “boss phase delete” button:
+                    amazing when that’s what you need, skippable when it’s overkill.
+                </p>
+
+                <div class="split">
+                    <div>
+                        <p><strong>Recommended: situations where Bloodmark shines</strong></p>
+                        <ul>
+                            <li><strong>High curse / high difficulty runs</strong> where boss HP is high and fights drag if you don’t have a finisher.</li>
+                            <li><strong>Leaderboard attempts</strong> where shaving seconds off every boss directly improves your score.</li>
+                            <li>Builds with <strong>many hits per second</strong> (Aura, Katana, Lightning Staff, Tornado, Space Noodle, Mines).</li>
+                            <li>Characters who <strong>already want lifesteal</strong> and melee uptime (Vlad and similar bruisers).</li>
+                        </ul>
+                        <p><strong>Borderline: “nice to have” but optional</strong></p>
+                        <ul>
+                            <li>Wave-clear builds that already delete elites and bosses in seconds without help.</li>
+                            <li>Runs where you are starved for defensive items and can’t afford to give up survivability.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <p><strong>Quick rule of thumb</strong></p>
+                        <ul class="key-points-list">
+                            <li><span>If bosses feel tanky or fights feel long → <strong>take Bloodmark</strong>.</span></li>
+                            <li><span>If everything already melts and you die to random hits → <strong>prioritize defense first</strong>.</span></li>
+                            <li><span>If you’re not hitting often (slow sniper / single-shot builds) → value is much lower.</span></li>
+                        </ul>
+                        <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--text-gray);">
+                            In other words: <strong>Bloodmark scales with how many times you touch the boss</strong>.
+                            If you barely touch it, you barely mark it.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="section" id="faq">
+                <div class="section-kicker">Common questions</div>
+                <h2 class="section-title">Megabonk Bloodmark – FAQ</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">What does Bloodmark actually do in Megabonk?</div>
+                    <div class="faq-answer">
+                        Bloodmark adds an execution threshold to enemy HP bars. Each stack moves that threshold higher.
+                        When the enemy’s health drops into that marked region, it is instantly killed, effectively cutting off a portion of its maximum HP.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is Bloodmark based on weapon damage or enemy max HP?</div>
+                    <div class="faq-answer">
+                        Bloodmark interacts with your level and damage scaling, but the important part is that it behaves like a %-based execute on
+                        the enemy’s max HP. The tankier the target and the more stacks you land, the more total HP you skip.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do I get Bloodmark early in a run?</div>
+                    <div class="faq-answer">
+                        The easiest way is to pick up <strong>Unstable Transfusion</strong> as soon as you see it, especially if you’re already using
+                        fast-hitting weapons. If you later find <strong>Bloody Cleaver</strong>, the combo turns into an extremely strong boss killer.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Does Bloodmark stack infinitely?</div>
+                    <div class="faq-answer">
+                        Practically, yes – you can keep adding stacks, and the execution threshold keeps creeping up.
+                        In real runs, once you have enough stacks for bosses to die far before 0 HP, extra stacks are heavily “win-more” rather than strictly required.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is Bloodmark good for every build?</div>
+                    <div class="faq-answer">
+                        It’s good in most builds that hit bosses very often and struggle with high HP targets.
+                        It’s less important in one-shot / burst builds where bosses already die in a second, or in fragile builds that need more survivability items first.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related -->
+            <section class="section" id="related">
+                <div class="section-kicker">Keep improving</div>
+                <h2 class="section-title">Next Steps: Learn More Megabonk Tech</h2>
+                <p class="section-lead">
+                    Now that you understand Bloodmark, you’ll get the most value by pairing it with strong characters,
+                    weapons and overall strategy.
+                </p>
+
+                <div class="related-links">
+                    <div class="related-card">
+                        <div class="related-title">Megabonk Best Builds Hub</div>
+                        <div class="related-desc">
+                            Browse meta builds by character and playstyle, including Bloodmark variants and leaderboard-tested setups.
+                        </div>
+                        <a class="related-link" href="https://megabonk.org/guides/builds/">Open builds overview →</a>
+                    </div>
+
+                    <div class="related-card">
+                        <div class="related-title">Vlad Best Build Guide</div>
+                        <div class="related-desc">
+                            Vlad is one of the best hosts for lifesteal + Bloodmark combos. Learn how to scale him safely into high curse.
+                        </div>
+                        <a class="related-link" href="https://megabonk.org/guides/builds/vlad-best-build">View Vlad build →</a>
+                    </div>
+
+                    <div class="related-card">
+                        <div class="related-title">Weapons Database</div>
+                        <div class="related-desc">
+                            Compare Aura, Katana, Tornado and more to decide which multi-hit weapons fit your Bloodmark plan.
+                        </div>
+                        <a class="related-link" href="https://megabonk.org/database/weapons/">Browse weapons →</a>
+                    </div>
+
+                    <div class="related-card">
+                        <div class="related-title">Leaderboard Runs Using Bloodmark</div>
+                        <div class="related-desc">
+                            See how top players actually use Bloodmark in successful leaderboard runs and copy their setups.
+                        </div>
+                        <a class="related-link" href="https://megabonk.org/leaderboard/builds">Open leaderboard builds →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- TOC -->
+        <aside class="toc-card" aria-label="On this page">
+            <div class="toc-title">On this page</div>
+            <div class="toc-subtitle">Jump straight to the section you need.</div>
+            <ul class="toc-list">
+                <li><a href="#overview">Overview & TL;DR</a></li>
+                <li><a href="#what-is-bloodmark">What is Bloodmark?</a></li>
+                <li><a href="#mechanics">How Bloodmark works</a></li>
+                <li><a href="#how-to-get">How to get Bloodmark</a></li>
+                <li><a href="#best-builds">Best Bloodmark builds</a></li>
+                <li><a href="#when-to-pick">When to pick / skip</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#related">Related guides</a></li>
+            </ul>
+            <div class="toc-footer">
+                Looking for more questions like “Is Megabonk worth it?” – check the
+                <a href="https://megabonk.org/faq/">Megabonk FAQ hub</a>.
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        Megabonk.org is a fan-made resource for the indie roguelike Megabonk. Not affiliated with the official developers.
+        <br>
+        For more guides, visit the <a href="https://megabonk.org/guides/">strategy hub</a>.
+    </footer>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does Bloodmark do in Megabonk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bloodmark adds an execution threshold to enemy HP bars. Each stack moves that threshold higher. When the enemy\u2019s health drops into that marked region, it is instantly killed, effectively cutting off a portion of its maximum HP."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Bloodmark based on weapon damage or enemy max HP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bloodmark interacts with your level and damage scaling, but the important part is that it behaves like a percent-based execute on the enemy\u2019s max HP. The tankier the target and the more stacks you land, the more total HP you skip."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get Bloodmark early in a run?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The easiest way is to pick up Unstable Transfusion as soon as you see it, especially if you\u2019re already using fast-hitting weapons. If you later find Bloody Cleaver, the combo turns into an extremely strong boss killer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Bloodmark stack infinitely?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Practically, yes. You can keep adding stacks and the execution threshold keeps creeping up. In real runs, once you have enough stacks for bosses to die far before zero HP, extra stacks are heavily win-more rather than strictly required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Bloodmark good for every build?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It\u2019s good in most builds that hit bosses very often and struggle with high HP targets. It\u2019s less important in one-shot or burst builds where bosses already die in a second, or in fragile builds that need more survivability items first."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script>
+        // Mobile nav
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('show');
+            });
+        }
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
