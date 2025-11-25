@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Difficulty Guide – Stat, Curve & When to Raise It</title>
+    <meta name="description" content="Complete Megabonk difficulty guide explaining how the Difficulty stat works, what it changes, and when to raise it for farming, achievements and leaderboard-ready runs.">
+    <meta name="keywords" content="megabonk difficulty, megabonk difficulty stat, megabonk how hard, megabonk best difficulty, megabonk challenge, megabonk difficulty guide">
+
+    <link rel="canonical" href="https://megabonk.org/guides/difficulty">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+        crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-purple: #9d4edd;
+            --accent-blue: #3a86ff;
+            --accent-pink: #ff006e;
+            --text-light: #f8f9fa;
+            --text-gray: #adb5bd;
+            --card-bg: #0f3460;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --danger: #ff006e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(58, 134, 255, 0.2));
+            padding: 5rem 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(157,78,221,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 2.1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            margin-top: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .hero-image {
+            justify-self: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Container & sections */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem 4rem;
+        }
+
+        .section {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .meta-card {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.12), rgba(58, 134, 255, 0.12));
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 18px;
+            padding: 1.75rem 1.75rem 1.5rem;
+        }
+
+        .meta-card ul {
+            padding-left: 1.3rem;
+        }
+
+        .meta-card li {
+            margin-bottom: 0.4rem;
+            color: var(--text-light);
+        }
+
+        /* Info grids / cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.75rem;
+        }
+
+        .mechanic-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem 1.6rem;
+            border: 1px solid rgba(157, 78, 221, 0.35);
+        }
+
+        .mechanic-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent-purple);
+        }
+
+        .mechanic-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .mechanic-card li {
+            margin-bottom: 0.4rem;
+        }
+
+        .mechanic-card li strong {
+            color: var(--success);
+        }
+
+        /* Difficulty scale block */
+        .difficulty-scale {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            background: rgba(15, 52, 96, 0.8);
+            border: 1px solid rgba(58, 134, 255, 0.5);
+        }
+
+        .difficulty-scale-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .difficulty-scale-label {
+            font-weight: 600;
+        }
+
+        .difficulty-scale-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-gray);
+        }
+
+        .difficulty-scale-bar {
+            width: 100%;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            margin-bottom: 0.6rem;
+        }
+
+        .difficulty-scale-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+            width: 70%;
+        }
+
+        .difficulty-scale-note {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .difficulty-dots {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .difficulty-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .difficulty-dot.filled {
+            background: linear-gradient(135deg, var(--success), var(--warning), var(--danger));
+        }
+
+        .difficulty-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .difficulty-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Weapon strip */
+        .weapon-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .weapon-icon {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.6rem 0.7rem;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(157, 78, 221, 0.4);
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            min-width: 90px;
+        }
+
+        .weapon-icon img {
+            width: 40px;
+            height: 40px;
+            image-rendering: pixelated;
+        }
+
+        .weapon-caption {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-top: 0.4rem;
+        }
+
+        /* Boxes */
+        .info-box {
+            background: rgba(58, 134, 255, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: 0.92rem;
+        }
+
+        .warning-box {
+            background: rgba(255, 190, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: 0.92rem;
+        }
+
+        .success-box {
+            background: rgba(6, 255, 165, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: 0.92rem;
+        }
+
+        /* Trinity / use-case cards */
+        .trinity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .trinity-card {
+            background: rgba(15, 52, 96, 0.85);
+            border-radius: 18px;
+            padding: 1.5rem 1.6rem;
+            border: 1px solid rgba(157, 78, 221, 0.35);
+        }
+
+        .trinity-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-purple);
+            font-size: 1.1rem;
+        }
+
+        .trinity-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+        }
+
+        .trinity-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.75rem;
+        }
+
+        .trinity-card li {
+            margin-bottom: 0.4rem;
+        }
+
+        .trinity-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        /* List styles */
+        .section ol {
+            padding-left: 1.4rem;
+        }
+
+        .section ol li {
+            margin-bottom: 0.7rem;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: white;
+            padding: 0.7rem 1.4rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 26px rgba(157, 78, 221, 0.55);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.06);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        /* FAQ */
+        .faq-list {
+            margin-top: 1.1rem;
+        }
+
+        .faq-list details {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(157, 78, 221, 0.35);
+            margin-bottom: 0.7rem;
+        }
+
+        .faq-list summary {
+            cursor: pointer;
+            list-style: none;
+            font-weight: 600;
+        }
+
+        .faq-list summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-list p {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+        }
+
+        .faq-list a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .faq-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: #0b1220;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .footer-inner a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .hero-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero {
+                padding-top: 4rem;
+            }
+
+            .hero-image {
+                order: -1;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                right: 0;
+                left: 0;
+                padding: 1rem 2rem 1.25rem;
+                background: rgba(15, 52, 96, 0.97);
+                flex-direction: column;
+                gap: 1rem;
+                box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 4rem 1.25rem 2.5rem;
+            }
+
+            .container {
+                padding: 2.5rem 1.25rem 3rem;
+            }
+
+            .info-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+        }
+
+        /* Optional ad placeholders */
+        .ad-row { grid-column: 1 / -1; margin: 16px 0; }
+        .ad-multiplex { display: block; min-height: 320px; margin: 20px 0; }
+        .ad-box { display: block; min-height: 300px; margin: 16px 0; }
+        @media (max-width: 768px) {
+            .ad-box { min-height: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="././" class="logo">Megabonk.org</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="././">Home</a></li>
+                <li><a href="/leaderboard/">Leaderboard</a></li>
+                <li><a href="/guides/characters/">Characters</a></li>
+                <li><a href="/guides/bosses/">Bosses</a></li>
+                <li><a href="/guides/achievements/">Achievements</a></li>
+                <li><a href="/database/weapons/">Weapons</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenu">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content hero-layout">
+            <div class="hero-text">
+                <h1>Megabonk Difficulty Guide</h1>
+                <p>
+                    Confused by how <strong>Difficulty</strong> works in Megabonk? This guide explains what the stat actually does,
+                    how it changes enemy health, damage and rewards, and when you should crank it up for farming,
+                    achievements and leaderboard pushes.
+                </p>
+                <div class="hero-cta">
+                    <a href="https://megabonk.org/guides/builds/" class="btn">Browse Meta Builds</a>
+                    <a href="https://megabonk.org/guides/meta-strategy/" class="btn btn-outline">Meta Strategy &amp; Scaling</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Use cases: farm / push / meme</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">⬆</div>
+                        <div class="stat-label">More XP &amp; coins at higher Difficulty</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">💀</div>
+                        <div class="stat-label">Harder bosses, denser waves</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Steam header: real image URL -->
+                <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2681470/header.jpg"
+                     alt="Megabonk official Steam header">
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Overview / TL;DR -->
+        <section class="section" id="overview">
+            <h2 class="section-title">What “Difficulty” Actually Means in Megabonk</h2>
+            <p class="section-subtitle">
+                Most players search for “megabonk difficulty” because the game feels brutal, or they wonder if raising
+                Difficulty is worth it. Here’s the short answer.
+            </p>
+
+            <div class="meta-card">
+                <p><strong>TL;DR:</strong> Difficulty is a <em>global scaling lever</em>:</p>
+                <ul>
+                    <li><strong>Enemies get stronger</strong> – more health, more damage, denser waves, tougher bosses.</li>
+                    <li><strong>You get more value</strong> – more XP, coins and better odds to snowball with strong weapons/items.</li>
+                    <li><strong>It’s not for brand new players</strong> – learn the basics on lower Difficulty first, then push up with meta builds.</li>
+                </ul>
+
+                <div class="info-box">
+                    Recommended reading:
+                    <ul>
+                        <li>
+                            Learn strong meta builds in the
+                            <a href="https://megabonk.org/guides/builds/">Megabonk Best Builds hub</a>.
+                        </li>
+                        <li>
+                            Understand long-term unlocks in the
+                            <a href="https://megabonk.org/guides/progression/">Progression guide</a>.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mechanics -->
+        <section class="section" id="mechanics">
+            <h2 class="section-title">How Difficulty Works Under the Hood</h2>
+            <p class="section-subtitle">
+                You don’t need exact formulas to play well, but you should know what Difficulty actually scales in a run.
+            </p>
+
+            <div class="info-grid">
+                <div class="mechanic-card">
+                    <h3>Things that go up for enemies</h3>
+                    <ul>
+                        <li><strong>Health:</strong> tankier mobs and bosses, especially in late waves.</li>
+                        <li><strong>Damage:</strong> stray hits punish you much harder.</li>
+                        <li><strong>Density:</strong> more enemies on screen, more projectiles and chaos.</li>
+                        <li><strong>Boss pressure:</strong> faster patterns, less room for mistakes.</li>
+                    </ul>
+                </div>
+
+                <div class="mechanic-card">
+                    <h3>Things that go up for you</h3>
+                    <ul>
+                        <li><strong>XP &amp; coins:</strong> each kill gives more value (if you can survive).</li>
+                        <li><strong>Snowball potential:</strong> more rerolls / shops = more chances to hit S-tier items.</li>
+                        <li><strong>Challenge rewards:</strong> harder settings count towards tougher achievements.</li>
+                        <li><strong>Leaderboard viability:</strong> top <a href="https://megabonk.org/leaderboard/">Leaderboard</a> runs assume high Difficulty.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="difficulty-scale">
+                <div class="difficulty-scale-header">
+                    <div class="difficulty-scale-label">Recommended Difficulty curve</div>
+                    <div class="difficulty-scale-tags">
+                        <span class="tag">New players: low</span>
+                        <span class="tag">Intermediate: medium</span>
+                        <span class="tag">Meta enjoyers: high</span>
+                    </div>
+                </div>
+                <div class="difficulty-scale-bar">
+                    <div class="difficulty-scale-fill"></div>
+                </div>
+                <div class="difficulty-legend">
+                    <div class="difficulty-legend-item">
+                        <div class="difficulty-dots">
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot"></div>
+                            <div class="difficulty-dot"></div>
+                            <div class="difficulty-dot"></div>
+                            <div class="difficulty-dot"></div>
+                        </div>
+                        <span>Learning basics / unlocking characters</span>
+                    </div>
+                    <div class="difficulty-legend-item">
+                        <div class="difficulty-dots">
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot"></div>
+                            <div class="difficulty-dot"></div>
+                        </div>
+                        <span>Comfortable clears with a few meta builds</span>
+                    </div>
+                    <div class="difficulty-legend-item">
+                        <div class="difficulty-dots">
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot filled"></div>
+                            <div class="difficulty-dot filled"></div>
+                        </div>
+                        <span>Push runs, extreme challenges &amp; leaderboard</span>
+                    </div>
+                </div>
+                <p class="difficulty-scale-note">
+                    If you’re dying before mid-game on a Difficulty setting, drop it for a bit, refine your build
+                    and come back with stronger <a href="https://megabonk.org/guides/builds/">meta builds</a>.
+                </p>
+            </div>
+
+            <div class="weapon-strip">
+                <a href="https://megabonk.org/database/weapons/black-hole" class="weapon-icon">
+                    <img src="https://megabonk.org/images/database/weapons/Black_Hole.png" alt="Black Hole weapon">
+                    <span>Black Hole</span>
+                </a>
+                <a href="https://megabonk.org/database/weapons/lightning-staff" class="weapon-icon">
+                    <img src="https://megabonk.org/images/database/weapons/Lightning_Staff.png" alt="Lightning Staff weapon">
+                    <span>Lightning Staff</span>
+                </a>
+                <a href="https://megabonk.org/database/weapons/poison-flask" class="weapon-icon">
+                    <img src="https://megabonk.org/images/database/weapons/Poison_Flask.png" alt="Poison Flask weapon">
+                    <span>Poison Flask</span>
+                </a>
+                <a href="https://megabonk.org/database/weapons/sword" class="weapon-icon">
+                    <img src="https://megabonk.org/images/database/weapons/Sword.png" alt="Sword weapon">
+                    <span>Sword</span>
+                </a>
+            </div>
+            <p class="weapon-caption">
+                Crowd-control and screen-control weapons like
+                <a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a> and
+                <a href="https://megabonk.org/database/weapons/lightning-staff">Lightning Staff</a>
+                scale especially well with higher Difficulty. Browse all weapons in the
+                <a href="https://megabonk.org/database/weapons/">Weapon database</a>.
+            </p>
+        </section>
+
+        <!-- Why the game feels hard -->
+        <section class="section" id="curve">
+            <h2 class="section-title">Why Megabonk Feels So Hard at Higher Difficulty</h2>
+            <p class="section-subtitle">
+                Megabonk is designed around snowballing: you start fragile and gradually become ridiculous.
+                Raising Difficulty too early amplifies the “fragile” part without guaranteeing the “ridiculous” payoff.
+            </p>
+
+            <div class="warning-box">
+                <strong>Reality check:</strong> if you’re still unlocking basic
+                <a href="https://megabonk.org/guides/characters/">characters</a> and
+                <a href="https://megabonk.org/guides/achievements/">achievements</a>,
+                cranking Difficulty to the max will mostly give you faster deaths, not faster progress.
+            </div>
+
+            <p style="margin-top: 1rem;">
+                Think of Difficulty as a <strong>multiplier on volatility</strong>:
+            </p>
+            <ul style="margin-top: 0.5rem; padding-left: 1.3rem;">
+                <li>Good builds become <strong>amazing</strong> – you get more XP, more shops, more rerolls.</li>
+                <li>Greedy or untested builds become <strong>disasters</strong> – one misstep and the run collapses.</li>
+                <li>Boss fights become a <strong>mechanics check</strong> instead of a formality.</li>
+            </ul>
+
+            <div class="info-box">
+                For a deeper breakdown on wave pacing, boss pressure and economy snowballing, see the
+                <a href="https://megabonk.org/guides/meta-strategy/">Megabonk Meta Strategy guide</a>
+                and the <a href="https://megabonk.org/guides/challenges/">Extreme Challenges overview</a>.
+            </div>
+        </section>
+
+        <!-- When to raise Difficulty -->
+        <section class="section" id="when-to-raise">
+            <h2 class="section-title">When You Should Raise Difficulty (and When You Shouldn’t)</h2>
+            <p class="section-subtitle">
+                Don’t treat Difficulty like a pride slider. Treat it like content selection:
+                farming, pushing, or proving a point.
+            </p>
+
+            <div class="trinity-grid">
+                <div class="trinity-card">
+                    <h3>1. Farming &amp; progression</h3>
+                    <p>
+                        Use <strong>low–medium Difficulty</strong> when you’re mainly farming coins, learning new
+                        <a href="https://megabonk.org/guides/characters/">characters</a>, or unlocking
+                        <a href="https://megabonk.org/guides/achievements/story-milestones">Story milestones</a>.
+                    </p>
+                    <ul>
+                        <li>Stick to safe builds like
+                            <a href="https://megabonk.org/guides/builds/sword-master">Sword Master</a>
+                            or
+                            <a href="https://megabonk.org/guides/builds/bullet-hell">Bullet Hell</a>.
+                        </li>
+                        <li>Focus on consistent clears &gt; “almost insane” runs.</li>
+                    </ul>
+                    <span class="trinity-tag">Recommended: 1–2 difficulty dots</span>
+                </div>
+
+                <div class="trinity-card">
+                    <h3>2. Pushing harder content</h3>
+                    <p>
+                        Once you’re clearing comfortably, raise Difficulty to chase stronger snowballs and
+                        practice high-pressure situations.
+                    </p>
+                    <ul>
+                        <li>Use screen-control setups like
+                            <a href="https://megabonk.org/guides/builds/black-hole-grouping-control">Black Hole Grouping Control</a>
+                            or
+                            <a href="https://megabonk.org/guides/builds/flamewalker-tornado-kite">Flamewalker Tornado Kite</a>.
+                        </li>
+                        <li>Expect some “learning deaths” as you adapt to heavier waves.</li>
+                    </ul>
+                    <span class="trinity-tag">Recommended: 3–4 difficulty dots</span>
+                </div>
+
+                <div class="trinity-card">
+                    <h3>3. Leaderboard &amp; challenge runs</h3>
+                    <p>
+                        For flex runs, <strong>max Difficulty</strong> is where you live.
+                        You’ll need top-tier builds, clean routing and good luck.
+                    </p>
+                    <ul>
+                        <li>Abuse high-ceiling builds like
+                            <a href="https://megabonk.org/guides/builds/kevin-mirror-immortality">Kevin Mirror Immortality</a>
+                            or <a href="https://megabonk.org/guides/builds/one-lucky-fox">One Lucky Fox</a>.
+                        </li>
+                        <li>Practice boss patterns from the <a href="https://megabonk.org/guides/bosses/">Boss guides</a>.</li>
+                    </ul>
+                    <span class="trinity-tag">Recommended: 4–5 difficulty dots</span>
+                </div>
+            </div>
+
+            <div class="success-box">
+                Once you have a few favorite builds from the
+                <a href="https://megabonk.org/guides/builds/">Best Builds hub</a>, use them as your “test pilots”
+                whenever you move Difficulty up a notch.
+            </div>
+        </section>
+
+        <!-- Difficulty & meta progression -->
+        <section class="section" id="meta">
+            <h2 class="section-title">Difficulty, Achievements &amp; Long-Term Progression</h2>
+            <p class="section-subtitle">
+                Higher Difficulty doesn’t just make a single run spicier – it also interacts with your long-term goals.
+            </p>
+
+            <div class="info-grid">
+                <div class="mechanic-card">
+                    <h3>Achievements &amp; unlocks</h3>
+                    <ul>
+                        <li>
+                            Some <a href="https://megabonk.org/guides/achievements/extreme-challenges">Extreme challenges</a>
+                            effectively <strong>expect higher Difficulty</strong> – otherwise you simply don’t see enough
+                            enemies or damage numbers.
+                        </li>
+                        <li>
+                            Farming on comfy Difficulty is still fine for early
+                            <a href="https://megabonk.org/guides/achievements/character-unlocks">character unlocks</a>.
+                        </li>
+                        <li>
+                            Use a mix: unlock on easy, then revisit goals later on harder modes for extra flex.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mechanic-card">
+                    <h3>Silver, items &amp; build depth</h3>
+                    <ul>
+                        <li>
+                            More XP &amp; coins per run means <strong>more shop visits and rerolls</strong>,
+                            unlocking synergies in the <a href="https://megabonk.org/database/items/">Item database</a>.
+                        </li>
+                        <li>
+                            Some items (e.g. “greed” or risk-reward pieces) shine when wave density is high.</li>
+                        <li>
+                            Use the <a href="https://megabonk.org/guides/progression/">Progression guide</a> to decide when to
+                            prioritize permanent upgrades vs. raw Difficulty.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common mistakes -->
+        <section class="section" id="mistakes">
+            <h2 class="section-title">Common Mistakes with Difficulty</h2>
+            <p class="section-subtitle">
+                If Megabonk feels unfair, you’re probably making at least one of these mistakes.
+            </p>
+
+            <ol>
+                <li><strong>Raising Difficulty before mastering any character.</strong>
+                    Learn a couple of reliable picks first –
+                    the <a href="https://megabonk.org/guides/builds/fox-best-build">Fox best build</a> or
+                    <a href="https://megabonk.org/guides/builds/sir-oofie-best-build">Sir Oofie builds</a> are great starters.
+                </li>
+                <li><strong>Ignoring boss patterns.</strong>
+                    On high Difficulty, boss attacks will one-shot sloppy play. Study them in the
+                    <a href="https://megabonk.org/guides/bosses/">Boss guide hub</a>.
+                </li>
+                <li><strong>Forcing meme builds at max Difficulty.</strong>
+                    Test weird ideas on lower settings, then bring the winners into tougher content.
+                </li>
+                <li><strong>Underestimating crowd control.</strong>
+                    On higher Difficulty, weapons like
+                    <a href="https://megabonk.org/database/weapons/black-hole">Black Hole</a>,
+                    <a href="https://megabonk.org/database/weapons/aura">Aura</a> or
+                    <a href="https://megabonk.org/database/weapons/aegis">Aegis</a>
+                    can be more valuable than raw single-target damage.
+                </li>
+            </ol>
+
+            <div class="warning-box">
+                If you’re stuck, drop Difficulty one step, grab a known-good build from the
+                <a href="https://megabonk.org/guides/builds/">Builds hub</a>,
+                and focus on clean dodging and wave control instead of forcing greedy shrine choices every run.
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section" id="faq">
+            <h2 class="section-title">Frequently Asked Questions About Difficulty</h2>
+            <p class="section-subtitle">
+                Quick answers to the most common “megabonk difficulty” questions.
+            </p>
+
+            <div class="faq-list">
+                <details>
+                    <summary>Is Megabonk really that hard, or am I just bad?</summary>
+                    <p>
+                        It’s genuinely on the harder side <em>and</em> very snowball-based. Early on, you’re fragile and
+                        missing key items / characters, so the game feels punishing. As you unlock more tools and learn
+                        a few strong builds from the <a href="https://megabonk.org/guides/builds/">Best Builds hub</a>,
+                        the same Difficulty settings will feel much more fair.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>What Difficulty should I use as a beginner?</summary>
+                    <p>
+                        Start at the lowest Difficulty that still drops enough enemies to feel engaging.
+                        Aim for consistent clears with safer builds (e.g.
+                        <a href="https://megabonk.org/guides/builds/sword-master">Sword Master</a>) before raising it.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>Does higher Difficulty give better rewards?</summary>
+                    <p>
+                        Yes – in general, higher Difficulty means more XP, coins and opportunities to scale.
+                        The catch is that you only benefit if you <strong>actually survive</strong> long enough to
+                        spend that extra economy. If you die before mid-game, you’re better off lowering Difficulty
+                        and stabilizing your clears.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>What Difficulty should I use for achievements and challenges?</summary>
+                    <p>
+                        Most basic achievements can be done on low–medium Difficulty. For tougher ones in the
+                        <a href="https://megabonk.org/guides/achievements/extreme-challenges">Extreme Challenges</a>
+                        category, you’ll likely want higher Difficulty so waves are dense enough and bosses hit hard
+                        enough to meet the conditions.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>What Difficulty do leaderboard runs use?</summary>
+                    <p>
+                        Top <a href="https://megabonk.org/leaderboard">Leaderboard</a> runs typically play on higher
+                        Difficulty – that’s where the craziest damage numbers and wave densities happen. If that’s your
+                        goal, treat this guide as your roadmap: master a few
+                        <a href="https://megabonk.org/guides/builds/">meta builds</a>, then gradually dial up Difficulty.
+                    </p>
+                </details>
+            </div>
+
+            <div class="success-box">
+                Next steps:
+                <ul>
+                    <li>Pick a difficulty tier that feels challenging but fair.</li>
+                    <li>Grab one or two meta builds from the
+                        <a href="https://megabonk.org/guides/builds/">Builds hub</a>.</li>
+                    <li>Use this page as a checklist whenever you’re ready to push higher Difficulty.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <p>© 2025 Megabonk.org — Unofficial community resource. Not affiliated with the developers.</p>
+            <p>
+                <a href="https://megabonk.org/privacy-policy">Privacy Policy</a> ·
+                <a href="https://megabonk.org/guides/">All Guides</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+
+    <!-- Structured data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Megabonk Difficulty Guide – Stat, Curve & When to Raise It",
+      "description": "Complete Megabonk difficulty guide explaining how the Difficulty stat works, what it changes, and when to raise it for farming, achievements and leaderboard-ready runs.",
+      "author": {
+        "@type": "Organization",
+        "name": "Megabonk.org"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Megabonk.org"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://megabonk.org/guides/difficulty/"
+      }
+    }
+    </script>
+
+    <!-- Structured data: FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Megabonk really that hard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Megabonk is genuinely on the harder side and very snowball-based. Early on you are fragile and missing key items and characters, so the game feels punishing. As you unlock more tools and learn strong builds, the same Difficulty settings feel much more forgiving."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What Difficulty should I use as a beginner?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start at the lowest Difficulty that still feels engaging and aim for consistent clears with safer builds. Once you can clear comfortably, slowly raise Difficulty instead of jumping straight to the max."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does higher Difficulty give better rewards?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Higher Difficulty generally increases XP and coins gained, which in turn gives you more shop visits, rerolls and chances to assemble strong builds. However, you only benefit if you survive long enough to use those resources."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What Difficulty should I use for achievements and challenges?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most basic achievements can be done on low to medium Difficulty, but some extreme challenges are easier or only possible when playing on higher Difficulty where enemies are denser and bosses hit harder."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What Difficulty do leaderboard runs use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Top leaderboard runs are typically played on higher Difficulty, where the biggest waves and damage numbers occur. If you want to compete, you will eventually need to push Difficulty while using strong meta builds."
+          }
+        }
+      ]
+    }
+    </script>
+</body>
+</html>
