@@ -4,6 +4,8 @@ from pathlib import Path
 
 # ================= 配置区域 =================
 
+# Trigger build test
+
 BASE_URL = 'https://megabonk.org'
 TARGET_DIR = 'tr'
 
