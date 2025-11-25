@@ -1,0 +1,39 @@
+name: Build Turkish Pages
+
+# 触发条件：当你 push 代码到 main 分支，且修改了 py 脚本或 html 文件时触发
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.html'
+      - 'generate_tr_v2.py'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Run translation script
+      run: python generate_tr_v2.py
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "action@github.com"
+        # 检查有没有新文件生成
+        if [[ -n $(git status --porcelain) ]]; then
+          git add tr/
+          git commit -m "Auto-generate Turkish pages via Action"
+          git push
+        else
+          echo "No changes to commit"
+        fi
