@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V1.0.49 Patch Notes - Christmas Update | Megabonk</title>
+    <meta name="description"
+        content="Megabonk v1.0.49 Christmas Patch: Fox nerf, Pot rework (weapons only), new Wizard's Hat item, Clover buff, item rebalancing, and many bug fixes.">
+    <link rel="canonical" href="https://megabonk.org/guides/patch-notes/V1.0.49">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-V5X87M8JFL');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+        crossorigin="anonymous"></script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="V1.0.49 Patch Notes - Christmas Update | Megabonk">
+    <meta property="og:description"
+        content="Megabonk v1.0.49 Christmas update: Fox nerf, Pot rework, new Wizard's Hat, item rebalancing, and bug fixes.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/guides/patch-notes/V1.0.49">
+    <meta property="og:image" content="https://megabonk.org/images/Stats_Page.png">
+    <meta property="og:site_name" content="Megabonk Wiki">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="V1.0.49 Patch Notes - Christmas Update | Megabonk">
+    <meta name="twitter:description"
+        content="Megabonk v1.0.49 Christmas update: Fox nerf, Pot rework, new Wizard's Hat, item rebalancing.">
+    <meta name="twitter:image" content="https://megabonk.org/images/Stats_Page.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Megabonk v1.0.49 Patch Notes - Christmas Update",
+      "datePublished": "2025-12-25",
+      "dateModified": "2026-01-30",
+      "author": {
+        "@type": "Organization",
+        "name": "VedinadGames"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Megabonk Wiki",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://megabonk.org/images/guides/characters/Fox.png"
+        }
+      },
+      "description": "Complete patch notes for Megabonk version 1.0.49 Christmas update including Fox nerf, Pot rework, new Wizard's Hat item, and item rebalancing.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://megabonk.org/guides/patch-notes/V1.0.49"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What are the main features in Megabonk v1.0.49?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Version 1.0.49 Christmas Patch introduces Fox nerf (luck passive reduced from +2% to +1.5% per level), Pot rework (now only affects weapons with diminishing returns), new Wizard's Hat item for Tomes, Clover buff (+7.5% to +10% luck), and many item rebalancing changes."
+        }
+      },{
+        "@type": "Question",
+        "name": "Was Fox nerfed in v1.0.49?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Fox's RNG Blessing passive was reduced from +2% Luck per level to +1.5% per level. At max level (20), this is a reduction from +40% to +30% Luck."
+        }
+      },{
+        "@type": "Question",
+        "name": "What happened to Pot (Stainless Steel) in v1.0.49?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pot now ONLY affects weapon level caps (no longer affects Tomes). It also has diminishing returns: first Pot gives +10 levels, subsequent Pots give -1 bonus each (minimum +2). A new item, Wizard's Hat, was added for Tome level caps."
+        }
+      }]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #c0392b;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e94560;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e94560;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 0.5rem;
+        }
+
+        /* Hero Section - Christmas Theme */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                linear-gradient(135deg, #c0392b 0%, #27ae60 100%);
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(192, 57, 43, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "🎄";
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+
+        .hero::after {
+            content: "🎁";
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            color: #27ae60;
+            margin-bottom: 1rem;
+            letter-spacing: 0.3rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(192, 57, 43, 0.2);
+            border-radius: 20px;
+            border: 1px solid rgba(192, 57, 43, 0.5);
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #c0392b;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(192, 57, 43, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #999;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 4px solid #c0392b;
+        }
+
+        .content-section h2 {
+            color: #e94560;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(233, 69, 96, 0.3);
+        }
+
+        .content-section h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        /* TL;DR Box */
+        .tldr-box {
+            background: linear-gradient(135deg, rgba(192, 57, 43, 0.1), rgba(39, 174, 96, 0.05));
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #c0392b;
+            margin: 2rem 0;
+        }
+
+        .tldr-box h2 {
+            color: #c0392b;
+            margin-bottom: 1rem;
+        }
+
+        .tldr-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tldr-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tldr-box li:before {
+            content: "🎄";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Changes List */
+        .changes-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .change-item {
+            background: rgba(192, 57, 43, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #c0392b;
+            transition: background 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .change-item:hover {
+            background: rgba(192, 57, 43, 0.1);
+        }
+
+        .change-item img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid #c0392b;
+            flex-shrink: 0;
+        }
+
+        .change-item strong {
+            color: #c0392b;
+            font-size: 1.1rem;
+        }
+
+        .change-item a {
+            color: #e94560;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .change-item a:hover {
+            color: #ff6b8a;
+            text-decoration: underline;
+        }
+
+        .buff {
+            border-left-color: #27ae60;
+        }
+
+        .buff strong,
+        .buff a {
+            color: #27ae60;
+        }
+
+        .nerf {
+            border-left-color: #e74c3c;
+        }
+
+        .nerf strong,
+        .nerf a {
+            color: #e74c3c;
+        }
+
+        .new-content {
+            border-left-color: #9b59b6;
+        }
+
+        .new-content strong,
+        .new-content a {
+            color: #9b59b6;
+        }
+
+        .rework {
+            border-left-color: #f39c12;
+        }
+
+        .rework strong,
+        .rework a {
+            color: #f39c12;
+        }
+
+        /* Bug Fixes */
+        .bug-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .bug-item {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .bug-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0.75rem;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* Related Pages */
+        .related-pages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .related-card {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid rgba(192, 57, 43, 0.3);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+        }
+
+        .related-card:hover {
+            border-color: #c0392b;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(192, 57, 43, 0.2);
+        }
+
+        .related-card h3 {
+            color: #e94560;
+            margin-bottom: 0.5rem;
+        }
+
+        .related-card p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 2px solid #c0392b;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #e94560;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="https://megabonk.org/" class="nav-logo">Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="https://megabonk.org/database/">Database</a></li>
+                <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                <li><a href="https://megabonk.org/guides/">Guides</a></li>
+                <li><a href="https://megabonk.org/guides/patch-notes/">Patch Notes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="https://megabonk.org/">Home</a>
+            <span>›</span>
+            <a href="https://megabonk.org/guides/">Guides</a>
+            <span>›</span>
+            <a href="https://megabonk.org/guides/patch-notes/">Patch Notes</a>
+            <span>›</span>
+            V1.0.49
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <section class="hero">
+            <h1>V1.0.49 Patch Notes</h1>
+            <div class="hero-subtitle">🎄 CHRISTMAS UPDATE 🎁</div>
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>December 25, 2025</span>
+                </div>
+                <div class="meta-item">
+                    <span>🎮</span>
+                    <span>Balance Update</span>
+                </div>
+                <div class="meta-item">
+                    <span>⚖️</span>
+                    <span>Major Reworks</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div class="stat-label">New Item</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Major Rework</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Item Buffs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Item Nerfs</div>
+            </div>
+        </div>
+
+        <!-- TL;DR Box -->
+        <div class="tldr-box">
+            <h2>🎄 TL;DR - Christmas Highlights</h2>
+            <ul>
+                <li><strong>Fox nerfed</strong> — Luck passive reduced from +2% to +1.5% per level</li>
+                <li><strong>Pot (Stainless Steel) reworked</strong> — Now only affects weapons, with diminishing returns
+                </li>
+                <li><strong>New item: Wizard's Hat</strong> — Epic item that adds +5 to Tome level caps</li>
+                <li><strong>Clover buffed</strong> — Luck increased from 7.5% to 10%</li>
+                <li><strong>Golden Sneakers buffed</strong> — Gold per meter doubled</li>
+                <li><strong>Credit Card (Green) nerfed</strong> — Now increases chest prices by +10% per card</li>
+                <li><strong>Kevin upgraded</strong> — Rarity increased from Rare to Epic</li>
+            </ul>
+        </div>
+
+        <!-- Character Changes -->
+        <section class="content-section">
+            <h2>👤 Character Changes</h2>
+
+            <ul class="changes-list">
+                <li class="change-item nerf">
+                    <img src="https://megabonk.org/images/guides/characters/Fox.png" alt="Fox">
+                    <div>
+                        <strong>Fox — RNG Blessing Nerf</strong>
+                        <p>Luck per level reduced from <strong>+2%</strong> to <strong>+1.5%</strong>. At max level
+                            (20), this is a reduction from +40% to +30% Luck.</p>
+                        <p><a href="https://megabonk.org/guides/characters/fox-kitsune-guide">→ Fox Guide (Updated)</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Item Changes -->
+        <section class="content-section">
+            <h2>🎒 Item Changes</h2>
+
+            <h3>⚙️ Reworks</h3>
+            <ul class="changes-list">
+                <li class="change-item rework">
+                    <img src="https://megabonk.org/images/Items/Item_Pot_Stainless_Steel.png"
+                        alt="Pot (Stainless Steel)">
+                    <div>
+                        <strong>Pot (Stainless Steel) — Major Rework</strong>
+                        <p>🔸 Now <strong>ONLY affects weapon level caps</strong> (no longer affects Tomes)</p>
+                        <p>🔸 Diminishing returns: First Pot +10 levels, subsequent Pots -1 each (minimum +2)</p>
+                        <p>🔸 A new item (<a href="https://megabonk.org/database/items/wizards-hat">Wizard's Hat</a>)
+                            was added for Tome level caps</p>
+                        <p><a href="https://megabonk.org/database/items/pot-stainless-steel">→ Pot Guide (Updated)</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>🆕 New Items</h3>
+            <ul class="changes-list">
+                <li class="change-item new-content">
+                    <img src="https://megabonk.org/images/Items/Item_Wizards_Hat.png" alt="Wizard's Hat">
+                    <div>
+                        <strong>Wizard's Hat — New Epic Item</strong>
+                        <p>🔮 Increases <strong>Tome level caps by +5</strong> (linear, no diminishing returns)</p>
+                        <p>🔮 The Tome counterpart to the reworked Pot (Stainless Steel)</p>
+                        <p><a href="https://megabonk.org/database/items/wizards-hat">→ Wizard's Hat Guide</a></p>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>💚 Buffs</h3>
+            <ul class="changes-list">
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Clover.png" alt="Clover">
+                    <div>
+                        <strong>Clover — Luck Increased</strong>
+                        <p>Luck bonus increased from <strong>7.5%</strong> to <strong>10%</strong>.</p>
+                        <p><a href="https://megabonk.org/database/items/clover">→ Clover Guide (Updated)</a></p>
+                    </div>
+                </li>
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Golden_Sneakers.png" alt="Golden Sneakers">
+                    <div>
+                        <strong>Golden Sneakers — Gold Doubled</strong>
+                        <p>Gold per meter traveled <strong>doubled</strong>. Much more effective for economy builds.</p>
+                        <p><a href="https://megabonk.org/database/items/golden-sneakers">→ Golden Sneakers Guide
+                                (Updated)</a></p>
+                    </div>
+                </li>
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Brass_Knuckles.png" alt="Brass Knuckles">
+                    <div>
+                        <strong>Brass Knuckles — Range Increased</strong>
+                        <p>Effective range increased from <strong>7 → 8</strong>. Slightly larger area for the +20%
+                            damage bonus.</p>
+                        <p><a href="https://megabonk.org/database/items/brass-knuckles">→ Brass Knuckles Guide
+                                (Updated)</a></p>
+                    </div>
+                </li>
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Giant_Fork.png" alt="Giant Fork">
+                    <div>
+                        <strong>Giant Fork — Multiplicative Stacking</strong>
+                        <p>Multiple Forks now stack <strong>multiplicatively</strong> instead of additively. Much more
+                            powerful for crit builds.</p>
+                        <p><a href="https://megabonk.org/database/items/giant-fork">→ Giant Fork Guide (Updated)</a></p>
+                    </div>
+                </li>
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Beefy_Ring.png" alt="Beefy Ring">
+                    <div>
+                        <strong>Beefy Ring — Overheal Scaling</strong>
+                        <p>Now also <strong>scales with overheal</strong>. Any healing above Max HP temporarily counts
+                            toward the damage bonus.</p>
+                        <p><a href="https://megabonk.org/database/items/beefy-ring">→ Beefy Ring Guide (Updated)</a></p>
+                    </div>
+                </li>
+                <li class="change-item buff">
+                    <img src="https://megabonk.org/images/Items/Item_Kevin.png" alt="Kevin">
+                    <div>
+                        <strong>Kevin — Rarity Upgrade</strong>
+                        <p>Rarity upgraded from <strong>Rare → Epic</strong>. Now easier to find in higher-tier loot
+                            pools.</p>
+                        <p><a href="https://megabonk.org/database/items/kevin">→ Kevin Guide (Updated)</a></p>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>❌ Nerfs</h3>
+            <ul class="changes-list">
+                <li class="change-item nerf">
+                    <img src="https://megabonk.org/images/Items/Item_Credit_Card_Green.png" alt="Credit Card (Green)">
+                    <div>
+                        <strong>Credit Card (Green) — Chest Price Increase</strong>
+                        <p>Each Green Credit Card now increases chest prices by <strong>+10%</strong>. Stacking multiple
+                            cards can make chests very expensive.</p>
+                        <p><a href="https://megabonk.org/database/items/credit-card-green">→ Credit Card (Green) Guide
+                                (Updated)</a></p>
+                    </div>
+                </li>
+                <li class="change-item nerf">
+                    <img src="https://megabonk.org/images/Items/Item_Golden_Shield.png" alt="Golden Shield">
+                    <div>
+                        <strong>Golden Shield — Kevin/LC Nerf</strong>
+                        <p>When combined with Kevin or Leeching Crystal, gold generation is reduced by
+                            <strong>50%</strong> to prevent infinite gold loops.</p>
+                        <p><a href="https://megabonk.org/database/items/golden-shield">→ Golden Shield Guide
+                                (Updated)</a></p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Related Pages -->
+        <section class="content-section">
+            <h2>🔗 Related Pages</h2>
+
+            <div class="related-pages">
+                <a href="https://megabonk.org/guides/characters/fox-kitsune-guide" class="related-card">
+                    <h3>🦊 Fox Guide</h3>
+                    <p>Updated with the luck passive nerf (+2% → +1.5% per level)</p>
+                </a>
+                <a href="https://megabonk.org/database/items/wizards-hat" class="related-card">
+                    <h3>🧙 Wizard's Hat</h3>
+                    <p>New Epic item that increases Tome level caps by +5</p>
+                </a>
+                <a href="https://megabonk.org/database/items/pot-stainless-steel" class="related-card">
+                    <h3>🍳 Pot (Stainless Steel)</h3>
+                    <p>Major rework: now weapons only with diminishing returns</p>
+                </a>
+                <a href="https://megabonk.org/guides/patch-notes/V1.0.64" class="related-card">
+                    <h3>📋 V1.0.64 Patch Notes</h3>
+                    <p>Next major update: H A T S update with 21 new hats</p>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="https://megabonk.org/">Home</a></li>
+                    <li><a href="https://megabonk.org/database/">Database</a></li>
+                    <li><a href="https://megabonk.org/tier-lists/">Tier Lists</a></li>
+                    <li><a href="https://megabonk.org/guides/">Guides</a></li>
+                    <li><a href="https://megabonk.org/guides/patch-notes/">Patch Notes</a></li>
+                </ul>
+                <p class="copyright">© 2026 Megabonk.org - Unofficial Fan Resource</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Fade in animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.content-section, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
