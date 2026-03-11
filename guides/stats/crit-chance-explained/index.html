@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk Crit Chance Explained: Over 100% & Overcrit Mechanics</title>
+    <meta name="description" content="What happens when your crit chance goes over 100 in Megabonk? Learn about the overcrit mechanics, Mega-Crits, and the critical damage formula.">
+    <meta name="keywords" content="crit chance over 100, megabonk crit, overcrit, crit weapons, crit chance, crit damage formula, overcrit mechanics, mega-crit">
+    <link rel="canonical" href="https://megabonk.org/guides/stats/crit-chance-explained">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-V5X87M8JFL');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+        crossorigin="anonymous"></script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Megabonk Crit Chance Over 100% Explained">
+    <meta property="og:description" content="Discover Megabonk's hidden Over-Crit mechanics. Learn how your damage exponentially scales when Critical Chance exceeds 100%.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/guides/stats/crit-chance-explained">
+    <meta property="og:site_name" content="Megabonk.org">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Megabonk Crit Chance Explained: Over 100% & Overcrit Mechanics","description":"An in-depth explanation of Megabonk's unique Overcrit and Mega-Crit exponential damage systems used in 2026.","datePublished":"2026-03-11","dateModified":"2026-03-11","author":{"@type":"Organization","name":"Megabonk.org"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"What happens to crit chance over 100 in Megabonk?","acceptedAnswer":{"@type":"Answer","text":"When your critical chance exceeds 100%, you are guaranteed a primary critical hit. The excess percentage then rolls for a secondary \"Overcrit\". For example, 140% Crit Chance means a 100% chance for a normal crit, and a 40% chance the resulting damage gets critically multiplied a second time."}},
+        {"@type":"Question","name":"How does the Mega-Crit mechanic work?","acceptedAnswer":{"@type":"Answer","text":"Mega-Crits apply an additional catastrophic damage boost on top of normal overcrits. They are usually triggered by specific legendary items like the Giant Fork, but you also gain a flat 0.1% chance to land a Mega-Crit for every 10% your normal crit chance passes 100%."}},
+        {"@type":"Question","name":"What is the crit damage formula in Megabonk?","acceptedAnswer":{"@type":"Answer","text":"The base formula works off standard multiplications: Damage × (1 + Crit Multiplier). However, because overcrits re-apply the multiplier recursively, landing a multi-tier overcrit causes the damage numbers to scale exponentially (from x2 up to x4, x8, etc.)."}}
+    ]}
+    </script>
+    
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://megabonk.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://megabonk.org/guides/"},{"@type":"ListItem","position":3,"name":"Stats Explained","item":"https://megabonk.org/guides/stats/"},{"@type":"ListItem","position":4,"name":"Crit Chance Over 100","item":"https://megabonk.org/guides/stats/crit-chance-explained"}]}
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --surface-color: #1f2833;
+            --text-color: #c5c6c7;
+            --accent-crit: #ff4757;
+            --accent-overcrit: #ff6b81;
+            --accent-megacrit: #ffd32a;
+            --highlight: #66fcf1;
+            --highlight-dim: #45a29e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .site-header {
+            background-color: var(--surface-color);
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--highlight-dim);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--highlight);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--highlight); }
+
+        main {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(145deg, var(--surface-color) 0%, rgba(31, 40, 51, 0.5) 100%);
+            padding: 4rem 3rem;
+            border-radius: 12px;
+            border-left: 6px solid var(--accent-crit);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight-text {
+            color: var(--accent-crit);
+            white-space: nowrap;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Content Blocks */
+        h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin: 3rem 0 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--highlight);
+            margin: 2rem 0 1rem;
+        }
+
+        p { margin-bottom: 1.5rem; font-size: 1.1rem; }
+
+        .info-box {
+            background: rgba(102, 252, 241, 0.05);
+            border: 1px solid rgba(102, 252, 241, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        /* Example Grid */
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .example-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid;
+        }
+
+        .card-1 { border-color: #555; }
+        .card-2 { border-color: var(--accent-overcrit); box-shadow: 0 4px 15px rgba(255,107,129,0.2); }
+        .card-3 { border-color: var(--accent-megacrit); box-shadow: 0 4px 15px rgba(255,211,42,0.2); }
+
+        .example-card .percent {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        .card-1 .percent { color: #fff; }
+        .card-2 .percent { color: var(--accent-overcrit); }
+        .card-3 .percent { color: var(--accent-megacrit); text-shadow: 0 0 10px rgba(255,211,42,0.5); }
+
+        /* Synergies UI */
+        .synergy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .synergy-item {
+            display: flex;
+            align-items: center;
+            background: rgba(31, 40, 51, 0.6);
+            padding: 1.5rem;
+            border-radius: 8px;
+            gap: 1.5rem;
+        }
+
+        .synergy-icon {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .synergy-icon img {
+            max-width: 60px;
+            max-height: 60px;
+        }
+
+        .synergy-text h4 {
+            color: #fff;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .synergy-text p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            color: var(--text-color);
+        }
+
+        /* FAQ */
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-crit);
+        }
+
+        .faq-q {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-a {
+            color: var(--text-color);
+            margin-bottom: 0;
+        }
+
+        /* internal link */
+        .internal-link {
+            color: var(--highlight);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .internal-link:hover { text-decoration: underline; color: #fff; }
+
+        /* Media queries */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .synergy-item { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Megabonk</a>
+            <ul class="nav-links">
+                <li><a href="/guides/">All Guides</a></li>
+                <li><a href="/database/weapons/">Weapons</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>What Happens to <span class="highlight-text">Crit Chance Over 100%</span> in Megabonk?</h1>
+            <p>If you're wondering whether picking up that extra <a href="/database/tomes/precision-tome" class="internal-link">Precision Tome</a> is a waste of stats—fear not. Megabonk utilizes a powerful infinite-scaling "Overcrit" mechanic. Here's exactly how the math works in 2026.</p>
+        </section>
+
+        <h2>💥 The Core Mechanic: Over-Crits</h2>
+        <p>In many action roguelikes, pushing your Critical Hit Chance past 100% offers zero benefit because 100% means you critically strike on every hit. <strong>Megabonk does not use a hard cap.</strong></p>
+        
+        <p>Any percentage of Critical Hit Chance that exceeds 100% is converted into rolling probabilities for a <strong>Double Critical Hit</strong> (often referred to by the community as an Over-Crit). If you score a secondary crit, the game reapplies your critical damage formula multiplier recursively to the resulting number.</p>
+
+        <div class="example-grid">
+            <div class="example-card card-1">
+                <span class="percent">80%</span>
+                <p><strong>Under 100:</strong><br> You have an 80% chance to deal normal critical damage.</p>
+            </div>
+            
+            <div class="example-card card-2">
+                <span class="percent">140%</span>
+                <p><strong>Over 100:</strong><br> Every hit WILL crit. There is a 40% chance that the hit will crit <em>again</em>, multiplying the damage twice.</p>
+            </div>
+
+            <div class="example-card card-3">
+                <span class="percent">235%</span>
+                <p><strong>Insane Scaling:</strong><br> You are guaranteed to Double-Crit on every hit, with a 35% chance to Triple-Crit.</p>
+            </div>
+        </div>
+
+        <h2>🧮 The Crit Damage Formula</h2>
+        <p>You might be wondering exactly how large these numbers can get. While the internal game code floats some variables, the general underlying <strong>crit damage formula</strong> operates on successive multiplications.</p>
+
+        <div class="info-box">
+            <strong>Base Calculation:</strong> <code>Final Damage = Base Damage × (1 + Crit Multiplier)</code>
+            <br><br>
+            If you trigger an Overcrit (Double Crit), the multiplier re-applies onto the already multiplied total. This leads to exponential damage scaling: x2 damage becomes x4 damage, which becomes x8 damage, etc.
+        </div>
+        <p>This explains why late-game progression runs into tier 3 maps usually end up flashing numbers in the millions or billions on your screen. Stacking Base Damage via the <a href="/database/tomes/damage-tome" class="internal-link">Damage Tome</a> combined with Overcrit scaling completely breaks the game's health inflation.</p>
+
+        <h2>🔱 What are Mega-Crits?</h2>
+        <p>As if Over-crits weren't enough, Megabonk introduces a secondary tier of hidden devastation known as <strong>Mega-Crits</strong>. Mega-Crits apply one final, catastrophic multiplier to the entire damage calculation.</p>
+
+        <p>Mega-Crits are extremely rare, predominantly activated by two methods:</p>
+        <ol style="margin-left: 2rem; margin-bottom: 1.5rem;">
+            <li style="margin-bottom: 0.5rem;"><strong>Holding Exclusive Items:</strong> Weapons and items explicitly designed to roll for them.</li>
+            <li><strong>Extreme Overcrit Scaling:</strong> Even without exclusive items, your character gains a flat <strong>0.1% chance to land a Mega-Crit for every 10% of Critical Chance you possess past 100%</strong>. (e.g., at 200% Crit Chance, you have a 1% chance for any hit to become a Mega-Crit).</li>
+        </ol>
+
+        <h2>✨ Best Items for Overcrit Builds</h2>
+        <p>To manipulate this overpowered mechanic, you must seek out passive stat buffs that supercharge your numbers. Prioritize these choices when leveling up or shopping at Shady Dealers.</p>
+        
+        <div class="synergy-list">
+            <!-- Tome 1 -->
+            <div class="synergy-item">
+                <div class="synergy-icon">
+                    <img src="/images/Tomes/Precision_Tome.png" alt="Precision Tome">
+                </div>
+                <div class="synergy-text">
+                    <h4>Precision Tome</h4>
+                    <p>The single most important passive item for any crit build. This tome grants massive flat percentages to your Critical Hit Chance when fully leveled, easily pushing most characters past the 140%+ threshold. <a href="/guides/best-tomes/" class="internal-link">See Best Tomes Tier List</a>.</p>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="synergy-item">
+                <div class="synergy-icon">
+                    <img src="/images/Items/Item_Giant_Fork.png" alt="Giant Fork">
+                </div>
+                <div class="synergy-text">
+                    <h4>Giant Fork</h4>
+                    <p>A high-tier legendary item that specifically interacts with the Mega-Crit mechanic. Bypasses normal low percentage thresholds to routinely trigger apocalyptic Mega-Crit strikes against bosses.</p>
+                </div>
+            </div>
+
+            <div class="synergy-item">
+                <div class="synergy-icon">
+                    <img src="/images/Tomes/Damage_Tome.png" alt="Damage Tome">
+                </div>
+                <div class="synergy-text">
+                    <h4>Damage Tome</h4>
+                    <p>Increases base attack values. Because Overcrits multiply recursively, taking a +10% base damage increase here can result in a +40% or +80% final output gain after a triple crit formula calculation.</p>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin: 3rem 0;">Want to use Overcrits effectively? We highly recommend testing out the <a href="/guides/builds/skeleton-best-build/" class="internal-link">Skeleton Build</a> or the high attack-speed <a href="/guides/builds/zorro-best-build/" class="internal-link">Bandit/Zorro execution combo</a> to maximize your rapid-fire procs.</p>
+
+        <h2>💬 Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-accordion">
+            <div class="faq-item">
+                <div class="faq-q">What happens to crit chance over 100 in Megabonk?</div>
+                <p class="faq-a">When your critical chance exceeds 100%, you are guaranteed a primary critical hit. The excess percentage then rolls for a secondary "Overcrit". For example, 140% Crit Chance means a 100% chance for a normal crit, and a 40% chance the resulting damage gets critically multiplied a second time.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-q">How does the Mega-Crit mechanic work?</div>
+                <p class="faq-a">Mega-Crits apply an additional catastrophic damage boost on top of normal overcrits. They are usually triggered by specific legendary items like the Giant Fork, but you also gain a flat 0.1% chance to land a Mega-Crit for every 10% your normal crit chance passes 100%.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">What is the crit damage formula in Megabonk?</div>
+                <p class="faq-a">The base formula works off standard multiplications: <code>Damage × (1 + Crit Multiplier)</code>. However, because overcrits re-apply the multiplier recursively, landing a multi-tier overcrit causes the damage numbers to scale exponentially (from x2 up to x4, x8, etc.).</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Are "crit weapons" the only ones that can trigger Overcrits?</div>
+                <p class="faq-a">No. While some starting weapons have innate critical bonuses, the Overcrit mechanic applies globally to your character's stats. Any weapon will benefit from the explosive double/triple damage if you stack enough <a href="/database/tomes/precision-tome" class="internal-link">Precision Tomes</a>.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer style="text-align: center; padding: 3rem 0; margin-top: 3rem; background: var(--surface-color); color: var(--text-color);">
+        <p>&copy; 2026 Megabonk.org - Unofficial Guides Database</p>
+    </footer>
+
+</body>
+</html>
