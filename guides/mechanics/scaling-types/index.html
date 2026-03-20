@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Megabonk Linear Scaling Explained — How Additive Stacking Works (2026)</title>
+  <meta name="description"
+    content="Learn how Linear Scaling works in Megabonk. See which items use additive stacking, stacking formulas, examples with Clover, Gym Sauce & more. Updated 2026.">
+  <meta name="keywords"
+    content="Megabonk linear scaling, Megabonk additive stacking, Megabonk scaling types, Megabonk item stacking, how items stack Megabonk">
+  <link rel="canonical" href="https://megabonk.org/guides/mechanics/scaling-types/">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+    crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Megabonk Linear Scaling Explained — Additive Stacking Guide 2026">
+  <meta property="og:description"
+    content="Complete guide to Linear Scaling in Megabonk. Formula, item list, stacking examples, and when linear beats hyperbolic.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://megabonk.org/guides/mechanics/scaling-types/">
+  <meta property="og:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Megabonk Linear Scaling — Additive Stacking Guide">
+  <meta name="twitter:description"
+    content="How Linear Scaling works: formula, item list, stacking examples. Master additive stacking in Megabonk.">
+  <meta name="twitter:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Megabonk Linear Scaling Explained — How Additive Stacking Works",
+    "description": "Complete guide to Linear Scaling in Megabonk. Learn the additive stacking formula, see all items that scale linearly, and understand when linear scaling outperforms hyperbolic.",
+    "url": "https://megabonk.org/guides/mechanics/scaling-types/",
+    "datePublished": "2026-03-20",
+    "dateModified": "2026-03-20",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Megabonk.org",
+      "url": "https://megabonk.org"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://megabonk.org/guides/mechanics/scaling-types/"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Linear Scaling in Megabonk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Linear Scaling (also called additive stacking) means each additional copy of an item adds the same flat bonus. For example, each Clover adds +10% Luck, so 3 Clovers = +30% Luck. The formula is: Total Bonus = Base Value + (Per-Copy Value × Number of Copies)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which items use Linear Scaling in Megabonk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most common items use Linear Scaling, including Clover (+10% Luck), Gym Sauce (+10% Damage), Oats (+25 Max HP), Battery (+8% Attack Speed), Time Bracelet (+8% XP), Turbo Socks (+15% Move Speed), Forbidden Juice (+10% Crit Chance), and many more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when Linear Scaling exceeds 100%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For proc-based items like Moldy Cheese (+40% poison chance), going over 100% means you apply multiple stacks per hit. For example, 5 Moldy Cheeses = 200% chance = 2 guaranteed poison stacks per hit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Linear and Hyperbolic Scaling?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Linear Scaling adds the same value every time with no diminishing returns. Hyperbolic Scaling has diminishing returns — each copy gives less benefit than the last. Evasion and some proc chances use hyperbolic scaling to prevent reaching 100% too easily."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* === Variables (matching site-wide design system) === */
+    :root {
+      --primary: #ff6b35;
+      --primary-dark: #e55a2b;
+      --bg-dark: #1a1a2e;
+      --bg-darker: #16213e;
+      --text-light: #ffffff;
+      --text-muted: #cccccc;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 107, 53, 0.2);
+      --accent-green: #26de81;
+      --accent-blue: #3498db;
+      --accent-purple: #9b59b6;
+      --accent-gold: #ffd700;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-light);
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+      min-height: 100vh;
+    }
+
+    /* === Header === */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      display: block;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+      font-size: 0.7rem;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      min-width: 200px;
+      background: rgba(26, 26, 46, 0.98);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 0.5rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(255, 107, 53, 0.15);
+      color: var(--primary);
+    }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    /* === Breadcrumb === */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      color: var(--text-muted);
+      margin: 0 0.5rem;
+    }
+
+    /* === Container === */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* === Hero Section === */
+    .page-hero {
+      background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .page-hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.15);
+      color: var(--primary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    /* === Content Sections === */
+    .content-section {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(15px);
+    }
+
+    .content-section h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      color: var(--accent-gold);
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul,
+    .content-section ol {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .content-section a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .content-section a:hover {
+      text-decoration: underline;
+    }
+
+    .content-section strong {
+      color: var(--text-light);
+    }
+
+    /* === Formula Box === */
+    .formula-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .formula-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent-gold), var(--primary));
+    }
+
+    .formula-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    .formula-text {
+      font-family: 'Courier New', monospace;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--accent-gold);
+      font-weight: bold;
+      line-height: 1.6;
+    }
+
+    .formula-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* === Stacking Table === */
+    .stacking-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .stacking-table thead {
+      background: rgba(255, 107, 53, 0.2);
+    }
+
+    .stacking-table th {
+      padding: 1rem;
+      text-align: left;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stacking-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+
+    .stacking-table tbody tr:hover {
+      background: rgba(255, 107, 53, 0.08);
+    }
+
+    .stacking-table .item-name {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .stacking-table .value-highlight {
+      color: var(--accent-green);
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    .rarity-common {
+      color: #7ec850;
+    }
+
+    .rarity-rare {
+      color: #3498db;
+    }
+
+    .rarity-legendary {
+      color: #e67e22;
+    }
+
+    /* === Example Box === */
+    .example-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .example-box .example-title {
+      color: var(--accent-blue);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .example-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    .example-box code {
+      background: rgba(255, 107, 53, 0.15);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--primary);
+    }
+
+    /* === Warning Box === */
+    .warning-box {
+      background: rgba(231, 76, 60, 0.1);
+      border-left: 4px solid #e74c3c;
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .warning-box .warning-title {
+      color: #e74c3c;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* === Tip Box === */
+    .tip-box {
+      background: rgba(38, 222, 129, 0.1);
+      border-left: 4px solid var(--accent-green);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .tip-box .tip-title {
+      color: var(--accent-green);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* === Comparison Cards === */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .comparison-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .comparison-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+    }
+
+    .comparison-card h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-card .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .comparison-card ul {
+      margin-left: 0;
+      list-style: none;
+    }
+
+    .comparison-card li {
+      padding: 0.3rem 0;
+    }
+
+    .comparison-card li::before {
+      content: '→ ';
+      color: var(--primary);
+    }
+
+    /* === Stacking Demo === */
+    .stacking-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+
+    .stack-step {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .stack-step:hover {
+      border-color: var(--accent-green);
+      background: rgba(38, 222, 129, 0.05);
+    }
+
+    .stack-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .stack-value {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--accent-green);
+      font-family: monospace;
+    }
+
+    /* === FAQ Section === */
+    .faq-section {
+      max-width: 100%;
+    }
+
+    .faq-section details {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .faq-section details:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--primary);
+    }
+
+    .faq-section summary {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .faq-section summary::before {
+      content: '▶';
+      color: var(--primary);
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-section details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding-left: 2rem;
+    }
+
+    /* === CTA === */
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* === Footer === */
+    footer {
+      background: rgba(15, 20, 25, 0.95);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-top: 2px solid var(--border);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 46, 0.98);
+        flex-direction: column;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .content-section {
+        padding: 1.5rem;
+      }
+
+      .stacking-table {
+        font-size: 0.85rem;
+      }
+
+      .stacking-table th,
+      .stacking-table td {
+        padding: 0.6rem 0.5rem;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .formula-text {
+        font-size: 0.9rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+
+    /* === Focus === */
+    a:focus,
+    .btn:focus,
+    details:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo">
+        <span>🎮</span>
+        <span>Megabonk.org</span>
+      </a>
+
+      <div class="mobile-toggle" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/guides/builds/">Builds</a></li>
+        <li class="dropdown">
+          <a href="/tier-lists/" class="dropdown-toggle">Tier Lists</a>
+          <div class="dropdown-menu">
+            <a href="/guides/characters/character-tier-list-2025.html">🏆 Characters</a>
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/tier-lists/items/">💎 Items</a>
+            <a href="/tier-lists/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/database/" class="dropdown-toggle">Items</a>
+          <div class="dropdown-menu">
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/database/items/">💎 Items</a>
+            <a href="/database/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li><a href="/guides/characters/">Characters</a></li>
+        <li><a href="/leaderboard/">Leaderboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="https://megabonk.org/">Home</a><span>›</span>
+    <a href="https://megabonk.org/guides/">Guides</a><span>›</span>
+    <a href="https://megabonk.org/guides/mechanics/scaling-types/">Mechanics</a><span>›</span>
+    <span>Linear Scaling</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <h1>Linear Scaling in Megabonk — How Additive Stacking Works</h1>
+    <p>
+      Linear Scaling (additive stacking) is the most common scaling type in Megabonk.
+      Each additional copy of an item adds the <strong>same flat bonus</strong> — no diminishing returns.
+      Understanding when and why items scale linearly is key to optimizing your builds.
+    </p>
+    <span class="hero-badge">📐 GAME MECHANICS • SCALING TYPES</span>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Ad slot -->
+    <div style="margin: 1.5rem auto; text-align: center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="7242990417"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Section 1: What is Linear Scaling -->
+    <section class="content-section">
+      <h2>📏 What Is Linear Scaling?</h2>
+      <p>
+        Linear Scaling is the simplest scaling mechanic in Megabonk. When an item uses linear scaling,
+        <strong>every copy you pick up adds the exact same amount of bonus</strong> as the first.
+        There are no diminishing returns — the 10th copy is just as valuable as the 1st.
+      </p>
+
+      <div class="formula-box">
+        <div class="formula-label">Linear Scaling Formula</div>
+        <div class="formula-text">
+          Total Bonus = Base Value + (Per-Copy Value × Number of Copies)
+        </div>
+        <div class="formula-note">Each copy contributes the same fixed amount — predictable and straightforward.</div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-title">💡 Example: Clover (+10% Luck)</div>
+        <p>Each Clover adds exactly <code>+10%</code> Luck. With linear scaling:</p>
+        <div class="stacking-demo">
+          <div class="stack-step">
+            <div class="stack-count">1 copy</div>
+            <div class="stack-value">+10%</div>
+          </div>
+          <div class="stack-step">
+            <div class="stack-count">2 copies</div>
+            <div class="stack-value">+20%</div>
+          </div>
+          <div class="stack-step">
+            <div class="stack-count">3 copies</div>
+            <div class="stack-value">+30%</div>
+          </div>
+          <div class="stack-step">
+            <div class="stack-count">5 copies</div>
+            <div class="stack-value">+50%</div>
+          </div>
+          <div class="stack-step">
+            <div class="stack-count">10 copies</div>
+            <div class="stack-value">+100%</div>
+          </div>
+        </div>
+        <p style="font-size:0.9rem; opacity:0.8;">
+          The graph of linear scaling is a straight line — hence the name. Every step up the ladder is the same height.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: Items with Linear Scaling -->
+    <section class="content-section">
+      <h2>📦 Items That Use Linear Scaling</h2>
+      <p>
+        The majority of items in Megabonk use linear (additive) scaling. Here are the most commonly encountered
+        linear-scaling items, grouped by their stat effect:
+      </p>
+
+      <h3>Flat Stat Boosts</h3>
+      <table class="stacking-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Effect per Copy</th>
+            <th>Rarity</th>
+            <th>Stacks With</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="item-name"><a href="/database/items/clover">Clover</a></td>
+            <td class="value-highlight">+10% Luck</td>
+            <td class="rarity-common">Common</td>
+            <td>YES (all damage brackets)</td>
+          </tr>
+          <tr>
+            <td class="item-name"><a href="/database/items/gym-sauce">Gym Sauce</a></td>
+            <td class="value-highlight">+10% Damage</td>
+            <td class="rarity-common">Common</td>
+            <td>YES (main damage bracket)</td>
+          </tr>
+          <tr>
+            <td class="item-name"><a href="/database/items/oats">Oats</a></td>
+            <td class="value-highlight">+25 Max HP</td>
+            <td class="rarity-common">Common</td>
+            <td>YES</td>
+          </tr>
+          <tr>
+            <td class="item-name">Medkit</td>
+            <td class="value-highlight">+45 HP Regen</td>
+            <td class="rarity-common">Common</td>
+            <td>YES</td>
+          </tr>
+          <tr>
+            <td class="item-name"><a href="/database/items/turbo-socks">Turbo Socks</a></td>
+            <td class="value-highlight">+15% Move Speed</td>
+            <td class="rarity-common">Common</td>
+            <td>YES</td>
+          </tr>
+          <tr>
+            <td class="item-name"><a href="/database/items/battery">Battery</a></td>
+            <td class="value-highlight">+8% Attack Speed</td>
+            <td class="rarity-common">Common</td>
+            <td>YES (own bracket)</td>
+          </tr>
+          <tr>
+            <td class="item-name">Time Bracelet</td>
+            <td class="value-highlight">+8% XP Gain</td>
+            <td class="rarity-common">Common</td>
+            <td>YES (own bracket)</td>
+          </tr>
+          <tr>
+            <td class="item-name">Forbidden Juice</td>
+            <td class="value-highlight">+10% Crit Chance</td>
+            <td class="rarity-common">Common</td>
+            <td>YES</td>
+          </tr>
+          <tr>
+            <td class="item-name">Golden Glove</td>
+            <td class="value-highlight">+15% Gold</td>
+            <td class="rarity-common">Common</td>
+            <td>YES</td>
+          </tr>
+          <tr>
+            <td class="item-name">Skuleg</td>
+            <td class="value-highlight">+7% Difficulty</td>
+            <td class="rarity-common">Common</td>
+            <td>YES</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Damage Boosts (Main Bracket)</h3>
+      <table class="stacking-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Effect per Copy</th>
+            <th>Rarity</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="item-name"><a href="/database/items/tactical-glasses">Tactical Glasses</a></td>
+            <td class="value-highlight">+20% Damage to &gt;90% HP enemies</td>
+            <td class="rarity-common">Common</td>
+            <td>Conditional damage</td>
+          </tr>
+          <tr>
+            <td class="item-name"><a href="/database/items/boss-buster">Boss Buster</a></td>
+            <td class="value-highlight">+15% Damage to Elites/Bosses</td>
+            <td class="rarity-common">Common</td>
+            <td>Elite/Boss only</td>
+          </tr>
+          <tr>
+            <td class="item-name">Credit Card (Red)</td>
+            <td class="value-highlight">+2.5% Damage per chest</td>
+            <td class="rarity-rare">Rare</td>
+            <td>Permanent per chest opened</td>
+          </tr>
+          <tr>
+            <td class="item-name"><a href="/database/items/beefy-ring">Beefy Ring</a></td>
+            <td class="value-highlight">+20% Damage per 100 Max HP</td>
+            <td class="rarity-rare">Rare</td>
+            <td>Scales with HP pool</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box">
+        <div class="tip-title">💡 Bracket Tip</div>
+        <p>
+          Items within the <strong>same damage bracket</strong> combine additively. But different brackets
+          <strong>multiply with each other</strong>. This means having items in multiple brackets is more powerful
+          than stacking everything in one bracket. See the
+          <a href="/guides/mechanics/damage-brackets/">Damage Brackets guide</a> for details.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: How Exceeding 100% Works -->
+    <section class="content-section">
+      <h2>🔥 What Happens Above 100%?</h2>
+      <p>
+        For proc-based items (items that trigger an effect on hit), linear scaling can push the chance
+        <strong>above 100%</strong>. When this happens, the item guarantees at least one proc and
+        rolls for additional stacks.
+      </p>
+
+      <div class="example-box">
+        <div class="example-title">💡 Example: Moldy Cheese (+40% Poison Chance)</div>
+        <p>Moldy Cheese adds <code>+40%</code> chance to poison enemies on hit. With additive stacking:</p>
+        <div class="stacking-demo">
+          <div class="stack-step">
+            <div class="stack-count">1 copy</div>
+            <div class="stack-value">40%</div>
+          </div>
+          <div class="stack-step">
+            <div class="stack-count">2 copies</div>
+            <div class="stack-value">80%</div>
+          </div>
+          <div class="stack-step">
+            <div class="stack-count">3 copies</div>
+            <div class="stack-value">120%</div>
+          </div>
+          <div class="stack-step">
+            <div class="stack-count">5 copies</div>
+            <div class="stack-value">200%</div>
+          </div>
+        </div>
+        <p>
+          At <code>120%</code>: guaranteed 1 poison stack + 20% chance for a 2nd stack.<br>
+          At <code>200%</code>: guaranteed 2 poison stacks per hit.<br>
+          At <code>250%</code>: guaranteed 2 stacks + 50% chance for a 3rd stack.
+        </p>
+      </div>
+
+      <div class="warning-box">
+        <div class="warning-title">⚠️ Important: Proc Coefficient</div>
+        <p>
+          Some items and weapons have a <strong>Proc Coefficient</strong> that affects the actual trigger chance.
+          Items with a Proc Coefficient of <code>0.5</code> (like Cactus, Electric Plug, Holy Book) will halve
+          the chance — so a 40% poison chance becomes 20% when triggered by these items. See the
+          <a href="/guides/mechanics/proc-coefficient/">Proc Coefficient guide</a> for the full list.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 4: Linear vs Hyperbolic -->
+    <section class="content-section">
+      <h2>⚖️ Linear vs Hyperbolic Scaling</h2>
+      <p>
+        Not all items in Megabonk scale linearly. Some use <strong>Hyperbolic Scaling</strong>, which has
+        diminishing returns. Understanding the difference is critical for build optimization.
+      </p>
+
+      <div class="comparison-grid">
+        <div class="comparison-card" style="border-color: var(--accent-green);">
+          <span class="card-icon">📈</span>
+          <h3 style="color: var(--accent-green);">Linear Scaling</h3>
+          <ul>
+            <li>Same bonus every copy</li>
+            <li>No diminishing returns</li>
+            <li>Can exceed 100%</li>
+            <li>Predictable & consistent</li>
+            <li>Most common in Megabonk</li>
+          </ul>
+        </div>
+        <div class="comparison-card" style="border-color: var(--accent-purple);">
+          <span class="card-icon">📉</span>
+          <h3 style="color: var(--accent-purple);">Hyperbolic Scaling</h3>
+          <ul>
+            <li>Each copy gives less than the last</li>
+            <li>Diminishing returns</li>
+            <li>Can never reach 100%</li>
+            <li>Used for balance</li>
+            <li>Examples: Key, Evasion stat</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <div class="warning-title">⚠️ Tricky Case: "Linearly Added, Hyperbolically Applied"</div>
+        <p>
+          Some items add their <strong>raw value linearly</strong> (e.g., Slippery Ring adds +15% Evasion per copy),
+          but the <strong>final stat uses a hyperbolic formula</strong>. This means:
+        </p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>3 Slippery Rings</strong> → +45% raw Evasion → actual evasion is less than 45%</li>
+          <li><strong>10 Slippery Rings</strong> → +150% raw Evasion → actual evasion converges toward ~60%</li>
+        </ul>
+        <p style="margin-top: 0.5rem;">
+          The game's UI shows the raw stacked value, not the actual effective percentage. Always check
+          if a stat uses hyperbolic conversion before over-investing in it.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 5: Build Tips -->
+    <section class="content-section">
+      <h2>🧠 Build Tips for Linear Scaling Items</h2>
+
+      <h3>1. Diversify Across Damage Brackets</h3>
+      <p>
+        Because items within the same bracket combine additively but brackets multiply together, having
+        +50% from Bracket A and +50% from Bracket B gives 2.25× damage (1.5 × 1.5). Stacking +100%
+        in a single bracket only gives 2.0× damage. Spread your damage sources across different brackets for
+        maximum output.
+      </p>
+
+      <h3>2. Stack Early, Benefit All Game</h3>
+      <p>
+        Linear scaling items are especially valuable early in a run. Unlike hyperbolic items that
+        lose value per copy, linear items maintain their full worth throughout. An early
+        <a href="/database/items/clover">Clover</a> or
+        <a href="/database/items/gym-sauce">Gym Sauce</a> will
+        pay dividends for the entire run.
+      </p>
+
+      <h3>3. Over-100% Proc Stacking Is Powerful</h3>
+      <p>
+        For proc items like <a href="/database/items/moldy-cheese">Moldy Cheese</a>, pushing past 100% lets you
+        apply multiple status effects per hit. This is a key strategy for
+        <a href="/guides/builds/">poison</a> and status-effect builds.
+      </p>
+
+      <h3>4. Watch Out for Items in Their Own Bracket</h3>
+      <p>
+        Some linear items like <strong>Battery</strong> (Attack Speed) and <strong>Time Bracelet</strong> (XP)
+        exist in their own dedicated brackets. This means they multiply independently with your other bonuses,
+        making them exceptionally efficient.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="content-section faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <details id="faq-what-is">
+        <summary>What is Linear Scaling in Megabonk?</summary>
+        <p>
+          Linear Scaling (also called additive stacking) means each additional copy of an item adds the same
+          flat bonus. For example, each Clover adds +10% Luck, so 3 Clovers = +30% Luck. The formula is:
+          <strong>Total Bonus = Base Value + (Per-Copy Value × Number of Copies)</strong>.
+        </p>
+      </details>
+
+      <details id="faq-which-items">
+        <summary>Which items use Linear Scaling?</summary>
+        <p>
+          Most common items use Linear Scaling, including Clover (+10% Luck), Gym Sauce (+10% Damage),
+          Oats (+25 Max HP), Battery (+8% Attack Speed), Time Bracelet (+8% XP), Turbo Socks (+15% Move Speed),
+          Forbidden Juice (+10% Crit Chance), and many more. Check the table above for a full list.
+        </p>
+      </details>
+
+      <details id="faq-above-100">
+        <summary>What happens when Linear Scaling exceeds 100%?</summary>
+        <p>
+          For proc-based items like Moldy Cheese (+40% poison chance), going over 100% means you apply
+          multiple stacks per hit. For example, 5 Moldy Cheeses = 200% chance = 2 guaranteed poison stacks per hit.
+          The remainder above each 100% threshold rolls for an additional stack.
+        </p>
+      </details>
+
+      <details id="faq-vs-hyperbolic">
+        <summary>What is the difference between Linear and Hyperbolic Scaling?</summary>
+        <p>
+          Linear Scaling adds the same value every time with no diminishing returns. Hyperbolic Scaling has
+          diminishing returns — each copy gives less benefit than the last. Evasion and some proc chances
+          (like Key's free chest chance) use hyperbolic scaling to prevent reaching 100% too easily.
+        </p>
+      </details>
+
+      <details id="faq-slippery-ring">
+        <summary>Why does Slippery Ring feel less effective at high stacks?</summary>
+        <p>
+          Slippery Ring adds +15% Evasion per copy linearly, but the Evasion <em>stat itself</em> uses
+          hyperbolic scaling. So while the raw number goes up at the same rate, the actual dodge chance
+          has diminishing returns. This is a common source of confusion — the item is linear, but the
+          stat it feeds into is not.
+        </p>
+      </details>
+    </section>
+
+    <!-- CTA -->
+    <section class="content-section" style="text-align: center;">
+      <h2>📚 Explore More Mechanics</h2>
+      <p>
+        Mastering scaling types is just the beginning. Dive deeper into Megabonk's damage formula and
+        build optimization with our other mechanics guides.
+      </p>
+      <div class="cta-buttons">
+        <a href="/database/items/" class="btn btn-primary">💎 Items Database</a>
+        <a href="/guides/builds/" class="btn btn-secondary">🔧 Best Builds</a>
+        <a href="/tier-lists/items/" class="btn btn-secondary">🏆 Items Tier List</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p>&copy; 2026 Megabonk.org - Unofficial Fan Resource</p>
+      <p style="margin-top:.5rem;">Not affiliated with the official Megabonk development team</p>
+      <p style="margin-top:1.5rem;">
+        <a href="https://megabonk.org/">Home</a> |
+        <a href="https://megabonk.org/database/">Database</a> |
+        <a href="https://megabonk.org/tier-lists/">Tier Lists</a> |
+        <a href="https://megabonk.org/guides/">Guides</a> |
+        <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      </p>
+      <p style="margin-top:1rem;font-size:.85rem;color:var(--text-muted)">Game assets and trademarks are property of
+        their respective owners</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    // Scroll-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.content-section, .comparison-card, .stack-step').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+
+</html>
