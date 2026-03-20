@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Megabonk Proc Coefficient Guide — How Items Trigger Other Items (2026)</title>
+  <meta name="description"
+    content="Complete Megabonk Proc Coefficient guide. Learn which 8 items can proc other items, the 1.0 vs 0.5 coefficient split, weapon coefficients, and how to maximize proc chains.">
+  <meta name="keywords"
+    content="Megabonk proc coefficient, Megabonk items that proc other items, Megabonk proc chance, proc chain Megabonk, Overpowered Lamp proc">
+  <link rel="canonical" href="https://megabonk.org/guides/mechanics/proc-coefficient/">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+    crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Megabonk Proc Coefficient Guide — Item Proc Chains Explained (2026)">
+  <meta property="og:description"
+    content="8 items that can proc other items, coefficient values (1.0 vs 0.5), weapon coefficients, and Overpowered Lamp interaction.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://megabonk.org/guides/mechanics/proc-coefficient/">
+  <meta property="og:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Megabonk Proc Coefficient — Which Items Trigger Other Items">
+  <meta name="twitter:description"
+    content="Full proc coefficient breakdown: 8 triggering items, weapon coefficients, and proc chain optimization.">
+  <meta name="twitter:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Megabonk Proc Coefficient Guide — How Items Trigger Other Items",
+    "description": "Complete guide to Proc Coefficients in Megabonk. 8 items that can trigger other items, their coefficient values, weapon proc coefficients, and proc chain optimization strategies.",
+    "url": "https://megabonk.org/guides/mechanics/proc-coefficient/",
+    "datePublished": "2026-03-20",
+    "dateModified": "2026-03-20",
+    "publisher": { "@type": "Organization", "name": "Megabonk.org", "url": "https://megabonk.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://megabonk.org/guides/mechanics/proc-coefficient/" }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Proc Coefficient in Megabonk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Proc Coefficient is a multiplier that determines how effectively an item or weapon triggers proc-based effects (like poison, lightning, or explosions). A coefficient of 1.0 means full proc chance; 0.5 means half proc chance. Most weapons have 1.0, but multi-hit weapons like Axe and Aura have ~0.7."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which items can proc other items in Megabonk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only 8 items can proc other items: Energy Core, Mirror, and Cursed Doll (proc coefficient 1.0), plus Cactus, Electric Plug, Holy Book, Shattered Knowledge, and Toxic Barrel (proc coefficient 0.5). All other items can only be triggered by weapon attacks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Overpowered Lamp affect proc chances?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Overpowered Lamp gives each on-hit proc one additional roll to trigger per lamp. For example, a 40% poison chance gets two independent 40% rolls, giving a 64% chance of at least one proc. It does not simply double the percentage — it adds an extra independent roll."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #ff6b35;
+      --primary-dark: #e55a2b;
+      --bg-dark: #1a1a2e;
+      --bg-darker: #16213e;
+      --text-light: #ffffff;
+      --text-muted: #cccccc;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 107, 53, 0.2);
+      --accent-green: #26de81;
+      --accent-blue: #3498db;
+      --accent-purple: #9b59b6;
+      --accent-gold: #ffd700;
+      --accent-red: #e74c3c;
+      --accent-cyan: #00d2d3;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-light);
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+      min-height: 100vh;
+    }
+
+    /* === Header === */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s;
+      display: block;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+    }
+
+    .dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      min-width: 200px;
+      background: rgba(26, 26, 46, 0.98);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 0.5rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(255, 107, 53, 0.15);
+      color: var(--primary);
+    }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    /* === Breadcrumb === */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      color: var(--text-muted);
+      margin: 0 0.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* === Hero === */
+    .page-hero {
+      background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .page-hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.15);
+      color: var(--primary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    /* === Content Sections === */
+    .content-section {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(15px);
+    }
+
+    .content-section h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section h3 {
+      color: var(--accent-gold);
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul,
+    .content-section ol {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .content-section a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .content-section a:hover {
+      text-decoration: underline;
+    }
+
+    .content-section strong {
+      color: var(--text-light);
+    }
+
+    .content-section code {
+      background: rgba(255, 107, 53, 0.15);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--primary);
+    }
+
+    /* === Item Cards Grid === */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .item-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .item-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.2);
+    }
+
+    .item-card img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      border-radius: 8px;
+    }
+
+    .item-card .item-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.3;
+    }
+
+    .item-card .item-coeff {
+      font-family: monospace;
+      font-size: 0.8rem;
+      font-weight: 900;
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .coeff-full {
+      background: rgba(38, 222, 129, 0.2);
+      color: var(--accent-green);
+    }
+
+    .coeff-half {
+      background: rgba(255, 165, 0, 0.2);
+      color: orange;
+    }
+
+    .coeff-low {
+      background: rgba(231, 76, 60, 0.2);
+      color: var(--accent-red);
+    }
+
+    /* === Proc Items Table === */
+    .proc-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .proc-table thead {
+      background: rgba(255, 107, 53, 0.2);
+    }
+
+    .proc-table th {
+      padding: 1rem;
+      text-align: left;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .proc-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+
+    .proc-table tbody tr:hover {
+      background: rgba(255, 107, 53, 0.08);
+    }
+
+    .proc-table .item-name-cell {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .proc-table .item-name-cell img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      border-radius: 6px;
+    }
+
+    .proc-table .item-name-cell a {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    /* === Flow Diagram === */
+    .flow-diagram {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 140px;
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .flow-multiply {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--accent-gold);
+    }
+
+    /* === Example Boxes === */
+    .example-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .example-box .example-title {
+      color: var(--accent-blue);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tip-box {
+      background: rgba(38, 222, 129, 0.1);
+      border-left: 4px solid var(--accent-green);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .tip-box .tip-title {
+      color: var(--accent-green);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .warning-box {
+      background: rgba(231, 76, 60, 0.1);
+      border-left: 4px solid var(--accent-red);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .warning-box .warning-title {
+      color: var(--accent-red);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* === FAQ === */
+    .faq-section details {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .faq-section details:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--primary);
+    }
+
+    .faq-section summary {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .faq-section summary::before {
+      content: '▶';
+      color: var(--primary);
+      font-size: 0.9rem;
+      transition: transform 0.3s;
+    }
+
+    .faq-section details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding-left: 2rem;
+    }
+
+    /* === CTA === */
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* === Footer === */
+    footer {
+      background: rgba(15, 20, 25, 0.95);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-top: 2px solid var(--border);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 46, 0.98);
+        flex-direction: column;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .content-section {
+        padding: 1.5rem;
+      }
+
+      .item-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .proc-table {
+        font-size: 0.85rem;
+      }
+
+      .proc-table th,
+      .proc-table td {
+        padding: 0.6rem 0.5rem;
+      }
+
+      .proc-table .item-name-cell img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .flow-row {
+        flex-direction: column;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+
+    a:focus,
+    .btn:focus,
+    details:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo"><span>🎮</span><span>Megabonk.org</span></a>
+      <div class="mobile-toggle" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/guides/builds/">Builds</a></li>
+        <li class="dropdown">
+          <a href="/tier-lists/" class="dropdown-toggle">Tier Lists</a>
+          <div class="dropdown-menu">
+            <a href="/guides/characters/character-tier-list-2025.html">🏆 Characters</a>
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/tier-lists/items/">💎 Items</a>
+            <a href="/tier-lists/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/database/" class="dropdown-toggle">Items</a>
+          <div class="dropdown-menu">
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/database/items/">💎 Items</a>
+            <a href="/database/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li><a href="/guides/characters/">Characters</a></li>
+        <li><a href="/leaderboard/">Leaderboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="https://megabonk.org/">Home</a><span>›</span>
+    <a href="https://megabonk.org/guides/">Guides</a><span>›</span>
+    <a href="https://megabonk.org/guides/mechanics/scaling-types/">Mechanics</a><span>›</span>
+    <span>Proc Coefficient</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <h1>Proc Coefficient in Megabonk — How Items Trigger Other Items</h1>
+    <p>
+      In Megabonk, most items can only be triggered by <strong>weapon attacks</strong>. But 8 special items
+      can also trigger other items when they deal damage — and the <strong>Proc Coefficient</strong> determines
+      how effectively they do it.
+    </p>
+    <span class="hero-badge">⚡ GAME MECHANICS • PROC SYSTEM</span>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Ad -->
+    <div style="margin: 1.5rem auto; text-align: center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="7242990417"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Section 1: What Is Proc Coefficient -->
+    <section class="content-section">
+      <h2>🎯 What Is Proc Coefficient?</h2>
+      <p>
+        <strong>Proc Coefficient</strong> is a multiplier that scales the effectiveness of triggering on-hit effects.
+        When an item or weapon "procs" another item, the Proc Coefficient determines the <em>actual chance</em>
+        of the triggered effect activating.
+      </p>
+
+      <div class="flow-diagram">
+        <div class="flow-row">
+          <div class="flow-box" style="border-color: var(--accent-blue); color: var(--accent-blue);">
+            Item's Base<br>Proc Chance
+          </div>
+          <span class="flow-multiply">×</span>
+          <div class="flow-box" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+            Trigger Source's<br>Proc Coefficient
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box" style="border-color: var(--accent-green); color: var(--accent-green);">
+            Actual Proc<br>Chance Per Hit
+          </div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-title">💡 Example: Moldy Cheese triggered by Holy Book</div>
+        <p>
+          <a href="/database/items/moldy-cheese">Moldy Cheese</a> has a <code>40%</code> poison chance.
+          <a href="/database/items/holy-book">Holy Book</a> has a Proc Coefficient of <code>0.5</code>.
+        </p>
+        <p>
+          When Holy Book deals damage → actual poison chance = <code>40% × 0.5 = 20%</code>
+        </p>
+        <p>
+          But if triggered by your <strong>weapon</strong> (Proc Coefficient <code>1.0</code>) → actual chance =
+          <code>40% × 1.0 = 40%</code> (full chance)
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: The 8 Proc Items -->
+    <section class="content-section">
+      <h2>⚡ The 8 Items That Can Proc Other Items</h2>
+      <p>
+        Only <strong>8 items</strong> in Megabonk can trigger other items' effects when they deal damage.
+        All other items can only be triggered by weapon attacks. These 8 items are split into two groups by
+        their Proc Coefficient:
+      </p>
+
+      <h3>🟢 Proc Coefficient 1.0 (Full Chance)</h3>
+      <p>These items trigger other items at <strong>full proc chance</strong> — identical to weapon attacks:</p>
+
+      <div class="item-grid">
+        <a href="/database/items/energy-core" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Energy_Core.png" alt="Energy Core">
+          <span class="item-name">Energy Core</span>
+          <span class="item-coeff coeff-full">1.0</span>
+        </a>
+        <a href="/database/items/mirror" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Mirror.png" alt="Mirror">
+          <span class="item-name">Mirror</span>
+          <span class="item-coeff coeff-full">1.0</span>
+        </a>
+        <a href="/database/items/cursed-doll" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Cursed_Doll.png" alt="Cursed Doll">
+          <span class="item-name">Cursed Doll</span>
+          <span class="item-coeff coeff-full">1.0</span>
+        </a>
+      </div>
+
+      <h3>🟡 Proc Coefficient 0.5 (Half Chance)</h3>
+      <p>These items trigger other items at <strong>half proc chance</strong>:</p>
+
+      <div class="item-grid">
+        <a href="/database/items/cactus" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Cactus.png" alt="Cactus">
+          <span class="item-name">Cactus</span>
+          <span class="item-coeff coeff-half">0.5</span>
+        </a>
+        <a href="/database/items/electric-plug" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Electric_Plug.png" alt="Electric Plug">
+          <span class="item-name">Electric Plug</span>
+          <span class="item-coeff coeff-half">0.5</span>
+        </a>
+        <a href="/database/items/toxic-barrel" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Toxic_Barrel.png" alt="Toxic Barrel">
+          <span class="item-name">Toxic Barrel</span>
+          <span class="item-coeff coeff-half">0.5</span>
+        </a>
+        <a href="/database/items/shattered-knowledge" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Shattered_Knowledge.png" alt="Shattered Knowledge">
+          <span class="item-name">Shattered Knowledge</span>
+          <span class="item-coeff coeff-half">0.5</span>
+        </a>
+        <a href="/database/items/holy-book" class="item-card">
+          <img src="https://megabonk.org/images/Items/Item_Holy_Book.png" alt="Holy Book">
+          <span class="item-name">Holy Book</span>
+          <span class="item-coeff coeff-half">0.5</span>
+        </a>
+      </div>
+
+      <div class="warning-box">
+        <div class="warning-title">⚠️ Not All Items Can Proc</div>
+        <p>
+          Items like <a href="/database/items/moldy-cheese">Moldy Cheese</a>,
+          <a href="/database/items/lightning-orb">Lightning Orb</a>, and
+          <a href="/database/items/spicy-meatball">Spicy Meatball</a> <strong>cannot</strong> trigger other items.
+          They can only be triggered <em>by</em> weapons or by the 8 items listed above.
+          This is a common source of confusion — just because an item deals damage doesn't mean it can proc
+          other items.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Proc-able Items Table -->
+    <section class="content-section">
+      <h2>🎲 Common On-Hit Proc Items</h2>
+      <p>
+        These are the items that <em>get triggered</em> by weapon attacks and by the 8 proc items above.
+        Their base proc chance is modified by the trigger source's Proc Coefficient:
+      </p>
+
+      <table class="proc-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Base Proc Chance</th>
+            <th>Effect</th>
+            <th>At 0.5 Coeff</th>
+            <th>Scaling</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="item-name-cell">
+              <img src="https://megabonk.org/images/Items/Item_Moldy_Cheese.png" alt="Moldy Cheese">
+              <a href="/database/items/moldy-cheese">Moldy Cheese</a>
+            </td>
+            <td><span style="color: var(--accent-green); font-weight: 700;">40%</span></td>
+            <td>Poison on hit</td>
+            <td><span style="color: orange;">20%</span></td>
+            <td><a href="/guides/mechanics/scaling-types/">Linear</a></td>
+          </tr>
+          <tr>
+            <td class="item-name-cell">
+              <img src="https://megabonk.org/images/Items/Item_Lightning_Orb.png" alt="Lightning Orb">
+              <a href="/database/items/lightning-orb">Lightning Orb</a>
+            </td>
+            <td><span style="color: var(--accent-green); font-weight: 700;">25%</span></td>
+            <td>Lightning + stun</td>
+            <td><span style="color: orange;">12.5%</span></td>
+            <td>Hyperbolic (cap 90%)</td>
+          </tr>
+          <tr>
+            <td class="item-name-cell">
+              <img src="https://megabonk.org/images/Items/Item_Spicy_Meatball.png" alt="Spicy Meatball">
+              <a href="/database/items/spicy-meatball">Spicy Meatball</a>
+            </td>
+            <td><span style="color: var(--accent-green); font-weight: 700;">25%</span></td>
+            <td>AoE explosion (65% dmg)</td>
+            <td><span style="color: orange;">12.5%</span></td>
+            <td>Fixed chance</td>
+          </tr>
+          <tr>
+            <td class="item-name-cell">
+              <img src="https://megabonk.org/images/Items/Item_Dragonfire.png" alt="Dragonfire">
+              <a href="/database/items/dragonfire">Dragonfire</a>
+            </td>
+            <td><span style="color: var(--accent-green); font-weight: 700;">15%</span></td>
+            <td>Fire + burn</td>
+            <td><span style="color: orange;">7.5%</span></td>
+            <td><a href="/guides/mechanics/scaling-types/">Linear</a></td>
+          </tr>
+          <tr>
+            <td class="item-name-cell">
+              <img src="https://megabonk.org/images/Items/Item_Bloody_Cleaver.png" alt="Bloody Cleaver">
+              <a href="/database/items/bloody-cleaver">Bloody Cleaver</a>
+            </td>
+            <td><span style="color: var(--accent-green); font-weight: 700;">15%</span></td>
+            <td>Blood mark (bleed)</td>
+            <td><span style="color: orange;">7.5%</span></td>
+            <td><a href="/guides/mechanics/scaling-types/">Linear</a></td>
+          </tr>
+          <tr>
+            <td class="item-name-cell">
+              <img src="https://megabonk.org/images/Items/Item_Ice_Cube.png" alt="Ice Cube">
+              Ice Cube
+            </td>
+            <td><span style="color: var(--accent-green); font-weight: 700;">10%</span></td>
+            <td>Freeze on hit</td>
+            <td><span style="color: orange;">5%</span></td>
+            <td>Hyperbolic</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box">
+        <div class="tip-title">💡 Scaling Type Matters</div>
+        <p>
+          Notice the "Scaling" column: some proc items use <a href="/guides/mechanics/scaling-types/">linear scaling</a>
+          (additively stackable past 100%), while others use hyperbolic scaling (diminishing returns).
+          The Proc Coefficient applies <em>after</em> the scaling calculation. Check each item's page in the
+          <a href="/database/items/">Items Database</a> for details.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 4: Weapon Proc Coefficients -->
+    <section class="content-section">
+      <h2>⚔️ Weapon Proc Coefficients</h2>
+      <p>
+        Weapons also have Proc Coefficients. Most single-projectile weapons have a coefficient of <code>1.0</code>,
+        but multi-hit weapons are balanced with lower values to prevent them from triggering procs too frequently.
+      </p>
+
+      <table class="proc-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Proc Coefficient</th>
+            <th>Examples</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Most Projectile Weapons</strong></td>
+            <td><span class="item-coeff coeff-full" style="font-size: 0.9rem;">1.0</span></td>
+            <td><a href="/database/weapons/shotgun">Shotgun</a>, Revolver, etc.</td>
+            <td>Full proc chance per hit</td>
+          </tr>
+          <tr>
+            <td><strong>Multi-hit / AoE Weapons</strong></td>
+            <td><span class="item-coeff coeff-low" style="font-size: 0.9rem;">~0.7</span></td>
+            <td>Axe, Aura, Black Hole</td>
+            <td>Reduced to balance frequent hits</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <div class="example-title">💡 Example: Black Hole Nerf</div>
+        <p>
+          The <strong>Black Hole</strong> weapon had its Proc Coefficient reduced from <code>0.9</code> to
+          <code>0.7</code> in a patch update. This was because Black Hole hits many enemies continuously,
+          and at 0.9 it was triggering proc items (like Spicy Meatball) far too reliably, creating
+          overpowered chain reactions.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 5: Overpowered Lamp -->
+    <section class="content-section">
+      <h2>💡 The Overpowered Lamp</h2>
+      <p>
+        The <strong>Overpowered Lamp</strong> is a unique item that gives each on-hit proc
+        <strong>one additional roll</strong> to trigger. It does NOT simply double the percentage — it adds
+        an extra independent chance.
+      </p>
+
+      <div class="example-box">
+        <div class="example-title">📊 How Overpowered Lamp Works</div>
+        <p>Without Lamp: Moldy Cheese has <code>40%</code> chance → <strong>40%</strong> to proc</p>
+        <p>With 1 Lamp: Two independent <code>40%</code> rolls:</p>
+        <ul>
+          <li>Chance of at least 1 proc: 1 − (0.6 × 0.6) = <code>64%</code></li>
+          <li>Chance of 2 procs: 0.4 × 0.4 = <code>16%</code></li>
+        </ul>
+        <p>
+          The more proc sources you have, the better the Lamp scales. With many proc items,
+          a single Overpowered Lamp dramatically increases overall proc consistency.
+        </p>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-title">🏆 Overpowered Lamp + Proc Synergy</div>
+        <p>
+          The Lamp is especially powerful with items that have moderate proc chances (25–40%).
+          It also synergizes well with the 8 items that can proc other items — giving those proc chains
+          an extra roll too. Combine with <a href="/database/items/moldy-cheese">Moldy Cheese</a>,
+          <a href="/database/items/lightning-orb">Lightning Orb</a>, and
+          <a href="/database/items/spicy-meatball">Spicy Meatball</a> for maximum effect.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 6: Build Tips -->
+    <section class="content-section">
+      <h2>🧠 Build Tips for Proc Builds</h2>
+
+      <h3>1. Chain Proc Items for Maximum Value</h3>
+      <p>
+        Pair a high-coefficient proc item (Energy Core, Mirror, Cursed Doll = <code>1.0</code>) with
+        powerful on-hit items like <a href="/database/items/moldy-cheese">Moldy Cheese</a>
+        or <a href="/database/items/lightning-orb">Lightning Orb</a>. The 1.0 coefficient means those
+        items proc at full chance even when triggered by another item.
+      </p>
+
+      <h3>2. Use 0.5-Coefficient Items for Volume</h3>
+      <p>
+        Items like <a href="/database/items/cactus">Cactus</a> and
+        <a href="/database/items/electric-plug">Electric Plug</a> hit frequently. Even at half proc chance,
+        their high hit rate can generate more total procs than slower 1.0-coefficient items.
+      </p>
+
+      <h3>3. Match Proc Items with the Right Bracket</h3>
+      <p>
+        Remember that proc damage still goes through the
+        <a href="/guides/mechanics/damage-brackets/">damage bracket system</a>. Proc item damage benefits from
+        your damage multipliers — so optimizing your brackets amplifies your proc damage too.
+      </p>
+
+      <h3>4. Overpowered Lamp Is a Proc Build Keystone</h3>
+      <p>
+        If you're running 3+ proc items, the Overpowered Lamp is one of the highest-value pickups in the game.
+        The extra roll on every single proc check multiplies your entire build's effectiveness.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="content-section faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <details id="faq-what-is">
+        <summary>What is Proc Coefficient in Megabonk?</summary>
+        <p>
+          Proc Coefficient is a multiplier that determines how effectively a weapon or item triggers proc-based
+          effects. A coefficient of 1.0 means full proc chance; 0.5 means the proc chance is halved.
+          Most single-projectile weapons have 1.0, but multi-hit weapons like Axe have ~0.7.
+        </p>
+      </details>
+
+      <details id="faq-which-items">
+        <summary>Which items can proc other items?</summary>
+        <p>
+          Only 8 items can proc other items: Energy Core, Mirror, and Cursed Doll (coefficient 1.0),
+          plus Cactus, Electric Plug, Holy Book, Shattered Knowledge, and Toxic Barrel (coefficient 0.5).
+          All other items can only be triggered by weapon attacks.
+        </p>
+      </details>
+
+      <details id="faq-lamp">
+        <summary>How does the Overpowered Lamp work?</summary>
+        <p>
+          The Lamp gives each on-hit proc one additional independent roll per lamp. A 40% chance
+          becomes two 40% rolls, yielding 64% chance of at least one proc. It doesn't simply double
+          the percentage — it adds an extra independent check.
+        </p>
+      </details>
+
+      <details id="faq-stacking">
+        <summary>Can proc items trigger themselves?</summary>
+        <p>
+          No. Even the 8 items that can proc other items cannot trigger themselves. A Holy Book cannot
+          proc another Holy Book — only other on-hit items like Moldy Cheese or Lightning Orb.
+        </p>
+      </details>
+
+      <details id="faq-weapon">
+        <summary>Why do multi-hit weapons have lower coefficients?</summary>
+        <p>
+          Multi-hit weapons (Axe, Aura, Black Hole) hit many enemies per attack cycle. Without a reduced
+          coefficient, they would trigger proc items far too many times, creating overpowered chain reactions.
+          The ~0.7 coefficient balances their high hit rate against proc synergy.
+        </p>
+      </details>
+    </section>
+
+    <!-- CTA -->
+    <section class="content-section" style="text-align: center;">
+      <h2>📚 Explore More Mechanics</h2>
+      <p>
+        Understanding proc coefficients unlocks advanced build strategies. Continue learning with our
+        other mechanics guides.
+      </p>
+      <div class="cta-buttons">
+        <a href="/guides/mechanics/scaling-types/" class="btn btn-primary">📏 Linear Scaling</a>
+        <a href="/guides/mechanics/damage-brackets/" class="btn btn-secondary">⚔️ Damage Brackets</a>
+        <a href="/database/items/" class="btn btn-secondary">💎 Items Database</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p>&copy; 2026 Megabonk.org - Unofficial Fan Resource</p>
+      <p style="margin-top:.5rem;">Not affiliated with the official Megabonk development team</p>
+      <p style="margin-top:1.5rem;">
+        <a href="https://megabonk.org/">Home</a> |
+        <a href="https://megabonk.org/database/">Database</a> |
+        <a href="https://megabonk.org/tier-lists/">Tier Lists</a> |
+        <a href="https://megabonk.org/guides/">Guides</a> |
+        <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      </p>
+      <p style="margin-top:1rem;font-size:.85rem;color:var(--text-muted)">Game assets and trademarks are property of
+        their respective owners</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.content-section, .item-card, .flow-diagram').forEach(el => {
+      el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+
+</html>

@@ -114,8 +114,15 @@
       --accent-pink: #e84393;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -127,7 +134,8 @@
 
     /* === Header === */
     header {
-      position: sticky; top: 0;
+      position: sticky;
+      top: 0;
       background: rgba(26, 26, 46, 0.95);
       backdrop-filter: blur(15px);
       z-index: 1000;
@@ -135,115 +143,286 @@
     }
 
     nav {
-      max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
-      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .logo {
-      font-size: 1.8rem; font-weight: 800; color: var(--primary);
-      text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .nav-links {
-      display: flex; list-style: none; gap: 1.5rem; align-items: center;
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
     }
 
     .nav-links a {
-      color: var(--text-light); text-decoration: none; font-weight: 500;
-      padding: 0.5rem 1rem; border-radius: 20px; transition: all 0.3s ease;
-      display: block; white-space: nowrap;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      display: block;
+      white-space: nowrap;
     }
 
-    .nav-links a:hover { color: var(--primary); background: rgba(255, 107, 53, 0.1); }
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(255, 107, 53, 0.1);
+    }
 
-    .dropdown { position: relative; }
-    .dropdown-toggle { cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
-    .dropdown-toggle::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s; }
-    .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+    }
+
+    .dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
 
     .dropdown-menu {
-      position: absolute; top: calc(100% + 0.5rem); left: 0; min-width: 200px;
-      background: rgba(26, 26, 46, 0.98); backdrop-filter: blur(15px);
-      border-radius: 12px; padding: 0.5rem 0;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid var(--border);
-      opacity: 0; visibility: hidden; transform: translateY(-10px);
-      transition: all 0.3s; z-index: 1000;
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      min-width: 200px;
+      background: rgba(26, 26, 46, 0.98);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 0.5rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s;
+      z-index: 1000;
     }
 
-    .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-    .dropdown-menu a { padding: 0.75rem 1.5rem; border-radius: 0; white-space: nowrap; }
-    .dropdown-menu a:hover { background: rgba(255, 107, 53, 0.15); color: var(--primary); }
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
 
-    .mobile-toggle { display: none; flex-direction: column; cursor: pointer; }
-    .bar { width: 25px; height: 3px; background: var(--primary); margin: 3px 0; transition: 0.3s; }
+    .dropdown-menu a {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(255, 107, 53, 0.15);
+      color: var(--primary);
+    }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      margin: 3px 0;
+      transition: 0.3s;
+    }
 
     /* === Breadcrumb === */
-    .breadcrumb { max-width: 1200px; margin: 0 auto; padding: 1.5rem 2rem 0.5rem; font-size: 0.9rem; }
-    .breadcrumb a { color: var(--primary); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb span { color: var(--text-muted); margin: 0 0.5rem; }
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 0.5rem;
+      font-size: 0.9rem;
+    }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      color: var(--text-muted);
+      margin: 0 0.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
 
     /* === Hero === */
     .page-hero {
       background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-      padding: 3rem 2rem; text-align: center;
+      padding: 3rem 2rem;
+      text-align: center;
     }
 
     .page-hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem); font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
       background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; line-height: 1.2; margin-bottom: 1rem;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 1rem;
     }
 
     .page-hero p {
-      font-size: 1.15rem; color: var(--text-muted);
-      max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.8;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
     }
 
     .hero-badge {
-      display: inline-block; background: rgba(255, 107, 53, 0.15);
-      color: var(--primary); padding: 0.5rem 1.2rem; border-radius: 20px;
-      font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border);
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.15);
+      color: var(--primary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
     }
 
     /* === Content Sections === */
     .content-section {
-      background: var(--card-bg); padding: 2.5rem; border-radius: 20px;
-      margin-bottom: 2rem; border: 1px solid var(--border); backdrop-filter: blur(15px);
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(15px);
     }
 
     .content-section h2 {
-      color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;
-      padding-bottom: 1rem; border-bottom: 2px solid var(--border);
-      display: flex; align-items: center; gap: 0.5rem;
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .content-section h3 { color: var(--accent-gold); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; }
-    .content-section p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
-    .content-section ul, .content-section ol { color: var(--text-muted); line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem; }
-    .content-section li { margin-bottom: 0.5rem; }
-    .content-section a { color: var(--primary); text-decoration: none; font-weight: 600; }
-    .content-section a:hover { text-decoration: underline; }
-    .content-section strong { color: var(--text-light); }
+    .content-section h3 {
+      color: var(--accent-gold);
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul,
+    .content-section ol {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .content-section a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .content-section a:hover {
+      text-decoration: underline;
+    }
+
+    .content-section strong {
+      color: var(--text-light);
+    }
 
     /* === Formula Box === */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 2px solid var(--primary);
-      border-radius: 15px; padding: 2rem; text-align: center;
-      margin: 2rem 0; position: relative; overflow: hidden;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
     }
 
     .formula-box::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
       background: linear-gradient(90deg, var(--primary), var(--accent-gold), var(--primary));
     }
 
-    .formula-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; }
-    .formula-text { font-family: 'Courier New', monospace; font-size: clamp(0.8rem, 2vw, 1.1rem); color: var(--accent-gold); font-weight: bold; line-height: 1.8; }
-    .formula-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem; font-style: italic; }
+    .formula-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    .formula-text {
+      font-family: 'Courier New', monospace;
+      font-size: clamp(0.8rem, 2vw, 1.1rem);
+      color: var(--accent-gold);
+      font-weight: bold;
+      line-height: 1.8;
+    }
+
+    .formula-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
 
     /* === Bracket Visualization === */
     .bracket-flow {
@@ -308,7 +487,9 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .bracket-items li:last-child { border-bottom: none; }
+    .bracket-items li:last-child {
+      border-bottom: none;
+    }
 
     .bracket-items a {
       color: var(--text-muted);
@@ -316,7 +497,9 @@
       transition: color 0.2s;
     }
 
-    .bracket-items a:hover { color: var(--primary); }
+    .bracket-items a:hover {
+      color: var(--primary);
+    }
 
     .multiply-symbol {
       font-size: 2rem;
@@ -328,37 +511,101 @@
     }
 
     /* Bracket colors */
-    .bracket-1 { border-color: var(--accent-red); }
-    .bracket-1 .bracket-header { color: var(--accent-red); }
-    .bracket-1 .bracket-number { background: var(--accent-red); }
+    .bracket-1 {
+      border-color: var(--accent-red);
+    }
 
-    .bracket-2 { border-color: var(--accent-purple); }
-    .bracket-2 .bracket-header { color: var(--accent-purple); }
-    .bracket-2 .bracket-number { background: var(--accent-purple); }
+    .bracket-1 .bracket-header {
+      color: var(--accent-red);
+    }
 
-    .bracket-3 { border-color: var(--accent-blue); }
-    .bracket-3 .bracket-header { color: var(--accent-blue); }
-    .bracket-3 .bracket-number { background: var(--accent-blue); }
+    .bracket-1 .bracket-number {
+      background: var(--accent-red);
+    }
 
-    .bracket-4 { border-color: var(--primary); }
-    .bracket-4 .bracket-header { color: var(--primary); }
-    .bracket-4 .bracket-number { background: var(--primary); }
+    .bracket-2 {
+      border-color: var(--accent-purple);
+    }
 
-    .bracket-5 { border-color: var(--accent-green); }
-    .bracket-5 .bracket-header { color: var(--accent-green); }
-    .bracket-5 .bracket-number { background: var(--accent-green); }
+    .bracket-2 .bracket-header {
+      color: var(--accent-purple);
+    }
 
-    .bracket-6 { border-color: var(--accent-gold); }
-    .bracket-6 .bracket-header { color: var(--accent-gold); }
-    .bracket-6 .bracket-number { background: var(--accent-gold); }
+    .bracket-2 .bracket-number {
+      background: var(--accent-purple);
+    }
 
-    .bracket-7 { border-color: var(--accent-cyan); }
-    .bracket-7 .bracket-header { color: var(--accent-cyan); }
-    .bracket-7 .bracket-number { background: var(--accent-cyan); }
+    .bracket-3 {
+      border-color: var(--accent-blue);
+    }
 
-    .bracket-8 { border-color: var(--accent-pink); }
-    .bracket-8 .bracket-header { color: var(--accent-pink); }
-    .bracket-8 .bracket-number { background: var(--accent-pink); }
+    .bracket-3 .bracket-header {
+      color: var(--accent-blue);
+    }
+
+    .bracket-3 .bracket-number {
+      background: var(--accent-blue);
+    }
+
+    .bracket-4 {
+      border-color: var(--primary);
+    }
+
+    .bracket-4 .bracket-header {
+      color: var(--primary);
+    }
+
+    .bracket-4 .bracket-number {
+      background: var(--primary);
+    }
+
+    .bracket-5 {
+      border-color: var(--accent-green);
+    }
+
+    .bracket-5 .bracket-header {
+      color: var(--accent-green);
+    }
+
+    .bracket-5 .bracket-number {
+      background: var(--accent-green);
+    }
+
+    .bracket-6 {
+      border-color: var(--accent-gold);
+    }
+
+    .bracket-6 .bracket-header {
+      color: var(--accent-gold);
+    }
+
+    .bracket-6 .bracket-number {
+      background: var(--accent-gold);
+    }
+
+    .bracket-7 {
+      border-color: var(--accent-cyan);
+    }
+
+    .bracket-7 .bracket-header {
+      color: var(--accent-cyan);
+    }
+
+    .bracket-7 .bracket-number {
+      background: var(--accent-cyan);
+    }
+
+    .bracket-8 {
+      border-color: var(--accent-pink);
+    }
+
+    .bracket-8 .bracket-header {
+      color: var(--accent-pink);
+    }
+
+    .bracket-8 .bracket-number {
+      background: var(--accent-pink);
+    }
 
     /* === Detailed Bracket Grid === */
     .bracket-detail-grid {
@@ -406,7 +653,9 @@
       align-items: center;
     }
 
-    .bracket-detail-card .item-list li:hover { background: rgba(255, 107, 53, 0.08); }
+    .bracket-detail-card .item-list li:hover {
+      background: rgba(255, 107, 53, 0.08);
+    }
 
     .item-effect {
       font-family: monospace;
@@ -426,19 +675,68 @@
 
     /* === Example Box === */
     .example-box {
-      background: rgba(0, 0, 0, 0.3); border-left: 4px solid var(--accent-blue);
-      border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
     }
-    .example-box .example-title { color: var(--accent-blue); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-    .example-box p { margin-bottom: 0.5rem; }
-    .example-box code { background: rgba(255,107,53,0.15); padding: 0.15rem 0.4rem; border-radius: 4px; font-family: monospace; color: var(--primary); }
+
+    .example-box .example-title {
+      color: var(--accent-blue);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .example-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    .example-box code {
+      background: rgba(255, 107, 53, 0.15);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--primary);
+    }
 
     /* === Tip/Warning Boxes === */
-    .tip-box { background: rgba(38,222,129,0.1); border-left: 4px solid var(--accent-green); border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0; }
-    .tip-box .tip-title { color: var(--accent-green); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .tip-box {
+      background: rgba(38, 222, 129, 0.1);
+      border-left: 4px solid var(--accent-green);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
 
-    .warning-box { background: rgba(231,76,60,0.1); border-left: 4px solid #e74c3c; border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0; }
-    .warning-box .warning-title { color: #e74c3c; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .tip-box .tip-title {
+      color: var(--accent-green);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .warning-box {
+      background: rgba(231, 76, 60, 0.1);
+      border-left: 4px solid #e74c3c;
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .warning-box .warning-title {
+      color: #e74c3c;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
     /* === Calculation Demo === */
     .calc-demo {
@@ -493,45 +791,178 @@
 
     /* === FAQ === */
     .faq-section details {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 12px; margin-bottom: 1rem; padding: 1.5rem;
-      cursor: pointer; transition: all 0.3s;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
     }
-    .faq-section details:hover { background: rgba(255,255,255,0.12); border-color: var(--primary); }
-    .faq-section summary { font-size: 1.1rem; font-weight: 600; color: var(--text-light); list-style: none; display: flex; align-items: center; gap: 1rem; }
-    .faq-section summary::before { content: '▶'; color: var(--primary); font-size: 0.9rem; transition: transform 0.3s; }
-    .faq-section details[open] summary::before { transform: rotate(90deg); }
-    .faq-section p { margin-top: 1rem; color: var(--text-muted); line-height: 1.8; padding-left: 2rem; }
+
+    .faq-section details:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--primary);
+    }
+
+    .faq-section summary {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .faq-section summary::before {
+      content: '▶';
+      color: var(--primary);
+      font-size: 0.9rem;
+      transition: transform 0.3s;
+    }
+
+    .faq-section details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding-left: 2rem;
+    }
 
     /* === CTA === */
-    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; justify-content: center; }
-    .btn { padding: 0.9rem 2rem; border: none; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
-    .btn-primary { background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 4px 15px rgba(255,107,53,0.4); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,107,53,0.6); }
-    .btn-secondary { background: transparent; color: var(--text-light); border: 2px solid var(--primary); }
-    .btn-secondary:hover { background: var(--primary); transform: translateY(-3px); }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
 
     /* === Footer === */
-    footer { background: rgba(15,20,25,0.95); padding: 2rem; text-align: center; margin-top: 4rem; border-top: 2px solid var(--border); }
-    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
-    footer a:hover { color: var(--primary); }
+    footer {
+      background: rgba(15, 20, 25, 0.95);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-top: 2px solid var(--border);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
 
     /* === Responsive === */
     @media (max-width: 768px) {
-      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(26,26,46,0.98); flex-direction: column; padding: 2rem; backdrop-filter: blur(20px); border-top: 1px solid var(--border); }
-      .nav-links.active { display: flex; }
-      .mobile-toggle { display: flex; }
-      .content-section { padding: 1.5rem; }
-      .bracket-flow { flex-direction: column; }
-      .multiply-symbol { transform: rotate(90deg); }
-      .bracket-card { max-width: 100%; }
-      .bracket-detail-grid { grid-template-columns: 1fr; }
-      .cta-buttons { flex-direction: column; align-items: center; }
-      .btn { width: 100%; max-width: 300px; justify-content: center; }
-      .calc-row { flex-direction: column; align-items: flex-start; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 46, 0.98);
+        flex-direction: column;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .content-section {
+        padding: 1.5rem;
+      }
+
+      .bracket-flow {
+        flex-direction: column;
+      }
+
+      .multiply-symbol {
+        transform: rotate(90deg);
+      }
+
+      .bracket-card {
+        max-width: 100%;
+      }
+
+      .bracket-detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .calc-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
-    a:focus, .btn:focus, details:focus { outline: 3px solid var(--primary); outline-offset: 3px; }
+    a:focus,
+    .btn:focus,
+    details:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
   </style>
 </head>
 
@@ -542,7 +973,9 @@
     <nav>
       <a href="https://megabonk.org/" class="logo"><span>🎮</span><span>Megabonk.org</span></a>
       <div class="mobile-toggle" onclick="toggleMenu()">
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
       </div>
       <ul class="nav-links" id="navLinks">
         <li><a href="/guides/builds/">Builds</a></li>
@@ -583,7 +1016,7 @@
     <p>
       In Megabonk, damage bonuses don't simply "add together." They are grouped into <strong>brackets</strong>:
       bonuses within the <em>same</em> bracket combine additively, but <strong>different brackets multiply with
-      each other</strong>. Understanding this system is the key to massive DPS.
+        each other</strong>. Understanding this system is the key to massive DPS.
     </p>
     <span class="hero-badge">⚔️ GAME MECHANICS • DAMAGE FORMULA</span>
   </section>
@@ -593,8 +1026,8 @@
 
     <!-- Ad slot -->
     <div style="margin: 1.5rem auto; text-align: center;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920"
-        data-ad-slot="7242990417" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920" data-ad-slot="7242990417"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
@@ -605,8 +1038,10 @@
         Megabonk's damage system uses <strong>8 independent brackets</strong>. The rule is simple:
       </p>
       <ul>
-        <li><strong>Inside the same bracket</strong> → bonuses <strong>add</strong> together (additive, <a href="/guides/mechanics/scaling-types/">linear scaling</a>)</li>
-        <li><strong>Between different brackets</strong> → totals <strong>multiply</strong> each other (multiplicative)</li>
+        <li><strong>Inside the same bracket</strong> → bonuses <strong>add</strong> together (additive, <a
+            href="/guides/mechanics/scaling-types/">linear scaling</a>)</li>
+        <li><strong>Between different brackets</strong> → totals <strong>multiply</strong> each other (multiplicative)
+        </li>
       </ul>
 
       <div class="formula-box">
@@ -622,7 +1057,8 @@
           × (1 + Corrupted Sword)<br>
           × Giant Fork Megacrit
         </div>
-        <div class="formula-note">Each line is a separate bracket. Items within each bracket add together first, then all brackets multiply.</div>
+        <div class="formula-note">Each line is a separate bracket. Items within each bracket add together first, then
+          all brackets multiply.</div>
       </div>
 
       <div class="tip-box">
@@ -631,7 +1067,7 @@
           Having <code>+50%</code> in Bracket A and <code>+50%</code> in Bracket B gives
           <strong>1.5 × 1.5 = 2.25×</strong> total damage. But stacking <code>+100%</code> in just
           one bracket gives only <strong>1 + 1.0 = 2.0×</strong>. <strong>Spreading bonuses across
-          brackets always wins.</strong>
+            brackets always wins.</strong>
         </p>
       </div>
     </section>
@@ -696,8 +1132,10 @@
             Main "Damage %" Bracket
           </h3>
           <ul class="item-list">
-            <li><a href="/database/items/tactical-glasses">Tactical Glasses</a> <span class="item-effect">+20% to &gt;90% HP</span></li>
-            <li><a href="/database/items/boss-buster">Boss Buster</a> <span class="item-effect">+15% Elite/Boss</span></li>
+            <li><a href="/database/items/tactical-glasses">Tactical Glasses</a> <span class="item-effect">+20% to
+                &gt;90% HP</span></li>
+            <li><a href="/database/items/boss-buster">Boss Buster</a> <span class="item-effect">+15% Elite/Boss</span>
+            </li>
             <li>Credit Card (Red) <span class="item-effect">+2.5%/chest</span></li>
             <li>Beer <span class="item-effect">+% Damage</span></li>
             <li>Phantom Shroud <span class="item-effect">2× after evade</span></li>
@@ -945,7 +1383,7 @@
   <!-- Footer -->
   <footer>
     <div style="max-width: 1200px; margin: 0 auto;">
-      <p>&copy; 2025 Megabonk.org - Unofficial Fan Resource</p>
+      <p>&copy; 2026 Megabonk.org - Unofficial Fan Resource</p>
       <p style="margin-top:.5rem;">Not affiliated with the official Megabonk development team</p>
       <p style="margin-top:1.5rem;">
         <a href="https://megabonk.org/">Home</a> |
