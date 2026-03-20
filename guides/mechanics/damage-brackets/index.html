@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Megabonk Damage Brackets Explained — How Damage Multipliers Stack (2026)</title>
+  <meta name="description"
+    content="Complete guide to Megabonk Damage Brackets. Learn how bonuses multiply between brackets, which items share a bracket, and how to maximize your DPS.">
+  <meta name="keywords"
+    content="Megabonk damage brackets, Megabonk damage formula, Megabonk damage calculation, multiplicative stacking, damage multipliers Megabonk">
+  <link rel="canonical" href="https://megabonk.org/guides/mechanics/damage-brackets/">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+    crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Megabonk Damage Brackets Explained — Multiplier Stacking Guide 2026">
+  <meta property="og:description"
+    content="Master Megabonk's damage formula. 8 brackets, multiplicative stacking, item-to-bracket mapping, and DPS optimization tips.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://megabonk.org/guides/mechanics/damage-brackets/">
+  <meta property="og:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Megabonk Damage Brackets — How Damage Really Works">
+  <meta name="twitter:description"
+    content="8 damage brackets × multiplicative stacking. Full item mapping and DPS optimization guide.">
+  <meta name="twitter:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Megabonk Damage Brackets Explained — How Damage Multipliers Stack",
+    "description": "Complete guide to Megabonk's damage bracket system. Learn how bonuses are grouped, why brackets multiply, and how to optimize your build for maximum DPS.",
+    "url": "https://megabonk.org/guides/mechanics/damage-brackets/",
+    "datePublished": "2026-03-20",
+    "dateModified": "2026-03-20",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Megabonk.org",
+      "url": "https://megabonk.org"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://megabonk.org/guides/mechanics/damage-brackets/"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are Damage Brackets in Megabonk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Damage Brackets are groups of damage bonuses that interact differently. Items inside the same bracket combine additively (add together), while different brackets multiply with each other. This means spreading bonuses across multiple brackets yields significantly more damage than stacking them all in one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many Damage Brackets are there in Megabonk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There are 8 known Damage Brackets: Damage Tome, Noelle's Passive, Flat Damage Upgrades (Gym Sauce, Brass Knuckles, Idle Juice), Main Damage % bracket (11 items), Speedy Boi, Elite Damage (Chaos Tome/Dicehead/Shrines), Corrupted Sword, and Giant Fork Megacrit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is spreading damage across brackets better than stacking one bracket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because brackets multiply together. Having +50% in Bracket A and +50% in Bracket B gives 1.5 × 1.5 = 2.25× total damage. But stacking +100% in just one bracket gives only 1 + 1.0 = 2.0× total damage. Multiplicative stacking always wins."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #ff6b35;
+      --primary-dark: #e55a2b;
+      --bg-dark: #1a1a2e;
+      --bg-darker: #16213e;
+      --text-light: #ffffff;
+      --text-muted: #cccccc;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 107, 53, 0.2);
+      --accent-green: #26de81;
+      --accent-blue: #3498db;
+      --accent-purple: #9b59b6;
+      --accent-gold: #ffd700;
+      --accent-red: #e74c3c;
+      --accent-cyan: #00d2d3;
+      --accent-pink: #e84393;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-light);
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+      min-height: 100vh;
+    }
+
+    /* === Header === */
+    header {
+      position: sticky; top: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    nav {
+      max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem; font-weight: 800; color: var(--primary);
+      text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex; list-style: none; gap: 1.5rem; align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-light); text-decoration: none; font-weight: 500;
+      padding: 0.5rem 1rem; border-radius: 20px; transition: all 0.3s ease;
+      display: block; white-space: nowrap;
+    }
+
+    .nav-links a:hover { color: var(--primary); background: rgba(255, 107, 53, 0.1); }
+
+    .dropdown { position: relative; }
+    .dropdown-toggle { cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+    .dropdown-toggle::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s; }
+    .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 0.5rem); left: 0; min-width: 200px;
+      background: rgba(26, 26, 46, 0.98); backdrop-filter: blur(15px);
+      border-radius: 12px; padding: 0.5rem 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid var(--border);
+      opacity: 0; visibility: hidden; transform: translateY(-10px);
+      transition: all 0.3s; z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu a { padding: 0.75rem 1.5rem; border-radius: 0; white-space: nowrap; }
+    .dropdown-menu a:hover { background: rgba(255, 107, 53, 0.15); color: var(--primary); }
+
+    .mobile-toggle { display: none; flex-direction: column; cursor: pointer; }
+    .bar { width: 25px; height: 3px; background: var(--primary); margin: 3px 0; transition: 0.3s; }
+
+    /* === Breadcrumb === */
+    .breadcrumb { max-width: 1200px; margin: 0 auto; padding: 1.5rem 2rem 0.5rem; font-size: 0.9rem; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: var(--text-muted); margin: 0 0.5rem; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+    /* === Hero === */
+    .page-hero {
+      background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+      padding: 3rem 2rem; text-align: center;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 900;
+      background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.2; margin-bottom: 1rem;
+    }
+
+    .page-hero p {
+      font-size: 1.15rem; color: var(--text-muted);
+      max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.8;
+    }
+
+    .hero-badge {
+      display: inline-block; background: rgba(255, 107, 53, 0.15);
+      color: var(--primary); padding: 0.5rem 1.2rem; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border);
+    }
+
+    /* === Content Sections === */
+    .content-section {
+      background: var(--card-bg); padding: 2.5rem; border-radius: 20px;
+      margin-bottom: 2rem; border: 1px solid var(--border); backdrop-filter: blur(15px);
+    }
+
+    .content-section h2 {
+      color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;
+      padding-bottom: 1rem; border-bottom: 2px solid var(--border);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .content-section h3 { color: var(--accent-gold); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; }
+    .content-section p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+    .content-section ul, .content-section ol { color: var(--text-muted); line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem; }
+    .content-section li { margin-bottom: 0.5rem; }
+    .content-section a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .content-section a:hover { text-decoration: underline; }
+    .content-section strong { color: var(--text-light); }
+
+    /* === Formula Box === */
+    .formula-box {
+      background: rgba(0, 0, 0, 0.4); border: 2px solid var(--primary);
+      border-radius: 15px; padding: 2rem; text-align: center;
+      margin: 2rem 0; position: relative; overflow: hidden;
+    }
+
+    .formula-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent-gold), var(--primary));
+    }
+
+    .formula-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; }
+    .formula-text { font-family: 'Courier New', monospace; font-size: clamp(0.8rem, 2vw, 1.1rem); color: var(--accent-gold); font-weight: bold; line-height: 1.8; }
+    .formula-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem; font-style: italic; }
+
+    /* === Bracket Visualization === */
+    .bracket-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .bracket-card {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 2px solid;
+      min-width: 200px;
+      max-width: 280px;
+      flex: 1;
+      transition: all 0.3s ease;
+    }
+
+    .bracket-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .bracket-card .bracket-header {
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bracket-card .bracket-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .bracket-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .bracket-items li {
+      padding: 0.35rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .bracket-items li:last-child { border-bottom: none; }
+
+    .bracket-items a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .bracket-items a:hover { color: var(--primary); }
+
+    .multiply-symbol {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--primary);
+      flex-shrink: 0;
+      text-align: center;
+      min-width: 30px;
+    }
+
+    /* Bracket colors */
+    .bracket-1 { border-color: var(--accent-red); }
+    .bracket-1 .bracket-header { color: var(--accent-red); }
+    .bracket-1 .bracket-number { background: var(--accent-red); }
+
+    .bracket-2 { border-color: var(--accent-purple); }
+    .bracket-2 .bracket-header { color: var(--accent-purple); }
+    .bracket-2 .bracket-number { background: var(--accent-purple); }
+
+    .bracket-3 { border-color: var(--accent-blue); }
+    .bracket-3 .bracket-header { color: var(--accent-blue); }
+    .bracket-3 .bracket-number { background: var(--accent-blue); }
+
+    .bracket-4 { border-color: var(--primary); }
+    .bracket-4 .bracket-header { color: var(--primary); }
+    .bracket-4 .bracket-number { background: var(--primary); }
+
+    .bracket-5 { border-color: var(--accent-green); }
+    .bracket-5 .bracket-header { color: var(--accent-green); }
+    .bracket-5 .bracket-number { background: var(--accent-green); }
+
+    .bracket-6 { border-color: var(--accent-gold); }
+    .bracket-6 .bracket-header { color: var(--accent-gold); }
+    .bracket-6 .bracket-number { background: var(--accent-gold); }
+
+    .bracket-7 { border-color: var(--accent-cyan); }
+    .bracket-7 .bracket-header { color: var(--accent-cyan); }
+    .bracket-7 .bracket-number { background: var(--accent-cyan); }
+
+    .bracket-8 { border-color: var(--accent-pink); }
+    .bracket-8 .bracket-header { color: var(--accent-pink); }
+    .bracket-8 .bracket-number { background: var(--accent-pink); }
+
+    /* === Detailed Bracket Grid === */
+    .bracket-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .bracket-detail-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .bracket-detail-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .bracket-detail-card h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bracket-detail-card .item-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0 0;
+    }
+
+    .bracket-detail-card .item-list li {
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 0.35rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bracket-detail-card .item-list li:hover { background: rgba(255, 107, 53, 0.08); }
+
+    .item-effect {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--accent-green);
+      white-space: nowrap;
+    }
+
+    .solo-bracket {
+      font-size: 0.75rem;
+      background: rgba(255, 107, 53, 0.2);
+      color: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    /* === Example Box === */
+    .example-box {
+      background: rgba(0, 0, 0, 0.3); border-left: 4px solid var(--accent-blue);
+      border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0;
+    }
+    .example-box .example-title { color: var(--accent-blue); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .example-box p { margin-bottom: 0.5rem; }
+    .example-box code { background: rgba(255,107,53,0.15); padding: 0.15rem 0.4rem; border-radius: 4px; font-family: monospace; color: var(--primary); }
+
+    /* === Tip/Warning Boxes === */
+    .tip-box { background: rgba(38,222,129,0.1); border-left: 4px solid var(--accent-green); border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0; }
+    .tip-box .tip-title { color: var(--accent-green); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    .warning-box { background: rgba(231,76,60,0.1); border-left: 4px solid #e74c3c; border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0; }
+    .warning-box .warning-title { color: #e74c3c; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* === Calculation Demo === */
+    .calc-demo {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+    }
+
+    .calc-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .calc-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      min-width: 140px;
+    }
+
+    .calc-value {
+      font-family: monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .calc-operator {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .calc-result {
+      border-top: 2px solid var(--primary);
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .calc-result .calc-value {
+      background: rgba(255, 107, 53, 0.2);
+      color: var(--primary);
+      font-size: 1.3rem;
+    }
+
+    /* === FAQ === */
+    .faq-section details {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 1rem; padding: 1.5rem;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .faq-section details:hover { background: rgba(255,255,255,0.12); border-color: var(--primary); }
+    .faq-section summary { font-size: 1.1rem; font-weight: 600; color: var(--text-light); list-style: none; display: flex; align-items: center; gap: 1rem; }
+    .faq-section summary::before { content: '▶'; color: var(--primary); font-size: 0.9rem; transition: transform 0.3s; }
+    .faq-section details[open] summary::before { transform: rotate(90deg); }
+    .faq-section p { margin-top: 1rem; color: var(--text-muted); line-height: 1.8; padding-left: 2rem; }
+
+    /* === CTA === */
+    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; justify-content: center; }
+    .btn { padding: 0.9rem 2rem; border: none; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
+    .btn-primary { background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 4px 15px rgba(255,107,53,0.4); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,107,53,0.6); }
+    .btn-secondary { background: transparent; color: var(--text-light); border: 2px solid var(--primary); }
+    .btn-secondary:hover { background: var(--primary); transform: translateY(-3px); }
+
+    /* === Footer === */
+    footer { background: rgba(15,20,25,0.95); padding: 2rem; text-align: center; margin-top: 4rem; border-top: 2px solid var(--border); }
+    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--primary); }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(26,26,46,0.98); flex-direction: column; padding: 2rem; backdrop-filter: blur(20px); border-top: 1px solid var(--border); }
+      .nav-links.active { display: flex; }
+      .mobile-toggle { display: flex; }
+      .content-section { padding: 1.5rem; }
+      .bracket-flow { flex-direction: column; }
+      .multiply-symbol { transform: rotate(90deg); }
+      .bracket-card { max-width: 100%; }
+      .bracket-detail-grid { grid-template-columns: 1fr; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 300px; justify-content: center; }
+      .calc-row { flex-direction: column; align-items: flex-start; }
+    }
+
+    a:focus, .btn:focus, details:focus { outline: 3px solid var(--primary); outline-offset: 3px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo"><span>🎮</span><span>Megabonk.org</span></a>
+      <div class="mobile-toggle" onclick="toggleMenu()">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/guides/builds/">Builds</a></li>
+        <li class="dropdown">
+          <a href="/tier-lists/" class="dropdown-toggle">Tier Lists</a>
+          <div class="dropdown-menu">
+            <a href="/guides/characters/character-tier-list-2025.html">🏆 Characters</a>
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/tier-lists/items/">💎 Items</a>
+            <a href="/tier-lists/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/database/" class="dropdown-toggle">Items</a>
+          <div class="dropdown-menu">
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/database/items/">💎 Items</a>
+            <a href="/database/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li><a href="/guides/characters/">Characters</a></li>
+        <li><a href="/leaderboard/">Leaderboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="https://megabonk.org/">Home</a><span>›</span>
+    <a href="https://megabonk.org/guides/">Guides</a><span>›</span>
+    <a href="https://megabonk.org/guides/mechanics/scaling-types/">Mechanics</a><span>›</span>
+    <span>Damage Brackets</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <h1>Damage Brackets in Megabonk — How Multipliers Really Stack</h1>
+    <p>
+      In Megabonk, damage bonuses don't simply "add together." They are grouped into <strong>brackets</strong>:
+      bonuses within the <em>same</em> bracket combine additively, but <strong>different brackets multiply with
+      each other</strong>. Understanding this system is the key to massive DPS.
+    </p>
+    <span class="hero-badge">⚔️ GAME MECHANICS • DAMAGE FORMULA</span>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Ad slot -->
+    <div style="margin: 1.5rem auto; text-align: center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920"
+        data-ad-slot="7242990417" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Section 1: Core Concept -->
+    <section class="content-section">
+      <h2>📐 The Core Rule</h2>
+      <p>
+        Megabonk's damage system uses <strong>8 independent brackets</strong>. The rule is simple:
+      </p>
+      <ul>
+        <li><strong>Inside the same bracket</strong> → bonuses <strong>add</strong> together (additive, <a href="/guides/mechanics/scaling-types/">linear scaling</a>)</li>
+        <li><strong>Between different brackets</strong> → totals <strong>multiply</strong> each other (multiplicative)</li>
+      </ul>
+
+      <div class="formula-box">
+        <div class="formula-label">Damage Formula (Simplified)</div>
+        <div class="formula-text">
+          Final Damage = Base<br>
+          × (1 + Tome)<br>
+          × (1 + Noelle)<br>
+          × (1 + Flat Damage Items)<br>
+          × (1 + Main Damage %)<br>
+          × (1 + Speedy Boi)<br>
+          × (1 + Elite Damage)<br>
+          × (1 + Corrupted Sword)<br>
+          × Giant Fork Megacrit
+        </div>
+        <div class="formula-note">Each line is a separate bracket. Items within each bracket add together first, then all brackets multiply.</div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-title">💡 Why This Matters</div>
+        <p>
+          Having <code>+50%</code> in Bracket A and <code>+50%</code> in Bracket B gives
+          <strong>1.5 × 1.5 = 2.25×</strong> total damage. But stacking <code>+100%</code> in just
+          one bracket gives only <strong>1 + 1.0 = 2.0×</strong>. <strong>Spreading bonuses across
+          brackets always wins.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: Visual Bracket Map -->
+    <section class="content-section">
+      <h2>🗺️ All 8 Damage Brackets — Visual Map</h2>
+      <p>Below is the complete mapping of every known damage bracket and its associated items:</p>
+
+      <div class="bracket-detail-grid">
+
+        <!-- Bracket 1: Damage Tome -->
+        <div class="bracket-detail-card" style="border-color: var(--accent-red);">
+          <h3 style="color: var(--accent-red);">
+            <span class="bracket-number" style="background: var(--accent-red);">1</span>
+            Damage Tome
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Your Tome's damage multiplier. Acts as an independent multiplier on all weapon damage.
+          </p>
+          <span class="solo-bracket">SOLO BRACKET</span>
+        </div>
+
+        <!-- Bracket 2: Noelle's Passive -->
+        <div class="bracket-detail-card" style="border-color: var(--accent-purple);">
+          <h3 style="color: var(--accent-purple);">
+            <span class="bracket-number" style="background: var(--accent-purple);">2</span>
+            Noelle's Passive
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Character-specific damage bonus from Noelle's passive ability. Multiplies independently.
+          </p>
+          <span class="solo-bracket">CHARACTER-SPECIFIC</span>
+        </div>
+
+        <!-- Bracket 3: Flat Damage Upgrades -->
+        <div class="bracket-detail-card" style="border-color: var(--accent-blue);">
+          <h3 style="color: var(--accent-blue);">
+            <span class="bracket-number" style="background: var(--accent-blue);">3</span>
+            Flat Damage Upgrades
+          </h3>
+          <ul class="item-list">
+            <li>
+              <a href="/database/items/gym-sauce">Gym Sauce</a>
+              <span class="item-effect">+10% Damage</span>
+            </li>
+            <li>
+              <a href="/database/items/brass-knuckles">Brass Knuckles</a>
+              <span class="item-effect">+Flat Damage</span>
+            </li>
+            <li>
+              Idle Juice
+              <span class="item-effect">+% Idle Damage</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Bracket 4: Main Damage % -->
+        <div class="bracket-detail-card" style="border-color: var(--primary);">
+          <h3 style="color: var(--primary);">
+            <span class="bracket-number" style="background: var(--primary);">4</span>
+            Main "Damage %" Bracket
+          </h3>
+          <ul class="item-list">
+            <li><a href="/database/items/tactical-glasses">Tactical Glasses</a> <span class="item-effect">+20% to &gt;90% HP</span></li>
+            <li><a href="/database/items/boss-buster">Boss Buster</a> <span class="item-effect">+15% Elite/Boss</span></li>
+            <li>Credit Card (Red) <span class="item-effect">+2.5%/chest</span></li>
+            <li>Beer <span class="item-effect">+% Damage</span></li>
+            <li>Phantom Shroud <span class="item-effect">2× after evade</span></li>
+            <li><a href="/database/items/beefy-ring">Beefy Ring</a> <span class="item-effect">+20%/100 HP</span></li>
+            <li>Scarf <span class="item-effect">+33% airborne</span></li>
+            <li>Gamer Goggles <span class="item-effect">up to +100% low HP</span></li>
+            <li>Eagle Claw <span class="item-effect">+66% to airborne</span></li>
+            <li>Demonic Soul <span class="item-effect">+0.1%/kill cap 100%</span></li>
+            <li>Joe's Dagger <span class="item-effect">+1%/execute</span></li>
+          </ul>
+        </div>
+
+        <!-- Bracket 5: Speedy Boi -->
+        <div class="bracket-detail-card" style="border-color: var(--accent-green);">
+          <h3 style="color: var(--accent-green);">
+            <span class="bracket-number" style="background: var(--accent-green);">5</span>
+            Speedy Boi
+          </h3>
+          <ul class="item-list">
+            <li>
+              Speed Boi
+              <span class="item-effect">+% Damage by speed</span>
+            </li>
+          </ul>
+          <span class="solo-bracket" style="margin-top: 0.5rem; display: inline-block;">SOLO ITEM BRACKET</span>
+        </div>
+
+        <!-- Bracket 6: Elite Damage -->
+        <div class="bracket-detail-card" style="border-color: var(--accent-gold);">
+          <h3 style="color: var(--accent-gold);">
+            <span class="bracket-number" style="background: var(--accent-gold);">6</span>
+            Elite Damage
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Damage bonuses specifically against elite enemies, from multiple sources:
+          </p>
+          <ul class="item-list">
+            <li>Chaos Tome <span class="item-effect">Elite bonus</span></li>
+            <li>Dicehead <span class="item-effect">Elite bonus</span></li>
+            <li>Charge Shrines <span class="item-effect">Elite bonus</span></li>
+          </ul>
+        </div>
+
+        <!-- Bracket 7: Corrupted Sword -->
+        <div class="bracket-detail-card" style="border-color: var(--accent-cyan);">
+          <h3 style="color: var(--accent-cyan);">
+            <span class="bracket-number" style="background: var(--accent-cyan);">7</span>
+            Corrupted Sword
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Damage multiplier from the Corrupted Sword weapon/modifier. Exists in its own bracket.
+          </p>
+          <span class="solo-bracket">SOLO BRACKET</span>
+        </div>
+
+        <!-- Bracket 8: Giant Fork Megacrit -->
+        <div class="bracket-detail-card" style="border-color: var(--accent-pink);">
+          <h3 style="color: var(--accent-pink);">
+            <span class="bracket-number" style="background: var(--accent-pink);">8</span>
+            Giant Fork Megacrit
+          </h3>
+          <ul class="item-list">
+            <li>
+              <a href="/database/items/giant-fork">Giant Fork</a>
+              <span class="item-effect">Megacrit ×</span>
+            </li>
+          </ul>
+          <span class="solo-bracket" style="margin-top: 0.5rem; display: inline-block;">MEGACRIT MULTIPLIER</span>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <div class="warning-title">⚠️ The Main Bracket Is Crowded</div>
+        <p>
+          Bracket 4 (Main "Damage %") has <strong>11 items</strong> — the most of any bracket.
+          Because items within the same bracket only add together, stacking many items in this bracket
+          has diminishing returns relative to investing in other brackets. A single item in a solo bracket
+          (like Speedy Boi or Giant Fork) can be more impactful than adding another item to the main bracket.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Worked Example -->
+    <section class="content-section">
+      <h2>🧮 Worked Example: Multi-Bracket vs Single-Bracket</h2>
+      <p>Let's compare two scenarios to show why bracket diversity matters:</p>
+
+      <div class="calc-demo">
+        <h3 style="color: var(--accent-green); margin-bottom: 1rem;">✅ Scenario A: Spread Across 3 Brackets</h3>
+        <div class="calc-row">
+          <span class="calc-label">Base Damage:</span>
+          <span class="calc-value" style="background: rgba(255,255,255,0.1); color: var(--text-light);">100</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Bracket 3 (Gym Sauce ×3):</span>
+          <span class="calc-value" style="background: rgba(52,152,219,0.2); color: var(--accent-blue);">× 1.30</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">(+30%)</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Bracket 4 (Boss Buster ×2):</span>
+          <span class="calc-value" style="background: rgba(255,107,53,0.2); color: var(--primary);">× 1.30</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">(+30%)</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Bracket 5 (Speedy Boi):</span>
+          <span class="calc-value" style="background: rgba(38,222,129,0.2); color: var(--accent-green);">× 1.40</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">(+40%)</span>
+        </div>
+        <div class="calc-row calc-result">
+          <span class="calc-label"><strong>Total Damage:</strong></span>
+          <span class="calc-value">236.6</span>
+          <span style="font-size: 0.9rem; color: var(--accent-green); font-weight: 700;">= 2.37× multiplier</span>
+        </div>
+      </div>
+
+      <div class="calc-demo">
+        <h3 style="color: var(--accent-red); margin-bottom: 1rem;">❌ Scenario B: All in One Bracket</h3>
+        <div class="calc-row">
+          <span class="calc-label">Base Damage:</span>
+          <span class="calc-value" style="background: rgba(255,255,255,0.1); color: var(--text-light);">100</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Bracket 4 only (+100% total):</span>
+          <span class="calc-value" style="background: rgba(255,107,53,0.2); color: var(--primary);">× 2.00</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">(+100% additive)</span>
+        </div>
+        <div class="calc-row calc-result">
+          <span class="calc-label"><strong>Total Damage:</strong></span>
+          <span class="calc-value">200</span>
+          <span style="font-size: 0.9rem; color: var(--accent-red); font-weight: 700;">= 2.0× multiplier</span>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-title">📊 Result: Same +100% bonus total</div>
+        <p>
+          Scenario A spreads +100% across 3 brackets → <strong>2.37× damage</strong><br>
+          Scenario B dumps +100% in one bracket → <strong>2.0× damage</strong><br>
+          <strong>That's 18.5% more damage just from bracket diversity!</strong>
+          The gap gets even wider as you stack more bonuses.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 4: Build Tips -->
+    <section class="content-section">
+      <h2>🧠 Build Optimization Tips</h2>
+
+      <h3>1. Prioritize Solo-Bracket Items</h3>
+      <p>
+        Items that sit alone in their own bracket (like <strong>Speedy Boi</strong>, <strong>Giant Fork</strong>,
+        <strong>Corrupted Sword</strong>) are extremely efficient because their bonus multiplies independently with
+        everything else in your build. Even a small bonus in a solo bracket can outperform a larger bonus in the
+        crowded main bracket.
+      </p>
+
+      <h3>2. Don't Over-Invest in Bracket 4</h3>
+      <p>
+        The Main "Damage %" bracket already has 11 items competing. Each new item you add there only
+        contributes additively alongside all your existing bonuses. Instead, look for items in Brackets 1, 3, 5, or 8
+        to create multiplicative synergy.
+      </p>
+
+      <h3>3. Damage Tome Is Always Multiplicative</h3>
+      <p>
+        Your <strong>Damage Tome</strong> choice is critical because it's always in its own bracket.
+        A tome with a strong damage multiplier effectively multiplies ALL your other item bonuses.
+        Choose your tome wisely — see our <a href="/guides/best-tomes/">Best Tomes guide</a>.
+      </p>
+
+      <h3>4. Elite Damage Is a Separate Multiplier</h3>
+      <p>
+        For boss-focused builds, remember that the Elite Damage bracket (Chaos Tome, Dicehead passive, Shrines)
+        multiplies <em>after</em> all other brackets. This makes it especially powerful as a final multiplier
+        on top of an already optimized build.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="content-section faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <details id="faq-what-are">
+        <summary>What are Damage Brackets in Megabonk?</summary>
+        <p>
+          Damage Brackets are groups of damage bonuses that interact differently. Items inside the same bracket
+          combine additively (add together), while different brackets multiply with each other. This means
+          spreading bonuses across multiple brackets yields significantly more damage than stacking them all in one.
+        </p>
+      </details>
+
+      <details id="faq-how-many">
+        <summary>How many Damage Brackets are there?</summary>
+        <p>
+          There are 8 known Damage Brackets: Damage Tome, Noelle's Passive, Flat Damage Upgrades
+          (Gym Sauce / Brass Knuckles / Idle Juice), Main Damage % (11 items), Speedy Boi, Elite Damage
+          (Chaos Tome / Dicehead / Shrines), Corrupted Sword, and Giant Fork Megacrit.
+        </p>
+      </details>
+
+      <details id="faq-why-spread">
+        <summary>Why is spreading damage across brackets better?</summary>
+        <p>
+          Because brackets multiply together. Having +50% in Bracket A and +50% in Bracket B gives
+          1.5 × 1.5 = 2.25× total damage. But stacking +100% in just one bracket gives only
+          1 + 1.0 = 2.0× total damage. The multiplicative effect always outperforms pure additive stacking.
+        </p>
+      </details>
+
+      <details id="faq-crit">
+        <summary>How do crits interact with Damage Brackets?</summary>
+        <p>
+          Critical hits are applied <em>after</em> the full bracket calculation. The formula multiplies
+          your final bracket-computed damage by (Number of Crits × Crit Damage Multiplier).
+          This means crit builds benefit enormously from having strong bracket diversity underneath.
+        </p>
+      </details>
+
+      <details id="faq-where-crit">
+        <summary>Does Boss Buster stack with Tactical Glasses?</summary>
+        <p>
+          Yes, but only <strong>additively</strong> — they both sit in the same Main "Damage %" bracket
+          (Bracket 4). If you have Boss Buster (+15%) and Tactical Glasses (+20%), that bracket's total is
+          +35%, not 1.15 × 1.20. To get multiplicative synergy, pair them with items from
+          <em>different</em> brackets.
+        </p>
+      </details>
+    </section>
+
+    <!-- CTA -->
+    <section class="content-section" style="text-align: center;">
+      <h2>📚 Explore More Mechanics</h2>
+      <p>
+        Understanding damage brackets is the foundation of build optimization. Continue learning with
+        our other mechanics guides.
+      </p>
+      <div class="cta-buttons">
+        <a href="/guides/mechanics/scaling-types/" class="btn btn-primary">📏 Linear Scaling Guide</a>
+        <a href="/database/items/" class="btn btn-secondary">💎 Items Database</a>
+        <a href="/guides/builds/" class="btn btn-secondary">🔧 Best Builds</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p>&copy; 2025 Megabonk.org - Unofficial Fan Resource</p>
+      <p style="margin-top:.5rem;">Not affiliated with the official Megabonk development team</p>
+      <p style="margin-top:1.5rem;">
+        <a href="https://megabonk.org/">Home</a> |
+        <a href="https://megabonk.org/database/">Database</a> |
+        <a href="https://megabonk.org/tier-lists/">Tier Lists</a> |
+        <a href="https://megabonk.org/guides/">Guides</a> |
+        <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      </p>
+      <p style="margin-top:1rem;font-size:.85rem;color:var(--text-muted)">Game assets and trademarks are property of
+        their respective owners</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.content-section, .bracket-detail-card, .calc-demo').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+
+</html>
