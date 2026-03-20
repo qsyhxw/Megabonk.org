@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Megabonk Status Effects & Debuffs Guide — Poison, Stun, Burn (2026)</title>
+  <meta name="description"
+    content="Complete guide to Status Effects in Megabonk. Learn how Poison, Burn, Stun, Freeze, and Bloodmark work, their duration scaling, and the CC Immunity mechanic.">
+  <meta name="keywords"
+    content="Megabonk status effects, Megabonk debuffs, Megabonk poison duration, Megabonk stun, Megabonk bloodmark, crowd control immunity">
+  <link rel="canonical" href="https://megabonk.org/guides/mechanics/status-effects/">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V5X87M8JFL');
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
+    crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Megabonk Status Effects Data — Debuffs & CC Immunity (2026)">
+  <meta property="og:description"
+    content="Detailed breakdown of the 5 main debuffs in Megabonk: Poison, Burn, Stun, Freeze, and Bloodmark, highlighting scaling and CC immunity rules.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://megabonk.org/guides/mechanics/status-effects/">
+  <meta property="og:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Megabonk Enemy Debuffs Explained">
+  <meta name="twitter:description" content="All status effects, durations, and CC mechanic guide for Megabonk.">
+  <meta name="twitter:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Megabonk Status Effects Guide — Enemy Debuffs Explained",
+    "description": "Comprehensive guide on how Poison, Burn, Stun, Freeze, and Bloodmark status effects work in Megabonk, including duration calculations and crowd control immunity mechanics.",
+    "url": "https://megabonk.org/guides/mechanics/status-effects/",
+    "datePublished": "2026-03-20",
+    "dateModified": "2026-03-20",
+    "publisher": { "@type": "Organization", "name": "Megabonk.org", "url": "https://megabonk.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://megabonk.org/guides/mechanics/status-effects/" }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does Poison work in Megabonk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Poison is a stacking Damage-over-Time (DoT) effect. It has a base duration of 5 seconds and deals damage every 0.5 seconds (2 ticks per second). Higher duration stats increase the total damage dealt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Freeze do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Freeze reduces an enemy's movement speed by 70% and turns them teal/blue. It usually has a base duration of 3 seconds, extendable with duration multipliers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can bosses be stunned?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, bosses can be stunned (they turn yellowish and stop moving). However, bosses can still shoot projectiles while stunned! Stun only stops movement, not attacks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Crowd Control (CC) Immunity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enemies build resistance to CC effects (Stun, Freeze). After roughly 30 procs, they become immune. After 20 minutes into a run, this threshold heavily decreases, making enemies almost impossible to CC."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #ff6b35;
+      --primary-dark: #e55a2b;
+      --bg-dark: #1a1a2e;
+      --bg-darker: #16213e;
+      --text-light: #ffffff;
+      --text-muted: #cccccc;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 107, 53, 0.2);
+      
+      --status-poison: #26de81;
+      --status-burn: #ff7675;
+      --status-freeze: #00cec9;
+      --status-stun: #fdcb6e;
+      --status-blood: #d63031;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text-light); background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%); min-height: 100vh; }
+
+    /* === Header === */
+    header { position: sticky; top: 0; background: rgba(26, 26, 46, 0.95); backdrop-filter: blur(15px); z-index: 1000; border-bottom: 2px solid var(--primary); }
+    nav { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+    .nav-links a { color: var(--text-light); text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 20px; transition: all 0.3s; display: block; white-space: nowrap; }
+    .nav-links a:hover { color: var(--primary); background: rgba(255, 107, 53, 0.1); }
+    .dropdown { position: relative; }
+    .dropdown-toggle { cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+    .dropdown-toggle::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s; }
+    .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+    .dropdown-menu { position: absolute; top: calc(100% + 0.5rem); left: 0; min-width: 200px; background: rgba(26, 26, 46, 0.98); backdrop-filter: blur(15px); border-radius: 12px; padding: 0.5rem 0; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid var(--border); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s; z-index: 1000; }
+    .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu a { padding: 0.75rem 1.5rem; border-radius: 0; white-space: nowrap; }
+    .dropdown-menu a:hover { background: rgba(255, 107, 53, 0.15); color: var(--primary); }
+    .mobile-toggle { display: none; flex-direction: column; cursor: pointer; }
+    .bar { width: 25px; height: 3px; background: var(--primary); margin: 3px 0; transition: 0.3s; }
+
+    /* === Breadcrumb === */
+    .breadcrumb { max-width: 1200px; margin: 0 auto; padding: 1.5rem 2rem 0.5rem; font-size: 0.9rem; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: var(--text-muted); margin: 0 0.5rem; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+    /* === Hero === */
+    .page-hero { background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%); padding: 3rem 2rem; text-align: center; }
+    .page-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; margin-bottom: 1rem; }
+    .page-hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.8; }
+    .hero-badge { display: inline-block; background: rgba(255, 107, 53, 0.15); color: var(--primary); padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border); }
+
+    /* === Content Sections === */
+    .content-section { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; margin-bottom: 2rem; border: 1px solid var(--border); backdrop-filter: blur(15px); }
+    .content-section h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+    .content-section p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+    .content-section a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .content-section a:hover { text-decoration: underline; }
+    .content-section strong { color: var(--text-light); }
+
+    /* === Status Effects Cards === */
+    .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+
+    .status-card {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      overflow: hidden;
+      border-top: 5px solid transparent;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .status-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+    .poison-card { border-top-color: var(--status-poison); }
+    .burn-card { border-top-color: var(--status-burn); }
+    .freeze-card { border-top-color: var(--status-freeze); }
+    .stun-card { border-top-color: var(--status-stun); }
+    .blood-card { border-top-color: var(--status-blood); }
+
+    .status-header { padding: 1.5rem; display: flex; align-items: center; gap: 1rem; background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .status-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 900; }
+    
+    .bg-poison { background: rgba(38, 222, 129, 0.2); color: var(--status-poison); }
+    .bg-burn { background: rgba(255, 118, 117, 0.2); color: var(--status-burn); }
+    .bg-freeze { background: rgba(0, 206, 201, 0.2); color: var(--status-freeze); }
+    .bg-stun { background: rgba(253, 203, 110, 0.2); color: var(--status-stun); }
+    .bg-blood { background: rgba(214, 48, 49, 0.2); color: var(--status-blood); }
+
+    .status-title { font-size: 1.4rem; font-weight: 800; color: var(--text-light); margin-bottom: 0.2rem; }
+    .status-type { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+    .status-body { padding: 1.5rem; }
+    .status-detail-row { display: flex; justify-content: space-between; margin-bottom: 0.8rem; padding-bottom: 0.8rem; border-bottom: 1px dotted rgba(255,255,255,0.1); }
+    .status-detail-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .detail-label { color: var(--text-muted); font-size: 0.95rem; }
+    .detail-value { font-weight: 700; color: var(--text-light); text-align: right; }
+    .status-desc { margin-top: 1.5rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+    .item-sources { margin-top: 1rem; display: flex; gap: 0.5rem; align-items: center; }
+    .item-sources img { width: 32px; height: 32px; border-radius: 6px; image-rendering: pixelated; border: 1px solid rgba(255,255,255,0.2); }
+    .source-label { font-size: 0.8rem; color: var(--text-muted); margin-right: 0.5rem; }
+
+    /* === Visual Indications === */
+    .indicator-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1rem; margin-top: 1rem; display: flex; align-items: center; gap: 1rem; }
+    .color-swatch { width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); }
+    .swatch-freeze { background: teal; }
+    .swatch-stun { background: #ffd700; }
+    .swatch-blood { background: darkred; border-radius: 4px; width: 40px; height: 12px; }
+
+    /* === Example/Warning Boxes === */
+    .warning-box { background: rgba(231, 76, 60, 0.1); border-left: 4px solid var(--status-blood); border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0; }
+    .warning-box .warning-title { color: var(--status-blood); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .tip-box { background: rgba(38, 222, 129, 0.1); border-left: 4px solid var(--status-poison); border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 1.5rem 0; }
+    .tip-box .tip-title { color: var(--status-poison); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* === FAQ === */
+    .faq-section details { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1rem; padding: 1.5rem; cursor: pointer; transition: all 0.3s; }
+    .faq-section details:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--primary); }
+    .faq-section summary { font-size: 1.1rem; font-weight: 600; color: var(--text-light); list-style: none; display: flex; align-items: center; gap: 1rem; }
+    .faq-section summary::before { content: '▶'; color: var(--primary); font-size: 0.9rem; transition: transform 0.3s; }
+    .faq-section details[open] summary::before { transform: rotate(90deg); }
+    .faq-section p { margin-top: 1rem; color: var(--text-muted); line-height: 1.8; padding-left: 2rem; }
+
+    /* === CTA === */
+    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; justify-content: center; }
+    .btn { padding: 0.9rem 2rem; border: none; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
+    .btn-primary { background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6); }
+    .btn-secondary { background: transparent; color: var(--text-light); border: 2px solid var(--primary); }
+    .btn-secondary:hover { background: var(--primary); transform: translateY(-3px); }
+
+    /* === Footer === */
+    footer {
+      background: rgba(15, 20, 25, 0.95);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-top: 2px solid var(--border);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(26, 26, 46, 0.98); flex-direction: column; padding: 2rem; backdrop-filter: blur(20px); border-top: 1px solid var(--border); }
+      .nav-links.active { display: flex; }
+      .mobile-toggle { display: flex; }
+      .content-section { padding: 1.5rem; }
+      .status-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="https://megabonk.org/" class="logo"><span>🎮</span><span>Megabonk.org</span></a>
+      <div class="mobile-toggle" onclick="toggleMenu()"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/guides/builds/">Builds</a></li>
+        <li class="dropdown">
+          <a href="/tier-lists/" class="dropdown-toggle">Tier Lists</a>
+          <div class="dropdown-menu">
+            <a href="/guides/characters/character-tier-list-2025.html">🏆 Characters</a>
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/tier-lists/items/">💎 Items</a>
+            <a href="/tier-lists/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/database/" class="dropdown-toggle">Items</a>
+          <div class="dropdown-menu">
+            <a href="/database/weapons/">⚔️ Weapons</a>
+            <a href="/database/items/">💎 Items</a>
+            <a href="/database/tomes/">📚 Tomes</a>
+          </div>
+        </li>
+        <li><a href="/guides/characters/">Characters</a></li>
+        <li><a href="/leaderboard/">Leaderboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="https://megabonk.org/">Home</a><span>›</span>
+    <a href="https://megabonk.org/guides/">Guides</a><span>›</span>
+    <a href="https://megabonk.org/guides/mechanics/scaling-types/">Mechanics</a><span>›</span>
+    <span>Status Effects</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <h1>Status Effects & Enemy Debuffs</h1>
+    <p>
+      Mastering status effects is crucial for pushing high loops in Megabonk. Learn how the 5 core debuffs work, 
+      how they scale with your stats, and the hidden mechanics of Crowd Control (CC) Immunity.
+    </p>
+    <span class="hero-badge">⚡ GAME MECHANICS • DEBUFFS</span>
+  </section>
+
+  <div class="container">
+    
+    <!-- Ad -->
+    <div style="margin: 1.5rem auto; text-align: center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8830315294299920"
+        data-ad-slot="7242990417" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Section: Damage Over Time (DoT) -->
+    <section class="content-section">
+      <h2>🔥 Damage Over Time (DoT)</h2>
+      <p>
+        These status effects actively drain enemy health. They benefit greatly from 
+        <a href="/guides/mechanics/damage-brackets/">Damage Brackets</a> and the <strong>Duration</strong> stat.
+      </p>
+
+      <div class="status-grid">
+        <!-- Poison Card -->
+        <div class="status-card poison-card">
+          <div class="status-header">
+            <div class="status-icon bg-poison">☠️</div>
+            <div>
+              <div class="status-title">Poison</div>
+              <div class="status-type" style="color: var(--status-poison)">Stacking DoT</div>
+            </div>
+          </div>
+          <div class="status-body">
+            <div class="status-detail-row">
+              <span class="detail-label">Base Duration</span>
+              <span class="detail-value">5 Seconds</span>
+            </div>
+            <div class="status-detail-row">
+              <span class="detail-label">Damage Rate</span>
+              <span class="detail-value">Every 0.5s (2 Ticks/sec)</span>
+            </div>
+            <div class="status-desc">
+              Poison is a stacking DoT that can spread among groups. Total damage scales with 
+              your overall damage multiplier. Increasing Duration adds more damage ticks.
+            </div>
+            <div class="item-sources">
+              <span class="source-label">Applied By:</span>
+              <a href="/database/items/moldy-cheese"><img src="https://megabonk.org/images/Items/Item_Moldy_Cheese.png" alt="Moldy Cheese" title="Moldy Cheese"></a>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">(40% Chance)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Burn Card -->
+        <div class="status-card burn-card">
+          <div class="status-header">
+            <div class="status-icon bg-burn">🔥</div>
+            <div>
+              <div class="status-title">Burn</div>
+              <div class="status-type" style="color: var(--status-burn)">DoT</div>
+            </div>
+          </div>
+          <div class="status-body">
+            <div class="status-detail-row">
+              <span class="detail-label">Base Duration</span>
+              <span class="detail-value">~3 Seconds</span>
+            </div>
+            <div class="status-detail-row">
+              <span class="detail-label">Damage Rate</span>
+              <span class="detail-value">Every 1.0s (1 Tick/sec)</span>
+            </div>
+            <div class="status-desc">
+              Burn deals damage once per second. The number of ticks scales purely with your Duration multiplier. 
+              Highly effective against single targets with high HP.
+            </div>
+            <div class="item-sources">
+              <span class="source-label">Applied By:</span>
+              <a href="/database/items/dragonfire"><img src="https://megabonk.org/images/Items/Item_Dragonfire.png" alt="Dragonfire" title="Dragonfire"></a>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">(15% Chance)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Crowd Control (CC) -->
+    <section class="content-section">
+      <h2>❄️ Crowd Control (CC) Effects</h2>
+      <p>
+        These effects restrict enemy movement. They are subject to the hidden <strong>CC Immunity</strong> mechanic to prevent infinite stun-locking.
+      </p>
+
+      <div class="status-grid">
+        <!-- Freeze Card -->
+        <div class="status-card freeze-card">
+          <div class="status-header">
+            <div class="status-icon bg-freeze">🧊</div>
+            <div>
+              <div class="status-title">Freeze</div>
+              <div class="status-type" style="color: var(--status-freeze)">Slow / Immobilize</div>
+            </div>
+          </div>
+          <div class="status-body">
+            <div class="status-detail-row">
+              <span class="detail-label">Base Duration</span>
+              <span class="detail-value">~3 Seconds</span>
+            </div>
+            <div class="status-detail-row">
+              <span class="detail-label">Effect</span>
+              <span class="detail-value">-70% Movement Speed</span>
+            </div>
+            <div class="indicator-box">
+              <div class="color-swatch swatch-freeze"></div>
+              <span style="font-size: 0.9rem;">Enemies turn teal/blue colored.</span>
+            </div>
+            <div class="item-sources">
+              <span class="source-label">Applied By:</span>
+              <a href="/database/items/ice-cube"><img src="https://megabonk.org/images/Items/Item_Ice_Cube.png" alt="Ice Cube" title="Ice Cube"></a>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">(20% Chance)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stun Card -->
+        <div class="status-card stun-card">
+          <div class="status-header">
+            <div class="status-icon bg-stun">⚡</div>
+            <div>
+              <div class="status-title">Stun</div>
+              <div class="status-type" style="color: var(--status-stun)">Stop Movement</div>
+            </div>
+          </div>
+          <div class="status-body">
+            <div class="status-detail-row">
+              <span class="detail-label">Base Duration</span>
+              <span class="detail-value">~3 Seconds</span>
+            </div>
+            <div class="status-detail-row">
+              <span class="detail-label">Effect</span>
+              <span class="detail-value">0 Movement Speed</span>
+            </div>
+            <div class="indicator-box">
+              <div class="color-swatch swatch-stun"></div>
+              <span style="font-size: 0.9rem;">Enemies gain a golden/yellow hue.</span>
+            </div>
+            <div class="item-sources">
+              <span class="source-label">Applied By:</span>
+              <a href="/database/items/lightning-orb"><img src="https://megabonk.org/images/Items/Item_Lightning_Orb.png" alt="Lightning Orb" title="Lightning Orb"></a>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">(25% Chance)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <div class="warning-title">⚠️ Boss Stun Mechanics</div>
+        <p>
+          While bosses CAN be stunned (turning yellow and stopping movement), <strong>Stun does not silence them!</strong>
+          Bosses can still shoot projectiles and use attacks while stunned. It only roots them in place.
+        </p>
+      </div>
+
+      <div class="tip-box" style="border-left-color: var(--status-freeze);">
+        <div class="tip-title" style="color: var(--status-freeze)">🛡️ The Hidden "CC Immunity" Mechanic</div>
+        <p>
+          Enemies build resistance to crowd control. After roughly <strong>30 procs</strong>, an enemy becomes 
+          immune to further Stuns and Freezes. Furthermore, <strong>after 20 minutes into a run</strong>, 
+          this threshold is heavily decreased, making it incredibly difficult to CC late-game enemies. 
+          Use Duration to get the most out of every single stun proc before immunity hits!
+        </p>
+      </div>
+    </section>
+
+    <!-- Section: Special Execute (Bloodmark) -->
+    <section class="content-section">
+      <h2>🩸 Special Debuff: Bloodmark</h2>
+      <p>
+        <strong>Bloodmark</strong> (also known as Bleed) is a unique execution mechanic separate from standard DoTs or CC.
+      </p>
+
+      <div class="status-card blood-card" style="margin-top: 1.5rem; max-width: 600px;">
+        <div class="status-header">
+          <div class="status-icon bg-blood">✖️</div>
+          <div>
+            <div class="status-title">Bloodmark</div>
+            <div class="status-type" style="color: var(--status-blood)">Delayed Execute</div>
+          </div>
+        </div>
+        <div class="status-body">
+          <p style="margin-bottom: 1rem; color: var(--text-muted);">
+            Marks a portion of an enemy's health bar dark red. If the enemy's total health drops to this marked threshold, 
+            they are instantly executed — this works on Bosses!
+          </p>
+          <div class="indicator-box">
+            <div class="color-swatch swatch-blood"></div>
+            <span style="font-size: 0.9rem;">Shows as a dark-red section on the HP bar.</span>
+          </div>
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+            If they don't reach the threshold, the mark explodes for damage after 5 seconds (or 4 seconds on some triggers).
+          </p>
+          <div class="item-sources" style="margin-top: 1.5rem;">
+            <span class="source-label">Applied By:</span>
+            <a href="/database/items/unstable-transfusion"><img src="https://megabonk.org/images/Items/Item_Demonic_Blood.png" alt="Unstable Transfusion" title="Unstable Transfusion"></a>
+            <a href="/database/items/bloody-cleaver"><img src="https://megabonk.org/images/Items/Item_Bloody_Cleaver.png" alt="Bloody Cleaver" title="Bloody Cleaver"></a>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">(Triggered via Lifesteal hitting enemies)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="content-section faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <details>
+        <summary>Does Proc Coefficient affect Status Effects?</summary>
+        <p>
+          Yes! If you trigger a status-inducing item (like Moldy Cheese) via a weapon with a low 
+          <a href="/guides/mechanics/proc-coefficient/">Proc Coefficient</a>, the chance to apply the status 
+          effect is reduced accordingly.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why do enemies stop getting stunned late game?</summary>
+        <p>
+          Because of the CC Immunity mechanic. After a 20-minute run timer, the threshold of procs required 
+          for an enemy to become immune to Stun/Freeze drops significantly.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does Duration increase Poison damage?</summary>
+        <p>
+          Yes. Poison triggers a damage tick every 0.5 seconds. By increasing the duration of the Poison stack, 
+          you increase the total number of ticks the enemy suffers before it wears off.
+        </p>
+      </details>
+      
+      <details>
+        <summary>Can multiple status effects be on an enemy at once?</summary>
+        <p>
+          Absolutely. You can Poison, Burn, and Stun an enemy simultaneously. Stacking multiple diverse 
+          debuffs is highly recommended.
+        </p>
+      </details>
+    </section>
+
+    <!-- CTA -->
+    <section class="content-section" style="text-align: center;">
+      <h2>📚 Explore More Mechanics</h2>
+      <div class="cta-buttons">
+        <a href="/guides/mechanics/proc-coefficient/" class="btn btn-primary">⚡ Proc Coefficients</a>
+        <a href="/guides/mechanics/damage-brackets/" class="btn btn-secondary">⚔️ Damage Brackets</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p>&copy; 2026 Megabonk.org - Unofficial Fan Resource</p>
+      <p style="margin-top:.5rem;">Not affiliated with the official Megabonk development team</p>
+      <p style="margin-top:1.5rem;">
+        <a href="https://megabonk.org/">Home</a> |
+        <a href="https://megabonk.org/database/">Database</a> |
+        <a href="https://megabonk.org/tier-lists/">Tier Lists</a> |
+        <a href="https://megabonk.org/guides/">Guides</a> |
+        <a href="https://megabonk.org/leaderboard/">Leaderboard</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.content-section, .status-card').forEach(el => {
+      el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+
+</html>
