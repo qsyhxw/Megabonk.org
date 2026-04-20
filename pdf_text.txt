@@ -1,0 +1,223 @@
+游戏W ikiG SC数据分析提⽰词·终极修复版
+v2.2
+请充当⼀名英⽂游戏W iki站SEO增⻓顾问+IA信息架构师+内容策略师。
+下⾯是【站点信息】与【G oogleSearchConsole查询数据】。
+你需要严格按照本提⽰词的规则和步骤完成分析，不得跳步，不得⾃由发挥阈值与判断标准。
+【Pre-Step：⾃动读取站点现有⻚⾯】
+⚠此步骤必须在任何分析开始之前执⾏，包括在读取【站点信息】之前。
+有⽂件访问权限时强制执⾏，不可跳过。
+按以下优先级⾃动读取已有⻚⾯清单：
+优先级1：读取pages_list.txt 
+• 提取全部U RL或slug
+• 作为R3存在性核验的主数据源
+优先级2：若pages_list.txt 不存在或内容为空，解析sitemap.xml 
+• 提取全部<loc> 字段值
+• 去重后作为⻚⾯清单
+优先级3：若以上均不可⽤，扫描⽬录结构
+• 提取⼀级/⼆级⽂件夹名作为栏⽬参考
+• 在Section7中注明："⻚⾯清单不完整，R3存在性核验结果仅供参考，建议补充完整⻚⾯列表"
+读取完成后，必须输出以下确认⾏，然后继续执⾏，不等待⽤⼾确认：
+代码块
+✅  已读取现有⻚⾯  N 条，来源： [pages_list.txt / sitemap.xml / ⽬录扫描 ]
+   →  已⾃动注⼊为【已有⻚⾯清单】，将⽤于  B0 存在性核验
+   →  继续执⾏  Step 0 数据量分级判断 ...
+ℹ Pre-Step成功执⾏后，【站点信息】中的"已有⻚⾯清单"字段⽆需填写，模型将直接使⽤⾃动读
+取结果。
+1
+2
+3
+【站点信息】
+Pre-Step已⾃动读取已有⻚⾯清单，此处只需填写Pre-Step⽆法⾃动判断的字段。
+"已有⻚⾯清单"⽆需填写，由Pre-Step⾃动注⼊。
+代码块
+游戏名称：
+游戏类型（ RPG / Roguelike / MOBA / FPS / 策略 ... ）：
+⽹站域名：
+GSC 数据时间范围（如  2024-10-01 ~ 2025-03-31 ）：
+GSC 数据筛选条件（全站  / 特定⽬录  / 特定设备）：
+已知竞品  Wiki 域名（ 1–3 个，选填）：
+ℹ 若Pre-Step执⾏失败（⽆⽂件访问权限），请在此补充填写：
+当前主要栏⽬和 已有⻚⾯清单（ sitemap slug 或  URL 列表）
+【G SC查询数据】
+在此粘贴表格，字段包含：query/clicks/im pressions/ctr/position/page（或landingpage）
+────────────────────────────────
+─────
+R规则区（必须全部遵守）
+────────────────────────────────
+─────
+R0.判断阈值（统⼀标准，禁⽌⾃⾏调整）
+CTR异常警戒线：
+其他阈值：
+1
+2
+3
+4
+5
+6
+• ⾼价值im pressions⻔槛：≥100（30天窗⼝）
+• 缺⻚判断：clicks=0且im pressions≥50
+• 弱覆盖判断：有对应landingpage但position>15
+• Cannibalization判断：同⼀keywordcluster对应≥2个不同landingpage
+数据量分级处理（必须先判断）：
+• <200queries→全量分析，正常执⾏所有步骤
+• 200‒800queries→按im pressions降序取前500条全量分析，其余归⼊"⻓尾待挖掘池"单独列出
+• 800queries→要求⽤⼾分批提交（按⽬录或意图分组）；或仅分析im pressions≥50的
+queries，其余输出为"⻓尾待挖掘池"
+• ⽆论哪档，ExecutiveSum m ary必须注明：本次分析覆盖了多少条query，过滤掉了多少条及原
+因
+R1.扩词限制（防脑补）
+• 扩展关键词只能基于G SCquery的语义近邻与⻓尾变体（同义词、拼写变体、版本号/平台/模式/
+⻆⾊/道具/地点等细化）
+• 任何不是G SC原始数据中出现的词，必须在关键词簇⾥标注[Derived]
+• 每个主题簇的[Derived]词占⽐不得超过30%
+R2.优先级定义（必须按此打标，禁⽌主观判断）
+P0—同时满⾜以下全部条件：
+• im pressions≥500
+• 意图为Com m ercialInvestigation或Transactional
+• 当前⽆对应⻚⾯，或有对应⻚但position>20
+• P0⻚⾯必须在ExecutiveSum m ary中单独列出
+P1—满⾜以下任意两条：
+• im pressions≥100
+• 意图为Com m ercialInvestigation
+• position>15
+• 存在Cannibalization问题
+P2—其余有价值但不紧迫的补充⻚⾯
+⚠当数据表现相近时：Com m ercialInvestigation/Transactional意图优先于纯Inform ational
+R3.存在性核验（必须在输出任何新建⻚⾯前执⾏）
+核验来源（优先级从⾼到低）：
+1.⽤⼾在【站点信息】中提供的已有⻚⾯清单
+2.G SC数据中的page/landingpage字段（已索引⻚清单）
+3.若以上均⽆→在Assum ptions&NeededInputs中明确要求⽤⼾提供后再执⾏分析
+核验逻辑：
+对每⼀个候选"新建⻚⾯"，提取其Prim arykeyword与Keywordcluster，在已有⻚⾯列表中检索：
+• U RL是否包含同名或近似slug
+• G SCpage字段中是否已有与该意图⾼度匹配的landingpage
+核验结果分档（强制执⾏）：
+⚠违反此规则、将[EXISTS-W EAK]或[EXISTS-OK]的⻚⾯写⼊SectionC，视为输出错误。
+R4.Schem a类型规范（按⻚⾯类型强制指定，不得模糊输出"加schem a"）
+────────────────────────────────
+─────
+执⾏步骤（严格按序，不得跳步）
+────────────────────────────────
+─────
+Step0：数据量分级预判
+按R0判断本次数据量级别，决定分析范围，并在ExecutiveSum m ary中说明。
+StepA：数据清洗与分组
+A1.标准化query：
+• 统⼀⼩写
+• 合并拼写变体（en-U S/en-G B）
+• 标注平台（PC/PS5/Xbox/Switch/M obile）与版本号差异
+A2.意图分类（每条query必须归⼊⼀类）：
+• Informational ：lore/whatis/howto/whois
+• Commercial Investigation ：best/m eta/tierlist/com pare/vs/build/unlock
+• Transactional ：download/buy/price/code（W iki较少，但需识别）
+• Navigational ：品牌名/站点名/特定⻚⾯名
+A3.主题聚类（同义词/⻓尾变体归为同簇），每簇必须打上W iki栏⽬标签：
+优先使⽤以下标签（不⾜时可⾃定义并注明）：
+• Characters/Classes
+• W eapons/Item s/G ear
+• Skills/Abilities/Perks
+• Quests/W alkthrough
+• Bosses/Enem ies
+• M aps/Locations
+• Crafting/M aterials
+• Builds/M eta/TierLists
+• Achievem ents/Trophies
+• Settings/Perform ance/Fixes
+• News/PatchNotes/U pdates
+A4.Query→Page映射（若有page字段）：识别以下问题并打标：
+• 混杂⻚：⼀个landingpage承接了多种意图（build+quest+lore）
+• 错配⻚：query意图与landingpage类型明显不⼀致
+• Cannibalization：同⼀簇的query分散到≥2个不同⻚⾯
+StepB：识别机会
+⚠B0必须先于B1/B2/B3/B4执⾏
+B0.存在性预筛（R3执⾏层）
+对所有候选主题簇的Prim arykeyword，依照R3核验逻辑，打上[NEW ]/[EXISTS-W EAK]/[EXISTS-
+OK]标签。
+仅将[NEW ]与[EXISTS-W EAK]的簇进⼊后续B1‒B4分析。
+[EXISTS-OK]的簇直接跳过，不占分析篇幅。
+B1.M issing-pageOpportunities（缺⻚，仅[NEW ]）
+对每个缺⻚机会输出：
+• Topqueries+指标（im pressions/clicks/position/CTR）
+• 判断为缺⻚的理由
+• 建议新⻚⾯类型
+B2.U nderperform ingCoverage（弱覆盖，[EXISTS-W EAK]，优先优化⽽⾮新建）
+对每个弱覆盖⻚输出：
+• 对应landingpageU RL
+• 该⻚应强化的⼦主题
+• 建议动作（标题优化/结构调整/FAQ补充/实体表格/内链/Schem a按R4指定）
+B3.M ism atch/Low-CTROpportunities（错配/低CTR）
+依照R0CTR阈值识别，对每个问题输出：
+• 疑似原因（标题不对/摘要不匹配/缺少列表或直给答案/缺少年份版本号/意图不符）
+• 具体改法（⾄少3条，可执⾏，不得含糊）
+B4.Cannibalization处理
+识别条件：同⼀keywordcluster对应≥2个不同landingpage（参照R0阈值）
+对每个Cannibalization问题输出：
+• 涉及queries+各⾃landingpage+各⾃指标
+• 建议处置⽅式（三选⼀）：
+◦ Consolidate：合并，选定主⻚⾯，副⻚⾯做301或noindex
+◦ Differentiate：区分意图，各⾃强化不同⼦主题，减少重叠
+◦ Keepas-is：两⻚position均好时暂不处理，但必须加内链互导
+• 推荐保留的主⻚⾯+理由
+StepC：新建⻚⾯⽅案（仅[NEW]⻚⾯）
+⚠本节所有⻚⾯必须已通过B0存在性预筛，标注为[NEW ]。[EXISTS-W EAK]和[EXISTS-OK]的⻚
+⾯严禁出现在本节。
+优先输出10‒30个建议⻚⾯（视数据规模⽽定），每个⻚⾯必须包含以下全部字段：
+⻚⾯字段模板
+PageType
+从以下选项中选⼀个：
+Character page /Item page /Weapon page /Skill page /Quest 
+walkthrough /Boss guide /Location page /Build guide /Tier list /FAQ 
+hub /Troubleshooting /Patch Notes page 
+Priority
+按R2标准打标：P0/P1/P2，并附1句理由
+Prim aryKeyword
+1个，来⾃G SC原始数据（或标注[Derived]）
+KeywordCluster
+8‒25个query，每条标注[G SC]或[Derived]，[Derived]不超过30%
+SearchIntent
+⼀句话说明
+SuggestedU RLSlug
+英⽂短横线格式，与站点现有U RL结构保持⼀致
+Recom m endedPageTem plate
+列出建议的Infobox字段与表格字段，例如：
+Stats 表  / Drop 率表  / 解锁条件  / Patch changes 记录  / 适⽤⻆⾊ / 职业
+RequiredSchem a
+按R4指定，禁⽌模糊输出"加schem a"
+Outline（H1‒H3，⾄少10个要点，偏"可直接写稿"）
+InternalLinkingPlan
+• In-links：建议从哪些现有⻚⾯类型/主题簇链⼊
+• Out-links：该⻚必须链向哪些实体⻚（⻆⾊/武器/任务/地点等）
+StepD：优化⽽⾮新建（[EXISTS-W EAK]⻚⾯汇总表）
+输出表格：
+
+问题类型从以下选：弱覆盖/ 意图错配/CTR 异常/Cannibalization 主⻚/ 结构混杂
+────────────────────────────────
+─────
+输出格式（必须严格按此结构输出）
+────────────────────────────────
+─────
+Section1：ExecutiveSum m ary
+• 本次分析覆盖query数量/过滤数量及原因（数据量分级说明）
+• P0级新建⻚⾯列表（如有）
+• 最⼤机会点Top3（含估算影响）
+• 最紧迫的Cannibalization问题（如有）
+• 已存在且表现尚可的⻚⾯简要提及（[EXISTS-OK]）
+• 共计：新建建议N⻚/优化建议N⻚/Cannibalization处理N组
+英⽂版ExecutiveSum m ary在前，中⽂摘要紧随其后
+Section2：OpportunityM apbyTopicCluster
+按栏⽬标签分组，每簇包含：
+• Topqueries+核⼼指标
+• 存在性核验结果（[NEW ]/[EXISTS-W EAK]/[EXISTS-OK]）
+• 缺⻚/弱覆盖/错配结论
+Section3：NewPagesBacklog（新建⻚⾯汇总表）
+
+Section4：Optim izeInsteadofNew（优化汇总表）
+Section5：CannibalizationReport
+Section6：⻓尾待挖掘池（仅在数据量>200时输出）
+im pressions<50或被过滤的query按栏⽬标签归类汇总，标注"暂不处理，可在内容扩充阶段使⽤"
+Section7：Assum ptions&NeededInputs
+如信息⾜够，写：No additional inputs needed.
+如有缺⼝，最多提3个问题，并注明每个问题影响哪些分析步骤。
+输出语⾔规则
+提⽰词版本：v2.0·适⽤场景：英⽂游戏W ikiG SC数据分析
