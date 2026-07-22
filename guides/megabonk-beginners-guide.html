@@ -210,7 +210,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
         
-        nav {
+        header > nav {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
@@ -260,6 +260,7 @@
             flex-wrap: wrap;
             font-size: 0.9rem;
             color: var(--text-secondary);
+            justify-content: flex-start;
         }
         
         .breadcrumb a {
@@ -310,6 +311,7 @@
         
         /* Quick Nav */
         .quick-nav {
+            display: block;
             background: var(--bg-card);
             border: 2px solid var(--border-color);
             border-radius: 12px;
@@ -325,10 +327,27 @@
         
         .quick-nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 1rem;
         }
         
+        .guide-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-grid {
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
         .quick-nav-item {
             background: var(--bg-hover);
             padding: 1rem;
@@ -676,6 +695,11 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .quick-nav-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -697,17 +721,37 @@
                 grid-template-columns: 1fr;
             }
             
-            nav {
+            header > nav {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
+            header,
+            footer {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .breadcrumb,
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .quick-nav {
+                padding: 1.5rem;
+            }
+
+            .quick-nav-grid {
+                grid-template-columns: 1fr;
+            }
             .nav-links {
                 gap: 1rem;
             }
             
             .progression-table {
                 font-size: 0.9rem;
+                min-width: 680px;
             }
             
             .progression-table th,
@@ -789,11 +833,11 @@
             <h2>Who Are "Megabonk Beginners"? Are You One of Them?</h2>
             <p>Understanding where you stand helps you focus on the right content. Most <strong>Megabonk beginners</strong> fall into one of these three categories:</p>
             
-            <div class="tips-list">
+            <ul class="tips-list">
                 <li><strong>Complete Newcomers:</strong> Just bought the game or saw it on Twitch/YouTube. Haven't completed a single run yet and feeling overwhelmed by the chaos on screen.</li>
                 <li><strong>Struggling Survivors:</strong> Can survive a few minutes but die consistently in Forest Tier 1 or early Tier 2. Not sure which upgrades to prioritize or how to position effectively.</li>
                 <li><strong>Progression Stuck:</strong> Beat Forest Tier 1 occasionally but stuck on silver farming, character unlocks, or don't know what to do next to progress efficiently.</li>
-            </div>
+            </ul>
             
             <p>If any of these describe you, you're in the perfect place. This guide covers everything true <strong>Megabonk beginners</strong> need to know to break through early barriers and start enjoying consistent victories.</p>
         </section>
@@ -945,7 +989,7 @@
             <h3>Recommended Starter Builds</h3>
             <p>These proven builds are perfect for <strong>Megabonk beginners</strong> because they're forgiving, powerful, and teach fundamental mechanics:</p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+            <div class="guide-card-grid">
                 <a href="https://megabonk.org/guides/builds/fox-best-build" style="background: var(--bg-hover); padding: 1.5rem; border-radius: 8px; text-decoration: none; border: 2px solid var(--border-color); transition: all 0.3s ease;">
                     <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Fox Starter Build</h4>
                     <p style="font-size: 0.95rem; margin-bottom: 0;">Balanced ranged build focusing on bow + movement speed. Perfect first build for learning positioning.</p>
@@ -970,7 +1014,8 @@
             <h2>Step 4: Your First Runs – Beginner Progression Roadmap</h2>
             <p>Many <strong>Megabonk beginners</strong> feel lost after their first few runs. This roadmap gives you clear goals to transform you from a newcomer to a confident player.</p>
             
-            <table class="progression-table">
+            <div class="table-scroll" role="region" aria-label="Beginner progression roadmap" tabindex="0">
+                <table class="progression-table">
                 <thead>
                     <tr>
                         <th>Phase</th>
@@ -1025,7 +1070,8 @@
                         <td>Clear Tier 2+ content. Ready for advanced builds and strategies!</td>
                     </tr>
                 </tbody>
-            </table>
+                </table>
+            </div>
             
             <div class="warning-box" style="margin-top: 2rem;">
                 <strong>⚠️ Important Unlock Strategy:</strong> Don't unlock everything at once! Every new unlock dilutes your item pool, making it harder to get good synergies during runs. Focus on unlocking 1-2 weapons, a few essential items, and one new character before expanding further. When the Toggler becomes available, use it to disable options that do not support the build you are trying to assemble. See the <a href="#item-pool">item-pool strategy below</a> for details.
@@ -1083,7 +1129,7 @@
             <h2>Essential Resources for Megabonk Beginners</h2>
             <p>As you progress beyond the basics, these resources will become invaluable:</p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+            <div class="guide-card-grid resource-grid">
                 <a href="https://megabonk.org/database/weapons/" style="background: var(--bg-hover); padding: 2rem; border-radius: 12px; text-decoration: none; border: 2px solid var(--border-color); transition: all 0.3s ease;">
                     <img src="https://megabonk.org/images/database/weapons/Katana.png" alt="Weapons icon" style="width: 60px; height: 60px; margin-bottom: 1rem;">
                     <h3 style="color: var(--accent-color); margin: 0 0 0.5rem 0; font-size: 1.3rem;">Weapons Database</h3>
@@ -1237,47 +1283,9 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Megabonk.org - Unofficial fan resource for Megabonk. Not affiliated with the game developers.</p>
+            <p>&copy; 2026 Megabonk.org - Unofficial fan resource for Megabonk. Not affiliated with the game developers.</p>
             <p style="margin-top: 0.5rem; font-size: 0.9rem;">All game assets and images are property of their respective owners.</p>
         </div>
     </footer>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 </body>
 </html>
