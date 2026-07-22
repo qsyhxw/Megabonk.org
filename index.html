@@ -115,17 +115,17 @@
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://megabonk.org/">
-    <meta property="og:title" content="Megabonk Wiki & Guides 2026 - Best Builds, Characters, Tips">
+    <meta property="og:title" content="Megabonk Wiki 2026">
     <meta property="og:description"
-        content="Complete Megabonk guide: 20 character builds, weapon tier lists, boss strategies. Updated daily. 500K+ players.">
+        content="Choose the Megabonk resource you need: builds, tier lists, leaderboards, weapon guides, or unlock help.">
     <meta property="og:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
 
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://megabonk.org/">
-    <meta property="twitter:title" content="Megabonk Wiki & Guides 2026">
+    <meta property="twitter:title" content="Megabonk Wiki 2026">
     <meta property="twitter:description"
-        content="Complete guide: 20 character builds, weapon tier lists, boss strategies. 500K+ players.">
+        content="Direct access to Megabonk builds, tier lists, leaderboards, weapon guides, and unlock help.">
     <meta property="twitter:image" content="https://cdn.akamai.steamstatic.com/steam/apps/3405340/header.jpg">
 
 
@@ -170,7 +170,7 @@
       "name": "Megabonk.org",
       "url": "https://megabonk.org",
       "logo": "https://megabonk.org/favicon.ico",
-      "description": "The ultimate Megabonk wiki, guides, and community hub. Daily updated builds, character guides, and strategies.",
+      "description": "Independent Megabonk player wiki with direct access to builds, tier lists, leaderboards, weapon guides, and unlock help.",
       "foundingDate": "2026",
       "sameAs": [
         "https://x.com/megabonkgame",
@@ -404,22 +404,23 @@
 
         /* Hero Section */
         .hero {
-            min-height: 80vh;
+            min-height: calc(100vh - 72px);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 1100px;
+            width: 100%;
         }
 
         .hero h1 {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--primary) 0%, #ff8c69 100%);
             -webkit-background-clip: text;
@@ -430,14 +431,14 @@
 
         .hero-subtitle {
             font-size: clamp(1.2rem, 3vw, 1.6rem);
-            margin-bottom: 2rem;
+            margin-bottom: 1.25rem;
             color: var(--text-muted);
             font-weight: 600;
         }
 
         .hero-description {
             font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             color: var(--text-muted);
             line-height: 1.8;
             max-width: 700px;
@@ -449,8 +450,8 @@
         .hero-meta {
             font-size: 0.95rem;
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            padding: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
             background: rgba(255, 107, 53, 0.05);
             border-radius: 10px;
             display: inline-block;
@@ -511,32 +512,54 @@
             transform: translateY(-3px);
         }
 
-        /* Top Tasks按钮条 */
-        .top-tasks {
-            background: rgba(255, 255, 255, 0.03);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 2rem 0;
+        .hero-paths {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 0.75rem;
+            width: 100%;
         }
 
-        .top-tasks .container {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .top-tasks .btn {
-            flex: 1;
-            min-width: 220px;
-            max-width: 280px;
-            padding: 1.2rem 1.5rem;
-            font-size: 1rem;
+        .hero-path {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            font-weight: 600;
+            gap: 0.65rem;
+            min-height: 76px;
+            padding: 0.9rem 0.75rem;
+            color: var(--text-light);
+            text-decoration: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .hero-path:hover,
+        .hero-path:focus-visible {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            background: rgba(255, 107, 53, 0.12);
+        }
+
+        .hero-path-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .hero-path strong,
+        .hero-path small {
+            display: block;
+        }
+
+        .hero-path strong {
+            font-size: 1rem;
+        }
+
+        .hero-path small {
+            margin-top: 0.15rem;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            line-height: 1.25;
         }
 
         /* FAQ Section */
@@ -1276,8 +1299,54 @@
             }
 
             .hero {
-                min-height: 70vh;
-                padding: 2rem 1rem;
+                min-height: auto;
+                padding: 1.25rem 1rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.35rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+                line-height: 1.4;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                margin-bottom: 0.75rem;
+            }
+
+            .hero-meta {
+                font-size: 0.8rem;
+                padding: 0.55rem 0.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-paths {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.5rem;
+            }
+
+            .hero-path {
+                min-height: 62px;
+                padding: 0.6rem 0.45rem;
+                gap: 0.4rem;
+            }
+
+            .hero-path-icon {
+                font-size: 1.2rem;
+            }
+
+            .hero-path small {
+                font-size: 0.7rem;
+            }
+
+            .hero-path:last-child {
+                grid-column: 1 / -1;
             }
 
             .cta-buttons {
@@ -1365,34 +1434,46 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <!-- ✅ 优化后的H1 - 更简洁，包含核心关键词 -->
-            <h1>Megabonk Wiki 2026 - Complete Character & Build Guide</h1>
-            <p class="hero-subtitle">🔥 Survive Endless Waves • 🎯 20 Unique Characters • ⚡ 70+ Epic Combinations</p>
+            <h1>Megabonk Wiki 2026</h1>
+            <p class="hero-subtitle">Build smarter • compare rankings • check weapons • unlock faster</p>
             <p class="hero-description">
-                Dive into the most <strong>chaotic 3D roguelike survival game of 2026</strong>. Master all 20 unique
-                characters,
-                discover 70+ weapon combinations, and survive increasingly difficult waves of enemies.
-                <span class="highlight">Perfect for Steam Deck</span> with 94% positive reviews from 3,000+ players!
+                Choose what you need for your next run: plan a build, compare tier lists, study leaderboard routes,
+                check a weapon, or finish an unlock.
             </p>
 
-            <!-- ✅ 新增！更新时间和社会证明 -->
             <div class="hero-meta">
-                📅 Last updated: <strong>January 4, 2026</strong> |
-                ⭐ 500K+ monthly visitors |
-                🎯 #1 Megabonk resource |
-                💯 100% free guides
+                Independent player resource | Latest patch tracked: <strong>v1.0.64</strong> |
+                Reviewed July 22, 2026
             </div>
 
-            <div class="cta-buttons">
-                <a href="#characters" class="btn btn-secondary">
-                    📚 Free Character Guides
+            <nav class="hero-paths" aria-label="Megabonk wiki sections">
+                <a class="hero-path" href="/guides/builds/">
+                    <span class="hero-path-icon" aria-hidden="true">🔧</span>
+                    <span><strong>Builds</strong><small>Character setups</small></span>
                 </a>
-            </div>
+                <a class="hero-path" href="/tier-lists/">
+                    <span class="hero-path-icon" aria-hidden="true">🏆</span>
+                    <span><strong>Tier Lists</strong><small>Rankings by category</small></span>
+                </a>
+                <a class="hero-path" href="/leaderboard/">
+                    <span class="hero-path-icon" aria-hidden="true">📈</span>
+                    <span><strong>Leaderboard</strong><small>Runs and records</small></span>
+                </a>
+                <a class="hero-path" href="/database/weapons/">
+                    <span class="hero-path-icon" aria-hidden="true">⚔️</span>
+                    <span><strong>Weapons</strong><small>Stats and unlocks</small></span>
+                </a>
+                <a class="hero-path" href="/guides/unlocks/">
+                    <span class="hero-path-icon" aria-hidden="true">🔓</span>
+                    <span><strong>Unlocks</strong><small>Unlock routes</small></span>
+                </a>
+            </nav>
         </div>
     </section>
 
     <!-- ✅ 新增！Top Tasks 按钮条 - 提高首屏转化率 -->
-    <section class="top-tasks">
+    <!--
+    <section class="top-tasks" hidden aria-hidden="true">
         <div class="container">
             <a class="btn btn-primary" href="/guides/characters/character-tier-list/">
                 🏆 Character Tier List 2026
@@ -1408,6 +1489,7 @@
             </a>
         </div>
     </section>
+    -->
 
 
 
