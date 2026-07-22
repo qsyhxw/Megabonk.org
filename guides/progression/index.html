@@ -3,10 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Progression Guide: Builds & Strategy</title>
-    <meta name="description" content="Complete Megabonk roadmap from beginner to expert. Master character builds, Holy Trinity, meta strategies for the 3D Vampire Survivors roguelike.">
+    <title>Megabonk Progression Guide & Final Swarm Strategy</title>
+    <meta name="description" content="Follow the Megabonk progression path from first clears to Final Swarm, with build milestones, a survival checklist, Ghost and Soul Harvester unlocks.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     
     <link rel="canonical" href="https://megabonk.org/guides/progression/">
+    <meta property="og:title" content="Megabonk Progression Guide & Final Swarm Strategy">
+    <meta property="og:description" content="Progress from first clears to Final Swarm with practical milestones, survival priorities, and unlock targets.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/guides/progression/">
+    <meta property="og:site_name" content="Megabonk.org">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Megabonk Progression & Final Swarm Guide">
+    <meta name="twitter:description" content="A practical progression roadmap with Final Swarm preparation, survival goals, and unlocks.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "Megabonk Progression Guide and Final Swarm Strategy",
+          "description": "A progression roadmap from beginner clears to Final Swarm survival and its related unlocks.",
+          "dateModified": "2026-07-22",
+          "author": {"@type": "Organization", "name": "Megabonk.org"},
+          "publisher": {"@type": "Organization", "name": "Megabonk.org"},
+          "mainEntityOfPage": {"@id": "https://megabonk.org/guides/progression/#webpage"}
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://megabonk.org/guides/progression/#webpage",
+          "url": "https://megabonk.org/guides/progression/",
+          "name": "Megabonk Progression Guide and Final Swarm Strategy"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {"@type": "Question", "name": "What is the Final Swarm in Megabonk?", "acceptedAnswer": {"@type": "Answer", "text": "Final Swarm is the endless enemy phase that begins after a stage boss is defeated. You can enter the portal to continue or remain in the stage and survive the swarm."}},
+            {"@type": "Question", "name": "How long do you need to survive Final Swarm to unlock Ghost?", "acceptedAnswer": {"@type": "Answer", "text": "Survive Final Swarm for 60 seconds to unlock the Ghost item."}},
+            {"@type": "Question", "name": "How long do you need to survive Final Swarm to unlock Soul Harvester?", "acceptedAnswer": {"@type": "Answer", "text": "Survive Final Swarm for six minutes to unlock the Soul Harvester item."}},
+            {"@type": "Question", "name": "Can you beat the Final Swarm?", "acceptedAnswer": {"@type": "Answer", "text": "Final Swarm is a survival phase with enemies that continue spawning, not a normal wave with a final enemy to clear. Use the portal when progression matters more than extending the run."}},
+            {"@type": "Question", "name": "Why do old Final Swarm stall strategies fail?", "acceptedAnswer": {"@type": "Answer", "text": "Version 1.0.12 added ghost-type enemies and reduced the effectiveness of Execute and Black Hole control during Final Swarm, so active movement and reliable damage are more important than old indefinite-stall setups."}}
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://megabonk.org/"},
+            {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://megabonk.org/guides/"},
+            {"@type": "ListItem", "position": 3, "name": "Progression", "item": "https://megabonk.org/guides/progression/"}
+          ]
+        }
+      ]
+    }
+    </script>
 
      <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
@@ -509,6 +559,130 @@
             left: 0;
         }
         
+        /* Final Swarm guide */
+        .final-swarm-guide,
+        .progression-faq {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 2px solid rgba(255, 107, 53, 0.35);
+            border-radius: 12px;
+            scroll-margin-top: 1rem;
+        }
+
+        .final-swarm-guide > h2,
+        .progression-faq > h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-size: 2rem;
+        }
+
+        .swarm-lead {
+            color: var(--text-muted);
+            font-size: 1.08rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .swarm-answer {
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.75rem;
+            border-left: 4px solid var(--accent-color);
+            background: rgba(255, 210, 63, 0.08);
+            border-radius: 8px;
+        }
+
+        .swarm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 1.75rem;
+        }
+
+        .swarm-card {
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.24);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+        }
+
+        .swarm-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.6rem;
+        }
+
+        .swarm-card p,
+        .swarm-card li {
+            color: var(--text-muted);
+        }
+
+        .swarm-card ul,
+        .swarm-card ol {
+            margin-left: 1.2rem;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .swarm-table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0 1.75rem;
+        }
+
+        .swarm-table {
+            width: 100%;
+            min-width: 640px;
+            border-collapse: collapse;
+        }
+
+        .swarm-table th,
+        .swarm-table td {
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .swarm-table th {
+            color: var(--accent-color);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .swarm-table td {
+            color: var(--text-muted);
+        }
+
+        .swarm-warning {
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.5rem;
+            background: rgba(220, 20, 60, 0.1);
+            border-left: 4px solid var(--danger-color);
+            border-radius: 8px;
+            color: var(--text-muted);
+        }
+
+        .swarm-link {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .progression-faq details {
+            padding: 1rem 1.25rem;
+            margin-top: 0.75rem;
+            background: rgba(0, 0, 0, 0.24);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+        }
+
+        .progression-faq summary {
+            cursor: pointer;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        .progression-faq details p {
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+        }
+
         /* Quick Navigation */
         .quick-nav {
             background: var(--card-bg);
@@ -615,7 +789,7 @@
             }
             
             .stage-card {
-                width: 100%;
+                width: calc(100% - 60px);
                 margin-left: 60px !important;
             }
             
@@ -636,6 +810,13 @@
                 align-items: flex-start;
                 gap: 0.5rem;
             }
+
+            .final-swarm-guide,
+            .progression-faq {
+                padding: 1.25rem;
+            }
+
+            .final-swarm-guide > h2 { font-size: 1.65rem; }
         }
         
         @keyframes fadeInUp {
@@ -749,7 +930,7 @@
         </section>
 
         <section class="quick-nav">
-            <h3>⚡ Jump to Your Stage</h3>
+            <h3>⚡ Jump to a Section</h3>
             <div class="nav-buttons">
                 <a href="#beginner" class="nav-btn">
                     <span class="icon">🌱</span>
@@ -766,6 +947,10 @@
                 <a href="#expert" class="nav-btn">
                     <span class="icon">👑</span>
                     <span>Expert (50+hrs)</span>
+                </a>
+                <a href="#final-swarm" class="nav-btn">
+                    <span class="icon">👻</span>
+                    <span>Final Swarm Guide</span>
                 </a>
             </div>
         </section>
@@ -1087,12 +1272,10 @@
                     </div>
                     
                     <div class="info-box">
-                        <h4>ℹ️ Final Swarm Goals (v1.0.12+)</h4>
+                        <h4>ℹ️ Final Swarm Checkpoint</h4>
                         <ul class="info-list">
-                            <li>Since v1.0.12, Final Swarm has been <strong>reworked and significantly enhanced</strong> to prevent extremely long marathon runs (5+ hours).</li>
-                            <li><strong>Current-version targets:</strong> Survive 60 seconds (Ghost achievement) → 6 minutes (Soul Harvester achievement) as milestone goals. Advanced players can aim for 10-15+ minutes with optimized builds.</li>
-                            <li>The old strategy of "45+ minute endless wave" is no longer aligned with the current version's design. Adjust your goals based on future patch updates.</li>
-                            <li style="font-style: italic; margin-top: 0.5rem;">Ref: Steam v1.0.12 Patch Notes, GamesRadar (2025-10-08)</li>
+                            <li>Use <strong>60 seconds</strong> for the Ghost unlock and <strong>6 minutes</strong> for Soul Harvester as clear progression targets.</li>
+                            <li><a class="swarm-link" href="#final-swarm">Open the full Final Swarm preparation and survival guide below.</a></li>
                         </ul>
                     </div>
                     
@@ -1100,7 +1283,7 @@
                         <h4>💡 Competitive Strategies</h4>
                         <ul class="tips-list">
                             <li><strong>Speedrun Meta:</strong> Prioritize raw damage over XP/Luck - kill speed matters</li>
-                            <li><strong>Final Swarm:</strong> Holy Trinity recommended, stack Duration for weapon uptime, adapt to Ghost mechanics</li>
+                            <li><strong>Final Swarm:</strong> Enter with sustainable area damage, recovery, defense, and enough movement to keep a route open.</li>
                             <li><strong>Dicehead Scaling:</strong> Rush Dice + Giant Fork + Overpowered Lamp combo</li>
                             <li><strong>Kill Count Optimization:</strong> Maximize spawn rate with Cursed Tome + Attraction Tome</li>
                             <li>Learn character-specific leaderboard strats (Monke for speedruns, Dicehead for kills)</li>
@@ -1123,6 +1306,86 @@
                 </div>
             </section>
         </div>
+
+        <section class="final-swarm-guide" id="final-swarm">
+            <h2>👻 Megabonk Final Swarm Guide</h2>
+            <p class="swarm-lead">Use this section when your normal stage clear is reliable and you are ready to turn the post-boss phase into an unlock attempt or survival run.</p>
+
+            <div class="swarm-answer">
+                <strong>Quick answer:</strong> Final Swarm begins after you defeat a stage boss. The enemies continue spawning, so the decision is whether to enter the portal and keep progressing or stay for a timed survival goal. Aim first for <strong>60 seconds</strong> to unlock <a class="swarm-link" href="/database/items/ghost.html">Ghost</a>, then build toward <strong>6 minutes</strong> to unlock <a class="swarm-link" href="/database/items/soul-harvester.html">Soul Harvester</a>.
+            </div>
+
+            <h3>Final Swarm goals</h3>
+            <div class="swarm-table-wrap">
+                <table class="swarm-table">
+                    <thead><tr><th>Target</th><th>What it accomplishes</th><th>Recommended decision</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Enter the portal</strong></td><td>Ends the current stage route and protects normal progression.</td><td>Choose this when the build is already strained or the run's main goal is the next stage.</td></tr>
+                        <tr><td><strong>Survive 60 seconds</strong></td><td>Unlocks the Ghost item.</td><td>Best first Final Swarm milestone; focus on space and survival rather than greed.</td></tr>
+                        <tr><td><strong>Survive 6 minutes</strong></td><td>Unlocks the legendary Soul Harvester item.</td><td>Attempt after ordinary bosses and the first minute are consistently comfortable.</td></tr>
+                        <tr><td><strong>Push a personal best</strong></td><td>Tests the build after both timed unlock goals are complete.</td><td>Treat this as an optional endurance run, not required progression.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>What to prepare before killing the boss</h3>
+            <div class="swarm-grid">
+                <article class="swarm-card">
+                    <h3>1. Stable damage</h3>
+                    <p>Use damage that keeps working while you move. Wide or automatic coverage is more dependable here than a setup that needs you to stop and aim into one lane.</p>
+                </article>
+                <article class="swarm-card">
+                    <h3>2. Recovery and defense</h3>
+                    <p>Bring enough health recovery and damage reduction to survive chip damage. Recovery alone will not rescue a build that lets enemy density grow without control.</p>
+                </article>
+                <article class="swarm-card">
+                    <h3>3. Movement margin</h3>
+                    <p>You need enough speed and turning room to move around pressure instead of backing into it. If the ordinary boss already traps you, use the portal and improve the build first.</p>
+                </article>
+                <article class="swarm-card">
+                    <h3>4. One clear target</h3>
+                    <p>Decide on 60 seconds, six minutes, or a personal best before the swarm starts. A defined stop point prevents an unlock run from becoming a needless failure.</p>
+                </article>
+            </div>
+
+            <h3>How to survive Final Swarm</h3>
+            <div class="swarm-grid">
+                <article class="swarm-card">
+                    <h3>Opening minute</h3>
+                    <ol>
+                        <li>Leave the boss area with a clear route instead of waiting for enemies to close around you.</li>
+                        <li>Move in broad, controlled loops and preserve escape space.</li>
+                        <li>Watch whether kills keep pace with new spawns; if not, widen the route instead of cutting through the pack.</li>
+                        <li>For the Ghost unlock, protect the timer and avoid unnecessary pickups inside dense groups.</li>
+                    </ol>
+                </article>
+                <article class="swarm-card">
+                    <h3>From 1:00 to 6:00</h3>
+                    <ol>
+                        <li>Keep damage active while moving and avoid sudden reversals into enemies following the route.</li>
+                        <li>Use open ground before a path closes; do not wait until the character is fully surrounded.</li>
+                        <li>Judge the run by available space, recovery, and kill speed—not the timer alone.</li>
+                        <li>Once six minutes registers, the Soul Harvester goal is complete; further survival is optional.</li>
+                    </ol>
+                </article>
+            </div>
+
+            <h3>Why older stall builds are less reliable</h3>
+            <p class="swarm-lead">The <a class="swarm-link" href="/guides/patch-notes/V1.0.12.html">v1.0.12 update</a> changed Final Swarm to prevent extremely long runs. It added ghost-type enemies and reduced the effectiveness of Execute mechanics and <a class="swarm-link" href="/database/weapons/black-hole.html">Black Hole</a> control during this phase. Build around active movement and dependable damage instead of assuming one control loop can hold the map indefinitely.</p>
+
+            <div class="swarm-warning">
+                <strong>Common failure signs:</strong> ordinary enemies survive long enough to stack, recovery cannot refill the damage taken during one loop, or every route is closing at once. If these appear before the boss dies, delay the Final Swarm attempt rather than relying on a fixed safe spot.
+            </div>
+        </section>
+
+        <section class="progression-faq" id="faq">
+            <h2>❓ Final Swarm FAQ</h2>
+            <details><summary>What is the Final Swarm in Megabonk?</summary><p>It is the endless enemy phase that begins after a stage boss is defeated. Enter the portal to continue progression, or remain in the stage for a survival target.</p></details>
+            <details><summary>How long do I need to survive Final Swarm to unlock Ghost?</summary><p>Survive for 60 seconds. See the <a class="swarm-link" href="/database/items/ghost.html">Ghost item guide</a> for its effect and follow-up uses.</p></details>
+            <details><summary>How long do I need to survive Final Swarm to unlock Soul Harvester?</summary><p>Survive for six minutes. The unlock is permanent once the requirement registers.</p></details>
+            <details><summary>Can you beat the Final Swarm?</summary><p>Final Swarm is a survival phase with enemies that continue spawning, not a normal wave with a final enemy to clear. Use the portal when progression matters more than extending the run.</p></details>
+            <details><summary>Why does an old Black Hole or Execute stall build stop working?</summary><p>Version 1.0.12 added ghost-type enemies and specifically reduced Execute and Black Hole effectiveness during Final Swarm. Use those tools as part of the build, but keep movement, recovery, and sustained damage available.</p></details>
+        </section>
 
         <section style="margin-top: 4rem; padding: 2rem; background: var(--card-bg); border-radius: 12px; border: 2px solid rgba(255, 107, 53, 0.3);">
             <h2 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">🚀 Ready to Start Your Journey?</h2>
@@ -1191,7 +1454,7 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2025 <a href="/" style="color: var(--primary-color);">Megabonk.org</a> - Unofficial fan guide</p>
-                <p>Not affiliated with official developers | Last Updated: January 2026</p>
+                <p>Not affiliated with official developers | Last Updated: July 2026</p>
             </div>
         </div>
     </footer>
