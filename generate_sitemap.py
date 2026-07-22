@@ -6,15 +6,29 @@ base_dir = r'd:\Antigravity\Megabonk.org'
 base_url = 'https://megabonk.org'
 
 urls = []
+excluded_files = {
+    '404.html',
+    'ceshi.html',
+}
+
+excluded_prefixes = ('components/',)
+canonical_overrides = {
+    'guides/patch-notes/V1.0.7.html': '/guides/patch-notes/V1.0.7',
+}
 for root, _, files in os.walk(base_dir):
     for file in files:
         if file.endswith('.html'):
             filepath = os.path.join(root, file)
             rel_path = os.path.relpath(filepath, base_dir).replace('\\', '/')
+            if rel_path in excluded_files or rel_path.startswith(excluded_prefixes):
+                continue
             if rel_path == 'index.html':
                  url = base_url + '/'
             else:
-                 url = base_url + '/' + rel_path.replace('index.html', '')
+                 url = base_url + canonical_overrides.get(
+                     rel_path,
+                     '/' + rel_path.replace('index.html', ''),
+                 )
             
             # get file modification time
             mtime = os.path.getmtime(filepath)
