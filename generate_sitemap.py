@@ -9,6 +9,7 @@ urls = []
 excluded_files = {
     '404.html',
     'ceshi.html',
+    'guides/characters/character-tier-list-2025.html',
 }
 
 excluded_prefixes = ('components/',)
