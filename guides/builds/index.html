@@ -15,6 +15,19 @@
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Megabonk Best Builds Guide 2026",
+      "url": "https://megabonk.org/guides/builds/",
+      "description": "Character build comparison hub for all 20 Megabonk characters, with weapons, Tome priorities, guide links, and quick filtering.",
+      "dateModified": "2026-07-23",
+      "version": "1.0.69",
+      "isPartOf": {"@type":"WebSite","name":"Megabonk.org","url":"https://megabonk.org/"}
+    }
+    </script>
+
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -950,6 +963,116 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             background: linear-gradient(135deg, rgba(255, 190, 11, 0.3), rgba(255, 0, 110, 0.3));
         }
 
+
+        .build-update-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin: 1.25rem 0 0;
+        }
+
+        .build-update-pill {
+            padding: 0.55rem 0.9rem;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 999px;
+            background: rgba(15, 18, 42, 0.5);
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .build-finder {
+            margin: 0 0 1.5rem;
+            padding: 1.25rem;
+            border: 1px solid rgba(157, 78, 221, 0.35);
+            border-radius: 16px;
+            background: rgba(26, 26, 46, 0.78);
+        }
+
+        .build-finder-row {
+            display: grid;
+            grid-template-columns: minmax(220px, 1.4fr) minmax(190px, 1fr) auto;
+            gap: 0.8rem;
+            align-items: end;
+        }
+
+        .build-filter-field label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .build-filter-field input,
+        .build-filter-field select {
+            width: 100%;
+            min-height: 46px;
+            padding: 0.7rem 0.85rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            background: #11142b;
+            color: var(--text-light);
+            font: inherit;
+        }
+
+        .build-filter-reset {
+            min-height: 46px;
+            padding: 0.7rem 1rem;
+            border: 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .build-filter-status {
+            margin: 0.8rem 0 0;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .build-comparison {
+            margin-bottom: 2.25rem;
+        }
+
+        .build-table-wrap {
+            overflow-x: auto;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 14px;
+            background: var(--card-bg);
+        }
+
+        .build-comparison-table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+        }
+
+        .build-comparison-table th,
+        .build-comparison-table td {
+            padding: 0.9rem 1rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid rgba(255,255,255,0.09);
+        }
+
+        .build-comparison-table th {
+            position: sticky;
+            top: 0;
+            background: #20213f;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .build-comparison-table tbody tr:hover { background: rgba(157, 78, 221, 0.1); }
+        .build-comparison-table tbody tr:last-child td { border-bottom: 0; }
+        .build-comparison-table a { color: #8cb8ff; font-weight: 700; }
+        .build-comparison-table .character-name { color: #fff; font-weight: 800; white-space: nowrap; }
+        .build-comparison-table .page-links { white-space: nowrap; }
+        .filter-empty { display: none; padding: 1rem; text-align: center; color: var(--text-gray); }
         @media (max-width: 768px) {
             .builds-grid-compact {
                 grid-template-columns: 1fr;
@@ -960,6 +1083,12 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 padding: 0.8rem 1.5rem;
                 font-size: 1rem;
             }
+
+            .build-finder-row { grid-template-columns: 1fr; }
+            .build-filter-reset { width: 100%; }
+            .build-update-pill { font-size: 0.8rem; }
+            .build-comparison-table th, .build-comparison-table td { padding: 0.75rem; }
+            .build-table-wrap { margin-inline: -0.25rem; }
         }
 
         .ad-row{grid-column:1/-1;margin:16px 0}
@@ -988,18 +1117,22 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         <div class="hero-content">
             <h1>🏆 Best Megabonk Build 2026</h1>
             <p>Master the most powerful character builds and dominate the leaderboards</p>
+            <div class="build-update-bar" aria-label="Build guide freshness">
+                <span class="build-update-pill">Current version: v1.0.69</span>
+                <span class="build-update-pill">Last updated: July 23, 2026</span>
+            </div>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">35+</div>
-                    <div class="stat-label">Meta Builds</div>
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Character Builds</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">30+</div>
                     <div class="stat-label">Weapon Combos</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Win Rate Possible</div>
+                    <div class="stat-number">20/20</div>
+                    <div class="stat-label">Guides Cross-Linked</div>
                 </div>
             </div>
         </div>
@@ -1023,6 +1156,64 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 <p class="section-subtitle">Optimized builds tailored for each character's unique strengths and abilities</p>
             </div>
 
+            <div class="build-finder" aria-labelledby="build-finder-title">
+                <h3 id="build-finder-title" style="margin:0 0 0.9rem;">Find a Character Build Fast</h3>
+                <div class="build-finder-row">
+                    <div class="build-filter-field">
+                        <label for="characterBuildSearch">Search character or build style</label>
+                        <input id="characterBuildSearch" type="search" placeholder="Try Fox, poison, melee, lifesteal…" autocomplete="off">
+                    </div>
+                    <div class="build-filter-field">
+                        <label for="characterBuildSelect">Jump to a character</label>
+                        <select id="characterBuildSelect">
+                            <option value="">All characters</option>
+                            <option>Amog</option><option>Athena</option><option>Bandit</option><option>Birdo</option>
+                            <option>Bush</option><option>Calcium</option><option>CL4NK</option><option>Dicehead</option>
+                            <option>Fox</option><option>Megachad</option><option>Monke</option><option>Ninja</option>
+                            <option>Noelle</option><option>Ogre</option><option>Robinette</option><option>Sir Chadwell</option>
+                            <option>Sir Oofie</option><option>Spaceman</option><option>Tony McZoom</option><option>Vlad</option>
+                        </select>
+                    </div>
+                    <button class="build-filter-reset" id="buildFilterReset" type="button">Show all</button>
+                </div>
+                <p class="build-filter-status" id="buildFilterStatus" aria-live="polite">Showing all 20 character builds.</p>
+            </div>
+
+            <section class="build-comparison" aria-labelledby="character-build-comparison-title">
+                <div class="section-header">
+                    <h3 id="character-build-comparison-title">Every Character's Best Build Comparison</h3>
+                    <p class="section-subtitle">Patch-current quick picks for v1.0.69. Open the Build for the full loadout, or the Character Guide for unlocks and passive mechanics.</p>
+                </div>
+                <div class="build-table-wrap" tabindex="0" aria-label="Scrollable character build comparison">
+                    <table class="build-comparison-table">
+                        <thead><tr><th>Character</th><th>Best Build Core</th><th>First Tome Priorities</th><th>Difficulty</th><th>Pages</th></tr></thead>
+                        <tbody id="characterBuildRows">
+                            <tr data-character="fox"><td class="character-name">Fox</td><td>Revolver + Bow crit/Luck</td><td>Quantity → Damage</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/fox-best-build">Build</a> · <a href="/guides/characters/fox-kitsune-guide">Guide</a></td></tr>
+                            <tr data-character="robinette"><td class="character-name">Robinette</td><td>Bananarang + Aegis economy</td><td>Quantity → Cooldown</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/robinette-best-build">Build</a> · <a href="/guides/characters/robinette-guide">Guide</a></td></tr>
+                            <tr data-character="ninja"><td class="character-name">Ninja</td><td>Katana + Dexecutioner melee</td><td>Size → Quantity</td><td>Advanced</td><td class="page-links"><a href="/guides/builds/ninja-best-build">Build</a> · <a href="/guides/characters/ninja-unlock-guide">Guide</a></td></tr>
+                            <tr data-character="megachad"><td class="character-name">Megachad</td><td>Aura + Aegis Flex engine</td><td>Cooldown → Size</td><td>Beginner</td><td class="page-links"><a href="/guides/builds/megachad-best-build">Build</a> · <a href="/guides/characters/megachad-guide">Guide</a></td></tr>
+                            <tr data-character="birdo"><td class="character-name">Birdo</td><td>Tornado airborne coverage</td><td>Size → Quantity</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/birdo-best-build">Build</a> · <a href="/guides/characters/birdo-guide">Guide</a></td></tr>
+                            <tr data-character="noelle"><td class="character-name">Noelle</td><td>Frostwalker + Lightning control</td><td>Size → Cooldown</td><td>Beginner</td><td class="page-links"><a href="/guides/builds/noelle-best-build">Build</a> · <a href="/guides/characters/noelle-guide">Guide</a></td></tr>
+                            <tr data-character="dicehead"><td class="character-name">Dicehead</td><td>Dice + Revolver scaling</td><td>XP → Luck</td><td>Advanced</td><td class="page-links"><a href="/guides/builds/dicehead-best-build">Build</a> · <a href="/guides/characters/dicehead-guide">Guide</a></td></tr>
+                            <tr data-character="bandit"><td class="character-name">Bandit</td><td>Dexecutioner + Katana execute</td><td>Size → Cooldown</td><td>Advanced</td><td class="page-links"><a href="/guides/builds/bandit-best-build">Build</a> · <a href="/guides/characters/bandit-guide">Guide</a></td></tr>
+                            <tr data-character="tony mczoom"><td class="character-name">Tony McZoom</td><td>Wireless Dagger + Lightning</td><td>Projectile → Quantity</td><td>Advanced</td><td class="page-links"><a href="/guides/builds/tony-mczoom-best-build">Build</a> · <a href="/guides/characters/tony-mczoom-guide">Guide</a></td></tr>
+                            <tr data-character="sir chadwell"><td class="character-name">Sir Chadwell</td><td>Dexecutioner + Bananarang</td><td>Size → Damage</td><td>Advanced</td><td class="page-links"><a href="/guides/builds/sir-chadwell-best-build">Build</a> · <a href="/guides/characters/sir-chadwell-guide">Guide</a></td></tr>
+                            <tr data-character="calcium"><td class="character-name">Calcium</td><td>Bone + Bananarang speed</td><td>Agility → Cooldown</td><td>Advanced</td><td class="page-links"><a href="/guides/builds/calcium-best-build">Build</a> · <a href="/guides/characters/calcium-guide">Guide</a></td></tr>
+                            <tr data-character="cl4nk"><td class="character-name">CL4NK</td><td>Revolver + Bow projectile crit</td><td>Quantity → Precision</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/cl4nk-best-build">Build</a> · <a href="/guides/characters/cl4nk-guide">Guide</a></td></tr>
+                            <tr data-character="monke"><td class="character-name">Monke</td><td>Bananarang + Revolver</td><td>Quantity → Projectile Speed</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/monke-best-build">Build</a> · <a href="/guides/characters/monke-guide">Guide</a></td></tr>
+                            <tr data-character="bush"><td class="character-name">Bush</td><td>Sniper + Bow Bullseye</td><td>Precision → Size</td><td>Advanced</td><td class="page-links"><a href="/guides/builds/bush-best-build">Build</a> · <a href="/guides/characters/bush-guide">Guide</a></td></tr>
+                            <tr data-character="sir oofie"><td class="character-name">Sir Oofie</td><td>Sword + Aegis armor</td><td>Size → Quantity</td><td>Beginner</td><td class="page-links"><a href="/guides/builds/sir-oofie-best-build">Build</a> · <a href="/guides/characters/sir-oofie-guide">Guide</a></td></tr>
+                            <tr data-character="athena"><td class="character-name">Athena</td><td>Aegis + Lightning defense</td><td>Cooldown → Agility</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/athena-best-build">Build</a> · <a href="/guides/characters/athena-guide">Guide</a></td></tr>
+                            <tr data-character="ogre"><td class="character-name">Ogre</td><td>Axe + Aura bruiser</td><td>Damage → Quantity</td><td>Beginner</td><td class="page-links"><a href="/guides/builds/ogre-best-build">Build</a> · <a href="/guides/characters/ogre-guide">Guide</a></td></tr>
+                            <tr data-character="amog"><td class="character-name">Amog</td><td>Poison Flask + Black Hole</td><td>Cooldown → Quantity</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/amog-best-build">Build</a> · <a href="/guides/characters/amog-guide">Guide</a></td></tr>
+                            <tr data-character="spaceman"><td class="character-name">Spaceman</td><td>Black Hole + Aura control</td><td>XP → Quantity</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/spaceman-best-build">Build</a> · <a href="/guides/characters/spaceman-guide">Guide</a></td></tr>
+                            <tr data-character="vlad"><td class="character-name">Vlad</td><td>Blood Magic + Sword sustain</td><td>Bloody → Cooldown</td><td>Intermediate</td><td class="page-links"><a href="/guides/builds/vlad-best-build">Build</a> · <a href="/guides/characters/vlad-guide">Guide</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="filter-empty" id="buildFilterEmpty">No matching character build. Clear the filter to see all 20.</p>
+            </section>
+
             <div class="builds-grid-compact">
                 <!-- Fox Build -->
                 <a href="https://megabonk.org/guides/builds/fox-best-build" class="build-card-compact">
@@ -1034,7 +1225,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <h3 class="build-card-title">🦊 Fox Luck Master</h3>
                         <p class="build-card-character">Best for: Fox (Kitsune)</p>
                         <p class="build-card-description">
-                            Stack Luck to absurd levels and watch legendary items rain from the sky. Fox's 1% Luck per level creates the ultimate RNG manipulation build.
+                            Fox gains +1.5% Luck per level. Use Quantity and Damage to stabilize the weapon shell while Luck improves the quality of later rewards.
                         </p>
                         <div class="build-card-footer">
                             <div class="difficulty-indicator">
@@ -1118,7 +1309,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <h3 class="build-card-title">💪 Megachad Tank Build</h3>
                         <p class="build-card-character">Best for: Megachad</p>
                         <p class="build-card-description">
-                            Become an unstoppable fortress with massive health pool and AOE damage. Stand your ground and let enemies come to you.
+                            Build Aura coverage around permanent +2.5% Damage from each Flex. Kevin or Leeching Crystal can keep the Flex engine growing.
                         </p>
                         <div class="build-card-footer">
                             <div class="difficulty-indicator">
@@ -1146,7 +1337,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <h3 class="build-card-title">🐦 Birdo Aerial Assault</h3>
                         <p class="build-card-character">Best for: Birdo</p>
                         <p class="build-card-description">
-                            Utilize high mobility and evasion for a hit-and-run playstyle. Stay in the air and rain destruction from above.
+                            Stay airborne to use Birdo's +1% Airborne Damage per level, then scale Tornado coverage with Size and Quantity.
                         </p>
                         <div class="build-card-footer">
                             <div class="difficulty-indicator">
@@ -1398,7 +1589,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <h3 class="build-card-title">🌳 Bush Stealth Ambush</h3>
                         <p class="build-card-character">Best for: Bush</p>
                         <p class="build-card-description">
-                            Use camouflage and stealth mechanics to your advantage. Set up ambushes and control the battlefield with tactical positioning and surprise attacks.
+                            Scale Sniper crits with Precision, then use Size for the more frequent Bullseye marks and larger Bullseye explosions.
                         </p>
                         <div class="build-card-footer">
                             <div class="difficulty-indicator">
@@ -1510,7 +1701,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <h3 class="build-card-title">🔪 Amog Impostor Build</h3>
                         <p class="build-card-character">Best for: Amog</p>
                         <p class="build-card-description">
-                            Suspicious strategies and unpredictable gameplay. Amog's unique mechanics create chaos on the battlefield with unexpected burst damage potential.
+                            Spread Poison Flask through grouped packs. Cooldown and Quantity exploit +1% Poison Damage per level and the growing explosion radius.
                         </p>
                         <div class="build-card-footer">
                             <div class="difficulty-indicator">
@@ -1538,7 +1729,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <h3 class="build-card-title">🚀 Spaceman Orbital Strike</h3>
                         <p class="build-card-character">Best for: Spaceman</p>
                         <p class="build-card-description">
-                            Harness the power of space technology with ranged attacks and area control. Deploy orbital strikes and maintain distance from threats.
+                            Black Hole controls packs while +1.5% XP per level and +5% flat XP Gain accelerate the supporting Aura and Tome setup.
                         </p>
                         <div class="build-card-footer">
                             <div class="difficulty-indicator">
@@ -1566,7 +1757,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <h3 class="build-card-title">🧛 Vlad Vampire Lord</h3>
                         <p class="build-card-character">Best for: Vlad</p>
                         <p class="build-card-description">
-                            Master lifesteal mechanics to become unkillable. Drain enemy health while dealing massive damage, sustaining through any encounter with blood magic.
+                            Blood Magic converts Vlad's +5% base Lifesteal and +1% per-level scaling into reliable sustain; Cooldown raises healing frequency.
                         </p>
                         <div class="build-card-footer">
                             <div class="difficulty-indicator">
@@ -2461,6 +2652,64 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             });
         });
 
+
+        // Character build search and quick filter
+        const characterBuildSearch = document.getElementById('characterBuildSearch');
+        const characterBuildSelect = document.getElementById('characterBuildSelect');
+        const buildFilterReset = document.getElementById('buildFilterReset');
+        const buildFilterStatus = document.getElementById('buildFilterStatus');
+        const buildFilterEmpty = document.getElementById('buildFilterEmpty');
+        const characterCards = Array.from(document.querySelectorAll('#character-builds .builds-grid-compact .build-card-compact'));
+        const characterRows = Array.from(document.querySelectorAll('#characterBuildRows tr'));
+
+        const normalizeBuildText = value => (value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+        function applyCharacterBuildFilter() {
+            const selected = normalizeBuildText(characterBuildSelect ? characterBuildSelect.value : '');
+            const searched = normalizeBuildText(characterBuildSearch ? characterBuildSearch.value : '');
+            const query = selected || searched;
+            let visibleCards = 0;
+
+            characterCards.forEach(card => {
+                const matches = !query || normalizeBuildText(card.textContent).includes(query);
+                card.hidden = !matches;
+                if (matches) visibleCards++;
+            });
+
+            characterRows.forEach(row => {
+                row.hidden = !!query && !normalizeBuildText(row.textContent).includes(query);
+            });
+
+            if (buildFilterStatus) {
+                buildFilterStatus.textContent = query
+                    ? `Showing ${visibleCards} of 20 character builds.`
+                    : 'Showing all 20 character builds.';
+            }
+            if (buildFilterEmpty) buildFilterEmpty.style.display = visibleCards ? 'none' : 'block';
+        }
+
+        if (characterBuildSearch) {
+            characterBuildSearch.addEventListener('input', () => {
+                if (characterBuildSelect) characterBuildSelect.value = '';
+                applyCharacterBuildFilter();
+            });
+        }
+
+        if (characterBuildSelect) {
+            characterBuildSelect.addEventListener('change', () => {
+                if (characterBuildSearch) characterBuildSearch.value = '';
+                applyCharacterBuildFilter();
+            });
+        }
+
+        if (buildFilterReset) {
+            buildFilterReset.addEventListener('click', () => {
+                if (characterBuildSearch) characterBuildSearch.value = '';
+                if (characterBuildSelect) characterBuildSelect.value = '';
+                applyCharacterBuildFilter();
+                if (characterBuildSearch) characterBuildSearch.focus();
+            });
+        }
         // Mobile menu toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');
