@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Patch Notes - Update History & Balance Changes</title>
+    <title>Megabonk Patch Notes V1.0.69 – February 4, 2026</title>
     <meta name="description"
-        content="Complete Megabonk patch notes archive. Track all updates, balance changes, and new features from V1.0.4 to V1.0.64 with detailed changelogs.">
+        content="Megabonk V1.0.69 patch notes for February 4, 2026, with the latest hotfix summary and a stable directory of every documented game version.">
     <link rel="canonical" href="https://megabonk.org/guides/patch-notes/">
 
     <!-- Google tag (gtag.js) -->
@@ -23,9 +23,9 @@
         crossorigin="anonymous"></script>
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Megabonk Patch Notes - Update History & Balance Changes">
+    <meta property="og:title" content="Megabonk Patch Notes V1.0.69 – February 4, 2026">
     <meta property="og:description"
-        content="Complete Megabonk patch notes archive. Track all updates, balance changes, and new features from V1.0.4 to V1.0.64 with detailed changelogs.">
+        content="Latest Megabonk V1.0.69 hotfix summary and a version-by-version patch archive.">
     <meta property="og:url" content="https://megabonk.org/guides/patch-notes/">
     <meta property="og:type" content="article">
     <meta property="og:image" content="https://megabonk.org/images/Stats_Page.png">
@@ -33,9 +33,9 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Megabonk Patch Notes - Update History & Balance Changes">
+    <meta name="twitter:title" content="Megabonk Patch Notes V1.0.69 – February 4, 2026">
     <meta name="twitter:description"
-        content="Complete Megabonk patch notes archive. Track all updates, balance changes, and new features from V1.0.4 to V1.0.17 with detailed changelogs.">
+        content="Latest Megabonk V1.0.69 hotfix summary and a version-by-version patch archive.">
     <meta name="twitter:image" content="https://megabonk.org/images/Stats_Page.png">
 
     <!-- JSON-LD Schema -->
@@ -43,10 +43,10 @@
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Megabonk Patch Notes - Complete Update History",
-        "description": "Complete archive of all Megabonk patches, updates, and balance changes from launch to present.",
+        "headline": "Megabonk Patch Notes V1.0.69 – February 4, 2026",
+        "description": "Megabonk V1.0.69 hotfix summary and version-by-version patch archive.",
         "datePublished": "2025-09-18",
-        "dateModified": "2026-01-29",
+        "dateModified": "2026-07-23",
         "author": {
             "@type": "Organization",
             "name": "Megabonk.org"
@@ -77,7 +77,7 @@
                 "name": "What is the latest Megabonk patch version?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The latest patch is V1.0.64 'H A T S', released on January 25-26, 2026. This update added 21 new hats, character buffs for Vlad, Robinette, and Spaceman, weapon balance changes, and a save recovery feature."
+                    "text": "The latest officially documented patch is V1.0.69, a hotfix dated February 4, 2026. It fixed the level 9999 bug, Auto Leveling tome stats, HP Regen stacking, several hat unlock issues, and other bugs."
                 }
             },
             {
@@ -93,7 +93,7 @@
                 "name": "How often does Megabonk receive updates?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Megabonk receives regular updates from developer vedinad, with patches typically released weekly or bi-weekly to address community feedback, fix bugs, and balance gameplay."
+                    "text": "Megabonk does not have a fixed public patch schedule. Check the official Steam announcements and this version directory for the latest documented update."
                 }
             }
         ]
@@ -224,6 +224,69 @@
         }
 
         /* Quick Navigation */
+        /* Latest Patch Summary */
+        .latest-summary {
+            background: #fff;
+            padding: 40px 0;
+        }
+
+        .latest-summary-card {
+            border: 2px solid #667eea;
+            border-radius: 14px;
+            padding: 28px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+        }
+
+        .latest-summary-card h2 {
+            color: #4f5fc7;
+            margin-bottom: 8px;
+        }
+
+        .latest-version-line {
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px 24px;
+            margin: 18px 0;
+            padding-left: 20px;
+        }
+
+        .summary-grid li {
+            line-height: 1.5;
+        }
+
+        .summary-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .summary-actions .btn-primary {
+            margin: 10px 0 0;
+        }
+
+        .summary-actions .text-link {
+            color: #4f5fc7;
+            font-weight: 700;
+        }
+
+        .version-card.hotfix {
+            border-color: #8b5cf6;
+        }
+
+        @media (max-width: 640px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .quick-nav {
             padding: 40px 0;
             background: #fff;
@@ -690,6 +753,16 @@
                 font-size: 0.85rem;
             }
 
+            .main-nav .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-menu {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
             .hero {
                 padding: 40px 0;
             }
@@ -728,26 +801,57 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Megabonk Patch Notes</h1>
-                <p class="subtitle">Complete update history and changelog archive</p>
+                <h1>Megabonk Patch Notes V1.0.69</h1>
+                <p class="subtitle">Latest hotfix summary and version-by-version update archive</p>
                 <div class="hero-meta">
-                    <span class="meta-item">📅 Last Updated: January 29, 2026</span>
-                    <span class="meta-item">🎮 Game Version: V1.0.64</span>
+                    <span class="meta-item">📅 Latest Patch: February 4, 2026</span>
+                    <span class="meta-item">🎮 Game Version: V1.0.69</span>
                     <span class="meta-item">👤 Developer: vedinad</span>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Latest Patch Summary -->
+    <section class="latest-summary" id="latest-patch-summary" aria-labelledby="latest-patch-title">
+        <div class="container">
+            <div class="latest-summary-card">
+                <h2 id="latest-patch-title">Latest Patch Summary</h2>
+                <p class="latest-version-line"><strong>V1.0.69 Hotfix</strong> · Released February 4, 2026</p>
+                <p>The latest official hotfix focuses on progression, stat behavior, translations, and hat unlock fixes. No new character, weapon, map, or major content system was announced with V1.0.69.</p>
+                <ul class="summary-grid">
+                    <li>Stopped an edge case that could boost a run to level 9999.</li>
+                    <li>Fixed the first Tome level selected through Auto Leveling not granting stats.</li>
+                    <li>Removed the one-point-per-tick cap that affected stacked HP Regen.</li>
+                    <li>Fixed Leeching Crystal failing to trigger Megachad's Flex.</li>
+                    <li>Fixed the Sheriff's Hat achievement during the final boss fight.</li>
+                    <li>Allowed Cheesy Hat on Forest and lowered Shady hat requirements.</li>
+                </ul>
+                <div class="summary-actions">
+                    <a class="btn-primary" href="#v1069">Read V1.0.69 Details ↓</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Quick Navigation -->
     <section class="quick-nav">
         <div class="container">
-            <h2>Jump to Version</h2>
+            <h2>Patch Version Directory</h2>
             <div class="version-grid">
-                <a href="V1.0.64" class="version-card latest">
+                <a href="#v1069" class="version-card latest">
+                    <span class="version-number">V1.0.69</span>
+                    <span class="version-date">Feb 4, 2026</span>
+                    <span class="version-tag">Latest</span>
+                </a>
+                <a href="#v1065" class="version-card hotfix">
+                    <span class="version-number">V1.0.65</span>
+                    <span class="version-date">Jan 26, 2026</span>
+                </a>
+                <a href="V1.0.64" class="version-card">
                     <span class="version-number">V1.0.64</span>
                     <span class="version-date">Jan 25-26, 2026</span>
-                    <span class="version-tag">Latest</span>
+                    <span class="version-tag">H A T S</span>
                 </a>
                 <a href="V1.0.49" class="version-card" style="border-color: #c0392b;">
                     <span class="version-number">V1.0.49</span>
@@ -757,7 +861,7 @@
                 </a>
                 <a href="V1.0.17" class="version-card">
                     <span class="version-number">V1.0.17</span>
-                    <span class="version-date">Oct 20, 2025</span>
+                    <span class="version-date">Oct 19, 2025</span>
                 </a>
                 <a href="V1.0.12" class="version-card">
                     <span class="version-number">V1.0.12</span>
@@ -765,7 +869,7 @@
                 </a>
                 <a href="V1.0.7" class="version-card">
                     <span class="version-number">V1.0.7</span>
-                    <span class="version-date">Sep 29, 2025</span>
+                    <span class="version-date">Sep 28, 2025</span>
                 </a>
                 <a href="V1.0.4" class="version-card">
                     <span class="version-number">V1.0.4</span>
@@ -789,9 +893,9 @@
                         features.</p>
 
                     <div class="info-box">
-                        <h3>Update Schedule</h3>
-                        <p>Patches are typically released weekly or bi-weekly, with hotfixes deployed as needed for
-                            critical issues. Major updates are announced on the official <a
+                        <h3>How to Check for a New Patch</h3>
+                        <p>Megabonk does not have a fixed public update schedule. New versions and hotfixes are announced
+                            when ready. Check the official <a
                                 href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank"
                                 rel="noopener">Steam page</a> and the developer's social media channels.</p>
                     </div>
@@ -854,15 +958,70 @@
                     </div>
                 </section>
 
-                <!-- V1.0.17 -->
-                <section id="v1017" class="patch-section latest-patch">
+                <!-- V1.0.69 -->
+                <section id="v1069" class="patch-section latest-patch">
                     <div class="patch-header">
                         <div class="patch-title-group">
-                            <h2>Version 1.0.17</h2>
+                            <h2>Version 1.0.69 Hotfix</h2>
                             <span class="patch-badge latest">Latest</span>
                         </div>
                         <div class="patch-meta">
-                            <span class="patch-date">📅 October 20, 2025</span>
+                            <span class="patch-date">📅 February 4, 2026</span>
+                            <span class="patch-name">🛠️ Progression, Stats & Hat Fixes</span>
+                        </div>
+                    </div>
+                    <div class="patch-content">
+                        <div class="patch-summary">
+                            <h3>What Changed</h3>
+                            <ul>
+                                <li>Fixed the level 9999 boost caused by banishing all weapons while leaving weapon slots empty.</li>
+                                <li>Fixed the first Auto Leveling Tome pick not awarding its stats.</li>
+                                <li>Fixed translation issues and Leeching Crystal not triggering Megachad's Flex.</li>
+                                <li>HP Regen can now stack beyond one point per tick, including negative regeneration.</li>
+                                <li>Fixed the Sheriff's Hat achievement during the final boss fight.</li>
+                                <li>Cheesy Hat can now unlock on Forest as well as Desert.</li>
+                                <li>Reduced the requirements for Shady hats.</li>
+                            </ul>
+                        </div>
+                        <p><strong>Player impact:</strong> Update before attempting affected hat achievements or using Auto Leveling, stacked HP Regen, or Leeching Crystal with Megachad.</p>
+                    </div>
+                </section>
+
+                <!-- V1.0.65 -->
+                <section id="v1065" class="patch-section">
+                    <div class="patch-header">
+                        <div class="patch-title-group">
+                            <h2>Version 1.0.65 Hotfix</h2>
+                        </div>
+                        <div class="patch-meta">
+                            <span class="patch-date">📅 January 26, 2026</span>
+                            <span class="patch-name">🐛 Damage, Display & Unlock Fixes</span>
+                        </div>
+                    </div>
+                    <div class="patch-content">
+                        <div class="patch-summary">
+                            <h3>What Changed</h3>
+                            <ul>
+                                <li>Fixed the extreme damage bug linked to Joe's Dagger.</li>
+                                <li>Fixed missing translations.</li>
+                                <li>Fixed a Desert black screen caused by pressing Tab while loading.</li>
+                                <li>Fixed Shotgun's Crit Damage upgrade granting 0%.</li>
+                                <li>Fixed Top Hat unlocking on unintended stages.</li>
+                                <li>Fixed rocket transparency and Kevin quest rarity issues.</li>
+                            </ul>
+                        </div>
+                        <p><strong>Base update:</strong> V1.0.65 is a hotfix for <a href="V1.0.64">V1.0.64 H A T S</a>, which added hats, achievements, balance changes, UI improvements, and save recovery.</p>
+                    </div>
+                </section>
+
+                <!-- V1.0.17 -->
+                <section id="v1017" class="patch-section">
+                    <div class="patch-header">
+                        <div class="patch-title-group">
+                            <h2>Version 1.0.17</h2>
+                        </div>
+                        <div class="patch-meta">
+                            <span class="patch-date">📅 October 19, 2025</span>
                             <span class="patch-name">🎨 Fog of War & Visuals Update</span>
                         </div>
                     </div>
@@ -1040,7 +1199,7 @@
                             <h2>Version 1.0.7</h2>
                         </div>
                         <div class="patch-meta">
-                            <span class="patch-date">📅 September 29, 2025</span>
+                            <span class="patch-date">📅 September 28, 2025</span>
                             <span class="patch-name">🔧 Quick Fixes Patch</span>
                         </div>
                     </div>
@@ -1224,7 +1383,7 @@
                 </section>
 
                 <!-- Future Updates Section -->
-                <section class="future-updates">
+                <section class="future-updates" hidden aria-hidden="true">
                     <h2>Upcoming Features</h2>
                     <p>The developer has mentioned several features in development:</p>
                     <ul>
@@ -1323,8 +1482,8 @@
             </div>
         </div>
     </footer>
-    <!-- Code injected by live-server -->
-    <script>
+    <!-- Legacy development helper retained but disabled in production -->
+    <script type="text/plain" data-disabled-live-reload>
         // <![CDATA[  <-- For SVG support
         if ('WebSocket' in window) {
             (function () {
