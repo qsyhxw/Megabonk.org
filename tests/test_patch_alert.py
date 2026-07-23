@@ -53,6 +53,13 @@ class PatchAlertTests(unittest.TestCase):
         self.assertIn("失败", subject)
         self.assertIn("/actions/runs/99", body)
 
+    def test_manual_test_email_confirms_configuration(self):
+        subject, body = patch_alert.build_test_email(
+            {"GITHUB_REPOSITORY": "qsyhxw/Megabonk.org", "GITHUB_RUN_ID": "101"}
+        )
+        self.assertIn("测试成功", subject)
+        self.assertIn("/actions/runs/101", body)
+
     def test_missing_secrets_skips_without_smtp_connection(self):
         self.assertFalse(patch_alert.send_email("Subject", "Body", {}))
 

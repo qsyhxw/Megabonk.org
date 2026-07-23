@@ -72,6 +72,19 @@ Actions 运行：{run_url or '未提供'}
     return subject, body
 
 
+def build_test_email(environment: Mapping[str, str]) -> tuple[str, str]:
+    run_url, _ = github_urls(environment)
+    subject = "[Megabonk] Patch Notes 邮件通知测试成功"
+    body = f"""Gmail SMTP 邮件通知配置成功。
+
+以后检测到新版本或官方追加 Hotfix 时，此邮箱会收到自动提醒。
+本次测试运行：{run_url or '未提供'}
+
+此邮件由 Megabonk.org GitHub Actions 手动测试发送。
+"""
+    return subject, body
+
+
 def build_failure_email(environment: Mapping[str, str]) -> tuple[str, str]:
     run_url, _ = github_urls(environment)
     workflow = environment.get("GITHUB_WORKFLOW", "Update Megabonk Patch Notes")
@@ -120,6 +133,8 @@ def main() -> int:
             Path("data/patch-notes-state.json").read_text(encoding="utf-8")
         )
         subject, body = build_update_email(state, os.environ)
+    elif kind == "test":
+        subject, body = build_test_email(os.environ)
     elif kind == "failure":
         subject, body = build_failure_email(os.environ)
     else:

@@ -5,6 +5,12 @@ on:
     # Every 6 hours; offset from the top of the hour to reduce GitHub schedule delays.
     - cron: '23 */6 * * *'
   workflow_dispatch:
+    inputs:
+      send_test_email:
+        description: Send a Gmail configuration test even when no patch changed
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -121,6 +127,15 @@ jobs:
 
           echo "Unable to push Patch Notes update after 3 attempts." >&2
           exit 1
+
+
+      - name: Send requested test email
+        if: ${{ success() && github.event_name == 'workflow_dispatch' && inputs.send_test_email }}
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_patch_alert.py test
 
       - name: Send version update email
         if: ${{ success() && steps.update.outputs.page_changed == 'true' && steps.publish.outputs.changed == 'true' }}
