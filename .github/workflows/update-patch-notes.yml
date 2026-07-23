@@ -1,0 +1,103 @@
+name: Update Megabonk Patch Notes
+
+on:
+  schedule:
+    # Every 6 hours; offset from the top of the hour to reduce GitHub schedule delays.
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+
+jobs:
+  update-patch-notes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run updater tests
+        run: python -m unittest tests.test_patch_notes_updater -v
+
+      - name: Fetch official Steam announcements
+        run: python scripts/update_patch_notes.py
+
+      - name: Validate generated files
+        shell: bash
+        run: |
+          python -m py_compile scripts/update_patch_notes.py
+          python - <<'PY'
+          import json
+          import re
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          page = Path("guides/patch-notes/index.html").read_text(encoding="utf-8")
+          state = json.loads(Path("data/patch-notes-state.json").read_text(encoding="utf-8"))
+          latest = state["latest_version"]
+
+          required = [
+              f'<meta name="patch-version" content="{latest}">',
+              f'Megabonk Patch Notes V{latest}',
+              "<!-- PATCH_AUTO_LATEST_START -->",
+              "<!-- PATCH_AUTO_LATEST_END -->",
+              "<!-- PATCH_AUTO_DIRECTORY_START -->",
+              "<!-- PATCH_AUTO_DIRECTORY_END -->",
+              "<!-- PATCH_AUTO_SECTIONS_START -->",
+              "<!-- PATCH_AUTO_SECTIONS_END -->",
+          ]
+          missing = [value for value in required if value not in page]
+          if missing:
+              raise SystemExit(f"Missing required patch page markers/content: {missing}")
+
+          ids = re.findall(r'\sid="([^"]+)"', page)
+          duplicates = sorted({value for value in ids if ids.count(value) > 1})
+          if duplicates:
+              raise SystemExit(f"Duplicate HTML ids: {duplicates}")
+
+          ET.parse("sitemap.xml")
+          print(f"Validated patch notes V{latest}")
+          PY
+          git diff --check
+
+      - name: Commit and push when data changed
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add guides/patch-notes/index.html sitemap.xml data/patch-notes-state.json
+
+          if git diff --staged --quiet; then
+            echo "No patch-note changes found." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          VERSION=$(python -c "import json; print(json.load(open('data/patch-notes-state.json', encoding='utf-8'))['latest_version'])")
+          git commit -m "Auto-update patch notes to V${VERSION}"
+
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Updated Patch Notes to V${VERSION}." | tee -a "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "Push attempt ${attempt} failed; retrying after refresh."
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+
+          echo "Unable to push Patch Notes update after 3 attempts." >&2
+          exit 1

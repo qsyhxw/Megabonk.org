@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+
 jobs:
   scrape-and-update:
     runs-on: ubuntu-latest

@@ -9,6 +9,13 @@ on:
       - '**.html'
       - 'generate_tr_v2.py'
 
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest

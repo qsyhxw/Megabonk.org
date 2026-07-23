@@ -2,10 +2,17 @@ name: Fetch Megabonk Leaderboard
 
 on:
   schedule:
-    - cron: '*/180 * * * *'  # Every 30 minutes
+    - cron: '*/30 * * * *'  # Every 30 minutes
   workflow_dispatch:
   push:
     branches: [ main ]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
 
 jobs:
   fetch-leaderboard:
