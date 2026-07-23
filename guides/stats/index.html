@@ -64,7 +64,7 @@
             }
         },
         "datePublished": "2025-11-14",
-        "dateModified": "2026-01-29"
+        "dateModified": "2026-07-23"
     }
     </script>
 
@@ -512,6 +512,16 @@
         .fade-in-up {
             animation: fadeInUp 0.6s ease-out;
         }
+        .scan-section { margin: 2rem 0; padding: 1.5rem; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; }
+        .scan-section h2 { margin: 0 0 .5rem; }
+        .scan-note { margin: 0 0 1rem; color: var(--text-secondary); }
+        .scan-table-wrap { overflow-x: auto; border-radius: 12px; }
+        .scan-table { width: 100%; min-width: 940px; border-collapse: collapse; background: rgba(10,15,30,.82); }
+        .scan-table th, .scan-table td { padding: .8rem .9rem; border-bottom: 1px solid rgba(255,255,255,.1); text-align: left; vertical-align: top; }
+        .scan-table th { color: var(--primary-color); background: rgba(255,255,255,.06); white-space: nowrap; }
+        .scan-table a { color: #7dd3fc; font-weight: 700; }
+        .tier-pill { display: inline-block; padding: .15rem .5rem; border-radius: 999px; background: #7c3aed; color: white; font-weight: 800; white-space: nowrap; }
+
     </style>
 </head>
 <body>
@@ -548,7 +558,7 @@
             <h1>📊 Megabonk Stats Guide</h1>
             <p class="hero-subtitle">
                 Master every stat in Megabonk! Learn how HP, armor, damage, crit, and all other statistics affect your character and build. 
-                Understanding stats is crucial for creating powerful builds and surviving longer runs.
+                Understanding stats is crucial for creating powerful builds and surviving longer runs. Reviewed for v1.0.69 on July 23, 2026.
             </p>
         </div>
     </section>
@@ -556,6 +566,30 @@
     <!-- Main Content -->
     <main class="container">
         
+        <section class="scan-section" aria-labelledby="stat-comparison-title">
+            <h2 id="stat-comparison-title">Core Stats: Effects, Sources and Best Builds</h2>
+            <p class="scan-note">Stats do not unlock individually, so “Main source” points to the Tome or system that most directly raises each value. Priority changes with weapon and character mechanics.</p>
+            <div class="scan-table-wrap" tabindex="0" aria-label="Scrollable stat comparison table">
+                <table class="scan-table">
+                    <thead><tr><th>Stat</th><th>What it changes</th><th>Main source / unlock</th><th>Priority</th><th>Best builds</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>Damage</td><td>Raises outgoing weapon and effect damage</td><td><a href="/database/tomes/damage-tome">Damage Tome</a> (default)</td><td><span class="tier-pill">Core</span></td><td>Every damage build</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
+                        <tr><td>Attack Speed</td><td>Shortens time between attacks</td><td><a href="/database/tomes/cooldown-tome">Cooldown Tome</a> (default)</td><td><span class="tier-pill">Core</span></td><td>Proc, Lifesteal, most weapons</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
+                        <tr><td>Crit Chance</td><td>Raises critical-hit chance; overflow enables Overcrit</td><td><a href="/database/tomes/precision-tome">Precision Tome</a> (default)</td><td><span class="tier-pill">Build</span></td><td>CL4NK, Dicehead, Giant Fork</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
+                        <tr><td>Crit Damage</td><td>Raises the multiplier applied by critical hits</td><td>Weapon upgrades and items</td><td><span class="tier-pill">Build</span></td><td>Crit / Overcrit</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
+                        <tr><td>Projectile Count</td><td>Adds projectiles to compatible attacks</td><td><a href="/database/tomes/quantity-tome">Quantity Tome</a>; fire 5,000 projectiles</td><td><span class="tier-pill">Core</span></td><td>Bullet hell, Sword, Axe</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
+                        <tr><td>Duration</td><td>Extends projectiles, clouds, trails and persistent effects</td><td><a href="/database/tomes/duration-tome">Duration Tome</a>; Axe Lv10</td><td><span class="tier-pill">Build</span></td><td>Poison, Flamewalker, Noelle</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                        <tr><td>Size</td><td>Expands hitboxes, arcs and area coverage</td><td><a href="/database/tomes/size-tome">Size Tome</a></td><td><span class="tier-pill">Build</span></td><td>Aura, swords, AoE</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                        <tr><td>Luck</td><td>Improves the chance of higher-rarity rewards</td><td><a href="/database/tomes/luck-tome">Luck Tome</a>; rare enemy drop</td><td><span class="tier-pill">Snowball</span></td><td>Fox, long runs, reward quality</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                        <tr><td>XP Gain</td><td>Multiplies experience earned</td><td><a href="/database/tomes/xp-tome">XP Tome</a>; break 20 pots</td><td><span class="tier-pill">Core</span></td><td>Every build, especially early</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                        <tr><td>Armor</td><td>Reduces incoming damage</td><td><a href="/database/tomes/armor-tome">Armor Tome</a></td><td><span class="tier-pill">Defense</span></td><td>Sir Oofie, tank, Final Swarm</td><td><a href="#player-stats">Player stats</a></td></tr>
+                        <tr><td>Lifesteal</td><td>Restores health from qualifying hits</td><td><a href="/database/tomes/bloody-tome">Bloody Tome</a></td><td><span class="tier-pill">Defense</span></td><td>Vlad, poison ticks, fast hits</td><td><a href="#player-stats">Player stats</a></td></tr>
+                        <tr><td>Difficulty</td><td>Raises enemy pressure while enabling denser reward farming</td><td><a href="/database/tomes/cursed-tome">Cursed Tome</a>; boss under 5 minutes</td><td><span class="tier-pill">Risk</span></td><td>Leaderboard, kills, XP farming</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <!-- Stats Image -->
         <div class="stats-image-section fade-in-up">
             <div class="stats-image-container">
