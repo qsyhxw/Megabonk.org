@@ -357,10 +357,14 @@
 
         /* Main Content */
         .main-content {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 40px;
             padding: 40px 0;
+        }
+
+        .main-content > .container {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 40px;
+            align-items: start;
         }
 
         /* Patch Sections */
@@ -709,7 +713,7 @@
 
         /* Responsive Design */
         @media (max-width: 968px) {
-            .main-content {
+            .main-content > .container {
                 grid-template-columns: 1fr;
             }
 
