@@ -30,15 +30,30 @@ jobs:
           python-version: '3.12'
 
       - name: Run updater tests
-        run: python -m unittest tests.test_patch_notes_updater -v
+        run: python -m unittest tests.test_patch_notes_updater tests.test_patch_alert -v
 
       - name: Fetch official Steam announcements
-        run: python scripts/update_patch_notes.py
+        id: update
+        shell: bash
+        run: |
+          RESULT=$(python scripts/update_patch_notes.py)
+          echo "$RESULT"
+          RESULT_JSON="$RESULT" python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+
+          result = json.loads(os.environ["RESULT_JSON"])
+          print(f"page_changed={str(result['page_changed']).lower()}")
+          print(f"latest_version={result['latest_version']}")
+          print(f"latest_edited={str(result['latest_edited']).lower()}")
+          print(f"new_versions={','.join(result['new_versions'])}")
+          PY
 
       - name: Validate generated files
         shell: bash
         run: |
           python -m py_compile scripts/update_patch_notes.py
+          python -m py_compile scripts/send_patch_alert.py
           python - <<'PY'
           import json
           import re
@@ -74,6 +89,7 @@ jobs:
           git diff --check
 
       - name: Commit and push when data changed
+        id: publish
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -82,6 +98,7 @@ jobs:
           git add guides/patch-notes/index.html sitemap.xml data/patch-notes-state.json
 
           if git diff --staged --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No patch-note changes found." | tee -a "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
@@ -91,6 +108,9 @@ jobs:
 
           for attempt in 1 2 3; do
             if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+              echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               echo "Updated Patch Notes to V${VERSION}." | tee -a "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
@@ -101,3 +121,22 @@ jobs:
 
           echo "Unable to push Patch Notes update after 3 attempts." >&2
           exit 1
+
+      - name: Send version update email
+        if: ${{ success() && steps.update.outputs.page_changed == 'true' && steps.publish.outputs.changed == 'true' }}
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+          PATCH_NEW_VERSIONS: ${{ steps.update.outputs.new_versions }}
+          PATCH_LATEST_EDITED: ${{ steps.update.outputs.latest_edited }}
+          PATCH_COMMIT_SHA: ${{ steps.publish.outputs.commit_sha }}
+        run: python scripts/send_patch_alert.py update
+
+      - name: Send workflow failure email
+        if: ${{ failure() }}
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_patch_alert.py failure
