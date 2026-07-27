@@ -1,0 +1,64 @@
+name: Update Megabonk Player Count
+
+on:
+  schedule:
+    - cron: '41 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+
+jobs:
+  update-player-count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Test Steam Charts parser
+        run: node tests/player-count-updater.test.mjs
+
+      - name: Refresh Steam player data
+        run: node scripts/update-player-count.mjs
+
+      - name: Validate snapshot
+        run: |
+          node -e "const d=require('./data/player-count.json');if(!(d.official.currentPlayers>0)||!(d.steamCharts.peak24h>0)||!(d.steamCharts.allTimePeak>0)||d.steamCharts.history.length<3)process.exit(1)"
+          git diff --check
+
+      - name: Commit and push when data changed
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/player-count.json
+
+          if git diff --staged --quiet; then
+            echo "No player-count changes found." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          git commit -m "Auto-update Megabonk player count"
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Player-count snapshot updated." | tee -a "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+
+          echo "Unable to push player-count update after 3 attempts." >&2
+          exit 1
