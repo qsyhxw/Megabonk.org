@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megabonk Stats – All Character, Weapon & Build Data</title>
-    <meta name="description" content="Complete Megabonk stats guide: HP, armor, damage, crit, XP, gold, silver and more. Learn how each stat works so you can optimize your characters.">
+    <meta name="description" content="Complete Megabonk stats guide, including what Luck affects, its rarity formula, reward odds, sources, and links to Fox, Luck Tome, and Clover.">
     <meta name="keywords" content="megabonk stats, megabonk guide, character stats, damage stats, defensive stats, weapon stats, build optimization">
     
       <!-- Canonical -->
@@ -64,7 +64,40 @@
             }
         },
         "datePublished": "2025-11-14",
-        "dateModified": "2026-07-23"
+        "dateModified": "2026-07-27"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does Luck do in Megabonk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Luck shifts reward rarity toward Rare, Epic, and Legendary results for level-up offers, chests, shrines, Moai statues, and Shady Guy inventory. Shady Guy inventory is rolled when entering a stage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Luck increase crit chance or item proc chance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Crit Chance, item proc chance, on-hit triggers, and Powerup Drop Chance are separate stats and mechanics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the main Luck sources in Megabonk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Current major sources include Fox's +1.5% Luck per level passive, Luck Tome at +8% per Tome level, Clover at +10%, Green Credit Card chest scaling, Luck rolls from shrines or Chaos Tome, and small stage-scaled Luck rewards from pots."
+          }
+        }
+      ]
     }
     </script>
 
@@ -272,6 +305,7 @@
         }
 
         .stat-card {
+            min-width: 0;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 15px;
@@ -521,6 +555,21 @@
         .scan-table th { color: var(--primary-color); background: rgba(255,255,255,.06); white-space: nowrap; }
         .scan-table a { color: #7dd3fc; font-weight: 700; }
         .tier-pill { display: inline-block; padding: .15rem .5rem; border-radius: 999px; background: #7c3aed; color: white; font-weight: 800; white-space: nowrap; }
+        .luck-deep-dive { scroll-margin-top: 92px; border-color: rgba(255, 215, 0, .45); background: linear-gradient(135deg, rgba(255,215,0,.09), rgba(15,52,96,.48)); }
+        .luck-deep-dive:hover { transform: none; border-color: rgba(255, 215, 0, .7); }
+        .luck-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .luck-panel { padding: 1.1rem; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; background: rgba(8,13,28,.55); }
+        .luck-panel h4 { color: #ffd700; margin-bottom: .55rem; }
+        .luck-panel ul { padding-left: 1.25rem; color: var(--text-secondary); }
+        .formula-box { padding: 1rem; margin: 1rem 0; border-radius: 10px; background: rgba(0,0,0,.28); overflow-x: auto; }
+        .formula-box code { color: #fef3c7; white-space: nowrap; }
+        .luck-table-wrap { width: 100%; max-width: 100%; overflow-x: auto; margin: 1rem 0; border-radius: 10px; }
+        .luck-table { width: 100%; min-width: 620px; border-collapse: collapse; }
+        .luck-table th, .luck-table td { padding: .7rem .8rem; border-bottom: 1px solid rgba(255,255,255,.1); text-align: left; }
+        .luck-table th { color: #ffd700; background: rgba(255,215,0,.08); }
+        .luck-links { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+        .luck-links a { padding: .65rem .9rem; border-radius: 999px; background: rgba(58,134,255,.16); color: #7dd3fc; text-decoration: none; font-weight: 700; }
+        @media (max-width: 768px) { .luck-grid { grid-template-columns: 1fr; } }
 
     </style>
 </head>
@@ -558,7 +607,7 @@
             <h1>📊 Megabonk Stats Guide</h1>
             <p class="hero-subtitle">
                 Master every stat in Megabonk! Learn how HP, armor, damage, crit, and all other statistics affect your character and build. 
-                Understanding stats is crucial for creating powerful builds and surviving longer runs. Reviewed for v1.0.69 on July 23, 2026.
+                Understanding stats is crucial for creating powerful builds and surviving longer runs. Reviewed for v1.0.69 on July 27, 2026.
             </p>
         </div>
     </section>
@@ -580,7 +629,7 @@
                         <tr><td>Projectile Count</td><td>Adds projectiles to compatible attacks</td><td><a href="/database/tomes/quantity-tome">Quantity Tome</a>; fire 5,000 projectiles</td><td><span class="tier-pill">Core</span></td><td>Bullet hell, Sword, Axe</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
                         <tr><td>Duration</td><td>Extends projectiles, clouds, trails and persistent effects</td><td><a href="/database/tomes/duration-tome">Duration Tome</a>; Axe Lv10</td><td><span class="tier-pill">Build</span></td><td>Poison, Flamewalker, Noelle</td><td><a href="#misc-stats">Misc stats</a></td></tr>
                         <tr><td>Size</td><td>Expands hitboxes, arcs and area coverage</td><td><a href="/database/tomes/size-tome">Size Tome</a></td><td><span class="tier-pill">Build</span></td><td>Aura, swords, AoE</td><td><a href="#misc-stats">Misc stats</a></td></tr>
-                        <tr><td>Luck</td><td>Improves the chance of higher-rarity rewards</td><td><a href="/database/tomes/luck-tome">Luck Tome</a>; rare enemy drop</td><td><span class="tier-pill">Snowball</span></td><td>Fox, long runs, reward quality</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                        <tr><td>Luck</td><td>Improves the chance of higher-rarity rewards</td><td><a href="/database/tomes/luck-tome">Luck Tome</a>; rare enemy drop</td><td><span class="tier-pill">Snowball</span></td><td>Fox, long runs, reward quality</td><td><a href="#luck">Luck details</a></td></tr>
                         <tr><td>XP Gain</td><td>Multiplies experience earned</td><td><a href="/database/tomes/xp-tome">XP Tome</a>; break 20 pots</td><td><span class="tier-pill">Core</span></td><td>Every build, especially early</td><td><a href="#misc-stats">Misc stats</a></td></tr>
                         <tr><td>Armor</td><td>Reduces incoming damage</td><td><a href="/database/tomes/armor-tome">Armor Tome</a></td><td><span class="tier-pill">Defense</span></td><td>Sir Oofie, tank, Final Swarm</td><td><a href="#player-stats">Player stats</a></td></tr>
                         <tr><td>Lifesteal</td><td>Restores health from qualifying hits</td><td><a href="/database/tomes/bloody-tome">Bloody Tome</a></td><td><span class="tier-pill">Defense</span></td><td>Vlad, poison ticks, fast hits</td><td><a href="#player-stats">Player stats</a></td></tr>
@@ -607,6 +656,7 @@
                 <a href="#player-stats" class="quick-nav-link">🛡️ Player Stats</a>
                 <a href="#weapon-stats" class="quick-nav-link">⚔️ Weapon Stats</a>
                 <a href="#misc-stats" class="quick-nav-link">🎯 Misc Stats</a>
+                <a href="#luck" class="quick-nav-link">🍀 Luck Explained</a>
                 <a href="#optimization" class="quick-nav-link">📈 Optimization Tips</a>
             </div>
         </div>
@@ -954,21 +1004,92 @@
                 </div>
 
                 <!-- Luck -->
-                <div class="stat-card">
+                <article class="stat-card luck-deep-dive" id="luck">
                     <div class="stat-header">
                         <span class="stat-icon">🍀</span>
-                        <h3 class="stat-name">Luck</h3>
+                        <h3 class="stat-name">What Does Luck Do in Megabonk?</h3>
                     </div>
                     <p class="stat-description">
-                        Affects the rarity of items from all sources, shown as a percentage increase. Higher luck = better upgrades more often.
+                        <strong>Luck changes reward rarity, not combat RNG.</strong> More Luck lowers the relative weight of Common rewards, so Rare, Epic, and Legendary results appear more often. It improves average reward quality but never guarantees a Legendary roll.
                     </p>
+
+                    <div class="luck-grid">
+                        <div class="luck-panel">
+                            <h4>Luck affects</h4>
+                            <ul>
+                                <li>Level-up upgrade rarity</li>
+                                <li>Items rolled when a chest is opened</li>
+                                <li>Shrine reward rarity</li>
+                                <li>Moai statue offers, with mode-specific Luck scaling</li>
+                                <li>Shady Guy inventory, using Luck at stage entry</li>
+                            </ul>
+                        </div>
+                        <div class="luck-panel">
+                            <h4>Luck does not affect</h4>
+                            <ul>
+                                <li>Crit Chance or Crit Damage</li>
+                                <li>Item proc chance or on-hit trigger chance</li>
+                                <li>Whether an enemy drops a chest or powerup</li>
+                                <li>Powerup Drop Chance, which is a separate stat</li>
+                                <li>Guaranteed rewards that already have a fixed result</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>When is the Luck roll made?</h4>
+                    <p class="stat-description">Level-up offers and most interactable rewards use your Luck when the reward is rolled or opened. Shady Guy is the important exception: shop inventory is fixed when you enter the stage, so gaining Luck afterward does not reroll that stage's shop. Moai statues can use 0.5×, 1×, or 1.5× of your Luck; a special mode ignores Luck and always offers Legendary rewards.</p>
+
+                    <h4>Luck rarity formula</h4>
+                    <p class="stat-description">Community code analysis models the current rarity roll with base weights Common 70, Rare 15, Epic 6, and Legendary 1.5. If <em>L</em> is the displayed Luck percentage:</p>
+                    <div class="formula-box"><code>S = ln(L / 100 + 1) × 1.5</code><br><code>Wᵢ = baseWeightᵢ × 1.5<sup>−(3−i)×S</sup></code><br><code>Pᵢ = Wᵢ / ΣW</code></div>
+                    <p class="stat-description">The logarithm creates diminishing returns: each extra block of Luck still helps, but less than the previous block. These are approximate chest-style rarity odds from that model:</p>
+                    <div class="luck-table-wrap" tabindex="0" aria-label="Luck reward rarity examples">
+                        <table class="luck-table">
+                            <thead><tr><th>Displayed Luck</th><th>Common</th><th>Rare</th><th>Epic</th><th>Legendary</th></tr></thead>
+                            <tbody>
+                                <tr><td>0%</td><td>75.68%</td><td>16.22%</td><td>6.49%</td><td>1.62%</td></tr>
+                                <tr><td>100%</td><td>62.43%</td><td>20.39%</td><td>12.43%</td><td>4.74%</td></tr>
+                                <tr><td>500%</td><td>33.80%</td><td>21.54%</td><td>25.62%</td><td>19.04%</td></tr>
+                                <tr><td>1,000%</td><td>19.20%</td><td>17.69%</td><td>30.42%</td><td>32.69%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="stat-warning">
-                        <strong>Important Note:</strong> Luck does <strong>NOT</strong> affect item proc chance or crit chance—only the quality of item drops and upgrade choices.
+                        <strong>Formula scope:</strong> The rarity formula and example odds come from current community code analysis, not a developer-published formula. Official patch notes do confirm the current Fox, Luck Tome, and Clover values. Different reward systems or special Moai modes can modify the roll.
                     </div>
+
+                    <h4 style="margin-top:1.25rem">Current Luck sources</h4>
+                    <div class="luck-grid">
+                        <div class="luck-panel">
+                            <h4>Reliable scaling</h4>
+                            <ul>
+                                <li><a href="/guides/characters/fox-kitsune-guide" class="internal-link">Fox</a>: +1.5% Luck per character level</li>
+                                <li><a href="/database/tomes/luck-tome" class="internal-link">Luck Tome</a>: +8% Luck per Tome level</li>
+                                <li><a href="/database/items/clover" class="internal-link">Clover</a>: +10% Luck per item</li>
+                                <li><a href="/database/items/credit-card-green" class="internal-link">Green Credit Card</a>: run-based Luck from opening chests, with higher chest prices per card</li>
+                            </ul>
+                        </div>
+                        <div class="luck-panel">
+                            <h4>Run-based sources</h4>
+                            <ul>
+                                <li>Luck upgrades from shrines and Chaos Tome rolls</li>
+                                <li>Pots and vases grant a small amount of Luck that scales with the stage</li>
+                                <li>Temporary or special reward rules may use their own multiplier</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="stat-tip">
-                        <strong>Farm Better:</strong> Increase with <a href="/database/tomes/luck-tome" class="internal-link">Luck Tome</a> to get more Legendary and Mythic items. Some characters like <a href="/guides/characters/fox-kitsune-guide" class="internal-link">Fox</a> have innate luck bonuses.
+                        <strong>Practical example:</strong> Moving from 0% to 100% Luck raises the model's Legendary chance from about 1.62% to 4.74%; it does not make Legendary rewards guaranteed. For Fox's passive value, Luck Tome unlock, or Clover's item effect, use the dedicated entity pages below.
                     </div>
-                </div>
+                    <div class="luck-links">
+                        <a href="/guides/characters/fox-kitsune-guide">Fox passive guide</a>
+                        <a href="/database/tomes/luck-tome">Luck Tome effect &amp; unlock</a>
+                        <a href="/database/items/clover">Clover +10% Luck</a>
+                        <a href="/guides/mechanics/powerups/">Powerup Drop Chance</a>
+                    </div>
+                    <p style="margin-top:1rem;color:var(--text-muted);font-size:.9rem">Last verified July 27, 2026. Sources: <a href="https://steamcommunity.com/app/3405340/announcements/" target="_blank" rel="nofollow noopener" class="internal-link">official Megabonk patch notes</a> and <a href="https://www.megabonkinfo.org/player-stats/luck" target="_blank" rel="nofollow noopener" class="internal-link">current Luck code-analysis reference</a>.</p>
+                </article>
 
                 <!-- Difficulty -->
                 <div class="stat-card">
