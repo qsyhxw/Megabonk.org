@@ -844,11 +844,15 @@
         </nav>
         <div class="page-header">
             <h1>🏗️ Leaderboard Builds</h1>
-            <p>What Top 100 Players Actually Use</p>
+            <p>Equipment patterns from the current patch top 100 verified runs</p>
             <div class="meta-badge">
                 <span>📊</span>
                 <span id="data-source-badge">Loading data...</span>
             </div>
+        </div>
+
+        <div id="build-source-note" style="margin: 0 0 24px; padding: 16px 20px; border-radius: 12px; background: rgba(255,255,255,.96); color: #495057; line-height: 1.6; box-shadow: 0 8px 24px rgba(0,0,0,.12);">
+            Loading the current patch snapshot from <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Leaderboard.gg</a>. Usage frequency is run evidence, not an automatic tier rating or editorial recommendation.
         </div>
 
         <!-- Loading State -->
@@ -880,13 +884,13 @@
             <div class="build-header">
                 <h2 class="card-title" style="color: white; margin: 0;">
                     <span>🔬</span>
-                    <span>Current Meta Analysis</span>
+                    <span>Current Run Evidence</span>
                 </h2>
             </div>
             <div class="build-content">
                 <h3 class="build-section-title">
                     <span>⚔️</span>
-                    <span>Most Used Weapons (Top 100)</span>
+                    <span>Most Used Weapons · Current Top 100 Runs</span>
                 </h3>
                 <div id="weapons-analysis" style="margin-bottom: 30px;">
                     <!-- Dynamically populated -->
@@ -978,12 +982,15 @@
 
     <script>
         // Configuration
+        let scrollBehaviorReady = false;
+
         const CONFIG = {
             dataUrl: '/leaderboard-data.json',
             top100Only: true,
             minUsageForDisplay: 1,
             minCharactersToShow: 4,
-            maxCharactersToShow: 6
+            maxCharactersToShow: 6,
+            updateInterval: 900000
         };
 
         // ============================================
@@ -2351,6 +2358,17 @@
             return str.replace(/([A-Z])/g, ' $1').trim().replace(/^./, s => s.toUpperCase());
         }
 
+        function formatCharacterName(name) {
+            const key = normalizeKey(name || '');
+            const specialNames = {
+                cl4nk: 'CL4NK',
+                tonymczoom: 'Tony McZoom',
+                siroofie: 'Sir Oofie',
+                sirchadwell: 'Sir Chadwell'
+            };
+            return specialNames[key] || formatName(name || 'Unknown');
+        }
+
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
@@ -2372,18 +2390,24 @@
                 
                 const result = await response.json();
                 const data = result.data || [];
-                
-                console.log(`📊 Total players in data: ${data.length}`);
-                
-                const topData = CONFIG.top100Only ? data.slice(0, 100) : data;
-                
-                console.log(`📊 Analyzing top ${topData.length} players...`);
-                
+                if (!Array.isArray(data) || data.length < 100) throw new Error('Incomplete leaderboard snapshot');
+
+                const activeVersion = result.active_version || null;
+                const activeData = activeVersion
+                    ? data.filter(run => !run.buildVersionLabel || run.buildVersionLabel === activeVersion)
+                    : data;
+                if (activeData.length < 50) throw new Error('Not enough current-version runs');
+
+                const rankedData = [...activeData].sort((a, b) => (a.rank || 999999) - (b.rank || 999999));
+                const topData = CONFIG.top100Only ? rankedData.slice(0, 100) : rankedData;
                 const analysis = analyzeLeaderboardData(topData);
-                
-                console.log(`✅ Found ${analysis.characters.length} characters to display`);
-                
-                document.getElementById('data-source-badge').textContent = `Based on Top ${topData.length} Players`;
+                const versionLabel = activeVersion ? `v${activeVersion}` : 'version not supplied';
+                const syncLabel = result.fetched_at
+                    ? new Date(result.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
+                    : 'unknown sync time';
+
+                document.getElementById('data-source-badge').textContent = `Top ${topData.length} Verified Runs · ${versionLabel}`;
+                document.getElementById('build-source-note').innerHTML = `Source: <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Leaderboard.gg</a> · ${versionLabel} · ${topData.length} ranked-run sample · synchronized ${syncLabel}. Usage frequency is evidence, not an automatic tier rating or editorial recommendation.`;
                 
                 renderCharacterNav(analysis.characters);
                 renderMetaOverview(analysis);
@@ -2395,7 +2419,10 @@
                 document.getElementById('meta-overview').style.display = 'grid';
                 document.getElementById('meta-analysis').style.display = 'block';
                 
-                setupScrollBehavior();
+                if (!scrollBehaviorReady) {
+                    setupScrollBehavior();
+                    scrollBehaviorReady = true;
+                }
                 
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -2426,18 +2453,20 @@
                 if (char) {
                     if (!characterStats[char]) {
                         characterStats[char] = {
-                            name: player.character,
+                            name: formatCharacterName(player.character),
                             count: 0,
                             totalKills: 0,
                             topRank: 999,
                             weapons: [],
                             tomes: [],
-                            items: []
+                            items: [],
+                            scores: []
                         };
                     }
                     characterStats[char].count++;
                     characterStats[char].totalKills += kills;
                     characterStats[char].topRank = Math.min(characterStats[char].topRank, rank);
+                    characterStats[char].scores.push(kills);
                     
                     (player.weapons || []).forEach(w => characterStats[char].weapons.push(w));
                     (player.tomes || []).forEach(t => characterStats[char].tomes.push(t));
@@ -2462,6 +2491,11 @@
             
             Object.values(characterStats).forEach(char => {
                 char.avgKills = Math.round(char.totalKills / char.count);
+                const sortedScores = [...char.scores].sort((a, b) => a - b);
+                const middle = Math.floor(sortedScores.length / 2);
+                char.medianKills = sortedScores.length % 2
+                    ? sortedScores[middle]
+                    : Math.round((sortedScores[middle - 1] + sortedScores[middle]) / 2);
                 char.usageRate = ((char.count / data.length) * 100).toFixed(1);
             });
             
@@ -2542,7 +2576,9 @@
             const secondChar = analysis.characters[1] || topChar;
             const topWeapon = analysis.weapons[0];
             
-            const bestPerformer = [...analysis.characters].sort((a,b) => b.avgKills - a.avgKills)[0];
+            const stablePerformers = analysis.characters.filter(character => character.count >= 3);
+            const bestPerformer = [...(stablePerformers.length ? stablePerformers : analysis.characters)]
+                .sort((a, b) => b.medianKills - a.medianKills)[0];
             
             const topCharData = getCharacterData(topChar.name);
             const bestPerformerData = getCharacterData(bestPerformer.name);
@@ -2564,14 +2600,14 @@
 
                 <div class="meta-card">
                     <div class="meta-card-header">
-                        <div class="meta-card-title">Top Performer</div>
-                        <div class="meta-card-badge">S-TIER</div>
+                        <div class="meta-card-title">Highest Median</div>
+                        <div class="meta-card-badge">3+ RUNS</div>
                     </div>
                     <div class="meta-card-value">
                         ${bestPerformerData && bestPerformerData.image ? `<img src="${bestPerformerData.image}" alt="${escapeHtml(bestPerformer.name)}">` : ''}
                         <span>${escapeHtml(bestPerformer.name)}</span>
                     </div>
-                    <div class="meta-card-description">${formatNumber(bestPerformer.avgKills)} avg kills</div>
+                    <div class="meta-card-description">${formatNumber(bestPerformer.medianKills)} median kills · ${bestPerformer.count} runs</div>
                 </div>
 
                 <div class="meta-card">
@@ -2588,8 +2624,8 @@
 
                 <div class="meta-card">
                     <div class="meta-card-header">
-                        <div class="meta-card-title">Rising Pick</div>
-                        <div class="meta-card-badge">TREND</div>
+                        <div class="meta-card-title">Second Most Picked</div>
+                        <div class="meta-card-badge">#2 PICK</div>
                     </div>
                     <div class="meta-card-value">
                         ${secondCharData && secondCharData.image ? `<img src="${secondCharData.image}" alt="${escapeHtml(secondChar.name)}">` : ''}
@@ -2891,6 +2927,7 @@
         // 初始化
         window.addEventListener('DOMContentLoaded', () => {
             loadAndAnalyzeData();
+            setInterval(loadAndAnalyzeData, CONFIG.updateInterval);
         });
     </script>
     <script src="/js/current-year.js" defer></script>

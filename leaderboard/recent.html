@@ -388,6 +388,11 @@
             padding: 0;
         }
 
+        #table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         /* Table */
         .leaderboard-table {
             width: 100%;
@@ -822,7 +827,7 @@
             <p>Latest Player Submissions & Trending Builds</p>
             <div class="live-badge">
                 <span class="live-indicator"></span>
-                <span>VERIFIED COMMUNITY DATA - SOURCE CHECKED HOURLY</span>
+                <span id="recent-source-status">VERIFIED COMMUNITY DATA - SOURCE CHECKED HOURLY</span>
             </div>
         </div>
 
@@ -830,7 +835,7 @@
         <div class="time-filter">
             <div class="current-range">
                 <span>📅</span>
-                <span>Showing submissions from <span id="range-text">last 7 days</span></span>
+                <span>Showing submissions from <span id="range-text">last 7 days</span> · <a href="https://megabonk.leaderboard.gg/" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Source: Leaderboard.gg</a></span>
             </div>
             <div class="filter-controls">
                 <button class="btn-filter active" data-days="7" onclick="setDaysFilter(7)">
@@ -859,7 +864,7 @@
 
             <div class="stat-card">
                 <div class="stat-icon">👥</div>
-                <div class="stat-label">Active Players</div>
+                <div class="stat-label">Unique Players</div>
                 <div class="stat-value" id="active-players">-</div>
                 <div class="stat-change">
                     <span>📊</span>
@@ -913,7 +918,7 @@
                 </a>
                 <a href="https://megabonk.org/leaderboard/official" class="quick-link">
                     <span>📤</span>
-                    <span>Official Leaderboard</span>
+                    <span>Steam &amp; Submission Guide</span>
                 </a>
                 <a href="https://megabonk.org/leaderboard/verified" class="quick-link">
                     <span>✅</span>
@@ -1114,6 +1119,7 @@
         let currentDays = CONFIG.defaultDays;
         let autoRefreshTimer = null;
         let sourceFetchedAt = null;
+        let activeVersion = null;
 
         // ============================================================
         // 🚀 初始化
@@ -1158,6 +1164,8 @@
 
                 leaderboardData = rawData;
                 sourceFetchedAt = result.fetched_at || null;
+                activeVersion = result.active_version || null;
+                document.getElementById('recent-source-status').textContent = `LEADERBOARD.GG VERIFIED DATA · ${activeVersion ? 'V' + activeVersion : 'VERSION UNKNOWN'} · SOURCE CHECKED HOURLY`;
                 console.log(`✅ Successfully loaded ${leaderboardData.length} entries`);
 
                 processAndRender(currentDays);
@@ -1194,34 +1202,24 @@
         // 🔍 核心过滤逻辑
         // ============================================================
         function filterRecentData(data, days) {
-            if(!data || !Array.isArray(data)) return [];
-            
+            if (!Array.isArray(data)) return [];
             const now = Date.now();
-            const cutoffTimestamp = (now / 1000) - (days * 24 * 60 * 60);
-            
-            // 1. 数据清洗和时间戳标准化
-            const validData = data.map(item => {
-                let ts = 0;
-                // 支持多种时间格式: _seconds, timestamp, 或者直接 ISO 字符串
-                if (item.createdAt && item.createdAt._seconds) {
-                    ts = item.createdAt._seconds;
-                } else if (item.timestamp) {
-                    ts = item.timestamp;
-                } else if (item.date) {
-                    ts = new Date(item.date).getTime() / 1000;
-                }
-                return { ...item, _processedTime: ts };
-            });
+            const cutoff = now - (days * 24 * 60 * 60 * 1000);
 
-            // 2. 筛选时间范围内的
-            const filtered = validData.filter(item => {
-                return item._processedTime >= cutoffTimestamp;
-            });
-            
-            // 3. 排序：最新的在最前面 (descending order)
-            return filtered
-                .sort((a, b) => b._processedTime - a._processedTime)
-                .slice(0, CONFIG.maxDisplayRanks);
+            return data
+                .filter(item => !activeVersion || !item.buildVersionLabel || item.buildVersionLabel === activeVersion)
+                .map(item => {
+                    let submittedAt = 0;
+                    if (item.createdAtIso) submittedAt = Date.parse(item.createdAtIso);
+                    if (!Number.isFinite(submittedAt) || !submittedAt) {
+                        if (item.createdAt?._seconds) submittedAt = item.createdAt._seconds * 1000;
+                        else if (typeof item.createdAt === 'string') submittedAt = Date.parse(item.createdAt);
+                        else if (typeof item.createdAt === 'number') submittedAt = item.createdAt > 10000000000 ? item.createdAt : item.createdAt * 1000;
+                    }
+                    return { ...item, _processedTime: Number.isFinite(submittedAt) ? submittedAt / 1000 : 0 };
+                })
+                .filter(item => item._processedTime * 1000 >= cutoff && item._processedTime * 1000 <= now)
+                .sort((a, b) => b._processedTime - a._processedTime);
         }
 
         // ============================================================
@@ -1253,7 +1251,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        ${data.map((item, index) => renderTableRow(item, index)).join('')}
+                        ${data.slice(0, CONFIG.maxDisplayRanks).map((item, index) => renderTableRow(item, index)).join('')}
                     </tbody>
                 </table>
             `;
@@ -1316,31 +1314,41 @@
         // 📊 统计与趋势
         // ============================================================
         function updateStats(data) {
-            if (!data || data.length === 0) return;
-
-            // 最高分
+            if (!data || data.length === 0) {
+                document.getElementById('top-recent-score').textContent = '0';
+                document.getElementById('active-players').textContent = '0';
+                document.getElementById('latest-time').textContent = '-';
+                document.getElementById('avg-recent-score').textContent = '0';
+                document.getElementById('top-score-info').textContent = `No runs in last ${currentDays} days`;
+                document.getElementById('players-info').textContent = '0 submissions';
+                document.getElementById('latest-info').textContent = 'No recent player';
+                document.getElementById('avg-info').textContent = 'Average Kills';
+                return;
+            }
             const topScore = Math.max(...data.map(item => item.kills || 0));
             document.getElementById('top-recent-score').textContent = formatNumber(topScore);
             document.getElementById('top-score-info').textContent = `In last ${currentDays} days`;
-
-            // 活跃人数
-            document.getElementById('active-players').textContent = formatNumber(data.length);
+            const uniquePlayers = new Set(data.map(item => (item.playerName || 'Anonymous').trim().toLowerCase())).size;
+            document.getElementById('active-players').textContent = formatNumber(uniquePlayers);
             document.getElementById('players-info').textContent = `${data.length} submissions`;
-
-            // 最新提交
             const latestTimeAgo = formatTimeAgo(data[0]._processedTime || 0);
             document.getElementById('latest-time').textContent = latestTimeAgo;
             document.getElementById('latest-info').textContent = data[0].playerName || 'Anonymous';
-
-            // 平均分
             const sum = data.reduce((acc, item) => acc + (item.kills || 0), 0);
-            const avg = Math.round(sum / data.length);
-            document.getElementById('avg-recent-score').textContent = formatNumber(avg);
+            document.getElementById('avg-recent-score').textContent = formatNumber(Math.round(sum / data.length));
             document.getElementById('avg-info').textContent = 'Average Kills';
         }
 
         function updateTrending(data) {
-            if (!data || data.length === 0) return;
+            if (!data || data.length === 0) {
+                document.getElementById('trending-character').textContent = '-';
+                document.getElementById('character-count').textContent = 'No data available';
+                document.getElementById('trending-weapon').textContent = '-';
+                document.getElementById('weapon-count').textContent = 'No data available';
+                document.getElementById('most-recent-player').textContent = '-';
+                document.getElementById('recent-info').textContent = 'No recent submission';
+                return;
+            }
 
             // 热门角色统计
             const characterCount = {};
@@ -1368,7 +1376,7 @@
             if (Object.keys(weaponCount).length > 0) {
                 const topWeapon = Object.keys(weaponCount).reduce((a, b) => weaponCount[a] > weaponCount[b] ? a : b);
                 const weaponKey = normalizeKey(topWeapon);
-                const weaponUrl = WEAPON_URLS[weaponKey] || '#';
+                const weaponUrl = WEAPON_URLS[weaponKey] || 'https://megabonk.org/database/weapons/';
                 document.getElementById('trending-weapon').innerHTML = `<a href="${weaponUrl}">${escapeHtml(topWeapon)}</a>`;
                 document.getElementById('weapon-count').textContent = `Used in ${weaponCount[topWeapon]} builds`;
             } else {
@@ -1389,9 +1397,12 @@
         function updateLastUpdateTime(timestamp) {
             const element = document.getElementById('last-update');
             const date = new Date(timestamp);
-            const now = new Date();
-            const minutes = Math.floor((now - date) / 60000);
-            const timeText = minutes < 1 ? 'Just now' : `${minutes}m ago`;
+            if (!timestamp || Number.isNaN(date.getTime())) {
+                element.innerHTML = '<span>🕐</span><span>Sync time unavailable</span>';
+                return;
+            }
+            const minutes = Math.max(0, Math.floor((Date.now() - date.getTime()) / 60000));
+            const timeText = minutes < 1 ? 'Just now' : minutes < 60 ? `${minutes}m ago` : date.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
             element.innerHTML = `<span>🕐</span><span>${timeText}</span>`;
         }
 
