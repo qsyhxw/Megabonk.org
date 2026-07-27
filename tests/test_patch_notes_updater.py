@@ -25,23 +25,26 @@ class PatchNotesUpdaterTests(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory(dir=temp_root)
         root = Path(temporary.name)
         page = root / "guides" / "patch-notes" / "index.html"
+        homepage = root / "index.html"
         sitemap = root / "sitemap.xml"
         state = root / "data" / "patch-notes-state.json"
         page.parent.mkdir(parents=True)
         state.parent.mkdir(parents=True)
         shutil.copy2(ROOT / "guides" / "patch-notes" / "index.html", page)
+        shutil.copy2(ROOT / "index.html", homepage)
         shutil.copy2(ROOT / "sitemap.xml", sitemap)
         shutil.copy2(ROOT / "data" / "patch-notes-state.json", state)
-        return temporary, page, sitemap, state
+        return temporary, page, homepage, sitemap, state
 
     def load_fixture(self, name):
         path = ROOT / "tests" / "fixtures" / name
         return json.loads(path.read_text(encoding="utf-8"))
 
     def test_current_official_data_does_not_rewrite_page(self):
-        temporary, page, sitemap, state = self.make_workspace()
+        temporary, page, homepage, sitemap, state = self.make_workspace()
         self.addCleanup(temporary.cleanup)
         original_page = page.read_text(encoding="utf-8")
+        original_homepage = homepage.read_text(encoding="utf-8")
         payload = self.load_fixture("steam-news-current.json")
         fixture_latest = max(
             patch_updater.parse_official_news(payload),
@@ -56,43 +59,52 @@ class PatchNotesUpdaterTests(unittest.TestCase):
         result = patch_updater.run_update(
             payload,
             page,
+            homepage,
             sitemap,
             state,
             date(2026, 7, 23),
         )
 
         self.assertFalse(result["page_changed"])
+        self.assertFalse(result["homepage_changed"])
         self.assertEqual(result["new_versions"], [])
         self.assertEqual(page.read_text(encoding="utf-8"), original_page)
+        self.assertEqual(homepage.read_text(encoding="utf-8"), original_homepage)
         saved = json.loads(state.read_text(encoding="utf-8"))
         self.assertEqual(saved["latest_version"], "1.0.69")
         self.assertTrue(saved["versions"]["1.0.69"]["source_hash"])
 
     def test_new_version_updates_page_sitemap_and_is_idempotent(self):
-        temporary, page, sitemap, state = self.make_workspace()
+        temporary, page, homepage, sitemap, state = self.make_workspace()
         self.addCleanup(temporary.cleanup)
         payload = self.load_fixture("steam-news-new.json")
 
         first = patch_updater.run_update(
-            payload, page, sitemap, state, date(2026, 8, 2)
+            payload, page, homepage, sitemap, state, date(2026, 8, 2)
         )
         rendered = page.read_text(encoding="utf-8")
+        rendered_homepage = homepage.read_text(encoding="utf-8")
         rendered_sitemap = sitemap.read_text(encoding="utf-8")
         rendered_state = state.read_text(encoding="utf-8")
 
         self.assertTrue(first["page_changed"])
+        self.assertTrue(first["homepage_changed"])
         self.assertEqual(first["new_versions"], ["1.0.70"])
         self.assertIn('<meta name="patch-version" content="1.0.70">', rendered)
         self.assertIn("Megabonk Patch Notes V1.0.70", rendered)
         self.assertIn('data-patch-version="1.0.70"', rendered)
         self.assertIn('id="v1070"', rendered)
+        self.assertIn('<strong data-home-patch-version>v1.0.70</strong>', rendered_homepage)
+        self.assertIn('datetime="2026-08-02">August 2, 2026</time>', rendered_homepage)
         self.assertIn("2026-08-02</lastmod>", rendered_sitemap)
 
         second = patch_updater.run_update(
-            payload, page, sitemap, state, date(2026, 8, 2)
+            payload, page, homepage, sitemap, state, date(2026, 8, 2)
         )
         self.assertFalse(second["page_changed"])
+        self.assertFalse(second["homepage_changed"])
         self.assertEqual(page.read_text(encoding="utf-8"), rendered)
+        self.assertEqual(homepage.read_text(encoding="utf-8"), rendered_homepage)
         self.assertEqual(sitemap.read_text(encoding="utf-8"), rendered_sitemap)
         self.assertEqual(state.read_text(encoding="utf-8"), rendered_state)
 

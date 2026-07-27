@@ -501,13 +501,39 @@ def update_page(page: str, records: list[PatchRecord], today: date) -> tuple[str
     return page, target_version
 
 
+def update_homepage(homepage: str, version: str, today: date) -> str:
+    version_label = f"v{version}"
+    date_label = display_date(today.isoformat())
+    homepage = _replace_once(
+        homepage,
+        r'(<strong data-home-patch-version>)[^<]+(</strong>)',
+        rf"\g<1>{version_label}\2",
+        "homepage patch version",
+    )
+    return _replace_once(
+        homepage,
+        r'(<time data-home-patch-synced datetime=")[^"]+(">)[^<]+(</time>)',
+        rf"\g<1>{today.isoformat()}\2{date_label}\3",
+        "homepage patch sync date",
+    )
+
+
 def update_sitemap(sitemap: str, today: date) -> str:
-    pattern = (
+    patch_pattern = (
         r"(<loc>https://megabonk\.org/guides/patch-notes/</loc>\s*"
         r"<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)"
     )
+    sitemap = _replace_once(
+        sitemap, patch_pattern, rf"\g<1>{today.isoformat()}\2",
+        "patch-notes sitemap lastmod", re.DOTALL,
+    )
+    home_pattern = (
+        r"(<loc>https://megabonk\.org/</loc>\s*"
+        r"<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)"
+    )
     return _replace_once(
-        sitemap, pattern, rf"\g<1>{today.isoformat()}\2", "sitemap lastmod", re.DOTALL
+        sitemap, home_pattern, rf"\g<1>{today.isoformat()}\2",
+        "homepage sitemap lastmod", re.DOTALL,
     )
 
 
@@ -533,6 +559,7 @@ def write_json_if_changed(path: Path, value: dict[str, Any]) -> bool:
 def run_update(
     payload: dict[str, Any],
     page_path: Path,
+    homepage_path: Path,
     sitemap_path: Path,
     state_path: Path,
     today: date,
@@ -543,6 +570,7 @@ def run_update(
 
     state = load_state(state_path)
     page = page_path.read_text(encoding="utf-8")
+    homepage = homepage_path.read_text(encoding="utf-8")
     sitemap = sitemap_path.read_text(encoding="utf-8")
     current_match = re.search(r'<meta name="patch-version" content="(\d+\.\d+\.\d+)">', page)
     if not current_match:
@@ -574,12 +602,17 @@ def run_update(
         page_records = [latest_api]
 
     page_changed = False
+    homepage_changed = False
     if page_records:
         updated_page, target_version = update_page(page, page_records, today)
+        updated_homepage = update_homepage(homepage, target_version, today)
         updated_sitemap = update_sitemap(sitemap, today)
         if updated_page != page:
             page_path.write_text(updated_page, encoding="utf-8", newline="\n")
             page_changed = True
+        if updated_homepage != homepage:
+            homepage_path.write_text(updated_homepage, encoding="utf-8", newline="\n")
+            homepage_changed = True
         if updated_sitemap != sitemap:
             sitemap_path.write_text(updated_sitemap, encoding="utf-8", newline="\n")
         current_version = target_version
@@ -604,6 +637,7 @@ def run_update(
     state_changed = write_json_if_changed(state_path, state)
     return {
         "page_changed": page_changed,
+        "homepage_changed": homepage_changed,
         "state_changed": state_changed,
         "latest_version": state["latest_version"],
         "new_versions": [record.version for record in new_records],
@@ -615,6 +649,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, help="Read Steam API JSON from a fixture")
     parser.add_argument("--page", type=Path, default=Path("guides/patch-notes/index.html"))
+    parser.add_argument("--homepage", type=Path, default=Path("index.html"))
     parser.add_argument("--sitemap", type=Path, default=Path("sitemap.xml"))
     parser.add_argument("--state", type=Path, default=Path("data/patch-notes-state.json"))
     parser.add_argument("--today", help="Override today's date (YYYY-MM-DD) for tests")
@@ -630,7 +665,9 @@ def main() -> int:
             else fetch_news()
         )
         today = date.fromisoformat(args.today) if args.today else datetime.now(timezone.utc).date()
-        result = run_update(payload, args.page, args.sitemap, args.state, today)
+        result = run_update(
+            payload, args.page, args.homepage, args.sitemap, args.state, today
+        )
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
     except (UpdateError, OSError, ValueError, json.JSONDecodeError) as exc:
