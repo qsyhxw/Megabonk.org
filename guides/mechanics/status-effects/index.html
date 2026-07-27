@@ -47,7 +47,7 @@
     "description": "Comprehensive guide on how Poison, Burn, Stun, Freeze, and Bloodmark status effects work in Megabonk, including duration calculations and crowd control immunity mechanics.",
     "url": "https://megabonk.org/guides/mechanics/status-effects/",
     "datePublished": "2026-03-20",
-    "dateModified": "2026-07-23",
+    "dateModified": "2026-07-27",
     "publisher": { "@type": "Organization", "name": "Megabonk.org", "url": "https://megabonk.org" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://megabonk.org/guides/mechanics/status-effects/" }
   }
@@ -474,7 +474,7 @@
     <section class="content-section">
       <h2>🩸 Special Debuff: Bloodmark</h2>
       <p>
-        <strong>Bloodmark</strong> (also known as Bleed) is a unique execution mechanic separate from standard DoTs or CC.
+        <strong><a href="/guides/bloodmark.html">Bloodmark</a></strong> is a delayed-damage debuff with an immediate lethal trigger, separate from standard DoTs and crowd control.
       </p>
 
       <div class="status-card blood-card" style="margin-top: 1.5rem; max-width: 600px;">
@@ -482,26 +482,25 @@
           <div class="status-icon bg-blood">✖️</div>
           <div>
             <div class="status-title">Bloodmark</div>
-            <div class="status-type" style="color: var(--status-blood)">Delayed Execute</div>
+            <div class="status-type" style="color: var(--status-blood)">Delayed Damage / Lethal Trigger</div>
           </div>
         </div>
         <div class="status-body">
           <p style="margin-bottom: 1rem; color: var(--text-muted);">
-            Marks a portion of an enemy's health bar dark red. If the enemy's total health drops to this marked threshold, 
-            they are instantly executed — this works on Bosses!
+            Stores pending Bloodmark damage and displays that amount as a dark-red section of the health bar. It is not a fixed percentage of enemy maximum HP.
           </p>
           <div class="indicator-box">
             <div class="color-swatch swatch-blood"></div>
             <span style="font-size: 0.9rem;">Shows as a dark-red section on the HP bar.</span>
           </div>
           <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
-            If they don't reach the threshold, the mark explodes for damage after 5 seconds (or 4 seconds on some triggers).
+            A normal on-hit mark uses a 5-second base timer and a Bloody Cleaver Lifesteal mark uses 4 seconds. If the stored damage becomes lethal, it resolves immediately.
           </p>
           <div class="item-sources" style="margin-top: 1.5rem;">
             <span class="source-label">Applied By:</span>
             <a href="/database/items/unstable-transfusion"><img src="https://megabonk.org/images/Items/Item_Demonic_Blood.png" alt="Unstable Transfusion" title="Unstable Transfusion"></a>
             <a href="/database/items/bloody-cleaver"><img src="https://megabonk.org/images/Items/Item_Bloody_Cleaver.png" alt="Bloody Cleaver" title="Bloody Cleaver"></a>
-            <span style="font-size: 0.8rem; color: var(--text-muted);">(Triggered via Lifesteal hitting enemies)</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">(Transfusion: on hit · Cleaver: on hit and via Lifesteal)</span>
           </div>
         </div>
       </div>

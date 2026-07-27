@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Bloodmark – Effect, Unlock & Best Builds</title>
-    <meta name="description" content="Confused about Megabonk Bloodmark? Learn exactly what it does, how to unlock it with Unstable Transfusion & Bloody Cleaver, and the best Bloodmark builds to melt bosses.">
+    <title>Megabonk Bloodmark: Effect, Unlock & Best Builds</title>
+    <meta name="description" content="Bloodmark stores damage and detonates after its timer or immediately when lethal. Learn the 35% proc, Bloody Cleaver unlock, builds and FAQ.">
     <meta name="keywords" content="megabonk bloodmark, what does bloodmark do, megabonk bloodmark build, megabonk unstable transfusion, megabonk bloody cleaver, megabonk status effects">
     <link rel="canonical" href="https://megabonk.org/guides/bloodmark">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Megabonk Bloodmark: Effect, Unlock and Best Builds",
+      "description": "Current Bloodmark mechanics, item sources, unlock requirements, build priorities and version history.",
+      "datePublished": "2026-01-29",
+      "dateModified": "2026-07-27",
+      "author": {"@type": "Organization", "name": "Megabonk.org"},
+      "publisher": {"@type": "Organization", "name": "Megabonk.org"},
+      "mainEntityOfPage": "https://megabonk.org/guides/bloodmark"
+    }
+    </script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
@@ -687,10 +701,6 @@
                 grid-template-columns: minmax(0, 1fr);
             }
 
-            .hero-side-card {
-                order: -1;
-            }
-
             .container {
                 grid-template-columns: minmax(0, 1fr);
                 padding-top: 0;
@@ -698,7 +708,6 @@
 
             .toc-card {
                 position: static;
-                order: -1;
                 margin-top: 0.5rem;
             }
         }
@@ -765,8 +774,8 @@
                 </div>
                 <h1>Megabonk Bloodmark Guide: Effect, Unlock & Best Builds</h1>
                 <p class="hero-tagline">
-                    Bloodmark is one of the strongest ways to delete chunky bosses in Megabonk – if you actually understand how it works.
-                    This guide explains the effect, how to unlock it, and the best builds that turn Bloodmark into a free win condition.
+                    Bloodmark stores damage on an enemy, displays it as a dark-red section of the health bar, and releases it after a short timer or immediately when the stored damage becomes lethal.
+                    This guide covers the current effect, both item sources, unlock requirements, and practical boss-focused builds.
                 </p>
                 <div class="hero-meta">
                     <div class="hero-pill">
@@ -775,7 +784,7 @@
                     </div>
                     <div class="hero-pill">
                         <span>★</span>
-                        <span>Beginner-friendly, leaderboard-ready</span>
+                        <span>Reviewed July 27, 2026 · Current through v1.0.69</span>
                     </div>
                 </div>
             </div>
@@ -785,7 +794,7 @@
                 <div class="hero-badge-row">
                     <span class="hero-badge gold">Boss shredder</span>
                     <span class="hero-badge">Status Effect</span>
-                    <span class="hero-badge">Scales with HP</span>
+                    <span class="hero-badge">Scales with Damage</span>
                 </div>
                 <div class="hero-stats-grid">
                     <div class="hero-stat">
@@ -816,11 +825,11 @@
                 <div class="callout-tldr">
                     <div class="callout-tldr-title">
                         <span>✓</span>
-                        <div>Bloodmark TL;DR – should you care?</div>
+                        <div>Bloodmark TL;DR – what does it do?</div>
                     </div>
-                    <p><strong>Bloodmark marks a chunk of a boss’s HP bar for execution.</strong> Once that HP threshold is reached, the enemy is instantly killed, no matter how tanky it is.</p>
-                    <p><strong>You mainly apply it via Unstable Transfusion and Bloody Cleaver.</strong> Fast-hitting weapons (Aura, Katana, Lightning Staff, Tornado…) stack Bloodmark quickly and make bosses evaporate.</p>
-                    <p><strong>Bloodmark shines in higher curses, long boss fights and leaderboard runs.</strong> In ultra-fast wave clear builds where everything already dies instantly, it’s nice to have but not mandatory.</p>
+                    <p><strong>Bloodmark stores separate damage on the target.</strong> The dark-red portion of a boss health bar shows how much damage is waiting to resolve; it is not a percentage-based max-HP reduction.</p>
+                    <p><strong>A hit-based mark normally resolves after 5 seconds; a lifesteal-applied mark uses 4 seconds.</strong> Applying another stack refreshes that mark's timer. If stored Bloodmark damage is already enough to kill the target, it resolves immediately.</p>
+                    <p><strong>Use Unstable Transfusion for a 35% on-hit chance.</strong> Bloody Cleaver adds another 50% on-hit source and converts Lifesteal into Bloodmark stacks. Damage, player level, hit frequency and stack count matter; Bloodmark cannot crit and does not heal you.</p>
                 </div>
             </section>
 
@@ -829,83 +838,57 @@
                 <div class="section-kicker">Core mechanic</div>
                 <h2 class="section-title">What is Bloodmark in Megabonk?</h2>
                 <p class="section-lead">
-                    Bloodmark is a special status effect that turns a piece of an enemy’s HP bar into a <strong>“execution zone”</strong>.
-                    Once the enemy’s health enters that zone, it’s immediately killed – even if it still has a lot of HP left on paper.
+                    Bloodmark is an enemy debuff that accumulates <strong>pending damage</strong>. On bosses, that pending amount appears as a dark-red section of the health bar.
                 </p>
                 <p>
-                    Visually, you’ll see a darker or highlighted segment on boss health bars. That segment is the Bloodmark threshold:
-                    as you land hits and apply stacks, the segment grows. When the boss’s HP drops into that region, <strong>Bloodmark executes it instantly</strong>.
-                </p>
-                <p>
-                    The key idea is simple:
+                    When the mark's timer ends, the stored damage is dealt. If the stored amount reaches or exceeds the enemy's remaining HP first, Bloodmark resolves immediately and kills the target. That lethal check is why it often looks like an execution.
                 </p>
                 <ul>
-                    <li><strong>More Bloodmark stacks → higher execution threshold → bosses die much earlier than “normal”.</strong></li>
-                    <li>Bloodmark is especially powerful on <strong>high-HP bosses and elites</strong>, where shaving off a large chunk of effective max HP matters most.</li>
-                    <li>On tiny trash mobs, everything usually dies before Bloodmark does anything interesting – the value is almost all on big targets.</li>
+                    <li><strong>It is not a fixed percentage of enemy maximum HP.</strong> The visible section represents stored Bloodmark damage.</li>
+                    <li><strong>It does not provide healing.</strong> Bloody Cleaver can create stacks from Lifesteal, but Bloodmark itself is damage.</li>
+                    <li><strong>It cannot crit.</strong> Damage scaling is useful; Precision is not a direct Bloodmark multiplier.</li>
+                    <li>It is most noticeable on bosses because fast regular enemies often die before the delayed mark matters.</li>
                 </ul>
             </section>
 
             <!-- Mechanics -->
             <section class="section" id="mechanics">
                 <div class="section-kicker">Under the hood</div>
-                <h2 class="section-title">How Bloodmark Works: Stacks, Threshold & Damage</h2>
+                <h2 class="section-title">How Bloodmark Works: Stacks, Timer & Damage</h2>
                 <p class="section-lead">
-                    You don’t need to know every formula to use Bloodmark well – but knowing the basics lets you decide when to chase it and when to skip it.
+                    Every successful application adds a stack to the target. More stacks increase the pending damage, while a new application refreshes the active mark timer.
                 </p>
 
                 <div class="split">
                     <div>
-                        <p><strong>1. Applying Bloodmark</strong></p>
-                        <p>
-                            Bloodmark isn’t a generic debuff – you <em>need specific items</em> to apply it. In most runs, that means:
-                        </p>
+                        <p><strong>1. Apply stacks</strong></p>
                         <ul>
-                            <li><strong>Unstable Transfusion</strong> – gives your hits a chance to apply Bloodmark stacks.</li>
-                            <li><strong>Bloody Cleaver</strong> – turns lifesteal into Bloodmark stacks and boosts the proc chance.</li>
+                            <li><a href="/database/items/unstable-transfusion.html"><strong>Unstable Transfusion</strong></a>: currently <strong>35% chance</strong> to apply Bloodmark on hit.</li>
+                            <li><a href="/database/items/bloody-cleaver.html"><strong>Bloody Cleaver</strong></a>: adds <strong>50% chance</strong> to apply Bloodmark and makes Lifesteal add Bloodmark stacks.</li>
+                            <li>Chances above 100% can produce guaranteed stacks plus a chance for an additional stack, so duplicate items remain useful.</li>
                         </ul>
-                        <p>
-                            Every time the effect procs on a hit, the target gains a stack and the execution threshold on its HP bar moves up a bit.
-                        </p>
 
-                        <p><strong>2. Stacks & execution threshold</strong></p>
-                        <p>
-                            Each Bloodmark stack represents some amount of “maximum life shaved off” from the enemy. Think of it like:
-                        </p>
+                        <p><strong>2. Wait for the trigger – or reach lethal damage</strong></p>
                         <ul>
-                            <li>At 0 stacks, the boss must hit 0 HP like normal.</li>
-                            <li>At a few stacks, it might get executed at, say, 20–30% remaining HP.</li>
-                            <li>At heavy stacking, it can die with <strong>half its HP bar still visually displayed</strong>.</li>
+                            <li>Marks applied by normal hits use a <strong>5-second</strong> base timer.</li>
+                            <li>Marks created through Bloody Cleaver's Lifesteal interaction use a <strong>4-second</strong> base timer.</li>
+                            <li>Reapplying Bloodmark refreshes the timer. If pending damage becomes lethal, it resolves immediately instead of waiting.</li>
                         </ul>
-                        <p>
-                            The exact threshold scales with <strong>your level, damage modifiers and how many stacks you’ve applied</strong>.
-                            The important takeaway: <strong>stacking Bloodmark aggressively massively shortens long boss fights.</strong>
-                        </p>
                     </div>
                     <div class="card">
-                        <div class="badge-row">
-                            <span class="badge">Mechanic snapshot</span>
-                        </div>
-                        <p><strong>Quick mental model</strong></p>
+                        <div class="badge-row"><span class="badge">Current tested formula</span></div>
+                        <p><strong>Damage per resolved mark</strong></p>
+                        <p><code>(Player Level + 8) × 0.75 × Damage Multiplier × Bloodmark Stacks</code></p>
                         <ul class="key-points-list">
-                            <li><span><strong>Bloodmark = execute bar</strong> drawn across an enemy’s HP.</span></li>
-                            <li><span>Stacks are applied when your items proc (Transfusion, Cleaver, etc.).</span></li>
-                            <li><span>The more stacks you land, the higher on the HP bar the execution happens.</span></li>
-                            <li><span>Damage buffs make Bloodmark stronger indirectly by affecting how much HP you “skip”.</span></li>
-                            <li><span>Best combo: lots of hits per second + reliable Bloodmark application.</span></li>
+                            <li><span><strong>Damage Tome helps</strong> because Bloodmark uses the Damage multiplier.</span></li>
+                            <li><span><strong>Cooldown and Quantity help indirectly</strong> when they create more qualifying hits.</span></li>
+                            <li><span><strong>Crit Chance and Crit Damage do not multiply Bloodmark</strong>; the mark itself cannot crit.</span></li>
+                            <li><span><strong>Duration changes the timer</strong>, not the damage stored per stack.</span></li>
                         </ul>
                     </div>
                 </div>
 
-                <p><strong>3. Why Bloodmark feels insane on bosses</strong></p>
-                <p>
-                    On a chunky boss with a huge HP pool, the absolute value of that “skipped” HP can be enormous.
-                    Instead of grinding through the last 40%–60% of their bar, you just cross into the Bloodmark segment and the fight ends.
-                </p>
-                <p>
-                    That’s why leaderboard players and high-curse runs love Bloodmark: it <strong>converts long, risky boss phases into short ones</strong>,
-                    and that saves time, deaths and rerolls.
-                </p>
+                <p><strong>Why it looks like an execute:</strong> when the dark-red pending-damage section reaches the boss's remaining health, Bloodmark fires immediately. Large stacks can therefore end a boss phase before ordinary damage reaches zero.</p>
             </section>
 
             <!-- How to get -->
@@ -913,67 +896,40 @@
                 <div class="section-kicker">Unlock & sources</div>
                 <h2 class="section-title">How to Get Bloodmark: Items & Unlock Paths</h2>
                 <p class="section-lead">
-                    Bloodmark isn’t a character skill – it comes from items. Two of them matter above all others.
+                    Bloodmark is not a standalone unlock or character passive. You gain access to it through two items.
                 </p>
 
                 <div class="split">
                     <div class="card">
                         <div class="badge-row">
                             <span class="badge rare">Unstable Transfusion</span>
-                            <span class="badge">Core Bloodmark source</span>
+                            <span class="badge">Available by default</span>
                         </div>
-                        <p>
-                            <strong>Unstable Transfusion</strong> is your most common way to add Bloodmark to a run. It gives your hits a chance
-                            to apply stacks directly to enemies you’re damaging.
-                        </p>
+                        <p><strong>Current effect:</strong> each hit has a <strong>35% chance</strong> to apply Bloodmark. This was increased from 27% in v1.0.49.</p>
                         <ul>
-                            <li><strong>Type:</strong> Rare item.</li>
-                            <li><strong>Effect:</strong> your attacks gain a chance to apply Bloodmark on hit.</li>
-                            <li><strong>Best with:</strong> multi-hit weapons (Aura, Katana, Lightning Staff, Tornado, Mines, etc.).</li>
+                            <li><strong>Unlock:</strong> none; it is in the item pool by default.</li>
+                            <li><strong>Best with:</strong> reliable, frequent hits and Damage scaling.</li>
+                            <li><strong>Does not need Lifesteal:</strong> the on-hit effect works on its own.</li>
                         </ul>
-                        <p>
-                            If you see Transfusion early and your build already attacks very quickly, <strong>it’s almost always worth picking</strong>.
-                        </p>
-                        <p>
-                            Learn more on the database page:
-                            <a href="https://megabonk.org/database/items/unstable-transfusion" target="_blank" rel="noopener noreferrer">
-                                Unstable Transfusion item entry →
-                            </a>
-                        </p>
+                        <p><a href="/database/items/unstable-transfusion.html">Open the Unstable Transfusion item guide →</a></p>
                     </div>
 
                     <div class="card">
                         <div class="badge-row">
                             <span class="badge legendary">Bloody Cleaver</span>
-                            <span class="badge">Bloodmark payoff</span>
+                            <span class="badge">Vlad unlock</span>
                         </div>
-                        <p>
-                            <strong>Bloody Cleaver</strong> is a legendary that supercharges Bloodmark by tying it to lifesteal.
-                            When combined with Transfusion and high hit-rate weapons, it can mark bosses incredibly fast.
-                        </p>
+                        <p><strong>Current effect:</strong> Lifesteal adds Bloodmark stacks, and the item also supplies a <strong>50% on-hit chance</strong> to apply Bloodmark.</p>
                         <ul>
-                            <li><strong>Type:</strong> Legendary item.</li>
-                            <li><strong>Effect:</strong> lifesteal hits can apply Bloodmark and boost your chance to mark enemies.</li>
-                            <li><strong>Best with:</strong> Vlad and other lifesteal-heavy builds that already want to be in melee range.</li>
+                            <li><strong>Unlock:</strong> reach <strong>Level 50 as Vlad</strong>.</li>
+                            <li><strong>Best with:</strong> Vlad, Lifesteal and weapons that maintain frequent damage contact.</li>
+                            <li><strong>Works without Transfusion:</strong> it is a separate Bloodmark source, though both items stack well together.</li>
                         </ul>
-                        <p>
-                            Bloody Cleaver is rarer, but when you already have Transfusion or strong sustain, it’s often a
-                            <strong>win-more accelerator</strong> that erases bosses the moment they spawn.
-                        </p>
-                        <p>
-                            Database link:
-                            <a href="https://megabonk.org/database/items/bloody-cleaver" target="_blank" rel="noopener noreferrer">
-                                Bloody Cleaver item entry →
-                            </a>
-                        </p>
+                        <p><a href="/database/items/bloody-cleaver.html">Open the Bloody Cleaver item guide →</a></p>
                     </div>
                 </div>
 
-                <p>
-                    There are other minor synergies and side-sources that mention Bloodmark or interact with lifesteal / on-hit effects.
-                    In practice though, <strong>Unstable Transfusion + fast weapons is the core package</strong>;
-                    Bloody Cleaver is the dream legendary that pushes the ceiling even higher.
-                </p>
+                <p><strong>Unlock order:</strong> you can use Bloodmark immediately whenever Unstable Transfusion appears. Bloody Cleaver becomes an additional permanent item-pool option after completing Vlad's Level 50 requirement.</p>
             </section>
 
             <!-- Builds -->
@@ -1027,7 +983,7 @@
                                 You’ll mark everything on screen while still having smooth wave clear.
                             </p>
                             <ul class="key-points-list">
-                                <li><span><strong>Core items:</strong> Unstable Transfusion, generic damage and attack speed.</span></li>
+                                <li><span><strong>Core items:</strong> Unstable Transfusion, Damage scaling, plus Cooldown or Quantity where the weapon benefits.</span></li>
                                 <li><span><strong>When to play:</strong> early Bloodmark learning, all-round runs that still care about bosses.</span></li>
                             </ul>
                             <a class="build-link" href="https://megabonk.org/guides/builds/fox-best-build">
@@ -1048,7 +1004,7 @@
                                 <span>Weapons: Katana / Hero Sword / Space Noodle</span>
                             </div>
                             <p class="build-summary">
-                                These characters already love attack speed and getting into melee.
+                                These characters can maintain frequent close-range hits.
                                 Adding Bloodmark lets them turn already strong clear into much faster boss kills.
                             </p>
                             <ul class="key-points-list">
@@ -1100,9 +1056,25 @@
                             <li><span>If you’re not hitting often (slow sniper / single-shot builds) → value is much lower.</span></li>
                         </ul>
                         <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--text-gray);">
-                            In other words: <strong>Bloodmark scales with how many times you touch the boss</strong>.
-                            If you barely touch it, you barely mark it.
+                            In other words: <strong>Bloodmark needs reliable applications and Damage scaling</strong>.
+                            A slow build can still use it, but frequent hits create more chances to add stacks.
                         </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Version history -->
+            <section class="section" id="version-history">
+                <div class="section-kicker">Patch status</div>
+                <h2 class="section-title">Bloodmark Version Changes</h2>
+                <div class="split">
+                    <div class="card">
+                        <p><strong>v1.0.49 · December 25, 2025</strong></p>
+                        <p>Unstable Transfusion's Bloodmark chance increased from <strong>27% to 35%</strong>. All recommendations on this page use the current 35% value.</p>
+                    </div>
+                    <div class="card">
+                        <p><strong>Checked through v1.0.69</strong></p>
+                        <p>No later official Bloodmark-specific balance change replaces the v1.0.49 Transfusion value. Bloody Cleaver remains the Level 50 Vlad unlock and 50% on-hit/Lifesteal source.</p>
                     </div>
                 </div>
             </section>
@@ -1110,46 +1082,36 @@
             <!-- FAQ -->
             <section class="section" id="faq">
                 <div class="section-kicker">Common questions</div>
-                <h2 class="section-title">Megabonk Bloodmark – FAQ</h2>
+                <h2 class="section-title">Megabonk Bloodmark FAQ</h2>
 
                 <div class="faq-item">
-                    <div class="faq-question">What does Bloodmark actually do in Megabonk?</div>
-                    <div class="faq-answer">
-                        Bloodmark adds an execution threshold to enemy HP bars. Each stack moves that threshold higher.
-                        When the enemy’s health drops into that marked region, it is instantly killed, effectively cutting off a portion of its maximum HP.
-                    </div>
+                    <div class="faq-question">What does Bloodmark do in Megabonk?</div>
+                    <div class="faq-answer">Bloodmark stores pending damage on an enemy. It normally deals that damage when its timer ends, but resolves immediately if the stored amount is enough to kill the target. The dark-red health-bar section shows the pending amount.</div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">Is Bloodmark based on weapon damage or enemy max HP?</div>
-                    <div class="faq-answer">
-                        Bloodmark interacts with your level and damage scaling, but the important part is that it behaves like a %-based execute on
-                        the enemy’s max HP. The tankier the target and the more stacks you land, the more total HP you skip.
-                    </div>
+                    <div class="faq-question">Is Bloodmark a percentage of enemy max HP?</div>
+                    <div class="faq-answer">No. It is damage calculated from player level, Damage multiplier and Bloodmark stacks. A boss can appear to lose a large percentage because many stacks have accumulated, not because Bloodmark automatically scales from that boss's maximum HP.</div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">How do I get Bloodmark early in a run?</div>
-                    <div class="faq-answer">
-                        The easiest way is to pick up <strong>Unstable Transfusion</strong> as soon as you see it, especially if you’re already using
-                        fast-hitting weapons. If you later find <strong>Bloody Cleaver</strong>, the combo turns into an extremely strong boss killer.
-                    </div>
+                    <div class="faq-question">How long does Bloodmark take to trigger?</div>
+                    <div class="faq-answer">A mark applied by a normal hit uses a 5-second base timer; a mark created through Bloody Cleaver's Lifesteal interaction uses 4 seconds. Reapplying the mark refreshes the timer, while lethal pending damage triggers immediately.</div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">Does Bloodmark stack infinitely?</div>
-                    <div class="faq-answer">
-                        Practically, yes – you can keep adding stacks, and the execution threshold keeps creeping up.
-                        In real runs, once you have enough stacks for bosses to die far before 0 HP, extra stacks are heavily “win-more” rather than strictly required.
-                    </div>
+                    <div class="faq-question">How do I unlock Bloodmark?</div>
+                    <div class="faq-answer">Unstable Transfusion is available by default and currently has a 35% on-hit Bloodmark chance. Bloody Cleaver is unlocked by reaching Level 50 as Vlad; it adds a 50% on-hit chance and converts Lifesteal into Bloodmark stacks.</div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">Is Bloodmark good for every build?</div>
-                    <div class="faq-answer">
-                        It’s good in most builds that hit bosses very often and struggle with high HP targets.
-                        It’s less important in one-shot / burst builds where bosses already die in a second, or in fragile builds that need more survivability items first.
-                    </div>
+                    <div class="faq-question">Can Bloodmark crit or heal me?</div>
+                    <div class="faq-answer">No. Bloodmark damage cannot crit, and Bloodmark itself does not heal. Bloody Cleaver uses Lifesteal as a source of stacks, but the healing comes from Lifesteal, not from Bloodmark.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What stats are best for a Bloodmark build?</div>
+                    <div class="faq-answer">Prioritize Damage, then use Cooldown, Quantity or other weapon-appropriate stats to create more hits. Precision is not a direct Bloodmark scaler because the mark cannot crit.</div>
                 </div>
             </section>
 
@@ -1209,6 +1171,7 @@
                 <li><a href="#how-to-get">How to get Bloodmark</a></li>
                 <li><a href="#best-builds">Best Bloodmark builds</a></li>
                 <li><a href="#when-to-pick">When to pick / skip</a></li>
+                <li><a href="#version-history">Version changes</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#related">Related guides</a></li>
             </ul>
@@ -1234,42 +1197,32 @@
         {
           "@type": "Question",
           "name": "What does Bloodmark do in Megabonk?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Bloodmark adds an execution threshold to enemy HP bars. Each stack moves that threshold higher. When the enemy\u2019s health drops into that marked region, it is instantly killed, effectively cutting off a portion of its maximum HP."
-          }
+          "acceptedAnswer": {"@type": "Answer", "text": "Bloodmark stores pending damage on an enemy. It normally deals that damage when its timer ends, but resolves immediately if the stored amount is enough to kill the target."}
         },
         {
           "@type": "Question",
-          "name": "Is Bloodmark based on weapon damage or enemy max HP?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Bloodmark interacts with your level and damage scaling, but the important part is that it behaves like a percent-based execute on the enemy\u2019s max HP. The tankier the target and the more stacks you land, the more total HP you skip."
-          }
+          "name": "Is Bloodmark a percentage of enemy max HP?",
+          "acceptedAnswer": {"@type": "Answer", "text": "No. Bloodmark damage is calculated from player level, Damage multiplier and Bloodmark stacks; it is not an automatic percentage of enemy maximum HP."}
         },
         {
           "@type": "Question",
-          "name": "How do I get Bloodmark early in a run?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The easiest way is to pick up Unstable Transfusion as soon as you see it, especially if you\u2019re already using fast-hitting weapons. If you later find Bloody Cleaver, the combo turns into an extremely strong boss killer."
-          }
+          "name": "How long does Bloodmark take to trigger?",
+          "acceptedAnswer": {"@type": "Answer", "text": "A normal hit uses a 5-second base timer and a Bloody Cleaver Lifesteal mark uses 4 seconds. Reapplication refreshes the timer, while lethal pending damage resolves immediately."}
         },
         {
           "@type": "Question",
-          "name": "Does Bloodmark stack infinitely?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Practically, yes. You can keep adding stacks and the execution threshold keeps creeping up. In real runs, once you have enough stacks for bosses to die far before zero HP, extra stacks are heavily win-more rather than strictly required."
-          }
+          "name": "How do I unlock Bloodmark?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Unstable Transfusion is available by default with a 35% on-hit chance. Bloody Cleaver is unlocked by reaching Level 50 as Vlad and adds a 50% on-hit chance plus Lifesteal-based stacks."}
         },
         {
           "@type": "Question",
-          "name": "Is Bloodmark good for every build?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It\u2019s good in most builds that hit bosses very often and struggle with high HP targets. It\u2019s less important in one-shot or burst builds where bosses already die in a second, or in fragile builds that need more survivability items first."
-          }
+          "name": "Can Bloodmark crit or heal me?",
+          "acceptedAnswer": {"@type": "Answer", "text": "No. Bloodmark cannot crit and does not heal. Bloody Cleaver uses Lifesteal as a stack source, but the healing itself comes from Lifesteal."}
+        },
+        {
+          "@type": "Question",
+          "name": "What stats are best for a Bloodmark build?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Prioritize Damage, then use Cooldown, Quantity or other weapon-appropriate stats to create more hits. Precision is not a direct Bloodmark scaler."}
         }
       ]
     }
