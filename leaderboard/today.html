@@ -389,6 +389,12 @@
             padding: 0;
         }
 
+        #table-container,
+        #recent-preview-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         /* Table */
         .leaderboard-table {
             width: 100%;
@@ -888,7 +894,7 @@
             <div class="card-header">
                 <h2 class="card-title">
                     <span>🏆</span>
-                    <span>Last 24 Hours · Top 50</span>
+                    <span id="today-list-title">Last 24 Hours · Verified Submissions</span>
                 </h2>
                 <div class="update-badge" id="last-update">
                     <span>🕐</span>
@@ -896,6 +902,9 @@
                 </div>
             </div>
             <div class="card-content">
+                <p id="window-summary" aria-live="polite" style="margin: 0; padding: 16px 28px; color: #495057; background: #f3f6ff; border-bottom: 1px solid #dfe5ff; line-height: 1.6;">
+                    Checking verified submissions in this window…
+                </p>
                 <div id="table-container" class="loading">
                     <div class="loading-spinner"></div>
                     <p>Loading today's leaderboard data...</p>
@@ -931,6 +940,25 @@
                  data-ad-layout="in-article"></ins>
         </div>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+        <div class="card" aria-labelledby="recent-seven-day-title">
+            <div class="card-header">
+                <h2 class="card-title" id="recent-seven-day-title">
+                    <span>🕐</span>
+                    <span>Latest Verified Runs · Last 7 Days</span>
+                </h2>
+                <a href="/leaderboard/recent" style="color: #fff; font-weight: 700; text-decoration: none;">View all recent runs →</a>
+            </div>
+            <div class="card-content">
+                <p style="margin: 0; padding: 16px 28px; color: #495057; background: #f8f9fa; border-bottom: 1px solid #e9ecef; line-height: 1.6;">
+                    This is a separate seven-day preview for context. These runs are not counted as Today submissions.
+                </p>
+                <div id="recent-preview-container" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading recent verified submissions...</p>
+                </div>
+            </div>
+        </div>
 
         <!-- Trending Today -->
         <div class="card">
@@ -1277,8 +1305,11 @@
                 leaderboardData = result.data || [];
                 
                 const todayData = filterTodayData(leaderboardData);
-                
+                const recentData = filterRecentData(leaderboardData, 7);
+
+                updateWindowSummary(todayData);
                 renderTable(todayData);
+                renderRecentPreview(recentData.slice(0, 10));
                 updateStats(todayData);
                 updateTrending(todayData);
                 updateLastUpdateTime(result.fetched_at);
@@ -1395,6 +1426,110 @@ function updateDateLabel(label) {
         // ============================================================
         // 🎨 渲染功能
         // ============================================================
+        function getSubmissionTime(item) {
+            if (item?.createdAtIso) {
+                const isoTime = Date.parse(item.createdAtIso);
+                if (Number.isFinite(isoTime)) return isoTime;
+            }
+            if (item?.createdAt && typeof item.createdAt === 'object' && item.createdAt._seconds) {
+                return item.createdAt._seconds * 1000;
+            }
+            if (typeof item?.createdAt === 'string') {
+                const stringTime = Date.parse(item.createdAt);
+                return Number.isFinite(stringTime) ? stringTime : 0;
+            }
+            if (typeof item?.createdAt === 'number') {
+                return item.createdAt > 10000000000 ? item.createdAt : item.createdAt * 1000;
+            }
+            return 0;
+        }
+
+        function filterRecentData(data, days) {
+            if (!Array.isArray(data)) return [];
+            const end = Date.now();
+            const start = end - (days * 24 * 60 * 60 * 1000);
+            return data
+                .filter(item => {
+                    const submittedAt = getSubmissionTime(item);
+                    return submittedAt >= start && submittedAt <= end;
+                })
+                .sort((a, b) => getSubmissionTime(b) - getSubmissionTime(a));
+        }
+
+        function updateWindowSummary(data) {
+            const count = Array.isArray(data) ? data.length : 0;
+            const plural = count === 1 ? 'submission' : 'submissions';
+            const now = new Date();
+            const isToday = currentDate.toDateString() === now.toDateString();
+            const title = document.getElementById('today-list-title');
+            const summary = document.getElementById('window-summary');
+
+            if (isToday) {
+                title.textContent = `Last 24 Hours · ${count} Verified ${count === 1 ? 'Submission' : 'Submissions'}`;
+                summary.textContent = count
+                    ? `${count} verified ${plural} were approved during the rolling 24-hour window. This is the complete source result, not a truncated Top 50 list.`
+                    : 'No verified submissions were approved during the rolling 24-hour window. The separate seven-day preview below provides recent context without changing the Today count.';
+            } else {
+                const selectedDate = currentDate.toLocaleDateString('en-US', {
+                    year: 'numeric', month: 'long', day: 'numeric'
+                });
+                title.textContent = `${selectedDate} · ${count} Verified ${count === 1 ? 'Submission' : 'Submissions'}`;
+                summary.textContent = `${count} verified ${plural} were recorded on this selected calendar day.`;
+            }
+        }
+
+        function formatRelativeSubmission(item) {
+            const submittedAt = getSubmissionTime(item);
+            if (!submittedAt) return 'Unknown';
+            const diffMinutes = Math.max(0, Math.floor((Date.now() - submittedAt) / 60000));
+            if (diffMinutes < 60) return `${diffMinutes}m ago`;
+            const diffHours = Math.floor(diffMinutes / 60);
+            if (diffHours < 24) return `${diffHours}h ago`;
+            return `${Math.floor(diffHours / 24)}d ago`;
+        }
+
+        function renderRecentPreview(data) {
+            const container = document.getElementById('recent-preview-container');
+            container.className = '';
+            if (!data.length) {
+                container.innerHTML = '<p style="padding: 32px; text-align: center; color: #6c757d;">No verified submissions in the last seven days.</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Submitted</th>
+                            <th class="player-cell">Player</th>
+                            <th>Character</th>
+                            <th class="score-cell">Kills</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.map(item => {
+                            const character = item.character || 'Unknown';
+                            const charInfo = CHARACTER_MAP[normalizeKey(character)] || {
+                                name: character, image: null, guideUrl: '/guides/characters/'
+                            };
+                            const countryFlag = COUNTRY_FLAGS[item.country?.code] || '🌍';
+                            const image = charInfo.image
+                                ? `<img src="${charInfo.image}" alt="" width="24" height="24" loading="lazy">`
+                                : '';
+                            return `
+                                <tr>
+                                    <td><strong>${formatRelativeSubmission(item)}</strong></td>
+                                    <td class="player-cell"><div class="player-info"><span>${countryFlag}</span><span class="player-name">${escapeHtml(item.playerName || 'Anonymous')}</span></div></td>
+                                    <td><a class="character-badge" href="${charInfo.guideUrl}">${image}${escapeHtml(charInfo.name || character)}</a></td>
+                                    <td class="score-cell"><span class="score">${formatNumber(item.kills || 0)}</span></td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
         function renderTable(data) {
             const container = document.getElementById('table-container');
             container.className = '';
