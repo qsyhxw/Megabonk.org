@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megabonk UsefullInfoUI Mod: Install, Config & Fixes</title>
+    <meta name="description" content="Install and configure the Megabonk UsefullInfoUI mod safely. Check loader compatibility, file paths, shortcuts, common errors and clean uninstall steps.">
+    <link rel="canonical" href="https://megabonk.org/mods/usefulinfoui/">
+    <meta property="og:title" content="Megabonk UsefullInfoUI Mod: Install, Config & Fixes">
+    <meta property="og:description" content="Safe installation, configuration, compatibility and troubleshooting for the UsefullInfoUI overlay.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://megabonk.org/mods/usefulinfoui/">
+    <meta property="og:image" content="https://megabonk.org/images/megabonk.jpg">
+    <meta property="og:site_name" content="Megabonk.org">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-V5X87M8JFL');
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@graph":[
+        {
+          "@type":"Article",
+          "headline":"Megabonk UsefullInfoUI Mod: Install, Config & Fixes",
+          "description":"Installation, configuration, compatibility and troubleshooting guide for the community UsefullInfoUI mod.",
+          "image":"https://megabonk.org/images/megabonk.jpg",
+          "datePublished":"2026-07-27",
+          "dateModified":"2026-07-27",
+          "author":{"@type":"Organization","name":"Megabonk.org"},
+          "publisher":{"@type":"Organization","name":"Megabonk.org"}
+        },
+        {
+          "@type":"HowTo",
+          "name":"How to install UsefullInfoUI for Megabonk with r2modman",
+          "step":[
+            {"@type":"HowToStep","name":"Back up and create a profile","text":"Back up the save and create a separate Megabonk profile in r2modman."},
+            {"@type":"HowToStep","name":"Install the original package","text":"Open the Maskoliver UsefullInfoUI package on Thunderstore and install it with the mod manager."},
+            {"@type":"HowToStep","name":"Check dependencies","text":"Confirm the profile includes BepInEx 6 IL2CPP and do not mix it with MelonLoader in the same game folder."},
+            {"@type":"HowToStep","name":"Launch and test","text":"Launch modded from the manager, enter one test run and press F1 to cycle the overlay."}
+          ]
+        },
+        {
+          "@type":"FAQPage",
+          "mainEntity":[
+            {"@type":"Question","name":"How do I use UsefullInfoUI in Megabonk?","acceptedAnswer":{"@type":"Answer","text":"Press F1 to cycle Default, Detailed and Hidden overlay states. Press Ctrl+R to reload the config and Ctrl+Up or Ctrl+Down to resize both panels."}},
+            {"@type":"Question","name":"Where is the UsefullInfoUI config file?","acceptedAnswer":{"@type":"Answer","text":"For BepInEx it is in the profile BepInEx config folder as UsefulInfoUI.cfg. For MelonLoader it is in the game UserData folder."}},
+            {"@type":"Question","name":"Does UsefullInfoUI work with the latest Megabonk version?","acceptedAnswer":{"@type":"Answer","text":"The version 1.2.0 package page only states that it was tested on Megabonk v1.0.19. Compatibility with later game patches should be tested in a separate profile rather than assumed."}},
+            {"@type":"Question","name":"How do I uninstall UsefullInfoUI?","acceptedAnswer":{"@type":"Answer","text":"Disable or remove the package from the manager profile. For manual installs remove UsefullInfoUI.dll from the loader's mod folder, then optionally delete UsefulInfoUI.cfg."}}
+          ]
+        },
+        {
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://megabonk.org/"},
+            {"@type":"ListItem","position":2,"name":"Mods","item":"https://megabonk.org/mods/"},
+            {"@type":"ListItem","position":3,"name":"UsefullInfoUI","item":"https://megabonk.org/mods/usefulinfoui/"}
+          ]
+        }
+      ]
+    }
+    </script>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#0b1220;--panel:#111d31;--panel2:#172642;--text:#edf6ff;--muted:#a9bad0;--cyan:#22d3ee;--blue:#60a5fa;--green:#4ade80;--amber:#fbbf24;--red:#fb7185;--line:rgba(148,163,184,.2)}
+        html{scroll-behavior:smooth}
+        body{font-family:"Segoe UI",Tahoma,sans-serif;background:radial-gradient(circle at 50% -15%,#173a5e 0,var(--bg) 46%);color:var(--text);line-height:1.65;min-height:100vh}
+        a{color:#7dd3fc}
+        nav{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+        .nav-inner{max-width:1180px;margin:auto;padding:1rem 1.4rem;display:flex;justify-content:space-between;align-items:center}
+        .logo{color:#fff;text-decoration:none;font-size:1.35rem;font-weight:800}
+        .nav-links{display:flex;gap:1.2rem;list-style:none}.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:#fff}
+        main{max-width:1080px;margin:auto;padding:1.5rem}
+        .crumbs{color:var(--muted);font-size:.9rem;margin:.4rem 0 1.4rem}.crumbs a{text-decoration:none}
+        .hero{padding:clamp(1.8rem,5vw,3.7rem);border:1px solid rgba(34,211,238,.4);border-radius:22px;background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(96,165,250,.08));text-align:center}
+        .eyebrow{color:#67e8f9;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.82rem}
+        h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.12;max-width:850px;margin:.65rem auto 1rem}
+        .hero>p{max-width:760px;margin:auto;color:var(--muted);font-size:1.08rem}
+        .badges{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.25rem}
+        .badge{padding:.35rem .72rem;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line);font-size:.84rem}
+        .layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:1.5rem;margin-top:1.5rem}.layout>*{min-width:0}
+        .toc{position:sticky;top:84px;align-self:start;padding:1rem;background:rgba(17,29,49,.92);border:1px solid var(--line);border-radius:14px}
+        .toc strong{display:block;margin-bottom:.5rem}.toc a{display:block;text-decoration:none;color:var(--muted);padding:.27rem 0;font-size:.92rem}.toc a:hover{color:#fff}
+        section{scroll-margin-top:90px;margin-bottom:1.3rem;padding:clamp(1.2rem,3vw,1.8rem);background:rgba(17,29,49,.8);border:1px solid var(--line);border-radius:16px}
+        h2{font-size:clamp(1.45rem,3vw,2rem);margin-bottom:.85rem}h3{font-size:1.14rem;color:#a5f3fc;margin:1rem 0 .4rem}
+        p+p{margin-top:.7rem}ul,ol{padding-left:1.25rem}li+li{margin-top:.4rem}
+        code{font-family:Consolas,monospace;background:#09101d;color:#bae6fd;padding:.15rem .35rem;border:1px solid var(--line);border-radius:5px;overflow-wrap:anywhere}
+        .answer{border-left:5px solid var(--green);background:linear-gradient(90deg,rgba(74,222,128,.12),transparent)}
+        .notice{margin-top:1rem;padding:1rem;border-radius:11px;background:rgba(251,191,36,.09);border:1px solid rgba(251,191,36,.35)}
+        .notice.danger{background:rgba(251,113,133,.09);border-color:rgba(251,113,133,.36)}
+        .status{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin-top:1rem}
+        .status div{padding:1rem;border:1px solid var(--line);border-radius:11px;background:var(--panel2)}
+        .status span{display:block;color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}.status strong{font-size:1.05rem}
+        .table-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--line);border-radius:12px}
+        table{width:100%;min-width:650px;border-collapse:collapse;background:rgba(7,13,24,.38)}
+        th,td{text-align:left;vertical-align:top;padding:.8rem;border-bottom:1px solid var(--line)}th{color:#a5f3fc;background:rgba(34,211,238,.08)}tr:last-child td{border-bottom:0}
+        .steps{counter-reset:step;list-style:none;padding:0}.steps li{counter-increment:step;position:relative;padding:0 0 1.25rem 3.1rem;margin:0}
+        .steps li:before{content:counter(step);position:absolute;left:0;top:0;width:2.15rem;height:2.15rem;display:grid;place-items:center;border-radius:50%;background:#0891b2;font-weight:800}
+        .steps li:not(:last-child):after{content:"";position:absolute;left:1.05rem;top:2.3rem;bottom:.15rem;width:2px;background:rgba(34,211,238,.35)}
+        .keys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin-top:1rem}.key{padding:1rem;background:var(--panel2);border:1px solid var(--line);border-radius:11px}.key kbd{display:inline-block;padding:.2rem .48rem;border-radius:6px;background:#08111f;border:1px solid #475569;box-shadow:0 2px 0 #020617;font-weight:700;margin-right:.35rem}
+        .faq details{padding:1rem 0;border-top:1px solid var(--line)}.faq details:first-of-type{border-top:0}summary{cursor:pointer;color:#bae6fd;font-weight:700}.faq details p{margin-top:.55rem;color:var(--muted)}
+        .related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}.related a{padding:.85rem;text-decoration:none;border:1px solid rgba(34,211,238,.28);border-radius:10px;background:rgba(34,211,238,.06)}.related strong{display:block;color:#e0f2fe}
+        footer{text-align:center;color:var(--muted);padding:2rem 1rem;border-top:1px solid var(--line);margin-top:2rem}
+        @media(max-width:820px){.layout{grid-template-columns:1fr}.toc{position:static;order:-1}.nav-links{display:none}}
+        @media(max-width:600px){main{padding:1rem}.hero{border-radius:16px}.status,.keys,.related{grid-template-columns:1fr}section{padding:1.1rem}.badge{font-size:.78rem}}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a class="logo" href="/">Megabonk.org</a>
+            <ul class="nav-links">
+                <li><a href="/mods/">Mods</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/guides/builds/">Builds</a></li>
+                <li><a href="/database/">Database</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="crumbs"><a href="/">Home</a> / <a href="/mods/">Mods</a> / UsefullInfoUI</div>
+        <header class="hero">
+            <div class="eyebrow">Community UI Mod Guide</div>
+            <h1>How to Install and Use UsefullInfoUI in Megabonk</h1>
+            <p>Add a togglable run-info and player-stat overlay, configure its rows and scale, and remove it cleanly if a game update breaks compatibility.</p>
+            <div class="badges">
+                <span class="badge">Official package spelling: UsefullInfoUI</span>
+                <span class="badge">Package version: 1.2.0</span>
+                <span class="badge">Third-party mod</span>
+                <span class="badge">Checked July 27, 2026</span>
+            </div>
+        </header>
+        <div class="layout">
+            <article>
+                <section class="answer" id="quick-answer">
+                    <h2>Quick Answer</h2>
+                    <p><strong>Install Maskoliver's original UsefullInfoUI package from Thunderstore through a separate r2modman profile.</strong> Launch the modded profile and press <code>F1</code> to switch between Default, Detailed and Hidden views. Do not install MelonLoader and BepInEx together in the same game folder.</p>
+                    <div class="notice"><strong>Name note:</strong> the package intentionally uses <em>UsefullInfoUI</em> with two l's. Searches for UsefulInfoUI, usefullinfoui and “useful info UI” refer to the same mod.</div>
+                </section>
+
+                <section id="status">
+                    <h2>Current Version and Compatibility</h2>
+                    <div class="status">
+                        <div><span>Author</span><strong>Maskoliver</strong></div>
+                        <div><span>Package</span><strong>UsefullInfoUI 1.2.0</strong></div>
+                        <div><span>Package-tested game</span><strong>Megabonk v1.0.19</strong></div>
+                        <div><span>Supported loaders</span><strong>BepInEx 6 IL2CPP / MelonLoader 0.7.1</strong></div>
+                    </div>
+                    <div class="notice danger"><strong>Newer game version warning:</strong> the package page only claims testing on Megabonk v1.0.19. Version 1.2.0 may or may not work after later game updates. Test it in a separate profile and disable it first when diagnosing a new-patch crash.</div>
+                </section>
+
+                <section id="download">
+                    <h2>Trusted Download Source</h2>
+                    <p>Use the original <a href="https://thunderstore.io/c/megabonk/p/Maskoliver/UsefullInfoUI/" target="_blank" rel="nofollow noopener noreferrer">Maskoliver UsefullInfoUI page on Thunderstore</a>. Confirm the author, package name and dependency string before installing.</p>
+                    <ul>
+                        <li>Prefer the package page's manager install button over a third-party mirror.</li>
+                        <li>Review the package's Versions, Changelog and Analysis tabs before an update.</li>
+                        <li>Do not run a separate installer claiming to be required by this small DLL mod.</li>
+                        <li>Back up your save and keep leaderboard attempts on a clean vanilla profile.</li>
+                    </ul>
+                </section>
+
+                <section id="install">
+                    <h2>Recommended Install: r2modman + BepInEx</h2>
+                    <ol class="steps">
+                        <li><strong>Create a separate Megabonk profile.</strong> In r2modman, make a test profile named with the current game version. Keep your clean profile unchanged.</li>
+                        <li><strong>Install the original package.</strong> Open UsefullInfoUI from the Megabonk Thunderstore catalog and choose the manager install option.</li>
+                        <li><strong>Confirm the loader dependency.</strong> The profile should use BepInEx 6 for IL2CPP. Let the manager install declared dependencies instead of adding a random loader build manually.</li>
+                        <li><strong>Launch modded.</strong> Start Megabonk from r2modman's modded launch button, enter a low-stakes run and press <code>F1</code>.</li>
+                        <li><strong>Verify before adding other mods.</strong> If the overlay works alone, add other packages one at a time so a conflict remains identifiable.</li>
+                    </ol>
+                    <h3>Manual BepInEx path</h3>
+                    <p>If you deliberately install the DLL manually inside a manager profile, the package readme specifies:</p>
+                    <p><code>&lt;profile&gt;\BepInEx\plugins\UsefullInfoUI\UsefullInfoUI.dll</code></p>
+                </section>
+
+                <section id="melonloader">
+                    <h2>Alternative: MelonLoader Install</h2>
+                    <p>The package also lists MelonLoader v0.7.1 support. Install that loader into the game directory, then place the DLL at:</p>
+                    <p><code>&lt;game&gt;\Mods\UsefullInfoUI\UsefullInfoUI.dll</code></p>
+                    <div class="notice danger"><strong>Never mix loaders:</strong> do not keep MelonLoader and BepInEx in the same Megabonk installation. Use separate installs or a dedicated BepInEx manager profile.</div>
+                </section>
+
+                <section id="use">
+                    <h2>How to Use the Overlay</h2>
+                    <div class="keys">
+                        <div class="key"><kbd>F1</kbd><strong>Cycle view</strong><p>Default → Detailed → Hidden.</p></div>
+                        <div class="key"><kbd>Ctrl</kbd> + <kbd>R</kbd><strong>Reload config</strong><p>Applies config changes without a restart.</p></div>
+                        <div class="key"><kbd>Ctrl</kbd> + <kbd>↑</kbd><strong>Increase scale</strong><p>Enlarges both overlay panels.</p></div>
+                        <div class="key"><kbd>Ctrl</kbd> + <kbd>↓</kbd><strong>Decrease scale</strong><p>Shrinks both overlay panels.</p></div>
+                    </div>
+                    <p>The left panel can show run counts such as Shrines, Chests, Vendors, Microwaves and Moai. The right panel can show Damage, Crit, Attack Speed, Luck, Difficulty, XP/Gold Gain and other player stats.</p>
+                </section>
+
+                <section id="config">
+                    <h2>Config File and Useful Settings</h2>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>Loader</th><th>Config path</th><th>Mod file path</th></tr></thead>
+                            <tbody>
+                                <tr><td>BepInEx</td><td><code>&lt;profile&gt;\BepInEx\config\UsefulInfoUI.cfg</code></td><td><code>&lt;profile&gt;\BepInEx\plugins\UsefullInfoUI\</code></td></tr>
+                                <tr><td>MelonLoader</td><td><code>&lt;game&gt;\UserData\UsefulInfoUI.cfg</code></td><td><code>&lt;game&gt;\Mods\UsefullInfoUI\</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>The config is created after the first successful launch. Its setting names are case-insensitive.</p>
+                    <ul>
+                        <li><code>DefaultRunInfoOrder</code> and <code>DetailedRunInfoOrder</code>: choose and reorder run counters.</li>
+                        <li><code>DefaultStatsOrder</code> and <code>DetailedStatsOrder</code>: choose and reorder player stats.</li>
+                        <li><code>RunInfoScale</code> and <code>PlayerStatsScale</code>: control the two panel sizes.</li>
+                    </ul>
+                    <div class="notice">Edit a copy of the config first. Use comma-separated keys from the annotated file, save it, then press <code>Ctrl+R</code>. Unknown keys are ignored rather than displayed.</div>
+                </section>
+
+                <section id="errors">
+                    <h2>UsefullInfoUI Not Working: Fixes</h2>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>Symptom</th><th>Likely cause</th><th>What to do</th></tr></thead>
+                            <tbody>
+                                <tr><td>No overlay after F1</td><td>Vanilla launch, missing loader or wrong folder</td><td>Launch modded from the correct profile and confirm the DLL exists in that profile.</td></tr>
+                                <tr><td>Game crashes on launch</td><td>Loader conflict, stale dependency or new game patch</td><td>Remove one loader, disable other mods and retest UsefullInfoUI alone in a fresh profile.</td></tr>
+                                <tr><td>Config file missing</td><td>The mod has not loaded successfully yet</td><td>Fix the loader/package first; the config is written on the first successful run.</td></tr>
+                                <tr><td>Config changes do nothing</td><td>Wrong profile, unsaved file or invalid key</td><td>Edit the active profile's file, save it and press Ctrl+R. Copy names from its comments.</td></tr>
+                                <tr><td>Overlay is too large</td><td>Scale value or UI scaling</td><td>Press Ctrl+Down or lower both scale values in the config.</td></tr>
+                                <tr><td>Worked before an update</td><td>Game/API compatibility changed</td><td>Disable the mod, confirm vanilla works, then check the original package for a newer version.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="uninstall">
+                    <h2>Clean Uninstall</h2>
+                    <ol>
+                        <li>Close Megabonk completely.</li>
+                        <li>In r2modman, disable or uninstall UsefullInfoUI from the affected profile.</li>
+                        <li>For a manual install, remove <code>UsefullInfoUI.dll</code> from the relevant BepInEx or MelonLoader folder.</li>
+                        <li>Optionally delete <code>UsefulInfoUI.cfg</code> if you do not want to preserve your layout.</li>
+                        <li>Launch the clean profile and verify the game before removing the loader itself.</li>
+                    </ol>
+                    <p>Removing this display mod should not require downloading a replacement save. Keep the backup until the clean game has launched and loaded normally.</p>
+                </section>
+
+                <section id="safety">
+                    <h2>Safety and Leaderboard Boundaries</h2>
+                    <ul>
+                        <li>Use only the original author package and a known mod manager.</li>
+                        <li>Scan manual downloads and reject unrelated executables or password prompts.</li>
+                        <li>Keep a vanilla profile for clean saves and leaderboard attempts.</li>
+                        <li>After any Megabonk update, launch vanilla first and re-enable mods individually.</li>
+                        <li>Never publish support logs without checking them for usernames, local paths or private data.</li>
+                    </ul>
+                    <div class="notice danger">UsefullInfoUI is community code, not an official Megabonk feature. A readable source view and package history improve transparency but do not guarantee security or future compatibility.</div>
+                </section>
+
+                <section class="faq" id="faq">
+                    <h2>UsefullInfoUI FAQ</h2>
+                    <details open><summary>How do I mod UsefullInfoUI into Megabonk?</summary><p>Create a separate r2modman profile, install Maskoliver's UsefullInfoUI package from Thunderstore, let the manager include BepInEx 6 IL2CPP, then launch modded and press F1.</p></details>
+                    <details><summary>Is it UsefulInfoUI or UsefullInfoUI?</summary><p>The official package name and DLL use <strong>UsefullInfoUI</strong> with two l's. Its generated config is named <code>UsefulInfoUI.cfg</code> with the conventional single-l spelling.</p></details>
+                    <details><summary>Does it support BepInEx and MelonLoader?</summary><p>Version 1.2.0 lists BepInEx 6 IL2CPP and MelonLoader 0.7.1 support. Choose one loader only; do not combine both in one game folder.</p></details>
+                    <details><summary>Does it work on the latest Megabonk patch?</summary><p>The package author only states testing on Megabonk v1.0.19. Treat later versions as unverified until tested in a separate profile or confirmed on the original package page.</p></details>
+                    <details><summary>Can I hide the overlay without uninstalling?</summary><p>Yes. Press F1 until the state cycles to Hidden. You can press F1 again later to restore Default view.</p></details>
+                </section>
+
+                <section>
+                    <h2>Related Guides</h2>
+                    <div class="related">
+                        <a href="/mods/"><strong>Megabonk Mods Hub</strong>Managers, compatibility, backups and safe setup</a>
+                        <a href="/mods/multiplayer/"><strong>Multiplayer Mods</strong>Community co-op packages and troubleshooting</a>
+                        <a href="/guides/save-file-location/"><strong>Save File Location</strong>Back up and restore progress before modding</a>
+                        <a href="/guides/patch-notes/"><strong>Patch Notes</strong>Check game changes before enabling an older profile</a>
+                    </div>
+                </section>
+            </article>
+            <aside class="toc">
+                <strong>On this page</strong>
+                <a href="#quick-answer">Quick answer</a>
+                <a href="#status">Compatibility</a>
+                <a href="#download">Trusted source</a>
+                <a href="#install">BepInEx install</a>
+                <a href="#melonloader">MelonLoader</a>
+                <a href="#use">Shortcuts</a>
+                <a href="#config">Configuration</a>
+                <a href="#errors">Error fixes</a>
+                <a href="#uninstall">Uninstall</a>
+                <a href="#safety">Safety</a>
+                <a href="#faq">FAQ</a>
+            </aside>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; <span data-current-year>2026</span> <a href="/">Megabonk.org</a> — Community-driven Megabonk guides</p>
+        <p>Megabonk and UsefullInfoUI belong to their respective creators. This site is not affiliated with them.</p>
+    </footer>
+    <script src="/js/current-year.js" defer></script>
+</body>
+</html>
