@@ -1541,7 +1541,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
         .lb-intent-tabs{display:flex;gap:8px;margin:0 0 22px;padding:8px;overflow-x:auto;background:#fff;border:1px solid #dee2e6;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.06);scrollbar-width:thin}.lb-intent-tabs a{flex:0 0 auto;padding:9px 13px;border-radius:8px;background:#f1f3f5;color:#495057;font-size:.9rem;font-weight:700;text-decoration:none;white-space:nowrap}.lb-intent-tabs a:hover{background:#e9ecef;color:#343a40}.lb-intent-tabs a[aria-current="page"]{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}        .lb-faq-card{margin:30px 0;padding:32px;background:#fff;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.08)}.lb-faq-card h2{margin:0 0 18px;color:#667eea}.lb-faq-card details{padding:14px 0;border-bottom:1px solid #e9ecef}.lb-faq-card details:last-child{border-bottom:0}.lb-faq-card summary{cursor:pointer;font-weight:700;color:#343a40}.lb-faq-card details p{margin:8px 0 0;color:#6c757d;line-height:1.65}
         @media(max-width:600px){.lb-intent-tabs{margin-left:-4px;margin-right:-4px}.lb-faq-card{padding:22px}}    </style>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the main Megabonk leaderboard page?","acceptedAnswer":{"@type":"Answer","text":"The Global Leaderboard hub at /leaderboard/ is the main entry for rankings, records and all leaderboard views."}},{"@type":"Question","name":"Where do I learn about official Megabonk leaderboard submissions?","acceptedAnswer":{"@type":"Answer","text":"Use the Official Leaderboard and Submission Guide for the Steam board, community board and submission routes."}},{"@type":"Question","name":"Where can I find Megabonk leaderboard builds?","acceptedAnswer":{"@type":"Answer","text":"The Leaderboard Builds page analyzes weapons, Tomes, Items and characters used by top-ranked runs."}},{"@type":"Question","name":"What is a verified Megabonk leaderboard run?","acceptedAnswer":{"@type":"Answer","text":"A verified run follows the relevant rules and may require video proof or review. The Verified and Rules page explains the distinction from automatic Steam scores."}},{"@type":"Question","name":"Are modded runs valid for Megabonk leaderboards?","acceptedAnswer":{"@type":"Answer","text":"Do not assume gameplay-changing mods are allowed. Check the exact official or community rules before submitting a run."}}]}</script></head>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the main Megabonk leaderboard page?","acceptedAnswer":{"@type":"Answer","text":"The Global Leaderboard hub at /leaderboard/ is the main entry for rankings, records and all leaderboard views."}},{"@type":"Question","name":"Where does the leaderboard data come from?","acceptedAnswer":{"@type":"Answer","text":"Megabonk.org synchronizes community leaderboard records from the unofficial Megabonk Leaderboard on Leaderboard.gg."}},{"@type":"Question","name":"Where can I find Megabonk leaderboard builds?","acceptedAnswer":{"@type":"Answer","text":"The Leaderboard Builds page analyzes weapons, Tomes, Items and characters used by top-ranked runs."}},{"@type":"Question","name":"What is a verified Megabonk leaderboard run?","acceptedAnswer":{"@type":"Answer","text":"Leaderboard records can include submission IDs and video evidence. Current acceptance and verification rules are maintained by the source community leaderboard."}},{"@type":"Question","name":"Are modded runs valid for Megabonk leaderboards?","acceptedAnswer":{"@type":"Answer","text":"Do not assume gameplay-changing mods are allowed. Check the current Leaderboard.gg rules before submitting a run."}}]}</script></head>
 <body>
     <!-- Site Header -->
     <header class="site-header">
@@ -1580,13 +1580,17 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         </nav>
         <div class="page-header">
             <h1>🏆 Global Leaderboard</h1>
-            <p>Real-time Player Rankings & Build Analysis</p>
+            <p>Verified Community Rankings, Run Data &amp; Build Evidence</p>
         </div>
 
         <div class="card">
             <div class="stats-bar">
                 <div class="stat-box">
-                    <div class="stat-label">Total Players</div>
+                    <div class="stat-label">Ranked Runs</div>
+                    <div class="stat-value" id="ranked-runs">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Unique Players</div>
                     <div class="stat-value" id="total-players">-</div>
                 </div>
                 <div class="stat-box">
@@ -1594,8 +1598,8 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     <div class="stat-value" id="top-score">-</div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-label">Average Score</div>
-                    <div class="stat-value" id="avg-score">-</div>
+                    <div class="stat-label">Active Patch</div>
+                    <div class="stat-value" id="current-version">-</div>
                 </div>
             </div>
 
@@ -1640,9 +1644,9 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             </div>
 
             <div class="card-footer">
-                📊 Data source: <a href="https://megabonk.fun" target="_blank" rel="nofollow noopener">megabonk.fun</a>
+                📊 Community data source: <a href="https://megabonk.leaderboard.gg/" target="_blank" rel="nofollow noopener">Leaderboard.gg</a>
                 <span style="margin: 0 10px;">|</span>
-                ⚡ Updates every 5 minutes
+                🔄 Source checked hourly; updated when rankings change
             </div>
         </div>
 
@@ -1653,10 +1657,10 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     <h2 style="color: #667eea; margin: 0 0 5px 0; display: flex; align-items: center; gap: 10px;">
                         🔥 Popular Right Now
                     </h2>
-                    <p style="color: #6c757d; margin: 0; font-size: 0.9rem;">Top builds from the current meta</p>
+                    <p style="color: #6c757d; margin: 0; font-size: 0.9rem;">Most represented characters in the current verified Top 50</p>
                 </div>
                 <span id="meta-update-badge" style="padding: 6px 12px; background: #e3f2fd; color: #1976d2; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
-                    🕐 Updated just now
+                    Loading patch evidence…
                 </span>
             </div>
             <div id="popular-builds-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
@@ -1730,12 +1734,12 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         <div class="hub-badge info">Steam Charts</div>
                     </a>
 
-                    <!-- Official vs Community -->
-                    <a href="#official-vs-community" class="hub-card" onclick="scrollToComparison(event)">
-                        <div class="hub-icon">⚖️</div>
-                        <h3 class="hub-title">Official vs Community</h3>
-                        <p class="hub-description">Compare official leaderboards with community-submitted scores.</p>
-                        <div class="hub-badge info">ℹ️ Info</div>
+                    <!-- Community source -->
+                    <a href="https://megabonk.leaderboard.gg/" class="hub-card" target="_blank" rel="nofollow noopener">
+                        <div class="hub-icon">🎥</div>
+                        <h3 class="hub-title">Source &amp; Submit</h3>
+                        <p class="hub-description">Review video-backed runs, current rules and submission options on the community leaderboard.</p>
+                        <div class="hub-badge info">Leaderboard.gg</div>
                     </a>
                 </div>
             </div>
@@ -1767,9 +1771,9 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         <section class="lb-faq-card" aria-labelledby="leaderboard-faq-title">
             <h2 id="leaderboard-faq-title">Megabonk Leaderboard FAQ</h2>
             <details><summary>Which page should rank for “Megabonk leaderboard”?</summary><p>This Global Leaderboard hub is the main page for the generic query. Use the tabs above for time-limited, official, build or verification intent.</p></details>
-            <details><summary>Where do I submit an official or community score?</summary><p>Open <a href="/leaderboard/official">Official &amp; Submit</a> for the Steam leaderboard, community board and submission routes.</p></details>
+            <details><summary>Where does this leaderboard data come from?</summary><p>The rankings are synchronized from the unofficial community-run <a href="https://megabonk.leaderboard.gg/" target="_blank" rel="nofollow noopener">Megabonk Leaderboard on Leaderboard.gg</a>. Megabonk.org is not the submission host.</p></details>
             <details><summary>Where are the builds used by top players?</summary><p><a href="/leaderboard/builds">Leaderboard Builds</a> analyzes current high-ranking equipment and links to complete character Build Guides.</p></details>
-            <details><summary>How are suspicious or verified runs handled?</summary><p>Use <a href="/leaderboard/verified">Verified &amp; Rules</a> for proof requirements, review and the difference between automatic Steam scores and VOD-verified submissions.</p></details>
+            <details><summary>How are runs verified?</summary><p>Leaderboard.gg records include a submission ID and normally link to video evidence. Review the source leaderboard for its current acceptance and verification rules.</p></details>
             <details><summary>Can I submit a modded run?</summary><p>Do not assume gameplay-changing mods are valid. Check the rules of the exact board before recording or submitting a run.</p></details>
         </section>    </div>
 
@@ -1830,7 +1834,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
     <script>
         const CONFIG = {
-            dataUrl: 'https://megabonk.org/leaderboard-data.json',
+            dataUrl: '/leaderboard-data.json',
             initialDisplay: 100,  // 初始显示100条
             loadMoreIncrement: 50  // 每次加载更多显示50条
         };
@@ -2482,7 +2486,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         updateStats(result);
         updateTime(result.fetched_at);
         updateLoadMoreButton();
-        renderPopularBuilds(result.data || []);
+        renderPopularBuilds(result.data || [], result);
         handleShareAnchor();
 
     } catch (error) {
@@ -2940,19 +2944,17 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
         function updateStats(result) {
             const data = result.data || [];
-            
-            document.getElementById('total-players').textContent = formatNumber(data.length);
-            
+            const uniquePlayers = new Set(
+                data.map(item => (item.playerName || '').trim().toLowerCase()).filter(Boolean)
+            );
+
+            document.getElementById('ranked-runs').textContent = formatNumber(data.length);
+            document.getElementById('total-players').textContent = formatNumber(uniquePlayers.size);
+
             const topScore = data.length > 0 ? (data[0].kills || 0) : 0;
             document.getElementById('top-score').textContent = formatNumber(topScore);
-            
-            if (data.length > 0) {
-                const sum = data.reduce((acc, item) => acc + (item.kills || 0), 0);
-                const avg = Math.round(sum / data.length);
-                document.getElementById('avg-score').textContent = formatNumber(avg);
-            } else {
-                document.getElementById('avg-score').textContent = '0';
-            }
+            document.getElementById('current-version').textContent =
+                result.active_version ? `v${result.active_version}` : 'Unknown';
         }
 
         function updateTime(timestamp) {
@@ -3206,7 +3208,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         }
 
         // ⭐ 分析排行榜数据并生成热门Build
-        function renderPopularBuilds(data) {
+        function renderPopularBuilds(data, result = {}) {
             const container = document.getElementById('popular-builds-container');
             const updateBadge = document.getElementById('meta-update-badge');
             
@@ -3217,7 +3219,11 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
             // 统计角色使用频率
             const characterStats = {};
-            const topPlayers = data.slice(0, 50); // 只分析TOP 50玩家（更能代表Meta）
+            const activeVersion = result.active_version || null;
+            const versionData = activeVersion
+                ? data.filter(player => !player.buildVersionLabel || player.buildVersionLabel === activeVersion)
+                : data;
+            const topPlayers = versionData.slice(0, 50);
             
             topPlayers.forEach(player => {
                 const char = (player.character || '').toLowerCase();
@@ -3247,7 +3253,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 .slice(0, 6); // 取TOP 6
 
             // 计算总使用次数（用于计算百分比）
-            const totalUsage = sortedCharacters.reduce((sum, char) => sum + char.count, 0);
+            const totalUsage = topPlayers.length || 1;
 
             // 生成卡片HTML
             const cardsHTML = sortedCharacters.map((charData, index) => {
@@ -3305,30 +3311,20 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             container.innerHTML = cardsHTML;
             
             // 更新时间徽章
-            updateBadge.innerHTML = '🕐 Updated just now';
+            updateBadge.textContent = activeVersion
+                ? `v${activeVersion} • Top ${topPlayers.length} verified runs`
+                : `Top ${topPlayers.length} verified runs`;
         }
 
         // Load on page load
         window.addEventListener('DOMContentLoaded', () => {
             loadLeaderboard();
             
-            // Auto-refresh every minute
+            // Recheck the published snapshot every 15 minutes
             setInterval(() => {
                 loadLeaderboard();
-            }, 60000);
+            }, 900000);
         });
-
-                // Smooth scroll to comparison section
-        function scrollToComparison(event) {
-            event.preventDefault();
-            const comparisonSection = document.getElementById('official-vs-community');
-            if (comparisonSection) {
-                comparisonSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                // If comparison section doesn't exist yet, just stay on page
-                alert('📊 Official vs Community comparison section coming soon!');
-            }
-        }
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"817a4a14805048c0b6b15c9a97fae19d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>

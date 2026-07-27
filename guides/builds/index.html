@@ -1091,6 +1091,73 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             .build-table-wrap { margin-inline: -0.25rem; }
         }
 
+
+        .leaderboard-signals {
+            margin: 0 0 2.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(58, 134, 255, 0.35);
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.82), rgba(26, 26, 46, 0.94));
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+        }
+        .leaderboard-signals-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .leaderboard-signals h2 { margin: 0 0 0.4rem; font-size: 1.55rem; }
+        .leaderboard-signals p { color: var(--text-gray); line-height: 1.65; }
+        .leaderboard-signals-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+        .leaderboard-signal-badge {
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(58, 134, 255, 0.18);
+            color: #b9d4ff;
+            border: 1px solid rgba(58, 134, 255, 0.35);
+            font-size: 0.78rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+        .leaderboard-version-note {
+            margin: 0.9rem 0 1.1rem;
+            padding: 0.85rem 1rem;
+            border-left: 4px solid #ffb703;
+            border-radius: 8px;
+            background: rgba(255, 183, 3, 0.1);
+            color: #ffe3a3;
+            font-size: 0.9rem;
+        }
+        .leaderboard-signal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 0.9rem;
+        }
+        .leaderboard-signal-card {
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .leaderboard-signal-card h3 { margin: 0 0 0.55rem; font-size: 1.05rem; }
+        .leaderboard-signal-card h3 a { color: #fff; }
+        .leaderboard-signal-metric { color: #8cb8ff; font-size: 0.82rem; font-weight: 800; }
+        .leaderboard-signal-line { margin-top: 0.45rem; color: var(--text-gray); font-size: 0.86rem; line-height: 1.45; }
+        .leaderboard-signals-foot {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.86rem;
+        }
+        .leaderboard-signals-foot a { color: #8cb8ff; font-weight: 800; }
+        @media (max-width: 700px) {
+            .leaderboard-signals-head { display: block; }
+            .leaderboard-signals-badges { justify-content: flex-start; margin-top: 0.8rem; }
+        }
+
         .ad-row{grid-column:1/-1;margin:16px 0}
         .ad-multiplex{display:block;min-height:320px;margin:20px 0} /* multiplex */
         .ad-box{display:block;min-height:300px;margin:16px 0}
@@ -1139,6 +1206,29 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
     </div>
 
     <div class="container">
+
+        <section class="leaderboard-signals" aria-labelledby="leaderboard-signals-title" data-editorial-version="1.0.69">
+            <div class="leaderboard-signals-head">
+                <div>
+                    <h2 id="leaderboard-signals-title">📈 Current Leaderboard Build Signals</h2>
+                    <p>Automatically summarized from verified community runs. Use these signals to spot changing weapon and Tome patterns; the editorial Build Guides below remain version-reviewed recommendations.</p>
+                </div>
+                <div class="leaderboard-signals-badges">
+                    <span class="leaderboard-signal-badge" id="leaderboardSignalVersion">Loading patch…</span>
+                    <span class="leaderboard-signal-badge" id="leaderboardSignalSample">Loading sample…</span>
+                </div>
+            </div>
+            <div class="leaderboard-version-note" id="leaderboardVersionNote">Checking whether the leaderboard sample matches this guide's reviewed game version…</div>
+            <div class="leaderboard-signal-grid" id="leaderboardSignalGrid" aria-live="polite">
+                <div class="leaderboard-signal-card"><p>Loading leaderboard evidence…</p></div>
+            </div>
+            <div class="leaderboard-signals-foot">
+                <span id="leaderboardSignalUpdated">Waiting for synchronized data…</span>
+                <a href="/leaderboard/builds">Open full leaderboard build analysis</a>
+                <a href="https://megabonk.leaderboard.gg/" target="_blank" rel="nofollow noopener">View source submissions</a>
+            </div>
+        </section>
+
         <!-- Build Type Tabs -->
         <div class="build-type-tabs">
             <button class="tab-button active" data-tab="character-builds">
@@ -2710,6 +2800,112 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 if (characterBuildSearch) characterBuildSearch.focus();
             });
         }
+
+
+        const leaderboardBuildRoutes = {
+            fox: '/guides/builds/fox-best-build',
+            robinette: '/guides/builds/robinette-best-build',
+            roberto: '/guides/builds/roberto-best-build/',
+            ninja: '/guides/builds/ninja-best-build',
+            megachad: '/guides/builds/megachad-best-build',
+            birdo: '/guides/builds/birdo-best-build',
+            noelle: '/guides/builds/noelle-best-build',
+            dicehead: '/guides/builds/dicehead-best-build',
+            bandit: '/guides/builds/bandit-best-build',
+            tonymczoom: '/guides/builds/tony-mczoom-best-build',
+            sirchadwell: '/guides/builds/sir-chadwell-best-build',
+            calcium: '/guides/builds/calcium-best-build',
+            cl4nk: '/guides/builds/cl4nk-best-build',
+            monke: '/guides/builds/monke-best-build',
+            bush: '/guides/builds/bush-best-build',
+            siroofie: '/guides/builds/sir-oofie-best-build',
+            athena: '/guides/builds/athena-best-build',
+            ogre: '/guides/builds/ogre-best-build',
+            amog: '/guides/builds/amog-best-build',
+            spaceman: '/guides/builds/spaceman-best-build',
+            vlad: '/guides/builds/vlad-best-build'
+        };
+
+        const leaderboardEntityLabels = {
+            cl4nk: 'CL4NK',
+            tonymczoom: 'Tony McZoom',
+            sirchadwell: 'Sir Chadwell',
+            siroofie: 'Sir Oofie',
+            dexecutioner: 'Dexecutioner',
+            firestaff: 'Fire Staff',
+            dragonsbreath: "Dragon's Breath",
+            bloodmagic: 'Blood Magic',
+            wirelessdagger: 'Wireless Dagger',
+            poisonflask: 'Poison Flask',
+            blackhole: 'Black Hole',
+            lightningstaff: 'Lightning Staff',
+            xp: 'XP',
+            cursed: 'Cursed'
+        };
+
+        function formatLeaderboardEntity(value) {
+            if (!value) return 'Unknown';
+            if (leaderboardEntityLabels[value]) return leaderboardEntityLabels[value];
+            return value.replace(/[-_]+/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
+        }
+
+        function formatLeaderboardNumber(value) {
+            return Number(value || 0).toLocaleString('en-US');
+        }
+
+        async function loadLeaderboardBuildSignals() {
+            const panel = document.querySelector('.leaderboard-signals');
+            const grid = document.getElementById('leaderboardSignalGrid');
+            if (!panel || !grid) return;
+
+            try {
+                const response = await fetch(`/data/leaderboard-meta.json?t=${Date.now()}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const meta = await response.json();
+                const editorialVersion = panel.dataset.editorialVersion;
+                const sourceVersion = meta.activeVersion || 'Unknown';
+                const supported = (meta.characters || [])
+                    .filter(entry => leaderboardBuildRoutes[entry.character] && entry.sampleSize >= 3)
+                    .slice(0, 6);
+
+                document.getElementById('leaderboardSignalVersion').textContent = `Leaderboard v${sourceVersion}`;
+                document.getElementById('leaderboardSignalSample').textContent = `${formatLeaderboardNumber(meta.sampleSize)} verified runs`;
+
+                const versionNote = document.getElementById('leaderboardVersionNote');
+                if (sourceVersion === editorialVersion) {
+                    versionNote.textContent = `The leaderboard sample matches this guide's reviewed version, v${editorialVersion}. Frequency still shows what successful players used, not a guaranteed best choice.`;
+                    versionNote.style.borderLeftColor = '#3ddc97';
+                } else {
+                    versionNote.textContent = `Version guard: the leaderboard currently exposes v${sourceVersion}, while this guide is reviewed for v${editorialVersion}. These cards remain evidence only and will not overwrite newer editorial recommendations.`;
+                }
+
+                grid.innerHTML = supported.map(entry => {
+                    const weapons = (entry.topWeapons || []).slice(0, 3).map(item => formatLeaderboardEntity(item.id)).join(' · ');
+                    const tomes = (entry.topTomes || []).slice(0, 3).map(item => formatLeaderboardEntity(item.id)).join(' · ');
+                    return `
+                        <article class="leaderboard-signal-card">
+                            <h3><a href="${leaderboardBuildRoutes[entry.character]}">${formatLeaderboardEntity(entry.character)} Build</a></h3>
+                            <div class="leaderboard-signal-metric">${entry.sampleSize} runs · Median ${formatLeaderboardNumber(entry.medianScore)} kills</div>
+                            <div class="leaderboard-signal-line"><strong>Common weapons:</strong> ${weapons || 'Not enough data'}</div>
+                            <div class="leaderboard-signal-line"><strong>Common Tomes:</strong> ${tomes || 'Not enough data'}</div>
+                        </article>
+                    `;
+                }).join('') || '<div class="leaderboard-signal-card"><p>Not enough version-matched runs are available yet.</p></div>';
+
+                const generated = meta.generatedAt ? new Date(meta.generatedAt) : null;
+                document.getElementById('leaderboardSignalUpdated').textContent =
+                    generated && !Number.isNaN(generated.getTime())
+                        ? `Evidence synchronized ${generated.toLocaleString('en-US')}`
+                        : 'Evidence synchronized automatically';
+            } catch (error) {
+                grid.innerHTML = '<div class="leaderboard-signal-card"><p>Leaderboard evidence is temporarily unavailable. The reviewed Build Guides below are unaffected.</p></div>';
+                document.getElementById('leaderboardVersionNote').textContent =
+                    'Automatic evidence could not be loaded; no editorial recommendation was changed.';
+            }
+        }
+
+        loadLeaderboardBuildSignals();
+
         // Mobile menu toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');

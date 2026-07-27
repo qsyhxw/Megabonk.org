@@ -28,7 +28,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Recent Activity - Latest Megabonk Submissions",
-      "description": "Real-time recent player submissions for Megabonk, updated every 5 minutes with the latest scores, trending builds, and active players.",
+      "description": "Recent verified community submissions for Megabonk, synchronized from Leaderboard.gg with timestamps, scores, builds, and players.",
       "datePublished": "2025-01-15T00:00:00Z",
       "dateModified": "2025-01-15T00:00:00Z",
       "author": {
@@ -822,7 +822,7 @@
             <p>Latest Player Submissions & Trending Builds</p>
             <div class="live-badge">
                 <span class="live-indicator"></span>
-                <span>LIVE - Updates Every 5 Minutes</span>
+                <span>VERIFIED COMMUNITY DATA - SOURCE CHECKED HOURLY</span>
             </div>
         </div>
 
@@ -993,7 +993,7 @@
                 <div style="background: #e3f2fd; padding: 20px; border-radius: 12px; border-left: 4px solid #1976d2;">
                     <h3 style="color: #495057; margin-bottom: 12px; font-size: 1.1rem;">⏰ Update Frequency:</h3>
                     <p style="color: #6c757d; margin: 0; line-height: 1.7;">
-                        Data updates automatically <strong style="color: #1976d2;">every 5 minutes</strong>. 
+                        The source is checked hourly, and this page rechecks the published snapshot <strong style="color: #1976d2;">every 15 minutes</strong>.
                         The "NEW" badge appears on submissions from the last 6 hours.
                     </p>
                 </div>
@@ -1054,19 +1054,12 @@
         const CONFIG = {
             // 关键修改：使用根目录相对路径 (对应你文件列表里的 leaderboard-data.json)
             dataUrl: '/leaderboard-data.json',
-            updateInterval: 300000,  // 5分钟自动刷新
+            updateInterval: 900000,  // Recheck the published snapshot every 15 minutes
             maxDisplayRanks: 50,     // 显示前50名
             defaultDays: 7,          // 默认显示最近7天
             newEntryThreshold: 6     // 6小时内的新数据显示 NEW 标签
         };
 
-        // ============================================================
-        // 🛠️ 备用模拟数据 (兜底方案)
-        // 如果 JSON 文件读取失败，或者文件是空的，会显示这个，保证页面不白屏
-        // ============================================================
-        const MOCK_DATA = [
-            { playerName: "Waiting for Data...", kills: 0, character: "monke", country: { code: "US" }, createdAt: { _seconds: Date.now()/1000 }, weapons: [] }
-        ];
 
         // ============================================================
         // 📊 角色映射数据 (无需修改)
@@ -1120,6 +1113,7 @@
         let leaderboardData = [];
         let currentDays = CONFIG.defaultDays;
         let autoRefreshTimer = null;
+        let sourceFetchedAt = null;
 
         // ============================================================
         // 🚀 初始化
@@ -1163,16 +1157,22 @@
                 }
 
                 leaderboardData = rawData;
+                sourceFetchedAt = result.fetched_at || null;
                 console.log(`✅ Successfully loaded ${leaderboardData.length} entries`);
 
                 processAndRender(currentDays);
 
             } catch (error) {
                 console.error('❌ Error loading data:', error);
-                // 加载失败时，不覆盖现有数据（如果之前加载成功过），或者显示空状态
-                if(leaderboardData.length === 0) {
-                    leaderboardData = MOCK_DATA; // 使用兜底数据防止白屏
-                    processAndRender(currentDays);
+                if (leaderboardData.length === 0) {
+                    const container = document.getElementById('table-container');
+                    container.innerHTML = `
+                        <div class="loading">
+                            <p style="font-size: 3rem; margin-bottom: 20px;">⚠️</p>
+                            <p style="font-size: 1.2rem;">Recent submissions are temporarily unavailable</p>
+                            <p style="color:#6c757d; margin-top:10px;">No placeholder or simulated rankings are shown.</p>
+                        </div>
+                    `;
                 }
             }
         }
@@ -1187,8 +1187,7 @@
              updateTrending(recentData);
              
              // 更新最后更新时间显示
-             const updateTime = new Date().toISOString();
-             updateLastUpdateTime(updateTime);
+             updateLastUpdateTime(sourceFetchedAt);
         }
 
         // ============================================================

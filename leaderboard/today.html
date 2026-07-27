@@ -28,7 +28,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Today's Megabonk Leaderboard - Daily Rankings",
-      "description": "Real-time daily leaderboard rankings for Megabonk, updated every 5 minutes with today's top scores, trending builds, and player achievements.",
+      "description": "Today's verified Megabonk community leaderboard submissions, synchronized from Leaderboard.gg with real source timestamps.",
       "datePublished": "2025-01-15T00:00:00Z",
       "dateModified": "2025-01-15T00:00:00Z",
       "author": {
@@ -820,7 +820,7 @@
             <p>Live Daily Rankings & Trending Scores</p>
             <div class="live-badge">
                 <span class="live-indicator"></span>
-                <span>LIVE - Updates Every 5 Minutes</span>
+                <span>VERIFIED COMMUNITY DATA - SOURCE CHECKED HOURLY</span>
             </div>
         </div>
 
@@ -975,7 +975,7 @@
             <div class="card-content" style="padding: 30px;">
                 <h2 style="color: #495057; margin-bottom: 20px; font-size: 1.5rem;">⏰ Update Schedule</h2>
                 <p style="color: #6c757d; line-height: 1.7; margin-bottom: 20px;">
-                    Today's leaderboard updates automatically <strong style="color: #667eea;">every 5 minutes</strong> to show the latest rankings and scores. The data is pulled directly from the official megabonk.fun leaderboard API, ensuring accuracy and real-time updates throughout the day.
+                    The source leaderboard is checked hourly, and this page rechecks the published snapshot every 15 minutes. Each run now uses the real submission timestamp supplied by the unofficial community-run Leaderboard.gg dataset.
                 </p>
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea;">
                     <h3 style="color: #495057; margin-bottom: 12px; font-size: 1.1rem;">📊 What Gets Updated:</h3>
@@ -1044,8 +1044,8 @@
         // 🎯 配置区域
         // ============================================================
         const CONFIG = {
-            dataUrl: 'https://megabonk.org/leaderboard-data.json',
-            updateInterval: 300000,
+            dataUrl: '/leaderboard-data.json',
+            updateInterval: 900000,
             maxDisplayRanks: 50,
             newEntryThreshold: 6,
         };
@@ -1318,15 +1318,20 @@ function filterTodayData(data) {
         return 0; // 无法解析
     };
 
-    // 3. 计算今天的起止时间 (UTC)
+    // 3. Calculate the selected local calendar day.
     const targetDate = new Date(currentDate);
-    const startTimestamp = new Date(Date.UTC(
-        targetDate.getUTCFullYear(),
-        targetDate.getUTCMonth(),
-        targetDate.getUTCDate(),
+    const startTimestamp = new Date(
+        targetDate.getFullYear(),
+        targetDate.getMonth(),
+        targetDate.getDate(),
         0, 0, 0, 0
-    )).getTime() / 1000;
-    const endTimestamp = startTimestamp + 86400; // +24小时
+    ).getTime() / 1000;
+    const endTimestamp = new Date(
+        targetDate.getFullYear(),
+        targetDate.getMonth(),
+        targetDate.getDate() + 1,
+        0, 0, 0, 0
+    ).getTime() / 1000;
 
     // 4. 执行过滤
     let filtered = data.filter(item => {
@@ -1336,30 +1341,7 @@ function filterTodayData(data) {
 
     console.log(`找到 ${filtered.length} 条今日数据`);
 
-    // === 兜底策略 (非常重要) ===
-    // 如果“今天”没数据，为了不让页面开天窗，自动尝试加载“过去7天”的数据
-    if (filtered.length === 0) {
-        console.log("今日无数据，尝试加载最近7天...");
-        const sevenDaysAgo = startTimestamp - (7 * 86400);
-        filtered = data.filter(item => {
-            const ts = parseTimestamp(item);
-            return ts >= sevenDaysAgo;
-        });
-        
-        if (filtered.length > 0) {
-            // 更新页面上的日期显示，提示用户这是最近的数据
-            updateDateLabel('Recent 7 Days');
-        }
-    }
-
-    // 如果7天也没数据，那就显示所有数据的前50名 (防止页面空白)
-    if (filtered.length === 0 && data.length > 0) {
-        console.log("最近无数据，显示全部历史记录前50名");
-        updateDateLabel('All Time');
-        filtered = data;
-    }
-
-    // 5. 排序并截取前50名
+    // 5. Sort and cap the selected day's verified submissions.
     return filtered
         .sort((a, b) => (b.kills || 0) - (a.kills || 0)) // 按击杀数降序
         .slice(0, CONFIG.maxDisplayRanks);
