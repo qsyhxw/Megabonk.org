@@ -432,7 +432,7 @@ def update_page(page: str, records: list[PatchRecord], today: date) -> tuple[str
     date_label = display_date(latest.release_date)
     description = (
         f"Megabonk {version_label} patch notes for {date_label}, with the latest update "
-        "summary, fixes and a stable version directory."
+        "summary, release date, Game Awards history and verified sales milestone."
     )
     social_description = (
         f"Latest Megabonk {version_label} patch summary and version-by-version update archive."

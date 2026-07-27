@@ -92,6 +92,7 @@ class PatchNotesUpdaterTests(unittest.TestCase):
         self.assertEqual(first["new_versions"], ["1.0.70"])
         self.assertIn('<meta name="patch-version" content="1.0.70">', rendered)
         self.assertIn("Megabonk Patch Notes V1.0.70", rendered)
+        self.assertIn("Game Awards history and verified sales milestone", rendered)
         self.assertIn('data-patch-version="1.0.70"', rendered)
         self.assertIn('id="v1070"', rendered)
         self.assertIn('<strong data-home-patch-version>v1.0.70</strong>', rendered_homepage)
