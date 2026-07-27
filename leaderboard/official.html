@@ -359,6 +359,12 @@
             margin: 30px 0;
         }
 
+        .comparison-table-scroll {
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         .comparison-table th {
             background: #667eea;
         }
@@ -421,7 +427,7 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+        .lb-intent-tabs{display:flex;gap:8px;margin:0 0 22px;padding:8px;overflow-x:auto;background:#fff;border:1px solid #dee2e6;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.06);scrollbar-width:thin}.lb-intent-tabs a{flex:0 0 auto;padding:9px 13px;border-radius:8px;background:#f1f3f5;color:#495057;font-size:.9rem;font-weight:700;text-decoration:none;white-space:nowrap}.lb-intent-tabs a:hover{background:#e9ecef;color:#343a40}.lb-intent-tabs a[aria-current="page"]{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}    </style>
 </head>
 <body>
     <!-- Site Header -->
@@ -452,8 +458,16 @@
     </header>
 
     <div class="container">
+        <nav class="lb-intent-tabs" aria-label="Leaderboard sections">
+            <a href="/leaderboard/">Global Leaderboard</a>
+            <a href="/leaderboard/today">Today</a>
+            <a href="/leaderboard/recent">Recent</a>
+            <a href="/leaderboard/official" aria-current="page">Official &amp; Submit</a>
+            <a href="/leaderboard/builds">Leaderboard Builds</a>
+            <a href="/leaderboard/verified">Verified &amp; Rules</a>
+        </nav>
         <div class="page-header">
-            <h1>🏆 Megabonk Leaderboards Guide</h1>
+            <h1>🏆 Official Megabonk Leaderboard &amp; Submission Guide</h1>
         </div>
         
         <div class="intro">
@@ -581,6 +595,7 @@
 
             <h2>Comparison: Steam vs megabonk.fun</h2>
 
+            <div class="comparison-table-scroll" role="region" aria-label="Steam and community leaderboard comparison" tabindex="0">
             <table class="comparison-table">
                 <thead>
                     <tr>
@@ -617,6 +632,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
 
             <h2>Understanding Leaderboard Resets</h2>
 
