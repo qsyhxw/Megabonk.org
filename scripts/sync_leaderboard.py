@@ -27,6 +27,8 @@ SOURCE_URL = "https://megabonk.leaderboard.gg/"
 DEFAULT_OUTPUT = Path("leaderboard-data.json")
 DEFAULT_META_OUTPUT = Path("data/leaderboard-meta.json")
 MINIMUM_VALID_RECORDS = 100
+META_SCHEMA_VERSION = 2
+BUILD_SAMPLE_LIMIT = 100
 USER_AGENT = (
     "Mozilla/5.0 (compatible; Megabonk.org leaderboard sync; "
     "+https://megabonk.org/leaderboard/)"
@@ -322,6 +324,51 @@ def top_values(records: list[dict[str, Any]], field: str, limit: int = 8) -> lis
     ]
 
 
+def popular_loadouts(
+    records: list[dict[str, Any]], limit: int = 3
+) -> list[dict[str, Any]]:
+    grouped: dict[tuple[tuple[str, ...], tuple[str, ...]], list[dict[str, Any]]] = (
+        defaultdict(list)
+    )
+    for record in records:
+        weapons = tuple(sorted(set(record.get("weapons") or [])))
+        tomes = tuple(sorted(set(record.get("tomes") or [])))
+        if weapons or tomes:
+            grouped[(weapons, tomes)].append(record)
+
+    loadouts = []
+    for (weapons, tomes), matching_runs in grouped.items():
+        scores = sorted(run.get("kills") or 0 for run in matching_runs)
+        representative = max(
+            matching_runs,
+            key=lambda run: (run.get("kills") or 0, -(run.get("rank") or 999999)),
+        )
+        loadouts.append(
+            {
+                "weapons": list(weapons),
+                "tomes": list(tomes),
+                "runs": len(matching_runs),
+                "usageRate": round(len(matching_runs) / len(records), 4)
+                if records
+                else 0,
+                "medianScore": int(statistics.median(scores)),
+                "topScore": max(scores),
+                "representativeRun": {
+                    "rank": representative.get("rank"),
+                    "playerName": representative.get("playerName"),
+                    "kills": representative.get("kills"),
+                    "videoURL": representative.get("videoURL"),
+                    "submissionId": representative.get("submissionId"),
+                },
+            }
+        )
+
+    loadouts.sort(
+        key=lambda item: (-item["runs"], -item["medianScore"], -item["topScore"])
+    )
+    return loadouts[:limit]
+
+
 def build_meta(
     records: list[dict[str, Any]],
     observed_at: str,
@@ -334,9 +381,11 @@ def build_meta(
     ]
     if not current:
         current = records
+    current.sort(key=lambda record: record.get("rank") or 999999)
+    build_sample = current[:BUILD_SAMPLE_LIMIT]
 
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for record in current:
+    for record in build_sample:
         grouped[record["character"]].append(record)
 
     characters = []
@@ -352,6 +401,7 @@ def build_meta(
                 "topWeapons": top_values(runs, "weapons", 6),
                 "topTomes": top_values(runs, "tomes", 6),
                 "topItems": top_values(runs, "items", 8),
+                "popularLoadouts": popular_loadouts(runs),
                 "representativeRuns": [
                     {
                         "rank": run["rank"],
@@ -369,24 +419,26 @@ def build_meta(
     characters.sort(key=lambda item: (-item["sampleSize"], -item["topScore"]))
 
     return {
+        "schemaVersion": META_SCHEMA_VERSION,
         "source": "Leaderboard.gg Megabonk community leaderboard",
         "sourceUrl": SOURCE_URL,
         "generatedAt": observed_at,
         "activeVersion": active_version,
-        "sampleSize": len(current),
+        "sampleSize": len(build_sample),
+        "availableRuns": len(current),
+        "sampleScope": f"Top {len(build_sample)} ranked runs",
         "methodology": (
-            "Observed verified leaderboard runs for the active leaderboard version. "
-            "Usage frequency is evidence, not an automatic editorial recommendation."
+            "Observed current-version Top 100 ranked runs. Exact loadouts are counted "
+            "only when the same weapon and Tome set appears in a source run. Usage "
+            "frequency is evidence, not a guaranteed best choice."
         ),
         "overall": {
-            "topWeapons": top_values(current, "weapons"),
-            "topTomes": top_values(current, "tomes"),
-            "topItems": top_values(current, "items"),
+            "topWeapons": top_values(build_sample, "weapons"),
+            "topTomes": top_values(build_sample, "tomes"),
+            "topItems": top_values(build_sample, "items"),
         },
         "characters": characters,
     }
-
-
 def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -402,7 +454,22 @@ def main() -> int:
     parser.add_argument("--input-html", type=Path)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--meta-output", type=Path, default=DEFAULT_META_OUTPUT)
+    parser.add_argument("--rebuild-meta-only", action="store_true")
     args = parser.parse_args()
+
+    if args.rebuild_meta_only:
+        payload = load_previous_payload(args.output)
+        records = payload.get("data") or []
+        if not records:
+            raise ValueError(f"No leaderboard records found in {args.output}")
+        meta = build_meta(
+            records,
+            payload.get("fetched_at") or utc_now(),
+            payload.get("active_version"),
+        )
+        write_json_atomic(args.meta_output, meta)
+        print(f"Rebuilt {args.meta_output} from {args.output}")
+        return 0
 
     html = (
         args.input_html.read_text(encoding="utf-8")
@@ -413,10 +480,12 @@ def main() -> int:
     source_digest = source_fingerprint(source_records)
     observed_at = utc_now()
     previous_payload = load_previous_payload(args.output)
+    previous_meta = load_previous_payload(args.meta_output)
     source_version = state.get("$sleaderboardVersion")
     if (
         previous_payload.get("source_url") == SOURCE_URL
         and previous_payload.get("source_fingerprint") == source_digest
+        and previous_meta.get("schemaVersion") == META_SCHEMA_VERSION
     ):
         print(
             f"No leaderboard change detected ({len(source_records)} records, "
