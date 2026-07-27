@@ -851,11 +851,7 @@
             </div>
         </div>
 
-        <div id="build-source-note" style="margin: 0 0 24px; padding: 16px 20px; border-radius: 12px; background: rgba(255,255,255,.96); color: #495057; line-height: 1.6; box-shadow: 0 8px 24px rgba(0,0,0,.12);">
-            Loading the current patch snapshot from <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Leaderboard.gg</a>. Usage frequency is run evidence, not an automatic tier rating or editorial recommendation.
-        </div>
-
-        <!-- Loading State -->
+<!-- Loading State -->
         <div id="loading-container" class="loading-container">
             <div class="loading-spinner"></div>
             <p style="color: #6c757d; font-size: 1.1rem;">Analyzing leaderboard data...</p>
@@ -920,6 +916,10 @@
                 </div>
             </div>
         </div>
+
+        <p id="build-source-note" style="margin: 24px 4px 12px; color: #6c757d; font-size: 0.78rem; line-height: 1.55; text-align: right;">
+            Loading source details…
+        </p>
 
         <!-- ADS: In-Article -->
         <div class="ad-box">
@@ -2407,7 +2407,7 @@
                     : 'unknown sync time';
 
                 document.getElementById('data-source-badge').textContent = `Top ${topData.length} Verified Runs · ${versionLabel}`;
-                document.getElementById('build-source-note').innerHTML = `Source: <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Leaderboard.gg</a> · ${versionLabel} · ${topData.length} ranked-run sample · synchronized ${syncLabel}. Usage frequency is evidence, not an automatic tier rating or editorial recommendation.`;
+                document.getElementById('build-source-note').innerHTML = `Source: <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Leaderboard.gg</a> · ${versionLabel} · ${topData.length} ranked-run sample · snapshot published ${syncLabel}. Usage frequency is evidence, not an automatic tier rating or editorial recommendation.`;
                 
                 renderCharacterNav(analysis.characters);
                 renderMetaOverview(analysis);

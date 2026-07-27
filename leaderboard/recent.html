@@ -835,7 +835,7 @@
         <div class="time-filter">
             <div class="current-range">
                 <span>📅</span>
-                <span>Showing submissions from <span id="range-text">last 7 days</span> · <a href="https://megabonk.leaderboard.gg/" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Source: Leaderboard.gg</a></span>
+                <span>Showing submissions from <span id="range-text">last 7 days</span></span>
             </div>
             <div class="filter-controls">
                 <button class="btn-filter active" data-days="7" onclick="setDaysFilter(7)">
@@ -979,6 +979,10 @@
                 </div>
             </div>
         </div>
+
+        <p style="margin: 8px 4px 26px; color: rgba(255,255,255,.82); font-size: 0.78rem; line-height: 1.5; text-align: right;">
+            Data source: <a href="https://megabonk.leaderboard.gg/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Leaderboard.gg</a> · Community-reviewed records · Snapshot changes publish automatically.
+        </p>
 
         <!-- About This Page -->
         <div class="card">
@@ -1165,7 +1169,7 @@
                 leaderboardData = rawData;
                 sourceFetchedAt = result.fetched_at || null;
                 activeVersion = result.active_version || null;
-                document.getElementById('recent-source-status').textContent = `LEADERBOARD.GG VERIFIED DATA · ${activeVersion ? 'V' + activeVersion : 'VERSION UNKNOWN'} · SOURCE CHECKED HOURLY`;
+                document.getElementById('recent-source-status').textContent = `VERIFIED COMMUNITY SNAPSHOT · ${activeVersion ? 'V' + activeVersion : 'VERSION UNKNOWN'} · CHECKED HOURLY`;
                 console.log(`✅ Successfully loaded ${leaderboardData.length} entries`);
 
                 processAndRender(currentDays);

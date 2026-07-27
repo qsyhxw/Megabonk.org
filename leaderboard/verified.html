@@ -857,7 +857,7 @@
                 if (!Array.isArray(snapshot.data) || snapshot.data.length < 100) throw new Error('Incomplete snapshot');
                 const version = snapshot.active_version ? `v${snapshot.active_version}` : 'unknown patch';
                 document.getElementById('verified-status').textContent = `${snapshot.data.length.toLocaleString()} source-approved records · ${version}`;
-                document.getElementById('verified-snapshot-count').textContent = `${snapshot.data.length.toLocaleString()} approved community records; synchronized ${snapshot.fetched_at ? new Date(snapshot.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'without a source timestamp'}.`;
+                document.getElementById('verified-snapshot-count').textContent = `${snapshot.data.length.toLocaleString()} approved community records; snapshot published ${snapshot.fetched_at ? new Date(snapshot.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'without a source timestamp'}.`;
                 document.getElementById('verified-snapshot-version').textContent = `${version}; build analysis remains evidence and cannot overwrite newer editorial recommendations.`;
             } catch (error) {
                 document.getElementById('verified-status').textContent = 'Community snapshot temporarily unavailable';

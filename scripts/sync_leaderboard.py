@@ -10,6 +10,7 @@ the site can power all-time, today, recent, and meta-build views from one file.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import re
@@ -181,6 +182,17 @@ def decode_source(html: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     if not isinstance(records, list):
         raise ValueError("Leaderboard array was not found in Nuxt payload")
     return records, state
+
+
+def source_fingerprint(records: list[dict[str, Any]]) -> str:
+    """Return a stable digest so same-count record edits still publish."""
+    serialized = json.dumps(
+        records,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(serialized).hexdigest()
 
 
 def previous_record_index(output_path: Path) -> dict[str, dict[str, Any]]:
@@ -398,13 +410,13 @@ def main() -> int:
         else fetch_source_html()
     )
     source_records, state = decode_source(html)
+    source_digest = source_fingerprint(source_records)
     observed_at = utc_now()
     previous_payload = load_previous_payload(args.output)
     source_version = state.get("$sleaderboardVersion")
     if (
         previous_payload.get("source_url") == SOURCE_URL
-        and previous_payload.get("leaderboard_version") == source_version
-        and previous_payload.get("count") == len(source_records)
+        and previous_payload.get("source_fingerprint") == source_digest
     ):
         print(
             f"No leaderboard change detected ({len(source_records)} records, "
@@ -423,6 +435,7 @@ def main() -> int:
         "fetched_at": observed_at,
         "active_version": active_version,
         "leaderboard_version": source_version,
+        "source_fingerprint": source_digest,
         "count": len(records),
         "data": records,
     }
