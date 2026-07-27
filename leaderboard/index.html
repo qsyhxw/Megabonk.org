@@ -1146,6 +1146,10 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             overflow: hidden;
         }
 
+        .popular-build-card.has-top-pick {
+            padding-top: 52px;
+        }
+
         .popular-build-card::before {
             content: '';
             position: absolute;
@@ -1235,7 +1239,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             position: absolute;
             top: 15px;
             right: 15px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             padding: 4px 10px;
             border-radius: 12px;
@@ -1244,19 +1248,8 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             display: flex;
             align-items: center;
             gap: 4px;
-            animation: pulse-badge 2s infinite;
         }
 
-        @keyframes pulse-badge {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 4px 16px rgba(255, 107, 107, 0.5);
-            }
-        }
 
         /* Site Footer */
         .site-footer {
@@ -1650,17 +1643,17 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             </div>
         </div>
 
-        <!-- Popular Builds Section -->
-        <div class="card" style="padding: 40px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+        <!-- Current Top 50 character evidence -->
+        <div class="card" style="padding: clamp(24px, 4vw, 40px);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 25px;">
                 <div>
                     <h2 style="color: #667eea; margin: 0 0 5px 0; display: flex; align-items: center; gap: 10px;">
-                        🔥 Popular Right Now
+                        📊 Current Top 50 Character Representation
                     </h2>
-                    <p style="color: #6c757d; margin: 0; font-size: 0.9rem;">Most represented characters in the current verified Top 50</p>
+                    <p style="color: #6c757d; margin: 0; font-size: 0.9rem;">Character share among current-patch Top 50 verified runs</p>
                 </div>
                 <span id="meta-update-badge" style="padding: 6px 12px; background: #e3f2fd; color: #1976d2; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
-                    Loading patch evidence…
+                    Loading Top 50 snapshot…
                 </span>
             </div>
             <div id="popular-builds-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
@@ -3009,6 +3002,31 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 .trim();
         }
 
+        function formatCharacterName(name) {
+            const rawName = String(name || '').trim();
+            const key = rawName.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const displayNames = {
+                cl4nk: 'CL4NK',
+                tonymczoom: 'Tony McZoom',
+                siroofie: 'Sir Oofie',
+                sirchadwell: 'Sir Chadwell'
+            };
+
+            return displayNames[key] || rawName
+                .split(/[\s_-]+/)
+                .filter(Boolean)
+                .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+                .join(' ') || 'Unknown';
+        }
+
+        function formatSnapshotDate(value) {
+            const date = new Date(value);
+            if (!value || Number.isNaN(date.getTime())) return '';
+            return date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric'
+            });
+        }
         function formatBuildVersion(version) {
             if (!version) return 'Unknown';
             const versionStr = version.toString();
@@ -3207,7 +3225,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             }
         }
 
-        // ⭐ 分析排行榜数据并生成热门Build
+        // Summarize character representation in the current-patch verified Top 50.
         function renderPopularBuilds(data, result = {}) {
             const container = document.getElementById('popular-builds-container');
             const updateBadge = document.getElementById('meta-update-badge');
@@ -3223,7 +3241,9 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             const versionData = activeVersion
                 ? data.filter(player => !player.buildVersionLabel || player.buildVersionLabel === activeVersion)
                 : data;
-            const topPlayers = versionData.slice(0, 50);
+            const topPlayers = [...versionData]
+                .sort((a, b) => (Number(a.rank) || Number.MAX_SAFE_INTEGER) - (Number(b.rank) || Number.MAX_SAFE_INTEGER))
+                .slice(0, 50);
             
             topPlayers.forEach(player => {
                 const char = (player.character || '').toLowerCase();
@@ -3259,6 +3279,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             const cardsHTML = sortedCharacters.map((charData, index) => {
                 const charName = charData.character;
                 const charKey = charName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const displayName = formatCharacterName(charName);
                 const buildUrl = CHARACTER_BUILD_MAP[charName.toLowerCase()] || 
                                 CHARACTER_BUILD_MAP[charKey] || 
                                 'https://megabonk.org/guides/builds/';
@@ -3267,17 +3288,17 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 const usageRate = ((charData.count / totalUsage) * 100).toFixed(1);
                 const avgKills = Math.round(charData.totalKills / charData.count);
                 
-                // 前3名显示Trending徽章
+                // Label the three most represented characters without implying a time trend.
                 const trendingBadge = index < 3 ? `
                     <span class="trending-badge">
-                        <span>🔥</span>
-                        <span>HOT</span>
+                        <span>🏆</span>
+                        <span>TOP PICK</span>
                     </span>
                 ` : '';
                 
                 return `
                     <a href="${buildUrl}" 
-                       class="popular-build-card" 
+                       class="popular-build-card ${index < 3 ? 'has-top-pick' : ''}"
                        target="_blank"
                        rel="noopener">
                         ${trendingBadge}
@@ -3286,8 +3307,8 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                                 ${charIcon}
                             </div>
                             <div class="popular-build-info">
-                                <div class="popular-build-name">${escapeHtml(charName)}</div>
-                                <div class="popular-build-subtitle">Best Build Guide</div>
+                                <div class="popular-build-name">${escapeHtml(displayName)}</div>
+                                <div class="popular-build-subtitle">${charData.count} verified ${charData.count === 1 ? 'run' : 'runs'} · View Build Guide</div>
                             </div>
                         </div>
                         <div class="popular-build-stats">
@@ -3310,10 +3331,13 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
             container.innerHTML = cardsHTML;
             
-            // 更新时间徽章
-            updateBadge.textContent = activeVersion
-                ? `v${activeVersion} • Top ${topPlayers.length} verified runs`
-                : `Top ${topPlayers.length} verified runs`;
+            const snapshotDate = formatSnapshotDate(result.fetched_at);
+            const badgeParts = [
+                activeVersion ? `v${activeVersion}` : '',
+                `Top ${topPlayers.length}`,
+                snapshotDate ? `Snapshot ${snapshotDate}` : ''
+            ].filter(Boolean);
+            updateBadge.textContent = badgeParts.join(' • ');
         }
 
         // Load on page load
