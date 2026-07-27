@@ -28,7 +28,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Today's Megabonk Leaderboard - Daily Rankings",
-      "description": "Today's verified Megabonk community leaderboard submissions, synchronized from Leaderboard.gg with real source timestamps.",
+      "description": "Verified Megabonk community leaderboard submissions from the rolling last 24 hours, synchronized from Leaderboard.gg with real source timestamps.",
       "datePublished": "2025-01-15T00:00:00Z",
       "dateModified": "2025-01-15T00:00:00Z",
       "author": {
@@ -817,7 +817,7 @@
         </nav>
         <div class="page-header">
             <h1>📅 Today's Leaderboard</h1>
-            <p>Live Daily Rankings & Trending Scores</p>
+            <p>Verified submissions from the rolling last 24 hours</p>
             <div class="live-badge">
                 <span class="live-indicator"></span>
                 <span>VERIFIED COMMUNITY DATA - SOURCE CHECKED HOURLY</span>
@@ -844,7 +844,7 @@
         <div class="stats-dashboard">
             <div class="stat-card">
                 <div class="stat-icon">🔥</div>
-                <div class="stat-label">Top Score Today</div>
+                <div class="stat-label">Top Score · 24h</div>
                 <div class="stat-value" id="top-score-today">-</div>
                 <div class="stat-change positive" id="top-score-change">
                     <span>↗</span>
@@ -888,7 +888,7 @@
             <div class="card-header">
                 <h2 class="card-title">
                     <span>🏆</span>
-                    <span>Today's Top 50 Rankings</span>
+                    <span>Last 24 Hours · Top 50</span>
                 </h2>
                 <div class="update-badge" id="last-update">
                     <span>🕐</span>
@@ -937,7 +937,7 @@
             <div class="card-header">
                 <h2 class="card-title">
                     <span>🔥</span>
-                    <span>Trending Today</span>
+                    <span>Trending · Last 24 Hours</span>
                 </h2>
             </div>
             <div class="trending-grid" id="trending-container">
@@ -987,7 +987,7 @@
                     </ul>
                 </div>
                 <p style="color: #6c757d; margin-top: 20px; font-size: 0.95rem;">
-                    <strong>Note:</strong> The "Today" filter shows all scores submitted in the current UTC day (resets at 00:00 UTC). To view all-time rankings, visit the <a href="https://megabonk.org/leaderboard/" style="color: #667eea; text-decoration: none; font-weight: 600;">Global Leaderboard</a>.
+                    <strong>Note:</strong> “Today” uses a rolling 24-hour window, so the page does not become artificially empty after midnight. “Yesterday” uses the selected local calendar day. To view all-time rankings, visit the <a href="https://megabonk.org/leaderboard/" style="color: #667eea; text-decoration: none; font-weight: 600;">Global Leaderboard</a>.
                 </p>
             </div>
         </div>
@@ -1241,7 +1241,10 @@
         function updateCurrentDate() {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const dateStr = currentDate.toLocaleDateString('en-US', options);
-            document.getElementById('current-date').textContent = dateStr;
+            const isToday = currentDate.toDateString() === new Date().toDateString();
+            document.getElementById('current-date').textContent = isToday
+                ? `Last 24 Hours · ${dateStr}`
+                : dateStr;
             
             const today = new Date();
             today.setHours(0, 0, 0, 0);
@@ -1318,20 +1321,26 @@ function filterTodayData(data) {
         return 0; // 无法解析
     };
 
-    // 3. Calculate the selected local calendar day.
+    // 3. “Today” is a rolling 24-hour window. Older selections remain calendar days.
     const targetDate = new Date(currentDate);
-    const startTimestamp = new Date(
-        targetDate.getFullYear(),
-        targetDate.getMonth(),
-        targetDate.getDate(),
-        0, 0, 0, 0
-    ).getTime() / 1000;
-    const endTimestamp = new Date(
-        targetDate.getFullYear(),
-        targetDate.getMonth(),
-        targetDate.getDate() + 1,
-        0, 0, 0, 0
-    ).getTime() / 1000;
+    const now = new Date();
+    const isToday = targetDate.toDateString() === now.toDateString();
+    const endTimestamp = isToday
+        ? now.getTime() / 1000
+        : new Date(
+            targetDate.getFullYear(),
+            targetDate.getMonth(),
+            targetDate.getDate() + 1,
+            0, 0, 0, 0
+        ).getTime() / 1000;
+    const startTimestamp = isToday
+        ? endTimestamp - (24 * 60 * 60)
+        : new Date(
+            targetDate.getFullYear(),
+            targetDate.getMonth(),
+            targetDate.getDate(),
+            0, 0, 0, 0
+        ).getTime() / 1000;
 
     // 4. 执行过滤
     let filtered = data.filter(item => {
@@ -1339,7 +1348,7 @@ function filterTodayData(data) {
         return ts >= startTimestamp && ts < endTimestamp;
     });
 
-    console.log(`找到 ${filtered.length} 条今日数据`);
+    console.log(`Found ${filtered.length} submissions in the selected window`);
 
     // 5. Sort and cap the selected day's verified submissions.
     return filtered
@@ -1394,7 +1403,7 @@ function updateDateLabel(label) {
                 container.innerHTML = `
                     <div style="text-align: center; padding: 60px 20px; color: #6c757d;">
                         <p style="font-size: 3rem; margin-bottom: 20px;">📅</p>
-                        <p style="font-size: 1.2rem;">No entries for ${currentDate.toLocaleDateString()}</p>
+                        <p style="font-size: 1.2rem;">No verified submissions in this 24-hour window</p>
                         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 10px;">
                             Check the <a href="https://megabonk.org/leaderboard/" style="color: #667eea; text-decoration: none; font-weight: 600;">Global Leaderboard</a> for all-time rankings
                         </p>
