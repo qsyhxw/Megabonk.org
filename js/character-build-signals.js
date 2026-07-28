@@ -24,6 +24,12 @@
     duration: 'Tomes/Duration_Tome.png', luck: 'Tomes/Luck_Tome.png', quantity: 'Tomes/Quantity_Tome.png',
     thorns: 'Tomes/Thorns_Tome.png', xp: 'Tomes/XP_Tome.png'
   };
+  const ITEM_IMAGES = {
+    bobslight: '/images/Items/Item_Bobs_Light.png',
+    oldmask: '/images/Items/Item_Old_Mask.png',
+    pot: '/images/Items/Item_Pot_Stainless_Steel.png',
+    wizardshat: '/images/Items/Item_Wizards_Hat.png'
+  };
   const WEAPON_ROUTES = {
     aegis: '/database/weapons/aegis', aura: '/database/weapons/aura', axe: '/database/weapons/axe',
     bananarang: '/database/weapons/bananarang', blackhole: '/database/weapons/black-hole', bloodmagic: '/database/weapons/blood-magic',
@@ -49,7 +55,7 @@
   const ITEM_ROUTES = {
     anvil: '/database/items/anvil', backpack: '/database/items/backpack', battery: '/database/items/battery', beacon: '/database/items/beacon',
     beefyring: '/database/items/beefy-ring', beer: '/database/items/beer', bigbonk: '/database/items/big-bonk', bloodycleaver: '/database/items/bloody-cleaver',
-    bobdead: '/database/items/bob-dead', borgar: '/database/items/borgar', bossbuster: '/database/items/boss-buster', brassknuckles: '/database/items/brass-knuckles',
+    bobdead: '/database/items/bob-dead', bobslight: '/database/items/bobs-light', borgar: '/database/items/borgar', bossbuster: '/database/items/boss-buster', brassknuckles: '/database/items/brass-knuckles',
     cactus: '/database/items/cactus', campfire: '/database/items/campfire', chonkplate: '/database/items/chonkplate', clover: '/database/items/clover',
     cowardscloak: '/database/items/cowards-cloak', creditcardgreen: '/database/items/credit-card-green', creditcardred: '/database/items/credit-card-red',
     curseddoll: '/database/items/cursed-doll', cursedgrabbies: '/database/items/cursed-grabbies', demonicblade: '/database/items/demonic-blade',
@@ -62,8 +68,8 @@
     holybook: '/database/items/holy-book', icecrystal: '/database/items/ice-crystal', icecube: '/database/items/ice-cube', idlejuice: '/database/items/idle-juice',
     joesdagger: '/database/items/joes-dagger', kevin: '/database/items/kevin', key: '/database/items/key', leechingcrystal: '/database/items/leeching-crystal',
     lightningorb: '/database/items/lightning-orb', medkit: '/database/items/medkit', mirror: '/database/items/mirror', moldycheese: '/database/items/moldy-cheese',
-    moldygloves: '/database/items/moldy-gloves', oats: '/database/items/oats', overpoweredlamp: '/database/items/overpowered-lamp',
-    phantomshroud: '/database/items/phantom-shroud', pot: '/database/items/pot-stainless-steel.html', powergloves: '/database/items/power-gloves',
+    moldygloves: '/database/items/moldy-gloves', oats: '/database/items/oats', oldmask: '/database/items/old-mask', overpoweredlamp: '/database/items/overpowered-lamp',
+    phantomshroud: '/database/items/phantom-shroud', pot: '/database/items/pot-stainless-steel', powergloves: '/database/items/power-gloves',
     quinsmask: '/database/items/quins-mask', scarf: '/database/items/scarf', shatteredknowledge: '/database/items/shattered-knowledge', skuleg: '/database/items/skuleg',
     slipperyring: '/database/items/slippery-ring', slurpgloves: '/database/items/slurp-gloves', sluttycannon: '/database/items/slutty-cannon',
     snek: '/database/items/snek', soulharvester: '/database/items/soul-harvester', speedboi: '/database/items/speed-boi',
@@ -131,9 +137,11 @@
       const shared = window.MegabonkEntities?.get('items', value);
       const label = shared?.name || formatName(value);
       const route = shared?.page || ITEM_ROUTES[value];
+      const image = shared?.image || ITEM_IMAGES[value] || null;
+      const content = `${image ? `<img src="${image}" alt="" width="22" height="22" loading="lazy" decoding="async">` : ''}<span>${escapeHtml(label)}</span>`;
       return route
-        ? `<a class="cbs-item-link" href="${route}">${escapeHtml(label)}</a>`
-        : `<span>${escapeHtml(label)}</span>`;
+        ? `<a class="cbs-item-link" href="${route}" aria-label="View ${escapeHtml(label)} details">${content}</a>`
+        : `<span class="cbs-item-link is-static">${content}</span>`;
     }).join(' <span aria-hidden="true">&middot;</span> ');
   }
 

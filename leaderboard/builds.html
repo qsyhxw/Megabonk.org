@@ -2319,6 +2319,28 @@
         url: 'https://megabonk.org/database/items/turbo-socks'
     },
     
+    // Graveyard progression items
+    'bobslight': {
+        name: "Bob's Light",
+        image: '/images/Items/Item_Bobs_Light.png',
+        url: '/database/items/bobs-light'
+    },
+    'oldmask': {
+        name: 'Old Mask',
+        image: '/images/Items/Item_Old_Mask.png',
+        url: '/database/items/old-mask'
+    },
+    'pot': {
+        name: 'Pot (Stainless Steel)',
+        image: '/images/Items/Item_Pot_Stainless_Steel.png',
+        url: '/database/items/pot-stainless-steel'
+    },
+    'wizardshat': {
+        name: "Wizard's Hat",
+        image: '/images/Items/Item_Wizards_Hat.png',
+        url: '/database/items/wizards-hat'
+    },
+
     // Scarf
     'scarf': {
         image: 'https://megabonk.org/images/Items/Item_Scarf.png',
@@ -2350,7 +2372,7 @@
 
         function getWeaponData(name) {
             const shared = window.MegabonkEntities?.get('weapons', name);
-            if (shared) return { image: shared.image, url: shared.page };
+            if (shared) return { name: shared.name, image: shared.image, url: shared.page };
             const key = normalizeKey(name);
             return WEAPONS[key] || WEAPONS[name.toLowerCase()] || null;
         }
@@ -2364,7 +2386,7 @@
 
         function getItemData(name) {
             const shared = window.MegabonkEntities?.get('items', name);
-            if (shared) return { image: shared.image, url: shared.page };
+            if (shared) return { name: shared.name, image: shared.image, url: shared.page };
             const key = normalizeKey(name);
             return ITEMS[key] || ITEMS[name.toLowerCase()] || null;
         }
@@ -2788,11 +2810,11 @@
                                             ${topItems.map(i => {
                                                 const itemData = getItemData(i);
                                                 const iImg = itemData ? itemData.image : null;
-                                                const iUrl = itemData ? itemData.url : '#';
+                                                const iUrl = itemData ? itemData.url : '';
                                                 return `
                                                     <a href="${iUrl}" class="equipment-item">
-                                                        ${iImg ? `<img src="${iImg}" alt="${formatName(i)}" class="equipment-icon">` : ''}
-                                                        <span>${escapeHtml(formatName(i))}</span>
+                                                        ${iImg ? `<img src="${iImg}" alt="${itemData && itemData.name ? itemData.name : formatName(i)}" class="equipment-icon">` : ''}
+                                                        <span>${escapeHtml(itemData && itemData.name ? itemData.name : formatName(i))}</span>
                                                     </a>
                                                 `;
                                             }).join('')}
@@ -2869,13 +2891,13 @@
             const itemsHtml = analysis.items.slice(0, 5).map(i => {
                 const itemData = getItemData(i.name);
                 const iImg = itemData ? itemData.image : null;
-                const iUrl = itemData ? itemData.url : '#';
+                const iUrl = itemData ? itemData.url : '';
                 return `
                     <div style="margin-bottom: 15px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;">
                             <a href="${iUrl}" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #495057; font-weight: 600;">
                                 ${iImg ? `<img src="${iImg}" style="width: 24px; height: 24px; object-fit: contain;">` : ''}
-                                <strong>${escapeHtml(formatName(i.name))}</strong>
+                                <strong>${escapeHtml(itemData && itemData.name ? itemData.name : formatName(i.name))}</strong>
                             </a>
                             <span style="color: #6c757d;">${i.percentage}%</span>
                         </div>
