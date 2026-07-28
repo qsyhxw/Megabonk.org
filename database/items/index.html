@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megabonk Items List: Effects, Unlocks & 78 Items</title>
-    <meta name="description" content="Browse 78 documented Megabonk items by rarity with current effects, unlock requirements, build uses and links to detailed item guides.">
+    <title>Megabonk Items List: Effects, Unlocks & 85 Items</title>
+    <meta name="description" content="Browse 85 documented Megabonk items by rarity with current effects, unlock requirements, build uses and links to detailed item guides.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta property="og:title" content="Megabonk Items List: Effects, Unlocks & 78 Items">
+    <meta property="og:title" content="Megabonk Items List: Effects, Unlocks & 85 Items">
     <meta property="og:description" content="Browse the Megabonk item database by rarity, effect and unlock, then open detailed item guides.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://megabonk.org/database/items/">
@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Item effects, unlocks, rarity filters and detailed guides.">
     <meta name="twitter:image" content="https://megabonk.org/images/megabonk.jpg">
     <link rel="canonical" href="https://megabonk.org/database/items/">
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
     <script>
@@ -29,7 +29,7 @@
 
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920"
      crossorigin="anonymous"></script>
-    
+
     <style>
         * {
             margin: 0;
@@ -56,7 +56,7 @@
             --text-primary: #eee;
             --text-muted: #aaa;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
@@ -138,7 +138,7 @@
             margin: 0 auto;
             padding: 2rem 1rem;
         }
-        
+
         h1 {
             font-size: 3rem;
             text-align: center;
@@ -156,7 +156,7 @@
             margin-bottom: 2rem;
             color: var(--text-gray);
         }
-        
+
         .filter-section {
             background: var(--card-bg);
             padding: 1.5rem;
@@ -168,7 +168,10 @@
             justify-content: center;
             border: 1px solid rgba(157, 78, 221, 0.3);
         }
-        
+
+        .item-search { flex: 1 1 280px; max-width: 420px; padding: 0.8rem 1rem; border: 2px solid rgba(157, 78, 221, 0.65); border-radius: 25px; background: rgba(8, 15, 32, 0.72); color: var(--text-light); font-size: 1rem; }
+        .item-search::placeholder { color: #94a3b8; }
+        .item-result-count { flex: 0 0 100%; text-align: center; color: #cbd5e1; font-size: 0.92rem; }
         .filter-btn {
             padding: 0.8rem 1.5rem;
             background: rgba(157, 78, 221, 0.1);
@@ -180,21 +183,21 @@
             transition: all 0.3s ease;
             font-size: 1rem;
         }
-        
+
         .filter-btn:hover, .filter-btn.active {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
         }
-        
+
         .items-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 1.5rem;
             margin: 2rem 0;
         }
-        
+
         .item-card {
             background: var(--card-bg);
             border-radius: 15px;
@@ -208,13 +211,13 @@
             flex-direction: column;
             align-items: center;
         }
-        
+
         .item-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-purple);
             box-shadow: 0 10px 30px rgba(157, 78, 221, 0.4);
         }
-        
+
         .item-card img {
             width: 100px;
             height: 100px;
@@ -222,14 +225,14 @@
             margin-bottom: 1rem;
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
-        
+
         .item-name {
             font-weight: 700;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
             color: var(--text-light);
         }
-        
+
         .item-rarity {
             display: inline-block;
             padding: 0.4rem 1rem;
@@ -240,25 +243,25 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .rarity-common { 
             background: linear-gradient(135deg, #9d9d9d, #7a7a7a);
             color: white;
             box-shadow: 0 2px 8px rgba(157, 157, 157, 0.3);
         }
-        
+
         .rarity-rare { 
             background: linear-gradient(135deg, #4169e1, #1e40af);
             color: white;
             box-shadow: 0 2px 8px rgba(65, 105, 225, 0.3);
         }
-        
+
         .rarity-epic { 
             background: linear-gradient(135deg, #9d4edd, #7209b7);
             color: white;
             box-shadow: 0 2px 8px rgba(157, 78, 221, 0.3);
         }
-        
+
         .rarity-legendary { 
             background: linear-gradient(135deg, #ff6b35, #f72585);
             color: white;
@@ -446,7 +449,8 @@
         .scan-table th, .scan-table td { padding: .8rem .9rem; border-bottom: 1px solid rgba(255,255,255,.1); text-align: left; vertical-align: top; }
         .scan-table th { color: #fbbf24; background: rgba(255,255,255,.08); white-space: nowrap; }
         .scan-table a { color: #7dd3fc; font-weight: 700; }
-        .tier-pill { display: inline-block; padding: .15rem .5rem; border-radius: 999px; background: #7c3aed; color: white; font-weight: 800; white-space: nowrap; }
+        .tier-pill { display: inline-block; padding: .15rem .5rem; border-radius: 999px; color: white; font-weight: 800; white-space: nowrap; }
+        .tier-s { background: #b45309; } .tier-a { background: #15803d; } .tier-b { background: #1d4ed8; } .tier-u { background: #475569; }
         @media (max-width: 700px) { .scan-section { padding: 1rem; } }
 
         .item-card:nth-child(4) { animation-delay: 0.2s; }
@@ -479,32 +483,32 @@
     <!-- ========== Items Database Content ========== -->
     <div class="container">
         <h1>🎮 Megabonk Items Database</h1>
-        <p class="subtitle">Browse 78 currently documented items with detailed guides • Reviewed for v1.0.69 • Updated July 27, 2026</p>
+        <p class="subtitle">Browse 85 currently documented items with detailed guides • Reviewed for v1.0.69 • Updated July 28, 2026</p>
 
         <!-- Stats Section -->
         <div class="stats-section">
             <div class="stat-card">
-                <div class="stat-number">78</div>
+                <div class="stat-number">85</div>
                 <div class="stat-label">Documented Items</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">12</div>
+                <div class="stat-number">15</div>
                 <div class="stat-label">Legendary Items</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">11</div>
+                <div class="stat-number">13</div>
                 <div class="stat-label">Epic Items</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">28</div>
+                <div class="stat-number">29</div>
                 <div class="stat-label">Rare Items</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">27</div>
+                <div class="stat-number">28</div>
                 <div class="stat-label">Common Items</div>
             </div>
         </div>
-        
+
         <section class="ranking-route" aria-labelledby="ranking-route-title">
             <div>
                 <h2 id="ranking-route-title">Need the Best Items, Not the Full List?</h2>
@@ -513,20 +517,39 @@
             <a href="/tier-lists/items/">Compare Item Tiers &rarr;</a>
         </section>
 
+        <section class="scan-section" aria-labelledby="popular-item-data-title">
+            <h2 id="popular-item-data-title">Popular Item Effects, Unlocks & Build Uses</h2>
+            <p class="scan-note">Use this table for fast factual lookup. Tier labels are a short reference only; the dedicated <a href="/tier-lists/items/">Item Tier List</a> owns full rankings and explanations.</p>
+            <div class="scan-table-wrap" tabindex="0" aria-label="Scrollable popular item data table">
+                <table class="scan-table">
+                    <thead><tr><th>Item</th><th>Rarity</th><th>Current Effect</th><th>Unlock</th><th>Tier</th><th>Best Build Use</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Anvil</strong></td><td>Legendary</td><td>Adds one extra stat line to future weapon upgrade offers.</td><td>Complete 3 Challenges</td><td><span class="tier-pill tier-s">S</span></td><td>Weapon scaling and long runs</td><td><a href="/database/items/anvil.html">Guide</a></td></tr>
+                        <tr><td><strong>Overpowered Lamp</strong></td><td>Legendary</td><td>Adds an independent extra roll to supported chance-based on-hit effects.</td><td>Available by default</td><td><span class="tier-pill tier-a">A</span></td><td>On-hit, proc and multi-projectile builds</td><td><a href="/database/items/overpowered-lamp.html">Guide</a></td></tr>
+                        <tr><td><strong>Kevin</strong></td><td>Epic</td><td>25% chance to punch you when you hit; cannot kill you and triggers damage-taken effects.</td><td>Obtain 3 Leeching Crystals in one run</td><td><span class="tier-pill tier-b">B</span></td><td>Trigger engines and Megachad Flex</td><td><a href="/database/items/kevin.html">Guide</a></td></tr>
+                        <tr><td><strong>Golden Ring</strong></td><td>Legendary</td><td>No dependable gameplay effect is currently documented.</td><td>No quest requirement documented</td><td><span class="tier-pill tier-u">U</span></td><td>Do not route a Build around it</td><td><a href="/database/items/golden-ring.html">Status</a></td></tr>
+                        <tr><td><strong>Golden Sneakers</strong></td><td>Rare</td><td>Generates 0.1 Gold per meter traveled.</td><td>Break 150 pots</td><td><span class="tier-pill tier-a">A</span></td><td>Movement, economy and map farming</td><td><a href="/database/items/golden-sneakers.html">Guide</a></td></tr>
+                        <tr><td><strong>Pot (Stainless Steel)</strong></td><td>Legendary</td><td>First copy adds +10 weapon level cap; later copies diminish to a +2 minimum.</td><td>Open every chest and pot in Graveyard's first Crypt</td><td><span class="tier-pill tier-s">S</span></td><td>Extended runs, high XP and weapon scaling</td><td><a href="/database/items/pot-stainless-steel.html">Guide</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
         <section class="scan-section" aria-labelledby="microwave-mechanic-title">
             <h2 id="microwave-mechanic-title">Duplicate an Item with the Microwave</h2>
             <p class="scan-note">The Microwave duplicates the Item you select, charges Gold, and consumes another random Item of the same rarity. Check the rarity limits and sacrifice risk before committing a build-defining stack.</p>
             <a href="/guides/mechanics/microwave/">See the Microwave uses, best choices and unlock routes &rarr;</a>
         </section>
 
-        <div class="filter-section">
-            <button class="filter-btn active" onclick="filterItems('all')">All Items</button>
-            <button class="filter-btn" onclick="filterItems('Common')">Common</button>
-            <button class="filter-btn" onclick="filterItems('Rare')">Rare</button>
-            <button class="filter-btn" onclick="filterItems('Epic')">Epic</button>
-            <button class="filter-btn" onclick="filterItems('Legendary')">Legendary</button>
+        <div class="filter-section" aria-label="Item search and rarity filters">
+            <input class="item-search" id="itemSearch" type="search" placeholder="Search all 85 items..." aria-label="Search Megabonk items">
+            <button class="filter-btn active" type="button" data-rarity-filter="all">All Items</button>
+            <button class="filter-btn" type="button" data-rarity-filter="Common">Common</button>
+            <button class="filter-btn" type="button" data-rarity-filter="Rare">Rare</button>
+            <button class="filter-btn" type="button" data-rarity-filter="Epic">Epic</button>
+            <button class="filter-btn" type="button" data-rarity-filter="Legendary">Legendary</button>
+            <div class="item-result-count" id="itemResultCount" aria-live="polite">Showing 85 of 85 items</div>
         </div>
-        
+
         <div class="items-grid" id="itemsGrid">
             <!-- Legendary Items -->
             <a href="anvil.html" class="item-card" data-rarity="Legendary">
@@ -564,7 +587,17 @@
                 <div class="item-name">Lightning Orb</div>
                 <span class="item-rarity rarity-legendary">Legendary</span>
             </a>
-            <a href="/database/items/pot-stainless-steel" class="item-card" data-rarity="Legendary">
+            <a href="golden-ring.html" class="item-card" data-rarity="Legendary">
+                <img src="/images/Items/Item_Golden_Ring.png" alt="Golden Ring">
+                <div class="item-name">Golden Ring</div>
+                <span class="item-rarity rarity-legendary">Legendary</span>
+            </a>
+            <a href="snek.html" class="item-card" data-rarity="Legendary">
+                <img src="/images/Items/Item_Snek.png" alt="Snek">
+                <div class="item-name">Snek</div>
+                <span class="item-rarity rarity-legendary">Legendary</span>
+            </a>
+            <a href="pot-stainless-steel.html" class="item-card" data-rarity="Legendary">
                 <img src="/images/Items/Item_Pot_Stainless_Steel.png" alt="Pot (Stainless Steel)">
                 <div class="item-name">Pot (Stainless Steel)</div>
                 <span class="item-rarity rarity-legendary">Legendary</span>
@@ -590,13 +623,18 @@
                 <span class="item-rarity rarity-legendary">Legendary</span>
             </a>
 
+            <a href="overpowered-lamp.html" class="item-card" data-rarity="Legendary">
+                <img src="https://megabonk.org/images/Items/Item_Overpowered_Lamp.png" alt="Overpowered Lamp">
+                <div class="item-name">Overpowered Lamp</div>
+                <span class="item-rarity rarity-legendary">Legendary</span>
+            </a>
             <!-- Epic Items -->
-            <a href="/database/items/bobs-light" class="item-card" data-rarity="Epic">
+            <a href="bobs-light.html" class="item-card" data-rarity="Epic">
                 <img src="/images/Items/Item_Bobs_Light.png" alt="Bob's Light">
                 <div class="item-name">Bob's Light</div>
                 <span class="item-rarity rarity-epic">Epic</span>
             </a>
-            <a href="/database/items/wizards-hat" class="item-card" data-rarity="Epic">
+            <a href="wizards-hat.html" class="item-card" data-rarity="Epic">
                 <img src="/images/Items/Item_Wizards_Hat.png" alt="Wizard's Hat">
                 <div class="item-name">Wizard's Hat</div>
                 <span class="item-rarity rarity-epic">Epic</span>
@@ -631,11 +669,7 @@
                 <div class="item-name">Grandma's Secret Tonic</div>
                 <span class="item-rarity rarity-epic">Epic</span>
             </a>
-            <a href="overpowered-lamp.html" class="item-card" data-rarity="Epic">
-                <img src="https://megabonk.org/images/Items/Item_Overpowered_Lamp.png" alt="Overpowered Lamp">
-                <div class="item-name">Overpowered Lamp</div>
-                <span class="item-rarity rarity-epic">Epic</span>
-            </a>
+
             <a href="shattered-knowledge.html" class="item-card" data-rarity="Epic">
                 <img src="https://megabonk.org/images/Items/Item_Shattered_Knowledge.png" alt="Shattered Knowledge">
                 <div class="item-name">Shattered Knowledge</div>
@@ -657,6 +691,11 @@
                 <span class="item-rarity rarity-epic">Epic</span>
             </a>
 
+            <a href="kevin.html" class="item-card" data-rarity="Epic">
+                <img src="https://megabonk.org/images/Items/Item_Kevin.png" alt="Kevin">
+                <div class="item-name">Kevin</div>
+                <span class="item-rarity rarity-epic">Epic</span>
+            </a>
             <!-- Rare Items -->
             <a href="pumpkin.html" class="item-card" data-rarity="Rare">
                 <img src="/images/Items/Item_Pumpkin.png" alt="Pumpkin">
@@ -733,9 +772,10 @@
                 <div class="item-name">Idle Juice</div>
                 <span class="item-rarity rarity-rare">Rare</span>
             </a>
-            <a href="kevin.html" class="item-card" data-rarity="Rare">
-                <img src="https://megabonk.org/images/Items/Item_Kevin.png" alt="Kevin">
-                <div class="item-name">Kevin</div>
+
+            <a href="quins-mask.html" class="item-card" data-rarity="Rare">
+                <img src="/images/Items/Item_Quins_Mask.png" alt="Quin's Mask">
+                <div class="item-name">Quin's Mask</div>
                 <span class="item-rarity rarity-rare">Rare</span>
             </a>
             <a href="leeching-crystal.html" class="item-card" data-rarity="Rare">
@@ -805,7 +845,7 @@
             </a>
 
             <!-- Common Items -->
-            <a href="/database/items/old-mask" class="item-card" data-rarity="Common">
+            <a href="old-mask.html" class="item-card" data-rarity="Common">
                 <img src="/images/Items/Item_Old_Mask.png" alt="Old Mask">
                 <div class="item-name">Old Mask</div>
                 <span class="item-rarity rarity-common">Common</span>
@@ -1004,7 +1044,7 @@
             </div>
         </div>
     </footer>
-    
+
     <script>
         // Mobile menu toggle
         const mobileMenu = document.getElementById('mobileMenu');
@@ -1027,24 +1067,33 @@
             });
         }
 
-        // Filter items function
-        function filterItems(rarity) {
-            const items = document.querySelectorAll('.item-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Update button states
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter items
-            items.forEach(item => {
-                if (rarity === 'all' || item.dataset.rarity === rarity) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
+        // Search and rarity filters share one predictable state.
+        const itemCards = [...document.querySelectorAll('.item-card')];
+        const itemSearch = document.getElementById('itemSearch');
+        const rarityButtons = [...document.querySelectorAll('[data-rarity-filter]')];
+        const itemResultCount = document.getElementById('itemResultCount');
+        let activeRarity = 'all';
+
+        function applyItemFilters() {
+            const query = itemSearch.value.trim().toLowerCase();
+            let visible = 0;
+            itemCards.forEach(card => {
+                const name = card.querySelector('.item-name').textContent.toLowerCase();
+                const matchesSearch = !query || name.includes(query);
+                const matchesRarity = activeRarity === 'all' || card.dataset.rarity === activeRarity;
+                const show = matchesSearch && matchesRarity;
+                card.style.display = show ? 'flex' : 'none';
+                if (show) visible += 1;
             });
+            itemResultCount.textContent = `Showing ${visible} of ${itemCards.length} items`;
         }
+
+        itemSearch.addEventListener('input', applyItemFilters);
+        rarityButtons.forEach(button => button.addEventListener('click', () => {
+            activeRarity = button.dataset.rarityFilter;
+            rarityButtons.forEach(candidate => candidate.classList.toggle('active', candidate === button));
+            applyItemFilters();
+        }));
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1057,7 +1106,7 @@
             });
         });
     </script>
-    
+
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "817a4a14805048c0b6b15c9a97fae19d"}'></script>
 <!-- Code injected by live-server -->
