@@ -26,9 +26,12 @@ from typing import Any
 SOURCE_URL = "https://megabonk.leaderboard.gg/"
 DEFAULT_OUTPUT = Path("leaderboard-data.json")
 DEFAULT_META_OUTPUT = Path("data/leaderboard-meta.json")
+DEFAULT_CHARACTER_META_OUTPUT = Path("data/character-build-signals.json")
 MINIMUM_VALID_RECORDS = 100
 META_SCHEMA_VERSION = 2
+CHARACTER_META_SCHEMA_VERSION = 1
 BUILD_SAMPLE_LIMIT = 100
+CHARACTER_SAMPLE_LIMIT = 30
 USER_AGENT = (
     "Mozilla/5.0 (compatible; Megabonk.org leaderboard sync; "
     "+https://megabonk.org/leaderboard/)"
@@ -320,12 +323,16 @@ def top_values(records: list[dict[str, Any]], field: str, limit: int = 8) -> lis
             "runs": count,
             "usageRate": round(count / sample_size, 4) if sample_size else 0,
         }
-        for value, count in counts.most_common(limit)
+        for value, count in sorted(
+            counts.items(), key=lambda item: (-item[1], item[0])
+        )[:limit]
     ]
 
 
 def popular_loadouts(
-    records: list[dict[str, Any]], limit: int = 3
+    records: list[dict[str, Any]],
+    limit: int = 3,
+    include_run_details: bool = False,
 ) -> list[dict[str, Any]]:
     grouped: dict[tuple[tuple[str, ...], tuple[str, ...]], list[dict[str, Any]]] = (
         defaultdict(list)
@@ -353,13 +360,17 @@ def popular_loadouts(
                 else 0,
                 "medianScore": int(statistics.median(scores)),
                 "topScore": max(scores),
-                "representativeRun": {
-                    "rank": representative.get("rank"),
-                    "playerName": representative.get("playerName"),
-                    "kills": representative.get("kills"),
-                    "videoURL": representative.get("videoURL"),
-                    "submissionId": representative.get("submissionId"),
-                },
+                "representativeRun": (
+                    summarize_run(representative)
+                    if include_run_details
+                    else {
+                        "rank": representative.get("rank"),
+                        "playerName": representative.get("playerName"),
+                        "kills": representative.get("kills"),
+                        "videoURL": representative.get("videoURL"),
+                        "submissionId": representative.get("submissionId"),
+                    }
+                ),
             }
         )
 
@@ -367,6 +378,109 @@ def popular_loadouts(
         key=lambda item: (-item["runs"], -item["medianScore"], -item["topScore"])
     )
     return loadouts[:limit]
+
+
+def summarize_run(run: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "rank": run.get("rank"),
+        "playerName": run.get("playerName"),
+        "kills": run.get("kills"),
+        "map": run.get("map"),
+        "weapons": run.get("weapons") or [],
+        "tomes": run.get("tomes") or [],
+        "items": (run.get("items") or [])[:8],
+        "videoURL": run.get("videoURL"),
+        "submissionId": run.get("submissionId"),
+        "createdAtIso": run.get("createdAtIso"),
+        "updatedAtIso": run.get("updatedAtIso"),
+    }
+
+
+def build_character_signals(
+    records: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for record in records:
+        character = record.get("character")
+        if character:
+            grouped[character].append(record)
+
+    signals = []
+    for character, runs in grouped.items():
+        ranked_runs = sorted(
+            runs,
+            key=lambda record: (
+                record.get("rank") or 999999,
+                -(record.get("kills") or 0),
+            ),
+        )
+        sample = ranked_runs[:CHARACTER_SAMPLE_LIMIT]
+        highest = max(
+            sample,
+            key=lambda record: (
+                record.get("kills") or 0,
+                -(record.get("rank") or 999999),
+            ),
+        )
+        recent = max(
+            sample,
+            key=lambda record: (
+                record.get("createdAtIso") or "",
+                record.get("updatedAtIso") or "",
+            ),
+        )
+        sample_size = len(sample)
+        confidence = (
+            "strong" if sample_size >= 5 else "limited" if sample_size >= 2 else "single"
+        )
+        signals.append(
+            {
+                "character": character,
+                "availableRuns": len(runs),
+                "sampleSize": sample_size,
+                "sampleScope": f"Top {sample_size} {character} runs",
+                "confidence": confidence,
+                "topWeapons": top_values(sample, "weapons", 6),
+                "topTomes": top_values(sample, "tomes", 6),
+                "topItems": top_values(sample, "items", 8),
+                "popularLoadouts": popular_loadouts(sample, include_run_details=True),
+                "highestScoringRun": summarize_run(highest),
+                "mostRecentRun": summarize_run(recent),
+            }
+        )
+
+    signals.sort(key=lambda item: (-item["sampleSize"], item["character"]))
+    return signals
+
+
+def build_character_meta(
+    records: list[dict[str, Any]],
+    observed_at: str,
+    active_version: str | None,
+) -> dict[str, Any]:
+    current = [
+        record
+        for record in records
+        if not active_version or record.get("buildVersionLabel") == active_version
+    ]
+    if not current:
+        current = records
+    return {
+        "schemaVersion": CHARACTER_META_SCHEMA_VERSION,
+        "source": "Leaderboard.gg Megabonk community leaderboard",
+        "sourceUrl": SOURCE_URL,
+        "generatedAt": observed_at,
+        "activeVersion": active_version,
+        "availableRuns": len(current),
+        "sampleLimitPerCharacter": CHARACTER_SAMPLE_LIMIT,
+        "methodology": (
+            "Each character is analyzed independently from up to its Top 30 "
+            "current-version ranked runs. Repeated loadouts, the highest-scoring "
+            "run, and the most recently submitted run are evidence rather than "
+            "a guaranteed universal best Build."
+        ),
+        "characterSignals": build_character_signals(current),
+    }
 
 
 def build_meta(
@@ -439,6 +553,8 @@ def build_meta(
         },
         "characters": characters,
     }
+
+
 def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -454,6 +570,9 @@ def main() -> int:
     parser.add_argument("--input-html", type=Path)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--meta-output", type=Path, default=DEFAULT_META_OUTPUT)
+    parser.add_argument(
+        "--character-meta-output", type=Path, default=DEFAULT_CHARACTER_META_OUTPUT
+    )
     parser.add_argument("--rebuild-meta-only", action="store_true")
     args = parser.parse_args()
 
@@ -462,13 +581,16 @@ def main() -> int:
         records = payload.get("data") or []
         if not records:
             raise ValueError(f"No leaderboard records found in {args.output}")
-        meta = build_meta(
-            records,
-            payload.get("fetched_at") or utc_now(),
-            payload.get("active_version"),
-        )
+        observed_at = payload.get("fetched_at") or utc_now()
+        active_version = payload.get("active_version")
+        meta = build_meta(records, observed_at, active_version)
+        character_meta = build_character_meta(records, observed_at, active_version)
         write_json_atomic(args.meta_output, meta)
-        print(f"Rebuilt {args.meta_output} from {args.output}")
+        write_json_atomic(args.character_meta_output, character_meta)
+        print(
+            f"Rebuilt {args.meta_output} and {args.character_meta_output} "
+            f"from {args.output}"
+        )
         return 0
 
     html = (
@@ -481,11 +603,14 @@ def main() -> int:
     observed_at = utc_now()
     previous_payload = load_previous_payload(args.output)
     previous_meta = load_previous_payload(args.meta_output)
+    previous_character_meta = load_previous_payload(args.character_meta_output)
     source_version = state.get("$sleaderboardVersion")
     if (
         previous_payload.get("source_url") == SOURCE_URL
         and previous_payload.get("source_fingerprint") == source_digest
         and previous_meta.get("schemaVersion") == META_SCHEMA_VERSION
+        and previous_character_meta.get("schemaVersion")
+        == CHARACTER_META_SCHEMA_VERSION
     ):
         print(
             f"No leaderboard change detected ({len(source_records)} records, "
@@ -509,8 +634,10 @@ def main() -> int:
         "data": records,
     }
     meta = build_meta(records, observed_at, active_version)
+    character_meta = build_character_meta(records, observed_at, active_version)
     write_json_atomic(args.output, output)
     write_json_atomic(args.meta_output, meta)
+    write_json_atomic(args.character_meta_output, character_meta)
     print(
         f"Synced {len(records)} records for version {active_version or 'unknown'} "
         f"to {args.output}"
