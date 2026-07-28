@@ -532,6 +532,15 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .content-grid > main { min-width: 0; }
+        .tier-table { overflow-x: auto; }
+        @media (max-width: 768px) {
+            .container { padding-left: 1rem; padding-right: 1rem; }
+            .content-grid > main { width: 100%; min-width: 0; }
+            .tier-table table { min-width: 680px; }
+            .quick-stats, .map-grid, .related-links { min-width: 0; }
+        }
     </style>
     
     <!-- JSON-LD Schema -->
@@ -554,7 +563,7 @@
         }
       },
       "datePublished": "2025-11-17",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-07-28",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://megabonk.org/guides/maps/"
@@ -650,8 +659,8 @@
                         <div class="stat-label">Unique Bosses</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">15</div>
-                        <div class="stat-label">Shrines Per Stage</div>
+                        <div class="stat-number">Random</div>
+                        <div class="stat-label">Shrine Layout</div>
                     </div>
                 </div>
                 
@@ -975,82 +984,27 @@
                     <p><strong>Universal Recommendations:</strong> Dexecutioner, Katana, and Aegis work exceptionally well on both maps. Dexecutioner's execute mechanic and Aegis's defensive shield are near-mandatory for Tier 3 boss fights.</p>
                 </section>
                 
-                <!-- Shrines -->
+                <!-- Shrine distribution -->
                 <section id="shrines">
-                    <h2>Shrines & Environmental Mechanics</h2>
-                    <p>Every stage contains exactly <strong>15 Charge Shrines</strong> (unless you pick up the Beacon item, which adds more). Charging shrines provides random stat upgrades crucial for late-game scaling.</p>
-                    
-                    <h3>Shrine Types</h3>
+                    <h2>Shrine Distribution by Map</h2>
+                    <p>This page covers <strong>where Shrine decisions fit into each map route</strong>. For Charge, Greed, Boss Curse, rewards and unlock rules, use the dedicated <a href="/guides/mechanics/shrines/"><strong>Megabonk Shrines Guide</strong></a>.</p>
                     <div class="tier-table">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>Shrine</th>
-                                    <th>Effect</th>
-                                    <th>Strategy</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Map or stage</th><th>Distribution and route impact</th><th>What to do</th></tr></thead>
                             <tbody>
-                                <tr>
-                                    <td><strong>Charge Shrine</strong></td>
-                                    <td>Random stat boost (standard)</td>
-                                    <td>Prioritize early for snowball effect</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Golden Charge Shrine</strong></td>
-                                    <td>Legendary stat upgrades</td>
-                                    <td>Extremely rare - always take when found</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Greed Shrine</strong></td>
-                                    <td>+5% Difficulty for silver coins</td>
-                                    <td>Use sparingly; difficulty stacks fast</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Boss Curse Shrine</strong></td>
-                                    <td>Doubles bosses, extra chest reward</td>
-                                    <td>Only activate with strong builds</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Shrine of Succ</strong></td>
-                                    <td>Collects all dropped XP instantly</td>
-                                    <td>Use after large enemy waves</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Moai Shrine</strong></td>
-                                    <td>Free items (various rarities)</td>
-                                    <td>Always activate - no downside</td>
-                                </tr>
+                                <tr><td><strong>Forest</strong></td><td>Shrines are part of the random stage layout rather than fixed-coordinate landmarks.</td><td>Scout in wide loops and mark risky Greed or Boss Curse interactions for a later return.</td></tr>
+                                <tr><td><strong>Desert</strong></td><td>Random placement combines with Sandstorm visibility and the Tornado unlock condition.</td><td>Keep an unused Charge Shrine available when targeting the Sandstorm requirement, then charge it during the weather window.</td></tr>
+                                <tr><td><strong>Graveyard / Crypt route</strong></td><td>Shrines remain run interactables, while Crypt Keys, Big Bob and the secret room belong to the map-specific route.</td><td>Use the <a href="/guides/maps/graveyard/">Graveyard Guide</a> for Crypt objectives and the Shrines Guide for Shrine choices.</td></tr>
+                                <tr><td><strong>Future stages after Beacon</strong></td><td>Beacon adds two extra Charge Shrines to future stages per copy.</td><td>Plan additional scouting time only after taking Beacon; do not rely on one universal Shrine count or route.</td></tr>
                             </tbody>
                         </table>
                     </div>
-                    
-                    <h3>Shrine Timing Strategy</h3>
-                    <p>Enemy spawns follow predictable patterns:</p>
-                    <ul style="margin-left: 2rem; color: var(--text-secondary);">
-                        <li><strong>3:00</strong> - First miniboss spawns</li>
-                        <li><strong>4:00</strong> - Enemy swarm event</li>
-                        <li><strong>7:00</strong> - Second enemy swarm</li>
-                        <li><strong>8:00</strong> - Second miniboss spawns</li>
-                        <li><strong>10:00</strong> - Standard stage window ends; overtime / Final Swarm pressure begins. The Boss Portal can be found and activated earlier.</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><a href="/guides/mechanics/boss-portal/">See how to find, activate and troubleshoot the Boss Portal.</a> <a href="/guides/mechanics/timer/">Read the full timer and Final Swarm timeline.</a></p>
-                    
                     <div class="info-box tip">
-                        <strong>💡 Shrine Charging Tip:</strong> Avoid charging shrines during miniboss spawns (3:00, 8:00) or swarms (4:00, 7:00). Getting knocked out of the charging zone fails the charge and wastes time. Clear enemies first, then charge in safety.
+                        <strong>Map rule:</strong> use unexplored terrain and the visible map layout to find Shrines. Do not plan around fixed coordinates, a guaranteed discovery order or a universal count that applies to every run.
                     </div>
-                    
-                    <h3>Desert-Exclusive: Sandstorms</h3>
-                    <p>Desert stages feature periodic sandstorms that drastically reduce visibility. During sandstorms:</p>
-                    <ul style="margin-left: 2rem; color: var(--text-secondary);">
-                        <li>Vision range drops to near-zero</li>
-                        <li>Enemies are only visible when very close</li>
-                        <li>Navigation becomes extremely difficult</li>
-                        <li>Charging a shrine during a sandstorm counts toward the Tornado weapon unlock quest</li>
-                    </ul>
-                    <p>Desert guarantees at least one sandstorm per run. Prepare by clearing enemy clusters before sandstorms hit and avoid exploration during reduced visibility.</p>
+                    <p style="margin-top:1rem;"><a href="/guides/mechanics/shrines/">Compare Charge, Greed and Boss Curse rewards</a> · <a href="/guides/mechanics/timer/">Check the stage event timeline</a> · <a href="/guides/mechanics/boss-portal/">Find and troubleshoot the Boss Portal</a></p>
                 </section>
-                
+
                 <!-- Tier 3 Tips -->
                 <section id="tier3-tips">
                     <h2>Beating Tier 3: Expert Tips</h2>
@@ -1131,8 +1085,8 @@
                     </div>
                     
                     <div class="faq-item">
-                        <h4>How many Shrines are on each map?</h4>
-                        <p>Each stage has exactly 15 Charge Shrines by default. This number increases if you pick up the Beacon item, which adds 2 additional shrines per stage. For Chaos Tome unlock attempts, banish Beacon to keep the count at 15.</p>
+                        <h4>Are Shrine locations and counts fixed on every map?</h4>
+                        <p>Do not rely on fixed coordinates or one universal count for route planning. Explore the current stage layout, and remember that <a href="/database/items/beacon.html">Beacon</a> adds two extra Charge Shrines to future stages per copy. See the <a href="/guides/mechanics/shrines/">Shrines Guide</a> for reward and unlock rules.</p>
                     </div>
                 </section>
                 
@@ -1140,9 +1094,13 @@
                 <section id="related">
                     <h2>Related Guides</h2>
                     <div class="related-links">
+                        <a href="/guides/mechanics/shrines/" class="related-card">
+                            <h4>Shrines Mechanics Guide</h4>
+                            <p>Charge, Greed, Boss Curse, rewards, unlocks and related items</p>
+                        </a>
                         <a href="https://megabonk.org/guides/characters/" class="related-card">
                             <h4>Character Guides</h4>
-                            <p>Complete guides for all 20 characters with tier rankings and strategies</p>
+                            <p>Guides for all 21 characters with tier rankings and strategies</p>
                         </a>
                         <a href="https://megabonk.org/guides/builds/" class="related-card">
                             <h4>Best Builds</h4>
@@ -1192,7 +1150,7 @@
     <footer>
         <div class="container">
             <p>&copy; <span data-current-year>2026</span> Megabonk.org - The #1 Megabonk Community Resource</p>
-            <p>Last Updated: January 29, 2026 | <a href="https://megabonk.org/privacy-policy" style="color: var(--text-secondary);">Privacy Policy</a></p>
+            <p>Last Updated: July 28, 2026 | <a href="https://megabonk.org/privacy-policy" style="color: var(--text-secondary);">Privacy Policy</a></p>
         </div>
     </footer>
 <!-- Code injected by live-server -->
