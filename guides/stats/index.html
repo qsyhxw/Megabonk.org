@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megabonk Stats – All Character, Weapon & Build Data</title>
-    <meta name="description" content="Complete Megabonk stats guide, including what Luck affects, its rarity formula, reward odds, sources, and links to Fox, Luck Tome, and Clover.">
+    <meta name="description" content="Megabonk stats explained: Difficulty, Size, Knockback, Luck and combat stats with formulas, diminishing returns, sources and Build recommendations.">
     <meta name="keywords" content="megabonk stats, megabonk guide, character stats, damage stats, defensive stats, weapon stats, build optimization">
     
       <!-- Canonical -->
-    <link rel="canonical" href="https://megabonk.org/guides/stats">
+    <link rel="canonical" href="https://megabonk.org/guides/stats/">
 
        <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X87M8JFL"></script>
@@ -64,7 +64,7 @@
             }
         },
         "datePublished": "2025-11-14",
-        "dateModified": "2026-07-27"
+        "dateModified": "2026-07-28"
     }
     </script>
 
@@ -95,6 +95,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Current major sources include Fox's +1.5% Luck per level passive, Luck Tome at +8% per Tome level, Clover at +10%, Green Credit Card chest scaling, Luck rolls from shrines or Chaos Tome, and small stage-scaled Luck rewards from pots."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does Difficulty do in Megabonk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Difficulty increases enemy HP, movement speed, attack damage and spawn pressure. It does not directly multiply XP per enemy; it can raise XP per minute only when your build kills the additional enemies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does Size do in Megabonk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Size increases the dimensions of compatible attacks, projectiles and area effects. It improves reach and coverage, but does not directly increase the damage dealt to one target."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Knockback Tome for in Megabonk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Knockback Tome increases how far compatible attacks push enemies. It is useful for crowd control and spacing, but provides no value to a weapon that does not apply knockback."
           }
         }
       ]
@@ -569,7 +593,20 @@
         .luck-table th { color: #ffd700; background: rgba(255,215,0,.08); }
         .luck-links { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
         .luck-links a { padding: .65rem .9rem; border-radius: 999px; background: rgba(58,134,255,.16); color: #7dd3fc; text-decoration: none; font-weight: 700; }
-        @media (max-width: 768px) { .luck-grid { grid-template-columns: 1fr; } }
+        .stat-deep-dive { grid-column: 1 / -1; scroll-margin-top: 92px; }
+        .stat-deep-dive:hover { transform: none; }
+        .stat-detail-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin:1rem 0; }
+        .stat-detail-panel { padding:1rem; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(8,13,28,.5); }
+        .stat-detail-panel h4 { color:var(--primary); margin-bottom:.5rem; }
+        .stat-detail-panel ul { padding-left:1.2rem; color:var(--text-secondary); }
+        .formula-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1rem; }
+        .formula-card { padding:1rem; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(8,13,28,.52); }
+        .formula-card h3 { color:var(--primary); font-size:1.05rem; margin-bottom:.55rem; }
+        .formula-card code { color:#fef3c7; }
+        .source-note { margin-top:1rem; color:var(--text-muted); font-size:.9rem; }
+        @media (max-width: 768px) {
+            .luck-grid, .stat-detail-grid, .formula-cards { grid-template-columns: 1fr; }
+        }
 
     </style>
 </head>
@@ -607,7 +644,7 @@
             <h1>📊 Megabonk Stats Guide</h1>
             <p class="hero-subtitle">
                 Master every stat in Megabonk! Learn how HP, armor, damage, crit, and all other statistics affect your character and build. 
-                Understanding stats is crucial for creating powerful builds and surviving longer runs. Reviewed for v1.0.69 on July 27, 2026.
+                Understanding stats is crucial for creating powerful builds and surviving longer runs. Reviewed for v1.0.69 on July 28, 2026.
             </p>
         </div>
     </section>
@@ -628,15 +665,39 @@
                         <tr><td>Crit Damage</td><td>Raises the multiplier applied by critical hits</td><td>Weapon upgrades and items</td><td><span class="tier-pill">Build</span></td><td>Crit / Overcrit</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
                         <tr><td>Projectile Count</td><td>Adds projectiles to compatible attacks</td><td><a href="/database/tomes/quantity-tome">Quantity Tome</a>; fire 5,000 projectiles</td><td><span class="tier-pill">Core</span></td><td>Bullet hell, Sword, Axe</td><td><a href="#weapon-stats">Weapon stats</a></td></tr>
                         <tr><td>Duration</td><td>Extends projectiles, clouds, trails and persistent effects</td><td><a href="/database/tomes/duration-tome">Duration Tome</a>; Axe Lv10</td><td><span class="tier-pill">Build</span></td><td>Poison, Flamewalker, Noelle</td><td><a href="#misc-stats">Misc stats</a></td></tr>
-                        <tr><td>Size</td><td>Expands hitboxes, arcs and area coverage</td><td><a href="/database/tomes/size-tome">Size Tome</a></td><td><span class="tier-pill">Build</span></td><td>Aura, swords, AoE</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                        <tr><td>Size</td><td>Expands compatible hitboxes, arcs and area coverage</td><td><a href="/database/tomes/size-tome">Size Tome</a> (default)</td><td><span class="tier-pill">Build</span></td><td>Aura, swords, AoE</td><td><a href="#size">Size details</a></td></tr>
+                        <tr><td>Knockback</td><td>Multiplies push distance on compatible attacks</td><td><a href="/database/tomes/knockback-tome">Knockback Tome</a> (default)</td><td><span class="tier-pill">Control</span></td><td>Compatible melee and crowd control</td><td><a href="#knockback">Knockback details</a></td></tr>
                         <tr><td>Luck</td><td>Improves the chance of higher-rarity rewards</td><td><a href="/database/tomes/luck-tome">Luck Tome</a>; rare enemy drop</td><td><span class="tier-pill">Snowball</span></td><td>Fox, long runs, reward quality</td><td><a href="#luck">Luck details</a></td></tr>
                         <tr><td>XP Gain</td><td>Multiplies experience earned</td><td><a href="/database/tomes/xp-tome">XP Tome</a>; break 20 pots</td><td><span class="tier-pill">Core</span></td><td>Every build, especially early</td><td><a href="#misc-stats">Misc stats</a></td></tr>
                         <tr><td>Armor</td><td>Reduces incoming damage</td><td><a href="/database/tomes/armor-tome">Armor Tome</a></td><td><span class="tier-pill">Defense</span></td><td>Sir Oofie, tank, Final Swarm</td><td><a href="#player-stats">Player stats</a></td></tr>
                         <tr><td>Lifesteal</td><td>Restores health from qualifying hits</td><td><a href="/database/tomes/bloody-tome">Bloody Tome</a></td><td><span class="tier-pill">Defense</span></td><td>Vlad, poison ticks, fast hits</td><td><a href="#player-stats">Player stats</a></td></tr>
-                        <tr><td>Difficulty</td><td>Raises enemy pressure while enabling denser reward farming</td><td><a href="/database/tomes/cursed-tome">Cursed Tome</a>; boss under 5 minutes</td><td><span class="tier-pill">Risk</span></td><td>Leaderboard, kills, XP farming</td><td><a href="#misc-stats">Misc stats</a></td></tr>
+                        <tr><td>Difficulty</td><td>Raises enemy HP, speed, damage and spawn pressure</td><td><a href="/database/tomes/cursed-tome">Cursed Tome</a>; boss under 5 minutes</td><td><span class="tier-pill">Risk</span></td><td>Leaderboard, kills, XP farming</td><td><a href="#difficulty">Difficulty details</a></td></tr>
                     </tbody>
                 </table>
             </div>
+        </section>
+
+        <section class="scan-section" id="stat-formulas" aria-labelledby="stat-formulas-title">
+            <h2 id="stat-formulas-title">How Megabonk Stats Scale</h2>
+            <p class="scan-note">The game does not use one universal stacking rule. Read the displayed stat as the final player multiplier, then check whether the selected weapon or mechanic actually consumes that stat.</p>
+            <div class="formula-cards">
+                <article class="formula-card">
+                    <h3>Multipliers need a compatible base</h3>
+                    <p><code>Effective value ≈ base value × displayed player multiplier</code></p>
+                    <p>Size and Knockback cannot create an effect a weapon does not have. A weapon with no knockback receives no practical benefit from more Knockback.</p>
+                </article>
+                <article class="formula-card">
+                    <h3>More coverage is not direct DPS</h3>
+                    <p><code>Real gain = extra targets reached × damage per target</code></p>
+                    <p>Size and Duration improve coverage or uptime. Their return falls when the existing attack already reaches every relevant enemy.</p>
+                </article>
+                <article class="formula-card">
+                    <h3>Difficulty changes opportunity</h3>
+                    <p><code>XP/min ≈ kills/min × XP/enemy × XP Gain</code></p>
+                    <p>Difficulty can increase available enemies and therefore kills per minute. It does not directly raise XP awarded by each enemy.</p>
+                </article>
+            </div>
+            <p class="source-note"><strong>Formula policy:</strong> These are practical models for comparing Build value, not developer-published source-code equations. Dedicated Tome pages retain rarity values, unlocks and entity-specific mechanics.</p>
         </section>
 
         <!-- Stats Image -->
@@ -656,7 +717,11 @@
                 <a href="#player-stats" class="quick-nav-link">🛡️ Player Stats</a>
                 <a href="#weapon-stats" class="quick-nav-link">⚔️ Weapon Stats</a>
                 <a href="#misc-stats" class="quick-nav-link">🎯 Misc Stats</a>
+                <a href="#size" class="quick-nav-link">📏 Size Explained</a>
+                <a href="#knockback" class="quick-nav-link">💫 Knockback Explained</a>
+                <a href="#difficulty" class="quick-nav-link">⚠️ Difficulty Explained</a>
                 <a href="#luck" class="quick-nav-link">🍀 Luck Explained</a>
+                <a href="#stat-formulas" class="quick-nav-link">🧮 Formulas &amp; Returns</a>
                 <a href="#optimization" class="quick-nav-link">📈 Optimization Tips</a>
             </div>
         </div>
@@ -895,18 +960,25 @@
 
             <div class="stats-grid">
                 <!-- Size -->
-                <div class="stat-card">
+                <article class="stat-card stat-deep-dive" id="size">
                     <div class="stat-header">
                         <span class="stat-icon">📏</span>
-                        <h3 class="stat-name">Size</h3>
+                        <h3 class="stat-name">What Does Size Do in Megabonk?</h3>
                     </div>
-                    <p class="stat-description">
-                        The size of your projectiles or <a href="/database/weapons/aura" class="internal-link">Aura</a>, shown as a multiplier (e.g., "2.0x" = 200% base size). Larger projectiles hit more enemies simultaneously.
-                    </p>
-                    <div class="stat-tip">
-                        <strong>AOE Power:</strong> Increase with <a href="/database/tomes/size-tome" class="internal-link">Size Tome</a> for better enemy coverage. Especially powerful for <a href="/database/weapons/axe" class="internal-link">Axe</a>, <a href="/database/weapons/tornado" class="internal-link">Tornado</a>, and <a href="/database/weapons/black-hole" class="internal-link">Black Hole</a> builds.
+                    <p class="stat-description">Size scales the dimensions of compatible attacks, projectiles, explosions and area effects. A displayed 2.0× Size means the compatible effect uses twice its base linear scale; it does <strong>not</strong> directly double single-target damage.</p>
+                    <div class="formula-box"><code>Effective attack size ≈ weapon base size × player Size multiplier</code></div>
+                    <div class="stat-detail-grid">
+                        <div class="stat-detail-panel">
+                            <h4>Where Size creates value</h4>
+                            <ul><li>More reach and safer spacing for melee arcs</li><li>More enemies covered by Aura, explosions and persistent zones</li><li>Better overlap with high enemy density from Difficulty</li></ul>
+                        </div>
+                        <div class="stat-detail-panel">
+                            <h4>Marginal return</h4>
+                            <ul><li>Excellent while extra reach adds targets</li><li>Lower value in sparse fights or after an attack already covers the active pack</li><li>Pair with Damage or Attack Speed because Size alone does not raise damage per hit</li></ul>
+                        </div>
                     </div>
-                </div>
+                    <div class="stat-tip"><strong>Best source and Builds:</strong> The default <a href="/database/tomes/size-tome" class="internal-link">Size Tome</a> gives a +10% Common offer. Prioritize it for <a href="/database/weapons/aura" class="internal-link">Aura</a>, swords, <a href="/database/weapons/axe" class="internal-link">Axe</a>, <a href="/database/weapons/tornado" class="internal-link">Tornado</a>, <a href="/database/weapons/black-hole" class="internal-link">Black Hole</a> and other AoE builds.</div>
+                </article>
 
                 <!-- Projectile Speed -->
                 <div class="stat-card">
@@ -951,18 +1023,19 @@
                 </div>
 
                 <!-- Knockback -->
-                <div class="stat-card">
+                <article class="stat-card stat-deep-dive" id="knockback">
                     <div class="stat-header">
                         <span class="stat-icon">💫</span>
-                        <h3 class="stat-name">Knockback</h3>
+                        <h3 class="stat-name">What Is Knockback Tome For?</h3>
                     </div>
-                    <p class="stat-description">
-                        How far enemies are pushed back when hit, as a multiplier. Higher knockback creates more distance between you and enemies.
-                    </p>
-                    <div class="stat-tip">
-                        <strong>Safety Tool:</strong> Increase with <a href="/database/tomes/knockback-tome" class="internal-link">Knockback Tome</a> for better enemy control. Helps keep melee enemies at bay, especially useful for ranged weapon builds.
+                    <p class="stat-description">Knockback multiplies the push distance of attacks that already apply knockback. It is a control and spacing stat—not a universal damage stat—and is ineffective when the current weapon has no knockback behavior.</p>
+                    <div class="formula-box"><code>Effective push ≈ weapon base knockback × player Knockback multiplier</code></div>
+                    <div class="stat-detail-grid">
+                        <div class="stat-detail-panel"><h4>When to take it</h4><ul><li>Your weapon lists Knockback in its base effect or current upgrade pool</li><li>Melee enemies are reaching you faster than you can clear them</li><li>Your Build benefits from keeping enemies inside a controlled range</li></ul></div>
+                        <div class="stat-detail-panel"><h4>When to skip it</h4><ul><li>No equipped weapon applies knockback</li><li>Your existing control already keeps normal enemies outside danger range</li><li>You need Damage or Attack Speed to keep pace with enemy HP scaling</li></ul></div>
                     </div>
-                </div>
+                    <div class="stat-tip"><strong>Source and unlock:</strong> <a href="/database/tomes/knockback-tome" class="internal-link">Knockback Tome</a> is available by default and its Common offer adds +20% Knockback. Use the Tome page for compatible weapon examples and rarity scaling.</div>
+                </article>
 
                 <!-- Movement Speed -->
                 <div class="stat-card">
@@ -1092,18 +1165,26 @@
                 </article>
 
                 <!-- Difficulty -->
-                <div class="stat-card">
+                <article class="stat-card stat-deep-dive" id="difficulty">
                     <div class="stat-header">
                         <span class="stat-icon">⚠️</span>
-                        <h3 class="stat-name">Difficulty</h3>
+                        <h3 class="stat-name">What Does Difficulty Do in Megabonk?</h3>
                     </div>
-                    <p class="stat-description">
-                        Affects enemy quantity, HP, damage, and speed. Does <strong>NOT</strong> increase XP drops directly, but more enemies = more XP potential.
-                    </p>
-                    <div class="stat-warning">
-                        <strong>High Risk, High Reward:</strong> Use <a href="/database/tomes/cursed-tome" class="internal-link">Cursed Tome</a> to increase difficulty for faster leveling through increased enemy spawns. Only recommended for experienced players with strong builds.
+                    <p class="stat-description">Difficulty raises enemy HP, movement speed, attack damage and spawn pressure. It does <strong>not</strong> directly increase XP per enemy; a strong Build earns more XP only by killing the additional enemies fast enough.</p>
+                    <div class="formula-box"><code>Practical reward rate ≈ enemy availability × clear rate × reward per enemy</code></div>
+                    <div class="stat-detail-grid">
+                        <div class="stat-detail-panel"><h4>Why high-kill Builds take it</h4><ul><li>More spawn pressure supplies more potential kills</li><li>More kills can mean more XP and drops per minute</li><li>AoE, scaling and leaderboard Builds can convert density into score</li></ul></div>
+                        <div class="stat-detail-panel"><h4>Why returns can turn negative</h4><ul><li>Enemy HP and speed rise alongside spawn pressure</li><li>If enemies remain alive, the reactive spawn system cannot replace them as quickly</li><li>Difficulty above a Final Swarm spawn threshold still strengthens enemies without adding more ghosts</li></ul></div>
                     </div>
-                </div>
+                    <div class="luck-table-wrap" tabindex="0" aria-label="Community-tested Final Swarm Difficulty thresholds">
+                        <table class="luck-table">
+                            <thead><tr><th>Final Swarm location</th><th>0–2 minutes</th><th>After 2 minutes</th></tr></thead>
+                            <tbody><tr><td>Stage 1 / Graveyard</td><td>571%</td><td>495%</td></tr><tr><td>Stage 2</td><td>514%</td><td>438%</td></tr><tr><td>Stage 3 / Final Boss area</td><td>457%</td><td>381%</td></tr></tbody>
+                        </table>
+                    </div>
+                    <div class="stat-warning"><strong>High risk, conditional reward:</strong> <a href="/database/tomes/cursed-tome" class="internal-link">Cursed Tome</a> is the dedicated Difficulty entity page and explains its +3.5% displayed base offer, unlock and Corrupted Sword interaction. The Final Swarm thresholds above are community code-analysis targets, not official developer guarantees.</div>
+                    <p class="source-note">Difficulty behavior and thresholds last checked July 28, 2026 against current community code analysis. Normal-stage spawning is reactive to kill speed, so no single “best Difficulty” percentage applies to every Build.</p>
+                </article>
 
                 <!-- Pickup Range -->
                 <div class="stat-card">
@@ -1316,19 +1397,7 @@
             observer.observe(el);
         });
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        // Native anchor navigation uses CSS scroll-behavior and preserves shareable URLs.
     </script>
     <script src="/js/current-year.js" defer></script>
 </body>
