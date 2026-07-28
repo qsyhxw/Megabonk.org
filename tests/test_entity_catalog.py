@@ -71,7 +71,7 @@ class EntityCatalogTests(unittest.TestCase):
         self.assertEqual(unresolved["tomes"], [])
         self.assertEqual(
             unresolved["items"],
-            ["bobslight", "cryptkey", "oldmask", "pumpkin"],
+            ["cryptkey"],
         )
 
 

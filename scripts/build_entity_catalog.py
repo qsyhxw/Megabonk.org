@@ -123,6 +123,12 @@ ITEM_ALIASES = {
     "wizardshat": ["wizardhat"],
 }
 
+PENDING_ITEMS = {
+    "bobslight": ("Bob's Light", "Item_Bobs_Light.png", ["boblight"]),
+    "oldmask": ("Old Mask", "Item_Old_Mask.png", []),
+    "pumpkin": ("Pumpkin", "Item_Pumpkin.png", []),
+}
+
 
 def normalize(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.lower())
@@ -266,6 +272,21 @@ def build_catalog() -> dict[str, object]:
                 page,
                 item_image,
                 ITEM_ALIASES.get(entity_id),
+            )
+        )
+
+    existing_item_ids = {entry["id"] for entry in entities["items"]}
+    for entity_id, (label, image_name, aliases) in PENDING_ITEMS.items():
+        if entity_id in existing_item_ids:
+            continue
+        entities["items"].append(
+            make_entry(
+                entity_id,
+                label,
+                "items",
+                ROOT / "database" / "items" / f"{entity_id}.html",
+                ROOT / "images" / "Items" / image_name,
+                aliases,
             )
         )
 
