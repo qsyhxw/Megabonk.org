@@ -107,6 +107,7 @@ TOMES = {
 TOME_ALIASES = {"health": ["hp", "healthtome"]}
 
 ITEM_LABEL_OVERRIDES = {
+    "bobs-light": "Bob's Light",
     "bob-dead": "Bob (Dead)",
     "cowards-cloak": "Coward's Cloak",
     "grandmas-secret-tonic": "Grandma's Secret Tonic",
@@ -119,14 +120,9 @@ ITEM_LABEL_OVERRIDES = {
 
 ITEM_ID_OVERRIDES = {"pot-stainless-steel": "pot"}
 ITEM_ALIASES = {
+    "bobslight": ["boblight"],
     "pot": ["potstainlesssteel", "stainlesssteelpot"],
     "wizardshat": ["wizardhat"],
-}
-
-PENDING_ITEMS = {
-    "bobslight": ("Bob's Light", "Item_Bobs_Light.png", ["boblight"]),
-    "oldmask": ("Old Mask", "Item_Old_Mask.png", []),
-    "pumpkin": ("Pumpkin", "Item_Pumpkin.png", []),
 }
 
 
@@ -272,21 +268,6 @@ def build_catalog() -> dict[str, object]:
                 page,
                 item_image,
                 ITEM_ALIASES.get(entity_id),
-            )
-        )
-
-    existing_item_ids = {entry["id"] for entry in entities["items"]}
-    for entity_id, (label, image_name, aliases) in PENDING_ITEMS.items():
-        if entity_id in existing_item_ids:
-            continue
-        entities["items"].append(
-            make_entry(
-                entity_id,
-                label,
-                "items",
-                ROOT / "database" / "items" / f"{entity_id}.html",
-                ROOT / "images" / "Items" / image_name,
-                aliases,
             )
         )
 
