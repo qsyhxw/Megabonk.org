@@ -220,14 +220,19 @@
 
   function render(container, meta, patchState) {
     const character = container.dataset.characterBuildSignals;
-    const signal = (meta.characterSignals || []).find(entry => entry.character === character);
+    const characterEntry = window.MegabonkEntities?.get('characters', character);
+    const signal = (meta.characterSignals || []).find(entry => {
+      if (entry.character === character) return true;
+      const signalEntry = window.MegabonkEntities?.get('characters', entry.character);
+      return Boolean(characterEntry && signalEntry && characterEntry.id === signalEntry.id);
+    });
     if (!signal) {
       container.innerHTML = '<p class="cbs-empty">No current-version leaderboard Build is available for this character yet. The reviewed guide below remains the primary recommendation.</p>';
       return;
     }
 
     const cards = selectCards(signal);
-    const characterName = formatName(character);
+    const characterName = characterEntry?.name || formatName(character);
     const sourceVersion = meta.activeVersion || 'unknown';
     const siteVersion = patchState && patchState.latest_version ? patchState.latest_version : null;
     const versionsMatch = !siteVersion || sourceVersion === siteVersion;
@@ -246,7 +251,7 @@
     </div>
     <p class="cbs-version-guard${versionsMatch ? ' is-match' : ''}">${guard}</p>
     <div class="cbs-grid">${cards.map(renderCard).join('')}</div>
-    <div class="cbs-foot"><span>Snapshot: ${escapeHtml(generatedAt)} · ${signal.sampleScope}. Rankings show successful outcomes, not a guaranteed universal best Build.</span><a href="/leaderboard/builds#${encodeURIComponent(character)}">Analyze leaderboard evidence</a><span class="cbs-source">Data: Leaderboard.gg</span></div>`;
+    <div class="cbs-foot"><span>Snapshot: ${escapeHtml(generatedAt)} · Top ${signal.sampleSize} ${escapeHtml(characterName)} runs. Rankings show successful outcomes, not a guaranteed universal best Build.</span><a href="/leaderboard/builds#${encodeURIComponent(signal.character)}">Analyze leaderboard evidence</a><span class="cbs-source">Data: Leaderboard.gg</span></div>`;
 
     container.querySelectorAll('img').forEach(image => {
       image.addEventListener('error', () => image.remove(), { once: true });
