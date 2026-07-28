@@ -62,5 +62,24 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
         values = SYNC.top_values(records, "items")
         self.assertEqual([entry["id"] for entry in values], ["alpha", "zeta"])
 
+    def test_crypt_key_is_excluded_from_build_item_signals(self):
+        records = [
+            {"items": ["cryptkey", "clover"]},
+            {"items": ["cryptkey", "battery"]},
+        ]
+        values = SYNC.top_values(records, "items")
+        self.assertEqual(
+            [entry["id"] for entry in values],
+            ["battery", "clover"],
+        )
+        summary = SYNC.summarize_run(
+            {
+                "items": ["cryptkey", "clover"],
+                "weapons": [],
+                "tomes": [],
+            }
+        )
+        self.assertEqual(summary["items"], ["clover"])
+
 if __name__ == "__main__":
     unittest.main()

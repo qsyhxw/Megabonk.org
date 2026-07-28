@@ -32,6 +32,7 @@ META_SCHEMA_VERSION = 2
 CHARACTER_META_SCHEMA_VERSION = 1
 BUILD_SAMPLE_LIMIT = 100
 CHARACTER_SAMPLE_LIMIT = 30
+NON_BUILD_ITEM_IDS = {"cryptkey"}
 USER_AGENT = (
     "Mozilla/5.0 (compatible; Megabonk.org leaderboard sync; "
     "+https://megabonk.org/leaderboard/)"
@@ -315,6 +316,10 @@ def top_values(records: list[dict[str, Any]], field: str, limit: int = 8) -> lis
     for record in records:
         values = record.get(field, [])
         if isinstance(values, list):
+            if field == "items":
+                values = [
+                    value for value in values if value not in NON_BUILD_ITEM_IDS
+                ]
             counts.update(set(values))
     sample_size = len(records)
     return [
@@ -388,7 +393,11 @@ def summarize_run(run: dict[str, Any]) -> dict[str, Any]:
         "map": run.get("map"),
         "weapons": run.get("weapons") or [],
         "tomes": run.get("tomes") or [],
-        "items": (run.get("items") or [])[:8],
+        "items": [
+            item
+            for item in (run.get("items") or [])
+            if item not in NON_BUILD_ITEM_IDS
+        ][:8],
         "videoURL": run.get("videoURL"),
         "submissionId": run.get("submissionId"),
         "createdAtIso": run.get("createdAtIso"),
@@ -477,7 +486,8 @@ def build_character_meta(
             "Each character is analyzed independently from up to its Top 30 "
             "current-version ranked runs. Repeated loadouts, the highest-scoring "
             "run, and the most recently submitted run are evidence rather than "
-            "a guaranteed universal best Build."
+            "a guaranteed universal best Build. Run-only map objectives such as Crypt Key "
+            "are excluded from Item recommendations."
         ),
         "characterSignals": build_character_signals(current),
     }
@@ -544,7 +554,8 @@ def build_meta(
         "methodology": (
             "Observed current-version Top 100 ranked runs. Exact loadouts are counted "
             "only when the same weapon and Tome set appears in a source run. Usage "
-            "frequency is evidence, not a guaranteed best choice."
+            "frequency is evidence, not a guaranteed best choice. Run-only map objectives "
+            "such as Crypt Key are excluded from Item usage."
         ),
         "overall": {
             "topWeapons": top_values(build_sample, "weapons"),

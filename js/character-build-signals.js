@@ -24,6 +24,7 @@
     duration: 'Tomes/Duration_Tome.png', luck: 'Tomes/Luck_Tome.png', quantity: 'Tomes/Quantity_Tome.png',
     thorns: 'Tomes/Thorns_Tome.png', xp: 'Tomes/XP_Tome.png'
   };
+  const NON_BUILD_ITEM_IDS = new Set(['cryptkey']);
   const ITEM_IMAGES = {
     bobslight: '/images/Items/Item_Bobs_Light.png',
     oldmask: '/images/Items/Item_Old_Mask.png',
@@ -133,7 +134,7 @@
   }
 
   function renderItemLinks(values) {
-    return values.map(value => {
+    return values.filter(value => !NON_BUILD_ITEM_IDS.has(value)).map(value => {
       const shared = window.MegabonkEntities?.get('items', value);
       const label = shared?.name || formatName(value);
       const route = shared?.page || ITEM_ROUTES[value];

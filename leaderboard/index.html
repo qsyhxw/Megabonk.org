@@ -1825,6 +1825,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         </div>
     </footer>
 
+    <script src="/js/entity-catalog.js"></script>
     <script>
         const CONFIG = {
             dataUrl: '/leaderboard-data.json',
@@ -1833,6 +1834,15 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         };
 
         // ⭐ 精确的URL映射表 - 基于现有链接文件
+        const RUN_OBJECTIVES = {
+            cryptkey: {
+                name: 'Crypt Key',
+                kind: 'Graveyard map objective',
+                url: '/guides/maps/graveyard/#crypt-keys',
+                icon: '🔑'
+            }
+        };
+
         const EXACT_URL_MAP = {
             // 武器映射 (不带结尾斜杠)
             weapons: {
@@ -1961,6 +1971,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 'credit card green': 'https://megabonk.org/database/items/credit-card-green',
                 'creditcardred': 'https://megabonk.org/database/items/credit-card-red',
                 'credit card red': 'https://megabonk.org/database/items/credit-card-red',
+                'cryptkey': '/guides/maps/graveyard/#crypt-keys',
                 'curseddoll': 'https://megabonk.org/database/items/cursed-doll',
                 'cursed doll': 'https://megabonk.org/database/items/cursed-doll',
                 'cursedgrabbies': 'https://megabonk.org/database/items/cursed-grabbies',
@@ -2136,6 +2147,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
         // 物品图标映射
         const itemIcons = {
+            'cryptkey': '🔑',
             'key': 'https://megabonk.org/images/Items/Item_Key.png',
             'curseddoll': 'https://megabonk.org/images/Items/Item_Cursed_Doll.png',
             'creditcardgreen': 'https://megabonk.org/images/Items/Item_Credit_Card_Green.png',
@@ -2602,7 +2614,19 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
             const weapons = item.weapons || [];
             const tomes = item.tomes || [];
-            const items = item.items || [];
+            const rawItems = item.items || [];
+            const mapObjectives = rawItems
+                .map(value => {
+                    const key = value.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const fallback = RUN_OBJECTIVES[key];
+                    const shared = window.MegabonkEntities?.get('runObjectives', value);
+                    return shared ? { ...fallback, ...shared, url: shared.page } : fallback;
+                })
+                .filter(Boolean);
+            const items = rawItems.filter(value => {
+                const key = value.toLowerCase().replace(/[^a-z0-9]/g, '');
+                return !RUN_OBJECTIVES[key];
+            });
             const videoURL = item.videoURL || '';
 
             // 获取Build策略信息
@@ -2859,6 +2883,21 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                                 </a>
                             `;
                         }).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${mapObjectives.length > 0 ? `
+                <div class="detail-section">
+                    <div class="section-title">🗺️ Run Objectives (${mapObjectives.length})</div>
+                    <div class="items-grid">
+                        ${mapObjectives.map(objective => `
+                            <a href="${objective.url}" class="item-card item" title="View the ${escapeHtml(objective.name)} route">
+                                <div class="item-icon">${objective.icon}</div>
+                                <div class="item-name">${escapeHtml(objective.name)}</div>
+                                <small style="color:#7a8492;">${escapeHtml(objective.kind)}</small>
+                            </a>
+                        `).join('')}
                     </div>
                 </div>
                 ` : ''}

@@ -125,6 +125,16 @@ ITEM_ALIASES = {
     "wizardshat": ["wizardhat"],
 }
 
+RUN_OBJECTIVES = {
+    "cryptkey": {
+        "name": "Crypt Key",
+        "aliases": ["crypt key"],
+        "page": "/guides/maps/graveyard/#crypt-keys",
+        "image": None,
+        "kind": "Graveyard map objective",
+    }
+}
+
 
 def normalize(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.lower())
@@ -205,6 +215,7 @@ def build_catalog() -> dict[str, object]:
         "weapons": [],
         "tomes": [],
         "items": [],
+        "runObjectives": [],
     }
 
     for entity_id, (label, slug, image_name) in CHARACTERS.items():
@@ -270,6 +281,11 @@ def build_catalog() -> dict[str, object]:
                 ITEM_ALIASES.get(entity_id),
             )
         )
+
+    entities["runObjectives"] = [
+        {"id": entity_id, **definition}
+        for entity_id, definition in RUN_OBJECTIVES.items()
+    ]
 
     return {
         "schemaVersion": 1,

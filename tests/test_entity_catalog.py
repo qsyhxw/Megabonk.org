@@ -28,7 +28,7 @@ class EntityCatalogTests(unittest.TestCase):
                     value = entry.get(field)
                     if not value:
                         continue
-                    relative = value.lstrip("/")
+                    relative = value.lstrip("/").split("#", 1)[0]
                     candidates = [
                         ROOT / relative,
                         ROOT / f"{relative}.html",
@@ -69,9 +69,30 @@ class EntityCatalogTests(unittest.TestCase):
         self.assertEqual(unresolved["characters"], [])
         self.assertEqual(unresolved["weapons"], [])
         self.assertEqual(unresolved["tomes"], [])
+        run_objectives = {
+            normalize(entry["id"])
+            for entry in self.catalog["entities"]["runObjectives"]
+        }
+        unresolved_build_items = sorted(
+            value
+            for value in unresolved["items"]
+            if normalize(value) not in run_objectives
+        )
+        self.assertEqual(unresolved_build_items, [])
+
+    def test_crypt_key_is_a_run_objective_not_an_item(self):
+        item_ids = {
+            normalize(entry["id"])
+            for entry in self.catalog["entities"]["items"]
+        }
+        objectives = {
+            normalize(entry["id"]): entry
+            for entry in self.catalog["entities"]["runObjectives"]
+        }
+        self.assertNotIn("cryptkey", item_ids)
         self.assertEqual(
-            unresolved["items"],
-            ["cryptkey"],
+            objectives["cryptkey"]["page"],
+            "/guides/maps/graveyard/#crypt-keys",
         )
 
 
