@@ -284,12 +284,14 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
         .trinity-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
         .trinity-card {
+            box-sizing: border-box;
+            min-width: 0;
             background: rgba(15, 52, 96, 0.5);
             border: 2px solid rgba(157, 78, 221, 0.3);
             border-radius: 15px;
@@ -1137,17 +1139,27 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         .leaderboard-signal-card {
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
+            min-width: 0;
             padding: 1.15rem;
             border-radius: 14px;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
         }
         .leaderboard-signal-card-head { display: flex; justify-content: space-between; gap: 0.75rem; align-items: flex-start; }
+        .leaderboard-signal-identity { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+        .leaderboard-signal-identity > div { min-width: 0; }
+        .leaderboard-character-image { flex: 0 0 52px; width: 52px; height: 52px; padding: 5px; object-fit: contain; border-radius: 12px; background: rgba(255, 255, 255, 0.08); }
         .leaderboard-signal-card h3 { margin: 0; color: #fff; font-size: 1.12rem; }
         .leaderboard-signal-confidence { padding: 0.28rem 0.5rem; border-radius: 999px; background: rgba(61, 220, 151, 0.13); color: #7ff0ba; font-size: 0.7rem; font-weight: 900; white-space: nowrap; }
         .leaderboard-signal-metric { margin-top: 0.4rem; color: #8cb8ff; font-size: 0.82rem; font-weight: 800; }
         .leaderboard-loadout { margin-top: 0.85rem; padding: 0.85rem; border-radius: 10px; background: rgba(5, 12, 32, 0.38); border: 1px solid rgba(140, 184, 255, 0.16); }
-        .leaderboard-loadout-title { margin-bottom: 0.45rem; color: #fff; font-size: 0.78rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; }
+        .leaderboard-loadout-title { margin-bottom: 0.55rem; color: #fff; font-size: 0.78rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; }
+        .leaderboard-loadout-row { display: flex; align-items: flex-start; gap: 0.55rem; margin-top: 0.5rem; }
+        .leaderboard-loadout-row > strong { flex: 0 0 62px; padding-top: 0.28rem; color: var(--text-gray); font-size: 0.8rem; }
+        .leaderboard-entity-list { display: flex; flex-wrap: wrap; gap: 0.38rem; min-width: 0; }
+        .leaderboard-entity-chip { display: inline-flex; align-items: center; gap: 0.32rem; min-height: 32px; padding: 0.25rem 0.48rem; border-radius: 8px; background: rgba(255, 255, 255, 0.08); color: #edf4ff; font-size: 0.78rem; font-weight: 750; }
+        .leaderboard-entity-chip img { width: 24px; height: 24px; object-fit: contain; flex: 0 0 24px; }
         .leaderboard-signal-line { margin-top: 0.4rem; color: var(--text-gray); font-size: 0.86rem; line-height: 1.48; }
         .leaderboard-signal-evidence { margin-top: 0.75rem; color: #d9e6ff; font-size: 0.8rem; line-height: 1.45; }
         .leaderboard-signal-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; padding-top: 0.95rem; }
@@ -1162,12 +1174,18 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             font-size: 0.8rem;
             color: var(--text-gray);
         }
-        .leaderboard-signals-foot a { color: #8cb8ff; font-weight: 800; }
+        .leaderboard-signals-foot > a { color: #8cb8ff; font-weight: 800; }
+        .leaderboard-source-note { margin-left: auto; opacity: 0.58; font-size: 0.72rem; }
+        .leaderboard-source-note a { color: inherit; font-weight: 600; text-decoration: none; }
+        .leaderboard-source-note a:hover { text-decoration: underline; }
         @media (max-width: 700px) {
             .leaderboard-signals { padding: 1.1rem; }
             .leaderboard-signals-head { display: block; }
             .leaderboard-signals-badges { justify-content: flex-start; margin-top: 0.8rem; }
             .leaderboard-signal-grid { grid-template-columns: 1fr; }
+            .leaderboard-signal-card-head { display: block; }
+            .leaderboard-signal-confidence { display: inline-block; margin: 0.55rem 0 0 64px; }
+            .leaderboard-source-note { width: 100%; margin-left: 0; }
         }
 
         .ad-row{grid-column:1/-1;margin:16px 0}
@@ -1237,7 +1255,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             <div class="leaderboard-signals-foot">
                 <span id="leaderboardSignalUpdated">Waiting for synchronized data…</span>
                 <a href="/leaderboard/builds">Explore every leaderboard Build</a>
-                <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="nofollow noopener">View source submissions</a>
+                <span class="leaderboard-source-note">Data: <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="nofollow noopener">Leaderboard.gg</a></span>
             </div>
         </section>
 
@@ -2870,6 +2888,87 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             cursed: 'Cursed'
         };
 
+        const leaderboardCharacterImages = {
+            fox: '/images/guides/characters/Fox.png',
+            robinette: '/images/guides/characters/Robinette.png',
+            roberto: '/images/guides/characters/Roberto.png',
+            ninja: '/images/guides/characters/Ninja.png',
+            megachad: '/images/guides/characters/Megachad.png',
+            birdo: '/images/guides/characters/Birdo.png',
+            noelle: '/images/guides/characters/Noelle.png',
+            dicehead: '/images/guides/characters/Dicehead.png',
+            bandit: '/images/guides/characters/Bandit.png',
+            tonymczoom: '/images/guides/characters/Tony_McZoom.png',
+            sirchadwell: '/images/guides/characters/Sir_Chadwell.png',
+            calcium: '/images/guides/characters/Calcium.png',
+            cl4nk: '/images/guides/characters/CL4NK.png',
+            monke: '/images/guides/characters/Monke.png',
+            bush: '/images/guides/characters/Bush.png',
+            siroofie: '/images/guides/characters/Sir_Oofie.png',
+            athena: '/images/guides/characters/Athena.png',
+            ogre: '/images/guides/characters/Ogre.png',
+            amog: '/images/guides/characters/Amog.png',
+            spaceman: '/images/guides/characters/Spaceman.png',
+            vlad: '/images/guides/characters/Vlad.png'
+        };
+
+        const leaderboardWeaponImages = {
+            aura: '/images/database/weapons/Aura.png',
+            aegis: '/images/database/weapons/Aegis.png',
+            flamewalker: '/images/database/weapons/Flamewalker.png',
+            katana: '/images/database/weapons/Katana.png',
+            dice: '/images/database/weapons/Dice.png',
+            dexecutioner: '/images/database/weapons/Dexecutioner.png',
+            bloodmagic: '/images/database/weapons/Blood_Magic.png',
+            lightningstaff: '/images/database/weapons/Lightning_Staff.png',
+            bananarang: '/images/database/weapons/Bananarang.png',
+            corruptedsword: '/images/database/weapons/CorruptedSword.png',
+            bow: '/images/database/weapons/Bow.png',
+            revolver: '/images/database/weapons/Revolver.png',
+            axe: '/images/database/weapons/Axe.png',
+            bone: '/images/database/weapons/Bone.png',
+            sniper: '/images/database/weapons/Sniper.png',
+            frostwalker: '/images/database/weapons/Frostwalker.png',
+            blackhole: '/images/database/weapons/Black_Hole.png',
+            tornado: '/images/database/weapons/Tornado.png',
+            shotgun: '/images/database/weapons/Shotgun.png',
+            sword: '/images/database/weapons/Sword.png',
+            herosword: '/images/database/weapons/Hero_Sword.png',
+            firestaff: '/images/database/weapons/Firestaff.png',
+            chunkers: '/images/database/weapons/Chunkers.png',
+            spacenoodle: '/images/database/weapons/Space_Noodle.png',
+            dragonsbreath: '/images/database/weapons/Dragons_Breath.png',
+            sluttyrocket: '/images/database/weapons/SluttyRocket.png',
+            mines: '/images/database/weapons/Mines.png',
+            poisonflask: '/images/database/weapons/Poison_Flask.png',
+            wirelessdagger: '/images/database/weapons/Wireless_Dagger.png'
+        };
+
+        const leaderboardTomeImages = {
+            agility: '/images/Tomes/Agility_Tome.png',
+            cooldown: '/images/Tomes/Cooldown_Tome.png',
+            damage: '/images/Tomes/Damage_Tome.png',
+            evasion: '/images/Tomes/Evasion_Tome.png',
+            golden: '/images/Tomes/Golden_Tome.png',
+            health: '/images/Tomes/Health_Tome.png',
+            knockback: '/images/Tomes/Knockback_Tome.png',
+            precision: '/images/Tomes/Precision_Tome.png',
+            projectilespeed: '/images/Tomes/Projectile_Speed_Tome.png',
+            regen: '/images/Tomes/Regen_Tome.png',
+            shield: '/images/Tomes/Shield_Tome.png',
+            silver: '/images/Tomes/Silver_Tome.png',
+            size: '/images/Tomes/Size_Tome.png',
+            armor: '/images/Tomes/Armor_Tome.png',
+            attraction: '/images/Tomes/Attraction_Tome.png',
+            bloody: '/images/Tomes/Bloody_Tome.png',
+            chaos: '/images/Tomes/Chaos_Tome.png',
+            cursed: '/images/Tomes/Cursed_Tome.png',
+            duration: '/images/Tomes/Duration_Tome.png',
+            luck: '/images/Tomes/Luck_Tome.png',
+            quantity: '/images/Tomes/Quantity_Tome.png',
+            thorns: '/images/Tomes/Thorns_Tome.png',
+            xp: '/images/Tomes/XP_Tome.png'
+        };
         function formatLeaderboardEntity(value) {
             if (!value) return 'Unknown';
             if (leaderboardEntityLabels[value]) return leaderboardEntityLabels[value];
@@ -2893,6 +2992,22 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             })[character]);
         }
 
+        function renderLeaderboardEntityChips(values, type) {
+            const imageMap = type === 'weapon' ? leaderboardWeaponImages : leaderboardTomeImages;
+            const list = Array.isArray(values) ? values : [];
+            if (!list.length) return '<span class="leaderboard-entity-chip">Not supplied</span>';
+
+            return list.map(value => {
+                const label = formatLeaderboardEntity(value);
+                const image = imageMap[value] || '';
+                return `
+                    <span class="leaderboard-entity-chip">
+                        ${image ? `<img src="${image}" alt="" width="24" height="24" loading="lazy" decoding="async">` : ''}
+                        <span>${escapeLeaderboardHtml(label)}</span>
+                    </span>
+                `;
+            }).join('');
+        }
         function safeLeaderboardUrl(value) {
             try {
                 const url = new URL(value);
@@ -2931,14 +3046,15 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
                 grid.innerHTML = supported.map(entry => {
                     const loadout = entry.popularLoadouts[0];
-                    const weapons = (loadout.weapons || []).map(formatLeaderboardEntity).join(' · ');
-                    const tomes = (loadout.tomes || []).map(formatLeaderboardEntity).join(' · ');
+                    const weaponsHtml = renderLeaderboardEntityChips(loadout.weapons, 'weapon');
+                    const tomesHtml = renderLeaderboardEntityChips(loadout.tomes, 'tome');
                     const supportItems = (entry.topItems || []).slice(0, 3)
                         .map(item => `${formatLeaderboardEntity(item.id)} ${formatLeaderboardPercent(item.usageRate)}`)
                         .join(' · ');
                     const representative = loadout.representativeRun || entry.representativeRuns?.[0] || {};
                     const videoUrl = safeLeaderboardUrl(representative.videoURL);
                     const characterName = formatLeaderboardEntity(entry.character);
+                    const characterImage = leaderboardCharacterImages[entry.character] || '';
                     const evidenceUrl = `/leaderboard/builds#${encodeURIComponent(entry.character)}`;
                     const confidence = loadout.runs >= 3 ? 'REPEATED SETUP' : 'EARLY SIGNAL';
                     const exactShare = formatLeaderboardPercent(loadout.usageRate);
@@ -2949,14 +3065,19 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     return `
                         <article class="leaderboard-signal-card">
                             <div class="leaderboard-signal-card-head">
-                                <h3>${escapeLeaderboardHtml(characterName)} Top 100 Setup</h3>
+                                <div class="leaderboard-signal-identity">
+                                    ${characterImage ? `<img class="leaderboard-character-image" src="${characterImage}" alt="${escapeLeaderboardHtml(characterName)} character" width="52" height="52" loading="lazy" decoding="async">` : ''}
+                                    <div>
+                                        <h3>${escapeLeaderboardHtml(characterName)} Top 100 Setup</h3>
+                                        <div class="leaderboard-signal-metric">${entry.sampleSize} runs · Median ${formatLeaderboardNumber(entry.medianScore)} kills</div>
+                                    </div>
+                                </div>
                                 <span class="leaderboard-signal-confidence">${confidence}</span>
                             </div>
-                            <div class="leaderboard-signal-metric">${entry.sampleSize} ${escapeLeaderboardHtml(characterName)} runs · Median ${formatLeaderboardNumber(entry.medianScore)} kills</div>
                             <div class="leaderboard-loadout">
                                 <div class="leaderboard-loadout-title">Most repeated exact loadout</div>
-                                <div class="leaderboard-signal-line"><strong>Weapons:</strong> ${escapeLeaderboardHtml(weapons || 'Not supplied')}</div>
-                                <div class="leaderboard-signal-line"><strong>Tomes:</strong> ${escapeLeaderboardHtml(tomes || 'Not supplied')}</div>
+                                <div class="leaderboard-loadout-row"><strong>Weapons</strong><div class="leaderboard-entity-list">${weaponsHtml}</div></div>
+                                <div class="leaderboard-loadout-row"><strong>Tomes</strong><div class="leaderboard-entity-list">${tomesHtml}</div></div>
                                 <div class="leaderboard-signal-evidence">Seen in ${loadout.runs} of ${entry.sampleSize} character runs (${exactShare}). ${escapeLeaderboardHtml(runEvidence)}.</div>
                             </div>
                             <div class="leaderboard-signal-line"><strong>Frequently present late-run items:</strong> ${escapeLeaderboardHtml(supportItems || 'Not enough item data')}</div>
@@ -2968,6 +3089,10 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         </article>
                     `;
                 }).join('') || '<div class="leaderboard-signal-card"><p>Not enough version-matched Top 100 runs are available yet.</p></div>';
+
+                grid.querySelectorAll('img').forEach(image => {
+                    image.addEventListener('error', () => image.remove(), { once: true });
+                });
 
                 const generated = meta.generatedAt ? new Date(meta.generatedAt) : null;
                 document.getElementById('leaderboardSignalUpdated').textContent =
