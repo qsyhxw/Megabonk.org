@@ -1,0 +1,90 @@
+name: Monitor Megabonk Entity Catalog
+
+on:
+  schedule:
+    - cron: '41 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+
+jobs:
+  compare-entities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild local catalog
+        run: python scripts/build_entity_catalog.py
+
+      - name: Compare Wiki entity categories
+        id: compare
+        shell: bash
+        run: |
+          RESULT=$(python scripts/check_wiki_entities.py --download-licensed-images)
+          echo "$RESULT"
+          RESULT_JSON="$RESULT" python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+
+          result = json.loads(os.environ["RESULT_JSON"])
+          for key, value in result.items():
+              print(f"{key}={str(value).lower() if isinstance(value, bool) else value}")
+          PY
+
+      - name: Validate catalog and monitor output
+        run: |
+          python -m unittest tests.test_entity_catalog -v
+          python -m py_compile scripts/build_entity_catalog.py
+          python -m py_compile scripts/check_wiki_entities.py
+          python -m py_compile scripts/send_entity_sync_alert.py
+          git diff --check
+
+      - name: Commit comparison changes
+        id: publish
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data images
+
+          if git diff --staged --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No entity changes found."
+            exit 0
+          fi
+
+          git commit -m "Auto-update entity catalog review"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Send entity change email
+        if: ${{ success() && steps.publish.outputs.changed == 'true' && (steps.compare.outputs.new_count != '0' || steps.compare.outputs.removed_count != '0' || steps.compare.outputs.downloaded_image_count != '0') }}
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_entity_sync_alert.py
+
+      - name: Send failure email
+        if: ${{ failure() }}
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_entity_sync_alert.py

@@ -1193,6 +1193,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         .ad-box{display:block;min-height:300px;margin:16px 0}
          @media (max-width:768px){.ad-box{min-height:280px}}
     </style>
+  <script src="/js/entity-catalog.js"></script>
 </head>
 <body>
     <header>
@@ -2971,6 +2972,10 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         };
         function formatLeaderboardEntity(value) {
             if (!value) return 'Unknown';
+            for (const type of ['characters', 'weapons', 'tomes', 'items']) {
+                const sharedName = window.MegabonkEntities?.name(type, value);
+                if (sharedName) return sharedName;
+            }
             if (leaderboardEntityLabels[value]) return leaderboardEntityLabels[value];
             return value.replace(/[-_]+/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
         }
@@ -2994,18 +2999,22 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
         function renderLeaderboardEntityChips(values, type) {
             const imageMap = type === 'weapon' ? leaderboardWeaponImages : leaderboardTomeImages;
+            const catalogType = type === 'weapon' ? 'weapons' : 'tomes';
             const list = Array.isArray(values) ? values : [];
             if (!list.length) return '<span class="leaderboard-entity-chip">Not supplied</span>';
 
             return list.map(value => {
                 const label = formatLeaderboardEntity(value);
-                const image = imageMap[value] || '';
-                return `
-                    <span class="leaderboard-entity-chip">
-                        ${image ? `<img src="${image}" alt="" width="24" height="24" loading="lazy" decoding="async">` : ''}
-                        <span>${escapeLeaderboardHtml(label)}</span>
-                    </span>
+                const shared = window.MegabonkEntities?.get(catalogType, value);
+                const image = shared?.image || imageMap[value] || '';
+                const page = shared?.page || '';
+                const content = `
+                    ${image ? `<img src="${image}" alt="" width="24" height="24" loading="lazy" decoding="async">` : ''}
+                    <span>${escapeLeaderboardHtml(label)}</span>
                 `;
+                return page
+                    ? `<a class="leaderboard-entity-chip" href="${page}">${content}</a>`
+                    : `<span class="leaderboard-entity-chip">${content}</span>`;
             }).join('');
         }
         function safeLeaderboardUrl(value) {
@@ -3023,6 +3032,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             if (!panel || !grid) return;
 
             try {
+                await window.MegabonkEntities.ready;
                 const response = await fetch(`/data/leaderboard-meta.json?t=${Date.now()}`);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const meta = await response.json();
@@ -3054,7 +3064,8 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     const representative = loadout.representativeRun || entry.representativeRuns?.[0] || {};
                     const videoUrl = safeLeaderboardUrl(representative.videoURL);
                     const characterName = formatLeaderboardEntity(entry.character);
-                    const characterImage = leaderboardCharacterImages[entry.character] || '';
+                    const sharedCharacter = window.MegabonkEntities?.get('characters', entry.character);
+                    const characterImage = sharedCharacter?.image || leaderboardCharacterImages[entry.character] || '';
                     const evidenceUrl = `/leaderboard/builds#${encodeURIComponent(entry.character)}`;
                     const confidence = loadout.runs >= 3 ? 'REPEATED SETUP' : 'EARLY SIGNAL';
                     const exactShare = formatLeaderboardPercent(loadout.usageRate);
@@ -3084,7 +3095,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                             <div class="leaderboard-signal-actions">
                                 <a href="${evidenceUrl}">Analyze leaderboard evidence</a>
                                 ${videoUrl ? `<a class="secondary" href="${escapeLeaderboardHtml(videoUrl)}" target="_blank" rel="nofollow noopener">Watch matching run</a>` : ''}
-                                <a class="secondary" href="${leaderboardBuildRoutes[entry.character]}">Compare editorial guide</a>
+                                <a class="secondary" href="${sharedCharacter?.buildPage || leaderboardBuildRoutes[entry.character]}">Compare editorial guide</a>
                             </div>
                         </article>
                     `;

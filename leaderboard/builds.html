@@ -980,6 +980,7 @@
         </div>
     </footer>
 
+    <script src="/js/entity-catalog.js"></script>
     <script>
         // Configuration
         let scrollBehaviorReady = false;
@@ -2335,21 +2336,35 @@
         }
 
         function getCharacterData(name) {
+            const shared = window.MegabonkEntities?.get('characters', name);
+            if (shared) {
+                return {
+                    image: shared.image,
+                    guideUrl: shared.page,
+                    buildUrl: shared.buildPage
+                };
+            }
             const key = normalizeKey(name);
             return CHARACTERS[key] || CHARACTERS[name.toLowerCase()] || null;
         }
 
         function getWeaponData(name) {
+            const shared = window.MegabonkEntities?.get('weapons', name);
+            if (shared) return { image: shared.image, url: shared.page };
             const key = normalizeKey(name);
             return WEAPONS[key] || WEAPONS[name.toLowerCase()] || null;
         }
 
         function getTomeData(name) {
+            const shared = window.MegabonkEntities?.get('tomes', name);
+            if (shared) return { image: shared.image, url: shared.page };
             const key = normalizeKey(name);
             return TOMES[key] || TOMES[name.toLowerCase()] || null;
         }
 
         function getItemData(name) {
+            const shared = window.MegabonkEntities?.get('items', name);
+            if (shared) return { image: shared.image, url: shared.page };
             const key = normalizeKey(name);
             return ITEMS[key] || ITEMS[name.toLowerCase()] || null;
         }
@@ -2385,6 +2400,7 @@
         
         async function loadAndAnalyzeData() {
             try {
+                await window.MegabonkEntities.ready;
                 const response = await fetch(`${CONFIG.dataUrl}?t=${Date.now()}`);
                 if (!response.ok) throw new Error('Failed to load data');
                 

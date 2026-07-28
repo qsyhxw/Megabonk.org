@@ -111,13 +111,15 @@
   function renderChips(values, type) {
     const images = type === 'weapon' ? WEAPON_IMAGES : TOME_IMAGES;
     const routes = type === 'weapon' ? WEAPON_ROUTES : TOME_ROUTES;
+    const catalogType = type === 'weapon' ? 'weapons' : 'tomes';
     const list = Array.isArray(values) ? values : [];
     if (!list.length) return '<span class="cbs-chip">Not supplied</span>';
     return list.map(value => {
-      const image = images[value];
-      const route = routes[value];
-      const label = formatName(value);
-      const content = `${image ? `<img src="${IMAGE_BASE}${image}" alt="" width="22" height="22" loading="lazy" decoding="async">` : ''}<span>${escapeHtml(label)}</span>`;
+      const shared = window.MegabonkEntities?.get(catalogType, value);
+      const image = shared?.image || (images[value] ? `${IMAGE_BASE}${images[value]}` : null);
+      const route = shared?.page || routes[value];
+      const label = shared?.name || formatName(value);
+      const content = `${image ? `<img src="${image}" alt="" width="22" height="22" loading="lazy" decoding="async">` : ''}<span>${escapeHtml(label)}</span>`;
       return route
         ? `<a class="cbs-chip cbs-chip-link" href="${route}" aria-label="View ${escapeHtml(label)} details">${content}</a>`
         : `<span class="cbs-chip">${content}</span>`;
@@ -126,8 +128,9 @@
 
   function renderItemLinks(values) {
     return values.map(value => {
-      const label = formatName(value);
-      const route = ITEM_ROUTES[value];
+      const shared = window.MegabonkEntities?.get('items', value);
+      const label = shared?.name || formatName(value);
+      const route = shared?.page || ITEM_ROUTES[value];
       return route
         ? `<a class="cbs-item-link" href="${route}">${escapeHtml(label)}</a>`
         : `<span>${escapeHtml(label)}</span>`;
@@ -245,6 +248,7 @@
     const containers = [...document.querySelectorAll('[data-character-build-signals]')];
     if (!containers.length) return;
     try {
+      await window.MegabonkEntities?.ready;
       const cacheBust = Date.now();
       const [metaResponse, patchResponse] = await Promise.all([
         fetch(`/data/character-build-signals.json?t=${cacheBust}`),
