@@ -131,6 +131,7 @@ RUN_OBJECTIVES = {
         "aliases": ["crypt key"],
         "page": "/guides/maps/graveyard/#crypt-keys",
         "image": None,
+        "icon": "🔑",
         "kind": "Graveyard map objective",
     }
 }
