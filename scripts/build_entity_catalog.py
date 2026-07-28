@@ -36,7 +36,10 @@ CHARACTERS = {
     "vlad": ("Vlad", "vlad-guide", "Vlad.png"),
 }
 
-CHARACTER_ALIASES = {"spaceman": ["astronat", "astronaut"]}
+CHARACTER_ALIASES = {
+    "spaceman": ["astronat", "astronaut"],
+    "roberto": ["robong"],
+}
 
 WEAPONS = {
     "aegis": ("Aegis", "aegis", "Aegis.png"),

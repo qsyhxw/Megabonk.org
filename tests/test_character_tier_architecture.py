@@ -7,6 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TIER = ROOT / "guides/characters/character-tier-list/index.html"
 HUB = ROOT / "guides/characters/index.html"
+LEGACY_KNIGHT = ROOT / "guides/characters/knight-beginner-guide.html"
+SITEMAP = ROOT / "sitemap.xml"
 
 
 class PageParser(HTMLParser):
@@ -55,8 +57,31 @@ class CharacterTierArchitectureTests(unittest.TestCase):
         h1 = re.search(r"<h1>(.*?)</h1>", self.hub, re.S).group(1)
         self.assertNotIn("Tier List", title)
         self.assertNotIn("Tier List", h1)
-        self.assertIn("21 characters + tier list", self.hub)
+        self.assertIn('id="characterTableBody"', self.hub)
+        self.assertIn('of <strong>21</strong> character guides', self.hub)
+        self.assertNotIn('data-filter="tier"', self.hub)
+        self.assertNotIn('tierBadge', self.hub)
         self.assertIn("id: 'roberto'", self.hub)
+        self.assertIn("aliases: ['robong']", self.hub)
+        self.assertIn("createCharacterTable();", self.hub)
+        self.assertIn("Warrior: +1.5% Damage per level", self.hub)
+
+    def test_hub_table_has_complete_guide_build_and_weapon_targets(self):
+        guide_links = re.findall(r"link: '([^']+-guide\.html)'", self.hub)
+        self.assertGreaterEqual(len(guide_links), 18)
+        build_links = re.findall(r"build: '([^']+)'", self.hub)
+        weapon_links = re.findall(r"weapon: \['[^']+', '([^']+)'\]", self.hub)
+        self.assertEqual(len(build_links), 21)
+        self.assertEqual(len(weapon_links), 21)
+        for href in [*guide_links, *build_links, *weapon_links]:
+            self.assertIsNotNone(local_target(href), href)
+
+    def test_legacy_knight_page_does_not_compete_with_sir_oofie(self):
+        legacy = LEGACY_KNIGHT.read_text(encoding="utf-8")
+        sitemap = SITEMAP.read_text(encoding="utf-8")
+        self.assertIn('<meta name="robots" content="noindex, follow">', legacy)
+        self.assertIn('href="https://megabonk.org/guides/characters/sir-oofie-guide.html"', legacy)
+        self.assertNotIn('/guides/characters/knight-beginner-guide.html</loc>', sitemap)
 
     def test_tier_page_has_21_characters_and_current_baseline(self):
         self.assertEqual(self.parser.h1, 1)

@@ -299,6 +299,21 @@
             gap: 2rem;
             margin-bottom: 3rem;
         }
+
+        .character-directory { margin: 2rem 0 3rem; }
+        .character-directory h2 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .character-directory > p { color: var(--text-muted); margin-bottom: 1rem; }
+        .character-table-wrap { overflow-x: auto; border: 1px solid rgba(255, 107, 53, 0.25); border-radius: 12px; background: rgba(20, 20, 30, 0.82); -webkit-overflow-scrolling: touch; }
+        .character-table { width: 100%; min-width: 980px; border-collapse: collapse; text-align: left; }
+        .character-table th, .character-table td { padding: 0.85rem 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); vertical-align: middle; }
+        .character-table th { color: var(--primary-color); background: rgba(255, 107, 53, 0.1); font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+        .character-table tbody tr:last-child td { border-bottom: 0; }
+        .character-table tbody tr:hover { background: rgba(255, 255, 255, 0.035); }
+        .character-cell { display: flex; align-items: center; gap: 0.7rem; min-width: 150px; }
+        .character-cell img { width: 44px; height: 44px; object-fit: contain; border-radius: 8px; background: rgba(0, 0, 0, 0.24); }
+        .character-table a { color: #ffd166; font-weight: 700; }
+        .character-table .table-action { display: inline-block; white-space: nowrap; padding: 0.42rem 0.62rem; border-radius: 7px; background: rgba(255, 107, 53, 0.16); }
+        .table-note { display: none; color: var(--text-muted); font-size: 0.84rem; margin-top: 0.6rem; }
         
         .guide-card {
             background: var(--card-bg);
@@ -725,6 +740,7 @@
         }
         
         @media (max-width: 768px) {
+            .table-note { display: block; }
             .compare-grid {
                 grid-template-columns: 1fr;
             }
@@ -860,8 +876,8 @@
 
     <main class="container">
         <section class="tier-overview">
-            <h2>🏆 Compare Megabonk Characters</h2>
-            <p>Not sure who to play? Use the dedicated character rankings to compare all 21 characters, then open the individual guides below for unlock requirements, passives, starting weapons, and builds.</p>
+            <h2>Find the Right Character Guide</h2>
+            <p>Use this hub for the complete character roster, unlock requirements, current passives, and starting weapons. For rankings by mode and current meta strength, use the separate Character Tier List.</p>
             
             <div class="tier-stats">
                 <div class="tier-stat">
@@ -887,9 +903,21 @@
             </a>
         </section>
 
+        <section class="character-directory" aria-labelledby="character-directory-title">
+            <h2 id="character-directory-title">All Megabonk Characters</h2>
+            <p>Scan every current character, then open the Character Guide for unlock and passive details or the separate Best Build page for weapons, tomes, and items.</p>
+            <div class="character-table-wrap" tabindex="0" aria-label="Scrollable Megabonk character directory">
+                <table class="character-table">
+                    <thead><tr><th>Character</th><th>How to Unlock</th><th>Current Passive</th><th>Starting Weapon</th><th>Guide</th><th>Best Build</th></tr></thead>
+                    <tbody id="characterTableBody"></tbody>
+                </table>
+            </div>
+            <p class="table-note">Swipe horizontally to view unlock, weapon, Guide, and Build columns.</p>
+        </section>
+
         <section>
             <h2 class="section-title">Individual Character Guides</h2>
-            <p class="section-subtitle">Detailed strategies, builds, and unlock guides for all Megabonk characters</p>
+            <p class="section-subtitle">Browse unlock, passive, starting weapon, and playstyle guides for all Megabonk characters.</p>
             
             <div class="filter-controls">
                 <div class="filter-row">
@@ -898,15 +926,7 @@
                         <input type="text" id="searchInput" placeholder="Search characters..." />
                     </div>
                     
-                    <div class="filter-group">
-                        <span class="filter-label">Tier:</span>
-                        <button class="filter-btn active" data-filter="tier" data-value="all">All</button>
-                        <button class="filter-btn" data-filter="tier" data-value="s">S-Tier</button>
-                        <button class="filter-btn" data-filter="tier" data-value="a">A-Tier</button>
-                        <button class="filter-btn" data-filter="tier" data-value="b">B-Tier</button>
-                        <button class="filter-btn" data-filter="tier" data-value="c">C</button>
-                    </div>
-                    
+
                     <div class="filter-group">
                         <span class="filter-label">Difficulty:</span>
                         <button class="filter-btn active" data-filter="difficulty" data-value="all">All</button>
@@ -919,7 +939,7 @@
                 </div>
                 
                 <div class="filter-stats">
-                    Showing <strong id="visibleCount">22</strong> of <strong>22</strong> guides (21 characters + tier list)
+                    Showing <strong id="visibleCount">21</strong> of <strong>21</strong> character guides
                 </div>
             </div>
             
@@ -1010,37 +1030,74 @@
         
         // Character data with stats for radar charts (Attack, Defense, Speed, Ease of Use, Scaling)
         const characters = [
-            { id: 'tierlist', name: 'Character Tier List 2026', tier: 'featured', difficulty: 'all', icon: '🏆', category: 'Character Rankings', difficultyLabel: 'All 21 Characters', description: 'Compare all Megabonk characters by effectiveness, ease of use, and current meta viability.', features: ['S-D tier rankings', 'Detailed pros and cons', 'Playstyle comparisons'], link: '/guides/characters/character-tier-list/', cta: 'View Character Rankings', stats: [5, 5, 5, 5, 5], featured: true, canCompare: false },
-            
             // S-TIER CHARACTERS (4)
-            { id: 'dicehead', name: 'Dicehead', tier: 's', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Dicehead.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Advanced', description: 'Gamba triggers on every level gained, applying a random eligible stat reward at a 75% multiplier with a 6% minimum. Silver Gain and Jump Height are excluded from the current reward pool.', features: ['75% reward multiplier', '6% minimum reward', 'One trigger per level gained'], link: 'dicehead-guide.html', cta: 'Master Dicehead', stats: [5, 2, 3, 4, 5], canCompare: true, passive: 'Gamba: 75% reward multiplier, 6% minimum; triggers once per level', weapon: 'Dice (1-6 damage)', pros: ['Strong random scaling', 'Multi-level XP works correctly', 'Easy to use once unlocked'], cons: ['RNG dependent', 'Slow early levels'] },
-            { id: 'cl4nk', name: 'CL4NK', tier: 's', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/CL4NK.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Advanced', description: 'Consistent crit scaling machine. Gains +1% crit chance per level, resulting in terrifying late-game DPS when paired with crit damage items.', features: ['Guaranteed crit scaling', 'Recently buffed survivability', 'Top-tier late game'], link: 'cl4nk-guide.html', cta: 'Master CL4NK', stats: [5, 2, 4, 3, 5], canCompare: true, passive: 'Crit Happens: +1% Crit Chance per level', weapon: 'Revolver', pros: ['Reliable crit scaling', 'Insane late-game DPS', 'Recently buffed'], cons: ['Very slow movement', 'Fragile early game', 'Painful first 10 levels'] },
-            { id: 'robinette', name: 'Robinette', tier: 's', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Robinette.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Intermediate', description: 'Perfect snowball character with gold-based scaling. Earns more gold per level and deals damage based on carried gold - creates powerful feedback loop.', features: ['Gold snowballing mechanic', 'Exceptional long-run ceiling', 'Excellent for long runs'], link: 'robinette-guide.html', cta: 'Master Robinette', stats: [5, 3, 4, 4, 5], canCompare: true, passive: 'Stonks: +1% gold gain/level, damage scales with gold', weapon: 'Bow (piercing)', pros: ['Perfect snowballing', 'Top-tier DPS', 'Bow is excellent'], cons: ['Slow early start', 'Gold dependent'] },
-            { id: 'megachad', name: 'Megachad', tier: 's', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Megachad.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Beginner Friendly', description: 'Nearly unkillable tank whose Flex blocks damage, stuns enemies and permanently adds +2.5% Damage each time it triggers.', features: ['+2.5% Damage per Flex', 'Near-invincibility late game', 'Kevin/Leeching Crystal triggers'], link: 'megachad-guide.html', cta: 'Master Megachad', stats: [3, 5, 2, 5, 4], canCompare: true, passive: 'Flexing: immunity, stun and permanent +2.5% Damage per trigger', weapon: 'Aura (auto-damage)', pros: ['Nearly unkillable', 'Permanent damage scaling', 'AFK viable'], cons: ['Slowest movement', 'Worst luck stat', 'Melee range only'] },
+            { id: 'dicehead', name: 'Dicehead', tier: 's', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Dicehead.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Advanced', description: 'Gamba triggers on every level gained, applying a random eligible stat reward at a 75% multiplier with a 6% minimum. Silver Gain and Jump Height are excluded from the current reward pool.', features: ['75% reward multiplier', '6% minimum reward', 'One trigger per level gained'], link: '/guides/characters/dicehead-guide.html', cta: 'Master Dicehead', stats: [5, 2, 3, 4, 5], canCompare: true, passive: 'Gamba: 75% reward multiplier, 6% minimum; triggers once per level', weapon: 'Dice (1-6 damage)', pros: ['Strong random scaling', 'Multi-level XP works correctly', 'Easy to use once unlocked'], cons: ['RNG dependent', 'Slow early levels'] },
+            { id: 'cl4nk', name: 'CL4NK', tier: 's', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/CL4NK.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Advanced', description: 'Consistent crit scaling machine. Gains +1% crit chance per level, resulting in terrifying late-game DPS when paired with crit damage items.', features: ['Guaranteed crit scaling', 'Recently buffed survivability', 'Top-tier late game'], link: '/guides/characters/cl4nk-guide.html', cta: 'Master CL4NK', stats: [5, 2, 4, 3, 5], canCompare: true, passive: 'Crit Happens: +1% Crit Chance per level', weapon: 'Revolver', pros: ['Reliable crit scaling', 'Insane late-game DPS', 'Recently buffed'], cons: ['Very slow movement', 'Fragile early game', 'Painful first 10 levels'] },
+            { id: 'robinette', name: 'Robinette', tier: 's', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Robinette.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Intermediate', description: 'Perfect snowball character with gold-based scaling. Earns more gold per level and deals damage based on carried gold - creates powerful feedback loop.', features: ['Gold snowballing mechanic', 'Exceptional long-run ceiling', 'Excellent for long runs'], link: '/guides/characters/robinette-guide.html', cta: 'Master Robinette', stats: [5, 3, 4, 4, 5], canCompare: true, passive: 'Stonks: +1% gold gain/level, damage scales with gold', weapon: 'Bow (piercing)', pros: ['Perfect snowballing', 'Top-tier DPS', 'Bow is excellent'], cons: ['Slow early start', 'Gold dependent'] },
+            { id: 'megachad', name: 'Megachad', tier: 's', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Megachad.png', category: 'S-Tier', categoryClass: 's-tier', difficultyLabel: 'Beginner Friendly', description: 'Nearly unkillable tank whose Flex blocks damage, stuns enemies and permanently adds +2.5% Damage each time it triggers.', features: ['+2.5% Damage per Flex', 'Near-invincibility late game', 'Kevin/Leeching Crystal triggers'], link: '/guides/characters/megachad-guide.html', cta: 'Master Megachad', stats: [3, 5, 2, 5, 4], canCompare: true, passive: 'Flexing: immunity, stun and permanent +2.5% Damage per trigger', weapon: 'Aura (auto-damage)', pros: ['Nearly unkillable', 'Permanent damage scaling', 'AFK viable'], cons: ['Slowest movement', 'Worst luck stat', 'Melee range only'] },
             
             // A-TIER CHARACTERS (8)
-            { id: 'calcium', name: 'Calcium', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Calcium.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'Speed Demon gains +0.75% damage per level and +0.5% damage per 1% Speed Multiplier. Hits reduce part of his momentum instead of wiping it.', features: ['Speed-based damage scaling', 'Partial momentum loss on hit', 'Bone projectile synergy'], link: 'calcium-guide.html', cta: 'Master Calcium', stats: [5, 2, 5, 2, 4], canCompare: true, passive: 'Speed Demon: +0.75% damage/level, +0.5% per 1% Speed Multiplier', weapon: 'Bone (bouncing)', pros: ['Strong damage potential', 'Excellent mobility', 'Bone bounces'], cons: ['Momentum drops when hit', 'Needs clean movement', 'Advanced mechanics'] },
-            { id: 'roberto', name: 'Roberto', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Roberto.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'Hoarder generates free chests while Scythe supplies circular coverage. Strong economy and current high-score evidence, but vulnerable before the chest engine develops.', features: ['Free-chest economy', 'Scythe starter', 'Long-run scaling'], link: 'roberto-guide.html', cta: 'Master Roberto', stats: [4, 2, 3, 2, 5], canCompare: true, passive: 'Hoarder: free chests on a growing interval', weapon: 'Scythe', pros: ['Free upgrade economy', 'Strong long-run value', 'Good high-score evidence'], cons: ['Slower early survival', 'Needs time to scale'] },
-            { id: 'sir-oofie', name: 'Sir Oofie', tier: 'a', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Sir_Oofie.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Beginner Friendly', description: 'Best character for learning the game. Armor scaling per level makes him nearly unkillable, perfect for understanding game mechanics.', features: ['Easiest character to learn', 'Excellent survivability', 'Forgiving gameplay'], link: 'sir-oofie-guide.html', cta: 'Learn Knight Basics', stats: [3, 5, 2, 5, 3], canCompare: true, passive: 'Fortified: +1% Armor per level', weapon: 'Sword (melee)', pros: ['Nearly unkillable', 'Perfect for beginners', 'Very forgiving'], cons: ['Slow movement', 'Melee range only', 'Limited scaling'] },
-            { id: 'bush', name: 'Bush', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Bush.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'Precision sniper with +1% Crit Damage per level, faster Bullseye marks and Size-scaling explosions.', features: ['+1% Crit Damage per level', 'Manual aim mechanics', 'Size-scaling explosions'], link: 'bush-guide.html', cta: 'Master Precision', stats: [5, 2, 2, 3, 4], canCompare: true, passive: 'Bullseye: +1% Crit Damage per level, marks enemies', weapon: 'Sniper Rifle (manual)', pros: ['Huge burst damage', 'Long range safety', 'Explosion combos'], cons: ['Requires manual aim', 'Low mobility', 'High skill floor'] },
-            { id: 'ninja', name: 'Ninja', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Ninja.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'High evasion assassin with execute mechanic. Dodge grants instant kills - but some boss attacks ignore evasion entirely.', features: ['Evasion scaling build', 'Execute on dodge', 'High mobility tactics'], link: 'ninja-unlock-guide.html', cta: 'Unlock Ninja', stats: [4, 2, 5, 3, 4], canCompare: true, passive: 'Shadow Step: +0.5% Evasion/level, execute on dodge', weapon: 'Katana (auto-aim)', pros: ['High evasion', 'Execute mechanic', 'Fast movement'], cons: ['Bosses ignore evasion', 'Melee only', 'Risky playstyle'] },
-            { id: 'tony', name: 'Tony McZoom', tier: 'a', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Tony_McZoom.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Speed specialist with electric charge attacks. Charges electricity while moving - rewards constant motion with bonus damage.', features: ['Movement-based damage', 'No fall damage', 'Electric mechanics'], link: 'tony-mczoom-guide.html', cta: 'Master Speed', stats: [4, 2, 5, 3, 3], canCompare: true, passive: 'Shocking: Charges electricity while moving, +2% pickup/level', weapon: 'Wireless Dagger', pros: ['Great starting speed', 'No fall damage', 'Movement rewards'], cons: ['Must keep moving', 'Awkward feel', 'Limited scaling'] },
-            { id: 'amog', name: 'Amog', tier: 'a', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Amog.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Poison explosion specialist with +1% Poison Damage per level. Plague radius grows from 4 to 12 over 220 levels, expanding chain-reaction coverage.', features: ['+1% Poison Damage per level', 'Radius 4 to 12 by level 220', 'Poison chain explosions'], link: 'amog-guide.html', cta: 'Master Poison', stats: [4, 3, 3, 4, 4], canCompare: true, passive: 'Plague: +1% Poison Damage/level; radius 4 to 12 over 220 levels', weapon: 'Poison Bottle', pros: ['Chain explosions', 'Scales damage and radius', 'Great DOT'], cons: ['Short throw range', 'Needs poison items', 'Dangerous early'] },
+            { id: 'calcium', name: 'Calcium', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Calcium.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'Speed Demon gains +0.75% damage per level and +0.5% damage per 1% Speed Multiplier. Hits reduce part of his momentum instead of wiping it.', features: ['Speed-based damage scaling', 'Partial momentum loss on hit', 'Bone projectile synergy'], link: '/guides/characters/calcium-guide.html', cta: 'Master Calcium', stats: [5, 2, 5, 2, 4], canCompare: true, passive: 'Speed Demon: +0.75% damage/level, +0.5% per 1% Speed Multiplier', weapon: 'Bone (bouncing)', pros: ['Strong damage potential', 'Excellent mobility', 'Bone bounces'], cons: ['Momentum drops when hit', 'Needs clean movement', 'Advanced mechanics'] },
+            { id: 'roberto', name: 'Roberto', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Roberto.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'Hoarder generates free chests while Scythe supplies circular coverage. Strong economy and current high-score evidence, but vulnerable before the chest engine develops.', features: ['Free-chest economy', 'Scythe starter', 'Long-run scaling'], link: '/guides/characters/roberto-guide.html', cta: 'Master Roberto', stats: [4, 2, 3, 2, 5], canCompare: true, passive: 'Hoarder: free chests on a growing interval', weapon: 'Scythe', pros: ['Free upgrade economy', 'Strong long-run value', 'Good high-score evidence'], cons: ['Slower early survival', 'Needs time to scale'] },
+            { id: 'sir-oofie', name: 'Sir Oofie', tier: 'a', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Sir_Oofie.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Beginner Friendly', description: 'Best character for learning the game. Armor scaling per level makes him nearly unkillable, perfect for understanding game mechanics.', features: ['Easiest character to learn', 'Excellent survivability', 'Forgiving gameplay'], link: '/guides/characters/sir-oofie-guide.html', cta: 'Learn Knight Basics', stats: [3, 5, 2, 5, 3], canCompare: true, passive: 'Fortified: +1% Armor per level', weapon: 'Sword (melee)', pros: ['Nearly unkillable', 'Perfect for beginners', 'Very forgiving'], cons: ['Slow movement', 'Melee range only', 'Limited scaling'] },
+            { id: 'bush', name: 'Bush', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Bush.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'Precision sniper with +1% Crit Damage per level, faster Bullseye marks and Size-scaling explosions.', features: ['+1% Crit Damage per level', 'Manual aim mechanics', 'Size-scaling explosions'], link: '/guides/characters/bush-guide.html', cta: 'Master Precision', stats: [5, 2, 2, 3, 4], canCompare: true, passive: 'Bullseye: +1% Crit Damage per level, marks enemies', weapon: 'Sniper Rifle (manual)', pros: ['Huge burst damage', 'Long range safety', 'Explosion combos'], cons: ['Requires manual aim', 'Low mobility', 'High skill floor'] },
+            { id: 'ninja', name: 'Ninja', tier: 'a', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Ninja.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Advanced', description: 'High evasion assassin with execute mechanic. Dodge grants instant kills - but some boss attacks ignore evasion entirely.', features: ['Evasion scaling build', 'Execute on dodge', 'High mobility tactics'], link: '/guides/characters/ninja-unlock-guide.html', cta: 'Unlock Ninja', stats: [4, 2, 5, 3, 4], canCompare: true, passive: 'Shadow Step: +0.5% Evasion/level, execute on dodge', weapon: 'Katana (auto-aim)', pros: ['High evasion', 'Execute mechanic', 'Fast movement'], cons: ['Bosses ignore evasion', 'Melee only', 'Risky playstyle'] },
+            { id: 'tony', name: 'Tony McZoom', tier: 'a', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Tony_McZoom.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Speed specialist with electric charge attacks. Charges electricity while moving - rewards constant motion with bonus damage.', features: ['Movement-based damage', 'No fall damage', 'Electric mechanics'], link: '/guides/characters/tony-mczoom-guide.html', cta: 'Master Speed', stats: [4, 2, 5, 3, 3], canCompare: true, passive: 'Shocking: Charges electricity while moving, +2% pickup/level', weapon: 'Wireless Dagger', pros: ['Great starting speed', 'No fall damage', 'Movement rewards'], cons: ['Must keep moving', 'Awkward feel', 'Limited scaling'] },
+            { id: 'amog', name: 'Amog', tier: 'a', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Amog.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Poison explosion specialist with +1% Poison Damage per level. Plague radius grows from 4 to 12 over 220 levels, expanding chain-reaction coverage.', features: ['+1% Poison Damage per level', 'Radius 4 to 12 by level 220', 'Poison chain explosions'], link: '/guides/characters/amog-guide.html', cta: 'Master Poison', stats: [4, 3, 3, 4, 4], canCompare: true, passive: 'Plague: +1% Poison Damage/level; radius 4 to 12 over 220 levels', weapon: 'Poison Flask', pros: ['Chain explosions', 'Scales damage and radius', 'Great DOT'], cons: ['Short throw range', 'Needs poison items', 'Dangerous early'] },
             
             // B-TIER CHARACTERS (6)
-            { id: 'monke', name: 'Monke', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Monke.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'Most controversial character - ranges from S to C tier depending on skill. Wall climbing and jump damage can dominate in skilled hands.', features: ['Unique wall climbing', 'Vertical mobility master', 'High skill ceiling'], link: 'monke-guide.html', cta: 'Go Ape', stats: [3, 3, 4, 2, 3], canCompare: true, passive: 'Monkey Grip: Wall climbing, high jump, +2 HP/level', weapon: 'Fists (melee)', pros: ['Unique mobility', 'Jump attack bonus', 'Invincible positioning'], cons: ['Hard to master', 'Average for casual play', 'Contested ranking'] },
-            { id: 'ogre', name: 'Ogre', tier: 'b', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Ogre.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Beginner', description: 'Straightforward damage scaling character. +1% damage per level provides consistent growth but mobility issues hold him back.', features: ['Simple damage scaling', 'AoE melee weapon', 'Beginner friendly'], link: 'ogre-guide.html', cta: 'Play Ogre', stats: [4, 4, 2, 4, 3], canCompare: true, passive: 'Warrior: +1% Damage per level', weapon: 'Spinning Axe', pros: ['Consistent damage', 'Simple mechanics', 'AoE clearing'], cons: ['Very slow', 'Fragile', 'Poor mobility'] },
-            { id: 'noelle', name: 'Noelle', tier: 'b', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Noelle.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Intermediate', description: 'Freeze specialist gaining +0.75% Size per level and +1.5% damage for every frozen enemy.', features: ['Size scaling', 'Frozen-enemy damage', 'Frostwalker control'], link: 'noelle-guide.html', cta: 'Master Noelle', stats: [4, 3, 3, 4, 3], canCompare: true, passive: 'Enduring: +0.75% Size/level, +1.5% damage per frozen enemy', weapon: 'Frostwalker', pros: ['Dense-wave control', 'Passive Size scaling', 'Freeze damage multiplier'], cons: ['Close range danger', 'Complex unlock', 'Weaker with few targets'] },
-            { id: 'birdo', name: 'Birdo', tier: 'a', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Birdo.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Air mobility specialist who can hold Jump to float and gains +1% Airborne Damage per character level.', features: ['+1% Airborne Damage per level', 'Air gliding mechanic', 'Tornado weapon'], link: 'birdo-guide.html', cta: 'Take Flight', stats: [3, 2, 4, 3, 3], canCompare: true, passive: 'Float: glide and +1% Airborne Damage per level', weapon: 'Tornado (AoE)', pros: ['Scaling airborne damage', 'Unique air mobility', 'AoE tornado'], cons: ['Confusing controls', 'Must remain airborne', 'Fragile early'] },
-            { id: 'bandit', name: 'Bandit', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Bandit.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'Extremely controversial - S tier with Kevin+Mirror combo, C tier without. Attack speed scaling rewards perfect item RNG.', features: ['Attack speed scaling', 'Kevin+Mirror immortal combo', 'Item dependent'], link: 'bandit-guide.html', cta: 'Master Bandit', stats: [4, 3, 4, 2, 3], canCompare: true, passive: 'Flow State: +1% Attack Speed per level', weapon: 'Dexecutioner (daggers)', pros: ['Kevin+Mirror breaks game', 'Attack speed king', 'High DPS potential'], cons: ['Useless without items', 'RNG dependent', 'Polarizing ranking'] },
-            { id: 'vlad', name: 'Vlad', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Vlad.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'Blood magic specialist with lifesteal. S tier with perfect blood items, mediocre otherwise - highly build-dependent character.', features: ['Blood magic scaling', 'Lifesteal mechanics', 'Max HP growth'], link: 'vlad-guide.html', cta: 'Embrace Blood', stats: [4, 3, 3, 2, 3], canCompare: true, passive: 'Vampirism: Lifesteal, low HP damage bonus', weapon: 'Blood Magic (5% +max HP)', pros: ['Insane with blood build', 'Lifesteal sustain', 'Max HP scaling'], cons: ['Useless without items', 'Build dependent', 'Mediocre default'] },
+            { id: 'monke', name: 'Monke', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Monke.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'Most controversial character - ranges from S to C tier depending on skill. Wall climbing and jump damage can dominate in skilled hands.', features: ['Unique wall climbing', 'Vertical mobility master', 'High skill ceiling'], link: '/guides/characters/monke-guide.html', cta: 'Go Ape', stats: [3, 3, 4, 2, 3], canCompare: true, passive: 'Monkey Grip: Wall climbing, high jump, +2 HP/level', weapon: 'Bananarang', pros: ['Unique mobility', 'Jump attack bonus', 'Invincible positioning'], cons: ['Hard to master', 'Average for casual play', 'Contested ranking'] },
+            { id: 'ogre', name: 'Ogre', tier: 'b', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Ogre.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Beginner', description: 'Straightforward damage scaling character. +1.5% damage per level provides consistent growth but mobility issues hold him back.', features: ['Simple damage scaling', 'AoE melee weapon', 'Beginner friendly'], link: '/guides/characters/ogre-guide.html', cta: 'Play Ogre', stats: [4, 4, 2, 4, 3], canCompare: true, passive: 'Warrior: +1.5% Damage per level', weapon: 'Axe', pros: ['Consistent damage', 'Simple mechanics', 'AoE clearing'], cons: ['Very slow', 'Fragile', 'Poor mobility'] },
+            { id: 'noelle', name: 'Noelle', tier: 'b', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Noelle.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Intermediate', description: 'Freeze specialist gaining +0.75% Size per level and +1.5% damage for every frozen enemy.', features: ['Size scaling', 'Frozen-enemy damage', 'Frostwalker control'], link: '/guides/characters/noelle-guide.html', cta: 'Master Noelle', stats: [4, 3, 3, 4, 3], canCompare: true, passive: 'Enduring: +0.75% Size/level, +1.5% damage per frozen enemy', weapon: 'Frostwalker', pros: ['Dense-wave control', 'Passive Size scaling', 'Freeze damage multiplier'], cons: ['Close range danger', 'Complex unlock', 'Weaker with few targets'] },
+            { id: 'birdo', name: 'Birdo', tier: 'a', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Birdo.png', category: 'A-Tier', categoryClass: 'a-tier', difficultyLabel: 'Intermediate', description: 'Air mobility specialist who can hold Jump to float and gains +1% Airborne Damage per character level.', features: ['+1% Airborne Damage per level', 'Air gliding mechanic', 'Tornado weapon'], link: '/guides/characters/birdo-guide.html', cta: 'Take Flight', stats: [3, 2, 4, 3, 3], canCompare: true, passive: 'Float: glide and +1% Airborne Damage per level', weapon: 'Tornado (AoE)', pros: ['Scaling airborne damage', 'Unique air mobility', 'AoE tornado'], cons: ['Confusing controls', 'Must remain airborne', 'Fragile early'] },
+            { id: 'bandit', name: 'Bandit', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Bandit.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'Extremely controversial - S tier with Kevin+Mirror combo, C tier without. Attack speed scaling rewards perfect item RNG.', features: ['Attack speed scaling', 'Kevin+Mirror immortal combo', 'Item dependent'], link: '/guides/characters/bandit-guide.html', cta: 'Master Bandit', stats: [4, 3, 4, 2, 3], canCompare: true, passive: 'Flow State: +1% Attack Speed per level', weapon: 'Dexecutioner (daggers)', pros: ['Kevin+Mirror breaks game', 'Attack speed king', 'High DPS potential'], cons: ['Useless without items', 'RNG dependent', 'Polarizing ranking'] },
+            { id: 'vlad', name: 'Vlad', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Vlad.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'Blood magic specialist with lifesteal. S tier with perfect blood items, mediocre otherwise - highly build-dependent character.', features: ['Blood magic scaling', 'Lifesteal mechanics', 'Max HP growth'], link: '/guides/characters/vlad-guide.html', cta: 'Embrace Blood', stats: [4, 3, 3, 2, 3], canCompare: true, passive: 'Vampirism: Lifesteal, low HP damage bonus', weapon: 'Blood Magic (5% +max HP)', pros: ['Insane with blood build', 'Lifesteal sustain', 'Max HP scaling'], cons: ['Useless without items', 'Build dependent', 'Mediocre default'] },
             
             // C-TIER CHARACTERS (3)
-            { id: 'athena', name: 'Athena', tier: 'c', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Athena.png', category: 'C-Tier', categoryClass: '', difficultyLabel: 'Intermediate', description: 'Thorns tank with low HP damage bonus. Can work with specific thorn items but clunky playstyle and slow movement hold her back.', features: ['Thorns scaling builds', 'Low HP damage bonus', 'Tank positioning'], link: 'athena-guide.html', cta: 'Learn Athena', stats: [2, 4, 2, 3, 2], canCompare: true, passive: 'Lockdown: +2 Thorns/level, low HP = more damage', weapon: 'Shield (melee)', pros: ['Thorns counter-damage', 'Can tank hits', 'Unique playstyle'], cons: ['Clunky movement', 'Requires thorn items', 'Melee only'] },
-            { id: 'fox', name: 'Fox', tier: 'c', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Fox.png', category: 'C-Tier', categoryClass: '', difficultyLabel: 'Starter Character', description: 'One of two starting characters. Luck scaling improves reward quality but offers little direct defense.', features: ['Starter character', 'Luck scaling', 'Easy to learn'], link: 'fox-kitsune-guide.html', cta: 'Learn Fox', stats: [3, 2, 4, 5, 2], canCompare: true, passive: 'RNG Blessing: +1.5% Luck per level', weapon: 'Firestaff (fireball)', pros: ['Free starter', 'Easy to learn', 'Better rewards'], cons: ['Very fragile', 'No direct damage passive', 'Needs time to scale'] },
-            { id: 'sir-chadwell', name: 'Sir Chadwell', tier: 'c', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png', category: 'C-Tier', categoryClass: '', difficultyLabel: 'Hard Unlock', description: 'Corrupted sword knight with curse mechanic. Feels inferior to Sir Oofie in every way - hard unlock for mediocre payoff.', features: ['Corrupted Sword mechanics', 'Low HP bonus damage', 'Difficult unlock'], link: 'sir-chadwell-guide.html', cta: 'Unlock Chadwell', stats: [3, 3, 3, 2, 3], canCompare: true, passive: 'Cursed: +1% Curse per level (increases difficulty)', weapon: 'Corrupted Sword', pros: ['Low HP damage bonus', 'Smooth movement', 'Unique aesthetic'], cons: ['Worse than Sir Oofie', 'Hard unlock', 'Weak sword damage'] },
-            { id: 'spaceman', name: 'Spaceman', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Spaceman.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'XP-scaling control character with +5% flat XP, +1.5% XP per level and no fall damage.', features: ['Working XP passive', 'Black Hole control', 'No fall damage'], link: 'spaceman-guide.html', cta: 'Unlock Info', stats: [2, 2, 3, 3, 2], canCompare: true, passive: 'Quantum XP Theory: +5% flat XP and +1.5% XP/level', weapon: 'Black Hole', pros: ['Fast leveling', 'Unique control', 'Low gravity'], cons: ['Weak early damage', 'Hard unlock', 'Needs good placement'] },
+            { id: 'athena', name: 'Athena', tier: 'c', difficulty: 'intermediate', img: 'https://megabonk.org/images/guides/characters/Athena.png', category: 'C-Tier', categoryClass: '', difficultyLabel: 'Intermediate', description: 'Thorns tank with low HP damage bonus. Can work with specific thorn items but clunky playstyle and slow movement hold her back.', features: ['Thorns scaling builds', 'Low HP damage bonus', 'Tank positioning'], link: '/guides/characters/athena-guide.html', cta: 'Learn Athena', stats: [2, 4, 2, 3, 2], canCompare: true, passive: 'Lockdown: +2 Thorns/level, low HP = more damage', weapon: 'Aegis', pros: ['Thorns counter-damage', 'Can tank hits', 'Unique playstyle'], cons: ['Clunky movement', 'Requires thorn items', 'Melee only'] },
+            { id: 'fox', name: 'Fox', tier: 'c', difficulty: 'beginner', img: 'https://megabonk.org/images/guides/characters/Fox.png', category: 'C-Tier', categoryClass: '', difficultyLabel: 'Starter Character', description: 'One of two starting characters. Luck scaling improves reward quality but offers little direct defense.', features: ['Starter character', 'Luck scaling', 'Easy to learn'], link: '/guides/characters/fox-kitsune-guide.html', cta: 'Learn Fox', stats: [3, 2, 4, 5, 2], canCompare: true, passive: 'RNG Blessing: +1.5% Luck per level', weapon: 'Firestaff (fireball)', pros: ['Free starter', 'Easy to learn', 'Better rewards'], cons: ['Very fragile', 'No direct damage passive', 'Needs time to scale'] },
+            { id: 'sir-chadwell', name: 'Sir Chadwell', tier: 'c', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Sir_Chadwell.png', category: 'C-Tier', categoryClass: '', difficultyLabel: 'Hard Unlock', description: 'Corrupted sword knight with curse mechanic. Feels inferior to Sir Oofie in every way - hard unlock for mediocre payoff.', features: ['Corrupted Sword mechanics', 'Low HP bonus damage', 'Difficult unlock'], link: '/guides/characters/sir-chadwell-guide.html', cta: 'Unlock Chadwell', stats: [3, 3, 3, 2, 3], canCompare: true, passive: 'Cursed: +1% Curse per level (increases difficulty)', weapon: 'Corrupted Sword', pros: ['Low HP damage bonus', 'Smooth movement', 'Unique aesthetic'], cons: ['Worse than Sir Oofie', 'Hard unlock', 'Weak sword damage'] },
+            { id: 'spaceman', name: 'Spaceman', tier: 'b', difficulty: 'advanced', img: 'https://megabonk.org/images/guides/characters/Spaceman.png', category: 'B-Tier', categoryClass: 'b-tier', difficultyLabel: 'Advanced', description: 'XP-scaling control character with +5% flat XP, +1.5% XP per level and no fall damage.', features: ['Working XP passive', 'Black Hole control', 'No fall damage'], link: '/guides/characters/spaceman-guide.html', cta: 'Unlock Info', stats: [2, 2, 3, 3, 2], canCompare: true, passive: 'Quantum XP Theory: +5% flat XP and +1.5% XP/level', weapon: 'Black Hole', pros: ['Fast leveling', 'Unique control', 'Low gravity'], cons: ['Weak early damage', 'Hard unlock', 'Needs good placement'] },
         ];
+
+        const characterDetails = {
+            dicehead: { unlock: 'Complete 100 quests, then purchase Dicehead', weapon: ['Dice', '/database/weapons/dice.html'], build: '/guides/builds/dicehead-best-build.html' },
+            cl4nk: { unlock: 'Complete Forest Tier 1, then purchase CL4NK', weapon: ['Revolver', '/database/weapons/revolver.html'], build: '/guides/builds/cl4nk-best-build.html' },
+            robinette: { unlock: 'Complete Forest Tier 2, then purchase Robinette', weapon: ['Bow', '/database/weapons/bow.html'], build: '/guides/builds/robinette-best-build.html' },
+            megachad: { unlock: 'Reach Damage Tome level 7, then purchase Megachad', weapon: ['Aura', '/database/weapons/aura.html'], build: '/guides/builds/megachad-best-build.html' },
+            calcium: { unlock: 'Defeat 1,000 skeletons, then purchase Calcium', weapon: ['Bone', '/database/weapons/bone.html'], build: '/guides/builds/calcium-best-build.html' },
+            roberto: { unlock: 'Defeat Spooky Steve and buy Scythe, then purchase Roberto', weapon: ['Scythe', '/database/weapons/scythe.html'], build: '/guides/builds/roberto-best-build/', aliases: ['robong'] },
+            'sir-oofie': { unlock: 'Starter character — available immediately', weapon: ['Sword', '/database/weapons/sword.html'], build: '/guides/builds/sir-oofie-best-build.html' },
+            bush: { unlock: 'Own Sniper Rifle, find Sus Bush in Forest, then win the fight', weapon: ['Sniper Rifle', '/database/weapons/sniper-rifle.html'], build: '/guides/builds/bush-best-build.html' },
+            ninja: { unlock: 'Complete Desert Tier 1 and obtain Katana', weapon: ['Katana', '/database/weapons/katana.html'], build: '/guides/builds/ninja-best-build.html' },
+            tony: { unlock: 'Complete any 2 challenges and unlock Wireless Dagger', weapon: ['Wireless Dagger', '/database/weapons/wireless-dagger.html'], build: '/guides/builds/tony-mczoom-best-build.html' },
+            amog: { unlock: 'Poison 50,000 enemies with Moldy Cheese', weapon: ['Poison Flask', '/database/weapons/poison-flask.html'], build: '/guides/builds/amog-best-build.html' },
+            monke: { unlock: 'Find the Gold Key and free Monke from the Forest cage', weapon: ['Bananarang', '/database/weapons/bananarang.html'], build: '/guides/builds/monke-best-build.html' },
+            ogre: { unlock: 'Unlock Axe, defeat 15,000 Goblins, then purchase Ogre', weapon: ['Axe', '/database/weapons/axe.html'], build: '/guides/builds/ogre-best-build.html' },
+            noelle: { unlock: 'Use the Microwave to duplicate Ice Crystal 3 times in a row', weapon: ['Frostwalker', '/database/weapons/frostwalker.html'], build: '/guides/builds/noelle-best-build.html' },
+            birdo: { unlock: 'In Desert, defeat 100 enemies with Tornado while airborne', weapon: ['Tornado', '/database/weapons/tornado.html'], build: '/guides/builds/birdo-best-build.html' },
+            bandit: { unlock: 'Find and defeat the Bandit miniboss in Desert', weapon: ['Dexecutioner', '/database/weapons/dexecutioner.html'], build: '/guides/builds/bandit-best-build.html' },
+            vlad: { unlock: 'Complete Desert Tier 2, then purchase Vlad', weapon: ['Blood Magic', '/database/weapons/blood-magic.html'], build: '/guides/builds/vlad-best-build.html' },
+            athena: { unlock: 'Unlock Aegis and Thorns Tome, then purchase Athena', weapon: ['Aegis', '/database/weapons/aegis.html'], build: '/guides/builds/athena-best-build.html' },
+            fox: { unlock: 'Starter character — available immediately', weapon: ['Fire Staff', '/database/weapons/firestaff.html'], build: '/guides/builds/fox-best-build.html', aliases: ['kitsune'] },
+            'sir-chadwell': { unlock: 'Complete Forest Tier 3, then purchase Sir Chadwell', weapon: ['Corrupted Sword', '/database/weapons/corrupted-sword.html'], build: '/guides/builds/sir-chadwell-best-build.html' },
+            spaceman: { unlock: 'Complete 6 challenges and unlock Black Hole', weapon: ['Black Hole', '/database/weapons/black-hole.html'], build: '/guides/builds/spaceman-best-build.html', aliases: ['astronat', 'astronaut'] }
+        };
+
+        function createCharacterTable() {
+            const body = document.getElementById('characterTableBody');
+            body.innerHTML = characters.map(char => {
+                const detail = characterDetails[char.id];
+                return `<tr data-character-id="${char.id}">
+                    <td><div class="character-cell"><img src="${char.img}" alt="" loading="lazy"><a href="${char.link}">${char.name}</a></div></td>
+                    <td>${detail.unlock}</td>
+                    <td>${char.passive}</td>
+                    <td><a href="${detail.weapon[1]}">${detail.weapon[0]}</a></td>
+                    <td><a class="table-action" href="${char.link}">Character Guide</a></td>
+                    <td><a class="table-action" href="${detail.build}">Best Build</a></td>
+                </tr>`;
+            }).join('');
+        }
 
         // Comparison state
         let selectedCharacters = [];
@@ -1190,10 +1247,7 @@
                             </div>
                             
                             <table class="compare-stats-table">
-                                <tr>
-                                    <td>Tier</td>
-                                    <td>${char.tier.toUpperCase()}-Tier</td>
-                                </tr>
+
                                 <tr>
                                     <td>Weapon</td>
                                     <td style="font-size: 0.85rem">${char.weapon || 'N/A'}</td>
@@ -1242,15 +1296,9 @@
             characters.forEach(char => {
                 const card = document.createElement('div');
                 card.className = `guide-card${char.featured ? ' featured' : ''}`;
-                card.setAttribute('data-tier', char.tier);
                 card.setAttribute('data-difficulty', char.difficulty);
-                card.setAttribute('data-name', char.name);
-                
-                let tierBadge = '';
-                if (char.tier === 's') tierBadge = '<span class="tier-badge s">S-Tier</span>';
-                else if (char.tier === 'a') tierBadge = '<span class="tier-badge a">A-Tier</span>';
-                else if (char.tier === 'b') tierBadge = '<span class="tier-badge b">B-Tier</span>';
-                else if (char.tier === 'c') tierBadge = '<span class="tier-badge c">C-Tier</span>';
+                const detail = characterDetails[char.id];
+                card.setAttribute('data-search', [char.name, char.passive, char.weapon, ...(detail.aliases || [])].join(' ').toLowerCase());
                 
                 const compareBtn = char.canCompare ? 
                     `<button class="compare-btn" data-char-id="${char.id}" title="Add to comparison">⚖️</button>` : '';
@@ -1263,9 +1311,8 @@
                 
                 card.innerHTML = `
                     ${compareBtn}
-                    ${char.featured ? '<span class="featured-badge">FEATURED</span>' : tierBadge}
+                    <span class="guide-category">Character Guide</span>
                     ${characterImage}
-                    <span class="guide-category ${char.categoryClass}">${char.category || 'Character Guide'}</span>
                     <h3 class="guide-title">${char.name}</h3>
                     <div class="guide-meta">
                         <span class="difficulty ${char.difficulty}">${char.difficultyLabel}</span>
@@ -1306,7 +1353,6 @@
         const visibleCountEl = document.getElementById('visibleCount');
         
         let currentFilters = {
-            tier: 'all',
             difficulty: 'all',
             search: ''
         };
@@ -1331,7 +1377,7 @@
         });
 
         resetButton.addEventListener('click', () => {
-            currentFilters = { tier: 'all', difficulty: 'all', search: '' };
+            currentFilters = { difficulty: 'all', search: '' };
             searchInput.value = '';
             filterButtons.forEach(btn => {
                 if (btn.dataset.value === 'all') btn.classList.add('active');
@@ -1345,15 +1391,13 @@
             let visibleCount = 0;
             
             guideCards.forEach(card => {
-                const cardTier = card.dataset.tier;
                 const cardDifficulty = card.dataset.difficulty;
-                const cardName = card.dataset.name.toLowerCase();
+                const cardSearch = card.dataset.search;
                 
-                const searchMatch = currentFilters.search === '' || cardName.includes(currentFilters.search);
-                const tierMatch = currentFilters.tier === 'all' || cardTier === currentFilters.tier || cardTier === 'featured';
-                const difficultyMatch = currentFilters.difficulty === 'all' || cardDifficulty === currentFilters.difficulty || cardDifficulty === 'all';
+                const searchMatch = currentFilters.search === '' || cardSearch.includes(currentFilters.search);
+                const difficultyMatch = currentFilters.difficulty === 'all' || cardDifficulty === currentFilters.difficulty;
                 
-                if (searchMatch && tierMatch && difficultyMatch) {
+                if (searchMatch && difficultyMatch) {
                     card.classList.remove('hidden');
                     visibleCount++;
                 } else {
@@ -1386,6 +1430,7 @@
         });
 
         // Initialize
+        createCharacterTable();
         createCharacterCards();
     </script>
     <script src="/js/current-year.js" defer></script>
