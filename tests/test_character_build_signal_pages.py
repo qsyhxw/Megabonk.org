@@ -5,30 +5,34 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDS = ROOT / "guides" / "builds"
-ALIASES = {
-    "gigachad": "megachad",
-    "knight": "siroofie",
-    "skeleton": "calcium",
-    "zorro": "bandit",
+NON_CANONICAL_BUILD_PAGES = {
+    "gigachad-best-build/index.html",
+    "knight-best-build/index.html",
+    "skeleton-best-build/index.html",
+    "zorro-best-build/index.html",
 }
 
 
 def build_pages():
     flat = BUILDS.glob("*-best-build.html")
     nested = BUILDS.glob("*-best-build/index.html")
-    return sorted([*flat, *nested])
+    pages = [*flat, *nested]
+    return sorted(
+        page for page in pages
+        if page.relative_to(BUILDS).as_posix() not in NON_CANONICAL_BUILD_PAGES
+    )
 
 
 def expected_character_id(path: Path) -> str:
     slug = path.stem if path.name != "index.html" else path.parent.name
     slug = slug.removesuffix("-best-build")
-    return ALIASES.get(slug, slug.replace("-", ""))
+    return slug.replace("-", "")
 
 
 class CharacterBuildSignalPageTests(unittest.TestCase):
-    def test_every_best_build_page_loads_the_dynamic_module_once(self):
+    def test_every_canonical_best_build_page_loads_the_dynamic_module_once(self):
         pages = build_pages()
-        self.assertGreaterEqual(len(pages), 25)
+        self.assertEqual(len(pages), 21)
 
         for page in pages:
             with self.subTest(page=page.relative_to(ROOT)):

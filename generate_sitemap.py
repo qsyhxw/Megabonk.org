@@ -10,6 +10,9 @@ excluded_files = {
     '404.html',
     'ceshi.html',
     'guides/characters/character-tier-list-2025.html',
+    'guides/builds/gigachad-best-build/index.html',
+    'guides/builds/knight-best-build/index.html',
+    'guides/builds/skeleton-best-build/index.html',
 }
 
 excluded_prefixes = ('components/',)
