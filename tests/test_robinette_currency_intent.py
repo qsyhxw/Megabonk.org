@@ -43,7 +43,7 @@ class RobinetteCurrencyIntentTests(unittest.TestCase):
         self.assertIn('href="/guides/builds/robinette-best-build"', self.page)
 
     def test_sitemap_date_is_current(self):
-        marker = "<loc>https://megabonk.org/guides/characters/robinette-guide.html</loc>"
+        marker = "<loc>https://megabonk.org/guides/characters/robinette-guide</loc>"
         start = self.sitemap.index(marker)
         self.assertIn("<lastmod>2026-07-29</lastmod>", self.sitemap[start:start + 160])
 

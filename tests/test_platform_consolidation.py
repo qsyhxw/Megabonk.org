@@ -108,10 +108,8 @@ class PlatformConsolidationTests(unittest.TestCase):
 
     def test_sitemap_generator_keeps_consolidation(self):
         self.assertIn("'faq/is-megabonk-on-console.html',", self.generator)
-        self.assertIn(
-            "'faq/megabonk-platforms.html': '/faq/megabonk-platforms',",
-            self.generator,
-        )
+        self.assertIn("def public_path(rel_path):", self.generator)
+        self.assertIn("rel_path[:-len('.html')]", self.generator)
 
     def test_internal_platform_link_uses_canonical_url(self):
         download = (ROOT / "download" / "megabonk.html").read_text(encoding="utf-8")

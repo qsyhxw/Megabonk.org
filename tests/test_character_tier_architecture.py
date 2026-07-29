@@ -67,7 +67,7 @@ class CharacterTierArchitectureTests(unittest.TestCase):
         self.assertIn("Warrior: +1.5% Damage per level", self.hub)
 
     def test_hub_table_has_complete_guide_build_and_weapon_targets(self):
-        guide_links = re.findall(r"link: '([^']+-guide\.html)'", self.hub)
+        guide_links = re.findall(r"link: '([^']+-guide)'", self.hub)
         self.assertGreaterEqual(len(guide_links), 18)
         build_links = re.findall(r"build: '([^']+)'", self.hub)
         weapon_links = re.findall(r"weapon: \['[^']+', '([^']+)'\]", self.hub)
@@ -80,7 +80,7 @@ class CharacterTierArchitectureTests(unittest.TestCase):
         legacy = LEGACY_KNIGHT.read_text(encoding="utf-8")
         sitemap = SITEMAP.read_text(encoding="utf-8")
         self.assertIn('<meta name="robots" content="noindex, follow">', legacy)
-        self.assertIn('href="https://megabonk.org/guides/characters/sir-oofie-guide.html"', legacy)
+        self.assertIn('href="https://megabonk.org/guides/characters/sir-oofie-guide"', legacy)
         self.assertNotIn('/guides/characters/knight-beginner-guide.html</loc>', sitemap)
 
     def test_tier_page_has_21_characters_and_current_baseline(self):

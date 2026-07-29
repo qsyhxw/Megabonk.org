@@ -71,7 +71,7 @@ class MapsShrinesArchitectureTests(unittest.TestCase):
     def test_shrines_owns_types_rewards_unlocks_and_related_links(self):
         for fragment in ('Charge vs Greed vs Boss Curse', 'Shrine-Related Unlocks', 'Beacon and Wrench', 'Shrines FAQ'):
             self.assertIn(fragment, self.shrines)
-        for href in ('/guides/maps/', '/guides/maps/graveyard/', '/guides/bosses/boss-curse-explained.html', '/database/items/beacon.html', '/database/items/wrench.html', '/guides/mechanics/'):
+        for href in ('/guides/maps/', '/guides/maps/graveyard/', '/guides/bosses/boss-curse-explained', '/database/items/beacon', '/database/items/wrench', '/guides/mechanics/'):
             self.assertIn(f'href="{href}"', self.shrines)
         self.assertIn('Shrine Distribution and Map Routing', self.shrines)
         self.assertIn('dateModified": "2026-07-28"', self.shrines)
@@ -87,8 +87,14 @@ class MapsShrinesArchitectureTests(unittest.TestCase):
         assert_jsonld(self, self.maps)
         assert_jsonld(self, self.shrines)
         assert_jsonld(self, self.wrench)
-        for url in ('database/items/beacon.html', 'database/items/wrench.html', 'guides/maps/', 'guides/mechanics/shrines/'):
-            pattern = rf'<loc>https://megabonk.org/{re.escape(url)}</loc>\s*<lastmod>2026-07-28</lastmod>'
+        expected = {
+            'database/items/beacon': '2026-07-28',
+            'database/items/wrench': '2026-07-28',
+            'guides/maps/': '2026-07-29',
+            'guides/mechanics/shrines/': '2026-07-29',
+        }
+        for url, lastmod in expected.items():
+            pattern = rf'<loc>https://megabonk.org/{re.escape(url)}</loc>\s*<lastmod>{lastmod}</lastmod>'
             self.assertRegex(self.sitemap, pattern)
 
 

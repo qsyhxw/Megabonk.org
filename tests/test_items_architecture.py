@@ -39,7 +39,8 @@ class ItemArchitectureTests(unittest.TestCase):
         self.assertEqual(85, len(set(hrefs)))
         for href in hrefs:
             path = ROOT / href.lstrip("/") if href.startswith("/") else HUB.parent / href
-            self.assertTrue(path.is_file(), href)
+            candidates = (path, path.with_suffix(".html"), path / "index.html")
+            self.assertTrue(any(candidate.is_file() for candidate in candidates), href)
 
     def test_ranked_items_use_local_icons_and_linked_names(self):
         table = re.search(
@@ -56,13 +57,13 @@ class ItemArchitectureTests(unittest.TestCase):
         for _, src in entities:
             self.assertTrue((ROOT / src.lstrip("/")).is_file(), src)
     def test_missing_hub_entities_are_restored(self):
-        for name, href in (("Golden Ring", "golden-ring.html"), ("Quin's Mask", "quins-mask.html"), ("Snek", "snek.html")):
+        for name, href in (("Golden Ring", "golden-ring"), ("Quin's Mask", "quins-mask"), ("Snek", "snek")):
             self.assertIn(name, self.hub)
             self.assertIn(f'href="{href}"', self.hub)
 
     def test_corrected_high_interest_item_data(self):
-        self.assertRegex(self.hub, r'href="overpowered-lamp.html" class="item-card" data-rarity="Legendary"')
-        self.assertRegex(self.hub, r'href="kevin.html" class="item-card" data-rarity="Epic"')
+        self.assertRegex(self.hub, r'href="overpowered-lamp" class="item-card" data-rarity="Legendary"')
+        self.assertRegex(self.hub, r'href="kevin" class="item-card" data-rarity="Epic"')
         self.assertIn("Complete 3 Challenges", self.anvil)
         self.assertIn("LEGENDARY ITEM", self.anvil)
         self.assertIn("Epic specialist item", self.kevin)

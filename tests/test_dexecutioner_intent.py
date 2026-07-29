@@ -64,8 +64,8 @@ class DexecutionerIntentTests(unittest.TestCase):
 
     def test_sitemap_dates_are_current(self):
         for url in (
-            "https://megabonk.org/database/weapons/dexecutioner.html",
-            "https://megabonk.org/guides/builds/katana-dexecutioner-execute-melee.html",
+            "https://megabonk.org/database/weapons/dexecutioner",
+            "https://megabonk.org/guides/builds/katana-dexecutioner-execute-melee",
         ):
             marker = f"<loc>{url}</loc>"
             start = self.sitemap.index(marker)

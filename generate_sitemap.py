@@ -1,14 +1,16 @@
 import os
+import re
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
-base_dir = r'd:\Antigravity\Megabonk.org'
+base_dir = os.path.dirname(os.path.abspath(__file__))
 base_url = 'https://megabonk.org'
 
 urls = []
 excluded_files = {
     '404.html',
     'ceshi.html',
+    'yandex_079a4f31aab726cf.html',
     'guides/characters/character-tier-list-2025.html',
     'guides/builds/gigachad-best-build/index.html',
     'guides/builds/knight-best-build/index.html',
@@ -17,10 +19,15 @@ excluded_files = {
 }
 
 excluded_prefixes = ('components/',)
-canonical_overrides = {
-    'guides/patch-notes/V1.0.7.html': '/guides/patch-notes/V1.0.7',
-    'faq/megabonk-platforms.html': '/faq/megabonk-platforms',
-}
+def public_path(rel_path):
+    """Return the canonical Cloudflare Pages route for a physical HTML file."""
+    if rel_path == 'index.html':
+        return '/'
+    if rel_path.endswith('/index.html'):
+        return '/' + rel_path[:-len('index.html')]
+    return '/' + rel_path[:-len('.html')]
+
+
 for root, _, files in os.walk(base_dir):
     for file in files:
         if file.endswith('.html'):
@@ -28,14 +35,23 @@ for root, _, files in os.walk(base_dir):
             rel_path = os.path.relpath(filepath, base_dir).replace('\\', '/')
             if rel_path in excluded_files or rel_path.startswith(excluded_prefixes):
                 continue
-            if rel_path == 'index.html':
-                 url = base_url + '/'
-            else:
-                 url = base_url + canonical_overrides.get(
-                     rel_path,
-                     '/' + rel_path.replace('index.html', ''),
-                 )
-            
+            with open(filepath, encoding='utf-8', errors='ignore') as page_file:
+                page_source = page_file.read()
+            if re.search(
+                r'<meta[^>]+name=["'']robots["''][^>]+content=["''][^"'']*noindex',
+                page_source,
+                re.IGNORECASE,
+            ):
+                continue
+            url = base_url + public_path(rel_path)
+            canonical_match = re.search(
+                r'<link[^>]+rel=["'']canonical["''][^>]+href=["'']([^"'']+)["'']',
+                page_source,
+                re.IGNORECASE,
+            )
+            if canonical_match and canonical_match.group(1) != url:
+                continue
+
             # get file modification time
             mtime = os.path.getmtime(filepath)
             lastmod = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
@@ -59,4 +75,6 @@ for url, lastmod in urls:
 tree = ET.ElementTree(urlset)
 ET.indent(tree, space='  ', level=0)
 tree.write(os.path.join(base_dir, 'sitemap.xml'), encoding='utf-8', xml_declaration=True)
-print(f'Generated sitemap.xml with {len(urls)} URLs.')
+with open(os.path.join(base_dir, 'pages_list.txt'), 'w', encoding='utf-8', newline='') as pages_file:
+    pages_file.write(chr(10).join(url for url, _ in urls) + chr(10))
+print(f'Generated sitemap.xml and pages_list.txt with {len(urls)} URLs.')

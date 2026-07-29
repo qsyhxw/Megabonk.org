@@ -57,9 +57,9 @@ class StatsArchitectureTests(unittest.TestCase):
     def test_sitemap_dates_are_current(self):
         for url in (
             "https://megabonk.org/guides/stats/",
-            "https://megabonk.org/database/tomes/size-tome.html",
-            "https://megabonk.org/database/tomes/knockback-tome.html",
-            "https://megabonk.org/database/tomes/cursed-tome.html",
+            "https://megabonk.org/database/tomes/size-tome",
+            "https://megabonk.org/database/tomes/knockback-tome",
+            "https://megabonk.org/database/tomes/cursed-tome",
         ):
             pattern = rf"<loc>{re.escape(url)}</loc>\s*<lastmod>2026-07-28</lastmod>"
             self.assertRegex(self.sitemap, pattern)
