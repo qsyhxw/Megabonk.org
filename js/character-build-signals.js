@@ -237,6 +237,8 @@
     const siteVersion = patchState && patchState.latest_version ? patchState.latest_version : null;
     const versionsMatch = !siteVersion || sourceVersion === siteVersion;
     const generatedAt = formatDate(meta.generatedAt);
+    const reviewedAt = container.dataset.editorialReviewed || '2026-07-29';
+    const characterGuide = characterEntry?.page || '/guides/characters/';
     const guard = versionsMatch
       ? `Version matched: these records use v${escapeHtml(sourceVersion)}. They supplement the reviewed guide; they do not replace it.`
       : `Version guard: leaderboard records currently use v${escapeHtml(sourceVersion)}, while the site tracks v${escapeHtml(siteVersion)}. Treat these as historical performance evidence until the source board accepts the newer patch.`;
@@ -251,7 +253,8 @@
     </div>
     <p class="cbs-version-guard${versionsMatch ? ' is-match' : ''}">${guard}</p>
     <div class="cbs-grid">${cards.map(renderCard).join('')}</div>
-    <div class="cbs-foot"><span>Snapshot: ${escapeHtml(generatedAt)} · Top ${signal.sampleSize} ${escapeHtml(characterName)} runs. Rankings show successful outcomes, not a guaranteed universal best Build.</span><a href="/leaderboard/builds#${encodeURIComponent(signal.character)}">Analyze leaderboard evidence</a><span class="cbs-source">Data: Leaderboard.gg</span></div>`;
+    <div class="cbs-usage-note"><strong>How to use this page:</strong> Follow the reviewed weapon, Tome and item priorities first; use the early, mid and late-run sections below to sequence upgrades. Swap only when the alternative improves survival or solves the current map or boss check. For unlocks and passive rules, open the <a href="${escapeHtml(characterGuide)}">${escapeHtml(characterName)} Character Guide</a>.</div>
+    <div class="cbs-foot"><span>Snapshot: ${escapeHtml(generatedAt)} · Top ${signal.sampleSize} ${escapeHtml(characterName)} runs. Editorial review: ${escapeHtml(reviewedAt)}. Rankings show successful outcomes, not a guaranteed universal best Build.</span><a href="/leaderboard/builds#${encodeURIComponent(signal.character)}">Analyze leaderboard evidence</a><span class="cbs-source">Leaderboard evidence</span></div>`;
 
     container.querySelectorAll('img').forEach(image => {
       image.addEventListener('error', () => image.remove(), { once: true });
