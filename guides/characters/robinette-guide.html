@@ -472,6 +472,20 @@
             border-radius: 5px;
         }
 
+        .money-answer {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(76, 175, 80, 0.14));
+            border: 2px solid rgba(255, 215, 0, 0.72);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .money-answer h2 { margin-top: 0; color: #FFD700; }
+        .hero-money-answer { margin: 0.75rem 0; padding: 12px 14px; border-left: 4px solid #FFD700; background: rgba(0,0,0,.28); border-radius: 5px; }
+        .money-table-wrap { overflow-x: auto; margin-top: 16px; }
+        .money-table { width: 100%; min-width: 640px; border-collapse: collapse; }
+        .money-table th, .money-table td { padding: 12px; border: 1px solid rgba(255,255,255,.18); text-align: left; vertical-align: top; }
+        .money-table th { color: #FFD700; background: rgba(0,0,0,.28); }
         /* Highlight */
         .highlight {
             color: #FFD700;
@@ -657,6 +671,7 @@
                 <div class="header-text">
                     <h1>Robinette Guide: Unlock, Passive &amp; Starting Weapon</h1>
 <p class="intent-handoff" style="margin: 0.75rem 0 1rem; color: var(--text-secondary, #d7d7df); font-size: 0.98rem;">For the complete loadout, see <a href="/guides/builds/robinette-best-build" style="color: var(--accent-color, #f4c542); font-weight: 700;">Best Robinette Build 2026</a> for recommended weapons, tomes, items, and upgrade priorities.</p>
+                    <p class="hero-money-answer"><strong>No, Robinette does not keep Gold between runs.</strong> Gold lasts for the active run; permanent Silver is separate and does not power Stonks.</p>
                     <p class="subtitle">The Economy Master - Wealth Through Strategy</p>
                     <div class="tier-container">
                         <span class="tier-badge">S-TIER Character</span>
@@ -666,8 +681,15 @@
             </div>
         </header>
 
+        <section class="money-answer" aria-labelledby="money-quick-answer">
+            <h2 id="money-quick-answer">Does Robinette Keep Money?</h2>
+            <p><strong>No, not between runs.</strong> Robinette keeps Gold only while the current run is active. Stonks reads the Gold currently in your inventory, so spending Gold immediately lowers the damage bonus. A stage or Boss Portal transition that continues the same run keeps that run's wallet, but starting a new run resets Gold.</p>
+            <p><strong>Silver is different:</strong> it is permanent account currency awarded after a run and remains available for unlock purchases. Silver does not increase Robinette's Stonks damage.</p>
+        </section>
+
         <nav>
             <a href="#overview">Overview</a>
+            <a href="#money">Gold vs Silver</a>
             <a href="#passive">Stonks Passive</a>
             <a href="#builds">Builds</a>
             <a href="#strategy">Strategy</a>
@@ -749,6 +771,23 @@
             </div>
         </section>
 
+        <section id="money" class="section">
+            <h2>Gold Retention, Silver and Reset Timing</h2>
+            <p>Robinette has no separate permanent wallet. Her passive uses the same run-only Gold shown during play, while Silver belongs to account progression.</p>
+            <div class="money-table-wrap" tabindex="0" aria-label="Robinette Gold and Silver retention table">
+                <table class="money-table">
+                    <thead><tr><th>Currency or event</th><th>What is retained?</th><th>Effect on Robinette</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Gold during the current run</strong></td><td>Kept until spent or until the run ends.</td><td>Current Gold directly controls the Stonks damage bonus.</td></tr>
+                        <tr><td><strong>Boss Portal / next stage in the same run</strong></td><td>Your active run state and Gold continue with the run.</td><td>Stonks continues reading the carried wallet; there is no separate cash-out step.</td></tr>
+                        <tr><td><strong>Buying a chest, item or shop offer</strong></td><td>The purchase cost is removed immediately.</td><td>Because held Gold falls, the Stonks damage bonus falls with it.</td></tr>
+                        <tr><td><strong>Run ends or a new run starts</strong></td><td>Gold does not carry into the new attempt.</td><td>Robinette starts building the Stonks wallet again from the new run's Gold.</td></tr>
+                        <tr><td><strong>Silver after the run</strong></td><td>Silver is retained on the account for permanent unlocks.</td><td>Silver is not counted by Stonks and cannot replace held Gold.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tip-box"><strong>Practical rule:</strong> Spend early when an upgrade improves clear speed or survival more than the temporary Stonks loss. Hoard later only after the build is stable. For the full equipment plan, use the <a href="/guides/builds/robinette-best-build">Best Robinette Build</a>.</div>
+        </section>
         <!-- Passive Ability Section -->
         <section id="passive" class="section">
             <h2>💎 Passive Ability: STONKS</h2>
@@ -1179,6 +1218,15 @@
         <!-- FAQ -->
         <section id="faq" class="section">
             <h2>❓ Frequently Asked Questions</h2>
+
+            <h3>Does Robinette keep Gold between runs?</h3>
+            <p>No. Gold belongs to the active run and resets before a new run. Robinette's passive does not create permanent Gold storage.</p>
+
+            <h3>Does Robinette keep Gold when entering the next stage?</h3>
+            <p>Yes, when the Boss Portal continues the same run. The current wallet remains part of that run, so Stonks continues to scale from the Gold you carry through the portal.</p>
+
+            <h3>Does Silver count toward Robinette's Stonks passive?</h3>
+            <p>No. Silver is permanent unlock currency saved to the account after a run. Stonks uses only the Gold currently held inside the active run.</p>
 
             <h3>Is Robinette actually S-tier or is it exaggerated?</h3>
             <p>Robinette is legitimately S-tier. According to MegaBonk's developer, 8 of the top 10 world record
