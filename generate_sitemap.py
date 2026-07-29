@@ -13,11 +13,13 @@ excluded_files = {
     'guides/builds/gigachad-best-build/index.html',
     'guides/builds/knight-best-build/index.html',
     'guides/builds/skeleton-best-build/index.html',
+    'faq/is-megabonk-on-console.html',
 }
 
 excluded_prefixes = ('components/',)
 canonical_overrides = {
     'guides/patch-notes/V1.0.7.html': '/guides/patch-notes/V1.0.7',
+    'faq/megabonk-platforms.html': '/faq/megabonk-platforms',
 }
 for root, _, files in os.walk(base_dir):
     for file in files:
