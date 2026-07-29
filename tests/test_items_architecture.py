@@ -1,3 +1,4 @@
+import json
 import re
 import unittest
 from pathlib import Path
@@ -8,6 +9,9 @@ ANVIL = ROOT / "database" / "items" / "anvil.html"
 KEVIN = ROOT / "database" / "items" / "kevin.html"
 GOLDEN_RING = ROOT / "database" / "items" / "golden-ring.html"
 TIER = ROOT / "tier-lists" / "items" / "index.html"
+ACHIEVEMENTS = ROOT / "guides" / "achievements" / "index.html"
+STORY_MILESTONES = ROOT / "guides" / "achievements" / "story-milestones.html"
+SITEMAP = ROOT / "sitemap.xml"
 
 class ItemArchitectureTests(unittest.TestCase):
     @classmethod
@@ -17,6 +21,9 @@ class ItemArchitectureTests(unittest.TestCase):
         cls.kevin = KEVIN.read_text(encoding="utf-8")
         cls.golden_ring = GOLDEN_RING.read_text(encoding="utf-8")
         cls.tier = TIER.read_text(encoding="utf-8")
+        cls.achievements = ACHIEVEMENTS.read_text(encoding="utf-8")
+        cls.story_milestones = STORY_MILESTONES.read_text(encoding="utf-8")
+        cls.sitemap = SITEMAP.read_text(encoding="utf-8")
 
     def test_database_owns_item_data_not_tier_list_intent(self):
         title = re.search(r"<title>(.*?)</title>", self.hub, re.S).group(1)
@@ -69,6 +76,62 @@ class ItemArchitectureTests(unittest.TestCase):
         self.assertIn("Epic specialist item", self.kevin)
         self.assertIn("No dependable gameplay effect", self.hub)
         self.assertIn("reviewed again July 28, 2026", self.golden_ring)
+
+    def test_anvil_unlock_is_consistent_across_owned_pages(self):
+        self.assertIn("<title>Megabonk Anvil: Effect, Unlock & Best Builds</title>", self.anvil)
+        hero = re.search(r'<div class="item-hero">(.*?)</div>\s*</div>\s*</div>', self.anvil, re.S).group(1)
+        self.assertIn("Complete any 3 Challenges", hero)
+        self.assertIn("Last verified July 29, 2026", hero)
+        self.assertNotIn("Defeat the Final Boss twice", self.anvil)
+
+        expected_sources = (
+            self.hub,
+            self.tier,
+            self.achievements,
+            self.story_milestones,
+        )
+        for source in expected_sources:
+            self.assertIn("Complete 3 Challenges", source)
+
+        for source in (self.hub, self.tier, self.achievements, self.story_milestones):
+            self.assertIn('href="/database/items/anvil"', source)
+
+    def test_anvil_schema_encodes_current_unlock(self):
+        blocks = re.findall(
+            r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
+            self.anvil,
+            re.S,
+        )
+        self.assertTrue(blocks)
+        entities = []
+        for block in blocks:
+            graph = json.loads(block)
+            entities.extend(graph.get("@graph", [graph]))
+
+        article = next(entity for entity in entities if entity.get("@type") == "Article")
+        self.assertEqual(article["headline"], "Megabonk Anvil: Effect, Unlock & Best Builds")
+        self.assertEqual(article["mainEntityOfPage"], "https://megabonk.org/database/items/anvil")
+        self.assertEqual(article["dateModified"], "2026-07-29")
+        properties = {
+            prop["name"]: prop["value"]
+            for prop in article["about"]["additionalProperty"]
+        }
+        self.assertEqual(properties["Unlock requirement"], "Complete 3 Challenges")
+        self.assertEqual(properties["Rarity"], "Legendary")
+
+        breadcrumb = next(entity for entity in entities if entity.get("@type") == "BreadcrumbList")
+        self.assertEqual(breadcrumb["itemListElement"][-1]["name"], "Anvil")
+        self.assertEqual(
+            breadcrumb["itemListElement"][-1]["item"],
+            "https://megabonk.org/database/items/anvil",
+        )
+
+    def test_anvil_sitemap_date_is_current(self):
+        self.assertRegex(
+            self.sitemap,
+            r"<loc>https://megabonk\.org/database/items/anvil</loc>\s*"
+            r"<lastmod>2026-07-29</lastmod>",
+        )
 
     def test_search_and_rarity_controls_are_present(self):
         self.assertIn('id="itemSearch"', self.hub)
