@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 HUB = ROOT / "database" / "tomes" / "index.html"
 TIER = ROOT / "tier-lists" / "tomes" / "index.html"
+BEST = ROOT / "guides" / "best-tomes" / "index.html"
 REDIRECTS = ROOT / "_redirects"
 SITEMAP = ROOT / "sitemap.xml"
 
@@ -15,6 +16,7 @@ class TomeArchitectureTests(unittest.TestCase):
     def setUpClass(cls):
         cls.hub = HUB.read_text(encoding="utf-8")
         cls.tier = TIER.read_text(encoding="utf-8")
+        cls.best = BEST.read_text(encoding="utf-8")
         cls.redirects = REDIRECTS.read_text(encoding="utf-8")
         cls.sitemap = SITEMAP.read_text(encoding="utf-8")
 
@@ -57,6 +59,67 @@ class TomeArchitectureTests(unittest.TestCase):
             "<loc>https://megabonk.org/guides/best-tomes/</loc>",
             self.sitemap,
         )
+
+    def test_tier_page_has_complete_filterable_comparison(self):
+        rows = re.findall(
+            r'<tr data-tier="[SABC]" data-build="[^"]+" data-unlock="(?:default|unlockable)">',
+            self.tier,
+        )
+        self.assertEqual(23, len(rows))
+        table = re.search(
+            r'<tbody id="tome-ranking-rows">(.*?)</tbody>',
+            self.tier,
+            re.S,
+        ).group(1)
+        links = re.findall(r'href="/database/tomes/([^"]+)"', table)
+        self.assertEqual(23, len(links))
+        self.assertEqual(23, len(set(links)))
+        self.assertIn('id="tome-search"', self.tier)
+        self.assertIn('id="build-filter"', self.tier)
+        self.assertIn('id="unlock-filter"', self.tier)
+        self.assertIn("Showing all 23 Tomes", self.tier)
+
+    def test_best_tomes_intent_and_thorns_query_are_merged(self):
+        title = re.search(r"<title>(.*?)</title>", self.tier, re.S).group(1)
+        self.assertIn("Tome Tier List", title)
+        self.assertIn("Best Tomes by Build", title)
+        self.assertIn("What are the best Tomes in Megabonk?", self.tier)
+        self.assertIn("best Tomes for an Athena Thorns build", self.tier)
+        self.assertIn('href="/database/tomes/thorns-tome"', self.tier)
+
+    def test_old_best_page_is_a_redirect_fallback(self):
+        self.assertIn(
+            "/guides/best-tomes /tier-lists/tomes/ 301",
+            self.redirects,
+        )
+        self.assertIn(
+            "/guides/best-tomes/ /tier-lists/tomes/ 301",
+            self.redirects,
+        )
+        self.assertIn('content="noindex, follow"', self.best)
+        self.assertIn(
+            'rel="canonical" href="https://megabonk.org/tier-lists/tomes/"',
+            self.best,
+        )
+        self.assertIn('url=/tier-lists/tomes/', self.best)
+        self.assertNotIn("Tomes Tier List Rankings", self.best)
+
+    def test_internal_links_no_longer_target_old_best_page(self):
+        offenders = []
+        for page in ROOT.rglob("*.html"):
+            if page == BEST:
+                continue
+            if "/guides/best-tomes" in page.read_text(encoding="utf-8"):
+                offenders.append(str(page.relative_to(ROOT)))
+        self.assertEqual([], offenders)
+
+    def test_page_metadata_and_source_are_current(self):
+        self.assertIn('"dateModified": "2026-07-29"', self.tier)
+        self.assertIn("Last Reviewed: July 29, 2026 | Version 1.0.69", self.tier)
+        self.assertNotIn("Code injected by live-server", self.tier)
+        marker = "<loc>https://megabonk.org/tier-lists/tomes/</loc>"
+        start = self.sitemap.index(marker)
+        self.assertIn("<lastmod>2026-07-29</lastmod>", self.sitemap[start:start + 180])
 
     def test_current_luck_value_is_consistent(self):
         luck = (ROOT / "database" / "tomes" / "luck-tome.html").read_text(
