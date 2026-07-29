@@ -81,5 +81,12 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
         )
         self.assertEqual(summary["items"], ["clover"])
 
+    def test_workflow_installs_browser_fallback(self):
+        workflow = (
+            MODULE_PATH.parents[1] / ".github" / "workflows" / "daily_scrape.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("playwright==1.54.0", workflow)
+        self.assertIn("playwright install --with-deps chromium", workflow)
+
 if __name__ == "__main__":
     unittest.main()

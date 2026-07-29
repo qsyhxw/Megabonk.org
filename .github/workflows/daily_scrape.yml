@@ -29,6 +29,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install leaderboard browser fallback
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.54.0
+          python -m playwright install --with-deps chromium
+
       - name: Fetch and validate leaderboard
         run: python scripts/sync_leaderboard.py
 
