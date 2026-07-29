@@ -72,13 +72,27 @@ class TomeArchitectureTests(unittest.TestCase):
             re.S,
         ).group(1)
         links = re.findall(r'href="/database/tomes/([^"]+)"', table)
-        self.assertEqual(23, len(links))
+        self.assertEqual(46, len(links))
         self.assertEqual(23, len(set(links)))
         self.assertIn('id="tome-search"', self.tier)
         self.assertIn('id="build-filter"', self.tier)
         self.assertIn('id="unlock-filter"', self.tier)
         self.assertIn("Showing all 23 Tomes", self.tier)
 
+    def test_tier_comparison_rows_use_local_icons_and_linked_names(self):
+        table = re.search(
+            r'<tbody id="tome-ranking-rows">(.*?)</tbody>',
+            self.tier,
+            re.S,
+        ).group(1)
+        entities = re.findall(
+            r'<a class="entity-name-with-icon" href="/database/tomes/([^"]+)"><img src="(/images/database/Tomes/[^"]+)"',
+            table,
+        )
+        self.assertEqual(23, len(entities))
+        self.assertEqual(23, len({slug for slug, _ in entities}))
+        for _, src in entities:
+            self.assertTrue((ROOT / src.lstrip("/")).is_file(), src)
     def test_best_tomes_intent_and_thorns_query_are_merged(self):
         title = re.search(r"<title>(.*?)</title>", self.tier, re.S).group(1)
         self.assertIn("Tome Tier List", title)
