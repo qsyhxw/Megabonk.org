@@ -37,7 +37,7 @@
         "headline": "Megabonk Weapon Tier List 2026 – All 30 Weapons Ranked",
         "description": "Complete weapon tier list ranking all 30 weapons in Megabonk with unlock conditions, build synergies, and meta analysis verified through version 1.0.69",
         "datePublished": "2026-03-10",
-        "dateModified": "2026-07-28",
+        "dateModified": "2026-07-29",
         "author": {"@type": "Organization", "name": "Megabonk.org"}
     }
     </script>
@@ -46,7 +46,7 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {"@type": "Question", "name": "What is the best weapon in Megabonk?", "acceptedAnswer": {"@type": "Answer", "text": "Aura, Aegis, and Dexecutioner are consistently ranked as the top S-tier weapons in the current data verified through v1.0.69. Aura provides 360-degree area damage without aiming, Aegis combines offense and defense, and Dexecutioner delivers devastating piercing stabs that scale with size and crit."}},
+            {"@type": "Question", "name": "What is the best weapon in Megabonk?", "acceptedAnswer": {"@type": "Answer", "text": "The current S tier includes Aura, Aegis, Dexecutioner, Flamewalker, Katana, Dice, and Blood Magic. Use the automatically refreshed Top 100 signal as supporting evidence because usage is affected by character and starting-weapon distribution."}},
             {"@type": "Question", "name": "How many weapons are in Megabonk?", "acceptedAnswer": {"@type": "Answer", "text": "Megabonk has 30 weapons total. 7 are unlocked by default (Flamewalker, Sword, Lightning Staff, Firestaff, Chunkers, Bone, Bow), while 23 require specific unlock conditions."}},
             {"@type": "Question", "name": "How do you unlock the Katana in Megabonk?", "acceptedAnswer": {"@type": "Answer", "text": "The Katana has a 5% chance to drop from breaking a Tumbleweed on Desert Stage 1. It is one of two RNG-based weapon unlocks in the game."}},
             {"@type": "Question", "name": "What weapons were changed in Megabonk v1.0.64?", "acceptedAnswer": {"@type": "Answer", "text": "In v1.0.64 (January 2026), Bone had its default knockback increased from 1.25 to 1.5 with knockback replaced by Crit Chance and Crit Damage upgrades. Shotgun had its default knockback increased from 2.5 to 3 with knockback replaced by Crit Damage upgrades."}}
@@ -431,6 +431,17 @@
             margin-left: 0.5rem;
         }
 
+        .ranking-tools{background:rgba(15,52,96,.3);border:1px solid var(--border-color);border-radius:8px;padding:1.5rem;margin:2rem 0 3rem}
+        .ranking-tools h2{color:var(--text-primary);margin-bottom:.5rem}.ranking-note{color:var(--text-muted);margin-bottom:1rem}
+        .signal-summary{display:flex;gap:.65rem;flex-wrap:wrap;margin:1rem 0}.signal-chip{padding:.45rem .7rem;border:1px solid var(--border-color);border-radius:6px;background:rgba(0,0,0,.22);font-size:.88rem}
+        .filter-grid{display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(145px,1fr));gap:.75rem;margin:1.25rem 0}.filter-grid label{color:var(--text-muted);font-size:.8rem}
+        .filter-grid input,.filter-grid select{width:100%;min-height:42px;margin-top:.3rem;border:1px solid var(--border-color);border-radius:5px;background:#10172c;color:var(--text-secondary);padding:.6rem .7rem}
+        .ranking-count{color:var(--text-muted);margin-bottom:.75rem}.ranking-table-wrap{overflow-x:auto;border:1px solid var(--border-color);border-radius:7px}
+        .ranking-table{width:100%;min-width:1160px;border-collapse:collapse;background:rgba(8,13,28,.72)}.ranking-table th,.ranking-table td{padding:.75rem .8rem;border-bottom:1px solid var(--border-color);text-align:left;vertical-align:top}
+        .ranking-table th{color:var(--text-primary);background:#16213e;white-space:nowrap}.ranking-table a{color:var(--text-primary);font-weight:700}.ranking-table tbody tr:hover{background:rgba(233,69,96,.07)}
+        .ranking-weapon{display:inline-flex;align-items:center;gap:.65rem;min-width:155px}.ranking-weapon img,.ranking-weapon .weapon-table-placeholder{width:38px;height:38px;object-fit:contain;flex:0 0 38px}
+        .tier-pill{display:inline-flex;align-items:center;justify-content:center;width:32px;height:28px;border-radius:5px;font-weight:800;color:#10131f}.tier-pill.s{background:var(--s-tier);color:white}.tier-pill.a{background:var(--a-tier)}.tier-pill.b{background:var(--b-tier)}.tier-pill.c{background:var(--c-tier);color:white}
+        .usage-signal{white-space:nowrap}.usage-signal small{display:block;color:var(--text-muted);white-space:normal}.ranking-empty{padding:1.25rem;text-align:center;color:var(--text-muted);display:none}
         .faq-section {
             background: rgba(15, 52, 96, 0.3);
             padding: 2rem;
@@ -540,6 +551,9 @@
             .quick-stats {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .filter-grid { grid-template-columns: 1fr; }
+            .ranking-tools { padding: 1rem; }
         }
 
         @keyframes fadeInUp {
@@ -586,7 +600,7 @@
             <h1>⚔️ Megabonk Weapon Tier List 2026</h1>
             <p>All 30 weapons ranked from S to C tier — find your perfect loadout for competitive runs and leaderboard
                 climbing</p>
-            <span class="version-badge">Verified through Version 1.0.69 | Updated July 28, 2026</span>
+            <span class="version-badge">Verified through Version 1.0.69 | Updated July 29, 2026</span>
         </header>
 
         <section class="quick-stats fade-in-up">
@@ -618,13 +632,55 @@
         </div>
 
         <div class="info-box">
-            <p style="margin-bottom:1rem"><strong>Need effects or unlocks?</strong> Use the <a href="/database/weapons/">30-weapon effects and unlock database</a>. This page is reserved for comparative ranking.</p>
-            <h3>📊 How We Rank Weapons</h3>
-            <p>Rankings are based on community consensus from competitive leaderboard data, multiple tier list sources
-                (IGN, GameRant, Destructoid, Reddit), and analysis of build synergies. Weapon effectiveness varies by
-                character and build — use this as a starting point, not gospel.</p>
+            <p style="margin-bottom:1rem"><strong>Need effects or unlocks without rankings?</strong> Use the <a href="/database/weapons/">30-weapon effects and unlock database</a>. This page owns comparative terms such as best weapons and weapon tier list.</p>
+            <h3>How We Rank Weapons</h3>
+            <p>We combine current weapon mechanics, patch changes, build flexibility, late-run scaling and observed use in the current-version Top 100 leaderboard sample. Leaderboard usage is supporting evidence, not an automatic tier: starting weapons, character popularity and small character samples can inflate or suppress a weapon's frequency.</p>
         </div>
 
+        <section class="ranking-tools" id="all-weapons">
+            <h2>All 30 Weapons: Tier, Unlock and Best Build Fit</h2>
+            <p class="ranking-note">Use the filters to compare weapons. The Current Top 100 column refreshes from the site's automated leaderboard snapshot; the editorial tier remains version-reviewed rather than being mechanically rewritten by popularity.</p>
+            <div class="signal-summary" id="weapon-signal-summary" aria-live="polite"><span class="signal-chip">Loading current leaderboard signal...</span></div>
+            <div class="filter-grid">
+                <label>Search weapons<input id="weapon-search" type="search" placeholder="Name, effect or build" autocomplete="off"></label>
+                <label>Tier<select id="weapon-tier-filter"><option value="all">All tiers</option><option value="s">S tier</option><option value="a">A tier</option><option value="b">B tier</option><option value="c">C tier</option></select></label>
+                <label>Build type<select id="weapon-build-filter"><option value="all">All builds</option><option value="melee">Melee</option><option value="projectile">Projectile</option><option value="area">Area / Duration</option><option value="crit">Crit / Precision</option><option value="tank">Tank / Sustain</option><option value="control">Control</option></select></label>
+                <label>Availability<select id="weapon-availability-filter"><option value="all">All weapons</option><option value="default">Default</option><option value="unlockable">Unlock required</option></select></label>
+            </div>
+            <p class="ranking-count" id="weapon-result-count">Showing all 30 weapons</p>
+            <div class="ranking-table-wrap" tabindex="0" aria-label="Scrollable comparison table of all Megabonk weapons">
+                <table class="ranking-table"><thead><tr><th>Weapon</th><th>Tier</th><th>Current effect</th><th>Unlock</th><th>Best builds</th><th>Current Top 100</th><th>Details</th></tr></thead><tbody><tr data-weapon="sword" data-tier="c" data-build="melee" data-availability="default" data-search="   sword   sweeping melee slash that hits multiple enemies beginner melee, size and quantity"><td><a class="ranking-weapon" href="/database/weapons/sword"><img src="/images/database/weapons/Sword.png" alt="" width="40" height="40" loading="lazy"><span>Sword</span></a></td><td><span class="tier-pill c">C</span></td><td>Sweeping melee slash that hits multiple enemies</td><td>Default</td><td>Beginner melee, Size and Quantity</td><td class="usage-signal" data-signal-for="sword">Loading current signal...</td><td><a href="/database/weapons/sword">Full details</a></td></tr>
+<tr data-weapon="flamewalker" data-tier="s" data-build="area" data-availability="default" data-search="   flamewalker   leaves a damaging fire trail kiting, duration and area damage"><td><a class="ranking-weapon" href="/database/weapons/flamewalker"><img src="/images/database/weapons/Flamewalker.png" alt="" width="40" height="40" loading="lazy"><span>Flamewalker</span></a></td><td><span class="tier-pill s">S</span></td><td>Leaves a damaging fire trail</td><td>Default</td><td>Kiting, Duration and area damage</td><td class="usage-signal" data-signal-for="flamewalker">Loading current signal...</td><td><a href="/database/weapons/flamewalker">Full details</a></td></tr>
+<tr data-weapon="lightning-staff" data-tier="a" data-build="projectile" data-availability="default" data-search="   lightning staff   strikes nearby enemies; upgrades add chain bounces bounce, on-hit and general-purpose builds"><td><a class="ranking-weapon" href="/database/weapons/lightning-staff"><img src="/images/database/weapons/Lightning_Staff.png" alt="" width="40" height="40" loading="lazy"><span>Lightning Staff</span></a></td><td><span class="tier-pill a">A</span></td><td>Strikes nearby enemies; upgrades add chain bounces</td><td>Default</td><td>Bounce, on-hit and general-purpose builds</td><td class="usage-signal" data-signal-for="lightning-staff">Loading current signal...</td><td><a href="/database/weapons/lightning-staff">Full details</a></td></tr>
+<tr data-weapon="firestaff" data-tier="c" data-build="projectile" data-availability="default" data-search="   firestaff   fires explosive fireballs projectile, fire and area builds"><td><a class="ranking-weapon" href="/database/weapons/firestaff"><img src="/images/database/weapons/Firestaff.png" alt="" width="40" height="40" loading="lazy"><span>Firestaff</span></a></td><td><span class="tier-pill c">C</span></td><td>Fires explosive fireballs</td><td>Default</td><td>Projectile, fire and area builds</td><td class="usage-signal" data-signal-for="firestaff">Loading current signal...</td><td><a href="/database/weapons/firestaff">Full details</a></td></tr>
+<tr data-weapon="chunkers" data-tier="c" data-build="projectile" data-availability="default" data-search="   chunkers   orbiting rocks; starts with +1 projectile projectile speed and orbiting coverage"><td><a class="ranking-weapon" href="/database/weapons/chunkers"><img src="/images/database/weapons/Chunkers.png" alt="" width="40" height="40" loading="lazy"><span>Chunkers</span></a></td><td><span class="tier-pill c">C</span></td><td>Orbiting rocks; starts with +1 Projectile</td><td>Default</td><td>Projectile Speed and orbiting coverage</td><td class="usage-signal" data-signal-for="chunkers">Loading current signal...</td><td><a href="/database/weapons/chunkers">Full details</a></td></tr>
+<tr data-weapon="bone" data-tier="b" data-build="projectile" data-availability="default" data-search="   bone   bouncing projectile; starts with one bounce calcium, bounce and quantity builds"><td><a class="ranking-weapon" href="/database/weapons/bone"><img src="/images/database/weapons/Bone.png" alt="" width="40" height="40" loading="lazy"><span>Bone</span></a></td><td><span class="tier-pill b">B</span></td><td>Bouncing projectile; starts with one bounce</td><td>Default</td><td>Calcium, bounce and Quantity builds</td><td class="usage-signal" data-signal-for="bone">Loading current signal...</td><td><a href="/database/weapons/bone">Full details</a></td></tr>
+<tr data-weapon="bow" data-tier="a" data-build="crit" data-availability="default" data-search="   bow   piercing arrows that pass through enemies precision, crit and line-clear builds"><td><a class="ranking-weapon" href="/database/weapons/bow"><img src="/images/database/weapons/Bow.png" alt="" width="40" height="40" loading="lazy"><span>Bow</span></a></td><td><span class="tier-pill a">A</span></td><td>Piercing arrows that pass through enemies</td><td>Default</td><td>Precision, crit and line-clear builds</td><td class="usage-signal" data-signal-for="bow">Loading current signal...</td><td><a href="/database/weapons/bow">Full details</a></td></tr>
+<tr data-weapon="revolver" data-tier="a" data-build="crit" data-availability="unlockable" data-search="   revolver   fires multiple ricocheting bullets crit, bounce and cl4nk builds"><td><a class="ranking-weapon" href="/database/weapons/revolver"><img src="/images/database/weapons/Revolver.png" alt="" width="40" height="40" loading="lazy"><span>Revolver</span></a></td><td><span class="tier-pill a">A</span></td><td>Fires multiple ricocheting bullets</td><td>Kill 7,500 enemies</td><td>Crit, bounce and CL4NK builds</td><td class="usage-signal" data-signal-for="revolver">Loading current signal...</td><td><a href="/database/weapons/revolver">Full details</a></td></tr>
+<tr data-weapon="aegis" data-tier="s" data-build="tank" data-availability="unlockable" data-search="   aegis   blocks attacks and releases counter shockwaves athena, thorns and defensive builds"><td><a class="ranking-weapon" href="/database/weapons/aegis"><img src="/images/database/weapons/Aegis.png" alt="" width="40" height="40" loading="lazy"><span>Aegis</span></a></td><td><span class="tier-pill s">S</span></td><td>Blocks attacks and releases counter shockwaves</td><td>Block 500 damage with Armor as Sir Oofie</td><td>Athena, Thorns and defensive builds</td><td class="usage-signal" data-signal-for="aegis">Loading current signal...</td><td><a href="/database/weapons/aegis">Full details</a></td></tr>
+<tr data-weapon="bananarang" data-tier="a" data-build="projectile" data-availability="unlockable" data-search="   bananarang   returning banana projectile monke, projectile and return-hit builds"><td><a class="ranking-weapon" href="/database/weapons/bananarang"><img src="/images/database/weapons/Bananarang.png" alt="" width="40" height="40" loading="lazy"><span>Bananarang</span></a></td><td><span class="tier-pill a">A</span></td><td>Returning banana projectile</td><td>Find the hidden Banana in Forest</td><td>Monke, projectile and return-hit builds</td><td class="usage-signal" data-signal-for="bananarang">Loading current signal...</td><td><a href="/database/weapons/bananarang">Full details</a></td></tr>
+<tr data-weapon="aura" data-tier="s" data-build="area" data-availability="unlockable" data-search="   aura   persistent close-range area damage megachad, tank and semi-afk builds"><td><a class="ranking-weapon" href="/database/weapons/aura"><img src="/images/database/weapons/Aura.png" alt="" width="40" height="40" loading="lazy"><span>Aura</span></a></td><td><span class="tier-pill s">S</span></td><td>Persistent close-range area damage</td><td>Take no damage for 2 consecutive minutes</td><td>Megachad, tank and semi-AFK builds</td><td class="usage-signal" data-signal-for="aura">Loading current signal...</td><td><a href="/database/weapons/aura">Full details</a></td></tr>
+<tr data-weapon="axe" data-tier="a" data-build="melee" data-availability="unlockable" data-search="   axe   throws spinning axes with lingering coverage size, duration and melee-area builds"><td><a class="ranking-weapon" href="/database/weapons/axe"><img src="/images/database/weapons/Axe.png" alt="" width="40" height="40" loading="lazy"><span>Axe</span></a></td><td><span class="tier-pill a">A</span></td><td>Throws spinning axes with lingering coverage</td><td>Kill 2,000 enemies with Sword</td><td>Size, Duration and melee-area builds</td><td class="usage-signal" data-signal-for="axe">Loading current signal...</td><td><a href="/database/weapons/axe">Full details</a></td></tr>
+<tr data-weapon="space-noodle" data-tier="b" data-build="area" data-availability="unlockable" data-search="   space noodle   links to an enemy and damages targets between tony, positioning and line-damage builds"><td><a class="ranking-weapon" href="/database/weapons/space-noodle"><img src="/images/database/weapons/Space_Noodle.png" alt="" width="40" height="40" loading="lazy"><span>Space Noodle</span></a></td><td><span class="tier-pill b">B</span></td><td>Links to an enemy and damages targets between</td><td>Complete Desert Tier 2 as Tony McZoom</td><td>Tony, positioning and line-damage builds</td><td class="usage-signal" data-signal-for="space-noodle">Loading current signal...</td><td><a href="/database/weapons/space-noodle">Full details</a></td></tr>
+<tr data-weapon="sniper-rifle" data-tier="a" data-build="crit" data-availability="unlockable" data-search="   sniper rifle   long-range piercing precision shot bush, crit and boss damage"><td><a class="ranking-weapon" href="/database/weapons/sniper-rifle"><img src="/images/database/weapons/Sniper.png" alt="" width="40" height="40" loading="lazy"><span>Sniper Rifle</span></a></td><td><span class="tier-pill a">A</span></td><td>Long-range piercing precision shot</td><td>Get Precision Tome to Level 10</td><td>Bush, crit and boss damage</td><td class="usage-signal" data-signal-for="sniper-rifle">Loading current signal...</td><td><a href="/database/weapons/sniper-rifle">Full details</a></td></tr>
+<tr data-weapon="slutty-rocket" data-tier="c" data-build="projectile" data-availability="unlockable" data-search="   slutty rocket   homing missiles that seek enemies quantity, projectile speed and mobile builds"><td><a class="ranking-weapon" href="/database/weapons/slutty-rocket"><img src="/images/database/weapons/SluttyRocket.png" alt="" width="40" height="40" loading="lazy"><span>Slutty Rocket</span></a></td><td><span class="tier-pill c">C</span></td><td>Homing missiles that seek enemies</td><td>Kill 15,000 enemies as CL4NK</td><td>Quantity, Projectile Speed and mobile builds</td><td class="usage-signal" data-signal-for="slutty-rocket">Loading current signal...</td><td><a href="/database/weapons/slutty-rocket">Full details</a></td></tr>
+<tr data-weapon="shotgun" data-tier="c" data-build="crit" data-availability="unlockable" data-search="   shotgun   manual spread burst; knockback 3 and crit damage upgrades close-range crit and knockback builds"><td><a class="ranking-weapon" href="/database/weapons/shotgun"><img src="/images/database/weapons/Shotgun.png" alt="" width="40" height="40" loading="lazy"><span>Shotgun</span></a></td><td><span class="tier-pill c">C</span></td><td>Manual spread burst; Knockback 3 and Crit Damage upgrades</td><td>5% drop from Desert Stage 2 Tumbleweeds, then purchase</td><td>Close-range crit and Knockback builds</td><td class="usage-signal" data-signal-for="shotgun">Loading current signal...</td><td><a href="/database/weapons/shotgun">Full details</a></td></tr>
+<tr data-weapon="mines" data-tier="c" data-build="control" data-availability="unlockable" data-search="   mines   deploys proximity mines trap, choke-point and area-denial builds"><td><a class="ranking-weapon" href="/database/weapons/mines"><img src="/images/database/weapons/Mines.png" alt="" width="40" height="40" loading="lazy"><span>Mines</span></a></td><td><span class="tier-pill c">C</span></td><td>Deploys proximity mines</td><td>Kill 7,500 enemies with Slutty Rocket</td><td>Trap, choke-point and area-denial builds</td><td class="usage-signal" data-signal-for="mines">Loading current signal...</td><td><a href="/database/weapons/mines">Full details</a></td></tr>
+<tr data-weapon="wireless-dagger" data-tier="b" data-build="projectile" data-availability="unlockable" data-search="   wireless dagger   homing daggers with projectile bounces tony, bounce and reliable mobile clear"><td><a class="ranking-weapon" href="/database/weapons/wireless-dagger"><img src="/images/database/weapons/Wireless_Dagger.png" alt="" width="40" height="40" loading="lazy"><span>Wireless Dagger</span></a></td><td><span class="tier-pill b">B</span></td><td>Homing daggers with projectile bounces</td><td>Get Lightning Staff to Level 15</td><td>Tony, bounce and reliable mobile clear</td><td class="usage-signal" data-signal-for="wireless-dagger">Loading current signal...</td><td><a href="/database/weapons/wireless-dagger">Full details</a></td></tr>
+<tr data-weapon="frostwalker" data-tier="b" data-build="control" data-availability="unlockable" data-search="   frostwalker   freezes and damages nearby enemies noelle, freeze and control builds"><td><a class="ranking-weapon" href="/database/weapons/frostwalker"><img src="/images/database/weapons/Frostwalker.png" alt="" width="40" height="40" loading="lazy"><span>Frostwalker</span></a></td><td><span class="tier-pill b">B</span></td><td>Freezes and damages nearby enemies</td><td>Freeze 1,000 enemies with Ice Cube</td><td>Noelle, freeze and control builds</td><td class="usage-signal" data-signal-for="frostwalker">Loading current signal...</td><td><a href="/database/weapons/frostwalker">Full details</a></td></tr>
+<tr data-weapon="tornado" data-tier="c" data-build="control" data-availability="unlockable" data-search="   tornado   sends out tornadoes that knock enemies back knockback and crowd-control builds"><td><a class="ranking-weapon" href="/database/weapons/tornado"><img src="/images/database/weapons/Tornado.png" alt="" width="40" height="40" loading="lazy"><span>Tornado</span></a></td><td><span class="tier-pill c">C</span></td><td>Sends out tornadoes that knock enemies back</td><td>Charge a Charge Shrine 5 times during Desert Sandstorms</td><td>Knockback and crowd-control builds</td><td class="usage-signal" data-signal-for="tornado">Loading current signal...</td><td><a href="/database/weapons/tornado">Full details</a></td></tr>
+<tr data-weapon="dexecutioner" data-tier="s" data-build="melee" data-availability="unlockable" data-search="   dexecutioner   piercing blade with an execute chance bandit, execute and high-density builds"><td><a class="ranking-weapon" href="/database/weapons/dexecutioner"><img src="/images/database/weapons/Dexecutioner.png" alt="" width="40" height="40" loading="lazy"><span>Dexecutioner</span></a></td><td><span class="tier-pill s">S</span></td><td>Piercing blade with an execute chance</td><td>Kill 12,500 enemies with Sword</td><td>Bandit, execute and high-density builds</td><td class="usage-signal" data-signal-for="dexecutioner">Loading current signal...</td><td><a href="/database/weapons/dexecutioner">Full details</a></td></tr>
+<tr data-weapon="blood-magic" data-tier="s" data-build="tank" data-availability="unlockable" data-search="   blood magic   kills can permanently increase max hp vlad, lifesteal and hp stacking"><td><a class="ranking-weapon" href="/database/weapons/blood-magic"><img src="/images/database/weapons/Blood_Magic.png" alt="" width="40" height="40" loading="lazy"><span>Blood Magic</span></a></td><td><span class="tier-pill s">S</span></td><td>Kills can permanently increase Max HP</td><td>Get Bloody Tome to Level 12</td><td>Vlad, Lifesteal and HP stacking</td><td class="usage-signal" data-signal-for="blood-magic">Loading current signal...</td><td><a href="/database/weapons/blood-magic">Full details</a></td></tr>
+<tr data-weapon="black-hole" data-tier="b" data-build="control" data-availability="unlockable" data-search="   black hole   pulls enemies into a damaging gravity field grouping, duration and area builds"><td><a class="ranking-weapon" href="/database/weapons/black-hole"><img src="/images/database/weapons/Black_Hole.png" alt="" width="40" height="40" loading="lazy"><span>Black Hole</span></a></td><td><span class="tier-pill b">B</span></td><td>Pulls enemies into a damaging gravity field</td><td>Get Knockback Tome to Level 10</td><td>Grouping, Duration and area builds</td><td class="usage-signal" data-signal-for="black-hole">Loading current signal...</td><td><a href="/database/weapons/black-hole">Full details</a></td></tr>
+<tr data-weapon="poison-flask" data-tier="c" data-build="area" data-availability="unlockable" data-search="   poison flask   creates persistent poison zones; starts at projectile speed 16 amog, poison and duration builds"><td><a class="ranking-weapon" href="/database/weapons/poison-flask"><img src="/images/database/weapons/Poison_Flask.png" alt="" width="40" height="40" loading="lazy"><span>Poison Flask</span></a></td><td><span class="tier-pill c">C</span></td><td>Creates persistent poison zones; starts at Projectile Speed 16</td><td>Defeat Scorpionussy 3 times</td><td>Amog, poison and Duration builds</td><td class="usage-signal" data-signal-for="poison-flask">Loading current signal...</td><td><a href="/database/weapons/poison-flask">Full details</a></td></tr>
+<tr data-weapon="katana" data-tier="s" data-build="melee" data-availability="unlockable" data-search="   katana   auto-targets the closest enemy with fast slashes ninja, crit and fast melee builds"><td><a class="ranking-weapon" href="/database/weapons/katana"><img src="/images/database/weapons/Katana.png" alt="" width="40" height="40" loading="lazy"><span>Katana</span></a></td><td><span class="tier-pill s">S</span></td><td>Auto-targets the closest enemy with fast slashes</td><td>5% drop from Desert Stage 1 Tumbleweeds, then purchase</td><td>Ninja, crit and fast melee builds</td><td class="usage-signal" data-signal-for="katana">Loading current signal...</td><td><a href="/database/weapons/katana">Full details</a></td></tr>
+<tr data-weapon="dragons-breath" data-tier="c" data-build="area" data-availability="unlockable" data-search="   dragon&#39;s breath   auto-targeting rotating flame; damage 16 and duration 1.5s duration and close-range fire builds"><td><a class="ranking-weapon" href="/database/weapons/dragons-breath"><img src="/images/database/weapons/Dragons_Breath.png" alt="" width="40" height="40" loading="lazy"><span>Dragon's Breath</span></a></td><td><span class="tier-pill c">C</span></td><td>Auto-targeting rotating flame; Damage 16 and Duration 1.5s</td><td>Kill 1,000 Wisps as Fox on Desert</td><td>Duration and close-range fire builds</td><td class="usage-signal" data-signal-for="dragons-breath">Loading current signal...</td><td><a href="/database/weapons/dragons-breath">Full details</a></td></tr>
+<tr data-weapon="dice" data-tier="s" data-build="crit" data-availability="unlockable" data-search="   dice   rolls 1–6 damage; sixes permanently add crit chance dicehead, crit and overcrit builds"><td><a class="ranking-weapon" href="/database/weapons/dice"><img src="/images/database/weapons/Dice.png" alt="" width="40" height="40" loading="lazy"><span>Dice</span></a></td><td><span class="tier-pill s">S</span></td><td>Rolls 1–6 damage; sixes permanently add Crit Chance</td><td>Get Luck Tome to Level 12</td><td>Dicehead, crit and Overcrit builds</td><td class="usage-signal" data-signal-for="dice">Loading current signal...</td><td><a href="/database/weapons/dice">Full details</a></td></tr>
+<tr data-weapon="hero-sword" data-tier="b" data-build="melee" data-availability="unlockable" data-search="   hero sword   multi-enemy front slash plus a ranged slash size, quantity and all-rounder builds"><td><a class="ranking-weapon" href="/database/weapons/hero-sword"><img src="/images/database/weapons/Hero_Sword.png" alt="" width="40" height="40" loading="lazy"><span>Hero Sword</span></a></td><td><span class="tier-pill b">B</span></td><td>Multi-enemy front slash plus a ranged slash</td><td>Defeat a Stage Boss without items, powerups or shrines; purchase for 30 Silver</td><td>Size, Quantity and all-rounder builds</td><td class="usage-signal" data-signal-for="hero-sword">Loading current signal...</td><td><a href="/database/weapons/hero-sword">Full details</a></td></tr>
+<tr data-weapon="corrupted-sword" data-tier="a" data-build="melee" data-availability="unlockable" data-search="   corrupted sword   front/back slashes that gain damage at low hp low-hp, size and berserker builds"><td><a class="ranking-weapon" href="/database/weapons/corrupted-sword"><img src="/images/database/weapons/CorruptedSword.png" alt="" width="40" height="40" loading="lazy"><span>Corrupted Sword</span></a></td><td><span class="tier-pill a">A</span></td><td>Front/back slashes that gain damage at low HP</td><td>Get Cursed Tome to Level 20 before 10:00, then purchase</td><td>Low-HP, Size and berserker builds</td><td class="usage-signal" data-signal-for="corrupted-sword">Loading current signal...</td><td><a href="/database/weapons/corrupted-sword">Full details</a></td></tr>
+<tr data-weapon="scythe" data-tier="a" data-build="melee" data-availability="unlockable" data-search="  ⚔️  scythe   360-degree sweep; elite kills charge a stronger attack roberto, size and circular-coverage builds"><td><a class="ranking-weapon" href="/database/weapons/scythe"><span class="weapon-table-placeholder" aria-hidden="true">⚔️</span><span>Scythe</span></a></td><td><span class="tier-pill a">A</span></td><td>360-degree sweep; Elite kills charge a stronger attack</td><td>Defeat Big Bob in the Graveyard Crypt, then purchase</td><td>Roberto, Size and circular-coverage builds</td><td class="usage-signal" data-signal-for="scythe">Loading current signal...</td><td><a href="/database/weapons/scythe">Full details</a></td></tr>                </tbody></table><p class="ranking-empty" id="weapon-empty">No weapons match these filters.</p>
+            </div>
+        </section>
         <!-- S-TIER -->
         <section class="tier-section" id="s-tier">
             <div class="tier-header s-tier">
@@ -676,8 +732,7 @@
                             <span class="weapon-type">Melee Piercing</span>
                         </div>
                     </div>
-                    <div class="weapon-effect">Close-range piercing stab that scales with Size, Crit Chance, and Damage.
-                        Executes damaged targets instantly.</div>
+                    <div class="weapon-effect">Piercing stab with a 2% execute chance on each valid hit. Execute affects regular enemies only; bosses and minibosses are immune.</div>
                     <div class="weapon-unlock"><strong>🔓 Unlock:</strong> Kill 12,500 enemies using the Sword</div>
                     <div class="weapon-synergies"><strong>Best with:</strong> <span class="synergy-tag"><a
                                 href="/guides/characters/bandit-guide">Bandit</a></span> <span class="synergy-tag">Crit
@@ -1035,8 +1090,7 @@
                     </div>
                     <div class="weapon-effect">Creates a tornado that pulls and damages enemies. Niche crowd control
                         option.</div>
-                    <div class="weapon-unlock"><strong>🔓 Unlock:</strong> Charge a Charge Shrine during a Sandstorm on
-                        Desert</div>
+                    <div class="weapon-unlock"><strong>🔓 Unlock:</strong> Charge a Charge Shrine 5 times during Desert Sandstorms</div>
                 </div>
                 <div class="weapon-card">
                     <div class="weapon-card-header">
@@ -1094,9 +1148,7 @@
             <h2>❓ Frequently Asked Questions</h2>
             <div class="faq-item">
                 <div class="faq-question">What is the best weapon in Megabonk?</div>
-                <div class="faq-answer">Aura, Aegis, and Dexecutioner are consistently ranked as the top S-tier weapons
-                    across multiple tier lists and community sources. Aura is particularly dominant for its passive 360°
-                    damage field that requires no aiming.</div>
+                <div class="faq-answer">Our current editorial S tier includes Aura, Aegis, Dexecutioner, Flamewalker, Katana, Dice, and Blood Magic. The live Top 100 usage signal above shows what current leaderboard runs actually use, while the tier also accounts for build flexibility and mechanics.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">How many weapons are in Megabonk?</div>
@@ -1168,7 +1220,60 @@
             Megabonk is developed by its respective creators. This site is not affiliated with the game developers.
         </p>
     </footer>
-    <script src="/js/current-year.js" defer></script>
+    <script>
+        (() => {
+            const rows = [...document.querySelectorAll('.ranking-table tbody tr')];
+            const search = document.getElementById('weapon-search');
+            const tier = document.getElementById('weapon-tier-filter');
+            const build = document.getElementById('weapon-build-filter');
+            const availability = document.getElementById('weapon-availability-filter');
+            const count = document.getElementById('weapon-result-count');
+            const empty = document.getElementById('weapon-empty');
+            function applyFilters() {
+                const query = search.value.trim().toLowerCase();
+                let visible = 0;
+                rows.forEach((row) => {
+                    const matches = (!query || row.dataset.search.includes(query))
+                        && (tier.value === 'all' || row.dataset.tier === tier.value)
+                        && (build.value === 'all' || row.dataset.build === build.value)
+                        && (availability.value === 'all' || row.dataset.availability === availability.value);
+                    row.hidden = !matches;
+                    if (matches) visible += 1;
+                });
+                count.textContent = visible === 30 ? 'Showing all 30 weapons' : 'Showing ' + visible + ' of 30 weapons';
+                empty.style.display = visible ? 'none' : 'block';
+            }
+            [search, tier, build, availability].forEach((control) => control.addEventListener('input', applyFilters));
+            const aliases = { bloodmagic: 'blood-magic', dragonsbreath: 'dragons-breath' };
+            fetch('/data/leaderboard-meta.json')
+                .then((response) => {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.json();
+                })
+                .then((data) => {
+                    const signals = new Map((data.overall?.topWeapons || []).map((entry) => [aliases[entry.id] || entry.id, entry]));
+                    rows.forEach((row) => {
+                        const cell = row.querySelector('[data-signal-for]');
+                        const signal = signals.get(row.dataset.weapon);
+                        cell.innerHTML = signal
+                            ? '<strong>' + signal.runs + ' of ' + data.sampleSize + '</strong><small>' + Math.round(signal.usageRate * 100) + '% observed usage</small>'
+                            : '<span>Not in listed leaders</span><small>Below current published Top 100 signal</small>';
+                    });
+                    const generated = new Date(data.generatedAt);
+                    const date = Number.isNaN(generated.getTime()) ? 'latest sync' : generated.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                    document.getElementById('weapon-signal-summary').innerHTML =
+                        '<span class="signal-chip"><strong>' + data.sampleSize + '</strong> ranked runs sampled</span>'
+                        + '<span class="signal-chip"><strong>' + data.activeVersion + '</strong> leaderboard version</span>'
+                        + '<span class="signal-chip">Synced ' + date + '</span>';
+                })
+                .catch(() => {
+                    document.querySelectorAll('[data-signal-for]').forEach((cell) => {
+                        cell.innerHTML = '<span>Signal unavailable</span><small>Editorial ranking remains available</small>';
+                    });
+                    document.getElementById('weapon-signal-summary').innerHTML = '<span class="signal-chip">Live signal temporarily unavailable</span>';
+                });
+        })();
+    </script>    <script src="/js/current-year.js" defer></script>
 </body>
 
 </html>

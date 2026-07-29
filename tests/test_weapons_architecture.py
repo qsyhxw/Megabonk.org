@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 HUB = ROOT / "database" / "weapons" / "index.html"
 TIER = ROOT / "tier-lists" / "weapons" / "index.html"
+OLD_BEST = ROOT / "guides" / "best-weapons" / "index.html"
 REDIRECTS = ROOT / "_redirects"
 SITEMAP = ROOT / "sitemap.xml"
 
@@ -16,6 +17,7 @@ class WeaponArchitectureTests(unittest.TestCase):
     def setUpClass(cls):
         cls.hub = HUB.read_text(encoding="utf-8")
         cls.tier = TIER.read_text(encoding="utf-8")
+        cls.old_best = OLD_BEST.read_text(encoding="utf-8")
         cls.redirects = REDIRECTS.read_text(encoding="utf-8")
         cls.sitemap = SITEMAP.read_text(encoding="utf-8")
 
@@ -96,5 +98,40 @@ class WeaponArchitectureTests(unittest.TestCase):
         )
 
 
+    def test_tier_page_has_scannable_current_roster(self):
+        rows = re.findall(r'<tr data-weapon="([^"]+)" data-tier="[sabc]"', self.tier)
+        self.assertEqual(30, len(rows))
+        self.assertEqual(30, len(set(rows)))
+        self.assertEqual(30, len(re.findall(r'data-signal-for="[^"]+"', self.tier)))
+        for control in ("weapon-search", "weapon-tier-filter", "weapon-build-filter", "weapon-availability-filter"):
+            self.assertIn(f'id="{control}"', self.tier)
+        for slug in rows:
+            self.assertIn(f'href="/database/weapons/{slug}"', self.tier)
+
+    def test_tier_uses_automated_leaderboard_signal(self):
+        self.assertIn("fetch('/data/leaderboard-meta.json')", self.tier)
+        self.assertIn("bloodmagic: 'blood-magic'", self.tier)
+        self.assertIn("dragonsbreath: 'dragons-breath'", self.tier)
+        self.assertIn("usage is supporting evidence", self.tier.lower())
+        self.assertNotIn("(IGN, GameRant, Destructoid, Reddit)", self.tier)
+
+    def test_current_weapon_rules_are_on_tier_page(self):
+        self.assertIn("2% execute chance on each valid hit", self.tier)
+        self.assertIn("bosses and minibosses are immune", self.tier)
+        self.assertNotIn("Executes damaged targets instantly", self.tier)
+        self.assertIn("Charge a Charge Shrine 5 times during Desert Sandstorms", self.tier)
+
+    def test_old_page_has_redirect_fallback(self):
+        self.assertIn('<meta name="robots" content="noindex, follow">', self.old_best)
+        self.assertIn('<link rel="canonical" href="https://megabonk.org/tier-lists/weapons/">', self.old_best)
+        self.assertIn('content="0; url=/tier-lists/weapons/"', self.old_best)
+        for source in ("/guides/best-weapons", "/guides/best-weapons/", "/guides/best-weapons/*"):
+            self.assertIn(f"{source} /tier-lists/weapons/ 301", self.redirects)
+
+    def test_current_modified_date(self):
+        self.assertIn('"dateModified": "2026-07-29"', self.tier)
+        block = re.search(r"<loc>https://megabonk.org/tier-lists/weapons/</loc>\s*<lastmod>([^<]+)</lastmod>", self.sitemap)
+        self.assertIsNotNone(block)
+        self.assertEqual("2026-07-29", block.group(1))
 if __name__ == "__main__":
     unittest.main()
