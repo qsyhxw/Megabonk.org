@@ -20,11 +20,11 @@
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Megabonk Tier List 2026 - Complete Rankings">
-    <meta name="twitter:description" content="Complete rankings for all 20 characters, 29 weapons, 79+ items & 23 tomes">
+    <meta name="twitter:description" content="Compare Megabonk character, weapon, item and tome rankings, plus current patch and leaderboard usage signals.">
     <meta name="twitter:image" content="https://megabonk.org/images/tier-lists-og.jpg">
     
     <!-- Article Meta -->
-    <meta property="article:modified_time" content="2026-07-22T00:00:00+08:00">
+    <meta property="article:modified_time" content="2026-07-29T00:00:00+08:00">
     <meta property="article:published_time" content="2025-01-15T00:00:00+00:00">
     <meta name="author" content="Megabonk.org Team">
 
@@ -49,35 +49,35 @@
       "name": "Megabonk Tier List 2026",
       "description": "Hub for Megabonk character, weapon, item and tome rankings with coverage notes for each category",
       "url": "https://megabonk.org/tier-lists/",
-      "dateModified": "2026-07-22",
+      "dateModified": "2026-07-29",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Megabonk Character Tier List 2026",
           "url": "https://megabonk.org/guides/characters/character-tier-list/",
-          "description": "Rankings of all 20 playable characters"
+          "description": "Character rankings, mode differences and links to character guides and builds"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Megabonk Weapon Tier List",
-          "url": "https://megabonk.org/database/weapons/",
-          "description": "Rankings of all 29 weapons"
+          "url": "https://megabonk.org/tier-lists/weapons/",
+          "description": "Weapon rankings, build fit, unlocks and current leaderboard usage signals"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Megabonk Item Tier List",
           "url": "https://megabonk.org/tier-lists/items/",
-          "description": "Rankings of 79+ items and combos"
+          "description": "Item rankings, effects, unlocks and build fit"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Megabonk Tome Tier List",
           "url": "https://megabonk.org/tier-lists/tomes/",
-          "description": "Rankings of all 23 tomes"
+          "description": "Tome rankings, effects, unlocks and build fit"
         }
       ]
     }
@@ -94,7 +94,7 @@
           "name": "What is the best character in Megabonk?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The v1.0.17-era ranking snapshot on this hub placed Dicehead and CL4NK in S tier. Open the character tier list and check its coverage note before using those placements for a newer patch."
+            "text": "There is no single best character for every mode and build. Use the Character Tier List for current editorial placements, then check the linked character guide and build page for the role you want to play."
           }
         },
         {
@@ -102,7 +102,7 @@
           "name": "How often are Megabonk tier lists updated?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Each linked tier list has its own update history. This hub labels its ranking snapshot as v1.0.17-era data and links to newer patch notes instead of presenting that snapshot as the current patch."
+            "text": "The hub tracks the latest official patch separately from the automated leaderboard sample. Each detailed tier list keeps its own editorial review date, while leaderboard usage refreshes when the scheduled data sync succeeds."
           }
         },
         {
@@ -110,7 +110,7 @@
           "name": "What makes a weapon S-tier in Megabonk?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "S-tier weapons demonstrate meta dominance with consistent leaderboard presence, strong synergy potential, and game-changing mechanics. Examples include Aura's 360° area damage, Dice's RNG multipliers, and weapons that enable powerful build archetypes."
+            "text": "An S-tier weapon should perform consistently, scale into demanding runs and fit strong builds without relying on one narrow setup. Leaderboard usage is supporting evidence, not an automatic tier assignment."
           }
         },
         {
@@ -119,14 +119,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Tier lists are primarily optimized for competitive play and leaderboard climbing. For casual play, all characters and weapons are viable - choose what fits your preferred playstyle and have fun experimenting with different combinations."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the Holy Trinity in Megabonk?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The Holy Trinity refers to the three essential S-tier tomes: XP Tome, Curse Tome, and Luck Tome. This combination provides accelerated leveling, enhanced drop quality, and powerful synergies that are fundamental to competitive runs."
           }
         }
       ]
@@ -490,6 +482,24 @@
             margin-bottom: 4rem;
         }
 
+        section[id] {
+            scroll-margin-top: 6rem;
+        }
+
+        .signal-list a,
+        .comparison-table a,
+        .method-note a,
+        .faq-answer a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+
+        .signal-list a:hover,
+        .comparison-table a:hover,
+        .method-note a:hover,
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
         .category-card {
             background: rgba(26, 26, 46, 0.8);
             border-radius: 20px;
@@ -704,6 +714,138 @@
             margin-bottom: 0.5rem;
         }
 
+        section[id] {
+            scroll-margin-top: 6rem;
+        }
+
+        .signal-list a,
+        .comparison-table a,
+        .method-note a,
+        .faq-answer a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+
+        .signal-list a:hover,
+        .comparison-table a:hover,
+        .method-note a:hover,
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+        .category-card {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .category-card:focus-visible {
+            outline: 3px solid var(--secondary-color);
+            outline-offset: 4px;
+        }
+
+        .category-scope {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .category-scope span,
+        .signal-chip {
+            padding: 0.35rem 0.7rem;
+            border-radius: 8px;
+            background: rgba(59, 130, 246, 0.13);
+            color: #bfdbfe;
+            font-size: 0.85rem;
+            border: 1px solid rgba(59, 130, 246, 0.28);
+        }
+
+        .signal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .signal-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .version-warning {
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(245, 158, 11, 0.11);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            color: #fde68a;
+            margin-bottom: 1.5rem;
+        }
+
+        .version-warning.current {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.35);
+            color: #bbf7d0;
+        }
+
+        .meta-signal-grid,
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .meta-signal-card,
+        .method-card {
+            background: rgba(15, 15, 35, 0.58);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .meta-signal-card h3,
+        .method-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .signal-list {
+            list-style: none;
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .signal-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.14);
+        }
+
+        .signal-list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .signal-rate {
+            color: #93c5fd;
+            white-space: nowrap;
+            font-weight: 700;
+        }
+
+        .signal-note,
+        .method-note {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .methodology-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
         /* FAQ Section */
         .faq-section {
             background: rgba(26, 26, 46, 0.8);
@@ -835,6 +977,32 @@
             .featured-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
+
+            .meta-signal-grid,
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .version-badge {
+                display: block;
+                width: fit-content;
+                margin: 0.5rem auto;
+            }
+
+            .container,
+            nav,
+            .breadcrumb {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .hero,
+            .comparison-section,
+            .meta-updates,
+            .faq-section,
+            .cta-section {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -869,406 +1037,306 @@
     </nav>
 
     <div class="container">
-        <!-- Hero Section -->
         <section class="hero">
             <h1>🏆 Megabonk Tier List 2026</h1>
-            <p class="hero-subtitle">Comprehensive Rankings for Characters, Weapons, Items & Tomes</p>
+            <p class="hero-subtitle">Compare current character, weapon, item and Tome rankings without mixing their search intent.</p>
             <div>
-                <span class="version-badge">📊 Ranking baseline: Version 1.0.17</span>
-                <span class="version-badge">🧢 Latest patch tracked: Version 1.0.64</span>
+                <span class="version-badge">Latest official patch: V1.0.69</span>
+                <span class="version-badge" id="leaderboard-version-badge">Leaderboard sample: V1.0.65</span>
             </div>
             <div class="update-date">
-                <span>🕒 Last Updated: <time datetime="2026-07-22">July 22, 2026</time></span>
-                <span style="margin-left: 1rem;">✍️ Megabonk.org Team</span>
+                <span>Last reviewed: <time datetime="2026-07-29">July 29, 2026</time></span>
+                <span style="margin-left: 1rem;">Megabonk.org Team</span>
             </div>
         </section>
 
-        <!-- Introduction Section -->
         <section class="intro-section">
             <p>
-                Use this <strong>Megabonk tier list hub</strong> to compare the character, weapon, item and tome ranking pages. The summary cards preserve a <strong>version 1.0.17 ranking baseline</strong>; newer releases, including version 1.0.64, may change individual placements, so check each detailed list and its version notes before choosing a build.
+                Start here for the broad <strong>Megabonk tier list and current meta</strong>, then open the ranking page that matches your decision: character, weapon, item or Tome. Each list uses a defined editorial baseline; the automated leaderboard panel below adds current usage evidence without silently changing editorial tiers.
             </p>
             <p class="secondary-text">
-                Whether you're climbing leaderboards or starting your first run, the linked tier lists help you compare the strongest picks and synergies within their stated coverage. Looking for specific builds? Check our <a href="/guides/builds/">complete build guide</a> featuring <a href="/guides/characters/dicehead/">Dicehead crit builds</a> and <a href="/guides/meta-strategy/">advanced meta strategies</a>.
+                The latest official patch tracked by the site is <a href="/guides/patch-notes/">V1.0.69</a>. The ranked-run sample may use an older game version, so its version is always shown beside the data.
             </p>
         </section>
 
-        <!-- Quick Navigation -->
-        <nav class="quick-nav">
-            <h3>📑 Quick Navigation</h3>
+        <nav class="quick-nav" aria-label="Tier list categories">
+            <h3>Choose a ranking</h3>
             <div class="quick-nav-links">
-                <a href="#characters">👥 Characters</a>
-                <a href="#weapons">⚔️ Weapons</a>
-                <a href="#items">💎 Items</a>
-                <a href="#tomes">📚 Tomes</a>
-                <a href="#comparison">📊 Comparison</a>
-                <a href="#faq">❓ FAQ</a>
+                <a href="#categories">Ranking categories</a>
+                <a href="#comparison">Choose the right list</a>
+                <a href="#current-meta">Current meta signal</a>
+                <a href="#methodology">Methodology</a>
+                <a href="#faq">FAQ</a>
             </div>
         </nav>
 
-        <!-- Quick Stats -->
-        <div class="quick-stats">
-            <div class="stat-card">
-                <div class="stat-number">20</div>
-                <div class="stat-label">Characters Ranked</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">29</div>
-                <div class="stat-label">Weapons Analyzed</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">79+</div>
-                <div class="stat-label">Items Evaluated</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">23</div>
-                <div class="stat-label">Tomes Tested</div>
-            </div>
-        </div>
+        <section id="categories" class="tier-categories" aria-label="Megabonk tier list categories">
+            <a id="characters" class="category-card" href="/guides/characters/character-tier-list/">
+                <div class="category-icon" aria-hidden="true">👥</div>
+                <h2 class="category-title">Character Tier List</h2>
+                <p class="category-description">Compare the best characters, starter choices, passive strength and mode-specific tradeoffs.</p>
+                <div class="category-scope"><span>Best characters</span><span>Starter picks</span><span>Mode fit</span></div>
+                <span class="view-btn">View Character Rankings →</span>
+            </a>
 
-        <!-- Comparison Overview Table -->
+            <a id="weapons" class="category-card" href="/tier-lists/weapons/">
+                <div class="category-icon" aria-hidden="true">⚔️</div>
+                <h2 class="category-title">Weapon Tier List</h2>
+                <p class="category-description">Compare weapon strength, unlock requirements, build fit and observed ranked-run usage.</p>
+                <div class="category-scope"><span>Best weapons</span><span>Build fit</span><span>Unlocks</span></div>
+                <span class="view-btn">View Weapon Rankings →</span>
+            </a>
+
+            <a id="items" class="category-card" href="/tier-lists/items/">
+                <div class="category-icon" aria-hidden="true">💎</div>
+                <h2 class="category-title">Item Tier List</h2>
+                <p class="category-description">Compare item effects, rarity, unlocks and which builds can use each pickup effectively.</p>
+                <div class="category-scope"><span>Best items</span><span>Effects</span><span>Synergies</span></div>
+                <span class="view-btn">View Item Rankings →</span>
+            </a>
+
+            <a id="tomes" class="category-card" href="/tier-lists/tomes/">
+                <div class="category-icon" aria-hidden="true">📚</div>
+                <h2 class="category-title">Tome Tier List</h2>
+                <p class="category-description">Compare Tome effects, unlock conditions and the builds that benefit from each stat path.</p>
+                <div class="category-scope"><span>Best Tomes</span><span>Effects</span><span>Build paths</span></div>
+                <span class="view-btn">View Tome Rankings →</span>
+            </a>
+        </section>
+
         <section id="comparison" class="comparison-section">
-            <h2>📊 Tier List Comparison Overview</h2>
+            <h2>Choose the Right Megabonk Tier List</h2>
             <div class="table-container">
                 <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th>Category</th>
-                            <th>Total Items</th>
-                            <th>S-Tier</th>
-                            <th>A-Tier</th>
-                            <th>B-Tier</th>
-                            <th>Best Pick</th>
+                            <th>What you need to choose</th>
+                            <th>Open this page</th>
+                            <th>What it compares</th>
+                            <th>Kept separate from</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Characters</strong></td>
-                            <td>20</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>6</td>
-                            <td class="best-pick">Dicehead</td>
+                            <td>Playable character</td>
+                            <td><a href="/guides/characters/character-tier-list/">Character Tier List</a></td>
+                            <td>Passives, starting weapons, modes and build ceiling</td>
+                            <td>Character unlock and guide directory</td>
                         </tr>
                         <tr>
-                            <td><strong>Weapons</strong></td>
-                            <td>29</td>
-                            <td>5</td>
-                            <td>8</td>
-                            <td>10</td>
-                            <td class="best-pick">Aura</td>
+                            <td>Weapon for a build</td>
+                            <td><a href="/tier-lists/weapons/">Weapon Tier List</a></td>
+                            <td>Damage role, scaling, synergy and ranked-run evidence</td>
+                            <td><a href="/database/weapons/">Weapon effects database</a></td>
                         </tr>
                         <tr>
-                            <td><strong>Items</strong></td>
-                            <td>79+</td>
-                            <td>6</td>
-                            <td>12</td>
-                            <td>15</td>
-                            <td class="best-pick">Mirror</td>
+                            <td>Item pickup</td>
+                            <td><a href="/tier-lists/items/">Item Tier List</a></td>
+                            <td>Practical impact, rarity, conditions and build fit</td>
+                            <td><a href="/database/items/">Item effects database</a></td>
                         </tr>
                         <tr>
-                            <td><strong>Tomes</strong></td>
-                            <td>23</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>3</td>
-                            <td class="best-pick">XP Tome</td>
+                            <td>Tome path</td>
+                            <td><a href="/tier-lists/tomes/">Tome Tier List</a></td>
+                            <td>Stat value, opportunity cost and build compatibility</td>
+                            <td><a href="/database/tomes/">Tome effects database</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Tier List Categories -->
-        <section class="tier-categories">
-            <!-- Characters -->
-            <div id="characters" class="category-card" onclick="window.location.href='/guides/characters/character-tier-list/'">
-                <div class="category-icon">👥</div>
-                <h3 class="category-title">Character Tier List</h3>
-                <p class="category-description">Complete rankings of all 20 playable characters based on competitive viability and meta strength.</p>
-                <div class="category-stats">
-                    <span>🌟 S-Tier: 4</span>
-                    <span>⭐ A-Tier: 4</span>
+        <section id="current-meta" class="meta-updates">
+            <div class="signal-header">
+                <div>
+                    <h2>Current Ranked-Run Meta Signal</h2>
+                    <p>These are observed usage rates in the latest local leaderboard sample. They update automatically with the scheduled leaderboard sync.</p>
                 </div>
-                <div class="category-stats">
-                    <span>📊 B-Tier: 6</span>
-                    <span>📉 C-Tier: 6</span>
-                </div>
-                <button class="view-btn">View Character Rankings →</button>
+                <a href="/leaderboard/builds/" class="cta-btn secondary">Explore ranked builds</a>
             </div>
-
-            <!-- Weapons -->
-            <div id="weapons" class="category-card" onclick="window.location.href='/database/weapons/'">
-                <div class="category-icon">⚔️</div>
-                <h3 class="category-title">Weapon Tier List</h3>
-                <p class="category-description">Rankings of all 29 weapons from default unlocks to endgame powerhouses.</p>
-                <div class="category-stats">
-                    <span>🌟 S-Tier: 5</span>
-                    <span>⭐ A-Tier: 8</span>
-                </div>
-                <div class="category-stats">
-                    <span>📊 B-Tier: 10</span>
-                    <span>📉 C-Tier: 6</span>
-                </div>
-                <button class="view-btn">View Weapon Rankings →</button>
+            <div class="signal-summary" id="meta-signal-summary">
+                <span class="signal-chip">100 ranked runs sampled</span>
+                <span class="signal-chip">652 available records</span>
+                <span class="signal-chip">Leaderboard V1.0.65</span>
             </div>
-
-            <!-- Items -->
-            <div id="items" class="category-card" onclick="window.location.href='/tier-lists/items/'">
-                <div class="category-icon">💎</div>
-                <h3 class="category-title">Item Tier List</h3>
-                <p class="category-description">Essential items, game-breaking combos, and must-have pickups for competitive runs.</p>
-                <div class="category-stats">
-                    <span>🌟 S-Tier: 6</span>
-                    <span>⭐ A-Tier: 12</span>
-                </div>
-                <div class="category-stats">
-                    <span>📊 B-Tier: 15</span>
-                    <span>📉 C-Tier: 7+</span>
-                </div>
-                <button class="view-btn">View Item Rankings →</button>
+            <div class="version-warning" id="meta-version-guard">
+                Version guard: leaderboard usage is from V1.0.65, while the latest official patch tracked here is V1.0.69. Treat usage as supporting evidence, not a current-patch verdict.
             </div>
-
-            <!-- Tomes -->
-            <div id="tomes" class="category-card" onclick="window.location.href='/tier-lists/tomes/'">
-                <div class="category-icon">📚</div>
-                <h3 class="category-title">Tome Tier List</h3>
-                <p class="category-description">Power rankings of all 23 tomes including the Holy Trinity combination.</p>
-                <div class="category-stats">
-                    <span>🌟 S-Tier: 3</span>
-                    <span>⭐ A-Tier: 4</span>
-                </div>
-                <div class="category-stats">
-                    <span>📊 B-Tier: 3</span>
-                    <span>📉 C-Tier: 2</span>
-                </div>
-                <button class="view-btn">View Tome Rankings →</button>
+            <div class="meta-signal-grid">
+                <article class="meta-signal-card">
+                    <h3>Most-used weapons</h3>
+                    <ol class="signal-list" id="meta-weapons-list">
+                        <li><span>Katana</span><span class="signal-rate">77%</span></li>
+                        <li><span>Shotgun</span><span class="signal-rate">61%</span></li>
+                        <li><span>Dice</span><span class="signal-rate">40%</span></li>
+                    </ol>
+                </article>
+                <article class="meta-signal-card">
+                    <h3>Most-used Tomes</h3>
+                    <ol class="signal-list" id="meta-tomes-list">
+                        <li><span>Chaos Tome</span><span class="signal-rate">100%</span></li>
+                        <li><span>XP Tome</span><span class="signal-rate">94%</span></li>
+                        <li><span>Cursed Tome</span><span class="signal-rate">87%</span></li>
+                    </ol>
+                </article>
+                <article class="meta-signal-card">
+                    <h3>Most-used items</h3>
+                    <ol class="signal-list" id="meta-items-list">
+                        <li><span>Anvil</span><span class="signal-rate">100%</span></li>
+                        <li><span>Overpowered Lamp</span><span class="signal-rate">100%</span></li>
+                        <li><span>Spicy Meatball</span><span class="signal-rate">100%</span></li>
+                    </ol>
+                </article>
             </div>
+            <p class="signal-note" id="meta-signal-updated">Snapshot refreshed July 28, 2026. Usage frequency can reflect availability, one dominant strategy or a limited sample; it does not automatically make an entity S-tier.</p>
         </section>
 
-        <!-- Tier Legend -->
         <section class="tier-legend">
-            <h2>📊 Understanding Our Tier System</h2>
+            <h2>How to Read the Tiers</h2>
             <div class="tier-grid">
-                <div class="tier-item s-tier">
-                    <span class="tier-badge">S-TIER</span>
-                    <h4>Meta Dominant</h4>
-                    <p>Best-in-class performance. Consistently dominates competitive play and leaderboards. Must-pick for serious runs.</p>
-                </div>
-                <div class="tier-item a-tier">
-                    <span class="tier-badge">A-TIER</span>
-                    <h4>Highly Competitive</h4>
-                    <p>Excellent choices with strong viability. Capable of top-tier performance with proper builds and execution.</p>
-                </div>
-                <div class="tier-item b-tier">
-                    <span class="tier-badge">B-TIER</span>
-                    <h4>Solid & Viable</h4>
-                    <p>Good choices for most situations. Reliable performance but may lack the power spike of higher tiers.</p>
-                </div>
-                <div class="tier-item c-tier">
-                    <span class="tier-badge">C-TIER</span>
-                    <h4>Situational</h4>
-                    <p>Workable in specific builds or playstyles. Generally outperformed by higher tiers but can succeed with dedication.</p>
-                </div>
+                <div class="tier-item s-tier"><span class="tier-badge">S</span><h3>Exceptional</h3><p>Strong, consistent choices that shape high-performing builds in the list's stated mode and patch.</p></div>
+                <div class="tier-item a-tier"><span class="tier-badge">A</span><h3>Strong</h3><p>Reliable choices with clear strengths and only modest tradeoffs.</p></div>
+                <div class="tier-item b-tier"><span class="tier-badge">B</span><h3>Viable</h3><p>Useful choices that need the right build, route or player execution.</p></div>
+                <div class="tier-item c-tier"><span class="tier-badge">C</span><h3>Situational</h3><p>Narrow choices that can work but are less consistent or more demanding.</p></div>
             </div>
         </section>
 
-        <!-- Featured Top Picks -->
-        <section class="featured-section">
-            <h2>🌟 Featured Picks from the v1.0.17 Snapshot</h2>
-            <div class="featured-grid">
-                <!-- Characters -->
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">🎲</div>
-                    <div class="featured-name">Dicehead</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Unlimited crit scaling</p>
-                </div>
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">🤖</div>
-                    <div class="featured-name">CL4NK</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Glass cannon crit master</p>
-                </div>
-                <!-- Weapons -->
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">💪</div>
-                    <div class="featured-name">Aura</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">360° area damage</p>
-                </div>
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">🎲</div>
-                    <div class="featured-name">Dice</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">RNG game-breaker</p>
-                </div>
-                <!-- Items -->
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">🪞</div>
-                    <div class="featured-name">Mirror</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Damage reflection</p>
-                </div>
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">🥊</div>
-                    <div class="featured-name">Kevin</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Self-damage engine</p>
-                </div>
-                <!-- Tomes -->
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">📖</div>
-                    <div class="featured-name">XP Tome</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Holy Trinity core</p>
-                </div>
-                <div class="featured-card s-tier">
-                    <div class="featured-emoji">🍀</div>
-                    <div class="featured-name">Luck Tome</div>
-                    <span class="featured-tier" style="background: var(--s-tier);">S-TIER</span>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Drop quality boost</p>
-                </div>
+        <section id="methodology" class="meta-updates">
+            <h2>How Rankings and Meta Data Are Evaluated</h2>
+            <div class="methodology-grid">
+                <article class="method-card"><h3>Editorial tier placement</h3><p>Detailed lists weigh consistency, scaling, opportunity cost, build compatibility and mode-specific performance. Rankings do not change automatically from one usage snapshot.</p></article>
+                <article class="method-card"><h3>Patch facts</h3><p>Effects, unlocks and balance changes are checked against the site's latest tracked patch notes. Each category page states its own review baseline.</p></article>
+                <article class="method-card"><h3>Leaderboard usage</h3><p>The automated panel counts appearances in the current ranked-run sample. It shows what successful submitted runs used, not what every player must choose.</p></article>
+                <article class="method-card"><h3>Version guard</h3><p>If the leaderboard version differs from the latest official patch, the page labels the mismatch and keeps that evidence separate from current-patch editorial conclusions.</p></article>
             </div>
+            <p class="method-note">For a specific entity's effect or unlock, use the database. For comparative recommendations, use the matching tier list. For complete ranked loadouts, use the <a href="/leaderboard/builds/">leaderboard builds page</a>.</p>
         </section>
 
-        <!-- Meta Updates -->
-        <section class="meta-updates">
-            <h2>📰 Recent Meta Changes</h2>
-            <div class="update-item">
-                <span class="meta-date">🗓️ Version 1.0.17 | November 10, 2025</span>
-                <strong>Ranking Baseline</strong>
-                <p>This hub snapshot was assembled around v1.0.17. Check individual tier lists and newer patch notes before treating a placement as current.</p>
-            </div>
-            <div class="update-item">
-                <span class="meta-date">🗓️ Version 1.0.12 | October 8, 2025</span>
-                <strong>Major Balance Overhaul</strong>
-                <p>Final Swarm introduced, Joe's Dagger capped at 2,000% damage, XP Tome nerfed from 9% to 7% per level. Duration bug fixed enabling Dexecutioner/Axe/Sword builds.</p>
-            </div>
-            <div class="update-item">
-                <span class="meta-date">🗓️ Version 1.0.7 | September 29, 2025</span>
-                <strong>Kevin + Mirror Nerf</strong>
-                <p>Immortality exploit removed, leaderboards reset. Athena buffed +150% attack speed when unshielded. Character diversity dramatically increased.</p>
-            </div>
-            <div class="update-item">
-                <span class="meta-date">🗓️ v1.0.17 Meta Focus</span>
-                <strong>Skill-Based Era</strong>
-                <p>Meta has shifted from exploit-based to skill-focused gameplay. Holy Trinity (XP + Curse + Luck) remains essential for competitive runs.</p>
-            </div>
-        </section>
-
-        <!-- Ranking Methodology -->
-        <section class="meta-updates">
-            <h2>🎯 Our Ranking Methodology</h2>
-            <div class="update-item">
-                <strong>🏆 Competitive Performance (40%)</strong>
-                <p>Leaderboard presence, top player usage rates, tournament results, and professional streamer picks.</p>
-            </div>
-            <div class="update-item">
-                <strong>⚖️ Consistency (25%)</strong>
-                <p>Performance across different situations and maps, reliability factor, skill floor versus skill ceiling analysis.</p>
-            </div>
-            <div class="update-item">
-                <strong>🔄 Versatility (20%)</strong>
-                <p>Build diversity options, synergy potential with other items, adaptability to different map types and strategies.</p>
-            </div>
-            <div class="update-item">
-                <strong>📊 Meta Impact (15%)</strong>
-                <p>Overall influence on competitive scene, whether picks force bans or restrictions, ability to define game strategies.</p>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
         <section id="faq" class="faq-section">
-            <h2>❓ Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">What is the best character in Megabonk?</div>
-                <div class="faq-answer">
-                    The v1.0.17-era ranking snapshot on this hub placed Dicehead and CL4NK in S tier. Open the character tier list and check its coverage note before using those placements for a newer patch.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">How often are Megabonk tier lists updated?</div>
-                <div class="faq-answer">
-                    Each linked tier list has its own update history. This hub labels its ranking snapshot as v1.0.17-era data and links to newer patch notes instead of presenting that snapshot as the current patch.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">What makes a weapon S-tier in Megabonk?</div>
-                <div class="faq-answer">
-                    S-tier weapons demonstrate meta dominance with consistent leaderboard presence, strong synergy potential, and game-changing mechanics. Examples include Aura's 360° area damage, Dice's RNG multipliers, and weapons that enable powerful build archetypes.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Should I follow tier lists for casual play?</div>
-                <div class="faq-answer">
-                    Tier lists are primarily optimized for competitive play and leaderboard climbing. For casual play, all characters and weapons are viable - choose what fits your preferred playstyle and have fun experimenting with different combinations.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">What is the Holy Trinity in Megabonk?</div>
-                <div class="faq-answer">
-                    The Holy Trinity refers to the three essential S-tier tomes: XP Tome, Curse Tome, and Luck Tome. This combination provides accelerated leveling, enhanced drop quality, and powerful synergies that are fundamental to competitive runs.
-                </div>
-            </div>
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item"><div class="faq-question">What is the best character in Megabonk?</div><div class="faq-answer">There is no single best character for every mode and build. Use the <a href="/guides/characters/character-tier-list/">Character Tier List</a> for current editorial placements, then check the linked character guide and build page for your preferred role.</div></div>
+            <div class="faq-item"><div class="faq-question">How often are Megabonk tier lists updated?</div><div class="faq-answer">Each detailed list has its own editorial review date. The ranked-run usage panel refreshes when the scheduled leaderboard sync succeeds, and it always displays the source game version and snapshot date.</div></div>
+            <div class="faq-item"><div class="faq-question">Does high leaderboard usage mean an automatic S-tier ranking?</div><div class="faq-answer">No. Usage shows what appeared in a limited group of successful submitted runs. Availability, one popular strategy and version differences can all affect the rate, so it is supporting evidence rather than an automatic tier.</div></div>
+            <div class="faq-item"><div class="faq-question">Should casual players follow the current meta?</div><div class="faq-answer">Use the lists to avoid weak combinations, but prioritize a character and build that fit how you play. A lower-ranked option can still be the better choice when its mechanics match your route or comfort level.</div></div>
         </section>
 
-        <!-- CTA Section -->
         <section class="cta-section">
-            <h2>🚀 Master the Meta</h2>
-            <p style="margin-bottom: 2rem;">Deep dive into our comprehensive guides to dominate every aspect of Megabonk</p>
+            <h2>Turn a Ranking into a Build</h2>
+            <p>Compare complete builds, inspect current ranked loadouts or review the latest balance changes.</p>
             <div class="cta-buttons">
-                <a href="/guides/meta-strategy/" class="cta-btn primary">📖 Read Meta Strategy Guide</a>
-                <a href="/guides/megabonk-beginners-guide" class="cta-btn secondary">📘 View Beginners Guide</a>
-                <a href="/guides/builds/" class="cta-btn secondary">🔧 Explore Builds</a>
+                <a href="/guides/builds/" class="cta-btn primary">Explore Character Builds</a>
+                <a href="/leaderboard/builds/" class="cta-btn secondary">View Ranked Builds</a>
+                <a href="/guides/patch-notes/" class="cta-btn secondary">Read Patch Notes</a>
             </div>
         </section>
     </div>
-
     <footer>
-        <p style="color: var(--text-muted);">© <span data-current-year>2026</span> Megabonk.org | All tier lists updated for version 1.0.17 | <a href="/privacy-policy">Privacy Policy</a></p>
-        <p style="color: var(--text-muted); margin-top: 0.5rem;">Rankings based on competitive data, community feedback, and developer balance changes</p>
+        <p style="color: var(--text-muted);">© <span data-current-year>2026</span> Megabonk.org | Latest official patch tracked: V1.0.69 | <a href="/privacy-policy">Privacy Policy</a></p>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Editorial rankings are separated from automated leaderboard usage signals</p>
     </footer>
 
     <script>
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+        const scrollToHashTarget = (hash, behavior = 'smooth') => {
+            const target = document.querySelector(hash);
+            if (!target) return false;
+            target.scrollIntoView({ behavior, block: 'start' });
+            return true;
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (event) => {
+                const hash = anchor.getAttribute('href');
+                if (!scrollToHashTarget(hash)) return;
+                event.preventDefault();
+                window.history.replaceState(null, '', hash);
             });
-        }, observerOptions);
-
-        // Observe all sections
-        document.querySelectorAll('.category-card, .featured-card, .update-item, .faq-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s, transform 0.6s';
-            observer.observe(el);
         });
+
+        window.addEventListener('load', () => {
+            if (window.location.hash) scrollToHashTarget(window.location.hash, 'auto');
+        }, { once: true });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+        document.querySelectorAll('.category-card, .meta-signal-card, .method-card, .faq-item').forEach((element) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(element);
+        });
+
+        (() => {
+            const OFFICIAL_PATCH = '1.0.69';
+            const normalizeVersion = (value) => String(value || '').replace(/^v/i, '');
+            const fallbackName = (value) => String(value || '')
+                .replace(/([a-z])([A-Z])/g, '$1 $2')
+                .replace(/[-_]/g, ' ')
+                .replace(/\b\w/g, (letter) => letter.toUpperCase());
+
+            function buildCatalogMap(catalog, group) {
+                return new Map((catalog.entities?.[group] || []).map((entity) => [entity.id, entity]));
+            }
+
+            function renderSignalList(elementId, entries, catalogMap) {
+                const list = document.getElementById(elementId);
+                list.textContent = '';
+                entries.slice(0, 5).forEach((entry) => {
+                    const entity = catalogMap.get(entry.id);
+                    const item = document.createElement('li');
+                    const name = entity?.page ? document.createElement('a') : document.createElement('span');
+                    if (entity?.page) name.href = entity.page;
+                    name.textContent = entity?.name || fallbackName(entry.id);
+                    const rate = document.createElement('span');
+                    rate.className = 'signal-rate';
+                    rate.textContent = Math.round(Number(entry.usageRate || 0) * 100) + '%';
+                    item.append(name, rate);
+                    list.append(item);
+                });
+            }
+
+            Promise.all([
+                fetch('/data/leaderboard-meta.json', { cache: 'no-store' }),
+                fetch('/data/entity-catalog.json', { cache: 'no-store' })
+            ])
+                .then(async ([metaResponse, catalogResponse]) => {
+                    if (!metaResponse.ok || !catalogResponse.ok) throw new Error('Tier signal data request failed');
+                    return [await metaResponse.json(), await catalogResponse.json()];
+                })
+                .then(([meta, catalog]) => {
+                    const sourceVersion = normalizeVersion(meta.activeVersion);
+                    const isCurrent = sourceVersion === OFFICIAL_PATCH;
+                    document.getElementById('leaderboard-version-badge').textContent = 'Leaderboard sample: V' + (sourceVersion || 'unknown');
+                    document.getElementById('meta-signal-summary').innerHTML =
+                        '<span class="signal-chip">' + Number(meta.sampleSize || 0).toLocaleString() + ' ranked runs sampled</span>'
+                        + '<span class="signal-chip">' + Number(meta.availableRuns || 0).toLocaleString() + ' available records</span>'
+                        + '<span class="signal-chip">Leaderboard V' + (sourceVersion || 'unknown') + '</span>';
+                    const guard = document.getElementById('meta-version-guard');
+                    guard.classList.toggle('current', isCurrent);
+                    guard.textContent = isCurrent
+                        ? 'Leaderboard evidence matches the latest official patch tracked here, V' + OFFICIAL_PATCH + '. Usage remains supporting evidence rather than an automatic tier.'
+                        : 'Version guard: leaderboard usage is from V' + (sourceVersion || 'unknown') + ', while the latest official patch tracked here is V' + OFFICIAL_PATCH + '. Treat usage as supporting evidence, not a current-patch verdict.';
+                    renderSignalList('meta-weapons-list', meta.overall?.topWeapons || [], buildCatalogMap(catalog, 'weapons'));
+                    renderSignalList('meta-tomes-list', meta.overall?.topTomes || [], buildCatalogMap(catalog, 'tomes'));
+                    renderSignalList('meta-items-list', meta.overall?.topItems || [], buildCatalogMap(catalog, 'items'));
+                    const stamp = meta.generatedAt ? new Date(meta.generatedAt) : null;
+                    const date = stamp && !Number.isNaN(stamp.getTime())
+                        ? stamp.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+                        : 'the latest sync';
+                    document.getElementById('meta-signal-updated').textContent =
+                        'Snapshot refreshed ' + date + '. Usage frequency can reflect availability, one dominant strategy or a limited sample; it does not automatically make an entity S-tier.';
+                })
+                .catch(() => {
+                    document.getElementById('leaderboard-version-badge').textContent = 'Leaderboard sample temporarily unavailable';
+                    document.getElementById('meta-version-guard').textContent = 'The automated usage signal could not be refreshed. The four editorial tier lists and their stated patch baselines remain available.';
+                    document.getElementById('meta-signal-updated').textContent = 'Showing the last rendered fallback snapshot while live data is unavailable.';
+                });
+        })();
     </script>
     <script src="/js/current-year.js?v=20260728" defer></script>
 </body>
