@@ -113,6 +113,22 @@
             filter: drop-shadow(0 10px 20px rgba(0,0,0,.35)); position: relative; z-index: 1;
         }
 
+        .execute-answer { background: #151515; border: 1px solid var(--execute-gold); border-left: 5px solid var(--success-green); border-radius: 12px; padding: 22px 24px; margin: -14px 0 28px; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+        .execute-answer h2 { color: var(--execute-gold); font-size: 1.45rem; margin-bottom: 8px; }
+        .execute-answer p { color: var(--text-secondary); }
+        .execute-status { display: inline-block; margin-right: 8px; padding: 3px 9px; border-radius: 6px; background: var(--success-green); color: #101010; font-weight: 800; }
+        .execute-table-wrap { width: 100%; overflow-x: auto; }
+        .execute-table { width: 100%; min-width: 680px; border-collapse: collapse; }
+        .execute-table th, .execute-table td { padding: 13px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,.12); vertical-align: top; }
+        .execute-table th { color: var(--execute-gold); background: rgba(178,34,34,.2); }
+        .test-steps { margin-left: 22px; color: var(--text-secondary); }
+        .test-steps li { margin: 9px 0; padding-left: 5px; }
+        .build-handoff { padding: 18px 20px; margin: 0 0 22px; border-radius: 10px; background: rgba(255,215,0,.08); border: 1px solid rgba(255,215,0,.4); }
+        .build-handoff a { color: var(--execute-gold); font-weight: 800; }
+        .faq-list details { background: var(--bg-primary); border: 1px solid rgba(255,255,255,.12); border-radius: 9px; margin: 10px 0; padding: 0 17px; }
+        .faq-list summary { cursor: pointer; color: var(--text-primary); font-weight: 800; padding: 15px 0; }
+        .faq-list details p { color: var(--text-secondary); padding: 0 0 15px; }
+
         .quick-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 20px; margin-bottom: 40px; }
         .stat-card { background: var(--bg-secondary); padding: 25px; border-radius: 15px; border-left: 4px solid var(--primary-color); transition: transform .3s ease, box-shadow .3s ease; }
         .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(178,34,34,.3); }
@@ -213,6 +229,11 @@
         <div class="weapon-tier">End-Game Power Weapon</div>
       </div>
 
+      <section class="execute-answer" id="execute-quick-answer" aria-labelledby="execute-answer-title">
+        <h2 id="execute-answer-title">Is Execute Bugged?</h2>
+        <p><span class="execute-status">No, not in normal play.</span> In the current version, Dexecutioner rolls a <strong>2% Execute chance on each valid hit</strong> against normal enemies. Bosses and Mini Bosses are immune, and Final Swarm is not a reliable baseline test because its special enemies and rules reduce the value of old Execute-stall strategies.</p>
+      </section>
+
       <!-- Quick Stats (objective wording) -->
       <div class="quick-stats">
         <div class="stat-card">
@@ -222,8 +243,8 @@
         </div>
         <div class="stat-card">
           <div class="stat-title">💀 Special Effect</div>
-          <div class="stat-value">Small execute chance</div>
-          <div class="stat-description">Occasionally instantly kills non-specified enemies</div>
+          <div class="stat-value">2% per valid hit</div>
+          <div class="stat-description">Normal enemies only; Bosses and Mini Bosses are immune</div>
         </div>
         <div class="stat-card">
           <div class="stat-title">🔓 Unlock</div>
@@ -299,10 +320,10 @@
             <div class="mechanic-card">
               <div class="mechanic-title">💀 Execute Proc</div>
               <div class="mechanic-description">
-                Has a <em>small chance</em> to instantly execute an enemy regardless of remaining HP. Exact percent isn’t disclosed by official sources.
+                Each valid hit has a <strong>2% chance</strong> to instantly kill a normal enemy regardless of its remaining HP. Bosses and Mini Bosses cannot be executed.
               </div>
               <div class="mechanic-stats">
-                <strong>Notes:</strong> Execute frequency can feel higher with more hits/projectiles. Boss interactions vary by effect—plan normal DPS for bosses.
+                <strong>No fixed proc cap:</strong> Execute has no fixed number-of-triggers limit. Quantity and Cooldown create more hit rolls, but do not raise the base 2% chance per roll.
               </div>
             </div>
 
@@ -319,7 +340,7 @@
             <div class="mechanic-card">
               <div class="mechanic-title">🏴‍☠️ Bandit Synergy</div>
               <div class="mechanic-description">
-                Bandit is built around Dexectioner, but you still必须完成沙漠雕像战才能解锁该角色。
+                Bandit starts with Dexecutioner, but you must still defeat the Bandit statue in the Desert to unlock the character.
               </div>
               <div class="mechanic-stats">
                 <strong>To play Bandit:</strong> Defeat Bandit statue (Desert) + own/purchase Dexectioner + buy Bandit with Silver
@@ -329,6 +350,54 @@
         </div>
       </div>
 
+      <section class="content-section" id="execute-troubleshooting">
+        <div class="section-header">
+          <div class="section-title">Why Execute Looks Bugged</div>
+          <div class="section-subtitle">Match the symptom to the rule before reporting a broken proc</div>
+        </div>
+        <div class="section-content execute-table-wrap">
+          <table class="execute-table">
+            <thead><tr><th>What you see</th><th>Likely cause</th><th>What to test</th></tr></thead>
+            <tbody>
+              <tr><td>A Boss never executes</td><td>Bosses are immune by design.</td><td>Use a normal enemy and keep ordinary DPS for the Boss.</td></tr>
+              <tr><td>A Mini Boss never executes</td><td>Mini Bosses are also immune.</td><td>Do not use elite-style targets as the proc test.</td></tr>
+              <tr><td>No proc in a short sample</td><td>At 2% per valid hit, short dry streaks are normal.</td><td>Observe many confirmed hits on ordinary enemies.</td></tr>
+              <tr><td>Execute stops carrying Final Swarm</td><td>Final Swarm has special enemies and post-v1.0.12 rules; old stall strategies are unreliable.</td><td>Test during a normal stage before the Final Swarm.</td></tr>
+              <tr><td>No obvious visual feedback</td><td>Dense damage numbers and effects can hide an instant-kill event.</td><td>Reduce other weapon effects and watch a healthy normal enemy.</td></tr>
+              <tr><td>Late-run attacks appear to stop</td><td>Heavy projectile load or an outdated game build can obscure weapon behavior.</td><td>Update the game, retest without Black Hole, and verify that the blade actually hits.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="content-section" id="execute-test">
+        <div class="section-header">
+          <div class="section-title">How to Test Execute</div>
+          <div class="section-subtitle">A clean test separates proc behavior from target immunity</div>
+        </div>
+        <div class="section-content">
+          <ol class="test-steps">
+            <li>Start a normal stage and test on regular enemies, not a Boss, Mini Boss, or Final Swarm target.</li>
+            <li>Limit other damaging weapons so a normal damage kill is not mistaken for Execute.</li>
+            <li>Confirm Dexecutioner's line attack is actually connecting, then observe a large sample of valid hits.</li>
+            <li>Add Quantity or Cooldown only to create more rolls. The base chance remains 2% per valid hit.</li>
+            <li>If behavior still differs, update to the latest game version and repeat without Black Hole or extreme projectile load.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="content-section" id="version-history">
+        <div class="section-header">
+          <div class="section-title">Current Version Behavior &amp; Fix History</div>
+          <div class="section-subtitle">Verified against the current v1.0.69 baseline</div>
+        </div>
+        <div class="section-content">
+          <p><strong>Current behavior:</strong> 2% Execute per valid hit on normal enemies, with Bosses and Mini Bosses immune. There is no fixed Execute trigger cap.</p>
+          <p style="margin-top:12px;"><strong>v1.0.12:</strong> the official notes optimized FPS when Dexecutioner was used with Black Hole and fixed maximum-duration/projectile-limit behavior that could make weapons stop firing. The same update reworked Final Swarm with Ghost pressure, so old Execute-stall results should not be used as proof that the normal proc is broken.</p>
+          <p style="margin-top:12px; color:var(--text-secondary);">The official notes do not document a global 2% Execute-proc fix; this page does not label normal dry streaks as a confirmed game bug.</p>
+        </div>
+      </section>
+
       <!-- Builds (only verified names/items) -->
       <div class="content-section">
         <div class="section-header">
@@ -336,6 +405,7 @@
           <div class="section-subtitle">Community-proven synergies</div>
         </div>
         <div class="section-content">
+          <div class="build-handoff"><strong>Need the full loadout?</strong> This weapon page owns proc rules, immunity, unlocking, and troubleshooting. Use the <a href="/guides/builds/katana-dexecutioner-execute-melee">Katana + Dexecutioner Execute Build</a> for weapons, Tomes, items, and the run plan.</div>
           <div class="builds-grid">
             <div class="build-card">
               <div class="build-header">
@@ -358,7 +428,7 @@
                 <div class="build-section">
                   <h4>🎒 Key Items</h4>
                   <ul class="build-list">
-                    <li>Joe’s Dagger • +1% execute chance, stacking damage on executes</li>
+                    <li>Joe’s Dagger • gains +1% Damage each time Execute triggers</li>
                     <li>Overpowered Lamp • +1 extra on-hit proc check</li>
                     <li>Giant Fork • crits can become Megacrits</li>
                     <li>Backpack / Anvil / Battery / Time Bracelet</li>
@@ -420,6 +490,22 @@
           </div>
         </div>
       </div>
+
+      <section class="content-section" id="faq">
+        <div class="section-header">
+          <div class="section-title">Dexecutioner Execute FAQ</div>
+          <div class="section-subtitle">Current rules, common limits, and unlock answers</div>
+        </div>
+        <div class="section-content faq-list">
+          <details><summary>Is Execute bugged in Megabonk?</summary><p>No, not in normal play. Dexecutioner currently rolls 2% on each valid hit against a normal enemy. Target immunity, a short sample, Final Swarm rules, or an attack that did not connect commonly makes it look broken.</p></details>
+          <details><summary>Can Dexecutioner execute Bosses?</summary><p>No. Bosses are immune to the instant-kill Execute effect, so your build still needs normal damage for Boss fights.</p></details>
+          <details><summary>Can Dexecutioner execute Mini Bosses?</summary><p>No. Mini Bosses are immune as well; test the proc against ordinary enemies.</p></details>
+          <details><summary>What is Dexecutioner's Execute chance?</summary><p>The base chance is 2% per valid hit against an eligible normal enemy, with no fixed cap on how many times it may trigger.</p></details>
+          <details><summary>Do Quantity or Cooldown increase Execute chance?</summary><p>They increase the number or frequency of hits and therefore create more 2% rolls. They do not change the base probability of an individual roll.</p></details>
+          <details><summary>Why does Execute stop working in Final Swarm?</summary><p>Final Swarm uses special enemies and pressure rules, and old Execute-stall approaches became unreliable after the v1.0.12 rework. Verify normal Execute behavior in a standard stage instead.</p></details>
+          <details><summary>How do I unlock Dexecutioner?</summary><p>Reach 12,500 cumulative kills with Sword, then purchase Dexecutioner with Silver in the Unlocks menu.</p></details>
+        </div>
+      </section>
 
       <!-- Character Synergy -->
       <div class="content-section">
