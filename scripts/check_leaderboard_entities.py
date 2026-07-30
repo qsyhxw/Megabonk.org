@@ -49,12 +49,31 @@ def page_status(value: str | None) -> tuple[bool, str | None]:
     return True, None
 
 
+def is_valid_image(path: Path) -> bool:
+    try:
+        header = path.read_bytes()[:16]
+    except OSError:
+        return False
+    return (
+        header.startswith(b"\x89PNG\r\n\x1a\n")
+        or header.startswith(b"\xff\xd8\xff")
+        or (header.startswith(b"RIFF") and header[8:12] == b"WEBP")
+        or header.startswith((b"GIF87a", b"GIF89a"))
+    )
+
+
 def asset_status(entry: dict[str, Any]) -> tuple[bool, str | None]:
     image = entry.get("image")
     if image:
-        if any(candidate.is_file() for candidate in local_candidates(image)):
-            return True, None
-        return False, f"image file not found: {image}"
+        existing = next(
+            (candidate for candidate in local_candidates(image) if candidate.is_file()),
+            None,
+        )
+        if not existing:
+            return False, f"image file not found: {image}"
+        if not is_valid_image(existing):
+            return False, f"invalid or corrupt image file: {image}"
+        return True, None
     if entry.get("icon"):
         return True, None
     return False, "missing image or fallback icon"

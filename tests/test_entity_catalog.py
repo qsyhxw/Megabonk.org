@@ -26,6 +26,11 @@ class EntityCatalogTests(unittest.TestCase):
         cls.catalog_script = (
             ROOT / "js" / "entity-catalog.js"
         ).read_text(encoding="utf-8")
+        cls.check_config = json.loads(
+            (ROOT / "data" / "leaderboard-entity-check-config.json").read_text(
+                encoding="utf-8"
+            )
+        )
 
     def test_declared_local_files_exist(self):
         for entries in self.catalog["entities"].values():
@@ -112,6 +117,20 @@ class EntityCatalogTests(unittest.TestCase):
                 entry = item_index[entity_id]
                 self.assertTrue(entry.get("image"))
                 self.assertTrue(entry.get("page"))
+
+    def test_scythe_has_a_local_image_without_a_gap_exemption(self):
+        weapon_index = {
+            normalize(entry["id"]): entry
+            for entry in self.catalog["entities"]["weapons"]
+        }
+        scythe = weapon_index["scythe"]
+        self.assertEqual(
+            scythe["image"], "/images/database/weapons/Scythe.png"
+        )
+        image = ROOT / scythe["image"].lstrip("/")
+        self.assertTrue(image.is_file())
+        self.assertEqual(image.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
+        self.assertEqual(self.check_config["knownGaps"], [])
 
     def test_global_leaderboard_modal_uses_shared_entity_catalog(self):
         page = self.leaderboard_page

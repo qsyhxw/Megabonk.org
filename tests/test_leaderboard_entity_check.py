@@ -34,7 +34,7 @@ class LeaderboardEntityCheckTests(unittest.TestCase):
     def make_image(self, relative_path):
         path = CHECK.ROOT / relative_path
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(b"image")
+        path.write_bytes(b"\x89PNG\r\n\x1a\n" + b"test-image")
 
     def empty_catalog(self):
         return {
@@ -90,6 +90,27 @@ class LeaderboardEntityCheckTests(unittest.TestCase):
         self.assertIn("page file not found", report["gaps"][0]["reason"])
         self.assertIn("image file not found", report["gaps"][0]["reason"])
 
+    def test_corrupt_image_is_reported(self):
+        self.make_page("database/items/clover.html")
+        image = CHECK.ROOT / "images/Items/Item_Clover.png"
+        image.parent.mkdir(parents=True, exist_ok=True)
+        image.write_bytes(b"not-an-image")
+        catalog = self.empty_catalog()
+        catalog["entities"]["items"].append(
+            {
+                "id": "clover",
+                "name": "Clover",
+                "aliases": [],
+                "page": "/database/items/clover",
+                "image": "/images/Items/Item_Clover.png",
+            }
+        )
+        report = CHECK.check_entities(
+            {"data": [{"items": ["clover"]}]}, catalog
+        )
+        self.assertEqual(report["gapCount"], 1)
+        self.assertIn("invalid or corrupt image file", report["gaps"][0]["reason"])
+
     def test_known_field_gap_warns_without_blocking(self):
         self.make_page("database/weapons/scythe.html")
         catalog = self.empty_catalog()
@@ -116,6 +137,7 @@ class LeaderboardEntityCheckTests(unittest.TestCase):
         )
         self.assertEqual(report["gapCount"], 0)
         self.assertEqual(report["knownGapCount"], 1)
+
     def test_run_objective_accepts_page_anchor_and_icon(self):
         self.make_page("guides/maps/graveyard/index.html", "crypt-keys")
         catalog = self.empty_catalog()
