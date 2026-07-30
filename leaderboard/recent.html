@@ -1056,6 +1056,7 @@
         </div>
     </footer>
 
+    <script src="/js/leaderboard-data-loader.js?v=20260730"></script>
     <script>
         // ============================================================
         // 🎯 配置区域 (生产环境版)
@@ -1139,22 +1140,8 @@
         // ============================================================
         async function loadRecentActivity() {
             try {
-                // 加上时间戳 t=... 防止浏览器缓存旧数据
-                const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
-                console.log('📡 Fetching data from:', url);
-
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    console.warn(`⚠️ Fetch failed with status: ${response.status}`);
-                    // 如果404，可能是文件还没生成，或者路径不对
-                    if(response.status === 404) {
-                        console.error('❌ leaderboard-data.json not found. Please verify file exists in root.');
-                    }
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const result = await response.json();
+                const loadResult = await window.MegabonkLeaderboardData.load(CONFIG.dataUrl, { kind: 'leaderboard', minRecords: 100 });
+                const result = loadResult.payload;
                 
                 // 兼容处理：数据可能直接是数组，也可能包裹在 {data: [...]} 里
                 // 优先取 result.data，如果没有就取 result 本身
@@ -1169,7 +1156,9 @@
                 leaderboardData = rawData;
                 sourceFetchedAt = result.fetched_at || null;
                 activeVersion = result.active_version || null;
-                document.getElementById('recent-source-status').textContent = `VERIFIED COMMUNITY SNAPSHOT · ${activeVersion ? 'V' + activeVersion : 'VERSION UNKNOWN'} · CHECKED HOURLY`;
+                document.getElementById('recent-source-status').textContent = loadResult.isCached
+                    ? `⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult).toUpperCase()} · ${activeVersion ? 'V' + activeVersion : 'VERSION UNKNOWN'}`
+                    : `VERIFIED COMMUNITY SNAPSHOT · ${activeVersion ? 'V' + activeVersion : 'VERSION UNKNOWN'} · CHECKED HOURLY`;
                 console.log(`✅ Successfully loaded ${leaderboardData.length} entries`);
 
                 processAndRender(currentDays);

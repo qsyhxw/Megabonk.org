@@ -1268,6 +1268,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         .ad-box{display:block;min-height:300px;margin:16px 0}
          @media (max-width:768px){.ad-box{min-height:280px}}
     </style>
+  <script src="/js/leaderboard-data-loader.js?v=20260730"></script>
   <script src="/js/entity-catalog.js"></script>
 </head>
 <body>
@@ -2409,9 +2410,8 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
             try {
                 await window.MegabonkEntities.ready;
-                const response = await fetch(`/data/leaderboard-meta.json?t=${Date.now()}`);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const meta = await response.json();
+                const loadResult = await window.MegabonkLeaderboardData.load('/data/leaderboard-meta.json', { kind: 'leaderboard-meta' });
+                const meta = loadResult.payload;
                 const editorialVersion = panel.dataset.editorialVersion;
                 const sourceVersion = meta.activeVersion || 'Unknown';
                 const supported = (meta.characters || [])
@@ -2419,15 +2419,16 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     .slice(0, 6);
 
                 document.getElementById('leaderboardSignalVersion').textContent = `Leaderboard v${sourceVersion}`;
-                document.getElementById('leaderboardSignalSample').textContent = meta.sampleScope || `Top ${formatLeaderboardNumber(meta.sampleSize)} ranked runs`;
+                document.getElementById('leaderboardSignalSample').textContent = (meta.sampleScope || `Top ${formatLeaderboardNumber(meta.sampleSize)} ranked runs`) + (loadResult.isCached ? ' · CACHED' : '');
 
                 const versionNote = document.getElementById('leaderboardVersionNote');
+                const cachedPrefix = loadResult.isCached ? `⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult)}. ` : '';
                 if (sourceVersion === editorialVersion) {
-                    versionNote.textContent = `The leaderboard and editorial guides both cover v${editorialVersion}. These exact setups show what succeeded in the Top ${meta.sampleSize}; they are evidence, not a guaranteed universal best Build.`;
+                    versionNote.textContent = `${cachedPrefix}The leaderboard and editorial guides both cover v${editorialVersion}. These exact setups show what succeeded in the Top ${meta.sampleSize}; they are evidence, not a guaranteed universal best Build.`;
                     versionNote.style.borderLeftColor = '#3ddc97';
                 } else {
                     versionNote.style.borderLeftColor = '#ffb703';
-                    versionNote.textContent = `Version guard: these ranked setups come from leaderboard v${sourceVersion}, while the editorial guides below are reviewed for v${editorialVersion}. Use the cards as proven run evidence, but check patch changes before copying a setup exactly.`;
+                    versionNote.textContent = `${cachedPrefix}Version guard: these ranked setups come from leaderboard v${sourceVersion}, while the editorial guides below are reviewed for v${editorialVersion}. Use the cards as proven run evidence, but check patch changes before copying a setup exactly.`;
                 }
 
                 grid.innerHTML = supported.map(entry => {

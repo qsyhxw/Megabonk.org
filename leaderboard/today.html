@@ -1067,6 +1067,7 @@
         </div>
     </footer>
 
+    <script src="/js/leaderboard-data-loader.js?v=20260730"></script>
     <script>
         // ============================================================
         // 🎯 配置区域
@@ -1294,14 +1295,8 @@
         // ============================================================
         async function loadTodayLeaderboard() {
             try {
-                const url = `${CONFIG.dataUrl}?t=${Date.now()}`;
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-
-                const result = await response.json();
+                const loadResult = await window.MegabonkLeaderboardData.load(CONFIG.dataUrl, { kind: 'leaderboard', minRecords: 100 });
+                const result = loadResult.payload;
                 leaderboardData = result.data || [];
                 
                 const todayData = filterTodayData(leaderboardData);
@@ -1313,6 +1308,9 @@
                 updateStats(todayData);
                 updateTrending(todayData);
                 updateLastUpdateTime(result.fetched_at);
+                if (loadResult.isCached) {
+                    document.getElementById('last-update').innerHTML = `<span>⚠️</span><span>${window.MegabonkLeaderboardData.cachedStatus(loadResult)}</span>`;
+                }
 
             } catch (error) {
                 console.error('Failed to load data:', error);

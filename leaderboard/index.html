@@ -1807,6 +1807,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         </div>
     </footer>
 
+    <script src="/js/leaderboard-data-loader.js?v=20260730"></script>
     <script src="/js/entity-catalog.js?v=20260730"></script>
     <script>
         const CONFIG = {
@@ -2488,14 +2489,8 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
     try {
         console.log('📡 Loading data...');
         
-        const url = `${CONFIG.dataUrl}?t=${Date.now()}`; // 防止缓存
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-
-        const result = await response.json();
+        const loadResult = await window.MegabonkLeaderboardData.load(CONFIG.dataUrl, { kind: 'leaderboard', minRecords: 100 });
+        const result = loadResult.payload;
         console.log('✅ Data loaded successfully');
 
         leaderboardData = result.data || [];
@@ -2503,6 +2498,9 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         renderLeaderboard();
         updateStats(result);
         updateTime(result.fetched_at);
+        if (loadResult.isCached) {
+            document.getElementById('update-time').textContent += ` · ⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult)}`;
+        }
         updateLoadMoreButton();
         renderPopularBuilds(result.data || [], result);
         handleShareAnchor();

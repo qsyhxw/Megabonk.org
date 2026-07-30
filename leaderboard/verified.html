@@ -842,6 +842,7 @@
         </div>
     </footer>
 
+    <script src="/js/leaderboard-data-loader.js?v=20260730"></script>
     <script>
         function toggleMobileMenu() { document.getElementById('mainNav').classList.toggle('active'); }
         function toggleFAQ(element) {
@@ -851,13 +852,13 @@
         }
         async function loadVerifiedStatus() {
             try {
-                const response = await fetch(`/leaderboard-data.json?t=${Date.now()}`);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const snapshot = await response.json();
-                if (!Array.isArray(snapshot.data) || snapshot.data.length < 100) throw new Error('Incomplete snapshot');
+                const loadResult = await window.MegabonkLeaderboardData.load('/leaderboard-data.json', { kind: 'leaderboard', minRecords: 100 });
+                const snapshot = loadResult.payload;
                 const version = snapshot.active_version ? `v${snapshot.active_version}` : 'unknown patch';
-                document.getElementById('verified-status').textContent = `${snapshot.data.length.toLocaleString()} source-approved records · ${version}`;
-                document.getElementById('verified-snapshot-count').textContent = `${snapshot.data.length.toLocaleString()} approved community records; snapshot published ${snapshot.fetched_at ? new Date(snapshot.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'without a source timestamp'}.`;
+                document.getElementById('verified-status').textContent = `${snapshot.data.length.toLocaleString()} source-approved records · ${version}${loadResult.isCached ? ' · ⚠ CACHED' : ''}`;
+                document.getElementById('verified-snapshot-count').textContent = loadResult.isCached
+                    ? `${snapshot.data.length.toLocaleString()} approved community records; ⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult)}.`
+                    : `${snapshot.data.length.toLocaleString()} approved community records; snapshot published ${snapshot.fetched_at ? new Date(snapshot.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'without a source timestamp'}.`;
                 document.getElementById('verified-snapshot-version').textContent = `${version}; build analysis remains evidence and cannot overwrite newer editorial recommendations.`;
             } catch (error) {
                 document.getElementById('verified-status').textContent = 'Community snapshot temporarily unavailable';

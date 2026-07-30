@@ -28,6 +28,7 @@ DEFAULT_OUTPUT = Path("leaderboard-data.json")
 DEFAULT_META_OUTPUT = Path("data/leaderboard-meta.json")
 DEFAULT_CHARACTER_META_OUTPUT = Path("data/character-build-signals.json")
 MINIMUM_VALID_RECORDS = 100
+MINIMUM_RETAINED_RATIO = 0.70
 META_SCHEMA_VERSION = 2
 CHARACTER_META_SCHEMA_VERSION = 1
 BUILD_SAMPLE_LIMIT = 100
@@ -341,7 +342,11 @@ def normalize_records(
     return normalized
 
 
-def validate(records: list[dict[str, Any]]) -> None:
+def validate(
+    records: list[dict[str, Any]],
+    previous_payload: dict[str, Any] | None = None,
+    active_version: str | None = None,
+) -> None:
     if len(records) < MINIMUM_VALID_RECORDS:
         raise ValueError(
             f"Only {len(records)} records found; refusing to replace known-good data"
@@ -357,6 +362,34 @@ def validate(records: list[dict[str, Any]]) -> None:
     ]
     if invalid:
         raise ValueError(f"Required fields are missing at ranks: {invalid[:10]}")
+
+    previous_payload = previous_payload or {}
+    previous_records = previous_payload.get("data") or []
+    if not previous_records:
+        return
+
+    previous_version = previous_payload.get("active_version")
+    version_changed = bool(
+        previous_version
+        and active_version
+        and str(previous_version) != str(active_version)
+    )
+    if version_changed:
+        print(
+            f"Leaderboard version changed from {previous_version} to {active_version}; "
+            "skipping the same-version retention-ratio guard"
+        )
+        return
+
+    minimum_retained = math.ceil(len(previous_records) * MINIMUM_RETAINED_RATIO)
+    if len(records) < minimum_retained:
+        version_label = active_version or previous_version or "unknown"
+        raise ValueError(
+            f"Leaderboard shrank from {len(previous_records)} to {len(records)} "
+            f"records on version {version_label}; minimum safe count is "
+            f"{minimum_retained} ({MINIMUM_RETAINED_RATIO:.0%}). Refusing to "
+            "replace known-good data"
+        )
 
 
 def top_values(records: list[dict[str, Any]], field: str, limit: int = 8) -> list[dict[str, Any]]:
@@ -679,9 +712,9 @@ def main() -> int:
 
     previous = previous_record_index(args.output)
     records = normalize_records(source_records, previous, observed_at)
-    validate(records)
-
     active_version = state.get("$sbuildVersion")
+    validate(records, previous_payload, active_version)
+
     output = {
         "source": "Leaderboard.gg Megabonk community leaderboard",
         "source_url": SOURCE_URL,

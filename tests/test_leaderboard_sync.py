@@ -55,6 +55,50 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
         self.assertEqual(signal["availableRuns"], 40)
         self.assertEqual(signal["confidence"], "strong")
 
+    def make_valid_records(self, count):
+        return [
+            {
+                "rank": rank,
+                "submissionId": f"submission-{rank}",
+                "playerName": f"Player {rank}",
+                "character": "fox",
+                "kills": 1000 - rank,
+                "createdAt": {"_seconds": 1_700_000_000 + rank},
+            }
+            for rank in range(1, count + 1)
+        ]
+
+    def test_same_version_rejects_more_than_thirty_percent_record_loss(self):
+        previous = {
+            "active_version": "1.0.65",
+            "data": self.make_valid_records(652),
+        }
+        with self.assertRaisesRegex(ValueError, "minimum safe count is 457"):
+            SYNC.validate(
+                self.make_valid_records(456), previous, "1.0.65"
+            )
+
+    def test_same_version_accepts_exact_seventy_percent_ceiling(self):
+        previous = {
+            "active_version": "1.0.65",
+            "data": self.make_valid_records(652),
+        }
+        SYNC.validate(self.make_valid_records(457), previous, "1.0.65")
+
+    def test_version_change_uses_absolute_minimum_not_old_record_ratio(self):
+        previous = {
+            "active_version": "1.0.65",
+            "data": self.make_valid_records(652),
+        }
+        SYNC.validate(self.make_valid_records(100), previous, "1.0.70")
+
+    def test_unknown_version_is_treated_conservatively(self):
+        previous = {
+            "active_version": "1.0.65",
+            "data": self.make_valid_records(652),
+        }
+        with self.assertRaisesRegex(ValueError, "Refusing to replace known-good data"):
+            SYNC.validate(self.make_valid_records(456), previous, None)
     def test_top_values_breaks_ties_deterministically(self):
         records = [
             {"items": ["zeta", "alpha"]},

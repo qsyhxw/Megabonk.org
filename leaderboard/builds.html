@@ -980,6 +980,7 @@
         </div>
     </footer>
 
+    <script src="/js/leaderboard-data-loader.js?v=20260730"></script>
     <script src="/js/entity-catalog.js"></script>
     <script>
         // Configuration
@@ -2425,10 +2426,8 @@
         async function loadAndAnalyzeData() {
             try {
                 await window.MegabonkEntities.ready;
-                const response = await fetch(`${CONFIG.dataUrl}?t=${Date.now()}`);
-                if (!response.ok) throw new Error('Failed to load data');
-                
-                const result = await response.json();
+                const loadResult = await window.MegabonkLeaderboardData.load(CONFIG.dataUrl, { kind: 'leaderboard', minRecords: 100 });
+                const result = loadResult.payload;
                 const data = result.data || [];
                 if (!Array.isArray(data) || data.length < 100) throw new Error('Incomplete leaderboard snapshot');
 
@@ -2446,8 +2445,9 @@
                     ? new Date(result.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
                     : 'unknown sync time';
 
-                document.getElementById('data-source-badge').textContent = `Top ${topData.length} Verified Runs · ${versionLabel}`;
-                document.getElementById('build-source-note').innerHTML = `Source: <a href="https://megabonk.leaderboard.gg/builds" target="_blank" rel="noopener noreferrer" style="color:#4f63d8;font-weight:700;">Leaderboard.gg</a> · ${versionLabel} · ${topData.length} ranked-run sample · snapshot published ${syncLabel}. Usage frequency is evidence, not an automatic tier rating or editorial recommendation.`;
+                const cacheLabel = loadResult.isCached ? ` · ⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult)}` : '';
+                document.getElementById('data-source-badge').textContent = `Top ${topData.length} Verified Runs · ${versionLabel}${loadResult.isCached ? ' · CACHED' : ''}`;
+                document.getElementById('build-source-note').textContent = `${versionLabel} · ${topData.length} ranked-run sample · snapshot published ${syncLabel}${cacheLabel}. Usage frequency is evidence, not an automatic tier rating or editorial recommendation.`;
                 
                 renderCharacterNav(analysis.characters);
                 renderMetaOverview(analysis);

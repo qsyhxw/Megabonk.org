@@ -218,7 +218,7 @@
     return 'Single-run evidence';
   }
 
-  function render(container, meta, patchState) {
+  function render(container, meta, patchState, loadResult) {
     const character = container.dataset.characterBuildSignals;
     const characterEntry = window.MegabonkEntities?.get('characters', character);
     const signal = (meta.characterSignals || []).find(entry => {
@@ -243,7 +243,9 @@
       ? `Version matched: these records use v${escapeHtml(sourceVersion)}. They supplement the reviewed guide; they do not replace it.`
       : `Version guard: leaderboard records currently use v${escapeHtml(sourceVersion)}, while the site tracks v${escapeHtml(siteVersion)}. Treat these as historical performance evidence until the source board accepts the newer patch.`;
 
-    container.innerHTML = `<div class="cbs-head">
+    const cacheNotice = loadResult?.isCached ? `<p class="cbs-version-guard">⚠ ${escapeHtml(window.MegabonkLeaderboardData.cachedStatus(loadResult))}. The latest request failed, so this proven snapshot remains visible.</p>` : '';
+
+    container.innerHTML = `${cacheNotice}<div class="cbs-head">
       <div class="cbs-heading">
         <p class="cbs-kicker">Automatically refreshed performance evidence</p>
         <h2 class="cbs-title">Current ${escapeHtml(characterName)} Leaderboard Builds</h2>
@@ -267,14 +269,13 @@
     try {
       await window.MegabonkEntities?.ready;
       const cacheBust = Date.now();
-      const [metaResponse, patchResponse] = await Promise.all([
-        fetch(`/data/character-build-signals.json?t=${cacheBust}`),
+      const [loadResult, patchResponse] = await Promise.all([
+        window.MegabonkLeaderboardData.load('/data/character-build-signals.json', { kind: 'character-signals' }),
         fetch(`/data/patch-notes-state.json?t=${cacheBust}`).catch(() => null)
       ]);
-      if (!metaResponse.ok) throw new Error(`Leaderboard metadata returned ${metaResponse.status}`);
-      const meta = await metaResponse.json();
+      const meta = loadResult.payload;
       const patchState = patchResponse && patchResponse.ok ? await patchResponse.json() : null;
-      containers.forEach(container => render(container, meta, patchState));
+      containers.forEach(container => render(container, meta, patchState, loadResult));
     } catch (error) {
       console.error('Character leaderboard Build signals unavailable:', error);
       containers.forEach(container => {

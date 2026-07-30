@@ -484,6 +484,7 @@
         <p><a href="https://megabonk.org/privacy-policy/">Privacy Policy</a> | Not affiliated with the official game or developer</p>
     </footer>
 
+    <script src="/js/leaderboard-data-loader.js?v=20260730"></script>
     <script>
         document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
             const nav = document.querySelector('.main-nav');
@@ -492,13 +493,13 @@
         });
         async function loadCommunityStatus() {
             try {
-                const response = await fetch(`/leaderboard-data.json?t=${Date.now()}`);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const snapshot = await response.json();
-                if (!Array.isArray(snapshot.data) || snapshot.data.length < 100) throw new Error('Incomplete snapshot');
+                const loadResult = await window.MegabonkLeaderboardData.load('/leaderboard-data.json', { kind: 'leaderboard', minRecords: 100 });
+                const snapshot = loadResult.payload;
                 document.getElementById('community-run-count').textContent = `${snapshot.data.length.toLocaleString()} approved records`;
                 document.getElementById('community-patch').textContent = snapshot.active_version ? `v${snapshot.active_version}` : 'Version not supplied';
-                document.getElementById('community-sync-time').textContent = snapshot.fetched_at ? new Date(snapshot.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'Timestamp unavailable';
+                document.getElementById('community-sync-time').textContent = loadResult.isCached
+                    ? `⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult)}`
+                    : (snapshot.fetched_at ? new Date(snapshot.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'Timestamp unavailable');
             } catch (error) {
                 document.getElementById('community-run-count').textContent = 'Snapshot temporarily unavailable';
                 document.getElementById('community-patch').textContent = 'See source for current patch';

@@ -66,7 +66,8 @@ class BuildHubTests(unittest.TestCase):
         self.assertIn('article:modified_time" content="2026-07-29T00:00:00+08:00', self.source)
         self.assertIn("Last reviewed: July 29, 2026", self.source)
         self.assertIn("latest synchronized Top 100 sample", self.source)
-        self.assertIn("fetch(`/data/leaderboard-meta.json?t=${Date.now()}`)", self.source)
+        self.assertIn("MegabonkLeaderboardData.load('/data/leaderboard-meta.json'", self.source)
+        self.assertIn("leaderboard-data-loader.js", self.source)
         self.assertIn("Version guard:", self.source)
         self.assertNotIn("current-version Top 100", self.source)
 
