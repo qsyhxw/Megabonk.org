@@ -1,5 +1,6 @@
 import importlib.util
 import unittest
+from unittest import mock
 from pathlib import Path
 
 
@@ -80,6 +81,41 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
             }
         )
         self.assertEqual(summary["items"], ["clover"])
+
+    def test_http_fetch_retries_before_browser_fallback(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self):
+                return b"<html>leaderboard</html>"
+
+        with mock.patch.object(
+            SYNC.urllib.request,
+            "urlopen",
+            side_effect=[TimeoutError("temporary timeout"), FakeResponse()],
+        ) as urlopen, mock.patch.object(SYNC.time, "sleep") as sleep:
+            html = SYNC.fetch_source_html()
+
+        self.assertEqual(html, "<html>leaderboard</html>")
+        self.assertEqual(urlopen.call_count, 2)
+        self.assertEqual(
+            [call.kwargs["timeout"] for call in urlopen.call_args_list],
+            [SYNC.HTTP_TIMEOUT_SECONDS, SYNC.HTTP_TIMEOUT_SECONDS],
+        )
+        sleep.assert_called_once_with(2)
+
+    def test_browser_fallback_uses_bounded_payload_readiness(self):
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        self.assertEqual(SYNC.HTTP_ATTEMPTS, 3)
+        self.assertEqual(SYNC.HTTP_TIMEOUT_SECONDS, 25)
+        self.assertEqual(SYNC.BROWSER_ATTEMPTS, 2)
+        self.assertIn('wait_until="commit"', source)
+        self.assertIn('page.wait_for_selector(', source)
+        self.assertIn('{"image", "media", "font", "stylesheet"}', source)
 
     def test_workflow_installs_browser_fallback(self):
         workflow = (

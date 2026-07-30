@@ -32,6 +32,11 @@ META_SCHEMA_VERSION = 2
 CHARACTER_META_SCHEMA_VERSION = 1
 BUILD_SAMPLE_LIMIT = 100
 CHARACTER_SAMPLE_LIMIT = 30
+HTTP_ATTEMPTS = 3
+HTTP_TIMEOUT_SECONDS = 25
+BROWSER_ATTEMPTS = 2
+BROWSER_NAV_TIMEOUT_MS = 45_000
+BROWSER_PAYLOAD_TIMEOUT_MS = 45_000
 NON_BUILD_ITEM_IDS = {"cryptkey"}
 USER_AGENT = (
     "Mozilla/5.0 (compatible; Megabonk.org leaderboard sync; "
@@ -145,32 +150,75 @@ def unique_strings(values: Any) -> list[str]:
 def fetch_source_html() -> str:
     request = urllib.request.Request(
         SOURCE_URL,
-        headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml"},
+        headers={
+            "User-Agent": USER_AGENT,
+            "Accept": "text/html,application/xhtml+xml",
+            "Accept-Language": "en-US,en;q=0.8",
+        },
     )
-    last_error: Exception | None = None
-    for attempt in range(3):
+    errors: list[str] = []
+    for attempt in range(1, HTTP_ATTEMPTS + 1):
         try:
-            with urllib.request.urlopen(request, timeout=45) as response:
+            with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT_SECONDS) as response:
                 return response.read().decode("utf-8")
         except Exception as error:  # pragma: no cover - network fallback
-            last_error = error
-            time.sleep(2 * (attempt + 1))
+            errors.append(f"HTTP attempt {attempt}/{HTTP_ATTEMPTS}: {error}")
+            if attempt < HTTP_ATTEMPTS:
+                time.sleep(2 * attempt)
 
     try:  # Cloudflare/browser fallback used by the existing workflow.
         from playwright.sync_api import sync_playwright
 
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=True)
-            page = browser.new_page(user_agent=USER_AGENT, viewport={"width": 1400, "height": 900})
-            page.goto(SOURCE_URL, timeout=90_000, wait_until="domcontentloaded")
-            page.wait_for_selector("#__NUXT_DATA__", timeout=60_000)
-            html = page.content()
-            browser.close()
-            return html
-    except Exception as fallback_error:  # pragma: no cover - network failure
-        raise RuntimeError(
-            f"Unable to fetch {SOURCE_URL}: {last_error}; browser fallback: {fallback_error}"
-        ) from fallback_error
+            try:
+                for attempt in range(1, BROWSER_ATTEMPTS + 1):
+                    context = browser.new_context(
+                        user_agent=USER_AGENT,
+                        viewport={"width": 1400, "height": 900},
+                        locale="en-US",
+                    )
+                    page = context.new_page()
+                    page.route(
+                        "**/*",
+                        lambda route: route.abort()
+                        if route.request.resource_type
+                        in {"image", "media", "font", "stylesheet"}
+                        else route.continue_(),
+                    )
+                    try:
+                        # Waiting for DOMContentLoaded caused intermittent 90-second
+                        # stalls even after the HTML response had started. Commit plus
+                        # the payload selector is the only readiness signal we need.
+                        page.goto(
+                            SOURCE_URL,
+                            timeout=BROWSER_NAV_TIMEOUT_MS,
+                            wait_until="commit",
+                        )
+                        page.wait_for_selector(
+                            "#__NUXT_DATA__",
+                            state="attached",
+                            timeout=BROWSER_PAYLOAD_TIMEOUT_MS,
+                        )
+                        html = page.content()
+                        if 'id="__NUXT_DATA__"' not in html:
+                            raise ValueError("Nuxt payload was absent after browser load")
+                        return html
+                    except Exception as error:  # pragma: no cover - network fallback
+                        errors.append(
+                            f"Browser attempt {attempt}/{BROWSER_ATTEMPTS}: {error}"
+                        )
+                    finally:
+                        context.close()
+                    if attempt < BROWSER_ATTEMPTS:
+                        time.sleep(3 * attempt)
+            finally:
+                browser.close()
+    except Exception as error:  # pragma: no cover - missing browser/runtime failure
+        errors.append(f"Browser fallback setup: {error}")
+
+    detail = "; ".join(errors[-5:])
+    raise RuntimeError(f"Unable to fetch {SOURCE_URL} after bounded retries: {detail}")
 
 
 def decode_source(html: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
