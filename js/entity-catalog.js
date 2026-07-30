@@ -18,7 +18,7 @@
     return result;
   }
 
-  const ready = fetch('/data/entity-catalog.json')
+  const ready = fetch('/data/entity-catalog.json', { cache: 'no-cache' })
     .then(response => {
       if (!response.ok) throw new Error(`Entity catalog returned ${response.status}`);
       return response.json();

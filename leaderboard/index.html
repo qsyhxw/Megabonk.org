@@ -1038,24 +1038,6 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             box-shadow: 0 6px 16px rgba(102, 126, 234, 0.25);
         }
 
-        /* ⭐ 悬停时显示"点击查看"提示 */
-        .item-card::after {
-            content: 'Click to view';
-            position: absolute;
-            bottom: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7rem;
-            color: #667eea;
-            opacity: 0;
-            transition: opacity 0.2s;
-            white-space: nowrap;
-            pointer-events: none;
-        }
-
-        .item-card:hover::after {
-            opacity: 1;
-        }
 
         .item-card.weapon {
             border-color: #ffcdd2;
@@ -1825,7 +1807,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         </div>
     </footer>
 
-    <script src="/js/entity-catalog.js"></script>
+    <script src="/js/entity-catalog.js?v=20260730"></script>
     <script>
         const CONFIG = {
             dataUrl: '/leaderboard-data.json',
@@ -2406,8 +2388,31 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             nav.classList.toggle('active');
         }
 
-        // ⭐ 精确获取物品URL - 使用映射表
+        const ENTITY_TYPE_MAP = {
+            weapon: 'weapons',
+            tome: 'tomes',
+            item: 'items',
+            character: 'characters'
+        };
+
+        function getEntityData(name, type) {
+            const catalogType = ENTITY_TYPE_MAP[type];
+            return catalogType
+                ? window.MegabonkEntities?.get(catalogType, name)
+                : null;
+        }
+
+        function getDisplayName(name, type) {
+            return getEntityData(name, type)?.name || formatName(name);
+        }
+
+        // Prefer the shared entity catalog, then retain the legacy map as a fallback.
         function getItemUrl(name, type) {
+            const entity = getEntityData(name, type);
+            if (entity?.page) {
+                return entity.page;
+            }
+
             const normalizedName = name.toLowerCase().replace(/[^a-z0-9 ]/g, '');
             const map = EXACT_URL_MAP[type + 's'] || {};
             
@@ -2428,6 +2433,14 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         }
 
         function getIcon(name, type) {
+            const entity = getEntityData(name, type);
+            if (entity?.image) {
+                return `<img src="${entity.image}" alt="${escapeHtml(entity.name || name)}">`;
+            }
+            if (entity?.icon) {
+                return entity.icon;
+            }
+
             const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, '');
             
             let iconMap;
@@ -2827,7 +2840,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     <div class="items-grid">
                         ${weapons.map(w => {
                             const weaponUrl = getItemUrl(w, 'weapon');
-                            const weaponName = formatName(w);
+                            const weaponName = getDisplayName(w, 'weapon');
                             return `
                                 <a href="${weaponUrl}" 
                                    target="_blank" 
@@ -2849,7 +2862,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     <div class="items-grid">
                         ${tomes.map(t => {
                             const tomeUrl = getItemUrl(t, 'tome');
-                            const tomeName = formatName(t);
+                            const tomeName = getDisplayName(t, 'tome');
                             return `
                                 <a href="${tomeUrl}" 
                                    target="_blank" 
@@ -2871,7 +2884,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     <div class="items-grid">
                         ${items.map(i => {
                             const itemUrl = getItemUrl(i, 'item');
-                            const itemName = formatName(i);
+                            const itemName = getDisplayName(i, 'item');
                             return `
                                 <a href="${itemUrl}" 
                                    target="_blank" 
@@ -3380,7 +3393,12 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         }
 
         // Load on page load
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await window.MegabonkEntities?.ready;
+            } catch (error) {
+                console.warn('Entity catalog unavailable; using built-in leaderboard fallbacks.', error);
+            }
             loadLeaderboard();
             
             // Recheck the published snapshot every 15 minutes

@@ -20,6 +20,12 @@ class EntityCatalogTests(unittest.TestCase):
         cls.leaderboard = json.loads(
             (ROOT / "leaderboard-data.json").read_text(encoding="utf-8")
         )
+        cls.leaderboard_page = (
+            ROOT / "leaderboard" / "index.html"
+        ).read_text(encoding="utf-8")
+        cls.catalog_script = (
+            ROOT / "js" / "entity-catalog.js"
+        ).read_text(encoding="utf-8")
 
     def test_declared_local_files_exist(self):
         for entries in self.catalog["entities"].values():
@@ -96,5 +102,31 @@ class EntityCatalogTests(unittest.TestCase):
         )
 
 
+    def test_reported_leaderboard_item_images_are_declared(self):
+        item_index = {
+            normalize(entry["id"]): entry
+            for entry in self.catalog["entities"]["items"]
+        }
+        for entity_id in ("bobslight", "oldmask", "pot", "wizardshat"):
+            with self.subTest(entity_id=entity_id):
+                entry = item_index[entity_id]
+                self.assertTrue(entry.get("image"))
+                self.assertTrue(entry.get("page"))
+
+    def test_global_leaderboard_modal_uses_shared_entity_catalog(self):
+        page = self.leaderboard_page
+        self.assertIn("/js/entity-catalog.js?v=20260730", page)
+        self.assertIn("window.MegabonkEntities?.get(catalogType, name)", page)
+        self.assertIn("await window.MegabonkEntities?.ready", page)
+        self.assertIn("getDisplayName(i, 'item')", page)
+        self.assertIn("getDisplayName(w, 'weapon')", page)
+        self.assertIn("getDisplayName(t, 'tome')", page)
+        self.assertNotIn("content: 'Click to view';", page)
+
+    def test_entity_catalog_revalidates_automated_updates(self):
+        self.assertIn(
+            "fetch('/data/entity-catalog.json', { cache: 'no-cache' })",
+            self.catalog_script,
+        )
 if __name__ == "__main__":
     unittest.main()
