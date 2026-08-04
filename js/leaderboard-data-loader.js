@@ -21,9 +21,15 @@
       }
       return payload;
     }
-    if (kind === 'leaderboard-meta' || kind === 'character-signals') {
+    if (kind === 'leaderboard-meta') {
       if (!Array.isArray(payload.characters) || payload.characters.length === 0) {
-        throw new Error(`${kind} snapshot has no character records`);
+        throw new Error('leaderboard-meta snapshot has no character records');
+      }
+      return payload;
+    }
+    if (kind === 'character-signals') {
+      if (!Array.isArray(payload.characterSignals) || payload.characterSignals.length === 0) {
+        throw new Error('character-signals snapshot has no character records');
       }
       return payload;
     }

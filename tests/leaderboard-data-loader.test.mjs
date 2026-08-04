@@ -67,6 +67,23 @@ test('metadata snapshots use independent validation and cache keys', async () =>
   assert.equal(store.size, 1);
 });
 
+test('character signal snapshots validate their real characterSignals field', async () => {
+  const payload = JSON.parse(fs.readFileSync(new URL('../data/character-build-signals.json', import.meta.url), 'utf8'));
+  const { api, store } = harness(async () => ({ ok: true, json: async () => payload }));
+  const result = await api.load('/data/character-build-signals.json', { kind: 'character-signals' });
+  assert.equal(result.isCached, false);
+  assert.equal(result.payload.characterSignals.length, 21);
+  assert.equal(store.size, 1);
+});
+
+test('character signal validation rejects the leaderboard-meta field shape', async () => {
+  const wrongShape = { characters: [{ character: 'fox' }] };
+  const { api } = harness(async () => ({ ok: true, json: async () => wrongShape }));
+  await assert.rejects(
+    api.load('/data/character-build-signals.json', { kind: 'character-signals' }),
+    /character-signals snapshot has no character records/
+  );
+});
 test('failure without a valid cache remains an explicit error', async () => {
   const { api } = harness(async () => { throw new Error('offline'); });
   await assert.rejects(api.load('/leaderboard-data.json', { kind: 'leaderboard' }), /offline/);
