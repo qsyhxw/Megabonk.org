@@ -141,8 +141,8 @@ def main() -> int:
         print(f"Unknown alert type: {kind}", file=sys.stderr)
         return 2
 
-    send_email(subject, body, os.environ)
-    return 0
+    sent = send_email(subject, body, os.environ)
+    return 0 if sent else 1
 
 
 if __name__ == "__main__":

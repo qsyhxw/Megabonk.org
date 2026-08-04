@@ -31,10 +31,10 @@ def main() -> int:
     recipient = os.environ.get("PATCH_ALERT_EMAIL")
     if not all((username, password, recipient)):
         print(
-            "::warning::Leaderboard entity alert skipped because Gmail Secrets "
+            "::error::Leaderboard entity alert failed because Gmail Secrets "
             "are incomplete."
         )
-        return 0
+        return 1
 
     report = load_report(args.report)
     gaps = report.get("gaps", [])

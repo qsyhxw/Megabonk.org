@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '41 */6 * * *'
   workflow_dispatch:
+    inputs:
+      send_test_email:
+        description: Send a Gmail configuration test after a successful update
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -62,3 +68,36 @@ jobs:
 
           echo "Unable to push player-count update after 3 attempts." >&2
           exit 1
+
+  notify-failure:
+    needs: update-player-count
+    if: ${{ always() && needs.update-player-count.result != 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send player-count failure email
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+          AUTOMATION_DETAILS: The Steam player-count fetch, validation or Git publish step failed.
+        run: python scripts/send_automation_alert.py failure --name "Update Megabonk Player Count"
+
+  test-email:
+    needs: update-player-count
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email == true && needs.update-player-count.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send requested Gmail test
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_automation_alert.py test --name "Update Megabonk Player Count"

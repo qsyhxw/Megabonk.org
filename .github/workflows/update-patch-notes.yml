@@ -156,10 +156,19 @@ jobs:
           PATCH_COMMIT_SHA: ${{ steps.publish.outputs.commit_sha }}
         run: python scripts/send_patch_alert.py update
 
-      - name: Send workflow failure email
-        if: ${{ failure() }}
+  notify-failure:
+    needs: update-patch-notes
+    if: ${{ always() && needs.update-patch-notes.result != 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send Patch Notes failure email
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
-        run: python scripts/send_patch_alert.py failure
+          AUTOMATION_DETAILS: The Steam announcement fetch, validation, page generation or Git publish step failed.
+        run: python scripts/send_automation_alert.py failure --name "Update Megabonk Patch Notes"

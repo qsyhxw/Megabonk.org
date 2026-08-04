@@ -8,6 +8,13 @@ on:
     paths:
       - '**.html'
       - 'generate_tr_v2.py'
+  workflow_dispatch:
+    inputs:
+      send_test_email:
+        description: Send a Gmail configuration test after a successful build
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -19,15 +26,18 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.9'
+        python-version: '3.12'
 
     - name: Run translation script
       run: python generate_tr_v2.py
@@ -40,7 +50,48 @@ jobs:
         if [[ -n $(git status --porcelain) ]]; then
           git add tr/
           git commit -m "Auto-generate Turkish pages via Action"
-          git push
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          echo "Unable to push Turkish page updates after 3 attempts." >&2
+          exit 1
         else
           echo "No changes to commit"
         fi
+
+  notify-failure:
+    needs: build
+    if: ${{ always() && needs.build.result != 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send Turkish build failure email
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+          AUTOMATION_DETAILS: Turkish page generation or Git publishing failed.
+        run: python scripts/send_automation_alert.py failure --name "Build Turkish Pages"
+
+  test-email:
+    needs: build
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email == true && needs.build.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send requested Gmail test
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_automation_alert.py test --name "Build Turkish Pages"

@@ -5,6 +5,12 @@ on:
     # Hourly at minute 17. The scraper commits only when the source dataset changes.
     - cron: '17 * * * *'
   workflow_dispatch:
+    inputs:
+      send_test_email:
+        description: Send a Gmail configuration test after a successful sync
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -70,12 +76,35 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
 
+  notify-failure:
+    needs: sync-leaderboard
+    if: ${{ always() && needs.sync-leaderboard.result != 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Send leaderboard failure email
-        if: ${{ failure() }}
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
-        run: >-
-          python scripts/send_leaderboard_entity_alert.py
-          --report "$RUNNER_TEMP/leaderboard-entity-gaps.json"
+          AUTOMATION_DETAILS: The leaderboard fetch, validation, entity coverage check or Git publish step failed.
+        run: python scripts/send_automation_alert.py failure --name "Sync Leaderboard Data"
+
+  test-email:
+    needs: sync-leaderboard
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email == true && needs.sync-leaderboard.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send requested Gmail test
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_automation_alert.py test --name "Sync Leaderboard Data"

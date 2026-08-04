@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '41 2 * * *'
   workflow_dispatch:
+    inputs:
+      send_test_email:
+        description: Send a Gmail configuration test after a successful check
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -81,10 +87,35 @@ jobs:
           PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
         run: python scripts/send_entity_sync_alert.py
 
-      - name: Send failure email
-        if: ${{ failure() }}
+  notify-failure:
+    needs: compare-entities
+    if: ${{ always() && needs.compare-entities.result != 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send entity-monitor failure email
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
-        run: python scripts/send_entity_sync_alert.py
+          AUTOMATION_DETAILS: The Wiki comparison, entity validation, image download or Git publish step failed.
+        run: python scripts/send_automation_alert.py failure --name "Monitor Megabonk Entity Catalog"
+
+  test-email:
+    needs: compare-entities
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email == true && needs.compare-entities.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send requested Gmail test
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_automation_alert.py test --name "Monitor Megabonk Entity Catalog"

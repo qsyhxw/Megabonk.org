@@ -1,0 +1,90 @@
+name: Monitor Megabonk Production Health
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+    - cron: '11 0 * * *'
+  workflow_dispatch:
+    inputs:
+      send_test_email:
+        description: Send a Gmail configuration test after the health check
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  production-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install browser health checker
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.54.0
+          python -m playwright install --with-deps chromium
+
+      - name: Run monitor tests
+        run: python -m unittest tests.test_automation_monitoring tests.test_character_build_signal_pages tests.test_leaderboard_cache_loader -v
+
+      - name: Check production feeds and all 21 Best Build pages
+        run: python scripts/check_production_health.py
+
+  notify-failure:
+    needs: production-health
+    if: ${{ always() && needs.production-health.result != 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send production health failure email
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+          AUTOMATION_DETAILS: One or more production data feeds or character Build pages failed the live health check.
+        run: python scripts/send_automation_alert.py failure --name "Production Site Health"
+
+  daily-heartbeat:
+    needs: production-health
+    if: ${{ github.event_name == 'schedule' && github.event.schedule == '11 0 * * *' && needs.production-health.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send daily health email
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+          AUTOMATION_DETAILS: All core JSON feeds and 21 character Best Build pages rendered successfully.
+        run: python scripts/send_automation_alert.py heartbeat --name "Production Site Health"
+
+  test-email:
+    needs: production-health
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email == true && needs.production-health.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send requested Gmail test
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+        run: python scripts/send_automation_alert.py test --name "Production Site Health"

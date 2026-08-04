@@ -19,8 +19,8 @@ def main() -> int:
     password = os.environ.get("GMAIL_APP_PASSWORD")
     recipient = os.environ.get("PATCH_ALERT_EMAIL")
     if not all((username, password, recipient)):
-        print("::warning::Entity alert skipped because Gmail Secrets are incomplete.")
-        return 0
+        print("::error::Entity alert failed because Gmail Secrets are incomplete.")
+        return 1
 
     report = (
         json.loads(REPORT.read_text(encoding="utf-8"))
