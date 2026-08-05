@@ -2,8 +2,8 @@ name: Monitor Megabonk Production Health
 
 on:
   schedule:
-    - cron: '23 */6 * * *'
-    - cron: '11 0 * * *'
+    - cron: '23 0 * * *'
+    - cron: '23 6,12,18 * * *'
   workflow_dispatch:
     inputs:
       send_test_email:
@@ -21,10 +21,10 @@ jobs:
     timeout-minutes: 12
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -37,15 +37,23 @@ jobs:
         run: python -m unittest tests.test_automation_monitoring tests.test_character_build_signal_pages tests.test_leaderboard_cache_loader -v
 
       - name: Check production feeds and all 21 Best Build pages
-        run: python scripts/check_production_health.py
+        shell: bash
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 >/tmp/megabonk-health-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          python scripts/check_production_health.py \
+            --base-url https://megabonk.org \
+            --browser-base-url http://127.0.0.1:4173 \
+            --local-html
 
   notify-failure:
     needs: production-health
     if: ${{ always() && needs.production-health.result != 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Send production health failure email
@@ -58,11 +66,11 @@ jobs:
 
   daily-heartbeat:
     needs: production-health
-    if: ${{ github.event_name == 'schedule' && github.event.schedule == '11 0 * * *' && needs.production-health.result == 'success' }}
+    if: ${{ github.event_name == 'schedule' && github.event.schedule == '23 0 * * *' && needs.production-health.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Send daily health email
@@ -78,8 +86,8 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email == true && needs.production-health.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Send requested Gmail test

@@ -97,7 +97,18 @@ def validate_feeds(base_url: str) -> list[str]:
     return errors
 
 
-def validate_rendered_builds(base_url: str, paths: list[str]) -> list[str]:
+def browser_path(path: str, local_html: bool = False) -> str:
+    """Resolve canonical production routes for a plain local HTTP server."""
+    if not local_html:
+        return path
+    if path.endswith("/"):
+        return path + "index.html"
+    return path + ".html"
+
+
+def validate_rendered_builds(
+    base_url: str, paths: list[str], local_html: bool = False
+) -> list[str]:
     from playwright.sync_api import sync_playwright
 
     errors: list[str] = []
@@ -107,8 +118,9 @@ def validate_rendered_builds(base_url: str, paths: list[str]) -> list[str]:
         page = context.new_page()
         for path in paths:
             try:
+                rendered_path = browser_path(path, local_html)
                 response = page.goto(
-                    base_url.rstrip("/") + path,
+                    base_url.rstrip("/") + rendered_path,
                     wait_until="domcontentloaded",
                     timeout=30_000,
                 )
@@ -135,6 +147,15 @@ def validate_rendered_builds(base_url: str, paths: list[str]) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", default=DEFAULT_BASE_URL)
+    parser.add_argument(
+        "--browser-base-url",
+        help="Optional separate origin used for browser rendering checks",
+    )
+    parser.add_argument(
+        "--local-html",
+        action="store_true",
+        help="Resolve clean routes to .html/index.html for a plain local server",
+    )
     parser.add_argument("--skip-browser", action="store_true")
     args = parser.parse_args()
     paths = canonical_build_paths()
@@ -143,7 +164,8 @@ def main() -> int:
         errors.append(f"Local canonical Build inventory contains {len(paths)} pages, expected 21")
     errors.extend(validate_feeds(args.base_url))
     if not args.skip_browser and len(paths) == 21:
-        errors.extend(validate_rendered_builds(args.base_url, paths))
+        browser_base_url = args.browser_base_url or args.base_url
+        errors.extend(validate_rendered_builds(browser_base_url, paths, args.local_html))
 
     checked_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     if errors:

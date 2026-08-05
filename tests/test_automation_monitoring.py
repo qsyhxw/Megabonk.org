@@ -49,6 +49,20 @@ class ProductionHealthTests(unittest.TestCase):
         self.assertIn("/guides/builds/dicehead-best-build", paths)
         self.assertIn("/guides/builds/roberto-best-build/", paths)
 
+    def test_local_browser_routes_resolve_static_html_files(self):
+        self.assertEqual(
+            check_production_health.browser_path(
+                "/guides/builds/dicehead-best-build", local_html=True
+            ),
+            "/guides/builds/dicehead-best-build.html",
+        )
+        self.assertEqual(
+            check_production_health.browser_path(
+                "/guides/builds/roberto-best-build/", local_html=True
+            ),
+            "/guides/builds/roberto-best-build/index.html",
+        )
+
     def test_health_workflow_has_failure_test_and_heartbeat_routes(self):
         source = (ROOT / ".github" / "workflows" / "production-health.yml").read_text(
             encoding="utf-8"
@@ -58,6 +72,13 @@ class ProductionHealthTests(unittest.TestCase):
         self.assertIn("send_test_email", source)
         self.assertIn("heartbeat", source)
         self.assertIn("send_automation_alert.py failure", source)
+        self.assertIn("python -m http.server 4173", source)
+        self.assertIn("--browser-base-url http://127.0.0.1:4173", source)
+        self.assertIn("--local-html", source)
+        self.assertIn("actions/checkout@v5", source)
+        self.assertIn("actions/setup-python@v6", source)
+        self.assertNotIn("actions/checkout@v4", source)
+        self.assertNotIn("actions/setup-python@v5", source)
 
     def test_all_automations_have_independent_failure_email_jobs(self):
         workflows = (
@@ -75,6 +96,7 @@ class ProductionHealthTests(unittest.TestCase):
                 self.assertIn("notify-failure:", source)
                 self.assertIn("always()", source)
                 self.assertIn("send_automation_alert.py failure", source)
+
 
     def test_legacy_leaderboard_workflow_is_removed(self):
         self.assertFalse(
