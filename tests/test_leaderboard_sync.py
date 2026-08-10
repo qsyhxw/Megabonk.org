@@ -1,5 +1,8 @@
 import importlib.util
+import json
+import tempfile
 import unittest
+from datetime import datetime, timedelta, timezone
 from unittest import mock
 from pathlib import Path
 
@@ -12,6 +15,19 @@ SPEC.loader.exec_module(SYNC)
 
 
 class LeaderboardBuildSignalsTests(unittest.TestCase):
+    def make_snapshot_set(self, fetched_at):
+        payload = {
+            "source_url": SYNC.SOURCE_URL,
+            "fetched_at": fetched_at,
+            "data": self.make_valid_records(SYNC.MINIMUM_VALID_RECORDS),
+        }
+        meta = {"schemaVersion": SYNC.META_SCHEMA_VERSION, "characters": [{}]}
+        character_meta = {
+            "schemaVersion": SYNC.CHARACTER_META_SCHEMA_VERSION,
+            "characterSignals": [{} for _ in range(21)],
+        }
+        return payload, meta, character_meta
+
     def make_run(self, character, rank, kills, created, weapons, tomes):
         return {
             "character": character,
@@ -160,6 +176,55 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
         self.assertIn('wait_until="commit"', source)
         self.assertIn('page.wait_for_selector(', source)
         self.assertIn('{"image", "media", "font", "stylesheet"}', source)
+
+    def test_recent_complete_snapshot_can_cover_temporary_source_failure(self):
+        now = datetime(2026, 8, 10, 0, 0, tzinfo=timezone.utc)
+        snapshots = self.make_snapshot_set(
+            (now - timedelta(hours=11)).isoformat().replace("+00:00", "Z")
+        )
+        self.assertTrue(SYNC.can_reuse_previous_snapshot(*snapshots, now=now))
+
+    def test_main_keeps_recent_snapshot_when_all_source_attempts_fail(self):
+        fetched_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+        payload, meta, character_meta = self.make_snapshot_set(fetched_at)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "leaderboard-data.json"
+            meta_output = root / "leaderboard-meta.json"
+            character_output = root / "character-build-signals.json"
+            output.write_text(json.dumps(payload), encoding="utf-8")
+            meta_output.write_text(json.dumps(meta), encoding="utf-8")
+            character_output.write_text(json.dumps(character_meta), encoding="utf-8")
+            argv = [
+                "sync_leaderboard.py",
+                "--output",
+                str(output),
+                "--meta-output",
+                str(meta_output),
+                "--character-meta-output",
+                str(character_output),
+            ]
+            with mock.patch.object(
+                SYNC, "fetch_source_html", side_effect=RuntimeError("source outage")
+            ), mock.patch("sys.argv", argv):
+                self.assertEqual(SYNC.main(), 0)
+
+    def test_stale_snapshot_cannot_hide_sustained_source_failure(self):
+        now = datetime(2026, 8, 10, 0, 0, tzinfo=timezone.utc)
+        snapshots = self.make_snapshot_set(
+            (now - timedelta(hours=13)).isoformat().replace("+00:00", "Z")
+        )
+        self.assertFalse(SYNC.can_reuse_previous_snapshot(*snapshots, now=now))
+
+    def test_incomplete_snapshot_cannot_be_used_as_fallback(self):
+        now = datetime(2026, 8, 10, 0, 0, tzinfo=timezone.utc)
+        payload, meta, character_meta = self.make_snapshot_set(now.isoformat())
+        character_meta["characterSignals"] = [{}]
+        self.assertFalse(
+            SYNC.can_reuse_previous_snapshot(
+                payload, meta, character_meta, now=now
+            )
+        )
 
     def test_workflow_installs_browser_fallback(self):
         workflow = (

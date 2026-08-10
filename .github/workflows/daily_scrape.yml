@@ -90,7 +90,7 @@ jobs:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
-          AUTOMATION_DETAILS: The leaderboard fetch, validation, entity coverage check or Git publish step failed.
+          AUTOMATION_DETAILS: The leaderboard source stayed unavailable beyond the 12-hour safe-cache window, validation failed, entity coverage failed, or Git publishing failed.
         run: python scripts/send_automation_alert.py failure --name "Sync Leaderboard Data"
 
   test-email:

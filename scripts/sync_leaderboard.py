@@ -29,6 +29,7 @@ DEFAULT_META_OUTPUT = Path("data/leaderboard-meta.json")
 DEFAULT_CHARACTER_META_OUTPUT = Path("data/character-build-signals.json")
 MINIMUM_VALID_RECORDS = 100
 MINIMUM_RETAINED_RATIO = 0.70
+MAX_STALE_FALLBACK_HOURS = 12.0
 META_SCHEMA_VERSION = 2
 CHARACTER_META_SCHEMA_VERSION = 1
 BUILD_SAMPLE_LIMIT = 100
@@ -280,6 +281,43 @@ def load_previous_payload(output_path: Path) -> dict[str, Any]:
     except (json.JSONDecodeError, OSError):
         return {}
 
+
+def can_reuse_previous_snapshot(
+    payload: dict[str, Any],
+    meta: dict[str, Any],
+    character_meta: dict[str, Any],
+    max_stale_hours: float = MAX_STALE_FALLBACK_HOURS,
+    now: datetime | None = None,
+) -> bool:
+    """Allow a recent, structurally complete snapshot during source outages."""
+    records = payload.get("data")
+    characters = meta.get("characters")
+    character_signals = character_meta.get("characterSignals")
+    if (
+        payload.get("source_url") != SOURCE_URL
+        or not isinstance(records, list)
+        or len(records) < MINIMUM_VALID_RECORDS
+        or meta.get("schemaVersion") != META_SCHEMA_VERSION
+        or not isinstance(characters, list)
+        or not characters
+        or character_meta.get("schemaVersion") != CHARACTER_META_SCHEMA_VERSION
+        or not isinstance(character_signals, list)
+        or len(character_signals) < 21
+    ):
+        return False
+
+    fetched_at = payload.get("fetched_at")
+    if not isinstance(fetched_at, str) or not fetched_at.strip():
+        return False
+    try:
+        observed = datetime.fromisoformat(fetched_at.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if observed.tzinfo is None:
+        observed = observed.replace(tzinfo=timezone.utc)
+    current = now or datetime.now(timezone.utc)
+    age_hours = max(0.0, (current - observed).total_seconds() / 3600)
+    return age_hours <= max_stale_hours
 
 def normalize_records(
     records: list[dict[str, Any]],
@@ -665,6 +703,9 @@ def main() -> int:
     parser.add_argument(
         "--character-meta-output", type=Path, default=DEFAULT_CHARACTER_META_OUTPUT
     )
+    parser.add_argument(
+        "--max-stale-hours", type=float, default=MAX_STALE_FALLBACK_HOURS
+    )
     parser.add_argument("--rebuild-meta-only", action="store_true")
     args = parser.parse_args()
 
@@ -685,17 +726,32 @@ def main() -> int:
         )
         return 0
 
-    html = (
-        args.input_html.read_text(encoding="utf-8")
-        if args.input_html
-        else fetch_source_html()
-    )
-    source_records, state = decode_source(html)
-    source_digest = source_fingerprint(source_records)
-    observed_at = utc_now()
     previous_payload = load_previous_payload(args.output)
     previous_meta = load_previous_payload(args.meta_output)
     previous_character_meta = load_previous_payload(args.character_meta_output)
+    if args.input_html:
+        html = args.input_html.read_text(encoding="utf-8")
+        source_records, state = decode_source(html)
+    else:
+        try:
+            html = fetch_source_html()
+            source_records, state = decode_source(html)
+        except (RuntimeError, ValueError) as error:
+            if can_reuse_previous_snapshot(
+                previous_payload,
+                previous_meta,
+                previous_character_meta,
+                args.max_stale_hours,
+            ):
+                print(
+                    "::warning::Leaderboard source is temporarily unavailable "
+                    "or returned an invalid payload; keeping the recent known-good "
+                    f"snapshot. {error}"
+                )
+                return 0
+            raise
+    source_digest = source_fingerprint(source_records)
+    observed_at = utc_now()
     source_version = state.get("$sleaderboardVersion")
     if (
         previous_payload.get("source_url") == SOURCE_URL
