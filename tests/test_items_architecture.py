@@ -13,6 +13,7 @@ LEGENDARY_TIER = ROOT / "tier-lists" / "legendary-items" / "index.html"
 ACHIEVEMENTS = ROOT / "guides" / "achievements" / "index.html"
 STORY_MILESTONES = ROOT / "guides" / "achievements" / "story-milestones.html"
 SITEMAP = ROOT / "sitemap.xml"
+CATALOG = ROOT / "data" / "entity-catalog.json"
 
 class ItemArchitectureTests(unittest.TestCase):
     @classmethod
@@ -26,6 +27,16 @@ class ItemArchitectureTests(unittest.TestCase):
         cls.achievements = ACHIEVEMENTS.read_text(encoding="utf-8")
         cls.story_milestones = STORY_MILESTONES.read_text(encoding="utf-8")
         cls.sitemap = SITEMAP.read_text(encoding="utf-8")
+        cls.catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
+        cls.catalog_items = {
+            entry["id"]: entry
+            for entry in cls.catalog["entities"]["items"]
+        }
+        cls.legendary_items = {
+            entity_id: entry
+            for entity_id, entry in cls.catalog_items.items()
+            if entry.get("rarity") == "Legendary"
+        }
 
     def test_database_owns_item_data_not_tier_list_intent(self):
         title = re.search(r"<title>(.*?)</title>", self.hub, re.S).group(1)
@@ -97,8 +108,9 @@ class ItemArchitectureTests(unittest.TestCase):
             '<link rel="canonical" href="https://megabonk.org/tier-lists/legendary-items/">',
             self.legendary_tier,
         )
-        self.assertIn("15 ranked items", self.legendary_tier)
-        self.assertEqual(15, self.legendary_tier.count('class="entity"'))
+        expected_count = len(self.legendary_items)
+        self.assertIn(f"{expected_count} ranked items", self.legendary_tier)
+        self.assertEqual(expected_count, self.legendary_tier.count('class="entity"'))
         self.assertIn('href="/tier-lists/items/">all-rarity Item Tier List</a>', self.legendary_tier)
         self.assertIn('href="/database/items/">Items Database</a>', self.legendary_tier)
 
@@ -110,25 +122,104 @@ class ItemArchitectureTests(unittest.TestCase):
         )
         schemas = [json.loads(block) for block in blocks]
         item_list = next(schema for schema in schemas if schema.get("@type") == "ItemList")
-        self.assertEqual(15, item_list["numberOfItems"])
-        self.assertEqual(15, len(item_list["itemListElement"]))
-        self.assertEqual(list(range(1, 16)), [item["position"] for item in item_list["itemListElement"]])
+        expected_count = len(self.legendary_items)
+        self.assertEqual(expected_count, item_list["numberOfItems"])
+        self.assertEqual(expected_count, len(item_list["itemListElement"]))
+        self.assertEqual(
+            list(range(1, expected_count + 1)),
+            [item["position"] for item in item_list["itemListElement"]],
+        )
 
         rows = re.findall(
             r'<span class="entity"><img src="([^"]+)"[^>]*><a href="([^"]+)">([^<]+)</a>',
             self.legendary_tier,
         )
-        self.assertEqual(15, len(rows))
+        self.assertEqual(expected_count, len(rows))
         for image, href, _ in rows:
             self.assertTrue((ROOT / image.lstrip("/")).is_file(), image)
             slug = href.removeprefix("/database/items/")
             self.assertTrue((ROOT / "database" / "items" / f"{slug}.html").is_file(), href)
+
+        listed_urls = {item["url"] for item in item_list["itemListElement"]}
+        expected_urls = {
+            f"https://megabonk.org{entry['page']}"
+            for entry in self.legendary_items.values()
+        }
+        self.assertEqual(expected_urls, listed_urls)
+
+    def test_legendary_rows_match_catalog_rarity_without_leakage(self):
+        row_ids = set(re.findall(r'<tr data-item-id="([^"]+)">', self.legendary_tier))
+        self.assertEqual(set(self.legendary_items), row_ids)
+        self.assertNotIn("kevin", row_ids)
+        for entity_id in row_ids:
+            with self.subTest(entity_id=entity_id):
+                self.assertEqual("Legendary", self.catalog_items[entity_id]["rarity"])
+
+    def test_legendary_structured_data_is_complete(self):
+        schemas = [
+            json.loads(block)
+            for block in re.findall(
+                r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
+                self.legendary_tier,
+                re.S,
+            )
+        ]
+        schema_types = {schema.get("@type") for schema in schemas}
+        self.assertTrue({"ItemList", "BreadcrumbList", "FAQPage"}.issubset(schema_types))
+        faq = next(schema for schema in schemas if schema.get("@type") == "FAQPage")
+        self.assertGreaterEqual(len(faq["mainEntity"]), 4)
+        breadcrumbs = next(
+            schema for schema in schemas if schema.get("@type") == "BreadcrumbList"
+        )
+        self.assertEqual(
+            "https://megabonk.org/tier-lists/legendary-items/",
+            breadcrumbs["itemListElement"][-1]["item"],
+        )
+
+    def test_three_item_pages_link_to_each_other_without_redirect_hops(self):
+        self.assertIn('href="/tier-lists/items/"', self.hub)
+        self.assertIn('href="/tier-lists/legendary-items/"', self.hub)
+        self.assertIn('href="/database/items/"', self.tier)
+        self.assertIn('href="/tier-lists/legendary-items/"', self.tier)
+        self.assertIn('href="/database/items/"', self.legendary_tier)
+        self.assertIn('href="/tier-lists/items/"', self.legendary_tier)
+
+        for name, source in (
+            ("items database", self.hub),
+            ("item tier list", self.tier),
+            ("legendary tier list", self.legendary_tier),
+        ):
+            body = re.search(r"<body>(.*)</body>", source, re.S).group(1)
+            with self.subTest(page=name):
+                self.assertNotRegex(body, r'href="https://megabonk\.org/')
+                self.assertNotRegex(body, r'href="[^"]+\.html(?:[#?][^"]*)?"')
+
+    def test_item_tier_and_legendary_pages_keep_separate_canonicals(self):
+        general = re.search(r'<link rel="canonical" href="([^"]+)">', self.tier).group(1)
+        legendary = re.search(
+            r'<link rel="canonical" href="([^"]+)">', self.legendary_tier
+        ).group(1)
+        self.assertEqual("https://megabonk.org/tier-lists/items/", general)
+        self.assertEqual("https://megabonk.org/tier-lists/legendary-items/", legendary)
+        self.assertNotEqual(general, legendary)
+
+    def test_general_tier_page_has_no_legendary_ranking_copy(self):
+        for duplicate_marker in (
+            'id="legendary-ranking"',
+            'id="legendary"',
+            "All Current Legendary Items Ranked",
+            "GENERATED:LEGENDARY_ROWS",
+        ):
+            self.assertNotIn(duplicate_marker, self.tier)
 
     def test_legendary_rewrite_removes_stale_and_unsupported_claims(self):
         for stale in (
             "Kevin (The Secret Tier)",
             "Zorro",
             "official 2026 Tier List",
+            "Boss Chest multiplier",
+            "fixed Legendary drop rate",
+            "zero Luck blocks Legendary",
             "locks out Legendary rarity rolls",
             "Every enemy elite you execute",
             "permanent stacking armor",
