@@ -65,8 +65,8 @@ class CharacterTierArchitectureTests(unittest.TestCase):
         self.assertIn('of <strong>21</strong> characters in both the directory and guide cards', self.hub)
         self.assertNotIn('data-filter="tier"', self.hub)
         self.assertNotIn('tierBadge', self.hub)
-        self.assertIn("id: 'roberto'", self.hub)
-        self.assertIn("aliases: ['robong']", self.hub)
+        self.assertIn('data-character-id="roberto"', self.hub)
+        self.assertIn('data-search="roberto robong', self.hub)
         self.assertNotIn("createCharacterTable", self.hub)
         self.assertLess(self.hub.index('id="searchInput"'), self.hub.index('id="characterTableBody"'))
         self.assertIn("document.querySelectorAll('#characterTableBody tr')", self.hub)
@@ -101,6 +101,36 @@ class CharacterTierArchitectureTests(unittest.TestCase):
         marker = '<loc>https://megabonk.org/guides/characters/</loc>'
         block = sitemap[sitemap.index(marker):sitemap.index('</url>', sitemap.index(marker))]
         self.assertIn('<lastmod>2026-08-11</lastmod>', block)
+
+    def test_hub_cards_are_neutral_and_have_two_clear_routes(self):
+        card_template = re.search(r"card\.innerHTML = `(.*?)`;", self.hub, re.S).group(1)
+        self.assertIn('Character Profile', card_template)
+        self.assertIn('class="character-role"', card_template)
+        self.assertIn('<dt>Passive</dt>', card_template)
+        self.assertIn('<dt>Starting Weapon</dt>', card_template)
+        self.assertIn('<dt>How to Unlock</dt>', card_template)
+        self.assertIn('card-action-guide">Character Guide</a>', card_template)
+        self.assertIn('card-action-build">Best Build</a>', card_template)
+        self.assertNotIn('tier-badge', card_template)
+        self.assertNotIn('radar', card_template.lower())
+        self.assertNotIn('compare-btn', card_template)
+        self.assertNotIn('char.description', card_template)
+        self.assertNotIn('char.features', card_template)
+
+    def test_hub_card_images_and_mobile_table_are_resilient(self):
+        self.assertIn("sourceImage.getAttribute('src')", self.hub)
+        self.assertIn('width="120" height="120" loading="lazy" decoding="async"', self.hub)
+        self.assertIn('.character-table th:first-child,', self.hub)
+        self.assertIn('position: sticky;', self.hub)
+        self.assertIn('left: 0;', self.hub)
+
+    def test_hub_supports_shareable_character_and_difficulty_filters(self):
+        self.assertIn("initialParams.get('character')", self.hub)
+        self.assertIn("initialParams.get('difficulty')", self.hub)
+        self.assertIn("params.set('character', currentFilters.search)", self.hub)
+        self.assertIn("params.set('difficulty', currentFilters.difficulty)", self.hub)
+        self.assertIn("history.replaceState", self.hub)
+        self.assertIn("applyFilters({ updateUrl: false })", self.hub)
 
     def test_legacy_knight_page_does_not_compete_with_sir_oofie(self):
         legacy = LEGACY_KNIGHT.read_text(encoding="utf-8")
