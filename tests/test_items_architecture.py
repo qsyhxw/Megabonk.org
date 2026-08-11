@@ -9,6 +9,7 @@ ANVIL = ROOT / "database" / "items" / "anvil.html"
 KEVIN = ROOT / "database" / "items" / "kevin.html"
 GOLDEN_RING = ROOT / "database" / "items" / "golden-ring.html"
 TIER = ROOT / "tier-lists" / "items" / "index.html"
+LEGENDARY_TIER = ROOT / "tier-lists" / "legendary-items" / "index.html"
 ACHIEVEMENTS = ROOT / "guides" / "achievements" / "index.html"
 STORY_MILESTONES = ROOT / "guides" / "achievements" / "story-milestones.html"
 SITEMAP = ROOT / "sitemap.xml"
@@ -21,6 +22,7 @@ class ItemArchitectureTests(unittest.TestCase):
         cls.kevin = KEVIN.read_text(encoding="utf-8")
         cls.golden_ring = GOLDEN_RING.read_text(encoding="utf-8")
         cls.tier = TIER.read_text(encoding="utf-8")
+        cls.legendary_tier = LEGENDARY_TIER.read_text(encoding="utf-8")
         cls.achievements = ACHIEVEMENTS.read_text(encoding="utf-8")
         cls.story_milestones = STORY_MILESTONES.read_text(encoding="utf-8")
         cls.sitemap = SITEMAP.read_text(encoding="utf-8")
@@ -63,6 +65,88 @@ class ItemArchitectureTests(unittest.TestCase):
         self.assertEqual(20, len({href for href, _ in entities}))
         for _, src in entities:
             self.assertTrue((ROOT / src.lstrip("/")).is_file(), src)
+
+    def test_general_item_tier_page_yields_legendary_only_intent(self):
+        self.assertIn(
+            "<title>Megabonk Item Tier List 2026: Best Items &amp; Unlocks</title>".replace("&amp;", "&"),
+            self.tier,
+        )
+        self.assertIn("<h1>🎮 Megabonk Item Tier List 2026</h1>", self.tier)
+        self.assertIn(
+            '<link rel="canonical" href="https://megabonk.org/tier-lists/items/">',
+            self.tier,
+        )
+        keywords = re.search(r'<meta name="keywords" content="([^"]+)">', self.tier).group(1)
+        self.assertNotIn("legendary item tier list", keywords.lower())
+        self.assertNotIn('id="legendary-ranking"', self.tier)
+        self.assertNotIn('id="legendary"', self.tier)
+        self.assertNotIn('id="itemSearch"', self.tier)
+        self.assertIn(
+            '<a href="/tier-lists/legendary-items/">Legendary Items Tier List</a>',
+            self.tier,
+        )
+        self.assertLess(TIER.stat().st_size, 60_000)
+
+    def test_legendary_tier_page_is_a_complete_separate_intent(self):
+        self.assertIn(
+            "<title>Megabonk Legendary Items Tier List & Drop Guide (2026)</title>",
+            self.legendary_tier,
+        )
+        self.assertIn("<h1>Legendary Items Tier List</h1>", self.legendary_tier)
+        self.assertIn(
+            '<link rel="canonical" href="https://megabonk.org/tier-lists/legendary-items/">',
+            self.legendary_tier,
+        )
+        self.assertIn("22 ranked items", self.legendary_tier)
+        self.assertEqual(22, self.legendary_tier.count('class="entity"'))
+        self.assertIn('href="/tier-lists/items/">all-rarity Item Tier List</a>', self.legendary_tier)
+        self.assertIn('href="/database/items/">Items Database</a>', self.legendary_tier)
+
+    def test_legendary_itemlist_and_assets_cover_every_ranked_item(self):
+        blocks = re.findall(
+            r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
+            self.legendary_tier,
+            re.S,
+        )
+        schemas = [json.loads(block) for block in blocks]
+        item_list = next(schema for schema in schemas if schema.get("@type") == "ItemList")
+        self.assertEqual(22, item_list["numberOfItems"])
+        self.assertEqual(22, len(item_list["itemListElement"]))
+        self.assertEqual(list(range(1, 23)), [item["position"] for item in item_list["itemListElement"]])
+
+        rows = re.findall(
+            r'<span class="entity"><img src="([^"]+)"[^>]*><a href="([^"]+)">([^<]+)</a>',
+            self.legendary_tier,
+        )
+        self.assertEqual(22, len(rows))
+        for image, href, _ in rows:
+            self.assertTrue((ROOT / image.lstrip("/")).is_file(), image)
+            slug = href.removeprefix("/database/items/")
+            self.assertTrue((ROOT / "database" / "items" / f"{slug}.html").is_file(), href)
+
+    def test_legendary_rewrite_removes_stale_and_unsupported_claims(self):
+        for stale in (
+            "Kevin (The Secret Tier)",
+            "Zorro",
+            "official 2026 Tier List",
+            "locks out Legendary rarity rolls",
+            "Every enemy elite you execute",
+            "permanent stacking armor",
+        ):
+            self.assertNotIn(stale, self.legendary_tier)
+        body = re.search(r"<body>(.*)</body>", self.legendary_tier, re.S).group(1)
+        self.assertNotRegex(body, r'href="https://megabonk\.org/')
+        self.assertNotRegex(body, r'href="[^"]+\.html(?:[#?][^"]*)?"')
+        self.assertIn("pagead2.googlesyndication.com", self.legendary_tier)
+        self.assertIn("G-V5X87M8JFL", self.legendary_tier)
+
+    def test_item_tier_sitemap_dates_are_current(self):
+        for url in ("items/", "legendary-items/"):
+            self.assertRegex(
+                self.sitemap,
+                rf"<loc>https://megabonk\.org/tier-lists/{url}</loc>\s*"
+                r"<lastmod>2026-08-11</lastmod>",
+            )
     def test_missing_hub_entities_are_restored(self):
         for name, href in (("Golden Ring", "golden-ring"), ("Quin's Mask", "quins-mask"), ("Snek", "snek")):
             self.assertIn(name, self.hub)
