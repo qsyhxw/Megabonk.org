@@ -33,7 +33,7 @@ class BuildHubTests(unittest.TestCase):
 
     def test_hub_lists_all_21_character_builds(self):
         rows = re.findall(r'<tr data-character="[^"]+">', self.source)
-        cards = re.findall(r'<p class="build-card-character">Best for:', self.source)
+        cards = re.findall(r'<article class="character-quick-card" data-character="[^"]+">', self.source)
         self.assertEqual(len(rows), 21)
         self.assertEqual(len(cards), 21)
         self.assertNotIn("all 20 Megabonk characters", self.source)
@@ -45,7 +45,7 @@ class BuildHubTests(unittest.TestCase):
         self.assertIn("<option>Roberto</option>", self.source)
         self.assertIn('<tr data-character="roberto">', self.source)
         self.assertIn(
-            'href="https://megabonk.org/guides/builds/roberto-best-build/"',
+            'href="/guides/builds/roberto-best-build/"',
             self.source,
         )
         self.assertIn('href="/guides/characters/roberto-guide"', self.source)
@@ -59,15 +59,29 @@ class BuildHubTests(unittest.TestCase):
         self.assertIn('id="characterBuildSearch"', self.source)
         self.assertIn('id="characterBuildSelect"', self.source)
         self.assertIn('id="characterBuildRows"', self.source)
+        self.assertIn("applyLeaderboardSignalFilter(query);", self.source)
+
+    def test_character_discovery_precedes_ranked_evidence(self):
+        quick = self.source.index('id="characterQuickGrid"')
+        comparison = self.source.index('id="character-build-comparison-title"')
+        leaderboard = self.source.index('id="leaderboard-signals-title"')
+        self.assertLess(quick, comparison)
+        self.assertLess(comparison, leaderboard)
+        self.assertNotIn('class="build-card-compact"', self.source)
+        self.assertLess(len(self.source.encode("utf-8")), 125000)
 
     def test_version_date_and_leaderboard_signal_are_explicit(self):
         self.assertIn('data-editorial-version="1.0.69"', self.source)
-        self.assertIn('"dateModified": "2026-07-29"', self.source)
-        self.assertIn('article:modified_time" content="2026-07-29T00:00:00+08:00', self.source)
-        self.assertIn("Last reviewed: July 29, 2026", self.source)
+        self.assertIn('"dateModified": "2026-08-11"', self.source)
+        self.assertIn('article:modified_time" content="2026-08-11T00:00:00+08:00', self.source)
+        self.assertIn("Build recommendations reviewed: July 29, 2026", self.source)
         self.assertIn("latest synchronized Top 100 sample", self.source)
         self.assertIn("MegabonkLeaderboardData.load('/data/leaderboard-meta.json'", self.source)
         self.assertIn("leaderboard-data-loader.js", self.source)
+        self.assertIn("Latest Synchronized Leaderboard Build Lab", self.source)
+        self.assertIn('id="leaderboardSignalCoverage"', self.source)
+        self.assertIn("characters with repeated evidence", self.source)
+        self.assertIn('id="leaderboardFilterEmpty"', self.source)
         self.assertIn("Version guard:", self.source)
         self.assertNotIn("current-version Top 100", self.source)
 
