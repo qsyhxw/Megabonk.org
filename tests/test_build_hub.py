@@ -69,11 +69,58 @@ class BuildHubTests(unittest.TestCase):
             "BUILD_HUB_CHARACTER_OPTIONS_START",
             "BUILD_HUB_CHARACTER_CARDS_START",
             "BUILD_HUB_CHARACTER_ROWS_START",
+            "BUILD_HUB_ITEMLIST_START",
         ):
             self.assertIn(marker, self.source)
         self.assertNotIn("const leaderboardBuildRoutes =", self.source)
         self.assertNotIn("const leaderboardCharacterImages =", self.source)
         self.assertIn("window.MegabonkEntities?.get('characters', entry.character)", self.source)
+
+    def test_build_hub_structured_data_matches_visible_architecture(self):
+        schemas = [
+            json.loads(raw)
+            for raw in re.findall(
+                r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>',
+                self.source,
+                re.DOTALL,
+            )
+        ]
+        by_type = {schema.get("@type"): schema for schema in schemas}
+        catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
+        characters = catalog["entities"]["characters"]
+
+        item_list = by_type["ItemList"]
+        self.assertEqual(item_list["numberOfItems"], len(characters))
+        self.assertEqual(len(item_list["itemListElement"]), len(characters))
+        for position, (item, character) in enumerate(
+            zip(item_list["itemListElement"], characters), start=1
+        ):
+            self.assertEqual(item["position"], position)
+            self.assertEqual(item["name"], f'{character["name"]} Best Build')
+            self.assertEqual(item["url"], f'https://megabonk.org{character["buildPage"]}')
+
+        breadcrumbs = by_type["BreadcrumbList"]["itemListElement"]
+        self.assertEqual([item["position"] for item in breadcrumbs], [1, 2, 3])
+        self.assertEqual(
+            [item["item"] for item in breadcrumbs],
+            [
+                "https://megabonk.org/",
+                "https://megabonk.org/guides/",
+                "https://megabonk.org/guides/builds/",
+            ],
+        )
+
+        questions = by_type["FAQPage"]["mainEntity"]
+        expected_questions = (
+            "What is the best Megabonk Build?",
+            "Are leaderboard Builds always current?",
+            "How do I find a Build for my character?",
+            "Why is the leaderboard version different?",
+        )
+        self.assertEqual(tuple(question["name"] for question in questions), expected_questions)
+        for question in questions:
+            self.assertIn(f'<h3>{question["name"]}</h3>', self.source)
+            self.assertIn(f'<p>{question["acceptedAnswer"]["text"]}</p>', self.source)
 
     def test_roberto_is_available_in_every_hub_surface(self):
         self.assertIn('<option value="roberto">Roberto</option>', self.source)
@@ -102,7 +149,8 @@ class BuildHubTests(unittest.TestCase):
         self.assertLess(quick, comparison)
         self.assertLess(comparison, leaderboard)
         self.assertNotIn('class="build-card-compact"', self.source)
-        self.assertLess(len(self.source.encode("utf-8")), 125000)
+        # Keep the Hub lean while allowing the generated 21-entry ItemList and FAQ schemas.
+        self.assertLess(len(self.source.encode("utf-8")), 128000)
 
     def test_version_date_and_leaderboard_signal_are_explicit(self):
         self.assertIn('data-editorial-version="1.0.69"', self.source)

@@ -20,6 +20,8 @@ CARDS_START = "<!-- BUILD_HUB_CHARACTER_CARDS_START -->"
 CARDS_END = "<!-- BUILD_HUB_CHARACTER_CARDS_END -->"
 ROWS_START = "<!-- BUILD_HUB_CHARACTER_ROWS_START -->"
 ROWS_END = "<!-- BUILD_HUB_CHARACTER_ROWS_END -->"
+ITEMLIST_START = "<!-- BUILD_HUB_ITEMLIST_START -->"
+ITEMLIST_END = "<!-- BUILD_HUB_ITEMLIST_END -->"
 
 # Editorial recommendations stay human-reviewed. Identity, assets and routes come
 # from entity-catalog.json; a newly cataloged character is still rendered even
@@ -72,6 +74,27 @@ def load_characters(catalog_path: Path) -> list[dict[str, object]]:
 
 
 def render(page: str, characters: list[dict[str, object]]) -> str:
+    item_list = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Megabonk Character Best Builds",
+        "numberOfItems": len(characters),
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": position,
+                "name": f'{entry["name"]} Best Build',
+                "url": f'https://megabonk.org{entry["buildPage"]}',
+            }
+            for position, entry in enumerate(characters, start=1)
+        ],
+    }
+    item_list_script = (
+        '    <script type="application/ld+json">\n'
+        + "    "
+        + json.dumps(item_list, ensure_ascii=False, separators=(",", ":"))
+        + '\n    </script>'
+    )
     options = "\n".join(
         f'                            <option value="{html.escape(str(entry["id"]))}">{html.escape(str(entry["name"]))}</option>'
         for entry in characters
@@ -104,6 +127,7 @@ def render(page: str, characters: list[dict[str, object]]) -> str:
             f'<a href="{html.escape(str(entry["page"]))}">Guide</a></td></tr>'
         )
 
+    page = replace_block(page, ITEMLIST_START, ITEMLIST_END, item_list_script)
     page = replace_block(page, OPTIONS_START, OPTIONS_END, options)
     page = replace_block(page, CARDS_START, CARDS_END, cards)
     page = replace_block(page, ROWS_START, ROWS_END, "\n".join(rows))
