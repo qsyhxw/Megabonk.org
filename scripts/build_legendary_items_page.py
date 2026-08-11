@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 from pathlib import Path
 
 
@@ -109,7 +110,14 @@ def render(source: str) -> str:
     items, editorial = load_inputs()
     source = replace_region(source, ITEMLIST_START, ITEMLIST_END, itemlist_schema(items, editorial))
     source = replace_region(source, ROWS_START, ROWS_END, table_rows(items, editorial))
-    source = source.replace("22 ranked items", f"{len(editorial)} ranked items")
+    source, count = re.subn(
+        r"\b\d+ ranked items\b",
+        f"{len(editorial)} ranked items",
+        source,
+        count=1,
+    )
+    if count != 1:
+        raise ValueError("Expected one visible Legendary roster count")
     source = source.replace(
         "Giant Fork is a high-value choice once a Crit build is established, while Overpowered Lamp, Anvil, Pot, Wizard's Hat, Joe's Dagger and Sucky Magnet can be stronger for their matching build or run length.",
         "Overpowered Lamp is a leading proc pick when supported on-hit effects are already online. Anvil, Pot, Joe's Dagger and Sucky Magnet can be stronger in longer specialized runs.",

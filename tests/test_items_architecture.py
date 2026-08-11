@@ -50,7 +50,7 @@ class ItemArchitectureTests(unittest.TestCase):
     def test_current_roster_and_rarity_totals(self):
         self.assertIn("85 Items", self.hub)
         self.assertEqual(85, self.hub.count('class="item-card"'))
-        for rarity, count in {"Legendary": 15, "Epic": 13, "Rare": 29, "Common": 28}.items():
+        for rarity, count in {"Legendary": 22, "Epic": 12, "Rare": 24, "Common": 27}.items():
             self.assertEqual(count, len(re.findall(rf'data-rarity="{rarity}"', self.hub)), rarity)
 
     def test_every_card_has_a_local_detail_page(self):
@@ -251,6 +251,33 @@ class ItemArchitectureTests(unittest.TestCase):
         self.assertIn("Epic specialist item", self.kevin)
         self.assertIn("No dependable gameplay effect", self.hub)
         self.assertIn("reviewed again July 28, 2026", self.golden_ring)
+
+    def test_current_legendary_roster_includes_the_seven_corrected_items(self):
+        corrected = (
+            "big-bonk",
+            "spicy-meatball",
+            "ice-cube",
+            "giant-fork",
+            "power-gloves",
+            "chonkplate",
+            "wizards-hat",
+        )
+        for slug in corrected:
+            with self.subTest(slug=slug):
+                self.assertRegex(
+                    self.hub,
+                    rf'href="{slug}" class="item-card" data-rarity="Legendary"',
+                )
+
+        big_bonk = (ROOT / "database/items/big-bonk.html").read_text(encoding="utf-8")
+        spicy = (ROOT / "database/items/spicy-meatball.html").read_text(encoding="utf-8")
+        wizard = (ROOT / "database/items/wizards-hat.html").read_text(encoding="utf-8")
+        self.assertNotIn("RARITY: Unknown", big_bonk)
+        self.assertNotIn("Rarity: Unconfirmed", spicy)
+        self.assertNotIn("EPIC ITEM", wizard)
+        self.assertNotIn("+5 Tome Level Cap", wizard)
+        self.assertIn("LEGENDARY ITEM", wizard)
+        self.assertIn("+10 Tome Level Cap", wizard)
 
     def test_anvil_unlock_is_consistent_across_owned_pages(self):
         self.assertIn("<title>Megabonk Anvil: Effect, Unlock & Best Builds</title>", self.anvil)

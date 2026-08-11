@@ -146,7 +146,7 @@ class EntityCatalogTests(unittest.TestCase):
             for entry in self.catalog["entities"]["items"]
             if entry.get("rarity") == "Legendary"
         }
-        self.assertEqual(15, len(legendary))
+        self.assertEqual(22, len(legendary))
         self.assertEqual(set(facts), set(legendary))
         self.assertNotIn("kevin", legendary)
         for entity_id, entry in legendary.items():

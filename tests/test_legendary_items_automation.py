@@ -34,7 +34,7 @@ class LegendaryItemsAutomationTests(unittest.TestCase):
             if entry.get("rarity") == "Legendary"
         }
         ranked_ids = [entry["id"] for entry in self.rankings]
-        self.assertEqual(15, len(legendary_ids))
+        self.assertEqual(22, len(legendary_ids))
         self.assertEqual(legendary_ids, set(ranked_ids))
         self.assertEqual(len(ranked_ids), len(set(ranked_ids)))
         self.assertNotIn("kevin", legendary_ids)
