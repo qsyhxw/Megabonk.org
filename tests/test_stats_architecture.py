@@ -21,7 +21,7 @@ class StatsArchitectureTests(unittest.TestCase):
         self.assertEqual(1, len(re.findall(r"<h1\b", self.stats)))
 
     def test_deep_dive_anchors_and_navigation_exist(self):
-        for anchor in ("stat-formulas", "size", "knockback", "difficulty", "luck"):
+        for anchor in ("stat-formulas", "attack-speed", "size", "knockback", "difficulty", "luck"):
             self.assertEqual(1, self.stats.count(f'id="{anchor}"'), anchor)
             self.assertIn(f'href="#{anchor}"', self.stats)
 
@@ -38,6 +38,7 @@ class StatsArchitectureTests(unittest.TestCase):
 
     def test_stats_and_tome_pages_link_both_directions(self):
         mapping = {
+            "cooldown-tome.html": ("/database/tomes/cooldown-tome", "/guides/stats/#attack-speed"),
             "size-tome.html": ("/database/tomes/size-tome", "/guides/stats/#size"),
             "knockback-tome.html": ("/database/tomes/knockback-tome", "/guides/stats/#knockback"),
             "cursed-tome.html": ("/database/tomes/cursed-tome", "/guides/stats/#difficulty"),
@@ -53,6 +54,7 @@ class StatsArchitectureTests(unittest.TestCase):
         self.assertIn("What does Difficulty do in Megabonk?", questions)
         self.assertIn("What does Size do in Megabonk?", questions)
         self.assertIn("What is the Knockback Tome for in Megabonk?", questions)
+        self.assertIn("Does Cooldown Tome work with Aura in Megabonk?", questions)
 
     def test_sitemap_dates_are_current(self):
         for url in (
@@ -61,7 +63,8 @@ class StatsArchitectureTests(unittest.TestCase):
             "https://megabonk.org/database/tomes/knockback-tome",
             "https://megabonk.org/database/tomes/cursed-tome",
         ):
-            pattern = rf"<loc>{re.escape(url)}</loc>\s*<lastmod>2026-07-28</lastmod>"
+            expected_date = "2026-08-11" if url == "https://megabonk.org/guides/stats/" else "2026-07-28"
+            pattern = rf"<loc>{re.escape(url)}</loc>\s*<lastmod>{expected_date}</lastmod>"
             self.assertRegex(self.sitemap, pattern)
 
 if __name__ == "__main__":
