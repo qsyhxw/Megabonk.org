@@ -81,24 +81,66 @@ class BrandWikiArchitectureTests(unittest.TestCase):
         self.assertEqual(website["name"], "Megabonk Wiki")
         self.assertEqual(website["about"]["@id"], game["@id"])
         self.assertEqual(website["publisher"]["@id"], organization["@id"])
+        self.assertNotIn("potentialAction", website)
         self.assertEqual(len(faq["mainEntity"]), 4)
         self.assertIn("data-home-patch-version", HOME_PAGE)
         self.assertIn("data-home-patch-synced", HOME_PAGE)
 
     def test_stale_dynamic_claims_are_removed_from_visible_content(self):
-        self.assertNotIn("$8.49", HOME_PAGE)
-        self.assertNotIn("Game data accurate as of January 2026", HOME_PAGE)
-        self.assertNotIn("70+ weapons", HOME_PAGE)
+        for stale_claim in (
+            "$8.49",
+            "Game data accurate as of January 2026",
+            "70+ weapons",
+            "24K",
+            "100K+ Copies Sold",
+            "Updated: January 2026",
+            "showGuide(",
+            "launchTool(",
+        ):
+            self.assertNotIn(stale_claim, HOME_PAGE)
+
+    def test_homepage_is_compact_and_game_first(self):
+        self.assertLess(len(HOME_PAGE.encode("utf-8")), 70000)
+        self.assertLessEqual(len(re.findall(r"<h2\b", HOME_PAGE)), 8)
+        self.assertLessEqual(len(re.findall(r"<h3\b", HOME_PAGE)), 16)
+        hero = re.search(r'<section id="home".*?</section>', HOME_PAGE, re.S).group(0)
+        self.assertIn("3D single-player roguelike survival game", hero)
+        self.assertIn("View Official Steam Page", hero)
+        self.assertIn("independent player Wiki", hero)
+        self.assertIn("Windows and Linux", hero)
+        self.assertIn("Single-player", hero)
+
+    def test_homepage_uses_hubs_instead_of_duplicate_long_form_sections(self):
+        for url in (
+            "/guides/megabonk-beginners-guide",
+            "/guides/characters/",
+            "/database/",
+            "/guides/patch-notes/",
+            "/database/tomes/",
+            "/database/items/",
+            "/guides/mechanics/",
+            "/faq/megabonk-platforms",
+        ):
+            self.assertIn(f'href="{url}"', HOME_PAGE)
+        for old_heading in (
+            "Meta Builds & Strategies",
+            "Boss Strategy Guides",
+            "Achievement Guide System",
+            "Interactive Tools & Calculators",
+            "Complete Site Navigation",
+        ):
+            self.assertNotIn(old_heading, HOME_PAGE)
 
     def test_modified_hubs_have_current_sitemap_dates(self):
-        for url in (
-            "https://megabonk.org/",
-            "https://megabonk.org/database/",
-            "https://megabonk.org/guides/",
-        ):
+        expected_dates = {
+            "https://megabonk.org/": "2026-08-11",
+            "https://megabonk.org/database/": "2026-07-29",
+            "https://megabonk.org/guides/": "2026-07-29",
+        }
+        for url, lastmod in expected_dates.items():
             self.assertRegex(
                 SITEMAP,
-                rf"<loc>{re.escape(url)}</loc>\s*<lastmod>2026-07-29</lastmod>",
+                rf"<loc>{re.escape(url)}</loc>\s*<lastmod>{lastmod}</lastmod>",
             )
 
 
