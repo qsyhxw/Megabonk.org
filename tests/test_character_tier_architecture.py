@@ -1,4 +1,5 @@
 import json
+import importlib.util
 import re
 import unittest
 from html.parser import HTMLParser
@@ -9,6 +10,9 @@ TIER = ROOT / "guides/characters/character-tier-list/index.html"
 HUB = ROOT / "guides/characters/index.html"
 LEGACY_KNIGHT = ROOT / "guides/characters/knight-beginner-guide.html"
 SITEMAP = ROOT / "sitemap.xml"
+CATALOG = ROOT / "data/entity-catalog.json"
+CHARACTER_SOURCE = ROOT / "data/characters.json"
+GENERATOR = ROOT / "scripts/build_characters_hub.py"
 
 
 class PageParser(HTMLParser):
@@ -131,6 +135,58 @@ class CharacterTierArchitectureTests(unittest.TestCase):
         self.assertIn("params.set('difficulty', currentFilters.difficulty)", self.hub)
         self.assertIn("history.replaceState", self.hub)
         self.assertIn("applyFilters({ updateUrl: false })", self.hub)
+
+    def test_hub_structured_data_matches_21_character_guides(self):
+        blocks = re.findall(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', self.hub, re.S)
+        schemas = [json.loads(block) for block in blocks]
+        item_list = next(item for item in schemas if item.get("@type") == "ItemList")
+        breadcrumb = next(item for item in schemas if item.get("@type") == "BreadcrumbList")
+        faq = next(item for item in schemas if item.get("@type") == "FAQPage")
+        catalog = json.loads(CATALOG.read_text(encoding="utf-8"))["entities"]["characters"]
+
+        self.assertEqual(item_list["numberOfItems"], 21)
+        self.assertEqual(len(item_list["itemListElement"]), 21)
+        self.assertEqual(
+            [item["url"] for item in item_list["itemListElement"]],
+            [f'https://megabonk.org{entry["page"]}' for entry in catalog],
+        )
+        self.assertEqual([item["position"] for item in breadcrumb["itemListElement"]], [1, 2, 3])
+        self.assertEqual(len(faq["mainEntity"]), 4)
+
+    def test_hub_faq_is_visible_and_keeps_guide_build_intents_separate(self):
+        questions = (
+            "How many characters are in Megabonk?",
+            "Which characters are available immediately?",
+            "How do I unlock more characters?",
+            "What is the difference between a Character Guide and Best Build?",
+        )
+        for question in questions:
+            self.assertGreaterEqual(self.hub.count(question), 2)
+        self.assertIn("A Character Guide explains unlocks, the passive and starting weapon", self.hub)
+        self.assertIn("A Best Build page focuses on Weapons, Tomes, Items", self.hub)
+
+    def test_characters_hub_is_reproducible_from_one_reviewed_entity_source(self):
+        source = json.loads(CHARACTER_SOURCE.read_text(encoding="utf-8"))["characters"]
+        catalog = json.loads(CATALOG.read_text(encoding="utf-8"))["entities"]["characters"]
+        self.assertEqual(len(source), 21)
+        self.assertEqual(
+            {entry["id"]: entry for entry in source},
+            {entry["id"]: entry for entry in catalog},
+        )
+
+        spec = importlib.util.spec_from_file_location("build_characters_hub", GENERATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        characters = module.load_characters(CATALOG)
+        self.assertEqual(module.render(self.hub, characters), self.hub)
+        self.assertIn("<!-- CHARACTER_HUB_ROWS_START -->", self.hub)
+        self.assertIn("<!-- CHARACTER_HUB_ITEMLIST_START -->", self.hub)
+
+        for workflow_name in ("daily_scrape.yml", "monitor-wiki-entities.yml"):
+            workflow = (ROOT / ".github/workflows" / workflow_name).read_text(encoding="utf-8")
+            self.assertIn("python scripts/build_characters_hub.py", workflow)
+            self.assertIn("python -m py_compile scripts/build_characters_hub.py", workflow)
+            self.assertIn("guides/characters/index.html", workflow)
 
     def test_legacy_knight_page_does_not_compete_with_sir_oofie(self):
         legacy = LEGACY_KNIGHT.read_text(encoding="utf-8")

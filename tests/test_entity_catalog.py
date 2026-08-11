@@ -50,6 +50,25 @@ class EntityCatalogTests(unittest.TestCase):
                         f"{entry['id']} has missing {field}: {value}",
                     )
 
+    def test_characters_share_one_complete_reviewed_entity_source(self):
+        reviewed = json.loads(
+            (ROOT / "data/characters.json").read_text(encoding="utf-8")
+        )["characters"]
+        catalog_characters = self.catalog["entities"]["characters"]
+        self.assertEqual(len(reviewed), 21)
+        self.assertEqual(
+            {entry["id"]: entry for entry in reviewed},
+            {entry["id"]: entry for entry in catalog_characters},
+        )
+        for entry in catalog_characters:
+            with self.subTest(character=entry["id"]):
+                self.assertIn(entry["difficulty"], {"beginner", "intermediate", "advanced"})
+                self.assertTrue(entry["role"])
+                self.assertTrue(entry["unlock"])
+                self.assertTrue(entry["passive"])
+                self.assertTrue(entry["startingWeapon"]["name"])
+                self.assertTrue(entry["startingWeapon"]["page"])
+
     def test_current_leaderboard_ids_resolve_or_are_reported_gaps(self):
         indexes = {}
         for entity_type, entries in self.catalog["entities"].items():

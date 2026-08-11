@@ -11,35 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "entity-catalog.json"
-
-CHARACTERS = {
-    "amog": ("Amog", "amog-guide", "Amog.png"),
-    "athena": ("Athena", "athena-guide", "Athena.png"),
-    "bandit": ("Bandit", "bandit-guide", "Bandit.png"),
-    "birdo": ("Birdo", "birdo-guide", "Birdo.png"),
-    "bush": ("Bush", "bush-guide", "Bush.png"),
-    "calcium": ("Calcium", "calcium-guide", "Calcium.png"),
-    "cl4nk": ("CL4NK", "cl4nk-guide", "CL4NK.png"),
-    "dicehead": ("Dicehead", "dicehead-guide", "Dicehead.png"),
-    "fox": ("Fox", "fox-kitsune-guide", "Fox.png"),
-    "megachad": ("Megachad", "megachad-guide", "Megachad.png"),
-    "monke": ("Monke", "monke-guide", "Monke.png"),
-    "ninja": ("Ninja", "ninja-unlock-guide", "Ninja.png"),
-    "noelle": ("Noelle", "noelle-guide", "Noelle.png"),
-    "ogre": ("Ogre", "ogre-guide", "Ogre.png"),
-    "roberto": ("Roberto", "roberto-guide", "Roberto.png"),
-    "robinette": ("Robinette", "robinette-guide", "Robinette.png"),
-    "sirchadwell": ("Sir Chadwell", "sir-chadwell-guide", "Sir_Chadwell.png"),
-    "siroofie": ("Sir Oofie", "sir-oofie-guide", "Sir_Oofie.png"),
-    "spaceman": ("Spaceman", "spaceman-guide", "Spaceman.png"),
-    "tonymczoom": ("Tony McZoom", "tony-mczoom-guide", "Tony_McZoom.png"),
-    "vlad": ("Vlad", "vlad-guide", "Vlad.png"),
-}
-
-CHARACTER_ALIASES = {
-    "spaceman": ["astronat", "astronaut"],
-    "roberto": ["robong"],
-}
+CHARACTER_SOURCE = ROOT / "data" / "characters.json"
 
 WEAPONS = {
     "aegis": ("Aegis", "aegis", "Aegis.png"),
@@ -177,21 +149,6 @@ def page_image(page: Path) -> str | None:
     return None
 
 
-def character_build_url(character_id: str) -> str | None:
-    slug = {
-        "tonymczoom": "tony-mczoom",
-        "sirchadwell": "sir-chadwell",
-        "siroofie": "sir-oofie",
-    }.get(character_id, character_id)
-    flat = ROOT / "guides" / "builds" / f"{slug}-best-build.html"
-    directory = ROOT / "guides" / "builds" / f"{slug}-best-build" / "index.html"
-    if flat.exists():
-        return f"/guides/builds/{slug}-best-build"
-    if directory.exists():
-        return f"/guides/builds/{slug}-best-build/"
-    return None
-
-
 def make_entry(
     entity_id: str,
     label: str,
@@ -213,27 +170,42 @@ def make_entry(
     return entry
 
 
+def load_reviewed_characters() -> list[dict[str, object]]:
+    source = json.loads(CHARACTER_SOURCE.read_text(encoding="utf-8"))
+    characters = source.get("characters", [])
+    required = {
+        "id", "name", "aliases", "page", "image", "buildPage",
+        "difficulty", "role", "unlock", "passive", "startingWeapon",
+    }
+    if len(characters) != 21:
+        raise ValueError(f"Expected 21 reviewed characters, found {len(characters)}")
+
+    seen: set[str] = set()
+    for entry in characters:
+        missing = required.difference(entry)
+        if missing:
+            raise ValueError(f"Character {entry.get('id')} is missing: {sorted(missing)}")
+        entity_id = str(entry["id"])
+        if entity_id in seen:
+            raise ValueError(f"Duplicate character id: {entity_id}")
+        seen.add(entity_id)
+        if entry["difficulty"] not in {"beginner", "intermediate", "advanced"}:
+            raise ValueError(f"Invalid difficulty for {entity_id}: {entry['difficulty']}")
+        weapon = entry["startingWeapon"]
+        if not isinstance(weapon, dict) or not weapon.get("name") or not weapon.get("page"):
+            raise ValueError(f"Character {entity_id} needs a starting weapon name and page")
+
+    return sorted(characters, key=lambda entry: str(entry["name"]).lower())
+
+
 def build_catalog() -> dict[str, object]:
     entities: dict[str, list[dict[str, object]]] = {
-        "characters": [],
+        "characters": load_reviewed_characters(),
         "weapons": [],
         "tomes": [],
         "items": [],
         "runObjectives": [],
     }
-
-    for entity_id, (label, slug, image_name) in CHARACTERS.items():
-        entities["characters"].append(
-            make_entry(
-                entity_id,
-                label,
-                "characters",
-                ROOT / "guides" / "characters" / f"{slug}.html",
-                ROOT / "images" / "guides" / "characters" / image_name,
-                CHARACTER_ALIASES.get(entity_id),
-                character_build_url(entity_id),
-            )
-        )
 
     for entity_id, (label, slug, image_name) in WEAPONS.items():
         entities["weapons"].append(
@@ -292,8 +264,8 @@ def build_catalog() -> dict[str, object]:
     ]
 
     return {
-        "schemaVersion": 1,
-        "generatedFrom": "Local reviewed detail pages and assets",
+        "schemaVersion": 2,
+        "generatedFrom": "Reviewed character entities, local detail pages and assets",
         "entities": entities,
     }
 
