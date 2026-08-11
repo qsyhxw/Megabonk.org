@@ -37,6 +37,7 @@ jobs:
       - name: Rebuild local catalog
         run: |
           python scripts/build_entity_catalog.py
+          python scripts/build_legendary_items_page.py
           python scripts/build_builds_hub.py
           python scripts/build_characters_hub.py
 
@@ -57,11 +58,12 @@ jobs:
 
       - name: Validate catalog and monitor output
         run: |
-          python -m unittest tests.test_entity_catalog -v
+          python -m unittest tests.test_entity_catalog tests.test_legendary_items_automation tests.test_items_architecture -v
           python -m py_compile scripts/build_entity_catalog.py
           python -m py_compile scripts/check_wiki_entities.py
           python -m py_compile scripts/build_builds_hub.py
           python -m py_compile scripts/build_characters_hub.py
+          python -m py_compile scripts/build_legendary_items_page.py
           python -m py_compile scripts/send_entity_sync_alert.py
           git diff --check
 
@@ -71,7 +73,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data images guides/builds/index.html guides/characters/index.html
+          git add -A data images guides/builds/index.html guides/characters/index.html tier-lists/legendary-items/index.html
 
           if git diff --staged --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"

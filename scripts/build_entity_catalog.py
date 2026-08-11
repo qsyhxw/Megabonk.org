@@ -12,6 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "entity-catalog.json"
 CHARACTER_SOURCE = ROOT / "data" / "characters.json"
+ITEM_FACTS_SOURCE = ROOT / "data" / "item-facts.json"
+ITEM_INDEX = ROOT / "database" / "items" / "index.html"
 
 WEAPONS = {
     "aegis": ("Aegis", "aegis", "Aegis.png"),
@@ -198,6 +200,44 @@ def load_reviewed_characters() -> list[dict[str, object]]:
     return sorted(characters, key=lambda entry: str(entry["name"]).lower())
 
 
+def load_item_index_metadata() -> dict[str, dict[str, str]]:
+    """Read the reviewed item roster and rarity from the Items Database hub."""
+    source = ITEM_INDEX.read_text(encoding="utf-8")
+    cards = re.findall(
+        r'<a\s+href="([^"]+)"\s+class="item-card"\s+data-rarity="([^"]+)">(.*?)</a>',
+        source,
+        flags=re.DOTALL,
+    )
+    metadata: dict[str, dict[str, str]] = {}
+    for slug, rarity, body in cards:
+        name_match = re.search(r'<div class="item-name">(.*?)</div>', body, re.DOTALL)
+        image_match = re.search(r'<img src="([^"]+)"', body)
+        if not name_match or not image_match:
+            raise ValueError(f"Item card {slug} is missing its name or image")
+        image = html.unescape(image_match.group(1))
+        if image.startswith("https://megabonk.org/"):
+            image = image.removeprefix("https://megabonk.org")
+        metadata[slug] = {
+            "name": html.unescape(re.sub(r"<[^>]+>", "", name_match.group(1))).strip(),
+            "rarity": rarity,
+            "image": image,
+        }
+    if len(metadata) != 85:
+        raise ValueError(f"Expected 85 reviewed item cards, found {len(metadata)}")
+    return metadata
+
+
+def load_item_facts() -> tuple[str, dict[str, dict[str, str]]]:
+    source = json.loads(ITEM_FACTS_SOURCE.read_text(encoding="utf-8"))
+    facts = source.get("items", {})
+    if not isinstance(facts, dict):
+        raise ValueError("item-facts.json needs an items object")
+    for entity_id, entry in facts.items():
+        if not entry.get("effect") or not entry.get("unlock"):
+            raise ValueError(f"Item facts for {entity_id} need effect and unlock")
+    return str(source.get("reviewedVersion", "")), facts
+
+
 def build_catalog() -> dict[str, object]:
     entities: dict[str, list[dict[str, object]]] = {
         "characters": load_reviewed_characters(),
@@ -232,23 +272,19 @@ def build_catalog() -> dict[str, object]:
             )
         )
 
-    item_assets = {
-        normalize(path.stem.removeprefix("Item_")): path
-        for path in (ROOT / "images" / "Items").glob("*.png")
-    }
+    item_metadata = load_item_index_metadata()
+    reviewed_version, item_facts = load_item_facts()
     for page in sorted((ROOT / "database" / "items").glob("*.html")):
         if page.stem == "index":
             continue
         slug = page.stem
         entity_id = ITEM_ID_OVERRIDES.get(slug, normalize(slug))
-        label = ITEM_LABEL_OVERRIDES.get(slug, title_from_slug(slug))
-        item_image = (
-            item_assets.get(normalize(label))
-            or item_assets.get(normalize(slug))
-            or item_assets.get(entity_id)
-        )
-        entities["items"].append(
-            make_entry(
+        if slug not in item_metadata:
+            raise ValueError(f"Item detail page {slug} is missing from the Items Database hub")
+        metadata = item_metadata[slug]
+        label = metadata["name"]
+        item_image = ROOT / metadata["image"].lstrip("/")
+        entry = make_entry(
                 entity_id,
                 label,
                 "items",
@@ -256,6 +292,23 @@ def build_catalog() -> dict[str, object]:
                 item_image,
                 ITEM_ALIASES.get(entity_id),
             )
+        entry["rarity"] = metadata["rarity"]
+        if entity_id in item_facts:
+            entry.update(item_facts[entity_id])
+        entities["items"].append(entry)
+
+    legendary_ids = {
+        str(entry["id"])
+        for entry in entities["items"]
+        if entry.get("rarity") == "Legendary"
+    }
+    fact_ids = set(item_facts)
+    if legendary_ids != fact_ids:
+        missing = sorted(legendary_ids - fact_ids)
+        stale = sorted(fact_ids - legendary_ids)
+        raise ValueError(
+            "Legendary item facts are out of sync with the reviewed roster; "
+            f"missing={missing}, no_longer_legendary={stale}"
         )
 
     entities["runObjectives"] = [
@@ -264,8 +317,9 @@ def build_catalog() -> dict[str, object]:
     ]
 
     return {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "generatedFrom": "Reviewed character entities, local detail pages and assets",
+        "reviewedItemVersion": reviewed_version,
         "entities": entities,
     }
 

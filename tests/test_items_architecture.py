@@ -97,8 +97,8 @@ class ItemArchitectureTests(unittest.TestCase):
             '<link rel="canonical" href="https://megabonk.org/tier-lists/legendary-items/">',
             self.legendary_tier,
         )
-        self.assertIn("22 ranked items", self.legendary_tier)
-        self.assertEqual(22, self.legendary_tier.count('class="entity"'))
+        self.assertIn("15 ranked items", self.legendary_tier)
+        self.assertEqual(15, self.legendary_tier.count('class="entity"'))
         self.assertIn('href="/tier-lists/items/">all-rarity Item Tier List</a>', self.legendary_tier)
         self.assertIn('href="/database/items/">Items Database</a>', self.legendary_tier)
 
@@ -110,15 +110,15 @@ class ItemArchitectureTests(unittest.TestCase):
         )
         schemas = [json.loads(block) for block in blocks]
         item_list = next(schema for schema in schemas if schema.get("@type") == "ItemList")
-        self.assertEqual(22, item_list["numberOfItems"])
-        self.assertEqual(22, len(item_list["itemListElement"]))
-        self.assertEqual(list(range(1, 23)), [item["position"] for item in item_list["itemListElement"]])
+        self.assertEqual(15, item_list["numberOfItems"])
+        self.assertEqual(15, len(item_list["itemListElement"]))
+        self.assertEqual(list(range(1, 16)), [item["position"] for item in item_list["itemListElement"]])
 
         rows = re.findall(
             r'<span class="entity"><img src="([^"]+)"[^>]*><a href="([^"]+)">([^<]+)</a>',
             self.legendary_tier,
         )
-        self.assertEqual(22, len(rows))
+        self.assertEqual(15, len(rows))
         for image, href, _ in rows:
             self.assertTrue((ROOT / image.lstrip("/")).is_file(), image)
             slug = href.removeprefix("/database/items/")

@@ -137,6 +137,25 @@ class EntityCatalogTests(unittest.TestCase):
                 self.assertTrue(entry.get("image"))
                 self.assertTrue(entry.get("page"))
 
+    def test_legendary_items_have_one_complete_fact_source(self):
+        facts = json.loads(
+            (ROOT / "data/item-facts.json").read_text(encoding="utf-8")
+        )["items"]
+        legendary = {
+            entry["id"]: entry
+            for entry in self.catalog["entities"]["items"]
+            if entry.get("rarity") == "Legendary"
+        }
+        self.assertEqual(15, len(legendary))
+        self.assertEqual(set(facts), set(legendary))
+        self.assertNotIn("kevin", legendary)
+        for entity_id, entry in legendary.items():
+            with self.subTest(entity_id=entity_id):
+                self.assertEqual(entry["effect"], facts[entity_id]["effect"])
+                self.assertEqual(entry["unlock"], facts[entity_id]["unlock"])
+                self.assertTrue(entry["image"])
+                self.assertTrue(entry["page"])
+
     def test_scythe_has_a_local_image_without_a_gap_exemption(self):
         weapon_index = {
             normalize(entry["id"]): entry
