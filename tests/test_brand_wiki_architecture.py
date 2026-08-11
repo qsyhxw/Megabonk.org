@@ -141,7 +141,7 @@ class BrandWikiArchitectureTests(unittest.TestCase):
     def test_modified_hubs_have_current_sitemap_dates(self):
         expected_dates = {
             "https://megabonk.org/": "2026-08-11",
-            "https://megabonk.org/database/": "2026-07-29",
+            "https://megabonk.org/database/": "2026-08-11",
             "https://megabonk.org/guides/": "2026-07-29",
         }
         for url, lastmod in expected_dates.items():
