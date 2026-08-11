@@ -103,7 +103,7 @@ def render(page: str, characters: list[dict[str, object]]) -> str:
         "\n".join(
             [
                 f'                <article class="character-quick-card" data-character="{html.escape(str(entry["id"]))}">',
-                f'                    <img src="{html.escape(str(entry["image"]))}" alt="{html.escape(str(entry["name"]))} character" width="54" height="54" loading="lazy" decoding="async">',
+                f'                    <img src="{html.escape(str(entry["image"]))}" alt="{html.escape(str(entry["name"]))} character" width="54" height="54" loading="lazy" decoding="async" fetchpriority="low">',
                 "                    <div>",
                 f'                        <a class="character-quick-build" href="{html.escape(str(entry["buildPage"]))}">{html.escape(str(entry["name"]))} Best Build</a>',
                 f'                        <a class="character-quick-guide" href="{html.escape(str(entry["page"]))}">Character Guide</a>',

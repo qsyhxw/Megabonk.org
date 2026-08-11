@@ -34,13 +34,14 @@ class BuildHubTests(unittest.TestCase):
     def test_hub_lists_all_21_character_builds(self):
         catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
         characters = catalog["entities"]["characters"]
+        css = (ROOT / "css" / "builds-hub.css").read_text(encoding="utf-8")
         rows = re.findall(r'<tr data-character="[^"]+">', self.source)
         cards = re.findall(r'<article class="character-quick-card" data-character="[^"]+">', self.source)
         self.assertEqual(len(rows), len(characters))
         self.assertEqual(len(cards), len(characters))
-        self.assertIn('.character-quick-card[hidden]', self.source)
-        self.assertIn('.leaderboard-signal-card[hidden]', self.source)
-        self.assertIn('display: none !important;', self.source)
+        self.assertIn('.character-quick-card[hidden]', css)
+        self.assertIn('.leaderboard-signal-card[hidden]', css)
+        self.assertIn('display: none !important;', css)
         self.assertNotIn("all 20 Megabonk characters", self.source)
         self.assertNotIn("Showing all 20 character builds", self.source)
         self.assertIn('<div class="stat-number">21</div>', self.source)
@@ -59,6 +60,10 @@ class BuildHubTests(unittest.TestCase):
                     self.source,
                 )
                 self.assertIn(f'src="{entity["image"]}"', self.source)
+                self.assertIn(
+                    f'src="{entity["image"]}" alt="{entity["name"]} character" width="54" height="54" loading="lazy" decoding="async" fetchpriority="low"',
+                    self.source,
+                )
                 self.assertIn(f'href="{entity["buildPage"]}"', self.source)
                 self.assertIn(f'href="{entity["page"]}"', self.source)
                 self.assertIn(
@@ -149,8 +154,25 @@ class BuildHubTests(unittest.TestCase):
         self.assertLess(quick, comparison)
         self.assertLess(comparison, leaderboard)
         self.assertNotIn('class="build-card-compact"', self.source)
-        # Keep the Hub lean while allowing the generated 21-entry ItemList and FAQ schemas.
-        self.assertLess(len(self.source.encode("utf-8")), 128000)
+        self.assertLess(len(self.source.encode("utf-8")), 100000)
+        self.assertIn('<link rel="stylesheet" href="/css/builds-hub.css">', self.source)
+
+    def test_character_filter_supports_shareable_url_parameter(self):
+        self.assertIn("new URLSearchParams(window.location.search).get('character')", self.source)
+        self.assertIn("url.searchParams.set('character', character)", self.source)
+        self.assertIn("url.searchParams.delete('character')", self.source)
+        self.assertIn("characterBuildIds.has(requestedCharacter)", self.source)
+
+    def test_internal_navigation_uses_root_relative_links(self):
+        self.assertNotRegex(self.source, r'<a\b[^>]*href="https://megabonk\.org(?:/|\")')
+        self.assertNotRegex(self.source, r'<a\b[^>]*href="\.\.?/')
+
+    def test_mobile_comparison_keeps_character_column_visible(self):
+        css = (ROOT / "css" / "builds-hub.css").read_text(encoding="utf-8")
+        self.assertIn(".build-comparison-table th:first-child", css)
+        self.assertIn(".build-comparison-table td:first-child", css)
+        self.assertIn("position: sticky", css)
+        self.assertIn("left: 0", css)
 
     def test_version_date_and_leaderboard_signal_are_explicit(self):
         self.assertIn('data-editorial-version="1.0.69"', self.source)
