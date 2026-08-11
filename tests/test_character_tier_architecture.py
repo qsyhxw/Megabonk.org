@@ -55,26 +55,52 @@ class CharacterTierArchitectureTests(unittest.TestCase):
     def test_hub_owns_character_directory_intent(self):
         title = re.search(r"<title>(.*?)</title>", self.hub, re.S).group(1)
         h1 = re.search(r"<h1>(.*?)</h1>", self.hub, re.S).group(1)
+        description = re.search(r'<meta name="description" content="(.*?)">', self.hub, re.S).group(1)
+        self.assertEqual(title, "Megabonk Characters 2026 – Unlocks, Passives & Guides")
+        self.assertEqual(description, "Browse Megabonk characters with unlock requirements, starting weapons, passives, individual guides and build links for every playable character.")
+        self.assertEqual(h1, "🎮 Megabonk Characters, Unlocks & Guides")
         self.assertNotIn("Tier List", title)
         self.assertNotIn("Tier List", h1)
         self.assertIn('id="characterTableBody"', self.hub)
-        self.assertIn('of <strong>21</strong> character guides', self.hub)
+        self.assertIn('of <strong>21</strong> characters in both the directory and guide cards', self.hub)
         self.assertNotIn('data-filter="tier"', self.hub)
         self.assertNotIn('tierBadge', self.hub)
         self.assertIn("id: 'roberto'", self.hub)
         self.assertIn("aliases: ['robong']", self.hub)
-        self.assertIn("createCharacterTable();", self.hub)
+        self.assertNotIn("createCharacterTable", self.hub)
+        self.assertLess(self.hub.index('id="searchInput"'), self.hub.index('id="characterTableBody"'))
+        self.assertIn("document.querySelectorAll('#characterTableBody tr')", self.hub)
         self.assertIn("Warrior: +1.5% Damage per level", self.hub)
 
     def test_hub_table_has_complete_guide_build_and_weapon_targets(self):
-        guide_links = re.findall(r"link: '([^']+-guide)'", self.hub)
-        self.assertGreaterEqual(len(guide_links), 18)
-        build_links = re.findall(r"build: '([^']+)'", self.hub)
-        weapon_links = re.findall(r"weapon: \['[^']+', '([^']+)'\]", self.hub)
+        tbody = re.search(r'<tbody id="characterTableBody">(.*?)</tbody>', self.hub, re.S).group(1)
+        rows = re.findall(r'<tr data-character-id="([^"]+)"', tbody)
+        self.assertEqual(len(rows), 21)
+        self.assertEqual(len(set(rows)), 21)
+        guide_links = re.findall(r'<a class="table-action" href="([^"]+)">Character Guide</a>', tbody)
+        build_links = re.findall(r'<a class="table-action" href="([^"]+)">Best Build</a>', tbody)
+        weapon_links = re.findall(r'<td><a href="([^"]+)">[^<]+</a></td>', tbody)
+        self.assertEqual(len(guide_links), 21)
         self.assertEqual(len(build_links), 21)
         self.assertEqual(len(weapon_links), 21)
         for href in [*guide_links, *build_links, *weapon_links]:
+            self.assertTrue(href.startswith("/"), href)
+            self.assertNotIn(".html", href)
             self.assertIsNotNone(local_target(href), href)
+
+    def test_hub_table_is_crawlable_and_current(self):
+        tbody = re.search(r'<tbody id="characterTableBody">(.*?)</tbody>', self.hub, re.S).group(1)
+        self.assertEqual(tbody.count('data-difficulty="'), 21)
+        self.assertEqual(tbody.count('data-search="'), 21)
+        self.assertEqual(tbody.count('loading="lazy"'), 21)
+        self.assertEqual(tbody.count('decoding="async"'), 21)
+        self.assertNotIn('alt=""', tbody)
+        self.assertIn('Last reviewed: August 11, 2026', self.hub)
+        self.assertIn('Verified through Game Version 1.0.69', self.hub)
+        sitemap = SITEMAP.read_text(encoding="utf-8")
+        marker = '<loc>https://megabonk.org/guides/characters/</loc>'
+        block = sitemap[sitemap.index(marker):sitemap.index('</url>', sitemap.index(marker))]
+        self.assertIn('<lastmod>2026-08-11</lastmod>', block)
 
     def test_legacy_knight_page_does_not_compete_with_sir_oofie(self):
         legacy = LEGACY_KNIGHT.read_text(encoding="utf-8")

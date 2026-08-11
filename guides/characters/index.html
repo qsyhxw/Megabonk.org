@@ -906,10 +906,93 @@
         <section class="character-directory" aria-labelledby="character-directory-title">
             <h2 id="character-directory-title">All Megabonk Characters</h2>
             <p>Scan every current character, then open the Character Guide for unlock and passive details or the separate Best Build page for weapons, tomes, and items.</p>
+            <div class="filter-controls">
+                <div class="filter-row">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="Search character, passive, weapon or unlock..." aria-label="Search Megabonk characters" />
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">Difficulty:</span>
+                        <button class="filter-btn active" data-filter="difficulty" data-value="all">All</button>
+                        <button class="filter-btn" data-filter="difficulty" data-value="beginner">Beginner</button>
+                        <button class="filter-btn" data-filter="difficulty" data-value="intermediate">Intermediate</button>
+                        <button class="filter-btn" data-filter="difficulty" data-value="advanced">Advanced</button>
+                    </div>
+                    <button class="reset-btn" id="resetFilters">Reset All</button>
+                </div>
+                <div class="filter-stats">
+                    Showing <strong id="visibleCount">21</strong> of <strong>21</strong> characters in both the directory and guide cards
+                </div>
+            </div>
             <div class="character-table-wrap" tabindex="0" aria-label="Scrollable Megabonk character directory">
                 <table class="character-table">
                     <thead><tr><th>Character</th><th>How to Unlock</th><th>Current Passive</th><th>Starting Weapon</th><th>Guide</th><th>Best Build</th></tr></thead>
-                    <tbody id="characterTableBody"></tbody>
+                    <tbody id="characterTableBody">
+                        <tr data-character-id="dicehead" data-difficulty="advanced" data-search="dicehead gamba dice complete 100 quests 75% reward multiplier 6% minimum">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Dicehead.png" alt="Dicehead" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/dicehead-guide">Dicehead</a></div></td><td>Complete 100 quests, then purchase Dicehead</td><td>Gamba: 75% reward multiplier, 6% minimum; triggers once per level</td><td><a href="/database/weapons/dice">Dice</a></td><td><a class="table-action" href="/guides/characters/dicehead-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/dicehead-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="cl4nk" data-difficulty="advanced" data-search="cl4nk crit happens revolver forest tier 1 critical chance">
+                            <td><div class="character-cell"><img src="/images/guides/characters/CL4NK.png" alt="CL4NK" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/cl4nk-guide">CL4NK</a></div></td><td>Complete Forest Tier 1, then purchase CL4NK</td><td>Crit Happens: +1% Crit Chance per level</td><td><a href="/database/weapons/revolver">Revolver</a></td><td><a class="table-action" href="/guides/characters/cl4nk-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/cl4nk-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="robinette" data-difficulty="intermediate" data-search="robinette stonks bow forest tier 2 gold gain carried gold">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Robinette.png" alt="Robinette" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/robinette-guide">Robinette</a></div></td><td>Complete Forest Tier 2, then purchase Robinette</td><td>Stonks: +1% Gold Gain per level; damage scales with carried gold</td><td><a href="/database/weapons/bow">Bow</a></td><td><a class="table-action" href="/guides/characters/robinette-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/robinette-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="megachad" data-difficulty="beginner" data-search="megachad flexing aura damage tome level 7 immunity stun permanent damage">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Megachad.png" alt="Megachad" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/megachad-guide">Megachad</a></div></td><td>Reach Damage Tome level 7, then purchase Megachad</td><td>Flexing: immunity, stun and permanent +2.5% Damage per trigger</td><td><a href="/database/weapons/aura">Aura</a></td><td><a class="table-action" href="/guides/characters/megachad-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/megachad-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="calcium" data-difficulty="advanced" data-search="calcium speed demon bone defeat 1000 skeletons damage speed multiplier">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Calcium.png" alt="Calcium" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/calcium-guide">Calcium</a></div></td><td>Defeat 1,000 skeletons, then purchase Calcium</td><td>Speed Demon: +0.75% Damage per level and +0.5% Damage per 1% Speed Multiplier</td><td><a href="/database/weapons/bone">Bone</a></td><td><a class="table-action" href="/guides/characters/calcium-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/calcium-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="roberto" data-difficulty="advanced" data-search="roberto robong hoarder scythe spooky steve free chest">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Roberto.png" alt="Roberto" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/roberto-guide">Roberto</a></div></td><td>Defeat Spooky Steve and buy Scythe, then purchase Roberto</td><td>Hoarder: periodically generates a free chest; the interval grows with level</td><td><a href="/database/weapons/scythe">Scythe</a></td><td><a class="table-action" href="/guides/characters/roberto-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/roberto-best-build/">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="sir-oofie" data-difficulty="beginner" data-search="sir oofie fortified sword starter armor">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Sir_Oofie.png" alt="Sir Oofie" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/sir-oofie-guide">Sir Oofie</a></div></td><td>Starter character — available immediately</td><td>Fortified: +1% Armor per level</td><td><a href="/database/weapons/sword">Sword</a></td><td><a class="table-action" href="/guides/characters/sir-oofie-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/sir-oofie-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="bush" data-difficulty="advanced" data-search="bush bullseye sniper rifle sus bush forest crit damage marks enemies">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Bush.png" alt="Bush" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/bush-guide">Bush</a></div></td><td>Own Sniper Rifle, find Sus Bush in Forest, then win the fight</td><td>Bullseye: +1% Crit Damage per level; marks enemies for an explosion</td><td><a href="/database/weapons/sniper-rifle">Sniper Rifle</a></td><td><a class="table-action" href="/guides/characters/bush-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/bush-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="ninja" data-difficulty="advanced" data-search="ninja shadow step katana desert tier 1 evasion execute dodge">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Ninja.png" alt="Ninja" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/ninja-unlock-guide">Ninja</a></div></td><td>Complete Desert Tier 1 and obtain Katana</td><td>Shadow Step: +0.5% Evasion per level; successful dodges can execute enemies</td><td><a href="/database/weapons/katana">Katana</a></td><td><a class="table-action" href="/guides/characters/ninja-unlock-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/ninja-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="tony" data-difficulty="intermediate" data-search="tony mczoom shocking wireless dagger two challenges pickup range electricity moving">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Tony_McZoom.png" alt="Tony McZoom" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/tony-mczoom-guide">Tony McZoom</a></div></td><td>Complete any 2 challenges and unlock Wireless Dagger</td><td>Shocking: charges electricity while moving and gains +2% Pickup Range per level</td><td><a href="/database/weapons/wireless-dagger">Wireless Dagger</a></td><td><a class="table-action" href="/guides/characters/tony-mczoom-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/tony-mczoom-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="amog" data-difficulty="intermediate" data-search="amog plague poison flask moldy cheese poison 50000 enemies radius damage">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Amog.png" alt="Amog" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/amog-guide">Amog</a></div></td><td>Poison 50,000 enemies with Moldy Cheese</td><td>Plague: +1% Poison Damage per level; radius grows from 4 to 12 by level 220</td><td><a href="/database/weapons/poison-flask">Poison Flask</a></td><td><a class="table-action" href="/guides/characters/amog-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/amog-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="monke" data-difficulty="advanced" data-search="monke monkey grip bananarang gold key forest cage wall climbing high jump hp">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Monke.png" alt="Monke" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/monke-guide">Monke</a></div></td><td>Find the Gold Key and free Monke from the Forest cage</td><td>Monkey Grip: wall climbing, high jump and +2 HP per level</td><td><a href="/database/weapons/bananarang">Bananarang</a></td><td><a class="table-action" href="/guides/characters/monke-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/monke-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="ogre" data-difficulty="beginner" data-search="ogre warrior axe 15000 goblins damage">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Ogre.png" alt="Ogre" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/ogre-guide">Ogre</a></div></td><td>Unlock Axe, defeat 15,000 Goblins, then purchase Ogre</td><td>Warrior: +1.5% Damage per level</td><td><a href="/database/weapons/axe">Axe</a></td><td><a class="table-action" href="/guides/characters/ogre-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/ogre-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="noelle" data-difficulty="intermediate" data-search="noelle enduring frostwalker microwave ice crystal size frozen enemies damage">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Noelle.png" alt="Noelle" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/noelle-guide">Noelle</a></div></td><td>Use the Microwave to duplicate Ice Crystal 3 times in a row</td><td>Enduring: +0.75% Size per level and +1.5% damage per frozen enemy</td><td><a href="/database/weapons/frostwalker">Frostwalker</a></td><td><a class="table-action" href="/guides/characters/noelle-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/noelle-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="birdo" data-difficulty="intermediate" data-search="birdo float tornado desert airborne damage glide">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Birdo.png" alt="Birdo" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/birdo-guide">Birdo</a></div></td><td>In Desert, defeat 100 enemies with Tornado while airborne</td><td>Float: glide and +1% Airborne Damage per level</td><td><a href="/database/weapons/tornado">Tornado</a></td><td><a class="table-action" href="/guides/characters/birdo-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/birdo-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="bandit" data-difficulty="advanced" data-search="bandit flow state dexecutioner desert miniboss attack speed">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Bandit.png" alt="Bandit" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/bandit-guide">Bandit</a></div></td><td>Find and defeat the Bandit miniboss in Desert</td><td>Flow State: +1% Attack Speed per level</td><td><a href="/database/weapons/dexecutioner">Dexecutioner</a></td><td><a class="table-action" href="/guides/characters/bandit-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/bandit-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="vlad" data-difficulty="advanced" data-search="vlad vampirism blood magic desert tier 2 lifesteal low hp damage">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Vlad.png" alt="Vlad" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/vlad-guide">Vlad</a></div></td><td>Complete Desert Tier 2, then purchase Vlad</td><td>Vampirism: +5% base Lifesteal and +1% Lifesteal per level</td><td><a href="/database/weapons/blood-magic">Blood Magic</a></td><td><a class="table-action" href="/guides/characters/vlad-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/vlad-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="athena" data-difficulty="intermediate" data-search="athena lockdown aegis thorns tome thorns low hp damage">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Athena.png" alt="Athena" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/athena-guide">Athena</a></div></td><td>Unlock Aegis and Thorns Tome, then purchase Athena</td><td>Lockdown: +2 Thorns per level; lower HP increases damage</td><td><a href="/database/weapons/aegis">Aegis</a></td><td><a class="table-action" href="/guides/characters/athena-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/athena-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="fox" data-difficulty="beginner" data-search="fox kitsune rng blessing fire staff firestaff starter luck">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Fox.png" alt="Fox" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/fox-kitsune-guide">Fox</a></div></td><td>Starter character — available immediately</td><td>RNG Blessing: +1.5% Luck per level</td><td><a href="/database/weapons/firestaff">Fire Staff</a></td><td><a class="table-action" href="/guides/characters/fox-kitsune-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/fox-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="sir-chadwell" data-difficulty="advanced" data-search="sir chadwell cursed corrupted sword forest tier 3 curse difficulty">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Sir_Chadwell.png" alt="Sir Chadwell" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/sir-chadwell-guide">Sir Chadwell</a></div></td><td>Complete Forest Tier 3, then purchase Sir Chadwell</td><td>Cursed: +1% Curse per level, increasing difficulty</td><td><a href="/database/weapons/corrupted-sword">Corrupted Sword</a></td><td><a class="table-action" href="/guides/characters/sir-chadwell-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/sir-chadwell-best-build">Best Build</a></td>
+                        </tr>
+                        <tr data-character-id="spaceman" data-difficulty="advanced" data-search="spaceman astronaut astronat quantum xp theory black hole six challenges experience no fall damage">
+                            <td><div class="character-cell"><img src="/images/guides/characters/Spaceman.png" alt="Spaceman" width="48" height="48" loading="lazy" decoding="async"><a href="/guides/characters/spaceman-guide">Spaceman</a></div></td><td>Complete 6 challenges and unlock Black Hole</td><td>Quantum XP Theory: +5% flat XP and +1.5% XP per level</td><td><a href="/database/weapons/black-hole">Black Hole</a></td><td><a class="table-action" href="/guides/characters/spaceman-guide">Character Guide</a></td><td><a class="table-action" href="/guides/builds/spaceman-best-build">Best Build</a></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <p class="table-note">Swipe horizontally to view unlock, weapon, Guide, and Build columns.</p>
@@ -918,31 +1001,6 @@
         <section>
             <h2 class="section-title">Individual Character Guides</h2>
             <p class="section-subtitle">Browse unlock, passive, starting weapon, and playstyle guides for all Megabonk characters.</p>
-            
-            <div class="filter-controls">
-                <div class="filter-row">
-                    <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="searchInput" placeholder="Search characters..." />
-                    </div>
-                    
-
-                    <div class="filter-group">
-                        <span class="filter-label">Difficulty:</span>
-                        <button class="filter-btn active" data-filter="difficulty" data-value="all">All</button>
-                        <button class="filter-btn" data-filter="difficulty" data-value="beginner">Beginner</button>
-                        <button class="filter-btn" data-filter="difficulty" data-value="intermediate">Intermediate</button>
-                        <button class="filter-btn" data-filter="difficulty" data-value="advanced">Advanced</button>
-                    </div>
-                    
-                    <button class="reset-btn" id="resetFilters">Reset All</button>
-                </div>
-                
-                <div class="filter-stats">
-                    Showing <strong id="visibleCount">21</strong> of <strong>21</strong> character guides
-                </div>
-            </div>
-            
             <div class="guides-grid" id="guidesGrid">
                 <!-- Character cards will be inserted here by JavaScript -->
             </div>
@@ -1003,7 +1061,7 @@
             <div class="footer-bottom">
                 <p>&copy; <span data-current-year>2026</span> <a href="/">Megabonk.org</a> - Unofficial fan guide and strategy resource</p>
                 <p>Not affiliated with the official Megabonk developers | All game content &copy; their respective owners</p>
-                <p style="margin-top: 0.5rem;"><strong>Last Updated: July 28, 2026</strong> | Verified through Game Version 1.0.69 | Core passive data checked against official patch notes</p>
+                <p style="margin-top: 0.5rem;"><strong>Last reviewed: August 11, 2026</strong> | Verified through Game Version 1.0.69 | Unlocks, passives and starting weapons checked against the current character guides</p>
             </div>
         </div>
     </footer>
@@ -1061,43 +1119,28 @@
         ];
 
         const characterDetails = {
-            dicehead: { unlock: 'Complete 100 quests, then purchase Dicehead', weapon: ['Dice', '/database/weapons/dice.html'], build: '/guides/builds/dicehead-best-build.html' },
-            cl4nk: { unlock: 'Complete Forest Tier 1, then purchase CL4NK', weapon: ['Revolver', '/database/weapons/revolver.html'], build: '/guides/builds/cl4nk-best-build.html' },
-            robinette: { unlock: 'Complete Forest Tier 2, then purchase Robinette', weapon: ['Bow', '/database/weapons/bow.html'], build: '/guides/builds/robinette-best-build.html' },
-            megachad: { unlock: 'Reach Damage Tome level 7, then purchase Megachad', weapon: ['Aura', '/database/weapons/aura.html'], build: '/guides/builds/megachad-best-build.html' },
-            calcium: { unlock: 'Defeat 1,000 skeletons, then purchase Calcium', weapon: ['Bone', '/database/weapons/bone.html'], build: '/guides/builds/calcium-best-build.html' },
-            roberto: { unlock: 'Defeat Spooky Steve and buy Scythe, then purchase Roberto', weapon: ['Scythe', '/database/weapons/scythe.html'], build: '/guides/builds/roberto-best-build/', aliases: ['robong'] },
-            'sir-oofie': { unlock: 'Starter character — available immediately', weapon: ['Sword', '/database/weapons/sword.html'], build: '/guides/builds/sir-oofie-best-build.html' },
-            bush: { unlock: 'Own Sniper Rifle, find Sus Bush in Forest, then win the fight', weapon: ['Sniper Rifle', '/database/weapons/sniper-rifle.html'], build: '/guides/builds/bush-best-build.html' },
-            ninja: { unlock: 'Complete Desert Tier 1 and obtain Katana', weapon: ['Katana', '/database/weapons/katana.html'], build: '/guides/builds/ninja-best-build.html' },
-            tony: { unlock: 'Complete any 2 challenges and unlock Wireless Dagger', weapon: ['Wireless Dagger', '/database/weapons/wireless-dagger.html'], build: '/guides/builds/tony-mczoom-best-build.html' },
-            amog: { unlock: 'Poison 50,000 enemies with Moldy Cheese', weapon: ['Poison Flask', '/database/weapons/poison-flask.html'], build: '/guides/builds/amog-best-build.html' },
-            monke: { unlock: 'Find the Gold Key and free Monke from the Forest cage', weapon: ['Bananarang', '/database/weapons/bananarang.html'], build: '/guides/builds/monke-best-build.html' },
-            ogre: { unlock: 'Unlock Axe, defeat 15,000 Goblins, then purchase Ogre', weapon: ['Axe', '/database/weapons/axe.html'], build: '/guides/builds/ogre-best-build.html' },
-            noelle: { unlock: 'Use the Microwave to duplicate Ice Crystal 3 times in a row', weapon: ['Frostwalker', '/database/weapons/frostwalker.html'], build: '/guides/builds/noelle-best-build.html' },
-            birdo: { unlock: 'In Desert, defeat 100 enemies with Tornado while airborne', weapon: ['Tornado', '/database/weapons/tornado.html'], build: '/guides/builds/birdo-best-build.html' },
-            bandit: { unlock: 'Find and defeat the Bandit miniboss in Desert', weapon: ['Dexecutioner', '/database/weapons/dexecutioner.html'], build: '/guides/builds/bandit-best-build.html' },
-            vlad: { unlock: 'Complete Desert Tier 2, then purchase Vlad', weapon: ['Blood Magic', '/database/weapons/blood-magic.html'], build: '/guides/builds/vlad-best-build.html' },
-            athena: { unlock: 'Unlock Aegis and Thorns Tome, then purchase Athena', weapon: ['Aegis', '/database/weapons/aegis.html'], build: '/guides/builds/athena-best-build.html' },
-            fox: { unlock: 'Starter character — available immediately', weapon: ['Fire Staff', '/database/weapons/firestaff.html'], build: '/guides/builds/fox-best-build.html', aliases: ['kitsune'] },
-            'sir-chadwell': { unlock: 'Complete Forest Tier 3, then purchase Sir Chadwell', weapon: ['Corrupted Sword', '/database/weapons/corrupted-sword.html'], build: '/guides/builds/sir-chadwell-best-build.html' },
-            spaceman: { unlock: 'Complete 6 challenges and unlock Black Hole', weapon: ['Black Hole', '/database/weapons/black-hole.html'], build: '/guides/builds/spaceman-best-build.html', aliases: ['astronat', 'astronaut'] }
+            dicehead: { aliases: [] },
+            cl4nk: { aliases: [] },
+            robinette: { aliases: [] },
+            megachad: { aliases: [] },
+            calcium: { aliases: [] },
+            roberto: { aliases: ['robong'] },
+            'sir-oofie': { aliases: [] },
+            bush: { aliases: [] },
+            ninja: { aliases: [] },
+            tony: { aliases: [] },
+            amog: { aliases: [] },
+            monke: { aliases: [] },
+            ogre: { aliases: [] },
+            noelle: { aliases: [] },
+            birdo: { aliases: [] },
+            bandit: { aliases: [] },
+            vlad: { aliases: [] },
+            athena: { aliases: [] },
+            fox: { aliases: ['kitsune'] },
+            'sir-chadwell': { aliases: [] },
+            spaceman: { aliases: ['astronat', 'astronaut'] }
         };
-
-        function createCharacterTable() {
-            const body = document.getElementById('characterTableBody');
-            body.innerHTML = characters.map(char => {
-                const detail = characterDetails[char.id];
-                return `<tr data-character-id="${char.id}">
-                    <td><div class="character-cell"><img src="${char.img}" alt="" loading="lazy"><a href="${char.link}">${char.name}</a></div></td>
-                    <td>${detail.unlock}</td>
-                    <td>${char.passive}</td>
-                    <td><a href="${detail.weapon[1]}">${detail.weapon[0]}</a></td>
-                    <td><a class="table-action" href="${char.link}">Character Guide</a></td>
-                    <td><a class="table-action" href="${detail.build}">Best Build</a></td>
-                </tr>`;
-            }).join('');
-        }
 
         // Comparison state
         let selectedCharacters = [];
@@ -1388,8 +1431,17 @@
 
         function applyFilters() {
             const guideCards = document.querySelectorAll('.guide-card');
+            const tableRows = document.querySelectorAll('#characterTableBody tr');
             let visibleCount = 0;
-            
+
+            tableRows.forEach(row => {
+                const searchMatch = currentFilters.search === '' || row.dataset.search.includes(currentFilters.search);
+                const difficultyMatch = currentFilters.difficulty === 'all' || row.dataset.difficulty === currentFilters.difficulty;
+                const isVisible = searchMatch && difficultyMatch;
+                row.hidden = !isVisible;
+                if (isVisible) visibleCount++;
+            });
+
             guideCards.forEach(card => {
                 const cardDifficulty = card.dataset.difficulty;
                 const cardSearch = card.dataset.search;
@@ -1399,7 +1451,6 @@
                 
                 if (searchMatch && difficultyMatch) {
                     card.classList.remove('hidden');
-                    visibleCount++;
                 } else {
                     card.classList.add('hidden');
                 }
@@ -1430,7 +1481,6 @@
         });
 
         // Initialize
-        createCharacterTable();
         createCharacterCards();
     </script>
     <script src="/js/current-year.js" defer></script>
