@@ -131,6 +131,13 @@ class BrandWikiArchitectureTests(unittest.TestCase):
         ):
             self.assertNotIn(old_heading, HOME_PAGE)
 
+    def test_related_site_is_a_low_emphasis_footer_link(self):
+        footer = re.search(r'<footer class="site-footer">.*?</footer>', HOME_PAGE, re.S).group(0)
+        self.assertIn('class="related-sites"', footer)
+        self.assertIn('href="https://heartopia.life/"', footer)
+        self.assertIn('>heartopia</a>', footer)
+        self.assertIn('rel="noopener"', footer)
+
     def test_modified_hubs_have_current_sitemap_dates(self):
         expected_dates = {
             "https://megabonk.org/": "2026-08-11",
