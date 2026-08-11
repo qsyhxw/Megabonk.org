@@ -32,10 +32,12 @@ class BuildHubTests(unittest.TestCase):
         self.assertIn("<h1>🏆 Best Megabonk Build 2026</h1>", self.source)
 
     def test_hub_lists_all_21_character_builds(self):
+        catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
+        characters = catalog["entities"]["characters"]
         rows = re.findall(r'<tr data-character="[^"]+">', self.source)
         cards = re.findall(r'<article class="character-quick-card" data-character="[^"]+">', self.source)
-        self.assertEqual(len(rows), 21)
-        self.assertEqual(len(cards), 21)
+        self.assertEqual(len(rows), len(characters))
+        self.assertEqual(len(cards), len(characters))
         self.assertIn('.character-quick-card[hidden]', self.source)
         self.assertIn('.leaderboard-signal-card[hidden]', self.source)
         self.assertIn('display: none !important;', self.source)
@@ -44,8 +46,37 @@ class BuildHubTests(unittest.TestCase):
         self.assertIn('<div class="stat-number">21</div>', self.source)
         self.assertIn('<div class="stat-number">21/21</div>', self.source)
 
+    def test_character_surfaces_are_generated_from_shared_catalog(self):
+        catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
+        for entity in catalog["entities"]["characters"]:
+            with self.subTest(character=entity["id"]):
+                self.assertIn(
+                    f'<option value="{entity["id"]}">{entity["name"]}</option>',
+                    self.source,
+                )
+                self.assertIn(
+                    f'<article class="character-quick-card" data-character="{entity["id"]}">',
+                    self.source,
+                )
+                self.assertIn(f'src="{entity["image"]}"', self.source)
+                self.assertIn(f'href="{entity["buildPage"]}"', self.source)
+                self.assertIn(f'href="{entity["page"]}"', self.source)
+                self.assertIn(
+                    f'<tr data-character="{entity["id"]}">',
+                    self.source,
+                )
+        for marker in (
+            "BUILD_HUB_CHARACTER_OPTIONS_START",
+            "BUILD_HUB_CHARACTER_CARDS_START",
+            "BUILD_HUB_CHARACTER_ROWS_START",
+        ):
+            self.assertIn(marker, self.source)
+        self.assertNotIn("const leaderboardBuildRoutes =", self.source)
+        self.assertNotIn("const leaderboardCharacterImages =", self.source)
+        self.assertIn("window.MegabonkEntities?.get('characters', entry.character)", self.source)
+
     def test_roberto_is_available_in_every_hub_surface(self):
-        self.assertIn("<option>Roberto</option>", self.source)
+        self.assertIn('<option value="roberto">Roberto</option>', self.source)
         self.assertIn('<tr data-character="roberto">', self.source)
         self.assertIn(
             'href="/guides/builds/roberto-best-build/"',
@@ -75,15 +106,22 @@ class BuildHubTests(unittest.TestCase):
 
     def test_version_date_and_leaderboard_signal_are_explicit(self):
         self.assertIn('data-editorial-version="1.0.69"', self.source)
+        self.assertIn('<meta name="game-version" content="1.0.69">', self.source)
+        self.assertIn('data-build-game-version>Latest game version: v1.0.69</span>', self.source)
+        self.assertIn('data-build-manual-review>Build recommendations reviewed for v1.0.69: July 29, 2026</span>', self.source)
         self.assertIn('"dateModified": "2026-08-11"', self.source)
         self.assertIn('article:modified_time" content="2026-08-11T00:00:00+08:00', self.source)
-        self.assertIn("Build recommendations reviewed: July 29, 2026", self.source)
         self.assertIn("latest synchronized Top 100 sample", self.source)
         self.assertIn("MegabonkLeaderboardData.load('/data/leaderboard-meta.json'", self.source)
         self.assertIn("leaderboard-data-loader.js", self.source)
         self.assertIn("Latest Synchronized Leaderboard Build Lab", self.source)
         self.assertIn('id="leaderboardSignalCoverage"', self.source)
-        self.assertIn("characters with repeated evidence", self.source)
+        self.assertIn('id="leaderboardSignalUpdated"', self.source)
+        self.assertIn('id="leaderboardSignalCache"', self.source)
+        self.assertIn("Cache: last-known-good snapshot", self.source)
+        self.assertIn("Cache: live synchronized JSON", self.source)
+        self.assertIn("Coverage:", self.source)
+        self.assertIn("characters · ${supported.length} repeated", self.source)
         self.assertIn('id="leaderboardFilterEmpty"', self.source)
         self.assertIn("Version guard:", self.source)
         self.assertNotIn("current-version Top 100", self.source)

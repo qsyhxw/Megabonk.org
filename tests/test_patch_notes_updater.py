@@ -28,23 +28,27 @@ class PatchNotesUpdaterTests(unittest.TestCase):
         homepage = root / "index.html"
         sitemap = root / "sitemap.xml"
         state = root / "data" / "patch-notes-state.json"
+        build_hub = root / "guides" / "builds" / "index.html"
         page.parent.mkdir(parents=True)
+        build_hub.parent.mkdir(parents=True)
         state.parent.mkdir(parents=True)
         shutil.copy2(ROOT / "guides" / "patch-notes" / "index.html", page)
         shutil.copy2(ROOT / "index.html", homepage)
         shutil.copy2(ROOT / "sitemap.xml", sitemap)
         shutil.copy2(ROOT / "data" / "patch-notes-state.json", state)
-        return temporary, page, homepage, sitemap, state
+        shutil.copy2(ROOT / "guides" / "builds" / "index.html", build_hub)
+        return temporary, page, homepage, sitemap, state, build_hub
 
     def load_fixture(self, name):
         path = ROOT / "tests" / "fixtures" / name
         return json.loads(path.read_text(encoding="utf-8"))
 
     def test_current_official_data_does_not_rewrite_page(self):
-        temporary, page, homepage, sitemap, state = self.make_workspace()
+        temporary, page, homepage, sitemap, state, build_hub = self.make_workspace()
         self.addCleanup(temporary.cleanup)
         original_page = page.read_text(encoding="utf-8")
         original_homepage = homepage.read_text(encoding="utf-8")
+        original_build_hub = build_hub.read_text(encoding="utf-8")
         payload = self.load_fixture("steam-news-current.json")
         fixture_latest = max(
             patch_updater.parse_official_news(payload),
@@ -63,32 +67,38 @@ class PatchNotesUpdaterTests(unittest.TestCase):
             sitemap,
             state,
             date(2026, 7, 23),
+            build_hub_path=build_hub,
         )
 
         self.assertFalse(result["page_changed"])
         self.assertFalse(result["homepage_changed"])
+        self.assertFalse(result["build_hub_changed"])
         self.assertEqual(result["new_versions"], [])
         self.assertEqual(page.read_text(encoding="utf-8"), original_page)
         self.assertEqual(homepage.read_text(encoding="utf-8"), original_homepage)
+        self.assertEqual(build_hub.read_text(encoding="utf-8"), original_build_hub)
         saved = json.loads(state.read_text(encoding="utf-8"))
         self.assertEqual(saved["latest_version"], "1.0.69")
         self.assertTrue(saved["versions"]["1.0.69"]["source_hash"])
 
     def test_new_version_updates_page_sitemap_and_is_idempotent(self):
-        temporary, page, homepage, sitemap, state = self.make_workspace()
+        temporary, page, homepage, sitemap, state, build_hub = self.make_workspace()
         self.addCleanup(temporary.cleanup)
         payload = self.load_fixture("steam-news-new.json")
 
         first = patch_updater.run_update(
-            payload, page, homepage, sitemap, state, date(2026, 8, 2)
+            payload, page, homepage, sitemap, state, date(2026, 8, 2),
+            build_hub_path=build_hub,
         )
         rendered = page.read_text(encoding="utf-8")
         rendered_homepage = homepage.read_text(encoding="utf-8")
         rendered_sitemap = sitemap.read_text(encoding="utf-8")
         rendered_state = state.read_text(encoding="utf-8")
+        rendered_build_hub = build_hub.read_text(encoding="utf-8")
 
         self.assertTrue(first["page_changed"])
         self.assertTrue(first["homepage_changed"])
+        self.assertTrue(first["build_hub_changed"])
         self.assertEqual(first["new_versions"], ["1.0.70"])
         self.assertIn('<meta name="patch-version" content="1.0.70">', rendered)
         self.assertIn("Megabonk Patch Notes V1.0.70", rendered)
@@ -98,16 +108,23 @@ class PatchNotesUpdaterTests(unittest.TestCase):
         self.assertIn('<strong data-home-patch-version>v1.0.70</strong>', rendered_homepage)
         self.assertIn('datetime="2026-08-02">August 2, 2026</time>', rendered_homepage)
         self.assertIn("2026-08-02</lastmod>", rendered_sitemap)
+        self.assertIn('<meta name="game-version" content="1.0.70">', rendered_build_hub)
+        self.assertIn('data-build-game-version>Latest game version: v1.0.70</span>', rendered_build_hub)
+        self.assertIn('data-build-manual-review>Build recommendations reviewed for v1.0.69: July 29, 2026</span>', rendered_build_hub)
+        self.assertIn('data-editorial-version="1.0.69"', rendered_build_hub)
 
         second = patch_updater.run_update(
-            payload, page, homepage, sitemap, state, date(2026, 8, 2)
+            payload, page, homepage, sitemap, state, date(2026, 8, 2),
+            build_hub_path=build_hub,
         )
         self.assertFalse(second["page_changed"])
         self.assertFalse(second["homepage_changed"])
+        self.assertFalse(second["build_hub_changed"])
         self.assertEqual(page.read_text(encoding="utf-8"), rendered)
         self.assertEqual(homepage.read_text(encoding="utf-8"), rendered_homepage)
         self.assertEqual(sitemap.read_text(encoding="utf-8"), rendered_sitemap)
         self.assertEqual(state.read_text(encoding="utf-8"), rendered_state)
+        self.assertEqual(build_hub.read_text(encoding="utf-8"), rendered_build_hub)
 
     def test_non_official_items_are_rejected(self):
         payload = self.load_fixture("steam-news-new.json")

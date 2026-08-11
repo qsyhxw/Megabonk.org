@@ -97,6 +97,15 @@ class ProductionHealthTests(unittest.TestCase):
                 self.assertIn("always()", source)
                 self.assertIn("send_automation_alert.py failure", source)
 
+    def test_build_hub_is_connected_to_patch_and_entity_automations(self):
+        patch = (ROOT / ".github" / "workflows" / "update-patch-notes.yml").read_text(encoding="utf-8")
+        leaderboard = (ROOT / ".github" / "workflows" / "daily_scrape.yml").read_text(encoding="utf-8")
+        entities = (ROOT / ".github" / "workflows" / "monitor-wiki-entities.yml").read_text(encoding="utf-8")
+        self.assertIn("guides/builds/index.html", patch)
+        self.assertIn("data-build-game-version", patch)
+        self.assertIn("python scripts/build_builds_hub.py", leaderboard)
+        self.assertIn("python scripts/build_builds_hub.py", entities)
+
 
     def test_legacy_leaderboard_workflow_is_removed(self):
         self.assertFalse(

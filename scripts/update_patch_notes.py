@@ -518,6 +518,28 @@ def update_homepage(homepage: str, version: str, today: date) -> str:
     )
 
 
+def update_build_hub_game_version(build_hub: str, version: str) -> str:
+    """Update the detected game version without changing the manual review baseline."""
+    build_hub = _replace_once(
+        build_hub,
+        r'(<meta name="game-version" content=")[^"]+(">)',
+        rf"\g<1>{version}\2",
+        "Build Hub game-version metadata",
+    )
+    build_hub = _replace_once(
+        build_hub,
+        r'("version":\s*")[^"]+(")',
+        rf"\g<1>{version}\2",
+        "Build Hub schema game version",
+    )
+    return _replace_once(
+        build_hub,
+        r'(<span class="build-update-pill" data-build-game-version>)[^<]+(</span>)',
+        rf"\g<1>Latest game version: v{version}\2",
+        "Build Hub visible game version",
+    )
+
+
 def update_sitemap(sitemap: str, today: date) -> str:
     patch_pattern = (
         r"(<loc>https://megabonk\.org/guides/patch-notes/</loc>\s*"
@@ -563,6 +585,7 @@ def run_update(
     sitemap_path: Path,
     state_path: Path,
     today: date,
+    build_hub_path: Path | None = None,
 ) -> dict[str, Any]:
     records = parse_official_news(payload)
     if not records:
@@ -603,6 +626,7 @@ def run_update(
 
     page_changed = False
     homepage_changed = False
+    build_hub_changed = False
     if page_records:
         updated_page, target_version = update_page(page, page_records, today)
         updated_homepage = update_homepage(homepage, target_version, today)
@@ -615,6 +639,12 @@ def run_update(
             homepage_changed = True
         if updated_sitemap != sitemap:
             sitemap_path.write_text(updated_sitemap, encoding="utf-8", newline="\n")
+        if build_hub_path:
+            build_hub = build_hub_path.read_text(encoding="utf-8")
+            updated_build_hub = update_build_hub_game_version(build_hub, target_version)
+            if updated_build_hub != build_hub:
+                build_hub_path.write_text(updated_build_hub, encoding="utf-8", newline="\n")
+                build_hub_changed = True
         current_version = target_version
 
     versions = dict(previous_versions)
@@ -638,6 +668,7 @@ def run_update(
     return {
         "page_changed": page_changed,
         "homepage_changed": homepage_changed,
+        "build_hub_changed": build_hub_changed,
         "state_changed": state_changed,
         "latest_version": state["latest_version"],
         "new_versions": [record.version for record in new_records],
@@ -652,6 +683,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--homepage", type=Path, default=Path("index.html"))
     parser.add_argument("--sitemap", type=Path, default=Path("sitemap.xml"))
     parser.add_argument("--state", type=Path, default=Path("data/patch-notes-state.json"))
+    parser.add_argument("--build-hub", type=Path, default=Path("guides/builds/index.html"))
     parser.add_argument("--today", help="Override today's date (YYYY-MM-DD) for tests")
     return parser.parse_args()
 
@@ -666,7 +698,8 @@ def main() -> int:
         )
         today = date.fromisoformat(args.today) if args.today else datetime.now(timezone.utc).date()
         result = run_update(
-            payload, args.page, args.homepage, args.sitemap, args.state, today
+            payload, args.page, args.homepage, args.sitemap, args.state, today,
+            build_hub_path=args.build_hub,
         )
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
