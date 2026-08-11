@@ -12,7 +12,6 @@ class LeaderboardCacheLoaderIntegrationTests(unittest.TestCase):
             'leaderboard/builds.html',
             'leaderboard/today.html',
             'leaderboard/recent.html',
-            'leaderboard/official.html',
             'leaderboard/verified.html',
             'guides/builds/index.html',
             'guides/characters/character-tier-list/index.html',
@@ -22,6 +21,11 @@ class LeaderboardCacheLoaderIntegrationTests(unittest.TestCase):
                 html = (ROOT / page).read_text(encoding='utf-8')
                 self.assertIn(LOADER, html)
                 self.assertIn('MegabonkLeaderboardData.load', html)
+
+    def test_official_status_page_does_not_load_unused_ranking_data(self):
+        html = (ROOT / 'leaderboard' / 'official.html').read_text(encoding='utf-8')
+        self.assertNotIn(LOADER, html)
+        self.assertNotIn('MegabonkLeaderboardData.load', html)
 
     def test_every_character_signal_page_loads_cache_loader_first(self):
         pages = []

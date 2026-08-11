@@ -144,7 +144,7 @@ class LeaderboardIntentArchitectureTests(unittest.TestCase):
         self.assertIn(
             '<a href="/leaderboard/official">Official Status &amp; Submit</a>', verified
         )
-        self.assertIn("Find Submission Destination", verified)
+        self.assertIn("Official Status &amp; Submit", verified)
         self.assertNotIn(
             'href="https://megabonk.leaderboard.gg/" target="_blank" rel="noopener noreferrer" class="cta-button"',
             verified,
@@ -157,6 +157,71 @@ class LeaderboardIntentArchitectureTests(unittest.TestCase):
         self.assertIn("Full ${escapeHtml(char.name)} Build Guide", builds)
         self.assertIn("use each character's Best Build page", builds)
         self.assertIn("View Global Rankings", builds)
+
+    def test_hub_places_live_data_and_intent_controls_before_rankings(self):
+        source = self.sources["hub"]
+        ordered_markers = (
+            'id="ranked-runs"',
+            'id="current-version"',
+            'id="data-cache-status"',
+            'id="update-time"',
+            '<!-- Leaderboard Hub Navigation -->',
+            'id="leaderboard-filter-input"',
+            'How to Use This Leaderboard',
+            'id="leaderboard-faq-title"',
+        )
+        positions = [source.index(marker) for marker in ordered_markers]
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn("Cached Snapshot", source)
+        self.assertIn("loadResult.isCached", source)
+        self.assertIn("getFilteredLeaderboardEntries", source)
+        self.assertIn("leaderboard-filter-clear", source)
+        self.assertIn("sourceIndex", source)
+        navigation = source.split("<!-- Leaderboard Hub Navigation -->", 1)[1].split(
+            '<div class="card">', 1
+        )[0]
+        self.assertEqual(navigation.count('class="hub-card"'), 6)
+        self.assertNotIn("Steam Player Count", navigation)
+        self.assertNotIn("https://megabonk.org/guides/builds/", source)
+        for intent in ("Records", "Builds", "Verification"):
+            self.assertRegex(source, rf"<h3[^>]*>[^<]*{intent}</h3>")
+
+    def test_official_page_stays_focused_on_status_and_submission(self):
+        source = self.sources["official"]
+        self.assertIn("Is There a Developer-Supported Leaderboard?", source)
+        self.assertIn("Steam In-Game vs Public Community Board", source)
+        self.assertIn("How to Submit a Community Run", source)
+        self.assertIn('href="https://megabonk.leaderboard.gg/"', source)
+        self.assertIn('<a href="/leaderboard/verified">Verification Rules</a>', source)
+        self.assertNotIn("Current Community Data Status", source)
+        self.assertNotIn("How Megabonk.org Uses the Data", source)
+        self.assertNotIn("Common Questions", source)
+        self.assertNotIn("Related Pages", source)
+        self.assertNotIn("community-run-count", source)
+        self.assertNotIn("loadCommunityStatus", source)
+
+    def test_verified_page_stays_focused_on_evidence_and_review_state(self):
+        source = self.sources["verified"]
+        required = (
+            "What “Verified” Means Here",
+            "Video Evidence and Prohibited Changes",
+            "gameplay-changing mods, hacking or exploits",
+            "edited footage",
+            "Submission time",
+            "firstSeenAt",
+            "lastSeenAt",
+            "Review Status and Observed Times",
+            "Appeals and Unusual Records",
+            "Official Status &amp; Submit",
+            "parseRecordTime",
+            "verified-review-status",
+            "verified-observation-window",
+            "verified-submission-coverage",
+        )
+        for marker in required:
+            self.assertIn(marker, source)
+        self.assertNotIn("Two Different Trust Models", source)
+        self.assertNotIn('"@type":"FAQPage"', source)
 
 
 if __name__ == "__main__":

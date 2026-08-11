@@ -466,17 +466,14 @@
         <div class="warning-box"><p><strong>Source distinction</strong></p><ul><li><strong>Steam in-game leaderboard:</strong> developer-supported game feature; view it inside Megabonk.</li><li><strong>Leaderboard.gg:</strong> public community board with full-run video review; not affiliated with vedinad.</li><li><strong>Megabonk.org:</strong> read-only community mirror and analysis layer; it does not approve submissions.</li></ul></div>
         <div class="dual-cta"><a href="https://store.steampowered.com/app/3405340/Megabonk/" target="_blank" rel="noopener noreferrer" class="cta-button steam">🎮 Open Megabonk on Steam →</a><a href="https://megabonk.leaderboard.gg/" target="_blank" rel="noopener noreferrer" class="cta-button">📹 View or Submit on Leaderboard.gg →</a></div>
         <div class="content-card">
-            <h2>Current Community Data Status</h2>
-            <div class="features-grid" aria-live="polite"><div class="feature-card"><h3>📊 Verified runs</h3><p id="community-run-count">Loading current snapshot…</p></div><div class="feature-card"><h3>🧩 Source patch</h3><p id="community-patch">Loading version…</p></div><div class="feature-card"><h3>🕐 Snapshot published</h3><p id="community-sync-time">Loading time…</p></div><div class="feature-card"><h3>🔗 Data source</h3><p><a href="https://megabonk.leaderboard.gg/" target="_blank" rel="noopener noreferrer">Leaderboard.gg</a></p></div></div>
+            <h2>Is There a Developer-Supported Leaderboard?</h2>
+            <p>Yes. Megabonk supports Steam Leaderboards inside the game. That developer-supported feature is separate from the public community website used for the records displayed on Megabonk.org.</p>
             <h2>Steam In-Game vs Public Community Board</h2>
             <div class="comparison-table-scroll" role="region" aria-label="Steam and community leaderboard comparison" tabindex="0"><table class="comparison-table"><thead><tr><th>Feature</th><th>Steam in-game</th><th>Leaderboard.gg community board</th></tr></thead><tbody><tr><td><strong>Operator</strong></td><td>Game developer / Steam integration</td><td>Independent community</td></tr><tr><td><strong>Public website</strong></td><td>No standalone official public board confirmed</td><td>Yes</td></tr><tr><td><strong>Submission</strong></td><td>Handled in game</td><td>Manual submission with video</td></tr><tr><td><strong>Video proof</strong></td><td>Not part of the public submission flow</td><td>Full run required</td></tr><tr><td><strong>Build details</strong></td><td>Limited public access</td><td>Weapons, Tomes, items, character and score</td></tr><tr><td><strong>Used by Megabonk.org</strong></td><td>No automated import</td><td>Hourly read-only synchronization</td></tr></tbody></table></div>
             <h2>How to Submit a Community Run</h2>
             <div class="info-box"><ol><li>Open the current Leaderboard.gg Megabonk board.</li><li>Choose <strong>Submit</strong> and provide the requested run and video details.</li><li>Follow the patch and form requirements displayed by the board.</li></ol></div>
             <p>For video evidence, prohibited tools and acceptance details, read the dedicated <a href="/leaderboard/verified">Verification Rules</a>.</p>
-            <h2>How Megabonk.org Uses the Data</h2><ul><li><strong>Hourly source check:</strong> GitHub Actions checks the public community dataset once per hour.</li><li><strong>Stable snapshots:</strong> a new commit is created only when the source dataset changes.</li><li><strong>Real timestamps:</strong> source submission and update times are stored alongside first-seen and last-seen observations.</li><li><strong>Validation:</strong> incomplete datasets, missing required fields and duplicate ranks are rejected.</li><li><strong>No invented rankings:</strong> a fetch failure never creates simulated scores or players.</li></ul>
             <div class="warning-box"><p><strong>Important:</strong> “Verified” on this site means the record is present in the Leaderboard.gg reviewed dataset. See <a href="/leaderboard/verified">Verification Rules</a> for evidence and review details.</p></div>
-            <h2>Common Questions</h2><div class="faq-item"><h3>Is Leaderboard.gg the official Megabonk website?</h3><p>No. It explicitly identifies itself as an independent community leaderboard and is not affiliated with vedinad.</p></div><div class="faq-item"><h3>Where can I see the developer-supported leaderboard?</h3><p>Open Megabonk through Steam and use the leaderboard interface provided inside the game. The Steam store confirms Steam Leaderboards as a game feature, but it is not a public build-data source for this website.</p></div><div class="faq-item"><h3>Why can the two leaderboards show different results?</h3><p>They use different submission and verification systems. Leaderboard.gg requires video evidence and can organize runs by patch, while the in-game system follows the game’s own upload and reset behavior.</p></div><div class="faq-item"><h3>Can Megabonk.org submit or remove my run?</h3><p>No. Submit, appeal or contact the operators directly through Leaderboard.gg. This site only mirrors the approved public dataset.</p></div>
-            <h2>Related Pages</h2><div class="related-links"><a href="/leaderboard/">📊 Global Rankings</a><a href="/leaderboard/recent">🕐 Recent Submissions</a><a href="/leaderboard/builds">🏗️ Ranked Build Data</a><a href="/leaderboard/verified">✅ Verification Rules</a></div><a href="/leaderboard/" class="back-link">← Back to Leaderboard Hub</a>
         </div>
     </div>
     <footer class="site-footer">
@@ -484,30 +481,12 @@
         <p><a href="/privacy-policy/">Privacy Policy</a> | Not affiliated with the official game or developer</p>
     </footer>
 
-    <script src="/js/leaderboard-data-loader.js?v=20260804"></script>
     <script>
         document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
             const nav = document.querySelector('.main-nav');
             nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
             if (nav.style.display === 'flex') Object.assign(nav.style, { flexDirection: 'column', position: 'absolute', top: '100%', left: '0', right: '0', background: 'white', padding: '20px' });
         });
-        async function loadCommunityStatus() {
-            try {
-                const loadResult = await window.MegabonkLeaderboardData.load('/leaderboard-data.json', { kind: 'leaderboard', minRecords: 100 });
-                const snapshot = loadResult.payload;
-                document.getElementById('community-run-count').textContent = `${snapshot.data.length.toLocaleString()} approved records`;
-                document.getElementById('community-patch').textContent = snapshot.active_version ? `v${snapshot.active_version}` : 'Version not supplied';
-                document.getElementById('community-sync-time').textContent = loadResult.isCached
-                    ? `⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult)}`
-                    : (snapshot.fetched_at ? new Date(snapshot.fetched_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'Timestamp unavailable');
-            } catch (error) {
-                document.getElementById('community-run-count').textContent = 'Snapshot temporarily unavailable';
-                document.getElementById('community-patch').textContent = 'See source for current patch';
-                document.getElementById('community-sync-time').textContent = 'No simulated status shown';
-            }
-        }
-        loadCommunityStatus();
-        setInterval(loadCommunityStatus, 900000);
     </script>
     <script src="/js/current-year.js" defer></script>
 </body>

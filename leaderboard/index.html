@@ -270,6 +270,49 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             color: #6c757d;
         }
 
+        .leaderboard-filter {
+            padding: 24px 40px;
+            background: #fff;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .leaderboard-filter label {
+            display: block;
+            margin-bottom: 8px;
+            color: #343a40;
+            font-weight: 700;
+        }
+
+        .leaderboard-filter-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .leaderboard-filter input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px 14px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        .leaderboard-filter button {
+            padding: 12px 16px;
+            border: 0;
+            border-radius: 8px;
+            background: #667eea;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .leaderboard-filter-status {
+            margin-top: 8px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
         .pulse {
             width: 10px;
             height: 10px;
@@ -1576,6 +1619,10 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                     <div class="stat-label">Active Patch</div>
                     <div class="stat-value" id="current-version">-</div>
                 </div>
+                <div class="stat-box">
+                    <div class="stat-label">Cache Status</div>
+                    <div class="stat-value" id="data-cache-status">Loading</div>
+                </div>
             </div>
 
             <div class="controls">
@@ -1589,7 +1636,82 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 </button>
             </div>
 
-            
+        </div>
+
+         <!-- Leaderboard Hub Navigation -->
+        <div class="card" style="margin-bottom: 30px;">
+            <div style="padding: 40px;">
+                <div style="text-align: center; margin-bottom: 35px;">
+                    <h2 style="color: #667eea; margin: 0 0 15px 0; font-size: 2rem;">
+                        🏆 Leaderboard Hub
+                    </h2>
+                    <p style="color: #6c757d; font-size: 1.1rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                        Explore different leaderboard views to find the rankings that matter to you. 
+                        From all-time legends to today's top performers, discover the best builds and strategies.
+                    </p>
+                </div>
+
+                <div class="leaderboard-hub-grid">
+                    <!-- Global Rankings -->
+                    <a href="/leaderboard/" class="hub-card">
+                        <div class="hub-icon">🌍</div>
+                        <h3 class="hub-title">Global Rankings</h3>
+                        <p class="hub-description">All-time top scores from players worldwide. The ultimate hall of fame.</p>
+                        <div class="hub-badge official">Main Hub</div>
+                    </a>
+
+                    <!-- Today's Rankings -->
+                    <a href="/leaderboard/today" class="hub-card">
+                        <div class="hub-icon">📅</div>
+                        <h3 class="hub-title">Today's Rankings</h3>
+                        <p class="hub-description">Fresh scores from the last 24 hours. See who's dominating right now.</p>
+                        <div class="hub-badge hot">🔥 Hot</div>
+                    </a>
+
+                    <!-- Recent Activity -->
+                    <a href="/leaderboard/recent" class="hub-card">
+                        <div class="hub-icon">⚡</div>
+                        <h3 class="hub-title">Recent Submissions</h3>
+                        <p class="hub-description">Latest submissions and live updates from the community.</p>
+                        <div class="hub-badge new">⏰ Live</div>
+                    </a>
+
+                    <!-- Top Builds -->
+                    <a href="/leaderboard/builds" class="hub-card">
+                        <div class="hub-icon">🏗️</div>
+                        <h3 class="hub-title">Ranked Build Data</h3>
+                        <p class="hub-description">Weapons, Tomes and items appearing in high-ranking submitted runs.</p>
+                        <div class="hub-badge trending">📈 Trending</div>
+                    </a>
+
+                    <!-- Verified Leaderboard -->
+                    <a href="/leaderboard/verified" class="hub-card">
+                        <div class="hub-icon">✅</div>
+                        <h3 class="hub-title">Verification Rules</h3>
+                        <p class="hub-description">Video evidence, review status and data provenance for community runs.</p>
+                        <div class="hub-badge verified">✓ Verified</div>
+                    </a>
+
+                    <!-- Official status and submission destination -->
+                    <a href="/leaderboard/official" class="hub-card">
+                        <div class="hub-icon">🎥</div>
+                        <h3 class="hub-title">Official Status &amp; Submit</h3>
+                        <p class="hub-description">Understand the Steam in-game board and find the current community submission destination.</p>
+                        <div class="hub-badge info">Status Guide</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <section class="leaderboard-filter" aria-labelledby="leaderboard-filter-title">
+                <label id="leaderboard-filter-title" for="leaderboard-filter-input">Filter Global Rankings</label>
+                <div class="leaderboard-filter-row">
+                    <input id="leaderboard-filter-input" type="search" placeholder="Player, character or country" autocomplete="off">
+                    <button id="leaderboard-filter-clear" type="button">Clear</button>
+                </div>
+                <p class="leaderboard-filter-status" id="leaderboard-filter-status" aria-live="polite">Showing all synchronized records.</p>
+            </section>
 
             <!-- ADS: In-Article #1 -->
             <div class="ad-box ad-in-article-top">
@@ -1647,98 +1769,26 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             </div>
         </div>
 
-         <!-- Leaderboard Hub Navigation -->
-        <div class="card" style="margin-bottom: 30px;">
-            <div style="padding: 40px;">
-                <div style="text-align: center; margin-bottom: 35px;">
-                    <h2 style="color: #667eea; margin: 0 0 15px 0; font-size: 2rem;">
-                        🏆 Leaderboard Hub
-                    </h2>
-                    <p style="color: #6c757d; font-size: 1.1rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">
-                        Explore different leaderboard views to find the rankings that matter to you. 
-                        From all-time legends to today's top performers, discover the best builds and strategies.
-                    </p>
-                </div>
 
-                <div class="leaderboard-hub-grid">
-                    <!-- Global Rankings -->
-                    <a href="/leaderboard/" class="hub-card">
-                        <div class="hub-icon">🌍</div>
-                        <h3 class="hub-title">Global Rankings</h3>
-                        <p class="hub-description">All-time top scores from players worldwide. The ultimate hall of fame.</p>
-                        <div class="hub-badge official">Main Hub</div>
-                    </a>
-
-                    <!-- Today's Rankings -->
-                    <a href="/leaderboard/today" class="hub-card">
-                        <div class="hub-icon">📅</div>
-                        <h3 class="hub-title">Today's Rankings</h3>
-                        <p class="hub-description">Fresh scores from the last 24 hours. See who's dominating right now.</p>
-                        <div class="hub-badge hot">🔥 Hot</div>
-                    </a>
-
-                    <!-- Recent Activity -->
-                    <a href="/leaderboard/recent" class="hub-card">
-                        <div class="hub-icon">⚡</div>
-                        <h3 class="hub-title">Recent Submissions</h3>
-                        <p class="hub-description">Latest submissions and live updates from the community.</p>
-                        <div class="hub-badge new">⏰ Live</div>
-                    </a>
-
-                    <!-- Top Builds -->
-                    <a href="/leaderboard/builds" class="hub-card">
-                        <div class="hub-icon">🏗️</div>
-                        <h3 class="hub-title">Ranked Build Data</h3>
-                        <p class="hub-description">Weapons, Tomes and items appearing in high-ranking submitted runs.</p>
-                        <div class="hub-badge trending">📈 Trending</div>
-                    </a>
-
-                    <!-- Verified Leaderboard -->
-                    <a href="/leaderboard/verified" class="hub-card">
-                        <div class="hub-icon">✅</div>
-                        <h3 class="hub-title">Verification Rules</h3>
-                        <p class="hub-description">Video evidence, review status and data provenance for community runs.</p>
-                        <div class="hub-badge verified">✓ Verified</div>
-                    </a>
-
-                    <!-- Steam Player Count -->
-                    <a href="/player-count/" class="hub-card">
-                        <div class="hub-icon">📊</div>
-                        <h3 class="hub-title">Steam Player Count</h3>
-                        <p class="hub-description">Current Steam players, 24-hour peaks and monthly activity trends.</p>
-                        <div class="hub-badge info">Steam Charts</div>
-                    </a>
-
-                    <!-- Official status and submission destination -->
-                    <a href="/leaderboard/official" class="hub-card">
-                        <div class="hub-icon">🎥</div>
-                        <h3 class="hub-title">Official Status &amp; Submit</h3>
-                        <p class="hub-description">Understand the Steam in-game board and find the current community submission destination.</p>
-                        <div class="hub-badge info">Status Guide</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quick Links Section -->
+        <!-- Records / Builds / Verification explanation -->
         <div class="card" style="padding: 30px;">
-            <h2 style="color: #667eea; margin-bottom: 20px;">📚 Related Resources</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                <a href="/guides/characters/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
-                    👥 Character Guides
-                </a>
-                <a href="/database/weapons/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
-                    ⚔️ Weapons Database
-                </a>
-                <a href="/guides/builds/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
-                    🏗️ Build Guides
-                </a>
-                <a href="/tier-lists/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
-                    📊 Tier Lists
-                </a>
-                <a href="/player-count/" style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #495057; font-weight: 600; transition: all 0.2s;">
-                    👥 Steam Player Count
-                </a>
+            <h2 style="color: #667eea; margin-bottom: 20px;">How to Use This Leaderboard</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                <article style="padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3 style="margin: 0 0 8px; color: #343a40;">🏆 Records</h3>
+                    <p style="margin: 0 0 12px; color: #6c757d; line-height: 1.6;">Global Rankings sorts the synchronized community snapshot by score. Today and Recent use observation or submission time instead.</p>
+                    <a href="/leaderboard/recent" style="color: #667eea; font-weight: 700;">View Recent Submissions →</a>
+                </article>
+                <article style="padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3 style="margin: 0 0 8px; color: #343a40;">🏗️ Builds</h3>
+                    <p style="margin: 0 0 12px; color: #6c757d; line-height: 1.6;">Ranked Build Data summarizes equipment found in submitted runs. Character Best Build pages remain the editorial loadout guides.</p>
+                    <a href="/leaderboard/builds" style="color: #667eea; font-weight: 700;">Analyze Ranked Build Data →</a>
+                </article>
+                <article style="padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3 style="margin: 0 0 8px; color: #343a40;">✅ Verification</h3>
+                    <p style="margin: 0 0 12px; color: #6c757d; line-height: 1.6;">Verified means the source community board approved the run. Megabonk.org mirrors that status and tracks when each record was observed.</p>
+                    <a href="/leaderboard/verified" style="color: #667eea; font-weight: 700;">Read Verification Rules →</a>
+                </article>
             </div>
         </div>
 
@@ -1747,8 +1797,8 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             <h2 id="leaderboard-faq-title">Megabonk Leaderboard FAQ</h2>
             <details><summary>Which page should rank for “Megabonk leaderboard”?</summary><p>This Global Leaderboard hub is the main page for the generic query. Use the tabs above for time-limited, official, build or verification intent.</p></details>
             <details><summary>Where does this leaderboard data come from?</summary><p>The rankings are synchronized from the unofficial community-run <a href="https://megabonk.leaderboard.gg/" target="_blank" rel="nofollow noopener">Megabonk Leaderboard on Leaderboard.gg</a>. Megabonk.org is not the submission host.</p></details>
-            <details><summary>Where are the builds used by top players?</summary><p><a href="/leaderboard/builds">Leaderboard Builds</a> analyzes current high-ranking equipment and links to complete character Build Guides.</p></details>
-            <details><summary>How are runs verified?</summary><p>Leaderboard.gg records include a submission ID and normally link to video evidence. Review the source leaderboard for its current acceptance and verification rules.</p></details>
+            <details><summary>Where are the builds used by top players?</summary><p><a href="/leaderboard/builds">Ranked Build Data</a> analyzes current high-ranking equipment and links to complete character Best Build pages.</p></details>
+            <details><summary>How are runs verified?</summary><p>Leaderboard.gg records include a submission ID and normally link to video evidence. Read the dedicated <a href="/leaderboard/verified">Verification Rules</a> for the evidence and timestamp definitions used here.</p></details>
             <details><summary>Can I submit a modded run?</summary><p>Do not assume gameplay-changing mods are valid. Check the rules of the exact board before recording or submitting a run.</p></details>
         </section>    </div>
 
@@ -2240,29 +2290,29 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
         // ⭐ 角色对应的Build链接映射（基于现有链接文件）
         const CHARACTER_BUILD_MAP = {
-            'fox': 'https://megabonk.org/guides/builds/fox-best-build',
-            'robinette': 'https://megabonk.org/guides/builds/robinette-best-build',
-            'birdo': 'https://megabonk.org/guides/builds/birdo-best-build',
-            'tony mczoom': 'https://megabonk.org/guides/builds/tony-mczoom-best-build',
-            'tonymczoom': 'https://megabonk.org/guides/builds/tony-mczoom-best-build',
-            'sir chadwell': 'https://megabonk.org/guides/builds/sir-chadwell-best-build',
-            'sirchadwell': 'https://megabonk.org/guides/builds/sir-chadwell-best-build',
-            'bandit': 'https://megabonk.org/guides/builds/bandit-best-build',
-            'dicehead': 'https://megabonk.org/guides/builds/dicehead-best-build',
-            'noelle': 'https://megabonk.org/guides/builds/noelle-best-build',
-            'ninja': 'https://megabonk.org/guides/builds/ninja-best-build',
-            'megachad': 'https://megabonk.org/guides/builds/megachad-best-build',
-            'calcium': 'https://megabonk.org/guides/builds/calcium-best-build',
-            'cl4nk': 'https://megabonk.org/guides/builds/cl4nk-best-build',
-            'monke': 'https://megabonk.org/guides/builds/monke-best-build',
-            'bush': 'https://megabonk.org/guides/builds/bush-best-build',
-            'sir oofie': 'https://megabonk.org/guides/builds/sir-oofie-best-build',
-            'siroofie': 'https://megabonk.org/guides/builds/sir-oofie-best-build',
-            'athena': 'https://megabonk.org/guides/builds/athena-best-build',
-            'ogre': 'https://megabonk.org/guides/builds/ogre-best-build',
-            'amog': 'https://megabonk.org/guides/builds/amog-best-build',
-            'spaceman': 'https://megabonk.org/guides/builds/spaceman-best-build',
-            'vlad': 'https://megabonk.org/guides/builds/vlad-best-build'
+            'fox': '/guides/builds/fox-best-build',
+            'robinette': '/guides/builds/robinette-best-build',
+            'birdo': '/guides/builds/birdo-best-build',
+            'tony mczoom': '/guides/builds/tony-mczoom-best-build',
+            'tonymczoom': '/guides/builds/tony-mczoom-best-build',
+            'sir chadwell': '/guides/builds/sir-chadwell-best-build',
+            'sirchadwell': '/guides/builds/sir-chadwell-best-build',
+            'bandit': '/guides/builds/bandit-best-build',
+            'dicehead': '/guides/builds/dicehead-best-build',
+            'noelle': '/guides/builds/noelle-best-build',
+            'ninja': '/guides/builds/ninja-best-build',
+            'megachad': '/guides/builds/megachad-best-build',
+            'calcium': '/guides/builds/calcium-best-build',
+            'cl4nk': '/guides/builds/cl4nk-best-build',
+            'monke': '/guides/builds/monke-best-build',
+            'bush': '/guides/builds/bush-best-build',
+            'sir oofie': '/guides/builds/sir-oofie-best-build',
+            'siroofie': '/guides/builds/sir-oofie-best-build',
+            'athena': '/guides/builds/athena-best-build',
+            'ogre': '/guides/builds/ogre-best-build',
+            'amog': '/guides/builds/amog-best-build',
+            'spaceman': '/guides/builds/spaceman-best-build',
+            'vlad': '/guides/builds/vlad-best-build'
         };
 
         // ⭐ Build策略数据库
@@ -2383,6 +2433,25 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         let leaderboardData = [];
         let currentDisplayCount = CONFIG.initialDisplay;
         let isLoading = false;
+        let leaderboardFilterQuery = '';
+
+        function getFilteredLeaderboardEntries() {
+            const query = leaderboardFilterQuery.trim().toLowerCase();
+            return leaderboardData
+                .map((item, sourceIndex) => ({ item, sourceIndex }))
+                .filter(({ item }) => {
+                    if (!query) return true;
+                    const searchable = [
+                        item.playerName,
+                        item.name,
+                        item.character,
+                        item.country?.code,
+                        item.country?.name,
+                        item.buildVersionLabel,
+                    ].filter(Boolean).join(' ').toLowerCase();
+                    return searchable.includes(query);
+                });
+        }
 
         function toggleMobileMenu() {
             const nav = document.getElementById('mainNav');
@@ -2498,6 +2567,9 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
         renderLeaderboard();
         updateStats(result);
         updateTime(result.fetched_at);
+        document.getElementById('data-cache-status').textContent = loadResult.isCached
+            ? 'Cached Snapshot'
+            : 'Live JSON';
         if (loadResult.isCached) {
             document.getElementById('update-time').textContent += ` · ⚠ ${window.MegabonkLeaderboardData.cachedStatus(loadResult)}`;
         }
@@ -2507,6 +2579,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
     } catch (error) {
         console.error('❌ Loading failed:', error);
+        document.getElementById('data-cache-status').textContent = 'Unavailable';
         showError(error.message);
     } finally {
         isLoading = false;
@@ -2527,25 +2600,34 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             const loadMoreBtn = document.getElementById('btn-load-more');
             const loadMoreInfo = document.getElementById('load-more-info');
             
-            const remainingCount = leaderboardData.length - currentDisplayCount;
+            const filteredCount = getFilteredLeaderboardEntries().length;
+            const visibleCount = Math.min(currentDisplayCount, filteredCount);
+            const remainingCount = filteredCount - visibleCount;
             
             if (remainingCount > 0) {
                 loadMoreContainer.style.display = 'block';
                 loadMoreBtn.disabled = false;
-                loadMoreInfo.innerHTML = `Showing ${currentDisplayCount} of ${leaderboardData.length} players<br>` +
+                loadMoreInfo.innerHTML = `Showing ${visibleCount} of ${filteredCount} matching records<br>` +
                                         `${remainingCount} more rankings available`;
-            } else if (leaderboardData.length > CONFIG.initialDisplay) {
+            } else if (filteredCount > CONFIG.initialDisplay) {
                 loadMoreContainer.style.display = 'block';
                 loadMoreBtn.disabled = true;
                 loadMoreBtn.innerHTML = '<span>✅</span><span>All Rankings Loaded</span>';
-                loadMoreInfo.innerHTML = `Showing all ${leaderboardData.length} players`;
+                loadMoreInfo.innerHTML = `Showing all ${filteredCount} matching records`;
             } else {
                 loadMoreContainer.style.display = 'none';
             }
         }
 
         function renderLeaderboard() {
-            const displayData = leaderboardData.slice(0, currentDisplayCount);
+            const filteredData = getFilteredLeaderboardEntries();
+            const displayData = filteredData.slice(0, currentDisplayCount);
+            const filterStatus = document.getElementById('leaderboard-filter-status');
+            if (filterStatus) {
+                filterStatus.textContent = leaderboardFilterQuery
+                    ? `${filteredData.length} of ${leaderboardData.length} records match “${leaderboardFilterQuery}”.`
+                    : `Showing all ${leaderboardData.length} synchronized records.`;
+            }
 
             const html = `
                 <table>
@@ -2559,7 +2641,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                         </tr>
                     </thead>
                     <tbody>
-                        ${displayData.map((item, index) => {
+                        ${displayData.map(({ item, sourceIndex }, index) => {
                             const rank = item.rank || (index + 1);
                             const topClass = rank <= 3 ? `top-${rank}` : '';
                             const rankEmoji = getRankEmoji(rank);
@@ -2572,7 +2654,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                             const characterIcon = getIcon(character, 'character');
                             
                             return `
-                                <tr class="${topClass}" onclick="showDetails(${index})">
+                                <tr class="${topClass}" onclick="showDetails(${sourceIndex})">
                                     <td class="rank-cell">
                                         <span class="rank">${rankEmoji}</span>
                                     </td>
@@ -2592,7 +2674,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                                         <span class="score">${formatNumber(kills)}</span>
                                     </td>
                                     <td class="actions-cell">
-                                        <button class="btn-details" onclick="event.stopPropagation(); showDetails(${index});">
+                                        <button class="btn-details" onclick="event.stopPropagation(); showDetails(${sourceIndex});">
                                             View Build
                                         </button>
                                     </td>
@@ -2644,7 +2726,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
             const buildStrategy = BUILD_STRATEGIES[characterKey] || BUILD_STRATEGIES[character.toLowerCase()] || null;
             const characterBuildUrl = CHARACTER_BUILD_MAP[character.toLowerCase()] || 
                                      CHARACTER_BUILD_MAP[characterKey] || 
-                                     'https://megabonk.org/guides/builds/';
+                                     '/guides/builds/';
             const characterGuideUrl = `https://megabonk.org/guides/characters/${characterKey}-guide`;
 
             // 构建策略卡片HTML
@@ -3332,7 +3414,7 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
                 const displayName = formatCharacterName(charName);
                 const buildUrl = CHARACTER_BUILD_MAP[charName.toLowerCase()] || 
                                 CHARACTER_BUILD_MAP[charKey] || 
-                                'https://megabonk.org/guides/builds/';
+                                '/guides/builds/';
                 
                 const charIcon = getIcon(charName, 'character');
                 const usageRate = ((charData.count / totalUsage) * 100).toFixed(1);
@@ -3392,6 +3474,22 @@ window.__h82AlnkH6D91__("WyJwdWItODgzMDMxNTI5NDI5OTkyMCIsW251bGwsbnVsbCxudWxsLCJ
 
         // Load on page load
         window.addEventListener('DOMContentLoaded', async () => {
+            const filterInput = document.getElementById('leaderboard-filter-input');
+            const filterClear = document.getElementById('leaderboard-filter-clear');
+            filterInput?.addEventListener('input', () => {
+                leaderboardFilterQuery = filterInput.value;
+                currentDisplayCount = CONFIG.initialDisplay;
+                renderLeaderboard();
+                updateLoadMoreButton();
+            });
+            filterClear?.addEventListener('click', () => {
+                leaderboardFilterQuery = '';
+                filterInput.value = '';
+                currentDisplayCount = CONFIG.initialDisplay;
+                renderLeaderboard();
+                updateLoadMoreButton();
+                filterInput.focus();
+            });
             try {
                 await window.MegabonkEntities?.ready;
             } catch (error) {

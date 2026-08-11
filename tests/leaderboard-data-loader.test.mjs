@@ -94,7 +94,6 @@ test('integrated page scripts that use the loader remain valid JavaScript', () =
     '../leaderboard/builds.html',
     '../leaderboard/today.html',
     '../leaderboard/recent.html',
-    '../leaderboard/official.html',
     '../leaderboard/verified.html',
     '../guides/builds/index.html',
     '../guides/characters/character-tier-list/index.html'
