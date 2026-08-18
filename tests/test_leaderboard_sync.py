@@ -232,6 +232,7 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertIn("playwright==1.54.0", workflow)
         self.assertIn("playwright install --with-deps chromium", workflow)
+        self.assertIn("timeout-minutes: 15", workflow)
 
 if __name__ == "__main__":
     unittest.main()

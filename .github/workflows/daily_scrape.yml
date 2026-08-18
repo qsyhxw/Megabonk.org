@@ -22,7 +22,10 @@ concurrency:
 jobs:
   sync-leaderboard:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # The browser fallback and hosted-runner package mirrors can occasionally
+    # take several minutes. Keep a bounded ceiling without cancelling a
+    # healthy sync during a transient GitHub/network slowdown.
+    timeout-minutes: 15
 
     steps:
       - name: Check out repository
@@ -97,7 +100,7 @@ jobs:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
-          AUTOMATION_DETAILS: The leaderboard source stayed unavailable beyond the 12-hour safe-cache window, validation failed, entity coverage failed, or Git publishing failed.
+          AUTOMATION_DETAILS: The leaderboard sync timed out or failed during source fetch, validation, entity coverage, or Git publishing. Existing cached data is preserved when no safe replacement is available.
         run: python scripts/send_automation_alert.py failure --name "Sync Leaderboard Data"
 
   test-email:
