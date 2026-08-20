@@ -15,6 +15,9 @@ import hashlib
 import json
 import mimetypes
 import re
+import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -34,6 +37,8 @@ USER_AGENT = (
     "Mozilla/5.0 (compatible; Megabonk.org entity monitor; "
     "+https://megabonk.org/)"
 )
+REQUEST_ATTEMPTS = 3
+REQUEST_TIMEOUT_SECONDS = 30
 
 CATEGORIES = {
     "characters": "Category:Characters",
@@ -49,6 +54,10 @@ LICENSE_ALLOWLIST = {
     "cc by-sa 3.0",
     "public domain",
 }
+
+
+class SourceUnavailableError(RuntimeError):
+    """The monitored Wiki could not be read after bounded retries."""
 
 
 def utc_now() -> str:
@@ -70,10 +79,52 @@ def request_json(parameters: dict[str, str]) -> dict[str, Any]:
     )
     request = urllib.request.Request(
         f"{API_URL}?{query}",
-        headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+        headers={
+            "User-Agent": USER_AGENT,
+            "Accept": "application/json",
+            "Accept-Language": "en-US,en;q=0.8",
+            "Referer": WIKI_BASE,
+        },
     )
-    with urllib.request.urlopen(request, timeout=45) as response:
-        return json.load(response)
+    errors: list[str] = []
+    for attempt in range(1, REQUEST_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(
+                request, timeout=REQUEST_TIMEOUT_SECONDS
+            ) as response:
+                return json.load(response)
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as error:
+            errors.append(f"attempt {attempt}/{REQUEST_ATTEMPTS}: {error}")
+            if attempt < REQUEST_ATTEMPTS:
+                time.sleep(2 * attempt)
+
+    raise SourceUnavailableError(
+        f"Unable to read {API_URL} after bounded retries: {'; '.join(errors)}"
+    )
+
+
+def unavailable_source_result(previous: dict[str, Any]) -> dict[str, Any]:
+    """Describe a safe no-op when Cloudflare temporarily blocks the source."""
+    previous_entities = previous.get("entities", {})
+    if not previous_entities or not all(
+        isinstance(previous_entities.get(entity_type), list)
+        and previous_entities[entity_type]
+        for entity_type in CATEGORIES
+    ):
+        raise SourceUnavailableError(
+            "The Wiki source is unavailable and no complete previous snapshot exists"
+        )
+    return {
+        "files_changed": False,
+        "baseline_created": False,
+        "source_available": False,
+        "snapshot_checked_at": previous.get("checkedAt", "unknown"),
+        "new_count": 0,
+        "removed_count": 0,
+        "catalog_gap_count": 0,
+        "missing_image_count": 0,
+        "downloaded_image_count": 0,
+    }
 
 
 def category_members(category: str) -> list[str]:
@@ -230,15 +281,26 @@ def main() -> int:
         raise ValueError(f"Missing catalog: {CATALOG_PATH}")
     indexes = catalog_indexes(catalog)
 
-    remote = {
-        entity_type: category_members(category)
-        for entity_type, category in CATEGORIES.items()
-    }
-    all_titles = [title for titles in remote.values() for title in titles]
-    images = page_images(all_titles)
-
     previous = load_json(SNAPSHOT_PATH, {})
     previous_remote = previous.get("entities", {})
+    try:
+        remote = {
+            entity_type: category_members(category)
+            for entity_type, category in CATEGORIES.items()
+        }
+        all_titles = [title for titles in remote.values() for title in titles]
+        images = page_images(all_titles)
+    except SourceUnavailableError as error:
+        result = unavailable_source_result(previous)
+        print(
+            "::warning title=Megabonk Wiki source unavailable::"
+            f"{error}. Preserving the complete snapshot from "
+            f"{result['snapshot_checked_at']}; no entity or image changes were inferred.",
+            file=sys.stderr,
+        )
+        print(json.dumps(result, separators=(",", ":")))
+        return 0
+
     first_run = not bool(previous_remote)
 
     gaps: list[dict[str, Any]] = []
@@ -420,6 +482,8 @@ def main() -> int:
     result = {
         "files_changed": files_changed,
         "baseline_created": first_run,
+        "source_available": True,
+        "snapshot_checked_at": checked_at,
         "new_count": len(new_entities),
         "removed_count": len(removed_entities),
         "catalog_gap_count": len(gaps),
