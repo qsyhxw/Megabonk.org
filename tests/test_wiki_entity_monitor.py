@@ -1,11 +1,23 @@
 import json
 import unittest
+from pathlib import Path
 from unittest import mock
 
 from scripts import check_wiki_entities as monitor
 
 
 class WikiEntityMonitorTests(unittest.TestCase):
+    def test_monitor_changes_trigger_a_validation_run(self):
+        workflow = (
+            Path(__file__).resolve().parents[1]
+            / ".github"
+            / "workflows"
+            / "monitor-wiki-entities.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("push:", workflow)
+        self.assertIn("scripts/check_wiki_entities.py", workflow)
+        self.assertIn("tests/test_wiki_entity_monitor.py", workflow)
+
     def test_request_json_retries_before_success(self):
         class FakeResponse:
             def __enter__(self):

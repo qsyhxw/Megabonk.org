@@ -1,6 +1,12 @@
 name: Monitor Megabonk Entity Catalog
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/monitor-wiki-entities.yml'
+      - 'scripts/check_wiki_entities.py'
+      - 'tests/test_wiki_entity_monitor.py'
   schedule:
     - cron: '41 2 * * *'
   workflow_dispatch:
