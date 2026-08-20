@@ -233,6 +233,10 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
         self.assertIn("playwright==1.54.0", workflow)
         self.assertIn("playwright install --with-deps chromium", workflow)
         self.assertIn("timeout-minutes: 15", workflow)
+        self.assertIn(
+            "timeout --signal=TERM --kill-after=15s 8m python scripts/sync_leaderboard.py",
+            workflow,
+        )
 
 if __name__ == "__main__":
     unittest.main()

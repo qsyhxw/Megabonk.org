@@ -44,7 +44,9 @@ jobs:
           python -m playwright install --with-deps chromium
 
       - name: Fetch and validate leaderboard
-        run: python scripts/sync_leaderboard.py
+        # Leave enough of the 15-minute job budget for validation, publishing,
+        # and a clear failure result. A killed fetch never replaces cached JSON.
+        run: timeout --signal=TERM --kill-after=15s 8m python scripts/sync_leaderboard.py
 
       - name: Rebuild shared entity catalog
         run: |
