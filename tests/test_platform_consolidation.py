@@ -49,8 +49,9 @@ class PlatformConsolidationTests(unittest.TestCase):
             "iOS / iPadOS",
         ):
             self.assertIn(platform, self.platforms)
-        self.assertIn("Last verified: July 29, 2026", self.platforms)
-        self.assertGreaterEqual(self.platforms.count('datetime="2026-07-29"'), 10)
+        self.assertIn("Last verified: September 21, 2026", self.platforms)
+        self.assertGreaterEqual(self.platforms.count('datetime="2026-09-21"'), 10)
+        self.assertIn('"dateModified": "2026-09-21"', self.platforms)
 
     def test_page_uses_current_factual_status_without_predictions(self):
         self.assertIn("Steam Deck Verified", self.platforms)
