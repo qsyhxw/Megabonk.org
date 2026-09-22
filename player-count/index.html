@@ -87,7 +87,7 @@
 <header class="header"><nav class="nav" aria-label="Primary navigation"><a class="logo" href="/">Megabonk<span>.org</span></a><ul><li><a href="/guides/">Guides</a></li><li><a href="/guides/builds/">Builds</a></li><li><a href="/tier-lists/">Tier Lists</a></li><li><a href="/leaderboard/">Leaderboard</a></li><li><a href="/guides/patch-notes/">Patch Notes</a></li></ul></nav></header>
 <div class="hero"><nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a> / Player Count</nav><div class="hero-in"><p class="eyebrow">Steam concurrency, peaks and monthly history</p><h1>Megabonk Player Count &amp; Steam Charts</h1><p class="lead">Check how many connected Steam users are playing Megabonk, compare the latest 24-hour and all-time peaks, and read the monthly trend without confusing concurrent players with sales.</p><div class="freshness"><span class="dot" aria-hidden="true"></span><span>Automatic snapshot refresh every 6 hours</span></div></div></div>
 <main id="main">
-  <nav class="jump" aria-label="On this page"><a href="#live">Current count</a><a href="#trend">History</a><a href="#table">Monthly data</a><a href="#meaning">What it means</a><a href="#sources">Sources</a><a href="#faq">FAQ</a></nav>
+  <nav class="jump" aria-label="On this page"><a href="#live">Current count</a><a href="#trend">History</a><a href="#table">Monthly data</a><a href="#meaning">What it means</a><a href="#faq">FAQ</a></nav>
   <section id="live">
     <h2>Latest Megabonk Steam Player Count</h2>
     <div class="metric-grid">
@@ -137,14 +137,14 @@
     </tbody></table></div>
   </section>
 
-  <section id="sources">
-    <h2>Data Sources and Update Method</h2>
+  <details id="sources" class="source-note" aria-label="Data sources and update method" style="margin:1rem auto;padding:.75rem 1rem;max-width:72rem;font-size:.92rem;line-height:1.6"><summary style="cursor:pointer;font-weight:600">Data sources and update method</summary>
+
     <div class="grid three">
       <article class="card"><span class="source-name">Steam Web API</span><p>Provides the latest official count of connected players active in app 3405340. It does not include people playing while disconnected from Steam.</p><a href="https://partner.steamgames.com/doc/webapi/ISteamUserStats#GetNumberOfCurrentPlayers" rel="noopener noreferrer">Read the Steam API definition</a></article>
       <article class="card"><span class="source-name">Steam Charts</span><p>Supplies the 24-hour peak, all-time peak and monthly average/peak history. Steam Charts is an independent third-party service powered by Steam data, not Valve.</p><a href="https://steamcharts.com/app/3405340" rel="noopener noreferrer">Open Megabonk on Steam Charts</a></article>
       <article class="card"><span class="source-name">Refresh policy</span><p>A GitHub Action checks both sources every six hours. If a source is temporarily unavailable or its format cannot be validated, the last successful snapshot remains and its timestamp stops advancing.</p><span class="source-meta">SteamDB was also used to cross-check headline peaks during page creation; small differences can occur between sampling services.</span></article>
     </div>
-  </section>
+  </details>
 
   <section id="faq">
     <h2>Megabonk Player Count FAQ</h2>
