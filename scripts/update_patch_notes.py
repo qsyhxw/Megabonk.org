@@ -365,6 +365,11 @@ def render_latest_summary(record: PatchRecord) -> str:
                 <ul class="summary-grid">
 {bullets}
                 </ul>
+                <aside class="anniversary-status" aria-labelledby="future-update-status-title">
+                    <h3 id="future-update-status-title">Will Megabonk get more updates?</h3>
+                    <p><strong>The feed does not confirm what comes after this release.</strong> V{html.escape(record.version)} from {html.escape(display_date(record.release_date))} is the latest version in the official Steam announcement feed used to build this directory. Any future patch or date needs a newer official announcement; the absence of one is not proof that development has ended.</p>
+                    <p>Source: <a class="external-link" href="https://steamcommunity.com/app/3405340/announcements/" target="_blank" rel="noopener">official Megabonk Steam announcements <span aria-hidden="true">↗</span></a>.</p>
+                </aside>
                 <div class="summary-actions">
                     <a class="btn-primary" href="#{version_slug(record.version)}">Read V{html.escape(record.version)} Details ↓</a>
                 </div>

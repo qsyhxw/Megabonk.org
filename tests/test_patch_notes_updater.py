@@ -105,6 +105,8 @@ class PatchNotesUpdaterTests(unittest.TestCase):
         self.assertIn("Game Awards history and verified sales milestone", rendered)
         self.assertIn('data-patch-version="1.0.70"', rendered)
         self.assertIn('id="v1070"', rendered)
+        self.assertIn("Will Megabonk get more updates?", rendered)
+        self.assertIn("the absence of one is not proof that development has ended", rendered)
         self.assertIn('<strong data-home-patch-version>v1.0.70</strong>', rendered_homepage)
         self.assertIn('datetime="2026-08-02">August 2, 2026</time>', rendered_homepage)
         self.assertIn("2026-08-02</lastmod>", rendered_sitemap)
