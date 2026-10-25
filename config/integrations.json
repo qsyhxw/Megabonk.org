@@ -343,7 +343,8 @@
         "tr/index.html",
         "tr/leaderboard/index.html",
         "pokebonk/evolution/index.html",
-        "pokebonk/builds/index.html"
+        "pokebonk/builds/index.html",
+        "pokebonk/play/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7014,9 +7015,32 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "pokebonk-play-ui",
+      "kind": "local-functional",
+      "enabled": true,
+      "authorization": "2026-10-26 user explicitly selected Pokemon Team Builder game source, same-window expand/minimize/restore and reference layout. ROADMAP PLAY-20261026-B.",
+      "include": [
+        "pokebonk/play/index.html"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "/assets/pokebonk/play.js"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
     }
   ],
-  "change_reference": "ROADMAP ITERATION-EXEC 2026-10-25: new gameplay pages inherit the existing AdSense authorization; correct two placeholder GA IDs to the existing site ID; remove unauthorized development reload from maps. No authorized service removed.",
+  "change_reference": "ROADMAP PLAY-20261026-B: user selected Pokemon Team Builder hosted source and simpler play layout; existing AdSense inherited by one new page, exact local UI script and click-loaded game iframe reviewed; preserve all existing integrations.",
   "protected_containers": {
     "database/tomes/chaos-tome.html": [
       {
@@ -7662,6 +7686,22 @@
           "data-ad-slot": "4372980572",
           "data-ad-format": "fluid",
           "data-ad-layout": "in-article"
+        },
+        "location": "body"
+      }
+    ],
+    "pokebonk/play/index.html": [
+      {
+        "tag": "iframe",
+        "attrs": {
+          "id": "game-frame",
+          "title": "PokeBonk game hosted by Pokemon Team Builder",
+          "data-src": "https://pokemon-team-builder.org/pokebonk/play/?lang=en",
+          "allow": "autoplay; fullscreen; gamepad",
+          "allowfullscreen": null,
+          "sandbox": "allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-orientation-lock",
+          "referrerpolicy": "strict-origin-when-cross-origin",
+          "hidden": null
         },
         "location": "body"
       }
