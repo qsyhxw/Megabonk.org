@@ -1,0 +1,29 @@
+name: Validate published integrations
+on:
+  push:
+    branches: [main]
+    paths: ['**.html', '**.htm', 'scripts/**', 'config/**', '.github/workflows/validate-integrations.yml']
+  pull_request:
+    paths: ['**.html', '**.htm', 'scripts/**', 'config/**', '.github/workflows/validate-integrations.yml']
+permissions:
+  contents: read
+jobs:
+  static-integrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify guard rejects integration defects
+        run: python scripts/test_integration_guard.py
+      - name: Rebuild PokeBonk from versioned source
+        run: |
+          python scripts/derive_pokebonk_evolution.py
+          python scripts/build_pokebonk.py
+      - name: Compare integration expectations with previous Git revision
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/ci_integrations.py

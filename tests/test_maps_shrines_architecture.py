@@ -90,7 +90,7 @@ class MapsShrinesArchitectureTests(unittest.TestCase):
         expected = {
             'database/items/beacon': '2026-07-28',
             'database/items/wrench': '2026-07-28',
-            'guides/maps/': '2026-07-29',
+            'guides/maps/': '2026-10-25',
             'guides/mechanics/shrines/': '2026-07-29',
         }
         for url, lastmod in expected.items():
