@@ -541,6 +541,7 @@
             .tier-table table { min-width: 680px; }
             .quick-stats, .map-grid, .related-links { min-width: 0; }
         }
+    #map-sources a, a[href="#source-map-1"] { color: #ffb17d; }
     </style>
     
     <!-- JSON-LD Schema -->
@@ -647,16 +648,16 @@
                 <!-- Quick Stats -->
                 <div class="quick-stats">
                     <div class="stat-card">
-                        <div class="stat-number">2</div>
-                        <div class="stat-label">Total Maps</div>
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Available Maps</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">3</div>
-                        <div class="stat-label">Tiers Per Map</div>
+                        <div class="stat-label">Forest / Desert Tiers</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">6</div>
-                        <div class="stat-label">Unique Bosses</div>
+                        <div class="stat-label">Forest / Desert Bosses</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">Random</div>
@@ -667,6 +668,7 @@
                 <!-- Overview Section -->
                 <section id="overview">
                     <h2>Overview</h2>
+                    <p id="map-scope"><strong>Three maps are available: Forest, Desert and Graveyard.</strong> The tier tables below focus on Forest and Desert. Graveyard follows its own Crypt route; it should not be read as a third map with the same three-tier table. <sup><a href="#source-map-1">[1]</a></sup></p><p>For the outdoor coffins, Crypt Keys, Big Bob and Spooky Steve, use the <a href="/guides/maps/graveyard/">Graveyard &amp; Crypt route guide</a>.</p>
                     <p>This guide focuses on the <strong>Forest and Desert progression route</strong> and its 3 difficulty tiers. Unlike traditional roguelikes with dozens of standalone stages, this route uses a tier system where the number of stages increases with difficulty. Tier 1 has 1 stage, Tier 2 has 2 stages, and Tier 3 features all 3 stages culminating in a final boss encounter.</p>
                     
                     <p>Each map offers distinct terrain, enemy types, and environmental mechanics that dramatically affect your build strategy. Forest provides natural cover and verticality, while Desert challenges you with open terrain and visibility-reducing sandstorms. Understanding these differences is crucial for optimizing your character builds and reaching the leaderboards.</p>
@@ -1005,6 +1007,7 @@
                     <p style="margin-top:1rem;"><a href="/guides/mechanics/shrines/">Compare Charge, Greed and Boss Curse rewards</a> · <a href="/guides/mechanics/timer/">Check the stage event timeline</a> · <a href="/guides/mechanics/boss-portal/">Find and troubleshoot the Boss Portal</a></p>
                 </section>
 
+
                 <!-- Tier 3 Tips -->
                 <section id="tier3-tips">
                     <h2>Beating Tier 3: Expert Tips</h2>
@@ -1124,7 +1127,8 @@
                         </a>
                     </div>
                 </section>
-            </main>
+            <section id="map-sources"><h2>Sources &amp; verification</h2><p id="source-map-1"><a href="https://steamcommunity.com/app/3405340/announcements/" target="_blank" rel="noopener noreferrer">Megabonk official Steam announcements ↗<span class="sr-only"> (external website, opens in a new tab)</span></a> — Spooky update of December 14, 2025 and later Graveyard changes; checked October 25, 2026. Supports Graveyard as an additional map, not a claim of three tiers for every map.</p><p><a href="#map-scope">Back to guide ↑</a></p></section>
+</main>
             
             <!-- Table of Contents -->
             <aside class="toc">
@@ -1150,47 +1154,10 @@
     <footer>
         <div class="container">
             <p>&copy; <span data-current-year>2026</span> Megabonk.org - The #1 Megabonk Community Resource</p>
-            <p>Last Updated: July 28, 2026 | <a href="https://megabonk.org/privacy-policy" style="color: var(--text-secondary);">Privacy Policy</a></p>
+            <p>Map scope reviewed: October 25, 2026 | <a href="https://megabonk.org/privacy-policy" style="color: var(--text-secondary);">Privacy Policy</a></p>
         </div>
     </footer>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
+
     <script src="/js/current-year.js" defer></script>
 </body>
 </html>
