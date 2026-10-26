@@ -24,9 +24,9 @@ def source_list(items):
 def related(items):
     return '<section class="related"><h2>Continue exploring</h2>'+''.join(f'<a href="{P+slug}">{label} →</a>' for slug,label in items)+'</section>'
 
-NAV=[('Start here',P+'beginners-guide/'),('Starters',P+'starters/'),('Guides',P+'#guides'),('Mobile',P+'mobile/'),('中文',P+'zh/beginners-guide/')]
+NAV=[('Play',P+'play/'),('Start here',P+'beginners-guide/'),('Starters',P+'starters/'),('Guides',P+'#guides'),('Mobile',P+'mobile/'),('中文',P+'zh/beginners-guide/')]
 def navlinks(path):
-    return ''.join(f'<a href="{u}"'+(' aria-current="page"' if path==u else '')+f'>{label}</a>' for label,u in NAV)
+    return ''.join(f'<a href="{u}"'+(' class="nav-play"' if u==P+'play/' else '')+(' aria-current="page"' if path==u else '')+'>'+('<span aria-hidden="true">▶</span> ' if u==P+'play/' else '')+f'{label}</a>' for label,u in NAV)
 def shell(path,title,desc,body,image='forest-1280.webp',lang='en',noindex=False,script=''):
     advertising = '' if noindex or path in [P+'about/',P+'contact/',P+'privacy/'] else '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
     alternates=''
