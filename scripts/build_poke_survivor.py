@@ -9,16 +9,17 @@ from html import escape
 import json
 from build_pokebonk import ext, ref, table, section, source_list
 from poke_survivor_content import make_pages, SOURCES
+from poke_survivor_play import make_play_page
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
 P='/poke-survivor/'
 A='/assets/poke-survivor/'
-NAV=[('Start here',P+'beginners-guide/'),('Build checks',P+'builds/'),('Guides',P+'#guides'),('Mobile',P+'mobile/')]
+NAV=[('▶ Play',P+'play/'),('Start here',P+'beginners-guide/'),('Build checks',P+'builds/'),('Guides',P+'#guides'),('Mobile',P+'mobile/')]
 ADS='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
 
 def navlinks(path):
-    return ''.join(f'<a href="{url}"'+(' aria-current="page"' if path==url else '')+f'>{label}</a>' for label,url in NAV)
+    return ''.join(f'<a href="{url}"'+(' class="nav-play"' if url==P+'play/' else '')+(' aria-current="page"' if path==url else '')+f'>{label}</a>' for label,url in NAV)
 
 def shell(path,title,desc,body,lang='en',kind='content',image='original-title-1280.webp'):
     alternate=''
@@ -55,6 +56,9 @@ def build():
         path,html=render(page)
         file=ROOT/(path.lstrip('/')+'index.html') if page.get('kind')!='error' else ROOT/'poke-survivor/404.html'
         file.parent.mkdir(parents=True,exist_ok=True);file.write_text(html,encoding='utf-8')
+    play=ROOT/'poke-survivor/play/index.html'
+    play.parent.mkdir(parents=True,exist_ok=True)
+    play.write_text(make_play_page(shell),encoding='utf-8')
     print(json.dumps([dict(slug=p['slug'],title_length=len(p['title']),description_length=len(p['desc']),kind=p.get('kind','content')) for p in pages],ensure_ascii=False,indent=2))
 
 if __name__=='__main__':build()
