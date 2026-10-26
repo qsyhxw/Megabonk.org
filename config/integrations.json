@@ -367,7 +367,8 @@
         "tr/guides/builds/noelle-best-build.html",
         "tr/guides/characters/fox-kitsune-guide.html",
         "tr/index.html",
-        "tr/leaderboard/index.html"
+        "tr/leaderboard/index.html",
+        "poke-survivor/play/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7090,6 +7091,29 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "poke-survivor-play-ui",
+      "kind": "local-functional",
+      "enabled": true,
+      "authorization": "2026-10-26 user explicitly authorized third-party PokeSurvivor embed and highlighted Play navigation; local click-to-load player only. ROADMAP PS-PLAY.",
+      "include": [
+        "poke-survivor/play/index.html"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "/assets/poke-survivor/play.js"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
     }
   ],
   "change_reference": "ROADMAP PS-EXEC 2026-10-26: user authorized GAME_HUB; ordinary pages inherit existing same-site AdSense once, trust/404 excluded; no other integration scopes changed",
@@ -7749,6 +7773,22 @@
           "id": "game-frame",
           "title": "PokeBonk game hosted by Pokemon Team Builder",
           "data-src": "https://pokemon-team-builder.org/pokebonk/play/?lang=en",
+          "allow": "autoplay; fullscreen; gamepad",
+          "allowfullscreen": null,
+          "sandbox": "allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-orientation-lock",
+          "referrerpolicy": "strict-origin-when-cross-origin",
+          "hidden": null
+        },
+        "location": "body"
+      }
+    ],
+    "poke-survivor/play/index.html": [
+      {
+        "tag": "iframe",
+        "attrs": {
+          "id": "game-frame",
+          "title": "Poke Survivor third-party game hosted by pokesurvivor.pro",
+          "data-src": "https://pokesurvivor.pro/play?embed=1",
           "allow": "autoplay; fullscreen; gamepad",
           "allowfullscreen": null,
           "sandbox": "allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-orientation-lock",
