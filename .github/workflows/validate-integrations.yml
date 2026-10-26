@@ -23,6 +23,8 @@ jobs:
         run: |
           python scripts/derive_pokebonk_evolution.py
           python scripts/build_pokebonk.py
+      - name: Rebuild PokeSurvivor from versioned source
+        run: python scripts/build_poke_survivor.py
       - name: Compare integration expectations with previous Git revision
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
