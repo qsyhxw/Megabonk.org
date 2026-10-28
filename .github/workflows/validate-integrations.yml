@@ -25,6 +25,8 @@ jobs:
           python scripts/build_pokebonk.py
       - name: Rebuild PokeSurvivor from versioned source
         run: python scripts/build_poke_survivor.py
+      - name: Rebuild Survivor Ace task pages
+        run: python scripts/build_survivor_ace.py
       - name: Compare integration expectations with previous Git revision
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
