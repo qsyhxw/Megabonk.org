@@ -22,7 +22,8 @@ def sources(lang):
 NAV=[('Start here',P+'#start'),('Guides',P+'#guides'),('Codes',P+'#codes'),('Megabonk','/')]
 def shell(path,title,desc,body,lang='en',content=False,image='',error=False):
  nav=''.join(f'<a href="{u}"'+(' aria-current="page"' if path==u else '')+f'>{l}</a>' for l,u in NAV)
- alts=''.join(f'<link rel="alternate" hreflang="{l}" href="{BASE+u}">' for l,u in PATHS.items()) if path in PATHS.values() else ''
+ groups=[PATHS,{'zh-Hant':P+'zh-hant/beginners-guide/','ja':P+'ja/beginners-guide/'}]
+ alts=''.join(f'<link rel="alternate" hreflang="{l}" href="{BASE+u}">' for group in groups if path in group.values() for l,u in group.items())
  return f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="{BASE+path}">{alts}
 {ADS if content else ''}{'<meta name="robots" content="noindex,follow">' if error else ''}<link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/survivor-ace/site.css">
@@ -60,21 +61,23 @@ def codes(lang):
  other='ja' if zh else 'zh-Hant'
  language=f'<p><a href="{PATHS[other]}" lang="{other}">'+('日本語のコード案内 →' if zh else '繁體中文禮包碼說明 →')+'</a></p>'
  toc='<aside class="toc" aria-label="On this page"><strong>'+('本頁內容' if zh else '目次')+'</strong>'+''.join(f'<a href="#{i}">{t}</a>' for i,t,_ in parts)+'<a href="#sources">'+('來源' if zh else '出典')+'</a></aside>'
- body=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">Survivor: Ace</a> / '+('禮包碼' if zh else 'コード')+f'</nav><header class="article-head" id="guide"><span class="tag">Survivor: Ace · Independent guide</span><h1>{h1}</h1><p class="answer">{answer}{ref(1)}{ref(2)}</p><p class="meta">Megabonk.org editors · 2026-10-28 · '+('非官方資料整理，未實兌' if zh else '非公式・出典照合、交換テストなし')+f'</p>{language}</header><div class="article-layout"><article class="prose">'+''.join(section(*part) for part in parts)+sources(lang)+'<section class="related"><h2>'+('站內相關入口' if zh else '関連するページ')+f'</h2>{language}<a href="{P}ja/beginners-guide/" lang="ja">日本語：序盤攻略 →</a><a href="{P}#guides">Survivor: Ace · Guides →</a></section></article>'+toc+'</div>'
+ body=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">Survivor: Ace</a> / '+('禮包碼' if zh else 'コード')+f'</nav><header class="article-head" id="guide"><span class="tag">Survivor: Ace · Independent guide</span><h1>{h1}</h1><p class="answer">{answer}{ref(1)}{ref(2)}</p><p class="meta">Megabonk.org editors · 2026-10-28 · '+('非官方資料整理，未實兌' if zh else '非公式・出典照合、交換テストなし')+f'</p>{language}</header><div class="article-layout"><article class="prose">'+''.join(section(*part) for part in parts)+sources(lang)+'<section class="related"><h2>'+('站內相關入口' if zh else '関連するページ')+f'</h2>{language}<a href="{P}zh-hant/beginners-guide/" lang="zh-Hant">繁中新手攻略 →</a><a href="{P}ja/beginners-guide/" lang="ja">日本語：序盤攻略 →</a><a href="{P}#guides">Survivor: Ace · Guides →</a></section></article>'+toc+'</div>'
  return PATHS[lang],shell(PATHS[lang],title,desc,body,lang,True)
 
 def build():
  pages=[codes(l) for l in PATHS]
  from survivor_ace_hub import make_pages
  pages+=make_pages(shell)
+ from survivor_ace_zh import beginner_zh
+ pages.append(beginner_zh(shell))
  for slug,title,text in [
-  ('about/','About the Survivor Ace guides','<p>Megabonk.org publishes these independent, source-based task guides to Survivor: Ace. We are not Gorilla Studio, the publisher or game support. The hub and Japanese beginner guide compare source-based upgrade decisions and edition limits. The Chinese and Japanese code articles distinguish reported strings, source deadlines and unresolved reward differences; we do not claim to have redeemed them.</p><p>We review the cited public pages and keep their dates and limits next to the relevant statements. Code availability can change between reviews. No account, game login or redemption service is offered here.</p><p><a href="'+PATHS['zh-Hant']+'">繁體中文禮包碼 →</a> · <a href="'+PATHS['ja']+'">日本語コード →</a></p>'),
+  ('about/','About the Survivor Ace guides','<p>Megabonk.org publishes these independent, source-based task guides to Survivor: Ace. We are not Gorilla Studio, the publisher or game support. The hub and Chinese and Japanese beginner guides compare source-based upgrade decisions and edition limits. The Chinese and Japanese code articles distinguish reported strings, source deadlines and unresolved reward differences; we do not claim to have redeemed them.</p><p>We review the cited public pages and keep their dates and limits next to the relevant statements. Code availability can change between reviews. No account, game login or redemption service is offered here.</p><p><a href="'+PATHS['zh-Hant']+'">繁體中文禮包碼 →</a> · <a href="'+PATHS['ja']+'">日本語コード →</a></p>'),
   ('contact/','Contact the guide editors','<p>For corrections to these Survivor: Ace guides, email <a href="mailto:qsyhxw@gmail.com?subject=%5BMegabonk.org%5D%20Website%20feedback">qsyhxw@gmail.com</a>. Include the article URL, source URL, region and date. Do not send passwords or account credentials. We do not promise a response time.</p><p>For redemption, purchase or account problems, use '+ext('https://play.google.com/store/apps/details?hl=en&id=com.survivor.ace','Google Play · Survivor: Ace App support')+'. We cannot credit game rewards or recover accounts.</p><p><a href="'+PATHS['zh-Hant']+'">繁體中文禮包碼 →</a> · <a href="'+PATHS['ja']+'">日本語コード →</a></p>')]:
   path=P+slug
   pages.append((path,shell(path,title+' | Megabonk.org','Publisher, source-review method and contact for the independent Survivor Ace task guides.',f'<article class="legal" id="guide"><nav class="crumbs"><a href="/">Megabonk.org</a></nav><h1>{title}</h1><p class="meta">Updated 2026-10-28</p>{text}</article>')))
  pages.append((P+'404.html',shell(P+'404.html','Page not found | Survivor: Ace Guides','This guide page could not be found.',f'<article class="legal"><h1>Page not found</h1><p>Find the current guides and code pages from the <a href="{P}">Survivor: Ace guide index</a>.</p></article>',error=True)))
  for path,html in pages:
   f=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);f.write_text(html,encoding='utf-8')
- print('Built '+str(len(pages))+' pages; 4 content pages inherit AdSense once; trust/404 excluded.')
+ print('Built '+str(len(pages))+' pages; 5 content pages inherit AdSense once; trust/404 excluded.')
 
 if __name__=='__main__':build()
