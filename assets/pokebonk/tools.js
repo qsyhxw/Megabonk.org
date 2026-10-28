@@ -1,0 +1,39 @@
+/* Local task tools. No account access, network calls or persistent storage. */
+(() => {
+ 'use strict';
+ const $=id=>document.getElementById(id), raw=$('task-data');
+ if(!raw)return;
+ const d=JSON.parse(raw.textContent), members=d.league, params=new URLSearchParams(location.search);
+ const num=(v,max)=>Math.min(max,Math.max(0,Math.floor(Number(v)||0)));
+ const resolve=(a,b)=>d.fusions.find(r=>r.kind==='signature'&&r.moves.includes(a.key)&&r.moves.includes(b.key))||d.fusions.find(r=>r.kind==='reaction'&&((r.pair[0].includes(a.type)&&r.pair[1].includes(b.type))||(r.pair[1].includes(a.type)&&r.pair[0].includes(b.type))))||d.fusions.find(r=>r.kind==='type'&&a.type===b.type&&r.type===a.type)||d.fusions.find(r=>r.kind==='glitch');
+ if($('partner-search')){
+  const cards=[...document.querySelectorAll('[data-partner]')], box=$('partner-cards');
+  const filter=()=>{let count=0;cards.forEach(c=>{const x=members.find(x=>x.id===Number(c.dataset.partner));const words=$('partner-search').value.toLowerCase().trim().split(/\s+/).filter(Boolean);c.hidden=!(words.every(w=>(c.textContent+' '+x.id+' '+String(x.id).padStart(3,'0')).toLowerCase().includes(w))&&(!$('partner-type').value||x.types.includes($('partner-type').value)));if(!c.hidden)count++});cards.sort((a,b)=>$('partner-sort').value==='name'?members.find(x=>x.id===+a.dataset.partner).name.localeCompare(members.find(x=>x.id===+b.dataset.partner).name):+a.dataset.partner-+b.dataset.partner).forEach(c=>box.append(c));$('partner-count').textContent=`${count} of 79 partners${count?'':'. No matches; reset filters or use the English game name.'}`;};
+  ['partner-search','partner-type','partner-sort'].forEach(id=>$(id).addEventListener('input',filter));$('partner-reset').onclick=()=>{$('partner-search').value='';$('partner-type').value='';$('partner-sort').value='id';filter()};filter();
+  const openHash=()=>{const target=document.getElementById(location.hash.slice(1));if(target?.matches('details')){target.open=true;target.scrollIntoView()}};addEventListener('hashchange',openHash);openHash();
+ }
+ if($('build-form')){
+  const slots=Array.from({length:4},(_,i)=>$('plan-move-'+i));
+  function kit(){const x=members.find(x=>x.id===+$('plan-partner').value);slots.forEach(s=>{s.replaceChildren(new Option('Empty',''));(x?.kit||[]).forEach(m=>s.add(new Option(`${m.name} · ${m.type} / ${m.cls}`,m.key)))});return x;}
+  function update(){const x=members.find(x=>x.id===+$('plan-partner').value),capacity=+$('plan-capacity').value;slots.forEach((s,i)=>{s.disabled=i>=capacity;if(s.disabled)s.value=''});$('plan-pairs').replaceChildren();if(!x){$('plan-result').textContent='Select a partner to inspect its listed kit.';return}
+   const selected=slots.map(s=>x.kit.find(m=>m.key===s.value)).filter(Boolean),unique=new Set(selected.map(m=>m.key));
+   $('plan-result').textContent=`${x.name}: ${selected.length} / ${capacity} slots. ${unique.size<selected.length?'Duplicate moves: choose different ingredients. ':''}${capacity===4?'Fourth move requires the Lab purchase. ':''}Goal: ${$('plan-goal').selectedOptions[0].text}. Offers and unlocks are not guaranteed.`;
+   if(unique.size===selected.length)for(let i=0;i<selected.length;i++)for(let j=i+1;j<selected.length;j++){const a=selected[i],b=selected[j],p=document.createElement('p');if(!a.fusionEligible||!b.fusionEligible)p.textContent=`${a.name} + ${b.name}: not eligible in this reference.`;else{const r=resolve(a,b);p.textContent=`${a.name} + ${b.name} → ${r?.name||'No listed match'} (${r?.kind||'unknown'}). Both ingredients need level 8; after one fusion: ${selected.length-1} occupied, ${capacity-selected.length+1} free. Pair options below are alternatives, not simultaneous fusions.`;} $('plan-pairs').append(p)}
+   const u=new URL('/pokebonk/lab/',location.origin);if(capacity===4)u.searchParams.set('fourth','1');u.hash='calculator';$('plan-budget').href=u.pathname+u.search+u.hash;$('plan-link').value='';$('share-status').textContent='';
+  }
+  $('plan-partner').onchange=()=>{kit();update()};$('build-form').addEventListener('change',update);
+  if(members.some(x=>x.id===+params.get('partner')))$('plan-partner').value=params.get('partner');kit();
+  if(params.get('capacity')==='4')$('plan-capacity').value='4';
+  if(['survival','fusion','status'].includes(params.get('goal')))$('plan-goal').value=params.get('goal');
+  slots.forEach((s,i)=>{const v=params.get('m'+i);if([...s.options].some(o=>o.value===v))s.value=v});update();
+  $('share-plan').onclick=()=>{const u=new URL('/pokebonk/build-planner/',location.origin);u.searchParams.set('v',d.version);u.searchParams.set('partner',$('plan-partner').value);u.searchParams.set('capacity',$('plan-capacity').value);u.searchParams.set('goal',$('plan-goal').value);slots.forEach((s,i)=>{if(s.value)u.searchParams.set('m'+i,s.value)});$('plan-link').value=u.href;$('plan-link').focus();$('plan-link').select();$('share-status').textContent='Link ready. Copy the selected address; it restores this plan without an account.';};
+  $('build-form').onreset=()=>setTimeout(()=>{kit();update()},0);
+  if(params.get('v')&&params.get('v')!==d.version)$('share-status').textContent='Shared data version differs. Review every move against this snapshot.';
+ }
+ if($('budget-form')){
+  const rows=[...document.querySelectorAll('[data-upgrade]')];
+  function calc(){let total=0,n=0;rows.forEach(row=>{const x=d.lab.find(x=>x.id===row.dataset.upgrade),[own,target]=row.querySelectorAll('select');if(+target.value<+own.value)target.value=own.value;const cost=x.costs.slice(+own.value,+target.value).reduce((a,b)=>a+b,0);total+=cost;n+=+target.value-+own.value;row.querySelector('output').textContent=cost.toLocaleString('en-US')+' Stardust';row.hidden=!x.name.toLowerCase().includes($('budget-search').value.trim().toLowerCase())});const balance=num($('dust').value,1e9),left=balance-total;$('budget-total').textContent=`Total ${total.toLocaleString('en-US')} Stardust · ${left<0?'Still needed':'Remaining'} ${Math.abs(left).toLocaleString('en-US')} · ${n} levels. Includes hidden selections.`;}
+  if(params.get('fourth')==='1'){const row=rows.find(r=>r.dataset.upgrade==='slot-move');row.querySelectorAll('select')[1].value='1'}
+  $('budget-form').addEventListener('input',calc);$('budget-form').addEventListener('change',calc);$('budget-form').onreset=()=>setTimeout(calc,0);calc();
+ }
+})();
