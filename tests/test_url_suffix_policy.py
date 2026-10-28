@@ -1,14 +1,23 @@
 import re
+import subprocess
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+def public_html_paths():
+    # Match the integration guard: ignored research captures are not deployed.
+    paths = subprocess.check_output(
+        ['git', 'ls-files', '--cached', '--others', '--exclude-standard'], cwd=ROOT
+    ).decode('utf-8').splitlines()
+    return sorted({ROOT / path for path in paths if Path(path).suffix == '.html'})
+
+
 SITE_PREFIX = "https://megabonk.org"
 DIRECTORY_ROUTES = {
     "/" + path.parent.relative_to(ROOT).as_posix()
-    for path in ROOT.rglob("index.html")
+    for path in public_html_paths() if path.name == "index.html"
 }
 DIRECTORY_ROUTES.add("")
 REDIRECT_ROUTES = {
@@ -40,7 +49,7 @@ class UrlSuffixPolicyTests(unittest.TestCase):
 
     def test_pages_use_clean_canonical_and_hreflang_urls(self):
         violations = []
-        for path in ROOT.rglob("*.html"):
+        for path in public_html_paths():
             source = path.read_text(encoding="utf-8")
             for tag in re.findall(r"<link\b[^>]+>", source, re.IGNORECASE):
                 if not re.search(
@@ -67,7 +76,7 @@ class UrlSuffixPolicyTests(unittest.TestCase):
                 re.IGNORECASE,
             ),
         )
-        for path in ROOT.rglob("*.html"):
+        for path in public_html_paths():
             source = path.read_text(encoding="utf-8")
             for pattern in patterns:
                 for match in pattern.finditer(source):
@@ -102,7 +111,7 @@ class UrlSuffixPolicyTests(unittest.TestCase):
         tree = ET.parse(ROOT / "sitemap.xml")
         namespace = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         urls = {node.text or "" for node in tree.findall(".//sm:loc", namespace)}
-        for path in ROOT.rglob("*.html"):
+        for path in public_html_paths():
             source = path.read_text(encoding="utf-8")
             if not re.search(
                 r'<meta[^>]+name=["'']robots["''][^>]+content=["''][^"'']*noindex',
