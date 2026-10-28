@@ -1,0 +1,1962 @@
+{
+  "version": "0.8.63",
+  "build": "mvrzvitr",
+  "checked": "2026-10-28",
+  "client": "https://pokebonk.com/assets/main-BKa7ObnE-mvrzvitr.js",
+  "config": "https://pokebonk.com/assets/defineProperty-CJH6ETM2-mvrzvitr.js",
+  "sha256": "7c2d58e4751fde1c11dd08fe7123b6033583d8e93d9917ec1dad2df9e3f66486",
+  "scope": "Current .63 species and League/passive definitions equal the preceding .62 snapshot. Baseline, additive Lab stats and grouped modifier functions inspected read-only. Source inspection, not live DPS or completed gameplay.",
+  "lab": [
+    {
+      "id": "dmg",
+      "stat": "damage",
+      "per": 0.04,
+      "max": 8
+    },
+    {
+      "id": "hp",
+      "stat": "maxHp",
+      "per": 8,
+      "max": 8
+    },
+    {
+      "id": "spd",
+      "stat": "moveSpeed",
+      "per": 0.025,
+      "max": 6
+    },
+    {
+      "id": "xp",
+      "stat": "xpGain",
+      "per": 0.05,
+      "max": 6
+    },
+    {
+      "id": "gold",
+      "stat": "gold",
+      "per": 0.08,
+      "max": 6
+    },
+    {
+      "id": "luck",
+      "stat": "luck",
+      "per": 5,
+      "max": 6
+    },
+    {
+      "id": "magnet",
+      "stat": "pickupRange",
+      "per": 0.6,
+      "max": 5
+    },
+    {
+      "id": "regen",
+      "stat": "regen",
+      "per": 0.2,
+      "max": 5
+    },
+    {
+      "id": "armor",
+      "stat": "armor",
+      "per": 2,
+      "max": 6
+    },
+    {
+      "id": "crit",
+      "stat": "critChance",
+      "per": 0.01,
+      "max": 5
+    },
+    {
+      "id": "atkspd",
+      "stat": "attackSpeed",
+      "per": 0.02,
+      "max": 5
+    },
+    {
+      "id": "area",
+      "stat": "area",
+      "per": 0.03,
+      "max": 5
+    }
+  ],
+  "passives": {
+    "1": {
+      "key": "photosynthesis",
+      "name": "Synthesis",
+      "desc": "+1.5 regen and +25% healing. Your Grass attacks heal you a little (0.4% of HP per hit, up to 5 times per second).",
+      "mods": [
+        {
+          "stat": "regen",
+          "add": 1.5
+        },
+        {
+          "stat": "healing",
+          "mul": 1.25
+        }
+      ]
+    },
+    "4": {
+      "key": "blaze",
+      "name": "Sea of Flames",
+      "desc": "Below 40% HP, +40% damage. +10% Fire damage.",
+      "lowHp": 1.4,
+      "typeBoost": {
+        "fire": 0.1
+      }
+    },
+    "7": {
+      "key": "torrent-shell",
+      "name": "Torrent Shell",
+      "desc": "+15 armor and +20 shield. Below 40% HP, +40% damage.",
+      "lowHp": 1.4,
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 15
+        },
+        {
+          "stat": "shieldMax",
+          "add": 20
+        }
+      ]
+    },
+    "10": {
+      "key": "metamorph",
+      "name": "Metamorphosis",
+      "desc": "+15% experience and +20 shield. Evolves soon (Metapod at Lv. 8, Butterfree at Lv. 36). As Metapod, the cocoon gives you +30 armor.",
+      "mods": [
+        {
+          "stat": "xpGain",
+          "mul": 1.15
+        },
+        {
+          "stat": "shieldMax",
+          "add": 20
+        }
+      ]
+    },
+    "13": {
+      "key": "venom-sting",
+      "name": "Poison Sting",
+      "desc": "+10% attack speed. Your crits poison and poisoned enemies take +20% damage. Evolves soon (Kakuna at Lv. 8, Beedrill at Lv. 36); as Kakuna, +30 armor.",
+      "mods": [
+        {
+          "stat": "attackSpeed",
+          "mul": 1.1
+        }
+      ]
+    },
+    "16": {
+      "key": "tailwind",
+      "name": "Tailwind",
+      "desc": "+12% speed, +20% projectile speed and +1 jump. Like any good Flying type, you glide by holding Jump.",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.12
+        },
+        {
+          "stat": "projSpeed",
+          "mul": 1.2
+        },
+        {
+          "stat": "extraJumps",
+          "add": 1
+        }
+      ]
+    },
+    "19": {
+      "key": "hustle",
+      "name": "Hustle",
+      "desc": "+25% physical damage and +10% attack speed, in exchange for -8% HP.",
+      "mods": [
+        {
+          "stat": "physical",
+          "mul": 1.25
+        },
+        {
+          "stat": "attackSpeed",
+          "mul": 1.1
+        },
+        {
+          "stat": "maxHp",
+          "mul": 0.92
+        }
+      ]
+    },
+    "21": {
+      "key": "sniper",
+      "name": "Sniper",
+      "desc": "+8% crit and +50% crit damage.",
+      "mods": [
+        {
+          "stat": "critChance",
+          "add": 0.08
+        },
+        {
+          "stat": "critDamage",
+          "add": 0.5
+        }
+      ]
+    },
+    "23": {
+      "key": "serpent-glare",
+      "name": "Serpent Glare",
+      "desc": "+1 regen (Shed Skin). Every 4 s your gaze paralyzes the enemies in front of you (7 m).",
+      "mods": [
+        {
+          "stat": "regen",
+          "add": 1
+        }
+      ]
+    },
+    "25": {
+      "key": "static",
+      "name": "Static",
+      "desc": "Anyone who touches you is paralyzed. Every 4 s you fire a discharge at an enemy.",
+      "contact": "paralysis"
+    },
+    "27": {
+      "key": "sand-rush",
+      "name": "Sand Rush",
+      "desc": "+10 armor and +6% crit. In a sandstorm, +30% speed.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 10
+        },
+        {
+          "stat": "critChance",
+          "add": 0.06
+        }
+      ]
+    },
+    "29": {
+      "key": "poison-point",
+      "name": "Poison Point",
+      "desc": "+15% HP and +10 armor. Anyone who touches you is poisoned, and poisoned enemies spread it when they die.",
+      "contact": "poison",
+      "mods": [
+        {
+          "stat": "maxHp",
+          "mul": 1.15
+        },
+        {
+          "stat": "armor",
+          "add": 10
+        }
+      ]
+    },
+    "32": {
+      "key": "rivalry",
+      "name": "Rivalry",
+      "desc": "+10% damage and +25% against elites, Alphas and bosses.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.1
+        },
+        {
+          "stat": "eliteDamage",
+          "mul": 1.25
+        }
+      ]
+    },
+    "35": {
+      "key": "lunar-blessing",
+      "name": "Lunar Blessing",
+      "desc": "+20 luck and +1 regen. Your Ultimate charges 30% faster and when you cast it you recover 15% HP.",
+      "mods": [
+        {
+          "stat": "luck",
+          "add": 20
+        },
+        {
+          "stat": "regen",
+          "add": 1
+        }
+      ]
+    },
+    "37": {
+      "key": "flash-fire",
+      "name": "Flash Fire",
+      "desc": "+20% Fire damage and +15% status damage.",
+      "mods": [
+        {
+          "stat": "statusDamage",
+          "mul": 1.15
+        }
+      ]
+    },
+    "39": {
+      "key": "cute-charm",
+      "name": "Cute Charm",
+      "desc": "Anyone who touches you is charmed. +5% evasion.",
+      "contact": "charm",
+      "mods": [
+        {
+          "stat": "evasion",
+          "add": 0.05
+        }
+      ]
+    },
+    "41": {
+      "key": "vampire",
+      "name": "Vampire",
+      "desc": "+8% lifesteal and +20% healing.",
+      "mods": [
+        {
+          "stat": "lifesteal",
+          "add": 0.08
+        },
+        {
+          "stat": "healing",
+          "mul": 1.2
+        }
+      ]
+    },
+    "43": {
+      "key": "chlorophyll",
+      "name": "Chlorophyll",
+      "desc": "+10% speed and +1 regen. In sun, +30% speed and +20% damage. Every 6 s you release a pollen cloud (4.5 m) that poisons.",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        },
+        {
+          "stat": "regen",
+          "add": 1
+        }
+      ]
+    },
+    "46": {
+      "key": "effect-spore",
+      "name": "Effect Spore",
+      "desc": "+20% status chance. Anyone who touches you falls asleep, gets paralyzed or gets poisoned. As Parasect, the mushroom is in control: +20% damage against enemies with any status.",
+      "mods": [
+        {
+          "stat": "statusChance",
+          "mul": 1.2
+        }
+      ]
+    },
+    "48": {
+      "key": "compound-eyes",
+      "name": "Compound Eyes",
+      "desc": "+8% crit and +15% status chance. Confused enemies take +25% damage. As Venomoth, +12% attack speed.",
+      "mods": [
+        {
+          "stat": "critChance",
+          "add": 0.08
+        },
+        {
+          "stat": "statusChance",
+          "mul": 1.15
+        }
+      ]
+    },
+    "50": {
+      "key": "arena-trap",
+      "name": "Sand Trap",
+      "desc": "+10 armor. Every 2 s the ground shakes around you (4.5 m): it damages and traps enemies in the sand (root). As Dugtrio, 6 m.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 10
+        }
+      ]
+    },
+    "52": {
+      "key": "pickup",
+      "name": "Pickup",
+      "desc": "+40% PokéDollars and +2 pickup. Every 100 ₽ you earn in a run gives you +1% crit (up to +15%). As Persian, +10% speed.",
+      "mods": [
+        {
+          "stat": "gold",
+          "mul": 1.4
+        },
+        {
+          "stat": "pickupRange",
+          "add": 2
+        }
+      ]
+    },
+    "54": {
+      "key": "headache",
+      "name": "Headache",
+      "desc": "+10% HP. The hits you take and the passage of time charge your headache; when full, it bursts into a psychic wave (7 m) that damages and confuses. As Golduck, the wave is 10 m and heals you for 8%.",
+      "mods": [
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        }
+      ]
+    },
+    "56": {
+      "key": "anger-point",
+      "name": "Anger Point",
+      "desc": "+8 armor. Every hit you take enrages you: +6% damage per charge (up to 6; as Primeape, up to 8). The rage fades after 5 s without taking damage.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 8
+        }
+      ]
+    },
+    "58": {
+      "key": "loyal-guard",
+      "name": "Loyal Guardian",
+      "desc": "+10% speed. Every 3 s, nearby enemies are intimidated (they deal -40% damage).",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        }
+      ]
+    },
+    "60": {
+      "key": "swift-swim",
+      "name": "Swift Swim",
+      "desc": "+10% HP and +20% projectile speed. In rain, +30% speed and +20% damage. As Poliwrath, +15% physical damage.",
+      "mods": [
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        },
+        {
+          "stat": "projSpeed",
+          "mul": 1.2
+        }
+      ]
+    },
+    "63": {
+      "key": "magic-guard",
+      "name": "Magic Guard",
+      "desc": "Immune to damage from the ground (lava, fire pools, cracks, spore clouds). -30% damage from projectiles and area attacks.",
+      "mods": [
+        {
+          "stat": "special",
+          "mul": 1.1
+        }
+      ]
+    },
+    "66": {
+      "key": "guts",
+      "name": "Guts",
+      "desc": "+25% physical damage.",
+      "mods": [
+        {
+          "stat": "physical",
+          "mul": 1.25
+        }
+      ]
+    },
+    "69": {
+      "key": "carnivore",
+      "name": "Hungry Maw",
+      "desc": "+10% HP. Your Strikes and Spins deal +15% damage and can root (20%). KOs of rooted enemies heal you for 2% of HP.",
+      "mods": [
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        }
+      ]
+    },
+    "72": {
+      "key": "tentacles",
+      "name": "Tentacles",
+      "desc": "+10 armor. Every 2 s your tentacles lash the 2 closest enemies within 7 m (they poison); Tentacruel lashes 4.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 10
+        }
+      ]
+    },
+    "74": {
+      "key": "sturdy",
+      "name": "Sturdy",
+      "desc": "You survive a lethal hit with 1 HP once per run. +10 armor.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 10
+        }
+      ]
+    },
+    "77": {
+      "key": "blazing-hooves",
+      "name": "Fiery Hooves",
+      "desc": "+15% speed. As you move you leave fire footprints that burn enemies. As Rapidash, +10% speed and bigger footprints.",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.15
+        }
+      ]
+    },
+    "79": {
+      "key": "oblivious",
+      "name": "Oblivious",
+      "desc": "+25% HP, +1.5 regen and -10% speed. Every 6 s you yawn: enemies within 6 m may fall asleep. As Slowbro, the Shellder on its tail gives you +20 armor.",
+      "mods": [
+        {
+          "stat": "maxHp",
+          "mul": 1.25
+        },
+        {
+          "stat": "regen",
+          "add": 1.5
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 0.9
+        }
+      ]
+    },
+    "81": {
+      "key": "magnet-pull",
+      "name": "Magnet",
+      "desc": "+4 pickup range. Every 4 s a magnetic pulse pulls in enemies within 9 m and may paralyze them. As Magneton, the pulse also damages them.",
+      "mods": [
+        {
+          "stat": "pickupRange",
+          "add": 4
+        }
+      ]
+    },
+    "83": {
+      "key": "leek-master",
+      "name": "Sharpened Leek",
+      "desc": "+10% crit. You always carry a leek: 4% of your hits are an ×8 \"Bonk!\" (stacks with the Leek item).",
+      "mods": [
+        {
+          "stat": "critChance",
+          "add": 0.1
+        }
+      ]
+    },
+    "84": {
+      "key": "twin-heads",
+      "name": "Twin Heads",
+      "desc": "+10% speed. Each attack has a 25% chance to repeat instantly with the other head. As Dodrio, 35%.",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        }
+      ]
+    },
+    "86": {
+      "key": "ice-body",
+      "name": "Polar Fat",
+      "desc": "+15% HP and +10 armor. Every 4 s ice shards burst around you (5 m) and gradually freeze enemies. As Dewgong, 6.5 m.",
+      "mods": [
+        {
+          "stat": "maxHp",
+          "mul": 1.15
+        },
+        {
+          "stat": "armor",
+          "add": 10
+        }
+      ]
+    },
+    "88": {
+      "key": "sludge-body",
+      "name": "Muddy Body",
+      "desc": "-15% damage taken. When hit, you leave a toxic puddle for 4 s that poisons and traps anyone who steps in it. As Muk, the puddles are bigger.",
+      "dmgTaken": 0.85
+    },
+    "90": {
+      "key": "skill-link",
+      "name": "Skill Link",
+      "desc": "+20 armor and +1 projectile. As Cloyster, +1 projectile and +10 more armor.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 20
+        },
+        {
+          "stat": "projectiles",
+          "add": 1
+        }
+      ]
+    },
+    "92": {
+      "key": "phantom",
+      "name": "Ghost",
+      "desc": "You plow through the horde: -20% damage taken and +10% evasion.",
+      "dmgTaken": 0.8,
+      "mods": [
+        {
+          "stat": "evasion",
+          "add": 0.1
+        }
+      ]
+    },
+    "95": {
+      "key": "rock-head",
+      "name": "Rock Head",
+      "desc": "+25 armor and +15% HP, in exchange for -8% speed. Your Charges deal +30% damage. Every 6 s rocks fall on the 3 closest enemies.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 25
+        },
+        {
+          "stat": "maxHp",
+          "mul": 1.15
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 0.92
+        }
+      ]
+    },
+    "96": {
+      "key": "pendulum",
+      "name": "Pendulum",
+      "desc": "+10% status chance. Every 7 s your pendulum puts the 3 closest enemies to sleep (Hypno, 5). Sleeping enemies within 6 m heal you for 0.5% of HP per second each (up to 5).",
+      "mods": [
+        {
+          "stat": "statusChance",
+          "mul": 1.1
+        }
+      ]
+    },
+    "98": {
+      "key": "hyper-cutter",
+      "name": "Giant Pincer",
+      "desc": "+6 armor. Your Strikes deal +20% damage. Every 5th hit of a Strike is a pincer that deals double damage and stuns (Kingler, every 4th).",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 6
+        }
+      ]
+    },
+    "100": {
+      "key": "aftermath",
+      "name": "Aftermath",
+      "desc": "+15% speed. Enemies you defeat have a 12% chance to explode (3 m, Electric damage that paralyzes); with Electrode, 20%.",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.15
+        }
+      ]
+    },
+    "102": {
+      "key": "harvest",
+      "name": "Harvest",
+      "desc": "+20% healing. Every 15 s a berry appears beside you. As Exeggutor, +10% area.",
+      "mods": [
+        {
+          "stat": "healing",
+          "mul": 1.2
+        }
+      ]
+    },
+    "104": {
+      "key": "bone-keeper",
+      "name": "Guardian Bone",
+      "desc": "+10 armor. Your bone attacks deal +20% damage. Below 40% HP, +35% damage.",
+      "lowHp": 1.35,
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 10
+        }
+      ]
+    },
+    "106": {
+      "key": "limber-kicks",
+      "name": "Rubber Kicks",
+      "desc": "+20% area and +1 jump. Your kicks (attacks with \"kick\") deal +20% damage.",
+      "mods": [
+        {
+          "stat": "area",
+          "mul": 1.2
+        },
+        {
+          "stat": "extraJumps",
+          "add": 1
+        }
+      ]
+    },
+    "107": {
+      "key": "iron-fist",
+      "name": "Iron Fist",
+      "desc": "+5% physical damage. Your punches (attacks with \"punch\") deal +20% damage. Every 3 s you throw an automatic punch at the closest enemy within 4 m.",
+      "mods": [
+        {
+          "stat": "physical",
+          "mul": 1.05
+        }
+      ]
+    },
+    "108": {
+      "key": "long-tongue",
+      "name": "Long Tongue",
+      "desc": "+4 pickup range and +20% HP. Every 4 s your tongue grabs the closest enemy within 8 m, pulls it toward you and paralyzes it.",
+      "mods": [
+        {
+          "stat": "pickupRange",
+          "add": 4
+        },
+        {
+          "stat": "maxHp",
+          "mul": 1.2
+        }
+      ]
+    },
+    "109": {
+      "key": "toxic-cloud",
+      "name": "Toxic Cloud",
+      "desc": "You levitate: hold Jump to glide and you can climb walls. A 4 m gas cloud surrounds you and poisons every second. As Weezing, 5.5 m."
+    },
+    "111": {
+      "key": "rhino-charge",
+      "name": "Unstoppable Charge",
+      "desc": "+15 armor. After 1.5 s of running without stopping, you charge: enemies you touch take damage and are sent flying.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 15
+        }
+      ]
+    },
+    "113": {
+      "key": "natural-cure",
+      "name": "Lucky Egg",
+      "desc": "+40% HP and +40% healing. Every 10 s you lay an egg beside you that heals you for 10% when picked up.",
+      "mods": [
+        {
+          "stat": "maxHp",
+          "mul": 1.4
+        },
+        {
+          "stat": "healing",
+          "mul": 1.4
+        }
+      ]
+    },
+    "114": {
+      "key": "regenerator",
+      "name": "Vines",
+      "desc": "+2 regen. Every 5 s your vines trap (root) and damage the 4 closest enemies within 7 m.",
+      "mods": [
+        {
+          "stat": "regen",
+          "add": 2
+        }
+      ]
+    },
+    "115": {
+      "key": "parental-bond",
+      "name": "Parental Bond",
+      "desc": "Your baby fights alongside you: every hit of your attacks is repeated at 25% of its damage."
+    },
+    "116": {
+      "key": "ink-sniper",
+      "name": "Ink",
+      "desc": "+10% crit and +25% crit damage. Your crits cover the enemy in ink and blind it: it deals -40% damage and common enemies stop attacking.",
+      "mods": [
+        {
+          "stat": "critChance",
+          "add": 0.1
+        },
+        {
+          "stat": "critDamage",
+          "add": 0.25
+        }
+      ]
+    },
+    "118": {
+      "key": "water-veil",
+      "name": "Water Veil",
+      "desc": "+10% evasion. Every dodge wraps you in water: a shield worth 6% of your HP. As Seaking, +5% evasion.",
+      "mods": [
+        {
+          "stat": "evasion",
+          "add": 0.1
+        }
+      ]
+    },
+    "120": {
+      "key": "star-core",
+      "name": "Core",
+      "desc": "+20% projectile speed. Every 8 s your core heals you for 5%. As Starmie, +10% special damage.",
+      "mods": [
+        {
+          "stat": "projSpeed",
+          "mul": 1.2
+        }
+      ]
+    },
+    "122": {
+      "key": "barrier-wall",
+      "name": "Invisible Wall",
+      "desc": "Every 6 s you raise an invisible barrier: a shield worth 10% of your HP and a wall that pushes back enemies within 4 m.",
+      "mods": []
+    },
+    "123": {
+      "key": "technician",
+      "name": "Technician",
+      "desc": "+15% attack speed and +10% damage.",
+      "mods": [
+        {
+          "stat": "attackSpeed",
+          "mul": 1.15
+        },
+        {
+          "stat": "damage",
+          "mul": 1.1
+        }
+      ]
+    },
+    "124": {
+      "key": "frost-kiss",
+      "name": "Icy Kiss",
+      "desc": "Anyone who touches you is charmed. Your hits on charmed enemies gradually freeze them.",
+      "contact": "charm"
+    },
+    "125": {
+      "key": "motor-drive",
+      "name": "Motor Drive",
+      "desc": "Every time you paralyze an enemy you gain +2% damage for 4 s (up to 15 stacks)."
+    },
+    "126": {
+      "key": "flame-body",
+      "name": "Flame Body",
+      "desc": "Anyone who touches you is burned. Burned enemies you defeat burst into flames (3 m) and burn those around them.",
+      "contact": "burn",
+      "mods": [
+        {
+          "stat": "statusDamage",
+          "mul": 1.1
+        }
+      ]
+    },
+    "127": {
+      "key": "mold-breaker",
+      "name": "Mold Breaker",
+      "desc": "+15% damage. You ignore enemy shields (like Fighting attacks) and deal +20% to bosses and mini-bosses. Storm Throw is always a crit.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.15
+        }
+      ]
+    },
+    "128": {
+      "key": "stampede",
+      "name": "Stampede",
+      "desc": "+15% speed. While running, every 0.5 s you ram the enemies in front of you (2.5 m): damage and a good shove.",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.15
+        }
+      ]
+    },
+    "129": {
+      "key": "persevere",
+      "name": "Perseverance",
+      "desc": "+60% experience. With it, it reaches a fearsome evolution before anyone else (Lv. 40).",
+      "mods": [
+        {
+          "stat": "xpGain",
+          "mul": 1.6
+        }
+      ]
+    },
+    "131": {
+      "key": "water-absorb",
+      "name": "Water Absorb",
+      "desc": "You take -15% damage. +0.5 regen.",
+      "dmgTaken": 0.85,
+      "mods": [
+        {
+          "stat": "regen",
+          "add": 0.5
+        }
+      ]
+    },
+    "132": {
+      "key": "imposter",
+      "name": "Transformation",
+      "desc": "+10% damage, HP and speed. Every 30 s you copy the types of the nearest enemy: your type bonus and your weaknesses change.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.1
+        },
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        }
+      ]
+    },
+    "133": {
+      "key": "adaptability",
+      "name": "Adaptability",
+      "desc": "+25% damage with moves of your own type (the type bonus goes from ×1.25 to ×1.56)."
+    },
+    "137": {
+      "key": "download",
+      "name": "Download",
+      "desc": "+12% special damage and projectile speed. Every 10 s you download data: your next 5 hits are crits.",
+      "mods": [
+        {
+          "stat": "special",
+          "mul": 1.12
+        },
+        {
+          "stat": "projSpeed",
+          "mul": 1.12
+        }
+      ]
+    },
+    "138": {
+      "key": "spiral-shell",
+      "name": "Spiral Shell",
+      "desc": "+20 armor. Your Rock and Water attacks deal +15% damage. Every 5 s, a ring of rocks bursts from your shell (5 m; Omastar 6.5 m).",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 20
+        }
+      ]
+    },
+    "140": {
+      "key": "battle-armor",
+      "name": "Fossil Armor",
+      "desc": "+15 armor. Each hit you take is reduced by 3 + 0.3 per level. As Kabutops, your Strikes and Boomerangs deal +20% damage.",
+      "mods": [
+        {
+          "stat": "armor",
+          "add": 15
+        }
+      ]
+    },
+    "142": {
+      "key": "ancient-wings",
+      "name": "Prehistoric Wings",
+      "desc": "+15% speed and +1 jump; you glide by holding Jump. While airborne, your attacks deal +25% damage.",
+      "mods": [
+        {
+          "stat": "moveSpeed",
+          "mul": 1.15
+        },
+        {
+          "stat": "extraJumps",
+          "add": 1
+        }
+      ]
+    },
+    "143": {
+      "key": "gluttony",
+      "name": "Gluttony",
+      "desc": "+30% healing.",
+      "mods": [
+        {
+          "stat": "healing",
+          "mul": 1.3
+        }
+      ]
+    },
+    "144": {
+      "key": "ice-pressure",
+      "name": "Frigid Pressure",
+      "desc": "Legendary: +10% damage, HP and speed. Every second, enemies within 6 m gradually freeze.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.1
+        },
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        }
+      ]
+    },
+    "145": {
+      "key": "volt-pressure",
+      "name": "Electric Pressure",
+      "desc": "Legendary: +10% damage, HP and speed. Every 5 s three lightning bolts strike nearby enemies and paralyze them.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.1
+        },
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        }
+      ]
+    },
+    "146": {
+      "key": "flame-pressure",
+      "name": "Fiery Pressure",
+      "desc": "Legendary: +10% damage, HP and speed. Every 6 s a 6 m ring of flames burns the enemies.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.1
+        },
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        }
+      ]
+    },
+    "147": {
+      "key": "multiscale",
+      "name": "Multiscale",
+      "desc": "At full HP you take -50% damage.",
+      "fullHp": 1
+    },
+    "150": {
+      "key": "genome",
+      "name": "Genome",
+      "desc": "+15% damage, area and speed. Every 8 s a psychic barrier gives you a shield worth 15% of your HP. Your crits stun.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.15
+        },
+        {
+          "stat": "area",
+          "mul": 1.15
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 1.15
+        }
+      ]
+    },
+    "151": {
+      "key": "mew",
+      "name": "Ancestral Gene",
+      "desc": "+10% damage, speed, area and HP. Can learn moves of any type.",
+      "mods": [
+        {
+          "stat": "damage",
+          "mul": 1.1
+        },
+        {
+          "stat": "moveSpeed",
+          "mul": 1.1
+        },
+        {
+          "stat": "area",
+          "mul": 1.1
+        },
+        {
+          "stat": "maxHp",
+          "mul": 1.1
+        }
+      ]
+    }
+  },
+  "pacts": [
+    {
+      "id": "horde",
+      "name": "Horde Pact",
+      "boon": "An Epic item or better",
+      "bane": "+25% wild Pokémon",
+      "max": 2
+    },
+    {
+      "id": "iron",
+      "name": "Iron Pact",
+      "boon": "A Legendary item",
+      "bane": "Wild Pokémon have +35% HP",
+      "max": 2
+    },
+    {
+      "id": "fury",
+      "name": "Fury Pact",
+      "boon": "+25% damage",
+      "bane": "Wild Pokémon deal +25% damage",
+      "max": 2
+    },
+    {
+      "id": "wind",
+      "name": "Wind Pact",
+      "boon": "+15% speed and one more jump",
+      "bane": "Wild Pokémon are 12% faster",
+      "max": 2
+    },
+    {
+      "id": "elite",
+      "name": "Elite Pact",
+      "boon": "+30% experience and +20 luck",
+      "bane": "Twice as many elite Pokémon",
+      "max": 2
+    },
+    {
+      "id": "moon",
+      "name": "Moon Pact",
+      "boon": "You gain 3 levels instantly",
+      "bane": "An Alpha Pokémon every 90 s (previously 150 s)",
+      "max": 1
+    },
+    {
+      "id": "greed",
+      "name": "Greedy Pact",
+      "boon": "Instant PokéDollars and +30% ₽",
+      "bane": "Poké Balls cost 50% more",
+      "max": 2
+    },
+    {
+      "id": "glass",
+      "name": "Glass Pact",
+      "boon": "+40% crit damage and +10% crit",
+      "bane": "−20% max HP",
+      "max": 2
+    },
+    {
+      "id": "thorn",
+      "name": "Thorny Pact",
+      "boon": "One more vitamin slot",
+      "bane": "You heal 30% less",
+      "max": 1
+    }
+  ],
+  "reactions": [
+    {
+      "id": "electro",
+      "status": "wet",
+      "types": [
+        "electric"
+      ],
+      "name": "Electrocuted",
+      "factor": 1.5,
+      "consumes": true,
+      "gate": 0.25,
+      "effect": "Consumes Wet; can chain to other Wet enemies. The splash is a separate hit, not this multiplier."
+    },
+    {
+      "id": "steam",
+      "status": "burn",
+      "types": [
+        "water"
+      ],
+      "name": "Steam",
+      "factor": 1.4,
+      "consumes": true,
+      "gate": 0.25,
+      "effect": "Consumes Burn; nearby enemies can be confused and rooted."
+    },
+    {
+      "id": "wildfire",
+      "status": "burn",
+      "types": [
+        "grass",
+        "flying"
+      ],
+      "name": "Wildfire",
+      "factor": 1.3,
+      "consumes": false,
+      "gate": 0.25,
+      "effect": "Spreads Burn to nearby enemies; periodic damage is a separate calculation."
+    },
+    {
+      "id": "wreckage",
+      "status": "freeze",
+      "types": [
+        "fighting",
+        "rock",
+        "steel"
+      ],
+      "name": "Wreckage",
+      "factor": 2.6,
+      "consumes": true,
+      "gate": 0.25,
+      "effect": "Consumes Frozen; an Ice splash can hit nearby enemies. Frozen damage amplification is another layer."
+    },
+    {
+      "id": "toxic-gas",
+      "status": "poison",
+      "types": [
+        "fire"
+      ],
+      "name": "Toxic Gas",
+      "factor": null,
+      "consumes": true,
+      "gate": 0.25,
+      "effect": "Consumes Poison and its stacks; the reaction factor is 1.4 + 0.1 × existing poison stacks. Splash uses its own factor."
+    },
+    {
+      "id": "mind",
+      "status": "paralysis",
+      "types": [
+        "psychic"
+      ],
+      "name": "Mind Collapse",
+      "factor": 1.6,
+      "consumes": true,
+      "gate": 0.25,
+      "effect": "Consumes Paralysis and applies Confusion."
+    },
+    {
+      "id": "dragon",
+      "status": "charm",
+      "types": [
+        "dragon"
+      ],
+      "name": "Dragon Fury",
+      "factor": 2,
+      "consumes": false,
+      "gate": 0.25,
+      "effect": "Requires Charmed; the checked branch does not consume Charm."
+    },
+    {
+      "id": "nightmare",
+      "status": "sleep",
+      "types": [
+        "ghost",
+        "dark"
+      ],
+      "name": "Nightmare",
+      "factor": 1.7,
+      "consumes": true,
+      "gate": null,
+      "effect": "The extra 1.7× is separate from the normal 1.8× sleeping-target hit. The hit normally wakes the target; Awakening can change that."
+    },
+    {
+      "id": "freeze-setup",
+      "status": "wet",
+      "types": [
+        "ice"
+      ],
+      "name": "Wet → Freeze setup",
+      "factor": null,
+      "consumes": true,
+      "gate": null,
+      "effect": "If an Ice hit successfully applies its Freeze status, a Wet target gets the three chill stacks needed to freeze. An Ice type alone does not guarantee its status roll."
+    }
+  ],
+  "engineFixtures": [
+    {
+      "species": 7,
+      "stage": 0,
+      "lab": {
+        "maxHp": 16,
+        "damage": 0.08
+      },
+      "groups": [
+        [
+          {
+            "stat": "physical",
+            "mul": 1.2
+          }
+        ],
+        [
+          {
+            "stat": "maxHp",
+            "add": 10
+          },
+          {
+            "stat": "maxHp",
+            "mul": 1.25
+          }
+        ],
+        [
+          {
+            "stat": "armor",
+            "add": 15
+          },
+          {
+            "stat": "shieldMax",
+            "add": 20
+          }
+        ]
+      ],
+      "raw": {
+        "hp": 44,
+        "atk": 48,
+        "def": 65,
+        "spa": 50,
+        "spd": 64,
+        "spe": 43
+      },
+      "expected": {
+        "maxHp": 167.5,
+        "regen": 0.4601910828025478,
+        "armor": 26.121019108280255,
+        "evasion": 0.03643312101910828,
+        "shieldMax": 20,
+        "moveSpeed": 1.0185987261146496,
+        "damage": 1.08,
+        "physical": 1.2041273885350319,
+        "special": 1.0110828025477707,
+        "attackSpeed": 1,
+        "projectiles": 0,
+        "area": 1,
+        "duration": 1,
+        "projSpeed": 1,
+        "critChance": 0.05,
+        "critDamage": 1.75,
+        "lifesteal": 0,
+        "thorns": 0,
+        "knockback": 1,
+        "pickupRange": 6,
+        "xpGain": 1,
+        "gold": 1,
+        "luck": 0,
+        "luckMult": 1,
+        "difficulty": 1,
+        "eliteDamage": 1,
+        "extraJumps": 0,
+        "jumpHeight": 1,
+        "statusChance": 1,
+        "statusDamage": 1,
+        "healing": 1,
+        "superEffective": 1,
+        "flinch": 0,
+        "bounces": 0,
+        "enemyAmount": 1,
+        "megaCrit": 0,
+        "overheal": 0,
+        "powerup": 1,
+        "eliteSpawn": 1,
+        "slam": 1,
+        "typeBoost": {}
+      }
+    },
+    {
+      "species": 1,
+      "stage": 2,
+      "lab": {
+        "armor": 4
+      },
+      "groups": [
+        [
+          {
+            "stat": "special",
+            "mul": 1.2
+          },
+          {
+            "stat": "special",
+            "mul": 1.1
+          }
+        ],
+        [
+          {
+            "stat": "damage",
+            "mul": 1.3
+          },
+          {
+            "stat": "damage",
+            "mul": 1.03
+          }
+        ],
+        [
+          {
+            "stat": "regen",
+            "add": 1.5
+          },
+          {
+            "stat": "healing",
+            "mul": 1.25
+          }
+        ]
+      ],
+      "raw": {
+        "hp": 45,
+        "atk": 49,
+        "def": 49,
+        "spa": 65,
+        "spd": 65,
+        "spe": 45
+      },
+      "expected": {
+        "maxHp": 134,
+        "regen": 1.9622641509433962,
+        "armor": 13.226415094339622,
+        "evasion": 0.0369811320754717,
+        "shieldMax": 0,
+        "moveSpeed": 1.0218867924528303,
+        "damage": 1.6492,
+        "physical": 1.0049056603773585,
+        "special": 1.384867924528302,
+        "attackSpeed": 1,
+        "projectiles": 0,
+        "area": 1,
+        "duration": 1,
+        "projSpeed": 1,
+        "critChance": 0.05,
+        "critDamage": 1.75,
+        "lifesteal": 0,
+        "thorns": 0,
+        "knockback": 1,
+        "pickupRange": 6,
+        "xpGain": 1,
+        "gold": 1,
+        "luck": 0,
+        "luckMult": 1,
+        "difficulty": 1,
+        "eliteDamage": 1,
+        "extraJumps": 0,
+        "jumpHeight": 1,
+        "statusChance": 1,
+        "statusDamage": 1,
+        "healing": 1.25,
+        "superEffective": 1,
+        "flinch": 0,
+        "bounces": 0,
+        "enemyAmount": 1,
+        "megaCrit": 0,
+        "overheal": 0,
+        "powerup": 1,
+        "eliteSpawn": 1,
+        "slam": 1,
+        "typeBoost": {}
+      }
+    }
+  ],
+  "formTypes": {
+    "1": [
+      "grass",
+      "poison"
+    ],
+    "2": [
+      "grass",
+      "poison"
+    ],
+    "3": [
+      "grass",
+      "poison"
+    ],
+    "4": [
+      "fire"
+    ],
+    "5": [
+      "fire"
+    ],
+    "6": [
+      "fire",
+      "flying"
+    ],
+    "7": [
+      "water"
+    ],
+    "8": [
+      "water"
+    ],
+    "9": [
+      "water"
+    ],
+    "10": [
+      "bug"
+    ],
+    "11": [
+      "bug"
+    ],
+    "12": [
+      "bug",
+      "flying"
+    ],
+    "13": [
+      "bug",
+      "poison"
+    ],
+    "14": [
+      "bug",
+      "poison"
+    ],
+    "15": [
+      "bug",
+      "poison"
+    ],
+    "16": [
+      "normal",
+      "flying"
+    ],
+    "17": [
+      "normal",
+      "flying"
+    ],
+    "18": [
+      "normal",
+      "flying"
+    ],
+    "19": [
+      "normal"
+    ],
+    "20": [
+      "normal"
+    ],
+    "21": [
+      "normal",
+      "flying"
+    ],
+    "22": [
+      "normal",
+      "flying"
+    ],
+    "23": [
+      "poison"
+    ],
+    "24": [
+      "poison"
+    ],
+    "25": [
+      "electric"
+    ],
+    "26": [
+      "electric"
+    ],
+    "27": [
+      "ground"
+    ],
+    "28": [
+      "ground"
+    ],
+    "29": [
+      "poison"
+    ],
+    "30": [
+      "poison"
+    ],
+    "31": [
+      "poison",
+      "ground"
+    ],
+    "32": [
+      "poison"
+    ],
+    "33": [
+      "poison"
+    ],
+    "34": [
+      "poison",
+      "ground"
+    ],
+    "35": [
+      "fairy"
+    ],
+    "36": [
+      "fairy"
+    ],
+    "37": [
+      "fire"
+    ],
+    "38": [
+      "fire"
+    ],
+    "39": [
+      "normal",
+      "fairy"
+    ],
+    "40": [
+      "normal",
+      "fairy"
+    ],
+    "41": [
+      "poison",
+      "flying"
+    ],
+    "42": [
+      "poison",
+      "flying"
+    ],
+    "43": [
+      "grass",
+      "poison"
+    ],
+    "44": [
+      "grass",
+      "poison"
+    ],
+    "45": [
+      "grass",
+      "poison"
+    ],
+    "46": [
+      "bug",
+      "grass"
+    ],
+    "47": [
+      "bug",
+      "grass"
+    ],
+    "48": [
+      "bug",
+      "poison"
+    ],
+    "49": [
+      "bug",
+      "poison"
+    ],
+    "50": [
+      "ground"
+    ],
+    "51": [
+      "ground"
+    ],
+    "52": [
+      "normal"
+    ],
+    "53": [
+      "normal"
+    ],
+    "54": [
+      "water"
+    ],
+    "55": [
+      "water"
+    ],
+    "56": [
+      "fighting"
+    ],
+    "57": [
+      "fighting"
+    ],
+    "58": [
+      "fire"
+    ],
+    "59": [
+      "fire"
+    ],
+    "60": [
+      "water"
+    ],
+    "61": [
+      "water"
+    ],
+    "62": [
+      "water",
+      "fighting"
+    ],
+    "63": [
+      "psychic"
+    ],
+    "64": [
+      "psychic"
+    ],
+    "65": [
+      "psychic"
+    ],
+    "66": [
+      "fighting"
+    ],
+    "67": [
+      "fighting"
+    ],
+    "68": [
+      "fighting"
+    ],
+    "69": [
+      "grass",
+      "poison"
+    ],
+    "70": [
+      "grass",
+      "poison"
+    ],
+    "71": [
+      "grass",
+      "poison"
+    ],
+    "72": [
+      "water",
+      "poison"
+    ],
+    "73": [
+      "water",
+      "poison"
+    ],
+    "74": [
+      "rock",
+      "ground"
+    ],
+    "75": [
+      "rock",
+      "ground"
+    ],
+    "76": [
+      "rock",
+      "ground"
+    ],
+    "77": [
+      "fire"
+    ],
+    "78": [
+      "fire"
+    ],
+    "79": [
+      "water",
+      "psychic"
+    ],
+    "80": [
+      "water",
+      "psychic"
+    ],
+    "81": [
+      "electric",
+      "steel"
+    ],
+    "82": [
+      "electric",
+      "steel"
+    ],
+    "83": [
+      "normal",
+      "flying"
+    ],
+    "84": [
+      "normal",
+      "flying"
+    ],
+    "85": [
+      "normal",
+      "flying"
+    ],
+    "86": [
+      "water"
+    ],
+    "87": [
+      "water",
+      "ice"
+    ],
+    "88": [
+      "poison"
+    ],
+    "89": [
+      "poison"
+    ],
+    "90": [
+      "water"
+    ],
+    "91": [
+      "water",
+      "ice"
+    ],
+    "92": [
+      "ghost",
+      "poison"
+    ],
+    "93": [
+      "ghost",
+      "poison"
+    ],
+    "94": [
+      "ghost",
+      "poison"
+    ],
+    "95": [
+      "rock",
+      "ground"
+    ],
+    "96": [
+      "psychic"
+    ],
+    "97": [
+      "psychic"
+    ],
+    "98": [
+      "water"
+    ],
+    "99": [
+      "water"
+    ],
+    "100": [
+      "electric"
+    ],
+    "101": [
+      "electric"
+    ],
+    "102": [
+      "grass",
+      "psychic"
+    ],
+    "103": [
+      "grass",
+      "psychic"
+    ],
+    "104": [
+      "ground"
+    ],
+    "105": [
+      "ground"
+    ],
+    "106": [
+      "fighting"
+    ],
+    "107": [
+      "fighting"
+    ],
+    "108": [
+      "normal"
+    ],
+    "109": [
+      "poison"
+    ],
+    "110": [
+      "poison"
+    ],
+    "111": [
+      "ground",
+      "rock"
+    ],
+    "112": [
+      "ground",
+      "rock"
+    ],
+    "113": [
+      "normal"
+    ],
+    "114": [
+      "grass"
+    ],
+    "115": [
+      "normal"
+    ],
+    "116": [
+      "water"
+    ],
+    "117": [
+      "water"
+    ],
+    "118": [
+      "water"
+    ],
+    "119": [
+      "water"
+    ],
+    "120": [
+      "water"
+    ],
+    "121": [
+      "water",
+      "psychic"
+    ],
+    "122": [
+      "psychic",
+      "fairy"
+    ],
+    "123": [
+      "bug",
+      "flying"
+    ],
+    "124": [
+      "ice",
+      "psychic"
+    ],
+    "125": [
+      "electric"
+    ],
+    "126": [
+      "fire"
+    ],
+    "127": [
+      "bug"
+    ],
+    "128": [
+      "normal"
+    ],
+    "129": [
+      "water"
+    ],
+    "130": [
+      "water",
+      "flying"
+    ],
+    "131": [
+      "water",
+      "ice"
+    ],
+    "132": [
+      "normal"
+    ],
+    "133": [
+      "normal"
+    ],
+    "134": [
+      "water"
+    ],
+    "135": [
+      "electric"
+    ],
+    "136": [
+      "fire"
+    ],
+    "137": [
+      "normal"
+    ],
+    "138": [
+      "rock",
+      "water"
+    ],
+    "139": [
+      "rock",
+      "water"
+    ],
+    "140": [
+      "rock",
+      "water"
+    ],
+    "141": [
+      "rock",
+      "water"
+    ],
+    "142": [
+      "rock",
+      "flying"
+    ],
+    "143": [
+      "normal"
+    ],
+    "144": [
+      "ice",
+      "flying"
+    ],
+    "145": [
+      "electric",
+      "flying"
+    ],
+    "146": [
+      "fire",
+      "flying"
+    ],
+    "147": [
+      "dragon"
+    ],
+    "148": [
+      "dragon"
+    ],
+    "149": [
+      "dragon",
+      "flying"
+    ],
+    "150": [
+      "psychic"
+    ],
+    "151": [
+      "psychic"
+    ]
+  }
+}
