@@ -2,9 +2,9 @@ name: Validate published integrations
 on:
   push:
     branches: [main]
-    paths: ['**.html', '**.htm', 'scripts/**', 'config/**', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', '.github/workflows/validate-integrations.yml']
   pull_request:
-    paths: ['**.html', '**.htm', 'scripts/**', 'config/**', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', '.github/workflows/validate-integrations.yml']
 permissions:
   contents: read
 jobs:
@@ -29,6 +29,8 @@ jobs:
         run: python scripts/build_longtail_main.py
       - name: Rebuild Survivor Ace task pages
         run: python scripts/build_survivor_ace.py
+      - name: Verify shared game-section layout and comparison controls
+        run: python scripts/check_guide_layout.py
       - name: Compare integration expectations with previous Git revision
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
