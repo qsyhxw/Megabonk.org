@@ -12,7 +12,7 @@ class Page(HTMLParser):
 def check():
  errors=[];count=0
  # Discover additional sections using the shared base/layout, as well as the three existing ones.
- sections={'pokebonk','poke-survivor','survivor-ace'}
+ sections={'pokebonk','poke-survivor','survivor-ace','azeroth-survivors'}
  for folder in ROOT.iterdir():
   if not folder.is_dir() or folder.name.startswith(('.', '_')) or folder.name in ['node_modules','assets','scripts','PAGE_REPORTS']:continue
   for file in folder.rglob('*.html'):
