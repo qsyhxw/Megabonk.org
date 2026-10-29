@@ -1,10 +1,11 @@
+from pokebonk_sync_reference import load_reference
 """Current-version corrections and local move/support/budget decision tools."""
 from pathlib import Path
 from html import escape as e
 import json,re
 ROOT=Path(__file__).resolve().parents[1]
-D=json.loads((ROOT/'data/pokebonk-decisions-reference.json').read_text(encoding='utf8'))
-R=json.loads((ROOT/'data/pokebonk-tools-reference.json').read_text(encoding='utf8'))
+D=load_reference('pokebonk-decisions-reference.json')
+R=load_reference('pokebonk-tools-reference.json')
 LATEST=D.get('latestReview',{'version':'0.8.63','build':'mvrzvitr','client':D['client'],'config':D['config']})
 
 def apply_decisions(ctx):

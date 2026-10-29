@@ -1,11 +1,12 @@
+from pokebonk_sync_reference import load_reference
 """Unified declared plans and source-scoped mode guides, reviewed 2026-10-29."""
 from pathlib import Path
 from html import escape as e
 import json,re
 ROOT=Path(__file__).resolve().parents[1]
 D=json.loads((ROOT/'data/pokebonk-continuity-reference.json').read_text(encoding='utf8'))
-R=json.loads((ROOT/'data/pokebonk-tools-reference.json').read_text(encoding='utf8'))
-A=json.loads((ROOT/'data/pokebonk-decisions-reference.json').read_text(encoding='utf8'))['alphaTypes']
+R=load_reference('pokebonk-tools-reference.json')
+A=load_reference('pokebonk-decisions-reference.json')['alphaTypes']
 
 def apply_continuity(ctx):
  P,pages,article,section,table,ref,ext=(ctx[k]for k in ['P','PAGES','article','section','table','ref','ext'])

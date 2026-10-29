@@ -1,9 +1,10 @@
+from pokebonk_sync_reference import load_reference
 """Source-scoped upgrade logs, support integration and optional local budgets."""
 from pathlib import Path
 import json,re
 ROOT=Path(__file__).resolve().parents[1]
-D=json.loads((ROOT/'data/pokebonk-progression-reference.json').read_text(encoding='utf8'))
-R=json.loads((ROOT/'data/pokebonk-tools-reference.json').read_text(encoding='utf8'))
+D=load_reference('pokebonk-progression-reference.json')
+R=load_reference('pokebonk-tools-reference.json')
 
 def apply_progression(ctx):
  P,pages,section,ref,ext=(ctx[k] for k in ['P','PAGES','section','ref','ext'])

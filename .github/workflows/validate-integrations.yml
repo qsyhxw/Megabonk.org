@@ -2,9 +2,9 @@ name: Validate published integrations
 on:
   push:
     branches: [main]
-    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', '.github/workflows/validate-integrations.yml']
   pull_request:
-    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', '.github/workflows/validate-integrations.yml']
 permissions:
   contents: read
 jobs:
@@ -29,6 +29,11 @@ jobs:
         run: python scripts/build_longtail_main.py
       - name: Rebuild Survivor Ace task pages
         run: python scripts/build_survivor_ace.py
+      - name: Verify public-source sync rejects unsafe updates
+        run: |
+          python scripts/test_pokebonk_sync.py
+          python scripts/test_pokebonk_sync_render.py
+
       - name: Verify source-derived PokeBonk task data
         run: python scripts/check_pokebonk_depth.py
       - name: Verify PokeBonk fixed-panel engine fixtures

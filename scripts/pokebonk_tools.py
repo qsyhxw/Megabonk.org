@@ -1,9 +1,10 @@
+from pokebonk_sync_reference import load_reference
 """Task tools use the versioned .55 reference; never connect to game accounts."""
 import json,re
 from pathlib import Path
 from html import escape as e
 from pokebonk_completion import requirements,mods_text
-D=json.loads((Path(__file__).resolve().parents[1]/"data/pokebonk-tools-reference.json").read_text(encoding="utf-8"))
+D=load_reference('pokebonk-tools-reference.json')
 
 def apply_tools(ctx):
  P,pages,article=ctx['P'],ctx['PAGES'],ctx['article']

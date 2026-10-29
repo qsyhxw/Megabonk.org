@@ -1,8 +1,9 @@
+from pokebonk_sync_reference import load_reference
 """Reviewed PokeBonk data views and task pages; no account or game automation."""
 from pathlib import Path
 from html import escape as e
 import json,re,math
-D=json.loads((Path(__file__).resolve().parents[1]/'data/pokebonk-tools-reference.json').read_text(encoding='utf8'))
+D=load_reference('pokebonk-tools-reference.json')
 FIELDS=['maxHp','armor','moveSpeed','physical','special','damage']
 def baseline(raw,stage):
  total=sum(raw.values());n=lambda k:raw[k]/total*6;growth=1+.12*stage

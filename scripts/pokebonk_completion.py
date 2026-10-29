@@ -1,3 +1,4 @@
+from pokebonk_sync_reference import load_reference
 """05A completion batch. Selected public facts, original decision help, no game files."""
 import json
 import re
@@ -5,7 +6,7 @@ from html import escape as esc
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-D = json.loads((ROOT / 'data/pokebonk-reference.json').read_text(encoding='utf-8'))
+D = load_reference('pokebonk-reference.json')
 CLIENT, NEWS = D['source_client'], D['source_news']
 CHECKED = 'October 26, 2026'
 LEAGUE = {x['id']: x for x in D['league']}

@@ -1,9 +1,10 @@
+from pokebonk_sync_reference import load_reference
 """Source-reviewed second-stage tools and boss task pages."""
 from pathlib import Path
 from html import escape as e
 import json,re
-D=json.loads((Path(__file__).resolve().parents[1]/'data/pokebonk-compare-reference.json').read_text(encoding='utf8'))
-ROLE=json.loads((Path(__file__).resolve().parents[1]/'data/pokebonk-tools-reference.json').read_text(encoding='utf8'))
+D=load_reference('pokebonk-compare-reference.json')
+ROLE=load_reference('pokebonk-tools-reference.json')
 def apply_compare(ctx):
  P,pages,article,ref,table,section=ctx['P'],ctx['PAGES'],ctx['article'],ctx['ref'],ctx['table'],ctx['section']
  source=[(D['client'],'pokebonk.com — v0.8.63 original client','Inspected October 28, 2026. SINGLE_SOURCE: current rules and encounter prompts; no completed run, measured DPS or boss victory claimed.'),(D['config'],'pokebonk.com — v0.8.63 configuration','Current species, League and passive definitions compare equal to the preceding .62 snapshot. The embedded Play host remains a separate .27 edition.')]
