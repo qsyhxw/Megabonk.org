@@ -171,6 +171,8 @@ def build():
     apply_continuity(globals())
     from pokebonk_progression import apply_progression
     apply_progression(globals())
+    from pokebonk_monthly import apply_monthly_handoffs
+    apply_monthly_handoffs(globals())
     from pokebonk_sync_pages import apply_sync_pages
     apply_sync_pages(globals())
     error=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">PokeBonk</a> / 404</nav><section class="legal"><p class="eyebrow">404 / Off the trail</p><h1>This path ends here.</h1><p>The page may have moved, or the address may be incomplete. Your next guide is still on the map.</p><div class="actions"><a class="button" href="{P}">Back to PokeBonk →</a><a class="button secondary" href="{P}#guides">Browse the guides</a></div></section>'
