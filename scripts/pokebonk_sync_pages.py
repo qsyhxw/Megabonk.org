@@ -1,13 +1,13 @@
 """Publish source freshness separately from dated editorial review."""
 from pathlib import Path
 from html import escape as e
-import json,re
+import json,re,hashlib
 ROOT=Path(__file__).resolve().parents[1]
 TOOLS=['pokemon','build-planner','moves','lab','items-vitamins','starters','tier-list','alpha-support','builds','unlocks','ultimates','evolution','time-attack','type-chart','reactions','move-fusions']
 def apply_sync_pages(ctx):
  path=ROOT/'data/pokebonk-sync.json'
  if not path.exists():return
- state=json.loads(path.read_text(encoding='utf8'));version=e(state['observed']['version']);pending=state['pending'];P,pages=ctx['P'],ctx['PAGES']
+ revision=hashlib.sha256(path.read_text(encoding='utf8').encode()).hexdigest();state=json.loads(path.read_text(encoding='utf8'));version=e(state['observed']['version']);pending=state['pending'];P,pages=ctx['P'],ctx['PAGES']
  def cite(p):
   s=p['html'];url=state['source']['config']
   old=[int(n)for n,body in re.findall(r'<li id="source-(\d+)">(.*?)</li>',s,re.S)if url in body]
@@ -19,7 +19,7 @@ def apply_sync_pages(ctx):
   p=pages[P+(slug+'/'if slug else'')];c=cite(p)
   warning=' <strong>Review pending:</strong> '+e(' '.join(pending))if pending else' Routes, conditional effects, capture instructions and recommendations retain their own dated editorial review.'
   names={'lab':'Lab prices','items':'item cards','moves':'move templates','league':'partner data','alpha':'Alpha bonuses'}
-  note='<aside id="source-sync" class="note"><details><summary><strong>Source version v'+version+'</strong> · '+('Changes need review · 'if pending else'')+'View data dates and limits</summary><p>Source observation '+e(state['changed_at'][:10])+'. Data snapshots: '+e(', '.join(names[k]+' (v'+v['version']+')'for k,v in state['accepted'].items()))+'. A source version is separate from a gameplay review.'+warning+' <a href="/pokebonk/updates/#source-monitor">See automatic update scope →</a>'+c+'</p></details></aside>'
+  note='<aside id="source-sync" data-sync-revision="'+revision+'" class="note"><details><summary><strong>Source version v'+version+'</strong> · '+('Changes need review · 'if pending else'')+'View data dates and limits</summary><p>Source observation '+e(state['changed_at'][:10])+'. Data snapshots: '+e(', '.join(names[k]+' (v'+v['version']+')'for k,v in state['accepted'].items()))+'. A source version is separate from a gameplay review.'+warning+' <a href="/pokebonk/updates/#source-monitor">See automatic update scope →</a>'+c+'</p></details></aside>'
   if slug=='':
    p['html']=p['html'].replace('<section class="section" id="guides">',note+'<section class="section" id="guides">',1).replace('Version checked October 29, 2026 · Original v0.8.75','Gameplay rules reviewed October 29, 2026 · Original v0.8.75')
   else:p['html']=re.sub(r'(<p class="meta">.*?</p>)',lambda m:m[1]+note,p['html'],count=1,flags=re.S)
