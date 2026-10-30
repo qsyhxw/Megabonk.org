@@ -2,6 +2,7 @@
 from pathlib import Path
 from html import escape
 import re,json
+from guide_images import decorate
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -58,6 +59,6 @@ def build():
  pages=[home()]+[article(x) for x in articles()+[russian()]]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
-  file.parent.mkdir(parents=True,exist_ok=True);file.write_text(text,encoding='utf8')
+  file.parent.mkdir(parents=True,exist_ok=True);file.write_text(decorate(path,text),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files: 17 ordinary, existing main-site trust pages reused, 1 noindex404. No embedded game or copied client.')
 if __name__=='__main__':build()

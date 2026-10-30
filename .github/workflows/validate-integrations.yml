@@ -2,9 +2,9 @@ name: Validate published integrations
 on:
   push:
     branches: [main]
-    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', 'data/guide-images.json', '.github/workflows/validate-integrations.yml']
   pull_request:
-    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', 'data/guide-images.json', '.github/workflows/validate-integrations.yml']
 permissions:
   contents: read
 jobs:
@@ -33,6 +33,8 @@ jobs:
         run: python scripts/build_azeroth_survivors.py
       - name: Rebuild Ball x Pit guides
         run: python scripts/build_ball_x_pit.py
+      - name: Verify page-specific game images
+        run: python scripts/check_guide_images.py
       - name: Verify public-source sync rejects unsafe updates
         run: |
           python scripts/test_pokebonk_sync.py
