@@ -29,7 +29,7 @@
       "id": "adsense-1",
       "kind": "adsense",
       "enabled": true,
-      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.",
+      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.; 2026-10-30 BXP-EXEC user-authorized ordinary10page same-site inheritance; trust/404 excluded.",
       "include": [
         "database/enemies/index.html",
         "database/enemies/wisp/index.html",
@@ -413,7 +413,17 @@
         "azeroth-survivors/index.html",
         "azeroth-survivors/mobile/index.html",
         "azeroth-survivors/ru/builds/index.html",
-        "azeroth-survivors/save-backup/index.html"
+        "azeroth-survivors/save-backup/index.html",
+        "ball-x-pit/beginners-guide/index.html",
+        "ball-x-pit/builds/index.html",
+        "ball-x-pit/character-tier-list/index.html",
+        "ball-x-pit/characters/index.html",
+        "ball-x-pit/evolutions/index.html",
+        "ball-x-pit/ghostly-shield/index.html",
+        "ball-x-pit/index.html",
+        "ball-x-pit/new-evolutions/index.html",
+        "ball-x-pit/passive-evolutions/index.html",
+        "ball-x-pit/trophy-guide/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7399,9 +7409,35 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "ball-x-pit-tools",
+      "kind": "local-functional",
+      "enabled": true,
+      "authorization": "2026-10-30 BXP-EXEC recipe route planning and local-only trophy notes; no network or analytics",
+      "include": [
+        "ball-x-pit/evolutions/index.html",
+        "ball-x-pit/passive-evolutions/index.html",
+        "ball-x-pit/new-evolutions/index.html",
+        "ball-x-pit/trophy-guide/index.html"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "/assets/ball-x-pit/tool.js"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
     }
   ],
-  "change_reference": "ROADMAP AZS-EXEC 2026-10-29 user authorizes17ordinary pages same-site AdSense inheritance; no new network/slot/ID; trust404 excluded",
+  "change_reference": "ROADMAP BXP-EXEC 2026-10-30 same-site10ordinaryAdSense plus4localtools; previous scopes preserved",
   "protected_containers": {
     "database/tomes/chaos-tome.html": [
       {
