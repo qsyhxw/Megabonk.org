@@ -4,6 +4,7 @@ from html import escape
 import re,json
 from guide_images import decorate
 from azeroth_survivors_iteration import apply
+from azeroth_survivors_expansion import update, new_pages
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -12,9 +13,18 @@ ASSET='/assets/azeroth-survivors/'
 NAV=[('Play original ↗','https://wow.aethus.pl/'),('Start here',P+'beginners-guide/'),('Builds',P+'builds/'),('Guides',P+'#guides'),('Help',P+'#help')]
 def sources(body,ru=False):
  keys=list(dict.fromkeys(re.findall(r'\{\{s:(\w+)\}\}',body)))
+ details={k:SOURCES[k][2] for k in keys}
+ # One source entry per destination; preserve both dated scopes when referenced.
+ unique=[]
+ for k in keys:
+  old=next((x for x in unique if SOURCES[x][0]==SOURCES[k][0]),None)
+  if old:
+   body=body.replace(ref(k),ref(old));details[old]+=' '+SOURCES[k][2]
+  else:unique.append(k)
+ keys=unique
  for i,k in enumerate(keys,1):body=body.replace(ref(k),f'<sup class="ref"><a href="#source-{i}" aria-label="Source {i}">[{i}]</a></sup>')
  source='<section class="sources" id="sources"><h2>'+('Источники и ограничения' if ru else 'Sources & verification')+'</h2><ol>'
- source+=''.join(f'<li id="source-{i}">{ext(SOURCES[k][0],SOURCES[k][1])} — {SOURCES[k][2]}</li>' for i,k in enumerate(keys,1))
+ source+=''.join(f'<li id="source-{i}">{ext(SOURCES[k][0],SOURCES[k][1])} — {details[k]}</li>' for i,k in enumerate(keys,1))
  source+='</ol><a class="back" href="#guide">'+('Вернуться к тексту ↑' if ru else 'Back to guide ↑')+'</a></section>'
  return body,source
 def shell(path,title,desc,body,lang='en',ads=True,error=False,image=''):
@@ -50,6 +60,11 @@ def home():
  body+='<section class="section" id="zh-start" lang="zh-Hans"><h2>艾泽拉斯幸存者：先找对原版</h2>'+para('原作者 Aethus 的入口是 wow.aethus.pl。原版禁止在其他网站内嵌；点击本站 Play original 会在新标签页打开原站。更换浏览器或设备前，先在 Options → Saves 导出存档；导入会替换目标端进度，不会合并。繁体名称「艾澤拉斯倖存者」也指向这款游戏。'+ref('launcher')+ref('saves'))+'</section>'
  body+='<section class="section" id="which-game"><h2>Which game did you mean?</h2>'+table(['Name you found','How to distinguish it'],[['Azeroth Survivors / WoW Survivors','The Aethus original at wow.aethus.pl. Use its current client text for these guides.'],['Community reconstruction','OutThisLife’s separate rebuild. Do not mix its map or ability values into original-game advice. '+ref('rebuild')],['WoW Forever','A separate Blizzard game; its name reservations do not apply here. '+ref('forever')],['Hordes of Azeroth / D2 Survivors','Separate survivors projects, not alternative names for this save or client. '+ref('hordes')+ref('d2')],['Aevoria Survivors','A different game which a third-party Azeroth-named page labels as its embedded offering. '+ref('aevoria')],['Pokémon Megabonk / PokeBonk','Charcher’s separate project. <a href="/pokebonk/#guide">Use the existing PokeBonk guide →</a>']])+'</section>'
  body+='<section class="section" id="community"><h2>The original community, when you need it</h2>'+para('Use '+ext('https://discord.gg/azerothsurvivors','Discord · linked by Aethus’s original launcher')+' for the author’s community. Recheck the original page if an invite changes. Public Reddit reports are player experiences, not official support or a compatibility guarantee. '+ref('launcher'))+'</section>'
+ body+='<section class="section" id="progression"><h2>Choose your next task</h2><p>Current system checks: 30 October 2026. Earlier class-route version scopes remain explicit.</p>'
+ groups=[('Play together and change device',[2,14]),('Build and character choices',[1,8,10]),('Progression and rewards',[3,4,5,6,7]),('Version checks',[9])]
+ for label,ids in groups:
+  body+='<h3>'+label+'</h3><div class="guide-index">'+''.join(f'<a href="{P+d["slug"]}">{d["title"].replace("Azeroth Survivors ","")}<span>{d["h1"]}</span></a>' for d in new_pages() if int(d['id'][-3:]) in ids)+'</div>'
+ body+='</section>'
  body,source=sources(body)
  return P,shell(P,title,desc,body+source,image=ASSET+'route-atlas.svg')
 def trust():
@@ -57,10 +72,10 @@ def trust():
  return [(P+'404.html',shell(P+'404','Page not found | Azeroth Survivors Guides','Find the original-game guide index, class builds and help after a missing page.',body,ads=False,error=True))]
 
 def build():
- pages=[home()]+[article(x) for x in apply(articles()+[russian()])]+trust()
+ pages=[home()]+[article(x) for x in update(apply(articles()+[russian()]))]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
   file.parent.mkdir(parents=True,exist_ok=True);file.write_text(decorate(path,text),encoding='utf8')
- print(f'Built {len(pages)} Azeroth guide files: 17 ordinary, existing main-site trust pages reused, 1 noindex404. No embedded game or copied client.')
+ print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. No embedded game or copied client.')
 if __name__=='__main__':build()
 
