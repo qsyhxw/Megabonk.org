@@ -20,6 +20,7 @@ def check():
   a=doc.pictures[0];m=data['media'][p['image']]
   if not a.get('alt') or not a.get('width','').isdigit() or not a.get('height','').isdigit():errors.append(route+': missing alt/dimensions')
   if p['alt']!=a.get('alt'):errors.append(route+': wrong page-specific image description')
+  if a.get('loading')!=p.get('loading','lazy'):errors.append(route+': image loading priority differs from reviewed viewport plan')
   for w in m['sizes']:
    path=m['stem']+'-'+str(w)+'.webp';asset=ROOT/path.lstrip('/')
    if not asset.exists() or asset.read_bytes()[:4]!=b'RIFF':errors.append(route+': invalid WebP '+path)

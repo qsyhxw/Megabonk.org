@@ -45,7 +45,7 @@ def decorate(path,html):
   assert target,path+' no insertion section'
   pos=start+target.start()
  else:pos=target.start()
- html=html[:pos]+figure+html[pos:]
+ html=html[:pos]+figure.replace('loading="lazy"',f'loading="{page.get("loading","lazy")}"')+html[pos:]
  og=f'<meta property="og:image" content="https://megabonk.org{m["stem"]}-{w}.webp">'
  if re.search(r'<meta\b[^>]*property="og:image"[^>]*>',html):html=re.sub(r'<meta\b[^>]*property="og:image"[^>]*>',og,html,count=1)
  else:html=html.replace('</head>',og+'</head>',1)
