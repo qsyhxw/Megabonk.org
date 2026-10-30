@@ -3,6 +3,7 @@ from pathlib import Path
 from html import escape
 import re,json
 from guide_images import decorate
+from azeroth_survivors_iteration import apply
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -32,7 +33,7 @@ def article(d):
  # Keep the short answer in the header, with citations resolved by the same source map.
  first,content=content.split('</p>',1)
  toc='<aside class="toc" aria-label="On this page"><strong>'+('На этой странице' if ru else 'On this page')+'</strong>'+''.join(f'<a href="#{i}">{t}</a>' for i,t,_ in parts)+'<a href="#sources">'+('Источники' if ru else 'Sources')+'</a></aside>'
- body=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">Azeroth Survivors</a> / {d["h1"]}</nav><header class="article-head" id="guide"><span class="tag">Original game · Independent guide</span><h1>{d["h1"]}</h1><div class="answer">{first}</p></div><p class="meta">Megabonk.org editors · Reviewed 29 October 2026 · Original v0.127.0 · Source-based, not a playtest</p></header><div class="article-layout">{toc}<article class="prose">{content}{source}<section class="related"><h2>'+('Дальше' if ru else 'Choose your next step')+'</h2>'+''.join(a(s,l) for s,l in d['related'])+'</section></article></div>'
+ body=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">Azeroth Survivors</a> / {d["h1"]}</nav><header class="article-head" id="guide"><span class="tag">Original game · Independent guide</span><h1>{d["h1"]}</h1><div class="answer">{first}</p></div><p class="meta">Megabonk.org editors · {d.get("review_note", "Reviewed 29 October 2026 · Original v0.127.0 · Source-based, not a playtest")}</p></header><div class="article-layout">{toc}<article class="prose">{content}{source}<section class="related"><h2>'+('Дальше' if ru else 'Choose your next step')+'</h2>'+''.join(a(s,l) for s,l in d['related'])+'</section></article></div>'
  return path,shell(path,d['title'],d['desc'],body,d.get('lang','en'))
 def home():
  title='Azeroth Survivors Guide: Play, Builds & Save Help'
@@ -56,9 +57,10 @@ def trust():
  return [(P+'404.html',shell(P+'404','Page not found | Azeroth Survivors Guides','Find the original-game guide index, class builds and help after a missing page.',body,ads=False,error=True))]
 
 def build():
- pages=[home()]+[article(x) for x in articles()+[russian()]]+trust()
+ pages=[home()]+[article(x) for x in apply(articles()+[russian()])]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
   file.parent.mkdir(parents=True,exist_ok=True);file.write_text(decorate(path,text),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files: 17 ordinary, existing main-site trust pages reused, 1 noindex404. No embedded game or copied client.')
 if __name__=='__main__':build()
+
