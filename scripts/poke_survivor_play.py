@@ -1,5 +1,6 @@
 """Click-to-load third-party player; no game executable is copied or hosted."""
 from build_pokebonk import ext, ref
+from play_recommendations import recommendations, stylesheet
 
 P='/poke-survivor/'
 SOURCE='https://pokesurvivor.pro/play?embed=1'
@@ -20,5 +21,6 @@ def player_body():
 <section class="related"><h2>Between runs</h2><a href="{P}beginners-guide/">First-run controls &amp; choices →</a><a href="{P}builds/">Physical &amp; special build checks →</a><a href="{P}save-and-sync/">Save &amp; sync checks →</a></section></div>'''
 
 def make_play_page(shell):
-    html=shell(P+'play/','Play Poke Survivor Online | Megabonk.org','Play Poke Survivor in your browser with a click-to-load third-party game, clear controls, expanded view and notes on editions, accounts and saves.',player_body())
-    return html.replace('</head>','<link rel="stylesheet" href="/assets/poke-survivor/play.css"><script defer src="/assets/poke-survivor/play.js"></script></head>').replace('<body>','<body class="ps-play-page">')
+    body=player_body().replace('<div class="play-notes"',recommendations('poke-survivor')+'<div class="play-notes"',1)
+    html=shell(P+'play/','Play Poke Survivor Online | Megabonk.org','Play Poke Survivor in your browser with a click-to-load third-party game, clear controls, expanded view and notes on editions, accounts and saves.',body)
+    return stylesheet(html).replace('</head>','<link rel="stylesheet" href="/assets/poke-survivor/play.css"><script defer src="/assets/poke-survivor/play.js"></script></head>').replace('class="guide-layout"','class="guide-layout ps-play-page"',1)

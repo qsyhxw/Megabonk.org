@@ -13,6 +13,7 @@
   let started = false;
   let mode = 'normal';
   function setMode(next) {
+    const wasExpanded = mode === 'expanded';
     mode = next;
     panel.dataset.mode = next;
     dock.hidden = next !== 'minimized';
@@ -22,6 +23,7 @@
     document.body.classList.toggle('game-expanded', next === 'expanded');
     document.body.classList.toggle('game-minimized', next === 'minimized');
     background.forEach(node => { node.inert = next === 'expanded'; });
+    if (wasExpanded && next === 'normal') panel.scrollIntoView({ block: 'start', behavior: 'instant' });
   }
   document.getElementById('game-launch').addEventListener('click', () => {
     if (started) return;
@@ -32,7 +34,7 @@
     expand.disabled = false;
     minimize.disabled = false;
     status.textContent = 'Connecting to pokesurvivor.pro. Wait for its game menu.';
-    expand.focus();
+    expand.focus({ preventScroll: true });
   });
   frame.addEventListener('load', () => {
     if (started) status.textContent = 'The window loaded. Game resources may still be starting; check the menu inside.';
@@ -41,10 +43,10 @@
   minimize.addEventListener('click', () => { setMode('minimized'); restore.focus(); });
   restore.addEventListener('click', () => {
     setMode('normal');
-    panel.scrollIntoView({ block: 'start', behavior: 'auto' });
-    expand.focus();
+    panel.scrollIntoView({ block: 'start', behavior: 'instant' });
+    expand.focus({ preventScroll: true });
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && mode === 'expanded') { setMode('normal'); expand.focus(); }
+    if (event.key === 'Escape' && mode === 'expanded') { setMode('normal'); expand.focus({ preventScroll: true }); }
   });
 })();
