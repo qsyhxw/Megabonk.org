@@ -18,7 +18,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   collect:
-    runs-on: ubuntu-latest
+    # Playwright 1.54.0 supports Ubuntu 24.04; latest can migrate to unsupported OS images.
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
@@ -45,7 +46,8 @@ jobs:
           retention-days: 7
   publish:
     needs: collect
-    runs-on: ubuntu-latest
+    # Playwright 1.54.0 supports Ubuntu 24.04; latest can migrate to unsupported OS images.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: write

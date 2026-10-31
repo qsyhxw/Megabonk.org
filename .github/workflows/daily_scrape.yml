@@ -21,7 +21,8 @@ concurrency:
 
 jobs:
   sync-leaderboard:
-    runs-on: ubuntu-latest
+    # Keep the browser job on an OS supported by Playwright 1.54.0.
+    runs-on: ubuntu-24.04
     # The browser fallback and hosted-runner package mirrors can occasionally
     # take several minutes. Keep a bounded ceiling without cancelling a
     # healthy sync during a transient GitHub/network slowdown.
