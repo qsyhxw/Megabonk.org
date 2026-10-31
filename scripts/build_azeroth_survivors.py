@@ -5,12 +5,13 @@ import re,json
 from guide_images import decorate
 from azeroth_survivors_iteration import apply
 from azeroth_survivors_expansion import update, new_pages
+from azeroth_survivors_play import play_page
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
 ADS='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
 ASSET='/assets/azeroth-survivors/'
-NAV=[('Play original ↗','https://wow.aethus.pl/'),('Start here',P+'beginners-guide/'),('Builds',P+'builds/'),('Guides',P+'#guides'),('Help',P+'#help')]
+NAV=[('▶ Play',P+'play/'),('Start here',P+'beginners-guide/'),('Builds',P+'builds/'),('Guides',P+'#guides'),('Help',P+'#help')]
 def sources(body,ru=False):
  keys=list(dict.fromkeys(re.findall(r'\{\{s:(\w+)\}\}',body)))
  details={k:SOURCES[k][2] for k in keys}
@@ -28,7 +29,7 @@ def sources(body,ru=False):
  source+='</ol><a class="back" href="#guide">'+('Вернуться к тексту ↑' if ru else 'Back to guide ↑')+'</a></section>'
  return body,source
 def shell(path,title,desc,body,lang='en',ads=True,error=False,image=''):
- nav=''.join(f'<a href="{u}"'+(' class="nav-play" target="_blank" rel="noopener noreferrer" aria-label="Play original at wow.aethus.pl (new tab)"' if u.startswith('https:') else '')+(' aria-current="page"' if path==u else '')+f'>{l}</a>' for l,u in NAV)
+ nav=''.join(f'<a href="{u}"'+(' class="nav-play"' if u==P+'play/' else '')+(' aria-current="page"' if path==u else '')+f'>{l}</a>' for l,u in NAV)
  return f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="{BASE+path}">
 {'<meta name="robots" content="noindex,follow">' if error else ''}{ADS if ads else ''}<link rel="icon" href="{ASSET}favicon.ico" sizes="any"><link rel="icon" type="image/svg+xml" href="{ASSET}logo.svg"><link rel="apple-touch-icon" href="{ASSET}apple-touch-icon.png">
@@ -65,6 +66,9 @@ def home():
  for label,ids in groups:
   body+='<h3>'+label+'</h3><div class="guide-index">'+''.join(f'<a href="{P+d["slug"]}">{d["title"].replace("Azeroth Survivors ","")}<span>{d["h1"]}</span></a>' for d in new_pages() if int(d['id'][-3:]) in ids)+'</div>'
  body+='</section>'
+ body=body.replace('<div class="actions">','<div class="actions"><a class="button" href="'+P+'play/">Play in a game window →</a>',1)
+ body=body.replace('The original opens in its own tab. Keep the guide here while you play; no embedded frame or substitute game is loaded.','Choose the <a href="'+P+'play/">third-party game window</a> for embedded play, or open the original in its own tab. These are separate providers; keep saves with the host that created them.')
+ body=body.replace('点击本站 Play original 会在新标签页打开原站。','本页原版入口在新标签页打开原站；顶部 Play 为第三方内嵌版本，两者的版本和存档互通尚未核实。')
  body,source=sources(body)
  return P,shell(P,title,desc,body+source,image=ASSET+'route-atlas.svg')
 def trust():
@@ -72,10 +76,10 @@ def trust():
  return [(P+'404.html',shell(P+'404','Page not found | Azeroth Survivors Guides','Find the original-game guide index, class builds and help after a missing page.',body,ads=False,error=True))]
 
 def build():
- pages=[home()]+[article(x) for x in update(apply(articles()+[russian()]))]+trust()
+ pages=[home()]+[article(x) for x in update(apply(articles()+[russian()]))]+[play_page(shell,ext)]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
   file.parent.mkdir(parents=True,exist_ok=True);file.write_text(decorate(path,text),encoding='utf8')
- print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. No embedded game or copied client.')
+ print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Click-loaded third-party Play; no copied client.')
 if __name__=='__main__':build()
 

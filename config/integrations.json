@@ -29,7 +29,7 @@
       "id": "adsense-1",
       "kind": "adsense",
       "enabled": true,
-      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.; 2026-10-30 BXP-EXEC user-authorized ordinary10page same-site inheritance; trust/404 excluded.; 2026-10-30 AZS-05A user authorizes all11 qualified ordinary task pages, same-site loader once; no new network/ID/slots.",
+      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.; 2026-10-30 BXP-EXEC user-authorized ordinary10page same-site inheritance; trust/404 excluded.; 2026-10-30 AZS-05A user authorizes all11 qualified ordinary task pages, same-site loader once; no new network/ID/slots.; 2026-10-31 PLAY-CARDS-1031 user-authorized ordinary Play page, same-site loader once.",
       "include": [
         "database/enemies/index.html",
         "database/enemies/wisp/index.html",
@@ -434,7 +434,8 @@
         "azeroth-survivors/items/index.html",
         "azeroth-survivors/patch-notes/index.html",
         "azeroth-survivors/talents/index.html",
-        "azeroth-survivors/zones-bosses/index.html"
+        "azeroth-survivors/zones-bosses/index.html",
+        "azeroth-survivors/play/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7446,9 +7447,32 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "azeroth-survivors-play-ui",
+      "kind": "local-functional",
+      "enabled": true,
+      "authorization": "2026-10-31 user explicitly requested the azerothsurvivors.online player approach and screenshot cross-game links. ROADMAP PLAY-CARDS-1031; click-loaded s.the-false-sun.com, no copied executable.",
+      "include": [
+        "azeroth-survivors/play/index.html"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "/assets/azeroth-survivors/play.js"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
     }
   ],
-  "change_reference": "ROADMAP AZS-05A 2026-10-30 exact11 ordinary-page inherited AdSense inclusions; all earlier BXP and other service scopes preserved",
+  "change_reference": "ROADMAP PLAY-CARDS-1031; adds only Azeroth Play inherited AdSense, exact local UI script and reviewed click-loaded iframe. Existing integrations and containers unchanged.",
   "protected_containers": {
     "database/tomes/chaos-tome.html": [
       {
@@ -8140,7 +8164,23 @@
     "azeroth-survivors/talents/index.html": [],
     "azeroth-survivors/patch-notes/index.html": [],
     "azeroth-survivors/best-race/index.html": [],
-    "azeroth-survivors/download-platforms/index.html": []
+    "azeroth-survivors/download-platforms/index.html": [],
+    "azeroth-survivors/play/index.html": [
+      {
+        "tag": "iframe",
+        "attrs": {
+          "id": "game-frame",
+          "title": "Azeroth Survivors third-party game hosted by s.the-false-sun.com",
+          "data-src": "https://s.the-false-sun.com/azeroth-survivors/index.html",
+          "allow": "autoplay; fullscreen; gamepad",
+          "allowfullscreen": null,
+          "sandbox": "allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-orientation-lock",
+          "referrerpolicy": "strict-origin-when-cross-origin",
+          "hidden": null
+        },
+        "location": "body"
+      }
+    ]
   },
   "container_baseline_revision": "59ea81c1",
   "container_inventory_note": "Supplementary exact container inventory from preserved pre-change Git, not edited output; initial script baseline remains immutable."
