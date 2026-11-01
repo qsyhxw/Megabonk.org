@@ -9,6 +9,7 @@ def para(text):return '<p>'+text+'</p>'
 def steps(items):return '<ol>'+''.join('<li>'+x+'</li>' for x in items)+'</ol>'
 def table(head,rows):return '<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable comparison"><table><thead><tr>'+''.join('<th scope="col">'+x+'</th>' for x in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+x+'</td>' for x in row)+'</tr>' for row in rows)+'</tbody></table></div>'
 SOURCES={
+ 'arena_champions':('https://arenaofchampions.live/','Arena of Champions · original game','Checked 1 November 2026: original browser launcher and public client text; latest embedded patch entry 0.23, dated 31 October. A separate arena PvP project, not Aethus’s survival game. Static source research, not a completed match or save-transfer test.'),
  'game':('https://wow.aethus.pl/','Aethus · original game','Original v0.127.0 / d1c85453 public client text inspected 29 October 2026. Single-source menu and talent evidence; no completed run or damage benchmark.'),
  'launcher':('https://wow.aethus.pl/rogue.js','Aethus · browser launcher','Inspected 29 October 2026; resource stamp c33ee61002a5. Original-host and frame checks, startup handling and local-save fallback. The resource stamp is not the game version.'),
  'saves':('https://wow.aethus.pl/saves.js','Aethus · browser save bridge','Inspected 29 October 2026. File export and file selection; the client itself validates imports. Not a save-recovery test.'),

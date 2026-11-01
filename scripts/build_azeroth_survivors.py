@@ -69,6 +69,7 @@ def home():
  body=body.replace('<div class="actions">','<div class="actions"><a class="button" href="'+P+'play/">Play in a game window →</a>',1)
  body=body.replace('The original opens in its own tab. Keep the guide here while you play; no embedded frame or substitute game is loaded.','Choose the <a href="'+P+'play/">third-party game window</a> for embedded play, or open the original in its own tab. These are separate providers; keep saves with the host that created them.')
  body=body.replace('点击本站 Play original 会在新标签页打开原站。','本页原版入口在新标签页打开原站；顶部 Play 为第三方内嵌版本，两者的版本和存档互通尚未核实。')
+ body=body.replace('<tr><td>Community reconstruction</td>', '<tr><td>Arena of Champions</td><td>A separate online arena PvP game at '+'<a href="/arena-of-champions/">Arena of Champions · play &amp; entry checks →</a>'+'. Choose it for player-versus-player matches, not automatic-spell survival runs. These class builds and save files do not apply to it. '+ref('arena_champions')+'</td></tr><tr><td>Community reconstruction</td>',1)
  body,source=sources(body)
  return P,shell(P,title,desc,body+source,image=ASSET+'route-atlas.svg')
 def trust():
