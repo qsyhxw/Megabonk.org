@@ -6,6 +6,7 @@ from guide_images import decorate
 from azeroth_survivors_iteration import apply
 from azeroth_survivors_expansion import update, new_pages
 from azeroth_survivors_play import play_page
+from azeroth_survivors_build_refinement import refine
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -77,7 +78,7 @@ def trust():
  return [(P+'404.html',shell(P+'404','Page not found | Azeroth Survivors Guides','Find the original-game guide index, class builds and help after a missing page.',body,ads=False,error=True))]
 
 def build():
- pages=[home()]+[article(x) for x in update(apply(articles()+[russian()]))]+[play_page(shell,ext)]+trust()
+ pages=[home()]+[article(x) for x in refine(update(apply(articles()+[russian()])))]+[play_page(shell,ext)]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
   file.parent.mkdir(parents=True,exist_ok=True);file.write_text(decorate(path,text),encoding='utf8')
