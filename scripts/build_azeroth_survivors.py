@@ -11,6 +11,7 @@ from azeroth_survivors_tools import apply_tools,tool_assets,home_search
 from azeroth_survivors_current import refresh
 from azeroth_survivors_icons import decorate_icons
 from azeroth_sync_pages import apply_sync,decorate_sync
+from azeroth_survivors_keywords import apply_keywords
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -77,6 +78,8 @@ def home():
  body=body.replace('<tr><td>Community reconstruction</td>', '<tr><td>Arena of Champions</td><td>A separate online arena PvP game at '+'<a href="/arena-of-champions/">Arena of Champions · play &amp; entry checks →</a>'+'. Choose it for player-versus-player matches, not automatic-spell survival runs. These class builds and save files do not apply to it. '+ref('arena_champions')+'</td></tr><tr><td>Community reconstruction</td>',1)
  body=body.replace('<small>Source reviewed</small><strong>v0.127.0</strong>','<small>Latest text check</small><strong>v0.139.0</strong>').replace('<small>Checked</small><strong>29 Oct 2026</strong>','<small>Checked</small><strong>2 Nov 2026</strong>')
  body=body.replace('<section class="section" id="launch">', '<p class="meta">Selected v0.139 client strings checked 2 November; individual guides and screenshots retain their own version dates. '+a('patch-notes/#nov2','See the verified changes')+ref('nov2')+'</p><section class="section" id="launch">',1)
+ body=body.replace('<section class="section" id="community"><h2>The original community, when you need it</h2>', '<section class="section" id="community"><h2>The original community, when you need it</h2>'+para(ext('https://www.reddit.com/r/WoWPrivateServers/comments/1x16xwn/azeroth_survivors_roguelike_wow_singleplayer_game/','Reddit · original-game discussion')+' — player discussion, not creator support. Check the host and build before following a download or workaround.'))
+ body=body.replace('<section class="section" id="guides"><h2>The guide index</h2>', '<section class="section" id="guides"><h2>The guide index</h2>'+para(a('luck/','Luck: rarity and upgrade decisions')+' · '+a('download-platforms/#source-safety','Original website, GitHub and source checks')))
  body,source=sources(body)
  return P,shell(P,title,desc,body+source,image=ASSET+'route-atlas.svg')
 def trust():
@@ -84,7 +87,7 @@ def trust():
  return [(P+'404.html',shell(P+'404','Page not found | Azeroth Survivors Guides','Find the original-game guide index, class builds and help after a missing page.',body,ads=False,error=True))]
 
 def build():
- content=apply_sync(refresh(apply_tools(refine(update(apply(articles()+[russian()]))))))
+ content=apply_sync(apply_keywords(refresh(apply_tools(refine(update(apply(articles()+[russian()])))))))
  path,html=home()
  html=html.replace('<section class="section" id="start">',home_search(content)+'<section class="section" id="start">',1)
  pages=[(path,html)]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
