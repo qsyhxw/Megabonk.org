@@ -9,6 +9,7 @@ from azeroth_survivors_play import play_page
 from azeroth_survivors_build_refinement import refine
 from azeroth_survivors_tools import apply_tools,tool_assets,home_search
 from azeroth_survivors_current import refresh
+from azeroth_survivors_icons import decorate_icons
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -88,7 +89,7 @@ def build():
  pages=[(path,html)]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
-  file.parent.mkdir(parents=True,exist_ok=True);file.write_text(tool_assets(path,decorate(path,text)),encoding='utf8')
+  file.parent.mkdir(parents=True,exist_ok=True);file.write_text(tool_assets(path,decorate_icons(path,decorate(path,text))),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Click-loaded third-party Play; no copied client.')
 if __name__=='__main__':build()
 

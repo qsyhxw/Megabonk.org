@@ -10,16 +10,8 @@ def checked(text):
 
 def refresh(pages):
  SOURCES['nov2']=('https://wow.aethus.pl/','Aethus · original client, 2 November','Original launcher stamp f339dd20e0fe; downloaded client embeds v0.139.0. Localized strings checked 2 November 2026. Client SHA-256 71a44d44a91245aa0a4db4171b5893e4343ba84c3699f7fa87dafc2856973299. Selected text comparisons with the 30 October v0.130 snapshot; not a complete release history, numeric talent export or gameplay test.')
- icons=json.loads((ROOT/'data/azeroth-reference-icons.json').read_text(encoding='utf8'))
  for d in pages:
   slug=d['slug']
-  if slug.startswith('builds/') and slug.count('/')==2:
-   name=slug.split('/')[1]
-   icon=next((x for x in icons if x['class']==name),None)
-   if icon:
-    key='icon_'+name
-    SOURCES[key]=(icon['source'],'AzerothSurvivor.com · '+name.title()+' icon','Downloaded and visually checked 2 November 2026. Warcraft artwork © Blizzard Entertainment; secondary reference icon, original asset version not independently verified. The reference site uses a global Sources page and disclaimer, not a per-file open reuse licence. No official affiliation implied.')
-    d['parts'].insert(0,('class-reference',name.title()+' visual reference',para(f'<img src="{icon["asset"]}" width="64" height="64" loading="lazy" alt="{name.title()} class reference icon">')+para('Warcraft artwork © Blizzard Entertainment. Reference image retrieved from AzerothSurvivor.com on 2 November 2026; original asset version not independently verified. This icon identifies the class, not a tested build or a v0.139 screenshot.'+ref(key))))
   if slug=='builds/shaman/':
    d['parts']=[(i,t,h) for i,t,h in d['parts'] if i!='third-route']
    revised=[]

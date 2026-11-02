@@ -48,6 +48,7 @@
       else { slug = v.goal === 'survival' && v.progress === 'fresh' ? 'hunter' : 'mage'; why = slug === 'hunter' ? 'Use the ranged opening while learning movement; later pet and Aimed Shot benefits need their own investments.' : 'Compare Frost for space control, Fire for kill triggers and Arcane for repeat strikes. Keep the actual starting spell in view.'; }
       const body = document.querySelector('#class-result-body'); body.replaceChildren();
       const title = document.createElement('h3'); title.textContent = slug[0].toUpperCase() + slug.slice(1);
+      const icon = document.createElement('img'); icon.src = `/assets/azeroth-survivors/icons/${slug}.png`; icon.width = 28; icon.height = 28; icon.alt = ''; icon.setAttribute('aria-hidden', 'true'); icon.className = 'az-entity-icon'; title.className = 'az-entity'; title.prepend(icon);
       const text = document.createElement('p'); text.textContent = why;
       const scope = document.createElement('p'); scope.textContent = `${v.progress === 'fresh' ? 'Fresh character' : 'Developed character'}: inspect the picker and current allocation. This shortlist routes preferences to a guide; it does not rank every class or measure win rates.`;
       const link = document.createElement('a'); link.href = `/azeroth-survivors/builds/${slug}/`; link.textContent = 'Open this class route →';
