@@ -1,6 +1,6 @@
 """Dated primary-client changes and individually credited reference icons."""
 from pathlib import Path
-import json
+import json,re
 from azeroth_survivors_content import SOURCES,a,ext,ref,para,steps,table
 ROOT=Path(__file__).resolve().parents[1]
 NOTE='2 November 2026 · Selected original-client v0.139.0 strings rechecked; earlier sections retain their dated scope · Source research, not a gameplay or all-rank test'
@@ -22,6 +22,15 @@ def refresh(pages):
     d['parts'].insert(0,('class-reference',name.title()+' visual reference',para(f'<img src="{icon["asset"]}" width="64" height="64" loading="lazy" alt="{name.title()} class reference icon">')+para('Warcraft artwork © Blizzard Entertainment. Reference image retrieved from AzerothSurvivor.com on 2 November 2026; original asset version not independently verified. This icon identifies the class, not a tested build or a v0.139 screenshot.'+ref(key))))
   if slug=='builds/shaman/':
    d['parts']=[(i,t,h) for i,t,h in d['parts'] if i!='third-route']
+   revised=[]
+   for i,t,h in d['parts']:
+    if i=='choose':h=h.replace('splitting every choice among lightning, wolves and fire totems','splitting every choice among unrelated damage engines')
+    if i=='talents':
+     h=re.sub(r'<tr><td>Enhancement</td>.*?</tr>','',h,flags=re.S)
+     h=checked('Enhancement changed in v0.139. Do not reuse the earlier Windfury / Maelstrom Weapon / Feral Spirit checkpoints. '+a('builds/shaman/#third-route','Use the Rockbiter / Stormstrike checks below')+'. The Elemental and Restoration rows retained here describe the dated v0.130 snapshot, not newly verified v0.139 allocations.')+h
+     t='Earlier Elemental and Restoration checkpoints'
+    revised.append((i,t,h))
+   d['parts']=revised
    d['parts'].append(('third-route','Enhancement in v0.139: Rockbiter into Stormstrike',checked('The older Windfury-and-wolves summary no longer describes this client’s Enhancement wording. Rockbiter Initiation changes the starter from Lightning Bolt to Rockbiter Weapon; the new capstone text changes it again to Stormstrike. Read your allocated endpoint before choosing support cards.')+table(['Verified interaction','What to do with it'],[
     ['Windfury Weapon names Rockbiter and Stormstrike; its chance remains a rank placeholder.','Support these attacks when allocated; do not assume the old Lightning Bolt/Shock repeat trigger.'],
     ['Elemental Sunder makes enemies hit by Rockbiter or Stormstrike take 10% more Fire and Nature damage for 4 seconds.','Keep the triggering attack working before relying on that damage window.'],
