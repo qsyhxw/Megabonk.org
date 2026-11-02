@@ -98,6 +98,25 @@ jobs:
           python -m http.server 4173 --bind 127.0.0.1 > "$RUNNER_TEMP/pb-http.log" 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          # Starting the process does not mean the HTTP listener is ready yet.
+          ready=false
+          for attempt in {1..30}; do
+            if ! kill -0 "$server_pid" 2>/dev/null; then
+              cat "$RUNNER_TEMP/pb-http.log"
+              echo "Preview server exited before becoming ready." >&2
+              exit 1
+            fi
+            if curl --fail --silent --max-time 1 --output /dev/null http://127.0.0.1:4173/pokebonk/; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then
+            cat "$RUNNER_TEMP/pb-http.log"
+            echo "Preview server did not become ready within 30 attempts." >&2
+            exit 1
+          fi
           node scripts/check_pokebonk_sync_browser.cjs
       - name: Commit only validated source data and existing PokeBonk output
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
