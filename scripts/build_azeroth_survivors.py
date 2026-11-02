@@ -8,6 +8,7 @@ from azeroth_survivors_expansion import update, new_pages
 from azeroth_survivors_play import play_page
 from azeroth_survivors_build_refinement import refine
 from azeroth_survivors_tools import apply_tools,tool_assets,home_search
+from azeroth_survivors_current import refresh
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -72,6 +73,8 @@ def home():
  body=body.replace('The original opens in its own tab. Keep the guide here while you play; no embedded frame or substitute game is loaded.','Choose the <a href="'+P+'play/">third-party game window</a> for embedded play, or open the original in its own tab. These are separate providers; keep saves with the host that created them.')
  body=body.replace('点击本站 Play original 会在新标签页打开原站。','本页原版入口在新标签页打开原站；顶部 Play 为第三方内嵌版本，两者的版本和存档互通尚未核实。')
  body=body.replace('<tr><td>Community reconstruction</td>', '<tr><td>Arena of Champions</td><td>A separate online arena PvP game at '+'<a href="/arena-of-champions/">Arena of Champions · play &amp; entry checks →</a>'+'. Choose it for player-versus-player matches, not automatic-spell survival runs. These class builds and save files do not apply to it. '+ref('arena_champions')+'</td></tr><tr><td>Community reconstruction</td>',1)
+ body=body.replace('<small>Source reviewed</small><strong>v0.127.0</strong>','<small>Latest text check</small><strong>v0.139.0</strong>').replace('<small>Checked</small><strong>29 Oct 2026</strong>','<small>Checked</small><strong>2 Nov 2026</strong>')
+ body=body.replace('<section class="section" id="launch">', '<p class="meta">Selected v0.139 client strings checked 2 November; individual guides and screenshots retain their own version dates. '+a('patch-notes/#nov2','See the verified changes')+ref('nov2')+'</p><section class="section" id="launch">',1)
  body,source=sources(body)
  return P,shell(P,title,desc,body+source,image=ASSET+'route-atlas.svg')
 def trust():
@@ -79,7 +82,7 @@ def trust():
  return [(P+'404.html',shell(P+'404','Page not found | Azeroth Survivors Guides','Find the original-game guide index, class builds and help after a missing page.',body,ads=False,error=True))]
 
 def build():
- content=apply_tools(refine(update(apply(articles()+[russian()]))))
+ content=refresh(apply_tools(refine(update(apply(articles()+[russian()])))))
  path,html=home()
  html=html.replace('<section class="section" id="start">',home_search(content)+'<section class="section" id="start">',1)
  pages=[(path,html)]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
