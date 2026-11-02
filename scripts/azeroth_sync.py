@@ -18,6 +18,7 @@ def validate(c,old,config):
  if not re.fullmatch(r'[a-f0-9]{9}',o.get('build','')) or not re.fullmatch(r'[a-f0-9]{8,64}',o.get('stamp','')) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',o.get('date','')):raise ValueError('Invalid capture metadata')
  if date.fromisoformat(o['date'])>datetime.now(timezone.utc).date():raise ValueError('Capture date is in the future')
  if not isinstance(o.get('etag'),str) or len(o['etag'])>200 or any(x in o['etag'] for x in '\r\n'):raise ValueError('Invalid HTTP validator')
+ if not isinstance(o.get('last_modified',''),str) or len(o.get('last_modified',''))>100 or any(x in o.get('last_modified','') for x in '\r\n'):raise ValueError('Invalid modification-time validator')
  info=o.get('launcher',{})
  if set(info)!={'stamp','windows','discord'} or info['stamp']!=o['stamp'] or not re.fullmatch(r'https://wow\.aethus\.pl/download/[A-Za-z0-9_.-]+\.(?:rar|zip)',info['windows']) or not re.fullmatch(r'https://discord\.gg/[A-Za-z0-9-]+',info['discord']):raise ValueError('Untrusted official action link')
  if c['unchanged']:
@@ -72,6 +73,8 @@ def assess(c,old,config,allroutes=None):
   for route in dependencies(hints.get(key,''),config,allroutes):affected.add(route);reasons.setdefault(route,set()).add(key)
  observed=deepcopy(c['observed'])
  if observed['client_sha256']==old['observed']['client_sha256'] and observed['launcher']==old['observed']['launcher']:observed['date']=old['observed']['date']
+ # Compression proxies can expose a different ETag for identical decoded client bytes.
+ if observed['client_sha256']==old['observed']['client_sha256']:observed['etag']=old['observed']['etag']
  if observed['client_sha256']==old['observed']['client_sha256'] and observed['launcher']==old['observed']['launcher'] and after==before and c['domain_errors']==old['domain_errors'] and all(data==old['accepted'][key]['data'] for key,data in c['domains'].items()):
   # A forced read of identical bytes must not erase the last meaningful comparison.
   state['observed']=observed;state['hints']=c['hints'];clear_reviewed(state,config)

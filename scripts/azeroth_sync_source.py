@@ -14,10 +14,11 @@ class Redirects(urllib.request.HTTPRedirectHandler):
   if not url.startswith(ORIGIN+'/'):raise ValueError('Official source redirected outside the allowed origin')
   return super().redirect_request(req,fp,code,msg,headers,url)
 
-def fetch(url,limit,etag=None):
+def fetch(url,limit,etag=None,last_modified=None):
  if not url.startswith(ORIGIN+'/'):raise ValueError('Untrusted source URL')
  headers={'User-Agent':'Mozilla/5.0 (compatible; Megabonk.org original-guide source check)','Accept-Encoding':'identity'}
- if etag:headers['If-None-Match']=etag
+ if last_modified:headers['If-Modified-Since']=last_modified
+ elif etag:headers['If-None-Match']=etag
  for attempt in range(3):
   try:
    with urllib.request.build_opener(Redirects()).open(urllib.request.Request(url,headers=headers),timeout=60) as r:
@@ -28,9 +29,9 @@ def fetch(url,limit,etag=None):
      size+=len(chunk)
      if size>limit:raise ValueError('Official response exceeds the source size limit')
      chunks.append(chunk)
-    return b''.join(chunks),r.headers.get('ETag','')
+    return b''.join(chunks),{'etag':r.headers.get('ETag',''),'last_modified':r.headers.get('Last-Modified','')}
   except urllib.error.HTTPError as e:
-   if e.code==304 and etag:return None,etag
+   if e.code==304 and (etag or last_modified):return None,{'etag':etag or '','last_modified':last_modified or ''}
    if e.code not in [429,500,502,503,504] or attempt==2:raise
   except (urllib.error.URLError,TimeoutError):
    if attempt==2:raise
@@ -123,14 +124,16 @@ def candidate(raw,info,etag,config,previous,date):
  before=previous.get('fingerprints',{}) if previous else {};changed={k for k,v in fingerprints.items() if before.get(k)!=v}
  review_keys={key for item in (previous or {}).get('pending',{}).values() for key in item.get('key_ids',[])}
  examples=[{'key':k,'value':v[:800]} for k,v in en.items() if digest(k) in changed|review_keys][:200]
- return {'schema':1,'unchanged':False,'observed':{'version':version,'build':build,'stamp':info['stamp'],'client_sha256':hashlib.sha256(raw).hexdigest(),'etag':etag,'date':date,'launcher':info},'fingerprints':fingerprints,'hints':hints,'domains':domains,'domain_errors':errors,'examples':examples,'examples_truncated':len(changed|review_keys)>200}
+ headers=etag if isinstance(etag,dict) else {'etag':etag,'last_modified':''}
+ return {'schema':1,'unchanged':False,'observed':{'version':version,'build':build,'stamp':info['stamp'],'client_sha256':hashlib.sha256(raw).hexdigest(),'etag':headers['etag'],'last_modified':headers.get('last_modified',''),'date':date,'launcher':info},'fingerprints':fingerprints,'hints':hints,'domains':domains,'domain_errors':errors,'examples':examples,'examples_truncated':len(changed|review_keys)>200}
 
 def main():
  a=argparse.ArgumentParser();a.add_argument('output',type=Path);a.add_argument('--force',action='store_true');args=a.parse_args()
  config=json.loads((ROOT/'config/azeroth-sync.json').read_text(encoding='utf8'));previous=json.loads((ROOT/'data/azeroth-sync.json').read_text(encoding='utf8'))
  raw,_=fetch(ORIGIN+'/',1000000);info=launcher(raw);old=previous['observed']
  etag=old.get('etag') if info==old.get('launcher') and not args.force else None
- client=ORIGIN+'/wenilla_bg.wasm?v='+info['stamp'];raw,tag=fetch(client,160000000,etag)
+ modified=old.get('last_modified') if info==old.get('launcher') and not args.force else None
+ client=ORIGIN+'/wenilla_bg.wasm?v='+info['stamp'];raw,tag=fetch(client,160000000,etag,modified)
  if raw is None:result={'schema':1,'unchanged':True,'observed':old}
  else:
   result=candidate(raw,info,tag,config,previous,datetime.now(timezone.utc).date().isoformat())

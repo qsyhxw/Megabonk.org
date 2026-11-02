@@ -48,7 +48,7 @@ class SyncTests(unittest.TestCase):
  def test_transient_fetch_retries_but_forbidden_does_not(self):
   opener=MagicMock();response=MagicMock();response.__enter__.return_value=response;response.headers={'ETag':'"test"'};response.read.side_effect=[b'data',b''];opener.open.side_effect=[source.urllib.error.HTTPError(source.ORIGIN+'/',503,'busy',{},None),response]
   with patch.object(source.urllib.request,'build_opener',return_value=opener),patch.object(source.time,'sleep'):
-   self.assertEqual(source.fetch(source.ORIGIN+'/',100),(b'data','"test"'));self.assertEqual(opener.open.call_count,2)
+   self.assertEqual(source.fetch(source.ORIGIN+'/',100),(b'data',{'etag':'"test"','last_modified':''}));self.assertEqual(opener.open.call_count,2)
   opener=MagicMock();opener.open.side_effect=source.urllib.error.HTTPError(source.ORIGIN+'/',403,'forbidden',{},None)
   with patch.object(source.urllib.request,'build_opener',return_value=opener),self.assertRaises(source.urllib.error.HTTPError):source.fetch(source.ORIGIN+'/',100)
   self.assertEqual(opener.open.call_count,1)
@@ -59,6 +59,7 @@ class SyncTests(unittest.TestCase):
   state,_=sync.assess(c,old,config);self.assertNotIn(route,state['pending'])
   old=deepcopy(self.old);old['last_changes']={'added':1,'removed':0,'changed':2,'data_domains':['names'],'affected_pages':[route]}
   state,_=sync.assess(self.make(self.tables),old,self.config);self.assertEqual(state['last_changes'],old['last_changes']);self.assertEqual(state,old)
+  forced=self.make(self.tables);forced['observed']['etag']='"different compression representation"';state,_=sync.assess(forced,old,self.config);self.assertEqual(state,old)
  def test_race_numbers_apply_but_semantic_change_freezes(self):
   t=deepcopy(self.tables);t['en']['race.human.line2']='The Human Spirit: +25% experience';c=self.make(t);state,report=sync.assess(c,self.old,self.config)
   self.assertEqual(state['accepted']['races']['data']['race.human.line2'],[25]);self.assertIn('races',report['domains']);self.assertIn('/azeroth-survivors/best-race/',state['pending'])
@@ -92,6 +93,7 @@ class SyncTests(unittest.TestCase):
    for name in ['guide-images.json','content-dates.json','play-games.json']:shutil.copyfile(ROOT/'data'/name,dest/'data'/name)
    shutil.copyfile(ROOT/'config/azeroth-sync.json',dest/'config/azeroth-sync.json');shutil.copyfile(ROOT/'sitemap.xml',dest/'sitemap.xml')
    (dest/'data/azeroth-sync.json').write_text(json.dumps(self.old),encoding='utf8')
+   names=json.loads((dest/'data/azeroth-spell-names.json').read_text(encoding='utf8'));names.update(version=self.old['accepted']['names']['version'],sha256=self.old['accepted']['names']['sha256']);(dest/'data/azeroth-spell-names.json').write_text(json.dumps(names,ensure_ascii=False),encoding='utf8')
    subprocess.run([sys.executable,str(dest/'scripts/build_azeroth_survivors.py')],cwd=dest,check=True,capture_output=True)
    dates=json.loads((dest/'data/content-dates.json').read_text(encoding='utf8'))
    for url in dates:
@@ -100,7 +102,7 @@ class SyncTests(unittest.TestCase):
    xml=(dest/'sitemap.xml').read_text(encoding='utf8');xml=re.sub(r'(<loc>https://megabonk.org/azeroth-survivors/[^<]*</loc>\s*<lastmod>)[^<]*(</lastmod>)',lambda m:m[1]+'2020-01-01'+m[2],xml);(dest/'sitemap.xml').write_text(xml,encoding='utf8')
    subprocess.run(['git','init','-q'],cwd=dest,check=True);subprocess.run(['git','-c','core.autocrlf=false','add','--','scripts','data','config','azeroth-survivors','sitemap.xml'],cwd=dest,check=True)
    with patch.object(gate,'ROOT',dest):before=gate.snapshot()
-   meta=self.make(self.tables);meta['observed']['etag']='"new HTTP validator, identical source bytes"';sync.apply(meta,root=dest)
+   meta=self.make(self.tables);meta['observed']['etag']='"new HTTP validator, identical source bytes"';meta['observed']['last_modified']='Sun, 01 Nov 2026 23:57:32 GMT';sync.apply(meta,root=dest)
    subprocess.run([sys.executable,str(dest/'scripts/build_azeroth_survivors.py')],cwd=dest,check=True,capture_output=True)
    with patch.object(gate,'ROOT',dest):gate.check(before)
    self.assertEqual(json.loads((dest/'data/content-dates.json').read_text(encoding='utf8')),dates);self.assertEqual((dest/'sitemap.xml').read_text(encoding='utf8'),xml)
