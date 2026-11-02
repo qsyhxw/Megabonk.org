@@ -49,7 +49,7 @@
       const body = document.querySelector('#class-result-body'); body.replaceChildren();
       const title = document.createElement('h3'); title.textContent = slug[0].toUpperCase() + slug.slice(1);
       const icon = document.createElement('img'); icon.src = `/assets/azeroth-survivors/icons/${slug}.png`; icon.width = 28; icon.height = 28; icon.alt = ''; icon.setAttribute('aria-hidden', 'true'); icon.className = 'az-entity-icon'; title.className = 'az-entity'; title.prepend(icon);
-      const text = document.createElement('p'); text.textContent = why;
+      const text = document.createElement('p'); text.textContent = document.querySelector('#source-sync[data-review-pending="true"]') ? 'The original source changed after this editorial shortlist was checked. Treat this as a playstyle direction; inspect the running client and the dated class guide before choosing talents.' : why;
       const scope = document.createElement('p'); scope.textContent = `${v.progress === 'fresh' ? 'Fresh character' : 'Developed character'}: inspect the picker and current allocation. This shortlist routes preferences to a guide; it does not rank every class or measure win rates.`;
       const link = document.createElement('a'); link.href = `/azeroth-survivors/builds/${slug}/`; link.textContent = 'Open this class route →';
       body.append(title, text, scope, link); dialog.showModal(); document.querySelector('#class-close').focus();

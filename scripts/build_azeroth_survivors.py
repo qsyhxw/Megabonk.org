@@ -10,6 +10,7 @@ from azeroth_survivors_build_refinement import refine
 from azeroth_survivors_tools import apply_tools,tool_assets,home_search
 from azeroth_survivors_current import refresh
 from azeroth_survivors_icons import decorate_icons
+from azeroth_sync_pages import apply_sync,decorate_sync
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -83,13 +84,13 @@ def trust():
  return [(P+'404.html',shell(P+'404','Page not found | Azeroth Survivors Guides','Find the original-game guide index, class builds and help after a missing page.',body,ads=False,error=True))]
 
 def build():
- content=refresh(apply_tools(refine(update(apply(articles()+[russian()])))))
+ content=apply_sync(refresh(apply_tools(refine(update(apply(articles()+[russian()]))))))
  path,html=home()
  html=html.replace('<section class="section" id="start">',home_search(content)+'<section class="section" id="start">',1)
  pages=[(path,html)]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
-  file.parent.mkdir(parents=True,exist_ok=True);file.write_text(tool_assets(path,decorate_icons(path,decorate(path,text))),encoding='utf8')
+  file.parent.mkdir(parents=True,exist_ok=True);file.write_text(tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text)))),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Click-loaded third-party Play; no copied client.')
 if __name__=='__main__':build()
 

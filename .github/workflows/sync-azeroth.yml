@@ -1,0 +1,133 @@
+name: Sync Azeroth original sources
+on:
+  schedule:
+    - cron: '53 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Fetch, compare, rebuild and validate without committing
+        type: boolean
+        default: false
+      force_refresh:
+        description: Download the client even when its HTTP validator is unchanged
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ['.github/workflows/sync-azeroth.yml', 'config/azeroth-sync.json', 'scripts/azeroth_sync*.py', 'scripts/test_azeroth_sync.py', 'scripts/check_azeroth_sync_browser.cjs']
+permissions:
+  contents: read
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test source adapters and failure retention
+        run: python scripts/test_azeroth_sync.py
+      - name: Fetch original data without executing the game
+        env:
+          FORCE_REFRESH: ${{ inputs.force_refresh || github.event_name == 'push' }}
+        run: |
+          args=()
+          if [ "$FORCE_REFRESH" = true ]; then args+=(--force); fi
+          timeout 6m python scripts/azeroth_sync_source.py "$RUNNER_TEMP/azeroth-candidate.json" "${args[@]}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: azeroth-source-candidate
+          path: ${{ runner.temp }}/azeroth-candidate.json
+          retention-days: 7
+  publish:
+    needs: collect
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: azeroth-source-candidate
+          path: ${{ runner.temp }}/azeroth-source
+      - name: Preserve independent pre-update baselines
+        run: |
+          cp config/integrations.json "$RUNNER_TEMP/azeroth-integrations.before.json"
+          python scripts/azeroth_sync_gate.py before "$RUNNER_TEMP/azeroth-before.json"
+      - name: Compare and accept only validated reference domains
+        id: sync
+        run: python scripts/azeroth_sync.py "$RUNNER_TEMP/azeroth-source/azeroth-candidate.json" --report "$RUNNER_TEMP/azeroth-diff.json"
+      # GITHUB_TOKEN pushes do not trigger ordinary push workflows. All gates run here.
+      - name: Rebuild and validate every publication invariant
+        if: steps.sync.outputs.changed == 'true' || github.event_name != 'schedule'
+        run: |
+          python scripts/build_azeroth_survivors.py
+          python scripts/azeroth_sync_gate.py after "$RUNNER_TEMP/azeroth-before.json"
+          python scripts/test_integration_guard.py
+          python scripts/check_guide_layout.py
+          python scripts/check_guide_images.py
+          python scripts/verify_integrations.py --baseline "$RUNNER_TEMP/azeroth-integrations.before.json"
+          git diff --check
+      - name: Install isolated browser verification
+        if: steps.sync.outputs.changed == 'true' || github.event_name != 'schedule'
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund --prefix "$RUNNER_TEMP/azeroth-runtime" playwright@1.54.0
+          "$RUNNER_TEMP/azeroth-runtime/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify responsive pages, names and tools before push
+        if: steps.sync.outputs.changed == 'true' || github.event_name != 'schedule'
+        env:
+          NODE_PATH: ${{ runner.temp }}/azeroth-runtime/node_modules
+          AZ_QA_DIR: ${{ runner.temp }}/azeroth-browser
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 > "$RUNNER_TEMP/azeroth-http.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          node scripts/check_azeroth_sync_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: azeroth-comparison-and-validation
+          path: |
+            ${{ runner.temp }}/azeroth-diff.json
+            ${{ runner.temp }}/azeroth-browser/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Publish only validated existing data and pages
+        id: commit
+        if: steps.sync.outputs.changed == 'true' && (github.event_name != 'workflow_dispatch' || !inputs.dry_run)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/azeroth-sync.json data/azeroth-spell-names.json data/content-dates.json sitemap.xml azeroth-survivors/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Sync validated Azeroth original source references"
+          # Do not rebase an already-validated tree onto new content and publish it untested.
+          git push origin HEAD:main
+          echo 'pushed=true' >> "$GITHUB_OUTPUT"
+      - name: Verify deployed source record and generated pages
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          NODE_PATH: ${{ runner.temp }}/azeroth-runtime/node_modules
+          AZ_BASE: https://megabonk.org
+          AZ_LIVE: 'true'
+        run: node scripts/check_azeroth_sync_browser.cjs
+      - name: Record a read-only or unchanged run
+        if: steps.sync.outputs.changed != 'true' || (github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        run: echo 'Validated check complete. No source-content change or dry-run selected; no automated commit or article-date refresh.' >> "$GITHUB_STEP_SUMMARY"
