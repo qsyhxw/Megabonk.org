@@ -2,7 +2,13 @@
 """Regenerate the Characters Hub from the shared entity catalog."""
 
 from __future__ import annotations
-from site_analytics import write_html
+try:
+    from site_analytics import write_html
+except ModuleNotFoundError as exc:
+    if exc.name != "site_analytics":
+        raise
+    # File-based test loaders run from the repository root, without scripts/ on sys.path.
+    from scripts.site_analytics import write_html
 
 import argparse
 import html
