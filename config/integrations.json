@@ -7531,9 +7531,34 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "umami-sitewide",
+      "kind": "analytics",
+      "enabled": true,
+      "authorization": "2026-11-03 user requests supplied Umami tag on every page including trust and 404; ROADMAP UMAMI-1103.",
+      "include": [
+        "**/*.html",
+        "**/*.htm"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "https://umami-nine-rust.vercel.app/script.js",
+            "data-website-id": "be597e21-a994-45fc-8c3c-5893c6cece58"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
     }
   ],
-  "change_reference": "ROADMAP SS-EXEC 2026-11-02; exact8 ordinary Soulstone Survivors pages inherit existing AdSense; trust/404 excluded.",
+  "change_reference": "ROADMAP UMAMI-1103 2026-11-03 user-authorized site-wide Umami",
   "protected_containers": {
     "database/tomes/chaos-tome.html": [
       {

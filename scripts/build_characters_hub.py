@@ -2,6 +2,7 @@
 """Regenerate the Characters Hub from the shared entity catalog."""
 
 from __future__ import annotations
+from site_analytics import write_html
 
 import argparse
 import html
@@ -113,7 +114,7 @@ def main() -> int:
     source = args.page.read_text(encoding="utf-8")
     rendered = render(source, characters)
     if rendered != source:
-        args.page.write_text(rendered, encoding="utf-8", newline="\n")
+        write_html(args.page, rendered, encoding="utf-8", newline="\n")
         print(f"Updated Characters Hub for {len(characters)} catalog characters")
     else:
         print(f"Characters Hub already matches {len(characters)} catalog characters")

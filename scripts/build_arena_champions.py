@@ -1,4 +1,5 @@
 """One playable task page; original game stays on its own origin."""
+from site_analytics import write_html
 from pathlib import Path
 from play_recommendations import recommendations, stylesheet
 ROOT=Path(__file__).resolve().parents[1]
@@ -26,6 +27,6 @@ def build():
 <footer class="footer"><div class="wrap footer-grid"><div><strong>Games for your next session.</strong><p>Independent editorial by Megabonk.org. Game services remain with their respective projects.</p></div><nav aria-label="Site information"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy-policy">Privacy</a></nav></div></footer></body></html>'''
     body=body.replace('Try another survivor game, right here on Megabonk.org.','Switch from arena PvP to one of these survival games on Megabonk.org.').replace('YOUR NEXT RUN','TRY A DIFFERENT SESSION')
     body=body.replace('The embedded original sign-in screen loaded in a desktop browser check.','A desktop browser check loaded the embedded original sign-in screen, entered town as a guest and sent movement input. Expand, Hide and Return preserved the same frame. This was a short startup check.')
-    target=ROOT/'arena-of-champions/index.html';target.parent.mkdir(exist_ok=True);target.write_text(stylesheet(body),encoding='utf-8')
+    target=ROOT/'arena-of-champions/index.html';target.parent.mkdir(exist_ok=True);write_html(target, stylesheet(body),encoding='utf-8')
     print('Built one Arena of Champions playable task page.')
 if __name__=='__main__':build()

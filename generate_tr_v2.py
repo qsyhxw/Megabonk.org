@@ -1,3 +1,4 @@
+from scripts.site_analytics import write_html
 import os
 import re
 from pathlib import Path
@@ -75,7 +76,7 @@ def process_page(file_path, url_slug):
 
     # 保存文件
     target_path.parent.mkdir(parents=True, exist_ok=True)
-    target_path.write_text(content, encoding='utf-8')
+    write_html(target_path, content, encoding='utf-8')
 
 # 执行
 for f_path, u_slug in FILES_MAP.items():

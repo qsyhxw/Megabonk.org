@@ -1,4 +1,5 @@
 """Main-site selection guides and reproducible patches to existing mod pages."""
+from site_analytics import write_html
 from pathlib import Path
 from html import escape
 import json
@@ -35,7 +36,7 @@ def shell(path, title, desc, h1, answer, parts, sources=(), related=(), trust=Fa
 def write(path, html):
     f = ROOT / path.strip('/') / 'index.html'
     f.parent.mkdir(parents=True, exist_ok=True)
-    f.write_text(html, encoding='utf-8')
+    write_html(f, html, encoding='utf-8')
 
 
 def build():
@@ -85,7 +86,7 @@ def build():
             text = text.replace('<section id="install">',callout+'<section id="install">',1)
         else:
             text = text.replace('<div class="notice"><p><strong>Looking specifically for co-op?',callout+'<div class="notice"><p><strong>Looking specifically for co-op?',1)
-        (ROOT/file).write_text(text,encoding='utf-8')
+        write_html(ROOT/file, text,encoding='utf-8')
     # Idempotent contextual entries; protected old metadata and nav stay intact.
     for file, marker, block in [
         ('index.html', '<div class="route-grid">', '<a class="route-card" href="/guides/pokemon-games-like-megabonk/" id="pokemon-game-choice"><h3>Pokémon games like Megabonk</h3><p>Identify PokeBonk or PokéSurvivor and choose by 3D or 2D play and separate progression.</p><span class="route-link">Compare the games →</span></a>'),
@@ -95,7 +96,7 @@ def build():
         if 'id="pokemon-game-choice"' not in text:
             assert marker in text, file
             text = text.replace(marker, marker+block if marker.endswith('>') else block+marker, 1)
-            f.write_text(text, encoding='utf-8')
+            write_html(f, text, encoding='utf-8')
     print('Built 2 main task pages, 2 necessary publisher pages and 2 existing mod-page patches.')
 
 

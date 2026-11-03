@@ -1,4 +1,5 @@
 """Build the original-game guide section from versioned editorial sources."""
+from site_analytics import write_html
 from pathlib import Path
 from html import escape
 import re,json
@@ -100,6 +101,6 @@ def build():
  pages=[(path,html)]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
-  file.parent.mkdir(parents=True,exist_ok=True);file.write_text(tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text)))),encoding='utf8')
+  file.parent.mkdir(parents=True,exist_ok=True);write_html(file, tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text)))),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Click-loaded third-party Play; no copied client.')
 if __name__=='__main__':build()

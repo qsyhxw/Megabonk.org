@@ -1,4 +1,5 @@
 """Rebuild the independent Ball x Pit hub. No expectation configuration is generated."""
+from site_analytics import write_html
 from pathlib import Path
 from html import escape as e
 import json,re
@@ -102,6 +103,6 @@ def build():
  result.append((P+'404.html',shell(P+'404','Page not found | Ball x Pit Guides','This Ball x Pit guide page could not be found. Return to the guide index to find current recipe, build and unlock help.',f'<article class="legal"><h1>That route ends here.</h1><p>This guide page was not found.</p><a class="button" href="{P}">Back to Ball x Pit guides</a></article>',error=True)))
  for route,html in result:
   f=ROOT/route.lstrip('/') if route.endswith('.html') else ROOT/route.lstrip('/')/'index.html'
-  f.parent.mkdir(parents=True,exist_ok=True);f.write_text(decorate(route,html),encoding='utf-8')
+  f.parent.mkdir(parents=True,exist_ok=True);write_html(f, decorate(route,html),encoding='utf-8')
  print(f'Built {len(result)} Ball x Pit pages: 10 ordinary, 2 trust, 1 error; {len(BALLS)} ball outputs and {len(ITEMS)} passive outputs.')
 if __name__=='__main__':build()

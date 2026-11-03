@@ -2,6 +2,7 @@
 """Generate Legendary item facts from the catalog while preserving editorial tiers."""
 
 from __future__ import annotations
+from site_analytics import write_html
 
 import argparse
 import html
@@ -136,7 +137,7 @@ def main() -> int:
             raise SystemExit("Legendary Items page is not synchronized; run build_legendary_items_page.py")
         print("Legendary Items page is synchronized")
         return 0
-    PAGE.write_text(generated, encoding="utf-8")
+    write_html(PAGE, generated, encoding="utf-8")
     print(f"Wrote {PAGE.relative_to(ROOT)}")
     return 0
 

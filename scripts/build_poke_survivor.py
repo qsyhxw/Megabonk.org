@@ -4,6 +4,7 @@ The shared structural helpers and base CSS also serve PokeBonk. This generator
 does not download, copy, host or execute any game code, and never rewrites the
 integration expectations. Run the independent integration guard after building.
 """
+from site_analytics import write_html
 from pathlib import Path
 from html import escape
 import json
@@ -55,10 +56,10 @@ def build():
     for page in pages:
         path,html=render(page)
         file=ROOT/(path.lstrip('/')+'index.html') if page.get('kind')!='error' else ROOT/'poke-survivor/404.html'
-        file.parent.mkdir(parents=True,exist_ok=True);file.write_text(html,encoding='utf-8')
+        file.parent.mkdir(parents=True,exist_ok=True);write_html(file, html,encoding='utf-8')
     play=ROOT/'poke-survivor/play/index.html'
     play.parent.mkdir(parents=True,exist_ok=True)
-    play.write_text(make_play_page(shell),encoding='utf-8')
+    write_html(play, make_play_page(shell),encoding='utf-8')
     print(json.dumps([dict(slug=p['slug'],title_length=len(p['title']),description_length=len(p['desc']),kind=p.get('kind','content')) for p in pages],ensure_ascii=False,indent=2))
 
 if __name__=='__main__':build()

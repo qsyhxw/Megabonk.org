@@ -1,4 +1,5 @@
 """Reproducible Survivor Ace hub and task pages; never hosts game code."""
+from site_analytics import write_html
 from pathlib import Path
 from html import escape
 from guide_images import decorate
@@ -78,7 +79,7 @@ def build():
   pages.append((path,shell(path,title+' | Megabonk.org','Publisher, source-review method and contact for the independent Survivor Ace task guides.',f'<article class="legal" id="guide"><nav class="crumbs"><a href="/">Megabonk.org</a></nav><h1>{title}</h1><p class="meta">Updated 2026-10-28</p>{text}</article>')))
  pages.append((P+'404.html',shell(P+'404','Page not found | Survivor: Ace Guides','This guide page could not be found.',f'<article class="legal"><h1>Page not found</h1><p>Find the current guides and code pages from the <a href="{P}">Survivor: Ace guide index</a>.</p></article>',error=True)))
  for path,html in pages:
-  f=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);f.write_text(decorate(path,html),encoding='utf-8')
+  f=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);write_html(f, decorate(path,html),encoding='utf-8')
  print('Built '+str(len(pages))+' pages; 5 content pages inherit AdSense once; trust/404 excluded.')
 
 if __name__=='__main__':build()

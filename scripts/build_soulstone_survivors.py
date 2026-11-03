@@ -1,4 +1,5 @@
 """Rebuild the source-based Soulstone Survivors section without editing old metadata."""
+from site_analytics import write_html
 from pathlib import Path
 from html import escape
 import json,re
@@ -44,15 +45,15 @@ def home():
  return shell(P,'Soulstone Survivors Guides: Builds, Co-op & Progress','Choose a Soulstone Survivors guide for builds, Barbarian routes, progression, co-op mods and the Bumble crystal order. Independent, source-based help.',body,'combat')
 def build():
  for p in PAGES:
-  f=ROOT/(P+p['slug']).lstrip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);f.write_text(article(p),encoding='utf8')
- (ROOT/P.lstrip('/')/'index.html').write_text(home(),encoding='utf8')
- (ROOT/P.lstrip('/')/'404.html').write_text(shell(P+'404','Page not found | Soulstone Survivors Guides','Find an independent Soulstone Survivors task guide.',f'<article class="legal"><h1>Page not found</h1><p>Return to the <a href="{P}">Soulstone Survivors guide index</a>.</p></article>',error=True),encoding='utf8')
+  f=ROOT/(P+p['slug']).lstrip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);write_html(f, article(p),encoding='utf8')
+ write_html(ROOT/P.lstrip('/')/'index.html', home(),encoding='utf8')
+ write_html(ROOT/P.lstrip('/')/'404.html', shell(P+'404','Page not found | Soulstone Survivors Guides','Find an independent Soulstone Survivors task guide.',f'<article class="legal"><h1>Page not found</h1><p>Return to the <a href="{P}">Soulstone Survivors guide index</a>.</p></article>',error=True),encoding='utf8')
  # Only idempotent body additions to existing publisher/root pages.
  f=ROOT/'index.html';t=f.read_text(encoding='utf8');marker='<div class="route-grid">'
  if 'id="soulstone-guide-entry"'not in t:
-  assert marker in t;t=t.replace(marker,marker+f'<a class="route-card" id="soulstone-guide-entry" href="{P}"><span class="route-icon" aria-hidden="true">◇</span><h3>Soulstone Survivors guides</h3><p>Choose a skill-chain build, compare co-op mods and follow the winter crystal order.</p><span class="route-link">Open the independent field guide →</span></a>',1);f.write_text(t,encoding='utf8')
+  assert marker in t;t=t.replace(marker,marker+f'<a class="route-card" id="soulstone-guide-entry" href="{P}"><span class="route-icon" aria-hidden="true">◇</span><h3>Soulstone Survivors guides</h3><p>Choose a skill-chain build, compare co-op mods and follow the winter crystal order.</p><span class="route-link">Open the independent field guide →</span></a>',1);write_html(f, t,encoding='utf8')
  f=ROOT/'privacy-policy.html';t=f.read_text(encoding='utf8')
  if 'id="soulstone-survivors-guides"'not in t:
-  t=t.replace('</body>','<h2 id="soulstone-survivors-guides">Soulstone Survivors guides</h2><p>Reviewed 2 November 2026. Ordinary pages in /soulstone-survivors/ use this domain’s existing Google AdSense loader. They add no analytics tag, account form, save uploader, video embed or browser storage. External mod downloads and community links open their providers’ websites; we do not host or run their plugins. Cloudflare may add performance measurement on pages and error responses as described above. Gmail handles mail sent to our contact address.</p></body>');f.write_text(t,encoding='utf8')
+  t=t.replace('</body>','<h2 id="soulstone-survivors-guides">Soulstone Survivors guides</h2><p>Reviewed 2 November 2026. Ordinary pages in /soulstone-survivors/ use this domain’s existing Google AdSense loader. They add no analytics tag, account form, save uploader, video embed or browser storage. External mod downloads and community links open their providers’ websites; we do not host or run their plugins. Cloudflare may add performance measurement on pages and error responses as described above. Gmail handles mail sent to our contact address.</p></body>');write_html(f, t,encoding='utf8')
  print('Built 8 ordinary pages + scoped404; reused /about/, /contact/, /privacy-policy.')
 if __name__=='__main__':build()
