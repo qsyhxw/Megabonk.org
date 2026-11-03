@@ -1,0 +1,34 @@
+'use strict';
+const assert = require('node:assert/strict'), fs = require('node:fs');
+const C = require('../assets/azeroth-survivors/planner-core.js');
+const data = JSON.parse(fs.readFileSync('data/azeroth-planner.json', 'utf8'));
+let checks = 0;
+const pass = fn => { fn(); checks++; };
+const build = (classId, steps) => steps.reduce((p, [id, count]) => { for (let i = 0; i < count; i++) p = C.add(data, p, id); return p; }, C.empty(data, classId));
+pass(() => assert.equal(Object.keys(data.classes).length, 2));
+pass(() => assert.equal(C.nodes(data, 'mage').length + C.nodes(data, 'warlock').length, 79));
+for (const key of Object.keys(data.examples)) pass(() => { const p = C.example(data, key); assert.equal(p.sequence.length,31); assert.equal(p.budget-p.sequence.length,20); assert.deepEqual(C.validate(data,p),p); });
+pass(() => assert.throws(() => C.add(data,C.empty(data),'ignite'), /Spend 10 points in Fire/));
+pass(() => { const p = build('mage',[['arcane-focus',5],['arcane-subtlety',5]]); assert.throws(() => C.add(data,p,'ignite'), /Spend 10 points in Fire/); });
+pass(() => { const p = build('mage',[['improved-fireball',5]]); assert.throws(() => C.add(data,p,'improved-fireball'),/rank cap/); });
+pass(() => { const p = C.example(data,'mage-fire'); assert.throws(() => C.remove(data,p,'ignite'),/Refund blocked/); assert.equal(C.remove(data,p,'pyroclasm').sequence.length,30); });
+pass(() => assert.throws(() => C.validate(data,{...C.example(data,'mage-fire'),budget:30}),/No points remain/));
+pass(() => assert.throws(() => C.add(data,{...C.empty(data),budget:0},'arcane-focus'),/No points remain/));
+const demon = build('warlock',[['demonic-familiar',5],['demonic-embrace',5],['soul-devourer',3],['unholy-power',5],['fel-stamina',2],['legion-gate',1],['fel-stamina',1],['demonic-echoes',3],['master-demonologist',3],['summon-infernal',2]]);
+pass(() => assert.equal(demon.sequence.length,30));
+pass(() => assert.throws(() => C.add(data,demon,'soul-link'),/excludes/));
+pass(() => assert.throws(() => C.add(data,C.add(data,demon,'pact-of-the-nathrezim'),'butcher'),/excludes/));
+pass(() => assert.throws(() => C.add(data,build('warlock',[['demonic-embrace',5],['unholy-power',5]]),'soul-devourer'),/5 rank/));
+pass(() => assert.throws(() => C.validate(data,{...C.empty(data),source:'other'}),/Needs verification/));
+pass(() => assert.throws(() => C.validate(data,{...C.empty(data),classId:'constructor'}),/Invalid class/));
+pass(() => assert.throws(() => C.validate(data,{...C.empty(data),budget:NaN}),/Invalid class/));
+pass(() => assert.throws(() => C.validate(data,{...C.empty(data),sequence:['constructor']}),/not in the selected class/));
+pass(() => assert.throws(() => C.validate(data,{...C.empty(data),notes:'x'.repeat(1601)}),/too long/));
+pass(() => { const p=C.validate(data,{...C.empty(data),name:'测试 🌲 <img src=x>'}); assert.equal(p.name,'测试 🌲 <img src=x>'); });
+for(const cls of ['mage','warlock']) pass(() => {
+  let p=C.empty(data,cls);
+  while(p.sequence.length<51){const next=C.nodes(data,cls).find(n=>!C.addReason(data,p,n.id));assert(next,'a legal 51-point route exists');p=C.add(data,p,next.id);}
+  assert.throws(()=>C.add(data,p,C.nodes(data,cls).at(-1).id),/No points remain/);
+  for(const node of C.nodes(data,cls))assert((C.ranks(p.sequence)[node.id]||0)<=node.max);
+});
+console.log('PASS '+checks+' planner rule/import fixtures: gates, ranks, ordered refunds, prerequisites, exclusions, budgets, Unicode and snapshot boundaries');
