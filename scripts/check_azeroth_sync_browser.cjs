@@ -37,6 +37,7 @@ const out=process.env.AZ_QA_DIR;if(out)fs.mkdirSync(out,{recursive:true});
   }
   await page.goto(base+'/azeroth-survivors/troubleshooting/');await page.locator('#gpu-run').click();await page.waitForFunction(()=>!document.querySelector('#gpu-run').disabled,{},{timeout:11000});assert(!(await page.locator('#gpu-result').innerText()).includes('Checking'));
   if(!live){await page.goto(base+'/azeroth-survivors/best-class/');await page.locator('#source-sync').evaluate(n=>n.dataset.reviewPending='true');for(const value of ['summon','survival','developed'])await page.locator('input[value='+value+']').check();await page.locator('#class-open').click();assert((await page.locator('#class-result-body').innerText()).includes('source changed'));await page.keyboard.press('Escape');assert.equal(await page.evaluate(()=>document.activeElement.id),'class-open');}
+  await require('./check_azeroth_planner_browser.cjs')(page,base,out);
   assert.deepEqual(errors,[]);if(out)fs.writeFileSync(path.join(out,'result.json'),JSON.stringify({checks,revision,errors},null,2));console.log('PASS '+checks+' responsive views; official-source status, locale lookup, visible result entry, dialog/focus, search and GPU check');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});
