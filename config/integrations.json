@@ -29,7 +29,7 @@
       "id": "adsense-1",
       "kind": "adsense",
       "enabled": true,
-      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.; 2026-10-30 BXP-EXEC user-authorized ordinary10page same-site inheritance; trust/404 excluded.; 2026-10-30 AZS-05A user authorizes all11 qualified ordinary task pages, same-site loader once; no new network/ID/slots.; 2026-10-31 PLAY-CARDS-1031 user-authorized ordinary Play page, same-site loader once.; 2026-11-01 AC-PLAY user authorizes original-host playable page, same-site ordinary AdSense inheritance.; 2026-11-01 user authorizes qualified AZS tools/lookup ordinary pages, same loader once.; 2026-11-02 AZK user authorizes qualified Luck page, same-site ordinary loader once.; 2026-11-02 SS-EXEC user authorizes all8ordinary GAME_HUB pages, same-site same-loader inheritance; no slots/network/ID change.",
+      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.; 2026-10-30 BXP-EXEC user-authorized ordinary10page same-site inheritance; trust/404 excluded.; 2026-10-30 AZS-05A user authorizes all11 qualified ordinary task pages, same-site loader once; no new network/ID/slots.; 2026-10-31 PLAY-CARDS-1031 user-authorized ordinary Play page, same-site loader once.; 2026-11-01 AC-PLAY user authorizes original-host playable page, same-site ordinary AdSense inheritance.; 2026-11-01 user authorizes qualified AZS tools/lookup ordinary pages, same loader once.; 2026-11-02 AZK user authorizes qualified Luck page, same-site ordinary loader once.; 2026-11-02 SS-EXEC user authorizes all8ordinary GAME_HUB pages, same-site same-loader inheritance; no slots/network/ID change.; 2026-11-03 D2-EXEC user-authorized LIGHT_CONTENT and playable task; existing same-site ordinary loader once, no slots or new network.",
       "include": [
         "database/enemies/index.html",
         "database/enemies/wisp/index.html",
@@ -447,7 +447,9 @@
         "soulstone-survivors/co-op/index.html",
         "soulstone-survivors/index.html",
         "soulstone-survivors/mods/index.html",
-        "soulstone-survivors/ru/builds/index.html"
+        "soulstone-survivors/ru/builds/index.html",
+        "d2-survivors/zh/localization/index.html",
+        "d2-survivors/play/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7539,7 +7541,9 @@
       "authorization": "2026-11-03 user requests supplied Umami tag on every page including trust and 404; ROADMAP UMAMI-1103.",
       "include": [
         "**/*.html",
-        "**/*.htm"
+        "**/*.htm",
+        "d2-survivors/zh/localization/index.html",
+        "d2-survivors/play/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7556,9 +7560,32 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "d2-play-local",
+      "kind": "local-functional",
+      "enabled": true,
+      "authorization": "2026-11-03 D2-EXEC user asks playable page; click-load third-party game and keep frame for expand/hide/return.",
+      "include": [
+        "d2-survivors/play/index.html"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "/assets/d2-survivors/play.js"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
     }
   ],
-  "change_reference": "ROADMAP UMAMI-1103 2026-11-03 user-authorized site-wide Umami",
+  "change_reference": "ROADMAP D2-EXEC 2026-11-03 authorized task pages and third-party game window; original remains blocked; existing integration scopes preserved.",
   "protected_containers": {
     "database/tomes/chaos-tome.html": [
       {
@@ -8284,7 +8311,23 @@
       }
     ],
     "azeroth-survivors/troubleshooting/index.html": [],
-    "azeroth-survivors/abilities/index.html": []
+    "azeroth-survivors/abilities/index.html": [],
+    "d2-survivors/zh/localization/index.html": [],
+    "d2-survivors/play/index.html": [
+      {
+        "tag": "iframe",
+        "attrs": {
+          "id": "game-frame",
+          "title": "D2 Survivors third-party browser game",
+          "data-src": "https://play.d2survivors.org/play/",
+          "allow": "autoplay; fullscreen; gamepad",
+          "allowfullscreen": null,
+          "referrerpolicy": "strict-origin-when-cross-origin",
+          "hidden": null
+        },
+        "location": "body"
+      }
+    ]
   },
   "container_baseline_revision": "59ea81c1",
   "container_inventory_note": "Supplementary exact container inventory from preserved pre-change Git, not edited output; initial script baseline remains immutable."

@@ -97,6 +97,7 @@ def trust():
 def build():
  content=apply_sync(apply_keywords(refresh(apply_tools(refine(update(apply(articles()+[russian()])))))))
  path,html=home()
+ html=html.replace('A separate Diablo II survivors project, not an alternative name for the Aethus client.', 'A separate Diablo II survivors project, not an alternative name for the Aethus client. <a href="/d2-survivors/play/">Play D2 Survivors →</a> · <a href="/d2-survivors/zh/localization/" lang="zh-Hant">繁體中文化與備份 →</a>')
  html=html.replace('<section class="section" id="start">',home_search(content)+'<section class="section" id="start">',1)
  pages=[(path,html)]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
  for path,text in pages:
