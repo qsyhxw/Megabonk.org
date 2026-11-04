@@ -25,7 +25,7 @@ def decorate(path,html):
   new=section[0].replace('</ol>',item+'</ol>',1)
   html=html[:section.start()]+new+html[section.end():]
  lang=page.get('lang','en')
- zoom={'en':'Open full image','ja':'画像を拡大','zh-Hant':'開啟大圖','ru':'Открыть изображение'}[lang]
+ zoom={'en':'Open full image','zh-Hans':'查看原图','ja':'画像を拡大','zh-Hant':'開啟大圖','ru':'Открыть изображение'}[lang]
  variants=m['sizes'];w=max(variants);h=round(m['height']*w/m['width'])
  source=m['stem']+'-'+str(min(variants))+'.webp'
  srcset=', '.join(m['stem']+'-'+str(v)+'.webp '+str(v)+'w' for v in variants)
