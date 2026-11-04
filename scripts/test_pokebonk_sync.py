@@ -19,6 +19,23 @@ class SyncTests(unittest.TestCase):
  def test_missing_schedule_rejected(self):
   self.c['lab'][0]['costs']=[]
   with self.assertRaises(ValueError):assess(self.c,self.base)
+ def test_lab_inventory_changes_retain_reviewed_domain(self):
+  for added in [False,True]:
+   with self.subTest(added=added):
+    candidate=deepcopy(self.c)
+    if added:
+     row=deepcopy(candidate['lab'][0]);row['id']='unreviewed-upgrade';candidate['lab'].append(row)
+    else:candidate['lab'].pop()
+    candidate['lab'][0]['costs'][0]+=10
+    candidate['items'][0]['desc']='Reviewed inventory, updated description'
+    state,domains=assess(candidate,self.base)
+    self.assertEqual(state['accepted']['lab'],self.base['accepted']['lab'])
+    self.assertNotIn('lab',domains);self.assertIn('items',domains)
+    self.assertTrue(any('Lab inventory changed'in x for x in state['pending']))
+    self.assertEqual(assess(candidate,state)[0],state)
+ def test_duplicate_lab_ids_rejected(self):
+  self.c['lab'].append(deepcopy(self.c['lab'][0]))
+  with self.assertRaises(ValueError):assess(self.c,self.base)
  def test_duplicates_rejected(self):
   self.c['items'].append(self.c['items'][0])
   with self.assertRaises(ValueError):assess(self.c,self.base)

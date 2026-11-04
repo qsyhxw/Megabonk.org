@@ -29,11 +29,14 @@ def assess(candidate,previous=None):
   if not re.fullmatch('[a-f0-9]{64}',c.get(k,'')):raise ValueError('Invalid source hash')
  tool=read('pokebonk-tools-reference.json');prog=read('pokebonk-progression-reference.json');accepted=deepcopy((previous or {}).get('accepted',{}));pending=[];changes=[]
  domains={};lab=indexed(c.get('lab'),'id');oldlab=indexed(tool['lab'],'id')
- if lab.keys()!=oldlab.keys():raise ValueError('Lab inventory changed; preserve cached data')
- for key,x in lab.items():
-  if type(x.get('max'))is not int or x['max']!=oldlab[key]['max']or len(x.get('costs',[]))!=x['max']:raise ValueError('Lab schedule shape changed')
-  if any(type(v)is not int or v<=0 or v>100000000 for v in x['costs']):raise ValueError('Invalid Lab price')
- domains['lab']=c['lab']
+ if lab.keys()!=oldlab.keys():
+  added=sorted(lab.keys()-oldlab.keys());removed=sorted(oldlab.keys()-lab.keys())
+  pending.append(f'Lab inventory changed (added: {added}; removed: {removed}); retain reviewed Lab data until inventory and schedules are reviewed.')
+ else:
+  for key,x in lab.items():
+   if type(x.get('max'))is not int or x['max']!=oldlab[key]['max']or len(x.get('costs',[]))!=x['max']:raise ValueError('Lab schedule shape changed')
+   if any(type(v)is not int or v<=0 or v>100000000 for v in x['costs']):raise ValueError('Invalid Lab price')
+  domains['lab']=c['lab']
  if c.get('adapter_ok')and c.get('arches')!=prog['arches']:
   c['adapter_ok']=False;c['adapter_error']='Move archetype upgrade fields changed; combat data requires review.'
  items=indexed(c.get('items'),'key');olditems=indexed(tool['items'],'key')
