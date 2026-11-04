@@ -9,7 +9,10 @@ VOID={'area','base','br','col','embed','hr','img','input','link','meta','param',
 
 @lru_cache(maxsize=1)
 def inventory():
- return json.loads((ROOT/'data/azeroth-inline-icons.json').read_text(encoding='utf8'))
+ data=json.loads((ROOT/'data/azeroth-inline-icons.json').read_text(encoding='utf8'))
+ extra=json.loads((ROOT/'data/azeroth-asbuilder-icons.json').read_text(encoding='utf8'))
+ data['entities'] += [dict(name=e['name'],kind=e['kind'],**{'class':e['class_id']},asset=e['asset']) for e in extra['entities']]
+ return data
 
 def pattern(name):
  pieces=[]
@@ -30,6 +33,8 @@ def names_for(path):
    for alias in e.get('aliases',{}).get('ru',[]):groups.setdefault(alias,[]).append({**e,'name':alias})
  result={}
  for name,entries in groups.items():
+  if path== '/azeroth-survivors/abilities/' and any(e['kind']=='spell' for e in entries):
+   entries=[e for e in entries if e['kind']=='spell']
   if len({e['asset'] for e in entries})!=1:continue
   # A localized spell row must receive a spell image, not a same-named talent inference.
   result[name]=next((e for e in entries if e['kind']=='spell'),entries[0])
@@ -40,7 +45,7 @@ def names_for(path):
 class Labels(HTMLParser):
  def __init__(self,path,html):
   super().__init__(convert_charrefs=False)
-  self.path=path;self.html=html;self.stack=[];self.edits=[];self.used=set();self.lines=[0]
+  self.path=path;self.html=html;self.stack=[];self.edits=[];self.used=set();self.lines=[0];self.text_end=0
   self.lines.extend(m.end() for m in re.finditer('\n',html))
   self.regex,self.names=names_for(path);self.feed(html)
  def handle_starttag(self,t,attrs):
@@ -49,6 +54,13 @@ class Labels(HTMLParser):
   for i in range(len(self.stack)-1,-1,-1):
    if self.stack[i][0]==t:del self.stack[i:];break
  def handle_data(self,text):
+  line,col=self.getpos();pos=self.lines[line-1]+col
+  if pos<self.text_end:return
+  # HTMLParser splits a label at character references. Match the original full
+  # text segment so Hunter&#x27;s Mark and other escaped names remain one label.
+  end=self.html.find('<',pos)
+  self.text_end=end if end>=0 else len(self.html)
+  text=self.html[pos:self.text_end]
   tags=[t for t,_ in self.stack]
   if 'main' not in tags or not any(t in tags for t in ('td','li','strong','h2','h3','a')):return
   if any(t in tags for t in ('h1','nav','aside','script','style','figcaption','dialog')):return
@@ -59,6 +71,7 @@ class Labels(HTMLParser):
   count=0;seen=set()
   for m in self.regex.finditer(text):
    e=self.names[m.lastgroup]
+   if e['name']=='Blizzard' and not (self.path.endswith('/builds/mage/') or row.get('data-spell-class')=='mage'):continue
    if e['asset'] in seen:continue
    if 'data-spell-class' in row:
     if translated:continue
@@ -67,7 +80,6 @@ class Labels(HTMLParser):
    start=m.start()
    if e['kind']=='class' and anchor and start>0 and not seen:start=0
    shown=text[start:m.end()];markup='<span class="az-entity" data-icon-name="'+escape(e['name'],quote=True)+'"><img class="az-entity-icon" src="'+e['asset']+'" width="28" height="28" loading="lazy" decoding="async" alt="" aria-hidden="true"><span>'+shown+'</span></span>'
-   line,col=self.getpos();pos=self.lines[line-1]+col
    self.edits.append((pos+start,pos+m.end(),markup));self.used.add(e['asset']);seen.add(e['asset']);count+=1
    if count==4:break
 
@@ -85,4 +97,7 @@ def decorate_icons(path,html):
   credit='<p class="icon-credit">Warcraft artwork © Blizzard Entertainment. Reference icons from <a href="https://azerothsurvivor.com/sources/" target="_blank" rel="noopener noreferrer">AzerothSurvivor.com ↗</a>, retrieved 2 November 2026; original asset versions not independently verified.</p>'
   if '/ru/' in path:credit=credit.replace('Warcraft artwork','Изображения Warcraft').replace('Reference icons from','Источник значков:').replace(', retrieved 2 November 2026; original asset versions not independently verified.',', получены 2 ноября 2026 года; исходные версии изображений независимо не подтверждены.')
   html=re.sub(r'(<section[^>]*id="sources"[^>]*>\s*<h2>.*?</h2>)',lambda m:m[1]+credit,html,count=1,flags=re.S)
+  if any('/icons/asbuilder/' in asset for asset in parser.used):
+   credit='<p class="icon-credit">Additional name-matched reference icons from <a href="https://asbuilds.app/" target="_blank" rel="noopener noreferrer">ASBuilds.app ↗</a>, retrieved 4 November 2026. ASBuilder credits this artwork to Blizzard Entertainment. Source atlas v=0134; individual asset/game versions and open reuse licences are unverified.</p>'
+   html=re.sub(r'(<section[^>]*id="sources"[^>]*>\s*<h2>.*?</h2>)',lambda m:m[1]+credit,html,count=1,flags=re.S)
  return html

@@ -15,6 +15,7 @@ from azeroth_sync_pages import apply_sync,decorate_sync
 from azeroth_survivors_keywords import apply_keywords
 from azeroth_survivors_discovery import improve_pages, improve_home
 from azeroth_survivors_planner import apply_planner, home_entry, planner_assets
+from azeroth_survivors_asbuilder import apply_asbuilder, home_asbuilder
 from azeroth_planner_reference import write_reference
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
@@ -100,11 +101,11 @@ def trust():
 
 def build():
  write_reference()
- content=apply_planner(improve_pages(apply_sync(apply_keywords(refresh(apply_tools(refine(update(apply(articles()+[russian()])))))))))
+ content=apply_asbuilder(apply_planner(improve_pages(apply_sync(apply_keywords(refresh(apply_tools(refine(update(apply(articles()+[russian()]))))))))))
  path,html=home()
  html=html.replace('A separate Diablo II survivors project, not an alternative name for the Aethus client.', 'A separate Diablo II survivors project, not an alternative name for the Aethus client. <a href="/d2-survivors/">D2 Survivors guides →</a> · <a href="/d2-survivors/play/">Play D2 Survivors →</a> · <a href="/d2-survivors/zh/localization/" lang="zh-Hant">繁體中文化與備份 →</a>')
  html=html.replace('<section class="section" id="start">',home_search(content)+'<section class="section" id="start">',1)
- pages=[(path,home_entry(improve_home(html)))]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
+ pages=[(path,home_asbuilder(home_entry(improve_home(html))))]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
  for path,text in pages:
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
   file.parent.mkdir(parents=True,exist_ok=True);write_html(file, planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text))))),encoding='utf8')
