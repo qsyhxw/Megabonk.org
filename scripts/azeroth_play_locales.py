@@ -56,7 +56,7 @@ def localized_pages(shell, ext):
             else:
                 body += ''.join('<p>'+text+'</p>' for text in copy[key])
             body += '<p><sup class="ref"><a href="#source-1">[1]</a></sup> <sup class="ref"><a href="#source-2">[2]</a></sup></p></section>'
-        body += '<p><a href="/privacy-policy#azeroth-survivors-guides">'+copy['privacy']+'</a> · <a href="'+P+'play/" lang="en">English · 31 Oct 2026</a></p>'
+        body += '<p><a href="/privacy-policy#azeroth-survivors-guides">'+copy['privacy']+'</a> · <a href="'+P+'play/" lang="en">English · 5 Nov 2026</a></p>'
         body += '<section class="sources" id="sources"><h2>'+copy['sections'][3]+'</h2><ol><li id="source-1">'+ext('https://wow.aethus.pl/rogue.js?v=f3a3d645a1ed','Aethus · rogue.js')+' — '+copy['source_host']+'</li><li id="source-2">'+ext('https://wow.aethus.pl/','Aethus · wow.aethus.pl')+' — '+copy['source_original']+'</li></ol><a href="#guide">'+copy['back']+'</a></section>'
         body += '<section class="related"><h2>'+copy['next']+'</h2>'
         for slug, label in zip(['beginners-guide/','troubleshooting/','save-backup/'],copy['related']):
@@ -71,7 +71,7 @@ def localized_pages(shell, ext):
 
 def connect_languages(path,html):
     if path==P+'play/':
-        html = html.replace('<header class="play-intro"',language_links()+'<header class="play-intro"',1)
+        html = html.replace('<header class="article-head"',language_links()+'<header class="article-head"',1)
         return alternatives(html)
     if path==P:
         marker='<section class="section" id="language-start">'

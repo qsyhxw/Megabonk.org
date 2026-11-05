@@ -24,13 +24,10 @@ def improve_pages(pages):
 
 
 def improve_home(html):
-    old = ('<div class="actions"><a class="button" href="' + P + 'play/">Play in a game window →</a>')
-    html = html.replace(old, '<div class="actions">', 1)
     needle = '<a class="button secondary" href="' + P + 'beginners-guide/">Plan your first run →</a>'
-    html = html.replace(needle, '<a class="button secondary" href="' + P + 'play/">Play a third-party version →</a>'
-                        + '<a class="button secondary" href="' + P + 'beginners-guide/">How to play: first-run guide →</a>', 1)
+    html = html.replace(needle, '<a class="button secondary" href="' + P + 'beginners-guide/">How to play: first-run guide →</a>', 1)
     html = html.replace('Opens wow.aethus.pl in a new tab. The original blocks embedded play; your game and save stay on its host.',
-                        'The original opens wow.aethus.pl in a new tab. The game window uses a separate third-party provider; version and save compatibility need verification. Keep progress with the host that created it.', 1)
+                        'The original opens wow.aethus.pl in a new tab. Our Play guide explains startup and save precautions. Keep progress with the host that created it.', 1)
     html = html.replace(a('mobile/', 'Phone and tablet checks') + ' · ' + a('save-backup/', 'Export before switching'),
                         a('download-platforms/#download', 'Windows download: source and setup') + ' · '
                         + a('mobile/', 'Phone and tablet checks') + ' · ' + a('save-backup/', 'Export before switching'), 1)
