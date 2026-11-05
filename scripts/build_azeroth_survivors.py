@@ -7,6 +7,7 @@ from guide_images import decorate
 from azeroth_survivors_iteration import apply
 from azeroth_survivors_expansion import update, new_pages
 from azeroth_survivors_play import play_page
+from azeroth_play_locales import localized_pages, connect_languages
 from azeroth_survivors_build_refinement import refine
 from azeroth_survivors_tools import apply_tools,tool_assets,home_search
 from azeroth_survivors_current import refresh
@@ -105,8 +106,9 @@ def build():
  path,html=home()
  html=html.replace('A separate Diablo II survivors project, not an alternative name for the Aethus client.', 'A separate Diablo II survivors project, not an alternative name for the Aethus client. <a href="/d2-survivors/">D2 Survivors guides →</a> · <a href="/d2-survivors/play/">Play D2 Survivors →</a> · <a href="/d2-survivors/zh/localization/" lang="zh-Hant">繁體中文化與備份 →</a>')
  html=html.replace('<section class="section" id="start">',home_search(content)+'<section class="section" id="start">',1)
- pages=[(path,home_asbuilder(home_entry(improve_home(html))))]+[article(x) for x in content]+[play_page(shell,ext)]+trust()
+ pages=[(path,home_asbuilder(home_entry(improve_home(html))))]+[article(x) for x in content]+[play_page(shell,ext)]+localized_pages(shell,ext)+trust()
  for path,text in pages:
+  text=connect_languages(path,text)
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
   file.parent.mkdir(parents=True,exist_ok=True);write_html(file, planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text))))),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Click-loaded third-party Play; no copied client.')

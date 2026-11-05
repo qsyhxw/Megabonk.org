@@ -25,7 +25,7 @@ def decorate(path,html):
   new=section[0].replace('</ol>',item+'</ol>',1)
   html=html[:section.start()]+new+html[section.end():]
  lang=page.get('lang','en')
- zoom={'en':'Open full image','zh-Hans':'查看原图','ja':'画像を拡大','zh-Hant':'開啟大圖','ru':'Открыть изображение'}[lang]
+ zoom={'en':'Open full image','de':'Bild vergrößern','zh-Hans':'查看原图','ja':'画像を拡大','zh-Hant':'開啟大圖','ru':'Открыть изображение'}[lang]
  variants=m['sizes'];w=max(variants);h=round(m['height']*w/m['width'])
  source=m['stem']+'-'+str(min(variants))+'.webp'
  srcset=', '.join(m['stem']+'-'+str(v)+'.webp '+str(v)+'w' for v in variants)
@@ -34,8 +34,10 @@ def decorate(path,html):
  if lang=='zh-Hant':detail='官方素材核對：2026-10-30；版本未註明，非本站遊玩實測。'
  if lang=='ja':detail='公式素材の確認日：2026-10-30。版は未記載、当サイトのプレイ記録ではありません。'
  if lang=='ru':detail='Снимок меню оригинала 30.10.2026 · v0.130.0 (e7d9dd47), не тест игрового прохождения.'
+ detail=page.get('detail',detail)
+ credit=page.get('credit',m['credit'])
  portrait=' portrait' if m['height']>m['width'] else ''
- figure=f'''<figure class="game-image{portrait}" data-game-image="{escape(page["image"])}"><a href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener" aria-label="{zoom}"><img src="{source}" srcset="{srcset}" sizes="(max-width: 800px) calc(100vw - 36px), {'420px' if portrait else '1000px'}" width="{w}" height="{h}" loading="lazy" alt="{escape(page["alt"],quote=True)}"></a><figcaption>{escape(m["credit"])}. {escape(detail)} {escape(page["purpose"])} <a class="ref" href="#{ident}" aria-label="Image source {number}">[{number}]</a> <a class="image-zoom" href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener">{zoom} ↗</a></figcaption></figure>'''
+ figure=f'''<figure class="game-image{portrait}" data-game-image="{escape(page["image"])}"><a href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener" aria-label="{zoom}"><img src="{source}" srcset="{srcset}" sizes="(max-width: 800px) calc(100vw - 36px), {'420px' if portrait else '1000px'}" width="{w}" height="{h}" loading="lazy" alt="{escape(page["alt"],quote=True)}"></a><figcaption>{escape(credit)}. {escape(detail)} {escape(page["purpose"])} <a class="ref" href="#{ident}" aria-label="Image source {number}">[{number}]</a> <a class="image-zoom" href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener">{zoom} ↗</a></figcaption></figure>'''
  anchor=page['anchor']
  target=re.search(r'<section\b[^>]*id="'+re.escape(anchor)+r'"[^>]*>\s*(?:<div[^>]*>)?(?:<h[23][^>]*>.*?</h[23]>)?',html,re.S) if anchor else None
  if not target:

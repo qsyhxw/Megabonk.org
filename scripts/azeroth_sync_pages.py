@@ -42,7 +42,7 @@ def apply_sync(pages):
  return pages
 
 def decorate_sync(path,html):
- if path.endswith('404.html') or path==P+'play/':return html
+ if path.endswith('404.html') or path.endswith('/play/'):return html
  s=state();o=s['observed'];pending=path in s['pending'];ru='/ru/' in path
  heading=('Последний исходный клиент' if ru else 'Latest original source')+': v'+o['version']
  scope=('Обнаружен '+o['date']+'. Разделы руководства сохраняют собственные даты проверки.' if ru else 'Detected '+o['date']+'. Individual guide sections retain their own verification dates; automatic checks do not validate every combat mechanic.')
