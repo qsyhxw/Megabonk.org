@@ -90,7 +90,7 @@ class SyncTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as td:
    dest=Path(td);shutil.copytree(ROOT/'scripts',dest/'scripts',ignore=shutil.ignore_patterns('__pycache__'));(dest/'data').mkdir();(dest/'config').mkdir()
    for p in (ROOT/'data').glob('azeroth*.json'):shutil.copyfile(p,dest/'data'/p.name)
-   for name in ['guide-images.json','content-dates.json','play-games.json','play-games-locales.json']:shutil.copyfile(ROOT/'data'/name,dest/'data'/name)
+   for name in ['guide-images.json','content-dates.json','play-games.json','play-games-locales.json','game-sections.json']:shutil.copyfile(ROOT/'data'/name,dest/'data'/name)
    shutil.copyfile(ROOT/'config/azeroth-sync.json',dest/'config/azeroth-sync.json');shutil.copyfile(ROOT/'sitemap.xml',dest/'sitemap.xml')
    (dest/'data/azeroth-sync.json').write_text(json.dumps(self.old),encoding='utf8')
    names=json.loads((dest/'data/azeroth-spell-names.json').read_text(encoding='utf8'));names.update(version=self.old['accepted']['names']['version'],sha256=self.old['accepted']['names']['sha256']);(dest/'data/azeroth-spell-names.json').write_text(json.dumps(names,ensure_ascii=False),encoding='utf8')

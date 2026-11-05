@@ -10,6 +10,7 @@ class RenderTest(unittest.TestCase):
    for p in (ROOT/'data').glob('pokebonk*.json'):shutil.copyfile(p,root/'data'/p.name)
    # The real Play generator also reads the shared, versioned game-card manifest.
    shutil.copyfile(ROOT/'data/play-games.json',root/'data/play-games.json')
+   shutil.copyfile(ROOT/'data/game-sections.json',root/'data/game-sections.json')
    path=root/'data/pokebonk-sync.json';state=json.loads(path.read_text(encoding='utf8'));row=next(x for x in state['accepted']['lab']['data']if x['id']=='slot-move');row['costs'][0]+=17;expected=row['costs'][0];path.write_text(json.dumps(state),encoding='utf8')
    subprocess.run([sys.executable,'scripts/build_pokebonk.py'],cwd=root,check=True,stdout=subprocess.DEVNULL)
    for slug,ids in [('lab',['task-data','decision-data','progression-data']),('build-planner',['task-data','progression-data'])]:
