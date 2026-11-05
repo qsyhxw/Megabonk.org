@@ -46,4 +46,3 @@ def home_mods(html):
     html = html.replace(intro, answer+intro, 1)
     marker = '<section class="section" id="guides">'
     return html.replace(marker, marker+para(a('mods/', 'Mods: addons, HD Overhaul and community clients')), 1)
-
