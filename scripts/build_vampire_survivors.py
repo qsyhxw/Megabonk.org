@@ -4,6 +4,7 @@ from html import escape
 import re
 from guide_images import decorate
 from site_analytics import write_html
+from game_sections import navigation
 from play_recommendations import recommendations, stylesheet
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -18,7 +19,7 @@ def ext(url,label):
 def ref(n):return f'<sup class="ref"><a href="#source-{n}" aria-label="Source {n}">[{n}]</a></sup>'
 def table(head,rows):return '<div class="table-wrap" role="region" aria-label="Comparison; scroll horizontally on small screens" tabindex="0"><table><thead><tr>'+''.join('<th scope="col">'+h+'</th>' for h in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+c+'</td>' for c in row)+'</tr>' for row in rows)+'</tbody></table></div>'
 def shell(route,title,desc,h1,answer,parts,sources,script=False,recs=False):
- nav='<a href="/guides/">Guides</a><a href="/guides/builds/">Builds</a><a href="/database/">Database</a><a href="/#wiki-start">More games</a>'
+ nav=navigation(route)
  body=''.join(f'<section id="{i}"><h2>{h}</h2>{text}</section>' for i,h,text in parts)
  source='<section class="sources" id="sources"><h2>Sources &amp; verification</h2><ol>'+''.join(f'<li id="source-{i}">{ext(u,l)} — {d}</li>' for i,(u,l,d) in enumerate(sources,1))+'</ol><a class="back" href="#guide">Back to guide ↑</a></section>'
  related='<section><h2>Related choices</h2><div class="related"><a href="/vampire-survivors/">Official browser demo</a><a href="/vampire-survivors/co-op/">Co-op compatibility</a><a href="/games-like-vampire-survivors/">Choose a browser survivor</a></div></section>'

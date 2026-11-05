@@ -5,6 +5,7 @@ from pathlib import Path
 from html import escape
 from guide_images import decorate, DATA
 from site_analytics import write_html
+from game_sections import navigation
 from play_recommendations import recommendations, stylesheet
 ROOT=Path(__file__).resolve().parents[1]
 GAME='https://pokedive.com/en/'
@@ -22,7 +23,7 @@ SOURCES=[
  (UPDATE,'Reddit · developer Night of Ghosts update','29 October 2026 announcement and player feedback. Event advertised for 30 October–9 November. Mechanism descriptions are developer-listed, not a completed run by this site.')
 ]
 def shell(route,title,desc,h1,answer,parts,indices):
- nav='<a href="/guides/">Guides</a><a href="/guides/builds/">Builds</a><a href="/database/">Database</a><a href="/#wiki-start">More games</a>'
+ nav=navigation(route)
  body=''.join(f'<section id="{i}"><h2>{h}</h2>{t}</section>' for i,h,t in parts)
  # Keep source numbering stable across pages; only include used sources.
  refs='<section class="sources" id="sources"><h2>Sources &amp; verification</h2><ol>'+''.join(f'<li id="source-{i}" value="{i}">{ext(SOURCES[i-1][0],SOURCES[i-1][1])} — {SOURCES[i-1][2]}</li>' for i in indices)+'</ol><a href="#guide">Back to guide ↑</a></section>'

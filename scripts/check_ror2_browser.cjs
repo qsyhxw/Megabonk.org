@@ -27,7 +27,7 @@ for(const width of [1440,390]){
  }
  await p.getByRole('button',{name:'Clear choices'}).click();assert(!await p.locator('#pair-result').isVisible());
 }
-await p.goto(base+'/');for(const[id,route]of [['ror2-crossplay-entry',routes[0]],['ror2-gold-entry',routes[1]],['ror2-ambry-entry',routes[2]]]){await p.locator('#'+id).click();assert(p.url().endsWith(route));await p.goBack()}
+await p.goto(base+'/');for(const route of routes){await p.locator('#game-risk-of-rain-2 a[href="'+route+'"]').click();assert(p.url().endsWith(route));await p.goBack()}
 await p.goto(base+'/privacy-policy');assert.equal(await p.locator('#risk-of-rain-2').count(),1);assert.equal(await p.locator('script[src*=adsbygoogle]').count(),0);
 const ad=await p.goto(base+'/ads.txt');assert.equal(ad.status(),200);assert(ad.headers()['content-type'].includes('text/plain'));assert.equal((await ad.text()).split('google.com, pub-8830315294299920, DIRECT, f08c47fec0942fa0').length,2);
 const xml=await p.goto(base+'/sitemap.xml');assert.equal(xml.status(),200);assert(xml.headers()['content-type'].includes('xml'));await p.waitForTimeout(200);assert(await p.locator('#webkit-xml-viewer-source-xml,.pretty-print').count());await p.screenshot({path:path.join(out,'sitemap.png')});assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,'result.json'),JSON.stringify({views,routes,errors,externalRequestsIntercepted:[...new Set(external)]},null,2));console.log('PASS',views,'responsive views; both widths visible results/modal/close focus, keyboard, three root entries, images, privacy, ads, native XML.');

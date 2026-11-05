@@ -21,7 +21,7 @@ def sources(lang):
  back='返回正文 ↑' if lang=='zh-Hant' else '本文に戻る ↑'
  return '<section class="sources" id="sources"><h2>'+title+'</h2><ol>'+''.join(f'<li id="source-{i}">{ext(u,l)} — {d.split(" / ")[0 if lang=="zh-Hant" else -1]}</li>' for i,(u,l,d) in enumerate(SOURCES,1))+'</ol><a class="back" href="#guide">'+back+'</a></section>'
 
-NAV=[('Start here',P+'#start'),('Guides',P+'#guides'),('Codes',P+'#codes'),('Megabonk','/')]
+NAV=[('Start here',P+'#start'),('Guides',P+'#guides'),('Codes',P+'#codes'),('More games','/#more-games')]
 def shell(path,title,desc,body,lang='en',content=False,image='',error=False):
  nav=''.join(f'<a href="{u}"'+(' aria-current="page"' if path==u else '')+f'>{l}</a>' for l,u in NAV)
  groups=[PATHS,{'zh-Hant':P+'zh-hant/beginners-guide/','ja':P+'ja/beginners-guide/'}]

@@ -3,6 +3,7 @@ from pathlib import Path
 from html import escape
 from guide_images import decorate
 from site_analytics import write_html
+from game_sections import navigation
 
 ROOT=Path(__file__).resolve().parents[1]
 CROSS='https://support.2k.com/hc/en-us/articles/35232640119443-Risk-of-Rain-2-Crossplay-and-You-An-Epic-Tale'
@@ -17,8 +18,7 @@ def ext(url,label):return f'<a href="{escape(url,quote=True)}" target="_blank" r
 def ref(n):return f'<sup class="ref"><a href="#source-{n}" aria-label="Source {n}">[{n}]</a></sup>'
 def table(head,rows):return '<div class="table-wrap" role="region" aria-label="Scrollable comparison" tabindex="0"><table><thead><tr>'+''.join('<th scope="col">'+x+'</th>' for x in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+x+'</td>' for x in r)+'</tr>' for r in rows)+'</tbody></table></div>'
 def shell(route,title,desc,h1,answer,parts,sources,ru=False,script=False):
- nav=(['Гайды','Билды','База данных','Другие игры'] if ru else ['Guides','Builds','Database','More games'])
- nav=''.join(f'<a href="{u}">{t}</a>' for u,t in zip(['/guides/','/guides/builds/','/database/','/#wiki-start'],nav))
+ nav=navigation(route)
  body=''.join(f'<section id="{i}"><h2>{h}</h2>{t}</section>' for i,h,t in parts)
  labels=['Crossplay & edition check','Gold Portal → False Son','Хранилище укрепления · русский']
  related=''.join(f'<a href="{u}"'+(' lang="ru"' if '/ru/' in u else ' lang="en"')+f'>{t}</a>' for u,t in zip(ROUTES,labels) if u!=route)

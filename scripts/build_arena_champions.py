@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 URL='/arena-of-champions/'
 GAME='https://arenaofchampions.live/'
 def build():
-    nav='<a href="/">Megabonk</a><a href="#play">Play</a><a href="#start">Start here</a><a href="#more-games">More games</a>'
+    nav='<a href="#play">Play</a><a href="#start">Start here</a><a href="#more-games">More games</a>'
     body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Play Arena of Champions Online | Megabonk.org</title><meta name="description" content="Play Arena of Champions in a browser game window. Find the original WoW-style arena PvP, guest and desktop options, plus more games on Megabonk.org."><link rel="canonical" href="https://megabonk.org{URL}">
 <link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/azeroth-survivors/site.css"><link rel="stylesheet" href="/assets/poke-survivor/play.css"><link rel="stylesheet" href="/assets/arena-of-champions/site.css">

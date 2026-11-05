@@ -65,6 +65,10 @@ jobs:
         run: |
           python scripts/build_risk_of_rain_2.py
           node scripts/test_ror2_compatibility.cjs
+      - name: Build and verify game-scoped discovery
+        run: |
+          python scripts/build_game_discovery.py
+          python scripts/check_game_navigation.py
       - name: Verify page-specific game images
         run: python scripts/check_guide_images.py
       - name: Verify public-source sync rejects unsafe updates
