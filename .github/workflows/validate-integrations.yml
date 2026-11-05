@@ -53,6 +53,10 @@ jobs:
         run: python scripts/build_poke_solaire.py
       - name: Rebuild Hordes of Azeroth guides
         run: python scripts/build_hordes_of_azeroth.py
+      - name: Rebuild Vampire Survivors lightweight tasks
+        run: |
+          python scripts/build_vampire_survivors.py
+          node scripts/test_vampire_compatibility.cjs
       - name: Verify page-specific game images
         run: python scripts/check_guide_images.py
       - name: Verify public-source sync rejects unsafe updates

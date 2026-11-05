@@ -29,7 +29,7 @@
       "id": "adsense-1",
       "kind": "adsense",
       "enabled": true,
-      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.; 2026-10-30 BXP-EXEC user-authorized ordinary10page same-site inheritance; trust/404 excluded.; 2026-10-30 AZS-05A user authorizes all11 qualified ordinary task pages, same-site loader once; no new network/ID/slots.; 2026-10-31 PLAY-CARDS-1031 user-authorized ordinary Play page, same-site loader once.; 2026-11-01 AC-PLAY user authorizes original-host playable page, same-site ordinary AdSense inheritance.; 2026-11-01 user authorizes qualified AZS tools/lookup ordinary pages, same loader once.; 2026-11-02 AZK user authorizes qualified Luck page, same-site ordinary loader once.; 2026-11-02 SS-EXEC user authorizes all8ordinary GAME_HUB pages, same-site same-loader inheritance; no slots/network/ID change.; 2026-11-03 D2-EXEC user-authorized LIGHT_CONTENT and playable task; existing same-site ordinary loader once, no slots or new network.; 2026-11-03 D2-HUB user requests complete game section; seven new ordinary pages inherit exact same loader; scoped404 excluded.; 2026-11-03 AZ-B1-B6 user authorizes native planner ordinary page, same-site same loader once, no added slots.; 2026-11-04 SAZ-EXEC user authorizes GAME_HUB ordinary2page same-site loader once; scoped404 excluded.; 2026-11-04 ASB-EXEC user-authorized ASBuilder ordinary guide inherits the exact same-site loader once; no embedded remote tool or new service.; 2026-11-04 PA2D user authorizes original-host launch guide, same-site loader once, no remote game iframe.; 2026-11-05 HOA-EXEC user-authorized GAME_HUB four ordinary pages inherit the exact same-site loader once; no new network/slot; scoped404 excluded.; 2026-11-05 PI-EXEC user authorizes original-host playable landing, same-site loader once; no new network/slot/frame-service.; 2026-11-05 PV-EXEC user authorizes original-host playable landing, same-site loader once; no new network/slot/frame-service.; 2026-11-05 PSOL-EXEC user authorizes original-host playable landing, same-site loader once; no new network/slot/frame-service.",
+      "authorization": "2026-10-25 preserve existing site integrations; reviewed pre-change exact scope, no new service IDs. AdSense authorized 2026-10-23. Placeholder GA IDs are recorded as pre-existing defects, not approval to propagate.; 2026-10-29 AZS-EXEC user-authorized GAME_HUB ordinary17page same-site inheritance; trust/404 excluded.; 2026-10-30 BXP-EXEC user-authorized ordinary10page same-site inheritance; trust/404 excluded.; 2026-10-30 AZS-05A user authorizes all11 qualified ordinary task pages, same-site loader once; no new network/ID/slots.; 2026-10-31 PLAY-CARDS-1031 user-authorized ordinary Play page, same-site loader once.; 2026-11-01 AC-PLAY user authorizes original-host playable page, same-site ordinary AdSense inheritance.; 2026-11-01 user authorizes qualified AZS tools/lookup ordinary pages, same loader once.; 2026-11-02 AZK user authorizes qualified Luck page, same-site ordinary loader once.; 2026-11-02 SS-EXEC user authorizes all8ordinary GAME_HUB pages, same-site same-loader inheritance; no slots/network/ID change.; 2026-11-03 D2-EXEC user-authorized LIGHT_CONTENT and playable task; existing same-site ordinary loader once, no slots or new network.; 2026-11-03 D2-HUB user requests complete game section; seven new ordinary pages inherit exact same loader; scoped404 excluded.; 2026-11-03 AZ-B1-B6 user authorizes native planner ordinary page, same-site same loader once, no added slots.; 2026-11-04 SAZ-EXEC user authorizes GAME_HUB ordinary2page same-site loader once; scoped404 excluded.; 2026-11-04 ASB-EXEC user-authorized ASBuilder ordinary guide inherits the exact same-site loader once; no embedded remote tool or new service.; 2026-11-04 PA2D user authorizes original-host launch guide, same-site loader once, no remote game iframe.; 2026-11-05 HOA-EXEC user-authorized GAME_HUB four ordinary pages inherit the exact same-site loader once; no new network/slot; scoped404 excluded.; 2026-11-05 PI-EXEC user authorizes original-host playable landing, same-site loader once; no new network/slot/frame-service.; 2026-11-05 PV-EXEC user authorizes original-host playable landing, same-site loader once; no new network/slot/frame-service.; 2026-11-05 PSOL-EXEC user authorizes original-host playable landing, same-site loader once; no new network/slot/frame-service.; 2026-11-05 VS-EXEC user authorizes three qualified ordinary pages, same-site loader once, no new slots/network.",
       "include": [
         "database/enemies/index.html",
         "database/enemies/wisp/index.html",
@@ -473,7 +473,10 @@
         "poke-isaac/index.html",
         "pokeversus/index.html",
         "poke-solaire/index.html",
-        "azeroth-survivors/tier-list/index.html"
+        "azeroth-survivors/tier-list/index.html",
+        "vampire-survivors/index.html",
+        "vampire-survivors/co-op/index.html",
+        "games-like-vampire-survivors/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7725,6 +7728,29 @@
           "tag": "script",
           "attrs": {
             "src": "/assets/poke-solaire/play.js"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "vs-compatibility",
+      "kind": "functional",
+      "enabled": true,
+      "authorization": "2026-11-05 VS-EXEC local device/storefront compatibility check. No storage or network.",
+      "include": [
+        "vampire-survivors/co-op/index.html"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "/assets/vampire-survivors/compatibility.js"
           },
           "boolean_attrs": [
             "defer"
