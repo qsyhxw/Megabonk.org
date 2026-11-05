@@ -45,6 +45,8 @@ def localized_pages(shell, ext):
     for lang, copy in COPY.items():
         body = language_links()
         body += '<header class="article-head" id="guide"><h1>'+copy['h1']+'</h1><div class="answer"><p>'+copy['intro']+'</p></div><p class="meta">Megabonk.org · '+copy['sources']+'</p><div class="actions">'+ext('https://wow.aethus.pl/',copy['original'])+'</div></header>'
+        if lang == 'ru':
+            body += '<p><a href="'+P+'ru/builds/">Билды на русском: девять классов, таланты и экипировка →</a></p>'
         body += '<div class="article-layout"><aside class="toc" aria-label="'+copy['sections'][0]+'">'
         for anchor, title in zip(['start','loading','edition','sources'],copy['sections']):
             body += '<a href="#'+anchor+'">'+title+'</a>'
