@@ -28,4 +28,6 @@ def write_html(path, text, **kwargs):
                 path.as_posix().endswith('/privacy/index.html')):
             if 'id="umami-analytics"' not in text:
                 text = text.replace('</body>', NOTICE + '\n</body>', 1)
+        from game_seo import edit as edit_seo
+        text = edit_seo(path, text)
     return path.write_text(text, **kwargs)
