@@ -25,8 +25,8 @@ def catalog():
   variants=g['sizes'];stem=g['image'];w=max(variants)
   srcset=', '.join(f'{stem}-{v}.webp {v}w' for v in variants)
   extra=''.join(f'<a href="{u}">{escape(t)}</a>' for t,u in g.get('tasks',[]))
-  credit=escape(g['credit'])+(' '+escape(g['host']) if g.get('host') else '')
-  cards.append(f'<article class="game-card" data-game="{g["id"]}" id="game-{g["id"]}"><a class="game-card-main" href="{g["url"]}"><img src="{stem}-{min(variants)}.webp" srcset="{srcset}" sizes="(max-width:600px) calc(100vw - 40px), (max-width:1000px) 45vw, 280px" width="{g["width"]}" height="{g["height"]}" loading="lazy" alt="{escape(g["alt"],quote=True)}"><div><h3>{escape(g["name"])}</h3><p>{escape(g["summary"])}</p><span>{escape(g.get("action","Game & guides"))} →</span></div></a>{"<div class=game-card-tasks>"+extra+"</div>" if extra else ""}<p class="game-card-credit">{credit}</p></article>')
+  credit=f'<p class="game-card-credit" data-required-credit>{escape(g["required_credit"])}</p>' if g.get('required_credit') else ''
+  cards.append(f'<article class="game-card" data-game="{g["id"]}" id="game-{g["id"]}"><a class="game-card-main" href="{g["url"]}"><img src="{stem}-{min(variants)}.webp" srcset="{srcset}" sizes="(max-width:600px) calc(100vw - 40px), (max-width:1000px) 45vw, 280px" width="{g["width"]}" height="{g["height"]}" loading="lazy" alt="{escape(g["alt"],quote=True)}"><div><h3>{escape(g["name"])}</h3><p>{escape(g["summary"])}</p><span>{escape(g.get("action","Game & guides"))} →</span></div></a>{"<div class=game-card-tasks>"+extra+"</div>" if extra else ""}{credit}</article>')
  return '<section id="more-games" class="section section-alt game-discovery" aria-labelledby="game-discovery-title"><div class="container"><span id="pokebonk-guide"></span><div class="section-heading"><h2 id="game-discovery-title">More games</h2><p>Discover related games, their starting guides and edition details.</p></div><div class="game-discovery-grid">'+''.join(cards)+'</div></div></section>'
 
 def div_end(text,start):

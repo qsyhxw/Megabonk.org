@@ -18,7 +18,7 @@ class Doc(HTMLParser):
   if t=='nav':self.n=False
 
 class RecommendationCards(HTMLParser):
- def __init__(self):super().__init__();self.articles=[];self.links=[];self.count=0
+ def __init__(self):super().__init__();self.articles=[];self.links=[];self.count=0;self.routine_credits=0
  def handle_starttag(self,t,attrs):
   a=dict(attrs)
   if t=='article':
@@ -26,6 +26,7 @@ class RecommendationCards(HTMLParser):
    self.articles.append(active)
    self.count+=int(active)
   if t=='a' and any(self.articles):self.links.append(a)
+  if any(self.articles) and set(a.get('class','').split())&{'game-card-credit','play-rec-caption'} and 'data-required-credit' not in a:self.routine_credits+=1
  def handle_endtag(self,t):
   if t=='article' and self.articles:self.articles.pop()
 
@@ -37,6 +38,7 @@ def check():
   if Path(name).suffix.lower() not in {'.html','.htm'}:continue
   p=RecommendationCards();p.feed((ROOT/name).read_text(encoding='utf8'))
   if p.count:card_pages+=1;card_count+=p.count
+  if p.routine_credits:errors.append(name+': routine source/date footers must not be generated on recommendation cards')
   for a in p.links:
    href=a.get('href','')
    if not href.startswith('/') or href.startswith('//') or a.get('target') or any(k.startswith('on') for k in a):

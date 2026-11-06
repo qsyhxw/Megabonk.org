@@ -30,6 +30,14 @@ class CitationModes(unittest.TestCase):
         notes = '<section id="sources"><h2>Checks</h2><p>One check.</p></section>'
         self.assertIn(notes, self.render('inline', notes))
 
+    def test_self_explanatory_image_needs_no_visible_caption(self):
+        html = self.render('none')
+        self.assertNotIn('<figcaption', html)
+        self.assertNotIn('https://example.com/game', html)
+        self.assertNotIn('source-1', html)
+        self.assertIn('alt="Real game menu"', html)
+        self.assertIn('href="/assets/menu-640.webp"', html)
+
     def test_numbered_source_is_reused(self):
         notes = '<section id="sources"><ol><li id="source-7"><a href="https://example.com/game">Original game</a></li></ol></section>'
         html = self.render('numbered', notes)

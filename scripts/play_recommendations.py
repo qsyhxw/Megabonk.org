@@ -20,8 +20,11 @@ def recommendations(current, lang='en'):
         action = escape(game.get('action', 'Play ' + game['name']))
         widths = game.get('image_sizes', [800, 1280])
         srcset = ', '.join(f'{e["image"]}-{w}.webp {w}w' for w in widths)
-        cards.append(f'''<article class="play-rec-card"><a class="play-rec-link" href="{e['url']}"><img src="{e['image']}-{min(widths)}.webp" srcset="{srcset}" sizes="(max-width: 600px) calc(100vw - 36px), 480px" width="{e.get('width', '1280')}" height="{e.get('height', '800')}" loading="lazy" alt="{e['alt']}"><div><h3>{e['name']}</h3><p>{e['summary']}</p><span class="play-rec-action">{action} <span aria-hidden="true">→</span></span></div></a><p class="play-rec-caption">{e['caption']} {e['host']}</p></article>''')
-    heading = locale.get('heading', ['YOUR NEXT GAME','More games to play','Choose another browser game on Megabonk.org. Each card identifies its host and gameplay.'])
+        # Routine provenance stays in the source data. Only an explicit credit
+        # requirement gets a visible footer; it never becomes an external link.
+        credit = f'<p class="play-rec-caption" data-required-credit>{e["required_credit"]}</p>' if game.get('required_credit') else ''
+        cards.append(f'''<article class="play-rec-card"><a class="play-rec-link" href="{e['url']}"><img src="{e['image']}-{min(widths)}.webp" srcset="{srcset}" sizes="(max-width: 600px) calc(100vw - 36px), 480px" width="{e.get('width', '1280')}" height="{e.get('height', '800')}" loading="lazy" alt="{e['alt']}"><div><h3>{e['name']}</h3><p>{e['summary']}</p><span class="play-rec-action">{action} <span aria-hidden="true">→</span></span></div></a>{credit}</article>''')
+    heading = locale.get('heading', ['YOUR NEXT GAME','More games to play','Choose another browser game and find its play or starting guide.'])
     return '<section class="play-recommendations" id="more-games" aria-labelledby="more-games-heading" data-play-background><div class="play-rec-heading"><p>'+escape(heading[0])+'</p><h2 id="more-games-heading">'+escape(heading[1])+'</h2><p>'+escape(heading[2])+'</p></div><div class="play-rec-grid">' + ''.join(cards) + '</div></section>'
 
 def stylesheet(html):
