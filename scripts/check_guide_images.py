@@ -26,6 +26,14 @@ def check():
    if not asset.exists() or asset.read_bytes()[:4]!=b'RIFF':errors.append(route+': invalid WebP '+path)
    if path not in text:errors.append(route+': missing responsive source '+path)
   if 'og:image' not in text or m['stem']+'-'+str(max(m['sizes']))+'.webp' not in text:errors.append(route+': missing actual page image')
+ # Original PNGs retain their complete source pixels and their own provenance map.
+ for name,m in json.loads((ROOT/'data/pokerogue-media.json').read_text(encoding='utf8')).items():
+  asset=ROOT/'assets/pokerogue'/name
+  if not asset.exists() or asset.read_bytes()[:8]!=b'\x89PNG\r\n\x1a\n':errors.append(name+': missing original PNG');continue
+  import struct
+  if list(struct.unpack('>II',asset.read_bytes()[16:24]))!=m['dimensions']:errors.append(name+': unexpected original dimensions')
+  page=(ROOT/m['page']).read_text(encoding='utf8')
+  if '/assets/pokerogue/'+name not in page or not m.get('source'):errors.append(name+': missing page/provenance association')
  for e in errors:print('FAIL',e)
  print(('PASS' if not errors else 'FAIL')+f': {len(data["pages"])} content pages / {len(data["media"])} reviewed game images; all responsive assets, descriptions and generated figures checked. Relevance and visual readability require browser review.')
  return int(bool(errors))
