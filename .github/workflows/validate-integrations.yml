@@ -31,7 +31,9 @@ jobs:
       - name: Rebuild Survivor Ace task pages
         run: python scripts/build_survivor_ace.py
       - name: Rebuild Azeroth Survivors guides
-        run: python scripts/build_azeroth_survivors.py
+        run: |
+          python scripts/build_azeroth_survivors.py
+          python scripts/check_azeroth_editorial.py
       - name: Verify Azeroth planner rules and safe imports
         run: node scripts/test_azeroth_planner.cjs
       - name: Rebuild Arena of Champions playable entry

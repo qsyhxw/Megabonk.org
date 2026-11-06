@@ -4,6 +4,7 @@ from pathlib import Path
 from html import escape
 import re,json
 from guide_images import decorate
+from azeroth_editorial import editorial
 from azeroth_survivors_iteration import apply
 from azeroth_survivors_expansion import update, new_pages
 from azeroth_survivors_play import play_page
@@ -117,6 +118,6 @@ def build():
   text=connect_languages(path,text)
   if path==P+'ru/builds/':text=decorate_russian_builds(text)
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
-  file.parent.mkdir(parents=True,exist_ok=True);write_html(file, planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text))))),encoding='utf8')
+  file.parent.mkdir(parents=True,exist_ok=True);write_html(file, editorial(path,planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text)))))),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Original-host external Play entry; no copied client.')
 if __name__=='__main__':build()
