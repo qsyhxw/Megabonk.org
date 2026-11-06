@@ -12,7 +12,7 @@ def games():return json.loads((ROOT/'data/game-sections.json').read_text(encodin
 
 def navigation(route):
  if route.startswith('/risk-of-rain-2/'):
-  pairs=[('Crossplay','/risk-of-rain-2/crossplay/'),('Gold Portal','/risk-of-rain-2/gold-portal/'),('Испытание (RU)','/risk-of-rain-2/ru/bulwarks-ambry/')]
+  pairs=[('Overview','/risk-of-rain-2/'),('Crossplay','/risk-of-rain-2/crossplay/'),('Gold Portal','/risk-of-rain-2/gold-portal/'),('Испытание (RU)','/risk-of-rain-2/ru/bulwarks-ambry/')]
  elif route.startswith('/pokedive/'):
   pairs=[('Start here','/pokedive/'),('Mobile','/pokedive/mobile/'),('Shinies','/pokedive/shinies/')]
  else:pairs=[('Browser demo','/vampire-survivors/'),('Co-op','/vampire-survivors/co-op/')]
