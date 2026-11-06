@@ -70,7 +70,9 @@ jobs:
           python scripts/build_game_discovery.py
           python scripts/check_game_navigation.py
       - name: Verify page-specific game images
-        run: python scripts/check_guide_images.py
+        run: |
+          python scripts/check_guide_images.py
+          python scripts/test_image_citation_modes.py
       - name: Verify public-source sync rejects unsafe updates
         run: |
           python scripts/test_pokebonk_sync.py

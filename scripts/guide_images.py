@@ -12,13 +12,15 @@ def decorate(path,html):
  if not page:return html
  assert 'class="game-image' not in html,path+' double image insertion'
  m=DATA['media'][page['image']]
+ mode=page.get('citation_mode','numbered')
+ assert mode in ('numbered','inline'),path+' unknown image citation mode'
  section=re.search(r'<section\b[^>]*id="sources"[^>]*>.*?</section>',html,re.S)
- assert section,path+' missing source section'
+ if mode=='numbered':assert section,path+' missing source section'
  ident=None;number=None
- for item in re.finditer(r'<li\b[^>]*id="(source-(\d+))"[^>]*>(.*?)</li>',section[0],re.S):
+ for item in re.finditer(r'<li\b[^>]*id="(source-(\d+))"[^>]*>(.*?)</li>',section[0] if mode=='numbered' else '',re.S):
   if any(key(url)==key(m['source']) for url in re.findall(r'href="([^"]+)"',item[3])):
    ident=item[1];number=item[2];break
- if not ident:
+ if mode=='numbered' and not ident:
   number=str(max([int(n) for n in re.findall(r'id="source-(\d+)"',section[0])]+[0])+1)
   ident='source-'+number
   item=f'<li id="{ident}"><a href="{escape(m["source"],quote=True)}" target="_blank" rel="noopener noreferrer">{escape(m["label"])} ↗</a> — {escape(m["detail"])}</li>'
@@ -37,7 +39,8 @@ def decorate(path,html):
  detail=page.get('detail',detail)
  credit=page.get('credit',m['credit'])
  portrait=' portrait' if m['height']>m['width'] else ''
- figure=f'''<figure class="game-image{portrait}" data-game-image="{escape(page["image"])}"><a href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener" aria-label="{zoom}"><img src="{source}" srcset="{srcset}" sizes="(max-width: 800px) calc(100vw - 36px), {'420px' if portrait else '1000px'}" width="{w}" height="{h}" loading="lazy" alt="{escape(page["alt"],quote=True)}"></a><figcaption>{escape(credit)}. {escape(detail)} {escape(page["purpose"])} <a class="ref" href="#{ident}" aria-label="Image source {number}">[{number}]</a> <a class="image-zoom" href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener">{zoom} ↗</a></figcaption></figure>'''
+ citation=(f'<a class="ref" href="#{ident}" aria-label="Image source {number}">[{number}]</a>' if mode=='numbered' else f'<a href="{escape(m["source"],quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="{escape(m["label"],quote=True)} (external website, opens in a new tab)">{escape(m["label"])} ↗</a>')
+ figure=f'''<figure class="game-image{portrait}" data-game-image="{escape(page["image"])}"><a href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener" aria-label="{zoom}"><img src="{source}" srcset="{srcset}" sizes="(max-width: 800px) calc(100vw - 36px), {'420px' if portrait else '1000px'}" width="{w}" height="{h}" loading="lazy" alt="{escape(page["alt"],quote=True)}"></a><figcaption>{escape(credit)}. {escape(detail)} {escape(page["purpose"])} {citation} <a class="image-zoom" href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener">{zoom} ↗</a></figcaption></figure>'''
  anchor=page['anchor']
  target=re.search(r'<section\b[^>]*id="'+re.escape(anchor)+r'"[^>]*>\s*(?:<div[^>]*>)?(?:<h[23][^>]*>.*?</h[23]>)?',html,re.S) if anchor else None
  if not target:
