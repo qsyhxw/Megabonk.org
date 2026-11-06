@@ -40,3 +40,18 @@ assert 'This section adds no analytics tags.' not in privacy
 assert privacy.count('id="umami-analytics"') == 1
 assert privacy.index('id="umami-analytics"') < privacy.index('</article>')
 print(f'PASS: {len(records)} editorial pages, source identities, fragment links, natural citations and privacy disclosure')
+
+current = json.loads((ROOT / 'data/pokebonk-main-first.json').read_text(encoding='utf8'))
+for slug, record in current['pages'].items():
+    text = (ROOT / 'pokebonk' / slug / 'index.html').read_text(encoding='utf8')
+    assert record['review'] in text, slug
+    assert current['source'] in text, slug
+    for old, new in record.get('replacements', []):
+        assert old not in text and new in text, slug
+    if record.get('addition'):
+        assert 'id="current-check"' in text and record['addition'] in text, slug
+    if record.get('image'):
+        media = current['media'][record['image']]
+        assert media['asset'] in text, slug
+        assert (ROOT / media['asset'].lstrip('/')).exists(), slug
+print(f'PASS: {len(current["pages"])} current access/issue corrections and task images preserved')
