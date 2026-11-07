@@ -487,7 +487,8 @@
         "risk-of-rain-2/index.html",
         "pokerogue/mobile/index.html",
         "pokerogue/dark-deal/index.html",
-        "pokerogue/trash-to-treasure/index.html"
+        "pokerogue/trash-to-treasure/index.html",
+        "pokerogue/index.html"
       ],
       "exclude": [],
       "checks": [
@@ -7793,6 +7794,29 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "pokerogue-play",
+      "kind": "local-functional",
+      "enabled": true,
+      "authorization": "2026-11-06 user requested original-host playable PokeRogue hub; click-load, expand, hide and restore.",
+      "include": [
+        "pokerogue/index.html"
+      ],
+      "exclude": [],
+      "checks": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "/assets/pokerogue/play.js"
+          },
+          "boolean_attrs": [
+            "defer"
+          ],
+          "location": "head",
+          "count": 1
+        }
+      ]
     }
   ],
   "change_reference": "ROADMAP PD-EXEC 2026-11-05: 3 ordinary task pages inherit existing same-site integrations; preserve concurrently published PB Ranked scope from7b18dd7e.; ROADMAP ROR2-EXEC all3same-site ordinary tasks and local compatibility script 2026-11-06; ROADMAP ROR2-HUB 2026-11-06 one ordinary hub inherits existing AdSense.",
@@ -8597,7 +8621,22 @@
         "location": "body"
       }
     ],
-    "azeroth-survivors/tier-list/index.html": []
+    "azeroth-survivors/tier-list/index.html": [],
+    "pokerogue/index.html": [
+      {
+        "tag": "iframe",
+        "attrs": {
+          "id": "game-frame",
+          "title": "PokeRogue original game hosted by pokerogue.net",
+          "data-src": "https://pokerogue.net/",
+          "allow": "autoplay; fullscreen; gamepad",
+          "allowfullscreen": null,
+          "referrerpolicy": "strict-origin-when-cross-origin",
+          "hidden": null
+        },
+        "location": "body"
+      }
+    ]
   },
   "container_baseline_revision": "59ea81c1",
   "container_inventory_note": "Supplementary exact container inventory from preserved pre-change Git, not edited output; initial script baseline remains immutable."
