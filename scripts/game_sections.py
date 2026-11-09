@@ -15,7 +15,7 @@ def navigation(route):
   pairs=[('Overview','/risk-of-rain-2/'),('Crossplay','/risk-of-rain-2/crossplay/'),('Gold Portal','/risk-of-rain-2/gold-portal/'),('Испытание (RU)','/risk-of-rain-2/ru/bulwarks-ambry/')]
  elif route.startswith('/pokedive/'):
   pairs=[('Start here','/pokedive/'),('Mobile','/pokedive/mobile/'),('Shinies','/pokedive/shinies/')]
- else:pairs=[('Browser demo','/vampire-survivors/'),('Co-op','/vampire-survivors/co-op/')]
+ else:pairs=[('Start & guides','/vampire-survivors/'),('Evolutions','/vampire-survivors/evolutions/'),('Collection 1.0','/vampire-survivors/collection-1-0/'),('Co-op','/vampire-survivors/co-op/')]
  pairs.append(('More games','/#more-games'))
  return ''.join(f'<a href="{u}"'+(' aria-current="page"' if u==route else '')+f'>{escape(t)}</a>' for t,u in pairs)
 
