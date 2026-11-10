@@ -16,7 +16,7 @@ def redesign(html):
 <a class="task" href="/vampire-survivors/collection-1-0/"><span class="task-number">03</span><span class="task-tag">COLLECTION CHECKLIST</span><h3>Find the missing entry.</h3><p>Check Collection 1.0 gaps, Gemini counterparts and the Queen Sigma exceptions.</p><span class="task-link">Check your collection <span aria-hidden="true">→</span></span></a>
 </div><div class="coop-strip"><div><span class="task-tag">PLAYING TOGETHER?</span><h3>Check both copies first.</h3><p>Choose both players’ devices and stores to check the documented co-op route.</p></div><a class="button secondary" href="/vampire-survivors/co-op/">Check co-op compatibility <span aria-hidden="true">→</span></a></div>
 <p class="scope-note">These guides cover the tasks listed above. The evolution guide covers common starting recipes. All-DLC coverage remains incomplete.</p>
-</section>'''
+<div class="batch-guides"><h3>Choose your next objective</h3><ul><li><a href="/vampire-survivors/unlocks/">Base-game unlock roadmap</a></li><li><a href="/vampire-survivors/how-to-beat-death/">Beat the 30-minute Red Death</a></li><li><a href="/vampire-survivors/secret-characters/">Selected secret-character gameplay routes</a></li><li><a href="/vampire-survivors/dlc/">Compare DLC packs</a></li><li><a href="/vampire-survivors/ode-to-castlevania/">Castlevania gate checkpoints</a></li><li><a href="/vampire-survivors/sonic-whip/">Sonic Whip unlock and evolution</a></li></ul></div></section>'''
     html = re.sub(r'<section id="guides">.*?</section>', '', html, count=1, flags=re.S)
     start = html.index('<header class="article-head"')
     end = html.index('</header>', start) + len('</header>')
