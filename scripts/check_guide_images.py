@@ -20,6 +20,17 @@ def check():
   a=doc.pictures[0];m=data['media'][p['image']]
   if not a.get('alt') or not a.get('width','').isdigit() or not a.get('height','').isdigit():errors.append(route+': missing alt/dimensions')
   if p['alt']!=a.get('alt'):errors.append(route+': wrong page-specific image description')
+  if p.get('citation_mode')=='none' and 'caption_text' in p:
+   import re
+   from html import unescape
+   figures=re.findall(r'<figure\b[^>]*data-game-image[^>]*>.*?</figure>',text,re.S)
+   for figure in figures:
+    caption=re.search(r'<figcaption>(.*?)</figcaption>',figure,re.S)
+    expected=p.get('caption_text','')
+    if (unescape(caption[1]) if caption else '')!=expected:errors.append(route+': visible caption differs from reviewed short caption')
+    if caption and re.search(r'<a\b',caption[1]):errors.append(route+': unexpected caption link')
+    if 'image-zoom' in figure:errors.append(route+': redundant image zoom text')
+    if re.search(r'href="https?://',figure):errors.append(route+': game image leaves site')
   if a.get('loading')!=p.get('loading','lazy'):errors.append(route+': image loading priority differs from reviewed viewport plan')
   for w in m['sizes']:
    path=m['stem']+'-'+str(w)+'.webp';asset=ROOT/path.lstrip('/')

@@ -5,11 +5,11 @@ import guide_images
 
 
 class CitationModes(unittest.TestCase):
-    def render(self, mode, bibliography=''):
+    def render(self, mode, bibliography='', caption=''):
         data = {
             'pages': {'/sample/': {'image': 'sample', 'anchor': 'start',
                                   'alt': 'Real game menu', 'purpose': '',
-                                  'citation_mode': mode}},
+                                  'citation_mode': mode, 'caption_text': caption}},
             'media': {'sample': {'source': 'https://example.com/game',
                                  'label': 'Original game', 'detail': 'Menu, checked 5 November 2026.',
                                  'credit': 'Creator', 'stem': '/assets/menu', 'sizes': [480, 640],
@@ -44,6 +44,13 @@ class CitationModes(unittest.TestCase):
         self.assertIn('href="#source-7"', html)
         self.assertEqual(html.count('id="source-7"'), 1)
         self.assertNotIn('id="source-8"', html)
+
+    def test_short_plain_caption_has_no_source_or_zoom_link(self):
+        html = self.render('none', caption='Cavallo before transformation.')
+        self.assertIn('<figcaption>Cavallo before transformation.</figcaption>', html)
+        self.assertNotIn('https://example.com/game', html)
+        self.assertNotIn('image-zoom', html)
+        self.assertIn('href="/assets/menu-640.webp"', html)
 
 
 if __name__ == '__main__':

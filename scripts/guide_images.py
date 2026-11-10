@@ -42,7 +42,10 @@ def decorate(path,html):
  portrait=' portrait' if m['height']>m['width'] else ''
  citation=(f'<a class="ref" href="#{ident}" aria-label="Image source {number}">[{number}]</a>' if mode=='numbered' else f'<a href="{escape(m["source"],quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="{escape(m["label"],quote=True)} (external website, opens in a new tab)">{escape(m["label"])} ↗</a>')
  figure=f'''<figure class="game-image{portrait}" data-game-image="{escape(page["image"])}"><a href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener" aria-label="{zoom}"><img src="{source}" srcset="{srcset}" sizes="(max-width: 800px) calc(100vw - 36px), {'420px' if portrait else '1000px'}" width="{w}" height="{h}" loading="lazy" alt="{escape(page["alt"],quote=True)}"></a><figcaption>{escape(credit)}. {escape(detail)} {escape(page["purpose"])} {citation} <a class="image-zoom" href="{m["stem"]}-{w}.webp" target="_blank" rel="noopener">{zoom} ↗</a></figcaption></figure>'''
- if mode=='none':figure=re.sub(r'<figcaption>.*?</figcaption>','',figure,flags=re.S)
+ if mode=='none':
+  caption=page.get('caption_text','')
+  replacement='<figcaption>'+escape(caption)+'</figcaption>' if caption else ''
+  figure=re.sub(r'<figcaption>.*?</figcaption>',lambda _:replacement,figure,flags=re.S)
  anchor=page['anchor']
  target=re.search(r'<section\b[^>]*id="'+re.escape(anchor)+r'"[^>]*>\s*(?:<div[^>]*>)?(?:<h[23][^>]*>.*?</h[23]>)?',html,re.S) if anchor else None
  if not target:
