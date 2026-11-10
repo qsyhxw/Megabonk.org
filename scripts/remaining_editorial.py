@@ -15,6 +15,38 @@ def records():
  p=ROOT/'data/remaining-editorial.json'
  return json.loads(p.read_text(encoding='utf8')) if p.exists() else {}
 
+@lru_cache(maxsize=1)
+def caption_records():
+    return json.loads((ROOT/'data/game-image-captions.json').read_text(encoding='utf8'))
+
+
+def edit_captions(path, text):
+    """Apply reviewed image captions after legacy source/citation rendering.
+
+    Original caption HTML retains provenance in the versioned policy. Unknown
+    images and changed captions require review instead of silently losing credit.
+    """
+    try:
+        key = Path(path).resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return text
+    rules = {entry['image']: entry for entry in caption_records().get(key, [])}
+
+    def figure(match):
+        html = match[0]
+        image = re.search(r'<img\b[^>]*\bsrc="([^"]+)"', html)
+        caption = re.search(r'<figcaption[^>]*>(.*?)</figcaption>', html, re.S)
+        if not image or not caption or image[1] not in rules:
+            return html
+        entry = rules[image[1]]
+        expected = escape(entry['caption'])
+        if caption[1] not in (entry['original_html'], expected):
+            raise ValueError('Image caption changed; review required: '+key)
+        replacement = '<figcaption>'+expected+'</figcaption>' if expected else ''
+        return html.replace(caption[0], replacement, 1)
+
+    return re.sub(r'<figure\b[^>]*>.*?</figure>', figure, text, flags=re.S)
+
 def edit(path,text):
  try:key=Path(path).resolve().relative_to(ROOT).as_posix()
  except ValueError:return text

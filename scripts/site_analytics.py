@@ -21,8 +21,9 @@ def write_html(path, text, **kwargs):
     if path.suffix.lower() in ('.html', '.htm'):
         from game_sections import normalize
         text = normalize(path, text)
-        from remaining_editorial import edit
+        from remaining_editorial import edit, edit_captions
         text = edit(path, text)
+        text = edit_captions(path, text)
         text = inject(text)
         if (path.name == 'privacy-policy.html' or
                 path.as_posix().endswith('/privacy/index.html')):

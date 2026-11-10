@@ -2,9 +2,9 @@ name: Validate published integrations
 on:
   push:
     branches: [main]
-    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', 'data/azeroth-*.json', 'data/guide-images.json', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', 'data/azeroth-*.json', 'data/guide-images.json', 'data/game-image-captions.json', '.github/workflows/validate-integrations.yml']
   pull_request:
-    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', 'data/azeroth-*.json', 'data/guide-images.json', '.github/workflows/validate-integrations.yml']
+    paths: ['**.html', '**.htm', 'scripts/**', 'assets/**', 'config/**', 'data/pokebonk-*.json', 'data/azeroth-*.json', 'data/guide-images.json', 'data/game-image-captions.json', '.github/workflows/validate-integrations.yml']
 permissions:
   contents: read
 jobs:
@@ -52,6 +52,8 @@ jobs:
         run: python scripts/build_pokearena.py
       - name: Rebuild reviewed Pokepath tasks
         run: python scripts/build_pokepath.py
+      - name: Rebuild reviewed Brotato tasks
+        run: python scripts/build_brotato.py
       - name: Rebuild Pokelit original-host entry
         run: python scripts/build_pokelit.py
       - name: Rebuild PB Ranked original-host entry
@@ -88,6 +90,7 @@ jobs:
         run: |
           python scripts/check_guide_images.py
           python scripts/test_image_citation_modes.py
+          python scripts/check_game_image_captions.py
       - name: Verify public-source sync rejects unsafe updates
         run: |
           python scripts/test_pokebonk_sync.py
