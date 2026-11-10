@@ -2,7 +2,6 @@
 from pathlib import Path
 from html import escape
 import json
-from PIL import Image
 from site_analytics import write_html
 from brotato_content import PAGES,STORE,BASE,NEWS,PRESS,link,p,table
 ROOT=Path(__file__).resolve().parents[1]
