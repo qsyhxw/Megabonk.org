@@ -565,3 +565,43 @@ th {
     left:0;
     top:0
 }
+/* Keep shared discovery cards within this homepage's palette. */
+.vs-home .play-recommendations {
+    max-width:none;
+    margin-top:32px;
+}
+.vs-home .play-rec-grid {
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+}
+.vs-home .play-rec-card {
+    background:var(--white);
+    border-color:var(--line);
+    border-radius:2px;
+    box-shadow:none;
+}
+.vs-home .play-rec-link h3 {
+    color:var(--ink);
+    font:500 24px/1.2 var(--heading);
+}
+.vs-home .play-rec-link p,
+.vs-home .play-rec-heading>p:last-child {
+    color:var(--muted);
+}
+.vs-home .play-rec-action,
+.vs-home .play-rec-heading>p:first-child {
+    color:var(--green);
+}
+.vs-home .play-rec-link img {
+    border-color:var(--line);
+}
+@media(max-width:900px) {
+    .vs-home .play-rec-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+@media(max-width:600px) {
+    .vs-home .play-rec-grid {
+        grid-template-columns:1fr;
+    }
+}
