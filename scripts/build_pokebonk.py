@@ -180,6 +180,8 @@ def build():
     apply_editorial(globals())
     from pokebonk_main_first import apply_main_first
     apply_main_first(globals())
+    from pokebonk_november import apply_november
+    apply_november(globals())
     error=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">PokeBonk</a> / 404</nav><section class="legal"><p class="eyebrow">404 / Off the trail</p><h1>This path ends here.</h1><p>The page may have moved, or the address may be incomplete. Your next guide is still on the map.</p><div class="actions"><a class="button" href="{P}">Back to PokeBonk →</a><a class="button secondary" href="{P}#guides">Browse the guides</a></div></section>'
     out=ROOT/'pokebonk/404.html';out.parent.mkdir(exist_ok=True);write_html(out, shell(P+'404','Page not found | PokeBonk Guide','This PokeBonk guide path could not be found. Return to the guide homepage or browse the available player notes.',error,noindex=True),encoding='utf-8')
     for path,page in PAGES.items():
