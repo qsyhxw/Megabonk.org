@@ -77,6 +77,7 @@ def evolutions():
     ]
 
 def build():
+    from warhammer_home import redesign
     from warhammer_launch import apply
     from warhammer_gsc_tasks import build as build_tasks, connect
     old = ROOT/'warhammer-survivors/co-op/index.html'
@@ -89,5 +90,8 @@ def build():
     for route, title, description, heading, answer, sections, stem, tool in pages:
         file = ROOT/route.strip('/')/'index.html'
         file.parent.mkdir(parents=True, exist_ok=True)
-        write_html(file, connect(route, apply(route, render(template, route, title, description, heading, answer, sections, stem, tool))), encoding='utf8')
+        document = connect(route, apply(route, render(template, route, title, description, heading, answer, sections, stem, tool)))
+        if route == BASE:
+            document = redesign(document)
+        write_html(file, document, encoding='utf8')
     build_tasks((ROOT/'warhammer-survivors/co-op/index.html').read_text(encoding='utf8'))
