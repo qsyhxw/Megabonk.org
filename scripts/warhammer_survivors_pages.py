@@ -77,9 +77,10 @@ def evolutions():
     ]
 
 def build():
+    from warhammer_launch import apply
     old = ROOT/'warhammer-survivors/co-op/index.html'
     template = old.read_text(encoding='utf8')
-    write_html(old, navigation(template), encoding='utf8')
+    write_html(old, apply(BASE+'co-op/', navigation(template)), encoding='utf8')
     pages = [
         (BASE, 'Warhammer Survivors Guide: Demo, Release & Game Pass', 'Choose how to try Warhammer Survivors, check November 10 release and Game Pass access, then find October-demo weapon evolutions or co-op answers.', 'Warhammer Survivors', '<p><strong>The full game is planned for 10 November 2026.</strong> Try the current PC demo, check your Game Pass access, or use the October-demo evolution guide to plan your next run.</p>', overview(), 'squad', False),
         (BASE+'evolutions/', 'Warhammer Survivors Evolutions: October Demo Recipes', 'Find 11 reported Warhammer Survivors weapon evolution recipes, match a companion to your universe, and check upgrade, chest and old-demo differences.', 'Warhammer Survivors weapon evolutions', '<p><strong>Match a weapon with its companion, then check the reported upgrade and chest conditions.</strong> The October demo has 11 unique community-reported pairings below. Use the universe filter to find the pair relevant to your run.</p>', evolutions(), 'combat', True),
@@ -87,4 +88,4 @@ def build():
     for route, title, description, heading, answer, sections, stem, tool in pages:
         file = ROOT/route.strip('/')/'index.html'
         file.parent.mkdir(parents=True, exist_ok=True)
-        write_html(file, render(template, route, title, description, heading, answer, sections, stem, tool), encoding='utf8')
+        write_html(file, apply(route, render(template, route, title, description, heading, answer, sections, stem, tool)), encoding='utf8')
