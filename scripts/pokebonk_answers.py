@@ -45,13 +45,18 @@ def tier_grid():
     for tier in ('S', 'A', 'B', 'C'):
         members = [r for r in rows if r.get('tier') == tier]
         cells = ''.join(
-            f'<a class="tier-cell" href="{("/pokebonk/builds/#build-" + _slug(r["name"])) if r["name"] in built else "/pokebonk/pokemon/"}" title="{escape(r["name"])}">'
+            f'<a class="tier-cell" data-region="{r.get("region", "kanto")}" href="{("/pokebonk/builds/#build-" + _slug(r["name"])) if r["name"] in built else "/pokebonk/pokemon/"}" title="{escape(r["name"])}">'
             f'{_img(r["id"], r["name"], 56)}<span>{escape(r["name"])}</span></a>' for r in members)
         groups.append(f'<div class="tier-row tier-{tier}"><div class="tier-label"><strong>{tier}</strong>'
                       f'<small>{TIER_LABEL[tier]}</small></div><div class="tier-cells">{cells}</div></div>')
     return ('<section class="tier-grid" id="tier-grid" aria-label="PokeBonk tier list">'
-            f'<p class="tier-note">All 79 League partners · ranked by combining three public tier lists '
-            f'(Season 2 data). Tap an S or A partner for its build.</p>' + ''.join(groups) + '</section>')
+            f'<p class="tier-note">All {len(rows)} League partners · {escape(data["version"])} · '
+            'Tap an S or A partner for its build.</p>'
+            '<fieldset class="tier-filter"><legend class="sr-only">Filter by region</legend>'
+            '<input type="radio" name="tier-region" id="tr-all" checked><label for="tr-all">All</label>'
+            '<input type="radio" name="tier-region" id="tr-kanto"><label for="tr-kanto">Kanto (Gen 1)</label>'
+            '<input type="radio" name="tier-region" id="tr-johto"><label for="tr-johto">Johto (Season 3)</label></fieldset>'
+            + ''.join(groups) + '</section>')
 
 
 def loadout_card(x, compact=False):
@@ -132,13 +137,23 @@ def _lede(html, text):
     return LEDE.sub(lambda m: m[1] + '<p class="answer">' + text + '</p>', html, count=1)
 
 
+META = re.compile(r'<p class="meta">[^<]*</p>')
+
+
+def _meta(html, version, date='November 13, 2026'):
+    return META.sub(f'<p class="meta">Megabonk.org · Updated {date} · Season 3 v{version}</p>', html, count=1)
+
+
 def apply_answers(pages):
-    loads = _load('pokebonk-loadouts.json')['loadouts']
+    ld = _load('pokebonk-loadouts.json')
+    loads = ld['loadouts']
     s = [x['name'] for x in loads if x['tier'] == 'S']
     tl = pages.get('/pokebonk/tier-list/')
     if tl:
-        tl['html'] = _lede(tl['html'], f'Best PokeBonk partners right now: <strong>{", ".join(s[:-1])} and {s[-1]}</strong> (S tier). '
-                           'Bulbasaur and Charmander are the strongest starters. The full S–C board for all 79 League partners is below.')
+        starters = [x['name'] for x in loads if x['name'] in ('Bulbasaur', 'Charmander', 'Squirtle', 'Chikorita', 'Cyndaquil', 'Totodile')][:3]
+        tl['html'] = _lede(tl['html'], f'Best PokeBonk partners in Season 3: <strong>{", ".join(s[:6])}</strong> and {len(s) - 6} more in S tier. '
+                           f'Best starters: {", ".join(starters)}. The full board for all 138 League partners, Kanto and Johto, is below.')
+        tl['html'] = _meta(tl['html'], ld['version'])
         tl['html'] = insert_after_header(tl['html'], tier_grid())
     bd = pages.get('/pokebonk/builds/')
     if bd:
@@ -146,5 +161,6 @@ def apply_answers(pages):
         bd['html'] = _lede(bd['html'], f'The best build to start with is <strong>{escape(top["name"])}</strong>: '
                            f'{", ".join(escape(m["name"]) for m in top["moves"])}, fused into '
                            f'<strong>{escape(top["fusion"]["name"])}</strong>, with {", ".join(escape(i["name"]) for i in top["items"])}. '
-                           'Every S and A tier partner has a copyable build below.')
+                           f'All {len(loads)} S and A tier partners have a copyable Season 3 build below.')
+        bd['html'] = _meta(bd['html'], ld['version'])
         bd['html'] = insert_after_header(bd['html'], builds_block())

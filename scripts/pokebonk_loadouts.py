@@ -16,7 +16,24 @@ from pathlib import Path
 import json
 
 ROOT = Path(__file__).resolve().parents[1]
-REF = json.loads((ROOT / 'data/pokebonk-tools-reference.json').read_text(encoding='utf8'))
+# Season 3 reference when present (v0.9.x); Season 2 file kept for history.
+_S3 = ROOT / 'data/pokebonk-s3-reference.json'
+REF = json.loads((_S3 if _S3.exists() else ROOT / 'data/pokebonk-tools-reference.json').read_text(encoding='utf8'))
+_SPECIES = ROOT / '_private/pb-s3.json'
+SPECIES = {x['id']: x for x in json.loads(_SPECIES.read_text(encoding='utf8'))['species']} if _SPECIES.exists() else {}
+
+
+def evolution_line(member):
+    if member.get('evolution'):
+        return [{'name': ', '.join(e['names']), 'level': e['level']} for e in member['evolution']]
+    line, cur = [], member['id']
+    while True:
+        kids = [x for x in SPECIES.values() if x.get('evoFrom') == cur]
+        if not kids:
+            return line
+        kid = kids[0]
+        line.append({'name': kid['name'], 'level': kid.get('evoLevel')})
+        cur = kid['id']
 TIER = json.loads((ROOT / 'data/pokebonk-consensus-tier.json').read_text(encoding='utf8'))
 
 ITEMS = {i['key']: i for i in REF['items']}
@@ -70,7 +87,8 @@ def loadout(member):
         'fusion': {'name': fusion['name'], 'moves': [title(k) for k in fusion['moves']]} if fusion else None,
         'items': [{'key': k, 'name': title(k), 'desc': ITEMS[k]['desc']} for k in items if k in ITEMS],
         'vitamins': [title(v) for v in vit],
-        'evolution': [{'name': ', '.join(e['names']), 'level': e['level']} for e in member.get('evolution', [])],
+        'evolution': evolution_line(member),
+        'region': member.get('region', 'kanto'),
     }
 
 

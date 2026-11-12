@@ -100,3 +100,13 @@ body[data-format="hub"] .task-grid .task span{display:none}
 @media(max-width:1100px){.build-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:800px){.build-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.build-grid{grid-template-columns:1fr}}
+.tier-filter{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 10px}
+.tier-filter button{font:inherit;font-size:.85rem;padding:5px 12px;border:1.5px solid #182d42;border-radius:999px;background:#fffdf5;color:#182d42;cursor:pointer}
+.tier-filter button[aria-pressed="true"]{background:#182d42;color:#fffdf5}
+.tier-cell[hidden]{display:none}
+.tier-filter{border:0;margin:0;padding:0 16px 10px;display:flex;gap:6px;flex-wrap:wrap}
+.tier-filter input{position:absolute;opacity:0;pointer-events:none}
+.tier-filter label{font-size:.85rem;padding:5px 12px;border:1.5px solid #182d42;border-radius:999px;background:#fffdf5;color:#182d42;cursor:pointer}
+.tier-filter input:checked+label{background:#182d42;color:#fffdf5}
+.tier-filter input:focus-visible+label{outline:2px solid #e66a50;outline-offset:2px}
+.tier-grid:has(#tr-kanto:checked) .tier-cell[data-region="johto"],.tier-grid:has(#tr-johto:checked) .tier-cell[data-region="kanto"]{display:none}
