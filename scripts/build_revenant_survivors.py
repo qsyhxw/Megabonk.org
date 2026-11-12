@@ -107,6 +107,28 @@ HOME = {
 }
 
 
+def homepage():
+    cards = [
+        ('demo-save-transfer', 'tree', 'Continue your Demo save', 'Move your progress to Early Access, then sync it to another PC.'),
+        ('permanent-progression', 'forge', 'Equipment & permanent upgrades', 'See what you keep and prepare your character for the next run.'),
+        ('hard-mode', 'boss', 'Hard Mode & world unlocks', 'Check item rewards and the progression gate for World 5 and beyond.'),
+        ('controller-auto-attack', 'controls', 'Controller & auto attack', 'Check attack modes and identify the input that needs attention.'),
+        ('stuck-after-run', 'battle', 'Stuck after a run', 'Match loading and results-screen problems to reported fixes.'),
+    ]
+    def card(entry):
+        slug, media, title, text = entry
+        return f'<a class="hub-card" href="{BASE}{slug}/"><img src="/assets/revenant-survivors/{media}-480.webp" width="1920" height="1080" loading="lazy" alt=""><div><h3>{title}</h3><p>{text}</p><span>Read guide <span aria-hidden="true">↗</span></span></div></a>'
+    hero = image(HOME['image'], HOME['alt'], HOME['caption']).replace('loading="lazy"', 'fetchpriority="high"')
+    return f'''<main id="main" class="hub-main">
+<section class="hub-hero"><div class="wrap hub-hero-grid"><div class="hub-intro"><p class="eyebrow">Independent player guides</p><h1>{HOME['title']}</h1><p class="hub-lead">Claim a boss’s power. Prepare your next run.</p><p>Find your way into Mongma Studio’s dark-fantasy survivorslike, then plan your upgrades and work through the next obstacle.</p><div class="hub-actions"><a class="hub-button" href="#guides">Explore the guides <span aria-hidden="true">↓</span></a><a class="hub-secondary" href="#start">Get the game</a></div></div>{hero}</div></section>
+<div class="hub-status"><div class="wrap"><span>Steam · Single-player</span><span>Early Access</span><span>Source review · 12 November 2026</span></div></div>
+<section class="wrap hub-section" id="guides"><div class="hub-heading"><div><p class="eyebrow">Your next step</p><h2>Pick up where you left off</h2></div><p>Choose the guide for your current goal.</p></div><div class="hub-feature-grid">{''.join(card(c) for c in cards[:3])}</div></section>
+<section class="hub-start-band" id="start"><div class="wrap hub-start"><div><p class="eyebrow">New to Revenant Survivors</p><h2>Start with the Demo.<br>Bring your progress with you.</h2><p>Try the free Steam Demo or enter the full game’s Early Access release. Boss powers and evolving attacks shape combat, while equipment and permanent upgrades carry your preparation forward.</p><div class="hub-store-links">{link('https://store.steampowered.com/app/4693240/', 'Free Demo on Steam')}{link(STORE, 'Full game on Steam')}</div></div><div class="hub-start-note"><h3>Returning from the Demo</h3><p>Launch the full game first on the PC with your Demo save. Check your imported progress, close the game and finish Steam Cloud syncing before changing computers.</p><a href="{BASE}demo-save-transfer/">Follow the transfer steps →</a></div></div></section>
+<section class="wrap hub-section" id="help"><div class="hub-heading"><div><p class="eyebrow">Get back into the game</p><h2>Help with controls and loading</h2></div></div><div class="hub-help-grid">{''.join(card(c) for c in cards[3:])}</div></section>
+<section class="wrap hub-update" id="versions"><div><h2>Check your edition before applying a fix</h2><p>Full-game hotfix <strong>0.6.2.1</strong> was the latest official update checked on 12 November. Demo and playtest reports use separate version numbers.</p></div><div>{link(HUB, 'Developer announcements')}<p>Guides draw on developer statements and public player reports. Each article gives the source and version scope for its answers.</p></div></section>
+</main>'''
+
+
 def build():
     for page in [HOME] + PAGES:
         route = BASE + (page['slug'] + '/' if page['slug'] else '')
@@ -117,6 +139,13 @@ def build():
         related = ''.join(f'<li><a href="{BASE}{p["slug"] + "/" if p["slug"] else ""}">{p["title"]}</a></li>' for p in PAGES if p != page)
         body += f'<section id="related"><h2>More Revenant Survivors guides</h2><ul>{related}</ul></section>'
         html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(page['title'])}</title><meta name="description" content="{escape(page['description'], quote=True)}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:title" content="{escape(page['title'])}"><meta property="og:description" content="{escape(page['description'], quote=True)}"><meta property="og:type" content="article"><meta property="og:url" content="https://megabonk.org{route}"><meta property="og:image" content="https://megabonk.org/assets/revenant-survivors/{page['image']}-1920.webp"><link rel="icon" href="/assets/revenant-survivors/favicon.ico"><link rel="icon" type="image/svg+xml" href="/assets/revenant-survivors/favicon.svg"><link rel="apple-touch-icon" href="/assets/revenant-survivors/icon-180.png"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/revenant-survivors/site.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script></head><body class="guide-layout revenant-guide"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="/revenant-survivors/"><img src="/assets/revenant-survivors/logo.svg" width="36" height="36" alt="">Revenant Survivors</a><nav class="desktop-nav" aria-label="Revenant Survivors tasks">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="Revenant Survivors tasks">{nav}</nav></details></div></header><main class="wrap" id="main"><header class="article-head"><p class="eyebrow">Revenant Survivors · Independent guides</p><h1>{escape(page['title'])}</h1><p class="answer">{page['answer']}</p><p class="meta">Megabonk.org editors · Checked 12 November 2026 · Early Access</p></header><div class="article-layout"><nav class="toc" aria-label="On this page">{toc}</nav><article class="prose">{body}</article></div></main><footer class="footer wrap"><p>Published by Megabonk.org. Independent of Mongma Studio. Source-based reporting.</p><p><a href="/#more-games">More games</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy">Privacy</a></p></footer></body></html>'''
+        if page is HOME:
+            start = html.index('<main ')
+            end = html.index('</main>', start) + len('</main>')
+            html = html[:start] + homepage() + html[end:]
+            html = html.replace('class="guide-layout revenant-guide"', 'class="guide-layout revenant-guide revenant-home"')
+            html = html.replace('<link rel="stylesheet" href="/assets/revenant-survivors/site.css">', '<link rel="stylesheet" href="/assets/revenant-survivors/site.css"><link rel="stylesheet" href="/assets/revenant-survivors/home.css">')
+            html = html.replace('property="og:type" content="article"', 'property="og:type" content="website"')
         target = ROOT / route.strip('/') / 'index.html'
         target.parent.mkdir(parents=True, exist_ok=True)
         write_html(target, html, encoding='utf8')
