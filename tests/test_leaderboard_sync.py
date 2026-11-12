@@ -230,8 +230,12 @@ class LeaderboardBuildSignalsTests(unittest.TestCase):
         workflow = (
             MODULE_PATH.parents[1] / ".github" / "workflows" / "daily_scrape.yml"
         ).read_text(encoding="utf-8")
-        self.assertIn("playwright==1.54.0", workflow)
-        self.assertIn("playwright install --with-deps chromium", workflow)
+        self.assertIn("bash scripts/install_ci_browser.sh", workflow)
+        installer = (MODULE_PATH.parents[1] / "scripts" / "install_ci_browser.sh").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("playwright==1.54.0", installer)
+        self.assertIn("playwright install --with-deps chromium", installer)
         self.assertIn("timeout-minutes: 15", workflow)
         self.assertIn(
             "timeout --signal=TERM --kill-after=15s 8m python scripts/sync_leaderboard.py",
