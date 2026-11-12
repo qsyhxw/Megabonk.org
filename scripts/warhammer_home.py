@@ -48,4 +48,5 @@ def redesign(document):
 <section class="help-section"><div class="section-heading"><h2>Before you start</h2><p>Demo progress, platforms and launch-day questions.</p></div>{help_items}</section>
 <div class="editorial-note"><p>Independent guides by Megabonk.org. Facts checked 11 November 2026. Recipe and unlock pages identify their supporting sources and build-specific limits.</p><a href="#guide">Back to top ↑</a></div>
 </div></main>'''
-    return head + main + footer
+    from warhammer_query_batch import patch_home
+    return patch_home(head + main + footer)

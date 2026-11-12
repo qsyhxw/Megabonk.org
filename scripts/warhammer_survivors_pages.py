@@ -95,3 +95,5 @@ def build():
             document = redesign(document)
         write_html(file, document, encoding='utf8')
     build_tasks((ROOT/'warhammer-survivors/co-op/index.html').read_text(encoding='utf8'))
+    from warhammer_query_batch import build as build_query_batch
+    build_query_batch((ROOT/'warhammer-survivors/co-op/index.html').read_text(encoding='utf8'))
