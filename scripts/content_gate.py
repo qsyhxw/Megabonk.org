@@ -21,7 +21,7 @@ from urllib.parse import urlparse
 
 SKIP_DIRS = {"_private", "node_modules", "dist", "build", "outputs", "scripts", "src",
              "config", ".git", "PAGE_REPORTS", "assets", "work", "tests", "fixtures", "tmp", "backup", "backups"}
-TRUST = re.compile(r"^(about|contact|privacy|terms|disclaimer|editorial-policy)(/|$)")
+TRUST = re.compile(r"(?:^|/)(about|contact|privacy|privacy-policy|terms|disclaimer|editorial-policy)(/|\.html$|$)")
 
 BANNED = [
     r"not tested by this site", r"we have not (?:personally )?tested", r"no gameplay test",
@@ -156,7 +156,7 @@ def main():
             parts = f.relative_to(root).parts
             if any(p in SKIP_DIRS or p.startswith(".") for p in parts[:-1]) or f.name == "404.html":
                 continue
-            if TRUST.match(f.relative_to(root).as_posix()):
+            if TRUST.search(f.relative_to(root).as_posix()):
                 continue
             files.append(f)
     blocks = 0

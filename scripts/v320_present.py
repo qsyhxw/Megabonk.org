@@ -23,7 +23,7 @@ from urllib.parse import urlparse
 
 SKIP_DIRS = {"_private", "node_modules", "dist", "build", "outputs", "scripts", "src",
              "config", "assets", "PAGE_REPORTS", "data", "tools", "templates", "work", "tests", "fixtures", "tmp", "backup", "backups"}
-TRUST = re.compile(r"^(about|contact|privacy|terms|disclaimer|editorial-policy)(/|$)")
+TRUST = re.compile(r"(?:^|/)(about|contact|privacy|privacy-policy|terms|disclaimer|editorial-policy)(/|\.html$|$)")
 
 SOURCE_HEAD = re.compile(
     r"<h[23][^>]*>\s*(?:<[^>]+>\s*)*(?:(?:External\s+)?Sources?(?:\s*(?:&amp;|&|and)\s*(?:verification|checks|limits|version|evidence(?: limits)?|edition limits|notes))?(?:\s+for\s+[^<]{1,60})?|"
@@ -204,7 +204,7 @@ def iter_pages(root):
         parts = rel.parts
         if any(p in SKIP_DIRS or p.startswith(".") for p in parts[:-1]) or f.name == "404.html":
             continue
-        if TRUST.match(rel.as_posix()):
+        if TRUST.search(rel.as_posix()):
             continue
         yield f
 
