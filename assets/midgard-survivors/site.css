@@ -1,13 +1,100 @@
-.midgard-guide{--green:#345780;--ink:#203149;--pale:#edf2f8;--line:#ccd6e2;background:#f8f6ef;color:var(--ink)}
-.midgard-guide h1,.midgard-guide h2{color:#203149}
-.midgard-guide .article-head{padding-top:36px}
-.midgard-guide .answer{background:#edf2f8;border-left:5px solid #bb924b;padding:16px 22px;border-radius:8px}
-.midgard-guide .byline,.midgard-guide figcaption,.midgard-guide .scope{font-size:14px;color:#526174}
-.midgard-guide pre{overflow:auto;background:#edf2f8;padding:16px}
-.midgard-guide .prose{line-height:1.8}
-.midgard-guide .game-image img{display:block;width:100%;height:auto}
-.midgard-guide .game-image{margin:28px 0}
-.midgard-guide .table-wrap{overflow-x:auto}
-.midgard-guide table{min-width:550px}
-.midgard-guide td,.midgard-guide th{padding:12px;text-align:left;vertical-align:top}
+@font-face{font-family:MidgardHeading;src:url(/assets/pokebonk/nunito-800-latin.woff2) format("woff2");font-weight:800;font-display:swap}
+/* Midgard's blue window chrome is drawn from its classic RO interface. */
+.midgard-guide{--ink:#243249;--line:#bcc8d5;--pale:#edf2f8;--green:#2d5487;--muted:#5c697a;--white:#fff;--body:system-ui,sans-serif;margin:0;background:#e9eef3;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75}
+.midgard-guide *{box-sizing:border-box}
+.midgard-guide a{color:#244f85;text-underline-offset:4px}
+.midgard-guide a:hover{color:#16335a}
+.midgard-guide :focus-visible{outline:3px solid #a46c18;outline-offset:4px}
+.midgard-guide .wrap{max-width:1180px;margin:auto;padding-inline:30px}
+.midgard-guide .top{background:#f8fbff;border-bottom:1px solid #b7c6d9}
+.midgard-guide .top>.wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:20px}
+.midgard-guide .brand{font-size:22px;line-height:1.25;font-weight:800;letter-spacing:-.04em;text-decoration:none;color:#25477a}
+.midgard-guide .brand small{display:block;font-size:11px;line-height:1.8;font-weight:500;letter-spacing:.06em;color:#5d6f85}
+.midgard-guide .desktop-nav{display:flex;gap:22px;font-size:13px}
+.midgard-guide .mobile-nav{display:none}
+.midgard-guide .skip{position:absolute;left:-9999px}
+.midgard-guide .skip:focus{left:16px;top:8px;background:white;padding:8px;z-index:10}
+.midgard-guide h1,.midgard-guide h2,.midgard-guide h3{line-height:1.15;letter-spacing:-.025em;color:#253e66}
+.midgard-guide h1{font-family:MidgardHeading,system-ui,sans-serif;font-weight:800;font-size:clamp(34px,4vw,53px);margin:18px 0 22px}
+.midgard-guide h2{font-size:25px;margin:32px 0 16px;font-weight:650}
+.midgard-guide main{padding-top:36px;padding-bottom:48px}
+.midgard-guide .byline,.midgard-guide .scope{font-size:12px;color:var(--muted)}
+.midgard-guide .answer{font-size:17px;line-height:1.8;max-width:73ch}
+.midgard-guide .article-head{max-width:880px;margin:auto;padding:10px 0 22px}
+.midgard-guide .article-head>p:first-of-type,.midgard-guide .home-intro .hero-copy>p:first-child{font-size:11px;letter-spacing:.1em;color:#5b6f8c}
+.midgard-guide .back-link{font-size:13px;display:inline-block;margin-bottom:18px}
+.midgard-guide .article-layout{display:flex;flex-direction:column;gap:26px}
+.midgard-guide .article-layout>.toc{border-radius:3px;background:#dbe5f1;border:1px solid #b5c4d8;gap:10px;padding:12px 16px}
+.midgard-guide .article-layout>.toc a{background:transparent;border:0;padding:4px;color:#254c7e;font-size:13px}
+.midgard-guide .prose>section{max-width:780px;margin:0 auto 32px}
+.midgard-guide .prose>section:has(table){max-width:100%}
+.midgard-guide .prose>section>p,.midgard-guide .prose>section>ol,.midgard-guide .prose>section>ul{max-width:780px}
+.midgard-guide section p{margin:16px 0;line-height:1.85}
+.midgard-guide ol{padding-left:26px}
+.midgard-guide li{margin:12px 0;padding-left:4px}
+.midgard-guide li::marker{color:#406a9b;font-weight:700}
+.midgard-guide .table-wrap{overflow:auto;border:1px solid #b6c5d8;border-radius:4px;background:white;margin:20px 0}
+.midgard-guide table{width:100%;border-collapse:collapse;font-size:15px}
+.midgard-guide th,.midgard-guide td{padding:16px 20px;text-align:left;vertical-align:top;border-bottom:1px solid #d6deea}
+.midgard-guide th{background:linear-gradient(#7393bc,#4c70a0);color:white;font-weight:600}
+.midgard-guide tr:last-child td{border:0}
+.midgard-guide figure.game-image{background:#f9fcff;border:1px solid #a5b7cd;border-radius:4px;padding:7px;margin:28px auto;max-width:900px;box-shadow:0 4px 0 #c9d3df}
+.midgard-guide figure.game-image img{display:block;width:100%;height:auto;border-radius:0}
+.midgard-guide figure figcaption{font-size:12px;color:#5d6f85;line-height:1.6;margin:10px 5px 4px}
+.midgard-guide .scope{border-top:1px solid var(--line);padding-top:20px;max-width:780px;margin:30px auto 0}
+.midgard-guide .footer{border-top:1px solid #b7c6d9;background:#dce5ef;padding:28px 0}
+.midgard-guide .footer-grid{display:flex;justify-content:space-between;gap:32px}
+.midgard-guide .footer p{font-size:12px;max-width:65ch}
+.midgard-guide .footer nav{display:flex;align-items:start;gap:20px;font-size:13px}
+.midgard-guide pre{background:#233d5c;color:#f2f6fc;padding:22px;overflow:auto;border-radius:4px;font-size:14px}
 .midgard-guide code{overflow-wrap:anywhere}
+.midgard-guide .command-section{border-top:4px solid #5c7ea7;padding-top:8px}
+.midgard-guide .equipment-route ol li{padding:10px 4px;border-bottom:1px solid var(--line)}
+.midgard-guide .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.midgard-home .home-intro{display:grid;grid-template-columns:.85fr 1.15fr;align-items:center;gap:44px;padding:20px 0 40px}
+.midgard-home .hero-copy h1{max-width:13ch;font-size:clamp(38px,4.2vw,58px)}
+.midgard-home .hero-image{margin:0!important;transform:rotate(-1deg)}
+.midgard-home .hero-actions{display:flex;gap:22px;align-items:center;flex-wrap:wrap;font-size:14px;margin-top:24px}
+.midgard-home .primary-action{display:inline-block;text-decoration:none;background:#315b91;color:white;padding:12px 18px;border:1px solid #244372;border-radius:3px;box-shadow:inset 0 1px #92afd0,0 3px #bdcbdd}
+.midgard-home #guides{margin:0 0 40px}
+.midgard-home .guide-groups{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.midgard-home .guide-groups section{border:1px solid #adbed3;border-radius:4px;background:#fff;overflow:hidden}
+.midgard-home .guide-groups h2{background:linear-gradient(#7898c2,#5075a5);color:#fff;font-size:19px;margin:0;padding:14px 20px;text-shadow:0 1px #355987}
+.midgard-home .task-link{display:grid;grid-template-columns:1fr auto;gap:4px 20px;text-decoration:none;padding:22px;border-top:1px solid #dbe3ed}
+.midgard-home .task-link strong{font-size:22px;font-weight:650}
+.midgard-home .task-link span{grid-column:1;font-size:14px;color:#5b6c81}
+.midgard-home .task-link b{grid-column:2;grid-row:1/3;align-self:center;font-weight:400;font-size:24px}
+.midgard-home .task-link:hover{background:#edf3fa}
+.midgard-home .download-section{background:#f8fbff;padding:20px 28px;border:1px solid var(--line);border-radius:4px}
+.midgard-home .article-layout{display:block}
+.midgard-home section{scroll-margin-top:20px}
+@media(max-width:900px){
+ .midgard-guide .desktop-nav{display:none}.midgard-guide .mobile-nav{display:block;font-size:14px}
+ .midgard-guide .mobile-links{display:flex;flex-direction:column;gap:12px;padding:18px 0 4px}
+ .midgard-guide .top>.wrap{align-items:start}
+ .midgard-home .home-intro{gap:24px}
+}
+@media(max-width:700px){
+ .midgard-guide .wrap{padding-inline:20px}
+ .midgard-guide .top>.wrap{padding-block:16px}
+ .midgard-guide .brand{font-size:20px}
+ .midgard-guide main{padding-top:24px}
+ .midgard-guide h1,.midgard-guide .article-head h1{font-size:35px}
+ .midgard-guide h2{font-size:24px}
+ .midgard-guide .answer{font-size:16px}
+ .midgard-home .home-intro{grid-template-columns:1fr;padding:0 0 30px}
+ .midgard-home .hero-copy h1{font-size:41px;max-width:15ch}
+ .midgard-home .hero-image{transform:none}
+ .midgard-home .guide-groups{grid-template-columns:1fr;gap:20px}
+ .midgard-home .download-section{padding:12px 16px}
+ .midgard-guide .footer-grid{flex-direction:column}
+ .midgard-guide table,.midgard-guide tbody,.midgard-guide tr,.midgard-guide td{display:block;width:100%}
+ .midgard-guide thead{display:none}
+ .midgard-guide tr{border-bottom:1px solid #b6c5d8;padding:10px 0}
+ .midgard-guide td{border:0;padding:8px 16px}
+ .midgard-guide td:first-child{font-weight:700;color:#284f80}
+ .midgard-guide td:not(:first-child)::before{content:attr(data-label);display:block;color:#65768b;font-size:11px;margin-bottom:4px}
+ .midgard-guide pre{font-size:12px;padding:16px}
+}
+
+.midgard-guide pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}

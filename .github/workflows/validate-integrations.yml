@@ -55,7 +55,9 @@ jobs:
       - name: Rebuild reviewed Revenant Survivors tasks
         run: python scripts/build_revenant_survivors.py
       - name: Rebuild reviewed Midgard Survivors tasks
-        run: python scripts/build_midgard_survivors.py
+        run: |
+          python -m pip install beautifulsoup4==4.14.3
+          python scripts/build_midgard_survivors.py
       - name: Rebuild reviewed Brotato tasks
         run: python scripts/build_brotato.py
       - name: Rebuild Pokelit original-host entry
