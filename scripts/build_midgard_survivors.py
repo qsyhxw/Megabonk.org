@@ -19,7 +19,7 @@ def link(url, text):
 
 def image(stem='field'):
     alt = {'field': 'Midgard Survivors character fighting a horde in Niflheim with Basic Info and skill slots visible', 'tower': 'Midgard Survivors Lord Knight fighting in Clock Tower with equipped skills visible'}[stem]
-    return f'<figure class="game-image"><a href="/assets/midgard-survivors/{stem}-1280.webp"><img src="/assets/midgard-survivors/{stem}-800.webp" srcset="/assets/midgard-survivors/{stem}-480.webp 480w, /assets/midgard-survivors/{stem}-800.webp 800w, /assets/midgard-survivors/{stem}-1280.webp 1280w" sizes="(max-width:800px) 90vw, 800px" width="1920" height="1080" loading="lazy" alt="{alt}"></a><figcaption>nearQ’s itch.io gameplay screenshot. Capture build and device unspecified, checked 12 November 2026. Ragnarok assets belong to Gravity.</figcaption></figure>'
+    return f'<figure class="game-image"><a href="/assets/midgard-survivors/{stem}-1280.webp"><img src="/assets/midgard-survivors/{stem}-800.webp" srcset="/assets/midgard-survivors/{stem}-480.webp 480w, /assets/midgard-survivors/{stem}-800.webp 800w, /assets/midgard-survivors/{stem}-1280.webp 1280w" sizes="(max-width:800px) 90vw, 800px" width="1920" height="1080" loading="lazy" alt="{alt}"></a></figure>'
 
 
 TASKS = [('', 'Download & start'), ('android/', 'Android'), ('mac/', 'Mac'), ('equipment/', 'Equipment'), ('co-op/', 'Co-op')]

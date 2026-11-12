@@ -7,6 +7,43 @@ def adapt(html, slug):
     end = html.index('</main>', start) + len('</main>')
     soup = BeautifulSoup(html[start:end], 'html.parser')
     main = soup.main
+    # Keep task actions nearby and collect supporting sources once per destination.
+    sources = {}
+    retained = set()
+    for anchor in list(main.select('a[href^="https://"]')):
+        url = anchor['href']
+        section = anchor.find_parent('section')
+        section_id = section.get('id') if section else ''
+        action = (section_id in ['download', 'choose', 'install'] and 'nearq.itch.io' in url)
+        command_source = slug == 'mac/' and section_id == 'damaged' and 'reddit.com' in url
+        support = slug == 'co-op/' and section_id == 'save' and 'nearq.itch.io' in url
+        if (action or command_source or support) and url not in retained:
+            retained.add(url)
+            continue
+        label = anchor.get_text(' ', strip=True).split('↗')[0].strip()
+        if url not in sources:
+            sources[url] = label
+        anchor.replace_with(label)
+    for url in retained:
+        sources.pop(url, None)
+    # A listing already used for installation also supplies its comments and notes.
+    if any('nearq.itch.io' in url for url in retained):
+        sources = {url: label for url, label in sources.items() if 'nearq.itch.io' not in url}
+    if sources:
+        evidence = soup.new_tag('section', id='checks', attrs={'class': 'source-notes'})
+        heading = soup.new_tag('h2')
+        heading.string = 'Sources'
+        evidence.append(heading)
+        paragraph = soup.new_tag('p')
+        for index, (url, label) in enumerate(sources.items()):
+            if index:
+                paragraph.append(' · ')
+            anchor = soup.new_tag('a', href=url)
+            anchor.string = label
+            paragraph.append(anchor)
+        evidence.append(paragraph)
+        main.select_one('#next').insert_before(evidence)
+
     if not slug:
         intro = main.select_one('.article-head')
         intro['class'] = ['home-intro']
@@ -15,6 +52,7 @@ def adapt(html, slug):
             copy.append(node.extract())
         intro.append(copy)
         photo = main.select_one('figure').extract()
+        photo.a.unwrap()
         photo.img.attrs.pop('loading', None)
         photo.img['fetchpriority'] = 'high'
         photo['class'] = ['game-image', 'hero-image']
