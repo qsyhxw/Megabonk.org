@@ -22,6 +22,7 @@ jobs:
       - name: Rebuild PokeBonk from versioned source
         run: |
           python scripts/derive_pokebonk_evolution.py
+          python scripts/pokebonk_loadouts.py
           python scripts/build_pokebonk.py
           python scripts/check_pokebonk_editorial.py
           python scripts/content_gate.py . --allow config/content-gate-allow.json $(find pokebonk -name index.html ! -path '*/about/*' ! -path '*/contact/*' ! -path '*/privacy/*')

@@ -129,7 +129,8 @@ def _hub(html, ctx):
         for slug, label, note, pid in HUB_ACTIONS if '/pokebonk/' + slug in pages)
     tasks = f'<nav class="task-grid" aria-label="PokeBonk guides">{cards}</nav>'
     # Task entries directly under the hero, before the long explanatory sections.
-    html = html.replace('<div class="statusbar">', tasks + '<div class="statusbar">', 1)
+    from pokebonk_answers import hub_preview
+    html = html.replace('<div class="statusbar">', tasks + hub_preview() + '<div class="statusbar">', 1)
     return html
 
 
@@ -145,6 +146,8 @@ FORMATS = {
 
 
 def apply_v320(ctx):
+    from pokebonk_answers import apply_answers
+    apply_answers(ctx['PAGES'])
     import json
     from pathlib import Path
     root = Path(__file__).resolve().parents[1]

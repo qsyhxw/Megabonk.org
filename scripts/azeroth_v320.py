@@ -45,7 +45,7 @@ REWRITE = [
     ('We have not verified original-to-third-party import compatibility; preserve both sides before any replacement.',
      'Original-to-third-party import is not confirmed, so keep both saves before replacing either.'),
 ]
-BYLINE_PARTS = re.compile(r'\s*·\s*(?:No new full-run test|Source-based, not a playtest|Source-based guide|'
+BYLINE_PARTS = re.compile(r'\s*·\s*(?:No new full-run test|No matched-run benchmark|Rat Den Gaming ranking dated [^·]*|Original v[0-9.]+ mechanic notes|Source-based, not a playtest|Source-based guide|'
                           r'Earlier [^·]*retained[^·]*|New advice scoped to[^·]*|earlier sections retain their dates)', re.I)
 
 FORMATS = {
@@ -107,6 +107,12 @@ def present(path, html):
     s = BYLINE.sub(lambda m: m[0].replace(m[1], BYLINE_PARTS.sub('', m[1])), s, count=1)
     s = SYNC.sub(_sync, s, count=1)
     s = re.sub(r'<p>\s*</p>', '', s)
+    from azeroth_answers import present_answers, hub_block
+    s = present_answers(path, s)
+    if slug == '':
+        # Class cards replace the icon-only class row; keep the task links row.
+        s = re.sub(r'<p class="hub-entries-label">Class builds</p><div class="class-row">.*?</div>', '', s, count=1, flags=re.S)
+        s = s.replace('<nav class="hub-entries"', hub_block() + '<nav class="hub-entries"', 1)
     if 'data-format=' not in s[:4000]:
         s = s.replace('<body class="', f'<body data-format="{fmt}" class="', 1)
     return s
