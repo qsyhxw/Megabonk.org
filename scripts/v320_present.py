@@ -32,6 +32,8 @@ SOURCE_HEAD = re.compile(
     re.I)
 CITE = re.compile(r'<sup\b[^>]*>\s*(?:<a\b[^>]*href="#[^"]*"[^>]*>.*?</a>\s*)+</sup>', re.S)
 CITE_A = re.compile(r'<a\b[^>]*class="[^"]*\breference\b[^"]*"[^>]*href="#[^"]*"[^>]*>.*?</a>', re.S)
+# Inline "(Publisher · author)" attributions after a sentence (v3.21: sources stay in FACT_CHECK).
+SOURCE_SPAN = re.compile(r'\s*<span class="source-link"[^>]*>\(.*?\)</span>', re.S)
 NEWTAB = re.compile(r'<span class="(?:sr-only|visually-hidden)">\s*\(?[^<()]*(?:new tab|new window)[^<()]*\)?\s*</span>', re.I)
 TOC_SOURCES = re.compile(r'<li>\s*<a href="#(?:sources?|references?|sources-[a-z-]+)"[^>]*>[^<]*</a>\s*</li>|<a href="#(?:sources?|references?)"[^>]*>[^<]*</a>', re.I)
 DANGLING = re.compile(r'<a\b[^>]*href="#(?:source|ref|cite|fn)[-_a-z]*\d+"[^>]*>(.*?)</a>', re.S | re.I)
@@ -176,6 +178,7 @@ def transform(html, domain):
     main = drop_source_sections(main)
     main = CITE.sub("", main)
     main = CITE_A.sub("", main)
+    main = SOURCE_SPAN.sub("", main)
     main = TOC_SOURCES.sub("", main)
     main = NEWTAB.sub("", main)
     main = re.sub(r'\s*\((?:external(?: site| website)?, )?opens? (?:in )?a new (?:tab|window)\)', "", main)

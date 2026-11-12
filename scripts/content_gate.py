@@ -3,6 +3,7 @@
 
 Usage:
   python content_gate.py SITE_ROOT [paths...] [--allow ALLOW.json] [--report-only]
+  python content_gate.py --sites PARENT_DIR [--min-sites 2]   (v3.21 cross-site fingerprint report)
 
 - SITE_ROOT: project root (public files live here).
 - paths: optional list of HTML files (relative to SITE_ROOT) to check; default = all
@@ -32,6 +33,13 @@ BANNED = [
     r"source changes detected", r"editorial recommendations are awaiting review",
     r"automatic checks do not validate", r"external site, opens in a new tab",
     r"\(opens in a new tab\)", r"未实测", r"本站未(?:实际)?测试",
+]
+# v3.21: retelling community posts instead of stating the answer (00 §1.2).
+RETELL = [
+    r"\b(?:a|one|another|the original|the stuck) (?:player|user|commenter|poster|redditor)s? (?:reports?|says?|said|describes?|points?|suggests?|warns?|claims?|supplied|mentions?)",
+    r"\bin a (?:launch-week |recent |separate |late-progress )?(?:reddit|steam|forum|help|discussion) (?:thread|post|reply|discussion)",
+    r"\b(?:another|a separate|the player|a single player) (?:report|reply)\b",
+    r"\bthe reply (?:points|says|suggests)", r"\bplayer leads?\b", r"\bu/[A-Za-z0-9_-]{3,}",
 ]
 BANNED_H2 = re.compile(r"^((external\s+)?sources?(\s*(&|and)\s*(verification|checks|limits|version|evidence limits|edition limits))?|references|检查依据)$", re.I)
 
@@ -82,6 +90,9 @@ def check(path, root, domain, allow):
         n = len(re.findall(pat, txt, re.I))
         if n:
             findings.append(("BLOCK", f"banned phrase x{n}: /{pat}/"))
+    retell = sum(len(re.findall(p, txt, re.I)) for p in RETELL)
+    if retell:
+        findings.append(("BLOCK", f"retelling community posts x{retell} (state the answer; sources go to FACT_CHECK)"))
     for h2 in re.findall(r"(?is)<h2[^>]*>(.*?)</h2>", main):
         if BANNED_H2.match(text_of(h2)):
             findings.append(("BLOCK", f"sources-style H2: {text_of(h2)}"))
@@ -134,8 +145,45 @@ def check(path, root, domain, allow):
     return url, fmt, findings
 
 
+def shell_phrases(html):
+    """Fixed copy outside the article answer: header/nav/footer text, badges, eyebrow labels."""
+    blocks = [m.group(0) for m in re.finditer(r"(?is)<(header|nav|footer)\b.*?</\1>", html)]
+    blocks += re.findall(r'(?is)<[^>]+class="[^"]*(?:eyebrow|kicker|badge|tagline|camp-note|site-note)[^"]*"[^>]*>.*?</[a-z0-9]+>', html)
+    out = set()
+    for b in blocks:
+        for seg in re.split(r"[.!?|·•\n]", text_of(strip(b))):
+            w = re.sub(r"[^a-z0-9' ]", " ", seg.lower()).split()
+            if len(w) >= 3:
+                out.add(" ".join(w))
+    return out
+
+
+def cross_sites(parent, min_sites=2):
+    """Report shell copy shared by independent domains (00 §3, v3.21)."""
+    parent = Path(parent)
+    seen = {}
+    for site in sorted(d for d in parent.iterdir() if d.is_dir() and "." in d.name and (d / "index.html").exists()):
+        name = site.name.lower()
+        game = re.split(r"[.-]", name)[0]
+        files = [site / "index.html"] + [f for f in list(site.glob("*/index.html"))[:6]]
+        for f in files:
+            for ph in shell_phrases(f.read_text(encoding="utf-8", errors="ignore")):
+                if game[:6] in ph.replace(" ", ""):
+                    continue
+                seen.setdefault(ph, set()).add(name)
+    rows = sorted(((ph, s) for ph, s in seen.items() if len(s) >= min_sites), key=lambda x: -len(x[1]))
+    for ph, s in rows[:80]:
+        print(f"WARN shared x{len(s)}: \"{ph}\" -> {', '.join(sorted(s)[:6])}{' ...' if len(s) > 6 else ''}")
+    print(f"\n{len(rows)} shell phrases shared by >= {min_sites} domains")
+    return 0
+
+
 def main():
     args = [a for a in sys.argv[1:]]
+    if "--sites" in args:
+        i = args.index("--sites")
+        ms = int(args[args.index("--min-sites") + 1]) if "--min-sites" in args else 2
+        sys.exit(cross_sites(args[i + 1], ms))
     report_only = "--report-only" in args
     allow = {}
     if "--allow" in args:
