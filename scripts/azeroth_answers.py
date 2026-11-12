@@ -71,14 +71,14 @@ def tier_grid():
 def route_line(cls, route):
     steps = [s for s in re.split(r'\s*→\s*', route[1])]
     chain = ' <span class="arrow">→</span> '.join(_chip(cls, s) if _icon(cls, s) else f'<span class="talent-chip plain">{escape(s)}</span>' for s in steps)
-    return f'<li><strong>{escape(route[0])}</strong><div class="talent-chain">{chain}</div><p>{escape(route[2])}</p></li>'
+    return f'<li><strong>{escape(route[0])}</strong><div class="talent-chain">{chain}</div><p>{escape(route[2].split(". ")[0].rstrip("."))}.</p></li>'
 
 
 def build_card(cls, d, tier):
     routes = ''.join(route_line(cls, r) for r in d['routes'])
-    prio = ''.join(f'<li>{escape(p)}</li>' for p in d.get('priority', [])[:4])
+    prio = ''.join(f'<li>{escape(p.split(". ")[0].rstrip("."))}.</li>' for p in d.get('priority', [])[:3])
     return (f'<section class="loadout az-loadout" id="best-build" aria-label="{d["name"]} build">'
-            f'<div class="loadout-head">{_class_icon(cls, 72)}<div><h2>Best {d["name"]} build</h2>'
+            f'<div class="loadout-head">{_class_icon(cls, 56)}<div><h2>Best {d["name"]} build</h2>'
             f'<p><span class="tier-badge tier-{tier}">{tier} tier</span> Starts with {_chip(cls, d["start"], 24)}</p></div></div>'
             f'<div class="loadout-body"><div><h4>Talent routes</h4><ol class="route-list">{routes}</ol></div>'
             f'<div><h4>Draft priority in a run</h4><ol class="prio-list">{prio}</ol></div></div></section>')

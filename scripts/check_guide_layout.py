@@ -7,7 +7,7 @@ class Page(HTMLParser):
  def handle_starttag(self,tag,attrs):
   a=dict(attrs)
   if tag=='body':self.classes.update(a.get('class','').split())
-  if tag=='link'and a.get('rel')=='stylesheet':self.css.append(a.get('href'))
+  if tag=='link'and a.get('rel')=='stylesheet':self.css.append((a.get('href') or '').split('?')[0])  # ignore cache-busting ?v=
   if a.get('id'):self.ids.add(a['id'])
 def check():
  errors=[];count=0

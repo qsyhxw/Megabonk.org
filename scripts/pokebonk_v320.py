@@ -179,7 +179,7 @@ def apply_v320(ctx):
             strip = portrait_strip(PAGE_PORTRAITS[slug], names)
             s = re.sub(r'(<article class="prose">)', lambda m: m[1] + strip, s, count=1)
             if 'id="portrait-credits"' not in s:
-                s = s.replace('</article>', CREDIT_NOTE + '</article>', 1)
+                s = s.replace('</main>', CREDIT_NOTE + '</main>', 1)
         if slug == '':
             s = _hub(s, ctx)
             if 'id="portrait-credits"' not in s:

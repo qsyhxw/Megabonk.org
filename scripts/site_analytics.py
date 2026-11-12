@@ -16,6 +16,23 @@ def inject(html):
     return re.sub(r'</head\s*>', lambda m: TAG + '\n' + m[0], html, count=1, flags=re.I)
 
 
+_CSS_HASH = {}
+
+
+def _version_css(text):
+    import hashlib
+    root = Path(__file__).resolve().parents[1]
+
+    def repl(m):
+        href = m.group(1)
+        if href not in _CSS_HASH:
+            f = root / href.lstrip('/')
+            _CSS_HASH[href] = hashlib.sha256(f.read_bytes()).hexdigest()[:10] if f.exists() else ''
+        v = _CSS_HASH[href]
+        return m.group(0) if not v else m.group(0).replace(href + '"', href + '?v=' + v + '"')
+    return re.sub(r'<link rel="stylesheet" href="(/assets/[^"?]+\.css)"', repl, text)
+
+
 def write_html(path, text, **kwargs):
     path = Path(path)
     if path.suffix.lower() in ('.html', '.htm'):
@@ -31,6 +48,9 @@ def write_html(path, text, **kwargs):
                 text = text.replace('</body>', NOTICE + '\n</body>', 1)
         from game_seo import edit as edit_seo
         text = edit_seo(path, text)
+        # Cache-bust local stylesheets by content hash so CSS updates reach readers at once
+        # (assets are served with max-age=14400).
+        text = _version_css(text)
         # v3.20 presentation (SOP 00 §1.4/§4) for every generated page except trust/404.
         if not re.search(r'(?:^|/)(?:about|contact|privacy|privacy-policy|terms)(?:/|\.html|$)|404\.html$', path.as_posix()):
             from v320_present import transform as _v320

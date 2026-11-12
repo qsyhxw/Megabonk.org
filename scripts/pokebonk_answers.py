@@ -79,17 +79,32 @@ def loadout_card(x, compact=False):
             + (f'<h4>Evolution</h4><p>{evo}</p>' if evo else '') + '</div></div></article>')
 
 
+def build_tile(x):
+    """Compact card: portrait, tier, 4 moves as chips, fusion, items. Detail opens in place."""
+    moves = ''.join(f'<li class="{"fuse" if m["fusion"] else ""}">{_type_chip(m["type"])}{escape(m["name"])}</li>' for m in x['moves'])
+    items = ''.join(f'<li><strong>{escape(i["name"])}</strong> <span>{escape(i["desc"])}</span></li>' for i in x['items'])
+    fusion = f'<p class="tile-fusion">Fusion: <strong>{escape(x["fusion"]["name"])}</strong></p>' if x['fusion'] else ''
+    evo = ' → '.join(f'{escape(e["name"])} Lv {e["level"]}' for e in x['evolution'])
+    return (f'<article class="build-tile tier-{x["tier"]}" id="build-{_slug(x["name"])}">'
+            f'<header>{_img(x["id"], x["name"], 56)}<div><h3>{escape(x["name"])}</h3>'
+            f'<p><span class="tier-badge tier-{x["tier"]}">{x["tier"]}</span>{"".join(_type_chip(t) for t in x["types"])}</p></div></header>'
+            f'<ol class="tile-moves">{moves}</ol>{fusion}'
+            f'<p class="tile-items">{" · ".join(escape(i["name"]) for i in x["items"])}</p>'
+            f'<details><summary>Items, vitamins &amp; passive</summary><ul class="tile-detail">{items}</ul>'
+            f'<p><strong>Vitamins:</strong> {", ".join(escape(v) for v in x["vitamins"])}</p>'
+            f'<p><strong>{escape(x["passive"]["name"])}:</strong> {escape(x["passive"]["desc"])}</p>'
+            + (f'<p><strong>Evolution:</strong> {evo}</p>' if evo else '') + '</details></article>')
+
+
 def builds_block():
     data = _load('pokebonk-loadouts.json')
     s = [x for x in data['loadouts'] if x['tier'] == 'S']
     a = [x for x in data['loadouts'] if x['tier'] == 'A']
-    nav = ''.join(f'<a href="#build-{_slug(x["name"])}">{_img(x["id"], x["name"], 36)}{escape(x["name"])}</a>' for x in s + a)
     return ('<section class="loadouts" id="best-builds" aria-label="Best PokeBonk builds">'
-            '<p class="tier-note">One copyable starting build for each S and A tier partner: take the moves in order, '
-            'level the two marked moves together for the signature fusion, and pick these items when offered.</p>'
-            f'<nav class="loadout-nav" aria-label="Jump to a partner">{nav}</nav>'
-            '<h2 class="loadout-h2">S tier builds</h2>' + ''.join(loadout_card(x) for x in s) +
-            '<h2 class="loadout-h2">A tier builds</h2>' + ''.join(loadout_card(x, compact=True) for x in a) +
+            '<p class="tier-note">Take the four moves in order and level the two <span class="fuse-key">bold</span> moves '
+            'together for the signature fusion. Pick the listed items when they are offered.</p>'
+            '<h2 class="loadout-h2">S tier builds</h2><div class="build-grid">' + ''.join(build_tile(x) for x in s) + '</div>'
+            '<h2 class="loadout-h2">A tier builds</h2><div class="build-grid">' + ''.join(build_tile(x) for x in a) + '</div>'
             '</section>')
 
 
