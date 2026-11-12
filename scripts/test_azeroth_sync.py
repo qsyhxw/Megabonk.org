@@ -111,7 +111,8 @@ class SyncTests(unittest.TestCase):
    sync.apply(self.make(t),root=dest)
    subprocess.run([sys.executable,str(dest/'scripts/build_azeroth_survivors.py')],cwd=dest,check=True,capture_output=True)
    self.assertIn('25% additional experience',(dest/'azeroth-survivors/best-race/index.html').read_text(encoding='utf8'));self.assertIn('Fire Orb',(dest/'azeroth-survivors/abilities/index.html').read_text(encoding='utf8'))
-   self.assertIn('Source changes detected:',(dest/'azeroth-survivors/builds/mage/index.html').read_text(encoding='utf8'))
+   # v3.20: the visible banner is one line; pending review is carried by the sync element's data attribute.
+   self.assertIn('data-review-pending="true"',(dest/'azeroth-survivors/builds/mage/index.html').read_text(encoding='utf8'))
    with patch.object(gate,'ROOT',dest):gate.check(before)
    updated=json.loads((dest/'data/content-dates.json').read_text(encoding='utf8'));self.assertNotEqual(updated['https://megabonk.org/azeroth-survivors/abilities/'],'2020-01-01');self.assertEqual(updated['https://megabonk.org/azeroth-survivors/builds/mage/'],'2020-01-01')
    p=dest/'azeroth-survivors/builds/mage/index.html';p.write_text(p.read_text(encoding='utf8').replace('<h1>','<h1>Changed ',1),encoding='utf8')

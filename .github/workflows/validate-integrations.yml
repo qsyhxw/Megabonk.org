@@ -36,6 +36,7 @@ jobs:
           python scripts/build_azeroth_survivors.py
           python scripts/check_azeroth_editorial.py
           python scripts/content_gate.py . --allow config/content-gate-allow.json $(find azeroth-survivors -name index.html)
+          python scripts/check_remaining_editorial.py
       - name: Verify Azeroth planner rules and safe imports
         run: node scripts/test_azeroth_planner.cjs
       - name: Rebuild Arena of Champions playable entry

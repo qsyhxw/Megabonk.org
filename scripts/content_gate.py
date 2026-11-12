@@ -20,7 +20,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 SKIP_DIRS = {"_private", "node_modules", "dist", "build", "outputs", "scripts", "src",
-             "config", ".git", "PAGE_REPORTS", "assets"}
+             "config", ".git", "PAGE_REPORTS", "assets", "work", "tests", "fixtures", "tmp", "backup", "backups"}
 TRUST = re.compile(r"^(about|contact|privacy|terms|disclaimer|editorial-policy)(/|$)")
 
 BANNED = [
@@ -33,7 +33,7 @@ BANNED = [
     r"automatic checks do not validate", r"external site, opens in a new tab",
     r"\(opens in a new tab\)", r"未实测", r"本站未(?:实际)?测试",
 ]
-BANNED_H2 = re.compile(r"^(sources?\s*(&|and)\s*(verification|checks|evidence limits)|references|检查依据)$", re.I)
+BANNED_H2 = re.compile(r"^((external\s+)?sources?(\s*(&|and)\s*(verification|checks|limits|version|evidence limits|edition limits))?|references|检查依据)$", re.I)
 
 # format -> (max external links, min images, first-screen check)
 FORMATS = {

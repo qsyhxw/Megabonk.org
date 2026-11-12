@@ -31,4 +31,12 @@ def write_html(path, text, **kwargs):
                 text = text.replace('</body>', NOTICE + '\n</body>', 1)
         from game_seo import edit as edit_seo
         text = edit_seo(path, text)
+        # v3.20 presentation (SOP 00 §1.4/§4) for every generated page except trust/404.
+        if not re.search(r'(?:^|/)(?:about|contact|privacy|privacy-policy|terms)(?:/|\.html|$)|404\.html$', path.as_posix()):
+            from v320_present import transform as _v320
+            text = _v320(text, 'megabonk.org')
+            if 'data-v320=' not in text:
+                text = re.sub(r'<body(?=[\s>])', '<body data-v320="1"', text, count=1)
+            # Re-apply the SEO editor so its own idempotence check still holds.
+            text = edit_seo(path, text)
     return path.write_text(text, **kwargs)

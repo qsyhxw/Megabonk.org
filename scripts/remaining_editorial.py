@@ -59,6 +59,7 @@ def edit(path,text):
  rule=records().get(key)
  if not rule:return text
  if 'data-editorial="20261106"' in text:return text
+ if 'data-v320=' in text:return text  # v3.20 pages carry no public source list
  source=re.search(r'<section[^>]*id="sources"[^>]*>.*?</section>',text,re.S)
  if not source:raise ValueError('Missing sources: '+key)
  links={}
