@@ -22,6 +22,7 @@ from azeroth_planner_reference import write_reference
 from azeroth_survivors_mods import apply_mods, home_mods
 from azeroth_survivors_tier_list import apply_tier_list, home_tier_list
 from azeroth_russian_builds import apply_russian_builds, decorate_russian_builds
+from azeroth_v320 import present
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -118,6 +119,6 @@ def build():
   text=connect_languages(path,text)
   if path==P+'ru/builds/':text=decorate_russian_builds(text)
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
-  file.parent.mkdir(parents=True,exist_ok=True);write_html(file, editorial(path,planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text)))))),encoding='utf8')
+  file.parent.mkdir(parents=True,exist_ok=True);write_html(file, present(path,editorial(path,planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text))))))),encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Original-host external Play entry; no copied client.')
 if __name__=='__main__':build()
