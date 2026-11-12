@@ -28,11 +28,8 @@ for slug, record in records.items():
     assert not any(x in text for x in ['SINGLE_SOURCE', 'Missing mechanic base', "added: ['affinity']"]), slug
     if slug in NATURAL:
         assert '<sup class="ref">' not in text, slug
-    assert '<section class="sources" id="sources">' in text, slug
-    active = {str(n) for g in record.get('source_groups', []) for n, _ in g['links']}
-    for n, entry in record['sources'].items():
-        if not active or n in active:
-            assert f'href="{entry["url"]}"' in text, (slug, n)
+    # v3.20: evidence stays in data/pokebonk-editorial.json; pages carry no Sources section.
+    assert '<section class="sources"' not in text and '<sup class="ref">' not in text, slug
     assert 'figcaption>Original game entry screen, captured' not in text, slug
 
 privacy = (ROOT / 'pokebonk/privacy/index.html').read_text(encoding='utf8')
@@ -45,7 +42,6 @@ current = json.loads((ROOT / 'data/pokebonk-main-first.json').read_text(encoding
 for slug, record in current['pages'].items():
     text = (ROOT / 'pokebonk' / slug / 'index.html').read_text(encoding='utf8')
     assert record['review'] in text, slug
-    assert current['source'] in text, slug
     for old, new in record.get('replacements', []):
         assert old not in text and new in text, slug
     if record.get('addition'):

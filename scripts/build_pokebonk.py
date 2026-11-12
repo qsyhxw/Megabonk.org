@@ -127,8 +127,9 @@ def card(num,title,text,slug,featured=False):
     return f'<article class="card {"featured" if featured else ""}"><span class="number">FIELD NOTE {num}</span><h3>{title}</h3><p>{text}</p><a href="{P+slug}">Open guide →</a></article>'
 
 def home():
-    title='PokeBonk Guide: Starters, Controls & Browser Play'
-    desc='Find the original PokeBonk browser game, compare starter roles, learn current controls and explore mobile, Guest progress and online feature guides.'
+    # CTR experiment 2026-11-12 (00 §5A ex.3); original title/desc kept in ROADMAP for rollback.
+    title='PokeBonk Wiki & Guide: Builds, Tier List & Pokémon'
+    desc='PokeBonk wiki and guide: partner builds, tier list by role, every League Pokémon, move fusions, evolutions, capture steps and the beginner run.'
     body=f'''<section class="hero" id="guide"><div><span class="tag">Independent guide · Browser adventure</span><h1>PokeBonk.<br><em>Big adventure.</em></h1><p class="lead"><strong>PokeBonk</strong> brings Pokémon partners into a free 3D horde-survival game. Find the original browser game, choose a starter and make sense of your first run.{ref(1)}</p><div class="actions">{ext('https://pokebonk.com/?lang=en','Play at pokebonk.com')}<a class="button" href="{P}beginners-guide/">Plan your first run →</a></div><p class="meta">An unofficial fan game by Charcher. This is an independent guide.<br>Source check: {DATE} · Beta v0.8.25</p></div><figure class="hero-art"><img src="{A}forest-1280.webp" srcset="{A}forest-800.webp 800w, {A}forest-1280.webp 1280w" sizes="(max-width:900px) 100vw, 600px" width="1280" height="672" alt="PokeBonk promotional artwork showing a forest, waterfall and stone altar"><figcaption>Official promotional artwork © Charcher / respective rights holders. Not a gameplay screenshot.</figcaption></figure></section>
 <div class="statusbar"><div><small>Where to play</small><strong>In your browser</strong></div><div><small>Entry</small><strong>Free fan game</strong></div><div><small>Starting partners</small><strong>Three distinct roles</strong></div><div><small>Source scope</small><strong>Beta v0.8.25</strong></div></div>
 <section class="section" id="start"><div class="section-head"><div><p class="eyebrow">01 / Begin the journey</p><h2>A good first run starts here.</h2></div><p>Find the right entry, keep your progress and learn the buttons before chasing a build.</p></div><div class="grid">{card('01','New trainer? Start here.','Guest entry, current keyboard defaults and what to read on your first upgrade cards.','beginners-guide/',True)}{card('02','Take it to your phone.','Browser play, touch controls, APK questions and device limits in one place.','mobile/')}{card('03','中文入门攻略','从原站入口、御三家选择到按键与游客存档，按顺序开始。','zh/beginners-guide/')}</div></section>
@@ -182,6 +183,8 @@ def build():
     apply_main_first(globals())
     from pokebonk_november import apply_november
     apply_november(globals())
+    from pokebonk_v320 import apply_v320
+    apply_v320(globals())
     error=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">PokeBonk</a> / 404</nav><section class="legal"><p class="eyebrow">404 / Off the trail</p><h1>This path ends here.</h1><p>The page may have moved, or the address may be incomplete. Your next guide is still on the map.</p><div class="actions"><a class="button" href="{P}">Back to PokeBonk →</a><a class="button secondary" href="{P}#guides">Browse the guides</a></div></section>'
     out=ROOT/'pokebonk/404.html';out.parent.mkdir(exist_ok=True);write_html(out, shell(P+'404','Page not found | PokeBonk Guide','This PokeBonk guide path could not be found. Return to the guide homepage or browse the available player notes.',error,noindex=True),encoding='utf-8')
     for path,page in PAGES.items():
