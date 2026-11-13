@@ -143,7 +143,12 @@ def apply_page(text, m, slug):
         if '<p><a href="#guide">Back to top' in text:
             text = text.replace('<p><a href="#guide">Back to top', rel + '<p><a href="#guide">Back to top', 1)
         else:
-            text = text.replace("</article>", rel + "</article>", 1)
+            # the page body can contain nested <article> cards (build tiles, play-rec
+            # cards) before the actual closing tag of the outer prose article, so the
+            # related block must go before the LAST </article>, not the first
+            last = text.rfind("</article>")
+            if last != -1:
+                text = text[:last] + rel + text[last:]
     return text
 
 
