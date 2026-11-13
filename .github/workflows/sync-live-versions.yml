@@ -1,0 +1,108 @@
+name: Sync live version labels (AUTO_SYNC)
+# SOP 05 §2.9 AUTO_SYNC: only the data-live / data-live-date spans on
+# /midgard-survivors/, /mythic-survivors/download-mod/ and
+# /spires-of-azeroth/download-platforms/, plus their content-dates and sitemap
+# lastmod. Rejected versions fail the run and change nothing.
+on:
+  schedule:
+    - cron: '19 4,16 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Fetch and validate only, do not commit
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Rejection fixtures change nothing
+        run: |
+          snap() { md5sum midgard-survivors/index.html mythic-survivors/download-mod/index.html spires-of-azeroth/download-platforms/index.html data/live-versions.json data/content-dates.json sitemap.xml; }
+          before=$(snap)
+          for f in backwards bad; do
+            if python scripts/sync_live_versions.py --offline tests/fixtures/live-versions-$f.json; then
+              echo "fixture $f was accepted" >&2; exit 1
+            fi
+          done
+          python scripts/sync_live_versions.py --offline tests/fixtures/live-versions-same.json
+          [ "$before" = "$(snap)" ]
+
+      - name: Fetch, validate and apply
+        run: >
+          python scripts/sync_live_versions.py
+          ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }}
+
+      - name: Synced pages match their generators
+        run: |
+          pages="midgard-survivors/index.html mythic-survivors/download-mod/index.html spires-of-azeroth/download-platforms/index.html"
+          mkdir -p "$RUNNER_TEMP/synced"
+          for p in $pages; do mkdir -p "$RUNNER_TEMP/synced/$(dirname $p)"; cp "$p" "$RUNNER_TEMP/synced/$p"; done
+          python scripts/build_midgard_survivors.py
+          python scripts/build_mythic_survivors.py
+          python scripts/build_spires_of_azeroth.py
+          for p in $pages; do
+            cmp <(tr -d '\r' < "$p") <(tr -d '\r' < "$RUNNER_TEMP/synced/$p") || { echo "$p differs from its generator" >&2; exit 1; }
+            cp "$RUNNER_TEMP/synced/$p" "$p"
+          done
+          git checkout -- . ':!data/live-versions.json' ':!data/content-dates.json' ':!sitemap.xml' ':!midgard-survivors/index.html' ':!mythic-survivors/download-mod/index.html' ':!spires-of-azeroth/download-platforms/index.html'
+          python scripts/ci_integrations.py
+
+      - name: Only whitelisted paths changed
+        run: |
+          allowed='^(data/live-versions\.json|data/content-dates\.json|sitemap\.xml|midgard-survivors/index\.html|mythic-survivors/download-mod/index\.html|spires-of-azeroth/download-platforms/index\.html)$'
+          if git status --porcelain | cut -c4- | grep -Ev "$allowed"; then
+            echo "Unexpected paths changed" >&2; exit 1
+          fi
+
+      - name: Commit and push when versions changed
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        run: |
+          if git diff --quiet; then
+            echo "No version changes." | tee -a "$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/live-versions.json data/content-dates.json sitemap.xml midgard-survivors/index.html mythic-survivors/download-mod/index.html spires-of-azeroth/download-platforms/index.html
+          git commit -m "Auto-sync live version labels"
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              git log -1 --stat | tee -a "$GITHUB_STEP_SUMMARY"; exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          echo "Unable to push after 3 attempts." >&2; exit 1
+
+  notify-failure:
+    needs: sync
+    if: ${{ always() && needs.sync.result == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Send failure email
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+          AUTOMATION_DETAILS: A version source was rejected (format, backwards, major jump, missing span) or the publish step failed. Pages were left unchanged; see the run log.
+        run: python scripts/send_automation_alert.py failure --name "Sync live version labels"

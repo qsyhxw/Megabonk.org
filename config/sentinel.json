@@ -1,42 +1,112 @@
 {
   "site": "megabonk.org",
   "label": "auto-sentinel",
-  "_scope": "Sections without their own sync workflow. Megabonk (update-patch-notes / player-count / leaderboard / wiki entities), PokeBonk (sync-pokebonk) and Azeroth Survivors (sync-azeroth) are already covered and intentionally absent.",
+  "_scope": "Sections without their own sync workflow. Megabonk (update-patch-notes / player-count / leaderboard / wiki entities), PokeBonk (sync-pokebonk) and Azeroth Survivors (sync-azeroth) are already covered and intentionally absent. Midgard client, Mythic iOS and Spires desktop/browser versions moved to sync-live-versions (AUTO_SYNC) on 2026-11-13.",
   "sources": [
-    {"id": "ball-x-pit-steam", "name": "BALL x PIT Steam announcements", "type": "steam_news", "appid": 2062430,
-     "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
-     "affected": ["/ball-x-pit/evolutions/", "/ball-x-pit/new-evolutions/", "/ball-x-pit/passive-evolutions/", "/ball-x-pit/builds/", "/ball-x-pit/character-tier-list/", "/ball-x-pit/characters/"]},
-    {"id": "warhammer-survivors-steam", "name": "Warhammer Survivors Steam announcements", "type": "steam_news", "appid": 3669620,
-     "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
-     "affected": ["/warhammer-survivors/evolutions/", "/warhammer-survivors/best-builds/", "/warhammer-survivors/characters/", "/warhammer-survivors/co-op/", "/warhammer-survivors/cross-save/", "data/warhammer-survivors-pages.json"]},
-    {"id": "vampire-survivors-steam", "name": "Vampire Survivors Steam announcements", "type": "steam_news", "appid": 1794680,
-     "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
-     "affected": ["/vampire-survivors/evolutions/", "/vampire-survivors/dlc/", "/vampire-survivors/unlocks/", "/vampire-survivors/secret-characters/", "/vampire-survivors/co-op/"]},
-    {"id": "risk-of-rain-2-steam", "name": "Risk of Rain 2 Steam announcements", "type": "steam_news", "appid": 632360,
-     "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
-     "affected": ["/risk-of-rain-2/crossplay/", "/risk-of-rain-2/gold-portal/", "/risk-of-rain-2/ru/bulwarks-ambry/"]},
-    {"id": "revenant-survivors-steam", "name": "Revenant Survivors Steam announcements", "type": "steam_news", "appid": 4617500,
-     "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
-     "affected": ["/revenant-survivors/hard-mode/", "/revenant-survivors/permanent-progression/", "/revenant-survivors/demo-save-transfer/", "/revenant-survivors/controller-auto-attack/"]},
-    {"id": "soulstone-survivors-steam", "name": "Soulstone Survivors Steam announcements", "type": "steam_news", "appid": 2066020,
-     "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
-     "affected": ["/soulstone-survivors/builds/", "/soulstone-survivors/bumble-crystal-order/", "/soulstone-survivors/co-op/"]},
-    {"id": "brotato-steam", "name": "Brotato Steam announcements", "type": "steam_news", "appid": 1942280,
-     "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
-     "affected": ["/brotato/updates/", "/brotato/caveman/", "/brotato/co-op/", "/brotato/mods/"]},
-    {"id": "midgard-client-version", "name": "Midgard Survivors launcher manifest (developer site)", "type": "json",
-     "url": "https://raw.githubusercontent.com/Gon-Analista/midgard-survivors-updates/main/manifest.json",
-     "fields": ["base", "patch.version"],
-     "affected": ["/midgard-survivors/", "/midgard-survivors/android/", "/midgard-survivors/mac/", "/midgard-survivors/equipment/"]},
-    {"id": "mythic-survivors-ios", "name": "Mythic Survivors App Store version", "type": "json",
-     "url": "https://itunes.apple.com/lookup?id=6775568333&country=us",
-     "fields": ["results.0.version"],
-     "affected": ["/mythic-survivors/download-mod/", "/mythic-survivors/evolution/"]},
-    {"id": "spires-of-azeroth-releases", "name": "Spires of Azeroth GitHub releases", "type": "rss",
-     "url": "https://github.com/Chrisl252/spiresofazeroth/releases.atom",
-     "affected": ["/spires-of-azeroth/download-platforms/ (v1.0.2 / BUILD 20261103e statements)"]},
-    {"id": "poke-survivors-port-releases", "name": "JayElDragon Poke Survivors native port releases", "type": "rss",
-     "url": "https://github.com/JayElDragon/poke-survivor/releases.atom",
-     "affected": ["/poke-survivor/mobile/ (V5.1 port note)", "/poke-survivor/es/mobile/", "scripts/poke_survivor_content.py 'port' source"]}
+    {
+      "id": "ball-x-pit-steam",
+      "name": "BALL x PIT Steam announcements",
+      "type": "steam_news",
+      "appid": 2062430,
+      "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
+      "affected": [
+        "/ball-x-pit/evolutions/",
+        "/ball-x-pit/new-evolutions/",
+        "/ball-x-pit/passive-evolutions/",
+        "/ball-x-pit/builds/",
+        "/ball-x-pit/character-tier-list/",
+        "/ball-x-pit/characters/"
+      ]
+    },
+    {
+      "id": "warhammer-survivors-steam",
+      "name": "Warhammer Survivors Steam announcements",
+      "type": "steam_news",
+      "appid": 3669620,
+      "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
+      "affected": [
+        "/warhammer-survivors/evolutions/",
+        "/warhammer-survivors/best-builds/",
+        "/warhammer-survivors/characters/",
+        "/warhammer-survivors/co-op/",
+        "/warhammer-survivors/cross-save/",
+        "data/warhammer-survivors-pages.json"
+      ]
+    },
+    {
+      "id": "vampire-survivors-steam",
+      "name": "Vampire Survivors Steam announcements",
+      "type": "steam_news",
+      "appid": 1794680,
+      "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
+      "affected": [
+        "/vampire-survivors/evolutions/",
+        "/vampire-survivors/dlc/",
+        "/vampire-survivors/unlocks/",
+        "/vampire-survivors/secret-characters/",
+        "/vampire-survivors/co-op/"
+      ]
+    },
+    {
+      "id": "risk-of-rain-2-steam",
+      "name": "Risk of Rain 2 Steam announcements",
+      "type": "steam_news",
+      "appid": 632360,
+      "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
+      "affected": [
+        "/risk-of-rain-2/crossplay/",
+        "/risk-of-rain-2/gold-portal/",
+        "/risk-of-rain-2/ru/bulwarks-ambry/"
+      ]
+    },
+    {
+      "id": "revenant-survivors-steam",
+      "name": "Revenant Survivors Steam announcements",
+      "type": "steam_news",
+      "appid": 4617500,
+      "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
+      "affected": [
+        "/revenant-survivors/hard-mode/",
+        "/revenant-survivors/permanent-progression/",
+        "/revenant-survivors/demo-save-transfer/",
+        "/revenant-survivors/controller-auto-attack/"
+      ]
+    },
+    {
+      "id": "soulstone-survivors-steam",
+      "name": "Soulstone Survivors Steam announcements",
+      "type": "steam_news",
+      "appid": 2066020,
+      "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
+      "affected": [
+        "/soulstone-survivors/builds/",
+        "/soulstone-survivors/bumble-crystal-order/",
+        "/soulstone-survivors/co-op/"
+      ]
+    },
+    {
+      "id": "brotato-steam",
+      "name": "Brotato Steam announcements",
+      "type": "steam_news",
+      "appid": 1942280,
+      "title_match": "^(?!.*(% off|sale\b|soundtrack|vinyl|merch|wishlist|steam next fest)).*",
+      "affected": [
+        "/brotato/updates/",
+        "/brotato/caveman/",
+        "/brotato/co-op/",
+        "/brotato/mods/"
+      ]
+    },
+    {
+      "id": "poke-survivors-port-releases",
+      "name": "JayElDragon Poke Survivors native port releases",
+      "type": "rss",
+      "url": "https://github.com/JayElDragon/poke-survivor/releases.atom",
+      "affected": [
+        "/poke-survivor/mobile/ (V5.1 port note)",
+        "/poke-survivor/es/mobile/",
+        "scripts/poke_survivor_content.py 'port' source"
+      ]
+    }
   ]
 }
