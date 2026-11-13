@@ -1,0 +1,151 @@
+/* Warhammer Survivors hub (v3.21 redesign). Grimdark gothic: void black, aged gold, parchment, blood red.
+   Loaded after home.css; everything is scoped to .wh-hub so article pages are untouched. */
+@font-face {
+  font-family: "Cinzel";
+  src: url("/assets/fonts/cinzel-latin.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+.wh-hub {
+  --void: #0e0f10;
+  --iron: #17191a;
+  --plate: #1f2223;
+  --edge: #3a3a33;
+  --gold: #c9a24a;
+  --gold-hi: #e8c874;
+  --parch: #ece3cc;
+  --parch-dim: #b9ae94;
+  --blood: #8e1c1c;
+  --sigmar: #2f6f8f;
+  --display: "Cinzel", Georgia, "Times New Roman", serif;
+  background: var(--void);
+  color: var(--parch);
+}
+.wh-hub h1, .wh-hub h2, .wh-hub h3 { font-family: var(--display); font-weight: 700; letter-spacing: .02em; }
+.wh-hub a { color: inherit; }
+.wh-hub .top { background: #08090a; border-bottom: 1px solid var(--edge); }
+.wh-hub .brand { font-family: var(--display); letter-spacing: .06em; }
+.wh-hub .brand small { color: var(--gold); letter-spacing: .2em; text-transform: uppercase; }
+.wh-hub .desktop-nav a:hover { color: var(--gold-hi); }
+
+/* Hazard rule used as section divider */
+.wh-hub .hazard { height: 6px; background: repeating-linear-gradient(-45deg, var(--gold) 0 12px, #0e0f10 12px 24px); opacity: .85; }
+
+/* Hero */
+.wh-hub .hub-hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--edge); }
+.wh-hub .hub-hero::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(14,15,16,.97) 0%, rgba(14,15,16,.88) 42%, rgba(14,15,16,.35) 75%, rgba(14,15,16,.6) 100%),
+              url("/assets/warhammer-survivors/squad-1280.webp") center right / cover no-repeat;
+  filter: saturate(.85);
+}
+.wh-hub .hub-hero .wrap { position: relative; padding-block: 64px 56px; }
+.wh-hub .kicker { font-family: var(--display); color: var(--gold); font-size: 12px; letter-spacing: .32em; text-transform: uppercase; margin: 0 0 14px; }
+.wh-hub .hub-hero h1 { font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: 1.02; margin: 0 0 18px; color: #f4ead2; text-shadow: 0 2px 0 #000; max-width: 12ch; }
+.wh-hub .hub-hero h1 span { display: block; font-size: .42em; color: var(--gold); letter-spacing: .14em; margin-top: 10px; }
+.wh-hub .hub-lead { max-width: 52ch; color: #d8cfb8; font-size: 17px; line-height: 1.7; margin: 0 0 26px; }
+.wh-hub .hub-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.wh-hub .btn { display: inline-flex; align-items: center; gap: 12px; padding: 14px 20px; font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: .06em; text-decoration: none; border: 1px solid var(--gold); clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.wh-hub .btn-gold { background: linear-gradient(#e2c06a, #b88f34); color: #160f04; }
+.wh-hub .btn-gold:hover { background: linear-gradient(#f0d48a, #c9a24a); }
+.wh-hub .btn-ghost { background: rgba(14,15,16,.6); color: var(--parch); }
+.wh-hub .btn-ghost:hover { background: #24211a; color: var(--gold-hi); }
+
+/* Status bar */
+.wh-hub .status { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 40px; border: 1px solid var(--edge); background: rgba(8,9,10,.82); max-width: 860px; }
+.wh-hub .status div { padding: 14px 18px; border-right: 1px solid var(--edge); }
+.wh-hub .status div:last-child { border-right: 0; }
+.wh-hub .status small { display: block; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--parch-dim); }
+.wh-hub .status strong { font-family: var(--display); font-size: 16px; color: var(--gold-hi); }
+
+/* Sections */
+.wh-hub .band { padding-block: 56px; }
+.wh-hub .band + .band { border-top: 1px solid #222420; }
+.wh-hub .band-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 26px; }
+.wh-hub .band-head h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); margin: 0; color: #f1e6cb; }
+.wh-hub .band-head h2::before { content: "✠ "; color: var(--gold); font-size: .7em; vertical-align: .12em; }
+.wh-hub .band-head p { margin: 0; color: var(--parch-dim); font-size: 14px; max-width: 46ch; }
+
+/* Task grid (icon tiles) */
+.wh-hub .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.wh-hub .tile { position: relative; display: flex; flex-direction: column; text-decoration: none; background: var(--plate); border: 1px solid var(--edge); min-height: 100%; transition: border-color .15s, transform .15s; }
+.wh-hub .tile:hover, .wh-hub .tile:focus-visible { border-color: var(--gold); transform: translateY(-2px); }
+.wh-hub .tile img { width: 100%; height: 132px; object-fit: cover; object-position: center top; border-bottom: 1px solid var(--edge); image-rendering: pixelated; }
+.wh-hub .tile img.contain { object-fit: contain; background: #0b0c0d; padding: 14px; }
+.wh-hub .tile div { padding: 14px 16px 18px; }
+.wh-hub .tile h3 { font-size: 1.05rem; margin: 0 0 6px; color: var(--gold-hi); }
+.wh-hub .tile p { font-size: 13.5px; line-height: 1.55; color: #cfc6ae; margin: 0; }
+.wh-hub .tile .tag { position: absolute; top: 10px; left: 10px; background: var(--blood); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; }
+.wh-hub .tile.main { grid-column: span 2; }
+.wh-hub .tile.main img { height: 190px; }
+
+/* Data preview: evolution table */
+.wh-hub .preview { display: grid; grid-template-columns: 1.25fr 1fr; gap: 22px; align-items: start; }
+.wh-hub .evo-table { width: 100%; border-collapse: collapse; background: var(--plate); border: 1px solid var(--edge); font-size: 14px; }
+.wh-hub .evo-table th { text-align: left; font-family: var(--display); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); background: #141617; padding: 11px 14px; border-bottom: 1px solid var(--edge); }
+.wh-hub .evo-table td { padding: 10px 14px; border-bottom: 1px solid #2a2c2a; color: #e6dcc3; }
+.wh-hub .evo-table tr:last-child td { border-bottom: 0; }
+.wh-hub .evo-table td:last-child { color: var(--gold-hi); font-weight: 600; }
+.wh-hub .u { display: inline-block; font-size: 10px; letter-spacing: .1em; padding: 2px 6px; margin-left: 6px; vertical-align: 1px; border: 1px solid; }
+.wh-hub .u40k { color: #e07a6a; border-color: #7b2b22; }
+.wh-hub .uaos { color: #8ec5e0; border-color: #2c5a70; }
+.wh-hub .rule { background: linear-gradient(#f0e6cc, #e3d6b4); color: #231a0d; padding: 22px 24px; border: 1px solid #a88a45; box-shadow: inset 0 0 0 4px #efe4c6, inset 0 0 0 5px #a88a45; }
+.wh-hub .rule h3 { color: #5a1414; margin: 0 0 12px; font-size: 1.15rem; }
+.wh-hub .rule ol { margin: 0 0 14px; padding-left: 20px; }
+.wh-hub .rule li { margin-bottom: 8px; line-height: 1.55; }
+.wh-hub .rule img { width: 100%; height: auto; border: 1px solid #a88a45; margin-top: 6px; }
+.wh-hub .rule a { color: #5a1414; font-weight: 700; }
+.wh-hub .more { display: inline-block; margin-top: 14px; color: var(--gold-hi); font-weight: 600; }
+
+/* Two universes */
+.wh-hub .realms { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.wh-hub .realm { padding: 22px 24px; border: 1px solid var(--edge); background: var(--plate); }
+.wh-hub .realm h3 { margin: 0 0 8px; font-size: 1.2rem; }
+.wh-hub .realm.k40 { border-top: 3px solid var(--blood); }
+.wh-hub .realm.k40 h3 { color: #f0a090; }
+.wh-hub .realm.aos { border-top: 3px solid var(--sigmar); }
+.wh-hub .realm.aos h3 { color: #a8d6ec; }
+.wh-hub .realm p { color: #cfc6ae; font-size: 14px; margin: 0 0 8px; }
+.wh-hub .realm a { color: var(--gold-hi); }
+
+/* Videos, access and help reuse home.css structure; restyle colours */
+.wh-hub .yt-embed figcaption { color: var(--parch-dim); }
+.wh-hub .yt-embed figcaption a { color: var(--gold-hi); }
+.wh-hub .access { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; }
+.wh-hub .access p { color: #d6cdb4; font-size: 15px; }
+.wh-hub .stores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start; }
+.wh-hub .stores a { display: block; padding: 13px 16px; border: 1px solid var(--edge); background: var(--plate); text-decoration: none; font-weight: 600; }
+.wh-hub .stores a:hover { border-color: var(--gold); color: var(--gold-hi); }
+.wh-hub .stores span { display: block; font-size: 12px; color: var(--parch-dim); font-weight: 400; }
+.wh-hub .help-item { border-color: #2a2c2a; }
+.wh-hub .help-item summary { color: #efe4c8; font-family: var(--display); letter-spacing: .03em; }
+.wh-hub .help-item summary:hover { color: var(--gold-hi); }
+.wh-hub .help-body { color: #d2c9b0; }
+.wh-hub .help-body a { color: var(--gold-hi); }
+.wh-hub .editorial-note { color: var(--parch-dim); border-color: #2a2c2a; }
+.wh-hub footer { background: #08090a; color: var(--parch-dim); border-top: 1px solid var(--edge); }
+
+@media (max-width: 1100px) {
+  .wh-hub .tiles { grid-template-columns: repeat(2, 1fr); }
+  .wh-hub .preview, .wh-hub .access { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .wh-hub .hub-hero::before { background: linear-gradient(180deg, rgba(14,15,16,.78), rgba(14,15,16,.96) 60%), url("/assets/warhammer-survivors/squad-800.webp") center top / cover no-repeat; }
+  .wh-hub .hub-hero .wrap { padding-block: 40px 36px; }
+  .wh-hub .status { grid-template-columns: 1fr 1fr; }
+  .wh-hub .status div:nth-child(2) { border-right: 0; }
+  .wh-hub .status div:nth-child(-n+2) { border-bottom: 1px solid var(--edge); }
+  .wh-hub .tiles { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .wh-hub .tile.main { grid-column: span 2; }
+  .wh-hub .tile img { height: 96px; }
+  .wh-hub .tile.main img { height: 150px; }
+  .wh-hub .tile div { padding: 10px 12px 14px; }
+  .wh-hub .tile p { font-size: 12.5px; }
+  .wh-hub .realms, .wh-hub .stores { grid-template-columns: 1fr; }
+  .wh-hub .band { padding-block: 40px; }
+  .wh-hub .band-head { display: block; }
+  .wh-hub .band-head p { margin-top: 8px; }
+  .wh-hub .evo-table { font-size: 13px; }
+  .wh-hub .evo-table th, .wh-hub .evo-table td { padding: 9px 10px; }
+}

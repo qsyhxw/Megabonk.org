@@ -7,8 +7,9 @@ BASE = '/warhammer-survivors/'
 def redesign(document):
     sections = dict(re.findall(r'<section id="([^"]+)">(.*?)</section>', document, re.S))
     head = document.split('<main id="main"', 1)[0]
+    # Drop the article themes whether or not write_html already added ?v= cache-busting.
     for theme in ('pokebonk', 'vampire-survivors'):
-        head = head.replace(f'<link rel="stylesheet" href="/assets/{theme}/site.css">', '')
+        head = re.sub(r'<link rel="stylesheet" href="/assets/' + theme + r'/site\.css(?:\?v=[0-9a-f]+)?">\n?', '', head)
     head = head.replace('</head>', '<link rel="stylesheet" href="/assets/warhammer-survivors/home.css"></head>')
     head = head.replace('class="guide-layout vs-guide"', 'class="guide-layout wh-home"')
     footer = '<footer' + document.split('<footer', 1)[1]

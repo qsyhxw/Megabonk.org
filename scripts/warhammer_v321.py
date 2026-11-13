@@ -228,14 +228,9 @@ def hub(text):
              + video('bq1k1U5KXaM', '12:02', 'A weapon evolving from a boss chest', 'Evolving every weapon', 'Gohjoe').replace('</figcaption>', ' · <a href="/warhammer-survivors/evolutions/">All 36 recipes →</a></figcaption>')
              + video('9bLZOyYe2sU', '1:52', 'Warhammer Survivors beginner guide', 'Beginner guide', 'iPICKmyBUTT').replace('</figcaption>', ' · <a href="/warhammer-survivors/tips/">First-run tips →</a></figcaption>')
              + '</div></section>')
-    text = text.replace('<section class="progression-section" id="reference">', block + '<section class="progression-section" id="reference">', 1)
-    thumbs = {'cross-save': ('objectives-ingame.webp', 'Objectives menu'), 'followers': ('amalia-select.webp', 'Sister Superior Amalia Novena in Character Select'),
-              'dice-cube': ('evo/sustained-fire-dice.webp', 'D6 Dice evolving into Sustained Fire Dice'), 'tips': ('enhancements.webp', 'Enhancements screen'),
-              'legend-of-catachan': ('catachan/character-select.webp', 'Legend of Catachan stats'), 'secrets': ('book-tzeentch.webp', 'The Book of Tzeentch relic')}
-    for slug, (src, alt) in thumbs.items():
-        text = re.sub(r'(<a class="task-card" href="/warhammer-survivors/' + slug + r'/">)',
-                      lambda m: m[1] + f'<img class="task-thumb{" icon" if src == "book-tzeentch.webp" else ""}" src="/assets/warhammer-survivors/{src}" alt="{alt}" width="400" height="140" loading="lazy" decoding="async">', text, count=1)
-    return with_video_assets(text)
+    from warhammer_hub_v321 import rebuild
+    videos = re.search(r'<div class="yt-row">(.*)</div></section>$', block, re.S)[1]
+    return with_video_assets(rebuild(text, videos))
 
 
 def apply():

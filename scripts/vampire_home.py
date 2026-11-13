@@ -3,7 +3,7 @@ import re
 
 
 def redesign(html):
-    html = html.replace('<link rel="stylesheet" href="/assets/pokebonk/site.css">', '')
+    html = re.sub(r'<link rel="stylesheet" href="/assets/pokebonk/site\.css(?:\?v=[0-9a-f]+)?">\n?', '', html)
     html = html.replace('<link rel="stylesheet" href="/assets/vampire-survivors/site.css">',
                         '<link rel="stylesheet" href="/assets/vampire-survivors/home.css">')
     html = html.replace('class="guide-layout vs-guide"', 'class="guide-layout vs-home"')
