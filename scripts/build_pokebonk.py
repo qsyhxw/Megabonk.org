@@ -185,10 +185,15 @@ def build():
     apply_november(globals())
     from pokebonk_v320 import apply_v320
     apply_v320(globals())
+    from pokebonk_theme import apply_theme
+    apply_theme(globals())
     error=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">PokeBonk</a> / 404</nav><section class="legal"><p class="eyebrow">404 / Off the trail</p><h1>This path ends here.</h1><p>The page may have moved, or the address may be incomplete. Your next guide is still on the map.</p><div class="actions"><a class="button" href="{P}">Back to PokeBonk →</a><a class="button secondary" href="{P}#guides">Browse the guides</a></div></section>'
     out=ROOT/'pokebonk/404.html';out.parent.mkdir(exist_ok=True);write_html(out, shell(P+'404','Page not found | PokeBonk Guide','This PokeBonk guide path could not be found. Return to the guide homepage or browse the available player notes.',error,noindex=True),encoding='utf-8')
     for path,page in PAGES.items():
         file=ROOT/path.lstrip('/')/'index.html';file.parent.mkdir(parents=True,exist_ok=True);write_html(file, page['html'],encoding='utf-8')
+    # v3.24: nav, breadcrumbs, related guides and registries from data/pokebonk-pages.json
+    import subprocess,sys
+    subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'pokebonk'],check=True,stdout=subprocess.DEVNULL)
     print(json.dumps([{'url':p,'title_length':len(v['title']),'description_length':len(v['desc'])} for p,v in PAGES.items()],indent=2))
 
 if __name__=='__main__':build()

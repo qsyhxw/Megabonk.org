@@ -1,0 +1,115 @@
+/* PokeBonk game theme (SOP 02 §2.1): hub and every guide page.
+   Visual source: pokebonk.com title screen and menus — dusk-violet sky, autumn red/orange/gold,
+   white rounded panels, coral-red "Play" buttons with a solid under-shadow, yellow logo accent,
+   M PLUS Rounded 1c headings (the game's own UI face, OFL, self-hosted). */
+@font-face{font-family:"M PLUS Rounded 1c";src:url('/assets/fonts/mplus-rounded-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+
+body.pb-theme{
+  --night:#2a2440;          /* game UI ink */
+  --dusk:#3b3164;           /* sky violet */
+  --dusk-2:#5a4f8c;
+  --red:#e0303e;            /* Play button */
+  --red-hi:#ff5a5f;
+  --red-lo:#9d222b;
+  --sun:#ffc93c;            /* logo yellow */
+  --leaf:#e8762b;           /* autumn orange */
+  --cream:#fdf8f1;
+  --panel:#ffffff;
+  /* map the shared shell variables */
+  --paper:var(--cream);--white:var(--panel);--ink:var(--night);--muted:#5a5478;--green:#4a3fa0;--pale:#f1edfb;--line:#e3dcef;--gold:var(--sun);--coral:var(--red);
+  --heading:"M PLUS Rounded 1c",Nunito,system-ui,sans-serif;
+  background:var(--cream);color:var(--night)
+}
+.pb-theme a{color:#4a3fa0}
+.pb-theme h1,.pb-theme h2,.pb-theme h3,.pb-theme .brand{font-family:var(--heading);font-weight:800;letter-spacing:-.01em}
+.pb-theme a:focus-visible,.pb-theme summary:focus-visible,.pb-theme button:focus-visible{outline:3px solid var(--leaf);outline-offset:3px}
+
+/* header */
+.pb-theme .top{background:var(--night);border-bottom:0;box-shadow:0 3px 0 var(--leaf)}
+.pb-theme .top .wrap{min-height:72px}
+.pb-theme .brand{color:#fff}
+.pb-theme .brand small{color:#c9c1ea}
+.pb-theme .brand img{background:#fff;border-radius:12px;padding:3px}
+.pb-theme .desktop-nav{gap:6px}
+.pb-theme .desktop-nav a{color:#efeaff;padding:9px 12px;border-radius:999px;font-family:var(--heading);font-size:14px}
+.pb-theme .desktop-nav a:hover{background:#ffffff1a}
+.pb-theme .desktop-nav a[aria-current=page]{background:#fff;color:var(--night);text-decoration:none}
+.pb-theme .desktop-nav a:first-child,.pb-theme .mobile-links a:first-child{background:linear-gradient(#ff7a7c,var(--red-hi) 60%,var(--red));color:#fff;box-shadow:0 3px 0 var(--red-lo);border-radius:999px;padding:9px 16px}
+.pb-theme .desktop-nav a:first-child::before,.pb-theme .mobile-links a:first-child::before{content:"▶ ";font-size:11px}
+.pb-theme .mobile-nav summary{color:#fff;border-color:#ffffff55;border-radius:999px;min-height:44px;display:flex;align-items:center}
+.pb-theme .mobile-nav[open] .mobile-links{top:72px;background:var(--night);border:0;box-shadow:0 8px 18px #0004}
+.pb-theme .mobile-links a{color:#fff;padding:12px 4px;font-family:var(--heading)}
+.pb-theme .mobile-links a[aria-current=page]{color:var(--sun)}
+.pb-theme .mobile-links a:first-child{display:inline-block;margin-bottom:6px}
+
+/* article head + answer box */
+.pb-guide .crumbs{font-size:13px;color:var(--muted);padding:20px 0 0}
+.pb-guide .crumbs a{color:var(--muted);text-decoration:none}
+.pb-guide .crumbs a:hover{color:var(--night);text-decoration:underline}
+.pb-guide .crumbs [aria-current]{color:var(--night)}
+.pb-guide .article-head{padding:12px 0 18px;max-width:none}
+.pb-guide .article-head .tag{display:none}
+.pb-guide .article-head h1{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.15;margin:.2em 0 .45em;color:var(--night)}
+.pb-guide .article-head .answer{background:var(--panel);border:2px solid var(--night);border-radius:18px;box-shadow:0 4px 0 var(--night);padding:16px 20px;font-size:1.12rem;line-height:1.6;max-width:72ch;position:relative}
+.pb-guide .article-head .answer::before{content:"Answer";position:absolute;top:-12px;left:16px;background:var(--sun);color:var(--night);font:800 11px/1 var(--heading);letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:2px solid var(--night)}
+.pb-guide .article-head .meta{margin-top:14px}
+.pb-theme .sync-line p{margin:.2rem 0;font-size:13px;color:var(--muted)}
+
+/* body type */
+.pb-theme .prose h2{font-size:1.65rem;color:var(--night);padding-top:.4rem;border-top:3px solid var(--line);margin-top:2.4rem}
+.pb-theme .prose h2::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:inset 0 -4px 0 #fff,0 0 0 2px var(--night);margin-right:10px;vertical-align:.12em}
+.pb-theme .toc{border-top:0;background:var(--pale);border-radius:14px;padding:12px 16px}
+.pb-theme .toc strong{color:var(--dusk)}
+.pb-theme .toc a{color:var(--night)}
+.pb-theme .note{background:#fff6e2;border-left-color:var(--leaf);border-radius:0 12px 12px 0}
+.pb-theme .table-wrap{border:2px solid var(--night);border-radius:14px;background:var(--panel)}
+.pb-theme th{background:var(--dusk);color:#fff}
+.pb-theme tbody tr:nth-child(even) td{background:#faf7ff}
+.pb-theme .button,.pb-theme button.play-button{border-radius:999px}
+.pb-theme .button{background:linear-gradient(#ff7a7c,var(--red-hi) 60%,var(--red));border-color:var(--red-lo);box-shadow:0 3px 0 var(--red-lo);color:#fff}
+.pb-theme .button.secondary{background:#fff;color:var(--night);border:2px solid var(--night);box-shadow:0 3px 0 var(--night)}
+.pb-theme .prose figure img,.pb-theme .game-image img{max-width:100%;height:auto;max-height:min(70vh,640px);object-fit:contain;border-radius:12px}
+
+/* answer modules from v3.20 recoloured */
+.pb-theme .tier-grid,.pb-theme .loadout,.pb-theme .task-grid .task,.pb-theme .preview-card{border-color:var(--night)}
+.pb-theme .tier-S .tier-label,.pb-theme .tier-badge.tier-S{background:var(--sun)}
+.pb-theme .tier-A .tier-label,.pb-theme .tier-badge.tier-A{background:#ffa36b}
+.pb-theme .tier-B .tier-label{background:#c8bff0}
+.pb-theme .loadout-body h4{color:var(--dusk)}
+.pb-theme .portrait-strip img{background:var(--pale);border-color:var(--night)}
+
+/* related guides (register_page.py) */
+.pb-theme .related-tasks{margin-top:2.4rem;padding-top:1rem;border-top:3px solid var(--line)}
+.pb-theme .related-tasks h2{border:0;margin-top:0}
+.pb-theme .related-tasks h2::before{content:none}
+.pb-theme .related-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.pb-theme .related-links a{display:flex;align-items:center;min-height:52px;padding:10px 16px;background:var(--panel);border:2px solid var(--night);border-radius:14px;box-shadow:0 3px 0 var(--night);text-decoration:none;color:var(--night);font-weight:700}
+.pb-theme .related-links a:hover{background:var(--sun)}
+
+/* footer */
+.pb-theme .footer{background:var(--night);color:#e7e2fb;border-top:3px solid var(--leaf)}
+.pb-theme .footer p{color:#c9c1ea}
+.pb-theme .footer a{color:var(--sun)}
+
+@media(max-width:900px){
+  .pb-theme .top .wrap{min-height:64px}
+  .pb-theme .mobile-nav[open] .mobile-links{top:64px}
+}
+@media(max-width:600px){
+  .pb-theme .wrap{width:calc(100% - 32px)}
+  .pb-guide .crumbs{padding-top:12px}
+  .pb-guide .crumbs>*{display:none}
+  .pb-guide .crumbs>a:nth-last-of-type(1){display:inline}
+  .pb-guide .crumbs>a:nth-last-of-type(1)::before{content:"‹ "}
+  .pb-guide .article-head h1{font-size:1.85rem}
+  .pb-guide .article-head .answer{font-size:1rem;padding:16px 14px 12px}
+  .pb-theme .prose h2{font-size:1.4rem}
+  .pb-theme .related-links{grid-template-columns:1fr}
+  /* one scrollable row of section links instead of a 250-440px block above the answer */
+  .pb-theme .article-layout>.toc{flex-wrap:nowrap;overflow-x:auto;gap:6px;padding:8px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .pb-theme .article-layout>.toc::-webkit-scrollbar{display:none}
+  .pb-theme .toc strong{display:none}
+  .pb-theme .article-layout>.toc a{flex:none;white-space:nowrap;background:#fff;border-radius:999px;padding:8px 12px;font-size:13px;text-decoration:none;max-width:78vw;overflow:hidden;text-overflow:ellipsis}
+  .pb-guide .article-head .note{font-size:14px;padding:10px 12px}
+  .pb-theme .portrait-strip img{width:48px;height:48px}
+}

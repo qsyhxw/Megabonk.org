@@ -5,7 +5,8 @@ Usage:
   python register_page.py PROJECT_DIR GAME            apply: rewrite nav / breadcrumbs / related, sync registries
   python register_page.py PROJECT_DIR GAME --check    report differences only (exit 1 if any)
 
-Manifest: PROJECT_DIR/data/GAME-pages.json (see 模板/pages.example.json).
+Manifest: PROJECT_DIR/data/GAME-pages.json (see 模板/pages.example.json). Rows with "plain": true
+(trust pages, other-language pages) get the nav only, no breadcrumbs or related list.
 Applied to every page listed (idempotent; run as the LAST build step or after manual edits):
   - desktop + mobile nav    <nav class="desktop-nav"> / <nav class="mobile-links"> get the manifest nav (current page marked)
   - breadcrumbs             <nav class="crumbs" data-reg> before the article head + BreadcrumbList JSON-LD (inner pages)
@@ -82,7 +83,7 @@ def apply_page(text, m, slug):
     text = re.sub(r'<nav class="crumbs" data-reg[^>]*>.*?</nav>', "", text, flags=re.S)
     text = re.sub(r'<script type="application/ld\+json" data-reg="crumbs">.*?</script>', "", text, flags=re.S)
     text = re.sub(r'<section class="related-tasks" data-reg[^>]*>.*?</section>', "", text, flags=re.S)
-    if slug:
+    if slug and not m["by"][slug].get("plain"):
         vis, ld = crumbs_html(m, slug)
         text = re.sub(r'(<header class="article-head"[^>]*>)', lambda x: vis + x[1], text, count=1)
         text = text.replace("</head>", ld + "</head>", 1)
@@ -176,7 +177,7 @@ def main():
     # orphans: inbound links from other section pages
     texts = {p["slug"]: file_of(root, m, p["slug"]).read_text(encoding="utf-8") for p in m["pages"] if file_of(root, m, p["slug"]).exists()}
     for s in texts:
-        if not s:
+        if not s or m["by"][s].get("plain"):
             continue
         n = sum(1 for o, t in texts.items() if o != s and f'href="{url(m, s)}' in t)
         if n < 2:
