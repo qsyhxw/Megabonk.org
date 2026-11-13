@@ -69,6 +69,14 @@ def must(text, old, new):
     return text.replace(old, new, 1)
 
 
+def anchor_rows(text):
+    """Give every recipe row an id (#lasgun, #chainsword …) so single-weapon searches land on their row."""
+    def row(m):
+        slug = re.sub(r'[^a-z0-9]+', '-', re.sub(r'&[^;]+;', '', m[1]).lower()).strip('-')
+        return f'<tr id="{slug}"><td>{m[1]}</td>'
+    return re.sub(r'<tr><td>([^<]+)</td>', row, text)
+
+
 def evolutions(text):
     text = must(text, '<p><strong>Match a weapon with its companion, then check the reported upgrade and chest conditions.</strong> The table now includes 38 unique reported pairings, with launch additions and older demo evidence identified below. Use the universe filter to find the pair relevant to your run.</p>',
                 '<p><strong>Max the weapon, hold its companion passive (level 1 is enough for most), then open a chest from an elite or boss.</strong> The table below lists all 38 weapon + companion pairs for both universes; filter by your universe or search a weapon.</p>')
@@ -103,6 +111,7 @@ def evolutions(text):
     nxt = re.sub(r'<figure>.*?</figure>', '', nxt, flags=re.S)
     text = replace_section(text, 'next', nxt)
     text = re.sub(r'<nav class="toc"[^>]*>.*?</nav>', '<nav class="toc" aria-label="On this page"><a href="#recipes">All 38 recipes</a><a href="#sequence">How to trigger an evolution</a><a href="#weapon-checks">Unlock the companion first</a><a href="#version">Older demo pairings</a></nav>', text, count=1, flags=re.S)
+    text = anchor_rows(text)
     return with_video_assets(text)
 
 

@@ -48,7 +48,7 @@ def body(help_items, videos):
         tile('dice-cube', 'Dice Cube', '40K: D6 Dice to level 6. AoS: hold four weapons at once.', 'evo/sustained-fire-dice.webp', 'D6 Dice evolving into Sustained Fire Dice'),
         tile('secrets', 'Secrets & incantations', 'Which relic opens the menu in each universe, and the codes.', 'book-tzeentch.webp', 'The Book of Tzeentch relic', contain=True),
         tile('co-op', 'Co-op & multiplayer', 'Single-player only at launch; squad followers are not a second player.', 'squad-480.webp', 'Champion and squad allies beside a tank'),
-        tile('cross-save', 'Cross-save', 'What carries between Xbox, PC, Steam and mobile copies.', 'objectives-ingame.webp', 'Objectives menu'),
+        tile('characters', 'All champions', 'Every 40K and Age of Sigmar champion with its unlock: rescues, objectives and Paint Pots.', 'catachan/character-select.webp', 'Character Select stats screen'),
     ])
     return f'''<main id="main">
 <section class="hub-hero" id="guide"><div class="wrap">

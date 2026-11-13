@@ -28,5 +28,7 @@ def build():
  build_tasks()
  from warhammer_v321 import apply as v321
  v321()
+ from warhammer_characters import build as build_characters
+ build_characters()
  f=ROOT/'index.html';write_html(f,f.read_text(encoding='utf8'),encoding='utf8')
 if __name__=='__main__':build()
