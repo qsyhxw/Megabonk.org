@@ -61,7 +61,9 @@ jobs:
           python scripts/build_mythic_survivors.py
           python scripts/build_spires_of_azeroth.py
           for p in $pages; do
-            cmp <(tr -d '\r' < "$p") <(tr -d '\r' < "$RUNNER_TEMP/synced/$p") || { echo "$p differs from its generator" >&2; exit 1; }
+            # ?v= stylesheet hashes depend on checkout line endings, not on the synced text
+            norm() { tr -d '\r' < "$1" | sed -E 's/\?v=[0-9a-f]{10}//g'; }
+            cmp <(norm "$p") <(norm "$RUNNER_TEMP/synced/$p") || { echo "$p differs from its generator" >&2; exit 1; }
             cp "$RUNNER_TEMP/synced/$p" "$p"
           done
           git checkout -- . ':!data/live-versions.json' ':!data/content-dates.json' ':!sitemap.xml' ':!midgard-survivors/index.html' ':!mythic-survivors/download-mod/index.html' ':!spires-of-azeroth/download-platforms/index.html'
