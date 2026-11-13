@@ -194,6 +194,11 @@ def build():
     # v3.24: nav, breadcrumbs, related guides and registries from data/pokebonk-pages.json
     import subprocess,sys
     subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'pokebonk'],check=True,stdout=subprocess.DEVNULL)
+    # register_page appends BreadcrumbList after game_seo's FAQ script; re-run the SEO editor so the FAQ block stays last (idempotent, check_game_seo).
+    from game_seo import edit as edit_seo
+    for f in (ROOT/'pokebonk').rglob('*.html'):
+        s=f.read_text(encoding='utf8');n=edit_seo(f,s)
+        if n!=s:f.write_text(n,encoding='utf8')
     print(json.dumps([{'url':p,'title_length':len(v['title']),'description_length':len(v['desc'])} for p,v in PAGES.items()],indent=2))
 
 if __name__=='__main__':build()
