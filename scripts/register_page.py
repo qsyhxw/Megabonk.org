@@ -121,7 +121,10 @@ def apply_page(text, m, slug):
     nav = nav_html(m, slug)
     text = re.sub(r'(<nav class="(?:desktop-nav|mobile-links)"[^>]*>).*?(</nav>)', lambda x: x[1] + nav + x[2], text, flags=re.S)
     text = re.sub(r'<nav class="crumbs" data-reg[^>]*>.*?</nav>', "", text, flags=re.S)
-    text = re.sub(r'<script type="application/ld\+json" data-reg="crumbs">.*?</script>', "", text, flags=re.S)
+    want_ld = crumbs_html(m, slug)[1] if slug and not m["by"][slug].get("plain") else None
+    if not (want_ld and want_ld in text):
+        # an unchanged BreadcrumbList stays where it is, so later SEO editors that append to <head> stay idempotent
+        text = re.sub(r'<script type="application/ld\+json" data-reg="crumbs">.*?</script>', "", text, flags=re.S)
     text = re.sub(r'<section class="related-tasks" data-reg[^>]*>.*?</section>', "", text, flags=re.S)
     if "footer" in m:
         foot = footer_html(m)
@@ -134,7 +137,8 @@ def apply_page(text, m, slug):
     if slug and not m["by"][slug].get("plain"):
         vis, ld = crumbs_html(m, slug)
         text = re.sub(r'(<header class="article-head"[^>]*>)', lambda x: vis + x[1], text, count=1)
-        text = text.replace("</head>", ld + "</head>", 1)
+        if ld not in text:
+            text = text.replace("</head>", ld + "</head>", 1)
         rel = related_html(m, slug)
         if '<p><a href="#guide">Back to top' in text:
             text = text.replace('<p><a href="#guide">Back to top', rel + '<p><a href="#guide">Back to top', 1)
