@@ -55,7 +55,8 @@ def root_discovery(text):
  assert old,'Root discovery placement missing'
  text=text[:old.start()]+catalog()+text[old.end():]
  css='<link rel="stylesheet" href="/assets/game-discovery.css">'
- if css not in text:text=text.replace('</head>',css+'\n</head>',1)
+ # Match with or without the ?v= cache-busting suffix added by write_html.
+ if 'href="/assets/game-discovery.css' not in text:text=text.replace('</head>',css+'\n</head>',1)
  return text
 
 def normalize(path,text):

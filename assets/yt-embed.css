@@ -1,0 +1,22 @@
+/* Click-to-load YouTube facade (v3.21). Theme via --yt-accent if the site wants. */
+.yt-embed { margin: 1.25rem 0; }
+.yt-facade, .yt-frame {
+  display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 10px;
+  overflow: hidden; background: #000;
+}
+.yt-facade { position: relative; padding: 0; cursor: pointer; }
+.yt-facade img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .2s; }
+.yt-facade:hover img, .yt-facade:focus-visible img { opacity: .85; }
+.yt-facade:focus-visible { outline: 3px solid var(--yt-accent, #ffcc33); outline-offset: 3px; }
+.yt-play {
+  position: absolute; left: 50%; top: 50%; width: 68px; height: 48px; transform: translate(-50%, -50%);
+  border-radius: 12px; background: rgba(20, 20, 20, .82);
+}
+.yt-play::after {
+  content: ""; position: absolute; left: 27px; top: 14px;
+  border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff;
+}
+.yt-facade:hover .yt-play { background: #c00; }
+.yt-embed figcaption { font-size: .85rem; opacity: .8; margin-top: .4rem; }
+.yt-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+.yt-row .yt-embed { margin: 0; }

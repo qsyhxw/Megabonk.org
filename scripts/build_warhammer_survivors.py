@@ -26,5 +26,7 @@ def build():
  p=ROOT/'warhammer-survivors/co-op/index.html';p.parent.mkdir(parents=True,exist_ok=True);write_html(p,html,encoding='utf8')
  from warhammer_survivors_pages import build as build_tasks
  build_tasks()
+ from warhammer_v321 import apply as v321
+ v321()
  f=ROOT/'index.html';write_html(f,f.read_text(encoding='utf8'),encoding='utf8')
 if __name__=='__main__':build()

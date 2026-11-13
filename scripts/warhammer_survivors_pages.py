@@ -38,7 +38,7 @@ def navigation(text):
     links = [('Overview', BASE), ('Evolutions', BASE+'evolutions/'), ('Co-op', BASE+'co-op/'), ('More games', '/#more-games')]
     markup = ''.join(f'<a href="{url}">{label}</a>' for label, url in links)
     stylesheet = '<link rel="stylesheet" href="/assets/warhammer-survivors/site.css">'
-    if stylesheet not in text:
+    if 'href="/assets/warhammer-survivors/site.css' not in text:
         text = text.replace('</head>', stylesheet+'</head>')
     return re.sub(r'(<nav class="(?:desktop-nav|mobile-links)"[^>]*>).*?(</nav>)', lambda match: match[1]+markup+match[2], text, flags=re.S)
 

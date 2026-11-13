@@ -51,6 +51,8 @@ def main():
             rules = {entry['image']: entry for entry in policies.get(key, [])}
             seen = set()
             for figure in FIGURE.findall(text):
+                if 'class="yt-embed"' in figure:
+                    continue  # Click-to-load video; its "Watch on YouTube" link is creator credit (SOP 08 video rules).
                 figures += 1
                 image = re.search(r'<img\b[^>]*\bsrc="([^"]+)"', figure)
                 caption = CAPTION.search(figure)

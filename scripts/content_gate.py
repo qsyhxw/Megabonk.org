@@ -101,7 +101,9 @@ def check(path, root, domain, allow):
         findings.append(("BLOCK", f"citation markers x{cites}"))
 
     ext = []
-    for href in re.findall(r'(?i)<a\b[^>]*href="(https?://[^"]+)"', main):
+    # A video's "Watch on YouTube" caption link is creator credit, not an outbound step (08 video rules).
+    no_video = re.sub(r'(?is)<figure class="yt-embed">.*?</figure>', "", main)
+    for href in re.findall(r'(?i)<a\b[^>]*href="(https?://[^"]+)"', no_video):
         host = urlparse(href).netloc.lower().removeprefix("www.")
         if domain and host.endswith(domain):
             continue
@@ -111,7 +113,8 @@ def check(path, root, domain, allow):
     if len(ext) > max_ext:
         findings.append(("BLOCK", f"external links {len(ext)} > {max_ext} ({len(set(urlparse(e).netloc for e in ext))} domains)"))
 
-    imgs = len(re.findall(r"(?i)<img\b", main))
+    # Video thumbnails are the creator's artwork, not page media (08 video rules, v3.21).
+    imgs = len(re.findall(r"(?i)<img\b", re.sub(r'(?is)<button[^>]*class="yt-facade".*?</button>', "", main)))
     min_img = allow.get(url, {}).get("min_images", limits[1])
     if imgs < min_img:
         findings.append(("BLOCK" if fmt else "WARN", f"images {imgs} < {min_img} for format {fmt or 'other'}"))
