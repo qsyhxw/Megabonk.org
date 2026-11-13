@@ -11,9 +11,13 @@ Applied to every page listed (idempotent; run as the LAST build step or after ma
   - desktop + mobile nav    <nav class="desktop-nav"> / <nav class="mobile-links"> get the manifest nav (current page marked)
   - breadcrumbs             <nav class="crumbs" data-reg> before the article head + BreadcrumbList JSON-LD (inner pages)
   - related tasks           <section class="related-tasks" data-reg> before "Back to top" (inner pages)
+  - footer (v3.25)          when the manifest has a "footer" block: the page's last <footer> becomes
+                            <footer class="site-footer" data-reg> (brand, section columns from rows with
+                            "footer": true, recently updated, official links, info row) — all pages incl. plain
 Registries synced (only entries for this game's pages are added; nothing else is removed):
   sitemap.xml <url>, data/content-dates.json, data/game-seo.json "pages", config/integrations.json includes.
-Checks: orphan pages (fewer than 2 inbound links from other pages of the section), pages in the folder
+Checks: footer link count (15–25) and footer links back to the main site other than the info row,
+orphan pages (fewer than 2 inbound links from other pages of the section), pages in the folder
 missing from the manifest, manifest rows without a file.
 """
 import html
@@ -77,12 +81,56 @@ def related_html(m, slug):
     return f'<section class="related-tasks" data-reg aria-label="Related guides"><h2>Related guides</h2><div class="related-links">{links}</div></section>'
 
 
+def footer_html(m):
+    f = m["footer"]
+    e = html.escape
+    cols = []
+    # columns: footer.columns groups several sections under one heading; default is one column per section
+    groups = f.get("columns") or [{"label": x["label"], "sections": [x["id"]]} for x in m["sections"]]
+    for g in groups:
+        rows = [p for sid in g["sections"] for p in m["pages"] if p.get("footer") and p.get("section") == sid][:6]
+        if rows:
+            cols.append(f'<div class="footer-col"><h2>{e(g["label"])}</h2>' + "".join(f'<a href="{url(m, p["slug"])}">{e(p["title"])}</a>' for p in rows) + "</div>")
+    recent = sorted((p for p in m["pages"] if p["slug"] and not p.get("plain") and p.get("updated")), key=lambda p: p["updated"], reverse=True)[:3]
+    if recent:
+        ver = f'<p class="footer-version">{e(f["version"])}</p>' if f.get("version") else ""
+        cols.append('<div class="footer-col"><h2>Recently updated</h2>' + "".join(f'<a href="{url(m, p["slug"])}">{e(p["title"])}</a>' for p in recent) + ver + "</div>")
+    if f.get("official"):
+        cols.append('<div class="footer-col"><h2>Official links</h2>' + "".join(f'<a href="{x["href"]}" rel="noopener">{e(x["label"])}</a>' for x in f["official"][:3]) + "</div>")
+    brand = f'<div class="footer-brand"><a href="{url(m, "")}"><strong>{e(f.get("name", m["name"]))}</strong></a><p>{e(f.get("tagline", ""))}</p><p>{e(f.get("disclaimer", ""))}</p></div>'
+    info = "".join(f'<a href="{x["href"]}">{e(x["label"])}</a>' for x in f.get("info", []))
+    return (f'<footer class="site-footer" data-reg><div class="wrap footer-grid">{brand}{"".join(cols)}</div>'
+            f'<nav class="footer-info" aria-label="Site information"><div class="wrap">{info}</div></nav></footer>')
+
+
+def footer_problems(m):
+    if "footer" not in m:
+        return []
+    out = []
+    links = re.findall(r'href="([^"]+)"', footer_html(m))
+    if not 15 <= len(links) <= 25:
+        out.append(f"footer has {len(links)} links (aim for 15-25)")
+    allowed = {x["href"] for x in m["footer"].get("info", [])} | {x["href"] for x in m["footer"].get("official", [])}
+    for h in links:
+        if h.startswith("/") and not h.startswith(m["base"]) and h not in allowed:
+            out.append(f"footer links out of the section: {h}")
+    return out
+
+
 def apply_page(text, m, slug):
     nav = nav_html(m, slug)
     text = re.sub(r'(<nav class="(?:desktop-nav|mobile-links)"[^>]*>).*?(</nav>)', lambda x: x[1] + nav + x[2], text, flags=re.S)
     text = re.sub(r'<nav class="crumbs" data-reg[^>]*>.*?</nav>', "", text, flags=re.S)
     text = re.sub(r'<script type="application/ld\+json" data-reg="crumbs">.*?</script>', "", text, flags=re.S)
     text = re.sub(r'<section class="related-tasks" data-reg[^>]*>.*?</section>', "", text, flags=re.S)
+    if "footer" in m:
+        foot = footer_html(m)
+        ends = [x for x in re.finditer(r"<footer\b[^>]*>.*?</footer>", text, flags=re.S)]
+        if ends:
+            last = ends[-1]
+            text = text[:last.start()] + foot + text[last.end():]
+        else:
+            text = text.replace("</body>", foot + "</body>", 1)
     if slug and not m["by"][slug].get("plain"):
         vis, ld = crumbs_html(m, slug)
         text = re.sub(r'(<header class="article-head"[^>]*>)', lambda x: vis + x[1], text, count=1)
@@ -137,7 +185,9 @@ def sync_registries(root, m, check):
     ip = root / "config" / "integrations.json"
     if ip.exists() and m.get("integrations"):
         d = json.loads(ip.read_text(encoding="utf-8"))
-        want = {i: list(rels) for i in m["integrations"].get("all", [])}
+        # trust pages ("plain") never get page integrations such as ads (00 §2)
+        ordinary = [file_of(root, m, p["slug"]).relative_to(root).as_posix() for p in pages if not p.get("plain")]
+        want = {i: list(ordinary) for i in m["integrations"].get("all", [])}
         vid = m["integrations"].get("video")
         if vid:
             want.setdefault(vid, []).extend(file_of(root, m, p["slug"]).relative_to(root).as_posix() for p in pages if p.get("video"))
@@ -174,6 +224,7 @@ def main():
             if not check:
                 f.write_text(new, encoding="utf-8")
     diffs += sync_registries(root, m, check)
+    diffs += ["footer: " + x for x in footer_problems(m)]
     # orphans: inbound links from other section pages
     texts = {p["slug"]: file_of(root, m, p["slug"]).read_text(encoding="utf-8") for p in m["pages"] if file_of(root, m, p["slug"]).exists()}
     for s in texts:
@@ -182,9 +233,10 @@ def main():
         n = sum(1 for o, t in texts.items() if o != s and f'href="{url(m, s)}' in t)
         if n < 2:
             diffs.append(f"orphan risk: {url(m, s)} has {n} inbound links from the section")
+    warn = ("orphan", "page not", "manifest row", "footer:")
     for d in diffs:
-        print(("DIFF  " if check else "FIXED ") + d if not d.startswith("orphan") and not d.startswith("page not") and not d.startswith("manifest row") else "WARN  " + d)
-    hard = [d for d in diffs if d.startswith(("orphan", "page not", "manifest row"))]
+        print(("WARN  " if d.startswith(warn) else "DIFF  " if check else "FIXED ") + d)
+    hard = [d for d in diffs if d.startswith(warn)]
     print(f"{len(m['pages'])} pages in manifest; {len(diffs) - len(hard)} {'differences' if check else 'updates'}; {len(hard)} warnings")
     sys.exit(1 if (check and diffs) or hard else 0)
 
