@@ -30,5 +30,7 @@ def build():
  v321()
  from warhammer_characters import build as build_characters
  build_characters()
+ from warhammer_fill_v323 import build as build_fill
+ build_fill()
  f=ROOT/'index.html';write_html(f,f.read_text(encoding='utf8'),encoding='utf8')
 if __name__=='__main__':build()

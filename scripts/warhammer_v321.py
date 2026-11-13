@@ -107,7 +107,7 @@ def evolutions(text):
     text = replace_section(text, 'weapon-checks', checks)
     text = drop_section(text, 'missing')
     nxt = section(text, 'next').group(0)
-    nxt = re.sub(r'<p>The game released on 10 November\..*?</p>', '<p><a href="/warhammer-survivors/dice-cube/">Unlock Dice Cube in your universe →</a></p><p><a href="/warhammer-survivors/followers/">Get followers and unlock Bugman’s Tankard →</a></p>', nxt, flags=re.S)
+    nxt = re.sub(r'<p>The game released on 10 November\..*?</p>', '<p><a href="/warhammer-survivors/best-builds/">Best builds using these evolutions →</a></p><p><a href="/warhammer-survivors/bosses/">Which evolution beats each Extremis boss →</a></p><p><a href="/warhammer-survivors/dice-cube/">Unlock Dice Cube in your universe →</a></p><p><a href="/warhammer-survivors/followers/">Get followers and unlock Bugman’s Tankard →</a></p>', nxt, flags=re.S)
     nxt = re.sub(r'<figure>.*?</figure>', '', nxt, flags=re.S)
     text = replace_section(text, 'next', nxt)
     text = re.sub(r'<nav class="toc"[^>]*>.*?</nav>', '<nav class="toc" aria-label="On this page"><a href="#recipes">All 38 recipes</a><a href="#sequence">How to trigger an evolution</a><a href="#weapon-checks">Unlock the companion first</a><a href="#version">Older demo pairings</a></nav>', text, count=1, flags=re.S)
@@ -233,7 +233,7 @@ def tips(text):
              '<li><strong>Buy Strength first</strong> in Enhancements: +4% damage per rank (max +40%), and ranks count in both universes. Refund All is free, so you can respec any time.</li>'
              '<li><strong>Play Amalia Novena early.</strong> She gains +10% Range every 10 levels (max +30% at level 30), and surviving 5 minutes with her unlocks Shield of Faith.</li>'
              '<li><strong>Clear the cheap Objectives</strong>: survive 1 minute (Tape Measure), survive 10 minutes (Hourglass), take 250 damage (Glue).</li>'
-             '<li><strong>Evolve one weapon per run</strong>: max it, hold its companion and open the next boss chest (<a href="/warhammer-survivors/evolutions/">all 38 recipes</a>).</li></ol>'
+             '<li><strong>Evolve one weapon per run</strong>: max it, hold its companion and open the next boss chest (<a href="/warhammer-survivors/evolutions/">all 38 recipes</a>, <a href="/warhammer-survivors/best-builds/">best builds</a>).</li></ol>'
              + ENH + AMALIA + '</section>')
     text = text.replace('<section id="plan">', first + '<section id="plan">', 1)
     text = text.replace('<section id="loadout"><h2>Check unlocks before planning an evolution</h2>', '<section id="loadout"><h2>Check unlocks before planning an evolution</h2>' + LEVELUP, 1)
