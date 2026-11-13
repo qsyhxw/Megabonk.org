@@ -4,6 +4,7 @@
 Usage:
   python content_gate.py SITE_ROOT [paths...] [--allow ALLOW.json] [--report-only]
   python content_gate.py --sites PARENT_DIR [--min-sites 2]   (v3.21 cross-site fingerprint report)
+  python content_gate.py --theme SITE_ROOT GAME_DIR [GAME_DIR ...] [--report-only]   (v3.22 game theme check)
 
 - SITE_ROOT: project root (public files live here).
 - paths: optional list of HTML files (relative to SITE_ROOT) to check; default = all
@@ -181,8 +182,40 @@ def cross_sites(parent, min_sites=2):
     return 0
 
 
+def theme_check(root, games, report_only=False):
+    """Every page under /{game}/ loads /assets/{game}/theme.css and no CSS from another game's asset folder (02 §2.1)."""
+    root = Path(root)
+    asset_dirs = {d.name for d in (root / "assets").iterdir() if d.is_dir()} if (root / "assets").exists() else set()
+    blocks = 0
+    for game in games:
+        for f in sorted((root / game).rglob("*.html")):
+            rel = f.relative_to(root).as_posix()
+            if any(p in SKIP_DIRS or p.startswith(".") for p in f.relative_to(root).parts[:-1]):
+                continue
+            html = f.read_text(encoding="utf-8", errors="ignore")
+            if re.search(r'(?i)<meta[^>]+name="robots"[^>]+noindex', html):
+                continue
+            css = [h.split("?")[0] for h in re.findall(r'<link rel="stylesheet" href="([^"]+)"', html)]
+            issues = []
+            if f"/assets/{game}/theme.css" not in css:
+                issues.append(f"missing /assets/{game}/theme.css")
+            foreign = [c for c in css if c.startswith("/assets/") and c.split("/")[2] in asset_dirs and c.split("/")[2] != game]
+            if foreign:
+                issues.append("loads other games' CSS: " + ", ".join(foreign))
+            if issues:
+                blocks += 1
+                print(f"/{rel}")
+                for i in issues:
+                    print(f"  BLOCK: {i}")
+    print(f"\ntheme check: {blocks} pages with BLOCK findings")
+    return 0 if report_only or not blocks else 1
+
+
 def main():
     args = [a for a in sys.argv[1:]]
+    if "--theme" in args:
+        rest = [a for a in args if not a.startswith("--")]
+        sys.exit(theme_check(rest[0], rest[1:], "--report-only" in args))
     if "--sites" in args:
         i = args.index("--sites")
         ms = int(args[args.index("--min-sites") + 1]) if "--min-sites" in args else 2

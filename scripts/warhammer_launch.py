@@ -13,11 +13,11 @@ ADDITIONS = [
     ('Flamer', 'Glue', 'Heavy Flamer', 'Warhammer 40,000'),
     ('Combat Shotgun', 'Magnet', 'Executioner Shotgun', 'Warhammer 40,000'),
     ('Mechanical Bite', 'Sabaton', 'Remote Detonation', 'Warhammer 40,000'),
-    ('Power Klaw', 'Da Lucky Stikk', 'Bale Eye', 'Warhammer 40,000'),
-    ('Ardent Blade', 'Tactical Rock', 'Weapon of the Matriarch', 'Warhammer 40,000'),
+    ('Power Klaw', 'Da Lucky Stikk (max level)', 'Bale Eye', 'Warhammer 40,000'),
+    ('Ardent Blade', 'Tactical Rock (max level)', 'Weapon of the Matriarch', 'Warhammer 40,000'),
     ('Power Fist', 'Codex Astartes', 'Gauntlets of Ultramar', 'Warhammer 40,000'),
     ('Storm Bolter', 'Lightning Bolt', 'Assault Cannon', 'Warhammer 40,000'),
-    ('Battle Cannon', 'Figure Case', 'Side Sponsors', 'Warhammer 40,000'),
+    ('Battle Cannon', 'Figure Case', 'Side Sponsons', 'Warhammer 40,000'),
     ('Spear of the Faithful', 'Chaos Sigil', 'Thorn of the White Rose', 'Warhammer 40,000'),
     ('Crozius Arcanum', 'Lightning Bolt', 'Benediction of Fury', 'Warhammer 40,000'),
     ('Smite', 'Ardcoat', 'Fury of the Ancients', 'Warhammer 40,000'),
@@ -27,13 +27,15 @@ ADDITIONS = [
     ('Brace of Pistols', 'Bandolier', 'Duelling Pistols', 'Age of Sigmar'),
     ('Grandblade', 'Tape Measure', 'Celestial Greatsword', 'Age of Sigmar'),
     ('Cyclone Sword', 'Magnet', 'Voice of God-King', 'Age of Sigmar'),
-    ('Flintlock Pistols', 'Ardcoat', 'Anto-Wizard Flintlock', 'Age of Sigmar'),
+    ('Flintlock Pistols', 'Ardcoat', 'Anti-Wizard Flintlock', 'Age of Sigmar'),
     ('Fyrestorm Greataxe', "Kragg Blackhammer's Master Rune", 'Zangrom-Thaz', 'Age of Sigmar'),
-    ('Stormcharged Warhammer', 'Tactical Rock', 'Uskavar the Sunderer', 'Age of Sigmar'),
+    ('Stormcharged Warhammer', 'Tactical Rock (max level)', 'Uskavar the Sunderer', 'Age of Sigmar'),
     ('Twin-Tailed Cat', 'Golden Demon', 'Enchanted Glove', 'Age of Sigmar'),
     ('Blade of the High Heavens', 'Figure Case', 'Thengavar', 'Age of Sigmar'),
     ('Poisoned Throwing Knives', 'Gauntlet', 'Bladed Vortex', 'Age of Sigmar'),
     ('Mystical Ward', 'Glue', 'Warding Lantern', 'Age of Sigmar'),
+    ('Uskavar the Sunderer', 'Null Pendant (max level)', 'Ghal Maraz', 'Age of Sigmar'),
+    ('Fusil-Cannon', 'Amberbone', 'Long-Fusil', 'Age of Sigmar'),
 ]
 
 def link(url, label):
@@ -43,7 +45,7 @@ def apply(route, text):
     # The evolution title's obsolete demo scope has a recorded launch exception.
     if route.endswith('/evolutions/'):
         text = text.replace('Warhammer Survivors Evolutions: October Demo Recipes', 'Warhammer Survivors Evolutions: Launch Recipe List')
-        text = text.replace('Find 11 reported Warhammer Survivors weapon evolution recipes, match a companion to your universe, and check upgrade, chest and old-demo differences.', 'Find 36 reported Warhammer Survivors weapon evolution recipes, filter by universe or companion, and check launch additions against older demo reports.')
+        text = text.replace('Find 11 reported Warhammer Survivors weapon evolution recipes, match a companion to your universe, and check upgrade, chest and old-demo differences.', 'Find 38 reported Warhammer Survivors weapon evolution recipes, filter by universe or companion, and check launch additions against older demo reports.')
     text = text.replace('WARHAMMER SURVIVORS · OCTOBER DEMO / PRE-RELEASE', 'WARHAMMER SURVIVORS · RELEASED 10 NOVEMBER 2026')
     text = text.replace('WARHAMMER SURVIVORS · PRE-RELEASE GUIDE', 'WARHAMMER SURVIVORS · LAUNCH GUIDE')
     text = text.replace('Checked 8 November 2026', 'Checked 11 November 2026').replace('Checked 7 November 2026', 'Checked 11 November 2026')
@@ -66,10 +68,10 @@ def apply(route, text):
     elif route.endswith('/evolutions/'):
         rows = ''.join('<tr>'+''.join('<td>'+escape(cell)+'</td>' for cell in row)+'</tr>' for row in ADDITIONS)
         text = text.replace('</tbody>', rows+'</tbody>', 1)
-        text = text.replace('The October demo has 11 unique community-reported pairings below.', 'The table now includes 36 unique reported pairings, with launch additions and older demo evidence identified below.')
-        text = text.replace('11 reported recipes</p>', '36 reported recipes</p>')
+        text = text.replace('The October demo has 11 unique community-reported pairings below.', 'The table now includes 38 unique reported pairings, with launch additions and older demo evidence identified below.')
+        text = text.replace('11 reported recipes</p>', '38 reported recipes</p>')
         text = text.replace('in your current run to the October table', 'in your current run to the relevant row')
         text = text.replace('Names and availability may change at full release.', 'The full game is now available. These older rows remain identified by their original evidence date.')
-        text = text.replace('<form id="recipe-filter"', f'<p><strong>Launch additions checked 11 November.</strong> The additional 25 rows come from {link(EVOLUTIONS, "Arka Sarkar’s 10 November launch recipe report")}. These are reported recipes, rather than our playtest. The source reverses the Age of Sigmar column labels. We normalize those rows to weapon → companion → result and retain the earlier Tempest Axes pairing. Nuln Oil and D6 Dice are listed once each as Both. Confirm the entry against your current Armoury when a name differs.</p><form id="recipe-filter"')
+        text = text.replace('<form id="recipe-filter"', f'<p><strong>Launch additions checked 11 November.</strong> The additional 27 rows come from {link(EVOLUTIONS, "Arka Sarkar’s 10 November launch recipe report")}. These are reported recipes, rather than our playtest. The source reverses the Age of Sigmar column labels. We normalize those rows to weapon → companion → result and retain the earlier Tempest Axes pairing. Nuln Oil and D6 Dice are listed once each as Both. Confirm the entry against your current Armoury when a name differs.</p><form id="recipe-filter"')
         text = text.replace('The full game is planned for 10 November. Recheck demo recipes against its actual Armoury before using them as launch recipes.', 'The game released on 10 November. Use the launch rows for newly available weapons and check your current Armoury when an older demo instruction differs.')
     return text

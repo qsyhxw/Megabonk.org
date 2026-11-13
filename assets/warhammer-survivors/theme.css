@@ -1,0 +1,120 @@
+/* Warhammer Survivors game theme (SOP v3.22, 02 §2.1). Loaded by the hub and every guide page.
+   Visual source: the game's own UI (dark iron panels, aged gold trim, parchment tooltips, blood red
+   for 40K and steel blue for Age of Sigmar). Base layout stays in guide-article-layout.css. */
+@font-face {
+  font-family: "Cinzel";
+  src: url("/assets/fonts/cinzel-latin.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+:root {
+  --void: #0e0f10; --iron: #17191a; --plate: #1f2223; --edge: #3a3a33;
+  --gold: #c9a24a; --gold-hi: #e8c874; --parch: #ece3cc; --parch-dim: #b9ae94;
+  --blood: #8e1c1c; --sigmar: #2f6f8f;
+  --display: "Cinzel", Georgia, "Times New Roman", serif;
+  --body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* tokens the shared layout reads */
+  --paper: var(--void); --white: var(--plate); --ink: var(--parch); --muted: var(--parch-dim);
+  --line: var(--edge); --pale: #191b1c; --green: var(--gold);
+}
+body.wh-theme { margin: 0; background: var(--void); color: var(--parch); font: 16.5px/1.72 var(--body); }
+.wh-theme * { box-sizing: border-box; }
+.wh-theme a { color: var(--gold-hi); text-underline-offset: 4px; }
+.wh-theme a:hover { color: #fff1c4; }
+.wh-theme a:focus-visible, .wh-theme button:focus-visible, .wh-theme summary:focus-visible,
+.wh-theme input:focus-visible, .wh-theme select:focus-visible { outline: 3px solid var(--gold-hi); outline-offset: 4px; }
+.wh-theme img { max-width: 100%; height: auto; display: block; }
+.wh-theme h1, .wh-theme h2, .wh-theme h3, .wh-theme .brand { font-family: var(--display); font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: #f3e9cf; }
+.wh-theme .wrap { width: min(1180px, calc(100% - 64px)); margin: auto; }
+.wh-theme .skip { position: absolute; top: -90px; left: 12px; background: var(--gold); color: #160f04; padding: 10px; z-index: 30; }
+.wh-theme .skip:focus { top: 10px; }
+.wh-theme .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Header & footer (shared by hub and guides) */
+.wh-theme .top { background: #08090a; border-bottom: 1px solid var(--edge); position: relative; }
+.wh-theme .top::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 3px; background: repeating-linear-gradient(-45deg, var(--gold) 0 10px, transparent 10px 20px); opacity: .55; }
+.wh-theme .top > .wrap { display: flex; align-items: center; justify-content: space-between; gap: 22px; min-height: 84px; }
+.wh-theme .brand { color: #f3e9cf; text-decoration: none; font-size: 22px; letter-spacing: .06em; }
+.wh-theme .brand small { display: block; font: 600 10.5px/1.6 var(--body); color: var(--gold); letter-spacing: .2em; text-transform: uppercase; margin-top: 3px; }
+.wh-theme .desktop-nav { display: flex; gap: 26px; }
+.wh-theme .desktop-nav a, .wh-theme .mobile-links a { color: var(--parch); text-decoration: none; font-size: 14px; font-weight: 600; padding: 10px 0; }
+.wh-theme .desktop-nav a:hover, .wh-theme .desktop-nav a[aria-current=page] { color: var(--gold-hi); }
+.wh-theme .mobile-nav { display: none; position: relative; }
+.wh-theme .mobile-nav summary { list-style: none; cursor: pointer; color: var(--parch); border: 1px solid var(--edge); padding: 8px 14px; font-weight: 600; }
+.wh-theme .mobile-nav summary::-webkit-details-marker { display: none; }
+.wh-theme .mobile-links { position: absolute; right: 0; top: calc(100% + 8px); display: grid; min-width: 220px; background: #111314; border: 1px solid var(--edge); padding: 8px 18px; z-index: 20; }
+.wh-theme .footer, .wh-theme footer { background: #08090a; color: var(--parch-dim); border-top: 1px solid var(--edge); padding: 32px 0; font-size: 13px; }
+.wh-theme .footer-grid { display: flex; justify-content: space-between; gap: 24px; }
+.wh-theme .footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.wh-theme .footer strong { color: var(--parch); }
+
+/* Guide pages */
+.wh-guide main.wrap { padding-bottom: 20px; }
+.wh-guide .article-head { padding: 40px 0 22px; max-width: 980px; }
+.wh-guide .article-head > p:first-child { font-family: var(--display); color: var(--gold); font-size: 12px; letter-spacing: .26em; margin: 0 0 10px; }
+.wh-guide .article-head h1 { font-size: clamp(2.1rem, 4.4vw, 3.4rem); margin: 0 0 18px; }
+.wh-guide .answer { background: linear-gradient(#efe5ca, #e2d4b0); color: #22190b; padding: 18px 22px; border: 1px solid #a88a45; box-shadow: inset 0 0 0 4px #ece0c0, inset 0 0 0 5px #a88a45; font-size: 1.08rem; line-height: 1.65; max-width: 78ch; }
+.wh-guide .answer strong { color: #5a1414; }
+.wh-guide .answer a { color: #5a1414; }
+.wh-guide .byline { color: var(--parch-dim); font-size: 13px; margin-top: 14px; }
+.wh-guide .article-layout > .toc { background: var(--iron); border: 1px solid var(--edge); border-radius: 0; padding: 12px 16px; }
+.wh-guide .toc a { background: var(--plate); border: 1px solid var(--edge); border-radius: 0; color: var(--parch); text-decoration: none; }
+.wh-guide .toc a:hover { border-color: var(--gold); color: var(--gold-hi); }
+.wh-guide .prose > section h2 { font-size: 1.7rem; margin-top: 2.2rem; padding-bottom: 8px; border-bottom: 1px solid var(--edge); }
+.wh-guide .prose > section h2::before { content: "✠ "; color: var(--gold); font-size: .7em; vertical-align: .12em; }
+.wh-guide .prose h3 { font-size: 1.2rem; color: var(--gold-hi); }
+.wh-guide .prose li { padding: 4px 0; }
+.wh-guide .prose li::marker { color: var(--gold); font-weight: 700; }
+.wh-guide .prose strong { color: #fff3d1; }
+.wh-guide .prose code { background: #26292a; border: 1px solid var(--edge); padding: 1px 6px; color: var(--gold-hi); }
+.wh-guide .prose figure { margin: 22px 0; }
+.wh-guide .prose figure img { border: 1px solid var(--edge); background: #0b0c0d; image-rendering: auto; }
+.wh-guide .prose figure img[height]:is([src*="objectives-ingame"], [src*="enhancements"], [src*="amalia-select"]) { max-width: 420px; }
+.wh-guide .prose figcaption { font-size: 13px; color: var(--parch-dim); margin-top: 8px; }
+
+/* Tables */
+.wh-theme .table-wrap { overflow-x: auto; border: 1px solid var(--edge); background: var(--plate); margin: 20px 0; border-radius: 0; }
+.wh-theme table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+.wh-theme th { text-align: left; font-family: var(--display); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); background: #141617; padding: 12px 14px; border-bottom: 1px solid var(--edge); }
+.wh-theme td { padding: 11px 14px; border-bottom: 1px solid #2a2c2a; color: #e6dcc3; vertical-align: top; }
+.wh-theme tr:last-child td { border-bottom: 0; }
+.wh-theme tbody tr:hover td { background: #24272a; }
+#recipe-table td:nth-child(3) { color: var(--gold-hi); font-weight: 600; }
+
+/* Tools & forms */
+.wh-theme .tool { background: var(--iron); border: 1px solid var(--edge); padding: 20px 22px; margin: 22px 0; }
+.wh-theme label { display: block; font-weight: 700; color: var(--parch); font-size: 14px; }
+.wh-theme input[type=search], .wh-theme select { width: 100%; max-width: 100%; min-height: 44px; margin: 8px 0 16px; padding: 10px 12px; background: #0d0e0f; color: var(--parch); border: 1px solid var(--edge); font: inherit; }
+.wh-theme input::placeholder { color: #8d8571; }
+.wh-theme button:not(.yt-facade), .wh-theme .tool button { font: 700 14px/1 var(--display); letter-spacing: .05em; padding: 12px 18px; cursor: pointer; background: linear-gradient(#e2c06a, #b88f34); color: #160f04; border: 1px solid var(--gold); }
+.wh-theme button[type=reset] { background: transparent; color: var(--gold-hi); }
+.wh-theme #recipe-count { color: var(--parch-dim); font-size: 14px; margin: 4px 0 0; }
+
+/* Details / FAQ */
+.wh-theme details { border-bottom: 1px solid var(--edge); }
+.wh-theme details summary { cursor: pointer; padding: 14px 0; font-family: var(--display); color: #efe4c8; }
+
+/* Videos */
+.wh-theme .yt-embed figcaption { color: var(--parch-dim); }
+.wh-theme .yt-embed figcaption a { color: var(--gold-hi); }
+
+/* Universe badges */
+.wh-theme .u { display: inline-block; font-size: 10px; letter-spacing: .1em; padding: 2px 6px; margin-left: 6px; vertical-align: 1px; border: 1px solid; }
+.wh-theme .u40k { color: #e07a6a; border-color: #7b2b22; }
+.wh-theme .uaos { color: #8ec5e0; border-color: #2c5a70; }
+
+@media (max-width: 900px) {
+  .wh-theme .desktop-nav { display: none; }
+  .wh-theme .mobile-nav { display: block; }
+}
+@media (max-width: 600px) {
+  body.wh-theme { font-size: 16px; }
+  .wh-theme .wrap { width: calc(100% - 32px); }
+  .wh-theme .brand { font-size: 18px; }
+  .wh-guide .article-head { padding-top: 26px; }
+  .wh-guide .answer { padding: 14px 16px; font-size: 1rem; }
+  .wh-guide .prose > section h2 { font-size: 1.4rem; }
+  .wh-theme th, .wh-theme td { padding: 9px 10px; }
+  .wh-theme .footer-grid { display: block; }
+}

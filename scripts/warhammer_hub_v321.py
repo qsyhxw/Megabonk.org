@@ -41,7 +41,7 @@ def body(help_items, videos):
     rows = ''.join(f'<tr><td>{w}</td><td>{c}</td><td>{e}{universe(u)}</td></tr>' for w, c, e, u in PREVIEW)
     stores = ''.join(f'<a href="{h}" target="_blank" rel="noopener noreferrer">{n} ↗<span>{d}</span></a>' for h, n, d in STORES)
     tiles = ''.join([
-        tile('evolutions', 'Weapon evolutions', 'All 36 weapon + companion recipes for both universes, with a search and universe filter.', 'evo/chest-evolution.webp', 'A boss chest turning Boltstorm Pistol into Typhoon Crossbow', 'Most used'),
+        tile('evolutions', 'Weapon evolutions', 'All 38 weapon + companion recipes for both universes, with a search and universe filter.', 'evo/chest-evolution.webp', 'A boss chest turning Boltstorm Pistol into Typhoon Crossbow', 'Most used'),
         tile('legend-of-catachan', 'Legend of Catachan', 'Signum Array → Imperial Bastion rescue → 1,020 coins.', 'catachan/imperial-bastion-map.webp', 'Imperial Bastion map marking the Legend of Catachan'),
         tile('tips', 'First-hour tips', 'What to buy in Enhancements and which Objectives to clear first.', 'enhancements.webp', 'Enhancements screen with Strength selected'),
         tile('followers', 'Two & five followers', 'Malum Caedo + Lasgun + Shield of Faith unlocks Bugman’s Tankard.', 'amalia-select.webp', 'Sister Superior Amalia Novena in Character Select'),
@@ -61,9 +61,9 @@ def body(help_items, videos):
 <div class="hazard" aria-hidden="true"></div>
 <div class="wrap">
 <section class="band" id="choose"><div class="band-head"><h2>Choose your task</h2><p>Answer-first guides with in-game screenshots.</p></div><div class="tiles">{tiles}</div></section>
-<section class="band" id="evolve"><div class="band-head"><h2>Evolution quick reference</h2><p>Six common recipes; the full table has all 36.</p></div>
-<div class="preview"><div><table class="evo-table"><thead><tr><th>Weapon</th><th>Companion</th><th>Evolves into</th></tr></thead><tbody>{rows}</tbody></table><a class="more" href="{B}evolutions/">See all 36 recipes →</a></div>
-<div class="rule"><h3>How every evolution triggers</h3><ol><li><strong>Max the weapon.</strong> A partly upgraded weapon never evolves.</li><li><strong>Hold its companion passive</strong> — level 1 is enough.</li><li><strong>Open the next elite or boss chest.</strong></li></ol><img src="{A}evo/evolution-requirements.webp" alt="Level-up screen showing a weapon's Evolution Requirements" width="1001" height="626" loading="lazy" decoding="async"></div></div></section>
+<section class="band" id="evolve"><div class="band-head"><h2>Evolution quick reference</h2><p>Six common recipes; the full table has all 38.</p></div>
+<div class="preview"><div><table class="evo-table"><thead><tr><th>Weapon</th><th>Companion</th><th>Evolves into</th></tr></thead><tbody>{rows}</tbody></table><a class="more" href="{B}evolutions/">See all 38 recipes →</a></div>
+<div class="rule"><h3>How every evolution triggers</h3><ol><li><strong>Max the weapon.</strong> A partly upgraded weapon never evolves.</li><li><strong>Hold its companion passive</strong> — level 1 is enough (four recipes need it maxed).</li><li><strong>Open the next elite or boss chest.</strong></li></ol><img src="{A}evo/evolution-requirements.webp" alt="Level-up screen showing a weapon's Evolution Requirements" width="1001" height="626" loading="lazy" decoding="async"></div></div></section>
 <section class="band" id="universes"><div class="band-head"><h2>Two universes, separate unlocks</h2><p>Objectives, relics and some recipes differ per universe.</p></div>
 <div class="realms"><div class="realm k40"><h3>Warhammer 40,000</h3><p>Imperial Bastion, Gallowdark (level 40 opens Ork Stronghold) and more. Champions include Malum Caedo, Sister Superior Amalia Novena and the Legend of Catachan.</p><p>The Book of Tzeentch (Death World Invasion) opens Secrets. <a href="{B}legend-of-catachan/">Catachan route →</a></p></div>
 <div class="realm aos"><h3>Age of Sigmar</h3><p>Its own stages and weapons, such as Tempest Axes and Boltstorm Pistol, with separate Objectives from 40K.</p><p>The Eye of Tzeentch opens its Secrets menu; Dice Cube unlocks by holding four weapons. <a href="{B}dice-cube/">Dice Cube →</a></p></div></div></section>
