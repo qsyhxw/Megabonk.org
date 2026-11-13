@@ -189,7 +189,7 @@ class ItemArchitectureTests(unittest.TestCase):
             ("item tier list", self.tier),
             ("legendary tier list", self.legendary_tier),
         ):
-            body = re.search(r"<body>(.*)</body>", source, re.S).group(1)
+            body = re.search(r"<body\b[^>]*>(.*)</body>", source, re.S).group(1)
             with self.subTest(page=name):
                 self.assertNotRegex(body, r'href="https://megabonk\.org/')
                 self.assertNotRegex(body, r'href="[^"]+\.html(?:[#?][^"]*)?"')
@@ -225,7 +225,7 @@ class ItemArchitectureTests(unittest.TestCase):
             "permanent stacking armor",
         ):
             self.assertNotIn(stale, self.legendary_tier)
-        body = re.search(r"<body>(.*)</body>", self.legendary_tier, re.S).group(1)
+        body = re.search(r"<body\b[^>]*>(.*)</body>", self.legendary_tier, re.S).group(1)
         self.assertNotRegex(body, r'href="https://megabonk\.org/')
         self.assertNotRegex(body, r'href="[^"]+\.html(?:[#?][^"]*)?"')
         self.assertIn("pagead2.googlesyndication.com", self.legendary_tier)
