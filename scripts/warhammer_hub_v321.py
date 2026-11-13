@@ -5,9 +5,13 @@ icon task tiles, a live evolution preview with the trigger rule, the two univers
 video guides, storefront entries and the existing launch-help details.
 Called from warhammer_v321.hub(); the help <details> blocks are carried over unchanged.
 """
+import json
 import re
+from html import escape
+from pathlib import Path
 
 B = '/warhammer-survivors/'
+MANIFEST = json.loads((Path(__file__).resolve().parents[1] / 'data/warhammer-survivors-pages.json').read_text(encoding='utf8'))
 A = '/assets/warhammer-survivors/'
 STORES = [
     ('https://store.steampowered.com/app/3669620/Warhammer_Survivors/', 'Steam', 'Windows PC · Steam Deck'),
@@ -40,16 +44,11 @@ def universe(u):
 def body(help_items, videos):
     rows = ''.join(f'<tr><td>{w}</td><td>{c}</td><td>{e}{universe(u)}</td></tr>' for w, c, e, u in PREVIEW)
     stores = ''.join(f'<a href="{h}" target="_blank" rel="noopener noreferrer">{n} ↗<span>{d}</span></a>' for h, n, d in STORES)
-    tiles = ''.join([
-        tile('evolutions', 'Weapon evolutions', 'All 38 weapon + companion recipes for both universes, with a search and universe filter.', 'evo/chest-evolution.webp', 'A boss chest turning Boltstorm Pistol into Typhoon Crossbow', 'Most used'),
-        tile('legend-of-catachan', 'Legend of Catachan', 'Signum Array → Imperial Bastion rescue → 1,020 coins.', 'catachan/imperial-bastion-map.webp', 'Imperial Bastion map marking the Legend of Catachan'),
-        tile('tips', 'First-hour tips', 'What to buy in Enhancements and which Objectives to clear first.', 'enhancements.webp', 'Enhancements screen with Strength selected'),
-        tile('followers', 'Two & five followers', 'Malum Caedo + Lasgun + Shield of Faith unlocks Bugman’s Tankard.', 'amalia-select.webp', 'Sister Superior Amalia Novena in Character Select'),
-        tile('bosses', 'Extremis bosses', 'All 6 bosses at 25:00 and the one evolution that beats each.', 'bosses/norn-emissary-fight.webp', 'Norn Emissary boss fight'),
-        tile('secrets', 'Secrets & incantations', 'Which relic opens the menu in each universe, and the codes.', 'book-tzeentch.webp', 'The Book of Tzeentch relic', contain=True),
-        tile('best-builds', 'Best builds', 'Eviscerator Chainsword, Heavy Bolter and three more builds with upgrade order.', 'builds/heavy-bolter-chest.webp', 'Chest evolving Boltgun into Heavy Bolter', 'New'),
-        tile('characters', 'All champions', 'Every 40K and Age of Sigmar champion with its unlock: rescues, objectives and Paint Pots.', 'catachan/character-select.webp', 'Character Select stats screen'),
-    ])
+    tiles = ''.join(tile(p['slug'], escape(p['title']), escape(p['blurb']), p['thumb'], escape(p['title'] + ' screenshot'), p.get('tag', ''),
+                         contain=p['thumb'].startswith('book-'))
+                    for p in sorted((p for p in MANIFEST['pages'] if p.get('card')), key=lambda p: p['card']))
+    faq = ''.join(f'<details class="help-item faq-item"><summary>{escape(f["q"])}</summary><p class="help-body">{escape(f["a"])}</p>'
+                  f'<a class="faq-more" href="{B}{f["link"]}/">Full guide →</a></details>' for f in MANIFEST['faq'])
     return f'''<main id="main">
 <section class="hub-hero" id="guide"><div class="wrap">
 <p class="kicker">Warhammer 40,000 · Age of Sigmar</p>
@@ -70,7 +69,8 @@ def body(help_items, videos):
 <section class="band" id="videos"><div class="band-head"><h2>Video guides</h2><p>Watch the hard parts, then use the written steps.</p></div><div class="yt-row">{videos}</div></section>
 <section class="band" id="release"><div class="band-head"><h2>Where to buy &amp; play</h2><p>Out now on PC, console and mobile.</p></div>
 <div class="access"><div><p>Launch price is $7.99 / £6.39 / €7.49 before regional discounts. <strong>Game Pass Ultimate and PC Game Pass</strong> include it from 10 November on Xbox Series X|S, PC, handheld and cloud, so check your membership before buying.</p><p>Demo progress does not carry into the full game. Only Xbox Play Anywhere (Xbox ↔ Microsoft PC) shares saves across devices; see <a href="{B}cross-save/">cross-save</a>.</p></div><div class="stores">{stores}</div></div></section>
-<section class="band help-section" id="faq"><div class="band-head"><h2>Before you start</h2><p>Demo, platforms and launch-day problems.</p></div>{help_items}</section>
+<section class="band help-section" id="faq"><div class="band-head"><h2>FAQ</h2><p>Quick answers; each links to the full guide.</p></div>{faq}</section>
+<section class="band help-section" id="before-you-start"><div class="band-head"><h2>Before you start</h2><p>Demo, platforms and launch-day problems.</p></div>{help_items}</section>
 <div class="editorial-note"><p>Independent fan guide by Megabonk.org · Updated 13 November 2026 · Release v2.1</p><a href="#guide">Back to top ↑</a></div>
 </div></main>'''
 
@@ -81,6 +81,7 @@ def rebuild(text, videos):
     head, rest = text.split('<main id="main"', 1)
     footer = '<footer' + rest.split('<footer', 1)[1]
     head = re.sub(r'<body([^>]*) class="guide-layout wh-home"', r'<body\1 class="guide-layout wh-home wh-hub"', head, count=1)
+    # FAQPage JSON-LD is written by game_seo.edit (write_html) from data/game-seo.json questions; one source.
     if 'hub.css' not in head:
         head = head.replace('</head>', '<link rel="stylesheet" href="/assets/warhammer-survivors/hub.css"></head>', 1)
     return head + body(help_items, videos) + footer

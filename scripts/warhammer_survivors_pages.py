@@ -93,6 +93,10 @@ def build():
         document = connect(route, apply(route, render(template, route, title, description, heading, answer, sections, stem, tool)))
         if route == BASE:
             document = redesign(document)
+            # Intermediate hub layer: warhammer_v321 rebuilds the hub (with its FAQ) and writes it through
+            # write_html at the end, so skip the SEO/FAQ editor here (it needs the final visible FAQ).
+            file.write_text(document, encoding='utf8')
+            continue
         write_html(file, document, encoding='utf8')
     build_tasks((ROOT/'warhammer-survivors/co-op/index.html').read_text(encoding='utf8'))
     from warhammer_query_batch import build as build_query_batch

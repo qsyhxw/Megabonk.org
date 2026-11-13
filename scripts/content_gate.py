@@ -120,6 +120,22 @@ def check(path, root, domain, allow):
     if imgs < min_img:
         findings.append(("BLOCK" if fmt else "WARN", f"images {imgs} < {min_img} for format {fmt or 'other'}"))
 
+    # v3.24 alt rules (08): content images need a descriptive, unique alt; filenames are not alt text.
+    alts = []
+    for tag in re.findall(r"(?i)<img\b[^>]*>", re.sub(r'(?is)<button[^>]*class="yt-facade".*?</button>', "", main)):
+        alt = re.search(r'\balt="([^"]*)"', tag)
+        if alt is None:
+            findings.append(("BLOCK", "img without alt attribute"))
+            continue
+        a = alt.group(1).strip()
+        if a and re.fullmatch(r"[\w\-]+\.(?:png|jpe?g|webp|gif|svg)", a, re.I):
+            findings.append(("BLOCK", f"alt is a filename: {a}"))
+        if a:
+            alts.append(a.lower())
+    dup = [a for a in set(alts) if alts.count(a) > 1 and len(a) > 3]
+    if dup:
+        findings.append(("WARN", f"same alt on several images: {dup[0][:60]}"))
+
     h1 = re.search(r"(?is)<h1[^>]*>(.*?)</h1>", body)
     if not h1:
         findings.append(("BLOCK", "missing H1"))

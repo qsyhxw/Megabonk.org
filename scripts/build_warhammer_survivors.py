@@ -32,5 +32,8 @@ def build():
  build_characters()
  from warhammer_fill_v323 import build as build_fill
  build_fill()
+ # v3.24: nav, breadcrumbs, related guides and registries from data/warhammer-survivors-pages.json
+ import subprocess,sys
+ subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'warhammer-survivors'],check=True)
  f=ROOT/'index.html';write_html(f,f.read_text(encoding='utf8'),encoding='utf8')
 if __name__=='__main__':build()

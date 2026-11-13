@@ -209,7 +209,7 @@ def tidy(name, text):
     if name == '':
         # Evidence links on the hub become plain text; store/platform entries stay (00 §4).
         for host in ('aurochdigital.com/warhammer-survivors-faq', 'www.warhammer-community.com', 'news.xbox.com', 'www.xbox.com/en-US/games/store/warhammer-survivors-demo'):
-            text = re.sub(r'<a href="https://' + re.escape(host) + r'[^"]*"[^>]*>(.*?) ↗</a>', r'\1', text)
+            text = re.sub(r'<a href="https://' + re.escape(host) + r'[^"]*"[^>]*>(.*?)\s*↗(?:<span[^>]*>[^<]*</span>)?</a>', r'\1', text)
     if name == 'co-op':
         # poncle's FAQs belong to the Vampire Survivors co-op guide this page links to.
         text = re.sub(r'<a href="https://poncle\.games/[^"]*"[^>]*>(.*?) ↗</a>', r'\1', text)
@@ -254,7 +254,11 @@ def hub(text):
              + '</div></section>')
     from warhammer_hub_v321 import rebuild
     videos = re.search(r'<div class="yt-row">(.*)</div></section>$', block, re.S)[1]
-    return with_video_assets(rebuild(text, videos))
+    text = rebuild(text, videos)
+    # Evidence links inside the carried-over help items become plain text; store entries stay (00 §4).
+    for host in ('aurochdigital.com/warhammer-survivors-faq', 'www.warhammer-community.com', 'news.xbox.com', 'www.xbox.com/en-US/games/store/warhammer-survivors-demo'):
+        text = re.sub(r'<a href="https://' + re.escape(host) + r'[^"]*"[^>]*>(.*?)\s*↗(?:<span[^>]*>[^<]*</span>)?</a>', r'\1', text)
+    return with_video_assets(text)
 
 
 def apply():
