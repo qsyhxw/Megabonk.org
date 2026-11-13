@@ -53,6 +53,7 @@ jobs:
 
       - name: Synced pages match their generators
         run: |
+          python -m pip install beautifulsoup4==4.14.3
           pages="midgard-survivors/index.html mythic-survivors/download-mod/index.html spires-of-azeroth/download-platforms/index.html"
           mkdir -p "$RUNNER_TEMP/synced"
           for p in $pages; do mkdir -p "$RUNNER_TEMP/synced/$(dirname $p)"; cp "$p" "$RUNNER_TEMP/synced/$p"; done
