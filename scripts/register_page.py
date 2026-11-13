@@ -152,6 +152,20 @@ def apply_page(text, m, slug):
     return text
 
 
+def write_if_changed(path, text):
+    """Leave unchanged files byte-identical (line endings included) so scoped CI gates see no edit."""
+    with open(path, encoding="utf-8", newline="") as f:
+        if f.read() == text:
+            return
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        f.write(text)
+
+
+def write_json_if_changed(path, data):
+    if json.loads(path.read_text(encoding="utf-8")) != data:
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def sync_registries(root, m, check):
     diffs = []
     pages = [p for p in m["pages"] if file_of(root, m, p["slug"]).exists()]
@@ -159,16 +173,17 @@ def sync_registries(root, m, check):
     # sitemap
     sp = root / "sitemap.xml"
     if sp.exists():
-        t = sp.read_text(encoding="utf-8")
+        t = open(sp, encoding="utf-8", newline="").read()
         for p in pages:
             loc = m["site"] + url(m, p["slug"])
             if f"<loc>{loc}</loc>" not in t:
                 diffs.append(f"sitemap missing {loc}")
                 if not check:
                     entry = f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{p.get('updated', '')}</lastmod>\n    <changefreq>weekly</changefreq>\n  </url>\n"
-                    t = t.replace("</urlset>", entry + "</urlset>", 1)
+                    nl = "\r\n" if "\r\n" in t else "\n"
+                    t = t.replace("</urlset>", entry.replace("\n", nl) + "</urlset>", 1)
         if not check:
-            sp.write_text(t, encoding="utf-8")
+            write_if_changed(sp, t)
     # content dates
     cp = root / "data" / "content-dates.json"
     if cp.exists():
@@ -179,7 +194,7 @@ def sync_registries(root, m, check):
                 diffs.append(f"content-dates missing {k}")
                 d[k] = p["updated"]
         if not check:
-            cp.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_json_if_changed(cp, d)
     # SEO registry
     gp = root / "data" / "game-seo.json"
     if gp.exists():
@@ -189,7 +204,7 @@ def sync_registries(root, m, check):
                 diffs.append(f"game-seo missing {r}")
                 d.setdefault("pages", {})[r] = {"questions": [], "reviewed_candidates": [], "faq_review": "Registered by register_page.py; review visible FAQ.", "language_review": "No equivalent translated page."}
         if not check:
-            gp.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_json_if_changed(gp, d)
     # integrations
     ip = root / "config" / "integrations.json"
     if ip.exists() and m.get("integrations"):
@@ -206,7 +221,7 @@ def sync_registries(root, m, check):
                     diffs.append(f"integration {i['id']} missing {r}")
                     i["include"].append(r)
         if not check:
-            ip.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_json_if_changed(ip, d)
     return diffs
 
 
