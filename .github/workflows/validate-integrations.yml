@@ -119,6 +119,8 @@ jobs:
         run: node scripts/test_pokebonk_progression.cjs
       - name: Verify shared game-section layout and comparison controls
         run: python scripts/check_guide_layout.py
+      - name: Verify clean URLs and matching sitemap and page inventories
+        run: python -m unittest tests.test_url_suffix_policy
       - name: Compare integration expectations with previous Git revision
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
