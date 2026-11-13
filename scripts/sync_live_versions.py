@@ -8,7 +8,7 @@ spans on each entry's pages, data/content-dates.json and the sitemap <lastmod>
 of those pages. Any rejected entry (bad format, older version, major-version
 jump, missing span, fetch failure) stops the whole run before writing.
 """
-import argparse, json, re, sys, urllib.request
+import argparse, json, os, re, sys, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -30,7 +30,10 @@ class Reject(Exception):
 
 
 def get(url, raw=False):
-    req = urllib.request.Request(url, headers={'User-Agent': UA})
+    headers = {'User-Agent': UA}
+    if url.startswith('https://api.github.com/') and os.environ.get('GITHUB_TOKEN'):
+        headers['Authorization'] = 'Bearer ' + os.environ['GITHUB_TOKEN']  # shared runner IPs hit the anonymous limit
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=30) as r:
         body = r.read().decode('utf8')
     return body if raw else json.loads(body)

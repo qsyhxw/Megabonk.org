@@ -45,6 +45,8 @@ jobs:
           [ "$before" = "$(snap)" ]
 
       - name: Fetch, validate and apply
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           python scripts/sync_live_versions.py
           ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }}
