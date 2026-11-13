@@ -70,7 +70,8 @@ body.wh-theme { margin: 0; background: var(--void); color: var(--parch); font: 1
 .wh-guide .prose code { background: #26292a; border: 1px solid var(--edge); padding: 1px 6px; color: var(--gold-hi); }
 .wh-guide .prose figure { margin: 22px 0; }
 .wh-guide .prose figure img { border: 1px solid var(--edge); background: #0b0c0d; image-rendering: auto; }
-.wh-guide .prose figure img[height]:is([src*="objectives-ingame"], [src*="enhancements"], [src*="amalia-select"]) { max-width: 420px; }
+/* Screenshots never fill the screen: cap height to the viewport, keep ratio, centre narrow shots. */
+.wh-guide .prose figure img { width: auto; max-width: 100%; max-height: min(70vh, 640px); margin-inline: auto; object-fit: contain; }
 .wh-guide .prose figcaption { font-size: 13px; color: var(--parch-dim); margin-top: 8px; }
 
 /* Tables */
