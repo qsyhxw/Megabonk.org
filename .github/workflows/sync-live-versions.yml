@@ -41,7 +41,8 @@ jobs:
               echo "fixture $f was accepted" >&2; exit 1
             fi
           done
-          python scripts/sync_live_versions.py --offline tests/fixtures/live-versions-same.json
+          python -c "import json;d=json.load(open('data/live-versions.json'));json.dump({k:[v['value'],v['date']] for k,v in d.items()},open('$RUNNER_TEMP/same.json','w'))"
+          python scripts/sync_live_versions.py --offline "$RUNNER_TEMP/same.json"
           [ "$before" = "$(snap)" ]
 
       - name: Fetch, validate and apply
