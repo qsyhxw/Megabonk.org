@@ -1,0 +1,35 @@
+name: Competitor sitemap watch (notify only)
+# SOP 05 §2.9.1 — weekly diff of competitor sitemaps, one summary Issue per competitor.
+# Never edits site files. Copy to .github/workflows/ and keep weekly; robots.txt is respected.
+on:
+  schedule:
+    - cron: '23 2 * * 1'     # Mondays 02:23 UTC (10:23 Beijing)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Print the issue that would be opened, without opening it
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: site-watch-competitors
+  cancel-in-progress: false
+jobs:
+  competitors:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Diff competitor sitemaps
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          python scripts/site_watch.py competitors --config config/competitor-watch.json
+          ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }}

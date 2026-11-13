@@ -1,0 +1,35 @@
+name: Version sentinel (notify only)
+# SOP 05 §2.9.1 — opens a GitHub Issue when the game's version/announcements change.
+# Never edits site files. Copy to .github/workflows/ and adjust cron to the game's cadence.
+on:
+  schedule:
+    - cron: '37 3,15 * * *'    # twice daily (UTC); these sections are not FAST, hot periods may use '37 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Print the issue that would be opened, without opening it
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: site-watch-sentinel
+  cancel-in-progress: false
+jobs:
+  sentinel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check sources and open issues on change
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          python scripts/site_watch.py sentinel --config config/sentinel.json
+          ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }}
