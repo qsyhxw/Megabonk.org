@@ -20,7 +20,7 @@ def shell(route,title,desc,body,image='steam-0',error=False):
 
 def article(slug,title,desc,answer,image,sections):
  toc='<nav class="toc" aria-label="On this page">'+''.join(f'<a href="#{i}">{h}</a>'for i,h,_ in sections)+'</nav>'
- review_date='9 November 2026' if slug=='vs-vampire-survivors' else '13 November 2026'
+ review_date='14 November 2026' if slug in {'evolution','caveman','co-op','updates','mods'} else ('9 November 2026' if slug=='vs-vampire-survivors' else '13 November 2026')
  body=f'<header class="article-head" id="guide"><p class="tag">BROTATO · FIELD GUIDE</p><h1>{title}</h1><div class="answer"><p>{answer}</p></div><p class="byline">Megabonk.org editors · Checked {review_date} · Source-based guidance, no gameplay test</p></header><div class="article-layout">'+toc+'<article class="prose">'
  for n,(i,h,t) in enumerate(sections):
   body+=f'<section id="{i}"><h2>{h}</h2>{t}</section>'
