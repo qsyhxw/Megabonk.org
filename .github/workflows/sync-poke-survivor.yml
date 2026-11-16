@@ -61,6 +61,9 @@ jobs:
           python scripts/content_gate.py --theme . poke-survivor
           python scripts/content_gate.py . --allow config/content-gate-allow.json $(find poke-survivor -name index.html ! -path '*/about/*' ! -path '*/contact/*' ! -path '*/privacy/*')
           python scripts/ci_integrations.py
+          python scripts/check_game_image_captions.py
+          python scripts/check_guide_images.py
+          python scripts/check_game_seo.py
 
       - name: Only whitelisted paths changed
         run: |
