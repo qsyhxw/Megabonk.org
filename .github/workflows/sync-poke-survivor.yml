@@ -46,6 +46,7 @@ jobs:
           python scripts/build_poke_survivor.py > /dev/null
           python -c "import sys; sys.path.insert(0, 'scripts'); import sync_poke_survivor_rules as s; s.crlf()"
           git status --porcelain
+          git diff --word-diff=porcelain -U0 -- poke-survivor/rifts/index.html poke-survivor/index.html | grep -E '^[-+][^-+]' | cut -c1-300 | head -40 || true
           test -z "$(git status --porcelain)"
 
       - name: Fetch, validate, apply and rebuild
