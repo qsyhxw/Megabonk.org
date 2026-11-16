@@ -105,6 +105,50 @@ def handoff(cfg, kind):
             "处理完在此写结果并关闭。本 Issue 只是通知，自动化不会修改页面。\n")
 
 
+NOTICES = []  # (title, issue url, plain-text summary) of change Issues opened in this run
+
+
+def note(title, url, lines):
+    NOTICES.append((title, url, lines if isinstance(lines, str) else "\n".join(lines)))
+
+
+def send_digest(cfg, mode, failures, dry):
+    """Email one digest per run (SOP 05 §2.9.1: notify by Issue + email). Uses the Gmail secrets
+    GMAIL_USERNAME / GMAIL_APP_PASSWORD / PATCH_ALERT_EMAIL; without them it only prints a warning."""
+    if not NOTICES and not failures:
+        return
+    site = cfg.get("site", os.environ.get("GITHUB_REPOSITORY", "site"))
+    kind = "版本哨兵" if mode == "sentinel" else "同行监控"
+    subject = f"[{site}] {kind}：{len(NOTICES)} 条更新" + (f"，{len(failures)} 个来源失败" if failures else "")
+    parts = [f"{site} 的{kind}本次发现 {len(NOTICES)} 条更新" + (f"，另有 {len(failures)} 个来源抓取失败。" if failures else "。"), ""]
+    for i, (title, url, text) in enumerate(NOTICES, 1):
+        parts += [f"{i}. {title}", f"   Issue：{url}", text, ""]
+    if failures:
+        parts += ["抓取失败的来源（页面未改动，请看运行日志）："] + [f"- {f}" for f in failures] + [""]
+    run = os.environ.get("GITHUB_RUN_ID")
+    if run:
+        parts.append(f"运行记录：{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/{os.environ.get('GITHUB_REPOSITORY', '')}/actions/runs/{run}")
+    cmd = "/weihu" if mode == "sentinel" else "/buquan"
+    parts += ["", f"处理方式：把 Issue 链接交给 `{cmd} {site}{' 事件' if mode == 'sentinel' else ''} 材料:<Issue链接>`。", "此邮件由 GitHub Actions 自动发送。"]
+    body = "\n".join(parts) + "\n"
+    if dry:
+        print(f"--- DRY-RUN email: {subject}\n{body}")
+        return
+    need = ("GMAIL_USERNAME", "GMAIL_APP_PASSWORD", "PATCH_ALERT_EMAIL")
+    if not all(os.environ.get(k, "").strip() for k in need):
+        print("::warning::Gmail secrets missing; change Issues were opened but no email was sent")
+        return
+    import smtplib, ssl
+    from email.message import EmailMessage
+    msg = EmailMessage()
+    msg["Subject"], msg["From"], msg["To"] = subject, os.environ["GMAIL_USERNAME"].strip(), os.environ["PATCH_ALERT_EMAIL"].strip()
+    msg.set_content(body)
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context(), timeout=30) as smtp:
+        smtp.login(os.environ["GMAIL_USERNAME"].strip(), os.environ["GMAIL_APP_PASSWORD"].replace(" ", ""))
+        smtp.send_message(msg)
+    print(f"Digest email sent to {msg['To']}.")
+
+
 # ---------- version sentinel ----------
 
 def get_path(obj, dotted):
@@ -212,6 +256,9 @@ def run_sentinel(cfg, issues):
                      "- [ ] 无需改动（说明原因）", handoff(cfg, "weihu")]
             title_hint = rows[0]["title"][:60] if rows else fp
             url = issues.create(f"[哨兵] {src['id']} 有更新：{title_hint}", "\n".join(body), label, key, state)
+            changes = body[body.index("### 变化") + 1: body.index("### 可能受影响的页面") - 1]
+            note(f"{src.get('name', src['id'])} 有更新", url,
+                 "\n".join(f"   {x}" for x in changes if x.strip() and not x.startswith(">")) + "\n   可能受影响：" + ("；".join(src.get("affected", [])) or "见 Issue"))
             print(f"{src['id']}: CHANGED -> {url}")
         except Exception as e:  # one bad source must not hide others
             failures.append(f"{src['id']}: {e}")
@@ -317,6 +364,8 @@ def run_competitors(cfg, issues):
                      handoff(cfg, "buquan")]
             url = issues.create(f"[同行] {comp['name']}：新增 {len(added)} / 更新 {len(updated)}",
                                 "\n".join(body), label, key, state)
+            note(f"同行 {comp['name']}：新增 {len(added)} / 更新 {len(updated)}", url,
+                 "\n".join(f"   - {u}" for u in sorted(added)[:10]) + ("\n   …" if len(added) > 10 else ""))
             print(f"{comp['name']}: CHANGED -> {url}")
         except Exception as e:
             failures.append(f"{comp['name']}: {e}")
@@ -334,6 +383,10 @@ def main():
         cfg = json.load(f)
     issues = Issues(a.dry_run)
     failures = (run_sentinel if a.mode == "sentinel" else run_competitors)(cfg, issues)
+    try:
+        send_digest(cfg, a.mode, failures, a.dry_run)
+    except Exception as e:  # email trouble must not hide the Issues already opened
+        print(f"::warning::digest email failed: {e}", file=sys.stderr)
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as f:

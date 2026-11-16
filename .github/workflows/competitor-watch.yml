@@ -30,6 +30,9 @@ jobs:
       - name: Diff competitor sitemaps
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
         run: >
           python scripts/site_watch.py competitors --config config/competitor-watch.json
           ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }}
