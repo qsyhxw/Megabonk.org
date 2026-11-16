@@ -23,6 +23,7 @@ from azeroth_survivors_mods import apply_mods, home_mods
 from azeroth_survivors_tier_list import apply_tier_list, home_tier_list
 from azeroth_russian_builds import apply_russian_builds, decorate_russian_builds
 from azeroth_v320 import present
+from azeroth_theme import apply as apply_theme, trust_pages, privacy as theme_privacy
 from azeroth_survivors_content import P,SOURCES,CLASSES,ref,a,ext,para,steps,table,articles,russian
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://megabonk.org'
@@ -115,10 +116,22 @@ def build():
  html=html.replace('A separate Diablo II survivors project, not an alternative name for the Aethus client.', 'A separate Diablo II survivors project, not an alternative name for the Aethus client. <a href="/d2-survivors/">D2 Survivors guides →</a> · <a href="/d2-survivors/play/">Play D2 Survivors →</a> · <a href="/d2-survivors/zh/localization/" lang="zh-Hant">繁體中文化與備份 →</a>')
  html=html.replace('<section class="section" id="start">',home_search(content)+'<section class="section" id="start">',1)
  pages=[(path,home_tier_list(home_mods(home_asbuilder(home_entry(improve_home(html))))))]+[article(x) for x in content]+[play_page(shell,ext)]+localized_pages(shell,ext)+trust()
+ # v3.22/v3.25: game theme, manifest hub and section About/Contact (scripts/azeroth_theme.py); trust pages after the hub
+ pages+=trust_pages(shell)
  for path,text in pages:
   text=connect_languages(path,text)
   if path==P+'ru/builds/':text=decorate_russian_builds(text)
   file=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html'
-  file.parent.mkdir(parents=True,exist_ok=True);write_html(file, present(path,editorial(path,planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text))))))),encoding='utf8')
+  file.parent.mkdir(parents=True,exist_ok=True);write_html(file, apply_theme(path,present(path,editorial(path,planner_assets(path,tool_assets(path,decorate_icons(path,decorate_sync(path,decorate(path,text)))))))),encoding='utf8')
+ pv=theme_privacy()
+ if pv:write_html(pv[0],pv[1],encoding='utf-8')
+ # v3.24/v3.25: nav, breadcrumbs, related guides, footer and registries from data/azeroth-survivors-pages.json
+ import subprocess,sys
+ subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'azeroth-survivors'],check=True,stdout=subprocess.DEVNULL)
+ # register_page appends BreadcrumbList after the FAQ script; re-run the SEO editor so its output stays last (idempotent).
+ from game_seo import edit as edit_seo
+ for f in (ROOT/'azeroth-survivors').rglob('*.html'):
+  s=f.read_text(encoding='utf8');n=edit_seo(f,s)
+  if n!=s:f.write_text(n,encoding='utf8')
  print(f'Built {len(pages)} Azeroth guide files; existing main-site trust pages reused, 1 noindex404. Original-host external Play entry; no copied client.')
 if __name__=='__main__':build()

@@ -1,0 +1,265 @@
+/* Azeroth Survivors game theme (SOP v3.22, 02 §2.1). Loaded by the hub and every page of /azeroth-survivors/.
+   Visual source: the original game's own menus (v0.130 character select, v0.139 Armory/Talents):
+   near-black warm panels, thin antique-gold frames, gold small-caps titles, crimson "Enter" buttons
+   with gold rims, square spell-icon slots. Layout base stays in /assets/guide-article-layout.css;
+   tool behaviour CSS (tools.css, planner.css, play.css) only gets colour overrides here. */
+@font-face {
+  font-family: "Cinzel";
+  src: url("/assets/fonts/cinzel-latin.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+:root {
+  --az-void: #0b0806; --az-panel: #15100b; --az-panel2: #1c150e; --az-inset: #100c08;
+  --az-edge: #4a3a22; --az-edge-hi: #7a5f33;
+  --az-gold: #c9a35a; --az-gold-hi: #f0cf7a; --az-parch: #ece2cb; --az-dim: #b4a587;
+  --az-crimson: #7e1a12; --az-crimson-hi: #a8291b;
+  --az-s: #e2b64f; --az-a: #8fc46a; --az-b: #6fa3d9; --az-c: #a59c8c;
+  --display: "Cinzel", Georgia, "Times New Roman", serif;
+  --body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* tokens the shared layout and tool CSS read */
+  --paper: var(--az-void); --white: var(--az-panel); --ink: var(--az-parch); --muted: var(--az-dim);
+  --line: var(--az-edge); --pale: var(--az-panel2); --green: var(--az-gold-hi); --gold: var(--az-gold);
+  --heading: var(--display); --reading: 72ch;
+}
+
+/* ---------- base ---------- */
+body.az-theme { margin: 0; background: var(--az-void); color: var(--az-parch); font: 17px/1.72 var(--body); }
+.az-theme * { box-sizing: border-box; }
+html:has(body.az-theme) { scroll-padding-top: 1.5rem; background: var(--az-void); }
+.az-theme a { color: var(--az-gold-hi); text-underline-offset: 4px; }
+.az-theme a:hover { color: #fff0c2; text-decoration-thickness: 2px; }
+.az-theme :focus-visible { outline: 3px solid var(--az-gold-hi); outline-offset: 4px; }
+.az-theme img { max-width: 100%; height: auto; display: block; }
+.az-theme h1, .az-theme h2, .az-theme h3, .az-theme .brand { font-family: var(--display); font-weight: 700; line-height: 1.16; letter-spacing: .015em; color: #f4e6c4; }
+.az-theme h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); margin: .35em 0; }
+.az-theme h2 { font-size: clamp(1.45rem, 2.6vw, 2rem); margin: 0 0 .8rem; color: var(--az-gold-hi); }
+.az-theme h3 { font-size: 1.2rem; }
+.az-theme h4 { font-family: var(--display); color: var(--az-gold); }
+.az-theme p { margin: .7rem 0 1.15rem; }
+.az-theme strong { color: #fbf0d6; }
+.az-theme code, .az-theme kbd { font: 13px ui-monospace, Consolas, monospace; background: var(--az-inset); border: 1px solid var(--az-edge); border-radius: 4px; padding: 1px 5px; color: var(--az-parch); }
+.az-theme .wrap { width: min(1180px, calc(100% - 64px)); margin: auto; }
+.az-theme .skip { position: absolute; top: -90px; left: 12px; background: var(--az-gold); color: #160f04; padding: 10px; z-index: 40; }
+.az-theme .skip:focus { top: 10px; }
+.az-theme .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.az-theme [hidden] { display: none !important; }
+.az-theme .eyebrow, .az-theme .tag { font: 700 11px/1.4 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--az-gold); background: none; padding: 0; }
+.az-theme .meta, .az-theme .byline { font-size: 13px; color: var(--az-dim); }
+
+/* ---------- framed panel (the game's gold-rimmed boxes) ---------- */
+.az-theme .az-panel, .az-theme .answer, .az-theme .loadout, .az-theme .tier-grid, .az-theme .card, .az-theme .az-tool, .az-theme .tool,
+.az-theme .filter, .az-theme .reference-filter .table-wrap, .az-theme .az-catalog-group, .az-theme .asbuilder-screen,
+.guide-layout.az-theme figure.game-image {
+  background: linear-gradient(180deg, var(--az-panel2), var(--az-panel)); border: 1px solid var(--az-edge);
+  box-shadow: inset 0 0 0 1px #00000080, inset 0 1px 0 #ffffff08; border-radius: 6px;
+}
+
+/* ---------- header ---------- */
+.az-theme .top { background: linear-gradient(180deg, #120d08, #0b0806); border-bottom: 1px solid var(--az-edge); position: relative; z-index: 20; }
+.az-theme .top::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, var(--az-gold) 30%, var(--az-gold) 70%, transparent); opacity: .55; }
+.az-theme .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.az-theme .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--az-gold-hi); font-size: 22px; white-space: nowrap; min-width: 0; }
+.az-theme .brand img { width: 40px; height: 40px; flex: none; }
+.az-theme .brand small { display: block; font: 600 10px/1.5 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--az-dim); margin-top: 3px; }
+.az-theme .desktop-nav { display: flex; align-items: center; gap: 4px; }
+.az-theme .desktop-nav a, .az-theme .mobile-links a { color: var(--az-parch); text-decoration: none; font: 600 14px/1.3 var(--body); padding: 10px 11px; border-radius: 4px; min-height: 44px; display: inline-flex; align-items: center; }
+.az-theme .desktop-nav a:hover, .az-theme .mobile-links a:hover { color: var(--az-gold-hi); background: #ffffff08; }
+.az-theme .desktop-nav a[aria-current=page], .az-theme .mobile-links a[aria-current=page] { color: var(--az-gold-hi); box-shadow: inset 0 -2px 0 var(--az-gold); }
+/* Play is the game's crimson button: first nav entry */
+.az-theme .desktop-nav a[href$="/azeroth-survivors/play/"], .az-theme .mobile-links a[href$="/azeroth-survivors/play/"],
+.az-theme .desktop-nav a.nav-play, .az-theme .mobile-links a.nav-play,
+.az-theme .az-btn-play {
+  background: linear-gradient(180deg, var(--az-crimson-hi), var(--az-crimson)); color: #fff2d6; border: 1px solid #d3a14a;
+  box-shadow: inset 0 1px 0 #ffffff26, 0 0 0 1px #000; margin-right: 8px; padding-inline: 16px; font-family: var(--display); letter-spacing: .04em;
+}
+.az-theme .desktop-nav a[href$="/azeroth-survivors/play/"]::before, .az-theme .mobile-links a[href$="/azeroth-survivors/play/"]::before { content: "▶"; font-size: 10px; margin-right: 7px; }
+.az-theme .desktop-nav a[href$="/azeroth-survivors/play/"]:hover, .az-theme .mobile-links a[href$="/azeroth-survivors/play/"]:hover { background: linear-gradient(180deg, #c23423, var(--az-crimson-hi)); color: #fff; }
+.az-theme .mobile-nav { display: none; position: static; }
+.az-theme .mobile-nav summary { list-style: none; cursor: pointer; border: 1px solid var(--az-edge-hi); color: var(--az-gold-hi); padding: 9px 15px; border-radius: 4px; font: 700 14px var(--body); min-height: 44px; display: flex; align-items: center; }
+.az-theme .mobile-nav summary::-webkit-details-marker { display: none; }
+.az-theme .mobile-nav:not([open]) > .mobile-links { display: none; }
+
+/* ---------- article pages ---------- */
+.az-theme .crumbs { font-size: 13px; color: var(--az-dim); padding: 22px 0 4px; }
+.az-theme .crumbs a { color: var(--az-dim); }
+.az-theme .crumbs a:hover { color: var(--az-gold-hi); }
+.az-theme .article-head { padding: 14px 0 18px; }
+.guide-layout.az-theme .article-head h1 { font-size: clamp(2rem, 4.2vw, 3.1rem); }
+.az-theme .article-head .answer { padding: 16px 20px; font-size: 18px; line-height: 1.6; border-left: 3px solid var(--az-gold); margin: 14px 0; }
+.az-theme .article-head .answer p { margin: 0; }
+.az-theme .source-status { border: 1px solid var(--az-edge); border-left: 3px solid var(--az-gold); background: var(--az-inset); padding: 11px 16px; margin: 12px 0 22px; font-size: 13px; line-height: 1.6; color: var(--az-dim); border-radius: 4px; }
+.az-theme .source-status strong { color: var(--az-parch); }
+.az-theme .source-status p { margin: 3px 0 0; }
+.az-theme .source-review { border-left-color: #c2603f; }
+.guide-layout.az-theme .article-layout > .toc { background: var(--az-inset); border: 1px solid var(--az-edge); border-radius: 6px; }
+.az-theme .toc strong { color: var(--az-gold); font: 700 11px var(--body); letter-spacing: .14em; text-transform: uppercase; }
+.guide-layout.az-theme .toc a, .guide-layout.az-theme .article-layout > .toc a { background: var(--az-panel2); border: 1px solid var(--az-edge); color: var(--az-parch); text-decoration: none; }
+.guide-layout.az-theme .toc a:hover { border-color: var(--az-gold); color: var(--az-gold-hi); }
+.az-theme .prose { overflow-wrap: anywhere; }
+.az-theme .prose > section { border-top: 1px solid #2a2015; padding-top: .4rem; }
+.az-theme .prose h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin-top: 2rem; }
+.az-theme .prose h2::before { content: "◆"; color: var(--az-gold); font-size: .55em; vertical-align: .25em; margin-right: .55em; }
+.az-theme .prose h3 { color: #f4e6c4; margin-top: 1.5rem; }
+.az-theme .prose li { padding: 3px 0; }
+.az-theme .prose li::marker { color: var(--az-gold); }
+.az-theme .prose figure img { border-radius: 4px; }
+/* 00 §3 screenshot framing: never taller than the viewport */
+.az-theme .prose figure img, .guide-layout.az-theme figure.game-image img { max-width: 100%; height: auto; max-height: min(70vh, 640px); object-fit: contain; }
+.guide-layout.az-theme figure.game-image figcaption, .az-theme figcaption { color: var(--az-dim); font-size: 13px; }
+.az-theme .table-wrap { overflow-x: auto; max-width: 100%; border: 1px solid var(--az-edge); border-radius: 6px; margin: 20px 0; position: relative; background: var(--az-panel); }
+.az-theme table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.55; }
+.az-theme th, .az-theme td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid #2c2216; }
+.az-theme th { background: #20180f; color: var(--az-gold-hi); font: 700 12.5px var(--body); letter-spacing: .04em; }
+.az-theme tbody tr:nth-child(even) td { background: #ffffff05; }
+.az-theme tr:last-child td { border-bottom: 0; }
+.az-theme td { overflow-wrap: anywhere; }
+.az-theme .note { background: var(--az-inset); border-left: 3px solid var(--az-gold); padding: 14px 18px; margin: 20px 0; }
+.az-theme .legal { max-width: var(--reading); padding: 20px 0 50px; margin-inline: auto; }
+.az-theme .sources { border-top: 1px solid var(--az-edge); margin-top: 30px; padding-top: 10px; font-size: 13px; }
+.az-theme .related { border-top: 1px solid var(--az-edge); margin-top: 26px; padding-top: 8px; }
+.az-theme .related a { display: block; padding: 6px 0; }
+/* related guides (register_page.py) */
+.az-theme .related-tasks { margin: 34px 0 10px; padding: 18px 20px; background: var(--az-inset); border: 1px solid var(--az-edge); border-radius: 6px; }
+.az-theme .related-tasks h2 { font-size: 1.25rem; margin: 0 0 10px; }
+.az-theme .related-tasks h2::before { display: none; }
+.az-theme .related-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 8px; }
+.az-theme .related-links a { display: flex; justify-content: space-between; gap: 8px; padding: 11px 13px; min-height: 44px; border: 1px solid var(--az-edge); border-radius: 4px; background: var(--az-panel2); text-decoration: none; color: var(--az-parch); font-weight: 600; font-size: 15px; }
+.az-theme .related-links a:hover { border-color: var(--az-gold); color: var(--az-gold-hi); }
+
+/* ---------- buttons and forms ---------- */
+.az-theme .button, body.az-theme button, .az-theme .az-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 4px; font: 700 15px/1.2 var(--body); text-decoration: none; cursor: pointer;
+  background: linear-gradient(180deg, #2a2014, #1a130c); color: var(--az-gold-hi); border: 1px solid var(--az-edge-hi); }
+.az-theme .button:hover, .az-theme button:hover, .az-theme .az-btn:hover { border-color: var(--az-gold); color: #fff0c2; }
+.az-theme .button:not(.secondary), .az-theme .az-btn-play { background: linear-gradient(180deg, var(--az-crimson-hi), var(--az-crimson)); color: #fff2d6; border-color: #d3a14a; font-family: var(--display); letter-spacing: .03em; }
+.az-theme button:disabled { opacity: .6; cursor: default; }
+.az-theme input[type=search], .az-theme input[type=text], .az-theme input[type=url], .az-theme select, .az-theme textarea,
+.az .planner-controls input, .az .planner-controls select, .az .planner-notes textarea, .az #plan-link {
+  font: inherit; color: var(--az-parch) !important; background: var(--az-inset) !important; border: 1px solid var(--az-edge-hi) !important; border-radius: 4px; padding: 10px 12px; min-height: 44px; max-width: 100%; }
+.az-theme input::placeholder { color: #8d806a; }
+.az-theme .az-tool, .az-theme .tool { padding: 18px 20px; margin: 20px 0; }
+.az-theme .az-tool fieldset { border: 1px solid var(--az-edge); }
+.az-theme .az-tray, .az-theme dialog { background: var(--az-panel) !important; color: var(--az-parch) !important; border: 1px solid var(--az-gold) !important; }
+.az-theme dialog::backdrop { background: #000000c0; }
+.az-theme .reference-filter thead th { background: #20180f; }
+.az-theme .prose .table-wrap::before { color: var(--az-gold-hi); background: var(--az-inset); }
+
+/* ---------- answer modules (08 F2/F3/F9) ---------- */
+.az-theme .az-entity { display: inline-flex; align-items: center; gap: .4em; max-width: 100%; vertical-align: middle; }
+.az-theme img.az-entity-icon { display: inline-block; width: 28px; height: 28px; max-width: none; margin: 0; flex: none; border-radius: 3px; border: 1px solid #000; box-shadow: 0 0 0 1px var(--az-edge); object-fit: contain; }
+.az-theme td .az-entity-link { white-space: nowrap; }
+.az-theme .icon-credit { font-size: 12px; color: var(--az-dim); }
+.az-theme .tier-grid { margin: 10px 0 26px; overflow: hidden; }
+.az-theme .tier-note { font-size: .95rem; color: var(--az-dim); margin: 0; padding: 12px 16px 6px; }
+.az-theme .tier-row { display: grid; grid-template-columns: 96px 1fr; border-top: 1px solid #2c2216; }
+.az-theme .tier-label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 6px; color: #160f04; }
+.az-theme .tier-label strong { font: 700 2rem/1 var(--display); color: #160f04; }
+.az-theme .tier-label small { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; font-weight: 700; }
+.az-theme .tier-S .tier-label { background: var(--az-s); } .az-theme .tier-A .tier-label { background: var(--az-a); }
+.az-theme .tier-B .tier-label { background: var(--az-b); } .az-theme .tier-C .tier-label { background: var(--az-c); }
+.az-theme .tier-cells { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; }
+.az-theme .tier-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 82px; padding: 8px 2px; border-radius: 4px; text-decoration: none; color: var(--az-parch); font-weight: 600; font-size: .82rem; }
+.az-theme .tier-cell:hover { background: #ffffff0d; color: var(--az-gold-hi); }
+.az-theme .tier-cell img, .az-theme .class-card img { border: 1px solid #000; box-shadow: 0 0 0 1px var(--az-edge-hi); border-radius: 3px; }
+.az-theme .tier-badge { display: inline-block; padding: 1px 7px; border-radius: 3px; font: 800 .72rem/1.5 var(--body); background: var(--az-c); color: #160f04; margin-right: 4px; vertical-align: 1px; }
+.az-theme .tier-badge.tier-S { background: var(--az-s); } .az-theme .tier-badge.tier-A { background: var(--az-a); } .az-theme .tier-badge.tier-B { background: var(--az-b); }
+.az-theme .loadout { padding: 16px 18px; margin: 8px 0 26px; border-top: 2px solid var(--az-gold); }
+.az-theme .loadout-head { display: flex; gap: 14px; align-items: center; }
+.az-theme .loadout-head h2 { margin: 0 0 4px; font-size: 1.45rem; }
+.az-theme .loadout-head h2::before { display: none; }
+.az-theme .loadout-head p { margin: 0; color: var(--az-dim); }
+.az-theme .loadout-body { display: grid; grid-template-columns: 1.6fr 1fr; gap: 18px; margin-top: 12px; }
+.az-theme .loadout-body h4 { margin: .4rem 0; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
+.az-theme .route-list, .az-theme .prio-list { margin: 0; padding-left: 1.2rem; }
+.az-theme .route-list li { margin: 0 0 8px; }
+.az-theme .route-list p { margin: 4px 0 0; font-size: .88rem; color: var(--az-dim); }
+.az-theme .prio-list li { margin: 0 0 8px; font-size: .92rem; }
+.az-theme .talent-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-top: 6px; }
+.az-theme .arrow { color: var(--az-gold); }
+.az-theme .talent-chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px 2px 2px; border: 1px solid var(--az-edge); border-radius: 4px; background: var(--az-inset); font-size: .84rem; vertical-align: middle; color: var(--az-parch); }
+.az-theme .talent-chip img { width: 26px; height: 26px; border-radius: 3px; border: 1px solid #000; }
+.az-theme .talent-chip.plain { padding: 3px 9px; }
+.az-theme .class-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 10px 0 18px; }
+.az-theme .class-card { display: flex; gap: 12px; align-items: center; padding: 11px 13px; min-height: 64px; border: 1px solid var(--az-edge); border-radius: 6px; background: linear-gradient(180deg, var(--az-panel2), var(--az-panel)); color: var(--az-parch); text-decoration: none; }
+.az-theme .class-card:hover { border-color: var(--az-gold); }
+.az-theme .class-card strong { font-family: var(--display); color: var(--az-gold-hi); font-size: 1.08rem; }
+.az-theme .class-card small { display: block; color: var(--az-dim); font-size: .82rem; line-height: 1.4; }
+.az-theme .az-catalog-group { margin: 14px 0; padding: 12px 16px; }
+.az-theme .az-catalog-group summary { cursor: pointer; font-weight: 700; padding: 4px; color: var(--az-gold-hi); }
+.az-theme .az-icon-catalog { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 12px; list-style: none; padding: 12px 0; margin: 0; }
+.az-theme .az-icon-catalog li { border-bottom: 1px solid #2c2216; padding: 8px; }
+.az-theme .asbuilder-screen { margin: 24px auto; max-width: 1000px; padding: 12px; }
+.az-theme .guide-index { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; }
+.az-theme .guide-index a { padding: 13px 0; border-bottom: 1px solid #2c2216; text-decoration: none; font-weight: 700; }
+.az-theme .guide-index a span { display: block; font-weight: 400; font-size: 13px; color: var(--az-dim); }
+.az-theme .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.az-theme .card { padding: 20px; }
+.az-theme .play-languages a { background: var(--az-panel2); border-color: var(--az-edge); color: var(--az-parch); }
+
+/* ---------- tool pages (colour overrides only) ---------- */
+.az-theme .planner-intro { background: var(--az-inset) !important; border-left-color: var(--az-gold) !important; }
+.az-theme .planner-controls, .az-theme .talent-tree { background: var(--az-panel) !important; border-color: var(--az-edge) !important; }
+.az-theme .talent-node { background: var(--az-panel2) !important; border-color: var(--az-edge) !important; color: var(--az-parch); }
+.az-theme .talent-node.is-picked { border-color: var(--az-gold) !important; box-shadow: 0 0 0 1px var(--az-gold) inset; }
+.az-theme .planner-actions button, .az-theme .talent-buttons button, .az-theme .plan-tray button, .az-theme #plan-dialog button { background: var(--az-panel2) !important; color: var(--az-gold-hi) !important; border-color: var(--az-edge-hi) !important; }
+.az-theme .planner-actions .primary, .az-theme .plan-tray button { background: linear-gradient(180deg, var(--az-crimson-hi), var(--az-crimson)) !important; color: #fff2d6 !important; border-color: #d3a14a !important; }
+.az-theme .plan-tray, .az-theme .plan-share { background: var(--az-panel) !important; border-color: var(--az-gold) !important; color: var(--az-parch); }
+.az-theme .play-rec-card { background: var(--az-panel) !important; border-color: var(--az-edge) !important; box-shadow: none !important; }
+.az-theme .play-rec-card *, .az-theme .play-rec-heading > p:last-child { color: var(--az-parch); }
+.az-theme .play-rec-heading > p:first-child { color: var(--az-gold) !important; }
+.az-theme .play-rec-card a.play-rec-action { color: var(--az-gold-hi); }
+
+/* ---------- section footer (register_page.py, 02 §5.2) ---------- */
+.az-theme .site-footer { margin-top: 40px; background: linear-gradient(180deg, #0f0b07, #070504); border-top: 1px solid var(--az-edge); position: relative; color: var(--az-dim); font-size: 14px; }
+.az-theme .site-footer::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: linear-gradient(90deg, transparent, var(--az-gold) 30%, var(--az-gold) 70%, transparent); opacity: .55; }
+.az-theme .site-footer .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(5, minmax(0, 1fr)); gap: 26px; padding: 40px 0 28px; }
+.az-theme .footer-brand strong { font: 700 20px var(--display); color: var(--az-gold-hi); }
+.az-theme .footer-brand a { text-decoration: none; }
+.az-theme .footer-brand p { margin: 8px 0; font-size: 13px; line-height: 1.6; }
+.az-theme .footer-col h2 { font: 700 12px/1.4 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--az-gold); margin: 4px 0 10px; }
+.az-theme .footer-col a { display: block; color: var(--az-parch); text-decoration: none; padding: 5px 0; font-size: 14px; line-height: 1.4; }
+.az-theme .footer-col a:hover { color: var(--az-gold-hi); text-decoration: underline; }
+.az-theme .footer-version { font-size: 12px; color: var(--az-dim); margin: 8px 0 0; }
+.az-theme .footer-info { border-top: 1px solid #241b11; }
+.az-theme .footer-info .wrap { display: flex; flex-wrap: wrap; gap: 4px 22px; padding: 12px 0 18px; }
+.az-theme .footer-info a { color: var(--az-dim); font-size: 13px; text-decoration: none; padding: 8px 0; }
+.az-theme .footer-info a:hover { color: var(--az-gold-hi); }
+.az-theme .footer-info a[href="/#more-games"] { margin-left: auto; color: var(--az-gold); }
+
+/* ---------- responsive (mobile first checks at 390) ---------- */
+@media (max-width: 1100px) {
+  .az-theme .site-footer .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .az-theme .footer-brand { grid-column: 1 / -1; }
+  .az-theme .desktop-nav a { padding-inline: 8px; font-size: 13.5px; }
+}
+@media (max-width: 900px) {
+  .az-theme .desktop-nav { display: none; }
+  .az-theme .mobile-nav { display: block; }
+  .az-theme .mobile-nav[open] .mobile-links { position: absolute; left: 0; right: 0; top: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 14px 18px 18px; background: #120d08; border-bottom: 1px solid var(--az-edge); box-shadow: 0 12px 24px #000a; z-index: 30; }
+  .az-theme .mobile-links a { border: 1px solid #2c2216; justify-content: flex-start; white-space: normal; }
+  .az-theme .mobile-links a[href$="/azeroth-survivors/play/"] { grid-column: 1 / -1; justify-content: center; margin: 0 0 4px; }
+  .az-theme .class-cards { grid-template-columns: 1fr 1fr; }
+  .az-theme .loadout-body { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  body.az-theme { font-size: 16px; }
+  .az-theme .wrap { width: calc(100% - 32px); }
+  .az-theme .top .wrap { min-height: 64px; gap: 10px; }
+  .az-theme .brand { font-size: 18px; }
+  .az-theme .brand img { width: 34px; height: 34px; }
+  .az-theme .brand small { font-size: 9px; letter-spacing: .08em; }
+  .guide-layout.az-theme .article-head h1 { font-size: 1.9rem; }
+  .az-theme .article-head .answer { font-size: 16.5px; padding: 13px 15px; }
+  .az-theme .prose h2 { font-size: 1.4rem; }
+  .az-theme th, .az-theme td { padding: 10px; }
+  .az-theme .table-wrap table { min-width: 560px; }
+  .az-theme .class-cards, .az-theme .guide-index, .az-theme .grid { grid-template-columns: 1fr; }
+  .az-theme .tier-row { grid-template-columns: 60px 1fr; }
+  .az-theme .tier-cell { width: 68px; }
+  .az-theme .mobile-nav[open] .mobile-links { padding-inline: 16px; }
+  .az-theme .site-footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 18px 16px; padding-top: 30px; }
+  .az-theme .footer-col a { padding: 9px 0; }
+  .az-theme .footer-info a[href="/#more-games"] { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .az-theme * { scroll-behavior: auto !important; transition: none !important; } }

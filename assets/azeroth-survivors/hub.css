@@ -1,0 +1,85 @@
+/* Azeroth Survivors hub layout only (08 F9). Colours, type and shared components live in theme.css. */
+.az-hub .az-hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--az-edge); background: #0b0806; }
+.az-hub .az-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 28%; z-index: -2; opacity: .55; filter: saturate(.9) blur(1.5px); transform: scale(1.04); }
+.az-hub .az-hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, #0b0806f2 0%, #0b0806d9 46%, #0b080666 100%), linear-gradient(180deg, transparent 55%, #0b0806 100%); }
+.az-hub .az-hero-in { padding: 40px 0 44px; max-width: 1180px; }
+.az-hub .az-hero h1 { font-size: clamp(2.2rem, 4.2vw, 3.3rem); margin: 14px 0 10px; color: var(--az-gold-hi); text-shadow: 0 2px 0 #000, 0 0 24px #e0a83c33; max-width: 22ch; }
+.az-hub .az-lead { font-size: 19px; line-height: 1.55; max-width: 54ch; color: var(--az-parch); margin: 0 0 22px; }
+.az-hub .az-status { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0; font: 600 12.5px/1.3 var(--body); color: var(--az-parch); }
+.az-hub .az-status span { padding: 6px 10px; border: 1px solid var(--az-edge); border-radius: 3px; background: #0b0806b3; }
+.az-hub .az-status .az-badge { border-color: var(--az-gold); color: var(--az-gold-hi); text-transform: uppercase; letter-spacing: .12em; font-size: 11px; }
+.az-hub .az-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.az-hub .az-btn { font-size: 16px; padding: 12px 20px; }
+
+/* task cards: square icon slots like the game's spell bar */
+.az-hub .az-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: -18px 0 26px; position: relative; z-index: 2; }
+.az-hub .az-card { position: relative; display: flex; gap: 12px; align-items: center; padding: 13px 14px; min-height: 84px; text-decoration: none; color: var(--az-parch);
+  background: linear-gradient(180deg, var(--az-panel2), var(--az-panel)); border: 1px solid var(--az-edge); border-radius: 6px; box-shadow: 0 6px 18px #0009, inset 0 1px 0 #ffffff08; }
+.az-hub .az-card:hover { border-color: var(--az-gold); transform: translateY(-1px); }
+.az-hub .az-slot { flex: none; width: 52px; height: 52px; padding: 1px; border: 1px solid var(--az-edge-hi); border-radius: 4px; background: #000; box-shadow: 0 0 0 1px #000; }
+.az-hub .az-slot img { width: 48px; height: 48px; border-radius: 3px; }
+.az-hub .az-card-text { min-width: 0; }
+.az-hub .az-card strong { display: block; font: 700 16px/1.25 var(--display); color: var(--az-gold-hi); }
+.az-hub .az-card small { display: block; font-size: 13px; line-height: 1.4; color: var(--az-dim); margin-top: 3px; }
+.az-hub .az-card-tag { position: absolute; top: -9px; right: 10px; font: 700 10px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px; background: var(--az-crimson-hi); color: #fff2d6; border: 1px solid #d3a14a; }
+
+/* bands */
+.az-hub .az-band { padding: 26px 0 30px; border-top: 1px solid #241b11; }
+.az-hub .az-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px; margin-bottom: 12px; }
+.az-hub .az-head h2, .az-hub .hub-preview h2 { margin: 0; font-size: clamp(1.4rem, 2.4vw, 1.85rem); }
+.az-hub .az-head p { margin: 0; color: var(--az-dim); font-size: 14px; }
+.az-hub .hub-preview { margin: 0; }
+.az-hub .hub-preview > p:first-of-type { color: var(--az-dim); margin: 6px 0 12px; }
+.az-hub #source-sync { margin: 0 0 18px; }
+
+.az-hub .az-updates { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.az-hub .az-updates li { display: grid; grid-template-columns: 74px 1fr; gap: 12px; align-items: baseline; padding: 9px 12px; background: var(--az-inset); border: 1px solid #241b11; border-radius: 4px; }
+.az-hub .az-updates time { font: 700 12px var(--body); color: var(--az-gold); letter-spacing: .06em; text-transform: uppercase; }
+
+.az-hub #guide-search { padding: 14px 16px; margin: 6px 0 18px; }
+.az-hub #guide-search label { display: block; font-weight: 700; color: var(--az-gold-hi); }
+.az-hub #guide-search input { width: 100%; max-width: 40rem; margin: 6px 10px 6px 0; }
+.az-hub #guide-status { font-size: 13px; color: var(--az-dim); margin: 4px 0; }
+.az-hub .az-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.az-hub .az-group { padding: 14px 14px 10px; background: var(--az-inset); border: 1px solid var(--az-edge); border-radius: 6px; min-width: 0; }
+.az-hub .az-group h3 { margin: 0 0 2px; font-size: 1.1rem; color: var(--az-gold-hi); }
+.az-hub .az-group > p { margin: 0 0 8px; font-size: 13px; color: var(--az-dim); }
+.az-hub .az-links a { display: flex; gap: 10px; align-items: center; padding: 7px 4px; min-height: 44px; text-decoration: none; color: var(--az-parch); border-top: 1px solid #241b11; }
+.az-hub .az-links a:hover strong { color: var(--az-gold-hi); }
+.az-hub .az-links img { width: 32px; height: 32px; flex: none; border-radius: 3px; border: 1px solid #000; box-shadow: 0 0 0 1px var(--az-edge); }
+.az-hub .az-links strong { display: block; font-size: 14.5px; line-height: 1.3; color: var(--az-parch); }
+.az-hub .az-links small { display: block; font-size: 12.5px; line-height: 1.35; color: var(--az-dim); }
+
+.az-hub .az-about p { max-width: 80ch; }
+.az-hub .az-langs { font-size: 14px; color: var(--az-dim); }
+.az-hub .az-faq { border: 1px solid var(--az-edge); border-radius: 5px; background: var(--az-panel); margin: 0 0 8px; }
+.az-hub .az-faq summary { cursor: pointer; padding: 13px 16px; min-height: 44px; font: 700 16px/1.4 var(--body); color: var(--az-parch); list-style: none; position: relative; padding-right: 40px; }
+.az-hub .az-faq summary::-webkit-details-marker { display: none; }
+.az-hub .az-faq summary::after { content: "+"; position: absolute; right: 16px; top: 10px; font: 700 20px var(--display); color: var(--az-gold); }
+.az-hub .az-faq[open] summary::after { content: "–"; }
+.az-hub .az-faq p { margin: 0; padding: 0 16px 6px; }
+.az-hub .az-more { display: inline-block; margin: 0 16px 12px; font-size: 14px; font-weight: 700; }
+.az-hub .icon-credit { margin: 10px 0 0; }
+
+@media (max-width: 1000px) {
+  .az-hub .az-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .az-hub .az-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .az-hub .az-hero-in { padding: 22px 0 30px; }
+  .az-hub .az-hero h1 { font-size: 2.05rem; margin: 12px 0 8px; }
+  .az-hub .az-lead { font-size: 16px; margin-bottom: 16px; }
+  .az-hub .az-status { font-size: 11.5px; gap: 5px; }
+  .az-hub .az-status span { padding: 4px 7px; }
+  .az-hub .az-hero::after { background: linear-gradient(180deg, #0b0806cc 0%, #0b0806e6 60%, #0b0806 100%); }
+  .az-hub .az-btn { font-size: 15px; padding: 11px 15px; }
+  .az-hub .az-cards { gap: 8px; margin-top: -14px; }
+  .az-hub .az-card { flex-direction: column; align-items: flex-start; gap: 8px; padding: 11px; min-height: 0; }
+  .az-hub .az-slot { width: 42px; height: 42px; }
+  .az-hub .az-slot img { width: 38px; height: 38px; }
+  .az-hub .az-card strong { font-size: 14.5px; }
+  .az-hub .az-card small { font-size: 12px; }
+  .az-hub .az-groups { grid-template-columns: 1fr; }
+  .az-hub .az-updates li { grid-template-columns: 1fr; gap: 2px; }
+}
