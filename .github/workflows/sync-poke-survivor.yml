@@ -1,0 +1,93 @@
+name: Sync PokéSurvivor rules (AUTO_SYNC)
+# SOP 05 §2.9 AUTO_SYNC (user-approved 2026-11-16, ROADMAP PS-AUTO): reads the creator's guides and dated
+# changelog at pokesurvivor.com, writes data/poke-survivor-rules.json (evolution levels, boss and rift minutes,
+# Arceus item breaks and touch damage, Eternatus reward, co-op cap, upgrade prices) and rebuilds /poke-survivor/.
+# Any rejected value fails the run, changes nothing and emails the failure. Free-text changelog entries are
+# announced separately by version-sentinel (Issues).
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Fetch and validate only, do not commit
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-content-writes
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Parser and rejection tests
+        run: python -m unittest tests.test_poke_survivor_rules
+
+      - name: Fetch, validate, apply and rebuild
+        run: >
+          python scripts/sync_poke_survivor_rules.py
+          ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }}
+
+      - name: Rebuilt section passes its gates
+        run: |
+          python -m unittest tests.test_poke_survivor_rules
+          python scripts/register_page.py . poke-survivor --check
+          python scripts/content_gate.py --theme . poke-survivor
+          python scripts/content_gate.py . --allow config/content-gate-allow.json $(find poke-survivor -name index.html ! -path '*/about/*' ! -path '*/contact/*' ! -path '*/privacy/*')
+          python scripts/ci_integrations.py
+
+      - name: Only whitelisted paths changed
+        run: |
+          allowed='^(data/poke-survivor-rules\.json|poke-survivor/.*\.html)$'
+          if git status --porcelain | cut -c4- | grep -Ev "$allowed"; then
+            echo "Unexpected paths changed" >&2; git status --porcelain >&2; exit 1
+          fi
+
+      - name: Commit and push when rules changed
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "No rule changes." | tee -a "$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/poke-survivor-rules.json poke-survivor
+          git commit -m "Auto-sync PokéSurvivor rules from pokesurvivor.com"
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              git log -1 --stat | tee -a "$GITHUB_STEP_SUMMARY"; exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          echo "Unable to push after 3 attempts." >&2; exit 1
+
+  notify-failure:
+    needs: sync
+    if: ${{ always() && needs.sync.result == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Send failure email
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+          AUTOMATION_DETAILS: A PokéSurvivor rule source was rejected (wording or layout changed, implausible value, missing upgrade) or the rebuild/publish step failed. Pages were left unchanged; see the run log.
+        run: python scripts/send_automation_alert.py failure --name "Sync PokéSurvivor rules"

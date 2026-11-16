@@ -65,18 +65,22 @@ def _card(p):
 
 def run_clock():
     """Real data preview (08 F9): the timeline of one run, from the creator's guide and the dated source snapshot."""
+    from poke_survivor_rules import load, words, clock, money
+    r = load()
+    cal, rifts = r['calendar_boss_minutes'], r['rift_minutes']
     stops = [
-        ('2:00', 'First calendar boss', 'Again at 6, 10, 14 and 18 minutes; each one drops a held item.'),
-        ('4:00', 'First rift', 'Also at 8, 12 and 16: beat the legendary for a ×10 ticket and a bond.'),
-        ('20:00', 'Eternamax Eternatus', 'Win for a power, a ×10 ticket and 600 PokéCoins.'),
-        ('25:00', 'Last rift', 'Gives a bond only if you missed an earlier one.'),
-        ('30:00', 'Judgment of Arceus', 'Unbeatable: survive and deal damage; it breaks an item at +2, +4 and +6 minutes.'),
+        (clock(cal[0]), 'First calendar boss', f'Again at {words(cal[1:])} minutes; each one drops a held item.'),
+        (clock(rifts[0]), 'First rift', f'Also at {words(rifts[1:-1])}: beat the legendary for a ×10 ticket and a bond.'),
+        (clock(r['eternatus_minute']), 'Eternamax Eternatus', f"Win for a power, a ×10 ticket and {money(r['eternatus_coins'])} PokéCoins."),
+        (clock(rifts[-1]), 'Last rift', 'Gives a bond only if you missed an earlier one.'),
+        (clock(r['arceus_minute']), 'Judgment of Arceus', 'Unbeatable: survive and deal damage; it breaks an item at ' + words(['+' + str(x) for x in r['arceus_item_breaks']]) + ' minutes.'),
     ]
+    stops.sort(key=lambda x: int(x[0].split(':')[0]))
     items = ''.join(f'<li><time>{t}</time><strong>{escape(a)}</strong><span>{escape(b)}</span></li>' for t, a, b in stops)
     return f'''<section class="ps-band ps-panel ps-clock" id="run-clock"><h2>A PokéSurvivor run on the clock</h2>
-<p>The run schedule since the 13 November 2026 update, from the game’s own guides.</p>
+<p>The run schedule from the game’s own guides and changelog, rechecked automatically.</p>
 <ol class="ps-timeline">{items}</ol>
-<div class="ps-facts"><p><b>Level 20 &amp; 40</b>Choose to evolve your partner or keep its look.</p><p><b>Ten-pull</b>10 ordinary tickets or one ×10 ticket.</p><p><b>Co-op</b>Up to 4 players from the Friends menu.</p></div>
+<div class="ps-facts"><p><b>Level {r['evolution_levels'][0]} &amp; {r['evolution_levels'][1]}</b>Choose to evolve your partner or keep its look.</p><p><b>Ten-pull</b>10 ordinary tickets or one ×10 ticket.</p><p><b>Co-op</b>Up to {r['coop_max']} players from the Friends menu.</p></div>
 <a class="ps-more" href="{P}arceus-judgment/">Plan the Judgment of Arceus →</a></section>'''
 
 
@@ -93,7 +97,9 @@ def hub_main(m):
                         f'<span><strong>{escape(p["title"])}</strong><small>{escape(p.get("blurb", ""))}</small></span></a>' for p in rows)
         groups.append(f'<section class="ps-group"><h3>{escape(g["title"])}</h3><p>{escape(g["note"])}</p><div class="ps-links">{links}</div></section>')
     langs = ' · '.join(f'<a href="{_url(p["slug"])}" lang="{p["lang"]}">{escape(p["title"])}</a>' for p in pages if p.get('lang'))
-    faq = ''.join(f'<details class="ps-faq"><summary>{escape(f["q"])}</summary><p>{escape(f["a"])}</p>'
+    from poke_survivor_rules import load, fill, tokens
+    rules = load()
+    faq = ''.join(f'<details class="ps-faq"><summary>{escape(f["q"])}</summary><p>{escape(fill(f["a"], rules))}</p>'
                   f'<a class="ps-more" href="{_url(f["link"])}">{escape(by[f["link"].split("#")[0]]["title"])} →</a></details>' for f in m['faq'])
     return f'''<main id="main">
 <section class="ps-hero" id="guide"><img class="ps-hero-bg" src="{A}images/title-field-1440.webp" srcset="{A}images/title-field-800.webp 800w, {A}images/title-field-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
@@ -109,7 +115,7 @@ def hub_main(m):
 <section class="ps-band" id="latest"><div class="ps-head"><h2>Latest updates</h2><p>What changed in the game and in these guides</p></div><ul class="ps-updates">{updates}</ul></section>
 <section class="ps-band" id="guides"><div class="ps-head"><h2>All PokéSurvivor guides</h2><p>Every guide in this section, grouped by what you want to do next.</p></div>
 <div class="ps-groups">{''.join(groups)}</div></section>
-<section class="ps-band ps-about" id="about-game"><h2>About the game</h2><div><p>PokéSurvivor is a free survival game by JPTER78 that you play in a browser on PC or phone at pokesurvivor.com. You pick a Pokémon partner, roam a top-down field while your active move fires on its own, and choose a card each level: a new move, an upgrade or a boost. Between runs you spend tickets in the gacha, collect partners and team up with up to three friends. It is a fan project, separate from PokeBonk and from the Megabonk Steam game; see <a href="{P}about/#which-game">games with similar names</a>.</p><p class="ps-langs">Other languages: {langs}</p></div>
+<section class="ps-band ps-about" id="about-game"><h2>About the game</h2><div><p>PokéSurvivor is a free survival game by JPTER78 that you play in a browser on PC or phone at pokesurvivor.com. You pick a Pokémon partner, roam a top-down field while your active move fires on its own, and choose a card each level: a new move, an upgrade or a boost. Between runs you spend tickets in the gacha, collect partners and team up with up to {tokens(rules)['coop_others']} friends. It is a fan project, separate from PokeBonk and from the Megabonk Steam game; see <a href="{P}about/#which-game">games with similar names</a>.</p><p class="ps-langs">Other languages: {langs}</p></div>
 <figure><img src="{A}images/login-panel-440.webp" width="440" height="460" loading="lazy" decoding="async" alt="PokéSurvivor login panel titled Mystery Dungeon, naming pokesurvivor.com as the official website, with Log in and Sign up tabs"></figure></section>
 <section class="ps-band" id="faq"><div class="ps-head"><h2>PokéSurvivor FAQ</h2><p>Short answers; each links to the full guide.</p></div>{faq}</section>
 <p class="icon-credit" id="icon-credits">Task icons are the original game’s own menu icons and the hero background is its title screen, shown to identify each section.</p>

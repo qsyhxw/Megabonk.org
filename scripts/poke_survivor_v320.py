@@ -9,11 +9,26 @@ poke_survivor_content.make_pages(); URL, title and canonical stay (00 §5A), des
 removed content are corrected and logged in ROADMAP PS-REWRITE.
 """
 from html import escape
+from poke_survivor_rules import load as load_rules, fill, long_date, clock
 
 P = '/poke-survivor/'
 G = '/assets/poke-survivor/game/'
 SITE = 'https://pokesurvivor.com/en/'
-UPDATED = 'November 16, 2026'
+RULES = load_rules()
+UPDATED = long_date(max('2026-11-16', RULES['changed']))  # pages follow the last rule change
+ORDINAL = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth']
+
+
+def rift_table():
+    r = RULES
+    events = [(m, 'Calendar boss') for m in r['calendar_boss_minutes']] + [(r['eternatus_minute'], 'Eternatus'), (r['arceus_minute'], 'Judgment of Arceus')]
+    rows, rifts = [], r['rift_minutes']
+    for i, m in enumerate(rifts):
+        last = i == len(rifts) - 1
+        what = 'Catch-up rift: a bond only if you missed one' if last else ORDINAL[i] + ' legendary' + ('; afterwards some forms can be chosen (Deoxys, Rotom, Oricorio…)' if i == 2 else '')
+        nxt = [f'{n} at {clock(t)}' for t, n in events if t > m][:2 if last or i == len(rifts) - 2 else 1]
+        rows.append([clock(m), what, ', '.join(nxt)])
+    return tbl(['Run time', 'Rift', 'Next on the clock'], rows)
 
 IMG = {  # name: (width, height, alt)
     'gacha-notes': (592, 336, 'Gacha notes in PokéSurvivor: the ×10 pull guarantees at least one Epic, 70 pulls without a Legendary make the next one Legendary, and bosses and rift legendaries give ×10 tickets'),
@@ -63,11 +78,11 @@ def ul(items):
 GAME = f'<a href="{SITE}" rel="noopener">pokesurvivor.com</a>'
 
 RUN_TABLE = tbl(['Run time', 'What happens', 'What to do'], [
-    ['2:00, 6:00, 10:00, 14:00, 18:00', 'A calendar boss appears, tougher each time; enraged at half HP', 'Beat it: it always drops a held item and gives a ×10 ticket 1 time in 3'],
-    ['4:00, 8:00, 12:00, 16:00', 'A rift opens to a legendary’s arena', 'Go in: a win gives a ×10 ticket and a bond'],
-    ['20:00', 'Eternamax Eternatus at the Top of the Tower', 'Pick up loot first; a win gives a power, a ×10 ticket and 600 PokéCoins'],
-    ['25:00', 'Last rift', 'Gives a bond only if you missed an earlier one'],
-    ['30:00', 'Judgment of Arceus in the Hall of Origin', 'Survive and deal damage as long as you can'],
+    ['[[cal_clock]]', 'A calendar boss appears, tougher each time; enraged at half HP', 'Beat it: it always drops a held item and gives a ×10 ticket 1 time in 3'],
+    ['[[rift_main_clock]]', 'A rift opens to a legendary’s arena', 'Go in: a win gives a ×10 ticket and a bond'],
+    ['[[et]]:00', 'Eternamax Eternatus at the Top of the Tower', 'Pick up loot first; a win gives a power, a ×10 ticket and [[coins]] PokéCoins'],
+    ['[[rift_last]]:00', 'Last rift', 'Gives a bond only if you missed an earlier one'],
+    ['[[ar]]:00', 'Judgment of Arceus in the Hall of Origin', 'Survive and deal damage as long as you can'],
 ])
 
 PAGES = {}
@@ -76,15 +91,15 @@ PAGES = {}
 PAGES['beginners-guide/'] = dict(
     format='beginner', h1='PokéSurvivor beginner guide: your first run',
     answer=('Open pokesurvivor.com, pick a partner and keep moving: your active move fires on its own while you dodge. '
-            'Take one card per level, decide on evolution at levels 20 and 40, and spend PokéCoins on your main partner’s upgrades between runs. '
+            'Take one card per level, decide on evolution at levels [[evo]], and spend PokéCoins on your main partner’s upgrades between runs. '
             'Sign up first if you want to keep your progress.'),
     lead=ol([
         f'Open {GAME} in a browser (turn a phone to landscape). Sign up or log in: guest progress is not saved when you leave.',
         'Answer the partner questions, then keep the suggested partner or press <strong>Change</strong>.',
         'Press <strong>Play</strong> on Normal. Move with WASD or the arrow keys; only the active move attacks.',
         'At every level, pick one of four cards: a new move, an upgrade for a move you have, or a boost.',
-        'At levels 20 and 40, choose to evolve your partner or keep its look; its stats rise either way.',
-        'Beat the bosses at 2, 6, 10, 14 and 18 minutes and enter the rifts at 4, 8, 12 and 16 minutes.',
+        'At levels [[evo]], choose to evolve your partner or keep its look; its stats rise either way.',
+        'Beat the bosses at [[cal]] minutes and enter the rifts at [[rift_main]] minutes.',
         'After the run, buy Magnet, Vitality and Strength levels for the partner you will keep using.',
     ]),
     parts=[
@@ -113,14 +128,14 @@ PAGES['beginners-guide/'] = dict(
          '<p>Upgrades are bought with PokéCoins in the menu and belong to one Pokémon only, so put your coins into the partner you play most. Each level costs more than the last.</p>'
          + fig('upgrades')
          + tbl(['Buy', 'First level', 'Why'], [
-             ['Magnet', '50', '+12% pickup range: more experience and coins every run'],
-             ['Vitality', '60', '+3 HP per level for early mistakes'],
-             ['Stride', '70', '+1.5% speed to outrun the horde'],
-             ['Strength', '80', '+1.5% damage on every move'],
-             ['Repertoire', '1,500', 'Start every run with 2 moves'],
-             ['Starting move', '400', 'Choose which move you start with'],
+             ['Magnet', '[[up:Magnet]]', '[[eff:Magnet]] range: more experience and coins every run'],
+             ['Vitality', '[[up:Vitality]]', '[[eff:Vitality]] per level for early mistakes'],
+             ['Stride', '[[up:Stride]]', '[[eff:Stride]] to outrun the horde'],
+             ['Strength', '[[up:Strength]]', '[[eff:Strength]] on every move'],
+             ['Repertoire', '[[up:Repertoire]]', 'Start every run with 2 moves'],
+             ['Starting move', '[[up:Starting move]]', 'Choose which move you start with'],
          ])
-         + '<p>The creator’s own tip: Repertoire and the move ban (Veto) change runs the most. Maxing every upgrade costs 93,470 PokéCoins per Pokémon and makes it hit and endure about 1.3 times more, so good movement still matters most.</p>'),
+         + '<p>The creator’s own tip: Repertoire and the move ban (Veto) change runs the most. Maxing every upgrade costs [[uptotal]] PokéCoins per Pokémon and makes it hit and endure about 1.3 times more, so good movement still matters most.</p>'),
         ('save', 'Keep your progress',
          '<p>The partner card in the menu says <strong>Guest mode: not saved</strong> until you sign in. With an account your game is saved online and you can continue on another computer or phone; coins and tickets from a run arrive when the run ends. '
          + a('save-and-sync/', 'Save and sync checks') + ' covers moving between devices.</p>' + fig('menu')),
@@ -134,7 +149,7 @@ PAGES['builds/'] = dict(
             'a special attacker wants special moves plus Nasty Plot. The level-up card tells you which side fits: “With Scorbunny it deals 84%: it hits harder with physical moves.”'),
     parts=[
         ('stat', 'Physical or special: the one rule that decides a build',
-         '<p>Physical moves hit with your Pokémon’s Attack and special moves with its Special Attack. Moves on the strong side hit at 100%; moves on the other side hit in proportion, so a Pokémon with 120 Attack and 60 Special Attack deals half damage with special moves. A move’s type (Fire, Psychic…) is separate from its physical or special category.</p>'
+         '<p>Physical moves hit with your Pokémon’s Attack and special moves with its Special Attack. Moves on the strong side hit at 100%; moves on the other side hit in proportion, so a Pokémon with 120 Attack and 60 Special Attack deals half damage with special moves. A move’s type (Fire, Psychic…) is separate from its physical or special category. Partners that start already evolved (Gallade, Lucario, Volcarona) fight with their first stage’s stats until level 40.</p>'
          + fig('levelup-physical')
          + tbl(['Your partner', 'Damaging moves', 'Buff to take', 'Skip'], [
              ['Physical (Attack higher)', 'Physical moves: Quick Attack, Body Slam, Flame Charge, Dragon Claw…', 'Swords Dance; Dragon Dance builds Attack faster', 'Nasty Plot and special moves'],
@@ -152,7 +167,7 @@ PAGES['builds/'] = dict(
          ])
          + '<p>Older videos that pair Swords Dance with Mewtwo’s Psychic or Confusion come from before the physical/special split (18 October 2026); in the current game only Nasty Plot raises those moves.</p>'),
         ('bonds', 'Bonds: two moves from one slot',
-         '<p>Every legendary you beat in a rift gives a bond: link two moves so they fire together from a single slot, up to four bonds. Rifts open at 4, 8, 12 and 16 minutes; the minute-25 rift gives a bond only if you missed one, so the plan is to reach Eternatus with all four.</p>'
+         '<p>Every legendary you beat in a rift gives a bond: link two moves so they fire together from a single slot, up to four bonds. Rifts open at [[rift_main]] minutes; the minute-[[rift_last]] rift gives a bond only if you missed one, so the plan is to reach Eternatus with all [[rift_main_n]].</p>'
          + ul(['Bond your two strongest damaging moves of the same category first.',
                'Use the freed slots for a third and fourth attack before adding a buff.',
                'Win the rifts: losing sends you back to the map with no bond and no ticket. ' + a('rifts/', 'Rift arenas and rewards') + '.']))
@@ -168,10 +183,10 @@ PAGES['builds/'] = dict(
              ['Substitute (physical)', 'Armor', '×1.8 damage, one more decoy, fires faster'],
          ]) + fig('levelup-weather', 'Weather cards such as Sunny Day change type damage for every move you use.')),
         ('upgrades', 'Upgrades and items that shape a build',
-         ul(['<strong>Repertoire</strong> (1,500 PokéCoins): start with 2 moves; then <strong>Starting move</strong> and <strong>Second starting move</strong> (400 each) pick them.',
-             '<strong>Ban / Veto</strong> (from 300): block up to five moves you never want, such as every off-side move.',
-             '<strong>Card reroll</strong> (from 150): one more reroll per run, per level bought.',
-             '<strong>Held items:</strong> Choice Band gives +40% damage but locks your move; Quick Claw cuts cooldowns by 20%; Leftovers heals 1.5% HP per second. Second item (10,000) and Third item (30,000) let you hold more at once.',
+         ul(['<strong>Repertoire</strong> ([[up:Repertoire]] PokéCoins): start with 2 moves; then <strong>Starting move</strong> and <strong>Second starting move</strong> ([[up:Starting move]] each) pick them.',
+             '<strong>Ban / Veto</strong> (from [[up:Ban]]): block up to five moves you never want, such as every off-side move.',
+             '<strong>Card reroll</strong> (from [[up:Card reroll]]): one more reroll per run, per level bought.',
+             '<strong>Held items:</strong> Choice Band gives +40% damage but locks your move; Quick Claw cuts cooldowns by 20%; Leftovers heals 1.5% HP per second. Second item ([[up:Second item]]) and Third item ([[up:Third item]]) let you hold more at once.',
              '<strong>Taught the wrong TM?</strong> A Blank TM from the Kecleon Shop erases it.'])
          + fig('levelup-buffs', 'Buff cards say “deals no damage”; Move Deleter swaps a move out mid-run.')),
     ])
@@ -194,9 +209,9 @@ PAGES['gacha/'] = dict(
         ('earn', 'How to get tickets',
          tbl(['Source', 'Reward'], [
              ['Defeated wild Pokémon', 'A ticket now and then'],
-             ['Calendar bosses (2, 6, 10, 14, 18 min)', 'A ×10 ticket 1 time in 3, plus a held item'],
-             ['Rift legendary win (4, 8, 12, 16 min)', 'A ×10 ticket and a bond'],
-             ['Eternamax Eternatus win (20 min)', 'A ×10 ticket and 600 PokéCoins'],
+             ['Calendar bosses ([[cal_list]] min)', 'A ×10 ticket 1 time in 3, plus a held item'],
+             ['Rift legendary win ([[rift_main_list]] min)', 'A ×10 ticket and a bond'],
+             ['Eternamax Eternatus win ([[et]] min)', 'A ×10 ticket and [[coins]] PokéCoins'],
              ['Weekly challenge', 'A ×10 ticket if you last 3 minutes (one attempt a week)'],
              ['Coin thief event', 'A Gholdengo carries a ×10 ticket 1 time in 4'],
              ['Lost Pokémon event', 'One ticket'],
@@ -218,18 +233,12 @@ PAGES['gacha/'] = dict(
 # ---------------------------------------------------------------- rifts
 PAGES['rifts/'] = dict(
     format='other', h1='PokéSurvivor rifts: times, arenas and bonds',
-    desc='When PokéSurvivor rifts open (4, 8, 12, 16 and 25 minutes), the 18 legendary arenas, and what a win gives: a ×10 ticket, a bond and a held item.',
-    answer=('Rifts open at 4, 8, 12, 16 and 25 minutes of a run. Step in to fight a legendary in an arena of its type: a win gives a ×10 ticket, a bond that links two moves into one slot, and a held item; '
-            'a loss sends you back to the map with nothing. The minute-25 rift only gives a bond if you missed an earlier one.'),
+    desc='When PokéSurvivor rifts open ([[rift_all]] minutes), the 18 legendary arenas, and what a win gives: a ×10 ticket, a bond and a held item.',
+    answer=('Rifts open at [[rift_all]] minutes of a run. Step in to fight a legendary in an arena of its type: a win gives a ×10 ticket, a bond that links two moves into one slot, and a held item; '
+            'a loss sends you back to the map with nothing. The minute-[[rift_last]] rift only gives a bond if you missed an earlier one.'),
     parts=[
         ('times', 'When rifts open',
-         tbl(['Run time', 'Rift', 'Next on the clock'], [
-             ['4:00', 'First legendary', 'Calendar boss at 6:00'],
-             ['8:00', 'Second legendary', 'Calendar boss at 10:00'],
-             ['12:00', 'Third legendary; afterwards some forms can be chosen (Deoxys, Rotom, Oricorio…)', 'Calendar boss at 14:00'],
-             ['16:00', 'Fourth legendary', 'Boss at 18:00, Eternatus at 20:00'],
-             ['25:00', 'Catch-up rift: a bond only if you missed one', 'Judgment of Arceus at 30:00'],
-         ]) + '<p>In co-op everyone enters together. Legendaries you are missing in your collection show up more often.</p>'),
+         rift_table() + '<p>In co-op everyone enters together. Legendaries you are missing in your collection show up more often.</p>'),
         ('arenas', 'The 18 arenas',
          tbl(['Type', 'Arena', 'Type', 'Arena'], [
              ['Normal', 'Eternal Meadow', 'Flying', 'Sky Peak'], ['Fire', 'Igneous Volcano', 'Psychic', 'Mind Temple'],
@@ -242,7 +251,7 @@ PAGES['rifts/'] = dict(
          ul(['Bring a move that is super effective against the arena’s type; the weather in the arena also changes type damage.',
              'Keep moving in wide circles and step out of ground markers before they fill.',
              'Enter with full HP: take a Sitrus Berry card or heal before the 4- and 8-minute rifts if you can.',
-             'Beat each legendary to collect all four bonds before Eternatus; ' + a('builds/#bonds', 'which moves to bond') + '.'])),
+             'Beat each legendary to collect all [[rift_main_n]] bonds before Eternatus; ' + a('builds/#bonds', 'which moves to bond') + '.'])),
         ('rewards', 'Rewards',
          tbl(['Result', 'You get'], [
              ['Win', 'A ×10 ticket, a bond, a held item; with an account, an egg that arrives when the run ends'],
@@ -253,13 +262,13 @@ PAGES['rifts/'] = dict(
 # ---------------------------------------------------------------- Arceus
 PAGES['arceus-judgment/'] = dict(
     format='other', h1='PokéSurvivor Judgment of Arceus: how to last longer',
-    desc='How the PokéSurvivor Judgment of Arceus works at minute 30: its attacks by time, the items it breaks, how fast it chases you and how to score more time and damage.',
-    answer=('At minute 30 Arceus takes you to the Hall of Origin. It cannot be beaten: your score is how long you last and how much damage you deal. '
-            'It breaks one held item at 2, 4 and 6 minutes, ignores Protect, Sturdy and Focus Sash, and is faster than you after 3 minutes; lasting 10 minutes (about 40:00 of run time) is a top result.'),
+    desc='How the PokéSurvivor Judgment of Arceus works at minute [[ar]]: its attacks by time, the items it breaks, how fast it chases you and how to score more time and damage.',
+    answer=('At minute [[ar]] Arceus takes you to the Hall of Origin. It cannot be beaten: your score is how long you last and how much damage you deal. '
+            'It breaks one held item at [[brk]] minutes, ignores Protect, Sturdy and Focus Sash, and is faster than you after 3 minutes; lasting 10 minutes (about [[ar10]]:00 of run time) is a top result.'),
     parts=[
-        ('before', 'Before minute 30',
-         ul(['Beat Eternamax Eternatus at 20:00 for a power (Mega Evolution, Dynamax, Z-Ring or Terastal).',
-             'Collect every bit of experience, coins and heals on the ground before 30:00: it disappears when you travel.',
+        ('before', 'Before minute [[ar]]',
+         ul(['Beat Eternamax Eternatus at [[et]]:00 for a power (Mega Evolution, Dynamax, Z-Ring or Terastal).',
+             'Collect every bit of experience, coins and heals on the ground before [[ar]]:00: it disappears when you travel.',
              'Amulet Coin, Exp. Charm and Luck Incense still pay out at the end even if Arceus breaks them.',
              'On Normal the Judgment is unchanged; only the earlier part of the run is easier.'])),
         ('attacks', 'Arceus’s attacks by time',
@@ -269,7 +278,7 @@ PAGES['arceus-judgment/'] = dict(
              ['0:00', 'Divine Wave around Arceus', 'Do not stay next to it'],
              ['0:30', 'Extreme Speed across a marked lane', 'Leave the lane when it is marked'],
              ['1:00', 'Future Sight explodes where you just were', 'Do not retrace your steps'],
-             ['1:30', 'Gravity: 4 s at 60% speed, no dash', 'Have space before it lands'],
+             ['1:30', 'Gravity: 4 s at 60% speed, no dash; Arceus stays still while it lasts', 'Move away from it while it cannot chase you'],
              ['2:00', 'Hyper Beam: 16 beams sweep a quarter of the arena', 'Move to the open quarter'],
              ['2:30', 'Plate Judgment: bullets of every type', 'Weave through the gaps'],
              ['5:00 / 7:00', 'Golden Wheels race around a lane near the edge, then a second lane further in', 'Cross through the gaps; a hit takes 35% HP'],
@@ -277,17 +286,17 @@ PAGES['arceus-judgment/'] = dict(
         ('rules', 'Rules that end most Judgments',
          tbl(['Rule', 'Detail'], [
              ['Speed', 'Matches your speed after 1 minute, faster than you at 3, 140% of your speed at 10'],
-             ['Touch', 'Takes 45% of your HP; from 10 minutes it knocks you out'],
-             ['Items', 'Breaks one held item at 2, 4 and 6 minutes (and at 8 if you hold a fourth)'],
-             ['Pure damage', 'Ignores types and defence; Protect, Sturdy and Focus Sash do not work'],
+             ['Touch', 'Takes [[touch]]% of your HP; from 10 minutes it knocks you out'],
+             ['Items', 'Breaks one held item at [[brk]] minutes (and at 8 if you hold a fourth)'],
+             ['Damage', 'Ignores types; damage reduction from Armor, items and upgrades cuts its attacks by at most 30% (only with the 80% maximum); Protect, Sturdy and Focus Sash do not work'],
              ['Floor', 'Every 4 s a chunk cracks and falls, up to 30% of the floor; standing on it hurts'],
              ['Chasing', 'Run far and it appears in front of you; three jumps in 45 s break the move you flee with'],
              ['Co-op', 'The first fall can be revived; a second fall means you are judged and out'],
          ])),
         ('score', 'Score more time or more damage',
          tbl(['Goal', 'Bring', 'Why'], [
-             ['Last longer', 'Stride and Vitality upgrades, Agility, healing such as Leftovers', 'Arceus outruns you after 3 minutes and its touch takes 45%'],
-             ['Deal more damage', 'Your strongest evolved moves on your strong side, Critical Hit and Power Crits', 'Arceus only takes part of your damage, less over time, and hitting it does not heal you'],
+             ['Last longer', 'Stride, Vitality and Armor upgrades, Agility, healing such as Leftovers', 'Arceus outruns you after 3 minutes and its touch takes [[touch]]%'],
+             ['Deal more damage', 'Your strongest evolved moves on your strong side, Critical Hit and Power Crits', 'Damage to Arceus counts in full on the ranking; level-up cards such as Power and Brutal Blow have no limit, but hitting Arceus does not heal you'],
          ]) + '<p>Arceus holds a random Plate that sets its type for the Judgment, announced when you enter. The ranking counts both time survived and damage dealt. At Halloween the witch Gengar takes Arceus’s place. Builds for each side: ' + a('builds/', 'physical and special builds') + '.</p>'),
     ])
 
@@ -357,8 +366,8 @@ PAGES['save-and-sync/'] = dict(
 # ---------------------------------------------------------------- multiplayer (08 F7)
 PAGES['multiplayer/'] = dict(
     format='platform', h1='PokéSurvivor multiplayer: co-op with friends',
-    desc='Play PokéSurvivor co-op with up to 4 friends: account requirement, adding friends and rooms, co-op rules for rifts, bosses and Arceus, and fixing lag with the ping display.',
-    answer=('Yes: PokéSurvivor has online co-op for up to 4 players. Everyone needs an account on pokesurvivor.com; add friends in the Friends menu, '
+    desc='Play PokéSurvivor co-op with up to [[coop]] friends: account requirement, adding friends and rooms, co-op rules for rifts, bosses and Arceus, and fixing lag with the ping display.',
+    answer=('Yes: PokéSurvivor has online co-op for up to [[coop]] players. Everyone needs an account on pokesurvivor.com; add friends in the Friends menu, '
             'invite them to a room and the host starts the run. A downed teammate can be revived.'),
     lead=tbl(['Mode', 'Players', 'Account', 'Notes'], [
         ['Co-op room', 'Up to 4', 'Required for everyone', 'Shared run; revive fallen teammates'],
@@ -455,14 +464,14 @@ PAGES['es/mobile/'] = dict(
 # ---------------------------------------------------------------- Chinese beginner guide
 PAGES['zh/beginners-guide/'] = dict(
     format='beginner', h1='PokéSurvivor 中文入门攻略',
-    answer='打开 pokesurvivor.com，在设置里把语言改成简体或繁体中文，选好伙伴后只管移动躲避：当前招式会自动攻击。每次升级选一张卡，20 级和 40 级可选择是否进化；想保留进度先注册账号，访客进度离开就会丢失。',
+    answer='打开 pokesurvivor.com，在设置里把语言改成简体或繁体中文，选好伙伴后只管移动躲避：当前招式会自动攻击。每次升级选一张卡，[[evo1]] 级和 [[evo2]] 级可选择是否进化；想保留进度先注册账号，访客进度离开就会丢失。',
     lead=ol([
         f'打开 {GAME}，手机请横屏。点“Sign up / Log in”注册或登录；访客（Guest）进度不保存。',
         '回答几个性格问题，接受推荐伙伴，或点 <strong>Change</strong> 换一只。',
         '设置（右上角齿轮）→ Graphics → Language 选 简体中文 或 繁體中文，游戏会重新载入。',
         '点 <strong>Play</strong>，选 Normal。WASD 或方向键移动，1–4 或 Q/E 切换当前招式，Esc 暂停。',
         '每次升级从四张卡里选一张：新招式、已有招式升级，或属性加成。',
-        '20 级和 40 级会问是否进化，不进化也会涨属性。',
+        '[[evo1]] 级和 [[evo2]] 级会问是否进化，不进化也会涨属性。',
         '结束后用 PokéCoins 在 Upgrades 里给主力伙伴买 Magnet、Vitality、Strength。',
     ]),
     parts=[
@@ -484,11 +493,11 @@ PAGES['zh/beginners-guide/'] = dict(
                '物理伙伴配 Swords Dance，特殊伙伴（如超梦 Mewtwo）配 Nasty Plot。详细构筑见 ' + a('builds/', '英文构筑指南') + '。'])),
         ('run', '一局里会发生什么',
          tbl(['时间', '事件', '做什么'], [
-             ['2、6、10、14、18 分钟', '日历 Boss', '击败必掉道具，1/3 概率给 ×10 抽卡券'],
-             ['4、8、12、16 分钟', '裂隙（传说宝可梦）', '获胜得 ×10 抽卡券和一个羁绊（Bond）'],
-             ['20 分钟', '无极巨化 无极汰那', '获胜选一种力量（超级进化、极巨化等）'],
-             ['25 分钟', '最后一个裂隙', '只有错过之前的裂隙才给羁绊'],
-             ['30 分钟', '阿尔宙斯的审判', '无法击败，按存活时间和伤害计分'],
+             ['[[cal_zh]] 分钟', '日历 Boss', '击败必掉道具，1/3 概率给 ×10 抽卡券'],
+             ['[[rift_main_zh]] 分钟', '裂隙（传说宝可梦）', '获胜得 ×10 抽卡券和一个羁绊（Bond）'],
+             ['[[et]] 分钟', '无极巨化 无极汰那', '获胜选一种力量（超级进化、极巨化等）'],
+             ['[[rift_last]] 分钟', '最后一个裂隙', '只有错过之前的裂隙才给羁绊'],
+             ['[[ar]] 分钟', '阿尔宙斯的审判', '无法击败，按存活时间和伤害计分'],
          ]) + fig('run-hud')),
         ('save', '保存进度',
          '<p>菜单伙伴卡上写着 “Guest mode: not saved” 时，关闭页面进度就会丢失。注册账号后进度保存在云端，可在其他电脑或手机登录继续；一局获得的金币和抽卡券在这局结束时到账。换设备前请看 ' + a('save-and-sync/', '存档与同步（英文）') + '。</p>'
@@ -502,16 +511,16 @@ def apply(pages):
         new = PAGES.get(page['slug'])
         if not new:
             continue
-        page['answer'] = new['answer']
-        page['lead'] = new.get('lead', '')
-        page['parts'] = new['parts']
+        page['answer'] = fill(new['answer'], RULES)
+        page['lead'] = fill(new.get('lead', ''), RULES)
+        page['parts'] = [(i, fill(t, RULES), fill(b, RULES)) for i, t, b in new['parts']]
         page['sources'] = []
         page['diagram'] = None
         page['format'] = new['format']
         page['h1'] = new['h1']
         page['updated'] = UPDATED
         if new.get('desc'):
-            page['desc'] = new['desc']
+            page['desc'] = fill(new['desc'], RULES)
         page['language'] = page.get('language', '')
         import re
         first = re.search(r'/assets/poke-survivor/(game/[^"]+\.webp)', new.get('lead', '') + ''.join(x[2] for x in new['parts']))
