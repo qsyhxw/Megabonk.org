@@ -1,5 +1,5 @@
 {
-  "_note": "PokeBonk page manifest (SOP v3.24, 02 §2.6). Nav, breadcrumbs, hub task cards, hub guide index, hub FAQ and related guides come from here; scripts/pokebonk_theme.py renders the hub and scripts/register_page.py syncs every page. New page = one row here, then run build_pokebonk.py.",
+  "_note": "PokeBonk page manifest (SOP v3.24, 02 §2.6). Nav, breadcrumbs, hub task cards, hub guide index, hub FAQ, related guides and the section footer (02 §5.2: rows marked footer, recent pages dated by the updates list) come from here; scripts/pokebonk_theme.py renders the hub and scripts/register_page.py syncs every page. New page = one row here, then run build_pokebonk.py.",
   "game": "pokebonk",
   "name": "PokeBonk",
   "base": "/pokebonk/",
@@ -38,32 +38,52 @@
     {"q": "Is PokeBonk down?", "a": "Check where it fails: if pokebonk.com does not load at all, the host is down; if it loads but the game will not connect, read the server message on the entry screen. Keep your Guest session and do not clear site data while you check.", "link": "troubleshooting"},
     {"q": "Was PokeBonk made with AI?", "a": "Partly. The author’s legal notice credits image and audio generation tools and Blender for scenery, 3D assets, effects, interface icons and music. The Pokémon sprites are credited to the community PMD SpriteCollab project.", "link": "megabonk-vs-pokebonk"}
   ],
+  "footer": {
+    "tagline": "Builds, tier list, Pokédex data and run help for the PokeBonk browser game, with game data read from the current client.",
+    "disclaimer": "Unofficial fan guide published by Megabonk.org. PokeBonk is a fan game by Charcher; not affiliated with Charcher, Nintendo, The Pokémon Company, Creatures or GAME FREAK.",
+    "version_from": {"file": "data/pokebonk-sync.json", "path": ["observed", "version"], "format": "Current game version: v{}"},
+    "columns": [
+      {"label": "Builds & tier list", "sections": ["builds", "tier"]},
+      {"label": "Pokédex & data", "sections": ["database"]},
+      {"label": "Play & help", "sections": ["play", "start", "modes", "help"]}
+    ],
+    "official": [
+      {"label": "Play at pokebonk.com", "href": "https://pokebonk.com/"},
+      {"label": "PokeBonk Discord", "href": "https://discord.gg/X7KusQqx8X"}
+    ],
+    "info": [
+      {"label": "About", "href": "/pokebonk/about/"},
+      {"label": "Contact", "href": "/pokebonk/contact/"},
+      {"label": "Privacy", "href": "/privacy-policy#pokebonk"},
+      {"label": "More games", "href": "/#more-games"}
+    ]
+  },
   "pages": [
     {"slug": "", "title": "PokeBonk Guide & Wiki", "section": "", "updated": "2026-11-13"},
-    {"slug": "play", "title": "Play PokeBonk online", "section": "play", "card": 3, "portrait": 133, "blurb": "Play in a game window here, with the guide below.", "related": ["beginners-guide", "mobile"]},
+    {"slug": "play", "footer": true, "title": "Play PokeBonk online", "section": "play", "card": 3, "portrait": 133, "blurb": "Play in a game window here, with the guide below.", "related": ["beginners-guide", "mobile"]},
 
-    {"slug": "builds", "title": "Best builds", "section": "builds", "card": 1, "portrait": 251, "blurb": "Copy one of 48 S and A tier Season 3 builds.", "related": ["tier-list", "move-fusions", "items-vitamins"]},
+    {"slug": "builds", "footer": true, "title": "Best builds", "section": "builds", "card": 1, "portrait": 251, "blurb": "Copy one of 48 S and A tier Season 3 builds.", "related": ["tier-list", "move-fusions", "items-vitamins"]},
     {"slug": "abra-build", "title": "Abra build", "section": "builds", "portrait": 63, "blurb": "Psychic kit, signature pair and slot conflicts.", "related": ["builds", "move-fusions", "lab"]},
-    {"slug": "build-planner", "title": "Build planner", "section": "builds", "portrait": 137, "blurb": "Choose moves, check slots and share a plan.", "related": ["builds", "items-vitamins", "luck-status-chance"]},
-    {"slug": "move-fusions", "title": "Move fusions", "section": "builds", "card": 6, "portrait": 4, "blurb": "All fusion recipes and the matching order at Bill’s Machine.", "related": ["builds", "lab", "items-vitamins"]},
+    {"slug": "build-planner", "footer": true, "title": "Build planner", "section": "builds", "portrait": 137, "blurb": "Choose moves, check slots and share a plan.", "related": ["builds", "items-vitamins", "luck-status-chance"]},
+    {"slug": "move-fusions", "footer": true, "title": "Move fusions", "section": "builds", "card": 6, "portrait": 4, "blurb": "All fusion recipes and the matching order at Bill’s Machine.", "related": ["builds", "lab", "items-vitamins"]},
     {"slug": "items-vitamins", "title": "Items & vitamins", "section": "builds", "portrait": 113, "blurb": "Filter item modifiers and keep vitamin caps separate.", "related": ["lab", "move-fusions", "builds"]},
     {"slug": "luck-status-chance", "title": "Luck vs Status Chance", "section": "builds", "portrait": 35, "blurb": "Rarity math and per-hit examples.", "related": ["items-vitamins", "unlocks", "builds"]},
     {"slug": "archive", "title": "Archive", "section": "builds", "portrait": 143, "blurb": "Exclude items from offers and set the active plan.", "related": ["builds", "lab", "items-vitamins"]},
 
-    {"slug": "tier-list", "title": "Tier list", "section": "tier", "card": 4, "portrait": 150, "blurb": "All 138 League partners ranked S to C for Season 3.", "related": ["builds", "starters", "unlocks"]},
-    {"slug": "starters", "title": "Best starter", "section": "tier", "card": 7, "portrait": 1, "blurb": "Bulbasaur, Squirtle or Charmander: passives and kits.", "related": ["evolution", "builds", "beginners-guide"]},
+    {"slug": "tier-list", "footer": true, "title": "Tier list", "section": "tier", "card": 4, "portrait": 150, "blurb": "All 138 League partners ranked S to C for Season 3.", "related": ["builds", "starters", "unlocks"]},
+    {"slug": "starters", "footer": true, "title": "Best starter", "section": "tier", "card": 7, "portrait": 1, "blurb": "Bulbasaur, Squirtle or Charmander: passives and kits.", "related": ["evolution", "builds", "beginners-guide"]},
 
-    {"slug": "pokemon", "title": "Pokédex", "section": "database", "portrait": 132, "blurb": "Every League partner: kit, evolution and capture gate.", "related": ["tier-list", "evolution", "build-planner"]},
+    {"slug": "pokemon", "footer": true, "title": "Pokédex", "section": "database", "portrait": 132, "blurb": "Every League partner: kit, evolution and capture gate.", "related": ["tier-list", "evolution", "build-planner"]},
     {"slug": "moves", "title": "Moves", "section": "database", "portrait": 235, "blurb": "Search every move and the partners that learn it.", "related": ["pokemon", "move-fusions", "reactions"]},
-    {"slug": "evolution", "title": "Evolution levels", "section": "database", "portrait": 133, "blurb": "Starter thresholds, Eevee choices and League overrides.", "related": ["pokemon", "ultimates", "how-to-catch-pokemon"]},
+    {"slug": "evolution", "footer": true, "title": "Evolution levels", "section": "database", "portrait": 133, "blurb": "Starter thresholds, Eevee choices and League overrides.", "related": ["pokemon", "ultimates", "how-to-catch-pokemon"]},
     {"slug": "ultimates", "title": "Ultimates", "section": "database", "portrait": 147, "blurb": "Every partner’s Ultimate and its three stages.", "related": ["pokemon", "build-planner"]},
-    {"slug": "type-chart", "title": "Type chart", "section": "database", "portrait": 145, "blurb": "PokeBonk’s own multipliers and a dual-type calculator.", "related": ["build-planner", "luck-status-chance"]},
+    {"slug": "type-chart", "footer": true, "title": "Type chart", "section": "database", "portrait": 145, "blurb": "PokeBonk’s own multipliers and a dual-type calculator.", "related": ["build-planner", "luck-status-chance"]},
     {"slug": "reactions", "title": "Status reactions", "section": "database", "portrait": 126, "blurb": "Which status plus which follow-up hit triggers a reaction.", "related": ["build-planner", "move-fusions", "type-chart"]},
-    {"slug": "lab", "title": "Lab & Stardust", "section": "database", "portrait": 81, "blurb": "All 24 Lab upgrades, 111 costs and three budgets.", "related": ["items-vitamins", "updates", "builds"]},
+    {"slug": "lab", "footer": true, "title": "Lab & Stardust", "section": "database", "portrait": 81, "blurb": "All 24 Lab upgrades, 111 costs and three budgets.", "related": ["items-vitamins", "updates", "builds"]},
     {"slug": "unlocks", "title": "League unlocks", "section": "database", "portrait": 151, "blurb": "Every League requirement and its counter.", "related": ["evolution", "wardrobe-mastery-looks", "builds"]},
 
-    {"slug": "beginners-guide", "title": "Beginner guide", "section": "start", "card": 2, "portrait": 25, "blurb": "Entry, controls, first upgrades and Guest saves.", "related": ["starters", "builds", "mobile"]},
-    {"slug": "how-to-catch-pokemon", "title": "How to catch Pokémon", "section": "start", "card": 8, "portrait": 52, "blurb": "League, support and shiny captures step by step.", "related": ["unlocks", "mewtwo", "wardrobe-mastery-looks"]},
+    {"slug": "beginners-guide", "footer": true, "title": "Beginner guide", "section": "start", "card": 2, "portrait": 25, "blurb": "Entry, controls, first upgrades and Guest saves.", "related": ["starters", "builds", "mobile"]},
+    {"slug": "how-to-catch-pokemon", "footer": true, "title": "How to catch Pokémon", "section": "start", "card": 8, "portrait": 52, "blurb": "League, support and shiny captures step by step.", "related": ["unlocks", "mewtwo", "wardrobe-mastery-looks"]},
     {"slug": "how-to-win", "title": "Win a Classic run", "section": "start", "portrait": 66, "blurb": "Guardian, reward, final encounter and exit portal.", "related": ["maps", "builds", "mewtwo"]},
     {"slug": "megabonk-vs-pokebonk", "title": "PokeBonk vs Megabonk", "section": "start", "portrait": 54, "blurb": "Find the right game, client and guide.", "related": ["beginners-guide", "starters", "multiplayer"]},
     {"slug": "zh/beginners-guide", "title": "PokeBonk 新手攻略", "section": "start", "plain": true, "lang": "zh", "blurb": "原站入口、初始伙伴、操作与存档。"},
@@ -71,7 +91,7 @@
 
     {"slug": "maps", "title": "Maps & portals", "section": "modes", "portrait": 74, "blurb": "Region unlock chain, guardians and portals.", "related": ["how-to-win", "lavender-tower", "troubleshooting"]},
     {"slug": "great-expedition", "title": "Great Expedition", "section": "modes", "portrait": 16, "blurb": "Find an extraction and leave with your loot.", "related": ["builds", "troubleshooting", "updates"]},
-    {"slug": "mewtwo", "title": "Mewtwo", "section": "modes", "portrait": 150, "blurb": "Eligibility, encounter blockers and the Survival Mewtwo.", "related": ["unlocks", "how-to-catch-pokemon", "how-to-win"]},
+    {"slug": "mewtwo", "footer": true, "title": "Mewtwo", "section": "modes", "portrait": 150, "blurb": "Eligibility, encounter blockers and the Survival Mewtwo.", "related": ["unlocks", "how-to-catch-pokemon", "how-to-win"]},
     {"slug": "articuno", "title": "Articuno boss", "section": "modes", "portrait": 144, "blurb": "Celestial Glacier arena cues and counterplay.", "related": ["maps", "pokemon", "build-planner"]},
     {"slug": "zapdos", "title": "Zapdos boss", "section": "modes", "portrait": 145, "blurb": "Storm Coast arena cues and counterplay.", "related": ["maps", "pokemon", "build-planner"]},
     {"slug": "lavender-tower", "title": "Lavender Tower", "section": "modes", "portrait": 92, "blurb": "Seven floors, Candle milestones and claim checks.", "related": ["wardrobe-mastery-looks", "builds", "troubleshooting"]},
@@ -82,7 +102,7 @@
     {"slug": "alpha-support", "title": "Alpha support", "section": "modes", "portrait": 131, "blurb": "Support slots, shiny bonus and first-type bonus.", "related": ["build-planner", "lab", "how-to-catch-pokemon"]},
     {"slug": "wardrobe-mastery-looks", "title": "Wardrobe & Mastery", "section": "modes", "portrait": 132, "blurb": "Shiny, Mastery and Spectral Looks and stuck counters.", "related": ["unlocks", "lavender-tower", "lab"]},
 
-    {"slug": "mobile", "title": "Mobile & APK", "section": "help", "card": 5, "portrait": 7, "blurb": "Phone browser, touch controls and the official apps.", "related": ["steam-deck", "troubleshooting", "beginners-guide"]},
+    {"slug": "mobile", "footer": true, "title": "Mobile & APK", "section": "help", "card": 5, "portrait": 7, "blurb": "Phone browser, touch controls and the official apps.", "related": ["steam-deck", "troubleshooting", "beginners-guide"]},
     {"slug": "es/mobile", "title": "PokeBonk en móvil", "section": "help", "plain": true, "lang": "es", "blurb": "Entrar sin APK y conservar la sesión."},
     {"slug": "steam-deck", "title": "Steam Deck", "section": "help", "portrait": 137, "blurb": "Browser routes, controls and stuck-input checks.", "related": ["mobile", "troubleshooting", "beginners-guide"]},
     {"slug": "multiplayer", "title": "Multiplayer & co-op", "section": "help", "portrait": 39, "blurb": "Co-op rooms for 2–4 trainers, invites and codes.", "related": ["clans", "team-survival", "mobile"]},

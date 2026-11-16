@@ -30,6 +30,22 @@ from pathlib import Path
 def load(root, game):
     m = json.loads((root / "data" / f"{game}-pages.json").read_text(encoding="utf-8"))
     m["by"] = {p["slug"]: p for p in m["pages"]}
+    # rows without their own "updated" take the latest date the manifest's "updates" list gives them
+    for u in m.get("updates", []):
+        row = m["by"].get(u.get("slug"))
+        if row is not None and u.get("date") and "updated" not in row:
+            row["_updated"] = max(row.get("_updated", ""), u["date"])
+    for row in m["pages"]:
+        if "_updated" in row:
+            row["updated"] = row.pop("_updated")
+    # footer.version_from reads the current version from a synced data file, so it never goes stale
+    f = m.get("footer", {})
+    src = f.get("version_from")
+    if src:
+        v = json.loads((root / src["file"]).read_text(encoding="utf-8"))
+        for k in src["path"]:
+            v = v[k]
+        f["version"] = src.get("format", "{}").format(v)
     return m
 
 
