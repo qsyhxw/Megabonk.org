@@ -1,7 +1,7 @@
 {
   "site": "megabonk.org",
   "label": "auto-sentinel",
-  "_scope": "Sections without their own sync workflow. Megabonk (update-patch-notes / player-count / leaderboard / wiki entities), PokeBonk (sync-pokebonk) and Azeroth Survivors (sync-azeroth) are already covered and intentionally absent. Midgard client, Mythic iOS and Spires desktop/browser versions moved to sync-live-versions (AUTO_SYNC) on 2026-11-13.",
+  "_scope": "Sections without their own sync workflow. Megabonk (update-patch-notes / player-count / leaderboard / wiki entities), PokeBonk (sync-pokebonk) and Azeroth Survivors (sync-azeroth) are already covered and intentionally absent. Midgard client, Mythic iOS and Spires desktop/browser versions moved to sync-live-versions (AUTO_SYNC) on 2026-11-13. PokéSurvivor changelog and guides added 2026-11-16 (S1/S2, notify only; structured rules AUTO_SYNC in sync-poke-survivor).",
   "sources": [
     {
       "id": "ball-x-pit-steam",
@@ -106,6 +106,78 @@
         "/poke-survivor/mobile/ (V5.1 port note)",
         "/poke-survivor/es/mobile/",
         "scripts/poke_survivor_content.py 'port' source"
+      ]
+    },
+    {
+      "id": "poke-survivor-news",
+      "name": "PokéSurvivor official changelog (newest entry)",
+      "type": "page_hash",
+      "url": "https://pokesurvivor.com/en/news/",
+      "extract": "<article class=\"news\">(.*?)</article>",
+      "min_chars": 80,
+      "note": "Structured rules (evolution levels, boss/rift minutes, Arceus item breaks, upgrade prices, co-op cap) are already synced by sync-poke-survivor.yml; check the rest.",
+      "affected": [
+        "evolution/level/card → /poke-survivor/beginners-guide/, /poke-survivor/zh/beginners-guide/, /poke-survivor/builds/",
+        "rift/legendary/bond → /poke-survivor/rifts/, /poke-survivor/builds/#bonds",
+        "Arceus/Judgment/Eternatus/boss → /poke-survivor/arceus-judgment/, hub #run-clock",
+        "gacha/ticket/egg → /poke-survivor/gacha/",
+        "co-op/room/host → /poke-survivor/multiplayer/, /poke-survivor/troubleshooting/",
+        "mobile/phone/iPhone → /poke-survivor/mobile/, /poke-survivor/es/mobile/",
+        "save/account/purchase → /poke-survivor/save-and-sync/"
+      ]
+    },
+    {
+      "id": "poke-survivor-guide-bosses",
+      "name": "PokéSurvivor official guide: bosses",
+      "type": "page_hash",
+      "url": "https://pokesurvivor.com/en/bosses/",
+      "extract": "<main[^>]*>(.*?)</main>",
+      "min_chars": 400,
+      "note": "Structured rules (evolution levels, boss/rift minutes, Arceus item breaks, upgrade prices, co-op cap) are already synced by sync-poke-survivor.yml; check the rest.",
+      "affected": [
+        "/poke-survivor/arceus-judgment/",
+        "/poke-survivor/ (#run-clock)",
+        "/poke-survivor/gacha/ (#earn)"
+      ]
+    },
+    {
+      "id": "poke-survivor-guide-legendaries",
+      "name": "PokéSurvivor official guide: legendaries",
+      "type": "page_hash",
+      "url": "https://pokesurvivor.com/en/legendaries/",
+      "extract": "<main[^>]*>(.*?)</main>",
+      "min_chars": 400,
+      "note": "Structured rules (evolution levels, boss/rift minutes, Arceus item breaks, upgrade prices, co-op cap) are already synced by sync-poke-survivor.yml; check the rest.",
+      "affected": [
+        "/poke-survivor/rifts/",
+        "/poke-survivor/builds/#bonds"
+      ]
+    },
+    {
+      "id": "poke-survivor-guide-upgrades",
+      "name": "PokéSurvivor official guide: upgrades",
+      "type": "page_hash",
+      "url": "https://pokesurvivor.com/en/upgrades/",
+      "extract": "<main[^>]*>(.*?)</main>",
+      "min_chars": 400,
+      "note": "Structured rules (evolution levels, boss/rift minutes, Arceus item breaks, upgrade prices, co-op cap) are already synced by sync-poke-survivor.yml; check the rest.",
+      "affected": [
+        "/poke-survivor/beginners-guide/#upgrades",
+        "/poke-survivor/builds/#upgrades"
+      ]
+    },
+    {
+      "id": "poke-survivor-guide-guide",
+      "name": "PokéSurvivor official guide: guide",
+      "type": "page_hash",
+      "url": "https://pokesurvivor.com/en/guide/",
+      "extract": "<main[^>]*>(.*?)</main>",
+      "min_chars": 400,
+      "note": "Structured rules (evolution levels, boss/rift minutes, Arceus item breaks, upgrade prices, co-op cap) are already synced by sync-poke-survivor.yml; check the rest.",
+      "affected": [
+        "/poke-survivor/beginners-guide/",
+        "/poke-survivor/mobile/",
+        "/poke-survivor/ (FAQ)"
       ]
     }
   ]

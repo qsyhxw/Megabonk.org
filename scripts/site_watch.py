@@ -9,7 +9,7 @@ newest issue per source), so the workflow only needs `issues: write`.
 First run for a source records a baseline issue and closes it immediately.
 Env: GITHUB_TOKEN, GITHUB_REPOSITORY (owner/repo). Without them, dry-run only.
 """
-import argparse, base64, gzip, hashlib, json, os, re, sys, time
+import argparse, base64, gzip, hashlib, html, json, os, re, sys, time
 import urllib.error, urllib.parse, urllib.request, urllib.robotparser
 import xml.etree.ElementTree as ET
 
@@ -169,7 +169,8 @@ def snapshot(src):
         text = re.sub(r"\s+", " ", text).strip()
         if len(text) < int(src.get("min_chars", 200)):
             raise WatchError(f"extracted text too short ({len(text)} chars)")
-        return hashlib.sha256(text.encode()).hexdigest()[:16], {"chars": len(text), "head": text[:300]}, []
+        readable = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text))).strip()
+        return hashlib.sha256(text.encode()).hexdigest()[:16], {"chars": len(text), "head": readable[:600]}, []
     raise WatchError("unknown source type " + t)
 
 
@@ -201,7 +202,9 @@ def run_sentinel(cfg, issues):
                 ov = prev.get("summary", {}).get("values", {})
                 body += [f"- `{k}`: `{ov.get(k)}` → `{v}`" for k, v in summary["values"].items() if ov.get(k) != v]
             else:
-                body.append(f"- 页面内容指纹 `{prev['fp']}` → `{fp}`（{summary['chars']} 字符）。开头：{summary['head'][:200]}")
+                body.append(f"- 页面内容指纹 `{prev['fp']}` → `{fp}`（{summary['chars']} 字符）。开头：{summary['head'][:600]}")
+            if src.get("note"):
+                body += ["", f"> {src['note']}"]
             body += ["", "### 可能受影响的页面"]
             body += [f"- {p}" for p in src.get("affected", [])] or ["- （配置未列出，处理时从生成源依赖查找）"]
             body += ["", "### 建议处理分类（处理时勾选）", "- [ ] 数值直接修改（生成源/data 中的字段）",
