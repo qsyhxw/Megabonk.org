@@ -3,7 +3,8 @@
 - The footer itself comes from data/pokebonk-pages.json ("footer" block) via scripts/register_page.py.
 - footer_404(): the section 404 page is not a manifest row, so it gets the same nav and footer here.
 - privacy_section(): the site-level /privacy-policy gets a #pokebonk section, the footer's Privacy anchor.
-  The detailed section notice at /pokebonk/privacy/ stays and is linked from that section.
+  The section notice is still assembled by the build modules but is published only as that section;
+  /pokebonk/privacy/ itself redirects there (functions/pokebonk/[[path]].js, _redirects).
 - about_body() / contact_body(): section About and Contact text with the current game version.
 Run from build_pokebonk.py after register_page.py.
 """
@@ -63,27 +64,50 @@ def contact_body(ext, mail):
         '<h2 id="details">Help us check the right detail</h2><ul><li>The guide URL and the sentence or image concerned.</li><li>The game version and date if a mechanic changed.</li><li>A public project announcement, screenshot or other source that supports the correction.</li></ul>'
         '<p>There is no on-site submission form. Your email provider opens when you select the address. We do not promise a response time.</p>'
         f'<h2 id="support">Game accounts and support</h2><p>We cannot reset passwords, restore Guests, resolve suspensions or inspect the game’s database. For game support use {ext("https://discord.gg/X7KusQqx8X", "the original project’s Discord")}, linked from the original website. Never send us game passwords or authentication data.</p>'
-        f'<h2 id="personal">Personal information</h2><p>Only include details needed to explain the issue. See the <a href="{P}privacy/">privacy notice</a> for how contact email and this website are handled.</p>')
+        f'<h2 id="personal">Personal information</h2><p>Only include details needed to explain the issue. See the <a href="{PRIVACY_ANCHOR}">privacy notice</a> for how contact email and this website are handled.</p>')
 
 
-PRIVACY = ('<section id="pokebonk"><h2>PokeBonk guides</h2><p>Reviewed ' + REVIEWED + '. The home page and ordinary guide pages under /pokebonk/ load this domain\'s existing Google AdSense code; '
-           'the section\'s About, Contact and privacy pages and its error page load no advertising. The site-wide Umami analytics and Cloudflare hosting described above apply. '
-           'The Play page connects to a game hosted by pokemon-team-builder.org only after you click Play; that host then receives technical request data and controls its own accounts, storage and progress, separate from pokebonk.com. '
-           'Partner search, the build planner, Lab budgets and table filters run in your browser. Build share links put your selected choices in the URL; saving a draft or a partner checklist stores it in this browser\'s localStorage only when you press Save. '
-           'Nothing is sent to the game or links to your game account. The <a href="' + P + 'privacy/">PokeBonk privacy notice</a> describes these features in full. '
-           'Links to pokebonk.com and the project\'s Discord open those services, which apply their own privacy practices.</p></section>')
+PRIVACY_ANCHOR = '/privacy-policy#pokebonk'
+# headings of the section notice that are PokeBonk-specific; delivery, ads choices, contact email and
+# Umami are already covered by the site-level policy above this section
+KEEP = ('Scripts and browser storage', 'Third-party game window', 'External websites', 'Optional local build drafts',
+        'Additional local planning tools', 'Unified declared drafts', 'Upgrade logs, Lab targets and private attempt notes')
 
 
-def privacy_section():
-    """Return (path, new_text) when /privacy-policy lacks the #pokebonk section, else None."""
+def privacy_html(notice):
+    """Turn the generated section notice (PAGES['/pokebonk/privacy/'] html) into the #pokebonk section."""
+    art = re.search(r'<article\b.*?</article>', notice, flags=re.S).group(0)
+    parts = re.split(r'(?=<h2\b)', art)
+    body = []
+    for part in parts[1:]:
+        m = re.match(r'<h2\b([^>]*)>(.*?)</h2>', part, flags=re.S)
+        title = re.sub(r'<[^>]+>', '', m.group(2)).strip()
+        if title not in KEEP:
+            continue
+        rest = part[m.end():].replace('</article>', '')
+        # the site-level policy is the "separate notice" this paragraph pointed to
+        rest = re.sub(r'<p>Other Megabonk\.org pages use .*?</p>', '', rest, flags=re.S)
+        hid = ' id="pokebonk-game-window"' if 'id="game-window"' in m.group(1) else ''
+        body.append(f'<h3{hid}>{title}</h3>{rest}')
+    intro = ('<p>Reviewed ' + REVIEWED + '. This part covers the PokeBonk guide section at megabonk.org/pokebonk/. It is separate from the privacy policy of the original game at pokebonk.com. '
+             'The home page and ordinary guide pages load this domain’s existing Google AdSense code; the section’s About and Contact pages and its error page load no advertising. '
+             'The site-wide Umami analytics, Cloudflare hosting, advertising choices and contact email terms described above apply.</p>')
+    return '<section id="pokebonk"><h2>PokeBonk guides</h2>' + intro + ''.join(body) + '</section>'
+
+
+def privacy_section(notice):
+    """Return (path, new_text) when the #pokebonk section of /privacy-policy differs from the notice, else None."""
     f = ROOT / 'privacy-policy.html'
     if not f.exists():
         return None
     s = f.read_text(encoding='utf-8')
-    if 'id="pokebonk"' in s:
-        return None
-    assert '</body>' in s
-    return f, s.replace('</body>', PRIVACY + '</body>', 1)
+    sec = privacy_html(notice)
+    if '<section id="pokebonk">' in s:
+        n = re.sub(r'<section id="pokebonk">.*?</section>', lambda _: sec, s, count=1, flags=re.S)
+    else:
+        assert '</body>' in s
+        n = s.replace('</body>', sec + '</body>', 1)
+    return None if n == s else (f, n)
 
 
 def footer_404(html):

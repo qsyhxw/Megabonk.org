@@ -32,10 +32,13 @@ for slug, record in records.items():
     assert '<section class="sources"' not in text and '<sup class="ref">' not in text, slug
     assert 'figcaption>Original game entry screen, captured' not in text, slug
 
-privacy = (ROOT / 'pokebonk/privacy/index.html').read_text(encoding='utf8')
-assert 'This section adds no analytics tags.' not in privacy
-assert privacy.count('id="umami-analytics"') == 1
-assert privacy.index('id="umami-analytics"') < privacy.index('</article>')
+assert not (ROOT / 'pokebonk/privacy/index.html').exists()  # redirected to /privacy-policy#pokebonk
+site_privacy = (ROOT / 'privacy-policy.html').read_text(encoding='utf8')
+section = re.search(r'<section id="pokebonk">.*?</section>', site_privacy, flags=re.S).group(0)
+assert 'This section adds no analytics tags.' not in section
+assert site_privacy.count('id="umami-analytics"') == 1
+for need in ('id="pokebonk-game-window"', 'pb-build-drafts-v1', 'pb-partner-checklist-v1', 'pokemon-team-builder.org'):
+    assert need in section, need
 print(f'PASS: {len(records)} editorial pages, source identities, fragment links, natural citations and privacy disclosure')
 
 current = json.loads((ROOT / 'data/pokebonk-main-first.json').read_text(encoding='utf8'))

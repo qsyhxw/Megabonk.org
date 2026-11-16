@@ -190,6 +190,10 @@ def build():
     apply_theme(globals())
     error=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">PokeBonk</a> / 404</nav><section class="legal"><p class="eyebrow">404 / Off the trail</p><h1>This path ends here.</h1><p>The page may have moved, or the address may be incomplete. Your next guide is still on the map.</p><div class="actions"><a class="button" href="{P}">Back to PokeBonk →</a><a class="button secondary" href="{P}#guides">Browse the guides</a></div></section>'
     out=ROOT/'pokebonk/404.html';out.parent.mkdir(exist_ok=True);write_html(out, shell(P+'404','Page not found | PokeBonk Guide','This PokeBonk guide path could not be found. Return to the guide homepage or browse the available player notes.',error,noindex=True),encoding='utf-8')
+    # v3.25: /pokebonk/privacy/ is no longer published; its assembled notice becomes /privacy-policy#pokebonk (redirected)
+    notice=PAGES.pop(P+'privacy/')['html']
+    old=ROOT/'pokebonk/privacy/index.html'
+    if old.exists():old.unlink();old.parent.rmdir()
     for path,page in PAGES.items():
         file=ROOT/path.lstrip('/')/'index.html';file.parent.mkdir(parents=True,exist_ok=True);write_html(file, page['html'],encoding='utf-8')
     # v3.24: nav, breadcrumbs, related guides and registries from data/pokebonk-pages.json
@@ -199,7 +203,7 @@ def build():
     from pokebonk_footer import footer_404,privacy_section
     e404=ROOT/'pokebonk/404.html';s404=e404.read_text(encoding='utf8');n404=footer_404(s404)
     if n404!=s404:e404.write_text(n404,encoding='utf8')
-    pv=privacy_section()
+    pv=privacy_section(notice)
     if pv:write_html(pv[0],pv[1],encoding='utf-8')
     # register_page appends BreadcrumbList after game_seo's FAQ script; re-run the SEO editor so the FAQ block stays last (idempotent, check_game_seo).
     from game_seo import edit as edit_seo

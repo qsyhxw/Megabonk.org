@@ -2,6 +2,11 @@
 // responses do not inherit _headers, so apply the same no-transform contract
 // at the response boundary for this section's missing paths only.
 export async function onRequest(context) {
+  // The section privacy notice now lives in the site-level policy (SOP 02 §5.1).
+  const path = new URL(context.request.url).pathname;
+  if (path === '/pokebonk/privacy' || path === '/pokebonk/privacy/' || path === '/pokebonk/privacy/index.html') {
+    return new Response(null, { status: 301, headers: { Location: '/privacy-policy#pokebonk' } });
+  }
   const response = await context.next();
   if (response.status !== 404) return response;
 
