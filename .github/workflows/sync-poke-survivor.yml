@@ -63,7 +63,7 @@ jobs:
           python scripts/ci_integrations.py
           python scripts/check_game_image_captions.py
           python scripts/check_guide_images.py
-          python scripts/check_game_seo.py
+          python -c "import sys; sys.path.insert(0, 'scripts'); from pathlib import Path; from game_seo import edit; bad = [str(f) for f in Path('poke-survivor').rglob('*.html') if edit(f.resolve(), f.read_text(encoding='utf8')) != f.read_text(encoding='utf8')]; assert not bad, bad; print('game-seo: poke-survivor pages up to date')"
 
       - name: Only whitelisted paths changed
         run: |
