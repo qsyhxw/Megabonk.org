@@ -23,4 +23,4 @@ def player_body():
 def make_play_page(shell):
     body=player_body().replace('<div class="play-notes"',recommendations('poke-survivor')+'<div class="play-notes"',1)
     html=shell(P+'play/','Play Poke Survivor Online | Megabonk.org','Play Poke Survivor in your browser with a click-to-load third-party game, clear controls, expanded view and notes on editions, accounts and saves.',body)
-    return stylesheet(html).replace('</head>','<link rel="stylesheet" href="/assets/poke-survivor/play.css"><script defer src="/assets/poke-survivor/play.js"></script></head>').replace('class="guide-layout ','class="guide-layout ps-play-page ',1)
+    return stylesheet(html).replace('</head>','<link rel="stylesheet" href="/assets/poke-survivor/play.css"><script defer src="/assets/poke-survivor/play.js"></script></head>').replace('<body class="guide-layout ','<body data-format="play" class="guide-layout ps-play-page ',1)

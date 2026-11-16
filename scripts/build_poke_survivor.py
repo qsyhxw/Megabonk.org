@@ -11,6 +11,7 @@ import json
 from build_pokebonk import ext, ref, table, section, source_list
 from poke_survivor_content import make_pages, SOURCES
 from poke_survivor_play import make_play_page
+from poke_survivor_v320 import apply as apply_v320
 from poke_survivor_theme import head_links, body_class, hub_main, manifest, footer_404, privacy as theme_privacy
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -47,13 +48,21 @@ def render(page):
     elif kind in ['trust','error']:
         body=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">PokéSurvivor</a> / {page["h1"]}</nav><article class="legal" id="guide"><p class="eyebrow">Independent player guide</p><h1>{page["h1"]}</h1><p class="meta">Updated {page.get("updated","October 26, 2026")}</p>{page["body"]}{sources}</article>'
     else:
-        toc='<aside class="toc" aria-label="On this page"><strong>On this page</strong>'+''.join(f'<a href="#{id}">{title}</a>' for id,title,_ in page['parts'])+'<a href="#sources">Sources</a></aside>'
-        diagram=f'<figure class="diagram"><img src="{A+page["diagram"]}.svg" width="1100" height="300" alt="{escape(page["diagram_alt"],quote=True)}"><figcaption>{page["diagram_caption"]}</figcaption></figure>'
-        body=f'<header class="article-head" id="guide"><span class="tag">JPTER78 browser game · Independent guide</span><h1>{page["h1"]}</h1><p class="answer">{page["answer"]}</p><p class="meta">PokéSurvivor guide · Updated October 26, 2026</p>{page.get("language","")}</header><div class="article-layout"><article class="prose">{diagram}'+''.join(section(*part) for part in page['parts'])+sources+'</article>'+toc+'</div>'
-    return path,shell(path,page['title'],page['desc'],body,page.get('lang','en'),kind,page.get('diagram','original-title-1280.webp')+'.png' if page.get('diagram') else 'original-title-1280.webp')
+        toc_links=''.join(f'<a href="#{id}">{title}</a>' for id,title,_ in page['parts'])+('<a href="#sources">Sources</a>' if sources else '')
+        toc=f'<aside class="toc" aria-label="On this page"><strong>On this page</strong>{toc_links}</aside>' if len(page['parts'])>=4 else ''
+        diagram=f'<figure class="diagram"><img src="{A+page["diagram"]}.svg" width="1100" height="300" alt="{escape(page["diagram_alt"],quote=True)}"><figcaption>{page["diagram_caption"]}</figcaption></figure>' if page.get('diagram') else ''
+        lead=f'<div class="answer-module">{page["lead"]}</div>' if page.get('lead') else ''
+        updated=page.get('updated','October 26, 2026')
+        tag='PokéSurvivor guide' if page.get('format') else 'JPTER78 browser game · Independent guide'
+        body=f'<header class="article-head" id="guide"><span class="tag">{tag}</span><h1>{page["h1"]}</h1><p class="answer">{page["answer"]}</p><p class="meta">PokéSurvivor guide · Updated {updated}</p>{page.get("language","")}</header>{lead}<div class="article-layout"><article class="prose">{diagram}'+''.join(section(*part) for part in page['parts'])+sources+'</article>'+toc+'</div>'
+    image=page.get('image') or (page['diagram']+'.png' if page.get('diagram') else 'original-title-1280.webp')
+    html=shell(path,page['title'],page['desc'],body,page.get('lang','en'),kind,image)
+    if page.get('format'):  # 08 page format for the content gate
+        html=html.replace('<body class="',f'<body data-format="{page["format"]}" class="',1)
+    return path,html
 
 def build():
-    pages=make_pages()
+    pages=apply_v320(make_pages())  # /xiufu 2026-11-16: v3.20 page formats (scripts/poke_survivor_v320.py)
     for page in pages:
         path,html=render(page)
         file=ROOT/(path.lstrip('/')+'index.html') if page.get('kind')!='error' else ROOT/'poke-survivor/404.html'

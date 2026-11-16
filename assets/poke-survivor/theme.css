@@ -137,6 +137,17 @@ html:has(body.ps-theme) { scroll-padding-top: 1.25rem; background: var(--ps-nigh
 /* ---------- play recommendations (shared module, colour only) ---------- */
 .ps-theme .play-rec-card { border-radius: 12px !important; border: 2px solid var(--ps-line) !important; }
 
+/* ---------- first-screen answer module and game screenshots (08 formats) ---------- */
+.ps-theme .answer-module { background: var(--ps-card); border: 2px solid var(--ps-line); border-radius: 12px; padding: 14px 20px 6px; margin: 0 0 22px; max-width: 980px; }
+.ps-theme .answer-module .table-wrap { margin: 4px 0 12px; }
+.ps-theme ol.steps { counter-reset: step; list-style: none; padding: 0; margin: 4px 0 10px; }
+.ps-theme ol.steps > li { counter-increment: step; position: relative; padding: 8px 0 8px 44px; border-bottom: 1px dashed var(--ps-line); }
+.ps-theme ol.steps > li:last-child { border-bottom: 0; }
+.ps-theme ol.steps > li::before { content: counter(step); position: absolute; left: 0; top: 7px; width: 30px; height: 30px; display: grid; place-items: center; font: 700 15px var(--pixel); color: #fff; background: var(--ps-blue); border: 2px solid #fff; border-radius: 8px; box-shadow: 0 0 0 2px var(--ps-navy); }
+.ps-theme figure.game-shot { margin: 18px 0 22px; }
+.ps-theme figure.game-shot img { border-radius: 10px; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--ps-navy); max-width: 100%; height: auto; max-height: min(70vh, 640px); object-fit: contain; image-rendering: auto; }
+@media (max-width: 600px) { .ps-theme .answer-module { padding: 10px 14px 4px; } .ps-theme ol.steps > li { padding-left: 40px; } }
+
 /* ---------- section footer (register_page.py, 02 §5.2) ---------- */
 .ps-theme .site-footer { margin-top: 48px; background: var(--ps-night); color: var(--ps-mist); font-size: 14px; position: relative; }
 .ps-theme .site-footer::before { content: ""; position: absolute; left: 0; right: 0; top: -6px; height: 6px;

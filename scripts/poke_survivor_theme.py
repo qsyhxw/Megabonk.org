@@ -66,18 +66,18 @@ def _card(p):
 def run_clock():
     """Real data preview (08 F9): the timeline of one run, from the creator's guide and the dated source snapshot."""
     stops = [
-        ('0:00', 'Pick a partner', 'Only the active move attacks; switch it with 1–4 or Q/E.'),
-        ('1:15', 'Rift checks begin', 'Every 30 s while eligible; base 20% chance that rises after misses.'),
-        ('28:00', 'Rifts stop opening', 'Do not wait for another portal to finish a Bond.'),
-        ('30:00', 'Judgment of Arceus', 'The final phase: survive longer or score damage.'),
-        ('35:00', 'Held items break', 'Arceus breaks held items, Focus Sash included.'),
+        ('2:00', 'First calendar boss', 'Again at 6, 10, 14 and 18 minutes; each one drops a held item.'),
+        ('4:00', 'First rift', 'Also at 8, 12 and 16: beat the legendary for a ×10 ticket and a bond.'),
+        ('20:00', 'Eternamax Eternatus', 'Win for a power, a ×10 ticket and 600 PokéCoins.'),
+        ('25:00', 'Last rift', 'Gives a bond only if you missed an earlier one.'),
+        ('30:00', 'Judgment of Arceus', 'Unbeatable: survive and deal damage; it breaks an item at +2, +4 and +6 minutes.'),
     ]
     items = ''.join(f'<li><time>{t}</time><strong>{escape(a)}</strong><span>{escape(b)}</span></li>' for t, a, b in stops)
     return f'''<section class="ps-band ps-panel ps-clock" id="run-clock"><h2>A PokéSurvivor run on the clock</h2>
-<p>Timings from the original game’s source (snapshot of 25 October 2026); newer builds and ports can move them.</p>
+<p>The run schedule since the 13 November 2026 update, from the game’s own guides.</p>
 <ol class="ps-timeline">{items}</ol>
-<div class="ps-facts"><p><b>Level 12 &amp; 24</b>Choose to evolve your partner or keep its look.</p><p><b>Ten-pull</b>10 ordinary tickets or one ×10 ticket.</p><p><b>Co-op</b>Up to 4 players from the Friends menu.</p></div>
-<a class="ps-more" href="{P}arceus-judgment/">Plan the last five minutes →</a></section>'''
+<div class="ps-facts"><p><b>Level 20 &amp; 40</b>Choose to evolve your partner or keep its look.</p><p><b>Ten-pull</b>10 ordinary tickets or one ×10 ticket.</p><p><b>Co-op</b>Up to 4 players from the Friends menu.</p></div>
+<a class="ps-more" href="{P}arceus-judgment/">Plan the Judgment of Arceus →</a></section>'''
 
 
 def hub_main(m):
