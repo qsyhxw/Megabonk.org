@@ -12,6 +12,10 @@ on:
         description: Download the client even when its HTTP validator is unchanged
         type: boolean
         default: false
+      test_email:
+        description: Send a test notification email (Gmail channel check)
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths: ['.github/workflows/sync-azeroth.yml', 'config/azeroth-sync.json', 'scripts/azeroth_sync*.py', 'scripts/test_azeroth_sync.py', 'scripts/check_azeroth_sync_browser.cjs', 'scripts/build_azeroth_survivors.py', 'assets/azeroth-survivors/site.css', 'assets/azeroth-survivors/tools.js']
@@ -52,6 +56,9 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write
+    outputs:
+      changed: ${{ steps.sync.outputs.changed }}
+      pushed: ${{ steps.commit.outputs.pushed }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -131,3 +138,38 @@ jobs:
       - name: Record a read-only or unchanged run
         if: steps.sync.outputs.changed != 'true' || (github.event_name == 'workflow_dispatch' && inputs.dry_run)
         run: echo 'Validated check complete. No source-content change or dry-run selected; no automated commit or article-date refresh.' >> "$GITHUB_STEP_SUMMARY"
+  # Notifications (v3.27): email/Issue only, never edits site files.
+  notify:
+    needs: [collect, publish]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      PATCH_ALERT_EMAIL: ${{ secrets.PATCH_ALERT_EMAIL }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test email
+        if: github.event_name == 'workflow_dispatch' && inputs.test_email
+        run: python scripts/azeroth_notify.py test
+      - name: A. Source changed and published
+        if: needs.publish.outputs.pushed == 'true'
+        run: python scripts/azeroth_notify.py changed
+      - name: B. Sync failed
+        if: needs.collect.result == 'failure' || needs.publish.result == 'failure'
+        run: python scripts/azeroth_notify.py failure
+      - name: C. Weekly review backlog (first scheduled run on Monday UTC)
+        if: github.event_name == 'schedule' && needs.publish.result == 'success'
+        run: |
+          if [ "$(date -u +%u)" = 1 ] && [ "$(date -u +%H)" -lt 6 ]; then python scripts/azeroth_notify.py backlog --days 14; fi
