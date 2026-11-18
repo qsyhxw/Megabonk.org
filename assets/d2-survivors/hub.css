@@ -1,0 +1,85 @@
+/* D2 Survivors hub layout (home only, 02 §2.1). Mobile first: copy → task cards → edition check. */
+.d2-hub .d2-front { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); grid-template-areas: "copy media" "tasks tasks"; gap: 22px 36px; align-items: center; padding: 30px 0 8px; }
+.d2-hub .d2-hero { grid-area: copy; min-width: 0; padding: 0; }
+.d2-hub .d2-hero-media { grid-area: media; min-width: 0; }
+.d2-hub .d2-tasks { grid-area: tasks; margin-top: 8px; }
+.d2-hub .d2-kicker, .d2-hub .d2-eyebrow { margin: 0; font: 600 11px/1.6 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--d2-flame); }
+.d2-hub .d2-hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: .2em 0 .15em; text-shadow: 0 2px 0 #000, 0 0 28px #b9531c66; }
+.d2-hub .d2-deck { margin: 0 0 14px; font-size: 1.15rem; line-height: 1.55; color: #eadfc2; max-width: 38ch; }
+.d2-hub .d2-status { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; padding: 0; list-style: none; }
+.d2-hub .d2-status li { padding: 3px 11px; border: 1px solid var(--d2-edge); background: #14120f; color: var(--d2-parch); font: 600 12px/1.7 var(--body); letter-spacing: .04em; }
+.d2-hub .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 12px; }
+.d2-hub .d2-source { margin: 0; font-size: 13px; color: var(--d2-parch-dim); }
+.d2-hub .d2-hero-media figure.game-image { margin: 0; max-width: none; padding: 8px; }
+.d2-hub .d2-hero-media figure.game-image img { width: 100%; max-height: 300px; object-fit: cover; object-position: 50% 45%; }
+.d2-hub .d2-hero-media figure.game-image figcaption { font-size: 11.5px; line-height: 1.5; margin: 8px 2px 0; }
+
+/* Task cards: thumbnail + number + one-line purpose */
+.d2-hub .d2-tasks h2 { margin: 6px 0 14px; }
+.d2-hub .d2-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.d2-hub .d2-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--d2-edge); background: linear-gradient(#1c1a17, #131110); color: var(--d2-parch); text-decoration: none; overflow: hidden; transition: border-color .15s; }
+.d2-hub .d2-card:hover { border-color: var(--d2-flame); color: #fff3cf; }
+.d2-hub .d2-card img { width: 100%; height: 92px; object-fit: cover; object-position: 50% 40%; border-bottom: 1px solid var(--d2-edge); filter: saturate(.9) brightness(.92); }
+.d2-hub .d2-card-body { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px 14px; flex: 1; }
+.d2-hub .d2-number { font: 600 11px/1.4 var(--body); letter-spacing: .12em; color: var(--d2-flame); }
+.d2-hub .d2-card strong { font: 400 16px/1.3 var(--display); color: #f1e6c6; }
+.d2-hub .d2-card:lang(ko) strong, .d2-hub .d2-card:lang(zh-Hant) strong { font: 700 15px/1.35 var(--body); }
+.d2-hub .d2-card-text { font-size: 13.5px; line-height: 1.5; color: var(--d2-parch-dim); }
+
+/* Lower bands */
+.d2-hub .d2-band { padding: 26px 0 8px; }
+.d2-hub .d2-band > h2 { margin-top: .2rem; }
+.d2-hub .d2-lede { margin-top: 0; color: var(--d2-parch-dim); }
+.d2-hub .d2-updates { margin: 0 0 12px; padding: 0; list-style: none; border: 1px solid var(--d2-edge); background: var(--d2-stone); }
+.d2-hub .d2-updates li { display: grid; grid-template-columns: 7.5rem minmax(0, 15rem) minmax(0, 1fr); gap: 4px 16px; align-items: baseline; padding: 11px 16px; border-bottom: 1px solid var(--d2-bevel); }
+.d2-hub .d2-updates li:last-child { border-bottom: 0; }
+.d2-hub .d2-updates time { font: 600 12px/1.6 var(--body); letter-spacing: .06em; color: var(--d2-gold); }
+.d2-hub .d2-updates a { font-weight: 600; }
+.d2-hub .d2-updates span { font-size: 13.5px; color: var(--d2-parch-dim); }
+.d2-hub .d2-groups { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.d2-hub .d2-group { padding: 16px 18px; border: 1px solid var(--d2-edge); background: var(--d2-stone); }
+.d2-hub .d2-group h3 { margin: 0 0 .3rem; color: var(--d2-gold-hi); }
+.d2-hub .d2-group p { margin: 0 0 .6rem; font-size: 14px; color: var(--d2-parch-dim); }
+.d2-hub .d2-group ul { margin: 0; padding-left: 1.1rem; }
+.d2-hub .d2-group li { padding: 3px 0; font-size: 14.5px; }
+.d2-hub .d2-two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; }
+.d2-hub .d2-faq { display: grid; gap: 10px; }
+.d2-hub .d2-faq-item { border: 1px solid var(--d2-edge); background: var(--d2-stone); }
+.d2-hub .d2-faq-item summary { cursor: pointer; list-style: none; min-height: 48px; padding: 12px 44px 12px 16px; position: relative; font: 400 16.5px/1.45 var(--display); color: #f1e6c6; }
+.d2-hub .d2-faq-item summary::-webkit-details-marker { display: none; }
+.d2-hub .d2-faq-item summary::after { content: "+"; position: absolute; right: 16px; top: 10px; font: 400 22px/1.4 var(--body); color: var(--d2-flame); }
+.d2-hub .d2-faq-item[open] summary::after { content: "–"; }
+.d2-hub .d2-faq-item[open] summary { border-bottom: 1px solid var(--d2-bevel); }
+.d2-hub .d2-faq-item p { margin: 0; padding: 12px 16px 4px; }
+.d2-hub .d2-faq-more { display: inline-block; padding: 6px 16px 14px; font-size: 14px; font-weight: 600; }
+
+@media (max-width: 1050px) {
+  .d2-hub .d2-cards, .d2-hub .d2-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .d2-hub .d2-updates li { grid-template-columns: 7rem minmax(0, 1fr); }
+  .d2-hub .d2-updates span { grid-column: 2; }
+}
+@media (max-width: 900px) {
+  .d2-hub .d2-front { grid-template-columns: 1fr; grid-template-areas: "copy" "media" "tasks"; padding-top: 18px; gap: 14px; }
+  .d2-hub .d2-hero-media figure.game-image img { max-height: 150px; }
+  .d2-hub .d2-two { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .d2-hub .d2-hero h1 { font-size: 2.7rem; }
+  .d2-hub .d2-deck { font-size: 1.02rem; margin-bottom: 10px; }
+  .d2-hub .d2-status { margin-bottom: 12px; gap: 6px; }
+  .d2-hub .d2-status li { font-size: 11.5px; padding: 1px 9px; }
+  .d2-hub .hero-actions { gap: 8px; }
+  .d2-hub .hero-actions .button { flex: 1 1 100%; }
+  .d2-hub .d2-source { display: none; }
+  .d2-hub .d2-hero-media figure.game-image { padding: 5px; }
+  .d2-hub .d2-hero-media figure.game-image img { max-height: 96px; }
+  .d2-hub .d2-hero-media figure.game-image figcaption { display: none; }
+  .d2-hub .d2-cards { gap: 10px; }
+  .d2-hub .d2-card img { height: 64px; }
+  .d2-hub .d2-card-body { padding: 9px 10px 11px; }
+  .d2-hub .d2-card strong { font-size: 14px; }
+  .d2-hub .d2-card-text { font-size: 12.5px; }
+  .d2-hub .d2-groups { grid-template-columns: 1fr; }
+  .d2-hub .d2-updates li { grid-template-columns: 1fr; padding: 11px 14px; }
+  .d2-hub .d2-updates span { grid-column: 1; }
+}

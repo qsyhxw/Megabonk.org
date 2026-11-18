@@ -14,9 +14,13 @@ AD='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoog
 
 def ext(url,label):return f'<a href="{escape(url,quote=True)}" target="_blank" rel="noopener noreferrer">{label} ↗</a>'
 def ref(i):return f'<sup class="ref"><a href="#source-{i}" aria-label="Source {i}">[{i}]</a></sup>'
-def shell(route,title,desc,body,lang='en',play=False,error=False):
- nav=f'<a href="{P}play/">Play</a><a href="{P}beginners-guide/">Start here</a><a href="{P}setup/">Setup</a><a href="{P}saves/">Saves</a><a href="{P}#guides">Guides</a>'
- return stylesheet(f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(desc,quote=True)}"><meta property="og:type" content="article"><meta property="og:url" content="https://megabonk.org{route}"><meta property="og:image" content="https://megabonk.org/assets/d2-survivors/{'run' if play else 'original-menu'}-1280.webp"><link rel="icon" href="/assets/d2-survivors/favicon.ico"><link rel="icon" type="image/svg+xml" href="/assets/d2-survivors/favicon.svg"><link rel="apple-touch-icon" href="/assets/d2-survivors/apple-touch-icon.png"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/d2-survivors/site.css">{('<link rel="stylesheet" href="/assets/poke-survivor/play.css"><script defer src="/assets/d2-survivors/play.js"></script>' if play else '')}{('<meta name="robots" content="noindex,follow">'if error else AD)}</head><body class="d2 guide-layout{' ps-play-page' if play else ''}"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/d2-survivors/logo.svg" width="44" height="44" alt=""><span>D2 Survivors<small>Independent guide · Megabonk.org</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu ☰</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header><main class="wrap" id="main">{body}</main><footer class="footer"><div class="wrap footer-grid"><div><strong>Find your next run.</strong><p>Independent editorial by Megabonk.org. Not affiliated with framara or Blizzard Entertainment. Game names and artwork belong to their owners.</p><a href="/#wiki-start">More game guides →</a></div><nav aria-label="Site information"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy-policy#d2-survivors">Privacy</a></nav></div></footer></body></html>''')
+def shell(route,title,desc,body,lang='en',play=False,error=False,home=False,trust=False):
+ nav=f'<a href="{P}play/">Play</a><a href="{P}beginners-guide/">Start here</a><a href="{P}setup/">Setup</a><a href="{P}saves/">Saves</a><a href="{P}beginners-guide/">Skills</a>'  # replaced by register_page.py
+ css='<link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/d2-survivors/theme.css">'+('<link rel="stylesheet" href="/assets/d2-survivors/hub.css">' if home else '')+('<link rel="stylesheet" href="/assets/d2-survivors/play.css"><script defer src="/assets/d2-survivors/play.js"></script>' if play else '')
+ og='' if (error or trust) else f'<meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(desc,quote=True)}"><meta property="og:type" content="article"><meta property="og:url" content="https://megabonk.org{route}"><meta property="og:image" content="https://megabonk.org/assets/d2-survivors/{'run' if play else 'original-menu'}-1280.webp">'
+ cls='d2-theme guide-layout '+('d2-hub' if home else 'd2-guide')+(' ps-play-page' if play else '')+(' d2-trust' if trust else '')
+ page=f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="https://megabonk.org{route}">{og}<link rel="icon" href="/assets/d2-survivors/favicon.ico"><link rel="icon" type="image/svg+xml" href="/assets/d2-survivors/favicon.svg"><link rel="apple-touch-icon" href="/assets/d2-survivors/apple-touch-icon.png">{css}{('<meta name="robots" content="noindex,follow">'if error else '' if trust else AD)}</head><body class="{cls}"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/d2-survivors/logo.svg" width="44" height="44" alt=""><span>D2 Survivors<small>Setup, saves &amp; skills guide</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu ☰</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header><main class="wrap" id="main">{body}</main><footer class="footer"></footer></body></html>'''
+ return stylesheet(page) if play else page
 
 def figure(stem,alt,caption,source):
  return f'<figure class="game-image" data-game-image="d2-{stem}"><a href="/assets/d2-survivors/{stem}-1280.webp" target="_blank" rel="noopener"><img src="/assets/d2-survivors/{stem}-800.webp" srcset="/assets/d2-survivors/{stem}-800.webp 800w, /assets/d2-survivors/{stem}-1280.webp 1280w" sizes="(max-width:800px) calc(100vw - 36px), 1000px" width="1280" height="900" loading="lazy" alt="{alt}"></a><figcaption>{caption} {ref(source)} <a href="/assets/d2-survivors/{stem}-1280.webp" target="_blank" rel="noopener" class="image-zoom">Open full image ↗</a></figcaption></figure>'
@@ -30,13 +34,13 @@ def localization():
  ('mobile','手機教學與原作 FAQ 為何不一致？',f'<p>2026 年 11 月 3 日核對時，原作 FAQ 表示目前不支援手機，並要求玩家自己的 Diablo II 安裝檔。另一方面，10 月 28 日的 Mobile01 分享及中文工具作者列有手機書籤步驟。這些紀錄的時間、版本與檔案供應條件不同，不能合併成「現在手機一定能玩」。{ref(1)}{ref(2)}{ref(4)}</p><p>要穩定開始，優先用電腦開原作並按其當前檔案要求準備。手機能開網頁、能改書籤，不等於當前版本可完成資源準備或開局。本站只做移動尺寸頁面檢查，不宣稱真機相容。</p>'),
  ('limits','中文化與改數值是兩件事',f'<p>工具作者的頁面除了翻譯，也介紹「書籤修改」功能，部分操作會更改遊戲數值或永久進度。只想看中文時，不需要使用那些修改項；翻譯工具的存在不代表所有操作都只改顯示文字。{ref(2)}</p><p>先保留備份，閱讀工具當前說明，再決定是否使用；本文不保證排行榜資格、跨版本相容或工具安全。若你要的是暗黑 II 本體漢化、另一個同名專案或其他網站的存檔，請先回到 #source 的辨認步驟。</p>')]
  toc='<aside class="toc"><strong>本頁內容</strong>'+''.join(f'<a href="#{i}">{t}</a>' for i,t,_ in parts)+'</aside>'
- body=f'<nav class="crumbs"><a href="/">Megabonk.org</a> / D2 Survivors 中文化</nav><header class="article-head" id="guide"><span class="tag">繁體中文 · 非官方任務指南</span><h1>D2 Survivors 中文化：版本、工具與備份</h1><div class="answer"><p>原作目前有英文與韓文；繁體中文工具由玩家另行維護。電腦瀏覽器用作者書籤，原作 Windows 安裝版走另一套工具；先備份，再按你實際使用的版本選路線。本站沒有安裝或驗證補丁成功。</p></div><p class="meta">Megabonk.org 編輯 · 核對 2026-11-03 · 來源整理，非遊玩或安全測試</p></header><div class="article-layout">{toc}<article class="prose">'
+ body=f'<nav class="crumbs"><a href="/d2-survivors/">D2 Survivors</a> / 中文化</nav><header class="article-head" id="guide"><span class="tag">繁體中文 · 非官方任務指南</span><h1>D2 Survivors 中文化：版本、工具與備份</h1><div class="answer"><p>原作目前有英文與韓文；繁體中文工具由玩家另行維護。電腦瀏覽器用作者書籤，原作 Windows 安裝版走另一套工具；先備份，再按你實際使用的版本選路線。本站沒有安裝或驗證補丁成功。</p></div><p class="meta">Megabonk.org 編輯 · 核對 2026-11-03 · 來源整理，非遊玩或安全測試</p></header><div class="article-layout">{toc}<article class="prose">'
  for i,t,c in parts:
   body+=f'<section id="{i}"><h2>{t}</h2>{c}</section>'
   if i=='backup':body+=figure('original-menu','D2 Survivors 原作主選單列出 PLAY、OPTIONS 與 SAVES','原作真實主選單，2026-11-03 擷取；畫面標示 build 20261102.2。SAVES 是備份入口，OPTIONS 是選項入口；這不是中文化成功畫面，也未安裝補丁。遊戲圖像 © Blizzard Entertainment／各權利人。',5)
  body+='<section class="sources" id="sources"><h2>來源與核對範圍</h2><p>原作文件與工具作者各為自己項目的單一來源；有來源材料不代表本站已測過工具、存檔遷移或完整局。</p><ol>'
  for n,(url,label,detail)in enumerate([('https://d2survivors.lol/faq/','D2 Survivors · 原作 FAQ','平台、檔案及語言入口；2026-11-03 核對。'),(PATCH,'GitHub Pages · 中文工具作者','瀏覽器／Windows 路線與額外修改功能；2026-11-03 核對，未下載執行工具。'),('https://d2survivors.lol/wiki/saves/','D2 Survivors · Saves','原作備份與匯入限制；實際版本提示優先。'),('https://www.mobile01.com/topicdetail.php?f=676&p=1&t=7311404','Mobile01 · 酷波分享','2026-10-28 的個人使用分享，非目前手機支援保證。'),(ORIGINAL,'D2 Survivors · 原作遊戲','2026-11-03 主選單擷取，build 20261102.2；只核菜單，不冒稱通關。')],1):body+=f'<li id="source-{n}">{ext(url,label)} — {detail}</li>'
- body+='</ol><a class="back" href="#guide">返回本文 ↑</a></section><section class="related"><h2>下一步</h2><p><a href="/d2-survivors/play/">D2 Survivors · Browser game window →</a></p><p><a href="/azeroth-survivors/">Azeroth Survivors：另一款獨立的幸存者遊戲 →</a></p><p><a href="/#wiki-start">站內相關遊戲 →</a></p></section></article></div>'
+ body+='</ol><a class="back" href="#guide">返回本文 ↑</a></section><section class="related"><h2>下一步</h2><p><a href="/d2-survivors/play/">D2 Survivors · Browser game window →</a></p><p><a href="/azeroth-survivors/">Azeroth Survivors：另一款獨立的幸存者遊戲 →</a></p></section></article></div>'
  body=body.replace('請先回到 #source 的辨認步驟','請先<a href="#source">確認遊戲來源</a>')
  return shell(ZH,'D2 Survivors 中文化：瀏覽器書籤、Windows 補丁與備份','按原作、瀏覽器與 Windows 安裝版選 D2 Survivors 繁中文化路線，先備份再操作，辨認手機說明衝突及工具限制。',body,'zh-Hant')
 
@@ -58,6 +62,19 @@ def build():
   f=ROOT/route.lstrip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);write_html(f,html,encoding='utf8')
  error=ROOT/'d2-survivors/404.html'
  write_html(error,shell(P+'404','Page not found | D2 Survivors Guides','Find the D2 Survivors guide index, Play window and task pages.',f'<article class="legal"><h1>This route ends here.</h1><p>Find your next task in the <a href="{P}">D2 Survivors guide index</a>.</p></article>',error=True),encoding='utf8')
+ from d2_trust import build as build_trust
+ build_trust(shell)
+ # v3.24/v3.25: nav, breadcrumbs, related guides, footer and registries from data/d2-survivors-pages.json
+ import subprocess,sys,re
+ subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'d2-survivors'],check=True)
+ import register_page as rp
+ foot=rp.footer_html(rp.load(ROOT,'d2-survivors'))
+ text=error.read_text(encoding='utf8');text=re.sub(r'<footer[^>]*>.*?</footer>',lambda x:foot,text,count=1,flags=re.S)
+ error.write_text(text,encoding='utf8')
+ from game_seo import edit as seo_edit  # keep the SEO editor idempotent after register_page adds its head markup
+ for fp in (ROOT/'d2-survivors').rglob('index.html'):
+  t=fp.read_text(encoding='utf8');n=seo_edit(fp,t)
+  if n!=t:fp.write_text(n,encoding='utf8')
  f=ROOT/'index.html';text=f.read_text(encoding='utf8')
  if 'id="d2-survivors-tasks"' not in text:
   marker='<div class="route-grid">'
@@ -72,5 +89,5 @@ def build():
  if 'id="d2-survivors"' not in text:
   notice='<h2 id="d2-survivors">D2 Survivors task pages and game window</h2><p>Reviewed 3 November 2026. The Play page connects to play.d2survivors.org only after you click Play. This third-party game host and services it uses receive technical request data and control their own storage and progress. Its edition and saves are separate from d2survivors.lol; framed and direct-tab storage can differ. Hiding keeps the frame connected and does not pause the game; close or leave the page to end its session. We cannot read or recover game storage. The localization article links to a community tool externally; we do not install it or upload saves. Ordinary task pages inherit this site’s existing AdSense loader and site-wide Umami analytics described here. Cloudflare hosting and possible performance measurement, including on error responses, are described above.</p>'
   write_html(f,text.replace('</body>',notice+'</body>',1),encoding='utf8')
- print('Built D2 Survivors hub, eight task pages and scoped404; no game code copied.')
+ print('Built D2 Survivors hub, eight task pages, About/Contact and scoped404; no game code copied.')
 if __name__=='__main__':build()
