@@ -21,7 +21,7 @@ FORMATS = {
     'spires-desktop': r'v\d+\.\d+\.\d+',
     'spires-browser': r'\d{8}[a-z]?',
     'midgard-client': r'\d+\.\d+\.\d+',
-    'mythic-ios': r'\d+\.\d+\.\d+',
+    'mythic-ios': r'\d+\.\d+(\.\d+)?',  # App Store 可能只发两段式版本，如 1.1
 }
 
 
