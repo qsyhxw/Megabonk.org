@@ -68,7 +68,7 @@ def build():
     </div>
     <figure class="arena-preview">
       <img src="{ASSETS}/town-640.webp" srcset="{ASSETS}/town-640.webp 640w, {ASSETS}/town-1052.webp 1052w" sizes="(max-width: 720px) calc(100vw - 32px), (max-width: 1240px) 53vw, 640px" width="1052" height="473" fetchpriority="high" alt="Heroes gather around torchlight in the original Arena of Champions town lobby">
-      <figcaption>Town lobby <span>Captured 1 Nov 2026</span></figcaption>
+      <figcaption>Town lobby, captured 1 Nov 2026</figcaption>
     </figure>
   </header>
 
