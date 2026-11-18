@@ -6,14 +6,13 @@ import json
 ROOT = Path(__file__).resolve().parents[1]
 GAMES = json.loads((ROOT / 'data/play-games.json').read_text(encoding='utf-8'))
 
-def recommendations(current, lang='en'):
+def recommendations(current, lang='en', *, limit=None):
     locale = {}
     if lang != 'en':
         locale = json.loads((ROOT / 'data/play-games-locales.json').read_text(encoding='utf-8'))[lang]
     cards = []
-    for game in GAMES:
-        if game['id'] == current:
-            continue
+    games = [game for game in GAMES if game['id'] != current]
+    for game in games[:limit]:
         if locale:
             game = {**game, **locale['games'][game['id']]}
         e = {k: escape(str(v), quote=True) for k, v in game.items()}

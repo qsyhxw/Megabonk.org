@@ -1,32 +1,126 @@
-"""One playable task page; original game stays on its own origin."""
-from site_analytics import write_html
+"""Build the Arena of Champions original-game entry and quickstart."""
+from html import escape
 from pathlib import Path
+
 from play_recommendations import recommendations, stylesheet
-ROOT=Path(__file__).resolve().parents[1]
-URL='/arena-of-champions/'
-GAME='https://arenaofchampions.live/'
+from register_page import apply_page, load
+from site_analytics import write_html
+
+ROOT = Path(__file__).resolve().parents[1]
+GAME_ID = 'arena-of-champions'
+GAME = 'https://arenaofchampions.live/'
+ASSETS = '/assets/arena-of-champions'
+
+
 def build():
-    nav='<a href="#play">Play</a><a href="#start">Start here</a><a href="#more-games">More games</a>'
-    body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Play Arena of Champions Online | Megabonk.org</title><meta name="description" content="Play Arena of Champions in a browser game window. Find the original WoW-style arena PvP, guest and desktop options, plus more games on Megabonk.org."><link rel="canonical" href="https://megabonk.org{URL}">
-<link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/azeroth-survivors/site.css"><link rel="stylesheet" href="/assets/poke-survivor/play.css"><link rel="stylesheet" href="/assets/arena-of-champions/site.css">
-<meta property="og:type" content="website"><meta property="og:title" content="Play Arena of Champions Online"><meta property="og:description" content="A WoW-style arena PvP game, hosted by its original project."><meta property="og:url" content="https://megabonk.org{URL}"><meta property="og:image" content="https://megabonk.org/assets/arena-of-champions/login-1280.webp">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script><script defer src="/assets/arena-of-champions/play.js"></script></head>
-<body class="az guide-layout ps-play-page arena-play"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="/"><span>Megabonk.org<small>Independent games &amp; guides</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header>
-<main class="wrap" id="main"><header class="play-intro" id="guide" data-play-background><p class="play-kicker">ORIGINAL-HOST GAME WINDOW · UNOFFICIAL GUIDE</p><h1>Play Arena of Champions online</h1><p>WoW-style arena PvP, with a guest route and no separate browser installation. Choose opponents instead of enemy waves.</p></header>
-<section class="game-panel" id="game-panel" aria-label="Arena of Champions game window" data-mode="normal"><div class="game-screen" id="play"><div class="game-cover" id="game-cover"><img src="/assets/arena-of-champions/login-1280.webp" width="1400" height="900" alt="Arena of Champions original sign-in screen with Play as Guest and Download for Windows"><div class="cover-content"><h2>Arena of Champions</h2><p>Pick a hero. Learn your abilities. Enter the arena.</p><button class="play-button" type="button" id="game-launch">Play Arena of Champions →</button><p class="cover-note">Click to connect to arenaofchampions.live.<br>Desktop keyboard and mouse recommended.</p></div></div><iframe id="game-frame" title="Arena of Champions original game" data-src="{GAME}" allow="autoplay; fullscreen; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-orientation-lock" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe></div>
-<div class="game-meta"><p><strong>Original-host game.</strong> We provide the window; the project operates the game and your account. This is a separate game from Azeroth Survivors.</p><div class="game-tools"><button id="game-expand" type="button" aria-pressed="false" disabled>Expand game</button><button id="game-minimize" type="button" aria-expanded="true" aria-controls="play" disabled>Hide game</button><a href="{GAME}" target="_blank" rel="noopener noreferrer">Arena of Champions · open original ↗</a></div><p id="game-status" role="status" aria-live="polite">Click Play to connect. Hiding keeps the game running.</p><noscript><p><a href="{GAME}" target="_blank" rel="noopener noreferrer">Arena of Champions · play original ↗</a></p></noscript></div></section>
-<div class="game-dock" id="game-dock" hidden><span>Arena of Champions hidden</span><button id="game-restore" type="button">Return to game ↑</button></div>
-{recommendations('arena-of-champions')}
-<article class="play-notes" data-play-background><nav class="play-jump" aria-label="On this page"><a href="#start">Start here</a><a href="#choose">Which game?</a><a href="#desktop">Desktop &amp; progress</a><a href="#help">Connection help</a><a href="#sources">Sources</a></nav>
-<section id="start"><h2>From the window to the arena</h2><ol><li>Click Play above and wait for the original game’s sign-in screen. A loaded window does not mean the game has finished downloading its resources.</li><li>Choose <strong>Play as Guest</strong> to begin without entering account details. Read the current hero and ability choices in the game.</li><li>Before joining a match, open the game’s Controls and Key Bindings settings. Practice targeting and abilities, then use its current queue interface for your preferred bracket.</li></ol><p>The original client lists 1v1, 2v2 and 3v3 queues. This is not a promise of available opponents, a particular ping or a completed match on every device.<sup class="ref"><a href="#source-1">[1]</a></sup> Expand gives you more room. Hide and Return keep the same frame and do not pause or disconnect it. Leave a match in the game before stepping away; close this page to end its embedded session.</p></section>
-<section id="choose"><h2>Arena PvP or a survival run?</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Choose a game"><table><thead><tr><th>Choose</th><th>When you want</th><th>Your next step</th></tr></thead><tbody><tr><td>Arena of Champions</td><td>Manually controlled abilities and online player-versus-player arenas.</td><td>Use the game window above and its own class and control menus.</td></tr><tr><td>Azeroth Survivors</td><td>Movement, automatic spells and upgrades while surviving enemy waves.</td><td><a href="/azeroth-survivors/">Read the survival guide →</a> or <a href="/azeroth-survivors/play/">open its game window →</a>.</td></tr></tbody></table></div><p>The Warcraft-inspired setting does not make these the same game. Azeroth Survivors builds and save files do not apply to Arena of Champions. Neither is an official Blizzard browser version of the full WoW MMO.</p></section>
-<section id="desktop"><h2>Choose browser or Windows before moving progress</h2><p>Browser play needs no separate game installation. If you prefer a desktop client, open the original game and use its <strong>Download for Windows</strong> control; obtain updates from that project rather than a lookalike download page.<sup class="ref"><a href="#source-1">[1]</a></sup></p><p>Already playing as a guest? The project’s text says to use <strong>Save Progress</strong> in town before moving to the app, then sign in with that account. These are the project’s instructions; we have not tested account migration, Windows compatibility or recovery of lost progress. Do not clear your guest browser data while deciding. A framed session and a separate browser tab may receive different storage treatment.</p><figure class="game-image" data-game-image="aoc-login"><a href="/assets/arena-of-champions/login-1280.webp" target="_blank" rel="noopener"><img src="/assets/arena-of-champions/login-800.webp" srcset="/assets/arena-of-champions/login-800.webp 800w, /assets/arena-of-champions/login-1280.webp 1280w" sizes="(max-width:800px) calc(100vw - 36px), 850px" width="1400" height="900" loading="lazy" alt="The original Arena of Champions sign-in menu offers guest access and a Windows download"></a><figcaption>Original-host browser menu captured 1 November 2026. Menu inspection, not a completed PvP match or Windows test. Game artwork © respective owners, including Blizzard Entertainment. <a href="#source-1">Source [1]</a></figcaption></figure></section>
-<section id="help"><h2>If the game does not start</h2><p>First distinguish the outer window loading from the game’s own resource download or connection message. If it stalls, <a href="{GAME}" target="_blank" rel="noopener noreferrer">Arena of Champions · open the same original in its own tab ↗</a>. Record the exact message and whether you reached sign-in or town. Conflicting player access reports do not establish that the game has shut down.<sup class="ref"><a href="#source-2">[2]</a></sup></p><p>The game has keyboard and mouse controls. A phone-sized page is not proof of touch support; use a desktop or laptop for this route. We do not promise that the Windows app fixes your latency or that every browser and graphics adapter works.</p><p>For project announcements and support, follow the community control inside the current original game. Invites can change. This window connects to the game host only when you click Play; that host controls its own services, accounts and storage. See our <a href="/privacy-policy#arena-of-champions">privacy notice</a>.</p></section>
-<section class="sources" id="sources"><h2>Sources &amp; verification</h2><p>Checked 1 November 2026. Independent editorial; not affiliated with the project or Blizzard. Current public client text contains patch notes through 0.23, dated 31 October. That is source-text scope, not a guarantee of the running server version.</p><ol><li id="source-1"><a href="{GAME}" target="_blank" rel="noopener noreferrer">Arena of Champions · original game ↗</a> — original launcher, guest/download/save instructions and public client text; single primary source. The embedded original sign-in screen loaded in a desktop browser check. No completed match, account migration or physical-phone benchmark is claimed.</li><li id="source-2"><a href="https://www.reddit.com/r/WC3/comments/1xide3i/new_wow_arena_browser_game_with_warcraft_3_models/" target="_blank" rel="noopener noreferrer">Reddit · r/WC3 player discussion ↗</a> — read 1 November; includes desktop-download and action-bar questions plus conflicting access reports. Individual experiences, not a universal outage or fix.</li></ol><a class="back" href="#guide">Back to page ↑</a></section></article></main>
-<footer class="footer"><div class="wrap footer-grid"><div><strong>Games for your next session.</strong><p>Independent editorial by Megabonk.org. Game services remain with their respective projects.</p></div><nav aria-label="Site information"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy-policy">Privacy</a></nav></div></footer></body></html>'''
-    body=body.replace('Try another survivor game, right here on Megabonk.org.','Switch from arena PvP to one of these survival games on Megabonk.org.').replace('YOUR NEXT RUN','TRY A DIFFERENT SESSION')
-    body=body.replace('The embedded original sign-in screen loaded in a desktop browser check.','A desktop browser check loaded the embedded original sign-in screen, entered town as a guest and sent movement input. Expand, Hide and Return preserved the same frame. This was a short startup check.')
-    target=ROOT/'arena-of-champions/index.html';target.parent.mkdir(exist_ok=True);write_html(target, stylesheet(body),encoding='utf-8')
-    print('Built one Arena of Champions playable task page.')
-if __name__=='__main__':build()
+    manifest = load(ROOT, GAME_ID)
+    url = manifest['base']
+    canonical = manifest['site'] + url
+    title = escape(manifest['pages'][0]['title'])
+    task_cards = ''.join(
+        f'<a href="#{task["id"]}"><strong>{escape(task["label"])} <span aria-hidden="true">↘</span></strong>'
+        f'<span>{escape(task["summary"])}</span></a>'
+        for task in manifest['tasks']
+    )
+    trust_links = ''.join(
+        f'<a href="{link["href"]}">{escape(link["label"])}</a>'
+        for link in manifest['trust_links']
+    )
+    body = f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play Arena of Champions Online | Megabonk.org</title>
+<meta name="description" content="Open the original Arena of Champions browser game and find guest sign-in, Windows download, save progress and connection help.">
+<link rel="canonical" href="{canonical}">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/guide-article-layout.css">
+<link rel="stylesheet" href="{ASSETS}/theme.css">
+<link rel="stylesheet" href="{ASSETS}/hub.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Play Arena of Champions Online">
+<meta property="og:description" content="A WoW-style arena PvP game, hosted by its original project.">
+<meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{manifest['site']}{ASSETS}/town-1052.webp">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>
+</head>
+<body class="arena-of-champions-theme arena-of-champions-hub guide-layout" data-format="play" data-v320="1">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="{url}"><span class="brand-mark" aria-hidden="true">A</span> Arena of Champions</a>
+    <nav class="desktop-nav" aria-label="Main navigation"></nav>
+    <details class="mobile-nav">
+      <summary>Menu</summary>
+      <nav class="mobile-links" aria-label="Mobile navigation"></nav>
+    </details>
+  </div>
+</header>
+<main class="wrap" id="main">
+  <header class="arena-hero" id="guide">
+    <div class="arena-intro" id="play">
+      <p class="arena-platform">Desktop browser <span aria-hidden="true">·</span> PvP <span aria-hidden="true">·</span> Guest play</p>
+      <h1>{title}</h1>
+      <p class="arena-lead">Pick a hero and queue for WoW-style 1v1, 2v2 or 3v3. Start with a desktop browser and a keyboard and mouse.</p>
+      <a class="primary" href="{GAME}" target="_blank" rel="noopener noreferrer">Open original game <span aria-hidden="true">↗</span></a>
+      <p class="arena-destination">arenaofchampions.live opens in a new tab.</p>
+    </div>
+    <figure class="arena-preview">
+      <img src="{ASSETS}/town-640.webp" srcset="{ASSETS}/town-640.webp 640w, {ASSETS}/town-1052.webp 1052w" sizes="(max-width: 720px) calc(100vw - 32px), (max-width: 1240px) 53vw, 640px" width="1052" height="473" fetchpriority="high" alt="Heroes gather around torchlight in the original Arena of Champions town lobby">
+      <figcaption>Town lobby <span>Captured 1 Nov 2026</span></figcaption>
+    </figure>
+  </header>
+
+  <nav class="task-grid" aria-label="On this page">{task_cards}</nav>
+
+  <article class="arena-notes prose" aria-label="Arena of Champions starting guide">
+    <section id="start">
+      <h2>From guest sign-in to the arena</h2>
+      <ol class="start-steps">
+        <li><strong>Enter as a guest.</strong> Wait for the sign-in screen on the original site, then choose <b>Play as Guest</b>.</li>
+        <li><strong>Set up your controls.</strong> Pick a hero and review <b>Controls</b> and <b>Key Bindings</b>. Try movement, targeting and a few abilities in town.</li>
+        <li><strong>Choose a bracket.</strong> Use the game’s queue interface for 1v1, 2v2 or 3v3. Match availability depends on who is queuing.</li>
+      </ol>
+    </section>
+
+    <section id="desktop">
+      <h2>Windows download and guest progress</h2>
+      <p>Play in a desktop browser for a session without installation. For the desktop client, choose <strong>Download for Windows</strong> from the original sign-in screen.</p>
+      <p>To move a guest session to the Windows app, the game instructs you to use <strong>Save Progress</strong> in town, then sign in with that account in the app. Keep your browser’s guest data until you can confirm the account opens with your progress.</p>
+      <figure class="game-image" data-game-image="aoc-login">
+        <a href="{ASSETS}/login-1280.webp" aria-label="Open full-size Arena of Champions sign-in screenshot">
+          <img src="{ASSETS}/login-800.webp" srcset="{ASSETS}/login-800.webp 800w, {ASSETS}/login-1280.webp 1280w" sizes="(max-width:800px) calc(100vw - 56px), 700px" width="1400" height="900" loading="lazy" alt="The original Arena of Champions sign-in menu offers guest access and a Windows download">
+        </a>
+      </figure>
+    </section>
+
+    <section id="help">
+      <h2>If the game stalls</h2>
+      <p>Start at the <a href="#play">original game link</a> on a desktop browser. If the original site shows a browser verification screen, wait for it to finish before looking for the game’s sign-in menu. If it stalls, note whether the message appeared during verification, in the game download, or after choosing <strong>Play as Guest</strong>.</p>
+      <p class="arena-check">On 18 November 2026 the original site showed browser verification, so guest entry could not be rechecked. The sign-in and town screenshots show the original client on 1 November 2026.</p>
+    </section>
+
+    <section id="choose">
+      <h2>Arena PvP or a survival run?</h2>
+      <p>Choose Arena of Champions for online PvP with manual abilities. Choose Azeroth Survivors for automatic spells and enemy waves. The two games use separate characters, builds and saves.</p>
+    </section>
+  </article>
+
+  {recommendations(GAME_ID, limit=4)}
+</main>
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div><strong>Arena of Champions</strong><p>Independent game guide by Megabonk.org.</p></div>
+    <nav aria-label="Site information">{trust_links}<a href="#more-games">More games</a></nav>
+  </div>
+</footer>
+</body>
+</html>
+'''
+    target = ROOT / GAME_ID / 'index.html'
+    write_html(target, stylesheet(apply_page(body, manifest, '')), encoding='utf-8', newline='\n')
+
+
+if __name__ == '__main__':
+    build()

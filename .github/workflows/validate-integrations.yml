@@ -40,8 +40,12 @@ jobs:
           python scripts/check_remaining_editorial.py
       - name: Verify Azeroth planner rules and safe imports
         run: node scripts/test_azeroth_planner.cjs
-      - name: Rebuild Arena of Champions playable entry
-        run: python scripts/build_arena_champions.py
+      - name: Rebuild and verify Arena of Champions entry guide
+        run: |
+          python scripts/build_arena_champions.py
+          python scripts/register_page.py . arena-of-champions --check
+          python scripts/content_gate.py --theme . arena-of-champions
+          python scripts/content_gate.py . arena-of-champions/index.html
       - name: Rebuild Ball x Pit guides
         run: python scripts/build_ball_x_pit.py
       - name: Rebuild Soulstone Survivors guides

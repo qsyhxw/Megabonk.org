@@ -1,0 +1,98 @@
+@font-face {
+  font-family: Cinzel Arena;
+  src: url("/assets/fonts/cinzel-latin.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+}
+
+.arena-of-champions-theme {
+  --paper: #111416;
+  --ink: #f5ebd9;
+  --line: #494338;
+  --pale: #1b1e20;
+  --white: #171a1c;
+  --muted: #c1baad;
+  --gold: #f2c873;
+  --heading: "Cinzel Arena", Georgia, serif;
+  --body: system-ui, sans-serif;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.65 var(--body);
+  color-scheme: dark;
+}
+
+.arena-of-champions-theme *, .arena-of-champions-theme *::before, .arena-of-champions-theme *::after { box-sizing: border-box; }
+.arena-of-champions-theme .wrap { width: min(calc(100% - 32px), 1200px); margin-inline: auto; }
+.arena-of-champions-theme a { color: var(--gold); text-underline-offset: .2em; }
+.arena-of-champions-theme :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.arena-of-champions-theme h1, .arena-of-champions-theme h2 { font-family: var(--heading); line-height: 1.16; }
+.arena-of-champions-theme h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
+.arena-of-champions-theme .skip { position: absolute; inset: 8px auto auto 12px; z-index: 5; padding: 8px 16px; background: var(--paper); }
+.arena-of-champions-theme .skip:not(:focus) { clip-path: inset(50%); }
+
+.arena-of-champions-theme .top {
+  position: relative;
+  z-index: 2;
+  background: #161819;
+  border-block: 1px solid #403725;
+}
+.arena-of-champions-theme .top > .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+.arena-of-champions-theme .brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--ink); font: 750 1.08rem/1.2 var(--heading); text-decoration: none; }
+.arena-of-champions-theme .brand-mark {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  flex: 0 0 33px;
+  height: 33px;
+  border: 1px solid #a98a51;
+  color: var(--gold);
+  background: #2b2419;
+}
+.arena-of-champions-theme .desktop-nav { display: flex; gap: 26px; }
+.arena-of-champions-theme .top nav a, .arena-of-champions-theme .footer nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 650;
+}
+.arena-of-champions-theme .top nav a:hover, .arena-of-champions-theme .footer nav a:hover { color: var(--gold); text-decoration: underline; }
+.arena-of-champions-theme .mobile-nav { display: none; }
+.arena-of-champions-theme .mobile-nav summary {
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  background: var(--pale);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.arena-of-champions-theme .mobile-links {
+  position: absolute;
+  inset: 100% 16px auto auto;
+  width: min(260px, calc(100% - 32px));
+  padding: 8px 16px;
+  background: var(--pale);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 24px #0007;
+}
+.arena-of-champions-theme .mobile-links a { display: flex; }
+
+.arena-of-champions-theme .footer { border-top: 1px solid var(--line); background: #161819; padding-block: 24px; }
+.arena-of-champions-theme .footer-grid { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 30px; }
+.arena-of-champions-theme .footer strong { font-family: var(--heading); }
+.arena-of-champions-theme .footer p { margin: 3px 0 0; color: var(--muted); }
+.arena-of-champions-theme .footer nav { display: flex; flex-wrap: wrap; gap: 0 18px; }
+.arena-of-champions-theme .prose figure img { max-height: min(70vh, 640px); object-fit: contain; }
+
+@media (max-width: 900px) {
+  .arena-of-champions-theme .desktop-nav { display: none; }
+  .arena-of-champions-theme .mobile-nav { display: block; }
+}
+
+@media (max-width: 600px) {
+  .arena-of-champions-theme .top > .wrap { min-height: 63px; }
+  .arena-of-champions-theme .brand { gap: 9px; font-size: .93rem; }
+  .arena-of-champions-theme .footer-grid { gap: 7px; }
+}
