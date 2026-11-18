@@ -3,7 +3,11 @@
 // existing PokeBonk function scope; ordinary static HTML keeps its static route.
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  if (/^\/(scripts|config|tests)(\/|$)/.test(url.pathname) || url.pathname.endsWith('.py')) {
+  if (
+    /^\/(scripts|config|tests)(\/|$)/.test(url.pathname) ||
+    url.pathname.endsWith('.py') ||
+    url.pathname === '/data/arena-of-champions-pages.json'
+  ) {
     const page = await context.env.ASSETS.fetch(new Request(new URL('/404.html', url)));
     const headers = new Headers(page.headers);
     headers.set('Content-Type', 'text/html; charset=utf-8');
