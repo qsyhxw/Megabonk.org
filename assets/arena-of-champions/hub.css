@@ -1,73 +1,52 @@
-.arena-of-champions-hub {
-  background:
-    radial-gradient(ellipse at 81% 120px, #332417 0, transparent 680px),
-    var(--paper);
-}
+.arena-of-champions-hub { background: var(--paper); }
 
-.arena-of-champions-hub .arena-hero {
-  display: grid;
-  align-items: center;
-  gap: 22px;
-  padding-block: 30px 24px;
-}
-.arena-of-champions-hub .arena-platform {
-  color: var(--gold);
-  font-size: .77rem;
-  font-weight: 700;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  margin: 0 0 12px;
-}
-.arena-of-champions-hub .arena-platform span { margin-inline: 3px; }
-.arena-of-champions-hub h1 { font-size: clamp(2.16rem, 4vw, 4.15rem); font-weight: 800; margin: 0; text-wrap: balance; }
-.arena-of-champions-hub .arena-lead { max-width: 47ch; color: var(--muted); margin: 14px 0 21px; }
-.arena-of-champions-hub .primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 22px;
-  min-height: 50px;
-  padding: 9px 19px;
-  border: 1px solid #ffdc96;
-  box-shadow: 0 3px 0 #6e4d25;
-  background: #efbf68;
-  color: #21170a;
-  font-weight: 800;
-  text-decoration: none;
-}
-.arena-of-champions-hub .primary:hover { background: #ffda91; }
-.arena-of-champions-hub .arena-destination { margin: 10px 0 0; color: var(--muted); font-size: .83rem; }
-.arena-of-champions-hub .arena-preview { min-width: 0; margin: 0; padding: 5px; background: #181614; border: 1px solid #8c7045; box-shadow: 0 12px 40px #0006; }
-.arena-of-champions-hub .arena-preview img { display: block; width: 100%; height: auto; aspect-ratio: 2.22; object-fit: cover; }
-.arena-of-champions-hub .arena-preview figcaption {
-  padding: 6px 8px 1px;
-  font-size: .76rem;
-  color: var(--muted);
-}
+/* 全宽首屏：截图作背景，左侧渐变压暗承载文字 */
+.arena-of-champions-hub .arena-hero { position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); }
+.arena-of-champions-hub .arena-backdrop { position: absolute; inset: 0; z-index: -2; margin: 0; }
+.arena-of-champions-hub .arena-backdrop img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 70% 88%; filter: brightness(.85) saturate(.9); }
+.arena-of-champions-hub .arena-backdrop figcaption { position: absolute; right: 14px; bottom: 14px; padding: 2px 8px; background: #0d1117b3; color: #b9c3d3; font-size: .72rem; line-height: 1.5; }
+.arena-of-champions-hub .arena-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #0d1117 10%, #0d1117e6 48%, #0d111773 80%, #0d111733), linear-gradient(180deg, #0d1117cc, transparent 34%), linear-gradient(0deg, #0d1117, transparent 38%); }
+.arena-of-champions-hub .arena-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, #2f6fb3 0 50%, #b8322f 50% 100%); }
+.arena-of-champions-hub .arena-hero-in { padding-block: 38px 46px; }
+.arena-of-champions-hub .arena-intro { max-width: 600px; }
+.arena-of-champions-hub .arena-platform { color: var(--gold); font-size: .76rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 12px; }
+.arena-of-champions-hub .arena-platform span { margin-inline: 4px; }
+.arena-of-champions-hub h1 { font-size: clamp(2.2rem, 5.2vw, 4.3rem); font-weight: 800; margin: 0; text-wrap: balance; text-shadow: 0 2px 18px #000a; }
+.arena-of-champions-hub .arena-lead { max-width: 46ch; color: #d3dae6; margin: 14px 0 16px; font-size: 1.05rem; }
+.arena-of-champions-hub .bracket-chips { display: flex; gap: 8px; list-style: none; margin: 0 0 22px; padding: 0; }
+.arena-of-champions-hub .bracket-chips li { padding: 3px 14px; border: 1px solid #5d7ba3; background: #16233699; color: #dbe6f5; font: 800 .9rem/1.5 var(--heading); letter-spacing: .06em; }
+.arena-of-champions-hub .bracket-chips li:nth-child(3) { border-color: #b45a56; background: #3a161899; color: #ffe0dd; }
+.arena-of-champions-hub .arena-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.arena-of-champions-hub .primary { display: inline-flex; align-items: center; gap: 20px; min-height: 52px; padding: 10px 22px; border: 1px solid #e46a62; border-bottom: 3px solid #6d1717; background: #b8322f; color: #fff; font-weight: 800; text-decoration: none; }
+.arena-of-champions-hub .primary:hover { background: #cf4039; }
+.arena-of-champions-hub .arena-destination { margin: 0; max-width: 30ch; color: #b9c3d3; font-size: .8rem; line-height: 1.4; }
 
-.arena-of-champions-hub .task-grid { display: grid; gap: 8px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
-.arena-of-champions-hub .task-grid a { display: block; padding: 10px 14px; border: 1px solid var(--line); background: var(--pale); text-decoration: none; }
-.arena-of-champions-hub .task-grid a:hover { border-color: #ab894f; background: #29251f; }
-.arena-of-champions-hub .task-grid strong { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.arena-of-champions-hub .task-grid a > span { display: block; color: var(--muted); font-size: .9rem; }
+/* 任务入口：三张带色条的快捷卡 */
+.arena-of-champions-hub .task-grid { display: grid; gap: 8px; padding-block: 18px 6px; }
+.arena-of-champions-hub .task-grid a { display: block; padding: 11px 16px; border: 1px solid var(--line); border-left: 3px solid #2f6fb3; background: var(--pale); text-decoration: none; }
+.arena-of-champions-hub .task-grid a:nth-child(2) { border-left-color: #8d6a3a; }
+.arena-of-champions-hub .task-grid a:nth-child(3) { border-left-color: #b8322f; }
+.arena-of-champions-hub .task-grid a:hover { background: #1c2636; }
+.arena-of-champions-hub .task-grid strong { display: flex; justify-content: space-between; gap: 8px; color: var(--ink); }
+.arena-of-champions-hub .task-grid a > span { display: block; color: var(--muted); font-size: .88rem; }
 
-.arena-of-champions-hub .arena-notes > section {
-  max-width: 71ch;
-  padding: 26px 0;
-  border-bottom: 1px solid var(--line);
-  scroll-margin-block-start: 16px;
-}
+.arena-of-champions-hub .arena-notes { padding-top: 18px; }
+.arena-of-champions-hub .arena-notes > section { max-width: 72ch; padding: 22px 0; scroll-margin-block-start: 16px; }
 .arena-of-champions-hub .arena-notes > section h2 { margin: 0 0 14px; }
+.arena-of-champions-hub .arena-notes > section h2::before { content: ""; display: block; width: 36px; height: 3px; margin-bottom: 10px; background: #b8322f; }
 .arena-of-champions-hub .arena-notes p { margin: 0 0 12px; color: var(--muted); }
-.arena-of-champions-hub .arena-notes p:last-child { margin-bottom: 0; }
 .arena-of-champions-hub .arena-notes strong, .arena-of-champions-hub .arena-notes b { color: var(--ink); }
-.arena-of-champions-hub .start-steps { display: grid; gap: 10px; color: var(--muted); padding-inline-start: 1.5em; margin-block: 0; }
-.arena-of-champions-hub .start-steps li { padding-inline-start: 6px; }
-.arena-of-champions-hub .start-steps li::marker { color: var(--gold); font-weight: 700; }
-.arena-of-champions-hub .arena-notes .arena-check { border-left: 2px solid #987143; background: var(--pale); padding: 12px 16px; }
-.arena-of-champions-hub .arena-notes .game-image { margin-block: 20px 0; border-radius: 0; }
+.arena-of-champions-hub .arena-notes a { color: #8cb6e8; }
+
+/* 三步做成编号卡片 */
+.arena-of-champions-hub .start-steps { counter-reset: s; display: grid; gap: 10px; list-style: none; margin: 0; padding: 0; color: var(--muted); }
+.arena-of-champions-hub .start-steps li { counter-increment: s; position: relative; padding: 14px 16px 14px 64px; border: 1px solid var(--line); background: var(--pale); }
+.arena-of-champions-hub .start-steps li::before { content: counter(s); position: absolute; left: 14px; top: 10px; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid #b8884a; color: var(--gold); background: #1d1416; font: 800 1.15rem/1 var(--heading); }
+.arena-of-champions-hub .arena-notes .arena-check { border-left: 3px solid #b8322f; background: var(--pale); padding: 12px 16px; }
+.arena-of-champions-hub .arena-notes .game-image { margin-block: 20px 0; padding: 4px; background: #0a0e14; border: 1px solid #4a5a73; border-radius: 0; }
 .arena-of-champions-hub .arena-notes .game-image img { border-radius: 0; }
 
-.arena-of-champions-hub .play-recommendations { max-width: none; margin: 34px 0 46px; }
+.arena-of-champions-hub .play-recommendations { max-width: none; margin: 30px 0 46px; padding-top: 26px; border-top: 1px solid var(--line); }
 .arena-of-champions-hub .play-rec-heading > p { display: none; }
 .arena-of-champions-hub .play-rec-grid { gap: 10px; }
 .arena-of-champions-hub .play-rec-card { border: 1px solid var(--line); background: var(--pale); border-radius: 0; box-shadow: none; }
@@ -80,22 +59,13 @@
 .arena-of-champions-hub .play-rec-link:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
 
 @media (max-width: 720px) {
-  .arena-of-champions-hub .arena-hero { padding-block: 25px 18px; }
-  .arena-of-champions-hub .task-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding-bottom: 16px; }
-  .arena-of-champions-hub .task-grid a { min-height: 44px; padding-block: 8px; }
-  .arena-of-champions-hub .task-grid a:last-child { grid-column: 1 / -1; }
+  .arena-of-champions-hub .arena-hero-in { padding-block: 26px 30px; }
+  .arena-of-champions-hub .arena-hero::before { background: linear-gradient(0deg, #0d1117 6%, #0d1117f2 60%, #0d1117cc); }
   .arena-of-champions-hub .task-grid a > span { display: none; }
+  .arena-of-champions-hub .task-grid a { min-height: 44px; }
+  .arena-of-champions-hub .start-steps li { padding-left: 58px; }
 }
-
-@media (max-width: 375px) {
-  .arena-of-champions-hub h1 { font-size: 2rem; }
-  .arena-of-champions-hub .task-grid strong span { display: none; }
-}
-
 @media (min-width: 721px) {
-  .arena-of-champions-hub .arena-hero { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(26px, 4vw, 64px); padding-block: 56px 33px; }
-  .arena-of-champions-hub .arena-lead { font-size: 1.1rem; }
-  .arena-of-champions-hub .task-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-bottom: 38px; }
-  .arena-of-champions-hub .task-grid a { padding: 15px 18px; }
-  .arena-of-champions-hub .arena-notes > section { padding-block: 32px; }
+  .arena-of-champions-hub .arena-hero-in { padding-block: 78px 84px; }
+  .arena-of-champions-hub .task-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-block: 26px 10px; }
 }

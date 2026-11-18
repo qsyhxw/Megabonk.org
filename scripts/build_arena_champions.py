@@ -57,21 +57,23 @@ def build():
     </details>
   </div>
 </header>
-<main class="wrap" id="main">
+<main id="main">
   <header class="arena-hero" id="guide">
-    <div class="arena-intro" id="play">
-      <p class="arena-platform">Desktop browser <span aria-hidden="true">·</span> PvP <span aria-hidden="true">·</span> Guest play</p>
-      <h1>{title}</h1>
-      <p class="arena-lead">Pick a hero and queue for WoW-style 1v1, 2v2 or 3v3. Start with a desktop browser and a keyboard and mouse.</p>
-      <a class="primary" href="{GAME}" target="_blank" rel="noopener noreferrer">Open original game <span aria-hidden="true">↗</span></a>
-      <p class="arena-destination">arenaofchampions.live opens in a new tab.</p>
+    <figure class="arena-backdrop"><img src="{ASSETS}/town-640.webp" srcset="{ASSETS}/town-640.webp 640w, {ASSETS}/town-1052.webp 1052w" sizes="100vw" width="1052" height="473" fetchpriority="high" alt="Heroes gather around torchlight in the original Arena of Champions town lobby"><figcaption>Town lobby, captured 1 Nov 2026</figcaption></figure>
+    <div class="wrap arena-hero-in">
+      <div class="arena-intro" id="play">
+        <p class="arena-platform">Desktop browser <span aria-hidden="true">·</span> PvP <span aria-hidden="true">·</span> Guest play</p>
+        <h1>{title}</h1>
+        <p class="arena-lead">Pick a hero and queue for WoW-style arena fights. Start with a desktop browser and a keyboard and mouse.</p>
+        <ul class="bracket-chips" aria-label="Match sizes"><li>1v1</li><li>2v2</li><li>3v3</li></ul>
+        <div class="arena-cta">
+          <a class="primary" href="{GAME}" target="_blank" rel="noopener noreferrer">Open original game <span aria-hidden="true">↗</span></a>
+          <p class="arena-destination">arenaofchampions.live opens in a new tab.</p>
+        </div>
+      </div>
     </div>
-    <figure class="arena-preview">
-      <img src="{ASSETS}/town-640.webp" srcset="{ASSETS}/town-640.webp 640w, {ASSETS}/town-1052.webp 1052w" sizes="(max-width: 720px) calc(100vw - 32px), (max-width: 1240px) 53vw, 640px" width="1052" height="473" fetchpriority="high" alt="Heroes gather around torchlight in the original Arena of Champions town lobby">
-      <figcaption>Town lobby, captured 1 Nov 2026</figcaption>
-    </figure>
   </header>
-
+<div class="wrap">
   <nav class="task-grid" aria-label="On this page">{task_cards}</nav>
 
   <article class="arena-notes prose" aria-label="Arena of Champions starting guide">
@@ -108,6 +110,7 @@ def build():
   </article>
 
   {recommendations(GAME_ID, limit=4)}
+</div>
 </main>
 <footer class="footer">
   <div class="wrap footer-grid">
