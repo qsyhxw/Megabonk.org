@@ -394,8 +394,8 @@ PAGES['multiplayer/'] = dict(
          fig('graphics')
          + ul(['Turn on <strong>Settings → Graphics → Show ping</strong>: green below 100 ms, yellow up to 200 ms, red above. The player with the best connection should host.',
                'Lower Quality and set Pokémon effects to “Only my partner” if everyone stutters in big fights.',
-               'If the host switches tabs or stops responding, the others wait 30 seconds before the run goes on; keep the game tab in front.',
-               'A host leaving after everyone picked a card no longer freezes the run, and “X is choosing…” stuck screens were fixed on 14 November: reload once if you still see one.',
+               'If the host switches tabs or stops responding, the others wait 30 seconds; after that the host passes to another player and the run goes on. Keep the game tab in front. If you yourself are away longer than the group waits (about one minute), your run ends with what you had; rewards earned while the game is hidden, locked or offline go to the group, not to you.',
+               'A host leaving after everyone picked a card no longer freezes the run, and “X is choosing…” stuck screens were fixed on 14 November: reload once if you still see one. Since 18 November, co-op no longer shows “reconnecting…” forever after a host change.',
                'More fixes: ' + a('troubleshooting/', 'loading, freezes and lag') + '.'])),
     ])
 
@@ -420,7 +420,7 @@ PAGES['troubleshooting/'] = dict(
              ['Stutter in big fights, bosses or Arceus', 'Too many effects and particles', 'Quality Low, effects “Only my partner”, trails “None”'],
              ['Phone gets hot, battery drains', 'Uncapped frame rate', 'FPS limit 60 or 30'],
              ['Only co-op is slow', 'Host connection', 'Show ping; let the player with green ping host'],
-             ['Co-op paused for everyone', 'The host switched tabs or lost connection', 'Keep the game tab in front; the run resumes after 30 seconds'],
+             ['Co-op paused for everyone', 'The host switched tabs or lost connection', 'Keep the game tab in front; after 30 seconds the host passes to another player'],
              ['Enemies freeze at the screen edge', 'Very unusual window shape', 'Return the window to a normal size'],
          ]) + fig('graphics')),
         ('stuck', 'Stuck runs and rooms',
