@@ -6,7 +6,8 @@ export async function onRequest(context) {
   if (
     /^\/(scripts|config|tests)(\/|$)/.test(url.pathname) ||
     url.pathname.endsWith('.py') ||
-    url.pathname === '/data/arena-of-champions-pages.json'
+    url.pathname === '/data/arena-of-champions-pages.json' ||
+    url.pathname === '/data/pokearena-2d-pages.json'
   ) {
     const page = await context.env.ASSETS.fetch(new Request(new URL('/404.html', url)));
     const headers = new Headers(page.headers);

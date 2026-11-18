@@ -1,0 +1,42 @@
+@font-face {
+  font-family: Pixelify;
+  src: url("/assets/fonts/pixelify-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+:root {
+  --ink: #182b48;
+  --line: #bfcbd4;
+  --blue: #18365d;
+  --gold: #ffcc49;
+  --paper: #f6f6ef;
+  --play-red: #204b72;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 1rem/1.6 system-ui, sans-serif; }
+.wrap { width: min(1192px, calc(100% - 36px)); margin-inline: auto; }
+a { color: #204f79; text-underline-offset: .2em; }
+a:focus-visible, summary:focus-visible { outline: 3px solid #e58c19; outline-offset: 3px; }
+.skip { position: absolute; left: 12px; top: -80px; z-index: 5; padding: .6rem; background: white; }
+.skip:focus { top: 4px; }
+.top { background: #101e35; color: #fff; border-bottom: 3px solid #4d7191; }
+.top .wrap, .footer-grid { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.top .wrap { min-height: 62px; position: relative; }
+.brand, .top nav a, .footer a { color: inherit; }
+.brand, .desktop-nav a, .mobile-links a { text-decoration: none; }
+.brand { font-weight: 800; font-size: 1.2rem; }
+.brand small { margin-left: .8rem; color: #c1d2dd; font-size: .8rem; font-weight: 500; }
+.desktop-nav { display: flex; gap: 1.5rem; font-size: .88rem; font-weight: 650; }
+.top nav a:hover, .brand:hover { color: var(--gold); }
+.mobile-nav { display: none; }
+.footer { background: #101e35; color: #e7edf2; padding: 32px 0; }
+.footer p { max-width: 52ch; font-size: .9rem; }
+.footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
+@media (max-width: 740px) {
+  .desktop-nav { display: none; }
+  .mobile-nav { display: block; }
+  .mobile-nav summary { padding: 10px; cursor: pointer; }
+  .mobile-links { display: grid; position: absolute; right: 0; top: 100%; z-index: 2; background: #162a47; min-width: 12rem; border: 1px solid #7894ac; }
+  .mobile-links a { padding: 10px 16px; }
+  .footer-grid { display: grid; }
+}
