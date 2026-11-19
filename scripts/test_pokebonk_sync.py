@@ -22,16 +22,21 @@ class SyncTests(unittest.TestCase):
  def test_lab_inventory_changes_retain_reviewed_domain(self):
   for added in [False,True]:
    with self.subTest(added=added):
-    candidate=deepcopy(self.c)
+    candidate=deepcopy(self.c);known=[x['id']for x in read('pokebonk-tools-reference.json')['lab']]
     if added:
      row=deepcopy(candidate['lab'][0]);row['id']='unreviewed-upgrade';candidate['lab'].append(row)
-    else:candidate['lab'].pop()
+    else:candidate['lab']=[x for x in candidate['lab']if x['id']!=known[-1]]
     candidate['lab'][0]['costs'][0]+=10
     candidate['items'][0]['desc']='Reviewed inventory, updated description'
     state,domains=assess(candidate,self.base)
-    self.assertEqual(state['accepted']['lab'],self.base['accepted']['lab'])
-    self.assertNotIn('lab',domains);self.assertIn('items',domains)
-    self.assertTrue(any('Lab inventory changed'in x for x in state['pending']))
+    self.assertIn('items',domains)
+    if added:
+     # 新增条目进入数据层，但必须留下"文字未审核"的待复核记录。
+     self.assertIn('lab',domains);self.assertTrue(any('unreviewed-upgrade'in x for x in state['pending']))
+    else:
+     # 删除已审核条目：保留原数据，等待人工复核。
+     self.assertEqual(state['accepted']['lab'],self.base['accepted']['lab'])
+     self.assertNotIn('lab',domains);self.assertTrue(any('Lab entries removed'in x for x in state['pending']))
     self.assertEqual(assess(candidate,state)[0],state)
  def test_duplicate_lab_ids_rejected(self):
   self.c['lab'].append(deepcopy(self.c['lab'][0]))
@@ -42,7 +47,7 @@ class SyncTests(unittest.TestCase):
  def test_adapter_change_keeps_combat_but_accepts_lab(self):
   self.c['adapter_ok']=False;self.c['items'][0]['desc']='Unreviewed';self.c['lab'][0]['costs'][0]+=10;s,domains=assess(self.c,self.base);self.assertEqual(s['accepted']['items'],self.base['accepted']['items']);self.assertIn('lab',domains);self.assertTrue(s['pending'])
  def test_new_entity_does_not_create_page(self):
-  self.c['items'].pop();s,_=assess(self.c,self.base);self.assertEqual(s['accepted']['items'],self.base['accepted']['items']);self.assertTrue(s['pending'])
+  known=read('pokebonk-tools-reference.json')['items'][-1]['key'];self.c['items']=[x for x in self.c['items']if x['key']!=known];s,_=assess(self.c,self.base);self.assertEqual(s['accepted']['items'],self.base['accepted']['items']);self.assertTrue(s['pending'])
  def test_changed_capture_requires_review(self):
   self.c['league'][0]['challenge']['goal']+=1;s,_=assess(self.c,self.base);self.assertEqual(s['accepted']['league'],self.base['accepted']['league']);self.assertTrue(s['pending'])
  def test_source_change_marks_prose_and_stays_pending(self):

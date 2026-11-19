@@ -29,31 +29,37 @@ def assess(candidate,previous=None):
   if not re.fullmatch('[a-f0-9]{64}',c.get(k,'')):raise ValueError('Invalid source hash')
  tool=read('pokebonk-tools-reference.json');prog=read('pokebonk-progression-reference.json');accepted=deepcopy((previous or {}).get('accepted',{}));pending=[];changes=[]
  domains={};lab=indexed(c.get('lab'),'id');oldlab=indexed(tool['lab'],'id')
- if lab.keys()!=oldlab.keys():
-  added=sorted(lab.keys()-oldlab.keys());removed=sorted(oldlab.keys()-lab.keys())
-  pending.append(f'Lab inventory changed (added: {added}; removed: {removed}); retain reviewed Lab data until inventory and schedules are reviewed.')
+ # 新增条目可以进入数据层（通过同样的形状校验）；删除条目仍需人工复核。新增条目的攻略文字不由脚本改写，写入 pending 提醒。
+ if oldlab.keys()-lab.keys():
+  pending.append(f'Lab entries removed ({sorted(oldlab.keys()-lab.keys())}); retain reviewed Lab data until schedules are reviewed.')
  else:
   for key,x in lab.items():
-   if type(x.get('max'))is not int or x['max']!=oldlab[key]['max']or len(x.get('costs',[]))!=x['max']:raise ValueError('Lab schedule shape changed')
+   if type(x.get('max'))is not int or (key in oldlab and x['max']!=oldlab[key]['max'])or len(x.get('costs',[]))!=x['max']:raise ValueError('Lab schedule shape changed')
    if any(type(v)is not int or v<=0 or v>100000000 for v in x['costs']):raise ValueError('Invalid Lab price')
   domains['lab']=c['lab']
+  if lab.keys()-oldlab.keys():pending.append(f'New Lab upgrades accepted into data ({sorted(lab.keys()-oldlab.keys())}); guide prose has not been reviewed for them.')
  if c.get('adapter_ok')and c.get('arches')!=prog['arches']:
   c['adapter_ok']=False;c['adapter_error']='Move archetype upgrade fields changed; combat data requires review.'
  items=indexed(c.get('items'),'key');olditems=indexed(tool['items'],'key')
- if items.keys()!=olditems.keys():pending.append('Item inventory changed; new or removed entries require review.')
+ if olditems.keys()-items.keys():pending.append(f'Items removed ({sorted(olditems.keys()-items.keys())}); retain reviewed item data until reviewed.')
  if c.get('adapter_ok'):
-  if items.keys()==olditems.keys():
+  if not olditems.keys()-items.keys():
    for x in items.values():
     if not isinstance(x.get('mods'),list)or not isinstance(x.get('desc'),str)or not 0<=x.get('rarity',-1)<=4:raise ValueError('Invalid item card')
    domains['items']=c['items']
+   if items.keys()-olditems.keys():pending.append(f'{len(items.keys()-olditems.keys())} new items accepted into data ({sorted(items.keys()-olditems.keys())}); guide prose, tiers and icons have not been reviewed for them.')
   moves=indexed(c.get('moves'),'key');oldmoves=indexed(prog['moves'],'key');roles=indexed(c.get('league'),'id');oldroles=indexed(tool['league'],'id');species=indexed(c.get('species'),'id')
-  if moves.keys()!=oldmoves.keys():pending.append('Move inventory changed; kit and template synchronization paused.')
+  if oldmoves.keys()-moves.keys():pending.append('Moves removed; kit and template synchronization paused.')
   else:
    for k,x in moves.items():
     if x.get('arch')not in prog['arches']or any(not isinstance(x.get(n),(int,float))for n in ['dmg','cd','count','area','dur','speed'])or x['cd']<=0:raise ValueError('Invalid move runtime')
    domains['moves']=c['moves']
-  if roles.keys()!=oldroles.keys():pending.append('League inventory changed; partner synchronization paused.')
+  newroles=sorted(roles.keys()-oldroles.keys())
+  if oldroles.keys()-roles.keys():pending.append('Partners removed from League; partner synchronization paused.')
   elif 'moves'in domains:
+   # 新增伙伴需要编辑内容（进化线、攻略页），脚本只同步已发布伙伴，并记录待补清单。
+   if newroles:pending.append(f'{len(newroles)} new League partners are not published yet (ids {newroles}); they need editorial pages before sync can include them.')
+   roles={k:v for k,v in roles.items()if k in oldroles}
    baseline=json.loads((ROOT/'config/pokebonk-sync.json').read_text(encoding='utf8'))
    if any(r.get('challenge')!=baseline['challenges'].get(str(k))for k,r in roles.items()):pending.append('Capture prerequisites changed; partner synchronization requires review.')
    else:
@@ -88,7 +94,7 @@ def assess(candidate,previous=None):
  if not news:raise ValueError('Missing release notes')
  if previous and (c['client_sha256']!=previous['source']['client_sha256']or c['config_sha256']!=previous['source']['config_sha256']):pending.append('Source changed: route, capture, mode, conditional effects and editorial recommendations retain their dated review until rechecked.')
  # Preserve an unresolved prose review across subsequent identical checks.
- if previous and previous.get('pending')and c['client_sha256']==previous['source']['client_sha256']and c['config_sha256']==previous['source']['config_sha256']:pending=list(dict.fromkeys(previous['pending']+pending))
+ if previous and previous.get('pending')and c['client_sha256']==previous['source']['client_sha256']and c['config_sha256']==previous['source']['config_sha256']:pending=list(dict.fromkeys(pending+[x for x in previous['pending']if x.startswith('Source changed')]))  # 只延续“文字未复核”提示；库存/适配器类提示每次按当前候选重新计算，避免陈旧告警
  result={'schema':1,'observed':c['observed'],'source':{k:c[k]for k in ['client','config','client_sha256','config_sha256']},'accepted':accepted,'news':news,'pending':pending}
  if not previous or digest(result)!=digest({k:v for k,v in previous.items()if k!='changed_at'}):result['changed_at']=datetime.now(timezone.utc).isoformat(timespec='seconds')
  else:result['changed_at']=previous['changed_at']
