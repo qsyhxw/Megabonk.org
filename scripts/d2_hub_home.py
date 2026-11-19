@@ -61,14 +61,8 @@ def home(shell, ext, figure):
         f'<details class="d2-faq-item"><summary>{escape(f["q"])}</summary><p>{escape(f["a"])}</p>'
         f'<a class="d2-faq-more" href="{href(f["link"])}">Full guide →</a></details>' for f in m['faq'])
     faq = f'<section class="d2-band" id="faq"><h2>FAQ</h2><p class="d2-lede">Quick answers; each links to the full guide.</p><div class="d2-faq">{faq_items}</div></section>'
-    sources = [('https://d2survivors.lol/faq/', 'D2 Survivors · original FAQ', 'Identity, platforms and mode boundaries; checked 3 November 2026.'),
-               ('https://d2survivors.lol/play/', 'D2 Survivors · original browser game', 'Actual interface capture and displayed menu build 20261102.2. No completed run or account migration claim.'),
-               ('https://zombodotcom.github.io/d2survivors-releases/', 'GitHub Pages · zombodotcom project', 'Separate publisher and launcher; identity check, not an installation test.'),
-               ('https://d2survivors.lol/wiki/getting-started/', 'D2 Survivors · original reference', 'Current camp/waypoint and file transition documentation; can differ from the observed playable build.')]
-    src = ('<section class="sources" id="sources"><h2>Reference pages checked</h2><p>By Megabonk.org editors · 3 November 2026. This is an independent game guide, not a Blizzard or developer website. Reference pages from one project share one publisher. Version and test limits are stated on each task page.</p><ol>'
-           + ''.join(f'<li id="source-{i}">{ext(u, l)} — {d}</li>' for i, (u, l, d) in enumerate(sources, 1))
-           + '</ol><a href="#guide">Back to guide ↑</a></section>')
-    body = f'<div class="d2-front">{hero}{tasks}</div>{versions}{updates}{grouped}{about}{faq}{src}'
+    # v3.20：生成页不展示公开来源列表；来源与核对依据保留在数据/研究材料中
+    body = f'<div class="d2-front">{hero}{tasks}</div>{versions}{updates}{grouped}{about}{faq}'
     body = re.sub(r'(?<![>\w-])\[(\d+)\]', lambda x: f'<sup class="ref"><a href="#source-{x[1]}">[{x[1]}]</a></sup>', body)
     return shell(P, 'D2 Survivors Guides: Play, Setup, Skills & Saves',
                  'Find the right D2 Survivors edition, play in a browser window, prepare your game files and follow guides for starting, saving, Druid skills and speed stats.',
