@@ -1,0 +1,5 @@
+#!/bin/sh
+# 推送到 main 前，在临时 worktree 中复现 validate-integrations 工作流（见 scripts/prepush_ci.py）。
+# 启用一次：git config core.hooksPath .githooks
+# 跳过（不推荐）：git push --no-verify
+exec python "$(git rev-parse --show-toplevel)/scripts/prepush_ci.py" --from-hook

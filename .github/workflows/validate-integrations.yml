@@ -19,8 +19,12 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify guard rejects integration defects
+        id: s01
+        if: always()
         run: python scripts/test_integration_guard.py
       - name: Rebuild PokeBonk from versioned source
+        id: s02
+        if: always()
         run: |
           python scripts/derive_pokebonk_evolution.py
           python scripts/pokebonk_loadouts.py
@@ -28,74 +32,130 @@ jobs:
           python scripts/check_pokebonk_editorial.py
           python scripts/content_gate.py . --allow config/content-gate-allow.json $(find pokebonk -name index.html ! -path '*/about/*' ! -path '*/contact/*' ! -path '*/privacy/*')
       - name: Rebuild PokeSurvivor from versioned source
+        id: s03
+        if: always()
         run: python scripts/build_poke_survivor.py
       - name: Rebuild main-site longtail guides
+        id: s04
+        if: always()
         run: python scripts/build_longtail_main.py
       - name: Rebuild Survivor Ace task pages
+        id: s05
+        if: always()
         run: python scripts/build_survivor_ace.py
       - name: Rebuild Azeroth Survivors guides
+        id: s06
+        if: always()
         run: |
           python scripts/build_azeroth_survivors.py
           python scripts/check_azeroth_editorial.py
           python scripts/content_gate.py . --allow config/content-gate-allow.json $(find azeroth-survivors -name index.html)
           python scripts/check_remaining_editorial.py
       - name: Verify Azeroth planner rules and safe imports
+        id: s07
+        if: always()
         run: node scripts/test_azeroth_planner.cjs
       - name: Rebuild and verify Arena of Champions entry guide
+        id: s08
+        if: always()
         run: |
           python scripts/build_arena_champions.py
           python scripts/register_page.py . arena-of-champions --check
           python scripts/content_gate.py --theme . arena-of-champions
           python scripts/content_gate.py . arena-of-champions/index.html
       - name: Rebuild Ball x Pit guides
+        id: s09
+        if: always()
         run: python scripts/build_ball_x_pit.py
       - name: Rebuild Soulstone Survivors guides
+        id: s10
+        if: always()
         run: python scripts/build_soulstone_survivors.py
       - name: Rebuild Warhammer Survivors reviewed task
+        id: s11
+        if: always()
         run: python scripts/build_warhammer_survivors.py
       - name: Rebuild D2 Survivors task pages
+        id: s12
+        if: always()
         run: python scripts/build_d2_survivors.py
       - name: Rebuild Spires of Azeroth section
+        id: s13
+        if: always()
         run: python scripts/build_spires_of_azeroth.py
       - name: Rebuild Poke Arena original-host launch guide
+        id: s14
+        if: always()
         run: python scripts/build_pokearena.py
       - name: Rebuild reviewed Pokepath tasks
+        id: s15
+        if: always()
         run: python scripts/build_pokepath.py
       - name: Rebuild reviewed Revenant Survivors tasks
+        id: s16
+        if: always()
         run: python scripts/build_revenant_survivors.py
       - name: Rebuild reviewed Midgard Survivors tasks
+        id: s17
+        if: always()
         run: |
           python -m pip install beautifulsoup4==4.14.3
           python scripts/build_midgard_survivors.py
       - name: Rebuild reviewed Brotato tasks
+        id: s18
+        if: always()
         run: python scripts/build_brotato.py
       - name: Rebuild Pokelit original-host entry
+        id: s19
+        if: always()
         run: python scripts/build_pokelit.py
       - name: Rebuild PB Ranked original-host entry
+        id: s20
+        if: always()
         run: python scripts/build_pokemon_battlegrounds.py
       - name: Rebuild PokéIsaac playable entry
+        id: s21
+        if: always()
         run: python scripts/build_pokeisaac.py
       - name: Rebuild PokéVersus playable entry
+        id: s22
+        if: always()
         run: python scripts/build_pokeversus.py
       - name: Rebuild PokéSolaire playable entry
+        id: s23
+        if: always()
         run: python scripts/build_poke_solaire.py
       - name: Rebuild PokeRogue decision guides
+        id: s24
+        if: always()
         run: python scripts/build_pokerogue.py
       - name: Rebuild Hordes of Azeroth guides
+        id: s25
+        if: always()
         run: python scripts/build_hordes_of_azeroth.py
       - name: Rebuild PokeDive lightweight tasks
+        id: s26
+        if: always()
         run: python scripts/build_pokedive.py
       - name: Rebuild Vampire Survivors lightweight tasks
+        id: s27
+        if: always()
         run: |
           python scripts/build_vampire_survivors.py
           node scripts/test_vampire_compatibility.cjs
       - name: Rebuild Risk of Rain 2 lightweight tasks
+        id: s28
+        if: always()
         run: |
           python scripts/build_risk_of_rain_2.py
           node scripts/test_ror2_compatibility.cjs
       - name: Rebuild Mythic Survivors installation task
+        id: s29
+        if: always()
         run: python scripts/build_mythic_survivors.py
       - name: Build and verify game-scoped discovery
+        id: s30
+        if: always()
         run: |
           python scripts/build_game_discovery.py
           python scripts/check_game_navigation.py
@@ -104,29 +164,54 @@ jobs:
           python scripts/check_game_seo.py
           python scripts/test_game_seo.py
       - name: Verify page-specific game images
+        id: s31
+        if: always()
         run: |
           python scripts/check_guide_images.py
           python scripts/test_image_citation_modes.py
           python scripts/check_game_image_captions.py
       - name: Verify public-source sync rejects unsafe updates
+        id: s32
+        if: always()
         run: |
           python scripts/test_pokebonk_sync.py
           python scripts/test_pokebonk_sync_render.py
           python scripts/test_azeroth_sync.py
 
       - name: Verify source-derived PokeBonk task data
+        id: s33
+        if: always()
         run: python scripts/check_pokebonk_depth.py
       - name: Verify PokeBonk fixed-panel engine fixtures
+        id: s34
+        if: always()
         run: node scripts/test_pokebonk_compare.cjs
       - name: Verify current move, support and purchase decisions
+        id: s35
+        if: always()
         run: node scripts/test_pokebonk_decisions.cjs
       - name: Verify recorded move upgrades and planned budgets
+        id: s36
+        if: always()
         run: node scripts/test_pokebonk_progression.cjs
       - name: Verify shared game-section layout and comparison controls
+        id: s37
+        if: always()
         run: python scripts/check_guide_layout.py
       - name: Verify clean URLs and matching sitemap and page inventories
+        id: s38
+        if: always()
         run: python -m unittest tests.test_url_suffix_policy
       - name: Compare integration expectations with previous Git revision
+        id: s39
+        if: always()
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: python scripts/ci_integrations.py
+
+      - name: 汇总失败步骤
+        id: summary
+        if: always()
+        env:
+          STEPS_JSON: ${{ toJSON(steps) }}
+        run: python scripts/ci_summary.py .github/workflows/validate-integrations.yml

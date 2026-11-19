@@ -59,4 +59,5 @@ def write_html(path, text, **kwargs):
                 text = re.sub(r'<body(?=[\s>])', '<body data-v320="1"', text, count=1)
             # Re-apply the SEO editor so its own idempotence check still holds.
             text = edit_seo(path, text)
+    kwargs.setdefault('newline', '\n')  # 统一写 LF，与仓库和 CI 一致；Windows 默认会写成 CRLF
     return path.write_text(text, **kwargs)
