@@ -1,7 +1,8 @@
 name: Sync PokeBonk public sources
-# 2026-11-20 暂停定时运行：线上 PokeBonk 已升级到 0.10.10，适配器与配置结构不再匹配（见 scripts/pokebonk_sync.py 的 pending 记录），
-# 已发布数据保持 0.8.76 不变。恢复前需先完成人工审核。手动运行仍可用（dry_run 仅校验，不提交）。
+# 2026-11-20 适配 0.10.x 包结构后恢复定时：机制函数指纹已变，引擎类数据保持上次审核值并记入 pending，不会自动改攻略结论。
 on:
+  schedule:
+    - cron: '41 */6 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
