@@ -23,7 +23,7 @@ def apply_compare(ctx):
  manager='<div class="draft-manager"><button type="button" id="rename-draft">Rename selected</button><button type="button" id="update-draft">Replace selected with current draft</button><button type="button" id="export-drafts">Export backup JSON</button><label>Import a backup <input type="file" id="import-drafts" accept="application/json,.json"></label><p>Import adds validated drafts; the existing list is kept. Maximum 20 total. Names and planning URLs stay on this device unless you share or export them.</p><h3>Compare two saved drafts</h3><label>Draft A <select id="draft-a"></select></label><label>Draft B <select id="draft-b"></select></label><button type="button" id="compare-drafts">Compare drafts</button><div id="draft-difference" aria-live="polite"></div></div>'
  s=s.replace('<p id="draft-status"',manager+'<p id="draft-status"',1)
  saved=re.search(r'<section class="plan-saves".*?</section>',s,re.S).group();s=s.replace(saved,'',1).replace('</form>','</form>'+saved,1);p['html']=s
- old=ctx['DATE'],ctx['VERSION'];ctx['DATE'],ctx['VERSION']='October 28, 2026','v0.8.63'
+ old=ctx['DATE'],ctx['VERSION'];ctx['DATE'],ctx['VERSION']='October 28, 2026','v0.8.63 wording · game data v0.10.11'
  rows=[]
  for r in D['reactions']:
   factor=f'{r["factor"]:g}×'if r['factor']else'1.4 + 0.1 × poison stacks'if r['id']=='toxic-gas'else'Application condition, not a damage multiplier'
