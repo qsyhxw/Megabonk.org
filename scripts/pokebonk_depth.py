@@ -7,7 +7,7 @@ D=load_reference('pokebonk-tools-reference.json')
 FIELDS=['maxHp','armor','moveSpeed','physical','special','damage']
 def baseline(raw,stage):
  total=sum(raw.values());n=lambda k:raw[k]/total*6;growth=1+.12*stage
- return dict(maxHp=math.floor((70+45*n('hp'))*growth+.5),armor=6*n('def')+3*n('spd'),moveSpeed=.92+.12*n('spe'),physical=.82+.2*n('atk'),special=.82+.2*n('spa'),damage=growth)
+ return dict(maxHp=math.floor((70+45*n('hp'))*growth+.5),armor=6*n('def')+3*n('spd'),moveSpeed=.92+.12*n('spe'),physical=max(.85,1.02+.3*(n('atk')-1)),special=max(.85,1.02+.3*(n('spa')-1)),damage=growth)
 def stat_text(x):
  return f"HP {x['maxHp']} · armor {x['armor']:.1f} · speed ×{x['moveSpeed']:.2f} · physical ×{x['physical']:.2f} / special ×{x['special']:.2f} · growth damage ×{x['damage']:.2f}"
 def apply_depth(ctx):
