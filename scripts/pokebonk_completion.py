@@ -280,5 +280,5 @@ def apply_completion(ctx):
     html=html.replace('v0.8.48 / build mvnw9v2s','v0.8.55 / build mvob1c8t').replace('checked October 25','checked October 26')
     pages[P]['html']=html
     # Keep the unchanged starter answer but connect the now-separate comparative task.
-    pages[P+'starters/']['html']=pages[P+'starters/']['html'].replace('<h2>What a PokeBonk tier list would need</h2>','<h2>What a PokeBonk tier list would need</h2><p>For a broader role comparison, our <a href="/pokebonk/tier-list/">role recommendations and 79-kit reference</a> exposes its method and unlock trade-offs. It retains the same no-invented-win-rate limit.</p>')
+    pages[P+'starters/']['html']=pages[P+'starters/']['html'].replace('<h2>What would make a ranking meaningful</h2>','<h2>What would make a ranking meaningful</h2><p>For a broader role comparison, our <a href="/pokebonk/tier-list/">role recommendations and 79-kit reference</a> exposes its method and unlock trade-offs. It retains the same no-invented-win-rate limit.</p>')
     ctx['DATE'],ctx['VERSION']=old
