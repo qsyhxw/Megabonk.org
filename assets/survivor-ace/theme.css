@@ -1,0 +1,140 @@
+/* Survivor: Ace 专区主题（SOP v3.22，02 §2.1）。首页、分页、About/Contact、404 全部加载本文件。
+   视觉来源：游戏官网与商店素材——蓝天白云 + 亮黄漫画描边字、深灰顶栏、橙黄飞机，局内画面是钴蓝/紫蓝底、青色血条、黄色弹幕。
+   标题字体 Bangers（OFL，本站托管）。布局骨架仍由 guide-article-layout.css 提供；不加载任何其他游戏目录的 CSS。 */
+@font-face{font-family:Bangers;src:url("/assets/fonts/bangers-400-latin.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+:root{
+ --cobalt:#1f3fae;--cobalt-dk:#14286f;--cyan:#35d6e8;--yellow:#ffd21c;--yellow-dk:#e0a800;--orange:#f58a1f;--red:#e5483b;
+ --charcoal:#242424;--navy:#16264a;--sky:#e8f3ff;--card:#ffffff;
+ --display:Bangers,"Arial Rounded MT Bold","Hiragino Maru Gothic ProN","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
+ --cjk:"Hiragino Sans","Noto Sans JP","Noto Sans TC","Microsoft JhengHei","Yu Gothic",system-ui,sans-serif;
+ --body:system-ui,-apple-system,"Segoe UI","Noto Sans JP","Noto Sans TC","Microsoft JhengHei",sans-serif;
+ /* 共享骨架读取的变量 */
+ --paper:var(--sky);--white:var(--card);--ink:var(--navy);--muted:#46557a;--line:#b9cbe8;--pale:#dbe9fb;--green:#1537a8;--gold:var(--yellow)
+}
+body.sa-theme{margin:0;background:var(--paper);color:var(--ink);font:17px/1.75 var(--body)}
+.sa-theme *{box-sizing:border-box}
+.sa-theme html{scroll-padding-top:2rem}
+.sa-theme a{color:var(--green);text-underline-offset:4px}
+.sa-theme a:hover{text-decoration-thickness:2px}
+.sa-theme a:focus-visible,.sa-theme summary:focus-visible,.sa-theme button:focus-visible,.sa-theme [tabindex]:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+.sa-theme img{max-width:100%;height:auto;display:block}
+.sa-theme h1,.sa-theme h2,.sa-theme h3,.sa-theme .brand,.sa-theme .button{font-family:var(--display);font-weight:400;letter-spacing:.02em;line-height:1.12;color:var(--navy)}
+html[lang=ja] .sa-theme h1,html[lang=ja] .sa-theme h2,html[lang=ja] .sa-theme h3,html[lang=zh-Hant] .sa-theme h1,html[lang=zh-Hant] .sa-theme h2,html[lang=zh-Hant] .sa-theme h3{font-family:var(--cjk);font-weight:800;letter-spacing:0;line-height:1.3}
+.sa-theme .wrap{width:min(1180px,calc(100% - 64px));margin:auto}
+.sa-theme .skip{position:absolute;top:-90px;left:12px;background:var(--yellow);color:var(--navy);padding:10px 14px;z-index:40;font-weight:700}
+.sa-theme .skip:focus{top:10px}
+.sa-theme .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sa-theme code{font-family:ui-monospace,Consolas,monospace;background:#fff8d6;border:1px solid #e9d27a;border-radius:4px;padding:1px 6px;color:#3b2f00}
+
+/* ===== 页眉（首页、分页、信任页、404 同一个） ===== */
+.sa-theme .top{background:var(--charcoal);position:relative;z-index:5}
+.sa-theme .top::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:5px;background:repeating-linear-gradient(-45deg,var(--yellow) 0 14px,var(--charcoal) 14px 28px)}
+.sa-theme .top>.wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:74px}
+.sa-theme .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--yellow);font-size:30px;line-height:1;text-shadow:2px 2px 0 #000}
+.sa-theme .brand img{width:44px;height:44px;flex:none}
+.sa-theme .brand small{display:block;font:700 11px/1.5 var(--body);color:#fff;letter-spacing:.14em;text-transform:uppercase;text-shadow:none;margin-top:5px}
+.sa-theme .desktop-nav{display:flex;align-items:center;gap:6px}
+.sa-theme .desktop-nav a,.sa-theme .mobile-links a{color:#fff;text-decoration:none;font:700 14px/1 var(--body);letter-spacing:.04em;text-transform:uppercase;padding:14px 14px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
+.sa-theme .desktop-nav a:hover{background:#3a3a3a;color:var(--yellow)}
+.sa-theme .desktop-nav a[aria-current=page]{background:var(--yellow);color:var(--navy)}
+.sa-theme .mobile-nav{display:none;position:relative}
+.sa-theme .mobile-nav summary{list-style:none;cursor:pointer;color:var(--navy);background:var(--yellow);border-radius:999px;padding:11px 18px;min-height:44px;font:700 14px/1.4 var(--body);display:flex;align-items:center}
+.sa-theme .mobile-nav summary::-webkit-details-marker{display:none}
+.sa-theme .mobile-links{position:absolute;right:0;top:calc(100% + 10px);display:grid;min-width:230px;background:var(--charcoal);border:2px solid var(--yellow);border-radius:14px;padding:8px;z-index:30}
+.sa-theme .mobile-links a{border-radius:10px}
+.sa-theme .mobile-links a[aria-current=page]{background:var(--yellow);color:var(--navy)}
+
+/* ===== 通用组件 ===== */
+.sa-theme .tag{display:inline-block;background:var(--yellow);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:3px 12px;font:800 12px/1.5 var(--body);letter-spacing:.1em;text-transform:uppercase}
+.sa-theme .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border:3px solid var(--navy);border-radius:14px;background:var(--yellow);color:var(--navy);text-decoration:none;font-size:19px;box-shadow:0 4px 0 var(--navy);transition:transform .08s}
+.sa-theme .button:hover{transform:translateY(1px);box-shadow:0 3px 0 var(--navy);background:#ffdf4d}
+.sa-theme .button.secondary{background:#fff}
+.sa-theme .meta{color:var(--muted);font-size:14px}
+.sa-theme .table-wrap{overflow-x:auto;background:#fff;border:3px solid var(--navy);border-radius:14px;margin:20px 0;box-shadow:4px 4px 0 var(--navy)}
+.sa-theme table{border-collapse:collapse;width:100%;font-size:15px}
+.sa-theme th{text-align:left;background:var(--cobalt);color:#fff;font:800 12px/1.4 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:12px 14px;white-space:nowrap}
+.sa-theme td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.sa-theme tbody tr:nth-child(even) td{background:#f3f8ff}
+.sa-theme .ref a{text-decoration:none;font-size:.8em}
+
+/* ===== 文章页（About/Contact/404 共用 .legal） ===== */
+.sa-theme main.wrap{padding-bottom:28px}
+.sa-theme .crumbs{font-size:13px;color:var(--muted);padding:22px 0 0}
+.sa-theme .crumbs a{color:var(--muted);text-decoration:none}
+.sa-theme .crumbs a:hover{color:var(--cobalt);text-decoration:underline}
+.sa-theme .crumbs [aria-current]{color:var(--navy);font-weight:700}
+.sa-theme .article-head{padding:20px 0 20px;max-width:1040px}
+.sa-theme .article-head h1{font-size:clamp(2.2rem,4.6vw,3.6rem);margin:12px 0 18px}
+.sa-theme .article-head .answer{background:#fff;border:3px solid var(--navy);border-left:12px solid var(--yellow);border-radius:14px;padding:18px 22px;font-size:1.08rem;line-height:1.7;max-width:78ch;box-shadow:4px 4px 0 var(--navy);margin:0}
+.sa-theme .article-head .meta{margin:14px 0 6px}
+.sa-theme .article-layout>.toc{background:#fff;border:2px solid var(--line);border-radius:14px}
+.sa-theme .toc strong{color:var(--navy)}
+.sa-theme .toc a{background:var(--sky);border:2px solid var(--line);border-radius:999px;color:var(--cobalt-dk);text-decoration:none;font-weight:700}
+.sa-theme .toc a:hover{background:var(--yellow);border-color:var(--navy);color:var(--navy)}
+.sa-theme .prose>section h2,.sa-theme .legal h2{font-size:1.9rem;margin:2.2rem 0 .7rem;padding-left:16px;border-left:10px solid var(--yellow)}
+html[lang=ja] .sa-theme .prose>section h2,html[lang=zh-Hant] .sa-theme .prose>section h2{font-size:1.5rem}
+.sa-theme .prose h3{font-size:1.25rem}
+.sa-theme .prose li{padding:3px 0}
+.sa-theme .prose li::marker{color:var(--cobalt);font-weight:800}
+.sa-theme .prose figure img{margin-inline:auto}
+.sa-theme .legal{max-width:78ch;padding:12px 0 24px}
+.sa-theme .legal h1{font-size:clamp(2.2rem,4.6vw,3.4rem);margin:10px 0 8px}
+.sa-theme .legal section{margin:0 0 1.4rem}
+.sa-theme .legal h2{font-size:1.6rem}
+.sa-theme .sources{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 22px 16px;font-size:14px;margin-top:2.4rem}
+.sa-theme .sources h2{font-size:1.35rem;border:0;box-shadow:none;padding-left:0}
+.sa-theme .back{font-weight:700}
+.sa-theme .flight-note{background:#fff;border:3px solid var(--navy);border-left:12px solid var(--cyan);border-radius:14px;padding:16px 22px;margin:26px 0;box-shadow:4px 4px 0 var(--navy)}
+.sa-theme .flight-note h3{margin:0 0 6px}
+.sa-theme .related,.sa-theme .related-tasks{margin-top:2.4rem;padding-top:1.2rem;border-top:3px dashed var(--line)}
+.sa-theme .related{display:flex;flex-wrap:wrap;gap:10px}
+.sa-theme .related h2{flex:0 0 100%;margin:0 0 4px}
+.sa-theme .related>a,.sa-theme .related-links a{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;background:#fff;border:2px solid var(--navy);border-radius:12px;color:var(--navy);font-weight:700;text-decoration:none;box-shadow:3px 3px 0 var(--navy)}
+.sa-theme .related>a:hover,.sa-theme .related-links a:hover{background:var(--yellow)}
+.sa-theme .related-links{display:flex;flex-wrap:wrap;gap:10px}
+
+/* FAQ / details */
+.sa-theme details{background:#fff;border:2px solid var(--line);border-radius:12px;margin:10px 0;padding:0 18px}
+.sa-theme details[open]{border-color:var(--navy)}
+.sa-theme details summary{cursor:pointer;padding:14px 0;font-weight:800;color:var(--navy);min-height:44px}
+.sa-theme details p{margin:0 0 14px}
+
+/* ===== 专区页脚（register_page.py 从页面清单生成） ===== */
+.sa-theme .site-footer{background:var(--charcoal);color:#cfd6e6;margin-top:36px;padding:42px 0 0;font-size:14px;position:relative;border-top:5px solid var(--yellow)}
+.sa-theme footer.site-footer .footer-grid{display:grid;grid-template-columns:1.6fr repeat(4,minmax(0,1fr));gap:28px 32px}
+.sa-theme .site-footer h2{font:400 18px/1.2 var(--display);letter-spacing:.08em;color:var(--yellow);margin:0 0 10px}
+.sa-theme .site-footer .footer-col a{display:block;color:#fff;text-decoration:none;padding:5px 0;line-height:1.45}
+.sa-theme .site-footer .footer-col a:hover,.sa-theme .footer-info a:hover{color:var(--yellow);text-decoration:underline}
+.sa-theme .site-footer .footer-brand strong{font:400 26px/1.1 var(--display);color:var(--yellow);letter-spacing:.05em;text-shadow:2px 2px 0 #000}
+.sa-theme .site-footer .footer-brand a{text-decoration:none}
+.sa-theme .site-footer .footer-brand p{margin:10px 0 0;line-height:1.6;max-width:36ch}
+.sa-theme .site-footer .footer-version{margin:10px 0 0;font-size:12px;color:#aab4cc;border-top:1px solid #444;padding-top:8px}
+.sa-theme .footer-info{border-top:1px solid #444;margin-top:30px;padding:16px 0 22px}
+.sa-theme .footer-info .wrap{display:flex;flex-wrap:wrap;gap:6px 24px}
+.sa-theme .footer-info a{color:#cfd6e6;text-decoration:none;font-size:13px;padding:8px 0;min-height:44px;display:inline-flex;align-items:center}
+
+/* ===== 响应式（手机优先断点：≤900 折叠导航，≤600 收窄） ===== */
+@media(max-width:1100px){.sa-theme footer.site-footer .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.sa-theme .site-footer .footer-brand{grid-column:1/-1}}
+@media(max-width:900px){.sa-theme .desktop-nav{display:none}.sa-theme .mobile-nav{display:block}.sa-theme footer.site-footer .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+ body.sa-theme{font-size:16px}
+ .sa-theme .wrap{width:calc(100% - 32px)}
+ .sa-theme .top>.wrap{min-height:64px}
+ .sa-theme .brand{font-size:24px}.sa-theme .brand img{width:38px;height:38px}.sa-theme .brand small{font-size:10px}
+ .sa-theme .crumbs{padding-top:14px}
+ .sa-theme .crumbs>*{display:none}.sa-theme .crumbs>a:nth-last-of-type(1){display:inline}.sa-theme .crumbs>a:nth-last-of-type(1)::before{content:"‹ "}
+ .sa-theme .article-head{padding-top:6px}
+ .sa-theme .article-head h1{font-size:2.2rem}
+ html[lang=ja] .sa-theme .article-head h1,html[lang=zh-Hant] .sa-theme .article-head h1{font-size:1.7rem}
+ .sa-theme .article-head .answer{padding:14px 16px;font-size:1rem;border-left-width:8px}
+ .sa-theme .prose>section h2{font-size:1.55rem}
+ .sa-theme th,.sa-theme td{padding:9px 10px}
+ .sa-theme .site-footer{padding-top:30px}
+ .sa-theme footer.site-footer .footer-grid{gap:22px 16px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+html[lang=ja] body.sa-theme :is(h1,h2,h3),html[lang=zh-Hant] body.sa-theme :is(h1,h2,h3){letter-spacing:0;word-spacing:0}
+/* 截图取景：竖图不超过视口 70% 高（00 §3），居中 */
+.sa-theme figure.game-image img{width:auto;max-width:100%;max-height:min(70vh,560px);margin-inline:auto}
+.sa-theme figure.game-image.portrait{max-width:420px}

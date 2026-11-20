@@ -107,7 +107,7 @@ def footer_html(m):
         rows = [p for sid in g["sections"] for p in m["pages"] if p.get("footer") and p.get("section") == sid][:6]
         if rows:
             cols.append(f'<div class="footer-col"><h2>{e(g["label"])}</h2>' + "".join(f'<a href="{url(m, p["slug"])}">{e(p["title"])}</a>' for p in rows) + "</div>")
-    recent = sorted((p for p in m["pages"] if p["slug"] and not p.get("plain") and p.get("updated")), key=lambda p: p["updated"], reverse=True)[:3]
+    recent = sorted((p for p in m["pages"] if p["slug"] and (not p.get("plain") or p.get("recent")) and p.get("updated")), key=lambda p: p["updated"], reverse=True)[:3]
     if recent:
         ver = f'<p class="footer-version">{e(f["version"])}</p>' if f.get("version") else ""
         cols.append('<div class="footer-col"><h2>Recently updated</h2>' + "".join(f'<a href="{url(m, p["slug"])}">{e(p["title"])}</a>' for p in recent) + ver + "</div>")

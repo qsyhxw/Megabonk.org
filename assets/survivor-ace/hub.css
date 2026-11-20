@@ -1,0 +1,69 @@
+/* Survivor: Ace 首页布局（仅首页加载）。颜色、字体、页眉页脚、表格、FAQ 来自 theme.css。 */
+.sa-hub main#main{display:block}
+.sa-hub .hub-hero{position:relative;overflow:hidden;background:radial-gradient(900px 420px at 82% 12%,#4d6fe0 0,rgba(77,111,224,0) 70%),linear-gradient(160deg,#1a2f86 0%,#2a2a9c 55%,#4a2aa0 100%);border-bottom:5px solid var(--navy);padding:30px 0 34px}
+.sa-hub .hub-hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.05) 0 2px,transparent 2px 46px);pointer-events:none}
+.sa-hub .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:44px;align-items:center}
+.sa-hub .hub-hero h1{font-size:clamp(3rem,5.4vw,4.8rem);color:var(--yellow);margin:14px 0 14px;text-shadow:4px 4px 0 #0b1646,-1px -1px 0 #0b1646,1px -1px 0 #0b1646,-1px 1px 0 #0b1646;line-height:1}
+.sa-hub .hub-hero .lead{color:#eaf0ff;font-size:18px;line-height:1.65;max-width:50ch;margin:0 0 20px}
+.sa-hub .hub-hero .lead a{color:#fff}
+.sa-hub .status-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px;padding:0;list-style:none}
+.sa-hub .status-row li{background:rgba(10,16,60,.55);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:999px;padding:5px 13px;font-size:13px;font-weight:700;line-height:1.4}
+.sa-hub .status-row li.flag{background:var(--yellow);color:var(--navy);border-color:var(--navy)}
+.sa-hub .actions{display:flex;flex-wrap:wrap;gap:14px}
+.sa-hub .hero-art{margin:0;border:4px solid var(--navy);border-radius:20px;overflow:hidden;background:#0b1646;box-shadow:8px 8px 0 #0b1646;transform:rotate(1.5deg)}
+.sa-hub .hero-art img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 56%}
+.sa-hub .hero-art figcaption{padding:8px 14px;background:var(--yellow);color:var(--navy);font:700 12px/1.5 var(--body);letter-spacing:.04em}
+
+/* 任务入口（首屏下方，6–9 个，手机 2 列） */
+.sa-hub .section-block{padding:26px 0 6px}
+.sa-hub .section-block>h2{font-size:clamp(2rem,3.6vw,2.8rem);margin:0 0 6px}
+.sa-hub .section-block>.sub{margin:0 0 18px;color:var(--muted)}
+.sa-hub .task-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:0;padding:0;list-style:none}
+.sa-hub .task-card{display:flex;flex-direction:column;gap:6px;height:100%;padding:16px;background:#fff;border:3px solid var(--navy);border-radius:16px;box-shadow:5px 5px 0 var(--navy);color:var(--ink);text-decoration:none;position:relative;transition:transform .08s}
+.sa-hub .task-card:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--navy);background:#fffbe2}
+.sa-hub .task-card img{width:52px;height:52px}
+.sa-hub .task-card h3{font-size:1.2rem;margin:4px 0 0;line-height:1.25}
+html[lang=en] .sa-hub .task-card h3{font-size:1.45rem}
+.sa-hub .task-card p{margin:0;font-size:14px;line-height:1.55;color:var(--muted)}
+.sa-hub .task-card .go{margin-top:auto;padding-top:6px;font-weight:800;color:var(--cobalt)}
+.sa-hub .task-card .lang{position:absolute;top:14px;right:14px;background:var(--cobalt);color:#fff;border-radius:999px;padding:2px 10px;font:800 11px/1.6 var(--body);letter-spacing:.06em}
+
+/* 数据预览 + 最近更新 */
+.sa-hub .preview-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:26px;align-items:start}
+.sa-hub .preview-grid h2{font-size:clamp(1.8rem,3vw,2.4rem);margin:0 0 8px}
+.sa-hub .preview-grid .table-wrap{margin:12px 0}
+.sa-hub .preview-grid .note{font-size:14px;color:var(--muted);margin:6px 0 0}
+.sa-hub .update-list{list-style:none;margin:12px 0 0;padding:0;background:#fff;border:3px solid var(--navy);border-radius:14px;box-shadow:4px 4px 0 var(--navy)}
+.sa-hub .update-list li{display:grid;grid-template-columns:92px minmax(0,1fr);gap:4px 12px;padding:12px 16px;border-top:1px solid var(--line)}
+.sa-hub .update-list li:first-child{border-top:0}
+.sa-hub .update-list time{font:800 12px/1.8 var(--body);color:var(--cobalt);letter-spacing:.04em}
+.sa-hub .update-list a{font-weight:800}
+.sa-hub .update-list span{grid-column:2;font-size:14px;color:var(--muted);line-height:1.5}
+
+/* 下方正文（沿用 prose 规则，居中窄栏） */
+.sa-hub .hub-sections{max-width:860px;margin:0 auto;padding:12px 0 40px}
+.sa-hub .hub-sections>section h2{font-size:clamp(1.8rem,3vw,2.3rem)}
+.sa-hub .hub-sections p{max-width:72ch}
+.sa-hub .hub-sections .table-wrap{max-width:none}
+.sa-hub .diagram{background:#fff;border:3px solid var(--navy);border-radius:14px;padding:10px;margin:22px 0;box-shadow:4px 4px 0 var(--navy)}
+.sa-hub .diagram figcaption{font-size:12px;color:var(--muted);padding:6px 4px 0}
+.sa-hub #faq details p a{font-weight:700}
+
+@media(max-width:1050px){.sa-hub .task-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sa-hub .preview-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.sa-hub .hero-grid{grid-template-columns:1fr;gap:26px}.sa-hub .hero-art{max-width:560px;transform:none;box-shadow:6px 6px 0 #0b1646}.sa-hub .hub-hero{padding:34px 0 38px}}
+@media(max-width:600px){
+ .sa-hub .hub-hero{padding:22px 0 26px}
+ .sa-hub .hub-hero h1{font-size:2.7rem;margin:8px 0 8px}
+ .sa-hub .hub-hero .lead{font-size:15.5px;line-height:1.55;margin-bottom:12px}
+ .sa-hub .status-row{margin-bottom:16px}.sa-hub .status-row li{font-size:12px;padding:4px 10px}
+ .sa-hub .actions{gap:10px}.sa-hub .button{font-size:17px;padding:10px 16px;flex:1 1 150px}
+ .sa-hub .hero-art img{aspect-ratio:21/8}
+ .sa-hub .hero-art figcaption{display:none}
+ .sa-hub .section-block{padding-top:26px}
+ .sa-hub .task-grid{gap:12px}
+ .sa-hub .task-card{padding:12px;box-shadow:4px 4px 0 var(--navy);border-radius:14px}
+ .sa-hub .task-card img{width:44px;height:44px}
+ .sa-hub .task-card .lang{top:10px;right:10px;font-size:10px;padding:1px 8px}
+ html[lang=en] .sa-hub .task-card h3{font-size:1.25rem}
+ .sa-hub .update-list li{grid-template-columns:1fr}.sa-hub .update-list span{grid-column:1}
+}

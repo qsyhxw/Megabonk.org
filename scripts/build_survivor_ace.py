@@ -21,17 +21,28 @@ def sources(lang):
  back='返回正文 ↑' if lang=='zh-Hant' else '本文に戻る ↑'
  return '<section class="sources" id="sources"><h2>'+title+'</h2><ol>'+''.join(f'<li id="source-{i}">{ext(u,l)} — {d.split(" / ")[0 if lang=="zh-Hant" else -1]}</li>' for i,(u,l,d) in enumerate(SOURCES,1))+'</ol><a class="back" href="#guide">'+back+'</a></section>'
 
-NAV=[('Start here',P+'#start'),('Guides',P+'#guides'),('Codes',P+'#codes'),('More games','/#more-games')]
+import json
+import register_page as RP
+MANIFEST=RP.load(ROOT,'survivor-ace')   # data/survivor-ace-pages.json: nav, footer, hub cards (02 §2.6)
+def kind_of(path):
+ if path==P:return 'hub'
+ if path in (P+'about/',P+'contact/',P+'404'):return 'trust'
+ return 'guide'
 def shell(path,title,desc,body,lang='en',content=False,image='',error=False):
- nav=''.join(f'<a href="{u}"'+(' aria-current="page"' if path==u else '')+f'>{l}</a>' for l,u in NAV)
+ kind=kind_of(path)
+ fmtattr=' data-format="hub"' if kind=='hub' else ''
+ nav=RP.nav_html(MANIFEST,'')
  groups=[PATHS,{'zh-Hant':P+'zh-hant/beginners-guide/','ja':P+'ja/beginners-guide/'}]
  alts=''.join(f'<link rel="alternate" hreflang="{l}" href="{BASE+u}">' for group in groups if path in group.values() for l,u in group.items())
+ hubcss='<link rel="stylesheet" href="/assets/survivor-ace/hub.css">' if kind=='hub' else ''
+ main=f'<main id="main">{body}</main>' if kind=='hub' else f'<main class="wrap" id="main">{body}</main>'
+ # Page structure (theme.css + hub.css only; no other game's CSS). Footer comes from register_page.footer_html.
  return f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="{BASE+path}">{alts}
-{ADS if content else ''}{'<meta name="robots" content="noindex,follow">' if error else ''}<link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/survivor-ace/site.css">
+{ADS if content else ''}{'<meta name="robots" content="noindex,follow">' if error else ''}<link rel="icon" href="/favicon.ico">
 <meta property="og:type" content="article"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(desc)}"><meta property="og:url" content="{BASE+path}">
-{f'<meta property="og:image" content="{BASE+image}">' if image else ''}<link rel="stylesheet" href="/assets/guide-article-layout.css"></head><body class="sa guide-layout"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/survivor-ace/logo.svg" width="44" height="44" alt=""><span>Survivor: Ace<small>Megabonk.org · Independent</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu ☰</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header>
-<main class="wrap" id="main">{body}</main><footer class="footer"><div class="wrap footer-grid"><div><strong>Megabonk.org · Independent guides</strong><p>Survivor: Ace names belong to their owners. This website is not affiliated with Gorilla Studio. Source-based reporting; no code redemption test.</p><a href="/">Megabonk Wiki →</a></div><nav aria-label="Site information"><a href="{P}about/">About these guides</a><a href="{P}contact/">Contact</a><a href="/privacy-policy">Privacy</a></nav></div></footer></body></html>'''
+{f'<meta property="og:image" content="{BASE+image}">' if image else ''}<link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/survivor-ace/theme.css">{hubcss}</head><body{fmtattr} class="sa-theme sa-{kind} guide-layout"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/survivor-ace/logo.svg" width="44" height="44" alt=""><span>Survivor: Ace<small>Guides &amp; codes</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu ☰</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header>
+{main}{RP.footer_html(MANIFEST)}</body></html>'''
 
 def codes(lang):
  zh=lang=='zh-Hant'
@@ -72,12 +83,27 @@ def build():
  pages+=make_pages(shell)
  from survivor_ace_zh import beginner_zh
  pages.append(beginner_zh(shell))
- for slug,title,text in [
-  ('about/','About the Survivor Ace guides','<p>Megabonk.org publishes these independent, source-based task guides to Survivor: Ace. We are not Gorilla Studio, the publisher or game support. The hub and Chinese and Japanese beginner guides compare source-based upgrade decisions and edition limits. The Chinese and Japanese code articles distinguish reported strings, source deadlines and unresolved reward differences; we do not claim to have redeemed them.</p><p>We review the cited public pages and keep their dates and limits next to the relevant statements. Code availability can change between reviews. No account, game login or redemption service is offered here.</p><p><a href="'+PATHS['zh-Hant']+'">繁體中文禮包碼 →</a> · <a href="'+PATHS['ja']+'">日本語コード →</a></p>'),
-  ('contact/','Contact the guide editors','<p>For corrections to these Survivor: Ace guides, email <a href="mailto:contact@megabonk.org?subject=%5BMegabonk.org%5D%20Website%20feedback">contact@megabonk.org</a>. Include the article URL, source URL, region and date. Do not send passwords or account credentials. We do not promise a response time.</p><p>For redemption, purchase or account problems, use '+ext('https://play.google.com/store/apps/details?hl=en&id=com.survivor.ace','Google Play · Survivor: Ace App support')+'. We cannot credit game rewards or recover accounts.</p><p><a href="'+PATHS['zh-Hant']+'">繁體中文禮包碼 →</a> · <a href="'+PATHS['ja']+'">日本語コード →</a></p>')]:
+ def crumb(label):return f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">Survivor: Ace</a> <span aria-hidden="true">›</span> <span aria-current="page">{label}</span></nav>'
+ gp=ext('https://play.google.com/store/apps/details?hl=en&id=com.survivor.ace','Google Play · Survivor: Ace App support')
+ about=('<section><h2>Who these guides are for</h2><p>These are independent, unofficial guides to Survivor: Ace, the mobile aerial roguelike that Google Play lists under Gorilla Studio. We are not Gorilla Studio, its publisher or its game support, and we cannot access or restore accounts.</p></section>'
+  '<section><h2>Where the information comes from</h2><p>The game’s identity, platforms and price model come from its official website and store listing. Weapon, upgrade and equipment decisions are compared across published beginner guides and gameplay accounts in Japanese, Traditional Chinese and English. Code lists come from public Taiwanese and Japanese articles. When two sources describe different editions or give different rewards, the page says which source says what instead of picking one silently.</p></section>'
+  '<section><h2>What was checked, and when</h2><p>Store listing and official links: November 21, 2026. Guide and code sources: compared between October 22 and October 30, 2026. None of the sources states a game build number, and we have not redeemed any code, so every code is labeled as reported, not verified.</p></section>'
+  f'<section><h2>What this section covers</h2><ul><li><a href="{P}">Survivor: Ace hub</a>: first-run steps, weapon-choice checklist, run picks versus equipment.</li><li><a href="{P}zh-hant/beginners-guide/" lang="zh-Hant">繁中新手攻略</a> and <a href="{P}ja/beginners-guide/" lang="ja">日本語・序盤攻略</a>: beginner decisions in each language.</li><li><a href="{P}zh-hant/codes/" lang="zh-Hant">繁中禮包碼</a> and <a href="{P}ja/codes/" lang="ja">日本語・コード</a>: reported codes, deadlines and where to enter them.</li></ul></section>'
+  f'<section><h2>Corrections</h2><p>Found an outdated code, a weapon description that does not match your edition or a wrong translation? Tell us on the <a href="{P}contact/">contact page</a> and include the page URL and your region.</p></section>')
+ contact=('<section><h2>What to report</h2><p>Email <a href="mailto:contact@megabonk.org?subject=%5BMegabonk.org%5D%20Website%20feedback">contact@megabonk.org</a> about expired or mistyped codes, weapon or equipment notes that do not match your edition, wrong translations or broken links in these Survivor: Ace guides. Include the article URL, the source URL, your region and the date. Do not send passwords or account credentials. We do not promise a response time.</p></section>'
+  f'<section><h2>What we cannot help with</h2><p>Redemption failures, purchases, missing rewards and account recovery are handled by the game’s support, not by us: {gp}. We cannot credit rewards or recover accounts.</p></section>'
+  f'<section><h2>Where to look first</h2><p><a href="{P}zh-hant/codes/" lang="zh-Hant">繁中禮包碼</a> · <a href="{P}ja/codes/" lang="ja">日本語・コード</a> · <a href="{P}#guides">All Survivor: Ace guides</a></p></section>')
+ for slug,title,label,text in [('about/','About the Survivor Ace guides','About these guides',about),('contact/','Contact the guide editors','Contact',contact)]:
   path=P+slug
-  pages.append((path,shell(path,title+' | Megabonk.org','Publisher, source-review method and contact for the independent Survivor Ace task guides.',f'<article class="legal" id="guide"><nav class="crumbs"><a href="/">Megabonk.org</a></nav><h1>{title}</h1><p class="meta">Updated 2026-10-28</p>{text}</article>')))
+  pages.append((path,shell(path,title+' | Megabonk.org','Publisher, source-review method and contact for the independent Survivor Ace task guides.',f'{crumb(label)}<article class="legal" id="guide"><h1>{title}</h1><p class="meta">Updated 2026-11-21</p>{text}</article>')))
  pages.append((P+'404.html',shell(P+'404','Page not found | Survivor: Ace Guides','This guide page could not be found.',f'<article class="legal"><h1>Page not found</h1><p>Find the current guides and code pages from the <a href="{P}">Survivor: Ace guide index</a>.</p></article>',error=True)))
+ # register_page.apply_page keeps nav/footer from the manifest in the generated output (rebuilds stay identical)
+ final=[]
+ for path,html in pages:
+  slug=path[len(P):].strip('/')
+  if slug in MANIFEST['by']:html=RP.apply_page(html,MANIFEST,slug)
+  final.append((path,html))
+ pages=final
  for path,html in pages:
   f=ROOT/path.lstrip('/') if path.endswith('.html') else ROOT/path.lstrip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);write_html(f, decorate(path,html),encoding='utf-8')
  print('Built '+str(len(pages))+' pages; 5 content pages inherit AdSense once; trust/404 excluded.')
