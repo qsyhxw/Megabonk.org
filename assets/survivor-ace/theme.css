@@ -138,3 +138,23 @@ html[lang=ja] body.sa-theme :is(h1,h2,h3),html[lang=zh-Hant] body.sa-theme :is(h
 /* 截图取景：竖图不超过视口 70% 高（00 §3），居中 */
 .sa-theme figure.game-image img{width:auto;max-width:100%;max-height:min(70vh,560px);margin-inline:auto}
 .sa-theme figure.game-image.portrait{max-width:420px}
+/* 手机分页首屏：目录单行横滑、收紧页头，使首个 H2 与答案落在首屏内（00 §3 HERO） */
+@media(max-width:600px){
+ .sa-guide .article-head>.tag{display:none}
+ .sa-guide .article-head h1{margin:6px 0 12px}
+ .sa-guide .article-head .meta{margin:10px 0 4px;font-size:13px}
+ .sa-guide .article-head>p:last-child{margin:4px 0 0}
+ .sa-guide .article-layout>.toc{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:8px 10px;gap:8px;scrollbar-width:thin}
+ .sa-guide .article-layout>.toc strong{display:none}
+ .sa-guide .article-layout>.toc a{flex:none;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
+ .sa-guide figure.game-image{margin:14px auto 18px;padding:8px}
+ .sa-guide figure.game-image img{max-height:min(38vh,320px)}
+}
+@media(max-width:600px){
+ /* 内容图放到首个小节之后，避免图片把首个 H2 推出首屏（DOM 顺序不变，仅视觉顺序） */
+ .sa-guide .prose{display:flex;flex-direction:column}
+ .sa-guide .prose>figure.game-image{order:1}
+ .sa-guide .prose>section~section,.sa-guide .prose>section~aside{order:2}
+}
+@media(max-width:600px){.sa-guide .prose>*{min-width:0;max-width:100%}.sa-guide .prose>figure.game-image{align-self:center}}
+@media(max-width:600px){.sa-guide .prose>section,.sa-guide .prose>aside{width:100%;overflow-x:clip}.sa-guide .prose .table-wrap{max-width:100%}}
