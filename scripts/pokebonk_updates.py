@@ -133,7 +133,7 @@ def apply_updates(ctx):
         ('starter', 'Turn a starter passive into a decision rule',
          table(['Partner / goal', 'Plan around', 'Check before selecting'], [
              ('Bulbasaur / recovery', 'Grass hits and healing-aware choices', 'The healing effect has a hit-rate limit. A Physical-only or Special-only bonus will not automatically improve every listed move.'),
-             ('Squirtle / defensive start', 'Armor and shield plus a coherent Water/mixed kit', 'The separate low-HP damage bonus is conditional. It is not a reason to deliberately lose most of your HP.'),
+             ('Squirtle / defensive start', 'Armor and shield plus a coherent Water/mixed kit', 'The ×1.25 damage bonus applies while the periodic shield is up. It has no low-HP trigger, so it is not a reason to deliberately lose most of your HP.'),
              ('Charmander / Fire offense', 'Its Fire-focused listed kit and applicable damage bonuses', 'A Fire bonus and a general damage-class bonus describe different scopes. Read the selected move’s actual description.')]) +
          f'<p>These are editorial planning directions based on current passive and kit descriptions, not clear-time, DPS or win-rate rankings. The starter comparison preserves the numerical passive details.{ref(1)}</p>'),
         ('choices', 'Read an upgrade against your current problem',

@@ -51,7 +51,7 @@ def tier_grid():
                       f'<small>{TIER_LABEL[tier]}</small></div><div class="tier-cells">{cells}</div></div>')
     return ('<section class="tier-grid" id="tier-grid" aria-label="PokeBonk tier list">'
             f'<p class="tier-note">All {len(rows)} League partners · {escape(data["version"])} · '
-            'Tap an S or A partner for its build.</p>'
+            'Tap an S or A partner for its build. Squirtle, Rattata, Venonat, Diglett and Mewtwo changed in v0.10.11; their tiers keep the Season 3 basis and have not been re-rated.</p>'
             '<fieldset class="tier-filter"><legend class="sr-only">Filter by region</legend>'
             '<input type="radio" name="tier-region" id="tr-all" checked><label for="tr-all">All</label>'
             '<input type="radio" name="tier-region" id="tr-kanto"><label for="tr-kanto">Kanto (Gen 1)</label>'
