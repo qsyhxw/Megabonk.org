@@ -86,8 +86,8 @@ def shinies():
  ]
  return shell('/pokedive/shinies/','PokeDive Shinies: Reported Odds & Identification','Understand PokeDive’s developer-reported shiny odds, the dated dungeon display issue, shiny-parent egg chances, and what to check before releasing.','PokeDive shinies: reported odds & identification',f'<p><strong>The developer reported a 2.5% shiny chance and 5% for eggs with a shiny parent in the Beta discussion.</strong> The same discussion acknowledged a dungeon-color display issue. These are dated developer statements, not a fresh verification of today’s build. {ref(2)}</p>',parts,[1,2])
 def build():
- for route,fn in [('/pokedive/',entry),('/pokedive/mobile/',mobile),('/pokedive/shinies/',shinies)]:
-  p=ROOT/route.strip('/')/'index.html';p.parent.mkdir(parents=True,exist_ok=True);write_html(p,fn(),encoding='utf-8')
+ # 三个任务页已由 scripts/pokedive_theme.py 维护（PD-THEME，不重建正文）；此处重建会丢掉新版首页与
+ # FAQ 区块，并因 game-seo.json 中的可见问答缺失而中断 CI。entry/mobile/shinies 仅保留作旧版参考。
  p=ROOT/'index.html';s=p.read_text(encoding='utf-8')
  if 'id="pokedive-entry"' not in s:s=s.replace('<div class="route-grid">','<div class="route-grid"><a class="route-card" id="pokedive-entry" href="/pokedive/"><h3>PokéDive</h3><p>Find the original dungeon-and-town browser game, distinguish old Beta codes and check phone and shiny limits.</p><span class="route-link">Original game &amp; starting checks →</span></a>',1)
  write_html(p,s,encoding='utf-8')
@@ -97,6 +97,6 @@ def build():
  p=ROOT/'privacy-policy.html';s=p.read_text(encoding='utf-8')
  if 'id="pokedive"' not in s:s=s.replace('</body>','<h2 id="pokedive">PokéDive guide and external original</h2><p>Updated 5 November 2026. These guides display local images and link to pokedive.com in a new tab; they do not embed its game, access its account or recover its saves. Following a link connects you to the original publisher and its own services and storage. The guides inherit this site’s existing ordinary-page AdSense and site-wide Umami described above. Cloudflare hosting may add analytics or performance measurement to pages and error responses.</p></body>',1)
  write_html(p,s,encoding='utf-8')
- print('Built 3 PokéDive tasks and local root/context/privacy entries. Release requires original startup, all media and QA.')
+ print('Updated PokéDive root/context/privacy entries (task pages maintained by pokedive_theme.py). Release requires original startup, all media and QA.')
 if __name__=='__main__':build()
 
