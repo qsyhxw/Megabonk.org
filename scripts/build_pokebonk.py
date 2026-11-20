@@ -151,6 +151,8 @@ def build():
     apply_updates(globals())
     from pokebonk_completion import apply_completion
     apply_completion(globals())
+    from pokebonk_johto import apply_johto
+    apply_johto(globals())
     from pokebonk_access import apply_access
     apply_access(globals())
     from pokebonk_longtail import apply_longtail
