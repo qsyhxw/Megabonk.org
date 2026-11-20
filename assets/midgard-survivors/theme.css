@@ -1,0 +1,164 @@
+/* Midgard Survivors game theme (SOP v3.22, 02 §2.1). Loaded by the hub, every guide page, About and Contact.
+   Visual source: the developer's own site and client UI — deep indigo night sky, blue-white outlined title,
+   gold download button, and the classic blue Ragnarok window frame for reading panels.
+   Base layout stays in guide-article-layout.css. Mobile (390) is tuned first. */
+@font-face {
+  font-family: "Nunito";
+  src: url("/assets/fonts/nunito-800-latin.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+:root {
+  --mg-night: #0a1128; --mg-deep: #101a3c; --mg-panel: #17244f; --mg-edge: #2d4580; --mg-glow: #6f98e8;
+  --mg-gold: #f4c451; --mg-gold-deep: #d58f22; --mg-red: #d9455f;
+  --mg-win: #f3f7fd; --mg-win-line: #aebfd9; --mg-win-ink: #1d2d4d; --mg-win-bar: #4a6fa6; --mg-win-pale: #e3ebf7;
+  --mg-text: #dbe5fb; --mg-dim: #9fb1d6;
+  --display: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* tokens the shared layout reads */
+  --paper: var(--mg-night); --white: var(--mg-win); --ink: var(--mg-text); --muted: var(--mg-dim);
+  --line: var(--mg-edge); --pale: var(--mg-deep); --green: var(--mg-gold); --gold: var(--mg-gold);
+  --heading: var(--display); --max: 1180px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; }
+body.midgard-theme {
+  margin: 0; color: var(--mg-text); font: 16.5px/1.7 var(--body); overflow-wrap: break-word;
+  background: var(--mg-night) radial-gradient(ellipse 90% 380px at 50% 0, #223a7c55 0, transparent 70%) no-repeat;
+}
+.midgard-theme a { color: #a9c4ff; text-underline-offset: 4px; }
+.midgard-theme a:hover { color: #fff; }
+.midgard-theme :focus-visible { outline: 3px solid var(--mg-gold); outline-offset: 3px; }
+.midgard-theme img { max-width: 100%; height: auto; }
+.midgard-theme h1, .midgard-theme h2, .midgard-theme h3 { font-family: var(--display); font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: #fff; }
+.midgard-theme h1 { font-size: clamp(2rem, 4.6vw, 3.3rem); margin: .3em 0 .4em; }
+.midgard-theme h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin: 0 0 .8rem; }
+.midgard-theme h3 { font-size: 1.15rem; }
+.midgard-theme p { margin: .6rem 0 1.05rem; }
+.midgard-theme .wrap { width: min(var(--max), calc(100% - 56px)); max-width: none; margin: auto; padding: 0; }
+.midgard-theme .skip { position: absolute; top: -90px; left: 12px; background: var(--mg-gold); color: #1a1202; padding: 10px; z-index: 30; }
+.midgard-theme .skip:focus { top: 10px; left: 12px; }
+.midgard-theme .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Header */
+.midgard-theme .top { background: rgba(8, 14, 36, .92); border-bottom: 1px solid var(--mg-edge); position: relative; z-index: 5; }
+.midgard-theme .top > .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 68px; padding: 0; }
+.midgard-theme .brand { display: flex; align-items: center; gap: 11px; min-width: 0; font: 800 20px/1.15 var(--display); letter-spacing: -.01em; color: #fff; text-decoration: none; white-space: nowrap; }
+.midgard-theme .brand img { width: 38px; height: 38px; flex-shrink: 0; }
+.midgard-theme .brand span { display: block; }
+.midgard-theme .brand em { font-style: normal; color: var(--mg-glow); }
+.midgard-theme .brand small { display: block; margin-top: 1px; font: 600 10.5px/1.3 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--mg-dim); }
+.midgard-theme .desktop-nav { display: flex; align-items: center; gap: 22px; }
+.midgard-theme .desktop-nav a, .midgard-theme .mobile-links a { font: 600 14px/1.2 var(--body); color: var(--mg-text); text-decoration: none; padding: 10px 0; border-bottom: 2px solid transparent; }
+.midgard-theme .desktop-nav a:hover, .midgard-theme .mobile-links a:hover { color: #fff; border-color: var(--mg-glow); }
+.midgard-theme .desktop-nav a[aria-current="page"], .midgard-theme .mobile-links a[aria-current="page"] { color: var(--mg-gold); border-color: var(--mg-gold); }
+.midgard-theme .mobile-nav { display: none; position: relative; }
+.midgard-theme .mobile-nav summary { cursor: pointer; list-style: none; min-height: 44px; display: flex; align-items: center; padding: 0 16px; border: 1px solid var(--mg-edge); border-radius: 8px; background: var(--mg-panel); font: 700 14px var(--body); color: #fff; }
+.midgard-theme .mobile-nav summary::-webkit-details-marker { display: none; }
+.midgard-theme .mobile-links { position: absolute; right: 0; top: 52px; z-index: 10; width: min(260px, 82vw); display: flex; flex-direction: column; gap: 0; padding: 8px 16px; border: 1px solid var(--mg-edge); border-radius: 10px; background: var(--mg-deep); box-shadow: 0 14px 34px #0009; }
+.midgard-theme .mobile-links a { padding: 13px 0; border-bottom: 1px solid #243566; }
+.midgard-theme .mobile-links a:last-child { border-bottom: 0; }
+
+/* Page body */
+.midgard-theme main.wrap { padding: 0 0 36px; }
+.midgard-theme .crumbs { padding: 18px 0 2px; font-size: 13px; color: var(--mg-dim); max-width: 1040px; margin-inline: auto; }
+.midgard-theme .crumbs a { color: var(--mg-text); }
+.midgard-theme .article-head { max-width: 1040px; margin: 0 auto; padding: 14px 0 12px; }
+.midgard-theme .article-head > p:first-of-type, .midgard-theme .mg-kicker { margin: 0; font: 700 11.5px/1.6 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--mg-gold); }
+.midgard-theme .article-head h1 { font-size: clamp(2rem, 4.8vw, 3.2rem); text-shadow: 0 2px 0 #06102f, 0 0 26px #4a78e055; }
+.midgard-theme .back-link { display: inline-block; margin: 0 0 10px; font-size: 13.5px; }
+.midgard-theme .answer { margin: .8rem 0 .6rem; padding: 14px 18px; background: var(--mg-panel); border: 1px solid var(--mg-edge); border-left: 4px solid var(--mg-gold); border-radius: 0 10px 10px 0; color: #e9f0ff; font-size: 1.08rem; line-height: 1.65; max-width: 78ch; }
+.midgard-theme .answer p { margin: .2rem 0; }
+.midgard-theme .byline { font-size: 12.5px; color: var(--mg-dim); margin: .5rem 0 0; }
+.midgard-theme .article-layout { max-width: 1040px; margin: 0 auto; padding-bottom: 8px; gap: 16px; }
+.midgard-theme .article-layout > .toc { background: var(--mg-deep); border: 1px solid var(--mg-edge); border-radius: 10px; padding: 10px 12px; }
+.midgard-theme .toc a { background: #0d1633; border: 1px solid var(--mg-edge); border-radius: 6px; color: #cfe0ff; font-size: 13px; }
+.midgard-theme .toc a:hover { border-color: var(--mg-gold); color: #fff; }
+
+/* Reading window: the classic blue RO frame holds the article prose */
+.midgard-theme .prose { background: var(--mg-win); color: var(--mg-win-ink); border: 1px solid var(--mg-win-line); border-radius: 10px; padding: 8px 26px 22px; box-shadow: 0 0 0 3px var(--mg-night), 0 0 0 4px var(--mg-edge), 0 18px 40px #0007; --ink: var(--mg-win-ink); --muted: #52617f; --line: var(--mg-win-line); --pale: var(--mg-win-pale); }
+.midgard-theme .prose h1, .midgard-theme .prose h2, .midgard-theme .prose h3 { color: #1b3363; }
+.midgard-theme .prose a { color: #1f4f9c; }
+.midgard-theme .prose a:hover { color: #0d2a5c; }
+.midgard-theme .prose > section { margin-bottom: 8px; }
+.midgard-theme .prose h2 { margin: 26px -26px 14px; padding: 9px 26px; font-size: 1.25rem; color: #fff; background: linear-gradient(#6d90c4, #43669c); border-block: 1px solid #355a92; text-shadow: 0 1px #2a4a7d; }
+.midgard-theme .prose li { margin: 10px 0; }
+.midgard-theme .prose li::marker { color: #3f69a6; font-weight: 800; }
+.midgard-theme .prose .scope { margin: 22px 0 0; padding-top: 14px; border-top: 1px solid var(--mg-win-line); font-size: 13px; color: #52617f; max-width: none; }
+.midgard-theme .prose .source-notes { border-top: 1px solid var(--mg-win-line); padding-top: 4px; font-size: 13.5px; }
+.midgard-theme .prose .source-notes h2 { font-size: 1rem; background: none; color: #1b3363; text-shadow: none; border: 0; margin: 14px 0 6px; padding: 0; }
+.midgard-theme .table-wrap { overflow-x: auto; max-width: 100%; margin: 18px 0; border: 1px solid var(--mg-win-line); border-radius: 8px; background: #fff; }
+.midgard-theme table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.midgard-theme th, .midgard-theme td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid #d5e0f0; }
+.midgard-theme th { background: #dbe6f6; color: #1b3363; font: 800 12px/1.4 var(--body); letter-spacing: .06em; text-transform: uppercase; }
+.midgard-theme tr:last-child td { border-bottom: 0; }
+.midgard-theme td:first-child { font-weight: 700; color: #1d3a6e; }
+.midgard-theme pre { margin: 16px 0; padding: 16px 18px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; border-radius: 8px; background: #0f1d3f; color: #eaf2ff; font-size: 14px; }
+.midgard-theme code { overflow-wrap: anywhere; }
+.midgard-theme .command-section { border-top: 0; padding-top: 0; }
+.midgard-theme .equipment-route ol li { padding: 8px 4px; border-bottom: 1px solid #d5e0f0; }
+.midgard-theme.guide-layout figure.game-image { max-width: 860px; margin: 22px auto; padding: 6px; border-radius: 8px; background: #fff; border: 1px solid #93a9cb; box-shadow: 0 3px 0 #c5d2e6; }
+.midgard-theme.guide-layout figure.game-image img { border-radius: 4px; }
+.midgard-theme.guide-layout figure.game-image figcaption { color: #52617f; }
+
+/* Related guides (generated) */
+.midgard-theme .related-tasks { margin: 26px 0 0; padding-top: 6px; border-top: 1px solid var(--mg-win-line); }
+.midgard-theme .prose .related-tasks h2 { margin: 14px 0 12px; padding: 0; background: none; border: 0; color: #1b3363; text-shadow: none; font-size: 1.2rem; }
+.midgard-theme .related-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.midgard-theme .related-links a { display: block; padding: 12px 14px; border: 1px solid var(--mg-win-line); border-radius: 8px; background: #fff; font-weight: 700; text-decoration: none; color: #1d3a6e; }
+.midgard-theme .related-links a:hover { border-color: #43669c; background: var(--mg-win-pale); }
+
+/* Trust pages */
+.midgard-theme .legal { max-width: 78ch; margin: 0 auto; padding: 8px 26px 20px; background: var(--mg-win); color: var(--mg-win-ink); border: 1px solid var(--mg-win-line); border-radius: 10px; box-shadow: 0 0 0 3px var(--mg-night), 0 0 0 4px var(--mg-edge); }
+.midgard-theme .legal h1, .midgard-theme .legal h2 { color: #1b3363; text-shadow: none; }
+.midgard-theme .legal a { color: #1f4f9c; }
+.midgard-theme .legal .article-head { padding-top: 18px; }
+.midgard-theme .legal .article-head > p:first-of-type { color: #43669c; }
+.midgard-theme .legal .byline { color: #52617f; }
+.midgard-theme .legal section { margin: 22px 0; }
+
+/* Footer (generated by register_page.py; 02 §5.2) */
+.midgard-theme .site-footer { margin-top: 40px; padding-top: 34px; background: #070c1e; border-top: 2px solid var(--mg-edge); }
+.midgard-theme .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 24px; }
+.midgard-theme .footer-brand strong { font: 800 19px/1.3 var(--display); color: #fff; }
+.midgard-theme .footer-brand a { text-decoration: none; }
+.midgard-theme .footer-brand p { margin: .5rem 0; font-size: 13px; color: var(--mg-dim); max-width: 38ch; }
+.midgard-theme .footer-col h2 { margin: 0 0 .5rem; font: 800 11px/1.6 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--mg-gold); }
+.midgard-theme .footer-col a { display: block; padding: 5px 0; font-size: 14px; color: var(--mg-text); text-decoration: none; }
+.midgard-theme .footer-col a:hover { color: #fff; text-decoration: underline; }
+.midgard-theme .footer-version { margin: .5rem 0 0; font-size: 12px; color: var(--mg-dim); }
+.midgard-theme .footer-info { margin-top: 26px; border-top: 1px solid #1d2b57; }
+.midgard-theme .footer-info .wrap { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 12px 0 20px; }
+.midgard-theme .footer-info a { font: 700 12.5px/1.4 var(--body); color: var(--mg-dim); text-decoration: none; padding: 8px 0; }
+.midgard-theme .footer-info a:hover { color: #fff; }
+
+@media (max-width: 1050px) { .midgard-theme .footer-grid { grid-template-columns: 1fr 1fr 1fr; } .midgard-theme .footer-brand { grid-column: 1 / -1; } }
+@media (max-width: 900px) {
+  .midgard-theme .desktop-nav { display: none; }
+  .midgard-theme .mobile-nav { display: block; }
+}
+@media (max-width: 600px) {
+  .midgard-theme { font-size: 16px; }
+  .midgard-theme .wrap { width: calc(100% - 32px); }
+  .midgard-theme .top > .wrap { min-height: 60px; }
+  .midgard-theme .brand { font-size: 17px; gap: 9px; }
+  .midgard-theme .brand img { width: 32px; height: 32px; }
+  .midgard-theme .brand small { display: none; }
+  .midgard-theme .crumbs { padding-top: 12px; }
+  .midgard-theme .article-head h1 { font-size: 1.85rem; }
+  .midgard-theme .answer { font-size: 1rem; padding: 12px 14px; }
+  .midgard-theme .prose { padding: 4px 16px 18px; }
+  .midgard-theme .prose h2 { margin-inline: -16px; padding-inline: 16px; font-size: 1.15rem; }
+  .midgard-theme .legal { padding: 4px 16px 16px; }
+  .midgard-theme .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+  .midgard-theme .footer-col a { padding: 8px 0; }
+  .midgard-theme .footer-info .wrap { gap: 0 18px; }
+  /* tables become stacked label/value cards */
+  .midgard-theme table, .midgard-theme tbody, .midgard-theme tr, .midgard-theme td { display: block; width: 100%; }
+  .midgard-theme thead { display: none; }
+  .midgard-theme tr { padding: 8px 0; border-bottom: 1px solid #c9d6ea; }
+  .midgard-theme tr:last-child { border-bottom: 0; }
+  .midgard-theme td { border: 0; padding: 6px 14px; }
+  .midgard-theme td:not(:first-child)::before { content: attr(data-label); display: block; margin-bottom: 2px; font: 800 11px/1.4 var(--body); letter-spacing: .06em; text-transform: uppercase; color: #5b6c88; }
+  .midgard-theme .prose .table-wrap { overflow: visible; }
+}

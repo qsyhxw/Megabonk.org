@@ -26,13 +26,24 @@ def image(stem='field'):
 TASKS = [('', 'Download & start'), ('android/', 'Android'), ('mac/', 'Mac'), ('equipment/', 'Equipment'), ('co-op/', 'Co-op')]
 
 
+def shell(route, title, description, body, home=False, trust=False):
+    """Page shell shared by task pages, hub and trust pages; nav and footer are refilled by register_page.py."""
+    nav = ''.join(f'<a href="{P+s}">{label}</a>' for s, label in TASKS)
+    css = '<link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/midgard-survivors/theme.css">' + ('<link rel="stylesheet" href="/assets/midgard-survivors/hub.css">' if home else '')
+    og = '' if trust else f'<meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(description)}"><meta property="og:type" content="article"><meta property="og:url" content="https://megabonk.org{route}"><meta property="og:image" content="https://megabonk.org/assets/midgard-survivors/field-800.webp">'
+    ad = '' if trust else '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
+    fmt = ''
+    cls = 'midgard-theme guide-layout midgard-guide' + (' mg-hub' if home else '')
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description)}"><link rel="canonical" href="https://megabonk.org{route}">{og}<link rel="icon" href="/favicon.ico"><link rel="icon" type="image/svg+xml" href="/assets/midgard-survivors/favicon.svg">{css}{ad}</head><body class="{cls}"{fmt}><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/midgard-survivors/logo.svg" width="38" height="38" alt=""><span>Midgard <em>Survivors</em><small>Download &amp; player guides</small></span></a><nav class="desktop-nav" aria-label="Midgard Survivors navigation">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="Midgard Survivors mobile navigation">{nav}</nav></details></div></header><main class="wrap" id="main">{body}</main><footer class="site-footer"></footer></body></html>'''
+
+
 def render(slug, title, description, answer, sections):
     route = P + slug
-    nav = ''.join(f'<a href="{P+s}">{label}</a>' for s, label in TASKS)
     toc = ''.join(f'<a href="#{key}">{heading}</a>' for key, heading, _ in sections)
     content = ''.join(f'<section id="{key}"><h2>{heading}</h2>{body}</section>' for key, heading, body in sections)
     related = ''.join(f'<li><a href="{P+s}">{label}</a></li>' for s, label in TASKS if s != slug)
-    html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description)}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(description)}"><meta property="og:type" content="article"><meta property="og:url" content="https://megabonk.org{route}"><meta property="og:image" content="https://megabonk.org/assets/midgard-survivors/field-800.webp"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/midgard-survivors/site.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script></head><body class="guide-layout midgard-guide"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="{P}"><span>Midgard Survivors<small>Download &amp; player guides</small></span></a><nav class="desktop-nav" aria-label="Midgard Survivors navigation">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="Midgard Survivors mobile navigation">{nav}</nav></details></div></header><main class="wrap" id="main"><header class="article-head"><p>NEARQ · RAGNAROK FAN GAME</p><h1>{escape(title)}</h1><div class="answer"><p>{answer}</p></div><p class="byline">Megabonk.org editors · Checked 12 November 2026</p></header><div class="article-layout"><nav class="toc" aria-label="On this page">{toc}</nav><article class="prose">{content}<section id="next"><h2>Next steps</h2><ul>{related}</ul></section><p class="scope">Source-based guidance from the developer’s site, itch.io listing and linked player discussions. We have not run these clients or tested device compatibility, progression or multiplayer.</p></article></div></main><footer class="footer"><div class="wrap footer-grid"><div><strong>Megabonk.org · Independent guides</strong><p>Unaffiliated with nearQ, Pawgres Studios or Gravity. Game assets belong to their respective owners.</p><a href="/#more-games">More games →</a></div><nav aria-label="Site information"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy-policy">Privacy</a></nav></div></footer></body></html>'''
+    body = f'''<header class="article-head"><p>NEARQ · RAGNAROK FAN GAME</p><h1>{escape(title)}</h1><div class="answer"><p>{answer}</p></div><p class="byline">Megabonk.org editors · Checked 12 November 2026</p></header><div class="article-layout"><nav class="toc" aria-label="On this page">{toc}</nav><article class="prose">{content}<section id="next"><h2>Next steps</h2><ul>{related}</ul></section><p class="scope">Source-based guidance from the developer’s site, itch.io listing and linked player discussions. We have not run these clients or tested device compatibility, progression or multiplayer.</p></article></div>'''
+    html = shell(route, title, description, body, home=not slug)
     target = ROOT / route.strip('/') / 'index.html'
     target.parent.mkdir(parents=True, exist_ok=True)
     write_html(target, adapt(html, slug), encoding='utf8')
@@ -74,5 +85,21 @@ def build():
     ])
 
 
+def finish():
+    """Trust pages, then nav / breadcrumbs / related / footer / registries from the page manifest (02 §2.6)."""
+    import subprocess
+    import sys
+    from midgard_trust import build as build_trust
+    build_trust()
+    subprocess.run([sys.executable, str(Path(__file__).resolve().parent / 'register_page.py'), str(ROOT), 'midgard-survivors'], check=True)
+    from game_seo import edit as seo_edit  # keep the SEO editor idempotent after register_page adds head markup
+    for fp in (ROOT / 'midgard-survivors').rglob('index.html'):
+        t = fp.read_text(encoding='utf8')
+        n = seo_edit(fp, t)
+        if n != t:
+            fp.write_text(n, encoding='utf8')
+
+
 if __name__ == '__main__':
     build()
+    finish()

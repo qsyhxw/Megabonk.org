@@ -1,0 +1,95 @@
+/* Midgard Survivors hub layout (home only, 02 §2.1). Mobile first: copy → image → task cards → download window. */
+.mg-hub main.wrap { padding-bottom: 28px; }
+.mg-hub .mg-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 20px 40px; align-items: center; padding: 34px 0 20px; }
+.mg-hub .mg-copy { min-width: 0; }
+.mg-hub .mg-hero h1 { margin: .22em 0 .38em; font-size: clamp(2.3rem, 5.2vw, 3.8rem); line-height: 1.04; background: linear-gradient(#fff 30%, #a8c4ff); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 0; filter: drop-shadow(0 3px 0 #0a1a55) drop-shadow(0 0 18px #3c68d855); }
+.mg-hub .mg-deck { margin: 0 0 14px; max-width: 46ch; font-size: 1.12rem; line-height: 1.6; color: #e3ecff; }
+.mg-hub .mg-status { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; padding: 0; list-style: none; }
+.mg-hub .mg-status li { padding: 3px 12px; border: 1px solid var(--mg-edge); border-radius: 999px; background: #0e1a42; color: #cfe0ff; font: 700 12.5px/1.7 var(--body); }
+.mg-hub .mg-status li:first-child { border-color: #7a6a2c; color: var(--mg-gold); }
+.mg-hub .mg-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; }
+.mg-hub .mg-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 12px; font: 800 16px/1 var(--display); text-decoration: none; }
+.mg-hub .mg-btn.primary { color: #261800; background: linear-gradient(#ffdf86, var(--mg-gold) 55%, var(--mg-gold-deep)); box-shadow: 0 3px 0 #8a5a10, 0 8px 20px #f4c45133; }
+.mg-hub .mg-btn.primary:hover { color: #000; filter: brightness(1.06); }
+.mg-hub .mg-btn.secondary { color: #fff; background: #1a2a5e; border: 1px solid var(--mg-edge); }
+.mg-hub .mg-btn.secondary:hover { border-color: var(--mg-glow); }
+.mg-hub .mg-byline { margin: 0; font-size: 12.5px; color: var(--mg-dim); }
+.mg-hub .mg-media { min-width: 0; margin: 0; }
+.mg-hub .mg-media figure.game-image { margin: 0; max-width: none; border: 2px solid #3a5aa2; border-radius: 12px; background: #0b1230; box-shadow: 0 0 0 4px var(--mg-night), 0 0 0 5px var(--mg-edge), 0 18px 44px #000a; padding: 5px; }
+.mg-hub .mg-media figure.game-image img { width: 100%; max-height: 340px; object-fit: cover; object-position: 50% 46%; border-radius: 8px; }
+
+/* Task cards */
+.mg-hub .mg-tasks { padding: 8px 0 6px; }
+.mg-hub .mg-tasks > h2 { margin: 6px 0 14px; }
+.mg-hub .mg-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.mg-hub .mg-card { display: grid; grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "ico title" "ico text"; gap: 2px 14px; align-items: start; padding: 16px 16px 18px; border: 1px solid var(--mg-edge); border-radius: 12px; background: linear-gradient(#16245a, #101a40); color: var(--mg-text); text-decoration: none; transition: border-color .15s, transform .15s; }
+.mg-hub .mg-card:hover { border-color: var(--mg-gold); color: #fff; transform: translateY(-2px); }
+.mg-hub .mg-card.wide { grid-column: span 2; background: linear-gradient(135deg, #5a3a0e, #2a1c0a 55%, #16245a); border-color: #8a6a24; }
+.mg-hub .mg-ico { grid-area: ico; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: #0b1436; border: 1px solid var(--mg-edge); color: var(--mg-gold); }
+.mg-hub .mg-ico svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.mg-hub .mg-card strong { grid-area: title; align-self: end; font: 800 17px/1.25 var(--display); color: #fff; }
+.mg-hub .mg-card span.mg-text { grid-area: text; font-size: 14px; line-height: 1.5; color: var(--mg-dim); }
+
+/* Lower bands: reading windows */
+.mg-hub .mg-win { margin: 26px 0 0; padding: 0 26px 22px; background: var(--mg-win); color: var(--mg-win-ink); border: 1px solid var(--mg-win-line); border-radius: 10px; box-shadow: 0 0 0 3px var(--mg-night), 0 0 0 4px var(--mg-edge), 0 16px 36px #0006; --ink: var(--mg-win-ink); --muted: #52617f; --line: var(--mg-win-line); }
+.mg-hub .mg-win > h2 { margin: 0 -26px 16px; padding: 10px 26px; font-size: 1.25rem; color: #fff; background: linear-gradient(#6d90c4, #43669c); border-bottom: 1px solid #355a92; border-radius: 9px 9px 0 0; text-shadow: 0 1px #2a4a7d; }
+.mg-hub .mg-win a { color: #1f4f9c; }
+.mg-hub .mg-win a:hover { color: #0d2a5c; }
+.mg-hub .mg-win li::marker { color: #3f69a6; font-weight: 800; }
+.mg-hub .mg-win .scope-note { font-size: 13px; color: #52617f; }
+.mg-hub .mg-updates { margin: 0; padding: 0; list-style: none; }
+.mg-hub .mg-updates li { display: grid; grid-template-columns: 7.5rem minmax(0, 14rem) minmax(0, 1fr); gap: 2px 16px; align-items: baseline; margin: 0; padding: 10px 0; border-bottom: 1px solid #d5e0f0; }
+.mg-hub .mg-updates li:last-child { border-bottom: 0; }
+.mg-hub .mg-updates time { font: 800 12.5px/1.6 var(--body); letter-spacing: .04em; color: #43669c; }
+.mg-hub .mg-updates a { font-weight: 800; }
+.mg-hub .mg-updates span { font-size: 14px; color: #52617f; }
+.mg-hub .mg-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.mg-hub .mg-group { padding: 14px 18px 8px; border: 1px solid var(--mg-win-line); border-radius: 8px; background: #fff; }
+.mg-hub .mg-group h3 { margin: 0 0 .25rem; color: #1b3363; }
+.mg-hub .mg-group p { margin: 0 0 .5rem; font-size: 14px; color: #52617f; }
+.mg-hub .mg-group ul { margin: 0 0 6px; padding-left: 1.1rem; }
+.mg-hub .mg-group li { margin: 4px 0; font-size: 15px; }
+.mg-hub .mg-faq { display: grid; gap: 10px; }
+.mg-hub .mg-faq details { border: 1px solid var(--mg-win-line); border-radius: 8px; background: #fff; }
+.mg-hub .mg-faq summary { position: relative; cursor: pointer; list-style: none; min-height: 48px; padding: 12px 44px 12px 16px; font: 800 16px/1.4 var(--display); color: #1b3363; }
+.mg-hub .mg-faq summary::-webkit-details-marker { display: none; }
+.mg-hub .mg-faq summary::after { content: "+"; position: absolute; right: 16px; top: 9px; font: 700 22px/1.4 var(--body); color: #43669c; }
+.mg-hub .mg-faq details[open] summary::after { content: "–"; }
+.mg-hub .mg-faq details[open] summary { border-bottom: 1px solid #d5e0f0; }
+.mg-hub .mg-faq p { margin: 0; padding: 12px 16px 2px; }
+.mg-hub .mg-faq .more { display: inline-block; padding: 4px 16px 14px; font-size: 14px; font-weight: 700; }
+.mg-hub .mg-win .table-wrap { margin-top: 6px; }
+.mg-hub .mg-win section { margin: 0 0 6px; }
+.mg-hub .mg-win section > h3 { margin: 18px 0 6px; }
+
+@media (max-width: 1050px) {
+  .mg-hub .mg-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mg-hub .mg-updates li { grid-template-columns: 7rem minmax(0, 1fr); }
+  .mg-hub .mg-updates span { grid-column: 2; }
+}
+@media (max-width: 900px) {
+  .mg-hub .mg-hero { grid-template-columns: 1fr; padding-top: 22px; gap: 14px; }
+  .mg-hub .mg-media figure.game-image img { max-height: 190px; }
+  .mg-hub .mg-groups { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .mg-hub .mg-hero { padding: 16px 0 12px; gap: 12px; }
+  .mg-hub .mg-hero h1 { font-size: 2.15rem; }
+  .mg-hub .mg-deck { font-size: .98rem; line-height: 1.5; margin-bottom: 10px; }
+  .mg-hub .mg-byline { display: none; }
+  .mg-hub .mg-kicker { font-size: 10.5px; letter-spacing: .1em; }
+  .mg-hub .mg-status { gap: 6px; margin-bottom: 12px; }
+  .mg-hub .mg-status li { font-size: 11.5px; padding: 1px 10px; }
+  .mg-hub .mg-btn { flex: 1 1 100%; min-height: 46px; }
+  .mg-hub .mg-actions { gap: 8px; }
+  .mg-hub .mg-media figure.game-image img { max-height: 110px; }
+  .mg-hub .mg-cards { gap: 10px; }
+  .mg-hub .mg-card { grid-template-columns: 1fr; grid-template-areas: "ico" "title" "text"; gap: 6px; padding: 12px 12px 14px; }
+  .mg-hub .mg-card.wide { grid-column: span 2; grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "ico title" "ico text"; gap: 2px 12px; }
+  .mg-hub .mg-card strong { font-size: 15.5px; }
+  .mg-hub .mg-card span.mg-text { font-size: 13px; }
+  .mg-hub .mg-win { padding: 0 16px 16px; }
+  .mg-hub .mg-win > h2 { margin-inline: -16px; padding-inline: 16px; font-size: 1.15rem; }
+  .mg-hub .mg-updates li { grid-template-columns: 1fr; }
+  .mg-hub .mg-updates span { grid-column: 1; }
+}
