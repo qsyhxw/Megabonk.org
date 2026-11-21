@@ -24,25 +24,22 @@ def href(h):
     return h if h.startswith('/') else P + h
 
 
+def _hub(m=None):
+    from hub_components import Hub
+    return Hub(m or manifest(), P, 'saz', '/assets/spires-of-azeroth/')
+
+
 def hero(figure_ref=''):
     status = ['Browser · Windows · Mac · Linux · Android', f'Browser build {BUILD}', f'Checked {CHECKED}', 'Unofficial fan guide']
-    return ('<header class="saz-hero" id="guide" data-play-background>'
-            '<p class="saz-kicker">A Classic WoW roguelike deckbuilder</p>'
-            '<h1>Spires of Azeroth<span class="saz-h1-sub">Guide &amp; Wiki</span></h1>'
-            '<p class="saz-deck">Draft familiar spells, read the enemy’s next move and climb a spire one turn at a time. '
-            f'Play the original in a window below.{figure_ref}</p>'
-            '<ul class="saz-status" aria-label="Game status">' + ''.join(f'<li>{escape(s)}</li>' for s in status) + '</ul>'
-            f'<div class="hero-actions"><a class="button" href="#play">Play now ↓</a>'
-            f'<a class="button secondary" href="{P}download-platforms/">Download &amp; platforms →</a></div></header>')
+    return _hub({}).hero(
+        kicker='A Classic WoW roguelike deckbuilder', title='Spires of Azeroth', sub='Guide &amp; Wiki',
+        deck='Draft familiar spells, read the enemy’s next move and climb a spire one turn at a time. '
+             f'Play the original in a window below.{figure_ref}',
+        status=status, actions=[('Play now ↓', '#play', False), ('Download & platforms →', f'{P}download-platforms/', True)])
 
 
 def cards(m):
-    items = ''.join(
-        f'<li><a class="saz-card" href="{escape(href(c["href"]), quote=True)}"><img src="/assets/spires-of-azeroth/images/{c["thumb"]}-480.webp" '
-        f'width="480" height="270" alt="" loading="{"eager" if i < 4 else "lazy"}"><span class="saz-card-body"><strong>{escape(c["label"])}</strong>'
-        f'<span class="saz-card-text">{escape(c["blurb"])}</span></span></a></li>' for i, c in enumerate(m['cards']))
-    return ('<section class="saz-tasks" id="guides" data-play-background><h2>Pick your task</h2>'
-            f'<ul class="saz-cards">{items}</ul></section>')
+    return _hub(m).cards()
 
 
 def cheat():
@@ -55,34 +52,23 @@ def cheat():
         ('End turn', f'The button, or {k("Space")} / {k("E")}. {k("Esc")} opens the menu, {k("F")} is fullscreen.'),
         ('Scope', 'The author lists nine Classic classes and 40 zones. We have not cleared them all.'),
     ]
-    dl = ''.join(f'<div><dt>{a}</dt><dd>{b}</dd></div>' for a, b in rows)
-    return ('<section class="saz-cheat" id="cheat-sheet" data-play-background><h2>Combat cheat sheet</h2>'
-            f'<p>Read from the original’s “How to fight” tutorial, browser build {BUILD}, checked {CHECKED}.</p><dl>{dl}</dl></section>')
+    return _hub({}).cheat('Combat cheat sheet', f'Read from the original’s “How to fight” tutorial, browser build {BUILD}, checked {CHECKED}.', rows)
 
 
 def updates(m):
-    rows = sorted(m['updates'], key=lambda u: u['date'], reverse=True)
-    li = ''.join(f'<li><time datetime="{u["date"]}">{u["date"]}</time><span>{escape(u["text"])} '
-                 f'<a href="{escape(href(u["href"]), quote=True)}">{escape(u["label"])} →</a></span></li>' for u in rows)
-    return f'<section class="saz-band" id="updates" data-play-background><h2>Latest updates</h2><ul class="saz-updates">{li}</ul></section>'
+    return _hub(m).updates()
 
 
 def groups(m):
-    out = ''
-    for g in m['groups']:
-        links = ''.join(f'<li><a href="{escape(href(h), quote=True)}">{escape(t)} <span>{escape(d)}</span></a></li>' for h, t, d in g['items'])
-        out += f'<div class="saz-group"><h3>{escape(g["label"])}</h3><p>{escape(g["text"])}</p><ul>{links}</ul></div>'
-    return f'<section class="saz-band" id="all-guides" data-play-background><h2>All guides by task</h2><div class="saz-groups">{out}</div></section>'
+    return _hub(m).groups()
 
 
 def faq(m):
-    items = ''.join(f'<details><summary>{escape(f["q"])}</summary><p>{escape(f["a"])}</p>'
-                    f'<a class="saz-faq-more" href="{escape(href(f["href"]), quote=True)}">Full answer →</a></details>' for f in m['faq'])
-    return f'<section class="saz-band" id="faq" data-play-background><h2>Common questions</h2><div class="saz-faq">{items}</div></section>'
+    return _hub(m).faq()
 
 
 def faq_questions(m):
-    return [f['q'] for f in m['faq']]
+    return _hub(m).faq_questions()
 
 
 # ---------- 信任页（02 §5.1）----------

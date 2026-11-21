@@ -69,7 +69,10 @@ def run_for(commit, base):
             print('推送的改动未命中 validate-integrations 的触发路径，跳过本地复现。')
             return 0
 
-    logs = ROOT / '.git' / 'prepush-logs' / commit[:8]
+    # worktree 里 .git 是文件：日志放到共用 git 目录（git rev-parse --git-common-dir）
+    gdir = Path(git('rev-parse', '--git-common-dir'))
+    gdir = gdir if gdir.is_absolute() else ROOT / gdir
+    logs = gdir / 'prepush-logs' / commit[:8]
     shutil.rmtree(logs, ignore_errors=True)
     logs.mkdir(parents=True)
     tmp = Path(tempfile.mkdtemp(prefix='prepush-ci-'))
