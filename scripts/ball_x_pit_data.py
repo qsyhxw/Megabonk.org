@@ -1,7 +1,7 @@
 """Source-based recipe edges, not a damage or strength model. Checked 2026-10-30."""
 SOURCES = {
  'official':('https://store.steampowered.com/app/2062430/BALL_x_PIT/','Steam · Kenny Sun and Friends / Devolver Digital','Current game and platform description'),
- 'news':('https://steamcommunity.com/app/2062430/allnews/','Steam · developer announcements','Regal 26 Jan, Shadow 27 Apr, Naturalist 6 Aug 2026; Risen announcement 20 Sep'),
+ 'news':('https://steamcommunity.com/app/2062430/allnews/','Steam · developer announcements','Regal 26 Jan, Shadow 27 Apr, Naturalist 6 Aug 2026; Risen Ballbylon released 12 Nov (Steam DLC page)'),
  'base':('https://www.reddit.com/r/BALLxPIT/comments/1nz0sod/all_ball_evolutions/','Reddit · tetracycloide','Full-release recipe post and corrections; older community observations'),
  'regal':('https://www.reddit.com/r/BALLxPIT/comments/1qnmyrv/regal_update_all_evolutions/','Reddit · hashtagtylerh','Regal recipes and laser clarification; 2026 update discussion'),
  'shadow':('https://www.reddit.com/r/BALLxPIT/comments/1sxd07s/shadow_update_all_evolutions/','Reddit · hashtagtylerh','Shadow recipes and max-level/core/Evolution instructions; 2026 discussion'),

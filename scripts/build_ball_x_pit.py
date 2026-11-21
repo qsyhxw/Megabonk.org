@@ -30,7 +30,8 @@ def shell(path,title,desc,body,ordinary=False,tool=False,error=False,image=False
 {'<script defer src="/assets/ball-x-pit/tool.js"></script>' if tool else ''}</head><body class="bxp-theme guide-layout {'bxp-hub' if hub else 'bxp-guide'}"{fmt}><a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/ball-x-pit/logo.svg" width="44" height="44" alt=""><span>BALL x PIT<small>Recipes · Builds · Unlocks</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu ☰</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header>
 <main class="wrap" id="main">{body}</main><footer class="site-footer"></footer></body></html>'''
-def citations(body):
+BUMP={'builds','characters','evolutions','new-evolutions'}  # 2026-11-21 Risen Ballbylon 上线，仅这些页的相关表述已复核
+def citations(body,when='30 October 2026'):
  used=[]
  def sub(m):
   key=m[1]
@@ -38,7 +39,7 @@ def citations(body):
   n=used.index(key)+1
   return f'<sup class="ref"><a href="#source-{n}" aria-label="Source {n}">[{n}]</a></sup>'
  body=re.sub(r'\[source:([a-z]+)\]',sub,body)
- refs='<section class="sources" id="sources"><h2>Sources & evidence limits</h2><ol>'+''.join(f'<li id="source-{i}">{ext(SOURCES[k][0],SOURCES[k][1])} — {e(SOURCES[k][2])}.</li>' for i,k in enumerate(used,1))+'</ol><p>Checked 30 October 2026. Community reports can change with patches. We have not played these routes or benchmarked builds.</p><a href="#guide">Back to the answer ↑</a></section>'
+ refs=f'<section class="sources" id="sources"><h2>Sources & evidence limits</h2><ol>'+''.join(f'<li id="source-{i}">{ext(SOURCES[k][0],SOURCES[k][1])} — {e(SOURCES[k][2])}.</li>' for i,k in enumerate(used,1))+f'</ol><p>Checked {when}. Community reports can change with patches. We have not played these routes or benchmarked builds.</p><a href="#guide">Back to the answer ↑</a></section>'
  return body+refs
 def recipe_table(data):
  return table(['Evolution','Ingredients','Set / source'],[[f'<strong>{e(r["name"])}</strong>',e(' + '.join(r['inputs']))+(' <small>Also: '+e(' or '.join(' + '.join(a) for a in r['alternatives']))+'</small>' if r['alternatives'] else ''),e(r['version'])+' [source:'+r['source']+']'] for r in data])
@@ -65,8 +66,8 @@ def article(x):
   if body in replacements:body=replacements[body]()
   blocks.append(f'<section id="{ident}"><h2>{title}</h2>{body}</section>')
  toc='<aside class="toc" aria-label="On this page"><strong>On this page</strong>'+''.join(f'<a href="#{i}">{t}</a>' for i,t,_ in x['parts'])+'<a href="#sources">Sources</a></aside>'
- body=f'<header class="article-head" id="guide"><span class="tag">Ball x Pit · Source-based guide</span><h1>{e(x["h1"])}</h1><p class="answer">{x["answer"]}</p><p class="meta">Megabonk.org editors · Checked {DATE} · Base game + free updates · No claimed gameplay test</p></header><div class="article-layout">{toc}<article class="prose">'
- body=citations(body+''.join(blocks))
+ body=f'<header class="article-head" id="guide"><span class="tag">Ball x Pit · Source-based guide</span><h1>{e(x["h1"])}</h1><p class="answer">{x["answer"]}</p><p class="meta">Megabonk.org editors · Checked {'2026-11-21' if x['slug'] in BUMP else DATE} · Base game + free updates · No claimed gameplay test</p></header><div class="article-layout">{toc}<article class="prose">'
+ slug_=x['slug'];body=citations(body+''.join(blocks),'21 November 2026' if slug_ in BUMP else '30 October 2026')
  return shell(P+x['slug']+'/',x['title'],x['desc'],body+'</article></div>',True,tool)
 HOME_DATE='21 November 2026'
 def home():
