@@ -38,7 +38,7 @@ def apply_johto(ctx):
 
     parts = [
         ('scope', 'What this page covers',
-         '<p>PokeBonk v0.10.11 lists 59 Johto League partners that do not have a full guide yet. '
+         '<p>PokeBonk lists 59 Johto League partners that do not have a full guide yet. '
          'This page only states their type, Season 3 rating and evolution links. It does not give passives, kits, builds or unlock routes. '
          f'Full guides follow after the evolution and kit review.{ref(2)}</p>'),
         ('list', f'Partners ({len(rows)})',
@@ -54,7 +54,7 @@ def apply_johto(ctx):
     article('johto-partners',
             'PokeBonk Johto Partners: 59 Unpublished League Partners',
             'Johto partners not yet in the guide',
-            'Types, Season 3 ratings and evolution links for the 59 Johto League partners in PokeBonk v0.10.11 that have no full guide yet.',
-            'PokeBonk v0.10.11 lists 59 Johto League partners without full guides. This page gives their type, Season 3 rating and evolution links only; passives, kits and builds are not covered yet.',
+            'Types, Season 3 ratings and evolution links for the 59 Johto League partners in PokeBonk that have no full guide yet.',
+            'PokeBonk lists 59 Johto League partners without full guides. This page gives their type, Season 3 rating and evolution links only; passives, kits and builds are not covered yet.',
             parts, sources, links)
     return pages

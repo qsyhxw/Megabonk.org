@@ -153,6 +153,8 @@ def build():
     apply_completion(globals())
     from pokebonk_johto import apply_johto
     apply_johto(globals())
+    from pokebonk_johto_guides import apply_johto_guides
+    apply_johto_guides(globals())
     from pokebonk_access import apply_access
     apply_access(globals())
     from pokebonk_longtail import apply_longtail
