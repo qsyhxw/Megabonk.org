@@ -54,6 +54,10 @@ def adapt(html):
     img['fetchpriority'] = 'high'
     keys = ('requirements', 'install', 'platforms', 'co-op', 'language', 'sources')
     secs = {k: main.select_one('#' + k).extract() for k in keys if main.select_one('#' + k)}
+    # 安装截图 figure 在原文中位于 #install 之前、不在任何 section 内：随 #install 一起保留
+    shot = main.select_one('figure[data-game-image]')
+    if shot is not None and 'install' in secs:
+        secs['install'].h2.insert_after(shot.extract())
 
     cards = ''
     for c in m['hub_cards']:
