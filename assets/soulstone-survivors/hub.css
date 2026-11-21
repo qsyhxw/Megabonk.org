@@ -1,0 +1,111 @@
+/* Soulstone Survivors 专区首页布局（仅首页加载，SOP 08 F9）。配色与组件来自 theme.css。 */
+.ss-hub .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding:26px 0 14px}
+.ss-hub .hero h1{font-size:clamp(2.7rem,4.5vw,4rem);line-height:1.04;margin:.2em 0 .15em;text-shadow:0 3px 0 #000a}
+.ss-hub .hero .subtitle{font:400 clamp(1.05rem,1.6vw,1.3rem)/1.4 var(--display);color:var(--ember);margin:0 0 14px}
+.ss-hub .hero .lead{font-size:18px;max-width:46ch;color:var(--text);margin-bottom:0}
+.ss-hub .hero-art{margin:0;border:1px solid var(--bronze);background:#0b0310;padding:8px;box-shadow:inset 0 0 0 2px #0b0310,0 0 0 4px var(--pit),0 0 0 5px var(--rim),0 24px 60px #000b;position:relative}
+.ss-hub .hero-art::before,.ss-hub .hero-art::after{content:"";position:absolute;width:14px;height:14px;background:var(--bronze);transform:rotate(45deg);top:-8px;left:-8px}
+.ss-hub .hero-art::after{left:auto;right:-8px;top:auto;bottom:-8px}
+.ss-hub .hero-art img{width:100%;aspect-ratio:16/9;object-fit:cover}
+
+/* 状态行：平台 · 价格 · 版本 · 日期 · 非官方 */
+.ss-hub .status{display:flex;flex-wrap:wrap;gap:0;margin:18px 0 0;padding:0;border:1px solid var(--rim);background:var(--stone);list-style:none}
+.ss-hub .status li{flex:1 1 auto;padding:10px 16px;border-right:1px solid var(--rim);font-size:13px;line-height:1.4;color:var(--dim);margin:0}
+.ss-hub .status li:last-child{border:0}
+.ss-hub .status b{display:block;color:var(--text);font:400 15px/1.35 var(--display)}
+.ss-hub .status .unofficial b{color:var(--ember)}
+
+/* 常用入口（桌面；手机由任务卡承担） */
+.ss-hub .quick{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin-top:16px;font-size:14px}
+.ss-hub .quick span{font:600 11px/1.5 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--bronze)}
+.ss-hub .quick a{font-weight:650;text-decoration:none;border-bottom:1px solid var(--rim)}
+/* 区块标题 */
+.ss-hub .hero>*{min-width:0}
+.ss-hub .section-title{font-family:var(--display);font-size:clamp(1.55rem,3vw,2.15rem);line-height:1.18;color:#fbf3ff}
+.ss-hub .section-title::before{content:"";display:block;width:54px;height:3px;background:var(--crimson);margin-bottom:12px}
+.ss-hub .section{padding:26px 0 12px}
+.ss-hub .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:14px}
+.ss-hub .section-head h2{margin:0}
+.ss-hub .section-head p{margin:0;max-width:44ch;color:var(--dim);font-size:14px}
+.ss-hub .section-head .section-title::before{display:block}
+.ss-hub .section h2::before{content:"";display:block;width:54px;height:3px;background:var(--crimson);margin-bottom:12px}
+
+/* 任务卡（8 张） */
+.ss-hub .task-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none}
+.ss-hub .task-card{position:relative;background:var(--panel);border:1px solid var(--rim);border-top:3px solid var(--bronze);display:flex;flex-direction:column;margin:0;transition:border-color .15s,transform .15s}
+.ss-hub .task-card:hover{border-color:var(--bronze-hi);transform:translateY(-2px)}
+.ss-hub .task-card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--rim);filter:saturate(.95)}
+.ss-hub .task-card .body{padding:14px 16px 16px;flex:1}
+.ss-hub .task-card h3{margin:0 0 6px;font-size:1.08rem}
+.ss-hub .task-card h3 a{color:#fbf3ff;text-decoration:none}
+.ss-hub .task-card h3 a::after{content:"";position:absolute;inset:0}
+.ss-hub .task-card p{margin:0;font-size:14px;line-height:1.5;color:var(--dim)}
+
+/* 数据预览 + 最新更新 */
+.ss-hub .duo{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:start}
+.ss-hub .panel{background:var(--panel);border:1px solid var(--bronze);box-shadow:inset 0 0 0 3px var(--panel),inset 0 0 0 4px var(--rim);padding:24px}
+.ss-hub .panel h2{font-size:1.4rem;margin-bottom:6px}.ss-hub .panel h2::before{display:none}
+.ss-hub .panel>p{font-size:14px;color:var(--dim);margin:0 0 14px}
+.ss-hub .recipes{width:100%;border-collapse:collapse;font-size:14px}
+.ss-hub .recipes th,.ss-hub .recipes td{padding:10px 8px;border-bottom:1px solid var(--rim);text-align:left;background:none;text-transform:none;letter-spacing:0;font:inherit}
+.ss-hub .recipes th{font:400 15px/1.4 var(--display);color:#fbf3ff;white-space:nowrap}
+.ss-hub .recipes tr:last-child th,.ss-hub .recipes tr:last-child td{border-bottom:0}
+.ss-hub .recipes .plus{color:var(--ember);padding:0 4px}
+.ss-hub .panel .more{display:inline-block;margin-top:12px;font-weight:650;font-size:14px}
+.ss-hub .updates{margin:0;padding:0;list-style:none}
+.ss-hub .updates li{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--rim);font-size:14px;line-height:1.5}
+.ss-hub .updates li:last-child{border:0}
+.ss-hub .updates time{font:600 12px/1.6 var(--body);letter-spacing:.06em;color:var(--ember);text-transform:uppercase}
+
+/* 分组入口 */
+.ss-hub .groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px}
+.ss-hub .hub-group{padding:18px 0 20px;border-top:1px solid var(--rim)}
+.ss-hub .hub-group h3{margin:0 0 4px;color:var(--bronze-hi);font-size:1.12rem}
+.ss-hub .hub-group>p{margin:0 0 8px;font-size:14px;color:var(--dim)}
+.ss-hub .hub-group a.row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px dashed var(--rim);text-decoration:none;font-weight:650;font-size:15px}
+.ss-hub .hub-group a.row span{font-weight:400;color:var(--dim);font-size:13px;text-align:right}
+
+/* 游戏简介 / FAQ */
+.ss-hub .about-game{display:grid;grid-template-columns:1.2fr 1fr;gap:30px}
+.ss-hub .about-game p{margin:.4rem 0 1rem}
+.ss-hub .faq{max-width:900px}
+.ss-hub .faq details{background:var(--panel);border:1px solid var(--rim);border-left:3px solid var(--bronze);margin:0 0 10px;padding:0}
+.ss-hub .faq summary{cursor:pointer;list-style:none;padding:15px 48px 15px 18px;font:400 1.05rem/1.4 var(--display);color:#fbf3ff;position:relative;min-height:48px}
+.ss-hub .faq summary::-webkit-details-marker{display:none}
+.ss-hub .faq summary::after{content:"+";position:absolute;right:18px;top:12px;color:var(--ember);font:400 1.5rem/1 var(--display)}
+.ss-hub .faq details[open] summary::after{content:"–"}
+.ss-hub .faq details[open]{border-left-color:var(--crimson)}
+.ss-hub .faq details p{margin:0;padding:0 18px 16px;color:var(--text)}
+.ss-hub .sources{margin-top:26px}
+
+@media(min-width:901px){.ss-hub .task-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){
+ .ss-hub .hero{grid-template-columns:1fr;gap:26px;padding-top:28px}
+ .ss-hub .hero-art{max-width:680px}
+ .ss-hub .task-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ss-hub .duo,.ss-hub .groups,.ss-hub .about-game{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ .ss-hub .hero{padding:20px 0 18px;gap:20px}.ss-hub .quick{display:none}
+ .ss-hub .hero h1{font-size:2.45rem;margin:.15em 0 .1em}.ss-hub .hero .subtitle{font-size:1.02rem;margin-bottom:10px}.ss-hub .eyebrow{font-size:10px}
+ .ss-hub .hero .lead{font-size:15.5px;line-height:1.55}
+ .ss-hub .hero-art{padding:5px}.ss-hub .hero-art img{aspect-ratio:16/8.5}
+ .ss-hub .actions{margin:14px 0 0;flex-wrap:nowrap;gap:8px}.ss-hub .actions .button{flex:1 1 0;justify-content:center;text-align:center;padding:10px 8px;font-size:13.5px;min-height:46px}
+ .ss-hub .status{flex-wrap:nowrap;overflow-x:auto;margin-top:16px;scrollbar-width:thin}.ss-hub .status li{flex:0 0 auto;padding:8px 14px;font-size:12px}.ss-hub .status b{font-size:14px;white-space:nowrap}
+ .ss-hub .section{padding-top:22px}
+ .ss-hub .section-head{display:block}.ss-hub .section-head p{margin-top:6px}
+ .ss-hub .task-grid{gap:10px}
+ .ss-hub .task-card .body{padding:10px 11px 12px}.ss-hub .task-card h3{font-size:.98rem}.ss-hub .task-card p{font-size:12.5px}
+ .ss-hub .panel{padding:16px}
+ .ss-hub .recipes{font-size:13px}.ss-hub .recipes th{white-space:normal}
+ .ss-hub .updates li{grid-template-columns:64px 1fr}
+ .ss-hub .hub-group{padding:14px 0 8px}.ss-hub .hub-group>p{display:none}.ss-hub .hub-group a.row{flex-direction:column;gap:2px;padding:9px 0}.ss-hub .hub-group a.row span{text-align:left}
+}
+
+/* 首屏主视觉：官方战斗截图（带来源图注，沿用 figure.game-image 结构） */
+.ss-hub .hero-visual{min-width:0}
+.ss-hub .hero-visual figure.game-image{margin:0;border:1px solid var(--bronze);background:#0b0310;padding:8px;box-shadow:inset 0 0 0 2px #0b0310,0 0 0 4px var(--pit),0 0 0 5px var(--rim),0 24px 60px #000b;position:relative}
+.ss-hub .hero-visual figure.game-image img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.ss-hub .hero-visual figcaption{font-size:12px;line-height:1.5;margin-top:8px}
+.ss-hub .hero-visual figcaption .image-zoom{white-space:nowrap}
+@media(max-width:600px){.ss-hub .hero-visual figure.game-image{padding:5px}.ss-hub .hero-visual figcaption{font-size:11px;margin-top:5px}}
