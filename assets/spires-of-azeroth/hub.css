@@ -1,0 +1,80 @@
+/* Spires of Azeroth 首页布局（仅首页，02 §2.1 / 08 F9）。手机优先：文案 → 任务卡 → 游戏窗口 → 速查/更新/分组/FAQ。 */
+.saz-hub .saz-hero { position: relative; margin: 18px 0 0; padding: 26px 22px 24px; color: var(--saz-parch); background: var(--saz-night); border: 4px solid var(--saz-steel); box-shadow: 0 0 0 2px var(--saz-gold-dim), 0 6px 0 #0006; overflow: hidden; }
+.saz-hub .saz-hero::before { content: ""; position: absolute; inset: 0; background: url("/assets/spires-of-azeroth/images/hero-bg-1280.webp") 70% 60% / cover; opacity: .55; }
+.saz-hub .saz-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #140d09ee 35%, #140d0988); }
+.saz-hub .saz-hero > * { position: relative; z-index: 1; }
+.saz-hub .saz-kicker { margin: 0; font: 700 11px/1.6 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--saz-gold); }
+.saz-hub .saz-hero h1 { margin: .15em 0 .2em; font-size: clamp(2rem, 7vw, 4rem); line-height: 1.05; color: var(--saz-gold-hi); text-shadow: 0 2px 0 #000, 0 0 30px #b42a1c88; }
+.saz-hub .saz-h1-sub { display: block; font-size: .46em; letter-spacing: .14em; text-transform: uppercase; color: var(--saz-parch); text-shadow: 0 2px 0 #000; margin-top: .35em; }
+.saz-hub .saz-deck { margin: 0 0 12px; max-width: 46ch; font-size: 1.1rem; line-height: 1.55; color: #f1e4c0; }
+.saz-hub .saz-status { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+.saz-hub .saz-status li { padding: 2px 11px; border: 1px solid var(--saz-gold-dim); background: #140d09cc; color: var(--saz-parch); font: 700 12px/1.7 var(--body); letter-spacing: .04em; }
+.saz-hub .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.saz-hub .saz-hero a:not(.button) { color: var(--saz-gold-hi); }
+
+/* 任务卡 */
+.saz-hub .saz-tasks { margin: 28px 0 8px; }
+.saz-hub .saz-tasks h2 { margin: 0 0 14px; }
+.saz-hub .saz-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.saz-hub .saz-card { display: flex; flex-direction: column; height: 100%; min-width: 0; border: 3px solid var(--saz-steel); background: var(--saz-wood); color: var(--saz-parch); text-decoration: none; overflow: hidden; box-shadow: 0 3px 0 #0005; transition: border-color .15s; }
+.saz-hub .saz-card:hover { border-color: var(--saz-gold-dim); color: #fff3c4; }
+.saz-hub .saz-card img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 2px solid var(--saz-gold-dim); }
+.saz-hub .saz-card-body { display: flex; flex-direction: column; gap: 3px; padding: 11px 13px 14px; flex: 1; }
+.saz-hub .saz-card strong { font: 700 15px/1.3 var(--display); letter-spacing: .02em; color: var(--saz-gold-hi); }
+.saz-hub .saz-card-text { font-size: 13px; line-height: 1.5; color: #dcc9a0; }
+
+/* 速查预览：来自原作战斗教学 */
+.saz-hub .saz-cheat { max-width: 1020px; margin: 8px auto 34px; padding: 18px 20px 12px; background: var(--saz-parch-hi); border: 2px solid var(--saz-gold-dim); outline: 1px solid var(--saz-wood-hi); outline-offset: -7px; }
+.saz-hub .saz-cheat h2 { margin: 0 0 .3rem; }
+.saz-hub .saz-cheat > p { margin: 0 0 12px; font-size: 14px; color: var(--saz-soft); }
+.saz-hub .saz-cheat dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 26px; margin: 0 0 8px; }
+.saz-hub .saz-cheat div { padding: 8px 0 8px 12px; border-left: 4px solid var(--saz-crimson); }
+.saz-hub .saz-cheat dt { font: 700 12px/1.5 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--saz-crimson); }
+.saz-hub .saz-cheat dd { margin: 2px 0 0; font-size: 15px; line-height: 1.5; }
+.saz-hub .saz-cheat kbd { padding: 1px 6px; border: 1px solid var(--saz-steel); border-radius: 3px; background: var(--saz-wood); color: var(--saz-gold-hi); font: 700 12px var(--body); white-space: nowrap; }
+
+/* 下方各区 */
+.saz-hub .saz-band { max-width: 850px; margin: 0 auto; padding: 22px 0 6px; scroll-margin-top: 16px; }
+.saz-hub .saz-band > h2 { margin-top: .2rem; }
+.saz-hub .saz-updates { margin: 0 0 12px; padding: 0; list-style: none; border: 2px solid var(--saz-edge); background: var(--saz-parch-hi); }
+.saz-hub .saz-updates li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 4px 16px; align-items: baseline; padding: 11px 16px; border-bottom: 1px solid var(--saz-edge); }
+.saz-hub .saz-updates li:last-child { border-bottom: 0; }
+.saz-hub .saz-updates time { font: 700 12px/1.6 var(--body); letter-spacing: .06em; color: var(--saz-crimson); }
+.saz-hub .saz-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.saz-hub .saz-group { padding: 14px 16px; border: 2px solid var(--saz-edge); background: var(--saz-parch-hi); }
+.saz-hub .saz-group h3 { margin: 0 0 .2rem; color: var(--saz-crimson); }
+.saz-hub .saz-group > p { margin: 0 0 .5rem; font-size: 14px; color: var(--saz-soft); }
+.saz-hub .saz-group ul { margin: 0; padding: 0; list-style: none; }
+.saz-hub .saz-group li a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; padding: 8px 0; border-top: 1px solid var(--saz-edge); font-weight: 700; text-decoration: none; }
+.saz-hub .saz-group li a span { font-weight: 400; font-size: 13px; color: var(--saz-soft); }
+.saz-hub .saz-faq { display: grid; gap: 10px; }
+.saz-hub .saz-faq details { border: 2px solid var(--saz-edge); background: var(--saz-parch-hi); }
+.saz-hub .saz-faq summary { cursor: pointer; list-style: none; min-height: 48px; padding: 12px 44px 12px 16px; position: relative; font: 700 15.5px/1.45 var(--display); color: var(--saz-wood); }
+.saz-hub .saz-faq summary::-webkit-details-marker { display: none; }
+.saz-hub .saz-faq summary::after { content: "+"; position: absolute; right: 16px; top: 9px; font: 700 22px/1.4 var(--body); color: var(--saz-crimson); }
+.saz-hub .saz-faq details[open] summary::after { content: "–"; }
+.saz-hub .saz-faq details[open] summary { border-bottom: 1px solid var(--saz-edge); }
+.saz-hub .saz-faq p { margin: 0; padding: 12px 16px 2px; }
+.saz-hub .saz-faq-more { display: inline-block; padding: 6px 16px 14px; font-size: 14px; font-weight: 700; }
+
+@media (max-width: 1050px) { .saz-hub .saz-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .saz-hub .saz-hero::after { background: #140d09cc; } }
+@media (max-width: 600px) {
+  .saz-hub .saz-hero { margin-top: 12px; padding: 18px 16px 18px; border-width: 3px; }
+  .saz-hub .saz-kicker { font-size: 10px; letter-spacing: .14em; }
+  .saz-hub .saz-deck { font-size: 1rem; margin-bottom: 10px; }
+  .saz-hub .saz-status { gap: 6px; margin-bottom: 12px; }
+  .saz-hub .saz-status li { font-size: 11px; padding: 1px 8px; }
+  .saz-hub .hero-actions { gap: 8px; }
+  .saz-hub .hero-actions .button { flex: 1 1 100%; }
+  .saz-hub .saz-tasks { margin-top: 20px; }
+  .saz-hub .saz-cards { gap: 10px; }
+  .saz-hub .saz-card { border-width: 2px; }
+  .saz-hub .saz-card-body { padding: 8px 10px 11px; }
+  .saz-hub .saz-card strong { font-size: 13px; }
+  .saz-hub .saz-card-text { font-size: 12px; line-height: 1.45; }
+  .saz-hub .saz-cheat { padding: 14px 14px 8px; }
+  .saz-hub .saz-cheat dl { grid-template-columns: 1fr; gap: 4px; }
+  .saz-hub .saz-groups { grid-template-columns: 1fr; }
+  .saz-hub .saz-updates li { grid-template-columns: 1fr; padding: 10px 14px; }
+}

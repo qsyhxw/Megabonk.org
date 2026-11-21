@@ -1,0 +1,83 @@
+/* Spires of Azeroth 游戏窗口与首页下方阅读区（仅首页加载；窗口行为由 play.js 驱动）。
+   取代原先借用的 /assets/poke-survivor/play.css 和 /assets/pokebonk/site.css。 */
+.saz-theme .game-panel { max-width: 1020px; margin: 8px auto 36px; min-width: 0; scroll-margin-top: 12px; }
+.saz-theme .game-screen { position: relative; aspect-ratio: 16/10; min-height: 420px; background: #000; border: 4px solid var(--saz-steel); box-shadow: 0 0 0 2px var(--saz-gold-dim), 0 6px 0 #0006; }
+.saz-theme .game-cover { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; background: #000; color: var(--saz-parch); overflow: hidden; }
+.saz-theme .game-cover>img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .42; }
+.saz-theme .game-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #000c, #0003); }
+.saz-theme .cover-content { position: relative; z-index: 1; max-width: 520px; text-shadow: 0 2px 4px #000; }
+.saz-theme .game-cover h2 { color: var(--saz-gold-hi); font-size: clamp(2rem, 4.2vw, 3.4rem); margin: 6px 0 10px; text-shadow: 0 2px 0 #000, 0 0 26px #b42a1c88; }
+.saz-theme .game-cover p { color: #f1e4c0; line-height: 1.6; }
+.saz-theme .game-cover .cover-note { font-size: 12px; margin-top: 16px; color: #d8c79a; }
+.saz-theme .play-button { font-size: 17px; padding: 15px 34px; text-shadow: none; }
+.saz-theme .game-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #111; }
+.saz-theme .game-cover[hidden], .saz-theme .game-dock[hidden] { display: none; }
+.saz-theme .game-meta { padding: 12px 0 0; line-height: 1.65; }
+.saz-theme .game-meta > p { font-size: 12.5px; color: var(--saz-soft); margin: 0 0 8px; }
+.saz-theme .game-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.saz-theme .game-tools button, .saz-theme .game-dock button {
+  font: 700 12.5px/1.4 var(--body); letter-spacing: .04em; min-height: 44px; padding: 9px 16px; cursor: pointer;
+  color: var(--saz-parch); background: linear-gradient(var(--saz-steel), var(--saz-steel-lo)); border: 2px solid var(--saz-wood); border-radius: 3px; box-shadow: inset 0 1px 0 #8a8377;
+}
+.saz-theme .game-tools button:hover:not(:disabled), .saz-theme .game-dock button:hover { color: var(--saz-gold-hi); border-color: var(--saz-gold-dim); }
+.saz-theme .game-tools button:disabled { opacity: .45; cursor: default; }
+.saz-theme .game-tools > a { font-size: 13px; padding: 9px 0; }
+.saz-theme .game-meta #game-status { font-size: 12px; margin: 10px 0 0; }
+.saz-theme .game-dock { position: fixed; right: 20px; bottom: 18px; z-index: 80; display: flex; align-items: center; gap: 16px; max-width: calc(100% - 36px); padding: 12px 16px; background: var(--saz-night); color: var(--saz-parch); border: 3px solid var(--saz-steel); box-shadow: 0 0 0 2px var(--saz-gold-dim), 0 5px 0 #0008; font-size: 13px; }
+.saz-theme .game-panel[data-mode=minimized] .game-screen { display: none; }
+.saz-theme .game-panel[data-mode=expanded] { position: fixed; inset: 12px; z-index: 100; max-width: none; margin: 0; display: flex; flex-direction: column; background: var(--saz-night); color: var(--saz-parch); box-shadow: 0 0 0 25px #000d; }
+.saz-theme .game-panel[data-mode=expanded] .game-screen { flex: 1; aspect-ratio: auto; min-height: 0; order: 1; }
+.saz-theme .game-panel[data-mode=expanded] .game-meta { order: 0; padding: 10px 16px; border: 3px solid var(--saz-steel); border-bottom: 0; }
+.saz-theme .game-panel[data-mode=expanded] .game-meta > p { color: #cdb98a; }
+.saz-theme .game-panel[data-mode=expanded] .game-meta > p:first-child, .saz-theme .game-panel[data-mode=expanded] #game-status { display: none; }
+.saz-theme .game-panel[data-mode=expanded] .game-tools a { color: var(--saz-gold-hi); }
+html.game-expanded, .game-expanded { overflow: hidden; }
+.game-minimized { padding-bottom: 90px; }
+html:has(body.saz-theme) { scroll-behavior: auto; }
+
+/* 首页下方阅读区 */
+.saz-theme .play-notes { max-width: 850px; margin: 0 auto; padding: 0 0 48px; }
+.saz-theme .play-notes > section { margin: 34px 0; scroll-margin-top: 16px; }
+.saz-theme .play-notes h2 { font-size: 1.55rem; }
+.saz-theme .play-notes p, .saz-theme .play-notes li { line-height: 1.8; }
+.saz-theme .play-notes li { margin-bottom: 8px; }
+.saz-theme .play-jump { display: flex; gap: 8px 22px; flex-wrap: wrap; border-block: 2px solid var(--saz-edge); padding: 12px 0; font: 700 12.5px/1.4 var(--body); letter-spacing: .06em; text-transform: uppercase; }
+.saz-theme .play-jump a { text-decoration: none; color: var(--saz-wood-hi); padding: 6px 0; }
+.saz-theme .play-jump a:hover { color: var(--saz-crimson); }
+.saz-theme .play-notes .sources { font-size: 12.5px; }
+.saz-theme .play-notes .related { margin-top: 30px; padding-top: 12px; border-top: 1px solid var(--saz-edge); }
+.saz-theme .play-notes .related h2 { font-size: 1.15rem; }
+
+/* 共享 More games 卡片（/assets/play-recommendations.css）换羊皮纸配色 */
+.saz-theme .play-recommendations { --play-red: var(--saz-crimson); max-width: 1020px; margin: 8px auto 40px; }
+.saz-theme .play-rec-heading > p:last-child { color: var(--saz-soft); }
+.saz-theme .play-rec-card { background: var(--saz-parch-hi); border: 2px solid var(--saz-edge); border-radius: 3px; box-shadow: 0 3px 0 #5a46302e; }
+.saz-theme .play-rec-link p { color: var(--saz-soft); }
+.saz-theme .play-rec-action { color: var(--saz-crimson); }
+
+@media (max-width: 900px) { .saz-theme .game-screen { min-height: 390px; } }
+@media (max-width: 600px) {
+  .saz-theme .game-panel { margin-top: 4px; margin-bottom: 28px; }
+  .saz-theme .game-screen { aspect-ratio: auto; height: 440px; min-height: 0; border-width: 3px; }
+  .saz-theme .game-cover { padding: 20px; }
+  .saz-theme .play-button { font-size: 14px; padding: 12px 20px; }
+  .saz-theme .game-tools { gap: 8px; }
+  .saz-theme .game-tools button { font-size: 12px; padding: 9px 12px; }
+  .saz-theme .play-notes h2 { font-size: 1.35rem; }
+  .saz-theme .play-notes > section { margin: 26px 0; }
+  .saz-theme .game-dock { right: 14px; bottom: 12px; gap: 10px; padding: 10px 12px; font-size: 12px; flex-wrap: wrap; }
+  .saz-theme .game-panel[data-mode=expanded] { inset: 6px; }
+  .saz-theme .game-panel[data-mode=expanded] .game-meta { padding: 8px 10px; }
+}
+
+/* 封面背景：原作截图里的教程文字糊掉，只留氛围 */
+.saz-theme .game-cover>img { filter: blur(3px) saturate(.9); transform: scale(1.06); opacity: .38; }
+.saz-theme .game-cover h2 { line-height: 1.15; margin-bottom: 14px; }
+/* 手机上 More games 改 2 列紧凑图文卡，避免整页被 11 张大卡拉长（02 §2.7） */
+@media (max-width: 600px) {
+  .saz-theme .play-rec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .saz-theme .play-rec-link p { display: none; }
+  .saz-theme .play-rec-link > div { padding: 10px 11px 12px; }
+  .saz-theme .play-rec-link h3 { font-size: 13px; margin: 0 0 4px; }
+  .saz-theme .play-rec-action { font-size: 12px; }
+}

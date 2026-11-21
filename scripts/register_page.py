@@ -13,7 +13,8 @@ Applied to every page listed (idempotent; run as the LAST build step or after ma
   - related tasks           <section class="related-tasks" data-reg> before "Back to top" (inner pages)
   - footer (v3.25)          when the manifest has a "footer" block: the page's last <footer> becomes
                             <footer class="site-footer" data-reg> (brand, section columns from rows with
-                            "footer": true, recently updated, official links, info row) — all pages incl. plain
+                            "footer": true, fixed "links" anchors per column, recently updated, official links,
+                            info row) — all pages incl. plain
 Registries synced (only entries for this game's pages are added; nothing else is removed):
   sitemap.xml <url>, data/content-dates.json, data/game-seo.json "pages", config/integrations.json includes.
 Checks: footer link count (15–25) and footer links back to the main site other than the info row,
@@ -64,7 +65,10 @@ def nav_html(m, slug):
         cur = ' aria-current="page"' if s == slug else ""
         label = next((x["label"] for x in m["sections"] if x["id"] == p.get("section")), p["title"])
         out.append(f'<a href="{url(m, s)}"{cur}>{html.escape(label)}</a>')
-    out += [f'<a href="{x["href"]}">{html.escape(x["label"])}</a>' for x in m.get("nav_extra", [])]
+    # nav_extra rows may carry "slug" so a real page that is not in "nav" (e.g. a hub whose first entries are anchors) is still marked current
+    for x in m.get("nav_extra", []):
+        cur = ' aria-current="page"' if slug and x.get("slug") == slug else ""
+        out.append(f'<a href="{x["href"]}"{cur}>{html.escape(x["label"])}</a>')
     return "".join(out)
 
 
@@ -104,9 +108,11 @@ def footer_html(m):
     # columns: footer.columns groups several sections under one heading; default is one column per section
     groups = f.get("columns") or [{"label": x["label"], "sections": [x["id"]]} for x in m["sections"]]
     for g in groups:
-        rows = [p for sid in g["sections"] for p in m["pages"] if p.get("footer") and p.get("section") == sid][:6]
-        if rows:
-            cols.append(f'<div class="footer-col"><h2>{e(g["label"])}</h2>' + "".join(f'<a href="{url(m, p["slug"])}">{e(p["title"])}</a>' for p in rows) + "</div>")
+        rows = [p for sid in g.get("sections", []) for p in m["pages"] if p.get("footer") and p.get("section") == sid][:6]
+        # "links": fixed anchors on real pages of the section, for small hubs whose tasks live as sections of one page
+        extra = "".join(f'<a href="{x["href"]}">{e(x["label"])}</a>' for x in g.get("links", []))
+        if rows or extra:
+            cols.append(f'<div class="footer-col"><h2>{e(g["label"])}</h2>' + "".join(f'<a href="{url(m, p["slug"])}">{e(p["title"])}</a>' for p in rows) + extra + "</div>")
     recent = sorted((p for p in m["pages"] if p["slug"] and (not p.get("plain") or p.get("recent")) and p.get("updated")), key=lambda p: p["updated"], reverse=True)[:3]
     if recent:
         ver = f'<p class="footer-version">{e(f["version"])}</p>' if f.get("version") else ""
