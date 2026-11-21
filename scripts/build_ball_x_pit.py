@@ -11,20 +11,25 @@ P='/ball-x-pit/'
 BASE='https://megabonk.org'
 DATE='2026-10-30'
 ADS='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
-NAV=[('Start here','beginners-guide/'),('Evolutions','evolutions/'),('Build choices','builds/'),('Guides','#guides')]
+NAV=[('Start here','beginners-guide/'),('Evolutions','evolutions/'),('Builds','builds/'),('Progress','trophy-guide/')]
 def slug(s):return re.sub(r'[^a-z0-9]+','-',s.lower()).strip('-')
 def ext(url,label):return f'<a href="{e(url,quote=True)}" target="_blank" rel="noopener noreferrer">{e(label)} ↗</a>'
 def shell(path,title,desc,body,ordinary=False,tool=False,error=False,image=False):
- nav=''.join(f'<a href="{P+u}"'+(' aria-current="page"' if path==P+u else '')+'>'+l+'</a>' for l,u in NAV)
+ """全站外壳：theme.css 全部页面，hub.css 仅首页；导航/页脚由 register_page.py 按页面清单覆盖。"""
+ nav=''.join(f'<a href="{P+u}"'+(' aria-current="page"' if path==P+u else '')+'>'+l+'</a>' for l,u in NAV)+'<a href="/#more-games">More games</a>'
+ hub=path==P
+ FORMATS={'':'hub'}|{k+'/':'other' for k in ['beginners-guide','builds','character-tier-list','characters','evolutions','new-evolutions','passive-evolutions','ghostly-shield','trophy-guide']}
+ key=path[len(P):] if path.startswith(P) else ''
+ fmt=f' data-format="{FORMATS[key]}"' if (ordinary and key in FORMATS) else ''
  return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc,quote=True)}"><link rel="canonical" href="{BASE+path}">
 {ADS if ordinary else ''}{'<meta name="robots" content="noindex,follow">' if error else ''}
-<link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/ball-x-pit/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css">
+<link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/ball-x-pit/theme.css">{'<link rel="stylesheet" href="/assets/ball-x-pit/hub.css">' if hub else ''}
 <meta property="og:type" content="{'website' if path==P else 'article'}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc,quote=True)}"><meta property="og:url" content="{BASE+path}">
-{f'<meta property="og:image" content="{BASE}/assets/ball-x-pit/recipe-map.svg">' if image else ''}
-{'<script defer src="/assets/ball-x-pit/tool.js"></script>' if tool else ''}</head><body class="bxp guide-layout"><a class="skip" href="#main">Skip to content</a>
-<header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/ball-x-pit/logo.svg" width="44" height="44" alt=""><span>BALL x PIT<small>Megabonk.org · Independent guides</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu ☰</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header>
-<main class="wrap" id="main">{body}</main><footer class="footer"><div class="wrap footer-grid"><div><strong>Ball x Pit · Independent guide notebook</strong><p>Published by Megabonk.org editors. Not affiliated with Kenny Sun and Friends or Devolver Digital. Source-based guides; no claimed gameplay tests.</p><a href="/#wiki-start">More survival-game guides →</a></div><nav aria-label="Site information"><a href="{P}about/">About</a><a href="{P}contact/">Contact</a><a href="/privacy-policy#ball-x-pit-guides">Privacy</a></nav></div></footer></body></html>'''
+{f'<meta property="og:image" content="{BASE}/assets/ball-x-pit/images/ball-2-1280.webp">' if image else ''}
+{'<script defer src="/assets/ball-x-pit/tool.js"></script>' if tool else ''}</head><body class="bxp-theme guide-layout {'bxp-hub' if hub else 'bxp-guide'}"{fmt}><a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="{P}"><img src="/assets/ball-x-pit/logo.svg" width="44" height="44" alt=""><span>BALL x PIT<small>Recipes · Builds · Unlocks</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu ☰</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header>
+<main class="wrap" id="main">{body}</main><footer class="site-footer"></footer></body></html>'''
 def citations(body):
  used=[]
  def sub(m):
@@ -60,49 +65,71 @@ def article(x):
   if body in replacements:body=replacements[body]()
   blocks.append(f'<section id="{ident}"><h2>{title}</h2>{body}</section>')
  toc='<aside class="toc" aria-label="On this page"><strong>On this page</strong>'+''.join(f'<a href="#{i}">{t}</a>' for i,t,_ in x['parts'])+'<a href="#sources">Sources</a></aside>'
- body=f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{P}">Ball x Pit guides</a> / {e(x["h1"])}</nav><header class="article-head" id="guide"><span class="tag">Ball x Pit · Source-based guide</span><h1>{e(x["h1"])}</h1><p class="answer">{x["answer"]}</p><p class="meta">Megabonk.org editors · Checked {DATE} · Base game + free updates · No claimed gameplay test</p></header><div class="article-layout">{toc}<article class="prose">'
+ body=f'<header class="article-head" id="guide"><span class="tag">Ball x Pit · Source-based guide</span><h1>{e(x["h1"])}</h1><p class="answer">{x["answer"]}</p><p class="meta">Megabonk.org editors · Checked {DATE} · Base game + free updates · No claimed gameplay test</p></header><div class="article-layout">{toc}<article class="prose">'
  body=citations(body+''.join(blocks))
- related='<section class="related"><h2>Next useful checks</h2>'+''.join(f'<a href="{P+s}/">{e(s.replace("-"," ").title())} →</a>' for s in x['related'])+'</section>'
- return shell(P+x['slug']+'/',x['title'],x['desc'],body+related+'</article></div>',True,tool)
+ return shell(P+x['slug']+'/',x['title'],x['desc'],body+'</article></div>',True,tool)
+HOME_DATE='21 November 2026'
 def home():
- specs=pages()
- groups=[('start','Start with a workable run',['beginners-guide']),('recipes','Find the missing ingredient',['evolutions','passive-evolutions']),('choose','Choose a build and character',['builds','character-tier-list']),('progression','Turn discoveries into progress',['characters','ghostly-shield','trophy-guide']),('updates','Return for the new recipes',['new-evolutions'])]
- lookup={x['slug']:x for x in specs}
- hero=f'''<header class="hero" id="guide"><div><span class="eyebrow">Independent guide notebook / 01</span><h1>One more run.<br><em>A better plan.</em></h1><p class="lead">Ball x Pit is out now: a brick-breaking survival roguelite with ball evolutions and a town to rebuild. Find your recipe, choose for your roster, then head back into the pit.</p><div class="actions"><a class="button" href="{P}evolutions/">Find an evolution →</a><a class="button secondary" href="{P}beginners-guide/">Start your first run</a></div><p class="meta">Megabonk.org editors · Checked 30 October 2026<br>Unofficial · Base game + free updates</p></div><figure class="hero-art"><img src="/assets/ball-x-pit/recipe-map.svg" width="1000" height="760" alt="Original diagram: Burn and Iron evolve into Bomb, then Poison leads to Nuclear Bomb"><figcaption>Original recipe diagram, not a game screenshot. Documented ingredient route. [source:base]</figcaption></figure></header>'''
- hero+='<div class="statusbar"><div><small>Base game</small><strong>Released</strong></div><div><small>Latest free set</small><strong>Naturalist</strong></div><div><small>Tools</small><strong>Ingredient routes</strong></div><div><small>Next expansion</small><strong>12 Nov · planned</strong></div></div>'
- body=hero+'<section id="guides" class="section"><div class="section-head"><h2>Bring the right plan.</h2><p>Pick the task you are trying to finish. Every link below leads to a complete guide.</p></div>'
- for ident,title,slugs in groups:
-  body+=f'<section id="{ident}" class="hub-group"><h3>{title}</h3><div class="hub-grid">'
-  for s in slugs:
-   x=lookup[s]
-   summaries={'evolutions':'Choose a target and reveal its missing ingredient branches.','passive-evolutions':'Check item ingredients, capacity and the Evolution action.','builds':'Choose reported combos that fit your unlocked roster.','character-tier-list':'Compare picks by task, partner and control style.','beginners-guide':'Go from a short recipe to completed town construction.','ghostly-shield':'Meet the stone-ally requirement before hunting the offer.','new-evolutions':'Filter Regal, Shadow and Naturalist recipes.','characters':'Check the blueprint, materials and completed house.','trophy-guide':'Track original-roster stage clears and avoid repeat pairs.'}
-   body+=f'<article class="card"><span class="number">{list(lookup).index(s)+1:02}</span><h4><a href="{P+s}/">{e(x["h1"])}</a></h4><p>{summaries[s]}</p><a href="{P+s}/">Open guide →</a></article>'
-  body+='</div>'
-  if ident=='updates':body+='<p>Regal, Shadow and Naturalist are available free updates. Risen Ballbylon is a separate paid expansion planned for 12 November 2026; its unreleased recipes are not included here. [source:news]</p>'
-  body+='</section>'
- body+='</section>'
- body+='<section class="section overview" id="platforms"><h2>Same game. Check the platform.</h2>'+paras('The released game is developed by Kenny Sun and Friends and published by Devolver Digital. Steam lists Windows and macOS; the game is also on consoles and mobile. These guides cover Ball x Pit, not an online ball-pit toy or a Megabonk game mode. [source:official]',
- 'Switch 2 Edition advertises improved resolution and frame rates; this is an official qualitative description, not our benchmark. Mobile is free to try with a purchase to unlock the full game. We do not promise cross-platform save transfer or identical performance. [source:switch][source:ios]')+f'<p>{ext(SOURCES["official"][0],"Steam · PC / Mac")} · {ext(SOURCES["ios"][0],"App Store · iOS")} · {ext(SOURCES["switch"][0],"Nintendo · Switch / Switch 2")} · {ext("https://www.playstation.com/en-us/games/ball-x-pit/","PlayStation · PS5")}</p></section>'
- body+='<section class="section overview" id="buy"><h2>Looking for a key or the controls?</h2>'+paras('For a purchase key, use the platform’s official listing above and check your region and edition before buying. If you meant keyboard or controller inputs, follow your version’s on-screen prompts and the '+f'<a href="{P}beginners-guide/#controls">beginner controls notes</a>. This site does not sell keys or host a playable browser copy.')+'</section>'
- body+='<section class="section overview" id="release-notes"><h2>Free updates and the forthcoming expansion</h2>'+paras('Regal, Shadow and Naturalist are released free updates. Risen Ballbylon is a paid expansion announced for 12 November 2026; the developer says its content is accessed after completing the base game. The ingredient tools here exclude its unreleased recipes. Check the official listing for your region’s date. [source:news]')+'</section>'
- body+='<section class="section overview" id="playtime"><h2>How long is a run through the game?</h2>'+paras('Separate a first clear from full trophy completion and continued Endless play. Dayngls estimates 25–30 hours for its base-game trophy route; that is a route estimate, not a guaranteed first-clear time. See the '+f'<a href="{P}trophy-guide/">trophy checklist</a> for the workload behind completion. [source:trophy]')+'</section>'
- body+='<section class="section overview" id="languages"><h2>Which game name am I looking for?</h2>'+paras('球比伦战记 is the Simplified Chinese game name used on Steam. ボールピット commonly appears in Japanese queries. These English guides use Burn, Freeze, Dark and Egg Sac consistently; community synonyms are explained beside the recipe tools. Language-specific guide pages are not currently offered here.')+'</section>'
- body+='<section class="section overview" id="community"><h2>Community reports, with their limits</h2>'+paras('Player questions and recipe reports help explain missing discoveries and build choices. They are attributed to their authors; exact post dates can be obscured by cached relative timestamps. No tier here claims a controlled performance test. '+ext('https://www.reddit.com/r/BALLxPIT/','Reddit · r/BALLxPIT')+' is a community forum, not our support desk.')+'</section>'
- # Citation source section remains inside the hub, with only one back link.
- body=citations(body)
+ """F9 专区首页：状态行 → 8 张任务卡 → 数据预览 + 最新更新 → 分组入口 → 简介 → FAQ。任务卡读 data/ball-x-pit-pages.json 的 card 排序。"""
+ manifest=json.loads((ROOT/'data/ball-x-pit-pages.json').read_text(encoding='utf-8'))
+ cards=sorted((x for x in manifest['pages'] if x.get('card')),key=lambda x:x['card'])
+ names={'trophy-guide':'Trophy guide','builds':'Builds','new-evolutions':'New evolutions','evolutions':'Evolutions','ghostly-shield':'Ghostly Shield','passive-evolutions':'Passive evolutions','beginners-guide':"Beginner's guide",'character-tier-list':'Character tier list','characters':'Characters'}
+ task_cards=''.join(f'<li class="task-card"><img src="/assets/ball-x-pit/images/{x["thumb"]}-480.webp" width="480" height="270" alt="" loading="lazy"><div class="body"><h3><a href="{P}{x["slug"]}/">{e(names[x["slug"]])}</a></h3><p>{e(x["blurb"])}</p></div></li>' for x in cards)
+ balls={r['name']:r for r in BALLS}
+ def recipe_row(name):
+  r=balls[name];ing='<span class="plus">+</span>'.join(e(i) for i in r['inputs'])
+  return f'<tr><th scope="row">{e(name)}</th><td>{ing}</td></tr>'
+ recipes=''.join(recipe_row(n) for n in ['Bomb','Magma','Maggot','Nuclear Bomb'])
+ hero=f'''<header class="hero" id="top"><div><span class="eyebrow">Unofficial guide notebook</span><h1>Ball x Pit Guide</h1><p class="subtitle">Evolutions, builds and unlocks</p><p class="lead">Find the missing ingredient for an evolution, pick a build that fits your roster, then drop back into the pit.</p><div class="actions"><a class="button" href="{P}evolutions/">Find an evolution →</a><a class="button secondary" href="{P}beginners-guide/">Start your first run</a></div><nav class="quick" aria-label="Most opened guides"><span>Most opened</span><a href="{P}trophy-guide/">Trophy guide</a><a href="{P}builds/">Builds</a><a href="{P}new-evolutions/">New evolutions</a><a href="{P}ghostly-shield/">Ghostly Shield</a></nav><ul class="status" aria-label="Game status"><li>Platforms<b>PC · Console · Mobile</b></li><li>Price<b>$14.99 on Steam</b></li><li>Latest free update<b>Naturalist</b></li><li>Expansion<b>Risen Ballbylon · $6.99</b></li><li>Checked<b>{HOME_DATE}</b></li><li class="unofficial">Status<b>Unofficial fan guide</b></li></ul></div><figure class="hero-art"><img src="/assets/ball-x-pit/images/ball-2-1280.webp" srcset="/assets/ball-x-pit/images/ball-2-800.webp 800w, /assets/ball-x-pit/images/ball-2-1280.webp 1280w" sizes="(max-width: 900px) calc(100vw - 32px), 560px" width="1280" height="720" alt="Ball x Pit combat: several balls in flight and the carried loadout at the left edge" fetchpriority="high"></figure></header>'''
+ tasks=f'<section class="section" id="guides"><div class="section-head"><h2>Pick your task</h2><p>Every card opens a complete guide, ordered by what readers open most.</p></div><ul class="task-grid">{task_cards}</ul></section>'
+ updates=[('21 Nov 2026','Risen Ballbylon expansion is on sale ($6.99 on Steam). The recipe tools here still cover the base game and free updates.',f'{P}new-evolutions/','See what the tools cover'),
+  ('6 Aug 2026','Naturalist update: 11 new balls, 5 passives and two characters.',f'{P}new-evolutions/','Naturalist recipes'),
+  ('27 Apr 2026','Shadow update: Tunneller, Tiptoer and the Guildhall.',f'{P}characters/','Character unlocks'),
+  ('26 Jan 2026','Regal update: Endless Mode, Falconer and Carouser.',f'{P}character-tier-list/','Pick a character')]
+ upd=''.join(f'<li><time>{d}</time><span>{e(t)} <a href="{u}">{e(l)} →</a></span></li>' for d,t,u,l in updates)
+ duo=f'<section class="section" id="updates"><div class="duo"><div class="panel"><h2>Recipe check</h2><p>Four short routes from the evolution chart. The finder shows the rest.</p><table class="recipes"><tbody>{recipes}</tbody></table><a class="more" href="{P}evolutions/">Open the recipe finder →</a></div><div class="panel"><h2>What changed</h2><ul class="updates">{upd}</ul></div></div></section>'
+ groups=[('Start with a workable run','Your first clear and first buildings.',[('beginners-guide',"Beginner's guide",'Short first recipe, town loop')]),
+  ('Find the missing ingredient','Ball and passive recipes, free-update additions.',[('evolutions','Evolutions','Ball recipes and route finder'),('passive-evolutions','Passive evolutions','Item recipes and slot checks'),('new-evolutions','New evolutions','Regal, Shadow and Naturalist')]),
+  ('Choose a build and character','Picks that fit what you have unlocked.',[('builds','Builds','Combos by progression'),('character-tier-list','Character tier list','Picks with conditions'),('characters','Characters','Houses, blueprints and materials')]),
+  ('Turn discoveries into progress','Unlocks and the trophy route.',[('ghostly-shield','Ghostly Shield','Stone-ally requirement'),('trophy-guide','Trophy guide','Stage clears checklist')])]
+ grp=''.join(f'<div class="hub-group"><h3>{t}</h3><p>{d}</p>'+''.join(f'<a class="row" href="{P}{s}/">{e(n)} <span>{e(w)}</span></a>' for s,n,w in rows)+'</div>' for t,d,rows in groups)
+ allguides=f'<section class="section" id="all-guides"><div class="section-head"><h2>All guides by task</h2></div><div class="groups">{grp}</div></section>'
+ about=f'<section class="section" id="platforms"><div class="about-game"><div><h2>About the game</h2><p>Ball x Pit mixes brick-breaking with a survival roguelite and a town you rebuild between runs. It is made by Kenny Sun and Friends and published by Devolver Digital. Steam lists Windows and macOS; the official site also lists Switch, Switch 2, Xbox, PlayStation, App Store and Google Play.</p><p>These guides cover the game itself, not an online ball-pit toy or a Megabonk mode. Prices and platform lists change, so check the store page for your region: {ext(SOURCES["official"][0],"Steam")} · {ext("https://ballxpit.com/","Official site")}.</p></div><div><h2>How we check</h2><p>Recipes come from attributed community charts and the official update notes, checked against each other. We have not benchmarked builds or played every route. Each guide shows its checked date.</p></div></div></section>'
+ faq=[('Is Ball x Pit still getting free updates?','Steam lists the Naturalist update (6 Aug 2026) as the latest free update, after Regal and Shadow. Risen Ballbylon is a separate paid expansion. Our recipe tools cover the base game and the free updates, not the expansion yet.',f'{P}new-evolutions/','New evolutions'),
+  ('How do I make an evolution?','Carry the listed ingredients, upgrade them fully, then choose Evolution at a fusion core. A fused ball with a generic name is not the named evolution.',f'{P}evolutions/','Evolution finder'),
+  ('Which character should I start with?','The Warrior is the starting character, and a good one for learning pickups and the town loop. Later picks depend on what you have unlocked and who you pair them with.',f'{P}character-tier-list/','Character picks'),
+  ('Is Ball x Pit on mobile and consoles?','Yes. Steam lists Windows and macOS, and the official site lists Switch, Switch 2, Xbox, PlayStation, App Store and Google Play. Save transfer between platforms is not promised here.',f'{P}beginners-guide/','Beginner\'s guide'),
+  ('Looking for a key or the controls?','For a purchase key use the official store listing for your platform and check region and edition. For controls, follow your version\'s on-screen prompts and the beginner notes. This site does not sell keys or host a playable copy.',f'{P}beginners-guide/#controls','Controls notes'),
+  ('How long is a run through the game?','Separate a first clear from full trophy completion and Endless play. Dayngls estimates 25–30 hours for the base-game trophy route; that is a route estimate, not a first-clear time.',f'{P}trophy-guide/','Trophy checklist'),
+  ('Which game name am I looking for?','球比伦战记 is the Simplified Chinese name on Steam, and ボールピット appears in Japanese searches. The guides here are in English and use Burn, Freeze, Dark and Egg Sac consistently.',f'{P}evolutions/','Recipe names')]
+ faq_html='<section class="section" id="faq"><div class="section-head"><h2>Common questions</h2></div><div class="faq">'+''.join(f'<details><summary>{e(q)}</summary><p>{e(a)} <a href="{u}">{e(l)} →</a></p></details>' for q,a,u,l in faq)+'</div></section>'
+ body=hero+tasks+duo+allguides+about+faq_html
  return shell(P,'Ball x Pit Guides: Evolutions, Builds & Unlocks','Plan Ball x Pit evolutions, choose builds for your roster and check character unlocks. Independent guides, recipe tools and a base-game trophy checklist.',body,True,image=True)
+FAQ_QUESTIONS=['Is Ball x Pit still getting free updates?','How do I make an evolution?','Which character should I start with?','Is Ball x Pit on mobile and consoles?','Looking for a key or the controls?','How long is a run through the game?','Which game name am I looking for?']
 def build():
  result=[(P,home())]+[(P+x['slug']+'/',article(x)) for x in pages()]
  for s,title,body in [
- ('about/','About the Ball x Pit guides',paras('Megabonk.org editors publish this independent guide section for players of Ball x Pit. We are not Kenny Sun and Friends, Devolver Digital or game support. We use official descriptions and attributed community reports; we do not claim to have played or benchmarked the routes.',
- 'Recipe tools follow documented ingredient graphs, keeping alternative recipes visible and distinguishing conflicts from verified instructions. Build choices are editorial advice based on published mechanics and player preferences, not a combined performance score.',
- 'Each guide records its checked date, source authors and relevant limitations. To suggest a correction, send the URL and an accessible source via our Contact page. Game names belong to their owners.')),
- ('contact/','Contact the guide editors',paras('For a correction to a Ball x Pit guide, email <a href="mailto:contact@megabonk.org?subject=%5BMegabonk.org%5D%20Website%20feedback">contact@megabonk.org</a>. Include the page URL, your platform, game version and a public source or a description of the issue. Do not send passwords, purchase keys or game credentials.',
- 'We cannot restore saves, issue refunds or credit in-game items. For purchase/account problems, use the support link provided by the store you purchased from. There is no promised reply time. '+ext(SOURCES['official'][0],'Steam · Ball x Pit store and support links')))]:
-  result.append((P+s,shell(P+s,title+' | Ball x Pit','Publisher, source-review method and contact information for the independent Ball x Pit guides on Megabonk.org.',f'<article class="legal" id="guide"><p class="crumbs"><a href="{P}">Ball x Pit guides</a></p><h1>{title}</h1><p class="meta">Reviewed {DATE}</p>{body}<p><a href="{P}about/">About</a> · <a href="{P}contact/">Contact</a></p></article>')))
- result.append((P+'404.html',shell(P+'404','Page not found | Ball x Pit Guides','This Ball x Pit guide page could not be found. Return to the guide index to find current recipe, build and unlock help.',f'<article class="legal"><h1>That route ends here.</h1><p>This guide page was not found.</p><a class="button" href="{P}">Back to Ball x Pit guides</a></article>',error=True)))
+ ('about/','About the Ball x Pit guides',paras('This is an unofficial guide section for players of Ball x Pit, written by the Megabonk.org editors. It is not made by Kenny Sun and Friends or Devolver Digital, and it is not game support.',
+ 'Sources: the Steam store page and update notes, the official site, and attributed community recipe charts and reports. Each guide lists the sources it relies on and the date we checked them. We have not benchmarked builds or played every route, and we say so where it matters.',
+ 'Checked against the Naturalist update (6 Aug 2026) and the Risen Ballbylon store listing on 21 Nov 2026. The recipe tools cover the base game and the free updates; Risen Ballbylon recipes are not included yet.',
+ 'Covered here: evolutions and passive evolutions, new recipes from the free updates, builds, the character tier list and unlocks, Ghostly Shield, the trophy checklist and a beginner guide. To suggest a correction, send the page URL and a public source through the <a href="/ball-x-pit/contact/">contact page</a>. Game names belong to their owners.')),
+ ('contact/','Contact the Ball x Pit guide editors',paras('Found a wrong recipe, an outdated update note or a broken tool? Email <a href="mailto:contact@megabonk.org?subject=%5BMegabonk.org%5D%20Website%20feedback">contact@megabonk.org</a> with the page URL, your platform and game version, and a public source or a short description of what you saw.',
+ 'Useful reports: a recipe that does not match your game, a character unlock that is described incorrectly, a price or platform change on the store page. Please do not send passwords, purchase keys or game credentials.',
+ 'We cannot restore saves, issue refunds or give in-game items. For purchase or account problems, use the support link on the store where you bought the game. There is no promised reply time. '+ext(SOURCES['official'][0],'Steam · Ball x Pit store and support links')))]:
+  result.append((P+s,shell(P+s,title+' | Ball x Pit','Who writes the unofficial Ball x Pit guides, which sources they use and how to report a correction.' if s=='about/' else 'How to report a wrong recipe, outdated note or broken tool in the Ball x Pit guides.',f'<article class="legal" id="guide"><p class="crumbs"><a href="{P}">Ball x Pit guide</a></p><h1>{title}</h1><p class="meta">Reviewed {HOME_DATE}</p>{body}<p><a href="{P}">Back to the Ball x Pit guide →</a></p></article>')))
+ result.append((P+'404.html',shell(P+'404','Page not found | Ball x Pit Guides','This Ball x Pit guide page could not be found. Return to the guide index to find current recipe, build and unlock help.',f'<article class="legal"><h1>That route ends here.</h1><p>This guide page was not found.</p><a class="button" href="{P}">Back to the Ball x Pit guide</a></article>',error=True)))
  for route,html in result:
   f=ROOT/route.lstrip('/') if route.endswith('.html') else ROOT/route.lstrip('/')/'index.html'
   f.parent.mkdir(parents=True,exist_ok=True);write_html(f, decorate(route,html),encoding='utf-8')
+ import subprocess,sys
+ subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'ball-x-pit'],check=True)
+ # 404 不在页面清单里：同一套导航与页脚由清单直接生成
+ sys.path.insert(0,str(Path(__file__).resolve().parent))
+ import register_page as rp
+ m=rp.load(ROOT,'ball-x-pit');f404=ROOT/'ball-x-pit/404.html';t=f404.read_text(encoding='utf-8')
+ nav=rp.nav_html(m,'__404__')
+ t=re.sub(r'(<nav class="(?:desktop-nav|mobile-links)"[^>]*>).*?(</nav>)',lambda x:x[1]+nav+x[2],t,flags=re.S)
+ t=re.sub(r'<footer class="site-footer"[^>]*>.*?</footer>',lambda x:rp.footer_html(m),t,count=1,flags=re.S)
+ write_html(f404,t,encoding='utf-8')
  print(f'Built {len(result)} Ball x Pit pages: 10 ordinary, 2 trust, 1 error; {len(BALLS)} ball outputs and {len(ITEMS)} passive outputs.')
 if __name__=='__main__':build()
