@@ -123,6 +123,12 @@ def build():
   f.parent.mkdir(parents=True,exist_ok=True);write_html(f, decorate(route,html),encoding='utf-8')
  import subprocess,sys
  subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'ball-x-pit'],check=True)
+ # register_page 追加面包屑后，让 SEO 编辑器再跑一遍，使 FAQ/面包屑顺序稳定（pre-push 的 render drift 检查）
+ from game_seo import edit as edit_seo
+ for route,_ in result:
+  f=ROOT/route.lstrip('/') if route.endswith('.html') else ROOT/route.lstrip('/')/'index.html'
+  t0=f.read_text(encoding='utf-8');t1=edit_seo(f,t0)
+  if t1!=t0:f.write_text(t1,encoding='utf-8')
  # 404 不在页面清单里：同一套导航与页脚由清单直接生成
  sys.path.insert(0,str(Path(__file__).resolve().parent))
  import register_page as rp
