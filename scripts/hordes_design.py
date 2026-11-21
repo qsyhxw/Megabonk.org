@@ -73,7 +73,7 @@ def adapt(html):
             '<ul class="hz-status" aria-label="Game status">' + ''.join(f'<li>{s}</li>' for s in status) + '</ul>'
             '<div class="hz-actions"><a class="hz-btn primary" href="#requirements">Check your client first</a>'
             f'<a class="hz-btn secondary" href="{RELEASE}" target="_blank" rel="noopener noreferrer">Author releases ↗<span class="sr-only"> (opens in a new tab)</span></a></div></div>'
-            f'<div class="hz-media"><figure class="game-image">{img}</figure></div></div>')
+            f'<div class="hz-media"><figure class="game-image">{img}</figure><p class="hz-frame-note">Early v0.1 gameplay frame.</p></div></div>')
     glance = ('<dl class="hz-glance" aria-label="Client check at a glance">'
               + ''.join(f'<div><dt>{a}</dt><dd>{b}</dd></div>' for a, b in GLANCE) + '</dl>')
     tasks = f'<section class="hz-tasks" id="start"><h2>What are you trying to do?</h2><div class="hz-cards">{cards}</div></section>'

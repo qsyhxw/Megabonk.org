@@ -43,7 +43,7 @@ def main():
             key = path.relative_to(ROOT).as_posix()
             text = path.read_text(encoding='utf8')
             if key == 'hordes-of-azeroth/index.html':
-                hero_caption = re.search(r'</header><p class="meta">(.*?)</p>', text, re.S)
+                hero_caption = re.search(r'</header><p class="meta">(.*?)</p>', text, re.S) or re.search(r'<p class="hz-frame-note">(.*?)</p>', text, re.S)
                 assert hero_caption and hero_caption[1] == 'Early v0.1 gameplay frame.', key
             links = ImageLinks()
             links.feed(text)
