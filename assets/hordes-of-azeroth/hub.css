@@ -1,0 +1,103 @@
+/* Hordes of Azeroth hub layout (home only, 02 §2.1). Mobile first: copy → image → task cards → download window. */
+.hz-hub main.wrap { padding-bottom: 28px; }
+.hz-hub .hz-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 20px 40px; align-items: center; padding: 34px 0 20px; }
+.hz-hub .hz-copy { min-width: 0; }
+.hz-hub .hz-hero h1 { margin: .22em 0 .38em; font-size: clamp(2.3rem, 5.2vw, 3.8rem); line-height: 1.04; background: linear-gradient(#fff 30%, #e9d6be); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 0; filter: drop-shadow(0 3px 0 #44321b) drop-shadow(0 0 18px #b58e5f55); }
+.hz-hub .hz-deck { margin: 0 0 14px; max-width: 46ch; font-size: 1.12rem; line-height: 1.6; color: #f8f2ea; }
+.hz-hub .hz-status { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; padding: 0; list-style: none; }
+.hz-hub .hz-status li { padding: 3px 12px; border: 1px solid var(--hz-edge); border-radius: 999px; background: #36291a; color: #f3e8db; font: 700 12.5px/1.7 var(--body); }
+.hz-hub .hz-status li:first-child { border-color: #7a6a2c; color: var(--hz-gold); }
+.hz-hub .hz-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; }
+.hz-hub .hz-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 12px; font: 800 16px/1 var(--display); text-decoration: none; }
+.hz-hub .hz-btn.primary { color: #261800; background: linear-gradient(#ffdf86, var(--hz-gold) 55%, var(--hz-gold-deep)); box-shadow: 0 3px 0 #8a5a10, 0 8px 20px #f4c45133; }
+.hz-hub .hz-btn.primary:hover { color: #000; filter: brightness(1.06); }
+.hz-hub .hz-btn.secondary { color: #fff; background: #4f3e29; border: 1px solid var(--hz-edge); }
+.hz-hub .hz-btn.secondary:hover { border-color: var(--hz-glow); }
+.hz-hub .hz-byline { margin: 0; font-size: 12.5px; color: var(--hz-dim); }
+.hz-hub .hz-media { min-width: 0; margin: 0; }
+.hz-hub .hz-media figure.game-image { margin: 0; max-width: none; border: 2px solid #8b7151; border-radius: 12px; background: #281f13; box-shadow: 0 0 0 4px var(--hz-night), 0 0 0 5px var(--hz-edge), 0 18px 44px #000a; padding: 5px; }
+.hz-hub .hz-media figure.game-image img { width: 100%; max-height: 340px; object-fit: cover; object-position: 50% 46%; border-radius: 8px; }
+
+/* Task cards */
+.hz-hub .hz-tasks { padding: 8px 0 6px; }
+.hz-hub .hz-tasks > h2 { margin: 6px 0 14px; }
+.hz-hub .hz-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.hz-hub .hz-card { display: grid; grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "ico title" "ico text"; gap: 2px 14px; align-items: start; padding: 16px 16px 18px; border: 1px solid var(--hz-edge); border-radius: 12px; background: linear-gradient(#4b3a25, #35291b); color: var(--hz-text); text-decoration: none; transition: border-color .15s, transform .15s; }
+.hz-hub .hz-card:hover { border-color: var(--hz-gold); color: #fff; transform: translateY(-2px); }
+.hz-hub .hz-card.wide { grid-column: span 2; background: linear-gradient(135deg, #5a3a0e, #2a1c0a 55%, #4b3a25); border-color: #8a6a24; }
+.hz-hub .hz-ico { grid-area: ico; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: #2c2215; border: 1px solid var(--hz-edge); color: var(--hz-gold); }
+.hz-hub .hz-ico svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.hz-hub .hz-card strong { grid-area: title; align-self: end; font: 800 17px/1.25 var(--display); color: #fff; }
+.hz-hub .hz-card span.hz-text { grid-area: text; font-size: 14px; line-height: 1.5; color: var(--hz-dim); }
+
+/* Lower bands: reading windows */
+.hz-hub .hz-win { margin: 26px 0 0; padding: 0 26px 22px; background: var(--hz-win); color: var(--hz-win-ink); border: 1px solid var(--hz-win-line); border-radius: 10px; box-shadow: 0 0 0 3px var(--hz-night), 0 0 0 4px var(--hz-edge), 0 16px 36px #0006; --ink: var(--hz-win-ink); --muted: #756a5c; --line: var(--hz-win-line); }
+.hz-hub .hz-win > h2 { margin: 0 -26px 16px; padding: 10px 26px; font-size: 1.25rem; color: #fff; background: linear-gradient(#b09b81, #887257); border-bottom: 1px solid #7d664a; border-radius: 9px 9px 0 0; text-shadow: 0 1px #6a563d; }
+.hz-hub .hz-win a { color: #80613b; }
+.hz-hub .hz-win a:hover { color: #4a371f; }
+.hz-hub .hz-win li::marker { color: #8f7556; font-weight: 800; }
+.hz-hub .hz-win .scope-note { font-size: 13px; color: #756a5c; }
+.hz-hub .hz-updates { margin: 0; padding: 0; list-style: none; }
+.hz-hub .hz-updates li { display: grid; grid-template-columns: 7.5rem minmax(0, 14rem) minmax(0, 1fr); gap: 2px 16px; align-items: baseline; margin: 0; padding: 10px 0; border-bottom: 1px solid #eae3db; }
+.hz-hub .hz-updates li:last-child { border-bottom: 0; }
+.hz-hub .hz-updates time { font: 800 12.5px/1.6 var(--body); letter-spacing: .04em; color: #887257; }
+.hz-hub .hz-updates a { font-weight: 800; }
+.hz-hub .hz-updates span { font-size: 14px; color: #756a5c; }
+.hz-hub .hz-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-hub .hz-group { padding: 14px 18px 8px; border: 1px solid var(--hz-win-line); border-radius: 8px; background: #fff; }
+.hz-hub .hz-group h3 { margin: 0 0 .25rem; color: #53412b; }
+.hz-hub .hz-group p { margin: 0 0 .5rem; font-size: 14px; color: #756a5c; }
+.hz-hub .hz-group ul { margin: 0 0 6px; padding-left: 1.1rem; }
+.hz-hub .hz-group li { margin: 4px 0; font-size: 15px; }
+.hz-hub .hz-faq { display: grid; gap: 10px; }
+.hz-hub .hz-faq details { border: 1px solid var(--hz-win-line); border-radius: 8px; background: #fff; }
+.hz-hub .hz-faq summary { position: relative; cursor: pointer; list-style: none; min-height: 48px; padding: 12px 44px 12px 16px; font: 800 16px/1.4 var(--display); color: #53412b; }
+.hz-hub .hz-faq summary::-webkit-details-marker { display: none; }
+.hz-hub .hz-faq summary::after { content: "+"; position: absolute; right: 16px; top: 9px; font: 700 22px/1.4 var(--body); color: #887257; }
+.hz-hub .hz-faq details[open] summary::after { content: "–"; }
+.hz-hub .hz-faq details[open] summary { border-bottom: 1px solid #eae3db; }
+.hz-hub .hz-faq p { margin: 0; padding: 12px 16px 2px; }
+.hz-hub .hz-faq .more { display: inline-block; padding: 4px 16px 14px; font-size: 14px; font-weight: 700; }
+.hz-hub .hz-win .table-wrap { margin-top: 6px; }
+.hz-hub .hz-win section { margin: 0 0 6px; }
+.hz-hub .hz-win section > h3 { margin: 18px 0 6px; }
+
+@media (max-width: 1050px) {
+  .hz-hub .hz-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-hub .hz-updates li { grid-template-columns: 7rem minmax(0, 1fr); }
+  .hz-hub .hz-updates span { grid-column: 2; }
+}
+@media (max-width: 900px) {
+  .hz-hub .hz-hero { grid-template-columns: 1fr; padding-top: 22px; gap: 14px; }
+  .hz-hub .hz-media figure.game-image img { max-height: 190px; }
+  .hz-hub .hz-groups { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hz-hub .hz-hero { padding: 16px 0 12px; gap: 12px; }
+  .hz-hub .hz-hero h1 { font-size: 2.15rem; }
+  .hz-hub .hz-deck { font-size: .98rem; line-height: 1.5; margin-bottom: 10px; }
+  .hz-hub .hz-byline { display: none; }
+  .hz-hub .hz-kicker { font-size: 10.5px; letter-spacing: .1em; }
+  .hz-hub .hz-status { gap: 6px; margin-bottom: 12px; }
+  .hz-hub .hz-status li { font-size: 11.5px; padding: 1px 10px; }
+  .hz-hub .hz-btn { flex: 1 1 100%; min-height: 46px; }
+  .hz-hub .hz-actions { gap: 8px; }
+  .hz-hub .hz-media figure.game-image img { max-height: 110px; }
+  .hz-hub .hz-cards { gap: 10px; }
+  .hz-hub .hz-card { grid-template-columns: 1fr; grid-template-areas: "ico" "title" "text"; gap: 6px; padding: 12px 12px 14px; }
+  .hz-hub .hz-card.wide { grid-column: span 2; grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "ico title" "ico text"; gap: 2px 12px; }
+  .hz-hub .hz-card strong { font-size: 15.5px; }
+  .hz-hub .hz-card span.hz-text { font-size: 13px; }
+  .hz-hub .hz-win { padding: 0 16px 16px; }
+  .hz-hub .hz-win > h2 { margin-inline: -16px; padding-inline: 16px; font-size: 1.15rem; }
+  .hz-hub .hz-updates li { grid-template-columns: 1fr; }
+  .hz-hub .hz-updates span { grid-column: 1; }
+}
+
+/* 客户端速查条：首屏下方一行关键条件 */
+.hz-hub .hz-glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 6px 0 18px; padding: 0; }
+.hz-hub .hz-glance div { padding: 10px 14px; border: 1px solid var(--hz-edge); border-left: 3px solid var(--hz-gold); border-radius: 8px; background: var(--hz-deep); }
+.hz-hub .hz-glance dt { font: 700 10.5px/1.5 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--hz-gold); }
+.hz-hub .hz-glance dd { margin: 2px 0 0; font-size: 14px; line-height: 1.4; color: var(--hz-text); }
+@media (max-width: 900px) { .hz-hub .hz-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .hz-hub .hz-glance { gap: 8px; } .hz-hub .hz-glance div { padding: 8px 10px; } .hz-hub .hz-glance dd { font-size: 13px; } }

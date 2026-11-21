@@ -1,0 +1,164 @@
+/* Hordes of Azeroth game theme (SOP v3.22, 02 §2.1). Loaded by the hub, every guide page, About and Contact.
+   Visual source: the project launcher and hordes-of-azeroth.com art plus the WoW 1.12 client UI — near-black
+   ember background, antique gold titles, oxblood download button and the parchment of the quest log for reading panels.
+   Base layout stays in guide-article-layout.css. Mobile (390) is tuned first. */
+@font-face {
+  font-family: "Cinzel";
+  src: url("/assets/fonts/cinzel-latin.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+}
+:root {
+  --hz-night: #0e0b08; --hz-deep: #19130d; --hz-panel: #261b11; --hz-edge: #5e4a2a; --hz-glow: #c99a45;
+  --hz-gold: #e6bb55; --hz-gold-deep: #a8741a; --hz-red: #a3262a;
+  --hz-win: #ecdfbf; --hz-win-line: #b9a06b; --hz-win-ink: #2b2013; --hz-win-bar: #6b4a1c; --hz-win-pale: #f4ead0;
+  --hz-text: #eadfc8; --hz-dim: #b5a587;
+  --display: "Cinzel", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* tokens the shared layout reads */
+  --paper: var(--hz-night); --white: var(--hz-win); --ink: var(--hz-text); --muted: var(--hz-dim);
+  --line: var(--hz-edge); --pale: var(--hz-deep); --green: var(--hz-gold); --gold: var(--hz-gold);
+  --heading: var(--display); --max: 1180px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; }
+body.hordes-theme {
+  margin: 0; color: var(--hz-text); font: 16.5px/1.7 var(--body); overflow-wrap: break-word;
+  background: var(--hz-night) radial-gradient(ellipse 90% 380px at 50% 0, #68513655 0, transparent 70%) no-repeat;
+}
+.hordes-theme a { color: #e9d6bf; text-underline-offset: 4px; }
+.hordes-theme a:hover { color: #fff; }
+.hordes-theme :focus-visible { outline: 3px solid var(--hz-gold); outline-offset: 3px; }
+.hordes-theme img { max-width: 100%; height: auto; }
+.hordes-theme h1, .hordes-theme h2, .hordes-theme h3 { font-family: var(--display); font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: #fff; }
+.hordes-theme h1 { font-size: clamp(2rem, 4.6vw, 3.3rem); margin: .3em 0 .4em; }
+.hordes-theme h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin: 0 0 .8rem; }
+.hordes-theme h3 { font-size: 1.15rem; }
+.hordes-theme p { margin: .6rem 0 1.05rem; }
+.hordes-theme .wrap { width: min(var(--max), calc(100% - 56px)); max-width: none; margin: auto; padding: 0; }
+.hordes-theme .skip { position: absolute; top: -90px; left: 12px; background: var(--hz-gold); color: #1a1202; padding: 10px; z-index: 30; }
+.hordes-theme .skip:focus { top: 10px; left: 12px; }
+.hordes-theme .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Header */
+.hordes-theme .top { background: rgba(14, 11, 8, .94); border-bottom: 1px solid var(--hz-edge); position: relative; z-index: 5; }
+.hordes-theme .top > .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 68px; padding: 0; }
+.hordes-theme .brand { display: flex; align-items: center; gap: 11px; min-width: 0; font: 800 20px/1.15 var(--display); letter-spacing: -.01em; color: #fff; text-decoration: none; white-space: nowrap; }
+.hordes-theme .brand img { width: 38px; height: 38px; flex-shrink: 0; }
+.hordes-theme .brand span { display: block; }
+.hordes-theme .brand em { font-style: normal; color: var(--hz-glow); }
+.hordes-theme .brand small { display: block; margin-top: 1px; font: 600 10.5px/1.3 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--hz-dim); }
+.hordes-theme .desktop-nav { display: flex; align-items: center; gap: 22px; }
+.hordes-theme .desktop-nav a, .hordes-theme .mobile-links a { font: 600 14px/1.2 var(--body); color: var(--hz-text); text-decoration: none; padding: 10px 0; border-bottom: 2px solid transparent; }
+.hordes-theme .desktop-nav a:hover, .hordes-theme .mobile-links a:hover { color: #fff; border-color: var(--hz-glow); }
+.hordes-theme .desktop-nav a[aria-current="page"], .hordes-theme .mobile-links a[aria-current="page"] { color: var(--hz-gold); border-color: var(--hz-gold); }
+.hordes-theme .mobile-nav { display: none; position: relative; }
+.hordes-theme .mobile-nav summary { cursor: pointer; list-style: none; min-height: 44px; display: flex; align-items: center; padding: 0 16px; border: 1px solid var(--hz-edge); border-radius: 8px; background: var(--hz-panel); font: 700 14px var(--body); color: #fff; }
+.hordes-theme .mobile-nav summary::-webkit-details-marker { display: none; }
+.hordes-theme .mobile-links { position: absolute; right: 0; top: 52px; z-index: 10; width: min(260px, 82vw); display: flex; flex-direction: column; gap: 0; padding: 8px 16px; border: 1px solid var(--hz-edge); border-radius: 10px; background: var(--hz-deep); box-shadow: 0 14px 34px #0009; }
+.hordes-theme .mobile-links a { padding: 13px 0; border-bottom: 1px solid #574733; }
+.hordes-theme .mobile-links a:last-child { border-bottom: 0; }
+
+/* Page body */
+.hordes-theme main.wrap { padding: 0 0 36px; }
+.hordes-theme .crumbs { padding: 18px 0 2px; font-size: 13px; color: var(--hz-dim); max-width: 1040px; margin-inline: auto; }
+.hordes-theme .crumbs a { color: var(--hz-text); }
+.hordes-theme .article-head { max-width: 1040px; margin: 0 auto; padding: 14px 0 12px; }
+.hordes-theme .article-head > p:first-of-type, .hordes-theme .hz-kicker { margin: 0; font: 700 11.5px/1.6 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--hz-gold); }
+.hordes-theme .article-head h1 { font-size: clamp(2rem, 4.8vw, 3.2rem); text-shadow: 0 2px 0 #261c0f, 0 0 26px #be996c55; }
+.hordes-theme .back-link { display: inline-block; margin: 0 0 10px; font-size: 13.5px; }
+.hordes-theme .answer { margin: .8rem 0 .6rem; padding: 14px 18px; background: var(--hz-panel); border: 1px solid var(--hz-edge); border-left: 4px solid var(--hz-gold); border-radius: 0 10px 10px 0; color: #f9f5ef; font-size: 1.08rem; line-height: 1.65; max-width: 78ch; }
+.hordes-theme .answer p { margin: .2rem 0; }
+.hordes-theme .byline { font-size: 12.5px; color: var(--hz-dim); margin: .5rem 0 0; }
+.hordes-theme .article-layout { max-width: 1040px; margin: 0 auto; padding-bottom: 8px; gap: 16px; }
+.hordes-theme .article-layout > .toc { background: var(--hz-deep); border: 1px solid var(--hz-edge); border-radius: 10px; padding: 10px 12px; }
+.hordes-theme .toc a { background: #2a2116; border: 1px solid var(--hz-edge); border-radius: 6px; color: #f3e8db; font-size: 13px; }
+.hordes-theme .toc a:hover { border-color: var(--hz-gold); color: #fff; }
+
+/* Reading window: the classic blue RO frame holds the article prose */
+.hordes-theme .prose { background: var(--hz-win); color: var(--hz-win-ink); border: 1px solid var(--hz-win-line); border-radius: 10px; padding: 8px 26px 22px; box-shadow: 0 0 0 3px var(--hz-night), 0 0 0 4px var(--hz-edge), 0 18px 40px #0007; --ink: var(--hz-win-ink); --muted: #756a5c; --line: var(--hz-win-line); --pale: var(--hz-win-pale); }
+.hordes-theme .prose h1, .hordes-theme .prose h2, .hordes-theme .prose h3 { color: #53412b; }
+.hordes-theme .prose a { color: #80613b; }
+.hordes-theme .prose a:hover { color: #4a371f; }
+.hordes-theme .prose > section { margin-bottom: 8px; }
+.hordes-theme .prose h2 { margin: 26px -26px 14px; padding: 9px 26px; font-size: 1.25rem; color: #fff; background: linear-gradient(#b09b81, #887257); border-block: 1px solid #7d664a; text-shadow: 0 1px #6a563d; }
+.hordes-theme .prose li { margin: 10px 0; }
+.hordes-theme .prose li::marker { color: #8f7556; font-weight: 800; }
+.hordes-theme .prose .scope { margin: 22px 0 0; padding-top: 14px; border-top: 1px solid var(--hz-win-line); font-size: 13px; color: #756a5c; max-width: none; }
+.hordes-theme .prose .source-notes { border-top: 1px solid var(--hz-win-line); padding-top: 4px; font-size: 13.5px; }
+.hordes-theme .prose .source-notes h2 { font-size: 1rem; background: none; color: #53412b; text-shadow: none; border: 0; margin: 14px 0 6px; padding: 0; }
+.hordes-theme .table-wrap { overflow-x: auto; max-width: 100%; margin: 18px 0; border: 1px solid var(--hz-win-line); border-radius: 8px; background: #fff; }
+.hordes-theme table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.hordes-theme th, .hordes-theme td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid #eae3db; }
+.hordes-theme th { background: #f0e9e1; color: #53412b; font: 800 12px/1.4 var(--body); letter-spacing: .06em; text-transform: uppercase; }
+.hordes-theme tr:last-child td { border-bottom: 0; }
+.hordes-theme td:first-child { font-weight: 700; color: #5c482f; }
+.hordes-theme pre { margin: 16px 0; padding: 16px 18px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; border-radius: 8px; background: #34281a; color: #faf5ef; font-size: 14px; }
+.hordes-theme code { overflow-wrap: anywhere; }
+.hordes-theme .command-section { border-top: 0; padding-top: 0; }
+.hordes-theme .equipment-route ol li { padding: 8px 4px; border-bottom: 1px solid #eae3db; }
+.hordes-theme.guide-layout figure.game-image { max-width: 860px; margin: 22px auto; padding: 6px; border-radius: 8px; background: #fff; border: 1px solid #beb1a0; box-shadow: 0 3px 0 #dfd6cc; }
+.hordes-theme.guide-layout figure.game-image img { border-radius: 4px; }
+.hordes-theme.guide-layout figure.game-image figcaption { color: #756a5c; }
+
+/* Related guides (generated) */
+.hordes-theme .related-tasks { margin: 26px 0 0; padding-top: 6px; border-top: 1px solid var(--hz-win-line); }
+.hordes-theme .prose .related-tasks h2 { margin: 14px 0 12px; padding: 0; background: none; border: 0; color: #53412b; text-shadow: none; font-size: 1.2rem; }
+.hordes-theme .related-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.hordes-theme .related-links a { display: block; padding: 12px 14px; border: 1px solid var(--hz-win-line); border-radius: 8px; background: #fff; font-weight: 700; text-decoration: none; color: #5c482f; }
+.hordes-theme .related-links a:hover { border-color: #887257; background: var(--hz-win-pale); }
+
+/* Trust pages */
+.hordes-theme .legal { max-width: 78ch; margin: 0 auto; padding: 8px 26px 20px; background: var(--hz-win); color: var(--hz-win-ink); border: 1px solid var(--hz-win-line); border-radius: 10px; box-shadow: 0 0 0 3px var(--hz-night), 0 0 0 4px var(--hz-edge); }
+.hordes-theme .legal h1, .hordes-theme .legal h2 { color: #53412b; text-shadow: none; }
+.hordes-theme .legal a { color: #80613b; }
+.hordes-theme .legal .article-head { padding-top: 18px; }
+.hordes-theme .legal .article-head > p:first-of-type { color: #887257; }
+.hordes-theme .legal .byline { color: #756a5c; }
+.hordes-theme .legal section { margin: 22px 0; }
+
+/* Footer (generated by register_page.py; 02 §5.2) */
+.hordes-theme .site-footer { margin-top: 40px; padding-top: 34px; background: #19130c; border-top: 2px solid var(--hz-edge); }
+.hordes-theme .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 24px; }
+.hordes-theme .footer-brand strong { font: 800 19px/1.3 var(--display); color: #fff; }
+.hordes-theme .footer-brand a { text-decoration: none; }
+.hordes-theme .footer-brand p { margin: .5rem 0; font-size: 13px; color: var(--hz-dim); max-width: 38ch; }
+.hordes-theme .footer-col h2 { margin: 0 0 .5rem; font: 800 11px/1.6 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--hz-gold); }
+.hordes-theme .footer-col a { display: block; padding: 5px 0; font-size: 14px; color: var(--hz-text); text-decoration: none; }
+.hordes-theme .footer-col a:hover { color: #fff; text-decoration: underline; }
+.hordes-theme .footer-version { margin: .5rem 0 0; font-size: 12px; color: var(--hz-dim); }
+.hordes-theme .footer-info { margin-top: 26px; border-top: 1px solid #4a3c2a; }
+.hordes-theme .footer-info .wrap { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 12px 0 20px; }
+.hordes-theme .footer-info a { font: 700 12.5px/1.4 var(--body); color: var(--hz-dim); text-decoration: none; padding: 8px 0; }
+.hordes-theme .footer-info a:hover { color: #fff; }
+
+@media (max-width: 1050px) { .hordes-theme .footer-grid { grid-template-columns: 1fr 1fr 1fr; } .hordes-theme .footer-brand { grid-column: 1 / -1; } }
+@media (max-width: 900px) {
+  .hordes-theme .desktop-nav { display: none; }
+  .hordes-theme .mobile-nav { display: block; }
+}
+@media (max-width: 600px) {
+  .hordes-theme { font-size: 16px; }
+  .hordes-theme .wrap { width: calc(100% - 32px); }
+  .hordes-theme .top > .wrap { min-height: 60px; }
+  .hordes-theme .brand { font-size: 17px; gap: 9px; }
+  .hordes-theme .brand img { width: 32px; height: 32px; }
+  .hordes-theme .brand small { display: none; }
+  .hordes-theme .crumbs { padding-top: 12px; }
+  .hordes-theme .article-head h1 { font-size: 1.85rem; }
+  .hordes-theme .answer { font-size: 1rem; padding: 12px 14px; }
+  .hordes-theme .prose { padding: 4px 16px 18px; }
+  .hordes-theme .prose h2 { margin-inline: -16px; padding-inline: 16px; font-size: 1.15rem; }
+  .hordes-theme .legal { padding: 4px 16px 16px; }
+  .hordes-theme .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+  .hordes-theme .footer-col a { padding: 8px 0; }
+  .hordes-theme .footer-info .wrap { gap: 0 18px; }
+  /* tables become stacked label/value cards */
+  .hordes-theme table, .hordes-theme tbody, .hordes-theme tr, .hordes-theme td { display: block; width: 100%; }
+  .hordes-theme thead { display: none; }
+  .hordes-theme tr { padding: 8px 0; border-bottom: 1px solid #e3dad0; }
+  .hordes-theme tr:last-child { border-bottom: 0; }
+  .hordes-theme td { border: 0; padding: 6px 14px; }
+  .hordes-theme td:not(:first-child)::before { content: attr(data-label); display: block; margin-bottom: 2px; font: 800 11px/1.4 var(--body); letter-spacing: .06em; text-transform: uppercase; color: #7e7365; }
+  .hordes-theme .prose .table-wrap { overflow: visible; }
+}
