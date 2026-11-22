@@ -1,0 +1,134 @@
+/* Pokémon Battlegrounds 专区主题（SOP v3.22，02 §2.1）。首页、About/Contact 共用。
+   视觉来源（ranked.pokemonbattlegrounds.com 原作界面与 pokemonbattlegrounds.com 频道站，2026-11-22 截取）：
+   近黑底带红蓝晕光、暗靛色面板、红色倾斜 PB 标识块、荧光黄绿主按钮（带下沉阴影）、Barlow Condensed 斜体大写标题。
+   结构向同类入口页学（首屏答案 + 任务卡），视觉只取自游戏本身。 */
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2");
+  font-weight: 800; font-style: italic; font-display: swap;
+}
+:root {
+  --pbg-night: #0a0912; --pbg-deep: #100f1e; --pbg-panel: #17152b; --pbg-panel-hi: #221f3d; --pbg-line: #34305a;
+  --pbg-red: #e5262f; --pbg-red-hi: #ff4a52; --pbg-red-lo: #8f1018;
+  --pbg-lime: #d6f531; --pbg-lime-lo: #8ea31c; --pbg-indigo: #5865f2;
+  --pbg-ink: #eceaf5; --pbg-soft: #a9a6c6; --pbg-link: #d6f531;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* 骨架读取的变量 */
+  --paper: var(--pbg-night); --white: var(--pbg-panel); --ink: var(--pbg-ink); --muted: var(--pbg-soft);
+  --line: var(--pbg-line); --pale: var(--pbg-panel-hi); --green: var(--pbg-red); --gold: var(--pbg-lime);
+  --heading: var(--display); --max: 1120px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; background: var(--pbg-night); }
+body.pbg-theme {
+  margin: 0; color: var(--pbg-ink); font: 16.5px/1.7 var(--body); min-height: 100vh;
+  background: var(--pbg-night) radial-gradient(ellipse 60% 420px at 0 0, #5a0f1a66, transparent), radial-gradient(ellipse 60% 420px at 100% 0, #1c2a7a55, transparent);
+  background-repeat: no-repeat;
+}
+.pbg-theme a { color: var(--pbg-link); text-underline-offset: 3px; }
+.pbg-theme a:hover { color: #fff; }
+.pbg-theme a:focus-visible, .pbg-theme button:focus-visible, .pbg-theme summary:focus-visible { outline: 3px solid var(--pbg-lime); outline-offset: 3px; }
+.pbg-theme img { max-width: 100%; height: auto; }
+.pbg-theme h1, .pbg-theme h2, .pbg-theme h3, .pbg-theme .brand { font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; letter-spacing: .01em; line-height: 1.08; color: #fff; }
+.pbg-theme h1 { font-size: clamp(2.3rem, 7vw, 3.6rem); margin: .2em 0; }
+.pbg-theme h2 { font-size: clamp(1.7rem, 3.4vw, 2.2rem); margin: 0 0 .9rem; }
+.pbg-theme h3 { font-size: 1.3rem; }
+.pbg-theme p { margin: .6rem 0 1.1rem; }
+.pbg-theme .wrap { width: min(var(--max), calc(100% - 64px)); margin: auto; }
+.pbg-theme .skip { position: absolute; top: -90px; left: 12px; background: var(--pbg-lime); color: #111; padding: 10px; z-index: 30; }
+.pbg-theme .skip:focus { top: 10px; }
+.pbg-theme .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.pbg-theme [hidden] { display: none !important; }
+
+/* 页头：近黑横条 + 红色下沿（原作顶栏） */
+.pbg-theme .top { position: relative; background: #07060d; border-bottom: 2px solid var(--pbg-red); color: var(--pbg-ink); }
+.pbg-theme .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 64px; }
+.pbg-theme .brand { display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; font-size: 23px; white-space: nowrap; color: #fff; }
+.pbg-theme .brand::before { content: "PB"; display: inline-grid; place-items: center; flex-shrink: 0; width: 44px; height: 32px; background: var(--pbg-red); color: #fff; font: 800 italic 24px/1 var(--display); transform: skewX(-9deg); box-shadow: 3px 3px 0 #fff2; }
+.pbg-theme .brand:hover { color: var(--pbg-lime); }
+.pbg-theme .brand small { display: block; margin-top: 2px; font: 700 10px/1.3 var(--body); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--pbg-soft); }
+.pbg-theme .desktop-nav { display: flex; align-items: center; gap: 22px; }
+.pbg-theme .desktop-nav a, .pbg-theme .mobile-links a { font: 800 italic 16px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--pbg-ink); text-decoration: none; padding: 12px 0; }
+.pbg-theme .desktop-nav a:hover, .pbg-theme .mobile-links a:hover { color: var(--pbg-lime); }
+.pbg-theme .desktop-nav a[aria-current=page] { color: var(--pbg-lime); box-shadow: inset 0 -3px 0 var(--pbg-red); }
+.pbg-theme .mobile-nav { display: none; }
+.pbg-theme .mobile-nav summary { list-style: none; cursor: pointer; min-height: 44px; padding: 9px 16px; border: 2px solid var(--pbg-line); border-radius: 4px; background: var(--pbg-panel); color: #fff; font: 800 italic 16px/1.5 var(--display); letter-spacing: .08em; text-transform: uppercase; }
+.pbg-theme .mobile-nav summary::-webkit-details-marker { display: none; }
+
+/* 荧光黄绿主按钮（原作 Go to pbranked.com） */
+.pbg-theme .button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 10px 26px;
+  font: 800 italic 19px/1.2 var(--display); letter-spacing: .05em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+  color: #141a02; background: var(--pbg-lime); border: 0; border-radius: 6px 16px 6px 16px; box-shadow: 0 4px 0 var(--pbg-lime-lo);
+}
+.pbg-theme .button:hover { color: #000; filter: brightness(1.08); transform: translateY(-1px); }
+.pbg-theme .button.secondary { color: #fff; background: var(--pbg-panel-hi); box-shadow: 0 4px 0 #0008, inset 0 0 0 2px var(--pbg-line); }
+.pbg-theme .button.secondary:hover { color: var(--pbg-lime); }
+.pbg-theme .eyebrow, .pbg-theme .tag { display: inline-block; margin: 0; padding: 2px 12px; background: var(--pbg-red); color: #fff; font: 800 12px/1.8 var(--body); letter-spacing: .14em; text-transform: uppercase; transform: skewX(-9deg); }
+.pbg-theme .byline, .pbg-theme .meta { font-size: 13px; color: var(--pbg-soft); }
+
+/* 表格、图、来源（首页与信任页共用） */
+.pbg-theme .table-wrap { overflow-x: auto; max-width: 100%; margin: 20px 0; border: 1px solid var(--pbg-line); border-top: 3px solid var(--pbg-red); border-radius: 6px; background: var(--pbg-panel); }
+.pbg-theme table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.pbg-theme th, .pbg-theme td { padding: 12px 15px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--pbg-line); }
+.pbg-theme th { background: var(--pbg-deep); color: var(--pbg-lime); font: 800 italic 14px/1.4 var(--display); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.pbg-theme tr:last-child td { border-bottom: 0; }
+.pbg-theme td strong { color: #fff; }
+.pbg-theme.guide-layout figure.game-image { margin: 0; background: var(--pbg-panel); border: 1px solid var(--pbg-line); border-top: 3px solid var(--pbg-red); border-radius: 6px; padding: 8px; }
+.pbg-theme.guide-layout figure.game-image img { display: block; width: 100%; max-height: min(62vh, 560px); object-fit: contain; border-radius: 3px; }
+.pbg-theme.guide-layout figure.game-image figcaption { color: var(--pbg-soft); }
+.pbg-theme .sources { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--pbg-line); font-size: 14px; overflow-wrap: anywhere; }
+.pbg-theme .sources h2 { font-size: 1.4rem; }
+.pbg-theme .sources li { margin-bottom: 10px; }
+.pbg-theme .legal { max-width: 76ch; margin-inline: auto; padding: 28px 0 52px; }
+.pbg-theme .legal .article-head { padding-bottom: 6px; }
+.pbg-theme .legal section { margin: 26px 0; }
+.pbg-theme .legal ul { padding-left: 1.2rem; }
+
+/* 页脚（register_page.py 生成，02 §5.2） */
+.pbg-theme .site-footer { margin-top: 48px; padding-top: 36px; background: #07060d; border-top: 2px solid var(--pbg-red); color: var(--pbg-ink); }
+.pbg-theme .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 28px; }
+.pbg-theme .footer-brand strong { font: 800 italic 24px/1.2 var(--display); text-transform: uppercase; color: #fff; }
+.pbg-theme .footer-brand a { text-decoration: none; }
+.pbg-theme .footer-brand p { margin: .5rem 0; font-size: 13px; color: var(--pbg-soft); max-width: 40ch; }
+.pbg-theme .footer-col h2 { margin: 0 0 .6rem; padding: 0; font: 800 italic 15px/1.6 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--pbg-lime); }
+.pbg-theme .footer-col a { display: block; padding: 5px 0; font-size: 14px; color: var(--pbg-ink); text-decoration: none; }
+.pbg-theme .footer-col a:hover { color: var(--pbg-lime); text-decoration: underline; }
+.pbg-theme .footer-info { margin-top: 28px; border-top: 1px solid var(--pbg-line); }
+.pbg-theme .footer-info .wrap { display: flex; flex-wrap: wrap; gap: 6px 26px; padding: 12px 0 22px; }
+.pbg-theme .footer-info a { font: 800 italic 15px/1.4 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--pbg-soft); text-decoration: none; padding: 8px 0; }
+.pbg-theme .footer-info a:hover { color: var(--pbg-lime); }
+
+@media (max-width: 1050px) { .pbg-theme .desktop-nav { gap: 14px; } .pbg-theme .footer-grid { grid-template-columns: 1fr 1fr 1fr; } .pbg-theme .footer-brand { grid-column: 1 / -1; } }
+@media (max-width: 900px) {
+  .pbg-theme .desktop-nav { display: none; }
+  .pbg-theme .mobile-nav { display: block; }
+  .pbg-theme .mobile-nav[open] .mobile-links { position: absolute; left: 0; right: 0; top: 100%; z-index: 20; padding: 8px 32px 14px; background: #07060d; border-bottom: 2px solid var(--pbg-red); }
+  .pbg-theme .mobile-links a { display: block; padding: 13px 0; border-bottom: 1px solid var(--pbg-line); }
+}
+@media (max-width: 600px) {
+  body.pbg-theme { font-size: 16px; }
+  .pbg-theme .wrap { width: calc(100% - 32px); }
+  .pbg-theme .top .wrap { gap: 8px; min-height: 58px; }
+  .pbg-theme .brand { font-size: 19px; gap: 9px; }
+  .pbg-theme .brand::before { width: 38px; height: 28px; font-size: 20px; }
+  .pbg-theme .brand small { font-size: 8.5px; letter-spacing: .1em; }
+  .pbg-theme .mobile-nav[open] .mobile-links { padding-inline: 16px; }
+  .pbg-theme th, .pbg-theme td { padding: 10px 12px; min-width: 110px; }
+  .pbg-theme .table-wrap { font-size: 13px; }
+  .pbg-theme .footer-grid { grid-template-columns: 1fr 1fr; gap: 22px 18px; }
+  .pbg-theme .footer-col a { padding: 8px 0; }
+  .pbg-theme .footer-info .wrap { gap: 0 18px; }
+  .pbg-theme .legal { padding-top: 14px; }
+}
+@media (max-width: 380px) { .pbg-theme .brand small { display: none; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+/* 共享 More games 区（play-recommendations.css）在深色页面上的标题可读性 */
+.pbg-theme .play-recommendations { max-width: var(--max); margin: 36px auto 0; }
+.pbg-theme .play-rec-heading > p:first-child { color: var(--pbg-red-hi); }
+.pbg-theme .play-rec-heading > p:last-child { color: var(--pbg-soft); }
+.pbg-theme .play-rec-link h3 { color: #17301f; font-size: 1.5rem; }
+.pbg-theme .play-rec-link { text-decoration: none; }
+.pbg-theme .play-rec-link:hover h3 { color: var(--pbg-red-lo); }
