@@ -1,0 +1,122 @@
+/* Í¨ÓÃ×¨ÇøÊ×Ò³²¼¾Ö£¨Ä£°å/hub_components.py µÄÅäÌ×ÑùÊ½£»ÓÃ `python hub_components.py --css PREFIX` Éú³É£©¡£
+   ÔÚÓÎÏ· theme.css µÄ :root Àï¶¨ÒåÕâÐ©±äÁ¿£¨ÑÕÉ«È¡×ÔÓÎÏ·×Ô¼ºµÄ½çÃæ£¬00 ¡ì3 / 02 ¡ì2.1£©£º
+   --hub-night Ó¢ÐÛÇø/¿¨Æ¬Éîµ×   --hub-dark ¿¨Æ¬Óë±êÌâÉîÉ«   --hub-wood-hi ´ÎÉîÉ«
+   --hub-frame ¸Ö/Ê¯Ãè±ßÉ«       --hub-accent Ç¿µ÷½ð  --hub-accent-dim °µ½ð  --hub-title ±êÌâÁÁÉ«
+   --hub-card Ç³É«¿¨Æ¬µ×         --hub-ink-on-dark Éîµ×ÉÏµÄÕýÎÄÉ«
+   --hub-hot Ç¿µ÷ºì£¨Ð¡±êÌâ¡¢·ûºÅ£© --hub-edge Ç³µ×·Ö¸ôÏß  --hub-soft ´ÎÒªÎÄ×Ö
+   --hub-hero-bg: url("/assets/{game}/images/hero-bg-1280.webp")  Ó¢ÐÛÇø±³¾°£¨ÕæÊµ½ØÍ¼£¬ÎÞÎÄ×ÖÇøÓò£©
+   ÁíÐè --display / --body ×ÖÌå±äÁ¿Óë theme.css µÄ .button ÑùÊ½¡£ */
+/* Spires of Azeroth Ê×Ò³²¼¾Ö£¨½öÊ×Ò³£¬02 ¡ì2.1 / 08 F9£©¡£ÊÖ»úÓÅÏÈ£ºÎÄ°¸ ¡ú ÈÎÎñ¿¨ ¡ú ÓÎÏ·´°¿Ú ¡ú ËÙ²é/¸üÐÂ/·Ö×é/FAQ¡£ */
+.rv-hub .rv-hero { position: relative; margin: 18px 0 0; padding: 26px 22px 24px; color: var(--hub-ink-on-dark); background: var(--hub-night); border: 4px solid var(--hub-frame); box-shadow: 0 0 0 2px var(--hub-accent-dim), 0 6px 0 #0006; overflow: hidden; }
+.rv-hub .rv-hero::before { content: ""; position: absolute; inset: 0; background: var(--hub-hero-bg) 70% 60% / cover; opacity: .55; }
+.rv-hub .rv-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #140d09ee 35%, #140d0988); }
+.rv-hub .rv-hero > * { position: relative; z-index: 1; }
+.rv-hub .rv-kicker { margin: 0; font: 700 11px/1.6 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--hub-accent); }
+.rv-hub .rv-hero h1 { margin: .15em 0 .2em; font-size: clamp(2rem, 7vw, 4rem); line-height: 1.05; color: var(--hub-title); text-shadow: 0 2px 0 #000, 0 0 30px #b42a1c88; }
+.rv-hub .rv-h1-sub { display: block; font-size: .46em; letter-spacing: .14em; text-transform: uppercase; color: var(--hub-ink-on-dark); text-shadow: 0 2px 0 #000; margin-top: .35em; }
+.rv-hub .rv-deck { margin: 0 0 12px; max-width: 46ch; font-size: 1.1rem; line-height: 1.55; color: #f1e4c0; }
+.rv-hub .rv-status { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+.rv-hub .rv-status li { padding: 2px 11px; border: 1px solid var(--hub-accent-dim); background: #140d09cc; color: var(--hub-ink-on-dark); font: 700 12px/1.7 var(--body); letter-spacing: .04em; }
+.rv-hub .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.rv-hub .rv-hero a:not(.button) { color: var(--hub-title); }
+
+/* ÈÎÎñ¿¨ */
+.rv-hub .rv-tasks { margin: 28px 0 8px; }
+.rv-hub .rv-tasks h2 { margin: 0 0 14px; }
+.rv-hub .rv-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.rv-hub .rv-card { display: flex; flex-direction: column; height: 100%; min-width: 0; border: 3px solid var(--hub-frame); background: var(--hub-dark); color: var(--hub-ink-on-dark); text-decoration: none; overflow: hidden; box-shadow: 0 3px 0 #0005; transition: border-color .15s; }
+.rv-hub .rv-card:hover { border-color: var(--hub-accent-dim); color: #fff3c4; }
+.rv-hub .rv-card img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 2px solid var(--hub-accent-dim); }
+.rv-hub .rv-card-body { display: flex; flex-direction: column; gap: 3px; padding: 11px 13px 14px; flex: 1; }
+.rv-hub .rv-card strong { font: 700 15px/1.3 var(--display); letter-spacing: .02em; color: var(--hub-title); }
+.rv-hub .rv-card-text { font-size: 13px; line-height: 1.5; color: #dcc9a0; }
+
+/* ËÙ²éÔ¤ÀÀ£ºÀ´×ÔÔ­×÷Õ½¶·½ÌÑ§ */
+.rv-hub .rv-cheat { max-width: 1020px; margin: 8px auto 34px; padding: 18px 20px 12px; background: var(--hub-card); border: 2px solid var(--hub-accent-dim); outline: 1px solid var(--hub-wood-hi); outline-offset: -7px; }
+.rv-hub .rv-cheat h2 { margin: 0 0 .3rem; }
+.rv-hub .rv-cheat > p { margin: 0 0 12px; font-size: 14px; color: var(--hub-soft); }
+.rv-hub .rv-cheat dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 26px; margin: 0 0 8px; }
+.rv-hub .rv-cheat div { padding: 8px 0 8px 12px; border-left: 4px solid var(--hub-hot); }
+.rv-hub .rv-cheat dt { font: 700 12px/1.5 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--hub-hot); }
+.rv-hub .rv-cheat dd { margin: 2px 0 0; font-size: 15px; line-height: 1.5; }
+.rv-hub .rv-cheat kbd { padding: 1px 6px; border: 1px solid var(--hub-frame); border-radius: 3px; background: var(--hub-dark); color: var(--hub-title); font: 700 12px var(--body); white-space: nowrap; }
+
+/* ÏÂ·½¸÷Çø */
+.rv-hub .rv-band { max-width: 850px; margin: 0 auto; padding: 22px 0 6px; scroll-margin-top: 16px; }
+.rv-hub .rv-band > h2 { margin-top: .2rem; }
+.rv-hub .rv-updates { margin: 0 0 12px; padding: 0; list-style: none; border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.rv-hub .rv-updates li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 4px 16px; align-items: baseline; padding: 11px 16px; border-bottom: 1px solid var(--hub-edge); }
+.rv-hub .rv-updates li:last-child { border-bottom: 0; }
+.rv-hub .rv-updates time { font: 700 12px/1.6 var(--body); letter-spacing: .06em; color: var(--hub-hot); }
+.rv-hub .rv-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.rv-hub .rv-group { padding: 14px 16px; border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.rv-hub .rv-group h3 { margin: 0 0 .2rem; color: var(--hub-hot); }
+.rv-hub .rv-group > p { margin: 0 0 .5rem; font-size: 14px; color: var(--hub-soft); }
+.rv-hub .rv-group ul { margin: 0; padding: 0; list-style: none; }
+.rv-hub .rv-group li a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; padding: 8px 0; border-top: 1px solid var(--hub-edge); font-weight: 700; text-decoration: none; }
+.rv-hub .rv-group li a span { font-weight: 400; font-size: 13px; color: var(--hub-soft); }
+.rv-hub .rv-faq { display: grid; gap: 10px; }
+.rv-hub .rv-faq details { border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.rv-hub .rv-faq summary { cursor: pointer; list-style: none; min-height: 48px; padding: 12px 44px 12px 16px; position: relative; font: 700 15.5px/1.45 var(--display); color: var(--hub-dark); }
+.rv-hub .rv-faq summary::-webkit-details-marker { display: none; }
+.rv-hub .rv-faq summary::after { content: "+"; position: absolute; right: 16px; top: 9px; font: 700 22px/1.4 var(--body); color: var(--hub-hot); }
+.rv-hub .rv-faq details[open] summary::after { content: "¨C"; }
+.rv-hub .rv-faq details[open] summary { border-bottom: 1px solid var(--hub-edge); }
+.rv-hub .rv-faq p { margin: 0; padding: 12px 16px 2px; }
+.rv-hub .rv-faq-more { display: inline-block; padding: 6px 16px 14px; font-size: 14px; font-weight: 700; }
+
+@media (max-width: 1050px) { .rv-hub .rv-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .rv-hub .rv-hero::after { background: #140d09cc; } }
+@media (max-width: 600px) {
+  .rv-hub .rv-hero { margin-top: 12px; padding: 18px 16px 18px; border-width: 3px; }
+  .rv-hub .rv-kicker { font-size: 10px; letter-spacing: .14em; }
+  .rv-hub .rv-deck { font-size: 1rem; margin-bottom: 10px; }
+  .rv-hub .rv-status { gap: 6px; margin-bottom: 12px; }
+  .rv-hub .rv-status li { font-size: 11px; padding: 1px 8px; }
+  .rv-hub .hero-actions { gap: 8px; }
+  .rv-hub .hero-actions .button { flex: 1 1 100%; }
+  .rv-hub .rv-tasks { margin-top: 20px; }
+  .rv-hub .rv-cards { gap: 10px; }
+  .rv-hub .rv-card { border-width: 2px; }
+  .rv-hub .rv-card-body { padding: 8px 10px 11px; }
+  .rv-hub .rv-card strong { font-size: 13px; }
+  .rv-hub .rv-card-text { font-size: 12px; line-height: 1.45; }
+  .rv-hub .rv-cheat { padding: 14px 14px 8px; }
+  .rv-hub .rv-cheat dl { grid-template-columns: 1fr; gap: 4px; }
+  .rv-hub .rv-groups { grid-template-columns: 1fr; }
+  .rv-hub .rv-updates li { grid-template-columns: 1fr; padding: 10px 14px; }
+}
+
+/* ---- Revenant Survivors é¦–é¡µè¦†ç›–ï¼šæš—è‰²æ•´é¡µï¼Œè¡€çº¢é¢„è­¦çº¿ä¸Žé’é“œæè¾¹ ---- */
+.rv-hub .rv-hero{border:1px solid var(--gold);box-shadow:inset 0 0 0 4px var(--stone),inset 0 0 0 5px var(--rim),0 8px 0 #050303;padding:48px 44px 40px;margin-top:22px}
+.rv-hub .rv-hero::before{background-position:62% 38%;opacity:.5}
+.rv-hub .rv-hero::after{background:linear-gradient(90deg,#0d0a0af2 38%,#0d0a0a8a)}
+.rv-hub .rv-hero h1{max-width:18ch;font-size:clamp(2rem,6vw,3.6rem);text-shadow:0 2px 0 #000,0 0 28px #8f1d1d99}
+.rv-hub .rv-h1-sub{max-width:26ch;font:700 .34em/1.5 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--hub-accent)}
+.rv-hub .rv-deck{max-width:48ch}
+.rv-hub .rv-card{border-width:1px;border-radius:4px;box-shadow:inset 0 0 0 3px var(--stone);transition:border-color .15s,transform .15s}
+.rv-hub .rv-card:hover{transform:translateY(-2px)}
+.rv-hub .rv-card img{border-bottom:1px solid var(--hub-accent-dim)}
+.rv-hub .rv-card-text{color:#d6c9b4}
+.rv-hub .rv-tasks>h2,.rv-hub .rv-band>h2,.rv-hub .rv-cheat>h2{font-size:clamp(1.5rem,3vw,2.1rem)}
+.rv-hub .rv-tasks>h2::before,.rv-hub .rv-band>h2::before,.rv-hub .rv-cheat>h2::before{content:"";display:block;width:54px;height:3px;background:var(--blood-hi);margin-bottom:12px}
+.rv-hub .rv-cheat{max-width:none;border:1px solid var(--gold);border-radius:4px;outline-offset:-6px;outline-color:var(--rim);margin-top:30px}
+.rv-hub .rv-cheat dd{color:var(--text)}
+.rv-hub .rv-band{max-width:none;padding-top:30px}
+.rv-hub .rv-updates,.rv-hub .rv-group,.rv-hub .rv-faq details{border-width:1px;border-radius:4px}
+.rv-hub .rv-group{border-top:3px solid var(--gold)}
+.rv-hub .rv-group h3{color:var(--hub-title)}
+.rv-hub .rv-groups{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rv-hub .rv-faq summary{color:var(--hub-title)}
+.rv-hub .rv-faq p{color:#dfd3bf}
+.rv-hub .rv-start{margin-top:30px}
+.rv-hub .rv-start-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.rv-hub .rv-start-note{padding:18px 20px;border:1px solid var(--rim);border-left:4px solid var(--blood-hi);background:var(--panel);border-radius:4px}
+.rv-hub .rv-start-note h3{margin:0 0 6px}
+.rv-hub .rv-start-note p{margin:0 0 8px;font-size:15px}
+.rv-hub .rv-start-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
+.rv-hub .rv-start-grid h2{margin:.2rem 0 .5rem}
+@media(max-width:1050px){.rv-hub .rv-groups{grid-template-columns:1fr}.rv-hub .rv-start-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.rv-hub .rv-hero{padding:34px 26px 30px}.rv-hub .rv-hero::after{background:#0d0a0acc}}
+@media(max-width:600px){.rv-hub .rv-hero{padding:20px 16px 20px;box-shadow:inset 0 0 0 3px var(--stone),inset 0 0 0 4px var(--rim)}.rv-hub .rv-h1-sub{font-size:.4em}.rv-hub .rv-card{box-shadow:none}}
+@media(prefers-reduced-motion:reduce){.rv-hub .rv-card{transition:none}}

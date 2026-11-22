@@ -1,4 +1,9 @@
-"""Reviewed Revenant Survivors task pages, checked 12 November 2026; updates 0.6.3 and 0.6.4 applied 17 November 2026."""
+"""Reviewed Revenant Survivors task pages, checked 12 November 2026; updates 0.6.3 and 0.6.4 applied 17 November 2026.
+
+专区主题（theme.css/hub.css）、首页组件、清单驱动的导航与页脚见 SOP v3.26（sheji，2026-11-22）。"""
+import json
+import subprocess
+import sys
 from pathlib import Path
 from html import escape
 from site_analytics import write_html
@@ -94,65 +99,155 @@ PAGES = [
 ]
 
 
+def button(url, label, secondary):
+    cls = 'button secondary' if secondary else 'button'
+    return f'<a class="{cls}" href="{url}" target="_blank" rel="noopener noreferrer">{label} ↗<span class="sr-only"> (opens in a new tab)</span></a>'
+
+
 HOME = {
     'slug': '', 'label': 'Overview',
     'title': 'Revenant Survivors guide — start, progression and help',
     'description': 'Choose where to start in Revenant Survivors, move a Demo save into Early Access, plan retained upgrades and find version-specific help.',
-    'answer': 'Start with the free Steam Demo if you want to try the game. If you already played it, transfer your Demo save on the original PC before switching computers. For continuing runs, review retained equipment and upgrades, then use Hard Mode when you need its item rewards or World 5 progression gate.',
     'image': 'boss', 'alt': 'Revenant Survivors Angel of Obsession boss arena with red ground attack warnings',
     'caption': 'Revenant Survivors combines horde combat with boss encounters and persistent character growth.',
-    'sections': [
-        ('start', 'Choose your starting point', '<p>Revenant Survivors is Mongma Studio’s single-player dark-fantasy horde-survival roguelite. It entered Steam Early Access on November 9, 2026. The full game and free Demo have separate Steam listings. Use the listing for your intended edition.</p><p>'+link(STORE, 'Revenant Survivors full game on Steam')+' · '+link('https://store.steampowered.com/app/4693240/', 'Free Revenant Survivors Demo on Steam')+'</p><ul><li><strong>Trying the game.</strong> Start with the Demo listing and check its current requirements before installing.</li><li><strong>Returning from the Demo.</strong> Open the full game first on the PC with your Demo save, inspect the imported progress, close the game and finish Steam Cloud syncing. Follow the <a href="/revenant-survivors/demo-save-transfer/">save-transfer steps</a> before continuing on another PC.</li><li><strong>Preparing another run.</strong> Review the equipment you kept, Forge options and permanent upgrades. The <a href="/revenant-survivors/permanent-progression/">progression guide</a> explains how equipment, upgrades and appearance relate.</li></ul>'),
-        ('progression', 'Decide what your next run should achieve', '<p>Boss powers and evolving attacks shape combat, while retained equipment, Skill Trees and Soul Engraving support growth between attempts. Choose a concrete goal before selecting the next stage.</p><ul><li><strong>Advance to later worlds.</strong> Clear Worlds 1–7 in order; clearing World 7 unlocks Hard 0 in every world. See the <a href="/revenant-survivors/hard-mode/">Hard Mode unlock and rewards guide</a>.</li><li><strong>Improve equipment.</strong> Higher Hard levels drop more Mythic gear and Mythic Essence. Whether it produces more useful gear for your time depends on your ability to finish the run. Review the <a href="/revenant-survivors/permanent-progression/">equipment preparation checklist</a> first.</li><li><strong>Change character appearance.</strong> The launch Supporter Pack contains cosmetic skins. Review the <a href="/revenant-survivors/permanent-progression/#appearance">gear and skin distinction</a> before choosing an upgrade or purchase.</li></ul><p>These choices combine the developer’s progression replies with the launch information. '+link(HUB, 'Mongma Studio launch and update announcements')+'</p>'),
-        ('help', 'Find help for the symptom you see', '<ul><li><strong>Basic Attack or Strike behaves unexpectedly.</strong> Check which attack the automation setting controls in the <a href="/revenant-survivors/controller-auto-attack/">controller and auto-attack guide</a>. It also separates historical playtest input reports from the current Steam support listing.</li><li><strong>The screen stops after a run.</strong> Match the transition and game edition to the <a href="/revenant-survivors/stuck-after-run/">reported loading and crash fixes</a>.</li><li><strong>The full game opens without expected Demo progress.</strong> Check the original PC, first-launch sequence and Cloud status using the <a href="/revenant-survivors/demo-save-transfer/#missing">missing-progress checks</a>.</li></ul>'),
-        ('versions', 'Use advice for your installed edition', '<p>The latest official update checked on November 12 is full-game hotfix 0.6.2.1, which adjusts boss and enemy balance. Demo and playtest reports use their own version numbers. Match the edition and symptom before applying an older workaround. '+link(HUB, 'Official Steam announcements')+'</p><p>These independent guides review developer announcements and public player discussions. The linked articles identify the evidence and version limits for their specific answers. The gameplay images are developer promotional screenshots with unspecified capture builds.</p>'),
-    ],
 }
+
+START = (
+    '<p>Revenant Survivors is Mongma Studio’s single-player dark-fantasy horde-survival roguelite. It entered Steam Early Access on November 9, 2026. '
+    'The full game and free Demo have separate Steam listings. Use the listing for your intended edition.</p>'
+    '<ul><li><strong>Trying the game.</strong> Start with the Demo listing and check its current requirements before installing.</li>'
+    '<li><strong>Returning from the Demo.</strong> Open the full game first on the PC with your Demo save, inspect the imported progress, close the game and finish Steam Cloud syncing. '
+    'Follow the <a href="/revenant-survivors/demo-save-transfer/">save-transfer steps</a> before continuing on another PC.</li>'
+    '<li><strong>Preparing another run.</strong> Review the equipment you kept, Forge options and permanent upgrades. '
+    'The <a href="/revenant-survivors/permanent-progression/">progression guide</a> explains how equipment, upgrades and appearance relate.</li></ul>'
+    '<p class="rv-start-links">' + button('https://store.steampowered.com/app/4693240/', 'Free Demo on Steam', False) + button(STORE, 'Full game on Steam', True) + '</p>'
+)
+
+VERSIONS = (
+    '<p>The latest official update checked on 17 November is full-game update <strong>0.6.4</strong> (16 November 2026), which removed Tiers and made World 7 the gate to Hard Mode. '
+    'Demo and playtest reports use their own version numbers. Match the edition and symptom before applying an older workaround. '
+    + link(HUB, 'Official Steam announcements') + '</p>'
+    '<p>These independent guides review developer announcements and public player discussions. The linked articles identify the evidence and version limits for their specific answers. '
+    'The gameplay images are developer promotional screenshots with unspecified capture builds.</p>'
+)
+
+
+def manifest():
+    m = json.loads((ROOT / 'data/revenant-survivors-pages.json').read_text(encoding='utf8'))
+    m['by'] = {p['slug']: p for p in m['pages']}
+    return m
+
+
+def hub(m):
+    from hub_components import Hub
+    # 缩略图直接放在 /assets/revenant-survivors/{名}-480.webp，thumb_dir 为空
+    return Hub(m, BASE, 'rv', '/assets/revenant-survivors', thumb_dir='')
 
 
 def homepage():
-    cards = [
-        ('demo-save-transfer', 'tree', 'Continue your Demo save', 'Move your progress to Early Access, then sync it to another PC.'),
-        ('permanent-progression', 'forge', 'Equipment & permanent upgrades', 'See what you keep and prepare your character for the next run.'),
-        ('hard-mode', 'boss', 'Hard Mode & world unlocks', 'World 7 unlocks Hard 0; Hard 0–10 rewards and Mythic drops.'),
-        ('controller-auto-attack', 'controls', 'Controller & auto attack', 'Check attack modes and identify the input that needs attention.'),
-        ('stuck-after-run', 'battle', 'Stuck after a run', 'Match loading and results-screen problems to reported fixes.'),
-    ]
-    def card(entry):
-        slug, media, title, text = entry
-        return f'<a class="hub-card" href="{BASE}{slug}/"><img src="/assets/revenant-survivors/{media}-480.webp" width="1920" height="1080" loading="lazy" alt=""><div><h3>{title}</h3><p>{text}</p><span>Read guide <span aria-hidden="true">↗</span></span></div></a>'
-    hero = image(HOME['image'], HOME['alt'], HOME['caption']).replace('loading="lazy"', 'fetchpriority="high"')
-    return f'''<main id="main" class="hub-main">
-<section class="hub-hero"><div class="wrap hub-hero-grid"><div class="hub-intro"><p class="eyebrow">Independent player guides</p><h1>{HOME['title']}</h1><p class="hub-lead">Claim a boss’s power. Prepare your next run.</p><p>Find your way into Mongma Studio’s dark-fantasy survivorslike, then plan your upgrades and work through the next obstacle.</p><div class="hub-actions"><a class="hub-button" href="#guides">Explore the guides <span aria-hidden="true">↓</span></a><a class="hub-secondary" href="#start">Get the game</a></div></div>{hero}</div></section>
-<div class="hub-status"><div class="wrap"><span>Steam · Single-player</span><span>Early Access</span><span>Update 0.6.4 · 17 November 2026</span></div></div>
-<section class="wrap hub-section" id="guides"><div class="hub-heading"><div><p class="eyebrow">Your next step</p><h2>Pick up where you left off</h2></div><p>Choose the guide for your current goal.</p></div><div class="hub-feature-grid">{''.join(card(c) for c in cards[:3])}</div></section>
-<section class="hub-start-band" id="start"><div class="wrap hub-start"><div><p class="eyebrow">New to Revenant Survivors</p><h2>Start with the Demo.<br>Bring your progress with you.</h2><p>Try the free Steam Demo or enter the full game’s Early Access release. Boss powers and evolving attacks shape combat, while equipment and permanent upgrades carry your preparation forward.</p><div class="hub-store-links">{link('https://store.steampowered.com/app/4693240/', 'Free Demo on Steam')}{link(STORE, 'Full game on Steam')}</div></div><div class="hub-start-note"><h3>Returning from the Demo</h3><p>Launch the full game first on the PC with your Demo save. Check your imported progress, close the game and finish Steam Cloud syncing before changing computers.</p><a href="{BASE}demo-save-transfer/">Follow the transfer steps →</a></div></div></section>
-<section class="wrap hub-section" id="help"><div class="hub-heading"><div><p class="eyebrow">Get back into the game</p><h2>Help with controls and loading</h2></div></div><div class="hub-help-grid">{''.join(card(c) for c in cards[3:])}</div></section>
-<section class="wrap hub-update" id="versions"><div><h2>Check your edition before applying a fix</h2><p>Full-game hotfix <strong>0.6.2.1</strong> was the latest official update checked on 12 November. Demo and playtest reports use separate version numbers.</p></div><div>{link(HUB, 'Developer announcements')}<p>Guides draw on developer statements and public player reports. Each article gives the source and version scope for its answers.</p></div></section>
-</main>'''
+    m = manifest()
+    h = hub(m)
+    bg = ''
+    pv = m['preview']
+    rows = [(a, b) for a, b in pv['rows']]
+    figure = image(HOME['image'], HOME['alt'], HOME['caption'])
+    hero = h.hero(
+        kicker='Independent player guides · Mongma Studio’s survivorslike', title='Revenant Survivors ', sub='guide — start, progression and help',
+        deck='Claim a boss’s power, then prepare the next run: move a Demo save into Early Access, plan the gear you keep and check what Hard Mode drops.',
+        status=['Steam · Single-player', 'Early Access', 'Update 0.6.4 · 17 Nov 2026', 'Unofficial fan guide'],
+        actions=[('Pick a guide ↓', '#guides', False), ('Get the game', '#start', True)], bg_attr=bg)
+    cards = h.cards(heading='Pick the job you have right now', bg_attr=bg)
+    cheat = h.cheat(pv['title'], pv['intro'], rows, bg_attr=bg)
+    start = (f'<section class="rv-band rv-start" id="start"><div class="rv-start-grid"><div><h2>Choose your starting point</h2>{START}</div>'
+             f'<div>{figure}<div class="rv-start-note"><h3>Returning from the Demo</h3><p>Launch the full game first on the PC with your Demo save. '
+             f'Check your imported progress, close the game and finish Steam Cloud syncing before changing computers.</p>'
+             f'<a href="{BASE}demo-save-transfer/">Follow the transfer steps →</a></div></div></div></section>')
+    versions = f'<section class="rv-band" id="versions"><h2>Check your edition before applying a fix</h2>{VERSIONS}</section>'
+    body = hero + cards + cheat + start + h.updates(bg_attr=bg) + h.groups(bg_attr=bg) + versions + h.faq(bg_attr=bg)
+    return f'<main class="wrap" id="main">{body}</main>', h.faq_questions()
+
+
+def shell(route, page, body_cls, extra_css, main, og_type='article'):
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(page['title'])}</title><meta name="description" content="{escape(page['description'], quote=True)}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:title" content="{escape(page['title'])}"><meta property="og:description" content="{escape(page['description'], quote=True)}"><meta property="og:type" content="{og_type}"><meta property="og:url" content="https://megabonk.org{route}"><meta property="og:image" content="https://megabonk.org/assets/revenant-survivors/{page.get('image', 'boss')}-1920.webp"><link rel="icon" href="/assets/revenant-survivors/favicon.ico"><link rel="icon" type="image/svg+xml" href="/assets/revenant-survivors/favicon.svg"><link rel="apple-touch-icon" href="/assets/revenant-survivors/icon-180.png"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/revenant-survivors/theme.css">{extra_css}</head><body class="guide-layout rv-theme {body_cls}"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="/assets/revenant-survivors/logo.svg" width="36" height="36" alt="">Revenant Survivors</a><nav class="desktop-nav" aria-label="Revenant Survivors tasks"></nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="Revenant Survivors tasks"></nav></details></div></header>{main}<footer class="footer"></footer></body></html>'''
+
+
+def ads(html):
+    """普通内容页保留站点既有 AdSense 加载器；信任页不放。"""
+    tag = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
+    return html.replace('</head>', tag + '</head>', 1)
 
 
 def build():
+    questions = {}
     for page in [HOME] + PAGES:
         route = BASE + (page['slug'] + '/' if page['slug'] else '')
-        nav = ''.join(f'<a href="{BASE}{p["slug"] + "/" if p["slug"] else ""}">{p["label"]}</a>' for p in (HOME, PAGES[0], PAGES[2]))
-        toc = ''.join(f'<a href="#{key}">{title}</a>' for key, title, _ in page['sections'])
-        body = image(page['image'], page['alt'], page['caption'])
-        body += ''.join(f'<section id="{key}"><h2>{title}</h2>{text}</section>' for key, title, text in page['sections'])
-        related = ''.join(f'<li><a href="{BASE}{p["slug"] + "/" if p["slug"] else ""}">{p["title"]}</a></li>' for p in PAGES if p != page)
-        body += f'<section id="related"><h2>More Revenant Survivors guides</h2><ul>{related}</ul></section>'
-        html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(page['title'])}</title><meta name="description" content="{escape(page['description'], quote=True)}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:title" content="{escape(page['title'])}"><meta property="og:description" content="{escape(page['description'], quote=True)}"><meta property="og:type" content="article"><meta property="og:url" content="https://megabonk.org{route}"><meta property="og:image" content="https://megabonk.org/assets/revenant-survivors/{page['image']}-1920.webp"><link rel="icon" href="/assets/revenant-survivors/favicon.ico"><link rel="icon" type="image/svg+xml" href="/assets/revenant-survivors/favicon.svg"><link rel="apple-touch-icon" href="/assets/revenant-survivors/icon-180.png"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/revenant-survivors/site.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script></head><body class="guide-layout revenant-guide"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="/revenant-survivors/"><img src="/assets/revenant-survivors/logo.svg" width="36" height="36" alt="">Revenant Survivors</a><nav class="desktop-nav" aria-label="Revenant Survivors tasks">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="Revenant Survivors tasks">{nav}</nav></details></div></header><main class="wrap" id="main"><header class="article-head"><p class="eyebrow">Revenant Survivors · Independent guides</p><h1>{escape(page['title'])}</h1><p class="answer">{page['answer']}</p><p class="meta">Megabonk.org editors · Checked {page.get("checked", "12 November 2026")} · Early Access</p></header><div class="article-layout"><nav class="toc" aria-label="On this page">{toc}</nav><article class="prose">{body}</article></div></main><footer class="footer wrap"><p>Published by Megabonk.org. Independent of Mongma Studio. Source-based reporting.</p><p><a href="/#more-games">More games</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy">Privacy</a></p></footer></body></html>'''
         if page is HOME:
-            start = html.index('<main ')
-            end = html.index('</main>', start) + len('</main>')
-            html = html[:start] + homepage() + html[end:]
-            html = html.replace('class="guide-layout revenant-guide"', 'class="guide-layout revenant-guide revenant-home"')
-            html = html.replace('<link rel="stylesheet" href="/assets/revenant-survivors/site.css">', '<link rel="stylesheet" href="/assets/revenant-survivors/site.css"><link rel="stylesheet" href="/assets/revenant-survivors/home.css">')
-            html = html.replace('property="og:type" content="article"', 'property="og:type" content="website"')
+            main, questions = homepage()
+            html = shell(route, page, 'rv-hub', '<link rel="stylesheet" href="/assets/revenant-survivors/hub.css">', main, 'website')
+        else:
+            toc = ''.join(f'<a href="#{key}">{title}</a>' for key, title, _ in page['sections'])
+            body = image(page['image'], page['alt'], page['caption'])
+            body += ''.join(f'<section id="{key}"><h2>{title}</h2>{text}</section>' for key, title, text in page['sections'])
+            main = (f'<main class="wrap" id="main"><header class="article-head" id="guide"><p class="eyebrow">Revenant Survivors · Independent guides</p><h1>{escape(page["title"])}</h1>'
+                    f'<p class="answer">{page["answer"]}</p><p class="byline">Megabonk.org editors · Checked {page.get("checked", "12 November 2026")} · Early Access</p></header>'
+                    f'<div class="article-layout"><nav class="toc" aria-label="On this page">{toc}</nav><article class="prose">{body}'
+                    f'<p><a href="#guide">Back to top</a></p></article></div></main>')
+            html = shell(route, page, 'rv-guide', '', main)
+        html = ads(html)
         target = ROOT / route.strip('/') / 'index.html'
         target.parent.mkdir(parents=True, exist_ok=True)
         write_html(target, html, encoding='utf8')
-    print('Built Revenant Survivors overview and 5 reviewed task pages')
+    from revenant_trust import build as build_trust
+    build_trust(shell)
+    privacy()
+    # 导航、面包屑、相关任务、页脚与登记来自 data/revenant-survivors-pages.json（02 §2.6、§5.2）
+    subprocess.run([sys.executable, str(Path(__file__).resolve().parent / 'register_page.py'), str(ROOT), 'revenant-survivors'], check=True, stdout=subprocess.DEVNULL)
+    register_seo(questions)
+    from game_seo import edit as seo_edit  # register_page 追加头部标记后，保持 SEO 编辑器幂等
+    for fp in (ROOT / 'revenant-survivors').rglob('index.html'):
+        t0 = fp.read_text(encoding='utf8')
+        n0 = seo_edit(fp, t0)
+        if n0 != t0:
+            fp.write_text(n0, encoding='utf8')
+    print('Built Revenant Survivors home, 5 task pages and About/Contact')
+
+
+def register_seo(questions):
+    """首页 FAQ 登记到 data/game-seo.json（可见问答与 FAQPage 同源），信任页补进 pages_list.txt（只追加）。"""
+    f = ROOT / 'data/game-seo.json'
+    d = json.loads(f.read_text(encoding='utf8'))
+    d['pages']['revenant-survivors/index.html'] = {
+        'questions': list(questions),
+        'faq_review': 'Hub FAQ from data/revenant-survivors-pages.json (v3.26 F9); visible answers and FAQPage share one source (2026-11-22).',
+        'language_review': 'No equivalent language page identified; do not map unrelated topics.',
+        'reviewed_candidates': list(questions),
+    }
+    new = json.dumps(d, ensure_ascii=False, indent=2) + '\n'
+    if f.read_text(encoding='utf8') != new:
+        f.write_text(new, encoding='utf8')
+    pl = ROOT / 'pages_list.txt'
+    text = open(pl, encoding='utf8', newline='').read()
+    add = ''.join(f'https://megabonk.org{BASE}{s}/\r\n' for s in ('about', 'contact') if f'{BASE}{s}/' not in text)
+    if add:
+        with open(pl, 'a', encoding='utf8', newline='') as out:
+            out.write(add)
+
+
+def privacy():
+    """站级隐私页为本专区保留一节（02 §5.1），已有则不重复。"""
+    f = ROOT / 'privacy-policy.html'
+    s = open(f, encoding='utf8', newline='').read()
+    if 'id="revenant-survivors"' in s:
+        return
+    section = ('<h2 id="revenant-survivors">Revenant Survivors guides</h2><p>Reviewed 22 November 2026. These pages host no game client, account or save and embed no third-party game window. '
+               'Steam, Steam Community and developer links open the destination site in a new tab only when you click them, and that site then applies its own privacy practices. '
+               'Ordinary guide pages inherit this site’s existing AdSense loader and site-wide Umami analytics described here; About and Contact carry no advertising. '
+               'Cloudflare hosting and possible performance measurement are described above.</p>')
+    marker = '<h2 id="midgard-survivors">'
+    if marker not in s:
+        raise SystemExit('privacy-policy.html: marker section not found')
+    with open(f, 'w', encoding='utf8', newline='') as out:  # 保持原 CRLF，不经 write_html 重排
+        out.write(s.replace(marker, section + marker, 1))
 
 
 if __name__ == '__main__':
