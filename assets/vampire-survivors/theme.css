@@ -1,0 +1,154 @@
+/* Vampire Survivors 游戏主题（SOP v3.22，02 §2.1）。首页、全部分页、专区 About/Contact 共用。
+   视觉来源：官方 Steam 商店页与官方 wiki——深夜紫黑底、血月红、古金描边面板、哥特衬线标题。
+   布局骨架来自 guide-article-layout.css；本文件不加载任何其他游戏的样式。 */
+@font-face{font-family:"Cinzel";src:url("/assets/fonts/cinzel-latin.woff2") format("woff2");font-weight:400 900;font-display:swap}
+:root{--night:#0f0a12;--stone:#171019;--panel:#1f1424;--panel-hi:#2d1b30;--blood:#a3162a;--blood-lo:#6d0f1d;--blood-hi:#d63b4d;--gold:#e6b64c;--gold-hi:#ffd979;--text:#efe4d4;--dim:#bfae9f;--rim:#4d3341;--display:"Cinzel","Palatino Linotype",Georgia,"Times New Roman",serif;--body:system-ui,-apple-system,"Segoe UI",sans-serif;
+ /* 骨架读取的变量 */--paper:var(--night);--white:var(--panel);--ink:var(--text);--muted:var(--dim);--line:var(--rim);--pale:var(--stone);--green:var(--gold);--heading:var(--display);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body.vs-theme{margin:0;background:radial-gradient(900px 420px at 50% -140px,#4a1020 0,transparent 72%),var(--night);color:var(--text);font:17px/1.72 var(--body)}
+.vs-theme *{box-sizing:border-box}
+.vs-theme a{color:var(--gold);text-underline-offset:4px}.vs-theme a:hover{color:var(--gold-hi)}
+.vs-theme a:focus-visible,.vs-theme button:focus-visible,.vs-theme summary:focus-visible,.vs-theme select:focus-visible,.vs-theme [tabindex]:focus-visible{outline:3px solid #9fb2ff;outline-offset:4px}
+.vs-theme img{max-width:100%;height:auto}
+.vs-theme h1,.vs-theme h2,.vs-theme h3,.vs-theme .brand{font-family:var(--display);font-weight:600;line-height:1.2;color:#fbeed2;letter-spacing:.01em}
+.vs-theme h3{font-size:1.2rem}
+.vs-theme p{margin:.7rem 0 1.15rem}
+.vs-theme .wrap{width:min(1200px,calc(100% - 64px));max-width:none;margin:auto;padding-inline:0}
+.vs-theme .skip{position:absolute;top:-90px;left:12px;background:var(--gold);color:#1a0d12;padding:10px;z-index:30}.vs-theme .skip:focus{top:10px}
+.vs-theme .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.vs-theme [hidden]{display:none!important}
+
+/* 页眉 */
+.vs-theme .top{background:#0b070e;border-bottom:1px solid var(--gold);box-shadow:0 3px 0 #0b070e,0 4px 0 var(--rim);position:relative;z-index:5}
+.vs-theme .top>.wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:84px}
+.vs-theme .brand{text-decoration:none;font-size:22px;line-height:1.1;max-width:260px;letter-spacing:.04em;color:#fbeed2}
+.vs-theme .brand small{display:block;font:600 10px/1.6 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:6px}
+.vs-theme .desktop-nav{display:flex;align-items:center;gap:26px}
+.vs-theme .desktop-nav a,.vs-theme .mobile-links a{color:var(--text);text-decoration:none;font-size:14px;font-weight:650;padding:10px 0}
+.vs-theme .desktop-nav a:hover{color:var(--gold-hi)}
+.vs-theme .desktop-nav a[aria-current=page]{color:var(--gold-hi);box-shadow:inset 0 -3px 0 var(--blood-hi)}
+.vs-theme .mobile-nav{display:none;position:relative}
+.vs-theme .mobile-nav summary{list-style:none;cursor:pointer;color:var(--text);border:1px solid var(--gold);border-radius:4px;padding:9px 14px;font-size:14px;min-height:44px}
+.vs-theme .mobile-nav summary::-webkit-details-marker{display:none}
+.vs-theme .mobile-links{position:absolute;right:0;top:calc(100% + 8px);display:grid;min-width:220px;background:#150d18;border:1px solid var(--gold);padding:6px 16px;box-shadow:0 14px 28px #000a;z-index:9}
+.vs-theme .mobile-links a{padding:13px 0;border-bottom:1px solid var(--rim)}.vs-theme .mobile-links a:last-child{border:0}
+
+/* 标签、按钮 */
+.vs-theme .eyebrow,.vs-theme .task-tag,.vs-theme .section-label{font:700 11px/1.6 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.vs-theme .eyebrow{display:block;color:var(--gold);margin:0}
+.vs-theme .button,.vs-theme .launch{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;min-height:46px;padding:10px 20px;background:linear-gradient(var(--gold-hi),var(--gold));border:1px solid #fff0b8;color:#1d1008;text-decoration:none;font:700 14px/1.3 var(--body);border-radius:3px;box-shadow:0 3px 0 #6b4a10}
+.vs-theme .button:hover,.vs-theme .launch:hover{color:#000;filter:brightness(1.08)}
+.vs-theme .button.secondary{background:transparent;color:var(--gold-hi);border-color:var(--gold);box-shadow:none}
+
+/* 分页：标题、答案框、目录、正文 */
+.vs-theme .crumbs{font-size:13px;color:var(--dim);padding:22px 0 0;overflow-wrap:anywhere}
+.vs-theme .crumbs a{color:var(--dim);text-decoration:none}.vs-theme .crumbs a:hover{color:var(--gold-hi)}.vs-theme .crumbs [aria-current]{color:var(--text)}
+.vs-theme .article-head{padding:30px 0 20px}
+.vs-theme .crumbs+.article-head{padding-top:12px}
+.vs-theme .article-head h1{font-size:clamp(2rem,4.3vw,3.2rem);margin:.15em 0 .55em;max-width:26ch}
+.vs-theme .answer,.vs-theme .article-head .answer{background:linear-gradient(var(--panel-hi),var(--panel));border:1px solid var(--gold);border-left:5px solid var(--blood-hi);box-shadow:inset 0 0 0 3px var(--panel),inset 0 0 0 4px var(--rim);padding:20px 24px;font-size:1.08rem;line-height:1.65;color:#f6ead6;max-width:80ch}
+.vs-theme .answer p{margin:0 0 .6rem}.vs-theme .answer p:last-child{margin-bottom:0}
+.vs-theme .byline{font-size:13px;color:var(--dim);margin-top:14px}
+.vs-theme .article-layout>.toc{background:var(--stone);border:1px solid var(--rim);border-top:3px solid var(--gold);border-radius:4px}
+.vs-theme .toc strong{font:700 11px/1.5 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.vs-theme.guide-layout .article-layout>.toc a{background:var(--panel);border-color:var(--rim);color:var(--gold-hi);border-radius:3px;text-decoration:none}
+.vs-theme.guide-layout .article-layout>.toc a:hover{border-color:var(--gold);color:#fff3cc}
+.vs-theme .prose h2{margin-top:2.2rem;padding-top:.3rem;font-size:clamp(1.5rem,3vw,2.1rem)}
+.vs-theme .prose h2::before{content:"";display:block;width:54px;height:3px;background:var(--blood-hi);margin-bottom:12px}
+.vs-theme .prose>section>.eyebrow+h2::before{display:none}
+.vs-theme .prose h3{margin-top:1.5rem}
+.vs-theme .prose p,.vs-theme .prose li{color:#e6d9c8}.vs-theme .prose li{padding:4px 0}
+.vs-theme .prose>section+section{border-top:1px solid #2c1d31}
+.vs-theme .prose details{border:1px solid var(--rim);background:var(--stone);padding:14px 18px;margin:14px 0}
+.vs-theme .prose summary{cursor:pointer;color:var(--gold-hi);font-weight:700}
+.vs-theme .prose figcaption,.vs-theme figure.game-image figcaption{color:var(--dim)}
+.vs-theme.guide-layout figure.game-image{background:var(--stone);border-color:var(--gold);border-radius:4px;padding:8px}
+.vs-theme.guide-layout figure.game-image img{border-radius:0}
+.vs-theme .notice,.vs-theme .note{background:var(--panel);border-left:4px solid var(--blood-hi);padding:14px 18px;margin:22px 0;font-size:15px}
+.vs-theme .choice{padding:16px;border:1px solid var(--rim);background:var(--panel);border-radius:4px;margin:14px 0}.vs-theme .choice p{margin-bottom:0}
+.vs-theme .ref{font-size:11px;vertical-align:super;margin-left:3px}.vs-theme .ref a{text-decoration:none;padding:3px 2px}
+.vs-theme .sources{border-top:1px solid var(--rim);margin-top:34px;padding-top:12px;font-size:14px;overflow-wrap:anywhere;color:var(--dim)}
+.vs-theme .sources h2{font-size:1.25rem}.vs-theme .sources h2::before{display:none}.vs-theme .sources li{margin-bottom:10px}
+.vs-theme .back{font-size:13px}
+.vs-theme .related-tasks,.vs-theme .related{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--rim)}
+.vs-theme .related-tasks h2::before{display:none}
+.vs-theme .related-links{display:flex;flex-wrap:wrap;gap:10px 24px}
+.vs-theme .related-links a{text-decoration:none;font-weight:650;padding:8px 0}
+.vs-theme .related{display:flex;flex-wrap:wrap;gap:12px}
+.vs-theme .related a{padding:10px 14px;border:1px solid var(--rim);background:var(--panel);border-radius:4px;text-decoration:none}
+.vs-theme .related a:hover{border-color:var(--gold)}
+.vs-theme .legal{max-width:72ch;padding:30px 0 60px}.vs-theme .legal .crumbs{padding:0}
+.vs-theme .legal .article-head{padding:14px 0 6px}
+.vs-theme .legal section{padding-block:6px}
+
+/* 表格 */
+.vs-theme .table-wrap{overflow-x:auto;border:1px solid var(--rim);border-radius:4px;margin:22px 0;max-width:100%;background:var(--panel);contain:inline-size layout paint;overscroll-behavior-x:contain}
+.vs-theme table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;color:var(--text)}
+.vs-theme th,.vs-theme td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--rim);vertical-align:top}
+.vs-theme th{background:var(--panel-hi);color:#ffe7ac;font:700 12px/1.4 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.vs-theme tr:last-child td{border-bottom:0}
+@media(max-width:700px){.vs-theme .prose .table-wrap::before{content:"Scroll sideways for all columns →";display:block;padding:.6rem;font-size:.85rem;color:var(--gold-hi);background:var(--stone);position:sticky;left:0}}
+
+/* 联机兼容检查工具 */
+.vs-theme .tool{padding:24px;border:1px solid var(--gold);box-shadow:inset 0 0 0 3px var(--stone),inset 0 0 0 4px var(--rim);background:var(--stone);border-radius:4px;margin:24px 0}
+.vs-theme .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vs-theme label{display:block;font-weight:700;font-size:14px}
+.vs-theme select{display:block;max-width:100%;width:100%;margin-top:8px;padding:12px;min-height:46px;background:var(--panel);color:var(--text);border:1px solid var(--gold);border-radius:3px;font:inherit}
+.vs-theme button{font:700 14px/1.4 var(--body);padding:12px 18px;min-height:44px;border:1px solid var(--gold);border-radius:3px;cursor:pointer;background:linear-gradient(var(--gold-hi),var(--gold));color:#1d1008;margin:14px 8px 0 0}
+.vs-theme button[type=reset]{background:transparent;color:var(--gold-hi)}
+.vs-theme .result{background:var(--panel);border-left:4px solid var(--blood-hi);padding:18px;margin-top:18px;scroll-margin-top:110px}
+
+/* 页脚（register_page.py 生成 footer.site-footer；信任页同一套） */
+.vs-theme .site-footer{background:#0b070e;color:var(--dim);border-top:1px solid var(--gold);padding:42px 0 0;font-size:14px;position:relative;margin-top:30px}
+.vs-theme .site-footer::before{content:"";position:absolute;left:0;right:0;top:3px;height:1px;background:var(--rim)}
+.vs-theme footer.site-footer .footer-grid{display:grid;grid-template-columns:1.6fr repeat(5,minmax(0,1fr));gap:28px 32px}
+.vs-theme .site-footer h2{font:700 11px/1.5 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.vs-theme .site-footer h2::before{display:none}
+.vs-theme .site-footer .footer-col a{display:block;color:var(--text);text-decoration:none;padding:4px 0;line-height:1.45}
+.vs-theme .site-footer .footer-col a:hover{color:var(--gold-hi)}
+.vs-theme .site-footer .footer-brand strong{font:600 20px/1.3 var(--display);color:#fbeed2}
+.vs-theme .site-footer .footer-brand a{text-decoration:none}
+.vs-theme .site-footer .footer-brand p{margin:10px 0 0;line-height:1.6;max-width:38ch}
+.vs-theme .site-footer .footer-version{margin:10px 0 0;font-size:12px;border-top:1px solid var(--rim);padding-top:8px}
+.vs-theme .footer-info{margin-top:34px;border-top:1px solid var(--rim);padding:16px 0 22px}
+.vs-theme .footer-info .wrap{display:flex;flex-wrap:wrap;gap:8px 24px}
+.vs-theme .footer-info a{color:var(--text);text-decoration:none;font-size:13px;padding:6px 0}.vs-theme .footer-info a:hover{color:var(--gold-hi)}
+
+/* 首页底部共享的 More games 推荐卡，沿用本主题配色 */
+.vs-theme .play-recommendations{max-width:none;margin-top:32px}
+.vs-theme .play-rec-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.vs-theme .play-rec-card{background:var(--panel);border-color:var(--rim);border-radius:4px;box-shadow:none}
+.vs-theme .play-rec-link h3{color:var(--text);font:600 22px/1.2 var(--display)}
+.vs-theme .play-rec-link p,.vs-theme .play-rec-heading>p:last-child{color:var(--dim)}
+.vs-theme .play-rec-action,.vs-theme .play-rec-heading>p:first-child{color:var(--gold)}
+.vs-theme .play-rec-link img{border-color:var(--rim)}
+
+@media(max-width:1100px){.vs-theme footer.site-footer .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vs-theme .site-footer .footer-brand{grid-column:1/-1}}
+@media(max-width:900px){
+ .vs-theme .desktop-nav{display:none}.vs-theme .mobile-nav{display:block}.vs-theme .top>.wrap{min-height:76px}
+ .vs-theme footer.site-footer .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .vs-theme .play-rec-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ body.vs-theme{font-size:16px}
+ .vs-theme .wrap{width:calc(100% - 32px)}
+ .vs-theme .brand{font-size:19px}.vs-theme .brand small{font-size:9px;letter-spacing:.14em}
+ .vs-theme .top>.wrap{min-height:56px}
+ .vs-theme .crumbs{padding-top:10px}.vs-theme .crumbs>*{display:none}.vs-theme .crumbs>a:nth-last-of-type(1){display:inline}.vs-theme .crumbs>a:nth-last-of-type(1)::before{content:"‹ "}
+ .vs-theme .article-head{padding:18px 0 14px}.vs-theme .crumbs+.article-head{padding-top:6px}
+ .vs-theme .article-head>.eyebrow{display:none}
+ .vs-theme .byline{margin-top:8px;font-size:12px;line-height:1.5}
+ .vs-theme.guide-layout figure.game-image img{max-height:240px;object-fit:contain}
+ .vs-theme .article-head h1{font-size:1.7rem;margin:.1em 0 .4em}
+ .vs-theme .answer,.vs-theme .article-head .answer{font-size:.9rem;line-height:1.48;padding:10px 13px}
+ .vs-theme.guide-layout .article-layout>.toc{flex-wrap:nowrap;overflow-x:auto;padding:8px 10px;gap:6px;align-items:center;scrollbar-width:thin}
+ .vs-theme.guide-layout .toc strong{width:auto;white-space:nowrap;margin:0 4px 0 0}.vs-theme.guide-layout .toc a{white-space:nowrap}
+ .vs-theme.guide-layout .article-layout{gap:10px;padding-bottom:30px}
+ .vs-theme.guide-layout figure.game-image{margin:6px auto 16px;padding:5px}
+ .vs-theme .prose h2{margin-top:1.4rem;font-size:1.45rem}
+ .vs-theme .tool{padding:15px}.vs-theme .tool-grid{grid-template-columns:1fr}
+ .vs-theme th,.vs-theme td{padding:11px;min-width:92px}.vs-theme .table-wrap{font-size:13px}
+ .vs-theme .play-rec-grid{grid-template-columns:1fr}
+ .vs-theme .site-footer{padding-top:28px}.vs-theme footer.site-footer .footer-grid{gap:22px 18px}.vs-theme .site-footer .footer-col a{padding:7px 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{scroll-behavior:auto!important}}

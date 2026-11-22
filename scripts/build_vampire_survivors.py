@@ -24,8 +24,13 @@ def shell(route,title,desc,h1,answer,parts,sources,script=False,recs=False):
  source='<section class="sources" id="sources"><h2>Sources &amp; verification</h2><ol>'+''.join(f'<li id="source-{i}">{ext(u,l)} — {d}</li>' for i,(u,l,d) in enumerate(sources,1))+'</ol><a class="back" href="#guide">Back to guide ↑</a></section>'
  related='<section><h2>Related choices</h2><div class="related"><a href="/vampire-survivors/">Official browser demo</a><a href="/vampire-survivors/co-op/">Co-op compatibility</a><a href="/games-like-vampire-survivors/">Choose a browser survivor</a></div></section>'
  html=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:type" content="article"><meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(desc,quote=True)}"><meta property="og:url" content="https://megabonk.org{route}"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/vampire-survivors/site.css">{AD}{'<script defer src="/assets/vampire-survivors/compatibility.js"></script>' if script else ''}</head><body class="guide-layout vs-guide"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="/"><span>Megabonk.org<small>Independent games &amp; guides</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="Mobile navigation">{nav}</nav></details></div></header><main class="wrap" id="main"><header class="article-head" id="guide"><p class="eyebrow">INDEPENDENT PLAYER GUIDE · VAMPIRE SURVIVORS</p><h1>{h1}</h1><div class="answer">{answer}</div><p class="byline">By Megabonk.org · {'checked 9 November 2026' if route in ['/vampire-survivors/evolutions/','/vampire-survivors/infinite-corridor/','/vampire-survivors/collection-1-0/'] else 'original checks 5 November 2026; progression links updated 9 November'} · Vampire Survivors is by poncle.</p></header><div class="article-layout"><nav class="toc" aria-label="On this page"><strong>On this page</strong>{''.join(f'<a href="#{i}">{h}</a>' for i,h,_ in parts)}</nav><article class="prose">{body}{source}{related}</article></div>{recommendations('vampire-survivors') if recs else ''}</main><footer class="footer"><div class="wrap footer-grid"><div><strong>A guide for your next run.</strong><p>Independent editorial. Not affiliated with poncle or the creators of the games linked here.</p><a href="/#wiki-start">More games &amp; guides →</a></div><nav aria-label="Site information"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy-policy#vampire-survivors">Privacy</a></nav></div></footer></body></html>'''
- if route in ['/vampire-survivors/'+x+'/' for x in ['sonic-whip','ode-to-castlevania','dlc','unlocks','secret-characters','how-to-beat-death','cherry-bomb-evolution']]:
-  html=html.replace('<link rel="stylesheet" href="/assets/pokebonk/site.css">','').replace('/assets/vampire-survivors/site.css','/assets/vampire-survivors/home.css').replace('class="guide-layout vs-guide"','class="guide-layout vs-home"').replace('original checks 5 November 2026; progression links updated 9 November','checked 10 November 2026')
+ if route.startswith('/vampire-survivors/'):
+  # 专区主题：全部页面只加载骨架 + 本游戏 theme.css，不借用 PokeBonk 或其他游戏样式（02 §2.1）
+  html=re.sub(r'<link rel="stylesheet" href="/assets/pokebonk/site\.css(?:\?v=[0-9a-f]+)?">\n?','',html)
+  html=html.replace('/assets/vampire-survivors/site.css','/assets/vampire-survivors/theme.css')
+  html=html.replace('class="guide-layout vs-guide"','class="guide-layout vs-theme vs-guide"')
+  if route in ['/vampire-survivors/'+x+'/' for x in ['sonic-whip','ode-to-castlevania','dlc','unlocks','secret-characters','how-to-beat-death','cherry-bomb-evolution']]:
+   html=html.replace('original checks 5 November 2026; progression links updated 9 November','checked 10 November 2026')
  html=decorate(route,html)
  if route.startswith('/vampire-survivors/'):
   html=html.replace('<a class="brand" href="/"><span>Megabonk.org<small>Independent games &amp; guides</small></span></a>', '<a class="brand" href="/vampire-survivors/"><span>Vampire Survivors<small>Independent player guides</small></span></a>')
@@ -100,5 +105,13 @@ def build():
  f=ROOT/'privacy-policy.html';s=f.read_text(encoding='utf-8')
  if 'id="vampire-survivors"' not in s:s=s.replace('</body>','<h2 id="vampire-survivors">Vampire Survivors guides and compatibility check</h2><p>Updated 5 November 2026. The compatibility check reads the two selections locally in the page; it does not store them, upload them, connect to a game lobby or access your saves. Original-game and support links open external destinations only when followed; no Vampire Survivors game is embedded. Existing page analytics and advertising remain as described above. The external publisher operates any game storage, account or connection features on its own site.</p></body>',1)
  write_html(f,s,encoding='utf-8')
+ from vampire_trust import build as build_trust
+ build_trust()
+ import subprocess,sys
+ subprocess.run([sys.executable,str(ROOT/'scripts/register_page.py'),str(ROOT),'vampire-survivors'],check=True)
+ from game_seo import edit as seo_edit
+ for fp in (ROOT/'vampire-survivors').rglob('index.html'):
+  t=fp.read_text(encoding='utf-8');n=seo_edit(fp,t)
+  if n!=t:fp.write_text(n,encoding='utf-8')
  print(f'Built {len(tasks)} Vampire Survivors and comparison tasks, plus reproducible site patches.')
 if __name__=='__main__':build()
