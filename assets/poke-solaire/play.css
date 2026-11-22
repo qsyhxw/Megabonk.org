@@ -1,0 +1,35 @@
+/* PokéSolaire 点击加载游玩窗口（play.css）。窗口机制沿用共享游玩页，配色与夜色篝火主题一致。 */
+.psol-theme .game-panel { max-width: 1020px; margin: 0 auto 38px; min-width: 0; scroll-margin-top: 16px; }
+.psol-theme .game-screen { position: relative; aspect-ratio: 16/10; min-height: 420px; background: var(--ps-night); border: 3px solid var(--ps-ink); box-shadow: 6px 6px 0 var(--ps-ink); }
+.psol-theme .game-cover { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; overflow: hidden; background: radial-gradient(ellipse at top, var(--ps-ember), var(--ps-night) 78%); color: #fff8ec; }
+.psol-theme .game-cover[hidden], .psol-theme .game-dock[hidden] { display: none; }
+.psol-theme .game-cover img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center top; opacity: .62; }
+.psol-theme .game-cover .cover-content { position: relative; z-index: 1; max-width: 560px; text-shadow: 0 2px 12px #00000099; }
+.psol-theme .game-cover h2 { font-family: var(--ps-display); font-size: clamp(2.1rem, 4vw, 3.4rem); margin: 8px 0 14px; color: #fff8ec; letter-spacing: .02em; line-height: 1.1; }
+.psol-theme .game-cover p { font-size: 15px; line-height: 1.65; color: #fff8ec; }
+.psol-theme .game-cover .cover-note { font-size: 12px; color: #eadfca; margin-top: 18px; }
+.psol-theme .game-cover .cover-warn { display: inline-block; margin: 14px 0 0; padding: 6px 12px; background: #14101fd9; border-left: 4px solid var(--ps-red); font-size: 13px; line-height: 1.5; color: #fff8ec; text-align: left; text-shadow: none; }
+.psol-theme .play-button { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 52px; padding: 14px 34px; background: var(--ps-gold); color: var(--ps-night); border: 0; font: 700 19px/1.3 var(--ps-display); cursor: pointer; clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); text-shadow: none; }
+.psol-theme .play-button:hover { background: #f4c866; }
+.psol-theme .play-button:focus-visible, .psol-theme .game-tools button:focus-visible, .psol-theme .game-dock button:focus-visible { outline: 3px solid var(--ps-red); outline-offset: 4px; }
+.psol-theme .game-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: var(--ps-night-lo); }
+.psol-theme .game-meta { padding: 14px 0 0; line-height: 1.65; }
+.psol-theme .game-meta > p { font-size: 13px; color: var(--ps-dim); margin: 0 0 9px; }
+.psol-theme .game-meta #game-status { font-size: 12px; margin: 11px 0 0; }
+.psol-theme .game-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.psol-theme .game-tools > a { font-size: 13px; padding: 9px 0; }
+.psol-theme .game-tools button, .psol-theme .game-dock button { font: 700 13px/1.4 var(--ps-body); background: var(--ps-parch-hi); color: var(--ps-ink); border: 2px solid var(--ps-ink); border-radius: 0; min-height: 44px; padding: 9px 15px; cursor: pointer; }
+.psol-theme .game-tools button:hover:not(:disabled), .psol-theme .game-dock button:hover { background: var(--ps-gold); }
+.psol-theme .game-tools button:disabled { opacity: .5; cursor: default; }
+.psol-theme .game-dock { position: fixed; right: 20px; bottom: 18px; z-index: 80; display: flex; align-items: center; gap: 16px; max-width: calc(100% - 36px); padding: 12px 16px; background: var(--ps-parch-hi); border: 2px solid var(--ps-ink); box-shadow: 4px 4px 0 var(--ps-ink); font-size: 13px; }
+.psol-theme .game-panel[data-mode=minimized] .game-screen { display: none; }
+.psol-theme .game-panel[data-mode=expanded] { position: fixed; inset: 12px; z-index: 100; max-width: none; margin: 0; display: flex; flex-direction: column; box-shadow: 0 0 0 25px #0d0a15e6; background: var(--ps-parch); }
+.psol-theme .game-panel[data-mode=expanded] .game-screen { flex: 1; aspect-ratio: auto; min-height: 0; order: 1; box-shadow: none; }
+.psol-theme .game-panel[data-mode=expanded] .game-meta { order: 0; padding: 10px 16px; border: 2px solid var(--ps-ink); border-bottom: 0; }
+.psol-theme .game-panel[data-mode=expanded] .game-meta > p:first-child, .psol-theme .game-panel[data-mode=expanded] #game-status { display: none; }
+.game-expanded { overflow: hidden; }
+.game-minimized { padding-bottom: 90px; }
+@media (max-width: 600px) {
+  .psol-theme .game-screen { aspect-ratio: auto; height: 460px; min-height: 0; box-shadow: 4px 4px 0 var(--ps-ink); }
+  .psol-theme .play-button { font-size: 16px; padding: 12px 22px; }
+}

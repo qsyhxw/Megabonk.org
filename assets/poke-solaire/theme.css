@@ -1,0 +1,122 @@
+/* PokéSolaire 游戏主题（SOP v3.22，02 §2.1）。加载于 /poke-solaire/ 首页及其全部分页。
+   视觉来源：原作 pokesolaire.com 菜单画面（2026-11-05 截图 assets/poke-solaire/hub-1280.webp）：
+   深紫夜色洞穴、篝火橙光、菜单金色斜切高亮条、浅米色像素菜单字、红色 HOY 徽标、绿色“在线”徽标。
+   长文阅读放在羊皮纸色面上，夜色/橙/金只用在页眉、首屏、按钮和卡片边。
+   首页独有布局在 hub.css，游玩窗口在 play.css。 */
+@font-face {
+  font-family: Pixelify;
+  src: url("/assets/fonts/pixelify-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+:root {
+  --ps-night: #14101f; --ps-night-hi: #231a3b; --ps-night-lo: #0d0a15;
+  --ps-ember: #e8742a; --ps-ember-dk: #a8460f; --ps-gold: #e9b44c; --ps-gold-dk: #b8862a;
+  --ps-red: #c8362b; --ps-teal: #2fbf8f;
+  --ps-parch: #f4ecd8; --ps-parch-hi: #fbf6e8; --ps-parch-lo: #ebe0c3;
+  --ps-ink: #241c33; --ps-dim: #5b5270; --ps-line: #d6c7a2; --ps-menu: #e7d9b8;
+  --ps-display: Pixelify, "Courier New", monospace;
+  --ps-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* 骨架读取的变量 */
+  --paper: var(--ps-parch); --white: var(--ps-parch-hi); --ink: var(--ps-ink); --muted: var(--ps-dim);
+  --line: var(--ps-line); --pale: var(--ps-parch-lo); --green: var(--ps-ember-dk); --gold: var(--ps-gold);
+  --body: var(--ps-body);
+}
+
+/* ---------- 基础 ---------- */
+body.psol-theme { margin: 0; background: var(--ps-parch); color: var(--ps-ink); font: 17px/1.7 var(--ps-body); }
+.psol-theme *, .psol-theme *::before, .psol-theme *::after { box-sizing: border-box; }
+html:has(body.psol-theme) { scroll-padding-top: 1rem; background: var(--ps-night); scroll-behavior: auto; }
+.psol-theme a { color: var(--ps-ember-dk); text-underline-offset: 3px; }
+.psol-theme a:hover { color: var(--ps-ink); text-decoration-thickness: 2px; }
+.psol-theme :focus-visible { outline: 3px solid var(--ps-red); outline-offset: 3px; }
+.psol-theme img { max-width: 100%; height: auto; }
+.psol-theme h1, .psol-theme h2, .psol-theme h3 { font-family: var(--ps-display); font-weight: 700; line-height: 1.15; color: var(--ps-ink); letter-spacing: 0; }
+.psol-theme h2 { font-size: clamp(1.45rem, 2.6vw, 1.9rem); margin: 0 0 .8rem; }
+.psol-theme h3 { font-size: 1.15rem; }
+.psol-theme p { margin: .7rem 0 1.1rem; }
+.psol-theme .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+.psol-theme #main { max-width: none; }
+.psol-theme .skip { position: absolute; top: -90px; left: 12px; background: var(--ps-gold); color: var(--ps-ink); padding: 10px 14px; z-index: 50; }
+.psol-theme .skip:focus { top: 10px; }
+.psol-theme .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.psol-theme .eyebrow { margin: 0; font: 700 12px/1.4 var(--ps-display); letter-spacing: .12em; text-transform: uppercase; color: var(--ps-ember-dk); }
+.psol-theme sup.ref a { text-decoration: none; font-weight: 700; padding: 0 1px; }
+
+/* ---------- 页眉：夜色条 + 橙色底边（篝火） ---------- */
+.psol-theme .top { background: var(--ps-night); position: relative; z-index: 20; border: 0; border-bottom: 4px solid var(--ps-ember); }
+.psol-theme .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; position: relative; }
+.psol-theme .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ps-menu); font: 700 1.5rem/1 var(--ps-display); white-space: nowrap; min-width: 0; }
+.psol-theme .brand:hover { color: #fff; }
+.psol-theme .brand span { display: block; }
+.psol-theme .brand b { color: var(--ps-gold); font-weight: 700; }
+.psol-theme .brand small { display: block; font: 700 10px/1.5 var(--ps-body); letter-spacing: .12em; text-transform: uppercase; color: #b8abd0; margin-top: 4px; }
+.psol-theme .desktop-nav { display: flex; align-items: center; gap: 2px; }
+.psol-theme .desktop-nav a, .psol-theme .mobile-links a { color: var(--ps-menu); text-decoration: none; font: 700 14px/1.3 var(--ps-body); padding: 10px 12px; min-height: 44px; display: inline-flex; align-items: center; }
+.psol-theme .desktop-nav a:hover, .psol-theme .mobile-links a:hover { color: var(--ps-night); background: var(--ps-gold); }
+.psol-theme .desktop-nav a[aria-current=page], .psol-theme .mobile-links a[aria-current=page] { color: var(--ps-gold); box-shadow: inset 0 -3px 0 var(--ps-gold); }
+.psol-theme .mobile-nav { display: none; position: static; }
+.psol-theme .mobile-nav summary { list-style: none; cursor: pointer; background: var(--ps-gold); color: var(--ps-night); padding: 9px 18px; font: 700 14px var(--ps-display); min-height: 44px; display: inline-flex; align-items: center; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+.psol-theme .mobile-nav summary::-webkit-details-marker { display: none; }
+.psol-theme .mobile-nav:not([open]) > .mobile-links { display: none; }
+.psol-theme .mobile-links { position: absolute; right: 0; top: calc(100% + 8px); z-index: 30; display: grid; min-width: 210px; padding: 8px; background: var(--ps-night-hi); border: 2px solid var(--ps-ember); }
+
+/* ---------- 正文（羊皮纸面） ---------- */
+.psol-theme .play-notes { max-width: 850px; margin: 0 auto; padding: 0 0 55px; }
+.psol-theme .play-notes > section { margin: 34px 0; border-top: 2px dashed var(--ps-line); padding-top: .4rem; scroll-margin-top: 14px; }
+.psol-theme .play-notes h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); margin-top: 1.6rem; }
+.psol-theme .play-notes h2::before { content: ""; display: inline-block; width: .5em; height: .5em; margin: 0 .55em .12em 0; vertical-align: middle; background: var(--ps-ember); transform: rotate(45deg); box-shadow: 0 0 0 2px var(--ps-ink); }
+.psol-theme .play-notes p, .psol-theme .play-notes li { font-size: 16px; line-height: 1.8; }
+.psol-theme .play-notes li { margin-bottom: 8px; }
+.psol-theme .play-notes ol { counter-reset: psstep; list-style: none; padding-left: 0; }
+.psol-theme .play-notes ol > li { counter-increment: psstep; position: relative; padding: 6px 0 6px 46px; border-bottom: 1px dashed var(--ps-line); }
+.psol-theme .play-notes ol > li:last-child { border-bottom: 0; }
+.psol-theme .play-notes ol > li::before { content: counter(psstep); position: absolute; left: 0; top: 6px; width: 32px; height: 32px; display: grid; place-items: center; font: 700 16px var(--ps-display); color: var(--ps-night); background: var(--ps-gold); border: 2px solid var(--ps-ink); box-shadow: 2px 2px 0 var(--ps-ink); }
+.psol-theme .play-notes .sources ol { list-style: decimal; padding-left: 22px; counter-reset: none; }
+.psol-theme .play-notes .sources ol > li { padding: 0; border: 0; counter-increment: none; }
+.psol-theme .play-notes .sources ol > li::before { display: none; }
+.psol-theme .play-jump { display: flex; gap: 8px 10px; flex-wrap: wrap; padding: 14px 0; font-size: 13px; border-block: 2px solid var(--ps-ink); }
+.psol-theme .play-jump a { background: var(--ps-parch-lo); border: 1px solid var(--ps-line); color: var(--ps-ink); text-decoration: none; padding: 5px 13px; font-weight: 700; }
+.psol-theme .play-jump a:hover { background: var(--ps-gold); border-color: var(--ps-ink); }
+.psol-theme .table-wrap { overflow: auto; max-width: 100%; margin: 20px 0; border: 2px solid var(--ps-ink); background: var(--ps-parch-hi); contain: inline-size layout paint; }
+.psol-theme table { border-collapse: collapse; width: 100%; min-width: 540px; font-size: 14.5px; line-height: 1.55; }
+.psol-theme th, .psol-theme td { padding: 11px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--ps-line); }
+.psol-theme th { background: var(--ps-night); color: var(--ps-menu); font: 700 13px var(--ps-display); letter-spacing: .03em; }
+.psol-theme tbody tr:nth-child(even) td { background: #f4ecd899; }
+.psol-theme tr:last-child td { border-bottom: 0; }
+.psol-theme .sources { margin-top: 34px; padding-top: 10px; border-top: 2px solid var(--ps-ink); font-size: 12px; color: var(--ps-dim); overflow-wrap: anywhere; }
+.psol-theme .sources h2 { font-size: 1.1rem; }
+.psol-theme .sources h2::before { display: none; }
+.psol-theme .sources li { margin-bottom: 10px; font-size: 12px; }
+.psol-theme .sources .back { display: inline-block; margin-top: 8px; }
+.psol-theme figure.game-image { max-width: 760px; margin: 22px auto; padding: 8px; background: var(--ps-night); border: 2px solid var(--ps-ink); box-shadow: 4px 4px 0 var(--ps-ink); }
+.psol-theme figure.game-image img { display: block; width: 100%; max-height: min(70vh, 600px); object-fit: contain; }
+
+/* ---------- 推荐模块（共享，只改色） ---------- */
+.psol-theme .play-recommendations { max-width: 1120px; margin: 10px auto 48px; padding: 0 24px; }
+.psol-theme .play-rec-card { border: 2px solid var(--ps-ink) !important; border-radius: 0 !important; box-shadow: 4px 4px 0 var(--ps-ink); background: var(--ps-parch-hi); }
+
+/* ---------- 页脚（站级页脚，换成本主题配色） ---------- */
+.psol-theme .footer { background: var(--ps-night); color: #d9cfe6; padding: 32px 0; border-top: 4px solid var(--ps-ember); }
+.psol-theme .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.psol-theme .footer p { max-width: 54ch; font-size: .9rem; color: #c4b8d8; }
+.psol-theme .footer a { color: var(--ps-gold); }
+.psol-theme .footer a:hover { color: #fff; }
+.psol-theme .footer nav { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.psol-theme .footer :focus-visible { outline-color: var(--ps-gold); }
+
+/* ---------- 手机优先断点（00 §3） ---------- */
+@media (max-width: 900px) {
+  .psol-theme .desktop-nav { display: none; }
+  .psol-theme .mobile-nav { display: block; }
+  .psol-theme .play-recommendations { padding: 0 14px; }
+}
+@media (max-width: 600px) {
+  body.psol-theme { font-size: 16px; }
+  .psol-theme .wrap { width: calc(100% - 28px); }
+  .psol-theme .brand { font-size: 1.3rem; }
+  .psol-theme .brand small { display: none; }
+  .psol-theme .play-notes { padding: 0 14px 40px; }
+  .psol-theme .play-notes ol > li { padding-left: 42px; }
+  .psol-theme .footer-grid { display: grid; }
+}

@@ -1,0 +1,93 @@
+/* PokéSolaire 首页布局（SOP v3.22 hub.css，08 F9）：夜色首屏 → 状态条 → 任务卡 → 游玩窗口 → 速查 → 最新更新 → 正文 → FAQ。仅首页加载。 */
+.psol-hub .psol-hero { background: radial-gradient(ellipse at 78% 0%, #5a2d1c 0%, var(--ps-night) 62%); color: var(--ps-menu); border-bottom: 4px solid var(--ps-ember); }
+.psol-hub .psol-hero-in { display: grid; gap: 22px; padding: 30px 0 34px; align-items: center; }
+@media (min-width: 901px) { .psol-hub .psol-hero-in { grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: 44px; padding: 42px 0 46px; } }
+.psol-hub .psol-hero .eyebrow { color: var(--ps-gold); }
+.psol-hub .psol-hero h1 { color: #fff8ec; font-size: clamp(2.5rem, 6vw, 4.2rem); margin: .2em 0 .15em; text-shadow: 3px 3px 0 #000000aa; }
+.psol-hub .psol-sub { font: 700 1.05rem/1.4 var(--ps-display); color: var(--ps-gold); margin: 0 0 .9rem; letter-spacing: .04em; }
+.psol-hub .psol-deck { font-size: 1.08rem; line-height: 1.65; color: #efe5d0; margin: 0 0 1rem; max-width: 60ch; }
+.psol-hub .psol-deck a, .psol-hub .psol-hero .byline a { color: var(--ps-gold); }
+.psol-hub .psol-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0 0 1.1rem; padding: 0; }
+.psol-hub .psol-chips li { font: 700 12px/1 var(--ps-display); letter-spacing: .06em; text-transform: uppercase; padding: 7px 11px; background: #ffffff14; border: 1px solid #ffffff3d; color: var(--ps-menu); }
+.psol-hub .psol-cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 1rem; }
+.psol-hub .psol-btn { display: inline-flex; align-items: center; min-height: 48px; padding: 11px 26px; font: 700 17px/1.2 var(--ps-display); text-decoration: none; background: var(--ps-gold); color: var(--ps-night); clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.psol-hub .psol-btn:hover { background: #f4c866; color: var(--ps-night); }
+.psol-hub .psol-btn.ghost { background: transparent; color: var(--ps-menu); box-shadow: inset 0 0 0 2px var(--ps-menu); clip-path: none; }
+.psol-hub .psol-btn.ghost:hover { background: #ffffff1f; color: #fff; }
+.psol-hub .psol-hero .byline { font-size: 12.5px; line-height: 1.6; color: #cdbfe0; margin: 0; max-width: 62ch; }
+.psol-hub .psol-hero figure { margin: 0; border: 3px solid var(--ps-menu); box-shadow: 6px 6px 0 #000000aa; background: var(--ps-night-lo); }
+.psol-hub .psol-hero figure img { display: block; width: 100%; height: auto; }
+.psol-hub .psol-hero figcaption { padding: 7px 10px; font-size: 11.5px; line-height: 1.5; color: #cdbfe0; background: var(--ps-night-lo); }
+
+/* 状态条 */
+.psol-hub .psol-status { background: var(--ps-night-lo); color: var(--ps-menu); font-size: 13px; }
+.psol-hub .psol-status .wrap { display: flex; flex-wrap: wrap; gap: 6px 26px; padding: 11px 0; }
+.psol-hub .psol-status b { color: var(--ps-gold); font-weight: 700; margin-right: 4px; }
+.psol-hub .psol-status .warn b { color: #ff9a8c; }
+
+/* 分区 */
+.psol-hub .psol-section { padding: 36px 0 8px; }
+.psol-hub .psol-lede { margin: 0 0 18px; color: var(--ps-dim); }
+
+/* 任务卡 */
+.psol-hub .psol-tasks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.psol-hub .psol-task { position: relative; display: grid; grid-template-columns: 52px 1fr; gap: 4px 14px; align-items: start; height: 100%; padding: 16px 16px 16px 14px; text-decoration: none; color: var(--ps-ink); background: var(--ps-parch-hi); border: 2px solid var(--ps-ink); box-shadow: 4px 4px 0 var(--ps-ink); min-height: 96px; }
+.psol-hub .psol-task:hover { background: #fff3cf; transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ps-ink); color: var(--ps-ink); }
+.psol-hub .psol-task .ico { grid-row: 1 / span 2; width: 52px; height: 52px; display: grid; place-items: center; background: var(--ps-night); border: 2px solid var(--ps-ink); }
+.psol-hub .psol-task .ico svg { width: 28px; height: 28px; stroke: var(--ps-gold); fill: none; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }
+.psol-hub .psol-task strong { font: 700 1.08rem/1.25 var(--ps-display); align-self: end; }
+.psol-hub .psol-task .d { font-size: 14px; line-height: 1.5; color: var(--ps-dim); }
+
+/* 速查 */
+.psol-hub .psol-preview { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; }
+.psol-hub .psol-card { background: var(--ps-parch-hi); border: 2px solid var(--ps-ink); box-shadow: 4px 4px 0 var(--ps-ink); padding: 18px 20px; }
+.psol-hub .psol-card h3 { margin: 0 0 .7rem; }
+.psol-hub .psol-card p { margin: .5rem 0 0; font-size: 14.5px; line-height: 1.6; }
+.psol-hub .psol-keys { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; margin: 0; }
+.psol-hub .psol-keys div { border-bottom: 1px dashed var(--ps-line); padding-bottom: 6px; }
+.psol-hub .psol-keys dt { font: 700 12px/1.3 var(--ps-display); letter-spacing: .06em; text-transform: uppercase; color: var(--ps-ember-dk); }
+.psol-hub .psol-keys dd { margin: 2px 0 0; font-size: 14.5px; }
+.psol-hub .psol-ver { display: block; font: 700 2.4rem/1 var(--ps-display); color: var(--ps-ember-dk); margin: 0 0 .4rem; }
+
+/* 最新更新 */
+.psol-hub .psol-updates { list-style: none; margin: 0; padding: 0; border: 2px solid var(--ps-ink); background: var(--ps-parch-hi); }
+.psol-hub .psol-updates li { display: grid; grid-template-columns: 112px 1fr; gap: 14px; padding: 12px 18px; border-bottom: 1px dashed var(--ps-line); align-items: baseline; }
+.psol-hub .psol-updates li:last-child { border-bottom: 0; }
+.psol-hub .psol-updates time { font: 700 13px var(--ps-display); color: var(--ps-ember-dk); }
+.psol-hub .psol-updates span { display: block; font-size: 14.5px; line-height: 1.55; }
+.psol-hub .psol-updates a { font-weight: 700; }
+
+/* 正文段与 FAQ */
+.psol-hub .psol-guide-title { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 28px auto 18px; max-width: 850px; padding: 0 0 8px; border-bottom: 4px solid var(--ps-ink); }
+.psol-hub .psol-faq { max-width: 850px; margin: 8px auto 40px; }
+.psol-hub .psol-faq details { background: var(--ps-parch-hi); border: 2px solid var(--ps-ink); margin: 0 0 10px; }
+.psol-hub .psol-faq summary { cursor: pointer; padding: 13px 18px; min-height: 48px; font: 700 1.02rem/1.35 var(--ps-display); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.psol-hub .psol-faq summary::-webkit-details-marker { display: none; }
+.psol-hub .psol-faq summary::after { content: "+"; font-size: 1.4rem; color: var(--ps-ember-dk); }
+.psol-hub .psol-faq details[open] summary::after { content: "−"; }
+.psol-hub .psol-faq details[open] summary { background: var(--ps-gold); }
+.psol-hub .psol-faq details p { margin: 0; padding: 12px 18px 4px; font-size: 15.5px; line-height: 1.7; }
+.psol-hub .psol-faq details a.more { display: inline-block; padding: 4px 18px 14px; font-weight: 700; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .psol-hub .psol-tasks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .psol-hub .psol-preview { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .psol-hub .psol-hero figure, .psol-hub .psol-chips { display: none; }
+  .psol-hub .psol-hero .byline { font-size: 12px; }
+  .psol-hub .psol-hero-in { padding: 20px 0 22px; gap: 16px; }
+  .psol-hub .psol-hero h1 { font-size: 2.4rem; }
+  .psol-hub .psol-deck { font-size: 1rem; }
+  .psol-hub .psol-status .wrap { gap: 4px 16px; font-size: 12.5px; }
+  .psol-hub .psol-section { padding-top: 26px; }
+  .psol-hub .psol-tasks { gap: 10px; }
+  .psol-hub .psol-task { grid-template-columns: 1fr; padding: 12px; min-height: 0; }
+  .psol-hub .psol-task .ico { grid-row: auto; width: 40px; height: 40px; }
+  .psol-hub .psol-task .ico svg { width: 22px; height: 22px; }
+  .psol-hub .psol-task strong { font-size: .98rem; }
+  .psol-hub .psol-task .d { font-size: 13px; }
+  .psol-hub .psol-keys { grid-template-columns: 1fr; }
+  .psol-hub .psol-updates li { grid-template-columns: 1fr; gap: 2px; padding: 10px 14px; }
+  .psol-hub .psol-guide-title, .psol-hub .psol-faq { margin-inline: 14px; }
+}
