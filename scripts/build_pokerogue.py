@@ -1,7 +1,8 @@
-"""PokeRogue original-host play hub and researched decision guides."""
+"""PokeRogue original-host play hub and researched decision guides. 专区主题/页面清单/页脚见 SOP v3.26（sheji，2026-11-22）。"""
 from pathlib import Path
 from html import escape
 import json
+import subprocess,sys
 from site_analytics import write_html
 ROOT=Path(__file__).resolve().parents[1]
 BASE='/pokerogue/'
@@ -9,11 +10,31 @@ SOURCE='https://github.com/pagefaultgames/pokerogue/blob/v1.12.2.4/src/data/myst
 def link(url,label):return f'<a href="{url}" target="_blank" rel="noopener noreferrer">{label} ↗<span class="sr-only"> (opens in a new tab)</span></a>'
 def section(id,title,body):return f'<section id="{id}"><h2>{title}</h2>{body}</section>'
 def table(head,rows):return '<div class="table-wrap" tabindex="0" role="region" aria-label="Decision comparison"><table><thead><tr>'+''.join('<th>'+x+'</th>' for x in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+x+'</td>' for x in row)+'</tr>' for row in rows)+'</tbody></table></div>'
-def render(slug,title,desc,h1,lead,parts,img,alt,caption):
- nav='<a href="/pokerogue/">Play &amp; guides</a>'+''.join(f'<a href="{BASE}{s}/"'+(' aria-current="page"' if s==slug else '')+f'>{t}</a>' for s,t in [('mobile','Mobile & versions'),('dark-deal','Dark Deal'),('trash-to-treasure','Trash to Treasure')])+'<a href="/#more-games">More games</a>'
- toc=''.join(f'<a href="#{i}">{t}</a>' for i,t,b in parts)
- body=''.join(section(*p) for p in parts)
- return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="https://megabonk.org{BASE}{slug}/"><meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(desc,quote=True)}"><meta property="og:type" content="article"><meta property="og:url" content="https://megabonk.org{BASE}{slug}/"><meta property="og:image" content="https://megabonk.org/assets/pokerogue/{img}"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/pokerogue/site.css?v=20261107-cover"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script></head><body class="guide-layout"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="/"><span>Megabonk.org<small>Independent games &amp; guides</small></span></a><nav class="desktop-nav" aria-label="PokeRogue guides">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="PokeRogue mobile navigation">{nav}</nav></details></div></header><main class="wrap" id="main"><header class="pr-intro"><p class="eyebrow">POKÉROGUE · INDEPENDENT GUIDE</p><h1>{h1}</h1><p class="pr-lead">{lead}</p><p>By Megabonk.org · Checked 6 November 2026</p></header><article class="pr-article"><nav class="pr-toc" aria-label="On this page">{toc}</nav><figure class="pr-image"><img src="/assets/pokerogue/{img}" alt="{alt}" width="{1280 if slug=='mobile' else 419 if slug=='trash-to-treasure' else 44}" height="{720 if slug=='mobile' else 261 if slug=='trash-to-treasure' else 74}" loading="eager"><figcaption>{caption}</figcaption></figure>{body}<section><h2>More PokeRogue decisions</h2><p>{' · '.join(f'<a href="{BASE}{s}/">{t}</a>' for s,t in [('mobile','Mobile versions and original entry'),('dark-deal','Accept or refuse Dark Deal'),('trash-to-treasure','Dig or investigate the garbage')] if s!=slug)}</p></section></article></main><footer class="footer"><div class="wrap"><p>Independent editorial. Pokémon and game artwork belong to their respective owners; this site does not operate PokéRogue.</p><nav aria-label="Site information"><a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy">Privacy</a> · <a href="/#more-games">More games</a></nav></div></footer></body></html>'''
+HEAD_CSS = '<link rel="icon" href="/assets/pokerogue/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/pokerogue/theme.css?v=20261122b">'
+AD = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
+SHELL_TOP = '<a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="/pokerogue/"><img src="/assets/pokerogue/logo.svg" width="36" height="36" alt="">PokeRogue</a><nav class="desktop-nav" aria-label="PokeRogue tasks"></nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="PokeRogue tasks"></nav></details></div></header>'
+
+
+def shell(route, page, body_cls, extra_css, main, og_type='article'):
+    """分页/首页/信任页共用外壳；导航与页脚由 register_page.py 最后填充。"""
+    t = escape(page['title']); d = escape(page['description'], quote=True)
+    img = page.get('image', 'original-menu.png')
+    return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{t}</title>'
+            f'<meta name="description" content="{d}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:title" content="{t}">'
+            f'<meta property="og:description" content="{d}"><meta property="og:type" content="{og_type}"><meta property="og:url" content="https://megabonk.org{route}">'
+            f'<meta property="og:image" content="https://megabonk.org/assets/pokerogue/{img}">{HEAD_CSS}{extra_css}</head>'
+            f'<body class="guide-layout pr-theme {body_cls}">{SHELL_TOP}{main}<footer class="footer"></footer></body></html>')
+
+
+def render(slug, title, desc, h1, lead, parts, img, alt, caption):
+    toc = ''.join(f'<a href="#{i}">{t}</a>' for i, t, b in parts)
+    body = ''.join(section(*p) for p in parts)
+    w, h = (1280, 720) if slug == 'mobile' else (419, 261) if slug == 'trash-to-treasure' else (44, 74)
+    fig = (f'<figure class="game-image"><img src="/assets/pokerogue/{img}" alt="{alt}" width="{w}" height="{h}" loading="eager"><figcaption>{caption}</figcaption></figure>')
+    main = (f'<main class="wrap" id="main"><header class="article-head" id="guide"><p class="eyebrow">PokéRogue · Independent guide</p><h1>{h1}</h1>'
+            f'<p class="answer">{lead}</p><p class="byline">Megabonk.org editors · Checked 6 November 2026 · Source-based guidance, no full run tested</p></header>'
+            f'<div class="article-layout"><nav class="toc" aria-label="On this page">{toc}</nav><article class="prose">{fig}{body}<p><a href="#guide">Back to top</a></p></article></div></main>')
+    return shell(BASE + slug + '/', {'title': title, 'description': desc, 'image': img}, 'pr-guide', '', main)
 
 def dark():
  parts=[('choose','Choose by what this run can afford to lose',table(['Your situation','Recommendation','Reason'],[
@@ -48,14 +69,122 @@ def mobile():
  ('sources','Sources and checks','<p>Checked 6 November 2026: original client reached its account screen in desktop Chrome. Sources: '+link('https://www.reddit.com/r/pokerogue/comments/1c7sqaf/guide_to_the_best_mobile_experience_for_pok%C3%A9rogue/','community mobile guide')+' for home-screen steps; '+link('https://wiki.pokerogue.net/community:tools','Wiki community tools')+' for wrapper identity and transfer direction; '+link('https://github.com/Admiral-Billy/Pokerogue-App','wrapper author’s desktop README')+' and '+link('https://github.com/Admiral-Billy/PokeRogue-App-Android','Android repository')+' for project boundaries. No app package was installed and no physical phone or account synchronization was tested.</p>')]
  return render('mobile','PokeRogue Mobile: Browser, Home Screen or App?','Choose the original PokeRogue mobile browser game, a home-screen shortcut or a community app. Check account and offline-save boundaries before switching.','PokeRogue on mobile: choose the right version','<strong>Start at pokerogue.net in your browser.</strong> A home-screen shortcut opens the web game; Admiral Billy’s offline-capable app is a separate community wrapper. Choose the route before following installation or save-transfer advice.',parts,'original-menu.png','PokeRogue original client account screen in Chinese, with username, password and external sign-in choices','Original-site account screen captured 6 November 2026; interface inspection only, not a mobile gameplay test.')
 
-def hub():
- nav='<a href="/pokerogue/" aria-current="page">Play</a><a href="#guides">Guides</a><a href="/pokerogue/mobile/">Mobile &amp; versions</a><a href="/#more-games">More games</a>'
- return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PokeRogue: Play Online &amp; Encounter Guides</title><meta name="description" content="Load the original PokeRogue browser game, sign in to start a run, and find guides for mobile versions, Dark Deal and Trash to Treasure encounter choices."><link rel="canonical" href="https://megabonk.org/pokerogue/"><meta property="og:title" content="PokeRogue: Play Online &amp; Encounter Guides"><meta property="og:type" content="website"><meta property="og:url" content="https://megabonk.org/pokerogue/"><meta property="og:image" content="https://megabonk.org/assets/pokerogue/original-menu.png"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/poke-survivor/play.css"><link rel="stylesheet" href="/assets/pokerogue/site.css?v=20261107-cover"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script></head><body class="guide-layout ps-play-page"><a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap"><a class="brand" href="/"><span>Megabonk.org<small>Independent games &amp; guides</small></span></a><nav class="desktop-nav" aria-label="PokeRogue">{nav}</nav><details class="mobile-nav"><summary>Menu</summary><nav class="mobile-links" aria-label="PokeRogue mobile navigation">{nav}</nav></details></div></header><main class="wrap" id="main"><header class="pr-intro" data-play-background><p class="eyebrow">TURN-BASED POKÉMON ROGUELITE</p><h1>PokeRogue</h1><p class="pr-lead">Build a team, battle through a run, and weigh the choices you cannot take back. Open the original browser game in its own tab; a game account is required.</p></header>
-<section class="pr-original-entry" id="play"><figure><img src="/assets/pokerogue/original-menu.png" width="1280" height="720" alt="Original PokeRogue account screen"></figure><div><h2>Play on pokerogue.net</h2><p>Open the original game in its own tab to sign in, register and continue your run.</p><p><a class="play-button" href="https://pokerogue.net/" target="_blank" rel="noopener noreferrer">Play on pokerogue.net ↗<span class="sr-only"> (opens in a new tab)</span></a></p><p class="pr-entry-note">Sign-in, registration and saves are managed by the original game. Keep this guide open in a separate tab.</p></div></section>
-<article class="play-notes" data-play-background><section id="start"><h2>Start with the original game</h2><ol><li>Choose Play on pokerogue.net above. The original game opens in a new tab.</li><li>Use your PokeRogue account or choose the original game’s registration option. This is an account-based game, not a guest-play demo.</li><li>Follow the original game’s menus to begin or continue your run. Keep this guide tab open to check encounter choices.</li></ol><p>On a small screen, the original’s touch controls and a larger landscape window can help. For browser shortcuts and community offline-app differences, use the mobile guide below. Do not assume a community app shares the web game’s account or saves.</p></section><section id="guides"><h2>Choose your next decision</h2><div class="pr-guide-cards"><a href="/pokerogue/mobile/"><h3>Mobile &amp; versions</h3><p>Original browser game, home-screen shortcut or community offline app?</p></a><a href="/pokerogue/dark-deal/"><h3>Dark Deal</h3><p>Weigh the random party-member loss before accepting the scientist’s offer.</p></a><a href="/pokerogue/trash-to-treasure/"><h3>Trash to Treasure</h3><p>Compare a lasting shop-price penalty with the risk of a boss battle.</p></a></div></section><section id="about-game"><h2>About this game entry</h2><p>PokéRogue is a fan-made, turn-based Pokémon roguelite by the Pagefault Games project. This independent page links to the original {link('https://pokerogue.net/','pokerogue.net')} game; Megabonk.org does not operate the game, accounts or saves. It is a different game from PokeBonk and other similarly named Pokémon projects.</p><p>Checked 6 November 2026 against the original client and {link('https://github.com/pagefaultgames/pokerogue','project repository')}. The original game opens in a separate tab and may change independently of these guides. Pokémon names and artwork belong to their respective owners.</p></section></article></main><footer class="footer"><div class="wrap"><p>Independent games &amp; guides · Megabonk.org</p><nav aria-label="Site information"><a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy">Privacy</a> · <a href="/#more-games">More games</a></nav></div></footer></body></html>'''
+
+def manifest():
+    m = json.loads((ROOT / 'data/pokerogue-pages.json').read_text(encoding='utf8'))
+    m['by'] = {p['slug']: p for p in m['pages']}
+    return m
+
+
+HOME = {
+    'title': 'PokeRogue: Play Online & Encounter Guides',
+    'description': 'Load the original PokeRogue browser game, sign in to start a run, and find guides for mobile versions, Dark Deal and Trash to Treasure encounter choices.',
+    'image': 'original-menu.png',
+}
+CHEAT = [
+    ('Dark Deal appears', 'From wave 30 in the Mystery Encounter window, with at least two party members. <a href="/pokerogue/dark-deal/#availability">Eligibility details →</a>'),
+    ('Dark Deal costs', 'A random party member is removed. You get five Rogue Balls and a catchable boss. <a href="/pokerogue/dark-deal/#choose">Accept or refuse →</a>'),
+    ('Trash to Treasure appears', 'From wave 100 with at least three party members, at most once per run. <a href="/pokerogue/trash-to-treasure/#recognize">Limits →</a>'),
+    ('Dig for Valuables', 'Leftovers and Shell Bell, but shop items and rerolls cost 2.5× for the rest of the run. <a href="/pokerogue/trash-to-treasure/#budget">Price penalty →</a>'),
+    ('Investigate Further', 'A Garbodor boss fight that opens with Toxic and Stockpile, then a reward choice. <a href="/pokerogue/trash-to-treasure/#battle">Prepare →</a>'),
+]
+
+
+def homepage():
+    from hub_components import Hub
+    m = manifest()
+    h = Hub(m, BASE, 'pr', '/assets/pokerogue', thumb_dir='')
+    bg = ''
+    hero = h.hero(
+        kicker='Turn-based Pokémon roguelite · Independent guides', title='PokeRogue ', sub='play online &amp; encounter guides',
+        deck='Build a team, battle through a run, and weigh the choices you cannot take back. Open the original browser game in its own tab; a game account is required.',
+        status=['Browser game · Account required', 'Release v1.12.2.4 checked', 'Checked 6 Nov 2026', 'Unofficial fan guide'],
+        actions=[('Play on pokerogue.net ↓', '#play', False), ('Pick a guide', '#guides', True)], bg_attr=bg)
+    cards = h.cards(heading='Pick the job you have right now', bg_attr=bg)
+    cheat = h.cheat(m['preview']['title'], m['preview']['intro'], CHEAT, bg_attr=bg)
+    play = (f'<section class="pr-band pr-start" id="play"><div class="pr-start-grid"><div><h2>Play on pokerogue.net</h2>'
+            f'<p>Open the original game in its own tab to sign in, register and continue your run.</p>'
+            f'<p><a class="button" href="https://pokerogue.net/" target="_blank" rel="noopener noreferrer">Play on pokerogue.net ↗<span class="sr-only"> (opens in a new tab)</span></a></p>'
+            f'<p class="pr-entry-note">Sign-in, registration and saves are managed by the original game. Keep this guide open in a separate tab.</p></div>'
+            f'<figure class="game-image"><img src="/assets/pokerogue/original-menu.png" width="1280" height="720" alt="Original PokeRogue account screen" loading="lazy"></figure></div></section>')
+    start = ('<section class="pr-band" id="start"><h2>Start with the original game</h2><ol><li>Choose Play on pokerogue.net above. The original game opens in a new tab.</li>'
+             '<li>Use your PokeRogue account or choose the original game’s registration option. This is an account-based game, not a guest-play demo.</li>'
+             '<li>Follow the original game’s menus to begin or continue your run. Keep this guide tab open to check encounter choices.</li></ol>'
+             '<p>On a small screen, the original’s touch controls and a larger landscape window can help. For browser shortcuts and community offline-app differences, use the '
+             '<a href="/pokerogue/mobile/">mobile guide</a>. Do not assume a community app shares the web game’s account or saves.</p></section>')
+    about = ('<section class="pr-band" id="about-game"><h2>About this game entry</h2><p>PokéRogue is a fan-made, turn-based Pokémon roguelite by the Pagefault Games project. '
+             'This independent page links to the original ' + link('https://pokerogue.net/', 'pokerogue.net') + ' game; Megabonk.org does not operate the game, accounts or saves. '
+             'It is a different game from PokeBonk and other similarly named Pokémon projects.</p><p>Checked 6 November 2026 against the original client and the '
+             + link('https://github.com/pagefaultgames/pokerogue', 'project repository') + '. The original game opens in a separate tab and may change independently of these guides. '
+             'Pokémon names and artwork belong to their respective owners.</p></section>')
+    body = hero + cards + cheat + play + start + h.updates(bg_attr=bg) + h.groups(bg_attr=bg) + about + h.faq(bg_attr=bg)
+    return f'<main class="wrap" id="main">{body}</main>', h.faq_questions()
+
+
+def ads(html):
+    return html.replace('</head>', AD + '</head>', 1)
+
 
 def build():
- write_html(ROOT/'pokerogue/index.html',hub(),encoding='utf8')
- for slug,fn in [('mobile',mobile),('dark-deal',dark),('trash-to-treasure',trash)]:
-  p=ROOT/'pokerogue'/slug/'index.html';p.parent.mkdir(parents=True,exist_ok=True);write_html(p,fn(),encoding='utf8')
-if __name__=='__main__':build()
+    main, questions = homepage()
+    html = ads(shell(BASE, HOME, 'pr-hub', '<link rel="stylesheet" href="/assets/pokerogue/hub.css?v=20261122">', main, 'website'))
+    write_html(ROOT / 'pokerogue/index.html', html, encoding='utf8')
+    for slug, fn in [('mobile', mobile), ('dark-deal', dark), ('trash-to-treasure', trash)]:
+        p = ROOT / 'pokerogue' / slug / 'index.html'
+        p.parent.mkdir(parents=True, exist_ok=True)
+        write_html(p, ads(fn()), encoding='utf8')
+    from pokerogue_trust import build as build_trust
+    build_trust(shell)
+    privacy()
+    # 导航、面包屑、相关任务、页脚与登记来自 data/pokerogue-pages.json（02 §2.6、§5.2）
+    subprocess.run([sys.executable, str(Path(__file__).resolve().parent / 'register_page.py'), str(ROOT), 'pokerogue'], check=True, stdout=subprocess.DEVNULL)
+    register_seo(questions)
+    from game_seo import edit as seo_edit  # register_page 追加头部标记后，保持 SEO 编辑器幂等
+    for fp in (ROOT / 'pokerogue').rglob('index.html'):
+        t0 = fp.read_text(encoding='utf8')
+        n0 = seo_edit(fp, t0)
+        if n0 != t0:
+            fp.write_text(n0, encoding='utf8')
+    print('Built PokeRogue home, 3 guides and About/Contact')
+
+
+def register_seo(questions):
+    """首页 FAQ 登记到 data/game-seo.json（可见问答与 FAQPage 同源），信任页补进 pages_list.txt（只追加）。"""
+    f = ROOT / 'data/game-seo.json'
+    d = json.loads(f.read_text(encoding='utf8'))
+    d['pages']['pokerogue/index.html'] = {
+        'questions': list(questions),
+        'faq_review': 'Hub FAQ from data/pokerogue-pages.json (v3.26 F9); visible answers and FAQPage share one source (2026-11-22).',
+        'language_review': 'No equivalent language page identified; do not map unrelated topics.',
+        'reviewed_candidates': list(questions),
+    }
+    new = json.dumps(d, ensure_ascii=False, indent=2) + '\n'
+    if f.read_text(encoding='utf8') != new:
+        f.write_text(new, encoding='utf8')
+    pl = ROOT / 'pages_list.txt'
+    text = open(pl, encoding='utf8', newline='').read()
+    add = ''.join(f'https://megabonk.org{BASE}{s}/\r\n' for s in ('about', 'contact') if f'{BASE}{s}/' not in text)
+    if add:
+        with open(pl, 'a', encoding='utf8', newline='') as out:
+            out.write(add)
+
+
+def privacy():
+    """站级隐私页为本专区保留一节（02 §5.1），已有则不重复。"""
+    f = ROOT / 'privacy-policy.html'
+    s = open(f, encoding='utf8', newline='').read()
+    if 'id="pokerogue"' in s:
+        return
+    section_html = ('<h2 id="pokerogue">PokeRogue guides</h2><p>Reviewed 22 November 2026. These pages host no game client, account or save and embed no third-party game window. '
+                    'The Play button and the source links open pokerogue.net, GitHub or the community wiki in a new tab only when you click them, and that site then applies its own privacy practices; '
+                    'sign-in and saves are handled entirely by the original game. Ordinary guide pages inherit this site’s existing AdSense loader and site-wide Umami analytics described here; '
+                    'About and Contact carry no advertising. Cloudflare hosting and possible performance measurement are described above.</p>')
+    marker = '<h2 id="midgard-survivors">'
+    if marker not in s:
+        raise SystemExit('privacy-policy.html: marker section not found')
+    with open(f, 'w', encoding='utf8', newline='') as out:  # 保持原换行，不经 write_html 重排
+        out.write(s.replace(marker, section_html + marker, 1))
+
+
+if __name__ == '__main__':
+    build()
