@@ -1,25 +1,121 @@
-.ror-hub { --hub-blue: #19516d; }
-.ror-hub .hub-hero { display: grid; grid-template-columns: .95fr 1.05fr; gap: 38px; align-items: center; padding: 64px 0 48px; }
-.ror-hub .hub-hero h1 { font-size: clamp(2.8rem, 5vw, 4.6rem); line-height: 1.05; margin: 16px 0 24px; }
-.ror-hub .hub-intro { font-size: 1.15rem; line-height: 1.7; max-width: 42ch; }
-.ror-hub .hub-hero img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 14px 35px #17334a18; }
-.ror-hub .hub-button { display: inline-block; padding: 13px 20px; margin-top: 12px; background: var(--hub-blue); color: white; border-radius: 7px; text-decoration: none; font-weight: 800; }
-.ror-hub .hub-section { padding: 38px 0; border-top: 1px solid var(--line); scroll-margin-top: 110px; }
-.ror-hub h2 { margin: 8px 0 26px; }
-.ror-hub .hub-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.ror-hub .hub-task { display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: #fffef8; color: var(--ink); text-decoration: none; }
-.ror-hub .hub-task:hover { border-color: var(--hub-blue); }
-.ror-hub .hub-number { font-size: .7rem; letter-spacing: .08em; color: var(--hub-blue); font-weight: 800; }
-.ror-hub .hub-task h3 { margin: 20px 0 12px; font-size: 1.4rem; }
-.ror-hub .hub-task p { font-size: .95rem; line-height: 1.7; }
-.ror-hub .hub-action { margin-top: auto; padding-top: 18px; font-weight: 800; color: var(--hub-blue); }
-.ror-hub .hub-choose { display: grid; grid-template-columns: 1fr 1.3fr; gap: 50px; }
-.ror-hub .hub-choose h3 { margin: 0 0 8px; }
-.ror-hub .hub-choose p { margin-bottom: 28px; }
-.ror-hub .hub-notes { padding: 24px 0 48px; max-width: 78ch; font-size: .85rem; color: var(--muted); }
-.ror-hub .hub-notes h2 { font-size: 1.1rem; margin-bottom: 12px; }
-@media (max-width: 900px) {
-  .ror-hub .hub-hero { grid-template-columns: 1fr; gap: 26px; padding-top: 36px; }
-  .ror-hub .hub-grid { grid-template-columns: 1fr; }
-  .ror-hub .hub-choose { grid-template-columns: 1fr; gap: 10px; }
+.ror-hub .ror-hero { position: relative; margin: 18px 0 0; padding: 26px 22px 24px; color: var(--hub-ink-on-dark); background: var(--hub-night); border: 4px solid var(--hub-frame); box-shadow: 0 0 0 2px var(--hub-accent-dim), 0 6px 0 #0006; overflow: hidden; }
+.ror-hub .ror-hero::before { content: ""; position: absolute; inset: 0; background: var(--hub-hero-bg) 70% 60% / cover; opacity: .55; }
+.ror-hub .ror-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #0a151cee 35%, #0a151c88); }
+.ror-hub .ror-hero > * { position: relative; z-index: 1; }
+.ror-hub .ror-kicker { margin: 0; font: 700 11px/1.6 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--hub-accent); }
+.ror-hub .ror-hero h1 { margin: .15em 0 .2em; font-size: clamp(2rem, 7vw, 4rem); line-height: 1.05; color: var(--hub-title); text-shadow: 0 2px 0 #000, 0 0 30px #2a7bd188; }
+.ror-hub .ror-h1-sub { display: block; font-size: .46em; letter-spacing: .14em; text-transform: uppercase; color: var(--hub-ink-on-dark); text-shadow: 0 2px 0 #000; margin-top: .35em; }
+.ror-hub .ror-deck { margin: 0 0 12px; max-width: 46ch; font-size: 1.1rem; line-height: 1.55; color: #d6e7f3; }
+.ror-hub .ror-status { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+.ror-hub .ror-status li { padding: 2px 11px; border: 1px solid var(--hub-accent-dim); background: #0a151ccc; color: var(--hub-ink-on-dark); font: 700 12px/1.7 var(--body); letter-spacing: .04em; }
+.ror-hub .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.ror-hub .ror-hero a:not(.button) { color: var(--hub-title); }
+
+.ror-hub .ror-tasks { margin: 28px 0 8px; }
+.ror-hub .ror-tasks h2 { margin: 0 0 14px; }
+.ror-hub .ror-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.ror-hub .ror-card { display: flex; flex-direction: column; height: 100%; min-width: 0; border: 3px solid var(--hub-frame); background: var(--hub-dark); color: var(--hub-ink-on-dark); text-decoration: none; overflow: hidden; box-shadow: 0 3px 0 #0005; transition: border-color .15s; }
+.ror-hub .ror-card:hover { border-color: var(--hub-accent-dim); color: #fffbe0; }
+.ror-hub .ror-card img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 2px solid var(--hub-accent-dim); }
+.ror-hub .ror-card-body { display: flex; flex-direction: column; gap: 3px; padding: 11px 13px 14px; flex: 1; }
+.ror-hub .ror-card strong { font: 700 15px/1.3 var(--display); letter-spacing: .02em; color: var(--hub-title); }
+.ror-hub .ror-card-text { font-size: 13px; line-height: 1.5; color: #bfd1de; }
+
+.ror-hub .ror-cheat { max-width: 1020px; margin: 8px auto 34px; padding: 18px 20px 12px; background: var(--hub-card); border: 2px solid var(--hub-accent-dim); outline: 1px solid var(--hub-wood-hi); outline-offset: -7px; }
+.ror-hub .ror-cheat h2 { margin: 0 0 .3rem; }
+.ror-hub .ror-cheat > p { margin: 0 0 12px; font-size: 14px; color: var(--hub-soft); }
+.ror-hub .ror-cheat dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 26px; margin: 0 0 8px; }
+.ror-hub .ror-cheat div { padding: 8px 0 8px 12px; border-left: 4px solid var(--hub-hot); }
+.ror-hub .ror-cheat dt { font: 700 12px/1.5 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--hub-hot); }
+.ror-hub .ror-cheat dd { margin: 2px 0 0; font-size: 15px; line-height: 1.5; }
+.ror-hub .ror-cheat kbd { padding: 1px 6px; border: 1px solid var(--hub-frame); border-radius: 3px; background: var(--hub-dark); color: var(--hub-title); font: 700 12px var(--body); white-space: nowrap; }
+
+.ror-hub .ror-band { max-width: 850px; margin: 0 auto; padding: 22px 0 6px; scroll-margin-top: 16px; }
+.ror-hub .ror-band > h2 { margin-top: .2rem; }
+.ror-hub .ror-updates { margin: 0 0 12px; padding: 0; list-style: none; border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.ror-hub .ror-updates li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 4px 16px; align-items: baseline; padding: 11px 16px; border-bottom: 1px solid var(--hub-edge); }
+.ror-hub .ror-updates li:last-child { border-bottom: 0; }
+.ror-hub .ror-updates time { font: 700 12px/1.6 var(--body); letter-spacing: .06em; color: var(--hub-hot); }
+.ror-hub .ror-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.ror-hub .ror-group { padding: 14px 16px; border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.ror-hub .ror-group h3 { margin: 0 0 .2rem; color: var(--hub-hot); }
+.ror-hub .ror-group > p { margin: 0 0 .5rem; font-size: 14px; color: var(--hub-soft); }
+.ror-hub .ror-group ul { margin: 0; padding: 0; list-style: none; }
+.ror-hub .ror-group li a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; padding: 8px 0; border-top: 1px solid var(--hub-edge); font-weight: 700; text-decoration: none; }
+.ror-hub .ror-group li a span { font-weight: 400; font-size: 13px; color: var(--hub-soft); }
+.ror-hub .ror-faq { display: grid; gap: 10px; }
+.ror-hub .ror-faq details { border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.ror-hub .ror-faq summary { cursor: pointer; list-style: none; min-height: 48px; padding: 12px 44px 12px 16px; position: relative; font: 700 15.5px/1.45 var(--display); color: var(--hub-dark); }
+.ror-hub .ror-faq summary::-webkit-details-marker { display: none; }
+.ror-hub .ror-faq summary::after { content: "+"; position: absolute; right: 16px; top: 9px; font: 700 22px/1.4 var(--body); color: var(--hub-hot); }
+.ror-hub .ror-faq details[open] summary { border-bottom: 1px solid var(--hub-edge); }
+.ror-hub .ror-faq p { margin: 0; padding: 12px 16px 2px; }
+.ror-hub .ror-faq-more { display: inline-block; padding: 6px 16px 14px; font-size: 14px; font-weight: 700; }
+
+@media (max-width: 1050px) { .ror-hub .ror-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .ror-hub .ror-hero::after { background: #0a151ccc; } }
+@media (max-width: 600px) {
+  .ror-hub .ror-hero { margin-top: 12px; padding: 18px 16px 18px; border-width: 3px; }
+  .ror-hub .ror-kicker { font-size: 10px; letter-spacing: .14em; }
+  .ror-hub .ror-deck { font-size: 1rem; margin-bottom: 10px; }
+  .ror-hub .ror-status { gap: 6px; margin-bottom: 12px; }
+  .ror-hub .ror-status li { font-size: 11px; padding: 1px 8px; }
+  .ror-hub .hero-actions { gap: 8px; }
+  .ror-hub .hero-actions .button { flex: 1 1 100%; }
+  .ror-hub .ror-tasks { margin-top: 20px; }
+  .ror-hub .ror-cards { gap: 10px; }
+  .ror-hub .ror-card { border-width: 2px; }
+  .ror-hub .ror-card-body { padding: 8px 10px 11px; }
+  .ror-hub .ror-card strong { font-size: 13px; }
+  .ror-hub .ror-card-text { font-size: 12px; line-height: 1.45; }
+  .ror-hub .ror-cheat { padding: 14px 14px 8px; }
+  .ror-hub .ror-cheat dl { grid-template-columns: 1fr; gap: 4px; }
+  .ror-hub .ror-groups { grid-template-columns: 1fr; }
+  .ror-hub .ror-updates li { grid-template-columns: 1fr; padding: 10px 14px; }
+}
+
+.ror-hub .ror-hero{border:1px solid var(--gold);box-shadow:inset 0 0 0 4px var(--stone),inset 0 0 0 5px var(--rim),0 8px 0 #03080c;padding:48px 44px 40px;margin-top:22px}
+.ror-hub .ror-hero::before{background-position:62% 38%;opacity:.5}
+.ror-hub .ror-hero::after{background:linear-gradient(90deg,#0a151cf2 38%,#0a151c8a)}
+.ror-hub .ror-hero h1{max-width:18ch;font-size:clamp(2rem,6vw,3.6rem);text-shadow:0 2px 0 #000,0 0 28px #2a7bd199}
+.ror-hub .ror-h1-sub{max-width:26ch;font:700 .34em/1.5 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--hub-accent)}
+.ror-hub .ror-deck{max-width:48ch}
+.ror-hub .ror-card{border-width:1px;border-radius:4px;box-shadow:inset 0 0 0 3px var(--stone);transition:border-color .15s,transform .15s}
+.ror-hub .ror-card:hover{transform:translateY(-2px)}
+.ror-hub .ror-card img{border-bottom:1px solid var(--hub-accent-dim)}
+.ror-hub .ror-card-text{color:#bfd1de}
+.ror-hub .ror-tasks>h2,.ror-hub .ror-band>h2,.ror-hub .ror-cheat>h2{font-size:clamp(1.5rem,3vw,2.1rem)}
+.ror-hub .ror-tasks>h2::before,.ror-hub .ror-band>h2::before,.ror-hub .ror-cheat>h2::before{content:"";display:block;width:54px;height:3px;background:var(--blood-hi);margin-bottom:12px}
+.ror-hub .ror-cheat{max-width:none;border:1px solid var(--gold);border-radius:4px;outline-offset:-6px;outline-color:var(--rim);margin-top:30px}
+.ror-hub .ror-cheat dd{color:var(--text)}
+.ror-hub .ror-band{max-width:none;padding-top:30px}
+.ror-hub .ror-updates,.ror-hub .ror-group,.ror-hub .ror-faq details{border-width:1px;border-radius:4px}
+.ror-hub .ror-group{border-top:3px solid var(--gold)}
+.ror-hub .ror-group h3{color:var(--hub-title)}
+.ror-hub .ror-groups{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ror-hub .ror-faq summary{color:var(--hub-title)}
+.ror-hub .ror-faq p{color:#d2e1ec}
+.ror-hub .ror-start{margin-top:30px}
+.ror-hub .ror-start-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.ror-hub .ror-start-note{padding:18px 20px;border:1px solid var(--rim);border-left:4px solid var(--blood-hi);background:var(--panel);border-radius:4px}
+.ror-hub .ror-start-note h3{margin:0 0 6px}
+.ror-hub .ror-start-note p{margin:0 0 8px;font-size:15px}
+.ror-hub .ror-start-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
+.ror-hub .ror-start-grid h2{margin:.2rem 0 .5rem}
+@media(max-width:1050px){.ror-hub .ror-groups{grid-template-columns:1fr}.ror-hub .ror-start-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.ror-hub .ror-hero{padding:34px 26px 30px}.ror-hub .ror-hero::after{background:#0a151ccc}}
+@media(max-width:600px){.ror-hub .ror-hero{padding:20px 16px 20px;box-shadow:inset 0 0 0 3px var(--stone),inset 0 0 0 4px var(--rim)}.ror-hub .ror-h1-sub{font-size:.4em}.ror-hub .ror-card{box-shadow:none}}
+@media(prefers-reduced-motion:reduce){.ror-hub .ror-card{transition:none}}
+
+/* 首页布局由 hub_components.py --css ror 生成，下方为 Risk of Rain 2 覆盖；颜色变量定义在 theme.css */
+.ror-hub .ror-faq details[open] summary::after { content: "−"; }
+
+/* 手机首屏：压缩英雄区，任务卡标题进入第一屏 */
+@media (max-width: 600px) {
+  .ror-hub .ror-hero { padding: 14px 14px 14px; margin-top: 8px; }
+  .ror-hub .ror-deck { font-size: .92rem; line-height: 1.45; margin-bottom: 8px; }
+  .ror-hub .ror-hero h1 { font-size: 1.9rem; }
+  .ror-hub .ror-status { margin-bottom: 8px; }
+  .ror-hub .hero-actions .button { flex: 1 1 100%; min-height: 40px; padding: 6px 14px; }
+  .ror-hub .ror-tasks { margin-top: 12px; }
 }

@@ -1,0 +1,198 @@
+/* Risk of Rain 2 游戏主题（SOP v3.22，02 §2.1）。首页、全部分页、专区 About/Contact 共用。
+   视觉来源：Steam 商店页与 1.0 预告片——深蓝夜空与月面、Lunar 青蓝光效、Boss 金黄高亮、粗体机甲感标题。
+   布局骨架来自 guide-article-layout.css；本文件不加载任何其他游戏的样式。 */
+@font-face{font-family:"Goldman";src:url("/assets/fonts/goldman-700-latin.woff2") format("woff2");font-weight:700;font-display:swap}
+:root{--night:#0a151c;--stone:#0f1d27;--panel:#142533;--panel-hi:#1c3144;--blood:#1f5f9c;--blood-lo:#17406a;--blood-hi:#4da3ff;--gold:#e2bf55;--gold-hi:#fff0a8;--text:#e4eef5;--dim:#9fb4c4;--rim:#2d4a5e;--display:"Goldman","Trebuchet MS","Segoe UI",sans-serif;--body:system-ui,-apple-system,"Segoe UI",sans-serif;
+ /* 骨架读取的变量 */--paper:var(--night);--white:var(--panel);--ink:var(--text);--muted:var(--dim);--line:var(--rim);--pale:var(--stone);--green:var(--gold);--heading:var(--display);color-scheme:dark;
+ /* 首页组件变量（hub.css） */--hub-night:#0a151c;--hub-dark:#0f2230;--hub-wood-hi:#1c3144;--hub-frame:#2d4a5e;--hub-accent:#e2bf55;--hub-accent-dim:#8d7a2c;--hub-title:#f4faff;--hub-card:#102331;--hub-ink-on-dark:#e4eef5;--hub-hot:#59b0ff;--hub-edge:#264559;--hub-soft:#9fb4c4;--hub-hero-bg:url("/assets/risk-of-rain-2/coop-survivors-1280.webp")}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body.ror-theme{margin:0;background:radial-gradient(900px 420px at 50% -140px,#12456f 0,transparent 72%),var(--night);color:var(--text);font:17px/1.72 var(--body)}
+.ror-theme *{box-sizing:border-box}
+.ror-theme a{color:var(--gold);text-underline-offset:4px}.ror-theme a:hover{color:var(--gold-hi)}
+.ror-theme a:focus-visible,.ror-theme button:focus-visible,.ror-theme summary:focus-visible,.ror-theme select:focus-visible,.ror-theme [tabindex]:focus-visible{outline:3px solid #ffd23f;outline-offset:4px}
+.ror-theme img{max-width:100%;height:auto}
+.ror-theme h1,.ror-theme h2,.ror-theme h3,.ror-theme .brand{font-family:var(--display);font-weight:600;line-height:1.2;color:#f4faff;letter-spacing:.01em}
+.ror-theme h3{font-size:1.2rem}
+.ror-theme p{margin:.7rem 0 1.15rem}
+.ror-theme .wrap{width:min(1200px,calc(100% - 64px));max-width:none;margin:auto;padding-inline:0}
+.ror-theme .skip{position:absolute;top:-90px;left:12px;background:var(--gold);color:#08131b;padding:10px;z-index:30}.ror-theme .skip:focus{top:10px}
+.ror-theme .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ror-theme [hidden]{display:none!important}
+
+/* 页眉 */
+.ror-theme .top{background:#060e14;border-bottom:1px solid var(--gold);box-shadow:0 3px 0 #060e14,0 4px 0 var(--rim);position:relative;z-index:5}
+.ror-theme .top>.wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:84px}
+.ror-theme .brand{text-decoration:none;font-size:22px;line-height:1.1;max-width:260px;letter-spacing:.04em;color:#f4faff}
+.ror-theme .brand small{display:block;font:600 10px/1.6 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:6px}
+.ror-theme .desktop-nav{display:flex;align-items:center;gap:26px}
+.ror-theme .desktop-nav a,.ror-theme .mobile-links a{color:var(--text);text-decoration:none;font-size:14px;font-weight:650;padding:10px 0}
+.ror-theme .desktop-nav a:hover{color:var(--gold-hi)}
+.ror-theme .desktop-nav a[aria-current=page]{color:var(--gold-hi);box-shadow:inset 0 -3px 0 var(--blood-hi)}
+.ror-theme .mobile-nav{display:none;position:relative}
+.ror-theme .mobile-nav summary{list-style:none;cursor:pointer;color:var(--text);border:1px solid var(--gold);border-radius:4px;padding:9px 14px;font-size:14px;min-height:44px}
+.ror-theme .mobile-nav summary::-webkit-details-marker{display:none}
+.ror-theme .mobile-links{position:absolute;right:0;top:calc(100% + 8px);display:grid;min-width:220px;background:#0c1822;border:1px solid var(--gold);padding:6px 16px;box-shadow:0 14px 28px #000a;z-index:9}
+.ror-theme .mobile-links a{padding:13px 0;border-bottom:1px solid var(--rim)}.ror-theme .mobile-links a:last-child{border:0}
+
+/* 标签、按钮 */
+.ror-theme .eyebrow,.ror-theme .task-tag,.ror-theme .section-label{font:700 11px/1.6 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.ror-theme .eyebrow{display:block;color:var(--gold);margin:0}
+.ror-theme .button,.ror-theme .launch{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;min-height:46px;padding:10px 20px;background:linear-gradient(var(--gold-hi),var(--gold));border:1px solid #fff6c4;color:#0b1218;text-decoration:none;font:700 14px/1.3 var(--body);border-radius:3px;box-shadow:0 3px 0 #8d7a2c}
+.ror-theme .button:hover,.ror-theme .launch:hover{color:#000;filter:brightness(1.08)}
+.ror-theme .button.secondary{background:transparent;color:var(--gold-hi);border-color:var(--gold);box-shadow:none}
+
+/* 分页：标题、答案框、目录、正文 */
+.ror-theme .crumbs{font-size:13px;color:var(--dim);padding:22px 0 0;overflow-wrap:anywhere}
+.ror-theme .crumbs a{color:var(--dim);text-decoration:none}.ror-theme .crumbs a:hover{color:var(--gold-hi)}.ror-theme .crumbs [aria-current]{color:var(--text)}
+.ror-theme .article-head{padding:30px 0 20px}
+.ror-theme .crumbs+.article-head{padding-top:12px}
+.ror-theme .article-head h1{font-size:clamp(2rem,4.3vw,3.2rem);margin:.15em 0 .55em;max-width:26ch}
+.ror-theme .answer,.ror-theme .article-head .answer{background:linear-gradient(var(--panel-hi),var(--panel));border:1px solid var(--gold);border-left:5px solid var(--blood-hi);box-shadow:inset 0 0 0 3px var(--panel),inset 0 0 0 4px var(--rim);padding:20px 24px;font-size:1.08rem;line-height:1.65;color:#e4eef5;max-width:80ch}
+.ror-theme .answer p{margin:0 0 .6rem}.ror-theme .answer p:last-child{margin-bottom:0}
+.ror-theme .byline{font-size:13px;color:var(--dim);margin-top:14px}
+.ror-theme .article-layout>.toc{background:var(--stone);border:1px solid var(--rim);border-top:3px solid var(--gold);border-radius:4px}
+.ror-theme .toc strong{font:700 11px/1.5 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.ror-theme.guide-layout .article-layout>.toc a{background:var(--panel);border-color:var(--rim);color:var(--gold-hi);border-radius:3px;text-decoration:none}
+.ror-theme.guide-layout .article-layout>.toc a:hover{border-color:var(--gold);color:#fffbe0}
+.ror-theme .prose h2{margin-top:2.2rem;padding-top:.3rem;font-size:clamp(1.5rem,3vw,2.1rem)}
+.ror-theme .prose h2::before{content:"";display:block;width:54px;height:3px;background:var(--blood-hi);margin-bottom:12px}
+.ror-theme .prose>section>.eyebrow+h2::before{display:none}
+.ror-theme .prose h3{margin-top:1.5rem}
+.ror-theme .prose p,.ror-theme .prose li{color:#dbe8f2}.ror-theme .prose li{padding:4px 0}
+.ror-theme .prose>section+section{border-top:1px solid #21384a}
+.ror-theme .prose details{border:1px solid var(--rim);background:var(--stone);padding:14px 18px;margin:14px 0}
+.ror-theme .prose summary{cursor:pointer;color:var(--gold-hi);font-weight:700}
+.ror-theme .prose figcaption,.ror-theme figure.game-image figcaption{color:var(--dim)}
+.ror-theme.guide-layout figure.game-image{background:var(--stone);border-color:var(--gold);border-radius:4px;padding:8px}
+.ror-theme.guide-layout figure.game-image img{border-radius:0}
+.ror-theme .notice,.ror-theme .note{background:var(--panel);border-left:4px solid var(--blood-hi);padding:14px 18px;margin:22px 0;font-size:15px}
+.ror-theme .choice{padding:16px;border:1px solid var(--rim);background:var(--panel);border-radius:4px;margin:14px 0}.ror-theme .choice p{margin-bottom:0}
+.ror-theme .ref{font-size:11px;vertical-align:super;margin-left:3px}.ror-theme .ref a{text-decoration:none;padding:3px 2px}
+.ror-theme .sources{border-top:1px solid var(--rim);margin-top:34px;padding-top:12px;font-size:14px;overflow-wrap:anywhere;color:var(--dim)}
+.ror-theme .sources h2{font-size:1.25rem}.ror-theme .sources h2::before{display:none}.ror-theme .sources li{margin-bottom:10px}
+.ror-theme .back{font-size:13px}
+.ror-theme .related-tasks,.ror-theme .related{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--rim)}
+.ror-theme .related-tasks h2::before{display:none}
+.ror-theme .related-links{display:flex;flex-wrap:wrap;gap:10px 24px}
+.ror-theme .related-links a{text-decoration:none;font-weight:650;padding:8px 0}
+.ror-theme .related{display:flex;flex-wrap:wrap;gap:12px}
+.ror-theme .related a{padding:10px 14px;border:1px solid var(--rim);background:var(--panel);border-radius:4px;text-decoration:none}
+.ror-theme .related a:hover{border-color:var(--gold)}
+.ror-theme .legal{max-width:72ch;padding:30px 0 60px}.ror-theme .legal .crumbs{padding:0}
+.ror-theme .legal .article-head{padding:14px 0 6px}
+.ror-theme .legal section{padding-block:6px}
+
+/* 表格 */
+.ror-theme .table-wrap{overflow-x:auto;border:1px solid var(--rim);border-radius:4px;margin:22px 0;max-width:100%;background:var(--panel);contain:inline-size layout paint;overscroll-behavior-x:contain}
+.ror-theme table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;color:var(--text)}
+.ror-theme th,.ror-theme td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--rim);vertical-align:top}
+.ror-theme th{background:var(--panel-hi);color:#ffefa6;font:700 12px/1.4 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.ror-theme tr:last-child td{border-bottom:0}
+@media(max-width:700px){.ror-theme .prose .table-wrap::before{content:"Scroll sideways for all columns →";display:block;padding:.6rem;font-size:.85rem;color:var(--gold-hi);background:var(--stone);position:sticky;left:0}}
+
+/* 联机兼容检查工具 */
+.ror-theme .tool{padding:24px;border:1px solid var(--gold);box-shadow:inset 0 0 0 3px var(--stone),inset 0 0 0 4px var(--rim);background:var(--stone);border-radius:4px;margin:24px 0}
+.ror-theme .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ror-theme label{display:block;font-weight:700;font-size:14px}
+.ror-theme select{display:block;max-width:100%;width:100%;margin-top:8px;padding:12px;min-height:46px;background:var(--panel);color:var(--text);border:1px solid var(--gold);border-radius:3px;font:inherit}
+.ror-theme button{font:700 14px/1.4 var(--body);padding:12px 18px;min-height:44px;border:1px solid var(--gold);border-radius:3px;cursor:pointer;background:linear-gradient(var(--gold-hi),var(--gold));color:#0b1218;margin:14px 8px 0 0}
+.ror-theme button[type=reset]{background:transparent;color:var(--gold-hi)}
+.ror-theme .result{background:var(--panel);border-left:4px solid var(--blood-hi);padding:18px;margin-top:18px;scroll-margin-top:110px}
+
+/* 页脚（register_page.py 生成 footer.site-footer；信任页同一套） */
+.ror-theme .site-footer{background:#060e14;color:var(--dim);border-top:1px solid var(--gold);padding:42px 0 0;font-size:14px;position:relative;margin-top:30px}
+.ror-theme .site-footer::before{content:"";position:absolute;left:0;right:0;top:3px;height:1px;background:var(--rim)}
+.ror-theme footer.site-footer .footer-grid{display:grid;grid-template-columns:1.6fr repeat(5,minmax(0,1fr));gap:28px 32px}
+.ror-theme .site-footer h2{font:700 11px/1.5 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.ror-theme .site-footer h2::before{display:none}
+.ror-theme .site-footer .footer-col a{display:block;color:var(--text);text-decoration:none;padding:4px 0;line-height:1.45}
+.ror-theme .site-footer .footer-col a:hover{color:var(--gold-hi)}
+.ror-theme .site-footer .footer-brand strong{font:600 20px/1.3 var(--display);color:#f4faff}
+.ror-theme .site-footer .footer-brand a{text-decoration:none}
+.ror-theme .site-footer .footer-brand p{margin:10px 0 0;line-height:1.6;max-width:38ch}
+.ror-theme .site-footer .footer-version{margin:10px 0 0;font-size:12px;border-top:1px solid var(--rim);padding-top:8px}
+.ror-theme .footer-info{margin-top:34px;border-top:1px solid var(--rim);padding:16px 0 22px}
+.ror-theme .footer-info .wrap{display:flex;flex-wrap:wrap;gap:8px 24px}
+.ror-theme .footer-info a{color:var(--text);text-decoration:none;font-size:13px;padding:6px 0}.ror-theme .footer-info a:hover{color:var(--gold-hi)}
+
+/* 首页底部共享的 More games 推荐卡，沿用本主题配色 */
+.ror-theme .play-recommendations{max-width:none;margin-top:32px}
+.ror-theme .play-rec-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ror-theme .play-rec-card{background:var(--panel);border-color:var(--rim);border-radius:4px;box-shadow:none}
+.ror-theme .play-rec-link h3{color:var(--text);font:600 22px/1.2 var(--display)}
+.ror-theme .play-rec-link p,.ror-theme .play-rec-heading>p:last-child{color:var(--dim)}
+.ror-theme .play-rec-action,.ror-theme .play-rec-heading>p:first-child{color:var(--gold)}
+.ror-theme .play-rec-link img{border-color:var(--rim)}
+
+@media(max-width:1100px){.ror-theme footer.site-footer .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.ror-theme .site-footer .footer-brand{grid-column:1/-1}}
+@media(max-width:900px){
+ .ror-theme .desktop-nav{display:none}.ror-theme .mobile-nav{display:block}.ror-theme .top>.wrap{min-height:76px}
+ .ror-theme footer.site-footer .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ror-theme .play-rec-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ body.ror-theme{font-size:16px}
+ .ror-theme .wrap{width:calc(100% - 32px)}
+ .ror-theme .brand{font-size:19px}.ror-theme .brand small{font-size:9px;letter-spacing:.14em}
+ .ror-theme .top>.wrap{min-height:56px}
+ .ror-theme .crumbs{padding-top:10px}.ror-theme .crumbs>*{display:none}.ror-theme .crumbs>a:nth-last-of-type(1){display:inline}.ror-theme .crumbs>a:nth-last-of-type(1)::before{content:"‹ "}
+ .ror-theme .article-head{padding:18px 0 14px}.ror-theme .crumbs+.article-head{padding-top:6px}
+ .ror-theme .article-head>.eyebrow{display:none}
+ .ror-theme .byline{margin-top:8px;font-size:12px;line-height:1.5}
+ .ror-theme.guide-layout figure.game-image img{max-height:240px;object-fit:contain}
+ .ror-theme .article-head h1{font-size:1.7rem;margin:.1em 0 .4em}
+ .ror-theme .answer,.ror-theme .article-head .answer{font-size:.9rem;line-height:1.48;padding:10px 13px}
+ .ror-theme.guide-layout .article-layout>.toc{flex-wrap:nowrap;overflow-x:auto;padding:8px 10px;gap:6px;align-items:center;scrollbar-width:thin}
+ .ror-theme.guide-layout .toc strong{width:auto;white-space:nowrap;margin:0 4px 0 0}.ror-theme.guide-layout .toc a{white-space:nowrap}
+ .ror-theme.guide-layout .article-layout{gap:10px;padding-bottom:30px}
+ .ror-theme.guide-layout figure.game-image{margin:6px auto 16px;padding:5px}
+ .ror-theme .prose h2{margin-top:1.4rem;font-size:1.45rem}
+ .ror-theme .tool{padding:15px}.ror-theme .tool-grid{grid-template-columns:1fr}
+ .ror-theme th,.ror-theme td{padding:11px;min-width:92px}.ror-theme .table-wrap{font-size:13px}
+ .ror-theme .play-rec-grid{grid-template-columns:1fr}
+ .ror-theme .site-footer{padding-top:28px}.ror-theme footer.site-footer .footer-grid{gap:22px 18px}.ror-theme .site-footer .footer-col a{padding:7px 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{scroll-behavior:auto!important}}
+
+/* 品牌：Logo + 站名同排，不换行 */
+.ror-theme .brand{display:flex;align-items:center;gap:10px;max-width:none;white-space:nowrap}
+.ror-theme .brand img{flex:none;border-radius:4px}
+@media(max-width:600px){.ror-theme .brand{gap:8px;font-size:17px}.ror-theme .brand img{width:30px;height:30px}}
+
+/* 手机首屏：标题、答案、目录、截图压缩，首个 H2 进入第一屏（image_audit HERO） */
+@media(max-width:600px){
+ .ror-theme .article-head h1{font-size:1.45rem;line-height:1.18;margin:.05em 0 .35em}
+ .ror-theme .answer,.ror-theme .article-head .answer{font-size:.84rem;line-height:1.42;padding:9px 12px}
+ .ror-theme .byline{margin-top:6px}
+ .ror-theme.guide-layout .article-layout>.toc{padding:5px 8px}
+ .ror-theme.guide-layout figure.game-image img{max-height:150px}
+ .ror-theme.guide-layout figure.game-image{margin:4px auto 12px}
+}
+
+/* 来自旧 site.css 的功能样式：结果弹窗、竖图、锚点偏移、俄语页 */
+.ror-theme dialog{max-width:min(680px,calc(100vw - 32px));max-height:85vh;border:1px solid var(--gold);border-radius:4px;padding:0;color:var(--text);background:var(--stone)}
+.ror-theme dialog::backdrop{background:#02080cd9}
+.ror-theme .dialog-body{padding:24px;overflow-wrap:anywhere}
+.ror-theme dialog button{margin:0 0 18px}
+.ror-theme .result strong{display:block}
+.ror-theme :target{scroll-margin-top:110px}
+.ror-theme.guide-layout figure.game-image.portrait{max-width:720px}
+.ror-theme .prose>section{max-width:78ch}
+.ror-theme .prose>section:has(table),.ror-theme .prose>section:has(.tool){max-width:100%}
+.ror-theme .prose>section>p,.ror-theme .prose>section>ol,.ror-theme .prose>section>ul{max-width:78ch}
+
+/* RoR2 识别特征：标题上方的 Lunar 青蓝色分隔线与稀有度色块 */
+.ror-theme .prose h2::before{background:linear-gradient(90deg,var(--blood-hi) 0 70%,var(--gold) 70% 100%);width:64px}
+.ror-theme .top{box-shadow:0 3px 0 #060e14,0 4px 0 var(--rim),0 -3px 0 var(--blood-hi) inset}
+
+/* 手机首屏再收紧：首个 H2 进入第一屏（image_audit HERO）；竖图限高 */
+@media(max-width:600px){
+ .ror-theme .top>.wrap{min-height:48px}
+ .ror-theme .article-head h1{font-size:1.3rem}
+ .ror-theme .byline{font-size:11px;line-height:1.4}
+ .ror-theme .answer,.ror-theme .article-head .answer{font-size:.8rem;line-height:1.38;padding:8px 11px}
+ .ror-theme.guide-layout figure.game-image img{max-height:110px}
+ .ror-theme.guide-layout figure.game-image{margin:2px auto 8px}
+ .ror-theme .legal{padding-top:14px}
+}
+.ror-theme.guide-layout figure.game-image.portrait img{max-height:520px;width:auto;margin-inline:auto;display:block}

@@ -17,14 +17,32 @@ ROUTES=['/risk-of-rain-2/crossplay/','/risk-of-rain-2/gold-portal/','/risk-of-ra
 def ext(url,label):return f'<a href="{escape(url,quote=True)}" target="_blank" rel="noopener noreferrer">{label} ↗</a>'
 def ref(n):return f'<sup class="ref"><a href="#source-{n}" aria-label="Source {n}">[{n}]</a></sup>'
 def table(head,rows):return '<div class="table-wrap" role="region" aria-label="Scrollable comparison" tabindex="0"><table><thead><tr>'+''.join('<th scope="col">'+x+'</th>' for x in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+x+'</td>' for x in r)+'</tr>' for r in rows)+'</tbody></table></div>'
+def frame(route,title,desc,main,ru=False,script=False,og='article',ads=True,trust=False):
+ """专区页面外壳：只加载本专区 theme.css；导航与页脚占位，由 register_page.py 填充（02 §2.6、§5.2）。"""
+ lang='ru' if ru else 'en'
+ skip='К содержанию' if ru else 'Skip to content'
+ menu='Меню' if ru else 'Menu'
+ head=(f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+  f'<title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="https://megabonk.org{route}">'
+  f'<meta property="og:type" content="{og}"><meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(desc,quote=True)}"><meta property="og:url" content="https://megabonk.org{route}">'
+  '<link rel="icon" href="/assets/risk-of-rain-2/favicon.ico"><link rel="icon" type="image/svg+xml" href="/assets/risk-of-rain-2/favicon.svg"><link rel="apple-touch-icon" href="/assets/risk-of-rain-2/icon-180.png">'
+  '<link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/risk-of-rain-2/theme.css">')
+ if og=='website':head+='<link rel="stylesheet" href="/assets/risk-of-rain-2/hub.css">'
+ head+=('' if trust else AD)+('<script defer src="/assets/risk-of-rain-2/compatibility.js"></script>' if script else '')+'</head>'
+ cls='guide-layout ror-theme '+('ror-hub' if og=='website' else 'ror-guide')
+ top=(f'<body class="{cls}"><a class="skip" href="#main">{skip}</a><header class="top"><div class="wrap"><a class="brand" href="/risk-of-rain-2/"><img src="/assets/risk-of-rain-2/logo.svg" width="36" height="36" alt="">Risk of Rain 2</a>'
+  f'<nav class="desktop-nav" aria-label="Risk of Rain 2 tasks"></nav><details class="mobile-nav"><summary>{menu}</summary><nav class="mobile-links" aria-label="Risk of Rain 2 tasks"></nav></details></div></header>')
+ return head+top+main+'<footer class="footer"></footer></body></html>'
+
 def shell(route,title,desc,h1,answer,parts,sources,ru=False,script=False):
  nav=navigation(route)
  body=''.join(f'<section id="{i}"><h2>{h}</h2>{t}</section>' for i,h,t in parts)
  labels=['Crossplay & edition check','Gold Portal → False Son','Хранилище укрепления · русский']
  related=''.join(f'<a href="{u}"'+(' lang="ru"' if '/ru/' in u else ' lang="en"')+f'>{t}</a>' for u,t in zip(ROUTES,labels) if u!=route)
  source='<section class="sources" id="sources"><h2>'+('Источники и проверка' if ru else 'Sources &amp; verification')+'</h2><ol>'+''.join(f'<li id="source-{i}">{ext(u,l)} — {d}</li>' for i,(u,l,d) in enumerate(sources,1))+'</ol><a href="#guide">'+('К началу ↑' if ru else 'Back to guide ↑')+'</a></section>'
- html=f'''<!doctype html><html lang="{'ru' if ru else 'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(desc,quote=True)}"><link rel="canonical" href="https://megabonk.org{route}"><meta property="og:type" content="article"><meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(desc,quote=True)}"><meta property="og:url" content="https://megabonk.org{route}"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/pokebonk/site.css"><link rel="stylesheet" href="/assets/guide-article-layout.css"><link rel="stylesheet" href="/assets/risk-of-rain-2/site.css">{AD}{'<script defer src="/assets/risk-of-rain-2/compatibility.js"></script>' if script else ''}</head><body class="guide-layout ror-guide"><a class="skip" href="#main">{'К содержанию' if ru else 'Skip to content'}</a><header class="top"><div class="wrap"><a class="brand" href="/risk-of-rain-2/"><span>Risk of Rain 2<small>{'Megabonk.org · игровые гайды' if ru else 'Megabonk.org · Independent guides'}</small></span></a><nav class="desktop-nav" aria-label="{'Навигация сайта · английские разделы' if ru else 'Main navigation'}">{nav}</nav><details class="mobile-nav"><summary>{'Меню' if ru else 'Menu'}</summary><nav class="mobile-links" aria-label="{'Мобильная навигация · английские разделы' if ru else 'Mobile navigation'}">{nav}</nav></details></div></header><main class="wrap" id="main"><header class="article-head" id="guide"><p class="eyebrow">{'НЕЗАВИСИМЫЙ ГАЙД' if ru else 'INDEPENDENT PLAYER GUIDE'} · RISK OF RAIN 2</p><h1>{h1}</h1><div class="answer">{answer}</div><p class="byline">{'Редакция Megabonk.org · проверено 5 ноября 2026 · без собственного прохождения' if ru else 'By Megabonk.org · checked 5 November 2026 · document-based, not a playtest'}</p></header><div class="article-layout"><nav class="toc" aria-label="{'На этой странице' if ru else 'On this page'}"><strong>{'На этой странице' if ru else 'On this page'}</strong>{''.join(f'<a href="#{i}">{h}</a>' for i,h,_ in parts)}</nav><article class="prose">{body}{source}<section><h2>{'Другие задачи · гайды на английском' if ru else 'Related tasks'}</h2><div class="related">{related}</div></section></article></div></main><footer class="footer"><div class="wrap footer-grid"><div><strong>Megabonk.org</strong><p>{'Независимая редакция; не связана с Hopoo Games, Gearbox или 2K.' if ru else 'Independent editorial. Not affiliated with Hopoo Games, Gearbox or 2K.'}</p><a href="/#wiki-start">{'Другие игры и гайды (EN)' if ru else 'More games &amp; guides'} →</a></div><nav aria-label="{'О сайте · страницы на английском' if ru else 'Site information'}"><a href="/about/">{'О сайте' if ru else 'About'}</a><a href="/contact/">{'Контакты' if ru else 'Contact'}</a><a href="/privacy-policy#risk-of-rain-2">{'Конфиденциальность' if ru else 'Privacy'}</a></nav></div></footer></body></html>'''
- return decorate(route,html)
+ related_block='' if not ru else ('<section><h2>Related tasks</h2><div class="related">'+related+'</div></section>')
+ main=f'''<main class="wrap" id="main"><header class="article-head" id="guide"><p class="eyebrow">{'НЕЗАВИСИМЫЙ ГАЙД' if ru else 'INDEPENDENT PLAYER GUIDE'} · RISK OF RAIN 2</p><h1>{h1}</h1><div class="answer">{answer}</div><p class="byline">{'Редакция Megabonk.org · проверено 5 ноября 2026 · без собственного прохождения' if ru else 'By Megabonk.org · checked 5 November 2026 · document-based, not a playtest'}</p></header><div class="article-layout"><nav class="toc" aria-label="{'На этой странице' if ru else 'On this page'}"><strong>{'На этой странице' if ru else 'On this page'}</strong>{''.join(f'<a href="#{i}">{h}</a>' for i,h,_ in parts)}</nav><article class="prose">{body}{source}{related_block}</article></div></main>'''
+ return decorate(route,frame(route,title,desc,main,ru=ru,script=script))
 
 def crossplay():
  opts=[('steam-on','Steam · crossplay ON'),('steam-off','Steam · crossplay OFF'),('steam-unknown','Steam · setting not checked'),('epic','Epic Games Store · PC'),('ps4','PlayStation 4'),('ps5','PlayStation 5'),('one','Xbox One'),('series','Xbox Series X|S'),('switch','Nintendo Switch'),('switch2','Switch 2 / edition not confirmed'),('other','Another or unspecified edition')]
@@ -79,9 +97,12 @@ def build():
  from ror2_hub import render
  hub=ROOT/'risk-of-rain-2/index.html'
  hub.parent.mkdir(parents=True,exist_ok=True)
- write_html(hub,render(shell),encoding='utf8')
+ hub_html,questions=render(frame)
+ write_html(hub,hub_html,encoding='utf8')
  for route,page in zip(ROUTES,[crossplay(),gold(),ambry()]):
   f=ROOT/route.strip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);write_html(f,page,encoding='utf-8')
+ from ror2_trust import build as build_trust
+ build_trust(lambda route,title,desc,main,trust=True:frame(route,title,desc,main,trust=trust))
  f=ROOT/'index.html';s=f.read_text(encoding='utf-8')
  if 'id="ror2-crossplay-entry"' not in s:
   cards=[('ror2-crossplay-entry',ROUTES[0],'Risk of Rain 2: play together','Check both stores, Steam crossplay settings and console generation limits.','Check our copies'),('ror2-gold-entry',ROUTES[1],'Risk of Rain 2: Gold Portal route','Follow seven beacons and Halcyon Seed to the False Son unlock.','Plan the unlock route'),('ror2-ambry-entry',ROUTES[2],'Хранилище укрепления · Risk of Rain 2','Вход через пятый этап, Artifact Key и награда испытания. Гайд на русском.','Пройти испытание')]
@@ -90,6 +111,27 @@ def build():
  write_html(f,s,encoding='utf-8')
  f=ROOT/'privacy-policy.html';s=f.read_text(encoding='utf-8')
  if 'id="risk-of-rain-2"' not in s:s=s.replace('</body>','<h2 id="risk-of-rain-2">Risk of Rain 2 guides and copy compatibility check</h2><p>Updated 5 November 2026. The copy check combines the selections locally in your browser and displays documentation-based advice. It does not store selections, upload them, access a game account, modify saves or connect to a lobby. This guide embeds no Risk of Rain 2 game or video. Publisher, community and support links lead to external services when followed. Existing site analytics and advertising apply as described above.</p></body>',1)
- write_html(f,s,encoding='utf-8')
- print('Built all 3 Risk of Rain 2 task pages and idempotent root/privacy patches.')
+ if 'id="risk-of-rain-2"' not in open(f,encoding='utf8',newline='').read():write_html(f,s,encoding='utf-8')
+ # 导航、面包屑、相关任务、页脚与登记来自 data/risk-of-rain-2-pages.json（02 §2.6、§5.2）
+ import subprocess,sys
+ subprocess.run([sys.executable,str(Path(__file__).resolve().parent/'register_page.py'),str(ROOT),'risk-of-rain-2'],check=True,stdout=subprocess.DEVNULL)
+ register_seo(questions)
+ from game_seo import edit as seo_edit  # register_page 追加头部标记后，保持 SEO 编辑器幂等
+ for fp in (ROOT/'risk-of-rain-2').rglob('index.html'):
+  t0=fp.read_text(encoding='utf8');n0=seo_edit(fp,t0)
+  if n0!=t0:fp.write_text(n0,encoding='utf8')
+ print('Built hub, 3 task pages, About/Contact and idempotent root/privacy patches.')
+
+def register_seo(questions):
+ """首页 FAQ 登记到 data/game-seo.json（可见问答与 FAQPage 同源），信任页补进 pages_list.txt（只追加）。"""
+ import json
+ f=ROOT/'data/game-seo.json';d=json.loads(f.read_text(encoding='utf8'))
+ d['pages']['risk-of-rain-2/index.html']={'questions':list(questions),'faq_review':'Hub FAQ from data/risk-of-rain-2-pages.json (v3.26 F9); visible answers and FAQPage share one source (2026-11-22).','language_review':'No equivalent language page identified; the Russian Bulwark’s Ambry guide covers a different task, so it is not mapped.','reviewed_candidates':list(questions)}
+ new=json.dumps(d,ensure_ascii=False,indent=2)+'\n'
+ if f.read_text(encoding='utf8')!=new:f.write_text(new,encoding='utf8')
+ pl=ROOT/'pages_list.txt';text=open(pl,encoding='utf8',newline='').read()
+ add=''.join(f'https://megabonk.org/risk-of-rain-2/{x}/\r\n' for x in ('about','contact') if f'/risk-of-rain-2/{x}/' not in text)
+ if add:
+  with open(pl,'a',encoding='utf8',newline='') as out:out.write(add)
+
 if __name__=='__main__':build()
