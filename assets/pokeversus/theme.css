@@ -1,0 +1,134 @@
+/* PokéVersus 游戏主题（SOP v3.22，02 §2.1）。首页、About/Contact 共用。
+   视觉来源（pokeversus.com 原作登录窗与菜单，2026-11-22 截取）：海军蓝底 #16204f、金黄 #ffcb05 描边与标题（蓝色轮廓像素字）、
+   #3f7bff 蓝色立体按钮、黄色 “Play as guest” 主按钮；标题字体 Jersey 10（OFL，本站托管）。
+   对比同类（pokeversus.net 白底点阵+红按钮、Poké Arena 2D 深紫掌机）：本专区正文用浅蓝灰底，页头页脚与英雄区用原作深蓝金边。 */
+@font-face {
+  font-family: "Jersey 10";
+  src: url("/assets/fonts/jersey10-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --pv-night: #0e1638; --pv-navy: #16204f; --pv-navy-hi: #22307a; --pv-line-dark: #3a4a96;
+  --pv-gold: #ffcb05; --pv-gold-hi: #ffe27a; --pv-gold-dim: #b88f00;
+  --pv-blue: #3f7bff; --pv-blue-lo: #2552c4; --pv-red: #e23b32;
+  --pv-bg: #eef2ff; --pv-card: #ffffff; --pv-edge: #c3cdf0; --pv-ink: #16204f; --pv-soft: #4d5a8c;
+  --pv-link: #2552c4;
+  --display: "Jersey 10", "Courier New", monospace;
+  --body: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* 骨架读取的变量 */
+  --paper: var(--pv-bg); --white: var(--pv-card); --ink: var(--pv-ink); --muted: var(--pv-soft);
+  --line: var(--pv-edge); --pale: #e1e7fb; --green: var(--pv-blue); --gold: var(--pv-gold-dim);
+  --heading: var(--display); --max: 1120px;
+  /* 首页组件变量（hub.css） */
+  --hub-night: var(--pv-night); --hub-dark: var(--pv-navy); --hub-wood-hi: var(--pv-navy-hi); --hub-frame: var(--pv-gold);
+  --hub-accent: var(--pv-gold); --hub-accent-dim: var(--pv-gold-dim); --hub-title: var(--pv-gold); --hub-card: var(--pv-card);
+  --hub-ink-on-dark: #eaf0ff; --hub-hot: var(--pv-red); --hub-edge: var(--pv-edge); --hub-soft: var(--pv-soft);
+  --hub-hero-bg: url("/assets/pokeversus/images/hero-bg-1280.webp");
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; }
+body.pv-theme {
+  margin: 0; color: var(--pv-ink); font: 16.5px/1.7 var(--body); background: var(--pv-bg);
+  background-image: radial-gradient(#c3cdf066 1px, transparent 1.4px); background-size: 18px 18px;
+}
+.pv-theme a { color: var(--pv-link); text-underline-offset: 3px; }
+.pv-theme a:hover { color: var(--pv-blue); }
+.pv-theme a:focus-visible, .pv-theme button:focus-visible, .pv-theme summary:focus-visible { outline: 3px solid var(--pv-red); outline-offset: 3px; }
+.pv-theme img { max-width: 100%; height: auto; }
+.pv-theme h1, .pv-theme h2, .pv-theme h3, .pv-theme .brand { font-family: var(--display); font-weight: 400; letter-spacing: .02em; line-height: 1.1; color: var(--pv-navy); }
+.pv-theme h1 { font-size: clamp(2.6rem, 6.5vw, 4.2rem); margin: .25em 0; }
+.pv-theme h2 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); margin: 0 0 .7rem; }
+.pv-theme h3 { font-size: 1.5rem; }
+.pv-theme p { margin: .6rem 0 1.1rem; }
+.pv-theme .wrap { width: min(var(--max), calc(100% - 64px)); margin: auto; }
+.pv-theme .skip { position: absolute; top: -90px; left: 12px; background: var(--pv-gold); color: var(--pv-night); padding: 10px; z-index: 30; }
+.pv-theme .skip:focus { top: 10px; }
+.pv-theme .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.pv-theme [hidden] { display: none !important; }
+
+/* 页头：深蓝横条 + 金色下沿（原作登录窗的描边） */
+.pv-theme .top { position: relative; background: var(--pv-night); border-bottom: 4px solid var(--pv-gold); color: #eaf0ff; }
+.pv-theme .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 70px; }
+.pv-theme .brand { display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; font-size: 2.1rem; white-space: nowrap; color: var(--pv-gold); text-shadow: 2px 2px 0 var(--pv-blue-lo); }
+.pv-theme .brand:hover { color: var(--pv-gold-hi); }
+.pv-theme .brand small { display: block; margin-top: -2px; font: 700 10.5px/1.3 var(--body); letter-spacing: .16em; text-transform: uppercase; color: #aebbea; text-shadow: none; }
+.pv-theme .desktop-nav { display: flex; align-items: center; gap: 20px; }
+.pv-theme .desktop-nav a, .pv-theme .mobile-links a { font: 800 13.5px/1.2 var(--body); letter-spacing: .05em; color: #eaf0ff; text-decoration: none; padding: 12px 0; }
+.pv-theme .desktop-nav a:hover, .pv-theme .mobile-links a:hover { color: var(--pv-gold); }
+.pv-theme .desktop-nav a[aria-current=page] { color: var(--pv-gold); box-shadow: inset 0 -3px 0 var(--pv-gold); }
+.pv-theme .mobile-nav { display: none; }
+.pv-theme .mobile-nav summary { list-style: none; cursor: pointer; min-height: 44px; padding: 9px 16px; border: 3px solid var(--pv-gold); background: var(--pv-navy); color: var(--pv-gold); font: 400 1.35rem/1.3 var(--display); letter-spacing: .04em; }
+.pv-theme .mobile-nav summary::-webkit-details-marker { display: none; }
+
+/* 立体按钮（原作 Sign in / Play as guest） */
+.pv-theme .button, .pv-theme .play-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 10px 26px;
+  font: 400 1.5rem/1.2 var(--display); letter-spacing: .04em; text-decoration: none; cursor: pointer;
+  color: var(--pv-night); background: var(--pv-gold); border: 3px solid var(--pv-night); border-bottom-width: 7px; border-radius: 4px;
+}
+.pv-theme .button:hover, .pv-theme .play-button:hover { color: var(--pv-night); background: var(--pv-gold-hi); transform: translateY(-1px); }
+.pv-theme .button:active, .pv-theme .play-button:active { transform: translateY(3px); border-bottom-width: 4px; }
+.pv-theme .button.secondary { color: #fff; background: var(--pv-blue); border-color: var(--pv-night); }
+.pv-theme .button.secondary:hover { color: #fff; background: #5a90ff; }
+.pv-theme .tag { display: inline-flex; padding: 3px 12px; border: 2px solid var(--pv-gold-dim); background: var(--pv-navy); color: var(--pv-gold); font: 400 1.05rem/1.5 var(--display); letter-spacing: .08em; }
+.pv-theme .meta, .pv-theme .byline { font-size: 12.5px; color: var(--pv-soft); }
+
+/* 文章与信任页 */
+.pv-theme .crumbs { padding: 20px 0 4px; font-size: 13px; color: var(--pv-soft); }
+.pv-theme .article-head { padding-top: 12px; }
+.pv-theme .table-wrap { overflow-x: auto; max-width: 100%; margin: 22px 0; border: 3px solid var(--pv-navy); background: var(--pv-card); box-shadow: 4px 4px 0 var(--pv-edge); }
+.pv-theme table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.pv-theme th, .pv-theme td { padding: 11px 15px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--pv-edge); }
+.pv-theme th { background: var(--pv-navy); color: var(--pv-gold); font: 400 1.15rem/1.3 var(--display); letter-spacing: .06em; }
+.pv-theme tr:last-child td { border-bottom: 0; }
+.pv-theme tbody tr:nth-child(even) td { background: #f5f7ff; }
+.pv-theme .ref { font-size: 11px; vertical-align: super; margin-left: 3px; }
+.pv-theme .ref a { padding: 4px; text-decoration: none; }
+.pv-theme .sources { margin-top: 34px; padding-top: 12px; border-top: 3px solid var(--pv-navy); font-size: 13px; overflow-wrap: anywhere; }
+.pv-theme .sources h2 { font-size: 1.7rem; border: 0; }
+.pv-theme .sources li { margin-bottom: 10px; }
+.pv-theme .legal { max-width: 76ch; margin-inline: auto; padding-bottom: 52px; }
+.pv-theme .legal .article-head { padding-top: 28px; }
+.pv-theme .legal section { margin: 26px 0; }
+.pv-theme .legal h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+
+/* 页脚（register_page.py 生成，02 §5.2） */
+.pv-theme .site-footer { margin-top: 48px; padding-top: 36px; background: var(--pv-night); border-top: 4px solid var(--pv-gold); color: #eaf0ff; }
+.pv-theme .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 28px; }
+.pv-theme .footer-brand strong { font: 400 2rem/1.1 var(--display); color: var(--pv-gold); letter-spacing: .02em; text-shadow: 2px 2px 0 var(--pv-blue-lo); }
+.pv-theme .footer-brand a { text-decoration: none; }
+.pv-theme .footer-brand p { margin: .5rem 0; font-size: 13px; color: #aebbea; max-width: 40ch; }
+.pv-theme .footer-col h2 { margin: 0 0 .5rem; padding: 0; border: 0; font: 400 1.3rem/1.3 var(--display); letter-spacing: .06em; color: var(--pv-gold); }
+.pv-theme .footer-col a { display: block; padding: 5px 0; font-size: 14px; color: #eaf0ff; text-decoration: none; }
+.pv-theme .footer-col a:hover { color: var(--pv-gold); text-decoration: underline; }
+.pv-theme .footer-version { margin: .5rem 0 0; font-size: 12px; color: #aebbea; }
+.pv-theme .footer-info { margin-top: 28px; border-top: 1px solid var(--pv-line-dark); }
+.pv-theme .footer-info .wrap { display: flex; flex-wrap: wrap; gap: 6px 26px; padding: 12px 0 22px; }
+.pv-theme .footer-info a { font: 800 12.5px/1.4 var(--body); letter-spacing: .06em; text-transform: uppercase; color: #aebbea; text-decoration: none; padding: 8px 0; }
+.pv-theme .footer-info a:hover { color: var(--pv-gold); }
+
+@media (max-width: 1050px) { .pv-theme .desktop-nav { gap: 13px; } .pv-theme .footer-grid { grid-template-columns: 1fr 1fr 1fr; } .pv-theme .footer-brand { grid-column: 1 / -1; } }
+@media (max-width: 900px) {
+  .pv-theme .desktop-nav { display: none; }
+  .pv-theme .mobile-nav { display: block; }
+  .pv-theme .top .wrap { min-height: 62px; }
+  .pv-theme .mobile-nav[open] .mobile-links { position: absolute; left: 0; right: 0; top: 100%; z-index: 20; padding: 8px 32px 14px; background: var(--pv-night); border-bottom: 4px solid var(--pv-gold); }
+  .pv-theme .mobile-links a { display: block; padding: 13px 0; border-bottom: 1px solid var(--pv-line-dark); }
+}
+@media (max-width: 600px) {
+  body.pv-theme { font-size: 16px; }
+  .pv-theme .wrap { width: calc(100% - 32px); }
+  .pv-theme .brand { font-size: 1.75rem; gap: 9px; }
+  .pv-theme .brand small { font-size: 8.5px; letter-spacing: .1em; }
+  .pv-theme .top .wrap { gap: 8px; min-height: 58px; }
+  .pv-theme .mobile-nav[open] .mobile-links { padding-inline: 16px; }
+  .pv-theme .crumbs { padding-top: 12px; }
+  .pv-theme th, .pv-theme td { padding: 9px 11px; min-width: 96px; }
+  .pv-theme .table-wrap { font-size: 13px; }
+  .pv-theme .footer-grid { grid-template-columns: 1fr 1fr; gap: 22px 18px; }
+  .pv-theme .footer-col a { padding: 8px 0; }
+  .pv-theme .footer-info .wrap { gap: 0 18px; }
+  .pv-theme .button, .pv-theme .play-button { font-size: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
