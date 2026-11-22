@@ -1,0 +1,85 @@
+/* Brotato 首页布局（仅首页加载，02 §2.1 / 08 F9）：英雄区、状态条、截图任务卡、数据预览、更新、分组、FAQ。
+   颜色全部来自 theme.css 变量；手机优先，≤600 再收窄。 */
+.bt-hub .hub-hero{display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:44px;padding-block:48px 30px}
+.bt-hub .hub-name{font:400 clamp(54px,6.6vw,92px)/.92 var(--display);letter-spacing:.02em;margin:16px 0 18px;color:#fff6dc;text-shadow:4px 4px 0 #000,7px 7px 0 var(--blood)}
+.bt-hub .hub-name span{display:block;font-size:.42em;color:var(--gold);letter-spacing:.14em;margin-top:10px;text-shadow:2px 2px 0 #000}
+.bt-hub .hub-hero h1{font:400 clamp(1.6rem,2.8vw,2.3rem)/1.15 var(--display);margin:0 0 12px;color:var(--text);max-width:none}
+.bt-hub .hero-intro{max-width:44ch;color:#e8e1d6;font-size:18px;line-height:1.65}
+.bt-hub .bh-status{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 18px;padding:0}
+.bt-hub .bh-status li{border:2px solid #000;background:var(--panel);color:var(--dim);font:700 12px/1.4 var(--body);padding:6px 11px;border-radius:6px;box-shadow:2px 2px 0 #000}
+.bt-hub .bh-status li:first-child{color:#1c1408;background:var(--gold)}
+.bt-hub .hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-block:24px 16px}
+.bt-hub .text-link{font-size:14px;font-weight:700}
+.bt-hub .hero-note{font-size:13px;line-height:1.65;color:var(--dim);max-width:48ch}
+.bt-hub .hero-scene{margin:0}
+.bt-hub .hero-scene figure.game-image{margin:0}
+.bt-hub .hero-scene img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+
+.bt-hub .bh-block{padding-block:30px 8px}
+.bt-hub .bh-block>h2{font-size:clamp(1.8rem,3.2vw,2.5rem);margin:0 0 6px}
+.bt-hub .bh-block>h2::before{content:"";display:block;width:46px;height:4px;border-radius:2px;background:var(--blood-hi);margin-bottom:12px}
+.bt-hub .bh-lede{color:var(--dim);margin:0 0 20px;max-width:70ch}
+.bt-hub .bh-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.bt-hub .bh-card{display:block;height:100%;border:2px solid #000;border-radius:8px;background:var(--panel);box-shadow:4px 4px 0 #000;text-decoration:none;color:var(--text);overflow:hidden;transition:transform .12s,box-shadow .12s}
+.bt-hub .bh-card:hover{color:var(--text);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--blood)}
+.bt-hub .bh-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-bottom:2px solid #000}
+.bt-hub .bh-card-body{display:block;padding:12px 14px 16px}
+.bt-hub .bh-card strong{display:block;font:400 22px/1.15 var(--display);letter-spacing:.03em;color:var(--gold-hi);text-shadow:2px 2px 0 #000}
+.bt-hub .bh-card-text{display:block;font-size:14px;line-height:1.5;color:#d9d2e3;margin-top:6px}
+
+.bt-hub .bh-preview .table-wrap{margin:0 0 12px}
+.bt-hub .bh-preview table{min-width:0}
+.bt-hub .bh-preview th,.bt-hub .bh-preview td{min-width:0}
+.bt-hub .bh-cap{font-size:13px;color:var(--dim);margin:0}
+
+.bt-hub .bh-win{padding-block:34px 4px}
+.bt-hub .bh-win>h2{font-size:clamp(1.6rem,2.8vw,2.1rem);margin:0 0 14px}
+.bt-hub .bh-win>h2::before{content:"";display:block;width:46px;height:4px;border-radius:2px;background:var(--blood-hi);margin-bottom:12px}
+.bt-hub .bh-updates{list-style:none;margin:0;padding:0;border:2px solid #000;border-radius:8px;background:var(--stone);box-shadow:3px 3px 0 #000;overflow:hidden}
+.bt-hub .bh-updates li{display:grid;grid-template-columns:110px minmax(0,230px) 1fr;gap:6px 18px;padding:12px 16px;border-bottom:1px solid var(--rim);font-size:14px;align-items:baseline}
+.bt-hub .bh-updates li:last-child{border:0}
+.bt-hub .bh-updates time{color:var(--gold);font-weight:800;font-size:13px}
+.bt-hub .bh-updates a{font-weight:700;text-decoration:none}
+.bt-hub .bh-updates span{color:var(--dim)}
+.bt-hub .bh-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.bt-hub .bh-group{padding:18px 20px;border:2px solid #000;border-top:5px solid var(--leaf);background:var(--stone);border-radius:8px;box-shadow:3px 3px 0 #000}
+.bt-hub .bh-group h3{margin:0 0 4px;font-size:1.4rem}
+.bt-hub .bh-group p{font-size:14px;color:var(--dim);margin:0 0 10px}
+.bt-hub .bh-group ul{list-style:none;margin:0;padding:0}
+.bt-hub .bh-group li{padding:5px 0;border-top:1px solid var(--rim);font-size:14px}
+.bt-hub .bh-group a{text-decoration:none}
+.bt-hub .bh-faq details{border:2px solid #000;background:var(--stone);margin:0 0 10px;border-radius:8px;box-shadow:2px 2px 0 #000}
+.bt-hub .bh-faq summary{cursor:pointer;padding:14px 18px;font-weight:800;color:var(--gold-hi)}
+.bt-hub .bh-faq details p{margin:0;padding:0 18px 6px;color:#e3dcd0}
+.bt-hub .bh-faq .more{display:inline-block;padding:4px 18px 16px;font-size:14px;font-weight:700}
+.bt-hub #faq h2{font-size:clamp(1.6rem,2.8vw,2.1rem)}
+
+@media(max-width:1100px){.bt-hub .bh-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1050px){.bt-hub .hub-hero{gap:28px}}
+@media(max-width:900px){
+ .bt-hub .hub-hero{grid-template-columns:1fr;gap:22px;padding-block:28px 22px}
+ .bt-hub .hub-name{font-size:68px}
+ .bt-hub .hero-scene{max-width:680px}
+ .bt-hub .bh-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .bt-hub .bh-groups{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ .bt-hub .hub-name{font-size:54px;margin:8px 0 12px;text-shadow:3px 3px 0 #000,5px 5px 0 var(--blood)}
+ .bt-hub .hero-copy>.eyebrow{display:none}
+ .bt-hub .hub-hero h1{font-size:1.45rem;margin-bottom:8px}
+ .bt-hub .bh-status{margin-bottom:12px}
+ .bt-hub .bh-status li:nth-child(n+3){display:none}
+ .bt-hub .hero-intro{font-size:15px;line-height:1.55;margin:0}
+ .bt-hub .hero-actions{gap:10px;margin-block:16px 4px}
+ .bt-hub .hero-note{display:none}
+ .bt-hub .hero-scene figure.game-image figcaption{display:none}
+ .bt-hub .hero-scene img{aspect-ratio:16/8;max-height:none}
+ .bt-hub .bh-preview th,.bt-hub .bh-preview td{padding:10px 9px;font-size:13px}
+ .bt-hub .bh-cards{gap:10px}
+ .bt-hub .bh-card{box-shadow:3px 3px 0 #000}
+ .bt-hub .bh-card-body{padding:9px 10px 12px}
+ .bt-hub .bh-card strong{font-size:18px}
+ .bt-hub .bh-card-text{font-size:12.5px;line-height:1.4}
+ .bt-hub .bh-updates li{grid-template-columns:1fr;gap:2px;padding:11px 14px}
+}
+@media(prefers-reduced-motion:reduce){.bt-hub .bh-card{transition:none}}

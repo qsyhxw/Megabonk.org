@@ -1,0 +1,182 @@
+/* Brotato 游戏主题（SOP v3.22，02 §2.1）。首页、全部分页、专区 About/Contact 共用。
+   视觉来源：官方 Steam 商店页、官方 wiki 与 Primal Dread 截图——紫黑夜色底、土豆人头带红、黄色弹道、丛林绿；
+   粗黑描边 + 硬投影的街机卡通面板，标题用本站托管的 Bangers（OFL）。
+   布局骨架来自 guide-article-layout.css；本文件不加载任何其他游戏的样式。 */
+@font-face{font-family:"Bangers";src:url("/assets/fonts/bangers-400-latin.woff2") format("woff2");font-weight:400;font-display:swap}
+:root{--night:#13101a;--stone:#1a1622;--panel:#231e2d;--panel-hi:#2e2740;--blood:#c92a22;--blood-lo:#7d1712;--blood-hi:#ff5a4d;--gold:#f3d63b;--gold-hi:#ffe96b;--leaf:#6cc070;--text:#f2ece1;--dim:#b9b0c6;--rim:#4a3f5c;--display:"Bangers","Impact","Arial Narrow",system-ui,sans-serif;--body:system-ui,-apple-system,"Segoe UI",sans-serif;
+ /* 骨架读取的变量 */--paper:var(--night);--white:var(--panel);--ink:var(--text);--muted:var(--dim);--line:var(--rim);--pale:var(--stone);--green:var(--gold);--heading:var(--display);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body.bt-theme{margin:0;background:radial-gradient(900px 420px at 50% -140px,#3b2a5c 0,transparent 72%),var(--night);color:var(--text);font:17px/1.72 var(--body)}
+.bt-theme *{box-sizing:border-box}
+.bt-theme a{color:var(--gold);text-underline-offset:4px}.bt-theme a:hover{color:var(--gold-hi)}
+.bt-theme a:focus-visible,.bt-theme button:focus-visible,.bt-theme summary:focus-visible,.bt-theme select:focus-visible,.bt-theme [tabindex]:focus-visible{outline:3px solid #9fb2ff;outline-offset:4px}
+.bt-theme img{max-width:100%;height:auto}
+.bt-theme h1,.bt-theme h2,.bt-theme h3,.bt-theme .brand{font-family:var(--display);font-weight:600;line-height:1.2;color:#fff6dc;letter-spacing:.01em}
+.bt-theme h3{font-size:1.2rem}
+.bt-theme p{margin:.7rem 0 1.15rem}
+.bt-theme .wrap{width:min(1200px,calc(100% - 64px));max-width:none;margin:auto;padding-inline:0}
+.bt-theme .skip{position:absolute;top:-90px;left:12px;background:var(--gold);color:#1c1410;padding:10px;z-index:30}.bt-theme .skip:focus{top:10px}
+.bt-theme .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.bt-theme [hidden]{display:none!important}
+
+/* 页眉 */
+.bt-theme .top{background:#0d0b12;border-bottom:1px solid var(--gold);box-shadow:0 3px 0 #0d0b12,0 4px 0 var(--rim);position:relative;z-index:5}
+.bt-theme .top>.wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:84px}
+.bt-theme .brand{text-decoration:none;font-size:22px;line-height:1.1;max-width:260px;letter-spacing:.04em;color:#fff6dc}
+.bt-theme .brand small{display:block;font:600 10px/1.6 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:6px}
+.bt-theme .desktop-nav{display:flex;align-items:center;gap:26px}
+.bt-theme .desktop-nav a,.bt-theme .mobile-links a{color:var(--text);text-decoration:none;font-size:14px;font-weight:650;padding:10px 0}
+.bt-theme .desktop-nav a:hover{color:var(--gold-hi)}
+.bt-theme .desktop-nav a[aria-current=page]{color:var(--gold-hi);box-shadow:inset 0 -3px 0 var(--blood-hi)}
+.bt-theme .mobile-nav{display:none;position:relative}
+.bt-theme .mobile-nav summary{list-style:none;cursor:pointer;color:var(--text);border:1px solid var(--gold);border-radius:4px;padding:9px 14px;font-size:14px;min-height:44px}
+.bt-theme .mobile-nav summary::-webkit-details-marker{display:none}
+.bt-theme .mobile-links{position:absolute;right:0;top:calc(100% + 8px);display:grid;min-width:220px;background:#181322;border:1px solid var(--gold);padding:6px 16px;box-shadow:0 14px 28px #000a;z-index:9}
+.bt-theme .mobile-links a{padding:13px 0;border-bottom:1px solid var(--rim)}.bt-theme .mobile-links a:last-child{border:0}
+
+/* 标签、按钮 */
+.bt-theme .eyebrow,.bt-theme .task-tag,.bt-theme .section-label{font:700 11px/1.6 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.bt-theme .eyebrow{display:block;color:var(--gold);margin:0}
+.bt-theme .button,.bt-theme .launch{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;min-height:46px;padding:10px 20px;background:linear-gradient(var(--gold-hi),var(--gold));border:1px solid #fff6b0;color:#1c1408;text-decoration:none;font:700 14px/1.3 var(--body);border-radius:3px;box-shadow:0 3px 0 #6b4a10}
+.bt-theme .button:hover,.bt-theme .launch:hover{color:#000;filter:brightness(1.08)}
+.bt-theme .button.secondary{background:transparent;color:var(--gold-hi);border-color:var(--gold);box-shadow:none}
+
+/* 分页：标题、答案框、目录、正文 */
+.bt-theme .crumbs{font-size:13px;color:var(--dim);padding:22px 0 0;overflow-wrap:anywhere}
+.bt-theme .crumbs a{color:var(--dim);text-decoration:none}.bt-theme .crumbs a:hover{color:var(--gold-hi)}.bt-theme .crumbs [aria-current]{color:var(--text)}
+.bt-theme .article-head{padding:30px 0 20px}
+.bt-theme .crumbs+.article-head{padding-top:12px}
+.bt-theme .article-head h1{font-size:clamp(2rem,4.3vw,3.2rem);margin:.15em 0 .55em;max-width:26ch}
+.bt-theme .answer,.bt-theme .article-head .answer{background:linear-gradient(var(--panel-hi),var(--panel));border:1px solid var(--gold);border-left:5px solid var(--blood-hi);box-shadow:inset 0 0 0 3px var(--panel),inset 0 0 0 4px var(--rim);padding:20px 24px;font-size:1.08rem;line-height:1.65;color:#f6ead6;max-width:80ch}
+.bt-theme .answer p{margin:0 0 .6rem}.bt-theme .answer p:last-child{margin-bottom:0}
+.bt-theme .byline{font-size:13px;color:var(--dim);margin-top:14px}
+.bt-theme .article-layout>.toc{background:var(--stone);border:1px solid var(--rim);border-top:3px solid var(--gold);border-radius:4px}
+.bt-theme .toc strong{font:700 11px/1.5 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.bt-theme.guide-layout .article-layout>.toc a{background:var(--panel);border-color:var(--rim);color:var(--gold-hi);border-radius:3px;text-decoration:none}
+.bt-theme.guide-layout .article-layout>.toc a:hover{border-color:var(--gold);color:#fffbe0}
+.bt-theme .prose h2{margin-top:2.2rem;padding-top:.3rem;font-size:clamp(1.5rem,3vw,2.1rem)}
+.bt-theme .prose h2::before{content:"";display:block;width:54px;height:3px;background:var(--blood-hi);margin-bottom:12px}
+.bt-theme .prose>section>.eyebrow+h2::before{display:none}
+.bt-theme .prose h3{margin-top:1.5rem}
+.bt-theme .prose p,.bt-theme .prose li{color:#e8e1d6}.bt-theme .prose li{padding:4px 0}
+.bt-theme .prose>section+section{border-top:1px solid #2f2640}
+.bt-theme .prose details{border:1px solid var(--rim);background:var(--stone);padding:14px 18px;margin:14px 0}
+.bt-theme .prose summary{cursor:pointer;color:var(--gold-hi);font-weight:700}
+.bt-theme .prose figcaption,.bt-theme figure.game-image figcaption{color:var(--dim)}
+.bt-theme.guide-layout figure.game-image{background:var(--stone);border-color:var(--gold);border-radius:4px;padding:8px}
+.bt-theme.guide-layout figure.game-image img{border-radius:0}
+.bt-theme .notice,.bt-theme .note{background:var(--panel);border-left:4px solid var(--blood-hi);padding:14px 18px;margin:22px 0;font-size:15px}
+.bt-theme .choice{padding:16px;border:1px solid var(--rim);background:var(--panel);border-radius:4px;margin:14px 0}.bt-theme .choice p{margin-bottom:0}
+.bt-theme .ref{font-size:11px;vertical-align:super;margin-left:3px}.bt-theme .ref a{text-decoration:none;padding:3px 2px}
+.bt-theme .sources{border-top:1px solid var(--rim);margin-top:34px;padding-top:12px;font-size:14px;overflow-wrap:anywhere;color:var(--dim)}
+.bt-theme .sources h2{font-size:1.25rem}.bt-theme .sources h2::before{display:none}.bt-theme .sources li{margin-bottom:10px}
+.bt-theme .back{font-size:13px}
+.bt-theme .related-tasks,.bt-theme .related{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--rim)}
+.bt-theme .related-tasks h2::before{display:none}
+.bt-theme .related-links{display:flex;flex-wrap:wrap;gap:10px 24px}
+.bt-theme .related-links a{text-decoration:none;font-weight:650;padding:8px 0}
+.bt-theme .related{display:flex;flex-wrap:wrap;gap:12px}
+.bt-theme .related a{padding:10px 14px;border:1px solid var(--rim);background:var(--panel);border-radius:4px;text-decoration:none}
+.bt-theme .related a:hover{border-color:var(--gold)}
+.bt-theme .legal{max-width:72ch;padding:30px 0 60px}.bt-theme .legal .crumbs{padding:0}
+.bt-theme .legal .article-head{padding:14px 0 6px}
+.bt-theme .legal section{padding-block:6px}
+
+/* 表格 */
+.bt-theme .table-wrap{overflow-x:auto;border:1px solid var(--rim);border-radius:4px;margin:22px 0;max-width:100%;background:var(--panel);contain:inline-size layout paint;overscroll-behavior-x:contain}
+.bt-theme table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;color:var(--text)}
+.bt-theme th,.bt-theme td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--rim);vertical-align:top}
+.bt-theme th{background:var(--panel-hi);color:#ffeea0;font:700 12px/1.4 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.bt-theme tr:last-child td{border-bottom:0}
+@media(max-width:700px){.bt-theme .prose .table-wrap::before{content:"Scroll sideways for all columns →";display:block;padding:.6rem;font-size:.85rem;color:var(--gold-hi);background:var(--stone);position:sticky;left:0}}
+
+/* 联机兼容检查工具 */
+.bt-theme .tool{padding:24px;border:1px solid var(--gold);box-shadow:inset 0 0 0 3px var(--stone),inset 0 0 0 4px var(--rim);background:var(--stone);border-radius:4px;margin:24px 0}
+.bt-theme .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.bt-theme label{display:block;font-weight:700;font-size:14px}
+.bt-theme select{display:block;max-width:100%;width:100%;margin-top:8px;padding:12px;min-height:46px;background:var(--panel);color:var(--text);border:1px solid var(--gold);border-radius:3px;font:inherit}
+.bt-theme button{font:700 14px/1.4 var(--body);padding:12px 18px;min-height:44px;border:1px solid var(--gold);border-radius:3px;cursor:pointer;background:linear-gradient(var(--gold-hi),var(--gold));color:#1c1408;margin:14px 8px 0 0}
+.bt-theme button[type=reset]{background:transparent;color:var(--gold-hi)}
+.bt-theme .result{background:var(--panel);border-left:4px solid var(--blood-hi);padding:18px;margin-top:18px;scroll-margin-top:110px}
+
+/* 页脚（register_page.py 生成 footer.site-footer；信任页同一套） */
+.bt-theme .site-footer{background:#0d0b12;color:var(--dim);border-top:1px solid var(--gold);padding:42px 0 0;font-size:14px;position:relative;margin-top:30px}
+.bt-theme .site-footer::before{content:"";position:absolute;left:0;right:0;top:3px;height:1px;background:var(--rim)}
+.bt-theme footer.site-footer .footer-grid{display:grid;grid-template-columns:1.6fr repeat(5,minmax(0,1fr));gap:28px 32px}
+.bt-theme .site-footer h2{font:700 11px/1.5 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.bt-theme .site-footer h2::before{display:none}
+.bt-theme .site-footer .footer-col a{display:block;color:var(--text);text-decoration:none;padding:4px 0;line-height:1.45}
+.bt-theme .site-footer .footer-col a:hover{color:var(--gold-hi)}
+.bt-theme .site-footer .footer-brand strong{font:600 20px/1.3 var(--display);color:#fff6dc}
+.bt-theme .site-footer .footer-brand a{text-decoration:none}
+.bt-theme .site-footer .footer-brand p{margin:10px 0 0;line-height:1.6;max-width:38ch}
+.bt-theme .site-footer .footer-version{margin:10px 0 0;font-size:12px;border-top:1px solid var(--rim);padding-top:8px}
+.bt-theme .footer-info{margin-top:34px;border-top:1px solid var(--rim);padding:16px 0 22px}
+.bt-theme .footer-info .wrap{display:flex;flex-wrap:wrap;gap:8px 24px}
+.bt-theme .footer-info a{color:var(--text);text-decoration:none;font-size:13px;padding:6px 0}.bt-theme .footer-info a:hover{color:var(--gold-hi)}
+
+/* 首页底部共享的 More games 推荐卡，沿用本主题配色 */
+.bt-theme .play-recommendations{max-width:none;margin-top:32px}
+.bt-theme .play-rec-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.bt-theme .play-rec-card{background:var(--panel);border-color:var(--rim);border-radius:4px;box-shadow:none}
+.bt-theme .play-rec-link h3{color:var(--text);font:600 22px/1.2 var(--display)}
+.bt-theme .play-rec-link p,.bt-theme .play-rec-heading>p:last-child{color:var(--dim)}
+.bt-theme .play-rec-action,.bt-theme .play-rec-heading>p:first-child{color:var(--gold)}
+.bt-theme .play-rec-link img{border-color:var(--rim)}
+
+@media(max-width:1100px){.bt-theme footer.site-footer .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.bt-theme .site-footer .footer-brand{grid-column:1/-1}}
+@media(max-width:900px){
+ .bt-theme .desktop-nav{display:none}.bt-theme .mobile-nav{display:block}.bt-theme .top>.wrap{min-height:76px}
+ .bt-theme footer.site-footer .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .bt-theme .play-rec-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ body.bt-theme{font-size:16px}
+ .bt-theme .wrap{width:calc(100% - 32px)}
+ .bt-theme .brand{font-size:19px}.bt-theme .brand small{font-size:9px;letter-spacing:.14em}
+ .bt-theme .top>.wrap{min-height:56px}
+ .bt-theme .crumbs{padding-top:10px}.bt-theme .crumbs>*{display:none}.bt-theme .crumbs>a:nth-last-of-type(1){display:inline}.bt-theme .crumbs>a:nth-last-of-type(1)::before{content:"‹ "}
+ .bt-theme .article-head{padding:18px 0 14px}.bt-theme .crumbs+.article-head{padding-top:6px}
+ .bt-theme .article-head>.eyebrow{display:none}
+ .bt-theme .byline{margin-top:8px;font-size:12px;line-height:1.5}
+ .bt-theme.guide-layout figure.game-image img{max-height:240px;object-fit:contain}
+ .bt-theme .article-head h1{font-size:1.7rem;margin:.1em 0 .4em}
+ .bt-theme .answer,.bt-theme .article-head .answer{font-size:.9rem;line-height:1.48;padding:10px 13px}
+ .bt-theme.guide-layout .article-layout>.toc{flex-wrap:nowrap;overflow-x:auto;padding:8px 10px;gap:6px;align-items:center;scrollbar-width:thin}
+ .bt-theme.guide-layout .toc strong{width:auto;white-space:nowrap;margin:0 4px 0 0}.bt-theme.guide-layout .toc a{white-space:nowrap}
+ .bt-theme.guide-layout .article-layout{gap:10px;padding-bottom:30px}
+ .bt-theme.guide-layout figure.game-image{margin:6px auto 16px;padding:5px}
+ .bt-theme .prose h2{margin-top:1.4rem;font-size:1.45rem}
+ .bt-theme .tool{padding:15px}.bt-theme .tool-grid{grid-template-columns:1fr}
+ .bt-theme th,.bt-theme td{padding:11px;min-width:92px}.bt-theme .table-wrap{font-size:13px}
+ .bt-theme .play-rec-grid{grid-template-columns:1fr}
+ .bt-theme .site-footer{padding-top:28px}.bt-theme footer.site-footer .footer-grid{gap:22px 18px}.bt-theme .site-footer .footer-col a{padding:7px 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{scroll-behavior:auto!important}}
+
+/* —— Brotato 特有：粗描边、硬投影、卡通标题 —— */
+.bt-theme h1,.bt-theme h2,.bt-theme h3,.bt-theme .brand{font-weight:400;letter-spacing:.03em;text-shadow:2px 2px 0 #000}
+.bt-theme .brand{font-size:30px;text-shadow:3px 3px 0 var(--blood)}
+.bt-theme .brand img{vertical-align:middle;margin-right:10px;float:left}
+.bt-theme .brand span{display:block;overflow:hidden}
+.bt-theme body,body.bt-theme{background:radial-gradient(900px 420px at 50% -140px,#3b2a5c 0,transparent 72%),var(--night)}
+.bt-theme .top{border-bottom:3px solid #000;box-shadow:0 3px 0 var(--blood)}
+.bt-theme .desktop-nav a{font-size:14px;letter-spacing:.02em}
+.bt-theme .desktop-nav a[aria-current=page]{box-shadow:inset 0 -3px 0 var(--gold)}
+.bt-theme .button,.bt-theme .launch{border:2px solid #000;border-radius:8px;background:var(--gold);color:#1c1408;box-shadow:3px 3px 0 #000;font-weight:800}
+.bt-theme .button:hover,.bt-theme .launch:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 #000}
+.bt-theme .button.secondary{background:var(--panel);color:var(--gold-hi);border-color:var(--gold)}
+.bt-theme .answer,.bt-theme .article-head .answer{border:2px solid #000;border-left:6px solid var(--gold);border-radius:8px;box-shadow:4px 4px 0 #000;background:var(--panel)}
+.bt-theme .article-layout>.toc{border:2px solid #000;border-radius:8px;border-top:2px solid #000;box-shadow:3px 3px 0 #000}
+.bt-theme .prose h2::before{background:var(--blood-hi);height:4px;border-radius:2px;width:46px}
+.bt-theme .table-wrap,.bt-theme .tool{border:2px solid #000;border-radius:8px;box-shadow:3px 3px 0 #000}
+.bt-theme.guide-layout figure.game-image{border:2px solid #000;border-radius:8px;box-shadow:4px 4px 0 #000;background:var(--stone)}
+.bt-theme.guide-layout figure.game-image img{border-radius:4px}
+.bt-theme .related a{border:2px solid #000;border-radius:8px;box-shadow:2px 2px 0 #000}
+.bt-theme .site-footer{border-top:3px solid #000;box-shadow:0 -3px 0 var(--blood)}
+.bt-theme .site-footer .footer-brand strong{font:400 26px/1.2 var(--display);letter-spacing:.03em}
+.bt-theme th{font-family:var(--body)}
+.bt-theme .brand small{text-shadow:none;letter-spacing:.14em;white-space:nowrap}
+.bt-theme .brand{max-width:none}
+.bt-theme .site-footer h2,.bt-theme .eyebrow{text-shadow:none}
+@media(max-width:600px){.bt-theme .brand{font-size:26px}.bt-theme .brand small{font-size:8.5px;letter-spacing:.1em}.bt-theme .brand img{width:36px;height:36px;margin-right:8px}}
