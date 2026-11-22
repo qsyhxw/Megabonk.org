@@ -1,0 +1,105 @@
+/* PokéPath TD 首页布局（模板 hub_components.py --css pp 生成，颜色走 theme.css 的 --hub-* 变量；02 §2.1 / 08 F9）。
+   首页专用，分页不加载。手机优先：文案 → 任务卡 → 预览 → 更新/分组/FAQ。 */
+/* Spires of Azeroth ��ҳ���֣�����ҳ��02 ��2.1 / 08 F9�����ֻ����ȣ��İ� �� ���� �� ��Ϸ���� �� �ٲ�/����/����/FAQ�� */
+.pp-hub .pp-hero { position: relative; margin: 18px 0 0; padding: 26px 22px 24px; color: var(--hub-ink-on-dark); background: var(--hub-night); border: 4px solid var(--hub-frame); box-shadow: 0 0 0 2px var(--hub-accent-dim), 0 6px 0 #0006; overflow: hidden; }
+.pp-hub .pp-hero::before { content: ""; position: absolute; inset: 0; background: var(--hub-hero-bg) 70% 60% / cover; opacity: .55; }
+.pp-hub .pp-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #140d09ee 35%, #140d0988); }
+.pp-hub .pp-hero > * { position: relative; z-index: 1; }
+.pp-hub .pp-kicker { margin: 0; font: 700 11px/1.6 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--hub-accent); }
+.pp-hub .pp-hero h1 { margin: .15em 0 .2em; font-size: clamp(2rem, 7vw, 4rem); line-height: 1.05; color: var(--hub-title); text-shadow: 0 2px 0 #000, 0 0 30px #b42a1c88; }
+.pp-hub .pp-h1-sub { display: block; font-size: .46em; letter-spacing: .14em; text-transform: uppercase; color: var(--hub-ink-on-dark); text-shadow: 0 2px 0 #000; margin-top: .35em; }
+.pp-hub .pp-deck { margin: 0 0 12px; max-width: 46ch; font-size: 1.1rem; line-height: 1.55; color: #f1e4c0; }
+.pp-hub .pp-status { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+.pp-hub .pp-status li { padding: 2px 11px; border: 1px solid var(--hub-accent-dim); background: #140d09cc; color: var(--hub-ink-on-dark); font: 700 12px/1.7 var(--body); letter-spacing: .04em; }
+.pp-hub .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.pp-hub .pp-hero a:not(.button) { color: var(--hub-title); }
+
+/* ���� */
+.pp-hub .pp-tasks { margin: 28px 0 8px; }
+.pp-hub .pp-tasks h2 { margin: 0 0 14px; }
+.pp-hub .pp-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.pp-hub .pp-card { display: flex; flex-direction: column; height: 100%; min-width: 0; border: 3px solid var(--hub-frame); background: var(--hub-dark); color: var(--hub-ink-on-dark); text-decoration: none; overflow: hidden; box-shadow: 0 3px 0 #0005; transition: border-color .15s; }
+.pp-hub .pp-card:hover { border-color: var(--hub-accent-dim); color: #fff3c4; }
+.pp-hub .pp-card img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 2px solid var(--hub-accent-dim); }
+.pp-hub .pp-card-body { display: flex; flex-direction: column; gap: 3px; padding: 11px 13px 14px; flex: 1; }
+.pp-hub .pp-card strong { font: 700 15px/1.3 var(--display); letter-spacing: .02em; color: var(--hub-title); }
+.pp-hub .pp-card-text { font-size: 13px; line-height: 1.5; color: #dcc9a0; }
+
+/* �ٲ�Ԥ��������ԭ��ս����ѧ */
+.pp-hub .pp-cheat { max-width: 1020px; margin: 8px auto 34px; padding: 18px 20px 12px; background: var(--hub-card); border: 2px solid var(--hub-accent-dim); outline: 1px solid var(--hub-wood-hi); outline-offset: -7px; }
+.pp-hub .pp-cheat h2 { margin: 0 0 .3rem; }
+.pp-hub .pp-cheat > p { margin: 0 0 12px; font-size: 14px; color: var(--hub-soft); }
+.pp-hub .pp-cheat dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 26px; margin: 0 0 8px; }
+.pp-hub .pp-cheat div { padding: 8px 0 8px 12px; border-left: 4px solid var(--hub-hot); }
+.pp-hub .pp-cheat dt { font: 700 12px/1.5 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--hub-hot); }
+.pp-hub .pp-cheat dd { margin: 2px 0 0; font-size: 15px; line-height: 1.5; }
+.pp-hub .pp-cheat kbd { padding: 1px 6px; border: 1px solid var(--hub-frame); border-radius: 3px; background: var(--hub-dark); color: var(--hub-title); font: 700 12px var(--body); white-space: nowrap; }
+
+/* �·����� */
+.pp-hub .pp-band { max-width: 850px; margin: 0 auto; padding: 22px 0 6px; scroll-margin-top: 16px; }
+.pp-hub .pp-band > h2 { margin-top: .2rem; }
+.pp-hub .pp-updates { margin: 0 0 12px; padding: 0; list-style: none; border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.pp-hub .pp-updates li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 4px 16px; align-items: baseline; padding: 11px 16px; border-bottom: 1px solid var(--hub-edge); }
+.pp-hub .pp-updates li:last-child { border-bottom: 0; }
+.pp-hub .pp-updates time { font: 700 12px/1.6 var(--body); letter-spacing: .06em; color: var(--hub-hot); }
+.pp-hub .pp-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.pp-hub .pp-group { padding: 14px 16px; border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.pp-hub .pp-group h3 { margin: 0 0 .2rem; color: var(--hub-hot); }
+.pp-hub .pp-group > p { margin: 0 0 .5rem; font-size: 14px; color: var(--hub-soft); }
+.pp-hub .pp-group ul { margin: 0; padding: 0; list-style: none; }
+.pp-hub .pp-group li a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; padding: 8px 0; border-top: 1px solid var(--hub-edge); font-weight: 700; text-decoration: none; }
+.pp-hub .pp-group li a span { font-weight: 400; font-size: 13px; color: var(--hub-soft); }
+.pp-hub .pp-faq { display: grid; gap: 10px; }
+.pp-hub .pp-faq details { border: 2px solid var(--hub-edge); background: var(--hub-card); }
+.pp-hub .pp-faq summary { cursor: pointer; list-style: none; min-height: 48px; padding: 12px 44px 12px 16px; position: relative; font: 700 15.5px/1.45 var(--display); color: var(--hub-dark); }
+.pp-hub .pp-faq summary::-webkit-details-marker { display: none; }
+.pp-hub .pp-faq summary::after { content: "+"; position: absolute; right: 16px; top: 9px; font: 700 22px/1.4 var(--body); color: var(--hub-hot); }
+.pp-hub .pp-faq details[open] summary::after { content: "�C"; }
+.pp-hub .pp-faq details[open] summary { border-bottom: 1px solid var(--hub-edge); }
+.pp-hub .pp-faq p { margin: 0; padding: 12px 16px 2px; }
+.pp-hub .pp-faq-more { display: inline-block; padding: 6px 16px 14px; font-size: 14px; font-weight: 700; }
+
+@media (max-width: 1050px) { .pp-hub .pp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .pp-hub .pp-hero::after { background: #140d09cc; } }
+@media (max-width: 600px) {
+  .pp-hub .pp-hero { margin-top: 12px; padding: 18px 16px 18px; border-width: 3px; }
+  .pp-hub .pp-kicker { font-size: 10px; letter-spacing: .14em; }
+  .pp-hub .pp-deck { font-size: 1rem; margin-bottom: 10px; }
+  .pp-hub .pp-status { gap: 6px; margin-bottom: 12px; }
+  .pp-hub .pp-status li { font-size: 11px; padding: 1px 8px; }
+  .pp-hub .hero-actions { gap: 8px; }
+  .pp-hub .hero-actions .button { flex: 1 1 100%; }
+  .pp-hub .pp-tasks { margin-top: 20px; }
+  .pp-hub .pp-cards { gap: 10px; }
+  .pp-hub .pp-card { border-width: 2px; }
+  .pp-hub .pp-card-body { padding: 8px 10px 11px; }
+  .pp-hub .pp-card strong { font-size: 13px; }
+  .pp-hub .pp-card-text { font-size: 12px; line-height: 1.45; }
+  .pp-hub .pp-cheat { padding: 14px 14px 8px; }
+  .pp-hub .pp-cheat dl { grid-template-columns: 1fr; gap: 4px; }
+  .pp-hub .pp-groups { grid-template-columns: 1fr; }
+  .pp-hub .pp-updates li { grid-template-columns: 1fr; padding: 10px 14px; }
+}
+
+/* 深色卡片上的文字与本站调整 */
+.pp-hub .pp-hero{background:linear-gradient(135deg,#25262b,#1b1c1f);box-shadow:0 0 0 2px var(--hub-accent-dim),0 6px 0 #0008}
+.pp-hub .pp-hero::before{opacity:.38;background-position:center 30%}
+.pp-hub .pp-hero::after{background:linear-gradient(90deg,#17181bf2 38%,#17181b99)}
+.pp-hub .pp-hero h1{text-shadow:0 2px 0 #000,0 0 26px #e0453d55}
+.pp-hub .pp-deck{color:#e4e3dd}
+.pp-hub .pp-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pp-hub .pp-card-text{color:#c9ccd4}
+.pp-hub .pp-faq summary{color:var(--hub-title)}
+.pp-hub .pp-faq p,.pp-hub .pp-updates span{color:#dcdde2}
+.pp-hub .pp-cheat dd{color:#e4e3dd}
+.pp-hub .pp-start{margin-top:30px}
+.pp-hub .pp-start-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.pp-hub .pp-start-note{padding:18px 20px;border:1px solid var(--rim);border-left:4px solid var(--red-hi);background:var(--panel);border-radius:4px}
+.pp-hub .pp-start-note h3{margin:0 0 6px}
+.pp-hub .pp-start-note p{margin:0 0 8px;font-size:15px}
+.pp-hub .pp-start-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
+.pp-hub .pp-start-grid h2{margin:.2rem 0 .5rem}
+@media(max-width:1050px){.pp-hub .pp-groups{grid-template-columns:1fr}.pp-hub .pp-start-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.pp-hub .pp-hero{padding:34px 26px 30px}.pp-hub .pp-hero::after{background:#17181bd9}.pp-hub .pp-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.pp-hub .pp-hero{padding:20px 16px 20px}.pp-hub .pp-h1-sub{font-size:.4em}.pp-hub .pp-card{box-shadow:none}.pp-hub .pp-cards{gap:10px}}
+@media(prefers-reduced-motion:reduce){.pp-hub .pp-card{transition:none}}
