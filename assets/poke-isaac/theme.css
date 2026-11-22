@@ -1,0 +1,76 @@
+/* PokéIsaac 专区主题（SOP v3.22）：视觉取自原作——深靛棋盘地面、金色像素标题、奶油色提示面板、红色 BETA 标签。
+   自包含：不加载其他游戏目录的 CSS。先按 390 手机调好，再放大到桌面。 */
+@font-face{font-family:Pixelify;src:url('/assets/fonts/pixelify-sans-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+.pkisaac-theme{
+  --pk-night:#14112b;--pk-ink:#231d3a;--pk-paper:#fbf5e6;--pk-card:#fffaf0;--pk-line:#d9ceb4;
+  --pk-gold:#ffd23c;--pk-orange:#f59e1b;--pk-red:#e63946;--pk-muted:#5c5470;--pk-link:#4a2fa8;
+  --paper:var(--pk-paper);--white:var(--pk-card);--ink:var(--pk-ink);--line:var(--pk-line);--pale:#efe5cb;--muted:var(--pk-muted);--green:var(--pk-link);
+  --play-red:var(--pk-link);--play-ink:var(--pk-ink);--play-paper:var(--pk-paper);
+  margin:0;color:var(--pk-ink);font:16px/1.7 system-ui,-apple-system,'Segoe UI',sans-serif;
+  background-color:var(--pk-night);
+  background-image:linear-gradient(45deg,#ffffff07 25%,transparent 25% 75%,#ffffff07 75%),linear-gradient(45deg,#ffffff07 25%,transparent 25% 75%,#ffffff07 75%);
+  background-size:48px 48px;background-position:0 0,24px 24px}
+.pkisaac-theme *{box-sizing:border-box}
+.pkisaac-theme img{max-width:100%;height:auto}
+.pkisaac-theme [hidden]{display:none!important}
+.pkisaac-theme .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.pkisaac-theme a{color:var(--pk-link);text-underline-offset:.2em}
+.pkisaac-theme a:focus-visible,.pkisaac-theme summary:focus-visible,.pkisaac-theme button:focus-visible{outline:3px solid var(--pk-orange);outline-offset:3px}
+.pkisaac-theme .wrap{width:calc(100% - 36px);max-width:1120px;margin-inline:auto}
+.pkisaac-theme .skip{position:absolute;left:12px;top:-90px;z-index:20;padding:10px;background:var(--pk-gold);color:var(--pk-ink)}
+.pkisaac-theme .skip:focus{top:8px}
+/* 页眉 */
+.pkisaac-theme .top{background:#0d0a20;color:#fff;border-bottom:4px solid var(--pk-gold)}
+.pkisaac-theme .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:60px;position:relative}
+.pkisaac-theme .brand{display:flex;align-items:baseline;gap:10px;color:#fff;text-decoration:none;font:700 1.45rem/1 Pixelify,monospace;letter-spacing:.02em}
+.pkisaac-theme .brand b{color:var(--pk-gold);font-weight:700}
+.pkisaac-theme .brand small{font:600 .7rem/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#b8b0d8}
+.pkisaac-theme .desktop-nav{display:flex;gap:22px;font-size:.88rem;font-weight:650}
+.pkisaac-theme .desktop-nav a,.pkisaac-theme .mobile-links a{color:#fff;text-decoration:none;padding:8px 0}
+.pkisaac-theme .desktop-nav a:hover,.pkisaac-theme .brand:hover b{color:var(--pk-gold)}
+.pkisaac-theme .desktop-nav a[aria-current=page]{border-bottom:3px solid var(--pk-gold)}
+.pkisaac-theme .mobile-nav{display:none}
+@media(max-width:900px){
+  .pkisaac-theme .desktop-nav{display:none}
+  .pkisaac-theme .mobile-nav{display:block}
+  .pkisaac-theme .mobile-nav summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;padding:0 14px;border:2px solid #6e5bc0;background:#2a1f52;color:#fff;font-weight:700;font-size:.9rem}
+  .pkisaac-theme .mobile-nav summary::-webkit-details-marker{display:none}
+  .pkisaac-theme .mobile-links{position:absolute;right:0;top:100%;z-index:30;display:grid;min-width:13rem;background:#0d0a20;border:2px solid #6e5bc0;padding:6px 0}
+  .pkisaac-theme .mobile-links a{padding:12px 18px}
+}
+/* 正文面板：奶油色提示框 + 金色描边 */
+.pkisaac-theme #main{padding-bottom:10px}
+.pkisaac-theme .play-notes{max-width:none;margin:0 0 40px;padding:6px 26px 30px;background:var(--pk-paper);border:3px solid var(--pk-gold);box-shadow:0 0 0 3px #0d0a20,6px 6px 0 3px #0d0a20}
+.pkisaac-theme .play-notes>section{margin:34px auto;scroll-margin-top:16px;max-width:80ch}
+.pkisaac-theme .play-notes>section:has(table){max-width:none}
+.pkisaac-theme .play-notes h2{font:700 1.45rem/1.25 Pixelify,system-ui;letter-spacing:0;margin:0 0 .7rem;padding-left:12px;border-left:6px solid var(--pk-red)}
+.pkisaac-theme .play-notes p,.pkisaac-theme .play-notes li{font-size:1rem;line-height:1.8}
+.pkisaac-theme .play-notes li{margin-bottom:8px}
+.pkisaac-theme .play-jump{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:16px 0 4px;font-size:.85rem}
+.pkisaac-theme .play-jump a{display:inline-block;padding:6px 12px;border:2px solid var(--pk-ink);background:var(--pk-card);color:var(--pk-ink);text-decoration:none;font-weight:700;min-height:36px}
+.pkisaac-theme .play-jump a:hover{background:var(--pk-gold)}
+/* 表格 */
+.pkisaac-theme .table-wrap{overflow-x:auto;border:2px solid var(--pk-ink);background:var(--pk-card);margin:18px 0;max-width:100%;contain:inline-size layout paint}
+.pkisaac-theme table{border-collapse:collapse;width:100%;font-size:.9rem}
+.pkisaac-theme th,.pkisaac-theme td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--pk-line)}
+.pkisaac-theme th{background:var(--pk-ink);color:var(--pk-gold);font:700 .8rem/1.3 Pixelify,system-ui;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.pkisaac-theme tr:last-child td{border-bottom:0}
+.pkisaac-theme kbd{font:600 .8rem system-ui;border:2px solid var(--pk-ink);border-bottom-width:3px;background:#fff;padding:1px 6px;white-space:nowrap}
+@media(max-width:700px){.pkisaac-theme .play-notes table{min-width:600px}.pkisaac-theme .table-wrap{overscroll-behavior-x:contain}}
+/* 配图与引用 */
+.pkisaac-theme figure.game-image{border:2px solid var(--pk-ink);background:var(--pk-card);box-shadow:4px 4px 0 #0d0a2033}
+.pkisaac-theme figure.game-image figcaption{color:var(--pk-muted)}
+.pkisaac-theme .ref{font-size:.7rem;vertical-align:super;margin-left:3px}
+.pkisaac-theme .ref a{text-decoration:none;padding:4px}
+.pkisaac-theme .sources{border-top:2px dashed var(--pk-line);margin-top:34px;padding-top:12px;font-size:.8rem;overflow-wrap:anywhere}
+.pkisaac-theme .sources h2{font-size:1.05rem;border-left-width:4px}
+.pkisaac-theme .sources li{font-size:.8rem;margin-bottom:9px}
+/* 页脚（LIGHT_CONTENT 沿用站级信任页，视觉与页眉一致） */
+.pkisaac-theme .footer{background:#0d0a20;color:#e5e0f7;border-top:4px solid var(--pk-gold);padding:30px 0}
+.pkisaac-theme .footer-grid{display:flex;justify-content:space-between;gap:24px}
+.pkisaac-theme .footer strong{font:700 1.15rem/1.2 Pixelify,system-ui;color:var(--pk-gold)}
+.pkisaac-theme .footer p{max-width:56ch;font-size:.85rem;color:#c9c2e6;margin:.4rem 0 .6rem}
+.pkisaac-theme .footer a{color:#fff}
+.pkisaac-theme .footer nav{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.85rem;align-content:flex-start}
+@media(max-width:600px){.pkisaac-theme .play-notes{padding:4px 16px 22px}.pkisaac-theme .play-notes h2{font-size:1.25rem}.pkisaac-theme .play-notes p,.pkisaac-theme .play-notes li{font-size:.95rem}.pkisaac-theme .footer-grid{display:grid}.pkisaac-theme .brand{font-size:1.25rem}.pkisaac-theme .brand small{display:none}}
+@media(prefers-reduced-motion:reduce){.pkisaac-theme *{scroll-behavior:auto!important}}

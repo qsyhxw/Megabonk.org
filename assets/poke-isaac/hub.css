@@ -1,0 +1,60 @@
+/* PokéIsaac 单页首页布局：英雄区、游戏窗口、入口条、互荐区。仅此页加载。 */
+.pkisaac-hub .pk-intro{display:grid;gap:20px;padding:26px 0 30px;color:#fff}
+.pkisaac-hub .pk-intro .eyebrow{display:inline-block;margin:0 0 12px;padding:3px 10px;background:var(--pk-red);color:#fff;font:700 .72rem/1.6 system-ui;letter-spacing:.1em;text-transform:uppercase;transform:rotate(-1.5deg)}
+.pkisaac-hub .pk-intro h1{font:700 clamp(2.6rem,11vw,4.6rem)/1 Pixelify,system-ui;letter-spacing:0;margin:0 0 14px;color:var(--pk-gold);text-shadow:4px 4px 0 #000a}
+.pkisaac-hub .pk-intro>div>p{font-size:1.02rem;line-height:1.7;margin:0 0 10px;color:#ece8fb}
+.pkisaac-hub .pk-intro .ref a{color:var(--pk-gold)}
+.pkisaac-hub .pk-intro>div>p.pk-version{font-size:.78rem;color:#b8b0d8}
+.pkisaac-hub .pk-hero{margin:0;border:3px solid var(--pk-gold);background:var(--pk-paper);padding:8px;box-shadow:6px 6px 0 #000a}
+.pkisaac-hub .pk-hero img{display:block;width:100%;height:auto}
+.pkisaac-hub .pk-heronote{font-size:.72rem;line-height:1.5;color:var(--pk-muted);margin:6px 2px 0}
+@media(min-width:901px){.pkisaac-hub .pk-intro{grid-template-columns:minmax(0,1fr) 440px;align-items:center;gap:40px;padding:42px 0 46px}}
+/* 游戏窗口 */
+.pkisaac-hub .game-panel{max-width:1020px;margin:0 auto 38px;min-width:0;scroll-margin-top:16px}
+.pkisaac-hub .game-screen{position:relative;aspect-ratio:16/10;min-height:420px;background:var(--pk-night);border:3px solid var(--pk-gold);box-shadow:6px 6px 0 #000a}
+.pkisaac-hub .game-cover{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;overflow:hidden;color:#fffdf6;background:radial-gradient(ellipse at top,#3a2f6e,var(--pk-night) 78%)}
+.pkisaac-hub .game-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.36}
+.pkisaac-hub .game-cover .cover-content{position:relative;z-index:1;max-width:560px;text-shadow:0 2px 12px #000a}
+.pkisaac-hub .game-cover h2{font:700 clamp(2.2rem,5vw,3.6rem)/1.05 Pixelify,system-ui;color:var(--pk-gold);margin:0 0 12px;text-shadow:3px 3px 0 #000b}
+.pkisaac-hub .game-cover p{font-size:.95rem;line-height:1.65;margin:0 0 14px;color:#ece8fb}
+.pkisaac-hub .game-cover .cover-note{font-size:.72rem;color:#cfc7e2;margin-top:16px}
+.pkisaac-hub .play-button{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:50px;padding:14px 34px;background:var(--pk-gold);color:var(--pk-ink);border:3px solid var(--pk-ink);border-radius:0;box-shadow:4px 4px 0 #000a;font:700 1.15rem/1.3 Pixelify,system-ui;cursor:pointer;letter-spacing:.02em}
+.pkisaac-hub .play-button:hover{background:#ffe27a;transform:translate(-1px,-1px)}
+.pkisaac-hub .game-screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0d0a20}
+.pkisaac-hub .game-meta{padding:14px 16px;margin-top:14px;background:var(--pk-paper);border:3px solid var(--pk-ink);box-shadow:4px 4px 0 #000a}
+.pkisaac-hub .game-meta>p{font-size:.78rem;line-height:1.6;color:var(--pk-muted);margin:0 0 8px}
+.pkisaac-hub .game-meta #game-status{margin:8px 0}
+.pkisaac-hub .game-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pkisaac-hub .game-tools button,.pkisaac-hub .game-dock button{min-height:44px;padding:8px 16px;background:var(--pk-card);color:var(--pk-ink);border:2px solid var(--pk-ink);border-radius:0;font:700 .85rem/1.3 system-ui;cursor:pointer}
+.pkisaac-hub .game-tools button:hover:not(:disabled),.pkisaac-hub .game-dock button:hover{background:var(--pk-gold)}
+.pkisaac-hub .game-tools button:disabled{opacity:.45;cursor:default}
+.pkisaac-hub .game-tools>a{font-size:.85rem;font-weight:700}
+.pkisaac-hub .game-dock{position:fixed;right:18px;bottom:16px;z-index:80;display:flex;align-items:center;gap:14px;max-width:calc(100% - 36px);padding:10px 14px;background:var(--pk-paper);border:3px solid var(--pk-ink);box-shadow:4px 4px 0 #000a;font-size:.85rem}
+.pkisaac-hub .game-panel[data-mode=minimized] .game-screen{display:none}
+.pkisaac-hub .game-panel[data-mode=expanded]{position:fixed;inset:12px;z-index:100;max-width:none;margin:0;display:flex;flex-direction:column;box-shadow:0 0 0 25px #0d0a20ee;background:var(--pk-paper)}
+.pkisaac-hub .game-panel[data-mode=expanded] .game-screen{flex:1;aspect-ratio:auto;min-height:0;order:1;box-shadow:none}
+.pkisaac-hub .game-panel[data-mode=expanded] .game-meta{order:0;margin:0;box-shadow:none;border-bottom:0;padding:8px 14px}
+.pkisaac-hub .game-panel[data-mode=expanded] .game-meta>p{display:none}
+.game-expanded{overflow:hidden}
+.game-minimized{padding-bottom:90px}
+html:has(body.pkisaac-theme){scroll-behavior:auto}
+/* 入口条 */
+.pkisaac-hub .pk-hub{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 38px}
+.pkisaac-hub .pk-hub a{display:block;padding:14px 16px;background:var(--pk-paper);border:3px solid var(--pk-ink);box-shadow:4px 4px 0 #000a;color:var(--pk-ink);text-decoration:none;font:700 1.05rem/1.3 Pixelify,system-ui;min-height:44px}
+.pkisaac-hub .pk-hub a:hover{background:var(--pk-gold)}
+.pkisaac-hub .pk-hub a span{display:block;margin-top:4px;font:400 .78rem/1.5 system-ui;color:var(--pk-muted)}
+/* 互荐区（共享组件，适配深色底） */
+.pkisaac-hub .play-recommendations{max-width:none;margin:0 0 40px;padding:22px 24px 26px;background:var(--pk-paper);border:3px solid var(--pk-gold);box-shadow:0 0 0 3px #0d0a20}
+.pkisaac-hub .play-rec-heading h2{font-family:Pixelify,system-ui;color:var(--pk-ink)}
+@media(max-width:900px){.pkisaac-hub .game-screen{min-height:390px}.pkisaac-hub .pk-hub{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+  .pkisaac-hub .pk-intro{padding:18px 0 22px}
+  .pkisaac-hub .game-screen{aspect-ratio:auto;height:440px;min-height:0}
+  .pkisaac-hub .game-cover{padding:18px}
+  .pkisaac-hub .play-button{font-size:1rem;padding:12px 20px}
+  .pkisaac-hub .pk-hub{gap:10px}
+  .pkisaac-hub .pk-hub a{padding:12px;font-size:.95rem}
+  .pkisaac-hub .play-recommendations{padding:16px 14px 20px}
+  .pkisaac-hub .game-dock{right:14px;bottom:12px;flex-wrap:wrap;gap:6px}
+  .pkisaac-hub .game-panel[data-mode=expanded]{inset:6px}
+}
