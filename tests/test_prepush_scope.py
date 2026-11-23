@@ -103,7 +103,8 @@ class RealWorkflowTests(unittest.TestCase):
             steps += [s for s in job['steps'] if 'run' in s and 'ci_summary.py' not in s['run']]
         kept, note = S.select_steps(['risk-of-rain-2/crossplay/index.html'], steps)
         self.assertLess(len(kept), len(steps))
-        checks_all = [s for s in steps if not S.is_rebuild(s)]
+        checks_all = [s for s in steps if not S.is_rebuild(s)
+                      and not any(k in s['name'] for k in S.SYNC_STEPS)]  # 同步测试按专区跳过
         checks_kept = [s for s in kept if not S.is_rebuild(s)]
         self.assertEqual(len(checks_all), len(checks_kept))
         self.assertIn('Rebuild Risk of Rain 2 lightweight tasks', names(kept))
