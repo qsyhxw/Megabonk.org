@@ -151,7 +151,12 @@ def run_for(commit, base, full=False):
             print('推送的改动未命中 validate-integrations 的触发路径，跳过本地复现。')
             return 0
     if not full:
-        steps, note = prepush_scope.select_steps(changed, steps)
+        def show(rev, path):
+            r = subprocess.run(['git', 'show', f'{rev}:{path}'], cwd=ROOT, capture_output=True,
+                               encoding='utf-8', errors='replace', env={k: v for k, v in os.environ.items() if not k.startswith('GIT_')})
+            return r.stdout if r.returncode == 0 else None
+        scoped = prepush_scope.expand_registry(changed, lambda f: show(base, f), lambda f: show(commit, f))
+        steps, note = prepush_scope.select_steps(scoped, steps)
         print(note)
     else:
         print('已指定 --full，全量运行。')

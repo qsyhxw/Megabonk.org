@@ -114,5 +114,54 @@ class RealWorkflowTests(unittest.TestCase):
                 self.assertTrue((ROOT / 'scripts' / sc).exists(), f'{game}: {sc}')
 
 
+class RegistryTests(unittest.TestCase):
+    """登记文件（pages_list/sitemap/content-dates/game-seo）按条目归属。"""
+
+    def expand(self, path, old, new):
+        return S.expand_registry([path], lambda p: old, lambda p: new)
+
+    def test_pages_list_new_game_line_is_scoped(self):
+        out = self.expand('pages_list.txt', 'https://megabonk.org/a/\n',
+                          'https://megabonk.org/a/\nhttps://megabonk.org/risk-of-rain-2/x/\n')
+        self.assertEqual(out, ['risk-of-rain-2/x/'])
+        self.assertEqual(S.owner_of(out[0]), 'risk-of-rain-2')
+
+    def test_pages_list_other_area_stays_shared(self):
+        out = self.expand('pages_list.txt', 'https://megabonk.org/a/\n',
+                          'https://megabonk.org/a/\nhttps://megabonk.org/guides/new/\n')
+        self.assertIsNone(S.owner_of(out[0]))
+
+    def test_content_dates_changed_keys_only(self):
+        old = '{"https://megabonk.org/pokepath/": "1", "https://megabonk.org/risk-of-rain-2/": "1"}'
+        new = '{"https://megabonk.org/pokepath/": "1", "https://megabonk.org/risk-of-rain-2/": "2"}'
+        self.assertEqual(self.expand('data/content-dates.json', old, new), ['risk-of-rain-2/'])
+
+    def test_game_seo_pages_only(self):
+        old = '{"pages": {"risk-of-rain-2/index.html": {"q": 1}, "brotato/index.html": {"q": 1}}}'
+        new = '{"pages": {"risk-of-rain-2/index.html": {"q": 2}, "brotato/index.html": {"q": 1}}}'
+        self.assertEqual(self.expand('data/game-seo.json', old, new), ['risk-of-rain-2/index.html'])
+        self.assertEqual(self.expand('data/game-seo.json', '{"pages": {}, "x": 0}', '{"pages": {}, "x": 1}'),
+                         ['data/game-seo.json'])
+
+    def test_sitemap_added_url_block(self):
+        base = '<urlset>\n<url><loc>https://megabonk.org/a/</loc></url>\n'
+        new = base + '<url><loc>https://megabonk.org/brotato/z/</loc><lastmod>d</lastmod></url>\n'
+        self.assertEqual(self.expand('sitemap.xml', base + '</urlset>', new + '</urlset>'), ['brotato/z/'])
+        self.assertEqual(self.expand('sitemap.xml', base + '</urlset>',
+                                     new.replace('<urlset>', '<urlset x="1">') + '</urlset>'), ['sitemap.xml'])
+
+    def test_unparseable_or_missing_stays_shared(self):
+        self.assertEqual(self.expand('data/content-dates.json', '{', '{}'), ['data/content-dates.json'])
+        self.assertEqual(self.expand('pages_list.txt', None, 'x'), ['pages_list.txt'])
+
+    def test_end_to_end_single_game_with_registry(self):
+        changed = ['risk-of-rain-2/index.html', 'assets/risk-of-rain-2/hub.css', 'pages_list.txt']
+        scoped = S.expand_registry(changed, lambda p: 'https://megabonk.org/a/\n',
+                                   lambda p: 'https://megabonk.org/a/\nhttps://megabonk.org/risk-of-rain-2/n/\n')
+        kept, note = S.select_steps(scoped, fake_steps())
+        self.assertIn('Rebuild Risk of Rain 2 lightweight tasks', names(kept))
+        self.assertNotIn('Rebuild PokeBonk from versioned source', names(kept))
+
+
 if __name__ == '__main__':
     unittest.main()

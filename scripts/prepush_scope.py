@@ -8,6 +8,7 @@
 专属路径来自 2026-11-23 的写入探测（修改时间变化法，见 PLAN）。未登记的生成脚本不会被跳过。
 本模块是纯函数，不调用 git，便于 tests/test_prepush_scope.py 单独测试。
 """
+import json
 import re
 
 # 游戏 → 专属路径前缀（以 '/' 结尾为目录，其余为文件名前缀）与其重建脚本。
@@ -88,3 +89,70 @@ def select_steps(changed, steps):
         kept.append(step)
     note = f'改动仅属于专区 {", ".join(sorted(touched))}；跳过 {len(skipped)} 个其他专区的重建步骤'
     return kept, note
+
+
+# ---- 登记文件按条目归属（v3.30）----
+# 新页上线必然改这几个全站登记文件；若只看文件名会一律判“共享→全量”，让单专区推送白跑全量。
+# 这里逐条比较新旧内容：只要变化的条目全部落在专区专属路径内，就把该文件替换成这些条目路径参与归属判断；
+# 任何一处无法证明（解析失败、非条目区域有改动、条目不属于专区）都保留原文件名，仍按共享处理。
+REGISTRY_FILES = ('pages_list.txt', 'sitemap.xml', 'data/content-dates.json', 'data/game-seo.json')
+_HOST_RE = re.compile(r'^https?://[^/]+/?')
+_URL_BLOCK_RE = re.compile(r'<url>.*?</url>', re.S)
+_LOC_RE = re.compile(r'<loc>\s*([^<]+?)\s*</loc>')
+
+
+def _rel(entry):
+    return _HOST_RE.sub('', entry.strip())
+
+
+def _changed_keys(old, new):
+    return {k for k in set(old) | set(new) if old.get(k) != new.get(k)}
+
+
+def registry_entries(path, old, new):
+    """返回该登记文件中变化的条目（相对站点根的路径）；无法证明时返回 None。"""
+    if old is None or new is None:
+        return None
+    try:
+        if path == 'pages_list.txt':
+            a = {l.strip() for l in old.splitlines() if l.strip()}
+            b = {l.strip() for l in new.splitlines() if l.strip()}
+            return {_rel(x) for x in a ^ b}
+        if path == 'sitemap.xml':
+            if re.sub(r'\s+', '', _URL_BLOCK_RE.sub('', old)) != re.sub(r'\s+', '', _URL_BLOCK_RE.sub('', new)):
+                return None
+
+            def blocks(text):
+                out = {}
+                for blk in _URL_BLOCK_RE.findall(text):
+                    m = _LOC_RE.search(blk)
+                    if not m:
+                        raise ValueError('url block without loc')
+                    out[m.group(1)] = re.sub(r'\s+', ' ', blk)
+                return out
+            return {_rel(k) for k in _changed_keys(blocks(old), blocks(new))}
+        if path == 'data/content-dates.json':
+            return {_rel(k) for k in _changed_keys(json.loads(old), json.loads(new))}
+        if path == 'data/game-seo.json':
+            o, n = json.loads(old), json.loads(new)
+            if {k: v for k, v in o.items() if k != 'pages'} != {k: v for k, v in n.items() if k != 'pages'}:
+                return None
+            return {_rel(k) for k in _changed_keys(o.get('pages', {}), n.get('pages', {}))}
+    except (ValueError, AttributeError, TypeError):
+        return None
+    return None
+
+
+def expand_registry(changed, read_old, read_new):
+    """把改动列表里的登记文件换成其变化条目；read_old/read_new(path) 返回文本，不存在返回 None。"""
+    if not changed or '*' in changed:
+        return list(changed)
+    out = []
+    for path in changed:
+        if path in REGISTRY_FILES:
+            entries = registry_entries(path, read_old(path), read_new(path))
+            if entries is not None:
+                out.extend(sorted(entries))
+                continue
+        out.append(path)
+    return out
