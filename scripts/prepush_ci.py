@@ -147,6 +147,65 @@ def fast(game):
     return 1
 
 
+def _clean_env():
+    return {k: v for k, v in os.environ.items() if not k.startswith('GIT_')}
+
+
+def _git_in(cwd, *args):
+    return subprocess.run(['git', *args], cwd=cwd, capture_output=True, env=_clean_env(),
+                          encoding='utf-8', errors='replace')
+
+
+def acquire_tree(commit, gdir, tmp):
+    """返回 (工作树路径, 释放函数)。
+
+    优先复用常驻 worktree（<git目录>/prepush-wt/tree）：每次只把变化的文件切到目标提交，
+    未变化的文件保持“已读过”的状态，省掉新建 worktree 时全站文件的冷读（约 60–70 秒，Windows 上尤其明显）。
+    常驻树被占用（并发推送）、损坏或切换失败时，退回每次新建临时 worktree（旧行为，安全）。
+    """
+    base_dir = gdir / 'prepush-wt'
+    lock = base_dir / 'lock'
+    wt = base_dir / 'tree'
+    base_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        if lock.exists() and time.time() - lock.stat().st_mtime > 1800:
+            lock.unlink()  # 超过 30 分钟视为上次异常退出遗留
+        fd = os.open(str(lock), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        os.close(fd)
+    except OSError:
+        fd = None
+    if fd is not None:
+        def release_lock():
+            try:
+                lock.unlink()
+            except OSError:
+                pass
+        ok = False
+        try:
+            if (wt / '.git').exists():
+                ok = (_git_in(wt, 'checkout', '-q', '-f', '--detach', commit).returncode == 0
+                      and _git_in(wt, 'clean', '-fdq').returncode == 0)
+            if not ok:
+                shutil.rmtree(wt, ignore_errors=True)
+                subprocess.run(['git', 'worktree', 'prune'], cwd=ROOT, capture_output=True, env=_clean_env())
+                ok = subprocess.run(['git', 'worktree', 'add', '-q', '--detach', str(wt), commit], cwd=ROOT,
+                                    capture_output=True, env=_clean_env()).returncode == 0
+        except OSError:
+            ok = False
+        if ok:
+            print(f'使用常驻 worktree：{wt}')
+            return wt, release_lock
+        release_lock()
+    print('常驻 worktree 不可用（被占用或失败），改用临时 worktree。')
+    wt = tmp / 'tree'
+    subprocess.run(['git', 'worktree', 'add', '--detach', str(wt), commit],
+                   cwd=ROOT, check=True, capture_output=True)
+
+    def release_tmp():
+        subprocess.run(['git', 'worktree', 'remove', '--force', str(wt)], cwd=ROOT, capture_output=True)
+    return wt, release_tmp
+
+
 def run_for(commit, base, full=False):
     paths, steps = workflow_spec(commit)
     changed = git('diff', '--name-only', base, commit, check=False).splitlines() if base else ['*']
@@ -177,13 +236,11 @@ def run_for(commit, base, full=False):
     shutil.rmtree(logs, ignore_errors=True)
     logs.mkdir(parents=True)
     tmp = Path(tempfile.mkdtemp(prefix='prepush-ci-'))
-    wt = tmp / 'tree'
-    subprocess.run(['git', 'worktree', 'add', '--detach', str(wt), commit],
-                   cwd=ROOT, check=True, capture_output=True)
+    wt, release = acquire_tree(commit, gdir, tmp)
     try:
         failures = execute(steps, wt, tmp, base, logs, commit[:8], games)
     finally:
-        subprocess.run(['git', 'worktree', 'remove', '--force', str(wt)], cwd=ROOT, capture_output=True)
+        release()
         shutil.rmtree(tmp, ignore_errors=True)
 
     if not failures:
