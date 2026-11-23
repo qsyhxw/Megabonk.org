@@ -13,6 +13,8 @@
 - 按工作流顺序逐个执行 run 步骤（bash -e，与 CI 相同）。某步失败后仍继续执行，
   最后汇总全部失败项，避免“修一个、冒一个”。
 - 推送的改动没有命中工作流的 paths 过滤时直接跳过，与 GitHub 的触发规则一致。
+- 按改动范围选择步骤（2026-11-23 批准，见 scripts/prepush_scope.py）：改动只落在某些专区的专属路径内时，
+  只运行这些专区的重建步骤；校验步骤、发现页与任何共享改动始终全量。`--full` 可强制全量。
 - 只对推送到 main 的提交生效。
 - 步骤日志保存在 .git/prepush-logs/，不会进入 Git。
 - 跳过检查：git push --no-verify
@@ -27,6 +29,9 @@ import tempfile
 from pathlib import Path
 
 import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import prepush_scope  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = '.github/workflows/validate-integrations.yml'
@@ -137,14 +142,19 @@ def fast(game):
     return 1
 
 
-def run_for(commit, base):
+def run_for(commit, base, full=False):
     paths, steps = workflow_spec(commit)
+    changed = git('diff', '--name-only', base, commit, check=False).splitlines() if base else ['*']
     if paths:
-        changed = git('diff', '--name-only', base, commit, check=False).splitlines() if base else ['*']
         patterns = [glob_to_re(p) for p in paths]
         if not any(p.match(f) for f in changed for p in patterns):
             print('推送的改动未命中 validate-integrations 的触发路径，跳过本地复现。')
             return 0
+    if not full:
+        steps, note = prepush_scope.select_steps(changed, steps)
+        print(note)
+    else:
+        print('已指定 --full，全量运行。')
 
     # worktree 里 .git 是文件：日志放到共用 git 目录（git rev-parse --git-common-dir）
     gdir = Path(git('rev-parse', '--git-common-dir').strip())
@@ -180,6 +190,7 @@ def main():
     ap.add_argument('--commit', default='HEAD', help='手动模式下要复现的提交')
     ap.add_argument('--fast', action='store_true', help='在当前工作区只跑共享检查（含未提交改动），见文件头说明')
     ap.add_argument('--game', default='', help='与 --fast 合用：追加名称或命令含该关键词的 Rebuild 步骤')
+    ap.add_argument('--full', action='store_true', help='不按改动范围选择步骤，强制运行全部 39 步')
     a = ap.parse_args()
     if a.fast:
         return fast(a.game)
@@ -201,7 +212,7 @@ def main():
 
     rc = 0
     for commit, base in pushes:
-        rc |= run_for(commit, base)
+        rc |= run_for(commit, base, full=a.full)
     return rc
 
 
