@@ -103,6 +103,8 @@ def build():
   f=ROOT/route.strip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);write_html(f,page,encoding='utf-8')
  from ror2_loader import page as loader_page
  fl=ROOT/'risk-of-rain-2/loader-build/index.html';fl.parent.mkdir(parents=True,exist_ok=True);write_html(fl,loader_page(frame,decorate),encoding='utf-8')
+ from ror2_bulwark import page as bulwark_page
+ fb=ROOT/'risk-of-rain-2/bulwarks-ambry/index.html';fb.parent.mkdir(parents=True,exist_ok=True);write_html(fb,bulwark_page(frame,decorate),encoding='utf-8')
  from ror2_items import page as items_page
  fi=ROOT/'risk-of-rain-2/item-tier-list/index.html';fi.parent.mkdir(parents=True,exist_ok=True);write_html(fi,items_page(frame,decorate),encoding='utf-8')
  from ror2_trust import build as build_trust
@@ -134,7 +136,7 @@ def register_seo(questions):
  new=json.dumps(d,ensure_ascii=False,indent=2)+'\n'
  if f.read_text(encoding='utf8')!=new:f.write_text(new,encoding='utf8')
  pl=ROOT/'pages_list.txt';text=open(pl,encoding='utf8',newline='').read()
- add=''.join(f'https://megabonk.org/risk-of-rain-2/{x}/\r\n' for x in ('about','contact','item-tier-list','loader-build') if f'/risk-of-rain-2/{x}/' not in text)
+ add=''.join(f'https://megabonk.org/risk-of-rain-2/{x}/\r\n' for x in ('about','contact','item-tier-list','loader-build','bulwarks-ambry') if f'/risk-of-rain-2/{x}/' not in text)
  if add:
   with open(pl,'a',encoding='utf8',newline='') as out:out.write(add)
 
