@@ -190,6 +190,17 @@ class CheckScopeTests(unittest.TestCase):
                 os.environ['PREPUSH_GAMES'] = old
 
 
+class GeneratorOwnershipTests(unittest.TestCase):
+    def test_game_generator_scripts_belong_to_game(self):
+        self.assertEqual(S.owner_of('scripts/build_risk_of_rain_2.py'), 'risk-of-rain-2')
+        self.assertEqual(S.owner_of('scripts/ror2_bulwark.py'), 'risk-of-rain-2')
+        self.assertEqual(S.owner_of('scripts/build_pokepath.py'), 'pokepath')
+
+    def test_shared_scripts_stay_shared(self):
+        for p in ('scripts/register_page.py', 'scripts/prepush_ci.py', 'scripts/site_analytics.py'):
+            self.assertIsNone(S.owner_of(p))
+
+
 class IntegrationsRegistryTests(unittest.TestCase):
     @staticmethod
     def cfg(include, sha='a', ref='r'):

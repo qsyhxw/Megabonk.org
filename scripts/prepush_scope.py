@@ -39,7 +39,7 @@ GAMES = {
     'poke-solaire': {'dirs': ['poke-solaire/'], 'files': [], 'scripts': ['build_poke_solaire.py']},
     'pokerogue': {'dirs': ['pokerogue/'], 'files': [], 'scripts': ['build_pokerogue.py']},
     'hordes-of-azeroth': {'dirs': ['hordes-of-azeroth/'], 'files': [], 'scripts': ['build_hordes_of_azeroth.py']},
-    'risk-of-rain-2': {'dirs': ['risk-of-rain-2/', 'assets/risk-of-rain-2/'], 'files': ['data/risk-of-rain-2'],
+    'risk-of-rain-2': {'dirs': ['risk-of-rain-2/', 'assets/risk-of-rain-2/'], 'files': ['data/risk-of-rain-2', 'scripts/ror2_'],
                        'scripts': ['build_risk_of_rain_2.py']},
     'mythic-survivors': {'dirs': ['mythic-survivors/'], 'files': [], 'scripts': ['build_mythic_survivors.py']},
 }
@@ -51,6 +51,9 @@ def owner_of(path):
     """返回改动路径所属的游戏；不属于任何游戏的专属路径返回 None。"""
     for game, spec in GAMES.items():
         if any(path.startswith(d) for d in spec['dirs']) or any(path.startswith(f) for f in spec['files']):
+            return game
+        # 本专区自己的生成脚本只产出本专区页面（写根目录共享文件的部分由保留的重建步骤和发现页覆盖）
+        if path.startswith('scripts/') and path[len('scripts/'):] in spec['scripts']:
             return game
     return None
 
