@@ -184,8 +184,14 @@ def write_if_changed(path, text):
 
 
 def write_json_if_changed(path, data):
-    if json.loads(path.read_text(encoding="utf-8")) != data:
-        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # 保持原文件的换行符：Windows 上 write_text 会把 LF 写成 CRLF，整文件变成改动并让预跑误判为共享改动
+    with open(path, encoding="utf-8", newline="") as f:
+        raw = f.read()
+    eol = "\r\n" if "\r\n" in raw else "\n"
+    if json.loads(raw) != data:
+        text = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+        with open(path, "w", encoding="utf-8", newline="") as f:
+            f.write(text.replace("\n", eol))
 
 
 def sync_registries(root, m, check):
