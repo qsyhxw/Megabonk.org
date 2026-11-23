@@ -190,6 +190,36 @@ class CheckScopeTests(unittest.TestCase):
                 os.environ['PREPUSH_GAMES'] = old
 
 
+class IntegrationsRegistryTests(unittest.TestCase):
+    @staticmethod
+    def cfg(include, sha='a', ref='r'):
+        import json
+        return json.dumps({'version': 1, 'change_reference': ref, 'integrations': [
+            {'id': 'adsense-1', 'enabled': True, 'include': include, 'exclude': [],
+             'checks': [{'tag': 'script', 'text_sha256': sha, 'count': 1}]}]})
+
+    def expand(self, old, new):
+        return S.expand_registry(['config/integrations.json'], lambda p: old, lambda p: new)
+
+    def test_new_page_in_include_list_is_scoped(self):
+        out = self.expand(self.cfg(['a/index.html']), self.cfg(['a/index.html', 'risk-of-rain-2/x/index.html']))
+        self.assertEqual(out, ['risk-of-rain-2/x/index.html'])
+        self.assertEqual(S.owner_of(out[0]), 'risk-of-rain-2')
+
+    def test_other_area_page_stays_full(self):
+        out = self.expand(self.cfg(['a/index.html']), self.cfg(['a/index.html', 'guides/new/index.html']))
+        self.assertIsNone(S.owner_of(out[0]))
+
+    def test_non_list_changes_stay_shared(self):
+        base = self.cfg(['a/index.html'])
+        self.assertEqual(self.expand(base, self.cfg(['a/index.html'], sha='b')), ['config/integrations.json'])
+        self.assertEqual(self.expand(base, self.cfg(['a/index.html'], ref='other')), ['config/integrations.json'])
+
+    def test_unchanged_lists_give_no_entries(self):
+        base = self.cfg(['a/index.html'])
+        self.assertEqual(self.expand(base, base), [])
+
+
 class SyncStepAndFileScopeTests(unittest.TestCase):
     SYNC = {'name': 'Verify public-source sync rejects unsafe updates', 'run': 'python scripts/test_pokebonk_sync.py'}
 

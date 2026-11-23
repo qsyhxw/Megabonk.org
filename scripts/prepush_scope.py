@@ -115,7 +115,8 @@ def select_steps(changed, steps):
 # 新页上线必然改这几个全站登记文件；若只看文件名会一律判“共享→全量”，让单专区推送白跑全量。
 # 这里逐条比较新旧内容：只要变化的条目全部落在专区专属路径内，就把该文件替换成这些条目路径参与归属判断；
 # 任何一处无法证明（解析失败、非条目区域有改动、条目不属于专区）都保留原文件名，仍按共享处理。
-REGISTRY_FILES = ('pages_list.txt', 'sitemap.xml', 'data/content-dates.json', 'data/game-seo.json')
+REGISTRY_FILES = ('pages_list.txt', 'sitemap.xml', 'data/content-dates.json', 'data/game-seo.json',
+                  'config/integrations.json')
 _HOST_RE = re.compile(r'^https?://[^/]+/?')
 _URL_BLOCK_RE = re.compile(r'<url>.*?</url>', re.S)
 _LOC_RE = re.compile(r'<loc>\s*([^<]+?)\s*</loc>')
@@ -158,7 +159,28 @@ def registry_entries(path, old, new):
             if {k: v for k, v in o.items() if k != 'pages'} != {k: v for k, v in n.items() if k != 'pages'}:
                 return None
             return {_rel(k) for k in _changed_keys(o.get('pages', {}), n.get('pages', {}))}
-    except (ValueError, AttributeError, TypeError):
+        if path == 'config/integrations.json':
+            # 新页上线只会往某个集成的 include/exclude 列表里加/删页面路径；
+            # 除这两个列表外任何字段（脚本哈希、数量、授权说明、启用状态、顶层字段）有变化都不归属，仍视为共享。
+            o, n = json.loads(old), json.loads(new)
+
+            def strip(cfg):
+                cfg = dict(cfg)
+                cfg['integrations'] = [{k: v for k, v in it.items() if k not in ('include', 'exclude')}
+                                       for it in cfg.get('integrations', [])]
+                return cfg
+            if strip(o) != strip(n):
+                return None
+            oi = {it['id']: it for it in o.get('integrations', [])}
+            ni = {it['id']: it for it in n.get('integrations', [])}
+            if set(oi) != set(ni):
+                return None
+            entries = set()
+            for ident in ni:
+                for key in ('include', 'exclude'):
+                    entries |= set(oi[ident].get(key, [])) ^ set(ni[ident].get(key, []))
+            return {_rel(x) for x in entries}
+    except (ValueError, AttributeError, TypeError, KeyError):
         return None
     return None
 
