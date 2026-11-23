@@ -132,7 +132,7 @@ def register_seo(questions):
  new=json.dumps(d,ensure_ascii=False,indent=2)+'\n'
  if f.read_text(encoding='utf8')!=new:f.write_text(new,encoding='utf8')
  pl=ROOT/'pages_list.txt';text=open(pl,encoding='utf8',newline='').read()
- add=''.join(f'https://megabonk.org/risk-of-rain-2/{x}/\r\n' for x in ('about','contact') if f'/risk-of-rain-2/{x}/' not in text)
+ add=''.join(f'https://megabonk.org/risk-of-rain-2/{x}/\r\n' for x in ('about','contact','item-tier-list') if f'/risk-of-rain-2/{x}/' not in text)
  if add:
   with open(pl,'a',encoding='utf8',newline='') as out:out.write(add)
 
