@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 
+from check_scope import scoped_games, route_in_scope
 from remaining_editorial import caption_records, edit_captions
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,11 +33,14 @@ class ImageLinks(HTMLParser):
 
 
 def main():
+    games_filter = scoped_games()
     policies = caption_records()
     games = json.loads((ROOT/'data/game-sections.json').read_text(encoding='utf8'))
     pages = 0
     figures = 0
     for game in games:
+        if games_filter is not None and game['id'] not in games_filter:
+            continue
         if game['id'] == 'vampire-survivors':
             continue  # Covered by the existing explicit guide-image policy.
         for path in sorted((ROOT/game['id']).rglob('*.html')):
@@ -69,6 +73,8 @@ def main():
     # Replay each original caption through the production path so rebuilding
     # old generators cannot restore source links or verbose inspection notes.
     for key, entries in policies.items():
+        if not route_in_scope(key, games_filter):
+            continue
         for entry in entries:
             original = ('<figure><img src="'+entry['image']+'"><figcaption>'
                         +entry['original_html']+'</figcaption></figure>')

@@ -74,12 +74,15 @@ def workflow_spec(commit):
     return paths, steps
 
 
-def execute(steps, cwd, tmp, base, logs, label):
+def execute(steps, cwd, tmp, base, logs, label, games=None):
     """按顺序执行步骤（bash -e，与 CI 相同），失败后继续，返回失败列表。"""
     # 从 pre-push 钩子触发时（尤其在 worktree 里推送）环境带有 GIT_DIR / GIT_INDEX_FILE 等变量；
     # 若传给步骤，测试里 cwd 在临时目录的 git init / add 会误操作真实仓库，必须清掉。
     env = {k: v for k, v in os.environ.items() if not k.startswith('GIT_')}
     env.update(RUNNER_TEMP=str(tmp), PYTHONIOENCODING='utf-8')
+    env.pop('PREPUSH_GAMES', None)
+    if games:  # 布局/图片/图注检查只查这些专区（scripts/check_scope.py）；CI 不设置，仍全量
+        env['PREPUSH_GAMES'] = ','.join(sorted(games))
     failures = []
     print(f'复现 {label}（{len(steps)} 个步骤），日志：{logs}')
     for i, step in enumerate(steps, 1):
@@ -150,6 +153,7 @@ def run_for(commit, base, full=False):
         if not any(p.match(f) for f in changed for p in patterns):
             print('推送的改动未命中 validate-integrations 的触发路径，跳过本地复现。')
             return 0
+    games = None
     if not full:
         def show(rev, path):
             r = subprocess.run(['git', 'show', f'{rev}:{path}'], cwd=ROOT, capture_output=True,
@@ -157,6 +161,7 @@ def run_for(commit, base, full=False):
             return r.stdout if r.returncode == 0 else None
         scoped = prepush_scope.expand_registry(changed, lambda f: show(base, f), lambda f: show(commit, f))
         steps, note = prepush_scope.select_steps(scoped, steps)
+        games = prepush_scope.touched_games(scoped)
         print(note)
     else:
         print('已指定 --full，全量运行。')
@@ -172,7 +177,7 @@ def run_for(commit, base, full=False):
     subprocess.run(['git', 'worktree', 'add', '--detach', str(wt), commit],
                    cwd=ROOT, check=True, capture_output=True)
     try:
-        failures = execute(steps, wt, tmp, base, logs, commit[:8])
+        failures = execute(steps, wt, tmp, base, logs, commit[:8], games)
     finally:
         subprocess.run(['git', 'worktree', 'remove', '--force', str(wt)], cwd=ROOT, capture_output=True)
         shutil.rmtree(tmp, ignore_errors=True)

@@ -163,5 +163,31 @@ class RegistryTests(unittest.TestCase):
         self.assertNotIn('Rebuild PokeBonk from versioned source', names(kept))
 
 
+class CheckScopeTests(unittest.TestCase):
+    def test_touched_games(self):
+        self.assertEqual(S.touched_games(['risk-of-rain-2/a/index.html', 'assets/risk-of-rain-2/x.css']), {'risk-of-rain-2'})
+        self.assertIsNone(S.touched_games(['risk-of-rain-2/a.html', 'scripts/x.py']))
+        self.assertIsNone(S.touched_games([]))
+        self.assertIsNone(S.touched_games(['*']))
+
+    def test_env_and_route_filter(self):
+        import os
+        import check_scope as C
+        old = os.environ.pop('PREPUSH_GAMES', None)
+        try:
+            self.assertIsNone(C.scoped_games())
+            self.assertTrue(C.route_in_scope('/anything/x/', None))
+            os.environ['PREPUSH_GAMES'] = 'pokepath, brotato'
+            g = C.scoped_games()
+            self.assertEqual(g, {'pokepath', 'brotato'})
+            self.assertTrue(C.route_in_scope('/pokepath/x/', g))
+            self.assertTrue(C.route_in_scope('brotato/index.html', g))
+            self.assertFalse(C.route_in_scope('/pokerogue/x/', g))
+        finally:
+            os.environ.pop('PREPUSH_GAMES', None)
+            if old is not None:
+                os.environ['PREPUSH_GAMES'] = old
+
+
 if __name__ == '__main__':
     unittest.main()

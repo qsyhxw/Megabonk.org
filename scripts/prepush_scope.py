@@ -70,6 +70,19 @@ def is_rebuild(step):
     return name.startswith('Rebuild')
 
 
+def touched_games(changed):
+    """改动全部落在专区专属路径内时返回涉及的专区集合；否则（含未知）返回 None。"""
+    if not changed or '*' in changed:
+        return None
+    touched = set()
+    for path in changed:
+        game = owner_of(path)
+        if game is None:
+            return None
+        touched.add(game)
+    return touched
+
+
 def select_steps(changed, steps):
     """返回 (保留的步骤列表, 说明文字)。changed 为改动路径列表，changed 为空或含 '*' 时全量。"""
     if not changed or '*' in changed:

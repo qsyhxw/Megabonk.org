@@ -2,6 +2,7 @@
 from pathlib import Path
 from html.parser import HTMLParser
 import json
+from check_scope import scoped_games, route_in_scope
 ROOT=Path(__file__).resolve().parents[1]
 class Images(HTMLParser):
  def __init__(self):super().__init__();self.active=False;self.pictures=[]
@@ -12,8 +13,9 @@ class Images(HTMLParser):
  def handle_endtag(self,t):
   if t=='figure':self.active=False
 def check():
- data=json.loads((ROOT/'data/guide-images.json').read_text(encoding='utf8'));errors=[]
- for route,p in data['pages'].items():
+ data=json.loads((ROOT/'data/guide-images.json').read_text(encoding='utf8'));errors=[];games=scoped_games()
+ pages={r:p for r,p in data['pages'].items() if route_in_scope(r,games)}
+ for route,p in pages.items():
   f=ROOT/route.lstrip('/')/'index.html';text=f.read_text(encoding='utf8')
   doc=Images();doc.feed(text)
   if len(doc.pictures)!=1:errors.append(route+': expected exactly one reviewed game figure');continue
@@ -39,6 +41,7 @@ def check():
   if 'og:image' not in text or m['stem']+'-'+str(max(m['sizes']))+'.webp' not in text:errors.append(route+': missing actual page image')
  # Original PNGs retain their complete source pixels and their own provenance map.
  for name,m in json.loads((ROOT/'data/pokerogue-media.json').read_text(encoding='utf8')).items():
+  if games is not None and not any(route_in_scope(r,games) for r in [m['page']]+m.get('also_used_on',[])):continue
   asset=ROOT/'assets/pokerogue'/name
   if not asset.exists() or asset.read_bytes()[:8]!=b'\x89PNG\r\n\x1a\n':errors.append(name+': missing original PNG');continue
   import struct
@@ -47,6 +50,6 @@ def check():
    page=(ROOT/route).read_text(encoding='utf8')
    if '/assets/pokerogue/'+name not in page or not m.get('source'):errors.append(name+': missing page/provenance association '+route)
  for e in errors:print('FAIL',e)
- print(('PASS' if not errors else 'FAIL')+f': {len(data["pages"])} content pages / {len(data["media"])} reviewed game images; all responsive assets, descriptions and generated figures checked. Relevance and visual readability require browser review.')
+ print(('PASS' if not errors else 'FAIL')+f': {len(pages)} content pages / {len(data["media"])} reviewed game images; all responsive assets, descriptions and generated figures checked. Relevance and visual readability require browser review.')
  return int(bool(errors))
 if __name__=='__main__':raise SystemExit(check())

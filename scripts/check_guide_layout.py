@@ -1,6 +1,7 @@
 """Guard shared game-section layout wiring after rebuilding all generators."""
 from html.parser import HTMLParser
 from pathlib import Path
+from check_scope import scoped_games
 ROOT=Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
  def __init__(self):super().__init__();self.classes=set();self.css=[];self.ids=set()
@@ -10,16 +11,19 @@ class Page(HTMLParser):
   if tag=='link'and a.get('rel')=='stylesheet':self.css.append((a.get('href') or '').split('?')[0])  # ignore cache-busting ?v=
   if a.get('id'):self.ids.add(a['id'])
 def check():
- errors=[];count=0
+ errors=[];count=0;games=scoped_games()
  # Discover additional sections using the shared base/layout, as well as the three existing ones.
  sections={'hordes-of-azeroth','pokearena-2d','spires-of-azeroth','pokebonk','poke-survivor','survivor-ace','azeroth-survivors','ball-x-pit','arena-of-champions','soulstone-survivors'}
  for folder in ROOT.iterdir():
   if not folder.is_dir() or folder.name.startswith(('.', '_')) or folder.name in ['node_modules','assets','scripts','PAGE_REPORTS']:continue
+  if games is not None and folder.name not in games:continue
   for file in folder.rglob('*.html'):
    text=file.read_text(encoding='utf-8-sig')
    if 'guide-layout' in text or '/assets/pokebonk/site.css' in text or '/assets/guide-article-layout.css' in text:
     sections.add(folder.name);break
+ if games is not None:sections&=games  # 限定专区：只检查本次涉及的专区（其余专区的文件未改动）
  for section in sorted(sections):
+  if not (ROOT/section).is_dir():continue
   for file in sorted((ROOT/section).rglob('*.html')):
    p=Page();p.feed(file.read_text(encoding='utf-8-sig'));count+=1
    if 'guide-layout'not in p.classes:errors.append(str(file.relative_to(ROOT))+': missing shared layout body class')
@@ -27,7 +31,7 @@ def check():
    if 'comparison-output'in p.ids:
     for ident in ['compare-tray','compare-open','compare-dialog','compare-modal-output','compare-close','compare-status']:
      if ident not in p.ids:errors.append('Partner comparison missing visible result control '+ident)
- if count<3:errors.append('No complete game sections found')
+ if games is None and count<3:errors.append('No complete game sections found')
  for x in errors:print('FAIL',x)
  print(('PASS'if not errors else'FAILED')+f': {count} game-section HTML files use the shared layout; comparison result controls present')
  return int(bool(errors))
