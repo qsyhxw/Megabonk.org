@@ -26,6 +26,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 import yaml
@@ -92,15 +93,16 @@ def execute(steps, cwd, tmp, base, logs, label, games=None):
             # 工作流里的 ${{ ... }} 只用于 BASE_SHA，这里替换为推送前的提交
             step_env[k] = base if '${{' in str(v) else str(v)
         print(f'[{i}/{len(steps)}] {name} ...', flush=True)
+        t0 = time.time()
         r = subprocess.run([BASH, '-e', '-c', step['run']], cwd=cwd, env=step_env,
                            capture_output=True, text=True, encoding='utf-8', errors='replace')
         log = logs / f'{i:02d}.log'
         log.write_text(r.stdout + r.stderr, encoding='utf-8')
         if r.returncode:
             failures.append((name, log, r.stdout + r.stderr))
-            print('  失败（退出码 %d）' % r.returncode)
+            print('  失败（退出码 %d，%.0f 秒）' % (r.returncode, time.time() - t0))
         else:
-            print('  通过')
+            print('  通过（%.0f 秒）' % (time.time() - t0))
     return failures
 
 
