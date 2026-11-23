@@ -101,6 +101,8 @@ def build():
  write_html(hub,hub_html,encoding='utf8')
  for route,page in zip(ROUTES,[crossplay(),gold(),ambry()]):
   f=ROOT/route.strip('/')/'index.html';f.parent.mkdir(parents=True,exist_ok=True);write_html(f,page,encoding='utf-8')
+ from ror2_items import page as items_page
+ fi=ROOT/'risk-of-rain-2/item-tier-list/index.html';fi.parent.mkdir(parents=True,exist_ok=True);write_html(fi,items_page(frame,decorate),encoding='utf-8')
  from ror2_trust import build as build_trust
  build_trust(lambda route,title,desc,main,trust=True:frame(route,title,desc,main,trust=trust))
  f=ROOT/'index.html';s=f.read_text(encoding='utf-8')
