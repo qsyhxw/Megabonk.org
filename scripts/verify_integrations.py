@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 
 import check_integrations as guard
+from check_scope import scoped_games, file_in_scope
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -24,7 +25,8 @@ def containers(document):
 
 def public_html():
     paths = subprocess.check_output(['git', 'ls-files', '--cached', '--others', '--exclude-standard'], cwd=ROOT).decode('utf-8').splitlines()
-    return sorted({p for p in paths if Path(p).suffix.lower() in ('.html', '.htm')})
+    games = scoped_games()  # 预跑限定专区时只检查这些专区与根目录页面；CI/全量不设置
+    return sorted({p for p in paths if Path(p).suffix.lower() in ('.html', '.htm') and file_in_scope(p, games)})
 
 
 def main():
@@ -51,6 +53,8 @@ def main():
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT/file, dest)
         errors, count = guard.check(out, config)
+        if scoped_games():  # 子集里可能没有某个集成的页面，“无匹配页面”只在全量时有意义
+            errors = [e for e in errors if not e.endswith('matches no HTML pages')]
         # Original containers were captured from the preserved pre-change Git
         # revision, independently of the edited HTML. New slots need review.
         for file in files:

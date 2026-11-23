@@ -19,3 +19,10 @@ def route_in_scope(route, games):
     if games is None:
         return True
     return route.strip('/').split('/', 1)[0] in games
+
+
+def file_in_scope(path, games):
+    """仓库相对路径是否需要检查：未限定、根目录文件（不在任何专区目录下）或属于限定专区。"""
+    if games is None or '/' not in path.strip('/'):
+        return True
+    return route_in_scope(path, games)

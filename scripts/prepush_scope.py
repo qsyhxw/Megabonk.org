@@ -83,6 +83,10 @@ def touched_games(changed):
     return touched
 
 
+# 只与特定专区的同步脚本有关的校验步骤：范围运行且未涉及这些专区时跳过（名称子串 → 专区集合）。
+SYNC_STEPS = {'public-source sync rejects unsafe updates': {'pokebonk', 'azeroth-survivors'}}
+
+
 def select_steps(changed, steps):
     """返回 (保留的步骤列表, 说明文字)。changed 为改动路径列表，changed 为空或含 '*' 时全量。"""
     if not changed or '*' in changed:
@@ -97,6 +101,9 @@ def select_steps(changed, steps):
     for step in steps:
         game = step_game(step)
         if is_rebuild(step) and game is not None and game not in touched:
+            skipped.append(step.get('name') or '?')
+            continue
+        if any(k in (step.get('name') or '') and not (touched & g) for k, g in SYNC_STEPS.items()):
             skipped.append(step.get('name') or '?')
             continue
         kept.append(step)

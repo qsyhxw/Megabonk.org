@@ -154,6 +154,8 @@ def run_for(commit, base, full=False):
             print('推送的改动未命中 validate-integrations 的触发路径，跳过本地复现。')
             return 0
     games = None
+    if not full and git('diff', '--name-only', '--diff-filter=DR', base, commit, check=False).strip():
+        changed = ['*']  # 有文件被删除/重命名：其他专区可能仍指向它，不缩范围
     if not full:
         def show(rev, path):
             r = subprocess.run(['git', 'show', f'{rev}:{path}'], cwd=ROOT, capture_output=True,

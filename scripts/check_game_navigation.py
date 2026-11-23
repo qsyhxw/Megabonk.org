@@ -2,6 +2,7 @@
 from pathlib import Path
 from html.parser import HTMLParser
 import json,subprocess
+from check_scope import scoped_games,file_in_scope
 ROOT=Path(__file__).resolve().parents[1]
 GAMES=json.loads((ROOT/'data/game-sections.json').read_text(encoding='utf8'))
 class Doc(HTMLParser):
@@ -31,11 +32,11 @@ class RecommendationCards(HTMLParser):
   if t=='article' and self.articles:self.articles.pop()
 
 def check():
- errors=[];count=0
+ errors=[];count=0;scope=scoped_games()
  public=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard'],cwd=ROOT).decode('utf8').splitlines()
  card_pages=card_count=0
  for name in public:
-  if Path(name).suffix.lower() not in {'.html','.htm'}:continue
+  if Path(name).suffix.lower() not in {'.html','.htm'} or not file_in_scope(name,scope):continue
   p=RecommendationCards();p.feed((ROOT/name).read_text(encoding='utf8'))
   if p.count:card_pages+=1;card_count+=p.count
   if p.routine_credits:errors.append(name+': routine source/date footers must not be generated on recommendation cards')
@@ -48,6 +49,7 @@ def check():
    if not dest.is_file() and not (dest/'index.html').is_file() and not Path(str(dest)+'.html').is_file():
     errors.append(name+': recommendation card has missing internal destination: '+href)
  for g in GAMES:
+  if scope is not None and g['id'] not in scope:continue  # 限定专区：其余专区本次未改动
   folder=ROOT/g['id']
   files=list(folder.rglob('*.html'))
   if g['id']=='vampire-survivors':files.append(ROOT/'games-like-vampire-survivors/index.html')

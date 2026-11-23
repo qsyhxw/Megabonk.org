@@ -189,5 +189,27 @@ class CheckScopeTests(unittest.TestCase):
                 os.environ['PREPUSH_GAMES'] = old
 
 
+class SyncStepAndFileScopeTests(unittest.TestCase):
+    SYNC = {'name': 'Verify public-source sync rejects unsafe updates', 'run': 'python scripts/test_pokebonk_sync.py'}
+
+    def test_sync_step_skipped_for_unrelated_game(self):
+        kept, _ = S.select_steps(['risk-of-rain-2/a/index.html'], [self.SYNC])
+        self.assertEqual(kept, [])
+
+    def test_sync_step_kept_for_pokebonk_and_full(self):
+        kept, _ = S.select_steps(['pokebonk/index.html'], [self.SYNC])
+        self.assertEqual(kept, [self.SYNC])
+        kept, _ = S.select_steps(['scripts/x.py'], [self.SYNC])
+        self.assertEqual(kept, [self.SYNC])
+
+    def test_file_in_scope(self):
+        import check_scope as C
+        g = {'risk-of-rain-2'}
+        self.assertTrue(C.file_in_scope('index.html', g))
+        self.assertTrue(C.file_in_scope('risk-of-rain-2/a/index.html', g))
+        self.assertFalse(C.file_in_scope('pokepath/index.html', g))
+        self.assertTrue(C.file_in_scope('pokepath/index.html', None))
+
+
 if __name__ == '__main__':
     unittest.main()
