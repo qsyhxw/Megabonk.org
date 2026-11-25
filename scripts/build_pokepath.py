@@ -16,6 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = '/pokepath/'
 A = '/assets/pokepath/'
 MEDIA = {
+    'route-1-1': ('/assets/pokepath/route-1-1.png', 480, 416, 'Route 1-1 terrain and enemy path', ''),
+    'route-3-3': ('/assets/pokepath/route-3-3.png', 480, 416, 'Route 3-3 terrain and enemy path', ''),
+    'route-5-1': ('/assets/pokepath/route-5-1.png', 480, 416, 'Route 5-1 terrain and enemy path', ''),
     'start': ('/assets/pokepath/start-800.webp', 1280, 720,
               'PokéPath TD profile creation with Charmander selected over Route 1-1',
               'Original 1.7.2 client, captured 9 November 2026 at profile creation.'),
@@ -29,6 +32,7 @@ MEDIA = {
                  'Excadrill, the armor-focused pick in the PokéPath TD role shortlist',
                  'Excadrill artwork from the original PokéPath Pokédex, checked 9 November 2026.'),
 }
+PAGES.extend(json.loads((ROOT / 'data/pokepath-guides.json').read_text(encoding='utf8')))
 HOME_PAGE = PAGES[0]
 
 
@@ -43,8 +47,9 @@ def figure(name):
     variants = ''
     if name == 'start':
         variants = ' srcset="/assets/pokepath/start-480.webp 480w, /assets/pokepath/start-800.webp 800w, /assets/pokepath/start-1280.webp 1280w" sizes="(max-width:800px) calc(100vw - 40px),800px"'
+    note = f'<figcaption>{caption}</figcaption>' if caption else ''
     return (f'<figure class="task-image {name}"><a href="{source}"><img src="{source}"{variants} width="{width}" height="{height}" '
-            f'alt="{alt}" loading="lazy"></a><figcaption>{caption}</figcaption></figure>')
+            f'alt="{alt}" loading="lazy"></a>{note}</figure>')
 
 
 def section_html(page):
@@ -61,7 +66,7 @@ def homepage():
     hero = h.hero(
         kicker='Independent player guides · Route tower defense', title='PokéPath TD ', sub='game &amp; player guides',
         deck='Choose a starter, place your Pokémon along a route and fix the wave that keeps beating you: team roles, save transfer, Route 1-3 and reward codes.',
-        status=['Browser · Free', 'Play page 1.7.2', 'Checked 9 Nov 2026', 'Unofficial fan guide'],
+        status=['Browser · Free', 'Play page 1.7.3', 'Checked 25 Nov 2026', 'Unofficial fan guide'],
         actions=[('Pick a guide ↓', '#guides', False), ('Open the game', '#play', True)], bg_attr=bg)
     cards = h.cards(heading='Pick the job you have right now', bg_attr=bg)
     cheat = h.cheat(pv['title'], pv['intro'], pv['rows'], bg_attr=bg)
@@ -116,7 +121,7 @@ def task_main(page):
     toc = ''.join(f'<a href="#{identifier}">{heading}</a>' for identifier, heading, _ in page['sections'])
     return (f'<main class="wrap" id="main"><header class="article-head" id="guide"><p class="eyebrow">PokéPath TD · Route tower defense</p>'
             f'<h1>{page["heading"]}</h1><div class="answer"><p>{page["answer"]}</p></div>'
-            f'<p class="byline">Megabonk.org editors · Checked 9 November 2026 · Current play page 1.7.2</p></header>'
+            f'<p class="byline">Megabonk.org editors · Build 1.7.3 · Updated 25 November 2026</p></header>'
             f'<div class="article-layout"><nav class="toc" aria-label="On this page">{toc}</nav><article class="prose">{"".join(sections)}'
             f'<p><a href="#guide">Back to top ↑</a></p></article></div></main>')
 
@@ -145,7 +150,7 @@ def build():
         n0 = seo_edit(fp, t0)
         if n0 != t0:
             fp.write_text(n0, encoding='utf8')
-    print('Built PokéPath home, 4 task pages and About/Contact')
+    print(f'Built PokéPath home, {len(PAGES) - 1} task pages and About/Contact')
 
 
 def register_seo(questions):
@@ -163,7 +168,7 @@ def register_seo(questions):
         f.write_text(new, encoding='utf8')
     pl = ROOT / 'pages_list.txt'
     text = open(pl, encoding='utf8', newline='').read()
-    add = ''.join(f'https://megabonk.org{BASE}{s}/\r\n' for s in ('about', 'contact') if f'{BASE}{s}/' not in text)
+    add = ''.join(f'https://megabonk.org{BASE}{s}/\r\n' for s in [p['slug'] for p in manifest()['pages'] if p['slug']] if f'{BASE}{s}/' not in text)
     if add:
         with open(pl, 'a', encoding='utf8', newline='') as out:
             out.write(add)
