@@ -2,14 +2,14 @@
 from pathlib import Path
 import re
 
-TAG = '<script defer src="https://umami-nine-rust.vercel.app/script.js" data-website-id="be597e21-a994-45fc-8c3c-5893c6cece58"></script>'
+TAG = '<script defer src="https://stats.megabonk.org/script.js" data-website-id="be597e21-a994-45fc-8c3c-5893c6cece58"></script>'
 NOTICE = '<h2 id="umami-analytics">Site-wide Umami analytics</h2><p>Updated 3 November 2026. All Megabonk.org pages, including guide sections, privacy and contact pages, and error pages, load Umami from umami-nine-rust.vercel.app to measure website usage. Your browser connects to that service and sends page-view information such as the page URL, referrer and browser/device details. This site-wide service also applies to sections described below as adding no separate analytics tag.</p>'
 
 
 def inject(html):
     if TAG in html:
         return html
-    if 'umami-nine-rust.vercel.app/script.js' in html:
+    if 'stats.megabonk.org/script.js' in html:
         raise ValueError('Unexpected Umami tag; review instead of duplicating')
     if not re.search(r'</head\s*>', html, re.I):
         raise ValueError('HTML document has no closing head')
