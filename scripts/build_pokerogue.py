@@ -66,6 +66,17 @@ def gimmighoul():
         ('sources', 'Evolution rules', '<p>The '+link('https://wiki.pokerogue.net/pokedex:1000','Gholdengo evolution entry')+' lists values for both Chest and Roaming forms. The '+link(RELEASE+'modifier/modifier.ts','game’s treasure tracker')+' updates the Pokémon present when a money reward is collected.</p>')]
     return render('gimmighoul', 'PokeRogue Gimmighoul Evolution: Count 10 Treasure Points', 'Calculate which rewards count toward Gholdengo, check the tracker and level up Gimmighoul after reaching ten points.', 'How to evolve Gimmighoul into Gholdengo', '<strong>Keep Gimmighoul in your party while collecting treasure, reach ten points, then level it up.</strong> Track the reward items themselves. You can spend your shop money normally.', parts, '999.png', 'Chest Form Gimmighoul', '', size=(39,53), checked='25 November 2026')
 
+def forms():
+    parts = [
+        ('items', 'Match the unlock to the Pokémon', table(['Goal', 'First reward', 'Then look for'], [
+            ('Gigantamax Garbodor', 'Dynamax Band', 'Max Mushrooms for your own eligible Garbodor. Seeing the boss in Trash to Treasure does not give your party that form.'),
+            ('Mega Rayquaza', 'Mega Bracelet', 'Rayquazite for your own Rayquaza. Teaching Dragon Ascent alone will not activate the PokéRogue form.'),
+            ('Mega Magearna', 'Mega Bracelet', 'Magearnite. The same stone works for standard and Original Color Magearna and leads to the corresponding Mega form.') ])),
+        ('activate', 'If the Band did nothing', '<ol><li>Check the species in your party. The Band enables rewards for eligible Pokémon. It does not give every team member a Gigantamax form.</li><li>Keep the eligible Pokémon and watch later reward choices for Max Mushrooms. Picking the Band does not guarantee mushrooms on the next wave.</li><li>Give the form item to the eligible Pokémon. In Check Team you can deactivate its form item and reactivate it. Switching out does not end a Mega or Gigantamax form.</li></ol>'),
+        ('choose', 'Decide before spending a reroll', '<p>If your only target is Magearna and you already have the Bracelet, your missing piece is Magearnite. A Dynamax Band does nothing for that goal. If your team needs healing now, budget for it before chasing a random form item.</p><p>Facing the event boss instead? See <a href="/pokerogue/trash-to-treasure/#battle">Garbodor’s opening moves and the reward choice</a>. The opponent and the reward screen are separate decisions.</p>'),
+        ('sources', 'Form and item references', '<p>The '+link('https://wiki.pokerogue.net/gameplay:forms','PokéRogue form tables')+' show eligible species, stat changes and form controls. The release definitions specify '+link(RELEASE+'data/balance/species/generation-07.ts','Magearna’s two stone triggers')+' and '+link(RELEASE+'data/balance/species/generation-03.ts','Rayquaza’s trigger')+'.</p>')]
+    return render('form-items', 'PokeRogue Dynamax Band, Max Mushrooms and Mega Stones', 'Match the Dynamax Band or Mega Bracelet to the next reward for Garbodor, Rayquaza or Magearna, then activate or reverse the form.', 'How to use the Dynamax Band and Mega Bracelet', '<strong>The Dynamax Band unlocks Max Mushrooms for eligible Pokémon. The Mega Bracelet unlocks the matching Mega Stone.</strong> Both routes need a second reward before the Pokémon changes.', parts, '569-gigantamax.png', 'Animation frames of Gigantamax Garbodor', 'Gigantamax Garbodor animation frames.', size=(419,261), checked='25 November 2026')
+
 def dark():
  parts=[('choose','Choose by what this run can afford to lose',table(['Your situation','Recommendation','Reason'],[
  ('You depend on one carry or a hard-to-replace support','Refuse if losing that member would end your plan.','You do not choose the donor. Keeping a weak bench member does not guarantee that it will be selected.'),
@@ -165,7 +176,7 @@ def build():
     main, questions = homepage()
     html = ads(shell(BASE, HOME, 'pr-hub', '<link rel="stylesheet" href="/assets/pokerogue/hub.css?v=20261122">', main, 'website'))
     write_html(ROOT / 'pokerogue/index.html', html, encoding='utf8')
-    for slug, fn in [('mobile', mobile), ('dark-deal', dark), ('trash-to-treasure', trash), ('eternatus', eternatus), ('gimmighoul', gimmighoul)]:
+    for slug, fn in [('mobile', mobile), ('dark-deal', dark), ('trash-to-treasure', trash), ('eternatus', eternatus), ('gimmighoul', gimmighoul), ('form-items', forms)]:
         p = ROOT / 'pokerogue' / slug / 'index.html'
         p.parent.mkdir(parents=True, exist_ok=True)
         write_html(p, ads(fn()), encoding='utf8')
@@ -181,7 +192,7 @@ def build():
         n0 = seo_edit(fp, t0)
         if n0 != t0:
             fp.write_text(n0, encoding='utf8')
-    print('Built PokeRogue home, 5 guides and About/Contact')
+    print('Built PokeRogue home, 6 guides and About/Contact')
 
 
 def register_seo(questions):
@@ -199,7 +210,7 @@ def register_seo(questions):
         f.write_text(new, encoding='utf8')
     pl = ROOT / 'pages_list.txt'
     text = open(pl, encoding='utf8', newline='').read()
-    add = ''.join(f'https://megabonk.org{BASE}{s}/\r\n' for s in ('about', 'contact', 'eternatus', 'gimmighoul') if f'{BASE}{s}/' not in text)
+    add = ''.join(f'https://megabonk.org{BASE}{s}/\r\n' for s in ('about', 'contact', 'eternatus', 'gimmighoul', 'form-items') if f'{BASE}{s}/' not in text)
     if add:
         with open(pl, 'a', encoding='utf8', newline='') as out:
             out.write(add)
