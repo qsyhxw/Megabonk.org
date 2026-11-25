@@ -4,6 +4,7 @@
 由最后一步 register_page.py 按 data/pokepath-pages.json 填充（02 §2.6、§5.2）。
 """
 import json
+import re
 import subprocess
 import sys
 from html import escape
@@ -66,7 +67,7 @@ def homepage():
     hero = h.hero(
         kicker='Independent player guides · Route tower defense', title='PokéPath TD ', sub='game &amp; player guides',
         deck='Choose a starter, place your Pokémon along a route and fix the wave that keeps beating you: team roles, save transfer, Route 1-3 and reward codes.',
-        status=['Browser · Free', 'Play page 1.7.3', 'Checked 25 Nov 2026', 'Unofficial fan guide'],
+        status=['Browser · Free', 'Play page 1.7.3', 'Updated 25 Nov 2026', 'Unofficial fan guide'],
         actions=[('Pick a guide ↓', '#guides', False), ('Open the game', '#play', True)], bg_attr=bg)
     cards = h.cards(heading='Pick the job you have right now', bg_attr=bg)
     cheat = h.cheat(pv['title'], pv['intro'], pv['rows'], bg_attr=bg)
@@ -126,6 +127,20 @@ def task_main(page):
             f'<p><a href="#guide">Back to top ↑</a></p></article></div></main>')
 
 
+def strip_source_links(html):
+    """00 §4：正文外链只保留行动入口（游玩/下载）；来源引用去掉链接、保留文字，不再逐条外跳。"""
+    def fix_anchor(m):
+        text = m.group(1)
+        if re.search(r'(?i)\b(play|download)\b', re.sub(r'<[^>]+>', ' ', text)):
+            return m.group(0)
+        return text.replace('↗', '').strip()
+
+    def fix_main(m):
+        return re.sub(r'<a\b[^>]*\bhref="https?://[^"]+"[^>]*>(.*?)</a>', fix_anchor, m.group(0), flags=re.S)
+
+    return re.sub(r'(?is)<main\b.*?</main>', fix_main, html)
+
+
 def build():
     questions = []
     for page in PAGES:
@@ -135,7 +150,7 @@ def build():
             html = shell(route, page, 'pp-hub', f'<link rel="stylesheet" href="{A}hub.css">', main, 'website')
         else:
             html = shell(route, page, 'pp-guide', '', task_main(page))
-        html = ads(html)
+        html = strip_source_links(ads(html))
         target = ROOT / route.strip('/') / 'index.html'
         target.parent.mkdir(parents=True, exist_ok=True)
         write_html(target, html, encoding='utf8')

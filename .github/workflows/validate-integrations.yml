@@ -90,7 +90,9 @@ jobs:
       - name: Rebuild reviewed Pokepath tasks
         id: s15
         if: always()
-        run: python scripts/build_pokepath.py
+        run: |
+          python scripts/build_pokepath.py
+          python scripts/content_gate.py . --allow config/content-gate-allow.json $(find pokepath -name index.html ! -path '*/about/*' ! -path '*/contact/*' ! -path '*/privacy/*')
       - name: Rebuild reviewed Revenant Survivors tasks
         id: s16
         if: always()
@@ -128,7 +130,9 @@ jobs:
       - name: Rebuild PokeRogue decision guides
         id: s24
         if: always()
-        run: python scripts/build_pokerogue.py
+        run: |
+          python scripts/build_pokerogue.py
+          python scripts/content_gate.py . --allow config/content-gate-allow.json $(find pokerogue -name index.html ! -path '*/about/*' ! -path '*/contact/*' ! -path '*/privacy/*')
       - name: Rebuild Hordes of Azeroth guides
         id: s25
         if: always()

@@ -34,6 +34,12 @@ BANNED = [
     r"source changes detected", r"editorial recommendations are awaiting review",
     r"automatic checks do not validate", r"external site, opens in a new tab",
     r"\(opens in a new tab\)", r"未实测", r"本站未(?:实际)?测试",
+    # 2026-11-26 补强：裸 "(new tab)" 文字、未测试式声明、作者栏免责（00 §1.4）
+    r"\(new tab\)", r"\b(?:is|are|was|were|remains?|remain) untested\b", r"\bnot (?:been )?tested here\b", r"\bnot tested in this check\b",
+    r"\bhas not been (?:tested|validated|claimed)\b", r"\bhave not been tested\b", r"\bwere not tested\b",
+    r"\bwas not tested\b", r"\bno full run tested\b", r"\bnot a (?:mobile )?gameplay test\b",
+    r"\bwe have not (?:generated|redeemed|established|validated|personally)\b", r"\bduring this review\b",
+    r"\bwe did not reproduce\b", r"\bsource-based guidance\b",
 ]
 # v3.21: retelling community posts instead of stating the answer (00 §1.2).
 RETELL = [
@@ -41,6 +47,10 @@ RETELL = [
     r"\bin a (?:launch-week |recent |separate |late-progress )?(?:reddit|steam|forum|help|discussion) (?:thread|post|reply|discussion)",
     r"\b(?:another|a separate|the player|a single player) (?:report|reply)\b",
     r"\bthe reply (?:points|says|suggests)", r"\bplayer leads?\b", r"\bu/[A-Za-z0-9_-]{3,}",
+    # 2026-11-26 补强：点名社区讨论/玩家帖子的转述（00 §1.2 不点名转述）
+    r"\b(?:community|player|forum|reddit|fan|user) (?:discussion|thread|post|question)s? (?:about [^.]{0,60}?)?(?:describes?|asks?|reports?|says?|discusses?|lists?|finds?|asked)\b",
+    r"\bReplies (?:emphasi[sz]e|say|suggest|note|point|differ)", r"\bthe thread (?:discusses|says|describes|suggests)\b",
+    r"\ba player (?:finding|reporting|asking|saying)\b", r"\ba phone player\b",
 ]
 BANNED_H2 = re.compile(r"^((external\s+)?sources?(\s*(&|and)\s*(verification|checks|limits|version|evidence limits|edition limits))?|references|检查依据)$", re.I)
 
