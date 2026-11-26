@@ -2,13 +2,20 @@ from pokebonk_sync_reference import load_reference
 """Task tools use the versioned .55 reference; never connect to game accounts."""
 import json,re
 from pathlib import Path
+from datetime import datetime
 from html import escape as e
 from pokebonk_completion import requirements,mods_text
 D=load_reference('pokebonk-tools-reference.json')
+# 价格表版本与日期取自已接受的同步数据，避免页面文字落后于真实数据。
+_SYNC=json.loads((Path(__file__).resolve().parents[1]/'data'/'pokebonk-sync.json').read_text(encoding='utf8'))
+_LAB_VER=_SYNC['accepted']['lab']['version']
+_LAB_AT=datetime.fromisoformat(_SYNC['changed_at'])
+_LAB_DATE=f'{_LAB_AT:%b} {_LAB_AT.day}'
+_LAB_AFF=any(x['id']=='affinity' for x in _SYNC['accepted']['lab']['data'])
 
 def apply_tools(ctx):
  P,pages,article=ctx['P'],ctx['PAGES'],ctx['article']
- old=ctx['DATE'],ctx['VERSION'];ctx['DATE'],ctx['VERSION']='October 28, 2026','game data v0.10.11 (synced Nov 20) · wording checked v0.8.62'
+ old=ctx['DATE'],ctx['VERSION'];ctx['DATE'],ctx['VERSION']='October 28, 2026','game data v'+_LAB_VER+' (synced '+_LAB_DATE+') · wording checked v0.8.62'
  flow='<nav class="task-flow" aria-label="Plan a run"><a href="/pokebonk/pokemon/">1 · Find a partner</a><a href="/pokebonk/build-planner/">2 · Draft a build</a><a href="/pokebonk/move-fusions/#finder">3 · Check a fusion</a><a href="/pokebonk/lab/#calculator">4 · Budget the Lab</a></nav>'
  scope='<p class="note">Original pokebonk.com: game data was synced to v0.10.11 on November 20, so passives, items and Lab prices shown here use that data. The wording of kits, item cards and Lab notes was last checked October 28 against v0.8.62 and has not been re-reviewed for v0.10.11. Fusion recipes and evolution levels retain the October 26 v0.8.55 reference. No live account access, purchase or damage simulation. Our Play window is a separate v0.8.27 edition. Recheck changed cards in your actual game.</p>'
  sources=[(D['source_client'],'pokebonk.com — v0.8.62 original client','SINGLE_SOURCE: kits and passive descriptions rechecked October 28. No full-run, purchase or fusion test.'),(D['source_news'],'pokebonk.com — v0.8.62 configuration','League rarity/challenges, item descriptions, vitamins and all Lab price schedules rechecked October 28; recipes/evolution retain dated v0.8.55 source fields.'),('https://pokebonk.com/assets/main-D2_otW26-mvob1c8t.js','pokebonk.com — retained v0.8.55 recipe/evolution reference','Inspected October 26. Recipe and evolution fields retain this snapshot, not a full .62 recheck.')]
@@ -43,7 +50,7 @@ def apply_tools(ctx):
  for x in D['lab']:
   options=''.join(f'<option value="{i}">{i}</option>'for i in range(x['max']+1))
   rows.append(f'<div class="budget-row" data-upgrade="{x["id"]}"><h3>{e(x["name"])}</h3><label>Owned level <select aria-label="Owned {e(x["name"])}">{options}</select></label><label>Target level <select aria-label="Target {e(x["name"])}">{options}</select></label><output>0 Stardust</output></div>')
- budget='<section id="calculator"><noscript><p>JavaScript is needed for automatic totals. The complete cost schedule and worked budgets remain below.</p></noscript><h2>Calculate your own Lab basket</h2><p>Price schedule from game data v0.10.11 (synced November 20, including affinity). The notes above were last checked against v0.8.62 on October 28. Choose owned and target levels; only unowned levels count. Hidden rows remain in the total. This is not a purchase or live price check.</p><form id="budget-form"><label>Stardust available <input id="dust" type="number" min="0" max="1000000000" value="0"></label><label>Find an upgrade <input id="budget-search" type="search"></label><p id="budget-total" role="status">Total 0 Stardust · Remaining 0</p><div id="budget-rows">'+''.join(rows)+'</div><button type="reset">Reset budget</button></form><p><a href="/pokebonk/build-planner/">Return to the build planner</a>. Selecting capacity here does not buy or unlock it in the game. Costs exclude item unlocks. A target below owned is raised to owned, never treated as a refund.</p></section>'
+ budget='<section id="calculator"><noscript><p>JavaScript is needed for automatic totals. The complete cost schedule and worked budgets remain below.</p></noscript><h2>Calculate your own Lab basket</h2><p>Price schedule from game data v'+_LAB_VER+' (synced '+_LAB_DATE+(', including affinity' if _LAB_AFF else '')+'). The notes above were last checked against v0.8.62 on October 28. Choose owned and target levels; only unowned levels count. Hidden rows remain in the total. This is not a purchase or live price check.</p><form id="budget-form"><label>Stardust available <input id="dust" type="number" min="0" max="1000000000" value="0"></label><label>Find an upgrade <input id="budget-search" type="search"></label><p id="budget-total" role="status">Total 0 Stardust · Remaining 0</p><div id="budget-rows">'+''.join(rows)+'</div><button type="reset">Reset budget</button></form><p><a href="/pokebonk/build-planner/">Return to the build planner</a>. Selecting capacity here does not buy or unlock it in the game. Costs exclude item unlocks. A target below owned is raised to owned, never treated as a refund.</p></section>'
  enhance('lab',budget)
  pages[P+'lab/']['html']=pages[P+'lab/']['html'].replace('</head>','<script src="/assets/pokebonk/tools.js" defer></script></head>').replace('<a href="#sources">Sources</a>','<a href="#calculator">Calculate a basket</a><a href="#sources">Sources</a>',1)
  # Put actual route presets next to the existing starter routes, not another ranking.
