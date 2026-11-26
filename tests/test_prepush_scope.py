@@ -253,5 +253,15 @@ class SyncStepAndFileScopeTests(unittest.TestCase):
         self.assertTrue(C.file_in_scope('pokepath/index.html', None))
 
 
+
+class BrotatoHelperOwnershipTest(unittest.TestCase):
+    """brotato 的生成辅助模块与数据文件必须归属 brotato，否则单专区推送会回退全量（2026-11-26 修复）。"""
+
+    def test_helper_modules_and_data_belong_to_brotato(self):
+        self.assertEqual(S.touched_games(['scripts/brotato_content.py', 'brotato/co-op/index.html']), {'brotato'})
+        self.assertEqual(S.touched_games(['data/brotato-pages.json', 'data/brotato-media.json']), {'brotato'})
+        self.assertIsNone(S.touched_games(['scripts/brotato_content.py', 'scripts/unknown_shared.py']))
+
+
 if __name__ == '__main__':
     unittest.main()

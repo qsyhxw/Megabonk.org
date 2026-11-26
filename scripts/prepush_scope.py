@@ -31,7 +31,7 @@ GAMES = {
     'pokepath': {'dirs': ['pokepath/'], 'files': [], 'scripts': ['build_pokepath.py']},
     'revenant-survivors': {'dirs': ['revenant-survivors/'], 'files': [], 'scripts': ['build_revenant_survivors.py']},
     'midgard-survivors': {'dirs': ['midgard-survivors/'], 'files': [], 'scripts': ['build_midgard_survivors.py']},
-    'brotato': {'dirs': ['brotato/'], 'files': [], 'scripts': ['build_brotato.py']},
+    'brotato': {'dirs': ['brotato/'], 'files': ['data/brotato-', 'scripts/brotato_'], 'scripts': ['build_brotato.py']},
     'pokelit': {'dirs': ['pokelit/'], 'files': [], 'scripts': ['build_pokelit.py']},
     'pokemon-battlegrounds': {'dirs': ['pokemon-battlegrounds/'], 'files': [], 'scripts': ['build_pokemon_battlegrounds.py']},
     'poke-isaac': {'dirs': ['poke-isaac/'], 'files': [], 'scripts': ['build_pokeisaac.py']},
