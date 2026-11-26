@@ -12,7 +12,7 @@ NAV=[('Start here',PREFIX),('Evolution',PREFIX+'evolution/'),('Co-op',PREFIX+'co
 
 def figure(key, loading='lazy'):
  m=MEDIA[key]
- return f'<figure class="game-image"><a href="{m["path"]}"><img src="{m["path"]}" width="{m["width"]}" height="{m["height"]}" alt="{escape(m["alt"],quote=True)}" loading="{loading}"></a><figcaption>{m["caption"]} {link(m["source"],"Image source")}</figcaption></figure>'
+ return f'<figure class="game-image"><a href="{m["path"]}"><img src="{m["path"]}" width="{m["width"]}" height="{m["height"]}" alt="{escape(m["alt"],quote=True)}" loading="{loading}"></a><figcaption>{m["caption"]} {m["source_text"] if m.get("source_text") else link(m["source"],"Image source")}</figcaption></figure>'
 
 def shell(route,title,desc,body,image='steam-0',error=False,hub=False):
  nav=''.join(f'<a href="{u}">{t}</a>'for t,u in NAV)
@@ -21,7 +21,7 @@ def shell(route,title,desc,body,image='steam-0',error=False,hub=False):
 
 def article(slug,title,desc,answer,image,sections):
  toc='<nav class="toc" aria-label="On this page">'+''.join(f'<a href="#{i}">{h}</a>'for i,h,_ in sections)+'</nav>'
- review_date='26 November 2026' if slug == 'evolution' else '18 November 2026' if slug in {'caveman','updates','mods'} else ('26 November 2026' if slug == 'co-op' else ('9 November 2026' if slug=='vs-vampire-survivors' else '13 November 2026'))
+ review_date='26 November 2026' if slug in {'evolution','shop'} else '18 November 2026' if slug in {'caveman','updates','mods'} else ('26 November 2026' if slug == 'co-op' else ('9 November 2026' if slug=='vs-vampire-survivors' else '13 November 2026'))
  body=f'<header class="article-head" id="guide"><p class="eyebrow">BROTATO · FIELD GUIDE</p><h1>{title}</h1><div class="answer"><p>{answer}</p></div><p class="byline">Megabonk.org editors · Checked {review_date} · Source-based guidance, no gameplay test</p></header><div class="article-layout">'+toc+'<article class="prose">'
  for n,(i,h,t) in enumerate(sections):
   body+=f'<section id="{i}"><h2>{h}</h2>{t}</section>'
