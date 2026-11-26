@@ -83,8 +83,10 @@ def read_raw(path):
 def apply_spans(text, path, key, version, when):
     out, n1 = re.subn(rf'(<strong data-live="{key}">)[^<]*(</strong>)', rf'\g<1>{version}\g<2>', text)
     out, n2 = re.subn(rf'(<span data-live-date="{key}">)[^<]*(</span>)', rf'\g<1>{long_date(when)}\g<2>', out)
-    if n1 != 1 or n2 != 1:
-        raise Reject(f'{path}: expected one value and one date span for {key}, found {n1}/{n2}')
+    # 同一版本可在页面多处展示（如状态栏与下载说明），全部替换为同一值；
+    # 但至少要有一个值标签，日期标签仍必须恰好一个，缺失或歧义都拒绝。
+    if n1 < 1 or n2 != 1:
+        raise Reject(f'{path}: expected at least one value and one date span for {key}, found {n1}/{n2}')
     return out
 
 
