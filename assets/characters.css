@@ -1,0 +1,60 @@
+/* Megabonk.org Characters 外观覆盖层（批次 2）。仅改视觉，叠加在内联样式之后；限定在 body.mb-chars 下。
+   保留每个角色的主题色首屏区块，统一页面底色、页头页脚、标题字体、卡片与标签。 */
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-display:optional;src:url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2")}
+body.mb-chars{--mb-bg:#0d1117;--mb-deep:#080b10;--mb-panel:#151b25;--mb-panel2:#1d2531;--mb-line:#2a3341;--mb-text:#f3f5f8;--mb-muted:#a9b3c1;--mb-orange:#ff7a35;--mb-orange-d:#e85f1c;--mb-cyan:#4dc5d6;--mb-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+--bg-primary:var(--mb-bg);--bg-secondary:var(--mb-panel);--bg-dark:var(--mb-bg);--bg-darker:var(--mb-deep);--primary-bg:var(--mb-bg);--secondary-bg:var(--mb-panel);--text-primary:var(--mb-text);--text-secondary:var(--mb-muted);--text-muted:var(--mb-muted);--text-light:var(--mb-text);--card-bg:var(--mb-panel);
+background:var(--mb-bg)!important;color:var(--mb-text)}
+/* 页头：统一 Logo 与导航 */
+body.mb-chars>header,body.mb-chars header:first-of-type{background:rgba(8,11,16,.94)!important;border-bottom:1px solid var(--mb-line)!important;box-shadow:0 2px 0 var(--mb-orange)!important}
+body.mb-chars .logo{background:none!important;-webkit-text-fill-color:var(--mb-text)!important;color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;letter-spacing:.01em}
+body.mb-chars .nav-links a{color:var(--mb-text)}body.mb-chars .nav-links a:hover{color:var(--mb-orange)}
+body.mb-chars .nav-links a::after{background:var(--mb-orange)!important}
+/* 面包屑 */
+body.mb-chars .breadcrumb,body.mb-chars nav.breadcrumb{background:transparent!important;color:var(--mb-muted)}
+body.mb-chars .breadcrumb a{color:var(--mb-orange)!important}
+/* 标题：去渐变字，统一展示字体（首屏背景色保留） */
+body.mb-chars h1,body.mb-chars .character-title,body.mb-chars .hero h1{background:none!important;-webkit-text-fill-color:currentColor!important;font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.06;letter-spacing:.005em;font-size:clamp(2.2rem,5.6vw,3.4rem);text-shadow:none!important}
+body.mb-chars h1:not([class*="hero"] h1){color:#fff}
+body.mb-chars .section-title,body.mb-chars .section-header h2,body.mb-chars .container>h2{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-text);font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.1;font-size:clamp(1.6rem,3.4vw,2.2rem)}
+/* 卡片 */
+body.mb-chars .stat-card,body.mb-chars .build-card,body.mb-chars .timeline-item,body.mb-chars .info-card,body.mb-chars .section,body.mb-chars .pros,body.mb-chars .cons,body.mb-chars .faq-item{border-radius:12px!important;box-shadow:none!important}
+body.mb-chars .stat-card:hover,body.mb-chars .build-card:hover,body.mb-chars .char-nav-item:hover{transform:none!important;box-shadow:none!important}
+body.mb-chars .stat-card,body.mb-chars .build-card,body.mb-chars .info-card,body.mb-chars .faq-item{background:var(--mb-panel)!important;border-color:var(--mb-line)!important}
+body.mb-chars .stat-card h3{color:var(--mb-orange)!important}
+body.mb-chars .warning-box{border-radius:0 12px 12px 0!important}
+/* 等级标签：统一为胶囊 */
+body.mb-chars .tier-badge,body.mb-chars .character-tier,body.mb-chars .tier-tag{border-radius:999px!important;box-shadow:none!important;font-weight:800}
+/* 表格 */
+body.mb-chars table th{background:var(--mb-panel2)!important;color:var(--mb-text)!important}
+body.mb-chars table td{border-color:var(--mb-line)!important}
+body.mb-chars .table-wrap,body.mb-chars .tier-table-wrap{overflow-x:auto}
+/* 按钮 */
+body.mb-chars .btn,body.mb-chars .cta-button,body.mb-chars .build-link{border-radius:8px!important;box-shadow:none!important}
+/* 页脚 */
+body.mb-chars footer{background:var(--mb-deep)!important;border-top:1px solid var(--mb-line)!important;color:var(--mb-muted)}
+body.mb-chars footer a{color:var(--mb-muted)}body.mb-chars footer a:hover{color:var(--mb-orange)}
+body.mb-chars a:focus-visible,body.mb-chars button:focus-visible,body.mb-chars summary:focus-visible{outline:2px solid #f4c95d;outline-offset:3px}
+/* 手机端：导航可横滑；溢出防护 */
+@media(max-width:768px){
+body.mb-chars header nav{flex-direction:column!important;align-items:flex-start!important;gap:.4rem;padding:.7rem 1.1rem!important}
+body.mb-chars header .nav-links{display:flex!important;flex-wrap:nowrap;gap:.3rem!important;width:100%;overflow-x:auto;padding:0 0 .35rem;margin:0;list-style:none;scrollbar-width:none}
+body.mb-chars header .nav-links::-webkit-scrollbar{display:none}
+body.mb-chars header .nav-links li{flex:0 0 auto}
+body.mb-chars header .nav-links a{display:block;padding:.35rem .75rem;border:1px solid var(--mb-line);border-radius:999px;font-size:.88rem;white-space:nowrap}
+body.mb-chars .mobile-menu{display:none!important}
+body.mb-chars table{display:block;max-width:100%;overflow-x:auto}
+body.mb-chars [class*="grid"],body.mb-chars .container,body.mb-chars .section{min-width:0;max-width:100%}
+}
+@media(max-width:600px){body.mb-chars [class*="grid"]{grid-template-columns:minmax(0,1fr)!important}body.mb-chars img{max-width:100%}}
+@media(prefers-reduced-motion:reduce){body.mb-chars *{transition:none!important}}
+/* 以 body>nav 作顶栏的页面 */
+body.mb-chars>nav:not(.breadcrumb){background:rgba(8,11,16,.94)!important;border-bottom:1px solid var(--mb-line)!important;box-shadow:0 2px 0 var(--mb-orange)!important}
+@media(max-width:768px){body.mb-chars>nav:not(.breadcrumb) .nav-links{display:flex!important;flex-wrap:nowrap;gap:.3rem!important;overflow-x:auto;list-style:none;scrollbar-width:none}body.mb-chars>nav:not(.breadcrumb) .nav-links a{padding:.35rem .75rem;border:1px solid var(--mb-line);border-radius:999px;font-size:.88rem;white-space:nowrap}body.mb-chars>nav:not(.breadcrumb){flex-direction:column!important;align-items:flex-start!important}}
+@media(max-width:768px){body.mb-chars .hero-content,body.mb-chars .character-hero,body.mb-chars [class*="hero"]{flex-wrap:wrap}body.mb-chars .hero-text{min-width:0;flex:1 1 100%;max-width:100%}}
+@media(max-width:768px){body.mb-chars .hero-content{grid-template-columns:minmax(0,1fr)!important;gap:1.2rem!important;justify-items:center}}
+/* Tier list：概览面板改用品牌面板色 */
+body.mb-chars .quick-overview{background:var(--mb-panel)!important;border:1px solid var(--mb-line)!important;box-shadow:none!important;border-radius:16px!important}
+body.mb-chars .overview-tier-row{background:var(--mb-panel2)!important;box-shadow:none!important}
+body.mb-chars .overview-character-item{background:rgba(255,255,255,.05)!important}
+body.mb-chars .overview-character-item:hover{background:rgba(255,122,53,.12)!important;transform:none!important}
+body.mb-chars .quick-overview h2{font-family:var(--mb-display);font-style:italic;font-weight:800}
