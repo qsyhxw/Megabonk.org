@@ -1,0 +1,53 @@
+/* Megabonk.org 共享设计系统 v1（批次 0）。承接旧 megabonk-guide.css 的全部类名，可整体替换。 */
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-display:swap;src:url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2")}
+:root{--bg:#0d1117;--deep:#080b10;--panel:#151b25;--panel2:#1d2531;--line:#2a3341;--text:#f3f5f8;--muted:#a9b3c1;--orange:#ff7a35;--orange-d:#e85f1c;--cyan:#4dc5d6;--green:#45c97a;--yellow:#f4c95d;--red:#f06a77;--radius:10px;--display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;--body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;font-family:var(--body);background:radial-gradient(900px 420px at 85% -80px,rgba(255,122,53,.10),transparent 70%),linear-gradient(180deg,var(--bg),var(--deep) 900px);background-color:var(--deep);color:var(--text);line-height:1.65}
+a{color:var(--cyan)}a:hover{color:var(--yellow)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;border-radius:4px}
+.skip{position:fixed;top:-5rem;left:1rem;z-index:2000;padding:.7rem 1rem;background:#fff;color:#111}.skip:focus{top:1rem}
+/* 页头 */
+.header{position:sticky;top:0;z-index:1000;background:rgba(8,11,16,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 2px 0 var(--orange)}
+.nav{max-width:1200px;min-height:64px;margin:auto;padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.logo{color:var(--text);font:italic 800 1.7rem/1 var(--display);letter-spacing:.01em;text-decoration:none}.logo span{color:var(--orange)}
+.main-desktop{display:flex;gap:.3rem}.main-desktop a,.main-mobile nav a{padding:.45rem .8rem;border-radius:999px;color:var(--text);font-weight:650;font-size:.95rem;text-decoration:none}.main-desktop a:hover,.main-mobile nav a:hover{background:var(--panel2);color:var(--orange)}
+.main-mobile{display:none}.main-mobile summary{cursor:pointer;padding:.45rem .9rem;border:1px solid var(--line);border-radius:999px;font-weight:700;list-style:none}.main-mobile summary::-webkit-details-marker{display:none}
+/* 首屏与正文容器 */
+main{max-width:1100px;margin:auto;padding:2.4rem 1.5rem 4rem}
+.guide-body{max-width:76ch}
+.guide-body ol,.guide-body ul{padding-left:1.4rem}.guide-body li+li{margin-top:.6rem}
+.crumb{color:var(--muted);font-size:.88rem;margin-bottom:1.4rem}.crumb a{text-decoration:none}
+.eyebrow{color:var(--orange);font-size:.78rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+h1,h2{font-family:var(--display);font-style:italic;font-weight:800;letter-spacing:.005em}
+h1{margin:.5rem 0 1rem;font-size:clamp(2.3rem,6vw,3.6rem);line-height:1.04}
+h2{margin-bottom:1rem;font-size:clamp(1.6rem,3.4vw,2.1rem);line-height:1.12}
+h2::before{content:"";display:block;width:2.2rem;height:4px;margin-bottom:.6rem;background:var(--orange);border-radius:2px}
+h3{margin-bottom:.45rem;font-size:1.12rem}
+.lead{color:#d9dee6;font-size:1.14rem}p+p{margin-top:.8rem}
+.jump{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.6rem 0 2.4rem}.jump a{padding:.4rem .8rem;color:var(--text);border:1px solid var(--line);border-radius:999px;background:var(--panel);text-decoration:none;font-size:.88rem}.jump a:hover{border-color:var(--orange);color:var(--orange)}
+section{margin-top:3rem;scroll-margin-top:92px}.guide-body section{margin-top:2.6rem}section:first-of-type{margin-top:0}
+/* 组件 */
+.quick,.notice,.danger{padding:1.3rem;background:var(--panel);border-left:4px solid var(--yellow);border-radius:0 var(--radius) var(--radius) 0}.notice{margin:1rem 0;border-left-color:var(--cyan);color:var(--muted)}.danger{margin:1rem 0;border-left-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{padding:1.2rem;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}.card p,.card li{color:var(--muted)}
+.tag{display:inline-block;margin-bottom:.7rem;padding:.2rem .55rem;border:1px solid rgba(255,122,53,.5);border-radius:4px;color:var(--orange);font-size:.74rem;font-weight:800;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}.chip{padding:.4rem .75rem;border:1px solid var(--green);border-radius:999px;background:rgba(69,201,122,.12);font-size:.86rem;font-weight:800}
+.btn{display:inline-block;padding:.7rem 1.2rem;border-radius:8px;background:var(--orange);color:#1a0d05;font-weight:800;text-decoration:none}.btn:hover{background:var(--orange-d);color:#1a0d05}.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+table{width:100%;min-width:640px;border-collapse:collapse}th,td{padding:.8rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:var(--panel2);font-size:.86rem;text-transform:uppercase;letter-spacing:.04em}td{color:var(--muted)}td strong{color:var(--text)}tr:last-child td{border-bottom:0}
+.good{color:var(--green);font-weight:850}
+.steps{counter-reset:step;list-style:none;padding:0!important}.steps li{counter-increment:step;display:grid;grid-template-columns:2.3rem 1fr;gap:.8rem;padding:1rem 0;border-bottom:1px solid var(--line)}.steps li:before{content:counter(step);width:2rem;height:2rem;display:grid;place-items:center;border-radius:50%;background:var(--orange);color:#1a0d05;font-weight:900}
+.check{padding-left:1.2rem}.check li{margin:.5rem 0}
+code{color:var(--yellow);overflow-wrap:anywhere}
+details{padding:.9rem 0;border-bottom:1px solid var(--line)}summary{font-weight:800;cursor:pointer}details p{margin-top:.55rem;color:var(--muted)}
+.related a{display:block;margin-top:.45rem}.sources li{overflow-wrap:anywhere}
+/* 页脚（与首页 footer-grid 同构） */
+.footer{margin-top:2rem;padding:2.6rem 1.5rem;background:var(--deep);border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.footer-in{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:2rem}
+.footer-brand{font:italic 800 1.5rem/1 var(--display);color:var(--text)}.footer-brand span{color:var(--orange)}
+.footer h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text)}.footer ul{list-style:none}.footer li{margin:.35rem 0}.footer a{color:var(--muted);text-decoration:none}.footer a:hover{color:var(--orange)}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.2rem;border-top:1px solid var(--line);font-size:.82rem}
+@media(max-width:900px){.main-desktop{display:none!important}.main-mobile{display:block;position:relative}.main-mobile nav{position:absolute;right:0;top:calc(100% + .5rem);min-width:12rem;display:grid;gap:.2rem;padding:.6rem;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);z-index:1100}.guide-body .table-wrap::before{content:"Scroll sideways for all columns →";display:block;padding:.5rem .8rem 0;color:var(--muted);font-size:.82rem}.footer-in{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){main{padding:1.6rem 1.1rem 3rem}.nav{padding:.6rem 1.1rem}.grid,.grid.three{grid-template-columns:1fr}.footer-in{grid-template-columns:1fr}section{scroll-margin-top:80px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
