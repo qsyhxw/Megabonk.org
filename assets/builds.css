@@ -1,0 +1,86 @@
+/* Megabonk.org Builds 外观覆盖层（批次 1）。仅改视觉，叠加在各页内联样式之后；全部限定在 body.mb-builds 下。 */
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-display:swap;src:url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2")}
+body.mb-builds{--mb-bg:#0d1117;--mb-deep:#080b10;--mb-panel:#151b25;--mb-panel2:#1d2531;--mb-line:#2a3341;--mb-text:#f3f5f8;--mb-muted:#a9b3c1;--mb-orange:#ff7a35;--mb-orange-d:#e85f1c;--mb-cyan:#4dc5d6;--mb-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+/* 重映射两套模板的内联变量 */
+--primary-bg:var(--mb-bg);--secondary-bg:var(--mb-panel);--accent-purple:var(--mb-orange);--accent-blue:var(--mb-cyan);--accent-pink:#f06a77;--danger:#f06a77;--card-bg:var(--mb-panel);--success:#45c97a;--warning:#f4c95d;--text-light:var(--mb-text);--text-gray:var(--mb-muted);
+--primary-gradient:linear-gradient(135deg,#ff7a35,#e85f1c);--dark-bg:var(--mb-bg);--bg-dark:var(--mb-bg);--bg-darker:var(--mb-deep);--primary:var(--mb-orange);--primary-dark:var(--mb-orange-d);--text-primary:var(--mb-text);--text-secondary:var(--mb-muted);--text-muted:var(--mb-muted);--success-color:#45c97a;--danger-color:#f06a77;--warning-color:#f4c95d;
+background:var(--mb-bg)!important;color:var(--mb-text)}
+/* 页头 */
+body.mb-builds>header,body.mb-builds header:first-of-type{background:rgba(8,11,16,.94)!important;border-bottom:1px solid var(--mb-line);box-shadow:0 2px 0 var(--mb-orange)!important}
+body.mb-builds .logo{background:none!important;-webkit-text-fill-color:var(--mb-text)!important;color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;letter-spacing:.01em}
+body.mb-builds .nav-links a{color:var(--mb-text);font-weight:650}
+body.mb-builds .nav-links a:hover{color:var(--mb-orange)}
+/* 标题：去掉渐变字，统一展示字体 */
+body.mb-builds .hero h1,body.mb-builds h1{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.06;letter-spacing:.005em;font-size:clamp(2.3rem,6vw,3.6rem)}
+body.mb-builds .section-title,body.mb-builds .container>h2,body.mb-builds .section-header h2{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.1;font-size:clamp(1.7rem,3.6vw,2.3rem)}
+body.mb-builds .section-title::before{content:"";display:block;width:2.2rem;height:4px;margin-bottom:.55rem;background:var(--mb-orange);border-radius:2px}
+body.mb-builds .hero-subtitle,body.mb-builds .section-subtitle{color:var(--mb-muted)}
+/* 首屏 */
+body.mb-builds .hero{background:radial-gradient(800px 320px at 50% -60px,rgba(255,122,53,.16),transparent 70%),var(--mb-bg)!important;border-bottom:1px solid var(--mb-line)}
+body.mb-builds .hero::before{display:none}
+body.mb-builds .character-image{border:2px solid var(--mb-orange)!important;box-shadow:0 8px 28px rgba(255,122,53,.25)!important;border-radius:16px}
+body.mb-builds .tier-badge{background:var(--mb-orange)!important;color:#1a0d05!important;box-shadow:none!important;border-radius:999px}
+/* 卡片与面板 */
+body.mb-builds .build-overview,body.mb-builds .overview-card,body.mb-builds .equipment-card,body.mb-builds .faq-item,body.mb-builds .timeline-item,body.mb-builds .card{background:var(--mb-panel)!important;border:1px solid var(--mb-line)!important;border-radius:12px!important;box-shadow:none!important}
+body.mb-builds .build-overview{border-radius:16px!important}
+body.mb-builds .equipment-card:hover{transform:none!important;border-color:var(--mb-orange)!important;box-shadow:none!important}
+body.mb-builds .equipment-card.priority-1{border-color:#f06a77!important;background:linear-gradient(135deg,rgba(240,106,119,.10),var(--mb-panel))!important}
+body.mb-builds .equipment-card.priority-2{border-color:#f4c95d!important}
+body.mb-builds .equipment-icon{border:1px solid var(--mb-line)!important}
+body.mb-builds .overview-card h3,body.mb-builds .equipment-info h3{color:var(--mb-orange)}
+body.mb-builds .equipment-info h3{color:var(--mb-text)}
+body.mb-builds .timeline::before{background:linear-gradient(180deg,var(--mb-orange),rgba(255,122,53,.15))!important}
+body.mb-builds .timeline-time{color:var(--mb-orange)}
+body.mb-builds .faq-question{color:var(--mb-text)}
+/* 表格 */
+body.mb-builds .alternatives-table th,body.mb-builds table th{background:var(--mb-panel2)!important;color:var(--mb-text)}
+body.mb-builds .alternatives-table td,body.mb-builds table td{border-color:var(--mb-line)!important}
+body.mb-builds .alternatives-table tr:hover{background:rgba(255,122,53,.06)!important}
+/* 链接与页脚 */
+body.mb-builds a{text-underline-offset:2px}
+body.mb-builds footer{background:var(--mb-deep)!important;border-top:1px solid var(--mb-line)!important;color:var(--mb-muted)}
+body.mb-builds .footer-links a{color:var(--mb-muted)}body.mb-builds .footer-links a:hover{color:var(--mb-orange)}
+body.mb-builds a:focus-visible,body.mb-builds button:focus-visible,body.mb-builds summary:focus-visible{outline:2px solid #f4c95d;outline-offset:3px}
+@media(max-width:768px){body.mb-builds .hero{padding:2.4rem 1.1rem!important}body.mb-builds .container{padding-left:1.1rem!important;padding-right:1.1rem!important}}
+@media(prefers-reduced-motion:reduce){body.mb-builds *{transition:none!important}}
+/* 手机端：原页面隐藏了 .nav-links 且没有菜单按钮，这里用纯 CSS 恢复为可横向滑动的一行 */
+@media(max-width:768px){
+body.mb-builds header nav{flex-direction:column!important;align-items:flex-start!important;gap:.4rem;padding:.7rem 1.1rem!important}
+body.mb-builds header .nav-links{display:flex!important;flex-wrap:nowrap;gap:.3rem!important;width:100%;overflow-x:auto;padding:0 0 .35rem;margin:0;list-style:none;scrollbar-width:none}
+body.mb-builds header .nav-links::-webkit-scrollbar{display:none}
+body.mb-builds header .nav-links li{flex:0 0 auto}
+body.mb-builds header .nav-links a{display:block;padding:.35rem .75rem;border:1px solid var(--mb-line);border-radius:999px;font-size:.88rem;white-space:nowrap}
+body.mb-builds .mobile-menu{display:none!important}
+}
+/* 排行榜构筑面板（character-build-signals.css）改用品牌色 */
+body.mb-builds .character-build-signals{--cbs-bg:#151b25;--cbs-border:#2a3341;--cbs-accent:#ff7a35;--cbs-muted:#a9b3c1;background:linear-gradient(145deg,#1d2531,#151b25)!important;box-shadow:none!important;border-radius:14px}
+body.mb-builds .character-build-signals .cbs-title{font-family:var(--mb-display);font-style:italic;font-weight:800}
+body.mb-builds .cbs-badge{background:rgba(255,122,53,.12)!important;border-color:rgba(255,122,53,.35)!important;color:#ffd9c2!important}
+/* 手机端溢出防护：宽表格横向滚动，卡片/列表允许收缩 */
+@media(max-width:768px){
+body.mb-builds .alternatives-table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+body.mb-builds .build-category,body.mb-builds .item-list,body.mb-builds .item,body.mb-builds .item-card,body.mb-builds .item-text{min-width:0;max-width:100%}
+body.mb-builds .item-card,body.mb-builds .item{flex-wrap:wrap}
+body.mb-builds h4,body.mb-builds .item-text p{overflow-wrap:anywhere}
+}
+@media(max-width:600px){body.mb-builds [class*="grid"]:not(.cbs-grid):not([class*="cbs-"]){grid-template-columns:minmax(0,1fr)!important}}
+/* ---- Builds hub（/guides/builds/，css/builds-hub.css 的类名）---- */
+body.mb-builds .hero-stats .stat-number,body.mb-builds .stat-number{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-orange)!important;font-family:var(--mb-display);font-style:italic;font-weight:800}
+body.mb-builds .hero p{color:var(--mb-muted)}
+body.mb-builds .trinity-card,body.mb-builds .tip-card,body.mb-builds .build-card,body.mb-builds .tier-item{background:var(--mb-panel)!important;border:1px solid var(--mb-line)!important;border-radius:14px!important;box-shadow:none!important}
+body.mb-builds .trinity-card:hover,body.mb-builds .tip-card:hover,body.mb-builds .build-card:hover,body.mb-builds .tier-item:hover{transform:none!important;border-color:var(--mb-orange)!important;box-shadow:none!important}
+body.mb-builds .build-header::before{display:none}
+body.mb-builds .build-header.s-tier,body.mb-builds .s-tier{background:linear-gradient(135deg,rgba(255,122,53,.28),rgba(240,106,119,.18))!important}
+body.mb-builds .build-header.a-tier,body.mb-builds .a-tier{background:linear-gradient(135deg,rgba(77,197,214,.22),rgba(69,201,122,.14))!important}
+body.mb-builds .build-badge{background:rgba(8,11,16,.45)!important;backdrop-filter:none!important}
+body.mb-builds .alert-box{background:rgba(244,201,93,.08)!important}
+body.mb-builds .info-box{background:rgba(77,197,214,.08)!important;border-left-color:var(--mb-cyan)!important}
+body.mb-builds .btn,body.mb-builds .btn-secondary,body.mb-builds .btn-success{background:var(--mb-orange)!important;color:#1a0d05!important;border-radius:8px!important;font-weight:800}
+body.mb-builds .btn:hover{background:var(--mb-orange-d)!important;transform:none!important}
+body.mb-builds .btn-secondary{background:transparent!important;border:1px solid var(--mb-line)!important;color:var(--mb-text)!important}
+body.mb-builds .tier-s{background:linear-gradient(135deg,#ff7a35,#e85f1c)!important;color:#1a0d05!important}
+body.mb-builds .tier-label{font-family:var(--mb-display);font-style:italic}
+body.mb-builds .tab-button,body.mb-builds .tab-button.active,body.mb-builds .build-filter-reset{background:var(--mb-panel2)!important;color:var(--mb-text)!important;border:1px solid var(--mb-line)!important;border-radius:999px!important;box-shadow:none!important}
+body.mb-builds .tab-button.active,body.mb-builds .build-filter-reset{background:var(--mb-orange)!important;color:#1a0d05!important;border-color:var(--mb-orange)!important;font-weight:800}
+body.mb-builds .tab-button::before{display:none!important}
+body.mb-builds .nav-links a::after{background:var(--mb-orange)!important}
