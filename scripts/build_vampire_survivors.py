@@ -15,7 +15,7 @@ STEAM='https://store.steampowered.com/app/1794680/Vampire_Survivors/'
 AD='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830315294299920" crossorigin="anonymous"></script>'
 
 def ext(url,label):
- return f'<a href="{escape(url,quote=True)}" target="_blank" rel="noopener noreferrer">{label} ↗<span class="sr-only"> (external website, opens in a new tab)</span></a>'
+ return f'<a href="{escape(url,quote=True)}" target="_blank" rel="noopener noreferrer">{label} ↗<span class="sr-only"> (external website)</span></a>'
 def ref(n):return f'<sup class="ref"><a href="#source-{n}" aria-label="Source {n}">[{n}]</a></sup>'
 def table(head,rows):return '<div class="table-wrap" role="region" aria-label="Comparison; scroll horizontally on small screens" tabindex="0"><table><thead><tr>'+''.join('<th scope="col">'+h+'</th>' for h in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+c+'</td>' for c in row)+'</tr>' for row in rows)+'</tbody></table></div>'
 def shell(route,title,desc,h1,answer,parts,sources,script=False,recs=False):
