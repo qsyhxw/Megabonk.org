@@ -1,0 +1,71 @@
+/* Megabonk.org Leaderboard 外观覆盖层（批次 3）。浅色紫蓝主题 → 品牌深色；仅改视觉，限定在 body.mb-lb 下。 */
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-display:optional;src:url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2")}
+body.mb-lb{--mb-bg:#0d1117;--mb-deep:#080b10;--mb-panel:#151b25;--mb-panel2:#1d2531;--mb-line:#2a3341;--mb-text:#f3f5f8;--mb-muted:#a9b3c1;--mb-orange:#ff7a35;--mb-orange-d:#e85f1c;--mb-cyan:#4dc5d6;--mb-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+background:radial-gradient(900px 420px at 85% -80px,rgba(255,122,53,.10),transparent 70%),var(--mb-bg)!important;color:var(--mb-text)!important}
+/* 顶栏、导航、面包屑 */
+body.mb-lb .header-top,body.mb-lb .main-nav,body.mb-lb header,body.mb-lb .breadcrumb,body.mb-lb .breadcrumb-list{background:var(--mb-deep)!important;box-shadow:none!important}
+body.mb-lb .header-top{border-bottom:1px solid var(--mb-line)!important;box-shadow:0 2px 0 var(--mb-orange)!important}
+body.mb-lb .site-logo{background:none!important;-webkit-text-fill-color:var(--mb-text)!important;color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800}
+body.mb-lb .main-nav a{color:var(--mb-text)!important}body.mb-lb .main-nav a:hover,body.mb-lb .main-nav a.active{color:var(--mb-orange)!important}
+body.mb-lb .main-nav a.active::after{background:var(--mb-orange)!important}
+body.mb-lb .breadcrumb-list a{color:var(--mb-orange)!important}body.mb-lb .breadcrumb-list li,body.mb-lb .breadcrumb-separator{color:var(--mb-muted)!important}
+/* 标题 */
+body.mb-lb h1,body.mb-lb .page-header h1{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;text-shadow:none!important;line-height:1.06}
+body.mb-lb .page-header p,body.mb-lb .intro{color:var(--mb-muted)!important;background:transparent!important}
+/* 浅色面板 → 深色面板 */
+body.mb-lb :is(.card,.content,.content-card,.stat-card,.trending-card,.hub-card,.type-card,.quick-link-card,.quick-link,.meta-card,.build-card,.feature-card,.lb-faq-card,.faq-item,.weapon-rating-card,.boss-matchup-card,.equipment-category,.key-stat-card,.popular-build-stats,.char-link,.controls,.leaderboard-filter,.lb-intent-tabs,.card-footer,.footer-bottom,.modal-content,.btn-filter,.update-info,.related-link,.item-card,.comparison-table-scroll){background:var(--mb-panel)!important;border-color:var(--mb-line)!important;box-shadow:none!important;color:var(--mb-text)!important}
+body.mb-lb :is(.stat-card,.trending-card,.hub-card,.quick-link-card,.meta-card,.build-card,.feature-card,.type-card):hover{transform:none!important;border-color:var(--mb-orange)!important;box-shadow:none!important}
+body.mb-lb .lb-intent-tabs a{color:var(--mb-muted)!important;background:var(--mb-panel2)!important}body.mb-lb .lb-intent-tabs a:hover{background:#263044!important;color:var(--mb-text)!important}
+body.mb-lb .lb-intent-tabs a[aria-current],body.mb-lb .lb-intent-tabs a.active{background:var(--mb-orange)!important;color:#1a0d05!important}
+body.mb-lb :is(.warning-box,.info-box,.success-box,.anti-synergy-section){background:rgba(244,201,93,.08)!important;color:var(--mb-text)!important}
+/* 紫蓝渐变 → 品牌橙 */
+body.mb-lb :is(.stats-bar,.card-header,.modal-header,.build-header,.comparison-table thead){background:linear-gradient(135deg,#2a1a10,#1d2531)!important;color:var(--mb-text)!important;border-bottom:2px solid var(--mb-orange)}
+body.mb-lb :is(.btn-build,.btn-load-more,.btn-refresh,.btn-date,.cta-button,.trending-badge,.hub-badge.info,.usage-bar-fill){background:var(--mb-orange)!important;color:#1a0d05!important;box-shadow:none!important}
+body.mb-lb :is(.btn-build-secondary,.btn-details,.cta-button.steam){background:transparent!important;border:1px solid var(--mb-line)!important;color:var(--mb-text)!important}
+body.mb-lb .stat-value{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-orange)!important;font-family:var(--mb-display);font-style:italic}
+body.mb-lb .stat-label{color:var(--mb-muted)!important}
+/* 表格 */
+body.mb-lb table{background:transparent!important}
+body.mb-lb thead,body.mb-lb th,body.mb-lb .leaderboard-table thead{background:var(--mb-panel2)!important;color:var(--mb-text)!important}
+body.mb-lb td{color:var(--mb-text)!important;border-color:var(--mb-line)!important}
+body.mb-lb tbody tr{background:transparent!important}body.mb-lb tbody tr:hover{background:rgba(255,122,53,.07)!important}
+body.mb-lb .player-name{color:var(--mb-text)!important}body.mb-lb .character-badge{background:var(--mb-panel2)!important;color:var(--mb-text)!important}
+body.mb-lb .top-1{background:linear-gradient(135deg,rgba(255,215,0,.22),rgba(255,215,0,.06))!important}
+body.mb-lb .top-2{background:linear-gradient(135deg,rgba(192,192,192,.20),rgba(192,192,192,.05))!important}
+body.mb-lb .top-3{background:linear-gradient(135deg,rgba(205,127,50,.24),rgba(205,127,50,.06))!important}
+/* 输入 */
+body.mb-lb :is(input,select,textarea){background:var(--mb-bg)!important;color:var(--mb-text)!important;border:1px solid var(--mb-line)!important}
+/* 页脚 */
+body.mb-lb footer,body.mb-lb .site-footer{background:var(--mb-deep)!important;border-top:1px solid var(--mb-line)!important;color:var(--mb-muted)!important}
+body.mb-lb footer a,body.mb-lb .site-footer a{color:var(--mb-muted)!important}body.mb-lb footer a:hover{color:var(--mb-orange)!important}
+body.mb-lb a:focus-visible,body.mb-lb button:focus-visible{outline:2px solid #f4c95d;outline-offset:3px}
+@media(max-width:768px){body.mb-lb table{max-width:100%}body.mb-lb .content,body.mb-lb .card-content,body.mb-lb .comparison-table-scroll{overflow-x:auto}}
+@media(prefers-reduced-motion:reduce){body.mb-lb *{transition:none!important;animation:none!important}}
+/* 审计补丁：残留的深色文字与默认链接色 */
+body.mb-lb :is(h2,h3,h4,label,summary,strong,.trending-title,.hub-title,.type-title,.meta-card-title,.card-title){color:var(--mb-text)!important}
+body.mb-lb span:not([class]){color:inherit}
+body.mb-lb :is(.content,.card,.content-card,.card-content,main,section,article) a:not([class]){color:var(--mb-cyan)}
+body.mb-lb :is(.meta-card-badge,.hub-badge.hot,.trending-badge){background:var(--mb-orange)!important;color:#1a0d05!important}
+/* 行内样式写死的浅色背景 */
+body.mb-lb [style*="#f8f9fa"],body.mb-lb [style*="#f3f6ff"],body.mb-lb [style*="#fff5f5"]{background:var(--mb-panel)!important;color:var(--mb-text)!important;border-color:var(--mb-line)!important}
+body.mb-lb [style*="#e3f2fd"]{background:rgba(77,197,214,.12)!important;color:var(--mb-text)!important}
+body.mb-lb [style*="color: #495057"],body.mb-lb [style*="color:#495057"]{color:var(--mb-muted)!important}
+body.mb-lb :is(.char-link,.character-badge) span{color:var(--mb-text)!important}
+body.mb-lb :is(p:not([class]),li:not([class]),small){color:var(--mb-muted)}
+body.mb-lb :is(.meta-card,.build-card,.card,.content-card) span:not([class]){color:var(--mb-text)!important}
+/* 审计补丁 2：其余浅色容器 */
+body.mb-lb :is(.load-more-container,.date-nav,.quick-links,.character-nav,.time-filter){background:var(--mb-panel)!important;border-color:var(--mb-line)!important;box-shadow:none!important;color:var(--mb-text)!important}
+body.mb-lb .usage-bar{background:var(--mb-panel2)!important}
+body.mb-lb .alert-box.info{background:rgba(77,197,214,.10)!important;color:var(--mb-text)!important;border-color:rgba(77,197,214,.4)!important}
+body.mb-lb .alert-box.success{background:rgba(69,201,122,.10)!important;color:var(--mb-text)!important;border-color:rgba(69,201,122,.4)!important}
+body.mb-lb .alert-box :is(h3,h4,strong,p){color:var(--mb-text)!important}
+body.mb-lb p.source-note,body.mb-lb :is(.card-content,.content) p{color:var(--mb-muted)}
+body.mb-lb :is(.alert-content,.alert-content p){color:var(--mb-text)!important}
+body.mb-lb :is(.content,.card-content,.card,.content-card) p{color:var(--mb-muted)!important}
+/* 分数：原为渐变裁切文字，改为纯色文字 */
+body.mb-lb .score{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-orange)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;box-shadow:none!important}
+body.mb-lb :is(.top-1,.top-2,.top-3) .score{color:var(--mb-text)!important}
+body.mb-lb :is(tr,tbody tr,thead tr,table,.leaderboard-table){border-color:var(--mb-line)!important}
+/* 异步数据加载前预留高度，避免页脚在视口内被推走（CLS） */
+body.mb-lb .loading-container{min-height:130vh}
+body.mb-lb :is(.current-date,.date-controls){color:var(--mb-text)!important}
