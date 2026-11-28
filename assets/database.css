@@ -1,0 +1,67 @@
+/* Megabonk.org Database 外观覆盖层（批次 4）。仅改视觉，限定在 body.mb-db 下；稀有度/语义色保留。 */
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-display:optional;src:url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2")}
+body.mb-db{--mb-bg:#0d1117;--mb-deep:#080b10;--mb-panel:#151b25;--mb-panel2:#1d2531;--mb-line:#2a3341;--mb-text:#f3f5f8;--mb-muted:#a9b3c1;--mb-orange:#ff7a35;--mb-orange-d:#e85f1c;--mb-cyan:#4dc5d6;--mb-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+--bg-primary:var(--mb-bg);--bg-secondary:var(--mb-panel);--bg-card:var(--mb-panel);--bg-dark:var(--mb-bg);--bg-darker:var(--mb-deep);--primary-bg:var(--mb-bg);--secondary-bg:var(--mb-panel);--card-bg:var(--mb-panel);
+--text-primary:var(--mb-orange);--text-secondary:var(--mb-text);--text-muted:var(--mb-muted);--text-light:var(--mb-text);--border-color:var(--mb-line);--danger-red:#f06a77;--accent-purple:var(--mb-orange);--accent-blue:var(--mb-cyan);--primary-color:var(--mb-orange);--secondary-color:var(--mb-cyan);
+background:radial-gradient(900px 420px at 85% -80px,rgba(255,122,53,.10),transparent 70%),var(--mb-bg)!important;color:var(--mb-text)}
+/* 页头（nav 或 header） */
+body.mb-db>header,body.mb-db header:first-of-type,body.mb-db>nav:not(.breadcrumb),body.mb-db .navbar{background:rgba(8,11,16,.94)!important;border-bottom:1px solid var(--mb-line)!important;box-shadow:0 2px 0 var(--mb-orange)!important}
+body.mb-db .logo{background:none!important;-webkit-text-fill-color:var(--mb-text)!important;color:var(--mb-text)!important;text-shadow:none!important;font-family:var(--mb-display);font-style:italic;font-weight:800;letter-spacing:.01em}
+body.mb-db .nav-links a{color:var(--mb-text)!important}body.mb-db .nav-links a:hover{color:var(--mb-orange)!important}body.mb-db .nav-links a::after{background:var(--mb-orange)!important}
+body.mb-db .breadcrumb a{color:var(--mb-orange)!important}body.mb-db .breadcrumb span{color:var(--mb-muted)}
+/* 标题：去渐变字与发光，统一展示字体 */
+body.mb-db :is(h1,.hero h1,.item-hero-content h1,.weapon-title,.comparison-title,.rarity-table-title,.calc-title,.section-title){background:none!important;-webkit-text-fill-color:currentColor!important;text-shadow:none!important;font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.06}
+body.mb-db :is(.hero h1,.weapon-title,.comparison-title,.rarity-table-title,.calc-title,.section-title){color:var(--mb-text)!important}
+body.mb-db h1{font-size:clamp(2.2rem,5.6vw,3.4rem)}
+body.mb-db .content-section h2{color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.1}
+body.mb-db .stat-number{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-orange)!important;font-family:var(--mb-display);font-style:italic}
+/* 面板与卡片 */
+body.mb-db :is(.stat-card,.synergy-card,.item-nav-card,.tome-card,.weapon-card,.content-section,.card,.related-items,.info-card,.pros,.cons,.faq-item,.rarity-table,.calculator,.item-card){background-color:var(--mb-panel)!important;border-color:var(--mb-line)!important;box-shadow:none!important;border-radius:12px}
+body.mb-db :is(.stat-card,.synergy-card,.item-nav-card,.tome-card,.weapon-card,.item-card):hover{transform:none!important;box-shadow:none!important;border-color:var(--mb-orange)!important}
+body.mb-db .stat-label{color:var(--mb-muted)!important}
+body.mb-db .hero{background-image:none!important;background-color:var(--mb-panel)!important;box-shadow:none!important}
+body.mb-db .hero::before{display:none}
+/* 按钮 */
+body.mb-db .btn:not(.btn-secondary){background:var(--mb-orange)!important;color:#1a0d05!important;box-shadow:none!important;border-radius:8px!important;font-weight:800}
+body.mb-db .btn-secondary{background:transparent!important;border:1px solid var(--mb-line)!important;color:var(--mb-text)!important;border-radius:8px!important;box-shadow:none!important}
+body.mb-db .btn:hover{transform:none!important}
+/* 表格、输入 */
+body.mb-db table th{background:var(--mb-panel2)!important;color:var(--mb-text)!important}body.mb-db table td{border-color:var(--mb-line)!important}
+body.mb-db :is(input,select,textarea){background:var(--mb-bg)!important;color:var(--mb-text)!important;border:1px solid var(--mb-line)!important}
+/* 页脚 */
+body.mb-db footer{background:var(--mb-deep)!important;border-top:1px solid var(--mb-line)!important;color:var(--mb-muted)!important}
+body.mb-db footer a{color:var(--mb-muted)!important}body.mb-db footer a:hover{color:var(--mb-orange)!important}
+
+body.mb-db a:focus-visible,body.mb-db button:focus-visible{outline:2px solid #f4c95d;outline-offset:3px}
+@media(max-width:768px){
+body.mb-db :is(header nav,body>nav:not(.breadcrumb),.nav-container){flex-direction:column!important;align-items:flex-start!important;gap:.4rem;padding:.7rem 1.1rem!important}
+body.mb-db :is(header,body>nav,.nav-container) .nav-links{display:flex!important;flex-wrap:nowrap;gap:.3rem!important;width:100%;overflow-x:auto;padding:0 0 .35rem;margin:0;list-style:none;scrollbar-width:none}
+body.mb-db .nav-links::-webkit-scrollbar{display:none}body.mb-db .nav-links li{flex:0 0 auto}
+body.mb-db .nav-links a{display:block;padding:.35rem .75rem;border:1px solid var(--mb-line);border-radius:999px;font-size:.88rem;white-space:nowrap}
+body.mb-db .mobile-menu,body.mb-db .menu-toggle{display:none!important}
+body.mb-db table{display:block;max-width:100%;overflow-x:auto}
+}
+@media(max-width:600px){body.mb-db [class*="grid"]{grid-template-columns:minmax(0,1fr)!important}}
+@media(prefers-reduced-motion:reduce){body.mb-db *{transition:none!important;animation:none!important}}
+/* 非语义紫色填充 → 品牌面板/橙（.rarity-epic 等稀有度语义色保留） */
+body.mb-db :is(.stat-item,.weapon-item,.sidebar-card,.tome-index,.filter-section,.social-link){background:var(--mb-panel)!important;border-color:var(--mb-line)!important;box-shadow:none!important}
+body.mb-db :is(.infobox-image,.tome-image,.tome-card-icon,.weapon-icon){background:var(--mb-panel2)!important}
+body.mb-db :is(.filter-btn,.tag,.db-nav-link){background:var(--mb-panel2)!important;border:1px solid var(--mb-line)!important;color:var(--mb-text)!important;box-shadow:none!important}
+body.mb-db :is(.filter-btn,.db-nav-link):hover,body.mb-db .filter-btn.active{background:var(--mb-orange)!important;color:#1a0d05!important;border-color:var(--mb-orange)!important}
+body.mb-db .highlight-box{background:rgba(255,122,53,.08)!important;border-color:rgba(255,122,53,.35)!important;box-shadow:none!important;color:var(--mb-text)!important}
+body.mb-db .highlight-box.info{background:rgba(77,197,214,.08)!important;border-color:rgba(77,197,214,.35)!important}
+body.mb-db :is(.cta-button,.btn-primary){background:var(--mb-orange)!important;color:#1a0d05!important;box-shadow:none!important;border-radius:8px!important}
+body.mb-db :is(.tier-badge,.weapon-header,.section-header,.build-header){background:linear-gradient(135deg,#2a1a10,#1d2531)!important;color:var(--mb-text)!important;border:1px solid var(--mb-line)!important;box-shadow:none!important}
+body.mb-db .card h3{color:var(--mb-orange)!important}
+body.mb-db :is(.footer-bottom){border-top-color:var(--mb-line)!important}
+/* 审计补丁：正文默认蓝色链接、链接内标题、侧栏链接、小标题 */
+body.mb-db a:not([class]):not(.nav-links a):not(footer a):not(.breadcrumb a),body.mb-db a.internal-link{color:var(--mb-cyan)}
+body.mb-db a:not([class]):not(.nav-links a):not(footer a):not(.breadcrumb a):hover,body.mb-db a.internal-link:hover{color:#f4c95d}
+body.mb-db a.tome-card,body.mb-db a.item-nav-card,body.mb-db a.weapon-nav-item,body.mb-db a.synergy-card{color:var(--mb-text)}
+body.mb-db a.tome-card :is(h3,h4,p),body.mb-db a :is(h3,h4,p):not([class]){color:inherit}
+body.mb-db :is(.sidebar-card a){color:var(--mb-text)!important}
+body.mb-db a.nav-link{color:#1a0d05!important}
+body.mb-db .content-section h3{color:var(--mb-text)}
+body.mb-db :is(p,li,td) strong{color:var(--mb-text)}
+body.mb-db span.synergy-rating,body.mb-db span.synergy-note{color:#1a0d05!important}
+@media(max-width:768px){body.mb-db .nav-links{display:flex!important;flex-wrap:nowrap;max-width:100%;overflow-x:auto;scrollbar-width:none}body.mb-db .nav-links li{flex:0 0 auto}body.mb-db :is(.item-hero,.item-hero-content,.item-effect){min-width:0;max-width:100%;overflow-wrap:anywhere}body.mb-db .item-hero{flex-wrap:wrap}}
