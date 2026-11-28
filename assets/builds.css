@@ -30,7 +30,6 @@ body.mb-builds .equipment-icon{border:1px solid var(--mb-line)!important}
 body.mb-builds .overview-card h3,body.mb-builds .equipment-info h3{color:var(--mb-orange)}
 body.mb-builds .equipment-info h3{color:var(--mb-text)}
 body.mb-builds .timeline::before{background:linear-gradient(180deg,var(--mb-orange),rgba(255,122,53,.15))!important}
-body.mb-builds .timeline-time{color:var(--mb-orange)}
 body.mb-builds .faq-question{color:var(--mb-text)}
 /* 表格 */
 body.mb-builds .alternatives-table th,body.mb-builds table th{background:var(--mb-panel2)!important;color:var(--mb-text)}
@@ -84,3 +83,12 @@ body.mb-builds .tab-button,body.mb-builds .tab-button.active,body.mb-builds .bui
 body.mb-builds .tab-button.active,body.mb-builds .build-filter-reset{background:var(--mb-orange)!important;color:#1a0d05!important;border-color:var(--mb-orange)!important;font-weight:800}
 body.mb-builds .tab-button::before{display:none!important}
 body.mb-builds .nav-links a::after{background:var(--mb-orange)!important}
+
+/* 审计补丁（批次6回查）：徽章/时间标签沿用原设计的深色字，避免白字落在变浅的警告黄与危险红上 */
+body.mb-builds :is(.priority-1 .priority-badge,.priority-2 .priority-badge){color:#1a0d05!important}
+body.mb-builds .priority-3 .priority-badge{color:#fff}
+/* 审计补丁：徽章/时间标签统一深色字（底色均为品牌浅色系：橙/黄/绿/青/红），正文默认链接用青色 */
+body.mb-builds :is(.timeline-time,.priority-badge,.weapon-priority,.item-priority,.item-type-badge){color:#0d1117!important}
+body.mb-builds .priority-3 .priority-badge{color:#0d1117!important}
+body.mb-builds :is(.container,main,section) a:not([class]){color:var(--mb-cyan)}
+body.mb-builds :is(.synergy-rating,.compat-rating){color:#0d1117!important}

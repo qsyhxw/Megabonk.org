@@ -2,7 +2,6 @@
    保留每个角色的主题色首屏区块，统一页面底色、页头页脚、标题字体、卡片与标签。 */
 @font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-display:optional;src:url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2")}
 body.mb-chars{--mb-bg:#0d1117;--mb-deep:#080b10;--mb-panel:#151b25;--mb-panel2:#1d2531;--mb-line:#2a3341;--mb-text:#f3f5f8;--mb-muted:#a9b3c1;--mb-orange:#ff7a35;--mb-orange-d:#e85f1c;--mb-cyan:#4dc5d6;--mb-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
---bg-primary:var(--mb-bg);--bg-secondary:var(--mb-panel);--bg-dark:var(--mb-bg);--bg-darker:var(--mb-deep);--primary-bg:var(--mb-bg);--secondary-bg:var(--mb-panel);--text-primary:var(--mb-text);--text-secondary:var(--mb-muted);--text-muted:var(--mb-muted);--text-light:var(--mb-text);--card-bg:var(--mb-panel);
 background:var(--mb-bg)!important;color:var(--mb-text)}
 /* 页头：统一 Logo 与导航 */
 body.mb-chars>header,body.mb-chars header:first-of-type{background:rgba(8,11,16,.94)!important;border-bottom:1px solid var(--mb-line)!important;box-shadow:0 2px 0 var(--mb-orange)!important}
@@ -58,3 +57,10 @@ body.mb-chars .overview-tier-row{background:var(--mb-panel2)!important;box-shado
 body.mb-chars .overview-character-item{background:rgba(255,255,255,.05)!important}
 body.mb-chars .overview-character-item:hover{background:rgba(255,122,53,.12)!important;transform:none!important}
 body.mb-chars .quick-overview h2{font-family:var(--mb-display);font-style:italic;font-weight:800}
+/* 审计补丁：评级徽章深色字；正文默认链接用青色（浅色主题页已不使用本覆盖层） */
+body.mb-chars :is(.character-rating,.rating-badge,.priority-badge){color:#0d1117!important}
+body.mb-chars :is(.container,main,section) a:not([class]):not(.nav-links a){color:var(--mb-cyan)}
+body.mb-chars{--ninja-purple:#b79cf0;--ninja-dark:#8a6fd8}
+body.mb-chars a.nav-link{color:#0d1117!important}
+body.mb-chars :is(.character-rating,.ability-name){color:#f3f5f8}
+body.mb-chars .character-rating{color:#0d1117!important}
