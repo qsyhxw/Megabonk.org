@@ -1,0 +1,69 @@
+/* Megabonk.org Guides 外观覆盖层（批次 5）。仅改视觉，限定在 body.mb-guides 下；语义色（警告/成功等）保留。 */
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:800;font-display:optional;src:url("/assets/fonts/barlow-condensed-800-italic.woff2") format("woff2")}
+body.mb-guides{--mb-bg:#0d1117;--mb-deep:#080b10;--mb-panel:#151b25;--mb-panel2:#1d2531;--mb-line:#2a3341;--mb-text:#f3f5f8;--mb-muted:#a9b3c1;--mb-orange:#ff7a35;--mb-orange-d:#e85f1c;--mb-cyan:#4dc5d6;--mb-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+--bg:var(--mb-bg);--bg-dark:var(--mb-bg);--bg-darker:var(--mb-deep);--bg-primary:var(--mb-bg);--bg-secondary:var(--mb-panel);--primary-bg:var(--mb-bg);--secondary-bg:var(--mb-panel);--card-bg:var(--mb-panel);--panel:var(--mb-panel);--line:var(--mb-line);
+--text:var(--mb-text);--text-light:var(--mb-text);--text-muted:var(--mb-muted);--muted:var(--mb-muted);--primary:var(--mb-orange);--primary-dark:var(--mb-orange-d);--accent:var(--mb-orange);--accent-purple:var(--mb-orange);--accent-blue:var(--mb-cyan);--accent-color:var(--mb-orange);--primary-color:var(--mb-orange);--secondary-color:var(--mb-cyan);
+background:radial-gradient(900px 420px at 85% -80px,rgba(255,122,53,.10),transparent 70%),var(--mb-bg)!important;color:var(--mb-text)}
+/* 页头（header / nav / .nav-container 等各种写法） */
+body.mb-guides>header,body.mb-guides header:first-of-type,body.mb-guides>nav:not(.breadcrumb),body.mb-guides .navbar,body.mb-guides .site-header{background:rgba(8,11,16,.94)!important;border-bottom:1px solid var(--mb-line)!important;box-shadow:0 2px 0 var(--mb-orange)!important}
+body.mb-guides :is(.logo,.site-logo,.brand){background:none!important;-webkit-text-fill-color:var(--mb-text)!important;color:var(--mb-text)!important;text-shadow:none!important;text-transform:none;font-family:var(--mb-display);font-style:italic;font-weight:800;letter-spacing:.01em}
+body.mb-guides :is(.nav-links,.nav ul,.main-nav) a{color:var(--mb-text)!important}
+body.mb-guides :is(.nav-links,.nav ul,.main-nav) a:hover{color:var(--mb-orange)!important}
+body.mb-guides .nav-links a::after{background:var(--mb-orange)!important}
+body.mb-guides .breadcrumb a{color:var(--mb-orange)!important}
+body.mb-guides .breadcrumb{color:var(--mb-muted)}
+/* 标题：去渐变字、发光，统一展示字体 */
+body.mb-guides :is(h1,.hero h1,.hero-title,.page-hero h1,.boss-name-large,.section-title){background:none!important;-webkit-text-fill-color:currentColor!important;text-shadow:none!important;font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.06}
+body.mb-guides :is(h1,.hero h1,.hero-title,.page-hero h1,.boss-name-large){color:var(--mb-text)!important;font-size:clamp(2.2rem,5.6vw,3.4rem)}
+body.mb-guides :is(h2,.section-title,.content-section h2){color:var(--mb-text)!important;font-family:var(--mb-display);font-style:italic;font-weight:800;line-height:1.1}
+body.mb-guides .stat-number{background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--mb-orange)!important;font-family:var(--mb-display);font-style:italic}
+/* 面板与卡片 */
+body.mb-guides :is(.stat-card,.card,.content-section,.info-card,.guide-card,.faq-item,.toc,.jump,.quick-jump,.tip-card,.boss-card,.mechanic-card,.achievement-card,.patch-card,.sidebar-card,.related-card){background-color:var(--mb-panel)!important;border-color:var(--mb-line)!important;box-shadow:none!important;border-radius:12px}
+body.mb-guides :is(.stat-card,.card,.guide-card,.boss-card,.mechanic-card,.achievement-card,.patch-card,.related-card):hover{transform:none!important;box-shadow:none!important;border-color:var(--mb-orange)!important}
+body.mb-guides .hero{background-image:none!important;background-color:var(--mb-panel)!important;box-shadow:none!important}
+body.mb-guides .hero::before{display:none}
+body.mb-guides :is(.quick-answer,.callout,.alert,.note,.info-box,.warning-box,.tip-box,.highlight-box){box-shadow:none!important;color:var(--mb-text)}
+/* 按钮 */
+body.mb-guides :is(.btn,.cta-button,.btn-primary,button.btn){background:var(--mb-orange)!important;color:#1a0d05!important;box-shadow:none!important;border-radius:8px!important;font-weight:800}
+body.mb-guides :is(.btn-secondary,.btn.secondary){background:transparent!important;border:1px solid var(--mb-line)!important;color:var(--mb-text)!important}
+body.mb-guides .btn:hover{transform:none!important}
+/* 表格、输入 */
+body.mb-guides table th{background:var(--mb-panel2)!important;color:var(--mb-text)!important}
+body.mb-guides table td{border-color:var(--mb-line)!important}
+body.mb-guides :is(input,select,textarea){background:var(--mb-bg)!important;color:var(--mb-text)!important;border:1px solid var(--mb-line)!important}
+/* 页脚 */
+body.mb-guides :is(footer,.footer){background:var(--mb-deep)!important;border-top:1px solid var(--mb-line)!important;color:var(--mb-muted)!important}
+body.mb-guides :is(footer,.footer) a{color:var(--mb-muted)!important}
+body.mb-guides :is(footer,.footer) a:hover{color:var(--mb-orange)!important}
+/* 正文链接 */
+body.mb-guides a:not([class]):not(nav a):not(header a):not(footer a):not(.breadcrumb a){color:var(--mb-cyan)}
+body.mb-guides a:not([class]):not(nav a):not(header a):not(footer a):not(.breadcrumb a):hover{color:#f4c95d}
+body.mb-guides a:focus-visible,body.mb-guides button:focus-visible,body.mb-guides summary:focus-visible{outline:2px solid #f4c95d;outline-offset:3px}
+/* 手机端：导航可横滑；防溢出 */
+@media(max-width:768px){
+body.mb-guides :is(header nav,body>nav:not(.breadcrumb),.nav-container,.nav){flex-direction:column!important;align-items:flex-start!important;gap:.4rem;padding:.7rem 1.1rem!important}
+body.mb-guides :is(.nav-links,.nav ul,.main-nav){display:flex!important;flex-wrap:nowrap;gap:.3rem!important;width:100%;max-width:100%;overflow-x:auto;padding:0 0 .35rem;margin:0;list-style:none;scrollbar-width:none}
+body.mb-guides :is(.nav-links,.nav ul)::-webkit-scrollbar{display:none}
+body.mb-guides :is(.nav-links,.nav ul) li{flex:0 0 auto}
+body.mb-guides :is(.nav-links,.nav ul,.main-nav) a{display:block;padding:.35rem .75rem;border:1px solid var(--mb-line);border-radius:999px;font-size:.88rem;white-space:nowrap}
+body.mb-guides :is(.mobile-menu,.menu-toggle,.hamburger){display:none!important}
+body.mb-guides table{display:block;max-width:100%;overflow-x:auto}
+body.mb-guides :is(.container,.hero-content,.hero,section){min-width:0;max-width:100%}
+}
+@media(max-width:600px){body.mb-guides [class*="grid"]{grid-template-columns:minmax(0,1fr)!important}}
+@media(prefers-reduced-motion:reduce){body.mb-guides *{transition:none!important;animation:none!important}}
+/* patch-notes 首页：整页浅色设计 → 品牌深色（仅作用于带 mb-patchnotes 的页面） */
+body.mb-patchnotes :is(.breadcrumbs,.latest-summary,.latest-summary-card,.anniversary-status,.milestones,.milestone-card,.source-policy,.quick-nav,.version-card,.patch-summary,.overview,section,article,aside){background:var(--mb-panel)!important;border-color:var(--mb-line)!important;box-shadow:none!important}
+body.mb-patchnotes :is(.milestones,.quick-nav,.overview,.latest-summary){background:transparent!important}
+body.mb-patchnotes :is(h1,h2,h3,h4,strong,.version-card strong){color:var(--mb-text)!important}
+body.mb-patchnotes :is(p,li,td,small,.source-policy,.anniversary-status,.version-card,.milestone-card){color:var(--mb-muted)!important}
+body.mb-patchnotes .source-policy{background:rgba(244,201,93,.08)!important}
+body.mb-patchnotes .version-card:hover{border-color:var(--mb-orange)!important;transform:none!important}
+body.mb-patchnotes :is(.info-box,.sidebar-widget,.patch-item,.version-item,.faq-item,.related-guides){background:var(--mb-panel)!important;border-color:var(--mb-line)!important;box-shadow:none!important;color:var(--mb-muted)!important}
+body.mb-patchnotes :is(.version-date,.patch-date,.patch-name,.meta,time){color:var(--mb-muted)!important}
+body.mb-patchnotes :is(.info-box,.sidebar-widget) :is(p,li,span,div){color:var(--mb-muted)!important}
+body.mb-guides a.external-link{color:var(--mb-cyan)!important}
+body.mb-guides h3{color:var(--mb-text)}
+body.mb-guides :is(span,small)[style*="#666"],body.mb-guides :is(span,small)[style*="#999"]{color:var(--mb-muted)!important}
+@media(max-width:768px){body.mb-guides :is(.achievement-card,.achievement-header,.achievement-details,.attack-item,.boss-attacks,.attack-grid){min-width:0;max-width:100%}body.mb-guides .achievement-details,body.mb-guides .attack-grid,body.mb-guides .boss-attacks{grid-template-columns:minmax(0,1fr)!important}body.mb-guides .achievement-header{flex-wrap:wrap}body.mb-guides :is(.attack-item,.achievement-card) :is(h4,p,li){overflow-wrap:anywhere}}
+@media(max-width:768px){body.mb-guides :is(.attack-list,[class*="-list"]){grid-template-columns:minmax(0,1fr)!important}}
